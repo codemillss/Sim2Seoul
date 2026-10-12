@@ -240,9 +240,14 @@ def audit(source: Path):
             "height units and semantic correctness", "actual access and gate openings", "road widths and road area handling",
             "terrain and vertical datum", "landmark alignment", "game geometry/collision/performance"]
     }
+    preview_path = ROOT / "data/processed/osm_preview.geojson"
+    save_json(preview_path, {"type": "FeatureCollection", "features": features})
+    report["preview_artifact"] = {"file": "data/processed/osm_preview.geojson",
+        "bytes": preview_path.stat().st_size, "sha256": digest(preview_path),
+        "config_sha256": digest(ROOT / "config/region.json"),
+        "generator": "tools/prepare_osm.py"}
     save_json(ROOT / "data/reports/osm_audit.json", report)
     save_json(ROOT / "data/reports/named_features.json", raw.named)
-    save_json(ROOT / "data/processed/osm_preview.geojson", {"type": "FeatureCollection", "features": features})
     print(json.dumps(report, ensure_ascii=False), flush=True)
     if missing or geometry.errors or roundtrip > 1e-8:
         raise SystemExit("Preparation audit found defects; see report. Do not promote to game-ready.")

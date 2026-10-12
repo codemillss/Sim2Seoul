@@ -1,0 +1,57 @@
+{
+  "provider": "Copernicus / DLR / Airbus; AWS mirror by Sinergise",
+  "started_at_utc": "2026-10-12T01:55:11.052282+00:00",
+  "fetched_at_utc": "2026-10-12T01:55:19.534642+00:00",
+  "source_url": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E126_00_DEM/Copernicus_DSM_COG_10_N37_00_E126_00_DEM.tif",
+  "response_headers": {
+    "Content-Length": "29862574",
+    "Content-Type": "image/tiff",
+    "ETag": "\"e4cbc0206e530a2e7919deca4d0a0e95\"",
+    "Last-Modified": "Mon, 09 May 2022 14:19:29 GMT"
+  },
+  "source_artifact": {
+    "file": "data/raw/supplemental/copernicus/20261012/Copernicus_DSM_COG_10_N37_00_E126_00_DEM.tif",
+    "bytes": 29862574,
+    "sha256": "f530dd28308ecd6c5ceb0405dc1ffb7113bcafdec30d023de50f16dc433a274f"
+  },
+  "regional_artifact": {
+    "file": "data/raw/supplemental/copernicus/20261012/deoksugung_cityhall-dsm-reference.tif",
+    "bytes": 5356,
+    "sha256": "2ae132838bfb1d756e3f2ed289a92b903519c14510f2ccfa9830565e8d2d0269"
+  },
+  "request_bbox_west_south_east_north": [
+    126.971,
+    37.5608,
+    126.9815,
+    37.5694
+  ],
+  "horizontal_crs": "EPSG:4326",
+  "vertical_datum": "EGM2008 (EPSG:3855)",
+  "vertical_datum_basis": "Copernicus DEM Product Handbook 5.0",
+  "handbook_url": "https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf",
+  "mirror_release_basis": "AWS registry describes the 2021 release; per-pixel dates unknown",
+  "license_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+  "registry_url": "https://registry.opendata.aws/copernicus-dem/",
+  "source_transform": [
+    0.0002777777777777778,
+    0.0,
+    125.99986111111112,
+    0.0,
+    -0.0002777777777777778,
+    38.00013888888889
+  ],
+  "crop_window": [
+    3496,
+    1550,
+    38,
+    32
+  ],
+  "crop_policy": "Native pixels enclosing bbox, no interpolation or height conversion",
+  "tool_version": "1.5.2",
+  "limitations": [
+    "DSM includes buildings and vegetation; not bare-earth terrain",
+    "Nominal 30m resolution cannot establish thresholds, stairs or road level",
+    "Do not use as the walkable game ground or subtract it from building heights",
+    "Local SHA-256 and complete HTTP length; no provider checksum obtained"
+  ]
+}

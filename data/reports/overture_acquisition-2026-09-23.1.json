@@ -1,0 +1,48 @@
+{
+  "provider": "Overture Maps Foundation",
+  "release": "2026-09-23.1",
+  "started_at_utc": "2026-10-12T01:54:39.054481+00:00",
+  "fetched_at_utc": "2026-10-12T01:54:43.130435+00:00",
+  "catalog_url": "https://stac.overturemaps.org/2026-09-23.1/catalog.json",
+  "source_location": "s3://overturemaps-us-west-2/release/2026-09-23.1/theme=buildings/type=building/",
+  "request_bbox_west_south_east_north": [
+    126.971,
+    37.5608,
+    126.9815,
+    37.5694
+  ],
+  "crs": "EPSG:4326",
+  "geometry_policy": "Official CLI bounding-box query; full polygons retained. Exact intersections checked locally; three bbox false positives excluded from use, raw snapshot preserved.",
+  "command": [
+    "-m",
+    "overturemaps",
+    "download",
+    "--release",
+    "2026-09-23.1",
+    "--bbox=126.971,37.5608,126.9815,37.5694",
+    "--type=building",
+    "-f",
+    "geojson",
+    "--stac",
+    "--connect_timeout",
+    "30",
+    "--request_timeout",
+    "90",
+    "-o",
+    "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson.part"
+  ],
+  "tool_version": "1.0.2",
+  "license": "ODbL-1.0",
+  "license_url": "https://docs.overturemaps.org/attribution/",
+  "record_count": 736,
+  "artifact": {
+    "file": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+    "bytes": 497524,
+    "sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4"
+  },
+  "limitations": [
+    "Sources may include OSM; not an independent ground truth",
+    "Release date is not the survey date of all features",
+    "No automatic merge into the current OSM map or game"
+  ]
+}

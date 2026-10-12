@@ -1,0 +1,131 @@
+{
+  "task_id": "D03",
+  "status": "complete_with_documented_acquisition_limits",
+  "updated_at_utc": "2026-10-12T02:16:59.070997+00:00",
+  "starting_commit": "0922c27288d0e349232a354a7fb71ea853fdfc6a",
+  "scope": "acquisition, source review and value checks; no game implementation or official field-survey validation",
+  "bbox_west_south_east_north": [
+    126.971,
+    37.5608,
+    126.9815,
+    37.5694
+  ],
+  "base_osm_manifest": "data/reports/extract_manifest.json",
+  "sources": [
+    {
+      "id": "overture_buildings",
+      "status": "acquired",
+      "artifact": {
+        "file": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+        "bytes": 497524,
+        "sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4"
+      },
+      "shared_in_git": true,
+      "source_url": "https://stac.overturemaps.org/2026-09-23.1/catalog.json",
+      "release": "2026-09-23.1",
+      "crs": "EPSG:4326",
+      "license": "ODbL-1.0; upstream CC BY attribution preserved",
+      "verification_report": "data/reports/d03_supplemental_review.json",
+      "received_features": 736,
+      "selected_features": 733,
+      "excluded_bbox_false_positives": 3,
+      "non_osm_candidates": 22,
+      "independent_height_gain": 0,
+      "use": "coverage candidates only; no automatic merge"
+    },
+    {
+      "id": "copernicus_dsm_reference",
+      "status": "acquired_reference_only",
+      "artifact": {
+        "file": "data/raw/supplemental/copernicus/20261012/deoksugung_cityhall-dsm-reference.tif",
+        "bytes": 5356,
+        "sha256": "2ae132838bfb1d756e3f2ed289a92b903519c14510f2ccfa9830565e8d2d0269"
+      },
+      "shared_in_git": true,
+      "source_url": "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E126_00_DEM/Copernicus_DSM_COG_10_N37_00_E126_00_DEM.tif",
+      "source_artifact": {
+        "file": "data/raw/supplemental/copernicus/20261012/Copernicus_DSM_COG_10_N37_00_E126_00_DEM.tif",
+        "bytes": 29862574,
+        "sha256": "f530dd28308ecd6c5ceb0405dc1ffb7113bcafdec30d023de50f16dc433a274f"
+      },
+      "source_full_tile_shared_in_git": false,
+      "horizontal_crs": "EPSG:4326",
+      "vertical_datum": "EGM2008 (EPSG:3855)",
+      "source_date": "AWS mirror describes 2021 release; HTTP Last-Modified 2022-05-09; per-pixel survey dates unknown",
+      "license_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+      "verification_report": "data/reports/d03_supplemental_review.json",
+      "use": "coarse surface reference; must not be used as walking ground"
+    },
+    {
+      "id": "gis_building_integrated",
+      "status": "authentication_required_body_not_received",
+      "source_url": "https://www.vworld.kr/dtmk/dtmk_ntads_s002.do?svcCde=NA&dsId=18",
+      "geometry_artifact": null,
+      "schema_artifact": {
+        "file": "data/raw/supplemental/korean/20261012/vworld-columns-20260819.xlsx",
+        "bytes": 224314,
+        "sha256": "403ba657f9c2b112445793679be5d6571e8f91fd8e6df35097476a64cb48df54"
+      },
+      "schema_shared_in_git": false,
+      "schema_verification": "data/reports/vworld_schema_acquisition-d03.json",
+      "body_reference_date": "2026-10-09",
+      "published_crs": "GRS80 EPSG:5186 for reference dates from 2023-08-08; BESSEL EPSG:5174 through 2023-08-05",
+      "actual_prj": null,
+      "regional_height_values_verified": false,
+      "access_report": "data/reports/korean_source_access-d03.json",
+      "resume_condition": "user login and supported official download environment; receive Seoul ZIP then inspect CRC, SHA, PRJ, DBF and encoding"
+    },
+    {
+      "id": "ngii_continuous_topographic_map",
+      "status": "access_requirements_identified_body_not_received",
+      "source_url": "https://www.data.go.kr/data/15059721/fileData.do",
+      "geometry_artifact": null,
+      "actual_crs": null,
+      "mac_support": "not_verified",
+      "access_report": "data/reports/korean_source_access-d03.json",
+      "resume_condition": "official login and transfer environment; request only necessary local area and inspect actual layer/schema/CRS"
+    },
+    {
+      "id": "deoksugung_official_route",
+      "status": "acquired_reference_pages_not_reusable_map_asset",
+      "source_url": "https://royal.khs.go.kr/ROYAL/contents/R701000000.do?schGroupCode=dsg",
+      "local_snapshot_count": 13,
+      "snapshots_shared_in_git": false,
+      "source_manifest": "data/reports/palace_source_manifest-d03.json",
+      "evidence_report": "docs/evidence/D03_PALACE_ROUTE_SOURCES.md",
+      "use": "official names, diagram and dated access notices; no survey CRS or licensed game texture obtained",
+      "resume_condition": "Confirm current crossing/stonewall access and individual map reuse terms where needed"
+    },
+    {
+      "id": "continuous_topographic_buildings",
+      "status": "candidate_not_attempted_in_D03",
+      "source_url": "https://www.data.go.kr/data/15125047/fileData.do",
+      "geometry_artifact": null,
+      "use": "lower-priority footprint source; actual height fields not assumed"
+    },
+    {
+      "id": "seokjojeon_archival_drawings",
+      "status": "candidate_not_attempted_in_D03",
+      "source_url": "https://www.archives.go.kr/next/newsearch/showDetailPopup.do?rc_code=1310377&rc_rfile_no=201003360323&rc_ritem_no=&sitePage=",
+      "geometry_artifact": null,
+      "use": "historic drawing candidate; current official diagram available; original reuse/scale unverified"
+    }
+  ],
+  "verification": {
+    "passed": true,
+    "passed_checks": 17,
+    "report": "data/reports/d03_supplemental_review.json",
+    "schema_xlsx_crc_passed": true,
+    "game_tests": "not_run",
+    "M4_hardware_tests": "not_run"
+  },
+  "remaining_gaps": [
+    "No independently sourced building heights received",
+    "No high-resolution bare-earth terrain or road/gate widths received",
+    "22 footprint candidates require real-world/parts review",
+    "R2 continuous crossing and R3 full loop current access unverified",
+    "Official diagram asset redistribution not confirmed"
+  ],
+  "next_task": "D04",
+  "next_first_action": "Read D03 evidence and manifests, create docs/data_gaps.md with usable sources, exclusions, estimates, manual supplements and access resume conditions"
+}

@@ -23,7 +23,23 @@ def main():
         if len(content) != record["extract_bytes"] or digest != record["extract_sha256"]:
             raise SystemExit(f"Regional map checksum mismatch: {record['extract_file']}")
         checked.append({"file": record["extract_file"], "bytes": len(content), "sha256": digest})
+    supplemental = []
+    for manifest_path, key in [
+        ("data/reports/overture_acquisition-2026-09-23.1.json", "artifact"),
+        ("data/reports/copernicus_acquisition-20261012.json", "regional_artifact"),
+    ]:
+        path = ROOT / manifest_path
+        if not path.exists():
+            continue
+        artifact = json.loads(path.read_text())[key]
+        source = ROOT / artifact["file"]
+        if not source.exists():
+            raise SystemExit(f"Missing shared D03 reference: {artifact['file']}")
+        if source.stat().st_size != artifact["bytes"] or hashlib.sha256(source.read_bytes()).hexdigest() != artifact["sha256"]:
+            raise SystemExit(f"D03 reference checksum mismatch: {artifact['file']}")
+        supplemental.append(artifact)
     print(json.dumps({"regional_maps": checked, "country_source_available": (ROOT / manifest["source_file"]).is_file(),
+        "supplemental_reference_files": supplemental,
         "country_source_required_for_local_audit": False, "result": "passed"}, ensure_ascii=False, indent=2))
 
 
