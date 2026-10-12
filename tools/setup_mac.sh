@@ -25,4 +25,6 @@ TASK_EXTRACT="$(.venv-data/bin/python -c 'import json; print(json.load(open("dat
 .venv-data/bin/python tools/check_coordinates.py
 .venv-data/bin/python tools/prepare_features.py
 .venv-data/bin/python tools/check_geometry.py
+.venv-data/bin/python tools/prepare_heights.py
+.venv-data/bin/python tools/check_heights.py
 printf '%s\n' 'Setup complete. Continue from docs/WORK_STATUS.md and docs/SOL_HANDOFF.md.'

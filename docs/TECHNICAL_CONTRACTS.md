@@ -18,7 +18,7 @@ D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../co
 
 G01에서 기존 수치·축을 변경하지 않고 수평 변환과 로컬 단위 계약 버전 1을 고정했다. 재사용 구현은 [coordinate_system.py](../tools/coordinate_system.py), 증거는 [coordinate_check.json](../data/reports/coordinate_check.json)이다. UTM의 east/north는 격자 방향이며 측지 동/북과 자오선 수렴각만큼 차이가 난다. 로컬 방위각은 `atan2(dx, -dz)`로 투영 평면 방위각과 비교하고, 측지 초기 방위각과의 차이는 별도로 기록한다. 이를 맞추려고 월드 전체를 회전하지 않는다.
 
-`y=local_height_m`는 지역 수직 좌표 규칙이다. G01 대표점의 y=0과 위쪽 10m는 합성 검사값이며 실제 지면이 아니다. 해발고도 기준은 계속 미확정이다. G03에서 임시 지면 기준·적용 구간·계단 예외를 정한 뒤 건물 바닥 위치에 연결한다. DSM 표고나 건물 height를 현재 원점의 해발고도로 취급하지 않는다.
+`y=local_height_m`는 지역 수직 좌표 규칙이다. G01 대표점의 y=0과 위쪽 10m는 합성 검사값이며 실제 지면이 아니다. 해발고도 기준은 계속 미확정이다. G03은 로컬 지지 평면 y=0을 임시 기준으로 정하고 전체 보존 도형 외접 범위+10m를 기술적 범위로 기록했다. 계단/교량/터널/0이 아니거나 해석 불가한 layer/지하/물 예외 132개에는 지면 높이를 배정하지 않는다. 평면은 플레이 경계·스폰·통행 허가가 아니며 DSM 표고나 건물 height를 원점의 해발고도로 취급하지 않는다. [규칙](../config/height_rules.json)·[검토](../data/reports/height_review.md).
 
 ## C02. 경계의 세 종류
 
@@ -73,7 +73,9 @@ G02 중간물은 `data/processed/features.json`의 **별도 JSON 형식**이다.
 
 XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한다. 이는 중간물 링 규칙이며 Godot 메시 앞면·법선 검증은 E02/E04에서 수행한다. 빈/비유효 도형을 조용히 수리하지 않고 작업을 중단하며 원본 오류를 기록한다. 조사 bbox에서 도형을 자르거나 도로폭 버퍼를 만들지 않는다. [생성 규칙](../config/geometry_rules.json)·[G02 증거](../data/reports/geometry_check.json).
 
-건물 추가 필드: `height_m`, `min_height_m`, `height_source`, `height_raw`, `levels_raw`, `height_assumption_id`. 높이는 단위·형식·범위를 검사해 유효하면 사용하고, 없으면 층수 추정, 그마저 없으면 용도별 임시값을 쓴다. 층당 높이와 기본 높이는 별도 설정표로 관리하며 실제값으로 이름 붙이지 않는다. 일반 빌딩 높이를 궁궐 전각에 일괄 적용하지 않는다.
+G03의 높이 가공물은 `heights.json`이며 G02 feature_id로 연결한다. 실제 필드는 `height_class`, `height_m`, `min_height_m`, `vertical_span_m`, `source_tags`, 원문 파싱 상태, `source_levels`, `assumption_id`, `component_evidence_ids`, `emit_coarse_body`다. 단일 유효 height를 우선하고, 원문이 있지만 다중/해석 불가면 보류한다. height가 없는 부분/지붕은 전체 높이를 임의로 만들지 않는다. 석조전은 명시 부분의 유효 상단 최대값으로 단순 외곽 상한을 도출한다. 랜드마크 임시값·층수 환산·용도 기본값과 계수는 [height_rules.json](../config/height_rules.json)에 구분한다. 원문 height에는 지붕이 포함되며 min_height와의 차이가 수직 길이다. 원문 min_height가 없을 때 하단 오프셋 0은 관측값이 아닌 로컬 기본안이다. 일반 빌딩 높이를 궁궐 전각에 일괄 적용하지 않는다.
+
+`terrain.json`은 객체별 `ground_class`, `ground_y_m`, 예외 사유, `physical_elevation_m=null`, `walkable_permission=null`, `terrain_shape_verified=false`를 기록한다. 지면 기준·높이 유효성·단순 본체 선택은 통행 허가와 별개다. 정관헌 주변 sand 관계는 원본 전체 면·구멍과 로컬 도형을 참조로 보존한다. 원문·현재 G02 검사·정책/큐·G03 규칙·수동 결정·근거 파일·생성 도구 해시가 달라지면 검토 후 재생성한다. 원문 정확도는 별도 검증이며 모든 추정은 가정 ID를 유지한다.
 
 도로 추가 필드: 중심선과 면을 구분, `width_m`, `width_source`, `lanes_raw`, `oneway`, `layer`, `bridge`, `tunnel`, `pedestrian_allowed`. 폭 추정으로 만든 도로 면이 건물·담장을 덮으면 결함 목록에 넣는다. 중심선 버퍼만으로 실제 보도와 차선을 확정하지 않는다.
 
@@ -91,6 +93,8 @@ XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한�
 G02의 보수적 생성 역할은 명시 `type=building` 관계의 outline/part를 먼저 연결하며 공간 겹침은 부모 후보로만 기록한다. 부모 외곽과 부분을 동시에 전체 건물 볼륨으로 생성하지 않는다. 기본 몸체 후보에는 primary 외곽만 넣고 `building:part`와 `building=roof`는 역할을 보존한 참조다. G03/E02에서 부분 표현을 채택할 때 부모 전체 볼륨과 겹치지 않도록 전략을 교체한다. 이 목록은 실제 메시가 아니다.
 
 동일 유형의 도형과 원본 태그(높이 의미 포함)가 모두 같을 때만 별칭으로 묶고 원본 기록은 남긴다. 설명되지 않은 본체 겹침은 양쪽을 기본 몸체 생성에서 보류한다. 겹침 보고 임계값 0.01㎡는 수치적인 검토 기준이지 측량 정확도가 아니다. 같은 원천의 담장 선/면은 선을 기본 표현, 면을 참조로 구분한다. 모든 보류·별칭과 Overture 22개 미승인 후보의 사유는 검사 보고서에 기록한다.
+
+G03은 [잠정 생성 결정](../data/manual/height_review_decisions.json)에 따라 정관헌의 이름 윤곽 `w/381755268`과 상동교회 본체 `w/1128365145`만 단순 본체에 복원했다. 정관헌의 큰 윤곽/sand 구멍과 교회의 52.1m 작은 면은 참조로 보존한다. 좌표 수정·부분 높이 승인·탑의 시작 높이 추정은 하지 않는다. 상세 부분 전략으로 교체할 때 본체 전체 부피와 동시 생성하지 않도록 다시 검사한다.
 
 ## C06. 게임 구성과 이동
 

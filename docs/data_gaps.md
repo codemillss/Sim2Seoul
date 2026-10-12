@@ -2,6 +2,8 @@
 
 D04 기준: 2026-10-12. **OSM v2를 기본 배치로 사용하고, 부족한 높이·폭·지면은 출처와 추정을 구분해 보완한다.** G01 좌표 작업으로 진행할 입력은 준비됐다. 실제 게임 보행과 모든 현실 치수를 확인한 상태는 아니다.
 
+이 문서의 수량과 후속 계획은 D04 당시 기준이다. 이후 G03에서 높이 추정·임시값·지면 예외와 단순 본체 결정을 구현한 결과는 [height_review](../data/reports/height_review.md)에 기록했다. 현재 다음 행동은 [WORK_STATUS](WORK_STATUS.md)를 따른다.
+
 사용 규칙은 [data_usage.json](../config/data_usage.json), 실제 속성 집계는 [D04 감사](../data/reports/d04_data_audit.json), 검토 대상은 [수동 검토 큐](../data/manual/review_queue.json)다. 원본을 다시 내려받거나 일반 외형으로 실제 배치를 바꾸지 않는다.
 
 ## 원천별 사용 판정

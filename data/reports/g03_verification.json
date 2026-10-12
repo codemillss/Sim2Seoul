@@ -1,0 +1,111 @@
+{
+  "task_id": "G03",
+  "verified_at_utc": "2026-10-12T07:45:57.788176+00:00",
+  "started_from_commit": "fd8aba911d8a76d3f716e54340119ecc8d923baf",
+  "environment_scope": "Current M1 existing interpreter; separate file snapshot, no new dependency install or M4 execution",
+  "snapshot_file_count": 92,
+  "checks": {
+    "no_country_dem_or_environment_in_snapshot": true,
+    "small_shared_input_hashes_pass": true,
+    "feature_bytes_equal_across_workspace_paths": true,
+    "height_and_terrain_bytes_equal_across_workspace_paths": true,
+    "height_and_geometry_reports_match_current": true,
+    "second_height_ground_generation_identical": true,
+    "twelve_corruptions_rejected_in_snapshot": true,
+    "manual_queue_and_decisions_unchanged_by_generators": true,
+    "changed_raw_rejected": true,
+    "changed_features_rejected": true,
+    "changed_height_rules_rejected": true,
+    "changed_decisions_rejected": true,
+    "changed_official_evidence_rejected": true,
+    "changed_policy_rejected": true,
+    "changed_manual_queue_rejected": true,
+    "all_shared_snapshot_files_restored": true,
+    "python_sources_parse": true,
+    "setup_shell_syntax": true,
+    "setup_dependency_order_correct": true,
+    "completed_tasks_D01_D04_G01_G03_only": true,
+    "manifest_status_matches_plan": true,
+    "next_task_G04": true,
+    "fourteen_pending_reviews_no_surveyed_overrides": true,
+    "derived_features_heights_terrain_git_ignored": true,
+    "nineteen_height_and_twentysix_geometry_checks_pass": true,
+    "source_count_and_coarse_ground_counts_match": true,
+    "published_G02_report_exactly_preserved": true,
+    "markdown_local_links_resolve": true,
+    "reports_and_config_json_parse": true
+  },
+  "provenance_rejection_cases": [
+    {
+      "case": "changed_raw",
+      "rejected": true,
+      "reason": "G03 provenance mismatch; review changes and regenerate height/terrain together"
+    },
+    {
+      "case": "changed_features",
+      "rejected": true,
+      "reason": "G03 provenance mismatch; review changes and regenerate height/terrain together"
+    },
+    {
+      "case": "changed_height_rules",
+      "rejected": true,
+      "reason": "G03 provenance mismatch; review changes and regenerate height/terrain together"
+    },
+    {
+      "case": "changed_decisions",
+      "rejected": true,
+      "reason": "G03 provenance mismatch; review changes and regenerate height/terrain together"
+    },
+    {
+      "case": "changed_official_evidence",
+      "rejected": true,
+      "reason": "G03 provenance mismatch; review changes and regenerate height/terrain together"
+    },
+    {
+      "case": "changed_policy",
+      "rejected": true,
+      "reason": "ValueError: G03 input/config/manual provenance mismatch"
+    },
+    {
+      "case": "changed_manual_queue",
+      "rejected": true,
+      "reason": "ValueError: G03 input/config/manual provenance mismatch"
+    }
+  ],
+  "features_sha256": "457bd780da586da2ac987b8df8662129baa1168f02f4568927fa19bcf9d81b54",
+  "heights_sha256": "c3ac4be49acc35ee44832ed92cb57547c56a0ddb13bbe23f3b128833caf70455",
+  "terrain_sha256": "095f6d19fa7908c9f9aefc7b3c593f17a31729c7a04dec229eaff34f61bdd7ea",
+  "height_report_sha256": "c7562b9fd3b662910f4a564557265a5577503eb7fd99ce034cc17c0a0b25266a",
+  "regression_report_sha256": "fe0aa99aef196e24dfabd6a1848939574a4c0810f19f46ad56c782f22798c45a",
+  "manual_review_count": 14,
+  "completed_tasks": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "G01",
+    "G02",
+    "G03"
+  ],
+  "next_task": "G04",
+  "not_run": [
+    "Fresh Python dependency installation",
+    "M4 Pro",
+    "Godot mesh/collision/walking",
+    "Independent measured heights/ground",
+    "Detailed component vertical mesh reconstruction",
+    "G04 width/route/boundary"
+  ],
+  "passed": true,
+  "local_markdown_link_count": 236,
+  "broken_links": [],
+  "json_documents_parsed": 44,
+  "final_document_checks": {
+    "shared_file_count": 94,
+    "local_markdown_link_count": 247,
+    "broken_links": [],
+    "json_documents_parsed": 45,
+    "diff_check_passed": true,
+    "timing": "After G03 execution log and independent review evidence added; no generator/input changes since portable reproduction"
+  }
+}

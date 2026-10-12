@@ -1,0 +1,88 @@
+{
+  "task_id": "G03",
+  "scope": "Independent Sol review of four corrupt derived inputs; before findings preserved and after meaningful-check rejection, with current provenance updated by reviewer",
+  "cases": [
+    {
+      "case": "invent_bottom",
+      "before": {
+        "passed": true,
+        "check_count": 17,
+        "checker_sha256": "b2a6f34679318c6f414fb85e81dbca88a759fefd86901d784c2b5662e8b599eb",
+        "heights_sha256": "1a377f8a1cac1b5cdae64205245a8fade95403926119b5687b59ebc34174247f",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8"
+      },
+      "after": {
+        "passed": false,
+        "check_count": 19,
+        "checker_sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b",
+        "heights_sha256": "1a377f8a1cac1b5cdae64205245a8fade95403926119b5687b59ebc34174247f",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8",
+        "failed_checks": [
+          "top_bottom_span_and_height_priority_values_valid"
+        ]
+      }
+    },
+    {
+      "case": "alter_surface_outer",
+      "before": {
+        "passed": true,
+        "check_count": 17,
+        "checker_sha256": "b2a6f34679318c6f414fb85e81dbca88a759fefd86901d784c2b5662e8b599eb",
+        "heights_sha256": "bc59648d4dd594aafc8b25b070da20b294088fe9294e725594aa3128d64ce2f3",
+        "terrain_sha256": "7b063389f40ce161588c3a53a8ed0922015053ab35d2e687b89d00c68462156b"
+      },
+      "after": {
+        "passed": false,
+        "check_count": 19,
+        "checker_sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b",
+        "heights_sha256": "bc59648d4dd594aafc8b25b070da20b294088fe9294e725594aa3128d64ce2f3",
+        "terrain_sha256": "7b063389f40ce161588c3a53a8ed0922015053ab35d2e687b89d00c68462156b",
+        "failed_checks": [
+          "surface_reference_ids_and_entire_source_local_geometry_match_raw"
+        ]
+      }
+    },
+    {
+      "case": "delete_decision_evidence",
+      "before": {
+        "passed": true,
+        "check_count": 17,
+        "checker_sha256": "b2a6f34679318c6f414fb85e81dbca88a759fefd86901d784c2b5662e8b599eb",
+        "heights_sha256": "4c50c1fa0df9b1c47b626abe446fbb3ff8190b0a3f4325416e9bcf32b9c20048",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8"
+      },
+      "after": {
+        "passed": false,
+        "check_count": 19,
+        "checker_sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b",
+        "heights_sha256": "4c50c1fa0df9b1c47b626abe446fbb3ff8190b0a3f4325416e9bcf32b9c20048",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8",
+        "failed_checks": [
+          "manual_decision_evidence_and_overlap_areas_complete"
+        ]
+      }
+    },
+    {
+      "case": "alter_height_status",
+      "before": {
+        "passed": true,
+        "check_count": 17,
+        "checker_sha256": "b2a6f34679318c6f414fb85e81dbca88a759fefd86901d784c2b5662e8b599eb",
+        "heights_sha256": "e6c4089c08dbafe879bddb8953e0952065b8f1663e44a082e92da7ed418c2162",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8"
+      },
+      "after": {
+        "passed": false,
+        "check_count": 19,
+        "checker_sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b",
+        "heights_sha256": "e6c4089c08dbafe879bddb8953e0952065b8f1663e44a082e92da7ed418c2162",
+        "terrain_sha256": "4501abfe084577ce376d503b5c4a68cd1441b5370bb019d0369b82922c4d45e8",
+        "failed_checks": [
+          "source_tags_levels_roof_and_estimation_labels_preserved"
+        ]
+      }
+    }
+  ],
+  "all_four_previous_misses_now_rejected": true,
+  "final_review": "No additional material defect found in final focused code review; not a physical or game validation"
+}

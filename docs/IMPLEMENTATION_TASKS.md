@@ -73,12 +73,13 @@
 - 실제 증거: [geometry_check](../data/reports/geometry_check.json) 26개 검사와 [회귀 검사](../data/reports/g02_regression_check.json) 9개 변형 거부. 원본 1,523개·holes 83개 보존, 명시 부모/부분 관계와 보류 사유 기록. [G02 설명](evidence/G02_GEOMETRY_REVIEW.md). 가공물은 공유 도구로 재생성한다.
 - 대안: 자동 복구가 외형을 크게 바꾸면 검토 대상으로 분리한다. 핵심 건물은 출처를 남긴 수동 도형으로 대체한다.
 
-### [ ] G03 높이와 지면 분류 — 계획
+### [x] G03 높이와 지면 분류 — 완료(원문·추정·임시 기준 분류, 실제 지형·부분 메시·보행 검증은 후속)
 - 선행: G02.
 - 입력: 유효 높이·층수·표고 자료, data_gaps.
 - 산출: `data/processed/heights.json`, `data/processed/terrain.json`, `data/reports/height_review.md`.
 - 실행: 확인된 높이, 층수 환산 추정, 임시 기본값을 분리한다. 건물 높이와 지면 해발고도를 혼동하지 않는다. 표고가 부족하면 초기 평면 지면의 적용 범위와 계단·경사 예외를 명시한다.
 - 완료 기준: 모든 생성 대상에 높이·지면 처리 상태와 출처/추정 사유가 있다. 미확인 경사를 사실로 표현하지 않는다.
+- 실제 증거: [height_review](../data/reports/height_review.md)·[높이 검사](../data/reports/height_check.json) 19개 통과·[회귀 검사](../data/reports/g03_regression_check.json) 12개 변형 거부. 1,523개 상태·단순 본체 계획 635개·지면 예외 132개, 정관헌/상동교회 본체 단일 선택과 참조 보존. 가공물은 공유 도구로 재생성하며 실측 확인/수동 보정 승인과 구분한다.
 - 대안: 보행 핵심 구간만 수동 단차를 보완하고 정확한 지형은 후속 작업으로 남긴다. 실제 축척 검증은 유지한다.
 
 ### [ ] G04 보행·주행·경계 후보 분리 — 계획

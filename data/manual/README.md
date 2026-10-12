@@ -1,8 +1,8 @@
 # 수동 검토와 보정
 
-`review_queue.json`은 D04에서 확인한 검토 대상이다. 실제 수정 좌표·높이·문 폭·충돌 보정은 아직 없다. `approved_geometry_or_value: null`과 `pending_review`를 승인된 게임 입력으로 읽지 않는다.
+`review_queue.json`은 D04에서 확인한 검토 대상이다. 승인된 실측 수정 좌표·높이·문 폭·충돌 보정은 아직 없다. G03 임시 높이는 별도 설정의 가정으로 존재한다. `approved_geometry_or_value: null`과 `pending_review`를 승인된 게임 입력으로 읽지 않는다.
 
-G02에서 기존 12건에 수평 검토 진행 메모를 남기고 정관헌·상동교회 겹침 MR13/MR14를 추가해 현재 14건이다. 본체 생성 보류는 원본 삭제나 수동 보정 승인이 아니다. [G02 결과](../../docs/evidence/G02_GEOMETRY_REVIEW.md)를 따라 높이/수직 구성 검토를 이어간다.
+G02에서 기존 12건에 수평 검토 진행 메모를 남기고 정관헌·상동교회 겹침 MR13/MR14를 추가해 현재 14건이다. 본체 생성 보류는 원본 삭제나 수동 보정 승인이 아니다. [G02 결과](../../docs/evidence/G02_GEOMETRY_REVIEW.md)와 [G03 검토](../reports/height_review.md)를 따라 검토를 이어간다. `height_review_decisions.json`은 MR13/MR14의 단순 본체 단일 선택과 참조 보존을 명시한 잠정 생성 결정이며 측량 보정 승인이 아니다. 원문 좌표·높이/시작 높이는 바꾸지 않았다.
 
 후속 작업에서 항목마다 원천 ID, 증거, 원본/추정 구분, 담당 작업 ID, 판단과 검증 결과를 기록한다. 보정을 만들면 안정적인 보정 ID와 원천 참조, 좌표계·축·단위, 값을 선택한 이유를 함께 남긴다. 수평 배치는 `config/region.json`, 원천 사용 범위는 `config/data_usage.json`을 따른다.
 

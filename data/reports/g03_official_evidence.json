@@ -1,0 +1,54 @@
+{
+  "reviewed_at": "2026-10-12",
+  "scope": "Primary evidence for G03 overlap review; web source access levels separated; no measured heights obtained",
+  "sources": [
+    {
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?VdkVgwKey=79%2C00820000%2C11&pageNo=1_1_1_1",
+      "provider": "국가유산포털",
+      "access": "Web search result extracted body exposed basic information; direct open failed Internal Error. Do not claim successful page fetch.",
+      "query": "정관헌 단층 site:heritage.go.kr",
+      "location": "기본 정보 / 수량·면적 / 해제일",
+      "short_excerpt": "1동 1층, 바닥면적 297.1㎡; 해제일 2008.06.23",
+      "interpretation": "Historical registration record supports one-storey scale; not current registration status or surveyed footprint/height.",
+      "limitation": "Direct opening unavailable; root also observed403. Search-extracted content is weaker than a locally saved original page."
+    },
+    {
+      "url": "https://royal.khs.go.kr/ROYAL/contents/R402000000.do?id=20240911102733381067&schBcid=normal1&schM=view",
+      "provider": "궁능유적본부",
+      "access": "Direct web open successful",
+      "location": "보도자료 2024-09-11 body paragraph2; web extracted lines137-139",
+      "short_excerpt": "서양식 건물에 전통적 요소가 가미돼",
+      "interpretation": "Avoid treating OSM architecture=joseon alone as sufficient for generic hanok generation.",
+      "limitation": "No metre height or footprint specification."
+    },
+    {
+      "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=205",
+      "provider": "서울미래유산 / 서울특별시",
+      "access": "Direct web open successful",
+      "location": "설명 paragraph beginning1944년에 교회가 폐쇄되고; phrase beginning1977년에",
+      "short_excerpt": "철근콘크리트조, 지하2층, 지상9층",
+      "interpretation": "Current building described as1977 completed commercial/church complex with9 above-ground floors.",
+      "limitation": "No37.4m or52.1m independent confirmation; no tower start height."
+    },
+    {
+      "url": "https://openab.seoul.go.kr/build/info.do?pageIndex=2676",
+      "provider": "서울특별시 집합건물 통합정보마당",
+      "access": "Direct web open successful; building-detail link fetch failed Cache miss",
+      "location": "건축물대장 목록 row 기독교 대한 감리회 상동교회; extracted line104",
+      "short_excerpt": "기독교 대한 감리회 상동교회 | 9층",
+      "values": {
+        "address": "서울특별시 중구 남창동1-1번지",
+        "above_ground_floors": 9,
+        "building_area_m2": 1796,
+        "gross_floor_area_m2": 19290
+      },
+      "interpretation": "Independent support for9 storeys; official building area is distinct from OSM polygon area1992.29m2.",
+      "limitation": "List-level record does not provide surveyed total height or component geometry. Page index may change."
+    }
+  ],
+  "root_review_notes": {
+    "heritage_direct_open": "403 Forbidden",
+    "royal_and_futureheritage": "root also directly opened successfully",
+    "measured_heights_received": false
+  }
+}

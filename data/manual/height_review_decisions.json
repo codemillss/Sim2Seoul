@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "G03",
+  "status": "provisional_generation_decisions_not_surveyed_geometry_or_height",
+  "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+  "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+  "official_evidence": "data/reports/g03_official_evidence.json",
+  "decisions": [
+    {
+      "review_id": "MR13",
+      "name": "정관헌",
+      "selected_body": "w/381755268",
+      "reference_only": "w/776767573",
+      "relation_surface_hole": "r/10757318",
+      "reason": "Named 339.05m2 outline is contained by anonymous 487.44m2 outline. Select one temporary body; anonymous outline also forms sand surface inner hole.",
+      "unconfirmed": "Outer outline may describe eaves or base but semantics and metre height are not established",
+      "physical_geometry_changed": false,
+      "independent_metres_verified": false
+    },
+    {
+      "review_id": "MR14",
+      "name": "상동교회",
+      "selected_body": "w/1128365145",
+      "reference_only": "w/1128365153",
+      "relation_surface_hole": null,
+      "reason": "Small higher outline is contained by named main body and shares nodes; use one coarse main body, retain higher component candidate.",
+      "unconfirmed": "Tower identity/start height and whether spire/cross is included remain unverified; do not invent min_height=37.4",
+      "physical_geometry_changed": false,
+      "independent_metres_verified": false
+    }
+  ]
+}

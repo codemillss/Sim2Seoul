@@ -1,0 +1,139 @@
+{
+  "task_id": "G03",
+  "baseline_passed": true,
+  "passed": true,
+  "heights_sha256": "c3ac4be49acc35ee44832ed92cb57547c56a0ddb13bbe23f3b128833caf70455",
+  "terrain_sha256": "095f6d19fa7908c9f9aefc7b3c593f17a31729c7a04dec229eaff34f61bdd7ea",
+  "checker_sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b",
+  "regression_tool_sha256": "87f1f6a3d61110b21a229ac8dfd08094c274d1cccb1f08b5ab2bc00aa5e58277",
+  "cases": [
+    {
+      "case": "roof_added_again_to_source_top",
+      "rejected": true,
+      "required_failed_check": "top_bottom_span_and_height_priority_values_valid",
+      "failed_checks": [
+        "top_bottom_span_and_height_priority_values_valid"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "invented_missing_source_bottom",
+      "rejected": true,
+      "required_failed_check": "top_bottom_span_and_height_priority_values_valid",
+      "failed_checks": [
+        "top_bottom_span_and_height_priority_values_valid"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "false_measured_status",
+      "rejected": true,
+      "required_failed_check": "source_tags_levels_roof_and_estimation_labels_preserved",
+      "failed_checks": [
+        "source_tags_levels_roof_and_estimation_labels_preserved"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "deleted_overlap_evidence",
+      "rejected": true,
+      "required_failed_check": "manual_decision_evidence_and_overlap_areas_complete",
+      "failed_checks": [
+        "manual_decision_evidence_and_overlap_areas_complete"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "shifted_surface_outer_vertex",
+      "rejected": true,
+      "required_failed_check": "surface_reference_ids_and_entire_source_local_geometry_match_raw",
+      "failed_checks": [
+        "surface_reference_ids_and_entire_source_local_geometry_match_raw"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "filled_surface_inner_hole",
+      "rejected": true,
+      "required_failed_check": "jeonggwanheon_sand_relation_inner_hole_retained",
+      "failed_checks": [
+        "surface_reference_ids_and_entire_source_local_geometry_match_raw",
+        "jeonggwanheon_sand_relation_inner_hole_retained"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "flattened_vertical_exception",
+      "rejected": true,
+      "required_failed_check": "vertical_exceptions_not_flattened_or_granted_access",
+      "failed_checks": [
+        "vertical_exceptions_not_flattened_or_granted_access"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "invented_sea_level_datum",
+      "rejected": true,
+      "required_failed_check": "local_plane_not_sea_level_dsm_or_play_boundary",
+      "failed_checks": [
+        "local_plane_not_sea_level_dsm_or_play_boundary"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "higher_outline_as_independent_body",
+      "rejected": true,
+      "required_failed_check": "one_coarse_plan_matches_height_ground_and_manual_decisions",
+      "failed_checks": [
+        "one_coarse_plan_matches_height_ground_and_manual_decisions",
+        "parts_roofs_and_reference_outlines_not_independent_bodies",
+        "no_duplicate_footprint_volume_in_coarse_body_plan",
+        "sangdong_higher_candidate_retained_without_invented_start_height"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "storey_count_as_metres",
+      "rejected": true,
+      "required_failed_check": "top_bottom_span_and_height_priority_values_valid",
+      "failed_checks": [
+        "top_bottom_span_and_height_priority_values_valid"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "compound_height_first_value",
+      "rejected": true,
+      "required_failed_check": "compound_height_stays_raw_and_held",
+      "failed_checks": [
+        "top_bottom_span_and_height_priority_values_valid",
+        "height_and_ground_class_counts_match_records",
+        "one_coarse_plan_matches_height_ground_and_manual_decisions",
+        "compound_height_stays_raw_and_held"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "temporary_ground_grants_walk_permission",
+      "rejected": true,
+      "required_failed_check": "vertical_exceptions_not_flattened_or_granted_access",
+      "failed_checks": [
+        "vertical_exceptions_not_flattened_or_granted_access"
+      ],
+      "exit_code": 1,
+      "error": null
+    }
+  ],
+  "scope": "Twelve derived-input corruptions; no source/manual changes or game tests"
+}

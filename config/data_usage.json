@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "stage": "D04",
+  "stage": "D04_baseline_with_G03_height_ground_policy",
   "status": "implementation_baseline_not_runtime_assets",
   "region_config": "config/region.json",
   "investigation_bbox_is_play_boundary": false,
@@ -83,13 +83,21 @@
     "missing": "estimated temporary default only; pin purpose-specific values in G03",
     "special_landmarks": "separate review, no ordinary-building default applied silently",
     "roof_and_min_height": "preserve separately; validate semantics in G03",
-    "estimation_parameters": null,
+    "estimation_parameters": {
+      "file": "config/height_rules.json",
+      "status": "G03_explicit_proxy_assumptions_not_measurements"
+    },
     "parameter_owner_task": "G03"
   },
   "ground_and_width_policy": {
     "no_source_ground": "temporary local datum plane only where declared by G03",
     "local_y_zero_is_sea_level": false,
-    "numeric_ground_datum": null,
+    "numeric_ground_datum": {
+      "local_support_y_m": 0.0,
+      "physical_vertical_datum": null,
+      "extent_policy": "retained geometry envelope; not playable area",
+      "rules": "config/height_rules.json"
+    },
     "layer_is_metres": false,
     "centreline_is_real_road_width": false,
     "width_estimates": "explicit estimated fields with model assumptions; never measured width",
@@ -111,5 +119,6 @@
   },
   "manual_review_queue": "data/manual/review_queue.json",
   "attribution_doc": "docs/ATTRIBUTION.md",
-  "next_coordinate_task": "G01"
+  "next_coordinate_task": "G01",
+  "height_review_decisions": "data/manual/height_review_decisions.json"
 }
