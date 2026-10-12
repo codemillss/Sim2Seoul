@@ -1,0 +1,789 @@
+{
+  "task_id": "G01",
+  "scope": "Fixed horizontal transform and local units; not engine or field validation",
+  "provenance": {
+    "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+    "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+    "preview_artifact": {
+      "file": "data/processed/osm_preview.geojson",
+      "bytes": 2124816,
+      "sha256": "130eab8f92b8b5a339496db803d18a1c74c4a8af61a9acb1855b8ee9af64e471",
+      "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+      "generator": "tools/prepare_osm.py"
+    },
+    "config_file": "config/region.json",
+    "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "generators": {
+      "tools/coordinate_system.py": "ead3e59b3d060f50f4097a88816aed2516033f37d3bd739719517ab74ece6274",
+      "tools/check_coordinates.py": "1444e1e5985e3e16859dd31fb9a79d43889d87644acf16a57d4374fac572d952"
+    }
+  },
+  "environment": {
+    "python": "3.14.7",
+    "pyproj": "3.8.0",
+    "proj": "9.8.1",
+    "platform": "Darwin",
+    "machine": "arm64",
+    "proj_network_enabled": false
+  },
+  "checks": {
+    "source_hash_and_size": true,
+    "preview_source_hash": true,
+    "preview_hash_and_size": true,
+    "preview_config_binding": true,
+    "seven_landmarks_and_raw_node_coordinates": true,
+    "investigation_bbox_within_projection_area": true,
+    "roundtrip_within_1e_minus_8_degrees": true,
+    "fixed_origin_is_zero": true,
+    "four_nonzero_pairs_distance_within_0_2_percent": true,
+    "local_distances_and_bearings_preserve_projected_plane": true,
+    "five_10m_axis_controls": true,
+    "true_east_north_primary_axis_signs": true,
+    "invalid_inputs_rejected": true
+  },
+  "passed": true,
+  "tolerances": {
+    "roundtrip_max_error_degrees": 1e-08,
+    "projected_geodesic_max_relative_difference": 0.002,
+    "synthetic_axis_max_error_m": 1e-06
+  },
+  "coordinate_reference": {
+    "task_id": "G01",
+    "coordinate_contract_version": 1,
+    "provenance": {
+      "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+      "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+      "preview_artifact": {
+        "file": "data/processed/osm_preview.geojson",
+        "bytes": 2124816,
+        "sha256": "130eab8f92b8b5a339496db803d18a1c74c4a8af61a9acb1855b8ee9af64e471",
+        "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+        "generator": "tools/prepare_osm.py"
+      },
+      "config_file": "config/region.json",
+      "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+      "generators": {
+        "tools/coordinate_system.py": "ead3e59b3d060f50f4097a88816aed2516033f37d3bd739719517ab74ece6274",
+        "tools/check_coordinates.py": "1444e1e5985e3e16859dd31fb9a79d43889d87644acf16a57d4374fac572d952"
+      }
+    },
+    "horizontal_source_crs": "EPSG:4326",
+    "metric_crs": "EPSG:32652",
+    "origin_lon_lat": [
+      126.97625,
+      37.5651
+    ],
+    "origin_projected_east_north_m": [
+      321266.3692172853,
+      4159488.62345062
+    ],
+    "world_axes": {
+      "x": "east",
+      "y": "up",
+      "z": "south"
+    },
+    "meters_per_world_unit": 1.0,
+    "vertical_datum": "not_yet_resolved",
+    "vertical_coordinate_rule": "world_y_is_local_height_m_not_sea_level_or_DSM; ground_assignment_is_G03",
+    "landmark_points": {
+      "w/377289797": {
+        "name": "대한문",
+        "source_feature_id": "w/377289797",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9764654,
+          37.5649595
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 292396028,
+            "lon_lat": [
+              126.9764654,
+              37.5649595
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321285.0591499416,
+          4159472.6234692778
+        ],
+        "world_xyz_m": [
+          18.68993265629979,
+          0.0,
+          15.999981342349201
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "w/181574577": {
+        "name": "중화전",
+        "source_feature_id": "w/181574577",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9746423,
+          37.5657499
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 1919857575,
+            "lon_lat": [
+              126.9746423,
+              37.5657499
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321125.91979385936,
+          4159563.797954544
+        ],
+        "world_xyz_m": [
+          -140.44942342594732,
+          0.0,
+          -75.17450392385945
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "r/19357693": {
+        "name": "석조전",
+        "source_feature_id": "r/19357693",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9739216,
+          37.5664567
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 13003697962,
+            "lon_lat": [
+              126.9739216,
+              37.5664567
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321063.95421491005,
+          4159643.598512571
+        ],
+        "world_xyz_m": [
+          -202.41500237525906,
+          0.0,
+          -154.97506195073947
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "w/517072312": {
+        "name": "돈덕전",
+        "source_feature_id": "w/517072312",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9734514,
+          37.567349
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 5046671480,
+            "lon_lat": [
+              126.9734514,
+              37.567349
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321024.55937527155,
+          4159743.5056551853
+        ],
+        "world_xyz_m": [
+          -241.80984201375395,
+          0.0,
+          -254.88220456521958
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "w/198561926": {
+        "name": "서울시청",
+        "source_feature_id": "w/198561926",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9778176,
+          37.5669035
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 2086880522,
+            "lon_lat": [
+              126.9778176,
+              37.5669035
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321409.13938752114,
+          4159685.7612943286
+        ],
+        "world_xyz_m": [
+          142.77017023583176,
+          0.0,
+          -197.13784370850772
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "r/10757525": {
+        "name": "서울도서관",
+        "source_feature_id": "r/10757525",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9774192,
+          37.5665521
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 2086880576,
+            "lon_lat": [
+              126.9774192,
+              37.5665521
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321373.11099973944,
+          4159647.5269072778
+        ],
+        "world_xyz_m": [
+          106.7417824541335,
+          0.0,
+          -158.90345665765926
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      },
+      "w/370019676": {
+        "name": "서울광장",
+        "source_feature_id": "w/370019676",
+        "source_point_kind": "lexicographically_first_outer_ring_vertex_not_entrance_centroid_or_spawn",
+        "geometry_polygon_ring_vertex_indices": [
+          0,
+          0,
+          0
+        ],
+        "lon_lat": [
+          126.9776086,
+          37.5657044
+        ],
+        "coincident_raw_nodes": [
+          {
+            "osm_node_id": 4030821369,
+            "lon_lat": [
+              126.9776086,
+              37.5657044
+            ]
+          }
+        ],
+        "projected_east_north_m": [
+          321387.81484115566,
+          4159553.1044211052
+        ],
+        "world_xyz_m": [
+          121.44562387035694,
+          0.0,
+          -64.48097048513591
+        ],
+        "y_status": "synthetic_0_for_horizontal_check_not_observed_ground"
+      }
+    },
+    "synthetic_10m_controls": [
+      {
+        "id": "grid_east_10m",
+        "kind": "synthetic_projected_or_local_control",
+        "lon_lat": [
+          126.9763631624445,
+          37.56510194052242
+        ],
+        "expected_world_xyz_m": [
+          10,
+          0,
+          0
+        ],
+        "actual_world_xyz_m": [
+          9.999999999883585,
+          0,
+          -0.0
+        ],
+        "max_error_m": 1.1641532182693481e-10
+      },
+      {
+        "id": "grid_west_10m",
+        "kind": "synthetic_projected_or_local_control",
+        "lon_lat": [
+          126.97613683756633,
+          37.5650980593692
+        ],
+        "expected_world_xyz_m": [
+          -10,
+          0,
+          0
+        ],
+        "actual_world_xyz_m": [
+          -10.000000001047738,
+          0,
+          -4.656612873077393e-10
+        ],
+        "max_error_m": 1.0477378964424133e-09
+      },
+      {
+        "id": "grid_north_10m",
+        "kind": "synthetic_projected_or_local_control",
+        "lon_lat": [
+          126.9762475621384,
+          37.56519007930091
+        ],
+        "expected_world_xyz_m": [
+          0,
+          0,
+          -10
+        ],
+        "actual_world_xyz_m": [
+          5.820766091346741e-10,
+          0,
+          -10.000000000465661
+        ],
+        "max_error_m": 5.820766091346741e-10
+      },
+      {
+        "id": "grid_south_10m",
+        "kind": "synthetic_projected_or_local_control",
+        "lon_lat": [
+          126.97625243785076,
+          37.56500992069757
+        ],
+        "expected_world_xyz_m": [
+          0,
+          0,
+          10
+        ],
+        "actual_world_xyz_m": [
+          7.566995918750763e-10,
+          0,
+          9.999999999068677
+        ],
+        "max_error_m": 9.313225746154785e-10
+      },
+      {
+        "id": "local_up_10m",
+        "kind": "synthetic_projected_or_local_control",
+        "lon_lat": [
+          126.97625,
+          37.5651
+        ],
+        "expected_world_xyz_m": [
+          0,
+          10,
+          0
+        ],
+        "actual_world_xyz_m": [
+          0.0,
+          10,
+          -0.0
+        ],
+        "max_error_m": 0.0
+      }
+    ],
+    "usage": "Horizontal reference only. Source vertices are not entrances, spawn points or walking route endpoints."
+  },
+  "roundtrips": [
+    {
+      "point_id": "origin",
+      "lon_lat": [
+        126.97625,
+        37.5651
+      ],
+      "world_xyz_m": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "inverse_lon_lat": [
+        126.97625,
+        37.5651
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "point_id": "bbox_corner_0",
+      "lon_lat": [
+        126.971,
+        37.5608
+      ],
+      "world_xyz_m": [
+        -474.0249551717425,
+        0.0,
+        467.13309717876837
+      ],
+      "inverse_lon_lat": [
+        126.971,
+        37.56080000000001
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "bbox_corner_1",
+      "lon_lat": [
+        126.9815,
+        37.5608
+      ],
+      "world_xyz_m": [
+        453.4677251309622,
+        0.0,
+        487.11210396746174
+      ],
+      "inverse_lon_lat": [
+        126.9815,
+        37.56079999999999
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "bbox_corner_2",
+      "lon_lat": [
+        126.9815,
+        37.5694
+      ],
+      "world_xyz_m": [
+        473.9721832944779,
+        0.0,
+        -467.1585487634875
+      ],
+      "inverse_lon_lat": [
+        126.9815,
+        37.5694
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "point_id": "bbox_corner_3",
+      "lon_lat": [
+        126.971,
+        37.5694
+      ],
+      "world_xyz_m": [
+        -453.41371098929085,
+        0.0,
+        -487.13915413990617
+      ],
+      "inverse_lon_lat": [
+        126.971,
+        37.5694
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "point_id": "w/377289797",
+      "lon_lat": [
+        126.9764654,
+        37.5649595
+      ],
+      "world_xyz_m": [
+        18.68993265629979,
+        0.0,
+        15.999981342349201
+      ],
+      "inverse_lon_lat": [
+        126.9764654,
+        37.56495949999999
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "w/181574577",
+      "lon_lat": [
+        126.9746423,
+        37.5657499
+      ],
+      "world_xyz_m": [
+        -140.44942342594732,
+        0.0,
+        -75.17450392385945
+      ],
+      "inverse_lon_lat": [
+        126.9746423,
+        37.56574989999999
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "r/19357693",
+      "lon_lat": [
+        126.9739216,
+        37.5664567
+      ],
+      "world_xyz_m": [
+        -202.41500237525906,
+        0.0,
+        -154.97506195073947
+      ],
+      "inverse_lon_lat": [
+        126.97392160000001,
+        37.566456699999996
+      ],
+      "absolute_errors_degrees": [
+        1.4210854715202004e-14,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "w/517072312",
+      "lon_lat": [
+        126.9734514,
+        37.567349
+      ],
+      "world_xyz_m": [
+        -241.80984201375395,
+        0.0,
+        -254.88220456521958
+      ],
+      "inverse_lon_lat": [
+        126.97345140000002,
+        37.56734899999999
+      ],
+      "absolute_errors_degrees": [
+        1.4210854715202004e-14,
+        7.105427357601002e-15
+      ]
+    },
+    {
+      "point_id": "w/198561926",
+      "lon_lat": [
+        126.9778176,
+        37.5669035
+      ],
+      "world_xyz_m": [
+        142.77017023583176,
+        0.0,
+        -197.13784370850772
+      ],
+      "inverse_lon_lat": [
+        126.9778176,
+        37.5669035
+      ],
+      "absolute_errors_degrees": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "point_id": "r/10757525",
+      "lon_lat": [
+        126.9774192,
+        37.5665521
+      ],
+      "world_xyz_m": [
+        106.7417824541335,
+        0.0,
+        -158.90345665765926
+      ],
+      "inverse_lon_lat": [
+        126.97741920000001,
+        37.5665521
+      ],
+      "absolute_errors_degrees": [
+        1.4210854715202004e-14,
+        0.0
+      ]
+    },
+    {
+      "point_id": "w/370019676",
+      "lon_lat": [
+        126.9776086,
+        37.5657044
+      ],
+      "world_xyz_m": [
+        121.44562387035694,
+        0.0,
+        -64.48097048513591
+      ],
+      "inverse_lon_lat": [
+        126.97760860000001,
+        37.565704399999994
+      ],
+      "absolute_errors_degrees": [
+        1.4210854715202004e-14,
+        7.105427357601002e-15
+      ]
+    }
+  ],
+  "distance_pairs": [
+    {
+      "from": "w/377289797",
+      "to": "w/181574577",
+      "names": [
+        "대한문",
+        "중화전"
+      ],
+      "projected_distance_m": 183.40698301272593,
+      "local_distance_m": 183.40698301272593,
+      "geodesic_distance_m": 183.4081252680426,
+      "absolute_distance_difference_m": 0.0011422553166653415,
+      "relative_distance_difference": 6.2279428187600065e-06,
+      "grid_bearing_degrees": 299.8093570365062,
+      "local_bearing_degrees": 299.8093570365062,
+      "geodesic_initial_bearing_degrees": 298.5753499417681,
+      "grid_minus_geodesic_bearing_degrees_informational": 1.2340070947381037,
+      "start_meridian_convergence_degrees": -1.2339955872631523
+    },
+    {
+      "from": "r/19357693",
+      "to": "w/517072312",
+      "names": [
+        "석조전",
+        "돈덕전"
+      ],
+      "projected_distance_m": 107.39362427785365,
+      "local_distance_m": 107.39362427785365,
+      "geodesic_distance_m": 107.3942168318443,
+      "absolute_distance_difference_m": 0.0005925539906570521,
+      "relative_distance_difference": 5.5175595868896845e-06,
+      "grid_bearing_degrees": 338.4799609924121,
+      "local_bearing_degrees": 338.4799609924121,
+      "geodesic_initial_bearing_degrees": 337.2443587346331,
+      "grid_minus_geodesic_bearing_degrees_informational": 1.2356022577789645,
+      "start_meridian_convergence_degrees": -1.235589638350829
+    },
+    {
+      "from": "w/370019676",
+      "to": "w/198561926",
+      "names": [
+        "서울광장",
+        "서울시청"
+      ],
+      "projected_distance_m": 134.35989837408715,
+      "local_distance_m": 134.35989837408715,
+      "geodesic_distance_m": 134.36084934238258,
+      "absolute_distance_difference_m": 0.0009509682954274012,
+      "relative_distance_difference": 7.077718696196342e-06,
+      "grid_bearing_degrees": 9.132151856701574,
+      "local_bearing_degrees": 9.132151856701574,
+      "geodesic_initial_bearing_degrees": 7.898816224072224,
+      "grid_minus_geodesic_bearing_degrees_informational": 1.2333356326293483,
+      "start_meridian_convergence_degrees": -1.233318910618127
+    },
+    {
+      "from": "w/181574577",
+      "to": "w/198561926",
+      "names": [
+        "중화전",
+        "서울시청"
+      ],
+      "projected_distance_m": 308.3640615982492,
+      "local_distance_m": 308.3640615982492,
+      "geodesic_distance_m": 308.3660663541053,
+      "absolute_distance_difference_m": 0.0020047558561486767,
+      "relative_distance_difference": 6.501220707749859e-06,
+      "grid_bearing_degrees": 66.70175557130833,
+      "local_bearing_degrees": 66.70175557130833,
+      "geodesic_initial_bearing_degrees": 65.46661009964276,
+      "grid_minus_geodesic_bearing_degrees_informational": 1.235145471665561,
+      "start_meridian_convergence_degrees": -1.2351300883251588
+    }
+  ],
+  "true_cardinal_controls": [
+    {
+      "id": "geodetic_east",
+      "world_xyz_m": [
+        9.997615140862763,
+        0.0,
+        0.21537842089310288
+      ],
+      "primary_axis_sign_passed": true,
+      "cross_axis_note": "Grid and geodetic north differ; cross component need not be zero"
+    },
+    {
+      "id": "geodetic_north",
+      "world_xyz_m": [
+        0.21537864953279495,
+        0.0,
+        -9.997615351341665
+      ],
+      "primary_axis_sign_passed": true,
+      "cross_axis_note": "Grid and geodetic north differ; cross component need not be zero"
+    }
+  ],
+  "invalid_input_checks": [
+    {
+      "case": "nonfinite_lon",
+      "rejected": true
+    },
+    {
+      "case": "swapped_lon_lat",
+      "rejected": true
+    },
+    {
+      "case": "nonfinite_height",
+      "rejected": true
+    },
+    {
+      "case": "nonfinite_world",
+      "rejected": true
+    }
+  ],
+  "direction_interpretation": "Grid/local bearings must agree. Geodesic initial bearings differ due to meridian convergence and projection; difference is informational, not an equal-bearing test.",
+  "not_run": {
+    "independent_position_accuracy": "no independent surveyed coordinates",
+    "godot_transfer_distance_and_axis_check": "E04; engine not installed or started",
+    "observed_vertical_datum_or_ground": "G03; synthetic y=0 only, no DSM elevation conversion",
+    "walking_route_length_or_gate_access": "G04/W; source-vertex straight lines only",
+    "M4_Pro_execution": "this run used the current M1 environment"
+  },
+  "official_implementation_references": [
+    "https://pyproj4.github.io/pyproj/stable/api/transformer.html",
+    "https://pyproj4.github.io/pyproj/stable/api/proj.html",
+    "https://proj.org/en/stable/operations/projections/utm.html"
+  ]
+}

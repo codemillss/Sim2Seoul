@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-12 · 최근 실행: **D04 자료 사용 범위·결손·후속 검토 기준 정리 완료** · 계획 작업 D01–D04 완료, 다음 G01 · 게임 구현은 아직 시작하지 않음
+갱신: 2026-10-12 · 최근 실행: **G01 고정 원점·수평 변환·미터 단위 검증 완료** · 계획 작업 D01–D04/G01 완료, 다음 G02 · 게임 구현은 아직 시작하지 않음
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -11,7 +11,7 @@
 | 대체 경로 다운로드 | Geofabrik 한국 PBF 288,878,500 bytes 수신, 공급자 MD5 일치 | [source_manifest.json](../data/reports/source_manifest.json) |
 | 지역 원본 추출 | 현재 v2 소구역 188,346 bytes, 누락 보행 복합 면 18개 보완. 이전 파일 보존 | [extract_manifest.json](../data/reports/extract_manifest.json) |
 | 기본 자료 검사 | 미해결 참조 0, 미리보기 도형 비유효 0, 변환 예외 0 | [osm_audit.json](../data/reports/osm_audit.json) |
-| 좌표 변환 준비 검사 | 왕복 오차 약 7.11e-15도. 대각 거리 차이 약 0.00065% | 같은 감사 보고서. 전체 G01 검증 완료는 아님 |
+| 좌표 변환 준비 검사 | 준비 당시 왕복 오차 약 7.11e-15도, 대각 거리 차이 약 0.00065% | 같은 감사 보고서. 이후 G01 정식 검증 별도 수행 |
 | 랜드마크 태그 확인 | 대한문·중화전·석조전·돈덕전·서울시청·서울도서관·서울광장 이름과 ID 확인 | [named_features.json](../data/reports/named_features.json) |
 | 로컬 준비 환경 | Python 3.14 가상환경, osmium 4.3.1 / pyproj 3.8.0 / shapely 2.2.0 | [requirements-data.txt](../requirements-data.txt) |
 | 상세 계획 | 8단계 32작업, 공간 계약, 검증, Sol 인수 안내 | [MASTER_PLAN.md](MASTER_PLAN.md) |
@@ -23,6 +23,7 @@
 | 작업 맥락 인수 | 자동 시작 지침, 결정 이유·확정/미정, 실행 이력과 종료 기록 규칙 추가 | [AGENTS](../AGENTS.md), [결정 요약](PROJECT_CONTEXT.md), [실행 이력](EXECUTION_LOG.md) |
 | D03 보완 자료 | Overture 지역 건물 원본, DSM 지역 참고 사본, 국내 컬럼 정의서와 공식 경내 접근 근거 확보. 원본 미수신 경로와 한계 구분 | [D03 결과](evidence/D03_SUPPLEMENTAL_REVIEW.md), [자료별 상태](../data/reports/supplemental_status.json) |
 | D04 사용·결손 판정 | 원천별 사용/후보/참고/미수신 분리, 높이 속성 분류와 핵심 경로·수동 검토 큐, 출처/배포 조건 정리 | [data_gaps](data_gaps.md), [속성 감사](../data/reports/d04_data_audit.json), [사용 정책](../config/data_usage.json) |
+| G01 좌표 기준 고정 | 원본 정점 7곳·거리 4쌍·역변환·10m 축 등 13개 검사 통과. 원점·축·수치 변경 없음 | [G01 설명](evidence/G01_COORDINATE_CHECK.md), [좌표 검사](../data/reports/coordinate_check.json), [인수 검사](../data/reports/g01_verification.json) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
@@ -89,12 +90,13 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - **D02 완료:** 국가 원본 대비 검토에서 빠진 보행 관계 18개를 복구한 v2를 만들었다. 모든 지역 객체가 원본과 일치하고 참조·면 조립 검사를 통과했다. 현재 파일은 `data/raw/deoksugung_cityhall-v2.osm.pbf`다.
 - **D03 완료:** 보완 소구역 자료와 공식 참고 근거를 실제 취득·분류했고 값/도형/출처를 검사했다. 국내 원본·독립 높이·상세 지면의 미수신/한계를 보고서에 남겼다. 모든 후보 수신이나 실제 보행 검증을 완료했다는 의미가 아니다.
 - **D04 완료:** 기본 OSM v2, Overture 후보, DSM 참고 전용 및 미수신 자료를 구분했다. 높이/폭/지면·문·동선·중복 검토 기준과 12개 수동 검토 대상을 기록했다. 추정값이나 실제 게임 보행 검증을 완료한 것은 아니다.
-- **G01:** 다음 실행 작업. 변환 smoke test만 실행돼 있으며 대표 지점 3쌍/거리/방향의 정식 검증과 고정 기준 기록이 남음.
+- **G01 완료:** 대표 원본 정점 7곳, 거리 4쌍, 원점/모서리 역변환, 10m 축·입력 검사를 통과하고 계약 버전 1을 고정했다. 왕복 최대 1.42e-14도, 투영/측지 거리 차이 최대 0.000708%. 실제 지면/외부 위치/엔진 검증은 미실행이다.
+- **G02:** 다음 실행 작업. 원천 연결을 보존한 미터 좌표 도형과 부분/관계 중복·구멍 처리가 남음.
 - **E01 이후:** 미실행. E01의 빈 엔진 기동 검증은 보완 자료 확보와 독립적으로 진행 가능.
 
-## 다음 작업: G01 좌표 변환 기준 확정
+## 다음 작업: G02 도형 정리와 원천 연결
 
-첫 행동은 `config/region.json`, [data_gaps](data_gaps.md), 기술 계약 C01과 검증 V02를 확인하고 대한문·중화전·서울광장·시청 등에서 대표 지점 최소 3쌍을 정하는 것이다. 원점·축·미터 단위·역변환·투영/측지 거리·방향 검사를 남기고 `coordinate_reference.json`과 `coordinate_check.json`을 만든다. 지금은 게임이 없어 엔진에서의 최종 배치 검사는 E 단계에 남긴다.
+첫 행동은 현재 OSM v2·미리보기, [좌표 기준](../data/reports/coordinate_check.json), 사용 정책과 수동 큐, C04/C05·V02·상세 계획 G02를 확인하는 것이다. `tools/coordinate_system.py`를 재사용해 원천 위경도·ID와 외곽/내부 링을 유지한 미터 좌표 `features.json`을 만들고 관계 외곽 웨이·부모/부분 도형 중복을 검사한다. Overture 22개는 검토 전 자동 추가하지 않는다. 높이·지면 배정은 G03이며 게임 표시·최종 배치는 E 단계에 남긴다.
 
 조사 bbox는 플레이 경계가 아니고 원점은 스폰 지점이 아니다. 미수신 국내 상세 자료 때문에 정상 원본을 다시 받거나 같은 취득 실패를 반복하지 않는다. `data_usage.json`의 보류/참고 전용 범위를 유지하며 G02–G04에서 도형·높이·지면·경로를 순서대로 준비한다.
 
@@ -119,7 +121,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 G01이다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 G02다.
 
 ## 개발 환경 기록
 

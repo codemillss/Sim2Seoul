@@ -1,0 +1,74 @@
+{
+  "task_id": "G01",
+  "verified_at_utc": "2026-10-12T05:30:51.277593+00:00",
+  "started_from_commit": "8db07b6520ed4c4c506729a540d1aeed60fcc75c",
+  "environment_scope": "Current M1 with existing Python environment; separate files, no fresh installation or M4 test",
+  "snapshot_file_count": 70,
+  "snapshot_includes_large_country_or_dem": false,
+  "coordinate_report_sha256": "eb636a3620004f68f1ce4d6bdf2fe669f779548711412b6ffb3255dcb9c56b03",
+  "checks": {
+    "snapshot_excludes_large_raws_and_environment": true,
+    "shared_small_input_checks": true,
+    "preview_matches_current_without_large_originals": true,
+    "reproduced_13_coordinate_checks": true,
+    "snapshot_report_equals_current": true,
+    "snapshot_reference_equals_current_and_embedded_reference": true,
+    "second_generation_identical": true,
+    "manual_queue_unchanged": true,
+    "changed_preview_rejected": true,
+    "changed_raw_rejected": true,
+    "changed_origin_config_rejected": true,
+    "restored_copy_preserves_shared_file_hashes": true,
+    "python_sources_parse": true,
+    "setup_shell_syntax": true,
+    "setup_runs_coordinate_generation_after_preview": true,
+    "coordinate_values_and_boundary_unchanged": true,
+    "completed_tasks_D01_D04_G01_only": true,
+    "manifest_completed_tasks_match": true,
+    "next_work_G02": true,
+    "reference_processed_file_remains_ignored": true,
+    "markdown_local_links_resolve": true,
+    "tracked_and_report_json_parse": true
+  },
+  "passed": true,
+  "rejection_cases": [
+    {
+      "case": "changed_preview",
+      "rejected": true,
+      "exit_code": 1,
+      "reason": "Source/preview/config mismatch: run the current OSM audit before G01"
+    },
+    {
+      "case": "changed_raw",
+      "rejected": true,
+      "exit_code": 1,
+      "reason": "Source/preview/config mismatch: run the current OSM audit before G01"
+    },
+    {
+      "case": "changed_origin_config",
+      "rejected": true,
+      "exit_code": 1,
+      "reason": "Source/preview/config mismatch: run the current OSM audit before G01"
+    }
+  ],
+  "local_markdown_link_count": 188,
+  "broken_links": [],
+  "json_documents_parsed": 31,
+  "completed_tasks": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "G01"
+  ],
+  "independent_sol_review": "13 checks reproduced; JSON/reference equal; no completion-blocking issue",
+  "not_run": [
+    "New dependency installation",
+    "M4 Pro",
+    "Godot",
+    "Independent surveyed positional accuracy",
+    "Vertical datum or observed ground",
+    "Walking routes"
+  ],
+  "next_task": "G02"
+}
