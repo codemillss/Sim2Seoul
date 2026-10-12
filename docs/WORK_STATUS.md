@@ -1,8 +1,8 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-12 · 이번 실행: **D02 지역 추출 검토·보완 완료** · 게임 구현은 아직 시작하지 않음
+갱신: 2026-10-12 · 최근 정리: **Git 공유 완료·다른 Mac 인수 지침과 실행 이력 추가** · 계획 작업 D01/D02 완료, 다음 D03 · 게임 구현은 아직 시작하지 않음
 
-이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다.
+이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
 ## 완료한 일
 
@@ -19,6 +19,8 @@
 | D01 자료 현황 인수 | 파일 6개·후보 6개·조회 실패 2건 분리. 원본/지역 파일 해시·크기 등 17개 대조 통과, 새 다운로드 0건 | [d01_verification.json](../data/reports/d01_verification.json) |
 | D02 지역 추출 검토 | 경계 교차 웨이 211개·주요 관계·국가 원본 교차/포함 면 검사. 보완 후 13개 검사 통과 | [D02 검토 결과](evidence/D02_EXTRACT_REVIEW.md) |
 | Git 공유 준비 | 서울 전용 독립 저장소, 작은 지역 지도 두 파일 포함. 국가 원본 없는 새 복제본에서 환경 설치·지역 감사·미리보기 생성 통과 | [git_portability_check.json](../data/reports/git_portability_check.json) |
+| 최초 원격 공유 | main의 최초 공유 커밋과 원격 일치, 원격 복제본 35개 파일·지도 해시·제외 파일 확인 | [git_publication_check.json](../data/reports/git_publication_check.json) |
+| 작업 맥락 인수 | 자동 시작 지침, 결정 이유·확정/미정, 실행 이력과 종료 기록 규칙 추가 | [AGENTS](../AGENTS.md), [결정 요약](PROJECT_CONTEXT.md), [실행 이력](EXECUTION_LOG.md) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
@@ -85,11 +87,10 @@ D03의 산출물 `data/reports/supplemental_status.json`에는 **확보/실패/�
 .venv-data/bin/python tools/prepare_osm.py audit data/raw/deoksugung_cityhall-v2.osm.pbf
 ```
 
-다른 기기에서 데이터 준비 환경이 필요할 때(현재 기기에는 완료):
+다른 기기에서 데이터 준비 환경이 필요할 때(현재 기기에는 완료), Python 3.14를 준비한 뒤 실행한다. 읽기 순서와 기기별 설정은 [CROSS_MAC](CROSS_MAC.md)을 따른다.
 
 ```sh
-python3 -m venv .venv-data
-.venv-data/bin/python -m pip install -r requirements-data.txt
+bash tools/setup_mac.sh
 ```
 
 지역 추출물을 새로 생성할 때만 실행한다. 기존 파일은 자동 덮어쓰기하지 않는다. 원본 갱신은 새 스냅샷/출력 이름과 manifest로 관리해야 한다. 아래 명령의 새 출력 이름은 실제 새 스냅샷에 맞게 지정한다.
