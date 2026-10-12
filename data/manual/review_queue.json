@@ -89,7 +89,14 @@
       "evidence_refs": [
         "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
       ],
-      "approved_geometry_or_value": null
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "horizontal_triage_recorded_remaining_review_required",
+          "note": "G02: r/19357702 explicitly links outline r/19357693 and 33 parts; extra spatial links remain candidates. Whole outline and parts are not simultaneous coarse volumes. Vertical/exterior access review remains.",
+          "evidence": "data/reports/geometry_check.json"
+        }
+      }
     },
     {
       "review_id": "MR04",
@@ -147,7 +154,14 @@
       "evidence_refs": [
         "data/reports/d04_data_audit.json"
       ],
-      "approved_geometry_or_value": null
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "horizontal_triage_recorded_remaining_review_required",
+          "note": "G02: r/18722760 explicitly links outline r/10757525 and 4 parts; 2 extra upper parts are spatial candidates. Raw 18.5m/4-floor tags retained, not measured verification.",
+          "evidence": "data/reports/geometry_check.json"
+        }
+      }
     },
     {
       "review_id": "MR07",
@@ -203,7 +217,14 @@
       "evidence_refs": [
         "data/reports/d04_data_audit.json"
       ],
-      "approved_geometry_or_value": null
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "horizontal_triage_recorded_remaining_review_required",
+          "note": "G02: raw height 26.3;17.2 retained; no scalar selected. G03 interpretation remains.",
+          "evidence": "data/reports/geometry_check.json"
+        }
+      }
     },
     {
       "review_id": "MR10",
@@ -219,7 +240,14 @@
       "evidence_refs": [
         "data/reports/d03_supplemental_review.json"
       ],
-      "approved_geometry_or_value": null
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "horizontal_triage_recorded_remaining_review_required",
+          "note": "G02: all 22 candidate footprints compared with OSM; held from base features because current presence/part identity lacks independent evidence.",
+          "evidence": "data/reports/geometry_check.json"
+        }
+      }
     },
     {
       "review_id": "MR11",
@@ -252,7 +280,68 @@
       "evidence_refs": [
         "data/reports/d02_extract_review.json"
       ],
-      "approved_geometry_or_value": null
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "horizontal_triage_recorded_remaining_review_required",
+          "note": "G02: 83 parts and 72 building=roof shapes are references; 2 unexplained non-roof overlap pairs (4 footprints) held. Relation outer independent building duplication count is 0. No manual geometry approved.",
+          "evidence": "data/reports/geometry_check.json"
+        }
+      }
+    },
+    {
+      "review_id": "MR13",
+      "title": "정관헌 본체 겹침",
+      "source_ids": [
+        "w/381755268",
+        "w/776767573"
+      ],
+      "status": "pending_review",
+      "priority": "palace_landmark",
+      "owner_tasks": [
+        "G03",
+        "E02"
+      ],
+      "reason": "약 339.05㎡ 겹침, 어느 외곽을 본체/부품으로 쓸지 미확정",
+      "acceptance": "원본 외곽·부분·최저높이/전체높이·공식 비례 근거를 검토해 중복 없는 생성 역할 결정; 두 본체 무조건 동시 생성 금지",
+      "evidence_refs": [
+        "data/reports/geometry_check.json",
+        "docs/evidence/G02_GEOMETRY_REVIEW.md"
+      ],
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "both_held_from_coarse_body_plan_source_geometry_retained",
+          "note": "No physical deletion, approval or scalar height change"
+        }
+      }
+    },
+    {
+      "review_id": "MR14",
+      "title": "상동교회 본체·상단 겹침",
+      "source_ids": [
+        "w/1128365145",
+        "w/1128365153"
+      ],
+      "status": "pending_review",
+      "priority": "building_composition",
+      "owner_tasks": [
+        "G03",
+        "E02"
+      ],
+      "reason": "약 189.22㎡ 겹침, 원문 높이 37.4/52.1m가 서로 다른 수직 부분인지 미확정",
+      "acceptance": "원본 외곽·부분·최저높이/전체높이·공식 비례 근거를 검토해 중복 없는 생성 역할 결정; 두 본체 무조건 동시 생성 금지",
+      "evidence_refs": [
+        "data/reports/geometry_check.json",
+        "docs/evidence/G02_GEOMETRY_REVIEW.md"
+      ],
+      "approved_geometry_or_value": null,
+      "task_progress": {
+        "G02": {
+          "status": "both_held_from_coarse_body_plan_source_geometry_retained",
+          "note": "No physical deletion, approval or scalar height change"
+        }
+      }
     }
   ]
 }

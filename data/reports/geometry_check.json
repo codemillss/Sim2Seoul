@@ -1,0 +1,2624 @@
+{
+  "task_id": "G02",
+  "scope": "Horizontal source-preserving geometry and conservative generation roles; no game assets",
+  "input_file": "data/processed/features.json",
+  "input_sha256": "952e604f270ecfd01df6d88c42ef56c6cfe585b28ed3249577f7cae36e6398af",
+  "input_bytes": 6643663,
+  "provenance": {
+    "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+    "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+    "preview_artifact": {
+      "file": "data/processed/osm_preview.geojson",
+      "bytes": 2124816,
+      "sha256": "130eab8f92b8b5a339496db803d18a1c74c4a8af61a9acb1855b8ee9af64e471",
+      "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+      "generator": "tools/prepare_osm.py"
+    },
+    "coordinate_report_sha256": "eb636a3620004f68f1ce4d6bdf2fe669f779548711412b6ffb3255dcb9c56b03",
+    "config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "rules_sha256": "0f2109457a7d4f0f947d6db668b5e58bf02d4d16319b2956232b86e4403a3177",
+    "policy_sha256": "df282dc317c77d855cb9867d9c789f823abfcc172b749cea730c706d6639e53b",
+    "manual_queue_sha256": "1b35fcc1318f726252a2ce526808145f3e0fe5989fa126853d1f1b3d870c848c",
+    "overture_file": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+    "overture_sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4",
+    "generator_sha256": "58d3769759074befd119811a168fec980deb99bb47fcaa2d582919a77b9b13d5",
+    "coordinate_module_sha256": "ead3e59b3d060f50f4097a88816aed2516033f37d3bd739719517ab74ece6274"
+  },
+  "checker_sha256": "09b66c74c39f694db6126279d15bf970fdbd6bfb6933c61d057dc4a9719b40b6",
+  "environment": {
+    "python": "3.14.7",
+    "shapely": "2.2.0",
+    "geos": "3.14.1",
+    "machine": "arm64"
+  },
+  "checks": {
+    "input_provenance_matches_current_files": true,
+    "preview_provenance_is_current": true,
+    "embedded_rules_match_current_configuration": true,
+    "document_coordinate_contract_and_schema_match": true,
+    "all_source_shapes_retained_with_unique_ids": true,
+    "raw_tags_topology_coordinates_and_ids_preserved": true,
+    "downstream_raw_height_roof_road_and_access_attributes_match_source": true,
+    "valid_finite_topology_winding_and_shape_preserved": true,
+    "all_vertices_roundtrip_within_1e_minus_8_degrees": true,
+    "all_holes_preserved": true,
+    "no_automatic_repairs_or_bbox_clipping": true,
+    "coarse_plan_contains_only_primary_building_footprints": true,
+    "no_unexplained_overlap_in_coarse_body_plan": true,
+    "parts_and_roofs_are_not_independent_coarse_volumes": true,
+    "all_raw_building_groups_and_reverse_links_present": true,
+    "explicit_building_relations_link_all_available_outline_parts": true,
+    "overlap_holds_and_exact_aliases_have_geometry_semantic_basis": true,
+    "relation_outer_members_not_second_independent_bodies": true,
+    "barrier_line_area_not_double_wall_plan": true,
+    "all_22_overture_candidates_reviewed_and_held": true,
+    "height_ground_width_and_access_not_invented": true,
+    "seven_landmarks_retained_and_six_bodies_not_held": true,
+    "junghwajeon_courtyard_hole_not_filled": true,
+    "compound_height_raw_preserved": true,
+    "manual_review_not_overwritten_or_implicitly_approved": true,
+    "reported_kind_and_role_counts_match_records": true
+  },
+  "passed": true,
+  "feature_count": 1523,
+  "kind_counts": {
+    "barrier": 47,
+    "barrier_area": 13,
+    "building": 711,
+    "building_part": 83,
+    "gate_node": 13,
+    "highway_area": 69,
+    "highway_line": 409,
+    "land_area": 178
+  },
+  "generation_role_counts": {
+    "body_overlap_hold": 4,
+    "boundary_area_candidate": 3,
+    "boundary_area_reference": 10,
+    "boundary_line_candidate": 47,
+    "centreline_candidate": 409,
+    "component_reference": 83,
+    "gate_location_candidate": 13,
+    "land_reference": 178,
+    "primary_footprint": 635,
+    "roof_reference": 72,
+    "tagged_surface_candidate": 69
+  },
+  "original_holes": 83,
+  "result_holes": 83,
+  "max_roundtrip_error_degrees": 2.1316282072803006e-14,
+  "max_shape_hausdorff_error_m": 0,
+  "geometry_failures": [],
+  "source_failures": [],
+  "group_failures": [],
+  "attribute_failures": [],
+  "role_failures": [],
+  "active_coarse_body_overlap_pairs": [],
+  "relation_outer_emission_violations": [],
+  "diagnostics": {
+    "building_groups": [
+      {
+        "group_id": "osm:relation:18722758",
+        "source_members": [
+          {
+            "object_id": "w/1275728633",
+            "role": "part"
+          },
+          {
+            "object_id": "w/223418692",
+            "role": "outline"
+          }
+        ],
+        "outline_feature_ids": [
+          "osm:way:223418692:building"
+        ],
+        "part_feature_ids": [
+          "osm:way:1275728633:building_part"
+        ],
+        "missing_preview_members": [],
+        "strategy": "coarse outline OR detailed parts; never both full volumes",
+        "part_union_outside_outline_m2": 0.0,
+        "outline_not_covered_by_parts_m2": 2521.562596992272
+      },
+      {
+        "group_id": "osm:relation:18722760",
+        "source_members": [
+          {
+            "object_id": "w/1203368740",
+            "role": "part"
+          },
+          {
+            "object_id": "w/1203368741",
+            "role": "part"
+          },
+          {
+            "object_id": "r/10757526",
+            "role": "part"
+          },
+          {
+            "object_id": "r/10757525",
+            "role": "outline"
+          },
+          {
+            "object_id": "r/18722759",
+            "role": "part"
+          }
+        ],
+        "outline_feature_ids": [
+          "osm:relation:10757525:building"
+        ],
+        "part_feature_ids": [
+          "osm:relation:10757526:building_part",
+          "osm:relation:18722759:building_part",
+          "osm:way:1203368740:building_part",
+          "osm:way:1203368741:building_part"
+        ],
+        "missing_preview_members": [],
+        "strategy": "coarse outline OR detailed parts; never both full volumes",
+        "part_union_outside_outline_m2": 0.0,
+        "outline_not_covered_by_parts_m2": 0.0
+      },
+      {
+        "group_id": "osm:relation:19357702",
+        "source_members": [
+          {
+            "object_id": "w/773001489",
+            "role": "part"
+          },
+          {
+            "object_id": "w/773001492",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357693",
+            "role": "outline"
+          },
+          {
+            "object_id": "r/19357694",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357695",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357696",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357697",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357698",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357699",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357700",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357701",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358427",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358426",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358429",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358430",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19357703",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358511",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358510",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19358428",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361010",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19360996",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19360997",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19360998",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19360999",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361000",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361001",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361002",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361003",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361004",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361005",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361006",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361007",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361008",
+            "role": "part"
+          },
+          {
+            "object_id": "r/19361009",
+            "role": "part"
+          }
+        ],
+        "outline_feature_ids": [
+          "osm:relation:19357693:building"
+        ],
+        "part_feature_ids": [
+          "osm:relation:19357694:building_part",
+          "osm:relation:19357695:building_part",
+          "osm:relation:19357696:building_part",
+          "osm:relation:19357697:building_part",
+          "osm:relation:19357698:building_part",
+          "osm:relation:19357699:building_part",
+          "osm:relation:19357700:building_part",
+          "osm:relation:19357701:building_part",
+          "osm:relation:19357703:building_part",
+          "osm:relation:19358426:building_part",
+          "osm:relation:19358427:building_part",
+          "osm:relation:19358428:building_part",
+          "osm:relation:19358429:building_part",
+          "osm:relation:19358430:building_part",
+          "osm:relation:19358510:building_part",
+          "osm:relation:19358511:building_part",
+          "osm:relation:19360996:building_part",
+          "osm:relation:19360997:building_part",
+          "osm:relation:19360998:building_part",
+          "osm:relation:19360999:building_part",
+          "osm:relation:19361000:building_part",
+          "osm:relation:19361001:building_part",
+          "osm:relation:19361002:building_part",
+          "osm:relation:19361003:building_part",
+          "osm:relation:19361004:building_part",
+          "osm:relation:19361005:building_part",
+          "osm:relation:19361006:building_part",
+          "osm:relation:19361007:building_part",
+          "osm:relation:19361008:building_part",
+          "osm:relation:19361009:building_part",
+          "osm:relation:19361010:building_part",
+          "osm:way:773001489:building_part",
+          "osm:way:773001492:building_part"
+        ],
+        "missing_preview_members": [],
+        "strategy": "coarse outline OR detailed parts; never both full volumes",
+        "part_union_outside_outline_m2": 1.8793428154676106,
+        "outline_not_covered_by_parts_m2": 50.15402247555091
+      }
+    ],
+    "part_building_overlap_pairs": [
+      {
+        "a": "osm:relation:10757526:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 1536.682277308251,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.846366235464064
+      },
+      {
+        "a": "osm:relation:18722759:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 278.9410461643413,
+        "fraction_of_a": 0.9999999999999968,
+        "fraction_of_b": 0.15363376453593566
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 1588.4238868272105,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.9197864027653182
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.01151479711834076,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 1138.7311934249576,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.6593891446754194
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.016062068818655684,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 40.96621511238154,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.023721733188230818
+      },
+      {
+        "a": "osm:relation:19357697:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 2.062167495533509,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.0011941104879787429
+      },
+      {
+        "a": "osm:relation:19357698:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 2.522387504219912,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.0014606036512840473
+      },
+      {
+        "a": "osm:relation:19357699:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 2.7021186915433466,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0015646780760165836
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 19.21635113206487,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.011127343669794537
+      },
+      {
+        "a": "osm:relation:19357701:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 2.9720551562063453,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0017209864089915432
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 1079.1992094039695,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.6249167913657997
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.01694810247761688,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 1151.0373905755678,
+        "fraction_of_a": 1.0000000000000004,
+        "fraction_of_b": 0.6665151221319092
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.015890342872003166,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358427:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 40.92934585206833,
+        "fraction_of_a": 0.9999999999999993,
+        "fraction_of_b": 0.023700383821353792
+      },
+      {
+        "a": "osm:relation:19358428:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 344.09562947507277,
+        "fraction_of_a": 0.9999999999999993,
+        "fraction_of_b": 0.19925064327402262
+      },
+      {
+        "a": "osm:relation:19358429:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 77.39158683052398,
+        "fraction_of_a": 1.0000000000000007,
+        "fraction_of_b": 0.044814063705207186
+      },
+      {
+        "a": "osm:relation:19358430:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 78.18225203253786,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.045271903144656
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 1564.5425640647286,
+        "fraction_of_a": 0.9988002320401598,
+        "fraction_of_b": 0.9059577792227348
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.011676534089829025,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358511:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 52.257318121836796,
+        "fraction_of_a": 0.969625300886968,
+        "fraction_of_b": 0.03025991427858434
+      },
+      {
+        "a": "osm:relation:19360995:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.304390304102177,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0024924830876323447
+      },
+      {
+        "a": "osm:relation:19360996:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.538432654390789,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0026280067178496482
+      },
+      {
+        "a": "osm:relation:19360997:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 6.207221008889223,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.003594328648846736
+      },
+      {
+        "a": "osm:relation:19360998:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.938938319537138,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.003438977944409613
+      },
+      {
+        "a": "osm:relation:19360999:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.056696590771493,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.00292811056650101
+      },
+      {
+        "a": "osm:relation:19361000:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.129403508502934,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0029702119443957577
+      },
+      {
+        "a": "osm:relation:19361001:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.495782186028435,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0031823657206300187
+      },
+      {
+        "a": "osm:relation:19361002:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.543530116587758,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.002630958433985539
+      },
+      {
+        "a": "osm:relation:19361003:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.053312841191856,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.002926151185960637
+      },
+      {
+        "a": "osm:relation:19361004:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.8328871797734205,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0027985123813099467
+      },
+      {
+        "a": "osm:relation:19361005:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.833573384892965,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0027989097325105293
+      },
+      {
+        "a": "osm:relation:19361006:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.64188146162315,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0032669653846493624
+      },
+      {
+        "a": "osm:relation:19361007:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.41885722101639,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.003137821857094571
+      },
+      {
+        "a": "osm:relation:19361008:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 5.561427599410204,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.003220378091970685
+      },
+      {
+        "a": "osm:relation:19361009:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.829748303437376,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.002796694796093684
+      },
+      {
+        "a": "osm:relation:19361010:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 4.978184578684178,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.002882647713813808
+      },
+      {
+        "a": "osm:way:1203368740:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 99.48859004918182,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.054795831692059455
+      },
+      {
+        "a": "osm:way:1203368741:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 213.60172890729797,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.11764649976998508
+      },
+      {
+        "a": "osm:way:1215686475:building_part",
+        "b": "osm:way:233592424:building",
+        "overlap_area_m2": 2022.1224495878657,
+        "fraction_of_a": 1.0000000000000007,
+        "fraction_of_b": 0.28053875186836597
+      },
+      {
+        "a": "osm:way:1216135890:building_part",
+        "b": "osm:way:223418027:building",
+        "overlap_area_m2": 437.5166107163309,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.1289690591751703
+      },
+      {
+        "a": "osm:way:1223358500:building_part",
+        "b": "osm:way:223418027:building",
+        "overlap_area_m2": 3392.4153088693965,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:way:1223358501:building_part",
+        "b": "osm:way:223418027:building",
+        "overlap_area_m2": 2390.5281149770935,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.7046684728509239
+      },
+      {
+        "a": "osm:way:1223358502:building_part",
+        "b": "osm:way:223418027:building",
+        "overlap_area_m2": 994.7544632742681,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.29322897484677185
+      },
+      {
+        "a": "osm:way:1223358503:building_part",
+        "b": "osm:way:821108000:building",
+        "overlap_area_m2": 780.7703937158888,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.6145954998430935
+      },
+      {
+        "a": "osm:way:1223358504:building_part",
+        "b": "osm:way:821108000:building",
+        "overlap_area_m2": 159.46238577704614,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.12552328505488702
+      },
+      {
+        "a": "osm:way:1223358505:building_part",
+        "b": "osm:way:821108000:building",
+        "overlap_area_m2": 153.34567297010256,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.12070841989704127
+      },
+      {
+        "a": "osm:way:1223358506:building_part",
+        "b": "osm:way:821108000:building",
+        "overlap_area_m2": 174.46382495729458,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.13733190009146784
+      },
+      {
+        "a": "osm:way:1275728633:building_part",
+        "b": "osm:way:223418692:building",
+        "overlap_area_m2": 44.49504896768548,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.017339847776895897
+      },
+      {
+        "a": "osm:way:1415361891:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 2.014022445412844,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.0011092732833817035
+      },
+      {
+        "a": "osm:way:1415361892:building_part",
+        "b": "osm:relation:10757525:building",
+        "overlap_area_m2": 0.4801198088217663,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.00026443800463164395
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:relation:10718798:building",
+        "overlap_area_m2": 698.1418435936494,
+        "fraction_of_a": 0.5958565677921439,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:way:181574565:building",
+        "overlap_area_m2": 108.27319290727496,
+        "fraction_of_a": 0.09241000765336797,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:way:181574575:building",
+        "overlap_area_m2": 93.31553671643393,
+        "fraction_of_a": 0.07964380868982754,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:way:181574576:building",
+        "overlap_area_m2": 85.0783715347629,
+        "fraction_of_a": 0.0726134766469537,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:way:181574579:building",
+        "overlap_area_m2": 84.91860551849469,
+        "fraction_of_a": 0.07247711806742296,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:way:181574568:building_part",
+        "b": "osm:way:181574581:building",
+        "overlap_area_m2": 101.9333515811637,
+        "fraction_of_a": 0.08699902115028393,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595072:building_part",
+        "b": "osm:way:768482852:building",
+        "overlap_area_m2": 1816.9645200562531,
+        "fraction_of_a": 1.0000000000000004,
+        "fraction_of_b": 1.0000000000000004
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 778.4715684173449,
+        "fraction_of_a": 0.7765131849758504,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:way:767871947:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 16.807406840878148,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.02159026420842587
+      },
+      {
+        "a": "osm:way:767871948:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 16.802529568369554,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.02158399901813959
+      },
+      {
+        "a": "osm:way:767871949:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 10.467313788074872,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.01344598083312821
+      },
+      {
+        "a": "osm:way:767871950:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 32.70567745378157,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.042012680720341734
+      },
+      {
+        "a": "osm:way:767871951:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 32.70566453425229,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.04201266412432231
+      },
+      {
+        "a": "osm:way:767871952:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 19.786065045809735,
+        "fraction_of_a": 1.0000000000000004,
+        "fraction_of_b": 0.02541655450055213
+      },
+      {
+        "a": "osm:way:767871953:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 12.053591325555226,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.015483662878093966
+      },
+      {
+        "a": "osm:way:767871954:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 15.387967921421666,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.01976689778498379
+      },
+      {
+        "a": "osm:way:767871955:building_part",
+        "b": "osm:way:769025806:building",
+        "overlap_area_m2": 170.39539892693057,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.21888454998215204
+      },
+      {
+        "a": "osm:way:768393721:building_part",
+        "b": "osm:way:768482852:building",
+        "overlap_area_m2": 344.85228867285474,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.18979582972934347
+      },
+      {
+        "a": "osm:way:773001489:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.11306886189459962
+      },
+      {
+        "a": "osm:way:773001492:building_part",
+        "b": "osm:relation:19357693:building",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.07699000754538711
+      },
+      {
+        "a": "osm:way:773001492:building_part",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.1375653043520928,
+        "fraction_of_b": 1.0
+      }
+    ],
+    "part_part_overlap_pairs": [
+      {
+        "a": "osm:relation:10757526:building_part",
+        "b": "osm:way:1203368740:building_part",
+        "overlap_area_m2": 99.48859004918182,
+        "fraction_of_a": 0.0647424594649795,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:10757526:building_part",
+        "b": "osm:way:1203368741:building_part",
+        "overlap_area_m2": 207.67908308728997,
+        "fraction_of_a": 0.13514770499668524,
+        "fraction_of_b": 0.9722724818272497
+      },
+      {
+        "a": "osm:relation:10757526:building_part",
+        "b": "osm:way:1415361891:building_part",
+        "overlap_area_m2": 2.014022445412844,
+        "fraction_of_a": 0.001310630359413484,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:10757526:building_part",
+        "b": "osm:way:1415361892:building_part",
+        "overlap_area_m2": 0.4801198088217663,
+        "fraction_of_a": 0.00031243921786016445,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:18722759:building_part",
+        "b": "osm:way:1203368741:building_part",
+        "overlap_area_m2": 5.9226458200079195,
+        "fraction_of_a": 0.021232607755111474,
+        "fraction_of_b": 0.02772751817274998
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19357695:building_part",
+        "overlap_area_m2": 1138.7311934249576,
+        "fraction_of_a": 0.7168937730466336,
+        "fraction_of_b": 0.9999999999999998
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19357696:building_part",
+        "overlap_area_m2": 40.96621511238154,
+        "fraction_of_a": 0.02579048039513515,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19357700:building_part",
+        "overlap_area_m2": 19.21635113206487,
+        "fraction_of_a": 0.012097747516532554,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19357703:building_part",
+        "overlap_area_m2": 1079.1992094039695,
+        "fraction_of_a": 0.6794151223447104,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358426:building_part",
+        "overlap_area_m2": 1151.0373905755675,
+        "fraction_of_a": 0.7246411994437465,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358427:building_part",
+        "overlap_area_m2": 40.929345852068316,
+        "fraction_of_a": 0.025767269172602563,
+        "fraction_of_b": 0.999999999999999
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358428:building_part",
+        "overlap_area_m2": 344.09562947507277,
+        "fraction_of_a": 0.21662708067327352,
+        "fraction_of_b": 0.9999999999999993
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358429:building_part",
+        "overlap_area_m2": 77.39158683052398,
+        "fraction_of_a": 0.04872225069915653,
+        "fraction_of_b": 1.0000000000000007
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358430:building_part",
+        "overlap_area_m2": 78.18225203253783,
+        "fraction_of_a": 0.04922001783082134,
+        "fraction_of_b": 0.9999999999999998
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 1563.5250538756839,
+        "fraction_of_a": 0.984324818357359,
+        "fraction_of_b": 0.9981506559683648
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 51.29875908610615,
+        "fraction_of_a": 0.03229538381506754,
+        "fraction_of_b": 0.9518394074113159
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:way:773001489:building_part",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.1229294774902744,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19357694:building_part",
+        "b": "osm:way:773001492:building_part",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 0.08370422449594635,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19357703:building_part",
+        "overlap_area_m2": 1079.1992094039695,
+        "fraction_of_a": 0.9477207752235765,
+        "fraction_of_b": 1.0000000000000002
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358426:building_part",
+        "overlap_area_m2": 1114.8504168336538,
+        "fraction_of_a": 0.9790286094477855,
+        "fraction_of_b": 0.9685614263809288
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358428:building_part",
+        "overlap_area_m2": 57.58050521571833,
+        "fraction_of_a": 0.05056549390074549,
+        "fraction_of_b": 0.16733867065838332
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358429:building_part",
+        "overlap_area_m2": 2.6871500689942813,
+        "fraction_of_a": 0.002359775585765899,
+        "fraction_of_b": 0.03472147527971924
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358430:building_part",
+        "overlap_area_m2": 3.039639057483376,
+        "fraction_of_a": 0.0026693209732325538,
+        "fraction_of_b": 0.03887888847482087
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 1138.7311934249576,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.7269632711489211
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 0.6267273316252566,
+        "fraction_of_a": 0.0005503733763016108,
+        "fraction_of_b": 0.011628814859660584
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:way:773001489:building_part",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.17147516426018375,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19357695:building_part",
+        "b": "osm:way:773001492:building_part",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 0.11675959206651026,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19357700:building_part",
+        "overlap_area_m2": 9.568537615667882,
+        "fraction_of_a": 0.23357143415418696,
+        "fraction_of_b": 0.49793728007507054
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358427:building_part",
+        "overlap_area_m2": 4.092136328663447,
+        "fraction_of_a": 0.0998905150851158,
+        "fraction_of_b": 0.09998049671875348
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358428:building_part",
+        "overlap_area_m2": 23.662317168361607,
+        "fraction_of_a": 0.5776056465907187,
+        "fraction_of_b": 0.0687666890871561
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358429:building_part",
+        "overlap_area_m2": 18.137514026857804,
+        "fraction_of_a": 0.442743220898041,
+        "fraction_of_b": 0.2343602808736338
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358430:building_part",
+        "overlap_area_m2": 18.73656475686029,
+        "fraction_of_a": 0.4573662640168433,
+        "fraction_of_b": 0.23965240537024332
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 40.36042443092454,
+        "fraction_of_a": 0.9852124322494733,
+        "fraction_of_b": 0.025765998453960222
+      },
+      {
+        "a": "osm:relation:19357696:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 4.195031683792168,
+        "fraction_of_a": 0.10240222759862116,
+        "fraction_of_b": 0.0778380713901889
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19358427:building_part",
+        "overlap_area_m2": 7.933499543658716,
+        "fraction_of_a": 0.4128515080274885,
+        "fraction_of_b": 0.1938340175856438
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19358429:building_part",
+        "overlap_area_m2": 5.646085053937013,
+        "fraction_of_a": 0.2938167092771229,
+        "fraction_of_b": 0.07295476530673936
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19358430:building_part",
+        "overlap_area_m2": 5.636766534469137,
+        "fraction_of_a": 0.2933317826953887,
+        "fraction_of_b": 0.0720977765148442
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 19.21635113206487,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.01226767261595416
+      },
+      {
+        "a": "osm:relation:19357700:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 7.933499543658716,
+        "fraction_of_a": 0.4128515080274885,
+        "fraction_of_b": 0.1472046817284377
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:relation:19358426:building_part",
+        "overlap_area_m2": 1079.1992094039695,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.9375883166265557
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 1079.1992094039695,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.6889581948923228
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:way:773001489:building_part",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.18093426750060548,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19357703:building_part",
+        "b": "osm:way:773001492:building_part",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 0.12320041421373883,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:relation:19358428:building_part",
+        "overlap_area_m2": 70.24779899177071,
+        "fraction_of_a": 0.06102998874488677,
+        "fraction_of_b": 0.20415196525144938
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 1151.035675839652,
+        "fraction_of_a": 0.9999985102691455,
+        "fraction_of_b": 0.7348184233021497
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 0.131189186718962,
+        "fraction_of_a": 0.00011397473947684867,
+        "fraction_of_b": 0.0024341921709207493
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:way:773001489:building_part",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.16964185528595158,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19358426:building_part",
+        "b": "osm:way:773001492:building_part",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 0.11551126897035374,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358427:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 23.290519021828718,
+        "fraction_of_a": 0.5690420537383628,
+        "fraction_of_b": 0.014868611655346343
+      },
+      {
+        "a": "osm:relation:19358427:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 23.290519021828718,
+        "fraction_of_a": 0.5690420537383628,
+        "fraction_of_b": 0.43215146368021357
+      },
+      {
+        "a": "osm:relation:19358428:building_part",
+        "b": "osm:relation:19358429:building_part",
+        "overlap_area_m2": 32.408907063075425,
+        "fraction_of_a": 0.09418575618794134,
+        "fraction_of_b": 0.418765248140552
+      },
+      {
+        "a": "osm:relation:19358428:building_part",
+        "b": "osm:relation:19358430:building_part",
+        "overlap_area_m2": 35.51139161531043,
+        "fraction_of_a": 0.10320210015304175,
+        "fraction_of_b": 0.4542129536065464
+      },
+      {
+        "a": "osm:relation:19358428:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 344.09562947507277,
+        "fraction_of_a": 0.9999999999999993,
+        "fraction_of_b": 0.21966982711599056
+      },
+      {
+        "a": "osm:relation:19358429:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 74.35923502804172,
+        "fraction_of_a": 0.9608180691639958,
+        "fraction_of_b": 0.04747075784718896
+      },
+      {
+        "a": "osm:relation:19358429:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 0.37316829878054336,
+        "fraction_of_a": 0.004821819968593311,
+        "fraction_of_b": 0.006924071823643066
+      },
+      {
+        "a": "osm:relation:19358430:building_part",
+        "b": "osm:relation:19358510:building_part",
+        "overlap_area_m2": 74.13879276282015,
+        "fraction_of_a": 0.9482816219206004,
+        "fraction_of_b": 0.04733002803215424
+      },
+      {
+        "a": "osm:relation:19358430:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 0.2651869744455297,
+        "fraction_of_a": 0.00339190759477182,
+        "fraction_of_b": 0.004920497437096824
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:relation:19358511:building_part",
+        "overlap_area_m2": 53.894342561022526,
+        "fraction_of_a": 0.0344060194282922,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:relation:19361010:building_part",
+        "overlap_area_m2": 0.9585590357305422,
+        "fraction_of_a": 0.0006119417964727531,
+        "fraction_of_b": 0.19255192743052255
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:way:773001489:building_part",
+        "overlap_area_m2": 195.2641184407397,
+        "fraction_of_a": 0.12465614633138178,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:relation:19358510:building_part",
+        "b": "osm:way:773001492:building_part",
+        "overlap_area_m2": 132.95778961770847,
+        "fraction_of_a": 0.08487993498668395,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:relation:19358511:building_part",
+        "b": "osm:relation:19361010:building_part",
+        "overlap_area_m2": 0.9585590357305422,
+        "fraction_of_a": 0.0177858934756501,
+        "fraction_of_b": 0.19255192743052255
+      },
+      {
+        "a": "osm:way:1203368740:building_part",
+        "b": "osm:way:1415361891:building_part",
+        "overlap_area_m2": 2.014022445412844,
+        "fraction_of_a": 0.020243753021499444,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:1203368740:building_part",
+        "b": "osm:way:1415361892:building_part",
+        "overlap_area_m2": 0.4801198088217663,
+        "fraction_of_a": 0.004825878109081864,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:way:1216135890:building_part",
+        "b": "osm:way:1223358500:building_part",
+        "overlap_area_m2": 437.5166107163309,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.1289690591751703
+      },
+      {
+        "a": "osm:way:1216135890:building_part",
+        "b": "osm:way:1223358501:building_part",
+        "overlap_area_m2": 437.5166107163309,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.1830209015218059
+      },
+      {
+        "a": "osm:way:1216135890:building_part",
+        "b": "osm:way:1223358502:building_part",
+        "overlap_area_m2": 437.5166107163309,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.43982372220400007
+      },
+      {
+        "a": "osm:way:1223358500:building_part",
+        "b": "osm:way:1223358501:building_part",
+        "overlap_area_m2": 2390.5281149770935,
+        "fraction_of_a": 0.7046684728509239,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:1223358500:building_part",
+        "b": "osm:way:1223358502:building_part",
+        "overlap_area_m2": 994.7544632742681,
+        "fraction_of_a": 0.29322897484677185,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:1223358501:building_part",
+        "b": "osm:way:1223358502:building_part",
+        "overlap_area_m2": 994.7544632742681,
+        "fraction_of_a": 0.4161233064116462,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:1223358503:building_part",
+        "b": "osm:way:1223358505:building_part",
+        "overlap_area_m2": 0.13517651340991313,
+        "fraction_of_a": 0.00017313222235102057,
+        "fraction_of_b": 0.0008815150163139471
+      },
+      {
+        "a": "osm:way:1415361891:building_part",
+        "b": "osm:way:1415361892:building_part",
+        "overlap_area_m2": 0.4801198088217663,
+        "fraction_of_a": 0.238388509480265,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:way:642595072:building_part",
+        "b": "osm:way:768393721:building_part",
+        "overlap_area_m2": 344.85228867285474,
+        "fraction_of_a": 0.18979582972934347,
+        "fraction_of_b": 0.9999999999999999
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871947:building_part",
+        "overlap_area_m2": 16.807406840878148,
+        "fraction_of_a": 0.016765124824954875,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871948:building_part",
+        "overlap_area_m2": 16.802529568369554,
+        "fraction_of_a": 0.016760259822091197,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871949:building_part",
+        "overlap_area_m2": 10.467313788074872,
+        "fraction_of_a": 0.010440981401856621,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871950:building_part",
+        "overlap_area_m2": 32.70567745378157,
+        "fraction_of_a": 0.032623400515526056,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871951:building_part",
+        "overlap_area_m2": 32.70566453425229,
+        "fraction_of_a": 0.03262338762849815,
+        "fraction_of_b": 0.9999999999999998
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871952:building_part",
+        "overlap_area_m2": 19.786065045809735,
+        "fraction_of_a": 0.019736289686336013,
+        "fraction_of_b": 1.0000000000000004
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871953:building_part",
+        "overlap_area_m2": 12.053591325555226,
+        "fraction_of_a": 0.012023268376561085,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871954:building_part",
+        "overlap_area_m2": 15.387967921421666,
+        "fraction_of_a": 0.01534925675610984,
+        "fraction_of_b": 1.0
+      },
+      {
+        "a": "osm:way:642595073:building_part",
+        "b": "osm:way:767871955:building_part",
+        "overlap_area_m2": 170.39539892693057,
+        "fraction_of_a": 0.16996673904864654,
+        "fraction_of_b": 1.0
+      }
+    ],
+    "parts_without_spatial_building_overlap": [
+      "osm:relation:19358436:building_part",
+      "osm:way:381941852:building_part",
+      "osm:way:381941859:building_part",
+      "osm:way:768488285:building_part",
+      "osm:way:768919697:building_part",
+      "osm:way:768919698:building_part",
+      "osm:way:768919699:building_part",
+      "osm:way:768919700:building_part",
+      "osm:way:768919701:building_part",
+      "osm:way:768919702:building_part",
+      "osm:way:768919703:building_part",
+      "osm:way:768919704:building_part",
+      "osm:way:768919705:building_part",
+      "osm:way:768919706:building_part",
+      "osm:way:768919707:building_part",
+      "osm:way:771281699:building_part",
+      "osm:way:772989544:building_part",
+      "osm:way:772990741:building_part",
+      "osm:way:772990742:building_part",
+      "osm:way:772990743:building_part"
+    ],
+    "building_overlap_pairs": [
+      {
+        "a": "osm:relation:19357693:building",
+        "b": "osm:way:773001493:building",
+        "overlap_area_m2": 18.29037879474159,
+        "fraction_of_a": 0.010591153820051097,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:1128365145:building",
+        "b": "osm:way:1128365153:building",
+        "overlap_area_m2": 189.21708745528915,
+        "fraction_of_a": 0.0949747676307832,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "unexplained_body_overlap; both held from coarse emission"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263216:building",
+        "overlap_area_m2": 198.57725084771764,
+        "fraction_of_a": 0.40650709261432616,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263217:building",
+        "overlap_area_m2": 145.27668517823741,
+        "fraction_of_a": 0.2973956113519779,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263218:building",
+        "overlap_area_m2": 46.97547718413975,
+        "fraction_of_a": 0.09616340528824852,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263219:building",
+        "overlap_area_m2": 52.27775237827781,
+        "fraction_of_a": 0.10701768222182859,
+        "fraction_of_b": 0.9999999999999996,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263220:building",
+        "overlap_area_m2": 12.05075217218689,
+        "fraction_of_a": 0.024669070643384687,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:181574577:building",
+        "b": "osm:way:772263221:building",
+        "overlap_area_m2": 8.697138269317918,
+        "fraction_of_a": 0.017803894337506152,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:198561926:building",
+        "b": "osm:way:768398467:building",
+        "overlap_area_m2": 3238.7236855587275,
+        "fraction_of_a": 0.6249250649557251,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766262:building",
+        "overlap_area_m2": 267.8143354988086,
+        "fraction_of_a": 0.18115993513056675,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766263:building",
+        "overlap_area_m2": 63.47223855324315,
+        "fraction_of_a": 0.0429350676747046,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766264:building",
+        "overlap_area_m2": 69.83438467130448,
+        "fraction_of_a": 0.04723866843562915,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766265:building",
+        "overlap_area_m2": 66.47719016188373,
+        "fraction_of_a": 0.044967732720352385,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766266:building",
+        "overlap_area_m2": 68.03052211237718,
+        "fraction_of_a": 0.046018466299880594,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766267:building",
+        "overlap_area_m2": 288.4939806099346,
+        "fraction_of_a": 0.195148443848284,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766268:building",
+        "overlap_area_m2": 218.54355105238645,
+        "fraction_of_a": 0.14783127818051459,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766269:building",
+        "overlap_area_m2": 68.5314024338922,
+        "fraction_of_a": 0.046357281047735045,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766270:building",
+        "overlap_area_m2": 62.909448063942456,
+        "fraction_of_a": 0.04255437450402753,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766271:building",
+        "overlap_area_m2": 64.41276202104608,
+        "fraction_of_a": 0.0435712739856872,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766272:building",
+        "overlap_area_m2": 59.39713369476131,
+        "fraction_of_a": 0.04017850973900697,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766273:building",
+        "overlap_area_m2": 128.5183928983148,
+        "fraction_of_a": 0.08693479263228976,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:223418691:building",
+        "b": "osm:way:776766274:building",
+        "overlap_area_m2": 127.37742104110268,
+        "fraction_of_a": 0.08616299530764926,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767564:building",
+        "overlap_area_m2": 44.79403166152713,
+        "fraction_of_a": 0.13211729523853308,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767565:building",
+        "overlap_area_m2": 28.989840486709113,
+        "fraction_of_a": 0.08550378638478535,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767566:building",
+        "overlap_area_m2": 148.2569627535043,
+        "fraction_of_a": 0.43727497152474787,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767567:building",
+        "overlap_area_m2": 117.00661214637758,
+        "fraction_of_a": 0.34510394685193374,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 339.0474470481181,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.6955661611256851,
+        "classification": "unexplained_body_overlap; both held from coarse emission"
+      },
+      {
+        "a": "osm:way:646147127:building",
+        "b": "osm:way:776578040:building",
+        "overlap_area_m2": 97.84525869869043,
+        "fraction_of_a": 0.18882862096593944,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:646147127:building",
+        "b": "osm:way:776578041:building",
+        "overlap_area_m2": 121.52331561224999,
+        "fraction_of_a": 0.23452419061953902,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:646147127:building",
+        "b": "osm:way:776578042:building",
+        "overlap_area_m2": 43.40580284504558,
+        "fraction_of_a": 0.0837675529929291,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:646147127:building",
+        "b": "osm:way:776578043:building",
+        "overlap_area_m2": 134.89662836137717,
+        "fraction_of_a": 0.2603329445412832,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987885:building",
+        "overlap_area_m2": 51.768386896564216,
+        "fraction_of_a": 0.09185608719730158,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987886:building",
+        "overlap_area_m2": 30.60856289004152,
+        "fraction_of_a": 0.054310806079961964,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987887:building",
+        "overlap_area_m2": 50.954303173018836,
+        "fraction_of_a": 0.09041160437721102,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987888:building",
+        "overlap_area_m2": 26.297611579771033,
+        "fraction_of_a": 0.04666159884754947,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987889:building",
+        "overlap_area_m2": 211.79290323369085,
+        "fraction_of_a": 0.37579821496224225,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091923:building",
+        "b": "osm:way:772987890:building",
+        "overlap_area_m2": 192.15968312595632,
+        "fraction_of_a": 0.34096168853573366,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:772987892:building",
+        "overlap_area_m2": 86.2683880132697,
+        "fraction_of_a": 0.1280097911981179,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:772987893:building",
+        "overlap_area_m2": 71.88167766368464,
+        "fraction_of_a": 0.10666199706065346,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:772987894:building",
+        "overlap_area_m2": 85.5671859451065,
+        "fraction_of_a": 0.12696930890326555,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:772987895:building",
+        "overlap_area_m2": 98.40206577389833,
+        "fraction_of_a": 0.1460144113419926,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:773001131:building",
+        "overlap_area_m2": 82.78481713002202,
+        "fraction_of_a": 0.12284067662836627,
+        "fraction_of_b": 0.9999241649118742,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:773001132:building",
+        "overlap_area_m2": 79.50114538351198,
+        "fraction_of_a": 0.11796818342066598,
+        "fraction_of_b": 0.9993877611427181,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:773001133:building",
+        "overlap_area_m2": 80.47773637969871,
+        "fraction_of_a": 0.11941730299258375,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:766091924:building",
+        "b": "osm:way:773001134:building",
+        "overlap_area_m2": 83.54616786303971,
+        "fraction_of_a": 0.12397041082888405,
+        "fraction_of_b": 0.9996353177748056,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:772987897:building",
+        "b": "osm:way:773001134:building",
+        "overlap_area_m2": 0.015770558704763283,
+        "fraction_of_a": 0.00028947915453642894,
+        "fraction_of_b": 0.00018869575787325274,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:772987899:building",
+        "b": "osm:way:773001132:building",
+        "overlap_area_m2": 0.020393135013243933,
+        "fraction_of_a": 0.000422791649409491,
+        "fraction_of_b": 0.00025635667819942935,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:772987900:building",
+        "b": "osm:way:773001132:building",
+        "overlap_area_m2": 0.020444206624000903,
+        "fraction_of_a": 0.00011321405888678979,
+        "fraction_of_b": 0.00025699868583952236,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:772987901:building",
+        "b": "osm:way:773001134:building",
+        "overlap_area_m2": 0.014708358817422494,
+        "fraction_of_a": 8.139592431716412e-05,
+        "fraction_of_b": 0.0001759864673207173,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776766262:building",
+        "b": "osm:way:776766263:building",
+        "overlap_area_m2": 63.47223855324315,
+        "fraction_of_a": 0.2370009000265989,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776766262:building",
+        "b": "osm:way:776766264:building",
+        "overlap_area_m2": 69.83438467130448,
+        "fraction_of_a": 0.2607567087147773,
+        "fraction_of_b": 1.0000000000000002,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776766262:building",
+        "b": "osm:way:776766265:building",
+        "overlap_area_m2": 66.47719016188373,
+        "fraction_of_a": 0.24822117919143077,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776766262:building",
+        "b": "osm:way:776766266:building",
+        "overlap_area_m2": 68.03052211237718,
+        "fraction_of_a": 0.2540212120671928,
+        "fraction_of_b": 1.0,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767564:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 44.79403166152712,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.09189631986737519,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767565:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 28.989840486709113,
+        "fraction_of_a": 1.0000000000000002,
+        "fraction_of_b": 0.059473540457375774,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767566:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 148.2569627535043,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.30415367329981213,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767567:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 117.00661214637756,
+        "fraction_of_a": 0.9999999999999998,
+        "fraction_of_b": 0.240042627501122,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767568:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 26.435896074447857,
+        "fraction_of_a": 0.9999999999999999,
+        "fraction_of_b": 0.05423404573169261,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767569:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 27.82035691885487,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.05707430930883243,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767570:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 41.55160250048671,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.08524437771620254,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      },
+      {
+        "a": "osm:way:776767571:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 52.585671440226655,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.10788110611758712,
+        "classification": "roof_and_body_or_roof_overlap; references retained"
+      }
+    ],
+    "unexplained_body_overlap_pairs": [
+      {
+        "a": "osm:way:1128365145:building",
+        "b": "osm:way:1128365153:building",
+        "overlap_area_m2": 189.21708745528915,
+        "fraction_of_a": 0.0949747676307832,
+        "fraction_of_b": 0.9999999999999999,
+        "classification": "unexplained_body_overlap; both held from coarse emission"
+      },
+      {
+        "a": "osm:way:381755268:building",
+        "b": "osm:way:776767573:building",
+        "overlap_area_m2": 339.0474470481181,
+        "fraction_of_a": 1.0,
+        "fraction_of_b": 0.6955661611256851,
+        "classification": "unexplained_body_overlap; both held from coarse emission"
+      }
+    ],
+    "exact_same_kind_duplicates": [],
+    "relation_outer_member_duplicates": [],
+    "barrier_same_entity_representations": [
+      {
+        "area": "osm:way:223418030:barrier_area",
+        "primary_lines": [
+          "osm:way:223418030:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:26658458:barrier_area",
+        "primary_lines": [
+          "osm:way:26658458:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:646147126:barrier_area",
+        "primary_lines": [
+          "osm:way:646147126:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:766091922:barrier_area",
+        "primary_lines": [
+          "osm:way:766091922:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:767685482:barrier_area",
+        "primary_lines": [
+          "osm:way:767685482:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:767685483:barrier_area",
+        "primary_lines": [
+          "osm:way:767685483:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:767889293:barrier_area",
+        "primary_lines": [
+          "osm:way:767889293:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:772989540:barrier_area",
+        "primary_lines": [
+          "osm:way:772989540:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:777624699:barrier_area",
+        "primary_lines": [
+          "osm:way:777624699:barrier"
+        ]
+      },
+      {
+        "area": "osm:way:777624701:barrier_area",
+        "primary_lines": [
+          "osm:way:777624701:barrier"
+        ]
+      }
+    ],
+    "overture_candidates": [
+      {
+        "overture_id": "01eaa8f5-ef11-478e-a44e-d3db3dac1a36",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 54.39120299731668,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "058d945a-66ad-47a9-8c9a-a198cd4614ed",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 14.703802731532177,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "51ebc712-f791-4a11-90ce-29842f7f4c57",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 14.79568778657646,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "523cbc0f-86be-4a33-80a3-7778259250f6",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 147.417358933168,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "55c78da4-174e-4287-8c30-bdc10c306e6e",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 76.79572359164635,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "57660562-9383-4087-922d-c223ece84128",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 139.4461495258991,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "5fe363cf-cd36-46f6-836c-8fa2ff28bfe2",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 209.461992170629,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "6f058df0-ccfe-469b-8703-4d57fd39a86c",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 67.70313795048929,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "80f8ff3a-9d28-4696-ac41-23266aa5cd70",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 1175.0424721156962,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "92c46edb-3c9b-437e-88ed-9537c0d4d2fe",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 22.718538594888482,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "93b41e0f-41bf-4cc9-85dd-b2a9a077f399",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 35.90945140855476,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "945c439f-17d0-4f29-b01c-75e48514373f",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 109.50150719721726,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "a17ed29a-37d7-40bb-9928-c98820d626f5",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 147.44583366368423,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "b251a77d-1c99-400e-a15b-edf4eb4c37ba",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 48.47898092467791,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "bb24ca30-8eaa-46d1-8a4e-b973b3bc317e",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 25.33960239853472,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "be9ebcf5-5016-4005-af62-868dfb4ae691",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 11.310583067613504,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "cfef3ffa-3120-4cc0-9c08-b40ca31119ed",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 1238.036739299679,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "e6303687-7140-4881-afaa-9ee1e80621fd",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 17.663349744680033,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "eaafa6c7-5294-4d3c-b61e-e47141533d1d",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 16.933326666906588,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "eda10a7f-4d47-4d31-9b0c-76219c6e82f4",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 201.1664795865654,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "eee6249a-7be1-423d-8abd-a3d478d0eef5",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 71.53474248268871,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      },
+      {
+        "overture_id": "efe98253-b672-4323-bdf7-589e3d2cb594",
+        "source_refs": [
+          {
+            "property": "",
+            "dataset": "doi:10.5281/zenodo.8174931",
+            "license": null,
+            "record_id": null,
+            "update_time": "2024-11-01T00:00:00.000Z",
+            "confidence": null,
+            "between": null,
+            "provider": "zenodo",
+            "resource": "east_asian_buildings",
+            "version": "2024-11-01"
+          }
+        ],
+        "geometry_valid": true,
+        "area_m2": 43.06066216135263,
+        "overlapping_osm_buildings": [],
+        "status": "held_not_in_base_feature_set",
+        "reason": "current presence/shape/part identity lacks independent confirmation"
+      }
+    ],
+    "invalid_or_empty_geometry": [],
+    "automatic_repairs": [],
+    "bbox_clipped_features": [],
+    "relation_type_restored_from_raw": [
+      "r/10647518",
+      "r/10650821",
+      "r/10658334",
+      "r/10658335",
+      "r/10658336",
+      "r/10713133",
+      "r/10718537",
+      "r/10718563",
+      "r/10718564",
+      "r/10718565",
+      "r/10718566",
+      "r/10718567",
+      "r/10718568",
+      "r/10718704",
+      "r/10718705",
+      "r/10718772",
+      "r/10718798",
+      "r/10738011",
+      "r/10753674",
+      "r/10753675",
+      "r/10754626",
+      "r/10754645",
+      "r/10754689",
+      "r/10754745",
+      "r/10754766",
+      "r/10755129",
+      "r/10755130",
+      "r/10755141",
+      "r/10757525",
+      "r/10757526",
+      "r/10769020",
+      "r/10769186",
+      "r/10775471",
+      "r/10839607",
+      "r/15100454",
+      "r/16492358",
+      "r/16492359",
+      "r/16492360",
+      "r/17229243",
+      "r/18722759",
+      "r/19175488",
+      "r/19357693",
+      "r/19357694",
+      "r/19357695",
+      "r/19357696",
+      "r/19357697",
+      "r/19357698",
+      "r/19357699",
+      "r/19357700",
+      "r/19357701",
+      "r/19357703",
+      "r/19358426",
+      "r/19358427",
+      "r/19358428",
+      "r/19358429",
+      "r/19358430",
+      "r/19358433",
+      "r/19358434",
+      "r/19358435",
+      "r/19358436",
+      "r/19358510",
+      "r/19358511",
+      "r/19360995",
+      "r/19360996",
+      "r/19360997",
+      "r/19360998",
+      "r/19360999",
+      "r/19361000",
+      "r/19361001",
+      "r/19361002",
+      "r/19361003",
+      "r/19361004",
+      "r/19361005",
+      "r/19361006",
+      "r/19361007",
+      "r/19361008",
+      "r/19361009",
+      "r/19361010",
+      "r/20431159",
+      "r/5681909",
+      "r/6012272",
+      "r/7240724",
+      "r/8885007"
+    ],
+    "non_osm_or_official_comparison": "22 Overture candidates compared spatially; domestic authoritative building originals unreceived",
+    "part_part_overlap_scope": "horizontal overlap can represent roof/wall/column stories; evaluate height/min_height in G03"
+  },
+  "not_run": [
+    "Independent surveyed accuracy or current physical completeness",
+    "Authoritative domestic building original comparison",
+    "G03 height/ground and detailed part vertical composition",
+    "G04 widths/playable boundary/routes",
+    "Godot meshes, normals, collision or walking",
+    "M4 Pro execution"
+  ],
+  "official_implementation_references": [
+    "https://shapely.readthedocs.io/en/stable/reference/shapely.orient_polygons.html",
+    "https://shapely.readthedocs.io/en/stable/strtree.html"
+  ]
+}

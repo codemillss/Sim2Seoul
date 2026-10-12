@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "task_id": "G02",
+  "coordinate_contract_version": 1,
+  "clip_to_investigation_bbox": false,
+  "repair_invalid_geometry": false,
+  "polygon_winding_in_local_xz": {"outer": "counterclockwise", "holes": "clockwise"},
+  "winding_is_godot_mesh_front_face": false,
+  "overlap_report_min_area_m2": 0.01,
+  "overlap_threshold_is_measured_accuracy": false,
+  "building_groups": "explicit type=building outline/part first; spatial links are candidates only",
+  "coarse_body_plan": "one primary outline; parts and building=roof are references, not simultaneous full volumes",
+  "unexplained_body_overlap": "hold both footprints from coarse body emission; retain all source geometry",
+  "exact_same_kind_duplicates": "geometry equality AND identical raw tags including height semantics; retain all records with one primary and aliases",
+  "barrier_area_with_same_source_line": "area reference; line is the primary boundary representation",
+  "overture_non_osm": "compare all 22 candidates; hold until independent presence/shape review",
+  "height_ground_width_assignment": "pending G03/G04; no extrusion, buffering or synthetic ground in G02"
+}

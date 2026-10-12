@@ -64,12 +64,13 @@
 - 실제 증거: [좌표 검사](../data/reports/coordinate_check.json)의 13개 검사 통과. 7곳의 원본 윤곽 정점, 4쌍 거리, 원점/모서리 역변환, 10m 축을 검증했다. 가공 기준 파일은 `tools/check_coordinates.py`로 재생성하며 공유 보고서에도 동일 기준을 보존한다. [G01 설명](evidence/G01_COORDINATE_CHECK.md). 실제 지면 배정은 G03, Godot 전달은 E04다.
 - 대안: 좌표계가 불명확한 원본은 변환에 넣지 않는다. 자료 제공 메타데이터를 확인하거나 해당 자료 사용을 보류한다.
 
-### [ ] G02 도형 정리와 원천 연결 — 계획
+### [x] G02 도형 정리와 원천 연결 — 완료(수평 도형·원천·생성 역할, 높이/실제 메시/현장 검증은 후속)
 - 선행: G01.
 - 입력: 건물·길·담장 원본과 보완 자료.
 - 산출: `data/processed/features.json`(명시한 CRS·축·미터 단위 포함) 또는 미터 좌표 GeoPackage, `data/reports/geometry_check.json`.
 - 실행: multipolygon의 외곽·구멍·부속 부분을 처리하고 자기교차·중복·빈 도형을 검사한다. 소스 ID를 보존한다. EPSG:32652와 로컬 원점 좌표는 정식 GeoJSON의 WGS84 좌표처럼 저장하지 않는다. 현재 `osm_preview.geojson`은 WGS84 검사용이며 게임 입력과 구분한다. OSM과 공식 건물을 겹침·주소·명칭으로 비교하며 같은 건물을 두 번 생성하지 않는다.
 - 완료 기준: 사용할 도형은 유효하고, 제외/수정 항목마다 사유가 있으며 원천으로 추적할 수 있다.
+- 실제 증거: [geometry_check](../data/reports/geometry_check.json) 26개 검사와 [회귀 검사](../data/reports/g02_regression_check.json) 9개 변형 거부. 원본 1,523개·holes 83개 보존, 명시 부모/부분 관계와 보류 사유 기록. [G02 설명](evidence/G02_GEOMETRY_REVIEW.md). 가공물은 공유 도구로 재생성한다.
 - 대안: 자동 복구가 외형을 크게 바꾸면 검토 대상으로 분리한다. 핵심 건물은 출처를 남긴 수동 도형으로 대체한다.
 
 ### [ ] G03 높이와 지면 분류 — 계획

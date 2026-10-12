@@ -1,0 +1,86 @@
+{
+  "task_id": "G02",
+  "verified_at_utc": "2026-10-12T06:49:43.447466+00:00",
+  "started_from_commit": "680142e3d0f1c0c27cdf23ff9a84018d161459fa",
+  "environment_scope": "Current M1 existing interpreter; separate file snapshot, no new dependency install or M4 execution",
+  "snapshot_file_count": 80,
+  "checks": {
+    "no_country_dem_environment_in_snapshot": true,
+    "small_shared_input_hashes_pass": true,
+    "feature_bytes_equal_across_workspace_paths": true,
+    "geometry_report_matches_current": true,
+    "geometry_svg_matches_current": true,
+    "second_feature_generation_identical": true,
+    "nine_corruptions_rejected_in_snapshot": true,
+    "manual_queue_unchanged_by_all_generators": true,
+    "changed_preview_rejected": true,
+    "changed_raw_rejected": true,
+    "changed_rules_rejected": true,
+    "changed_manual_queue_rejected": true,
+    "all_shared_snapshot_files_restored": true,
+    "python_sources_parse": true,
+    "setup_shell_syntax": true,
+    "setup_dependency_order_correct": true,
+    "completed_tasks_D01_D04_G01_G02_only": true,
+    "manifest_status_matches_plan": true,
+    "next_task_G03": true,
+    "fourteen_pending_manual_reviews_no_approved_values": true,
+    "features_remain_git_ignored": true,
+    "twenty_six_geometry_checks_pass": true,
+    "landmark_svg_render_has_expected_dimensions": true,
+    "markdown_local_links_resolve": true,
+    "reports_and_config_json_parse": true
+  },
+  "passed": true,
+  "provenance_rejection_cases": [
+    {
+      "case": "changed_preview",
+      "rejected": true,
+      "reason": "G02 derived-input provenance mismatch; regenerate after reviewing source changes"
+    },
+    {
+      "case": "changed_raw",
+      "rejected": true,
+      "reason": "G02 derived-input provenance mismatch; regenerate after reviewing source changes"
+    },
+    {
+      "case": "changed_rules",
+      "rejected": true,
+      "reason": "G02 derived-input provenance mismatch; regenerate after reviewing source changes"
+    },
+    {
+      "case": "changed_manual_queue",
+      "rejected": true,
+      "reason": "G02 derived-input provenance mismatch; regenerate after reviewing source changes"
+    }
+  ],
+  "features_sha256": "952e604f270ecfd01df6d88c42ef56c6cfe585b28ed3249577f7cae36e6398af",
+  "geometry_report_sha256": "7dddf9f6cf545d36037f86d55911cc314f4c3842f90304203c6f35b3eaf1e16f",
+  "regression_report_sha256": "61291a5fcfe66f0c3028c87bc158b84361374b38346ff3f3c28036c2dafe65ce",
+  "svg_sha256": "52da8af7ff2a1ceed129407fbda6effe37f27eab02be3351932434302625a365",
+  "visual_review": {
+    "render_width": 1320,
+    "render_height": 650,
+    "reviewed": "Parent/parts/roof/courtyard holes and 10m scales; no label clipping; not 3D accuracy"
+  },
+  "manual_review_count": 14,
+  "local_markdown_link_count": 210,
+  "broken_links": [],
+  "json_documents_parsed": 36,
+  "completed_tasks": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "G01",
+    "G02"
+  ],
+  "not_run": [
+    "Fresh Python dependency installation",
+    "M4 Pro",
+    "Godot meshes/normals/collision/walking",
+    "Independent ground truth",
+    "Observed vertical datum or height composition"
+  ],
+  "next_task": "G03"
+}

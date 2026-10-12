@@ -1,0 +1,107 @@
+{
+  "task_id": "G02",
+  "baseline_passed": true,
+  "input_sha256": "952e604f270ecfd01df6d88c42ef56c6cfe585b28ed3249577f7cae36e6398af",
+  "checker_sha256": "09b66c74c39f694db6126279d15bf970fdbd6bfb6933c61d057dc4a9719b40b6",
+  "regression_tool_sha256": "5dde9875b46cb6574d7a71da4f410fcb1a35472b3e6dc2e011570a9c5f7d4040",
+  "cases": [
+    {
+      "case": "removed_groups_and_reverse_links",
+      "rejected": true,
+      "required_failed_check": "all_raw_building_groups_and_reverse_links_present",
+      "failed_checks": [
+        "all_raw_building_groups_and_reverse_links_present"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "altered_height_raw",
+      "rejected": true,
+      "required_failed_check": "downstream_raw_height_roof_road_and_access_attributes_match_source",
+      "failed_checks": [
+        "downstream_raw_height_roof_road_and_access_attributes_match_source"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "altered_source_crs",
+      "rejected": true,
+      "required_failed_check": "raw_tags_topology_coordinates_and_ids_preserved",
+      "failed_checks": [
+        "raw_tags_topology_coordinates_and_ids_preserved"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "altered_embedded_rules",
+      "rejected": true,
+      "required_failed_check": "embedded_rules_match_current_configuration",
+      "failed_checks": [
+        "embedded_rules_match_current_configuration"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "altered_coordinate_metadata",
+      "rejected": true,
+      "required_failed_check": "document_coordinate_contract_and_schema_match",
+      "failed_checks": [
+        "document_coordinate_contract_and_schema_match"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "filled_courtyard_hole",
+      "rejected": true,
+      "required_failed_check": "junghwajeon_courtyard_hole_not_filled",
+      "failed_checks": [
+        "valid_finite_topology_winding_and_shape_preserved",
+        "all_holes_preserved",
+        "junghwajeon_courtyard_hole_not_filled"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "shifted_daehanmun_vertex",
+      "rejected": true,
+      "required_failed_check": "valid_finite_topology_winding_and_shape_preserved",
+      "failed_checks": [
+        "valid_finite_topology_winding_and_shape_preserved"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "duplicated_coarse_emission",
+      "rejected": true,
+      "required_failed_check": "coarse_plan_contains_only_primary_building_footprints",
+      "failed_checks": [
+        "coarse_plan_contains_only_primary_building_footprints",
+        "no_unexplained_overlap_in_coarse_body_plan"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "part_as_independent_body",
+      "rejected": true,
+      "required_failed_check": "parts_and_roofs_are_not_independent_coarse_volumes",
+      "failed_checks": [
+        "coarse_plan_contains_only_primary_building_footprints",
+        "no_unexplained_overlap_in_coarse_body_plan",
+        "parts_and_roofs_are_not_independent_coarse_volumes",
+        "reported_kind_and_role_counts_match_records"
+      ],
+      "exit_code": 1,
+      "error": null
+    }
+  ],
+  "passed": true,
+  "scope": "Nine malformed derived-input cases; no source/manual changes or game tests"
+}
