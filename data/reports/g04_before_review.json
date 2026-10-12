@@ -1,0 +1,183 @@
+{
+  "task_id": "G04",
+  "provenance": {
+    "features_sha256": "457bd780da586da2ac987b8df8662129baa1168f02f4568927fa19bcf9d81b54",
+    "heights_sha256": "c3ac4be49acc35ee44832ed92cb57547c56a0ddb13bbe23f3b128833caf70455",
+    "terrain_sha256": "095f6d19fa7908c9f9aefc7b3c593f17a31729c7a04dec229eaff34f61bdd7ea",
+    "geometry_report_sha256": "f753334c967654d116c6bc3622e80a035e9bd3ca32559b1f5eec29a30de1b627",
+    "height_report_sha256": "c7562b9fd3b662910f4a564557265a5577503eb7fd99ce034cc17c0a0b25266a",
+    "rules_sha256": "f405642fdc95dfd8edeba2dee71edf351229d5fb2457417ca4b725e81f37e488",
+    "manual_sha256": "5c0034c82d3b238f68490e7b9ce29a0e67d897803e06d272abd6b9a696a47758",
+    "official_sha256": "981465ed026fa393592965a79304a4c2ac83018adfdab90d97e9f5e77ff4fe76",
+    "generator_sha256": "4f0d792fe2b492315dae638e241b5eb3131af677efe452d797dd0ecdda9d9adc",
+    "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+    "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+  },
+  "checker_sha256": "fa7d2dafb8829308102eefdded74d1dfe0d7c2a6efcc586ea92bdd247cfd142c",
+  "walk_sha256": "63205f6cc400a9e1e6fa6c35caea73c52ad96eb16e0837baff8c7ba4e877aeaa",
+  "drive_sha256": "fc828e2cb122db082bf239a0b6f282b0007da7f17058408c616d7332d1f872bb",
+  "boundary_sha256": "341ea388ed2de8bf5150b8195df7493c0e57abd537aca29fdd38e6b077f51874",
+  "checks": {
+    "current_predecessors_rules_manual_evidence_and_generator_bound": true,
+    "schema_coordinates_embedded_rules_match": true,
+    "complete_unique_highway_records_in_both_modes": true,
+    "source_tags_topology_node_constraints_and_geometry_preserved": true,
+    "mode_specific_access_overrides_and_restrictions_preserved": true,
+    "widths_and_assumptions_not_measured_sidewalks": true,
+    "source_area_holes_and_exact_estimated_buffers_preserved": true,
+    "ground_steps_indoor_and_node_holds_not_flattened": true,
+    "candidate_surfaces_do_not_grant_runtime_permission": true,
+    "vehicle_oneway_preserved_and_not_applied_to_walking": true,
+    "classification_counts_match_records": true,
+    "graph_contacts_complete_no_distance_snapping_or_verified_connections": true,
+    "required_R1_R2_R3_source_chains_connected_with_holds_retained": true,
+    "checkpoints_bound_to_raw_nodes_not_runtime_spawns": true,
+    "gate_passage_evidence_preserved_no_invented_width_or_opening": true,
+    "boundary_envelope_source_union_padding_and_private_exclusions_match": true,
+    "boundary_covers_required_source_chains_and_excludes_embassy": true,
+    "review_envelope_not_bbox_or_final_boundary_spawn_or_permission": true,
+    "land_gardens_parks_not_auto_walking_or_vehicle_geometry": true,
+    "source_obstacle_conflicts_not_silently_cut_or_deleted": true,
+    "crossing_conflicts_retained_without_vehicle_control_claim": true,
+    "foot_yes_overrides_blanket_no_and_vehicle_stays_denied": true,
+    "R2_uses_ground_north_crossing_not_underground_or_direct_cut": true
+  },
+  "passed": true,
+  "highway_record_count": 478,
+  "walk_classification_counts": {
+    "explicit_mode_access": 26,
+    "held_construction": 2,
+    "held_restricted_or_unparsed_access": 3,
+    "highway_semantic_candidate_not_verified_access": 253,
+    "not_this_mode_geometry": 194
+  },
+  "drive_classification_counts": {
+    "held_construction": 2,
+    "held_restricted_or_unparsed_access": 12,
+    "highway_semantic_candidate_not_verified_access": 190,
+    "not_this_mode_geometry": 274
+  },
+  "walk_structural_candidates": 279,
+  "drive_structural_candidates": 190,
+  "walk_surface_candidates": 192,
+  "drive_surface_candidates": 180,
+  "walk_obstacle_conflict_count": 77,
+  "drive_obstacle_conflict_count": 133,
+  "crossing_conflict_count": 19,
+  "routes": [
+    {
+      "route_id": "R1",
+      "chain": [
+        "w/1530764334",
+        "w/377289807",
+        "w/377289813",
+        "w/377289810"
+      ],
+      "source_chain_connected_2d": true,
+      "placement_review_feature_ids": [
+        "osm:way:377289807:highway_line",
+        "osm:way:377289813:highway_line"
+      ],
+      "remaining": [
+        "대한문 개구부 폭·지면·충돌",
+        "금천교 대응·실제 높이",
+        "경내 길과 마당 내 상세 경로",
+        "석조전 계단·실내 제외"
+      ]
+    },
+    {
+      "route_id": "R2",
+      "chain": [
+        "w/1530764334",
+        "w/776588359",
+        "w/1415923127",
+        "w/1415923126",
+        "w/1230789306",
+        "w/1498257483",
+        "r/6012272",
+        "w/768397718"
+      ],
+      "source_chain_connected_2d": true,
+      "placement_review_feature_ids": [],
+      "remaining": [
+        "횡단보도 차량 경로 교차·정지 규칙",
+        "분리 자전거길 내 실제 보행 폭",
+        "면 안의 상세 경로·턱·장애물",
+        "서울광장 잔디 자동 보행화 금지"
+      ]
+    },
+    {
+      "route_id": "R3",
+      "chain": [
+        "w/1530764334",
+        "w/776588359",
+        "w/1415923123"
+      ],
+      "source_chain_connected_2d": true,
+      "placement_review_feature_ids": [],
+      "remaining": [
+        "남측 담장 공사 가림막 위치·폭",
+        "북측·전체 일주 현재 접근 미확정",
+        "평성문 예정 통제와 현재 상태 구분"
+      ]
+    }
+  ],
+  "gate_passages": [
+    {
+      "way_id": "w/377289807",
+      "building_id": "w/377289797",
+      "gate_node_id": 3851434686,
+      "role": "R1 필수 대한문 통과선",
+      "clear_width_m": null,
+      "physical_ground_verified": false,
+      "source_tags": {
+        "access": "permissive",
+        "highway": "footway",
+        "tunnel": "building_passage"
+      },
+      "source_intersection_length_m": 11.340945714726297,
+      "geometry_changed": false,
+      "collision_opening_created": false
+    },
+    {
+      "way_id": "w/381755277",
+      "building_id": "w/181574580",
+      "gate_node_id": null,
+      "role": "중화문 선택 고리·계단 예외",
+      "clear_width_m": null,
+      "physical_ground_verified": false,
+      "source_tags": {
+        "access": "permissive",
+        "highway": "footway",
+        "tunnel": "building_passage"
+      },
+      "source_intersection_length_m": 12.766372638934316,
+      "geometry_changed": false,
+      "collision_opening_created": false
+    }
+  ],
+  "boundary_bounds_xz_m": [
+    -269.9951769618208,
+    -334.7962401803909,
+    251.70063401575885,
+    146.85521714362315
+  ],
+  "errors": {
+    "attributes": [],
+    "access": [],
+    "widths": [],
+    "geometry": [],
+    "placement": [],
+    "permissions": [],
+    "directions": [],
+    "routes": [],
+    "checkpoints": []
+  },
+  "not_run": [
+    "Actual walk/drive or collision",
+    "Measured width/ground/access",
+    "Navmesh/vehicle routes/turn restrictions",
+    "Final play boundary/fall recovery",
+    "M4 Pro"
+  ]
+}

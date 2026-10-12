@@ -1,0 +1,117 @@
+{
+  "task": "G04 independent review",
+  "baseline": "/tmp/g04_review_baseline_report.json",
+  "cases": "/tmp/g04_independent_review_cases.json",
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "tools/prepare_movement.py",
+      "line": 89,
+      "finding": "node_constraints reads node_ids only; relation highway_area member nodes omitted",
+      "current_examples": [
+        {
+          "feature_id": "osm:relation:10755141:highway_area",
+          "node_id": 7246189806,
+          "tags": {
+            "barrier": "kerb",
+            "kerb": "lowered"
+          }
+        },
+        {
+          "feature_id": "osm:relation:16492358:highway_area",
+          "node_id": 11277508941,
+          "tags": {
+            "barrier": "kerb",
+            "kerb": "lowered"
+          }
+        }
+      ],
+      "limit": "Current examples are lowered kerbs, not proof of obstruction. Contract requires raw barrier-node review preservation; future relation gates/restricted nodes can be silently omitted."
+    },
+    {
+      "priority": "P2",
+      "file": "tools/check_movement.py",
+      "line": 24,
+      "finding": "Top-level mode not checked; walk doc relabelled drive still passes 23 checks",
+      "proof": "/tmp/g04_review_walk_mode_false_report.json"
+    },
+    {
+      "priority": "P3",
+      "file": "tools/check_movement.py",
+      "line": 106,
+      "finding": "boundary padding_m metadata not bound to rules; 1000m metadata with actual 12m geometry passes 23 checks",
+      "proof": "/tmp/g04_review_boundary_padding_false_report.json"
+    }
+  ],
+  "confirmed_strengths": [
+    "raw-node R1/R2/R3 chains maintained; no proximity snapping",
+    "foot override examples verified and vehicle denial kept",
+    "steps/tunnel/layer/node holds retained without runtime permission",
+    "source-area holes mutation rejected",
+    "actual envelope geometry and embassy exclusion validated",
+    "width estimates separated from measured widths"
+  ],
+  "repository_modified": false,
+  "final_recheck": {
+    "task": "G04 final independent review",
+    "review_scope": "Previously reported three defects only; no full fresh audit or runtime verification",
+    "fixes_verified": {
+      "recursive_relation_member_nodes": true,
+      "lowered_kerb_node_ids_preserved": [
+        7246189806,
+        11277508941
+      ],
+      "lowered_kerb_surfaces_held": true,
+      "top_level_walk_drive_mode_validation": true,
+      "boundary_padding_matches_rules_validation": true
+    },
+    "normal_checks": 23,
+    "normal_walk_surface_candidates": 190,
+    "cases": [
+      {
+        "case": "baseline",
+        "exit_code": 0,
+        "passed": true,
+        "failed_checks": [],
+        "report": "/tmp/g04_final_baseline_report.json"
+      },
+      {
+        "case": "boundary_padding_false",
+        "exit_code": 1,
+        "passed": false,
+        "failed_checks": [
+          "boundary_envelope_source_union_padding_and_private_exclusions_match"
+        ],
+        "report": "/tmp/g04_final_boundary_padding_false_report.json"
+      },
+      {
+        "case": "walk_mode_false",
+        "exit_code": 1,
+        "passed": false,
+        "failed_checks": [
+          "schema_coordinates_embedded_rules_match"
+        ],
+        "report": "/tmp/g04_final_walk_mode_false_report.json"
+      }
+    ],
+    "before_after_metadata_cases": [
+      {
+        "case": "boundary_padding_false",
+        "before_passed": true,
+        "after_passed": false
+      },
+      {
+        "case": "walk_mode_false",
+        "before_passed": true,
+        "after_passed": false
+      }
+    ],
+    "additional_defects_found_in_limited_review": [],
+    "limitations": [
+      "Only the three earlier findings were rechecked.",
+      "The two lowered kerbs are review holds, not evidence of impassability.",
+      "No physical access, measured width, terrain transition, collision, or game route completion verified."
+    ],
+    "repository_modified": false
+  }
+}

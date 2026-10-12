@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-12 · 최근 실행: **G03 높이·지면 분류와 잠정 겹침 생성 결정 검증 완료** · 계획 작업 D01–D04/G01–G03 완료, 다음 G04 · 게임 구현은 아직 시작하지 않음
+갱신: 2026-10-12 · 최근 실행: **G04 보행·주행·경계 후보와 원문 2D 연결 검증 완료** · 계획 작업 D01–D04/G01–G04 완료, 다음 E01 · 게임 구현은 아직 시작하지 않음
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -26,6 +26,7 @@
 | G01 좌표 기준 고정 | 원본 정점 7곳·거리 4쌍·역변환·10m 축 등 13개 검사 통과. 원점·축·수치 변경 없음 | [G01 설명](evidence/G01_COORDINATE_CHECK.md), [좌표 검사](../data/reports/coordinate_check.json), [인수 검사](../data/reports/g01_verification.json) |
 | G02 미터 도형 정리 | 1,523개·holes 83개 보존, 본체 후보 635·지붕 참조 72·겹침 보류 4·부분 참조 83. 정상 26개/변형 9개 검사 통과 | [G02 설명](evidence/G02_GEOMETRY_REVIEW.md), [도형 검사](../data/reports/geometry_check.json), [인수 검사](../data/reports/g02_verification.json) |
 | G03 높이·지면 분류 | 1,523개 처리 상태, 단순 본체 계획 635·수직 지면 예외 132. 겹침 2쌍의 본체 단일 선택/참조 보존. 정상 19개·변형 12개 검사 통과 | [G03 검토](../data/reports/height_review.md), [높이 검사](../data/reports/height_check.json), [인수 검사](../data/reports/g03_verification.json) |
+| G04 이동/경계 후보 | 두 모드별 478개 판정. 보행/차량 구조 후보 279/190·검토용 면 190/180. R1/R2/R3 원문 연결·사유지 제외 경계, 정상 23개/변형 17개 검사 통과 | [G04 검토/지도](../data/reports/movement_review.md), [이동 검사](../data/reports/movement_check.json), [인수 검사](../data/reports/g04_verification.json) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
@@ -80,7 +81,7 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 
 - 국내 SHP/NGII 지역 원본 수신, 독립 높이·상세 지형 검증. Overture 원본은 취득 완료이며 후보의 현실 대응 검토는 남음.
 - 독립 기준 대비 위치·누락률 검증, 상세 부분별 수직 메시와 정관헌/상동교회의 실제 외형·높이 확인. G03 단순 본체 선택은 이 확인과 구분한다.
-- 지면·계단·도로폭·대한문 개구부·세 필수 동선 검증.
+- 실제 지면·계단·도로폭·대한문 개구부·세 필수 동선의 물리 연결/통행·게임 완주 검증. 원본 2D 연결과 경계 후보는 G04에서 검토 완료.
 - Godot 설치/버전·렌더러 결정/기동, 캐릭터·충돌·카메라, 3D 자산 생성.
 - 실제 플레이, 성능 측정, M4 Pro 확인, 패키지 제작.
 
@@ -95,12 +96,12 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - **G01 완료:** 대표 원본 정점 7곳, 거리 4쌍, 원점/모서리 역변환, 10m 축·입력 검사를 통과하고 계약 버전 1을 고정했다. 왕복 최대 1.42e-14도, 투영/측지 거리 차이 최대 0.000708%. 실제 지면/외부 위치/엔진 검증은 미실행이다.
 - **G02 완료:** 원천 위경도·태그·노드/관계와 미터 도형을 연결했다. 부모/부분·지붕 역할과 본체 보류·Overture 후보 22개를 기록하고 26개 정상 검사/9개 변형 거부를 통과했다. 실제 높이·수직 겹침·메시 생성은 미실행이다.
 - **G03 완료:** 모든 1,523개 객체의 높이/지면 상태와 근거를 연결하고, 층수 계수·랜드마크/용도 임시값·로컬 지지 평면을 명시했다. 정관헌/상동교회 잠정 본체 선택과 참조 보존, 19개 정상 검사·12개 변형 거부를 통과했다. 상세 메시/독립 높이·실제 지면·통행은 미검증이다.
-- **G04:** 다음 실행 작업. 보행·주행·경계 후보와 폭·수직/접근 예외·필수 동선 연결을 검토한다.
+- **G04 완료:** 두 모드별 478개 원천을 판정하고 R1/R2/R3의 원본 공유 노드/면 접촉 연결, 북측 지상 횡단·남측 돌담길·gate/계단·공사 제한을 검토했다. 폭은 추정이며 토지/공원 참조·사유지 제외 경계·겹침을 보존했다. 정상 23개·변형 17개 검사 통과. 실제 단차/폭/허가/충돌·보행과 최종 경계는 미검증이다.
 - **E01 이후:** 미실행. E01의 빈 엔진 기동 검증은 보완 자료 확보와 독립적으로 진행 가능.
 
-## 다음 작업: G04 보행·주행·경계 후보 분리
+## 다음 작업: E01 엔진 설치·첫 실행
 
-첫 행동은 현재 `features.json`·`heights.json`·`terrain.json`과 [높이 검사](../data/reports/height_check.json)의 132개 지면 예외, 수동 큐·D03 공식 경내/공사 근거·C04/C05/V02·상세 계획 G04를 읽는 것이다. 다른 Mac에서는 아래 공유 도구로 재생성한다. 대한문 밖→경내/중화전·석조전 앞, 서울광장·시청 연결, 돌담길 후보를 구분하고 계단·문 폭/개구부·보도/차도·접근 제한·단차와 미확정 연결부터 검토한다. `ground_y=0`이나 `emit_coarse_body`를 통행 허가로 읽지 않는다. Overture·DSM은 기존 후보/참고 전용 범위를 유지한다.
+첫 행동은 현재 M1의 디스크 여유·OS/아키텍처와 엔진 설치 유무를 확인하고, 상세 계획 E01·관련 기동/두 Mac 검증 계약을 읽는 것이다. 공식 무료 Godot 4 계열의 현재 안정 후보를 확인해 빈 3D 장면을 실제 기동하고 버전·렌더러·설치 출처를 기록한다. 기동 전에 버전이나 성능을 달성 사실로 고정하지 않는다. 이 요청 G04에서는 엔진을 설치하거나 게임을 만들지 않았다. G04의 원본 연결/면/경계를 엔진 통행 허가로 읽지 않으며 E03/P/W에서 gate·단차·폭·충돌을 이어서 검증한다.
 
 조사 bbox는 플레이 경계가 아니고 원점은 스폰 지점이 아니다. 미수신 국내 상세 자료 때문에 정상 원본을 다시 받거나 같은 취득 실패를 반복하지 않는다. `data_usage.json`의 보류/참고 전용 범위를 유지하며 G02–G04에서 도형·높이·지면·경로를 순서대로 준비한다.
 
@@ -125,7 +126,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 G04다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`로 도형과 높이·지면 분류를 재생성한다. G03 분류는 [height_review](../data/reports/height_review.md)를 따른다. 이전 공유 G02 보고서는 [스냅샷](../data/reports/geometry_check-g02.json)으로 보존했다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 E01이다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다.
 
 ## 개발 환경 기록
 

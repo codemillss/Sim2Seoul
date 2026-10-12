@@ -1,0 +1,194 @@
+{
+  "task_id": "G04",
+  "baseline_passed": true,
+  "passed": true,
+  "checker_sha256": "01d027938708198ebf649c1e7d06b3f667113dcfb30c11f67a11fa3d07fa7cc4",
+  "regression_tool_sha256": "fb934a05b0dcb9da5e8d0f42dc30871ec1cc9a666077ba9916366e2f306cd244",
+  "cases": [
+    {
+      "case": "foot_override_lost",
+      "rejected": true,
+      "required_failed_check": "mode_specific_access_overrides_and_restrictions_preserved",
+      "failed_checks": [
+        "mode_specific_access_overrides_and_restrictions_preserved",
+        "graph_contacts_complete_no_distance_snapping_or_verified_connections",
+        "crossing_conflicts_retained_without_vehicle_control_claim",
+        "foot_yes_overrides_blanket_no_and_vehicle_stays_denied"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "vehicles_on_pedestrian_plaza",
+      "rejected": true,
+      "required_failed_check": "mode_specific_access_overrides_and_restrictions_preserved",
+      "failed_checks": [
+        "mode_specific_access_overrides_and_restrictions_preserved"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "estimate_relabelled_source_width",
+      "rejected": true,
+      "required_failed_check": "widths_and_assumptions_not_measured_sidewalks",
+      "failed_checks": [
+        "widths_and_assumptions_not_measured_sidewalks"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "enlarged_centreline_buffer",
+      "rejected": true,
+      "required_failed_check": "source_area_holes_and_exact_estimated_buffers_preserved",
+      "failed_checks": [
+        "source_area_holes_and_exact_estimated_buffers_preserved",
+        "source_obstacle_conflicts_not_silently_cut_or_deleted"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "filled_courtyard_hole",
+      "rejected": true,
+      "required_failed_check": "source_area_holes_and_exact_estimated_buffers_preserved",
+      "failed_checks": [
+        "source_area_holes_and_exact_estimated_buffers_preserved",
+        "source_obstacle_conflicts_not_silently_cut_or_deleted"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "flattened_gate_passage",
+      "rejected": true,
+      "required_failed_check": "ground_steps_indoor_and_node_holds_not_flattened",
+      "failed_checks": [
+        "source_area_holes_and_exact_estimated_buffers_preserved",
+        "ground_steps_indoor_and_node_holds_not_flattened",
+        "graph_contacts_complete_no_distance_snapping_or_verified_connections",
+        "required_R1_R2_R3_source_chains_connected_with_holds_retained",
+        "source_obstacle_conflicts_not_silently_cut_or_deleted"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "snapped_direct_crossing",
+      "rejected": true,
+      "required_failed_check": "graph_contacts_complete_no_distance_snapping_or_verified_connections",
+      "failed_checks": [
+        "graph_contacts_complete_no_distance_snapping_or_verified_connections"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "removed_R1_connection_evidence",
+      "rejected": true,
+      "required_failed_check": "required_R1_R2_R3_source_chains_connected_with_holds_retained",
+      "failed_checks": [
+        "required_R1_R2_R3_source_chains_connected_with_holds_retained"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "shifted_raw_checkpoint",
+      "rejected": true,
+      "required_failed_check": "checkpoints_bound_to_raw_nodes_not_runtime_spawns",
+      "failed_checks": [
+        "checkpoints_bound_to_raw_nodes_not_runtime_spawns"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "invented_gate_clear_width",
+      "rejected": true,
+      "required_failed_check": "gate_passage_evidence_preserved_no_invented_width_or_opening",
+      "failed_checks": [
+        "gate_passage_evidence_preserved_no_invented_width_or_opening"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "review_boundary_grants_access",
+      "rejected": true,
+      "required_failed_check": "review_envelope_not_bbox_or_final_boundary_spawn_or_permission",
+      "failed_checks": [
+        "review_envelope_not_bbox_or_final_boundary_spawn_or_permission"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "deleted_obstacle_conflicts",
+      "rejected": true,
+      "required_failed_check": "source_obstacle_conflicts_not_silently_cut_or_deleted",
+      "failed_checks": [
+        "source_obstacle_conflicts_not_silently_cut_or_deleted"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "vehicle_oneway_lost",
+      "rejected": true,
+      "required_failed_check": "vehicle_oneway_preserved_and_not_applied_to_walking",
+      "failed_checks": [
+        "vehicle_oneway_preserved_and_not_applied_to_walking"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "candidate_grants_runtime_permission",
+      "rejected": true,
+      "required_failed_check": "candidate_surfaces_do_not_grant_runtime_permission",
+      "failed_checks": [
+        "candidate_surfaces_do_not_grant_runtime_permission"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "changed_document_mode",
+      "rejected": true,
+      "required_failed_check": "schema_coordinates_embedded_rules_match",
+      "failed_checks": [
+        "schema_coordinates_embedded_rules_match"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "changed_boundary_padding",
+      "rejected": true,
+      "required_failed_check": "boundary_envelope_source_union_padding_and_private_exclusions_match",
+      "failed_checks": [
+        "boundary_envelope_source_union_padding_and_private_exclusions_match"
+      ],
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "case": "removed_relation_kerb_constraint",
+      "rejected": true,
+      "required_failed_check": "source_tags_topology_node_constraints_and_geometry_preserved",
+      "failed_checks": [
+        "source_tags_topology_node_constraints_and_geometry_preserved"
+      ],
+      "exit_code": 1,
+      "error": null
+    }
+  ],
+  "input_sha256": {
+    "walk": "00b2a31b40fdd8c9248cf0bc22b1d449720901a202f12338aef63bea65e43b7b",
+    "drive": "7a3cb92b240011052c3dcafe61ee41393a32e3507ec2da21c80c71e08c7938ac",
+    "boundary": "54c8b9eb5d49a4952f742a934fed80c7f41a429826fffb5d0d99256fa4437171"
+  },
+  "scope": "Seventeen corrupt derived inputs; no source/manual changes or game tests"
+}

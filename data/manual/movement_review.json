@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "G04",
+  "status": "reviewed_source_chains_and_working_envelope_not_physical_access_approval",
+  "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+  "official_evidence": "data/reports/g04_official_route_evidence.json",
+  "routes": [
+    {
+      "route_id": "R1",
+      "purpose": "대한문 외측→대한문 통과선→중화전 앞·측면→석조전 계단 아래 외부",
+      "chain": ["w/1530764334", "w/377289807", "w/377289813", "w/377289810"],
+      "checkpoints": [{"node_id": 3806615944, "way_id": "w/1530764334", "role": "대한문 외측 원문 입구"}, {"node_id": 3851434686, "way_id": "w/377289807", "role": "대한문 원문 gate"}, {"node_id": 921242850, "way_id": "w/377289810", "role": "중화전 앞·측면 경내 길"}, {"node_id": 3851434705, "way_id": "w/377289810", "role": "석조전 계단 아래 외부 후보"}],
+      "target_surface_ids": ["r/5681909"],
+      "remaining": ["대한문 개구부 폭·지면·충돌", "금천교 대응·실제 높이", "경내 길과 마당 내 상세 경로", "석조전 계단·실내 제외"]
+    },
+    {
+      "route_id": "R2",
+      "purpose": "대한문 외측→북측 지상 횡단 우회→서울광장 외곽→시청 전면",
+      "chain": ["w/1530764334", "w/776588359", "w/1415923127", "w/1415923126", "w/1230789306", "w/1498257483", "r/6012272", "w/768397718"],
+      "checkpoints": [{"node_id": 11414286298, "way_id": "w/1230789306", "role": "북측 지상 횡단 서측"}, {"node_id": 13721232744, "way_id": "w/1230789306", "role": "북측 지상 횡단 동측"}],
+      "target_surface_ids": ["r/6012272", "w/768397718"],
+      "remaining": ["횡단보도 차량 경로 교차·정지 규칙", "분리 자전거길 내 실제 보행 폭", "면 안의 상세 경로·턱·장애물", "서울광장 잔디 자동 보행화 금지"]
+    },
+    {
+      "route_id": "R3",
+      "purpose": "대한문 외측→남측 공개 보행면→서측 연결 지점·복귀",
+      "chain": ["w/1530764334", "w/776588359", "w/1415923123"],
+      "checkpoints": [{"node_id": 7245912943, "way_id": "w/1415923123", "role": "남측 보행면의 서측 원문 연결"}],
+      "target_surface_ids": ["w/776588359"],
+      "remaining": ["남측 담장 공사 가림막 위치·폭", "북측·전체 일주 현재 접근 미확정", "평성문 예정 통제와 현재 상태 구분"]
+    }
+  ],
+  "gate_passages": [{"way_id": "w/377289807", "building_id": "w/377289797", "gate_node_id": 3851434686, "role": "R1 필수 대한문 통과선", "clear_width_m": null, "physical_ground_verified": false}, {"way_id": "w/381755277", "building_id": "w/181574580", "gate_node_id": null, "role": "중화문 선택 고리·계단 예외", "clear_width_m": null, "physical_ground_verified": false}],
+  "boundary_reference_ids": ["osm:way:26658458:barrier_area", "osm:way:370019676:land_area"],
+  "excluded_private_enclosure_ids": ["osm:way:767889293:barrier_area"],
+  "land_and_garden_policy": "land_area is reference only, including Seoul Plaza lawn; only highway pedestrian surfaces/eligible lines enter walking candidates",
+  "boundary_policy": "union of source chains and listed reference envelopes plus explicit padding, excluding listed private enclosure; not finalized playable boundary",
+  "real_world_access_verified": false,
+  "runtime_routes_created": false
+}

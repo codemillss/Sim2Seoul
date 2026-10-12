@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "stage": "D04_baseline_with_G03_height_ground_policy",
+  "stage": "D04_baseline_with_G03_G04_candidate_policy",
   "status": "implementation_baseline_not_runtime_assets",
   "region_config": "config/region.json",
   "investigation_bbox_is_play_boundary": false,
@@ -120,5 +120,13 @@
   "manual_review_queue": "data/manual/review_queue.json",
   "attribution_doc": "docs/ATTRIBUTION.md",
   "next_coordinate_task": "G01",
-  "height_review_decisions": "data/manual/height_review_decisions.json"
+  "height_review_decisions": "data/manual/height_review_decisions.json",
+  "movement_policy": {
+    "rules": "config/movement_rules.json",
+    "manual": "data/manual/movement_review.json",
+    "official_evidence": "data/reports/g04_official_route_evidence.json",
+    "use": "walking/driving and envelope review candidates only",
+    "runtime_permission_granted": false,
+    "final_playable_boundary": null
+  }
 }

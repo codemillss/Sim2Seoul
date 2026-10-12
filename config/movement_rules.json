@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "G04",
+  "status": "candidate_separation_not_runtime_permission_or_measured_width",
+  "assumption_id": "G04-width-v1",
+  "walk_highways": ["footway", "pedestrian", "path", "steps"],
+  "drive_highways": ["primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link", "residential", "unclassified", "service"],
+  "accepted_access_values": ["yes", "designated", "permissive"],
+  "walk_width_m": {"footway": 2.4, "pedestrian": 4.0, "path": 2.0, "steps": 1.8, "cycleway": 2.4},
+  "drive_width_m": {"primary": 12.0, "primary_link": 6.0, "secondary": 10.0, "secondary_link": 6.0, "tertiary": 8.0, "tertiary_link": 6.0, "residential": 6.0, "unclassified": 6.0, "service": 4.0},
+  "estimated_lane_width_m": 3.2,
+  "buffer_quad_segs": 4,
+  "buffer_cap_style": "flat",
+  "buffer_join_style": "mitre",
+  "boundary_review_padding_m": 12.0,
+  "conflict_min_area_m2": 0.01,
+  "graph_policy": "line-line shared raw node only; line-area and area-area actual source contact, never distance snapping; source contacts are 2D candidates, not physical paths",
+  "node_constraint_policy": "access/conditional/indoor/barrier transport nodes require review; gate node does not create wall or building opening",
+  "surface_policy": "retain source area holes; estimated centreline buffers are review geometry only; no buffer for denied or unresolved placement",
+  "width_policy": "source width if valid single metre value; otherwise explicit estimate from lanes or highway; never infer sidewalk or vehicle lanes geometry from buffer",
+  "permission_policy": "foot overrides access; motorcar overrides motor_vehicle/vehicle/access; conditional or unknown values held; all runtime permissions null"
+}

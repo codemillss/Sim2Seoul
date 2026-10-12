@@ -26,6 +26,8 @@ G01에서 기존 수치·축을 변경하지 않고 수평 변환과 로컬 단�
 2. `playable_boundary`: 실제로 걷는 폴리곤과 경계의 막음 방식. 필수 동선을 포함한 뒤 고정.
 3. `background_boundary`: 멀리 보이는 빌딩·지형 범위. 접근 가능성을 의미하지 않음.
 
+G04 `boundary_candidate.json`의 후보는 R1/R2/R3 원문 연결과 참조 윤곽의 합집합+임시 12m 여유에서 영국대사관 경내를 제외한 검토 도형이다. `finalized_playable_boundary=null`, `spawn_point=null`, 접근 권한 없음이다. 경계 안에 차도/건물/정원이 있어도 통행 허가를 의미하지 않는다. 실제 경계 막음·낙하 복귀는 P/W에서 필수 동선을 검증한 뒤 고정한다.
+
 영역을 가로지르는 건물과 관계 도형은 원본 참조를 먼저 완성한다. 단순한 bbox 정점 필터로 도형을 잘라버리지 않는다. 잘라야 한다면 원본 ID와 잘린 경계를 기록한다. 배경 건물은 본래 위치를 유지한다.
 
 ## C03. 출처와 재생성
@@ -78,6 +80,10 @@ G03의 높이 가공물은 `heights.json`이며 G02 feature_id로 연결한다. 
 `terrain.json`은 객체별 `ground_class`, `ground_y_m`, 예외 사유, `physical_elevation_m=null`, `walkable_permission=null`, `terrain_shape_verified=false`를 기록한다. 지면 기준·높이 유효성·단순 본체 선택은 통행 허가와 별개다. 정관헌 주변 sand 관계는 원본 전체 면·구멍과 로컬 도형을 참조로 보존한다. 원문·현재 G02 검사·정책/큐·G03 규칙·수동 결정·근거 파일·생성 도구 해시가 달라지면 검토 후 재생성한다. 원문 정확도는 별도 검증이며 모든 추정은 가정 ID를 유지한다.
 
 도로 추가 필드: 중심선과 면을 구분, `width_m`, `width_source`, `lanes_raw`, `oneway`, `layer`, `bridge`, `tunnel`, `pedestrian_allowed`. 폭 추정으로 만든 도로 면이 건물·담장을 덮으면 결함 목록에 넣는다. 중심선 버퍼만으로 실제 보도와 차선을 확정하지 않는다.
+
+G04 보행/차량 가공물은 동일 478개 도로선·보행면의 모드별 기록이다. `source_geometry`는 G02 XZ 원문 도형, `candidate_surface_geometry`는 원문 면 또는 명시 폭 버퍼이며 실제 메시가 아니다. `structural_candidate`, `mode_class`, `access_basis`, 폭/가정 ID·원문 방향, 지면/노드 검토 사유를 분리한다. foot은 access를, motorcar는 motor_vehicle/vehicle/access를 우선한다. 조건/제한은 보류하고 보행면·정원·차도 사이에 자동 권한을 주지 않는다. 관계 member way 노드까지 barrier/access를 보존한다. `runtime_permission=null`, `runtime_surface_ready=false`이며 표고/폭/허가의 독립 확인을 뜻하지 않는다. [규칙](../config/movement_rules.json).
+
+선↔선은 원본 공유 노드, 선↔면/면↔면은 실제 원문 도형 접촉을 연결 후보로 기록하며 근접 스냅을 하지 않는다. 2D 접촉 그래프·원본 노드 체크포인트는 상세 경로/차량 제어/통행 검증이 아니다. gate/passsage와 계단·노드 제약을 유지하고 원문 면의 구멍은 채우지 않는다. 건물/담장 겹침·횡단 후보 차량 접촉을 삭제하거나 자동 절단하지 않고 후속 검토 목록으로 넘긴다. R1 경내·R2 북측 지상 횡단·R3 남측 구간의 원천 연결은 [수동 검토](../data/manual/movement_review.json)에 고정했다. 북측 전체 일주·실내·광장 잔디·사유지를 자유 보행으로 확장하지 않는다.
 
 게이트/연결 필드: 벽 ID, 문 위치, 통과 가능 폭, 전후 지면 높이, 근거, 검토 상태. OSM 문 노드 하나가 건물 충돌체에 자동 구멍을 만들어주지는 않는다.
 

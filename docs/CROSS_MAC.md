@@ -35,7 +35,7 @@ Python 명령 이름이 다르면 Python 3.14를 가리키는 실행 파일을 �
 SIM2SEOUL_PYTHON=python3 bash tools/setup_mac.sh
 ```
 
-준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. Godot은 E01에서 현재 기기에 후보 버전을 설치해 기동을 검증하고 버전·렌더러를 고정한 뒤, 다른 Mac에도 같은 버전을 설치한다.
+준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. Godot은 E01에서 현재 기기에 후보 버전을 설치해 기동을 검증하고 버전·렌더러를 고정한 뒤, 다른 Mac에도 같은 버전을 설치한다.
 
 환경 설치 전 지도 파일만 확인하려면 다음을 실행한다.
 
@@ -111,5 +111,15 @@ G03 가공물 `heights.json`·`terrain.json`도 Git 제외이며 기본 준비�
 ```
 
 [G03 검토](../data/reports/height_review.md)에는 임시 계수/지면·132개 예외·잠정 본체 선택과 상세 외형의 미확인 부분을 남겼다. [별도 사본 검사](../data/reports/g03_verification.json)는 현재 M1의 기존 인터프리터로 두 번 생성해 높이/지면 결과와 수동 입력 보존을 확인한 증거다. 새로운 환경 설치나 M4 기기 검증으로 확대하지 않는다.
+
+G04의 `walkable_areas.json`·`driveable_areas.json`·`boundary_candidate.json`도 Git 제외 재생성 입력이다. 파일 이름이 통행 가능성을 확정하지 않는다. 기존 준비 환경에서는 G02/G03의 현재 검사 후 다음을 실행한다.
+
+```sh
+.venv-data/bin/python tools/prepare_movement.py
+.venv-data/bin/python tools/check_movement.py --report /tmp/sim2seoul-g04-check.json
+.venv-data/bin/python tools/test_movement_contract.py --report /tmp/sim2seoul-g04-regression.json
+```
+
+[G04 인수 검사](../data/reports/g04_verification.json)는 국가 원본·전체 DSM 없는 파일 사본과 기존 M1 인터프리터의 재현 증거다. 새 설치·M4·게임 시험과 구분한다. SVG 지도는 공유되며 재생성은 `tools/map_movement.py`, 선택 PNG 렌더는 별도 도구이며 기본 준비의 의존성은 아니다. 최종 경계·스폰·gate·실제 통행 검증은 남아 있다.
 
 현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. 아직 실행 가능한 Godot 게임은 없다.
