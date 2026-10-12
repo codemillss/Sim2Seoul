@@ -1,0 +1,31 @@
+{
+  "source_file": "data/raw/geofabrik/south-korea-261009.osm.pbf",
+  "source_sha256": "70007aa979f8e362ca609fdc2d6302164c2f1379f11c8fc5fd39a7a2e79d3c17",
+  "extract_file": "data/raw/deoksugung_cityhall.osm.pbf",
+  "extract_sha256": "6e495884b67a8181d1ff68fde02f14720e514cff8c3eba2a4ba73d696b3ac110",
+  "extract_bytes": 187286,
+  "bbox_west_south_east_north": [
+    126.971,
+    37.5608,
+    126.9815,
+    37.5694
+  ],
+  "selection_counts": {
+    "country_nodes_scanned": 38604357,
+    "country_ways_scanned": 3814261,
+    "country_relations_scanned": 64765
+  },
+  "directly_selected": {
+    "nodes": 12256,
+    "ways": 2135,
+    "relations": 72
+  },
+  "policy": "BBox-intersecting ways (closed rings include enclosure), inside nodes, relevant local multipolygon/building/site relations; backward references completed to depth 3; tags retained.",
+  "limitations": [
+    "Not a universal recursive geographic extract: ancestor relations not discovered through selected members can be omitted.",
+    "Multipolygons fully enclosing the bbox without any intersecting member can be omitted.",
+    "Route and administrative relations intentionally excluded unless pulled as backward references.",
+    "Country-edge ways with incomplete node locations skipped and counted; inspect local coverage independently.",
+    "Reference completeness does not establish current real-world geometry or access."
+  ]
+}

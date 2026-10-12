@@ -1,0 +1,126 @@
+{
+  "checked_on_kst": "2026-10-12",
+  "stage": "D01_D02_complete_D03_next_game_not_implemented",
+  "valid_raw_extract_acquired": true,
+  "raw_file": "raw/deoksugung_cityhall-v2.osm.pbf",
+  "osm_base_timestamp": "2026-10-09T20:21:04Z",
+  "feature_counts": {
+    "gate_node": 13,
+    "barrier": 47,
+    "highway_line": 409,
+    "barrier_area": 13,
+    "building": 711,
+    "building_part": 83,
+    "land_area": 178,
+    "highway_area": 69
+  },
+  "bbox_south_west_north_east": [
+    37.5608,
+    126.971,
+    37.5694,
+    126.9815
+  ],
+  "bbox_role": "provisional_data_investigation_not_playable_boundary",
+  "attempts": [
+    {
+      "endpoint": "https://overpass-api.de/api/interpreter",
+      "query_scope": "building_ways_and_relations_highway_ways",
+      "status": "http_error",
+      "http_code": 504,
+      "error": "Gateway Timeout"
+    },
+    {
+      "endpoint": "https://overpass.private.coffee/api/interpreter",
+      "query_file": "queries/deoksugung_cityhall.overpassql",
+      "status": "http_error",
+      "http_code": 500,
+      "error": "Internal Server Error"
+    },
+    {
+      "endpoint": "https://download.geofabrik.de/asia/south-korea-261009.osm.pbf",
+      "status": "downloaded_checksum_verified_region_extracted",
+      "raw_size_bytes": 288878500,
+      "provider_md5_verified": true,
+      "unresolved_extract_references": 0,
+      "stages": {
+        "download": {
+          "status": "complete",
+          "file": "raw/geofabrik/south-korea-261009.osm.pbf",
+          "size_bytes": 288878500
+        },
+        "integrity": {
+          "status": "verified",
+          "verified_at_utc": "2026-10-11T22:43:48.061066+00:00",
+          "evidence": "reports/d01_verification.json"
+        },
+        "regional_extraction": {
+          "status": "verified_after_D02_repair",
+          "file": "raw/deoksugung_cityhall-v2.osm.pbf",
+          "original_file": "raw/deoksugung_cityhall.osm.pbf",
+          "evidence": "reports/d02_extract_review.json",
+          "spatial_coverage_independently_verified": false
+        }
+      }
+    }
+  ],
+  "next_validation": [
+    "landmark_and_walkable_connection_review",
+    "supplemental_building_height_and_width_sources",
+    "geometry_deduplication_and_building_part_strategy",
+    "terrain_and_playable_boundary",
+    "Godot_install_and_smoke_test"
+  ],
+  "feature_count_scope": "preview_geometries_intersecting_investigation_bbox_not_unique_real_world_objects",
+  "source_manifest": "reports/source_manifest.json",
+  "audit_report": "reports/osm_audit.json",
+  "task_status": {
+    "D01": "complete",
+    "D02": "complete",
+    "D03": "not_started"
+  },
+  "inventory_verification": {
+    "verified_at_utc": "2026-10-11T22:43:48.061066+00:00",
+    "report": "reports/d01_verification.json",
+    "passed": true,
+    "verified_files": 6,
+    "candidate_sources_not_acquired": 6,
+    "scope": "D01_pre_repair_inventory; current inventory verified by D02 extract_verification"
+  },
+  "extract_verification": {
+    "report": "reports/d02_extract_review.json",
+    "passed": true,
+    "verified_at_utc": "2026-10-11T23:03:38.317925+00:00",
+    "checks": 13,
+    "recovered_pedestrian_relations": 18
+  },
+  "local_processing": [
+    {
+      "task": "D02",
+      "status": "complete",
+      "previous_file": "data/raw/deoksugung_cityhall.osm.pbf",
+      "current_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+      "added_relation_ids": [
+        5681909,
+        6012272,
+        10713133,
+        10718564,
+        10718565,
+        10718567,
+        10718772,
+        10738011,
+        10753674,
+        10753675,
+        10754689,
+        10754745,
+        10754766,
+        10755141,
+        10839607,
+        16492358,
+        17229243,
+        20431159
+      ],
+      "report": "reports/d02_extract_review.json",
+      "new_downloads": 0
+    }
+  ]
+}

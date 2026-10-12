@@ -1,0 +1,59 @@
+{
+  "source_file": "data/raw/geofabrik/south-korea-261009.osm.pbf",
+  "source_sha256": "70007aa979f8e362ca609fdc2d6302164c2f1379f11c8fc5fd39a7a2e79d3c17",
+  "extract_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+  "extract_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+  "extract_bytes": 188346,
+  "bbox_west_south_east_north": [
+    126.971,
+    37.5608,
+    126.9815,
+    37.5694
+  ],
+  "policy": "BBox-intersecting ways and inside nodes retained; relevant multipolygon/building/site relations include highway; country multipolygon intersection/enclosure and fixed-point parent audit supplies omissions; backward references completed to depth 3; tags retained.",
+  "limitations": [
+    "Same-source comparison is not independent real-world completeness or positional accuracy.",
+    "Source multipolygons that cannot assemble and have no identified local members cannot be placed reliably.",
+    "Administrative and route relations excluded unless backward referenced.",
+    "Backward completion depth is 3; D02 checks all current relations for unresolved references."
+  ],
+  "prepared_at_utc": "2026-10-11T23:01:04.321004+00:00",
+  "previous_extract": "data/raw/deoksugung_cityhall.osm.pbf",
+  "previous_extract_sha256": "6e495884b67a8181d1ff68fde02f14720e514cff8c3eba2a4ba73d696b3ac110",
+  "previous_manifest": "data/reports/extract_manifest-v1.json",
+  "repair": {
+    "reason": "Original semantic relation selector omitted highway multipolygons, including palace courtyard areas.",
+    "added_relation_ids": [
+      5681909,
+      6012272,
+      10713133,
+      10718564,
+      10718565,
+      10718567,
+      10718772,
+      10738011,
+      10753674,
+      10753675,
+      10754689,
+      10754745,
+      10754766,
+      10755141,
+      10839607,
+      16492358,
+      17229243,
+      20431159
+    ],
+    "source_review": "data/reports/d02_before_review.json",
+    "method": "Preserved existing nodes/ways; copied sorted existing+missing relations from pinned country source; backward references completed."
+  },
+  "original_selection_counts": {
+    "country_nodes_scanned": 38604357,
+    "country_ways_scanned": 3814261,
+    "country_relations_scanned": 64765
+  },
+  "original_directly_selected": {
+    "nodes": 12256,
+    "ways": 2135,
+    "relations": 72
+  }
+}

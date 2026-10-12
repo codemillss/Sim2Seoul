@@ -1,0 +1,101 @@
+{
+  "task_id": "D01",
+  "verified_at_utc": "2026-10-11T22:43:48.061066+00:00",
+  "scope": "existing_local_inventory_and_metadata_handover",
+  "passed": true,
+  "checks": [
+    {
+      "check": "osm_south_korea_20261009_exists",
+      "passed": true,
+      "details": "data/raw/geofabrik/south-korea-261009.osm.pbf"
+    },
+    {
+      "check": "osm_south_korea_20261009_size",
+      "passed": true,
+      "details": 288878500
+    },
+    {
+      "check": "osm_south_korea_20261009_sha256",
+      "passed": true,
+      "details": "70007aa979f8e362ca609fdc2d6302164c2f1379f11c8fc5fd39a7a2e79d3c17"
+    },
+    {
+      "check": "osm_south_korea_20261009_provider_md5",
+      "passed": true,
+      "details": "b480965b3fbc84411961aa76d5454366"
+    },
+    {
+      "check": "raw_header_base_timestamp",
+      "passed": true,
+      "details": "2026-10-09T20:21:04Z"
+    },
+    {
+      "check": "osm_deoksugung_cityhall_extract_exists",
+      "passed": true,
+      "details": "data/raw/deoksugung_cityhall.osm.pbf"
+    },
+    {
+      "check": "osm_deoksugung_cityhall_extract_size",
+      "passed": true,
+      "details": 187286
+    },
+    {
+      "check": "osm_deoksugung_cityhall_extract_sha256",
+      "passed": true,
+      "details": "6e495884b67a8181d1ff68fde02f14720e514cff8c3eba2a4ba73d696b3ac110"
+    },
+    {
+      "check": "data/processed/osm_preview.geojson_exists",
+      "passed": true,
+      "details": "data/processed/osm_preview.geojson"
+    },
+    {
+      "check": "data/reports/osm_audit.json_exists",
+      "passed": true,
+      "details": "data/reports/osm_audit.json"
+    },
+    {
+      "check": "data/reports/named_features.json_exists",
+      "passed": true,
+      "details": "data/reports/named_features.json"
+    },
+    {
+      "check": "data/queries/deoksugung_cityhall.overpassql_exists",
+      "passed": true,
+      "details": "data/queries/deoksugung_cityhall.overpassql"
+    },
+    {
+      "check": "extract_audit_hash_matches",
+      "passed": true,
+      "details": "6e495884b67a8181d1ff68fde02f14720e514cff8c3eba2a4ba73d696b3ac110"
+    },
+    {
+      "check": "availability_raw_file_matches",
+      "passed": true,
+      "details": "raw/deoksugung_cityhall.osm.pbf"
+    },
+    {
+      "check": "acquired_status_matches_files",
+      "passed": true,
+      "details": true
+    },
+    {
+      "check": "no_incomplete_downloads",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "data_tool_versions_match_requirements",
+      "passed": true,
+      "details": {
+        "osmium": "4.3.1",
+        "pyproj": "3.8.0",
+        "shapely": "2.2.0"
+      }
+    }
+  ],
+  "errors": [],
+  "new_downloads": 0,
+  "source_policy": "Checksum compared with previously recorded provider value; no remote re-fetch in D01.",
+  "next_task": "D02 reuse existing extraction evidence; D03 supplemental acquisition remains unexecuted."
+}
