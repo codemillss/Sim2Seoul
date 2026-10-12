@@ -2,6 +2,8 @@
 
 상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. 게임 코드는 아직 없다.
 
+D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../config/data_usage.json)에 정리했다. 좌표 수치는 기존 `config/region.json`이 기준이며 사용 정책이 좌표 계약을 대체하지 않는다. [data_gaps](data_gaps.md)와 [수동 검토 큐](../data/manual/review_queue.json)는 G02–G04/W 단계의 입력이다.
+
 ## C01. 단위와 좌표
 
 - 원본 OSM: WGS84, EPSG:4326. GeoJSON 좌표는 `[경도, 위도]` 순서.

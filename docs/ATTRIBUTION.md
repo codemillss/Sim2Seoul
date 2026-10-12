@@ -28,7 +28,7 @@ v2는 같은 원본에서 기존 지역 추출물에 보행 공간 관계와 참
 
 Copernicus WorldDEM-30를 사용해 만든 지역 추출 사본이다. 출처 표시:
 
-> © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
+> produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
 
 법률 또는 위임에 따라 Copernicus 프로그램을 담당하는 기관은 이 자료의 사용에 대해 책임을 지지 않는다.
 
@@ -38,4 +38,16 @@ Copernicus WorldDEM-30를 사용해 만든 지역 추출 사본이다. 출처 �
 
 국내 SHP·NGII 지역 원본·사진·거리뷰·외부 3D 모델은 포함하지 않았다. VWorld 컬럼 정의서와 공식 궁궐 안내 HTML은 로컬 참고용이며 Git에서는 제외한다. 공개 열람만으로 지도·사진의 게임 재사용을 허용하지 않는다. 출처 URL·해시·조사 요약은 공유한다.
 
-D04에서 실제 사용할 자료와 결손·추정·라이선스 목록을 최종 대조한다. 이번 출처 추가만으로 D04 완료를 의미하지 않는다. Godot 프로젝트를 배포할 때 엔진과 추가 자산의 출처도 기록한다.
+D04에서 실제 공유 파일·원천·사용 판정을 대조했다. 사용 범위는 [data_gaps](data_gaps.md), 기계 판독 규칙은 [data_usage](../config/data_usage.json)를 따른다. 국내 본체나 미허가 이미지가 새로 들어오면 이 판정을 다시 확인한다.
+
+## 파생 자료와 게임 배포에 적용할 기준
+
+OSM/Overture에서 만든 공간 데이터에는 ODbL 표시·원천·변경 기록을 함께 관리한다. 데이터베이스를 만드는 프로그램의 조건은 별도로 관리한다. ODbL의 데이터/프로그램/Produced Work 구분과 공개 사용 조건은 [원문 2.3·4.3–4.6](https://opendatacommons.org/licenses/odbl/1-0/)을 따른다.
+
+수정 데이터베이스나 그 데이터베이스에서 나온 결과물을 공개 사용하면, 수정 데이터베이스 또는 전체 변경 내용/재현 방법을 기계 판독 가능한 형태로 제공해야 하는 조건을 확인한다. 공개 배포 R03에서는 실제 파일 성격·결합 방식에 맞춰 제공 묶음과 접근 경로를 정한다. **현재 비공개 Git 링크는 대중이 받을 수 있는 제공 경로가 아니다.** 지금은 개인용 준비 자료이고 게임 배포는 미실행이다.
+
+R03의 게임 표시 기준은 시작 안내에 읽을 수 있는 `© OpenStreetMap contributors, Overture Maps Foundation`를 두고, 메뉴의 ‘자료 출처’에서 OSM 저작권·ODbL·Overture·추가 원천·추정 범위 및 제공 데이터/변경 방법에 접근할 수 있게 하는 것이다. 상세 위치·읽기 가능성은 실제 화면에서 검증한다. [OSMF 게임·시뮬레이션 지침](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines#Computer_games_and_simulations).
+
+비OSM 원천의 저자·라이선스·변경 표시는 파생 자료에도 보존한다. `sources.license=null`을 사용 조건이 없는 것으로 해석하지 않는다. Copernicus 사본을 재배포할 때는 위 변형 출처·책임·후속 사용자 조건을 동봉한다. 게임 입력으로 쓰지 않더라도 저장소의 참고 파일에는 이 표시를 유지한다.
+
+Godot과 새 자산은 실제 사용하는 버전·파일에 따라 출처를 추가한다. 이번 단계는 확인한 자료에 대한 사용 기준이며 미래 산출물 전체의 라이선스 검증을 대신하지 않는다.

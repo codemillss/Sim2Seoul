@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "created_for": "D04",
+  "scope": "review targets only; no approved coordinates, dimensions or collision patches",
+  "base_source_manifest": "data/reports/extract_manifest.json",
+  "overture_candidate_ids": [
+    "eaafa6c7-5294-4d3c-b61e-e47141533d1d",
+    "523cbc0f-86be-4a33-80a3-7778259250f6",
+    "a17ed29a-37d7-40bb-9928-c98820d626f5",
+    "cfef3ffa-3120-4cc0-9c08-b40ca31119ed",
+    "57660562-9383-4087-922d-c223ece84128",
+    "55c78da4-174e-4287-8c30-bdc10c306e6e",
+    "eda10a7f-4d47-4d31-9b0c-76219c6e82f4",
+    "eee6249a-7be1-423d-8abd-a3d478d0eef5",
+    "945c439f-17d0-4f29-b01c-75e48514373f",
+    "058d945a-66ad-47a9-8c9a-a198cd4614ed",
+    "5fe363cf-cd36-46f6-836c-8fa2ff28bfe2",
+    "bb24ca30-8eaa-46d1-8a4e-b973b3bc317e",
+    "92c46edb-3c9b-437e-88ed-9537c0d4d2fe",
+    "01eaa8f5-ef11-478e-a44e-d3db3dac1a36",
+    "80f8ff3a-9d28-4696-ac41-23266aa5cd70",
+    "93b41e0f-41bf-4cc9-85dd-b2a9a077f399",
+    "51ebc712-f791-4a11-90ce-29842f7f4c57",
+    "6f058df0-ccfe-469b-8703-4d57fd39a86c",
+    "efe98253-b672-4323-bdf7-589e3d2cb594",
+    "b251a77d-1c99-400e-a15b-edf4eb4c37ba",
+    "be9ebcf5-5016-4005-af62-868dfb4ae691",
+    "e6303687-7140-4881-afaa-9ee1e80621fd"
+  ],
+  "items": [
+    {
+      "review_id": "MR01",
+      "title": "대한문 개구부·충돌·전후 지면",
+      "source_ids": [
+        "w/377289797"
+      ],
+      "status": "pending_review",
+      "priority": "critical_route",
+      "owner_tasks": [
+        "G03",
+        "G04",
+        "W01"
+      ],
+      "reason": "높이·문 폭·통과 개구부 미확인; 건물 도형만으로 통과 불가",
+      "acceptance": "출처/추정 상태·폭·단차·차단 담장 분리, W 단계 실제 양방향 통과 검사",
+      "evidence_refs": [
+        "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR02",
+      "title": "중화전 앞 마당·중화문 연결",
+      "source_ids": [
+        "w/181574577",
+        "r/10754689"
+      ],
+      "status": "pending_review",
+      "priority": "critical_route",
+      "owner_tasks": [
+        "G03",
+        "G04",
+        "W02"
+      ],
+      "reason": "보행 면 구멍 보존과 기단/계단·허용 접근이 필요",
+      "acceptance": "마당과 건물을 합치지 않음, 현재 접근 근거·계단 처리·경로 폭·충돌 검사",
+      "evidence_refs": [
+        "docs/evidence/D02_EXTRACT_REVIEW.md",
+        "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR03",
+      "title": "석조전 외곽·부분 높이·앞 외부 접근",
+      "source_ids": [
+        "r/19357693"
+      ],
+      "status": "pending_review",
+      "priority": "landmark_route",
+      "owner_tasks": [
+        "G02",
+        "G03",
+        "G04",
+        "L02"
+      ],
+      "reason": "부속 부분과 부모 중복 및 외부/예약실내 구분",
+      "acceptance": "부모/부분 역할·높이 근거, 앞 외부 통행 공간·분수/기단 차단; 실내 자동 개방 금지",
+      "evidence_refs": [
+        "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR04",
+      "title": "돈덕전 외형·높이",
+      "source_ids": [
+        "w/517072312"
+      ],
+      "status": "pending_review",
+      "priority": "landmark",
+      "owner_tasks": [
+        "G03",
+        "L02"
+      ],
+      "reason": "본체 높이·층수 원본 없음",
+      "acceptance": "별도 비례 근거/추정을 표시하고 일반 빌딩 기본값 무조건 적용 금지",
+      "evidence_refs": [
+        "data/reports/d04_data_audit.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR05",
+      "title": "신 시청 높이·곡면 표현",
+      "source_ids": [
+        "w/198561926"
+      ],
+      "status": "pending_review",
+      "priority": "landmark",
+      "owner_tasks": [
+        "G03",
+        "L03"
+      ],
+      "reason": "12층 태그는 원천 층수이며 높이 실측이 아님",
+      "acceptance": "층수 환산이면 추정 상태 유지, 핵심 실루엣·주변 비례 별도 확인",
+      "evidence_refs": [
+        "data/reports/d04_data_audit.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR06",
+      "title": "서울도서관 본체·부분 정리",
+      "source_ids": [
+        "r/10757525"
+      ],
+      "status": "pending_review",
+      "priority": "landmark",
+      "owner_tasks": [
+        "G02",
+        "G03",
+        "L03"
+      ],
+      "reason": "원본 18.5m 높이 후보·4층, 현장 측정 보증 없음",
+      "acceptance": "원천 태그와 도형 연결·부품 중복 정리·최종 비례 검사",
+      "evidence_refs": [
+        "data/reports/d04_data_audit.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR07",
+      "title": "서울광장·시청 횡단 연결 R2",
+      "source_ids": [
+        "w/370019676"
+      ],
+      "status": "pending_review",
+      "priority": "critical_route",
+      "owner_tasks": [
+        "G04",
+        "W02"
+      ],
+      "reason": "crossing 노드만으로 지상 연속 보행 연결 확정 불가",
+      "acceptance": "원본 노드/웨이·레벨·횡단·접근 근거 연결, 차도 직선 관통 금지",
+      "evidence_refs": [
+        "data/reports/d03_crossing_candidates.json",
+        "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR08",
+      "title": "돌담길 공개 구간·기간별 공사 R3",
+      "source_ids": [],
+      "status": "pending_review",
+      "priority": "critical_route",
+      "owner_tasks": [
+        "G04",
+        "W03"
+      ],
+      "reason": "전체순환/북측 연결 현재 상태·공사 가림막 위치 미확정",
+      "acceptance": "확인 공개 구간 선택, 공사 공지 유효 기간/현재 상태 구분, 전체 폐쇄/일주 자동 가정 금지",
+      "evidence_refs": [
+        "docs/evidence/D03_PALACE_ROUTE_SOURCES.md"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR09",
+      "title": "다중 높이 원문 보존",
+      "source_ids": [
+        "r/15100454"
+      ],
+      "status": "pending_review",
+      "priority": "attribute_hold",
+      "owner_tasks": [
+        "G02",
+        "G03"
+      ],
+      "reason": "height=26.3;17.2는 단일 높이 아님",
+      "acceptance": "부품/별동 의미와 근거를 확인한 뒤 보정, 확인 전 first/max/min/평균 자동 선택 금지",
+      "evidence_refs": [
+        "data/reports/d04_data_audit.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR10",
+      "title": "Overture 비OSM 윤곽 22개",
+      "source_ids": [],
+      "status": "pending_review",
+      "priority": "coverage_candidate",
+      "owner_tasks": [
+        "G02"
+      ],
+      "reason": "실제 건물/지붕·부분/현행 배치 확인 전",
+      "acceptance": "개별 원천·형태·겹침·현실 근거 확인; 불확실 객체는 제외 목록에 사유 기록",
+      "evidence_refs": [
+        "data/reports/d03_supplemental_review.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR11",
+      "title": "터널·교량·계단·층 분리",
+      "source_ids": [],
+      "status": "pending_review",
+      "priority": "critical_geometry",
+      "owner_tasks": [
+        "G03",
+        "G04"
+      ],
+      "reason": "81개 길 후보에 수직/접근 예외 태그가 있음",
+      "acceptance": "원문 태그·지면/연결 검토, layer를 m로 쓰거나 모든 객체를 지면에 평탄화하지 않음",
+      "evidence_refs": [
+        "data/reports/d04_data_audit.json"
+      ],
+      "approved_geometry_or_value": null
+    },
+    {
+      "review_id": "MR12",
+      "title": "원천 건물/부분·관계 중복",
+      "source_ids": [],
+      "status": "pending_review",
+      "priority": "geometry",
+      "owner_tasks": [
+        "G02"
+      ],
+      "reason": "711 본체와 83 부분 도형의 최종 생성 역할 미정",
+      "acceptance": "부모 참조와 부분 역할·중정 구멍 보존, 하나를 두 번 생성하지 않음",
+      "evidence_refs": [
+        "data/reports/d02_extract_review.json"
+      ],
+      "approved_geometry_or_value": null
+    }
+  ]
+}

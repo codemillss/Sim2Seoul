@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "stage": "D04",
+  "status": "implementation_baseline_not_runtime_assets",
+  "region_config": "config/region.json",
+  "investigation_bbox_is_play_boundary": false,
+  "base_geometry": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+    "sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+    "crs": "EPSG:4326",
+    "osm_base_timestamp": "2026-10-09T20:21:04Z",
+    "use": "base footprints and tagged road/path/barrier/gate candidates",
+    "independent_position_accuracy": "unverified",
+    "part_parent_cleanup_task": "G02"
+  },
+  "supplemental_buildings": {
+    "file": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+    "release": "2026-09-23.1",
+    "use": "candidate_review_only",
+    "selected_intersections": 733,
+    "excluded_bbox_false_positive_ids": [
+      "9baf0737-42bb-45c3-be58-1c638c6a699c",
+      "20cfc6ed-5c2c-41ad-af77-39f0c263598f",
+      "9148206b-2670-48be-8164-351e50261da5"
+    ],
+    "candidate_ids_not_automatically_approved": [
+      "eaafa6c7-5294-4d3c-b61e-e47141533d1d",
+      "523cbc0f-86be-4a33-80a3-7778259250f6",
+      "a17ed29a-37d7-40bb-9928-c98820d626f5",
+      "cfef3ffa-3120-4cc0-9c08-b40ca31119ed",
+      "57660562-9383-4087-922d-c223ece84128",
+      "55c78da4-174e-4287-8c30-bdc10c306e6e",
+      "eda10a7f-4d47-4d31-9b0c-76219c6e82f4",
+      "eee6249a-7be1-423d-8abd-a3d478d0eef5",
+      "945c439f-17d0-4f29-b01c-75e48514373f",
+      "058d945a-66ad-47a9-8c9a-a198cd4614ed",
+      "5fe363cf-cd36-46f6-836c-8fa2ff28bfe2",
+      "bb24ca30-8eaa-46d1-8a4e-b973b3bc317e",
+      "92c46edb-3c9b-437e-88ed-9537c0d4d2fe",
+      "01eaa8f5-ef11-478e-a44e-d3db3dac1a36",
+      "80f8ff3a-9d28-4696-ac41-23266aa5cd70",
+      "93b41e0f-41bf-4cc9-85dd-b2a9a077f399",
+      "51ebc712-f791-4a11-90ce-29842f7f4c57",
+      "6f058df0-ccfe-469b-8703-4d57fd39a86c",
+      "efe98253-b672-4323-bdf7-589e3d2cb594",
+      "b251a77d-1c99-400e-a15b-edf4eb4c37ba",
+      "be9ebcf5-5016-4005-af62-868dfb4ae691",
+      "e6303687-7140-4881-afaa-9ee1e80621fd"
+    ],
+    "matching_osm_shapes": "use current OSM, do not create duplicates",
+    "review_task": "G02",
+    "license": "ODbL-1.0 with upstream CC BY attribution",
+    "sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4"
+  },
+  "reference_only_sources": {
+    "copernicus_dsm": {
+      "file": "data/raw/supplemental/copernicus/20261012/deoksugung_cityhall-dsm-reference.tif",
+      "use": "coarse surface reference; not runtime terrain",
+      "forbidden_current_uses": [
+        "walkable_ground",
+        "stairs_or_kerb_height",
+        "building_height_subtraction",
+        "game_vertical_datum"
+      ],
+      "license_doc": "docs/ATTRIBUTION.md",
+      "sha256": "2ae132838bfb1d756e3f2ed289a92b903519c14510f2ccfa9830565e8d2d0269"
+    },
+    "official_palace_pages": {
+      "manifest": "data/reports/palace_source_manifest-d03.json",
+      "use": "names, qualitative layout, dated access notices",
+      "media_assets": "not_included; individual permission unconfirmed"
+    }
+  },
+  "unreceived_sources": [
+    "GIS building SHP/DBF/PRJ",
+    "NGII local detailed terrain/road layers"
+  ],
+  "height_policy": {
+    "numeric_tag": "source attribute candidate, not independently measured reality",
+    "multiple_values": "hold for manual/parts review; no automatic first/max/min selection",
+    "levels_only": "estimated; pin explicit conversion factors in G03",
+    "missing": "estimated temporary default only; pin purpose-specific values in G03",
+    "special_landmarks": "separate review, no ordinary-building default applied silently",
+    "roof_and_min_height": "preserve separately; validate semantics in G03",
+    "estimation_parameters": null,
+    "parameter_owner_task": "G03"
+  },
+  "ground_and_width_policy": {
+    "no_source_ground": "temporary local datum plane only where declared by G03",
+    "local_y_zero_is_sea_level": false,
+    "numeric_ground_datum": null,
+    "layer_is_metres": false,
+    "centreline_is_real_road_width": false,
+    "width_estimates": "explicit estimated fields with model assumptions; never measured width",
+    "multi_level_features": "classify/review before ground placement; no flattening all layers"
+  },
+  "route_policy": {
+    "R1": "Daehanmun to palace grounds/Junghwajeon front/accessible Seokjojeon exterior and return",
+    "R2": "verified crossing/footway connection to Seoul Plaza and City Hall; no invented direct crossing",
+    "R3": "verified public stonewall segment and return; full loop not assumed",
+    "interiors": "undecided; no automatic room/corridor access",
+    "dated_access_notices": "retain validity dates and refresh when implementing; not permanent closures",
+    "walking_graph_and_width_owner_task": "G04",
+    "game_acceptance_tasks": [
+      "W01",
+      "W02",
+      "W03",
+      "W04"
+    ]
+  },
+  "manual_review_queue": "data/manual/review_queue.json",
+  "attribution_doc": "docs/ATTRIBUTION.md",
+  "next_coordinate_task": "G01"
+}

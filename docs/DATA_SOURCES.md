@@ -10,7 +10,7 @@ D01 당시 후보 6개는 원본 파일 미수신 상태였다. 현재 보완 �
 
 ## D03 취득·검토 완료
 
-Overture 지역 건물 GeoJSON과 Copernicus DSM 지역 참고 사본, VWorld 컬럼 정의서, 덕수궁 공식 경내·접근 근거를 실제 확보했다. 자료별 미수신·접근 요구·한계는 [supplemental_status](../data/reports/supplemental_status.json), 실물 값·도형·해시 검사는 [D03 결과](evidence/D03_SUPPLEMENTAL_REVIEW.md)에 있다. 현재 다음 작업은 D04다.
+Overture 지역 건물 GeoJSON과 Copernicus DSM 지역 참고 사본, VWorld 컬럼 정의서, 덕수궁 공식 경내·접근 근거를 실제 확보했다. 자료별 미수신·접근 요구·한계는 [supplemental_status](../data/reports/supplemental_status.json), 실물 값·도형·해시 검사는 [D03 결과](evidence/D03_SUPPLEMENTAL_REVIEW.md)에 있다. D04 사용 판정과 후속 결손은 [data_gaps](data_gaps.md)에 정리했다. 현재 다음 작업은 G01이다.
 
 Overture 원본 수신 736개 중 실제 도형이 조사 상자와 교차하는 것은 733개다. 기존 OSM 711개와 비OSM 후보 22개이며, 높이 100개는 모두 OSM 원천이어서 독립적인 높이 보완은 아니다. 원천 ID와 시점을 유지하고 자동 병합하지 않는다.
 
@@ -62,7 +62,7 @@ Overture는 OSM을 포함하는 여러 원천을 사용할 수 있어 OSM과 완
 
 ## 3. 미수신 상세 자료를 재개할 때의 취득 순서
 
-이 절은 남은 자료의 재개 절차다. 현재 실행 순서는 D04이며, 이미 확보한 소구역을 다시 받을 필요는 없다. 접근 환경이 준비될 때 필요한 자료만 재개한다.
+이 절은 남은 자료의 재개 절차다. 현재 실행 순서는 G01이며, 이미 확보한 소구역을 다시 받을 필요는 없다. 접근 환경이 준비될 때 필요한 자료만 재개한다.
 
 1. 먼저 현재 감사 결과로 부족한 대상을 정한다. 건물 711개에 일괄 임의 높이를 넣기 전에 주요 빌딩·궁궐의 우선순위를 정한다.
 2. GIS건물통합정보의 [원본 VWorld 연결](https://www.vworld.kr/dtmk/dtmk_ntads_s002.do?svcCde=NA&dsId=18)에서 서울 파일과 컬럼 정의를 확인한다. `.shp/.shx/.dbf/.prj`와 인코딩 파일을 함께 보존한다.

@@ -1,0 +1,1056 @@
+{
+  "task_id": "D04",
+  "verified_at_utc": "2026-10-12T04:15:11.008585+00:00",
+  "scope": "Source attribute triage, not height estimation, geometry cleanup or route simulation",
+  "source_file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+  "source_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+  "preview_artifact": {
+    "file": "data/processed/osm_preview.geojson",
+    "bytes": 2124816,
+    "sha256": "130eab8f92b8b5a339496db803d18a1c74c4a8af61a9acb1855b8ee9af64e471",
+    "config_sha256": "334c5f65f2207da587b685199c90af98af89de9f358c473c379f35ab19e4fcb3",
+    "generator": "tools/prepare_osm.py"
+  },
+  "checks": {
+    "current_osm_hash": true,
+    "preview_source_hash": true,
+    "preview_size_and_hash": true,
+    "preview_config_binding": true,
+    "building_height_categories_cover_denominator": true,
+    "seven_landmarks_present": true
+  },
+  "passed": true,
+  "preview_shape_counts": {
+    "gate_node": 13,
+    "barrier": 47,
+    "highway_line": 409,
+    "barrier_area": 13,
+    "building": 711,
+    "building_part": 83,
+    "land_area": 178,
+    "highway_area": 69
+  },
+  "buildings": {
+    "denominator": 711,
+    "denominator_kind": "OSM preview shapes, not unique physical buildings",
+    "counts": {
+      "height_tag_present": 101,
+      "levels_tag_present": 134,
+      "height_numeric_positive": 100,
+      "levels_positive_integer": 134,
+      "source_height_candidate": 100,
+      "temporary_height_missing": 557,
+      "levels_estimate_candidate": 53,
+      "ambiguous_height_hold": 1
+    },
+    "numeric_height_range_m": [
+      3.0,
+      150.0
+    ],
+    "missing_numeric_height_count": 611,
+    "missing_numeric_height_fraction": 0.8593530239099859,
+    "requires_attribute_review": [
+      {
+        "osm_id": "r/15100454",
+        "height_raw": "26.3;17.2",
+        "height_status": "unparsed_or_multiple_values",
+        "levels_raw": null,
+        "levels_status": "missing",
+        "decision": "preserve raw; no split/max/min/automatic scalar selection"
+      }
+    ]
+  },
+  "building_parts": {
+    "denominator": 83,
+    "denominator_kind": "OSM preview shapes, not unique physical buildings",
+    "counts": {
+      "height_tag_present": 51,
+      "levels_tag_present": 0,
+      "height_numeric_positive": 51,
+      "levels_positive_integer": 0,
+      "temporary_height_missing": 32,
+      "source_height_candidate": 51
+    },
+    "numeric_height_range_m": [
+      0.18,
+      111.0
+    ],
+    "missing_numeric_height_count": 32,
+    "missing_numeric_height_fraction": 0.3855421686746988,
+    "requires_attribute_review": []
+  },
+  "highway_lines": {
+    "denominator": 409,
+    "width_tag_present": 0,
+    "flag_counts_not_additive": {
+      "negative_layer_not_a_metric_elevation": 44,
+      "steps": 34,
+      "bridge": 5,
+      "tunnel_or_building_passage": 39,
+      "generic_access_no_requires_specific_mode_review": 7
+    },
+    "distinct_flagged_features": 81,
+    "exceptions": [
+      {
+        "osm_id": "w/73541400",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/78503347",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/156922847",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/183272502",
+        "reasons": [
+          "bridge"
+        ],
+        "tags": {
+          "highway": "construction",
+          "layer": "1",
+          "bridge": "yes"
+        }
+      },
+      {
+        "osm_id": "w/302087645",
+        "reasons": [
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/302087656",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/306025987",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/338906150",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/338906156",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/338906157",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/338906159",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/377289806",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/377289807",
+        "reasons": [
+          "tunnel_or_building_passage"
+        ],
+        "tags": {
+          "highway": "footway",
+          "tunnel": "building_passage",
+          "access": "permissive"
+        }
+      },
+      {
+        "osm_id": "w/377289808",
+        "reasons": [
+          "bridge"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "1",
+          "bridge": "yes"
+        }
+      },
+      {
+        "osm_id": "w/377289811",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/379237469",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/379237471",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/379237474",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/379237476",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/381755265",
+        "reasons": [
+          "steps",
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "steps",
+          "access": "no"
+        }
+      },
+      {
+        "osm_id": "w/381755266",
+        "reasons": [
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "footway",
+          "access": "no"
+        }
+      },
+      {
+        "osm_id": "w/381755267",
+        "reasons": [
+          "steps",
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "steps",
+          "access": "no"
+        }
+      },
+      {
+        "osm_id": "w/381755273",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381755277",
+        "reasons": [
+          "tunnel_or_building_passage"
+        ],
+        "tags": {
+          "highway": "footway",
+          "tunnel": "building_passage",
+          "access": "permissive"
+        }
+      },
+      {
+        "osm_id": "w/381755279",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381755280",
+        "reasons": [
+          "tunnel_or_building_passage"
+        ],
+        "tags": {
+          "highway": "footway",
+          "tunnel": "building_passage",
+          "access": "permissive"
+        }
+      },
+      {
+        "osm_id": "w/381755281",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381755282",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps",
+          "access": "permissive"
+        }
+      },
+      {
+        "osm_id": "w/381755283",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381755284",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381755286",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381941872",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/381941875",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/447919203",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-3",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/447919205",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/447919206",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/447919207",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/447919382",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/607927398",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/620634305",
+        "reasons": [
+          "bridge"
+        ],
+        "tags": {
+          "highway": "secondary",
+          "layer": "1",
+          "bridge": "yes"
+        }
+      },
+      {
+        "osm_id": "w/656122968",
+        "reasons": [
+          "bridge"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "1",
+          "bridge": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917056",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917057",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917058",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917059",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917060",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917061",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917062",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917063",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917064",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917065",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/709917066",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134540",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134541",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134542",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134543",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134544",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710134545",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "steps",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "steps",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/710255391",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/710255394",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/710255395",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/710255396",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/710255404",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/770894972",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/770894973",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/770894974",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/770894975",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/770894976",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/770894977",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "pedestrian",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/772989536",
+        "reasons": [
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "service",
+          "layer": "-1"
+        }
+      },
+      {
+        "osm_id": "w/772989538",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "service",
+          "layer": "-1",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/843570527",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/1062619345",
+        "reasons": [
+          "bridge"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "1",
+          "bridge": "yes"
+        }
+      },
+      {
+        "osm_id": "w/1209113130",
+        "reasons": [
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "footway",
+          "access": "no",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/1209132247",
+        "reasons": [
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "footway",
+          "access": "no",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/1217120571",
+        "reasons": [
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "footway",
+          "access": "no",
+          "foot": "yes"
+        }
+      },
+      {
+        "osm_id": "w/1230789310",
+        "reasons": [
+          "tunnel_or_building_passage",
+          "negative_layer_not_a_metric_elevation"
+        ],
+        "tags": {
+          "highway": "footway",
+          "layer": "-2",
+          "tunnel": "yes"
+        }
+      },
+      {
+        "osm_id": "w/1230789314",
+        "reasons": [
+          "generic_access_no_requires_specific_mode_review"
+        ],
+        "tags": {
+          "highway": "cycleway",
+          "access": "no",
+          "foot": "designated"
+        }
+      },
+      {
+        "osm_id": "w/1415105498",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/1415105499",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      },
+      {
+        "osm_id": "w/1487557534",
+        "reasons": [
+          "steps"
+        ],
+        "tags": {
+          "highway": "steps"
+        }
+      }
+    ],
+    "rule": "Do not flatten or permit access from absence of tags"
+  },
+  "landmarks": [
+    {
+      "osm_id": "w/181574577",
+      "name": "중화전",
+      "kind": "building",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": null,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "w/198561926",
+      "name": "서울시청",
+      "kind": "building",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": 12,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "r/10757525",
+      "name": "서울도서관",
+      "kind": "building",
+      "height_m_source_candidate": 18.5,
+      "height_state": "numeric_source_tag_not_independent_measurement",
+      "levels_source": 4,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "w/370019676",
+      "name": "서울광장",
+      "kind": "land_area",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": null,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "w/377289797",
+      "name": "대한문",
+      "kind": "building",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": null,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "w/517072312",
+      "name": "돈덕전",
+      "kind": "building",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": null,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    },
+    {
+      "osm_id": "r/19357693",
+      "name": "석조전",
+      "kind": "building",
+      "height_m_source_candidate": null,
+      "height_state": "missing",
+      "levels_source": null,
+      "manual_review": "height/proportions/access; no implicit interior or gate collision opening"
+    }
+  ],
+  "limitations": [
+    "No independent regional ground truth for positional/coverage completeness",
+    "Numeric source height is not verified real-world measured height",
+    "Building parts may overlap parent footprints; not separate building counts",
+    "No estimated heights, widths, terrain, manual coordinates or final routes created"
+  ]
+}
