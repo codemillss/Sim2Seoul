@@ -56,4 +56,4 @@ GODOT_BIN=/Applications/Godot-4.7.2.app/Contents/MacOS/Godot sh tools/run_engine
 
 ## 공유 범위
 
-[E01 시험 프로젝트](../tests/engine_smoke/project.godot)는 서울 지도·캐릭터·충돌·입력/월드 구조가 없는 독립 장면이다. 정식 `game/`은 E02에서 만든다. `.godot`, 시험용 UID sidecar, 앱/설치 ZIP, 사용자 설정, 캐시와 내보내기 결과는 Git으로 옮기지 않는다. 작은 소스 장면·시험 실행 도구·이번 관찰 보고서와 화면만 공유한다. M4 Pro에서는 같은 버전의 실제 GUI 기동부터 재검증한다.
+[E01 시험 프로젝트](../tests/engine_smoke/project.godot)는 독립 엔진 시험으로 보존한다. E02에서 만든 정식 `game/`의 구조/입력/로컬 실행 방법은 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. `.godot`, UID sidecar, 자동 생성 실행 자료/자산, 앱/설치 ZIP, 사용자 설정, 캐시와 내보내기 결과는 Git으로 옮기지 않는다. 작은 소스 장면·실행 도구·관찰 보고서와 화면만 공유한다. M4 Pro에서는 같은 버전의 실제 GUI 기동부터 재검증한다.

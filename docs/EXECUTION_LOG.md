@@ -164,6 +164,20 @@ G02 인수 확인: 공유 대상 80개 파일의 별도 사본에서 국가 원�
 - 인수/사용자 검토: WORK_STATUS·README·상세 완료 체크·CROSS_MAC·Sol 안내·검증 계획을 E01 완료/E02 미실행으로 맞췄다. 사용자 추가 선호를 PROJECT_CONTEXT·AGENTS·Sol 안내에 기록했다. 배치/축척 첫 화면(E03/E04), 직접 조작·카메라·동선(P/W), 랜드마크 장소 인상(L)에는 검토 가능한 결과와 구체적인 항목을 준비해 알리며 매 작업 승인은 요구하지 않는다. 좌표 수치·자료 정책·대한문 경내 필수 범위는 유지했다.
 - 다음 첫 행동: **E02**, 고정 엔진/환경과 G01/C01·상세 E02를 읽고 정식 `game/`의 장면 역할·입력 동작·로컬 데이터 경계를 구성한다. 현재 Mac의 완료 설치나 원본 다운로드를 반복하지 않는다. M4에서 이어갈 때만 동일 버전 설치와 기기 정보/실제 기동을 새로 확인한다.
 
+## 2026-10-13 · E02: 정식 빈 프로젝트·입력·데이터 경계
+
+- 목적/지시: 사용자의 “좋아요 E02 ㄱㄱ. 정식 Godot 프로젝트와 입력·데이터 경계를 구성하고, 실행 내용과 검증 결과도 기록해서 같이 푸시해주세요.”에 따른 구성·검증·공유다.
+- 시작 입력: E01 공유 커밋 `45c450dcde7a9ee9ef8aa3a15b76b77bbc7a105a`. 깨끗한 main에서 ff-only 최신을 확인하고 설치된 Godot `4.7.2.stable.official.ed1daf0bf`·Forward+/Metal과 G01/C01을 사용했다. 현재 G02–G04 가공물은 존재하지만 E02에서 도시 자산으로 읽지 않았다. 원본/엔진 재다운로드는 없었다.
+- 변경: 정식 `game/project.godot`·main/world/player-slot 장면·`world_config.tres`와 Resource/입력/메뉴 스크립트를 만들었다. Ground/Buildings/Routes/Barriers와 Actors/PlayerSlot, Presentation·InputRouter·Interface 역할을 나눴다. 현재 빈 Node3D의 스케일은 1이고 기본 변환은 실제 지면/스폰이 아니다. [구조/재현](GAME_PROJECT.md).
+- 자료 경계: authored Resource는 manifest 경로만 보유해 별도 좌표를 중복 확정하지 않았다. `prepare_game_data.py`가 단일 region 원본과 공유 G01 SHA를 대조해 Git 제외 `game/data/generated/region.json`(949 bytes)·manifest(516 bytes)를 만든다. 원점·축·단위·수직 미정·경계 null을 그대로 보존하며 2회 생성이 동일했다. runtime은 허용된 res:// 경로·SHA/JSON/계약을 확인하고 원본/가공물/Python/외부 API를 열지 않는다. 자산 목록은 E02의 빈 상태다. authored/generated 자산 경계와 UID·캐시/생성 제외도 명시했다.
+- 입력: project InputMap에 WASD/방향키, Shift, Esc 물리 키를 등록했다. 키 상수는 설치 엔진에서 직접 조회했다. 2D 이동 의도/빠른 이동 요청만 전달하며 캐릭터 위치는 바꾸지 않는다. Esc는 echo를 무시해 메뉴를 열고 닫으며 메뉴 중 입력을 차단·SceneTree를 멈춘다. 재개하면 역할 처리/입력이 복구되고 버튼 초점을 해제한다. 마우스는 현재 보이는 상태이며 최종 3인칭 잠금/회전은 P02다.
+- 독립 검토/수정: 짧은 Sol 검토에서 Main ALWAYS를 World/Actors가 상속해 이후 도시·캐릭터 처리가 메뉴 중에도 지속될 수 있음을 찾았다. 빈 장면에서는 움직임 증상이 없었으며 World/Actors/Presentation을 명시 PAUSABLE로 바꿨다. [최초 25개 결과](../data/reports/e02/project_check-before-review.json)를 보존하고 메뉴 중 처리 중단·재개 검사를 추가해 최종 27개를 통과했다. [검토](../data/reports/e02/independent_review.json). GPU 메뉴에서 안내가 아래 비치는 겹침은 메뉴 중 안내 숨김으로 정리하고 재캡처했다. 진단 입력 이력은 1,024개로 제한했다. 커밋 대상 검사에서 가져오기 로그의 빈 클래스 진행 줄 끝 공백을 발견해 진단 내용은 유지하고 정리했다.
+- 실제 검증: headless 프로젝트/물리 키 이벤트·메뉴/역할 27개, 잘못된/오래된 bundle 17건 거부. 누락/JSON/해시·축척·축·원점/경계·외부/상위/원격 경로·manifest/원천 형식과 G01 이후 원천 변경을 검증했다. 캐시/저장소 config/raw/processed/Python 없는 준비된 game 사본을 앱별 network deny 프로파일로 실제 macOS GPU 기동하고 약 12초 화면/계약·정상 자동 종료(exit 0)를 확인했다. 같은 프로파일의 소켓은 PermissionError/errno 1로 차단됐다. 시스템/다른 앱 네트워크 설정 변경은 없었다. [결과](../data/reports/project_setup.md)·[자동 검사](../data/reports/e02/project_check.json)·[차단 근거](../data/reports/e02/offline_check.json).
+- 화면/대안: Mac이 잠겨 CUA 직접 창/키 제어는 못했고 사용자에게 잠금 해제를 요청했다. 잠금 화면을 우회하지 않았다. 실제 GPU에서 엔진 내부 키 이벤트를 주입하는 대안으로 동일 동작 27개+준비/메뉴 PNG 저장 2개를 통과했고 화면을 직접 읽었다. 직접 키 조작은 미실행으로 남겼으며 사람의 조작감 검수로 확대하지 않았다. [GPU 입력 검사](../data/reports/e02/gpu_input_check.json). 수정 전 대기 사본은 소유한 엔진만 SIGTERM 종료해 교체했고 테스트 드라이버의 비정상 반환은 이 의도적 종료였다. 마지막 사본은 정상 자동 종료했다. [이전 GPU 기록](../data/reports/e02/gpu-before-review.json).
+- 인수: 저장소 밖 cwd에서도 `run_game.sh observe`로 자료 준비→GPU 기동→기록→exit 0를 확인했다. 별도 runtime 사본의 최종 소스/자료 해시가 현재 game과 같았고 공유 region/G01·지역 지도 두 파일/D03 사본 해시는 그대로다. 인수 29개 검사와 공유 대상 168개 파일의 로컬 링크 371개(오류 0개)·JSON 69개 파싱·변경 형식 검사를 통과했다. [인수 보고서](../data/reports/e02_verification.json). WORK_STATUS·상세 체크·C03·검증 계획·맥락/환경·Sol/CROSS_MAC·README를 같은 완료 범위로 갱신했다.
+- 범위/한계: E02는 정식 빈 프로젝트의 입력/자료 구성과 네트워크 없는 기동이다. 서울 메시·실제 좌표 전달/축척·지면/문/경계·3인칭/캐릭터 이동·충돌/보행·도시 성능·패키지·M4·직접 키 조작은 미검증이다. W0/V0 미완료. 기술 좌표 수치·자료 정책·대한문 경내 필수 범위는 변경하지 않았다. 승인된 방향을 새로 묻지 않았다.
+- 다음 첫 행동: **E03**, 정식 프로젝트 구조와 현재 G02 features·G03 heights/terrain·G04 이동/경계/보류를 읽고 World에 바닥/길/건물 표시를 생성한다. 도형 구멍·부품/겹침 역할·원문/추정 높이·수직 예외를 보존한다. 첫 서울 배치 화면이 준비되면 사용자에게 익숙한 장소/비율의 확인 항목을 알린다.
+
 ## 이후 작업을 끝낼 때 추가할 양식
 
 아래를 실제 결과로 채워 새 항목으로 추가한다. 수행하지 않은 검증은 “미실행”으로 남긴다. 완료하지 못한 작업도 시도·현재 입력·막힌 이유·재개 조건을 기록한다. 작업 산출물과 이력·현재 상태를 같은 커밋으로 공유하며, 커밋 번호는 Git 이력으로 찾을 수 있어 본문에 자기 커밋 해시를 미리 넣을 필요가 없다.

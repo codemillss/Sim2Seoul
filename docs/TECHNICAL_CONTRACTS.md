@@ -1,6 +1,6 @@
 # 공간·데이터·게임 계약
 
-상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. 게임 코드는 아직 없다.
+상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. E02 정식 빈 프로젝트·입력/메뉴·로컬 계약 코드는 있으며 서울 메시·캐릭터 이동은 아직 없다.
 
 D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../config/data_usage.json)에 정리했다. 좌표 수치는 기존 `config/region.json`이 기준이며 사용 정책이 좌표 계약을 대체하지 않는다. [data_gaps](data_gaps.md)와 [수동 검토 큐](../data/manual/review_queue.json)는 G02–G04/W 단계의 입력이다.
 
@@ -54,6 +54,8 @@ builds/                              # 로컬 실행 파일, Git 제외
 원본 manifest: 공급자, URL/요청식, 취득일, 데이터 기준 시각, 라이선스 URL, SHA-256, 크기, CRS, 범위, 변환기 버전. 작은 사본을 `data/reports/source_manifest.json`에 두어 원본을 Git에서 제외해도 출처가 남게 한다.
 
 원본 갱신은 기존 스냅샷 덮어쓰기가 아니라 새 버전으로 수행한다. 생성 자산 manifest에 원본 해시·설정 해시·도구 버전을 기록한다. 자동 생성과 수동 보정을 분리해 두 번 생성해도 같은 ID와 배치가 유지돼야 한다.
+
+E02는 `game/`를 Godot의 프로젝트 경계로 정했다. authored `world_config.tres`는 manifest 경로만 보유하며 `config/region.json`의 좌표 값은 중복 작성하지 않는다. G01 원천 해시를 대조한 뒤 Git 제외 `game/data/generated/region.json` 원본 바이트 사본과 manifest를 생성한다. 런타임은 허용된 `res://` 계약만 읽고 외부 원본/가공물/Python/네트워크를 요구하지 않는다. 자산 목록은 아직 비어 있다. [실제 경로·입력·처리 역할](GAME_PROJECT.md). 수동 모델은 `game/assets/authored/`, 자동 생성 결과는 별도 경계에서 재생성한다.
 
 ## C04. 공간 객체 스키마
 

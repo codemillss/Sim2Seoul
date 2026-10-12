@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/world_config.tres" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/world/world_root.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/actors/player_slot.tscn" id="4"]
+[ext_resource type="Script" path="res://scripts/input_router.gd" id="5"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.06, 0.09, 0.13, 1)
+
+[node name="Main" type="Node3D"]
+process_mode = 3
+script = ExtResource("1")
+world_config = ExtResource("2")
+
+[node name="World" parent="." instance=ExtResource("3")]
+
+[node name="Actors" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="PlayerSlot" parent="Actors" instance=ExtResource("4")]
+
+[node name="Presentation" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="OverviewCamera" type="Camera3D" parent="Presentation"]
+position = Vector3(0, 20, 20)
+rotation_degrees = Vector3(-45, 0, 0)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Presentation"]
+environment = SubResource("Environment_1")
+
+[node name="InputRouter" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("5")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+process_mode = 3

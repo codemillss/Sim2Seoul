@@ -1,0 +1,14 @@
+{
+  "model": "Sol",
+  "scope": "E02 contract, source/resource/input boundary and pause behaviour",
+  "finding": "World/Actors inherited Main ALWAYS so future world/player processing would continue under paused tree",
+  "current_effect": "empty nodes; no visible motion yet",
+  "fix": "World, Actors and Presentation explicitly PAUSABLE; Main/InputRouter/Interface ALWAYS",
+  "before_project_check": "data/reports/e02/project_check-before-review.json",
+  "final_project_check": "data/reports/e02/project_check.json",
+  "added_assertions": [
+    "menu_pauses_world_actors_presentation",
+    "resume_enables_world_and_actors"
+  ],
+  "result": "fixed; 27 project/input checks and 17 invalid/stale bundle rejections pass"
+}

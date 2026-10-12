@@ -1,0 +1,346 @@
+{
+  "task": "E02",
+  "checked_on": "2026-10-13",
+  "baseline_commit": "45c450dcde7a9ee9ef8aa3a15b76b77bbc7a105a",
+  "result": "passed",
+  "checks": [
+    {
+      "name": "structure_and_input_27",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "invalid_and_stale_17",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "preparation_deterministic_and_current",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "GPU_input_and_capture_29",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "offline_real_GPU_runtime",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "offline_gpu.png_PNG_pixels",
+      "passed": true,
+      "detail": [
+        1152,
+        720
+      ]
+    },
+    {
+      "name": "gpu_ready.png_PNG_pixels",
+      "passed": true,
+      "detail": [
+        1152,
+        720
+      ]
+    },
+    {
+      "name": "gpu_menu.png_PNG_pixels",
+      "passed": true,
+      "detail": [
+        1152,
+        720
+      ]
+    },
+    {
+      "name": "network_restriction_app_local",
+      "passed": true,
+      "detail": {
+        "task": "E02",
+        "profile": "tests/game/offline.sb",
+        "restriction": "deny network* on test processes only; no system network or security settings modified",
+        "probe": {
+          "target": "127.0.0.1:9",
+          "exception": "PermissionError",
+          "errno": 1,
+          "message": "Operation not permitted",
+          "passed": true
+        },
+        "gpu_startup": {
+          "runtime_only_copy": true,
+          "no_repo_source_or_python": true,
+          "cache_excluded_at_copy": true,
+          "runtime_report": "data/reports/e02/offline_gpu.json",
+          "log": "data/reports/e02/offline_gpu.log",
+          "runtime_ok": true,
+          "display_server": "macOS",
+          "driver": "metal",
+          "renderer": "forward_plus"
+        },
+        "native_ui_check": "not_run: Mac locked; engine-level GPU input/menu tests substituted; no lock-screen bypass",
+        "gpu_input_check": "data/reports/e02/gpu_input_check.json"
+      }
+    },
+    {
+      "name": "runtime_copy_matches_final_game",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_copy_has_no_repo_data_python",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "run_helper_non_repo_cwd_GPU",
+      "passed": true,
+      "detail": {
+        "command": "sandbox-exec -f tests/game/offline.sb sh <repo>/tools/run_game.sh observe",
+        "cwd": "/private/tmp",
+        "exit_code_observed": 0,
+        "runtime": {
+          "display_server": "macOS",
+          "driver": "metal",
+          "elapsed_seconds": 12.007695,
+          "engine": "4.7.2-stable (official)",
+          "input_history": [
+            {
+              "fast": false,
+              "intent": [
+                0.0,
+                0.0
+              ],
+              "menu_open": false,
+              "seconds": 0.15
+            }
+          ],
+          "loaded_geometry_count": 0,
+          "region": {
+            "bbox_role": "data_investigation_only",
+            "bbox_west_south_east_north": [
+              126.971,
+              37.5608,
+              126.9815,
+              37.5694
+            ],
+            "coordinate_contract_status": "G01_fixed_horizontal_and_local_units_engine_check_pending",
+            "coordinate_contract_version": 1.0,
+            "coordinate_validation": {
+              "projected_geodesic_max_relative_difference": 0.002,
+              "roundtrip_max_error_degrees": 1e-08,
+              "synthetic_axis_max_error_m": 1e-06
+            },
+            "meters_per_world_unit": 1.0,
+            "metric_crs": "EPSG:32652",
+            "origin_lon_lat": [
+              126.97625,
+              37.5651
+            ],
+            "origin_role": "fixed_technical_origin_not_spawn_point",
+            "playable_boundary": null,
+            "region_id": "deoksugung_cityhall",
+            "source_crs": "EPSG:4326",
+            "status": "implementation_proposal_not_user_confirmed_play_boundary",
+            "vertical_coordinate_rule": "world_y_is_local_height_m_not_sea_level_or_DSM; ground_assignment_is_G03",
+            "vertical_datum": "not_yet_resolved",
+            "world_axes": {
+              "x": "east",
+              "y": "up",
+              "z": "south"
+            }
+          },
+          "renderer": "forward_plus",
+          "runtime_ok": true,
+          "scope": "project structure and input intent only; no city movement or scale acceptance",
+          "task": "E02"
+        }
+      }
+    },
+    {
+      "name": "shared_map_and_supplemental_integrity",
+      "passed": true,
+      "detail": {
+        "regional_maps": [
+          {
+            "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+            "bytes": 188346,
+            "sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+          },
+          {
+            "file": "data/raw/deoksugung_cityhall.osm.pbf",
+            "bytes": 187286,
+            "sha256": "6e495884b67a8181d1ff68fde02f14720e514cff8c3eba2a4ba73d696b3ac110"
+          }
+        ],
+        "country_source_available": true,
+        "supplemental_reference_files": [
+          {
+            "file": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+            "bytes": 497524,
+            "sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4"
+          },
+          {
+            "file": "data/raw/supplemental/copernicus/20261012/deoksugung_cityhall-dsm-reference.tif",
+            "bytes": 5356,
+            "sha256": "2ae132838bfb1d756e3f2ed289a92b903519c14510f2ccfa9830565e8d2d0269"
+          }
+        ],
+        "country_source_required_for_local_audit": false,
+        "result": "passed"
+      }
+    },
+    {
+      "name": "config/region.json_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data/reports/coordinate_check.json_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "shell_entrypoints_parse",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "python_entrypoints_parse",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "game/data/generated/region.json_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "game/scripts/main.gd.uid_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "game/.godot/editor/project_metadata.cfg_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "game/assets/generated/probe.res_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data/cache/game/probe_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "authored_sources_not_ignored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "E02_done_E03_pending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "offline_gpu.log_no_engine_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "input_test-before-review.log_no_engine_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "gpu_input.log_no_engine_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "import.log_no_engine_error",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "gpu-before-review.log_no_engine_error",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 29,
+  "images": [
+    {
+      "file": "data/reports/e02/offline_gpu.png",
+      "sha256": "45ad398b7b60f21f89af2eb75b53915b8d50f3e22bcda6f885d2a097195a07b4",
+      "bytes": 37305,
+      "pixels": [
+        1152,
+        720
+      ],
+      "visual_review": "normal Korean text/ready/menu; no Seoul geometry"
+    },
+    {
+      "file": "data/reports/e02/gpu_ready.png",
+      "sha256": "45ad398b7b60f21f89af2eb75b53915b8d50f3e22bcda6f885d2a097195a07b4",
+      "bytes": 37305,
+      "pixels": [
+        1152,
+        720
+      ],
+      "visual_review": "normal Korean text/ready/menu; no Seoul geometry"
+    },
+    {
+      "file": "data/reports/e02/gpu_menu.png",
+      "sha256": "aff53705814fcdf6de004776752a0dcc909775331c0cb716ead35c293764635c",
+      "bytes": 9423,
+      "pixels": [
+        1152,
+        720
+      ],
+      "visual_review": "normal Korean text/ready/menu; no Seoul geometry"
+    }
+  ],
+  "runtime_game_file_hashes": {
+    "game/assets/authored/README.md": "85db7912db064e8d5f18c7c54b172fe07bcd39057401e65ad94a9f38d86473da",
+    "game/assets/generated/README.md": "0407a820c69334fb90d84d5f9fa4559b22eb7585d9b46b0927ab9a7499fe2375",
+    "game/data/generated/manifest.json": "4c09693247394d9bf89088e96d35792302becce92e2940bca718ca30eb40ef55",
+    "game/data/generated/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "game/resources/world_config.tres": "4beae09241c91cebf971a13462c5b2841a0db564bad82b879c1ef9e3dbce32a6",
+    "game/scenes/actors/player_slot.tscn": "735e185464f84c26cb336913b1f3966b2ded1c38fabcbcb7fa067e49ace0ecb6",
+    "game/scenes/main.tscn": "89bbe5ba9ea365038167faf31aba10e6562333da88b5fe97d78addb7dae23547",
+    "game/scenes/world/world_root.tscn": "fdc6fe0f36e5ff5abc7c754d55a8f611d50e8e1ddb4cdde821b1cbaaa9d391d8",
+    "game/scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "game/scripts/main.gd": "bb97650d5338f5b381d07fbb3ad97b8c623b3ee8b40a7f1223f0725d8dbd7127",
+    "game/scripts/world_config.gd": "c61cc8d6459c4c9b63d40ea0e444da6824dbb72706233afd466766174d95844c"
+  },
+  "headless_checks": 27,
+  "GPU_input_checks_including_two_captures": 29,
+  "invalid_bundle_rejections": 17,
+  "native_manual_keyboard_test": {
+    "performed": false,
+    "reason": "Mac locked; no lock-screen bypass; engine events used instead"
+  },
+  "limits": [
+    "No Seoul meshes/physical scale/world movement/collision/third-person feel/performance/package/M4 validation",
+    "The prepared runtime copy used the existing M1 engine; not a new Mac installation"
+  ],
+  "documentation_checks": {
+    "shared_files": 168,
+    "local_markdown_links": 371,
+    "broken_links": [],
+    "json_parsed": 69,
+    "diff_check": "passed",
+    "next_task": "E03",
+    "cached_diff_initial": {
+      "result": "failed",
+      "reason": "Godot empty class progress lines had trailing spaces in import.log",
+      "resolution": "trim line-end spaces; diagnostic content preserved"
+    },
+    "cached_diff_check": "passed"
+  }
+}

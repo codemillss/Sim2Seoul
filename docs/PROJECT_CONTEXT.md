@@ -32,6 +32,7 @@
 | 상태 | 항목 | 현재 내용 / 결정할 시점 |
 |---|---|---|
 | E01 구현 기준 고정 | 엔진·자료 도구 | Godot 4.7.2 Standard 네이티브 앱 + Python. 현재 M1에서 편집기·세 렌더러 기동을 확인해 Forward+/Metal을 선택. [환경](environment.md)·[기동 증거](../data/reports/engine_startup.md). 템플릿은 R03 전 준비, 도시 성능·M4는 미검증 |
+| E02 구현 기준 | 프로젝트·입력·자료 경계 | 정식 `game/`, World/Actors/Presentation과 UI/입력 역할 분리. region은 단일 원천에서 Git 제외 로컬 계약으로 재생성, 실행 중 외부 원본/Python/네트워크 불필요. WASD/방향키·Shift는 입력 의도만 전달, Esc 메뉴는 역할 처리와 입력 차단. [구성/검증](GAME_PROJECT.md). 실제 이동과 서울 표시는 후속 |
 | 구현 기준 고정 | 좌표 계약 | G01에서 EPSG:4326 원본 → EPSG:32652 미터 좌표 → 고정 원점, x=격자 동/y=위/z=격자 남, 1단위=1m를 검증해 버전 1로 고정. 수치 변경 없음. [region.json](../config/region.json)·[검증](evidence/G01_COORDINATE_CHECK.md). 실제 지면과 엔진 전달은 후속 검증 |
 | 제안 | 조명·성능 | 고정 낮, M1 Pro 16GB에서 1080p·안정적인 30fps부터 검토. 실측 전에는 달성했다고 표현하지 않음 |
 | 임시 구현 기준 | 높이·지면 | G03에서 원문/층수 추정/임시값을 분리하고 로컬 지지 평면 y=0을 가정. 실제 해발 기준은 미확정, 132개 수직 예외는 지면 배정 보류. [G03 근거](../data/reports/height_review.md). 실제 지형·통행 허가·플레이 경계가 아님 |

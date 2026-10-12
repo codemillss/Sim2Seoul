@@ -122,7 +122,7 @@ G04의 `walkable_areas.json`·`driveable_areas.json`·`boundary_candidate.json`�
 
 [G04 인수 검사](../data/reports/g04_verification.json)는 국가 원본·전체 DSM 없는 파일 사본과 기존 M1 인터프리터의 재현 증거다. 새 설치·M4·게임 시험과 구분한다. SVG 지도는 공유되며 재생성은 `tools/map_movement.py`, 선택 PNG 렌더는 별도 도구이며 기본 준비의 의존성은 아니다. 최종 경계·스폰·gate·실제 통행 검증은 남아 있다.
 
-현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. E01 독립 엔진 시험 장면은 실행되지만 정식 서울 게임과 보행은 미구현이다.
+현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. E02 정식 빈 프로젝트·입력/메뉴·로컬 자료 구성은 완료됐지만 서울 메시·보행은 미구현이다.
 
 ## 엔진 기동 확인
 
@@ -135,3 +135,16 @@ sh tools/run_engine_smoke.sh observe
 ```
 
 M4 Pro의 RAM/OS와 실제 기동은 아직 미확인이다. M1의 보고서를 다른 기기의 결과로 복사해 완료 처리하지 않는다.
+
+## 정식 프로젝트 실행
+
+E02 이후 정식 프로젝트는 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. 지역 지도 가공과 독립적으로 작은 계약을 준비하며 표준 Python 3·고정 Godot만 필요하다. 다른 작업 폴더에서도 실행 도구의 절대 경로를 사용하면 같은 자료를 준비한다.
+
+```sh
+sh tools/run_game.sh run
+sh tools/run_game.sh editor
+sh tools/run_game.sh observe
+python3 tools/check_game_project.py --report /tmp/sim2seoul-e02-check.json
+```
+
+`config/region.json`과 공유 G01 해시를 대조해 `game/data/generated/`를 재생성한다. 생성된 파일·UID·캐시를 다른 Mac에서 복사하지 않는다. E03 도시 자산 준비는 아직 없다. 현재 M1의 GPU/자동 입력 시험은 [E02 기록](../data/reports/project_setup.md), 직접 키 조작과 M4 실제 기동은 미검증이다.

@@ -1,0 +1,25 @@
+{
+  "task": "E02",
+  "profile": "tests/game/offline.sb",
+  "restriction": "deny network* on test processes only; no system network or security settings modified",
+  "probe": {
+    "target": "127.0.0.1:9",
+    "exception": "PermissionError",
+    "errno": 1,
+    "message": "Operation not permitted",
+    "passed": true
+  },
+  "gpu_startup": {
+    "runtime_only_copy": true,
+    "no_repo_source_or_python": true,
+    "cache_excluded_at_copy": true,
+    "runtime_report": "data/reports/e02/offline_gpu.json",
+    "log": "data/reports/e02/offline_gpu.log",
+    "runtime_ok": true,
+    "display_server": "macOS",
+    "driver": "metal",
+    "renderer": "forward_plus"
+  },
+  "native_ui_check": "not_run: Mac locked; engine-level GPU input/menu tests substituted; no lock-screen bypass",
+  "gpu_input_check": "data/reports/e02/gpu_input_check.json"
+}
