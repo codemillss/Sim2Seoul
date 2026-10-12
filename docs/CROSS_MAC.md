@@ -35,7 +35,7 @@ Python 명령 이름이 다르면 Python 3.14를 가리키는 실행 파일을 �
 SIM2SEOUL_PYTHON=python3 bash tools/setup_mac.sh
 ```
 
-준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. Godot은 E01에서 현재 기기에 후보 버전을 설치해 기동을 검증하고 버전·렌더러를 고정한 뒤, 다른 Mac에도 같은 버전을 설치한다.
+준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. E01에서 현재 M1에 Godot **4.7.2 Standard·Forward+/Metal**을 설치하고 실제 편집기·GPU 창을 확인했다. 다른 Mac에는 [엔진 환경](environment.md)의 공식 동일 버전 설치·체크섬·기동 절차를 따른다. 템플릿은 장면 실행에 필요하지 않으며 R03 전에 4.7.2.stable로 준비한다.
 
 환경 설치 전 지도 파일만 확인하려면 다음을 실행한다.
 
@@ -122,4 +122,16 @@ G04의 `walkable_areas.json`·`driveable_areas.json`·`boundary_candidate.json`�
 
 [G04 인수 검사](../data/reports/g04_verification.json)는 국가 원본·전체 DSM 없는 파일 사본과 기존 M1 인터프리터의 재현 증거다. 새 설치·M4·게임 시험과 구분한다. SVG 지도는 공유되며 재생성은 `tools/map_movement.py`, 선택 PNG 렌더는 별도 도구이며 기본 준비의 의존성은 아니다. 최종 경계·스폰·gate·실제 통행 검증은 남아 있다.
 
-현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. 아직 실행 가능한 Godot 게임은 없다.
+현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. E01 독립 엔진 시험 장면은 실행되지만 정식 서울 게임과 보행은 미구현이다.
+
+## 엔진 기동 확인
+
+Godot 설치 뒤 저장소 루트에서 다음을 실행한다. 지도/Python 준비와 독립적이다. 버전·실제 renderer/driver·화면·종료를 확인하며 새 결과는 Git 제외 캐시에 기록된다. 자세한 설치/후보 비교는 [환경](environment.md), 현재 M1 증거는 [기동 결과](../data/reports/engine_startup.md)를 따른다.
+
+```sh
+sh tools/run_engine_smoke.sh editor
+sh tools/run_engine_smoke.sh run
+sh tools/run_engine_smoke.sh observe
+```
+
+M4 Pro의 RAM/OS와 실제 기동은 아직 미확인이다. M1의 보고서를 다른 기기의 결과로 복사해 완료 처리하지 않는다.
