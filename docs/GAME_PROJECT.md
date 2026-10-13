@@ -1,6 +1,6 @@
 # 정식 Godot 프로젝트와 데이터 경계
 
-2026-10-13 · E03/E04 · [서울 표시/검증](../data/reports/world_import.md) · [거리·축척 검증](../data/reports/scale_view/README.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
+2026-10-13 · E03/E04/P01 · [서울 표시](../data/reports/world_import.md) · [거리·축척](../data/reports/scale_view/README.md) · [사람 크기·시험장](../data/reports/player_scale.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
 
 ## 실행과 보기
 
@@ -94,4 +94,18 @@ python3 tools/check_game_project.py
 
 `tests/game/check_world.gd`는 actual ArrayMesh의 모든 정점을 읽고 변환/법선·삼각형 수를 검사한다. 현재 M1 GPU에서 12개+세 시점/메뉴 캡처 4개를 통과했다. `tests/game/offline.sb`는 시험 프로세스에만 네트워크 차단을 적용하며 시스템 설정을 바꾸지 않는다. 별도 game 사본의 관측 결과·정상 종료와 환경 범위는 [E03 보고서](../data/reports/world_import.md)에 있다.
 
-작은 공유 파일에서 G01–G04→E03 재생성 검사는 `tools/check_world_portability.py`다. 현재 M1의 기존 인터프리터를 사용한 사본 검사이며 새 가상환경/M4 실측을 대신하지 않는다. `.godot`·UID·생성 JSON·빌드·설치 앱·사용자 설정은 복사/공유하지 않는다. E04 고정 대표 거리·10m 기준물 검증은 완료했으며 다음 P01부터 사람 크기/조작/충돌을 구현한다. 대한문 통과와 전체 경로는 W 단계에서 검증한다.
+작은 공유 파일에서 G01–G04→E03 재생성 검사는 `tools/check_world_portability.py`다. 현재 M1의 기존 인터프리터를 사용한 사본 검사이며 새 가상환경/M4 실측을 대신하지 않는다. `.godot`·UID·생성 JSON·빌드·설치 앱·사용자 설정은 복사/공유하지 않는다. E04 고정 대표 거리·10m 기준물 검증은 완료했으며 P01 사람 크기/독립 정적 충돌은 아래 절과 같이 구현했으며 다음 P02부터 수평 조작/복귀를 연결한다. 대한문 통과와 전체 경로는 W 단계에서 검증한다.
+
+## P01 캐릭터와 독립 충돌 시험장
+
+```sh
+sh tools/run_player_fixture.sh run
+sh tools/run_player_fixture.sh editor
+sh tools/run_player_fixture.sh observe
+```
+
+[Player](../game/scenes/player/player.tscn)는 발 위치를 루트로 하고 `CollisionShape`·`Visual/Body`를 분리한 1.70m/반경 0.30m 캡슐이다. [idle_support](../game/scripts/player/idle_support.gd)는 P01 수직 중력/정지 지지만 구현하고 수평 입력은 받지 않는다. [player_fixture](../game/scenes/tests/player_fixture.tscn)는 Actors/Fixtures/Guides/Presentation을 PAUSABLE, 안내/시점/메뉴를 ALWAYS로 두며 메뉴 중 물리를 멈춘다. 전체/사람/문 보기·다시 놓기는 시험장 기능이다. 실제 서울의 main·PlayerSlot·표시 geometry는 그대로다.
+
+시험장의 7개 정적 충돌 구조·1.20×2.20m 개구부·0.15/0.30m 단차·미터 기준물은 합성 자료다. 생성 manifest나 원본/가공 지도·Python을 런타임에서 읽지 않는다. `observe`는 기본 정착 1초+60초 실제 관측·세 시점/메뉴 캡처를 `data/cache/player/`에 저장한다. `observe 2` 같은 짧은 관측은 화면/실행 확인용이며 60초 완료 근거와 구분한다.
+
+`python3 tools/check_player_contract.py`는 지도/초기 캐시 없는 5개 authored 파일 사본에서 실제 엔진 오류 9종·가속 60초 물리·반복 측정을 검사한다. 정상 검사기는 `tools/check_player_fixture.py`이고 `--require-real-time`은 실제 벽시계 관측을 요구한다. [P01 결과/한계/정확한 실행](../data/reports/player_scale.md). 다음 P02에서 입력/이동·낙하 복귀, P03에서 3인칭, P04에서 도시 충돌을 연결하며 시험장 query를 실제 보행 완료로 해석하지 않는다.

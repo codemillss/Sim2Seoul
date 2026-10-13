@@ -1,0 +1,199 @@
+{
+  "task": "P01",
+  "passed": true,
+  "checks": [
+    {
+      "name": "engine.version",
+      "passed": true
+    },
+    {
+      "name": "copy.authored_only",
+      "passed": true
+    },
+    {
+      "name": "normal.engine_passed",
+      "passed": true,
+      "checks": 10
+    },
+    {
+      "name": "normal.repeat_measurements",
+      "passed": true
+    },
+    {
+      "name": "normal.repeat_stability",
+      "passed": true
+    },
+    {
+      "name": "regression.player_scaled",
+      "passed": true
+    },
+    {
+      "name": "regression.collision_height",
+      "passed": true
+    },
+    {
+      "name": "regression.visual_offset",
+      "passed": true
+    },
+    {
+      "name": "regression.mask_disabled",
+      "passed": true
+    },
+    {
+      "name": "regression.collider_disabled",
+      "passed": true
+    },
+    {
+      "name": "regression.floor_disabled",
+      "passed": true
+    },
+    {
+      "name": "regression.spawn_below_floor",
+      "passed": true
+    },
+    {
+      "name": "regression.door_blocked",
+      "passed": true
+    },
+    {
+      "name": "regression.step_height_wrong",
+      "passed": true
+    },
+    {
+      "name": "authored_inputs_unchanged",
+      "passed": true
+    }
+  ],
+  "actual_mutations": [
+    {
+      "case": "player_scaled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "player_capsule_visual_and_contact",
+      "failed_checks": [
+        "player_capsule_visual_and_contact"
+      ],
+      "measurement_file": "regression/player_scaled.json",
+      "sha256": "0b7d7cd3735ccea47ed7f6daf561dcde50117e0f8f951ae8a890ae69d5610458"
+    },
+    {
+      "case": "collision_height",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "player_capsule_visual_and_contact",
+      "failed_checks": [
+        "player_capsule_visual_and_contact",
+        "actual_physics_queries_and_separate_spawn",
+        "all_tick_idle_summary",
+        "one_hz_idle_samples"
+      ],
+      "measurement_file": "regression/collision_height.json",
+      "sha256": "439e13c3012b173c4da7555aa795f938d739995e08ac33eaf90e1a895bbf5783"
+    },
+    {
+      "case": "visual_offset",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "player_capsule_visual_and_contact",
+      "failed_checks": [
+        "player_capsule_visual_and_contact"
+      ],
+      "measurement_file": "regression/visual_offset.json",
+      "sha256": "fbe0ee7cc697ff3e1f7f72e8ac80c906c5cb2814c90e3a8bac8ada2be95a64b1"
+    },
+    {
+      "case": "mask_disabled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "player_capsule_visual_and_contact",
+      "failed_checks": [
+        "player_capsule_visual_and_contact",
+        "all_tick_idle_summary",
+        "one_hz_idle_samples"
+      ],
+      "measurement_file": "regression/mask_disabled.json",
+      "sha256": "05aab84a55ee4f106cd45fe291c44514181043cbe58ba6359cc2cf250b1951a8"
+    },
+    {
+      "case": "collider_disabled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "player_capsule_visual_and_contact",
+      "failed_checks": [
+        "player_capsule_visual_and_contact",
+        "all_tick_idle_summary",
+        "one_hz_idle_samples"
+      ],
+      "measurement_file": "regression/collider_disabled.json",
+      "sha256": "b54f192464b99a7ff23b25d34b4ed14b1f864b044b54ce5991d792e3654c25ad"
+    },
+    {
+      "case": "floor_disabled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "seven_static_boxes_and_opening",
+      "failed_checks": [
+        "player_capsule_visual_and_contact",
+        "seven_static_boxes_and_opening",
+        "actual_physics_queries_and_separate_spawn",
+        "all_tick_idle_summary",
+        "one_hz_idle_samples"
+      ],
+      "measurement_file": "regression/floor_disabled.json",
+      "sha256": "613fe7b6211fccde0acecad173f7e2983545dd75c762c0a9650efec220c7fffb"
+    },
+    {
+      "case": "spawn_below_floor",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "initial_placement",
+      "failed_checks": [
+        "initial_placement"
+      ],
+      "measurement_file": "regression/spawn_below_floor.json",
+      "sha256": "f8b3b493b32743db4d1d068b3e299bd7863d2b81d7fa542c9618557687ef0425"
+    },
+    {
+      "case": "door_blocked",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "seven_static_boxes_and_opening",
+      "failed_checks": [
+        "seven_static_boxes_and_opening",
+        "actual_physics_queries_and_separate_spawn"
+      ],
+      "measurement_file": "regression/door_blocked.json",
+      "sha256": "b9ec224aa178d92701401d3bcea45df9614f82026f0b34f3df0b8d18786f181f"
+    },
+    {
+      "case": "step_height_wrong",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_keyword": "seven_static_boxes_and_opening",
+      "failed_checks": [
+        "seven_static_boxes_and_opening"
+      ],
+      "measurement_file": "regression/step_height_wrong.json",
+      "sha256": "6d7e1473c36b2bf0c88bd90497c2c6e238f8fa64b8b8a3bd3e790b8e2801b8db"
+    }
+  ],
+  "sources": {
+    "project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "scenes/tests/player_fixture.tscn": "6fc75704f2e89f5ecba6b790adabbb4d0d711f4d153802f637b7436bccd553e4",
+    "scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "scripts/player_fixture.gd": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6"
+  },
+  "checker_sha256": "100a12574ca012e081fe4f9bbad6a8450f3c2232d09743191a03bfadd37cb628",
+  "independent_checker_sha256": "63f14526916a74a0f7eab722876f2563fba0cf819f9bd528753634c80e1b7bc9",
+  "scope": "actual offline engine processes; 60 physics seconds accelerated with fixed-fps; existing M1 engine; no map/generated data",
+  "not_tested": [
+    "60 real wall seconds in this accelerated run",
+    "keyboard movement",
+    "door passage",
+    "step traversal",
+    "camera control",
+    "Seoul collision",
+    "M4"
+  ]
+}

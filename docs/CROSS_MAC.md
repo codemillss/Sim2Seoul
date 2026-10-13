@@ -156,7 +156,7 @@ sh tools/run_game.sh observe
 python3 tools/check_game_project.py --report /tmp/sim2seoul-e03-project-check.json
 ```
 
-[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. 다음 P01 사람 크기 캐릭터를 이어간다.
+[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. P01 독립 시험장도 완료했으며 다음 P02 이동·지면 복귀를 이어간다.
 
 ```sh
 python3 tools/prepare_scale_view.py
@@ -166,3 +166,15 @@ sh tools/run_scale_view.sh observe
 ```
 
 생성 `scale_view.json`·`scale_manifest.json`도 기기별이며 Git에 넣지 않는다. 공유 설정/장면/기준점 보고서에서 재생성해 같은 위치·축·단위와 세 시점을 확인한다. 검사 도구는 현재 Mac의 Godot을 사용하므로 실제 M4 실행 결과를 별도로 남긴다.
+
+## P01 독립 시험장만 먼저 확인하기
+
+동일한 Godot 4.7.2와 저장소만 있으면 지도/Python 준비 전에 아래 P01 합성 시험장을 열 수 있다. 생성 자산·지도 서버·국가 원본을 요구하지 않는다.
+
+```sh
+sh tools/run_player_fixture.sh run
+sh tools/run_player_fixture.sh observe
+python3 tools/check_player_contract.py
+```
+
+기본 관측은 정착 후 60초이며 `observe 2`는 짧은 실행 확인용이다. 검사기는 표준 Python, 계약 검사는 macOS의 설치된 Godot/네트워크 차단 프로파일을 사용한다. 현재 M1의 60초/3,600회 안정 정지와 지도 없는 사본 검증은 [P01 보고서](../data/reports/player_scale.md)에 있다. 실제 M4·새 환경·직접 조작·서울 보행 결과는 이 증거로 대신하지 않는다. 다음 P02는 같은 캐릭터/충돌 시험장의 이동·지면 복귀다.

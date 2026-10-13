@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "schema_and_finite_numbers",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "physics_rate",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "initial_placement",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "unscaled_parents",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "player_capsule_visual_and_contact",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "seven_static_boxes_and_opening",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "metre_reference_geometry",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "actual_physics_queries_and_separate_spawn",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "all_tick_idle_summary",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "one_hz_idle_samples",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "name": "real_time_observation",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "require_seconds": 60.0,
+  "require_real_time": true,
+  "scope": "P01 synthetic fixture geometry and idle support only",
+  "limitations": [
+    "Capsule height is total height, including both caps.",
+    "Geometry and overlap queries do not prove door passage, walking, step traversal, third-person camera, or Seoul collision.",
+    "GPU appearance requires separate visual inspection; this audit consumes engine measurements."
+  ]
+}

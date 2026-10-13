@@ -1,0 +1,32 @@
+{
+  "task": "P01",
+  "failures": [
+    {
+      "case": "initial_record_timing",
+      "first_gpu_check_passed": false,
+      "failed_group": "initial_placement",
+      "reason": "initial was read after process_frame; GPU had already applied gravity",
+      "first_initial_position": [
+        -2.0,
+        0.00377777963876724,
+        2.0
+      ],
+      "fix": "record immediately after add_child, before first frame await",
+      "verified": "final GPU11/headless10/contract15 pass",
+      "evidence": "before-initial-timing-fix/gpu_check.json"
+    },
+    {
+      "case": "hud_contrast",
+      "reason": "default white font on light panel",
+      "fix": "explicit dark font and height-bar caption placement",
+      "verified": "final three GPU views visually inspected"
+    },
+    {
+      "case": "restricted_first_smoke",
+      "reason": "user log write/system CA lookup denied by restricted tool host; 1second measurement still recorded",
+      "fix": "authorized host with explicit local log path and process network denial",
+      "verified": "final GPU/headless logs contain no ERROR; smoke not used for acceptance",
+      "not_approval_rejection": true
+    }
+  ]
+}

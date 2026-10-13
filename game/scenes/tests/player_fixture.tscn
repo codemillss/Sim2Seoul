@@ -1,0 +1,203 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="Script" path="res://scripts/player_fixture.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(24, 0.2, 20)
+
+[sub_resource type="StandardMaterial3D" id="FloorMaterial"]
+albedo_color = Color(0.76, 0.79, 0.8, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+size = Vector3(24, 0.2, 20)
+material = SubResource("FloorMaterial")
+
+[sub_resource type="BoxShape3D" id="WallShape"]
+size = Vector3(3, 3, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="WallMaterial"]
+albedo_color = Color(0.45, 0.53, 0.6, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="WallMesh"]
+size = Vector3(3, 3, 0.25)
+material = SubResource("WallMaterial")
+
+[sub_resource type="BoxShape3D" id="DoorLeftShape"]
+size = Vector3(2.4, 3, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="DoorLeftMaterial"]
+albedo_color = Color(0.37, 0.5, 0.62, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="DoorLeftMesh"]
+size = Vector3(2.4, 3, 0.25)
+material = SubResource("DoorLeftMaterial")
+
+[sub_resource type="BoxShape3D" id="DoorRightShape"]
+size = Vector3(2.4, 3, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="DoorRightMaterial"]
+albedo_color = Color(0.37, 0.5, 0.62, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="DoorRightMesh"]
+size = Vector3(2.4, 3, 0.25)
+material = SubResource("DoorRightMaterial")
+
+[sub_resource type="BoxShape3D" id="DoorLintelShape"]
+size = Vector3(1.2, 0.8, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="DoorLintelMaterial"]
+albedo_color = Color(0.37, 0.5, 0.62, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="DoorLintelMesh"]
+size = Vector3(1.2, 0.8, 0.25)
+material = SubResource("DoorLintelMaterial")
+
+[sub_resource type="BoxShape3D" id="Step015Shape"]
+size = Vector3(2, 0.15, 2)
+
+[sub_resource type="StandardMaterial3D" id="Step015Material"]
+albedo_color = Color(0.43, 0.65, 0.61, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Step015Mesh"]
+size = Vector3(2, 0.15, 2)
+material = SubResource("Step015Material")
+
+[sub_resource type="BoxShape3D" id="Step030Shape"]
+size = Vector3(2, 0.3, 2)
+
+[sub_resource type="StandardMaterial3D" id="Step030Material"]
+albedo_color = Color(0.33, 0.55, 0.53, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Step030Mesh"]
+size = Vector3(2, 0.3, 2)
+material = SubResource("Step030Material")
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.88, 0.92, 0.94, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.89, 0.92, 0.96, 1)
+ambient_light_energy = 0.65
+
+[node name="PlayerFixture" type="Node3D"]
+process_mode = 3
+script = ExtResource("1")
+
+[node name="Fixtures" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Floor" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(0, -0.1, 0)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/Floor"]
+shape = SubResource("FloorShape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/Floor"]
+mesh = SubResource("FloorMesh")
+
+[node name="Wall" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(-7, 1.5, -4)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/Wall"]
+shape = SubResource("WallShape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/Wall"]
+mesh = SubResource("WallMesh")
+
+[node name="DoorLeft" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(-1.8, 1.5, -4)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/DoorLeft"]
+shape = SubResource("DoorLeftShape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/DoorLeft"]
+mesh = SubResource("DoorLeftMesh")
+
+[node name="DoorRight" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(1.8, 1.5, -4)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/DoorRight"]
+shape = SubResource("DoorRightShape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/DoorRight"]
+mesh = SubResource("DoorRightMesh")
+
+[node name="DoorLintel" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(0, 2.6, -4)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/DoorLintel"]
+shape = SubResource("DoorLintelShape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/DoorLintel"]
+mesh = SubResource("DoorLintelMesh")
+
+[node name="Step015" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(4, 0.075, 2)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/Step015"]
+shape = SubResource("Step015Shape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/Step015"]
+mesh = SubResource("Step015Mesh")
+
+[node name="Step030" type="StaticBody3D" parent="Fixtures"]
+position = Vector3(6, 0.15, 2)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Fixtures/Step030"]
+shape = SubResource("Step030Shape")
+
+[node name="Visual" type="MeshInstance3D" parent="Fixtures/Step030"]
+mesh = SubResource("Step030Mesh")
+
+[node name="Actors" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Player" parent="Actors" instance=ExtResource("2")]
+position = Vector3(-2, 0.08, 2)
+
+[node name="Guides" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Presentation" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Camera" type="Camera3D" parent="Presentation"]
+projection = 1
+keep_aspect = 1
+size = 17.0
+far = 100.0
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Presentation"]
+environment = SubResource("Environment")
+
+[node name="Sun" type="DirectionalLight3D" parent="Presentation"]
+rotation_degrees = Vector3(-50, -30, 0)
+light_energy = 1.1
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="Interface" type="CanvasLayer" parent="."]
+process_mode = 3
