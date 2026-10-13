@@ -1,0 +1,32 @@
+{
+  "task": "E04",
+  "failures": [
+    {
+      "case": "integer_vs_json_float_array",
+      "actual": "normal GPU rejected 10m control array",
+      "evidence": "gpu-before-json-number-fix.log",
+      "fix": "finite numeric componentwise float comparison",
+      "verified": "GPU209 and all bundle fixtures pass"
+    },
+    {
+      "case": "headless_logical_vs_render_target",
+      "actual": "render target 64x64 reported for logical 1152x720 projection",
+      "evidence": "headless-before-viewport-fix.log",
+      "fix": "record get_visible_rect size and physical target size separately",
+      "verified": "headless/GPU209 pass and actual PNG1152x720"
+    },
+    {
+      "case": "nested_sandbox",
+      "actual": "sandbox-exec: sandbox_apply: Operation not permitted",
+      "fix": "authorized host execution with same network-deny profile",
+      "verified": "36 contract checks pass",
+      "not_approval_rejection": true
+    },
+    {
+      "case": "relative_probe_output",
+      "actual": "Godot E04_READY then Cannot write E04 probe, exit1",
+      "fix": "resolve output to absolute path before engine call",
+      "verified": "normal/repeat/ten variants captured"
+    }
+  ]
+}

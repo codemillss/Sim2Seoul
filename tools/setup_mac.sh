@@ -31,4 +31,5 @@ TASK_EXTRACT="$(.venv-data/bin/python -c 'import json; print(json.load(open("dat
 .venv-data/bin/python tools/check_movement.py
 .venv-data/bin/python tools/prepare_world.py
 .venv-data/bin/python tools/prepare_game_data.py
+.venv-data/bin/python tools/prepare_scale_view.py
 printf '%s\n' 'Setup complete. Continue from docs/WORK_STATUS.md and docs/SOL_HANDOFF.md.'

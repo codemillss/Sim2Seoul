@@ -35,7 +35,7 @@ Python 명령 이름이 다르면 Python 3.14를 가리키는 실행 파일을 �
 SIM2SEOUL_PYTHON=python3 bash tools/setup_mac.sh
 ```
 
-준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사, E03 표시 삼각형·실행 자료를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. E01에서 현재 M1에 Godot **4.7.2 Standard·Forward+/Metal**을 설치하고 실제 편집기·GPU 창을 확인했다. 다른 Mac에는 [엔진 환경](environment.md)의 공식 동일 버전 설치·체크섬·기동 절차를 따른다. 템플릿은 장면 실행에 필요하지 않으며 R03 전에 4.7.2.stable로 준비한다.
+준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사, E03 표시 삼각형·실행 자료와 E04 고정 거리/기준물 실행 자료를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. E01에서 현재 M1에 Godot **4.7.2 Standard·Forward+/Metal**을 설치하고 실제 편집기·GPU 창을 확인했다. 다른 Mac에는 [엔진 환경](environment.md)의 공식 동일 버전 설치·체크섬·기동 절차를 따른다. 템플릿은 장면 실행에 필요하지 않으며 R03 전에 4.7.2.stable로 준비한다.
 
 환경 설치 전 지도 파일만 확인하려면 다음을 실행한다.
 
@@ -138,7 +138,7 @@ M4 Pro의 RAM/OS와 실제 기동은 아직 미확인이다. M1의 보고서를 
 
 ## 정식 프로젝트 실행
 
-E03 정식 프로젝트는 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. 최초 `setup_mac.sh`가 지역 지도에서 현재 G01–G04 가공물·E03 삼각형/실행 manifest를 만든다. 준비된 기존 환경에서 표시 입력만 갱신하면 아래 생성기를 사용한다. 엔진은 [고정 환경](environment.md)대로 별도 설치한다.
+E03/E04 정식 프로젝트는 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. 최초 `setup_mac.sh`가 지역 지도에서 현재 G01–G04 가공물·E03 삼각형/실행 manifest·E04 기준점/시점 manifest를 만든다. 준비된 기존 환경에서 표시 입력만 갱신하면 아래 생성기를 사용한다. 엔진은 [고정 환경](environment.md)대로 별도 설치한다.
 
 ```sh
 .venv-data/bin/python tools/prepare_world.py
@@ -156,4 +156,13 @@ sh tools/run_game.sh observe
 python3 tools/check_game_project.py --report /tmp/sim2seoul-e03-project-check.json
 ```
 
-[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. 다음 E04 고정 거리·축척 장면을 이어간다.
+[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. 다음 P01 사람 크기 캐릭터를 이어간다.
+
+```sh
+python3 tools/prepare_scale_view.py
+sh tools/run_scale_view.sh run
+sh tools/run_scale_view.sh observe
+.venv-data/bin/python tools/check_scale_contract.py
+```
+
+생성 `scale_view.json`·`scale_manifest.json`도 기기별이며 Git에 넣지 않는다. 공유 설정/장면/기준점 보고서에서 재생성해 같은 위치·축·단위와 세 시점을 확인한다. 검사 도구는 현재 Mac의 Godot을 사용하므로 실제 M4 실행 결과를 별도로 남긴다.

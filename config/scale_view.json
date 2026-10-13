@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task": "E04",
+  "scope": "fixed_source_vertex_distance_and_synthetic_scale_view_not_walking_or_survey",
+  "distance_tolerance": {"absolute_floor_m": 0.05, "relative": 0.001},
+  "position_tolerance_m": 0.05,
+  "pixel_projection_tolerance_px": 0.05,
+  "views": {
+    "map": {"title": "직선거리", "position": [-25, 900, -100], "target": [-25, 0, -100], "size_m": 650, "projection": "orthogonal"},
+    "axes": {"title": "10m 기준물", "position": [34, 32, 43], "target": [8, 4, 0], "size_m": 42, "projection": "orthogonal"},
+    "oblique": {"title": "입체 배치", "position": [360, 480, 520], "target": [-35, 0, -75], "size_m": 650, "projection": "orthogonal"}
+  },
+  "cube": {"position": [20, 5, 0], "edge_m": 10, "status": "synthetic_reference_not_city_building"},
+  "expected_cardinal_vectors": {
+    "grid_east_10m": [10, 0, 0],
+    "grid_west_10m": [-10, 0, 0],
+    "grid_north_10m": [0, 0, -10],
+    "grid_south_10m": [0, 0, 10],
+    "local_up_10m": [0, 10, 0]
+  },
+  "display_note": "Reference lines/markers can show through buildings for inspection; no collision or access granted"
+}

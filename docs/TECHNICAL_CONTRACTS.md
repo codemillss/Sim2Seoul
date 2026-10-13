@@ -1,6 +1,6 @@
 # 공간·데이터·게임 계약
 
-상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. E02 정식 구조·입력/메뉴·로컬 계약과 E03 서울 표시 코드는 있다. 캐릭터 이동·충돌은 아직 없다.
+상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. E02 정식 구조·입력/메뉴·로컬 계약과 E03 서울 표시·E04 고정 축척 검증 코드는 있다. 캐릭터 이동·충돌은 아직 없다.
 
 D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../config/data_usage.json)에 정리했다. 좌표 수치는 기존 `config/region.json`이 기준이며 사용 정책이 좌표 계약을 대체하지 않는다. [data_gaps](data_gaps.md)와 [수동 검토 큐](../data/manual/review_queue.json)는 G02–G04/W 단계의 입력이다.
 
@@ -17,6 +17,8 @@ D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../co
 - 원점·축·CRS 변경은 전체 데이터 재생성과 이동 경로·수동 보정·저장 위치의 변환을 필요로 한다. 파일마다 중심점을 다시 계산하지 않는다.
 
 G01에서 기존 수치·축을 변경하지 않고 수평 변환과 로컬 단위 계약 버전 1을 고정했다. 재사용 구현은 [coordinate_system.py](../tools/coordinate_system.py), 증거는 [coordinate_check.json](../data/reports/coordinate_check.json)이다. UTM의 east/north는 격자 방향이며 측지 동/북과 자오선 수렴각만큼 차이가 난다. 로컬 방위각은 `atan2(dx, -dz)`로 투영 평면 방위각과 비교하고, 측지 초기 방위각과의 차이는 별도로 기록한다. 이를 맞추려고 월드 전체를 회전하지 않는다.
+
+E04의 대표점은 G01에 저장한 원본 외곽 링의 사전순 첫 정점으로 고정하며 출입구·중심·스폰으로 재해석하지 않는다. 거리는 XZ 직선거리다. 같은 E03 메시·원점·5방향 10m 합성 축·10m 큐브의 실제 global 좌표/변환을 독립 재투영과 대조하고, 고정 map 시점의 정사영 650m 높이/1152×720 논리 화면에서 10m의 픽셀 투영도 검사한다. 허용 오차는 거리 `max(0.05m, 0.1%)`, 절대 위치/기준물 0.05m, 픽셀 투영 0.05px다. 물리 타깃 크기와 논리 화면을 구분한다. [고정 시점 설정](../config/scale_view.json)·[실제 E04 결과/한계](../data/reports/scale_view/README.md). 기존 region·도시 geometry 계약 수치는 변경하지 않았다.
 
 `y=local_height_m`는 지역 수직 좌표 규칙이다. G01 대표점의 y=0과 위쪽 10m는 합성 검사값이며 실제 지면이 아니다. 해발고도 기준은 계속 미확정이다. G03은 로컬 지지 평면 y=0을 임시 기준으로 정하고 전체 보존 도형 외접 범위+10m를 기술적 범위로 기록했다. 계단/교량/터널/0이 아니거나 해석 불가한 layer/지하/물 예외 132개에는 지면 높이를 배정하지 않는다. 평면은 플레이 경계·스폰·통행 허가가 아니며 DSM 표고나 건물 height를 원점의 해발고도로 취급하지 않는다. [규칙](../config/height_rules.json)·[검토](../data/reports/height_review.md).
 
@@ -75,7 +77,7 @@ E02는 `game/`를 Godot의 프로젝트 경계로 정했다. authored `world_con
 
 G02 중간물은 `data/processed/features.json`의 **별도 JSON 형식**이다. 위경도 GeoJSON으로 읽지 않는다. `coordinate_system`에 EPSG:32652·고정 원점·단위를 적고 `geometry`는 `[x,z]` 미터 좌표, `source_geometry`는 원본 `[경도,위도]`와 EPSG:4326을 보존한다. y/지면/건물 높이는 아직 배정하지 않는다. 같은 원천의 선/면 등 여러 표현은 `feature_id=정식 원천 ID:source_kind`로 구분하고 `entity_id`와 직접 원천·노드/관계 참조를 남긴다.
 
-XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한다. 이는 중간물 링 규칙이며 E03은 시계 방향 앞면/명시 법선과 실제 엔진 배열을 검증했으며, 고정 거리·기준물 검증은 E04에서 수행한다. 빈/비유효 도형을 조용히 수리하지 않고 작업을 중단하며 원본 오류를 기록한다. 조사 bbox에서 도형을 자르거나 도로폭 버퍼를 만들지 않는다. [생성 규칙](../config/geometry_rules.json)·[G02 증거](../data/reports/geometry_check.json).
+XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한다. 이는 중간물 링 규칙이며 E03은 시계 방향 앞면/명시 법선과 실제 엔진 배열을, E04는 고정 거리·기준물·투영 비례를 검증했다. 빈/비유효 도형을 조용히 수리하지 않고 작업을 중단하며 원본 오류를 기록한다. 조사 bbox에서 도형을 자르거나 도로폭 버퍼를 만들지 않는다. [생성 규칙](../config/geometry_rules.json)·[G02 증거](../data/reports/geometry_check.json).
 
 G03의 높이 가공물은 `heights.json`이며 G02 feature_id로 연결한다. 실제 필드는 `height_class`, `height_m`, `min_height_m`, `vertical_span_m`, `source_tags`, 원문 파싱 상태, `source_levels`, `assumption_id`, `component_evidence_ids`, `emit_coarse_body`다. 단일 유효 height를 우선하고, 원문이 있지만 다중/해석 불가면 보류한다. height가 없는 부분/지붕은 전체 높이를 임의로 만들지 않는다. 석조전은 명시 부분의 유효 상단 최대값으로 단순 외곽 상한을 도출한다. 랜드마크 임시값·층수 환산·용도 기본값과 계수는 [height_rules.json](../config/height_rules.json)에 구분한다. 원문 height에는 지붕이 포함되며 min_height와의 차이가 수직 길이다. 원문 min_height가 없을 때 하단 오프셋 0은 관측값이 아닌 로컬 기본안이다. 일반 빌딩 높이를 궁궐 전각에 일괄 적용하지 않는다.
 

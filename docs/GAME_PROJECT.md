@@ -1,6 +1,6 @@
 # 정식 Godot 프로젝트와 데이터 경계
 
-2026-10-13 · E03 · [서울 표시/검증](../data/reports/world_import.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
+2026-10-13 · E03/E04 · [서울 표시/검증](../data/reports/world_import.md) · [거리·축척 검증](../data/reports/scale_view/README.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
 
 ## 실행과 보기
 
@@ -22,6 +22,21 @@ sh tools/run_game.sh observe
 아래 버튼으로 **전체 배치 / 위에서 보기 / 덕수궁 가까이**를 선택한다. Esc는 메뉴를 열고 Esc나 **돌아가기**로 닫으며 **종료**로 끝낸다. 실제 사람 이동·마우스 회전은 아직 없다. `observe`는 약 12초의 장면 처리 후 PNG/JSON/로그를 Git 제외 `data/cache/game/`에 남기고 종료한다. 12초는 기동 시간·도시 성능 측정이 아니다.
 
 실행 준비의 삼각분할은 `.venv-data` Shapely 환경이 필요하다. 준비된 `game/` 사본을 Godot으로 실행할 때는 Python·원본·인터넷·내보내기 템플릿이 필요 없다. `run_game.sh`의 자료 확인은 엔진 밖의 표준 Python이다. 새/오래된 자산을 좌표 기본값으로 조용히 대체하지 않고 재생성 안내를 낸다. 엔진/Python 위치가 다르면 `GODOT_BIN`·`SIM2SEOUL_PYTHON`을 지정한다.
+
+### E04 고정 검증 화면
+
+```sh
+python3 tools/prepare_scale_view.py
+sh tools/run_scale_view.sh run
+sh tools/run_scale_view.sh editor
+sh tools/run_scale_view.sh observe
+```
+
+[scale_view.tscn](../game/scenes/tests/scale_view.tscn)은 같은 base_world를 표시하고 G01 외곽점·4쌍 직선거리·5방향 10m 기준물·시험 큐브를 추가한다. 좌표/도시 메시 변환은 identity이고 플레이어·충돌은 없다. `config/scale_view.json`에 세 시점을 저장했으며 화면 아래 버튼과 Esc 메뉴로 확인한다. `observe`는 세 시점/메뉴와 실제 메시·기준물·카메라 측정값을 Git 제외 `data/cache/scale/`에 남기고 종료한다. 직접 키보드·마우스 사용성 검사는 별도다.
+
+`prepare_scale_view.py`는 현재 E03 계약/입력과 G01 로컬 기준점=공유 보고서, region 해시를 먼저 확인한다. Git 제외 `game/data/generated/scale_view.json`·`scale_manifest.json`을 생성하며 E03 world 해시와 정확 실행 경로를 연결한다. `scale_config.gd`는 해시/크기·자료 정의/숫자·축·시점 형식을 확인해 잘못된 자료를 거부한다. 대표점은 출입구/중심/스폰이 아니며 가려지지 않는 선·큐브는 합성 검사용 표시다.
+
+독립 검사기는 원본 경위도를 재투영해 실제 engine global 정점/선/변환과 대조한다. `.venv-data/bin/python tools/check_scale_contract.py`로 네트워크 차단 game 사본에서 정상/10종 실제 변형·11종 자료 거부·재생성을 다시 검사한다. [E04 결과/정확한 방법·한계](../data/reports/scale_view/README.md)를 따른다.
 
 ## 장면과 입력 역할
 
@@ -79,4 +94,4 @@ python3 tools/check_game_project.py
 
 `tests/game/check_world.gd`는 actual ArrayMesh의 모든 정점을 읽고 변환/법선·삼각형 수를 검사한다. 현재 M1 GPU에서 12개+세 시점/메뉴 캡처 4개를 통과했다. `tests/game/offline.sb`는 시험 프로세스에만 네트워크 차단을 적용하며 시스템 설정을 바꾸지 않는다. 별도 game 사본의 관측 결과·정상 종료와 환경 범위는 [E03 보고서](../data/reports/world_import.md)에 있다.
 
-작은 공유 파일에서 G01–G04→E03 재생성 검사는 `tools/check_world_portability.py`다. 현재 M1의 기존 인터프리터를 사용한 사본 검사이며 새 가상환경/M4 실측을 대신하지 않는다. `.godot`·UID·생성 JSON·빌드·설치 앱·사용자 설정은 복사/공유하지 않는다. 다음 E04는 고정 대표 거리·10m 기준물 검증, 이후 P/W는 실제 조작/충돌/대한문 통과 검증이다.
+작은 공유 파일에서 G01–G04→E03 재생성 검사는 `tools/check_world_portability.py`다. 현재 M1의 기존 인터프리터를 사용한 사본 검사이며 새 가상환경/M4 실측을 대신하지 않는다. `.godot`·UID·생성 JSON·빌드·설치 앱·사용자 설정은 복사/공유하지 않는다. E04 고정 대표 거리·10m 기준물 검증은 완료했으며 다음 P01부터 사람 크기/조작/충돌을 구현한다. 대한문 통과와 전체 경로는 W 단계에서 검증한다.

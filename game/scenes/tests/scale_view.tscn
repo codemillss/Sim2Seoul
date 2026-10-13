@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/scale_view.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/world_config.tres" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/world/base_world.tscn" id="3"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.76, 0.81, 0.82, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.82, 0.86, 0.89, 1)
+ambient_light_energy = 0.55
+
+[node name="ScaleView" type="Node3D"]
+process_mode = 3
+script = ExtResource("1")
+world_config = ExtResource("2")
+
+[node name="World" parent="." instance=ExtResource("3")]
+
+[node name="Anchors" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Controls" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Presentation" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Camera" type="Camera3D" parent="Presentation"]
+projection = 1
+keep_aspect = 1
+size = 650.0
+far = 6000.0
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Presentation"]
+environment = SubResource("Environment_1")
+
+[node name="Sun" type="DirectionalLight3D" parent="Presentation"]
+rotation_degrees = Vector3(-60, -35, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.05
+shadow_enabled = true
+directional_shadow_max_distance = 2000.0
+
+[node name="Interface" type="CanvasLayer" parent="."]
+process_mode = 3

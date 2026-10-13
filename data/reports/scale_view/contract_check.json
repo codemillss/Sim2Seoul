@@ -1,0 +1,592 @@
+{
+  "task": "E04",
+  "passed": true,
+  "checks": [
+    {
+      "name": "engine.version",
+      "passed": true
+    },
+    {
+      "name": "preparation.current_bundle",
+      "passed": true
+    },
+    {
+      "name": "runtime.game_only",
+      "passed": true
+    },
+    {
+      "name": "runtime.no_import_cache",
+      "passed": true
+    },
+    {
+      "name": "engine.normal",
+      "passed": true,
+      "checks": 209
+    },
+    {
+      "name": "engine.fixed_scene_repeat",
+      "passed": true
+    },
+    {
+      "name": "regression.world_scaled",
+      "passed": true
+    },
+    {
+      "name": "regression.world_moved",
+      "passed": true
+    },
+    {
+      "name": "regression.world_rotated",
+      "passed": true
+    },
+    {
+      "name": "regression.world_z_flipped",
+      "passed": true
+    },
+    {
+      "name": "regression.world_y_scaled",
+      "passed": true
+    },
+    {
+      "name": "regression.anchors_moved",
+      "passed": true
+    },
+    {
+      "name": "regression.controls_scaled",
+      "passed": true
+    },
+    {
+      "name": "regression.root_moved",
+      "passed": true
+    },
+    {
+      "name": "regression.ruler_shortened",
+      "passed": true
+    },
+    {
+      "name": "regression.cube_wrong_size",
+      "passed": true
+    },
+    {
+      "name": "bundle.normal",
+      "passed": true
+    },
+    {
+      "name": "bundle.missing_manifest",
+      "passed": true
+    },
+    {
+      "name": "bundle.missing_data",
+      "passed": true
+    },
+    {
+      "name": "bundle.checksum",
+      "passed": true
+    },
+    {
+      "name": "bundle.external_path",
+      "passed": true
+    },
+    {
+      "name": "bundle.stale_world",
+      "passed": true
+    },
+    {
+      "name": "bundle.source_point_kind",
+      "passed": true
+    },
+    {
+      "name": "bundle.duplicate_anchor",
+      "passed": true
+    },
+    {
+      "name": "bundle.control_direction",
+      "passed": true
+    },
+    {
+      "name": "bundle.missing_view",
+      "passed": true
+    },
+    {
+      "name": "bundle.cube_size",
+      "passed": true
+    },
+    {
+      "name": "bundle.invalid_camera",
+      "passed": true
+    },
+    {
+      "name": "preparation.two_generations_equal",
+      "passed": true
+    },
+    {
+      "name": "preparation.copy_matches_current",
+      "passed": true
+    },
+    {
+      "name": "preparation.reference_drift",
+      "passed": true
+    },
+    {
+      "name": "preparation.config_drift",
+      "passed": true
+    },
+    {
+      "name": "preparation.world_drift",
+      "passed": true
+    },
+    {
+      "name": "preparation.bundle_drift",
+      "passed": true
+    },
+    {
+      "name": "preparation.no_large_source",
+      "passed": true
+    },
+    {
+      "name": "city_world_unchanged",
+      "passed": true,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    }
+  ],
+  "engine_mutations": [
+    {
+      "case": "world_scaled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "world_transform.basis",
+      "failed_checks": [
+        "mesh.w/377289797.xz",
+        "mesh.w/377289797.transform.basis.0",
+        "mesh.w/377289797.transform.basis.1",
+        "mesh.w/377289797.transform.basis.2",
+        "mesh.w/181574577.xz",
+        "mesh.w/181574577.transform.basis.0",
+        "mesh.w/181574577.transform.basis.1",
+        "mesh.w/181574577.transform.basis.2",
+        "mesh.r/19357693.xz",
+        "mesh.r/19357693.transform.basis.0",
+        "mesh.r/19357693.transform.basis.1",
+        "mesh.r/19357693.transform.basis.2",
+        "mesh.w/517072312.xz",
+        "mesh.w/517072312.transform.basis.0",
+        "mesh.w/517072312.transform.basis.1",
+        "mesh.w/517072312.transform.basis.2",
+        "mesh.w/198561926.xz",
+        "mesh.w/198561926.transform.basis.0",
+        "mesh.w/198561926.transform.basis.1",
+        "mesh.w/198561926.transform.basis.2",
+        "mesh.r/10757525.xz",
+        "mesh.r/10757525.transform.basis.0",
+        "mesh.r/10757525.transform.basis.1",
+        "mesh.r/10757525.transform.basis.2",
+        "mesh.w/370019676.xz",
+        "mesh.w/370019676.transform.basis.0",
+        "mesh.w/370019676.transform.basis.1",
+        "mesh.w/370019676.transform.basis.2",
+        "pair.w/377289797.w/181574577.mesh_xz_m",
+        "pair.r/19357693.w/517072312.mesh_xz_m",
+        "pair.w/370019676.w/198561926.mesh_xz_m",
+        "pair.w/181574577.w/198561926.mesh_xz_m",
+        "world_transform.basis.0",
+        "world_transform.basis.1",
+        "world_transform.basis.2"
+      ],
+      "measurement_file": "regression/world_scaled.json",
+      "sha256": "146fb49d2c2b6a57f518227e405641b7486ce1b34cc25d20a8a7fffe4a1cb74c"
+    },
+    {
+      "case": "world_moved",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "world_transform.origin",
+      "failed_checks": [
+        "mesh.w/377289797.xz",
+        "mesh.w/377289797.transform.origin",
+        "mesh.w/181574577.xz",
+        "mesh.w/181574577.transform.origin",
+        "mesh.r/19357693.xz",
+        "mesh.r/19357693.transform.origin",
+        "mesh.w/517072312.xz",
+        "mesh.w/517072312.transform.origin",
+        "mesh.w/198561926.xz",
+        "mesh.w/198561926.transform.origin",
+        "mesh.r/10757525.xz",
+        "mesh.r/10757525.transform.origin",
+        "mesh.w/370019676.xz",
+        "mesh.w/370019676.transform.origin",
+        "pair.w/377289797.w/181574577.mesh_xz_m",
+        "pair.r/19357693.w/517072312.mesh_xz_m",
+        "pair.w/370019676.w/198561926.mesh_xz_m",
+        "pair.w/181574577.w/198561926.mesh_xz_m",
+        "world_transform.origin"
+      ],
+      "measurement_file": "regression/world_moved.json",
+      "sha256": "d681afc75edb892e48f64296a6cee51639ab47aa23a3f5c11da7141d7bd4fa83"
+    },
+    {
+      "case": "world_rotated",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "world_transform.basis",
+      "failed_checks": [
+        "mesh.w/377289797.xz",
+        "mesh.w/377289797.transform.basis.0",
+        "mesh.w/377289797.transform.basis.2",
+        "mesh.w/181574577.xz",
+        "mesh.w/181574577.transform.basis.0",
+        "mesh.w/181574577.transform.basis.2",
+        "mesh.r/19357693.xz",
+        "mesh.r/19357693.transform.basis.0",
+        "mesh.r/19357693.transform.basis.2",
+        "mesh.w/517072312.xz",
+        "mesh.w/517072312.transform.basis.0",
+        "mesh.w/517072312.transform.basis.2",
+        "mesh.w/198561926.xz",
+        "mesh.w/198561926.transform.basis.0",
+        "mesh.w/198561926.transform.basis.2",
+        "mesh.r/10757525.xz",
+        "mesh.r/10757525.transform.basis.0",
+        "mesh.r/10757525.transform.basis.2",
+        "mesh.w/370019676.xz",
+        "mesh.w/370019676.transform.basis.0",
+        "mesh.w/370019676.transform.basis.2",
+        "pair.w/377289797.w/181574577.mesh_xz_m",
+        "pair.r/19357693.w/517072312.mesh_xz_m",
+        "pair.w/370019676.w/198561926.mesh_xz_m",
+        "pair.w/181574577.w/198561926.mesh_xz_m",
+        "world_transform.basis.0",
+        "world_transform.basis.2"
+      ],
+      "measurement_file": "regression/world_rotated.json",
+      "sha256": "d273e65a888bd8d345b89f13acc407d8cac0e533d9f735dd3fa9e2e4d23ed2ea"
+    },
+    {
+      "case": "world_z_flipped",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "world_transform.basis",
+      "failed_checks": [
+        "mesh.w/377289797.xz",
+        "mesh.w/377289797.transform.basis.2",
+        "mesh.w/181574577.xz",
+        "mesh.w/181574577.transform.basis.2",
+        "mesh.r/19357693.xz",
+        "mesh.r/19357693.transform.basis.2",
+        "mesh.w/517072312.xz",
+        "mesh.w/517072312.transform.basis.2",
+        "mesh.w/198561926.xz",
+        "mesh.w/198561926.transform.basis.2",
+        "mesh.r/10757525.xz",
+        "mesh.r/10757525.transform.basis.2",
+        "mesh.w/370019676.xz",
+        "mesh.w/370019676.transform.basis.2",
+        "pair.w/377289797.w/181574577.mesh_xz_m",
+        "pair.r/19357693.w/517072312.mesh_xz_m",
+        "pair.w/370019676.w/198561926.mesh_xz_m",
+        "pair.w/181574577.w/198561926.mesh_xz_m",
+        "world_transform.basis.2"
+      ],
+      "measurement_file": "regression/world_z_flipped.json",
+      "sha256": "cf088f0ed52603eae05caa04937d739688eb84d730c8eff152c383c12017fe9b"
+    },
+    {
+      "case": "world_y_scaled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "world_transform.basis",
+      "failed_checks": [
+        "mesh.w/377289797.transform.basis.1",
+        "mesh.w/181574577.transform.basis.1",
+        "mesh.r/19357693.transform.basis.1",
+        "mesh.w/517072312.transform.basis.1",
+        "mesh.w/198561926.transform.basis.1",
+        "mesh.r/10757525.transform.basis.1",
+        "mesh.w/370019676.transform.basis.1",
+        "world_transform.basis.1"
+      ],
+      "measurement_file": "regression/world_y_scaled.json",
+      "sha256": "914832d37d6fd5b58df3d99f8be09dd8faa31a219c639a2c41089f42b88e5e0d"
+    },
+    {
+      "case": "anchors_moved",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "anchor_parent_transform.origin",
+      "failed_checks": [
+        "anchor.w/377289797.xz",
+        "anchor.w/181574577.xz",
+        "anchor.r/19357693.xz",
+        "anchor.w/517072312.xz",
+        "anchor.w/198561926.xz",
+        "anchor.r/10757525.xz",
+        "anchor.w/370019676.xz",
+        "line.w/377289797.w/181574577.start",
+        "line.w/377289797.w/181574577.end",
+        "line.r/19357693.w/517072312.start",
+        "line.r/19357693.w/517072312.end",
+        "line.w/370019676.w/198561926.start",
+        "line.w/370019676.w/198561926.end",
+        "line.w/181574577.w/198561926.start",
+        "line.w/181574577.w/198561926.end",
+        "anchor_parent_transform.origin"
+      ],
+      "measurement_file": "regression/anchors_moved.json",
+      "sha256": "e8f672cb132b807bdf08e7a72050448b2a40179717e347b1c99844431b3deed2"
+    },
+    {
+      "case": "controls_scaled",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "control_parent_transform.basis",
+      "failed_checks": [
+        "control.grid_east_10m.marker",
+        "control.grid_east_10m.line_end",
+        "control.grid_east_10m.direction",
+        "control.grid_east_10m.length_3d",
+        "control.grid_west_10m.marker",
+        "control.grid_west_10m.line_end",
+        "control.grid_west_10m.direction",
+        "control.grid_west_10m.length_3d",
+        "control.grid_north_10m.marker",
+        "control.grid_north_10m.line_end",
+        "control.grid_north_10m.direction",
+        "control.grid_north_10m.length_3d",
+        "control.grid_south_10m.marker",
+        "control.grid_south_10m.line_end",
+        "control.grid_south_10m.direction",
+        "control.grid_south_10m.length_3d",
+        "control.local_up_10m.marker",
+        "control.local_up_10m.line_end",
+        "control.local_up_10m.direction",
+        "control.local_up_10m.length_3d",
+        "cube.edge_axis_0",
+        "cube.edge_axis_1",
+        "cube.edge_axis_2",
+        "control_parent_transform.basis.0",
+        "control_parent_transform.basis.1",
+        "control_parent_transform.basis.2",
+        "camera.east.pixel_delta",
+        "camera.north.pixel_delta"
+      ],
+      "measurement_file": "regression/controls_scaled.json",
+      "sha256": "dea1b8c32ebbb8a4af7fc418792388fc94c6c426c51cb5a0162b7067b2b51696"
+    },
+    {
+      "case": "root_moved",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "engine.origin",
+      "failed_checks": [
+        "anchor.w/377289797.xz",
+        "mesh.w/377289797.xz",
+        "mesh.w/377289797.transform.origin",
+        "anchor.w/181574577.xz",
+        "mesh.w/181574577.xz",
+        "mesh.w/181574577.transform.origin",
+        "anchor.r/19357693.xz",
+        "mesh.r/19357693.xz",
+        "mesh.r/19357693.transform.origin",
+        "anchor.w/517072312.xz",
+        "mesh.w/517072312.xz",
+        "mesh.w/517072312.transform.origin",
+        "anchor.w/198561926.xz",
+        "mesh.w/198561926.xz",
+        "mesh.w/198561926.transform.origin",
+        "anchor.r/10757525.xz",
+        "mesh.r/10757525.xz",
+        "mesh.r/10757525.transform.origin",
+        "anchor.w/370019676.xz",
+        "mesh.w/370019676.xz",
+        "mesh.w/370019676.transform.origin",
+        "line.w/377289797.w/181574577.start",
+        "line.w/377289797.w/181574577.end",
+        "line.r/19357693.w/517072312.start",
+        "line.r/19357693.w/517072312.end",
+        "line.w/370019676.w/198561926.start",
+        "line.w/370019676.w/198561926.end",
+        "line.w/181574577.w/198561926.start",
+        "line.w/181574577.w/198561926.end",
+        "engine.origin",
+        "control.grid_east_10m.marker",
+        "control.grid_east_10m.line_start",
+        "control.grid_east_10m.line_end",
+        "control.grid_west_10m.marker",
+        "control.grid_west_10m.line_start",
+        "control.grid_west_10m.line_end",
+        "control.grid_north_10m.marker",
+        "control.grid_north_10m.line_start",
+        "control.grid_north_10m.line_end",
+        "control.grid_south_10m.marker",
+        "control.grid_south_10m.line_start",
+        "control.grid_south_10m.line_end",
+        "control.local_up_10m.marker",
+        "control.local_up_10m.line_start",
+        "control.local_up_10m.line_end",
+        "world_transform.origin",
+        "anchor_parent_transform.origin",
+        "control_parent_transform.origin",
+        "camera.transform.origin",
+        "camera.transform.basis.0",
+        "camera.transform.basis.1",
+        "camera.transform.basis.2",
+        "camera.origin_pixel"
+      ],
+      "measurement_file": "regression/root_moved.json",
+      "sha256": "11c814907afa8480e8f1d5cc2a4ab52de9d6c39c7082152d9858a62dcd40bba1"
+    },
+    {
+      "case": "ruler_shortened",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "control.grid_east_10m.length_3d",
+      "failed_checks": [
+        "control.grid_east_10m.line_end",
+        "control.grid_east_10m.direction",
+        "control.grid_east_10m.length_3d"
+      ],
+      "measurement_file": "regression/ruler_shortened.json",
+      "sha256": "f495fa956b67beb1428e9d61dd0d06d64130cd73d4e480c7be3ca53c0741c393"
+    },
+    {
+      "case": "cube_wrong_size",
+      "engine_exit": 0,
+      "checker_passed": false,
+      "expected_failure_prefix": "cube.edge_axis_1",
+      "failed_checks": [
+        "cube.edge_axis_1"
+      ],
+      "measurement_file": "regression/cube_wrong_size.json",
+      "sha256": "561aabfb56507e5242c7b85e90f8a10fd0bbd6f401d00ed91d32d12cd0e1f9a2"
+    }
+  ],
+  "bundle_fixtures": [
+    {
+      "case": "normal",
+      "reader": {
+        "ok": true
+      },
+      "expected_ok": true
+    },
+    {
+      "case": "missing_manifest",
+      "reader": {
+        "error": "고정 검증 자료를 준비해주세요.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "missing_data",
+      "reader": {
+        "error": "고정 검증 자료가 없습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "checksum",
+      "reader": {
+        "error": "고정 검증 자료의 체크섬 또는 크기가 다릅니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "external_path",
+      "reader": {
+        "error": "고정 검증 자료를 준비해주세요.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "stale_world",
+      "reader": {
+        "error": "고정 검증 자료가 현재 서울 배치/좌표 계약과 다릅니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "source_point_kind",
+      "reader": {
+        "error": "대표점의 정의 또는 위치가 잘못됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "duplicate_anchor",
+      "reader": {
+        "error": "대표점 ID가 중복됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "control_direction",
+      "reader": {
+        "error": "10m 기준물의 위치가 잘못됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "missing_view",
+      "reader": {
+        "error": "고정 시점의 형식이 잘못됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "cube_size",
+      "reader": {
+        "error": "고정 시점 또는 큐브 기준이 잘못됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    },
+    {
+      "case": "invalid_camera",
+      "reader": {
+        "error": "고정 시점의 형식이 잘못됐습니다.",
+        "ok": false
+      },
+      "expected_ok": false
+    }
+  ],
+  "preparation_rejections": [
+    {
+      "case": "reference_drift",
+      "rejected": true,
+      "reason": "G01 local reference differs from validated snapshot; rerun G01 before E04"
+    },
+    {
+      "case": "config_drift",
+      "rejected": true,
+      "reason": "E04 bundle stale/missing: scale_view.json"
+    },
+    {
+      "case": "world_drift",
+      "rejected": true,
+      "reason": "Stale or missing runtime contract: manifest.json; run prepare_game_data.py"
+    },
+    {
+      "case": "bundle_drift",
+      "rejected": true,
+      "reason": "E04 bundle stale/missing: scale_view.json"
+    }
+  ],
+  "checker_sha256": "88364a8876ae90dfe12901cd671e9ee87ccf4f776ecc300a33c57c2d9a6651c2",
+  "independent_checker_sha256": "c5ff874f90abb306e671e26b7ae6351187854cc420278ca72d994155794df74a",
+  "scope": "current M1, existing interpreter; actual offline game-only engine copy and validated G01/E03 preparation inputs",
+  "unverified": [
+    "new dependency installation",
+    "M4 Pro",
+    "physical survey",
+    "walking",
+    "native keyboard/mouse"
+  ]
+}
