@@ -26,7 +26,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 
 ## 현재 상태
 
-**D01–D04/G01–G04/E01–E04/P01–P03을 완료했고, 다음은 P04 충돌 계층·도시 적용이다.** 독립 시험장에서 걷기·달리기·회전·중력/지면 접촉·낙하/영역 이탈/수동 복귀를 구현했다. 10초 거리·대각선 속도, 실제 화면 30/60fps와 물리 60Hz, 60초 정지, 벽·시험문 왕복·램프/경사를 검증했다. [P02 실행/화면/결과](data/reports/movement.md)·[P01 사람 크기](data/reports/player_scale.md)·[E04 거리/축척](data/reports/scale_view/README.md)·[E03 서울 배치](data/reports/world_import.md)·[구조/실행](docs/GAME_PROJECT.md). P03에서 시험장 3인칭 추적·마우스 회전/휠 거리·벽/문 가림과 메뉴/잠금 복구도 구현했다. [P03 화면·검증](data/reports/camera.md). 도시 장면의 보행·대한문 통과·도시 충돌·상세 외형은 후속이다.
+**D01–D04/G01–G04/E01–E04/P01–P04를 완료했고, 다음은 W01 대한문 밖과 경내 연결이다.** 독립 시험장에서 걷기·달리기·회전·중력/지면 접촉·낙하/영역 이탈/수동 복귀를 구현했다. 10초 거리·대각선 속도, 실제 화면 30/60fps와 물리 60Hz, 60초 정지, 벽·시험문 왕복·램프/경사를 검증했다. [P02 실행/화면/결과](data/reports/movement.md)·[P01 사람 크기](data/reports/player_scale.md)·[E04 거리/축척](data/reports/scale_view/README.md)·[E03 서울 배치](data/reports/world_import.md)·[구조/실행](docs/GAME_PROJECT.md). P03에서 시험장 3인칭 추적·마우스 회전/휠 거리·벽/문 가림과 메뉴/잠금 복구도 구현했다. [P03 화면·검증](data/reports/camera.md). P04에서 도시 정적 충돌685개·역할별 행렬과 별도 충돌 시험장을 검증했다. [P04 화면·검증](data/reports/collision.md). 실제 도시 보행·대한문 개구부·상세 외형은 후속이다.
 
 이미 데이터 환경을 준비한 Mac은 `.venv-data/bin/python tools/prepare_world.py` 후 `sh tools/run_game.sh run`으로 연다. 아래 보기 버튼 세 개와 Esc 메뉴를 사용할 수 있다. 처음 쓰는 Mac은 위 준비 도구와 고정 Godot 설치를 먼저 수행한다. 생성 자산은 기기별 준비하며 게임 실행은 원본/Python/네트워크를 요구하지 않는다. 자동 입력과 실제 사용자의 직접 조작 검증은 구분한다.
 
@@ -45,7 +45,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 - [좌표·자료·게임 구성 계약](docs/TECHNICAL_CONTRACTS.md)
 - [보행·축척·충돌·성능·두 기기 검증 계획](docs/VALIDATION_PLAN.md)
 
-3인칭 시험장은 `sh tools/run_camera_test.sh run`으로 연다. WASD/방향키·Shift, 마우스 회전·휠 거리, Esc 메뉴/마우스 해제를 사용한다. 창을 벗어나면 일시 정지되고 Esc/돌아가기로 재개한다. 다음 우선 작업 **P04**는 충돌 계층/행렬과 실제 도시 정적 충돌 적용이다. 대한문 개구부와 경로 완주는 W에서 검증한다.
+3인칭 시험장은 `sh tools/run_camera_test.sh run`으로 연다. WASD/방향키·Shift, 마우스 회전·휠 거리, Esc 메뉴/마우스 해제를 사용한다. 창을 벗어나면 일시 정지되고 Esc/돌아가기로 재개한다. 최신 충돌 시험장은 `.venv-data/bin/python tools/prepare_collision.py` 후 `sh tools/run_collision_test.sh run`으로 연다. Esc 메뉴에서 서울/덕수궁 충돌 배치를 볼 수 있다. 서울 보기는 고정 시점이며 실제 보행은 다음 **W01** 대한문 연결부터 검증한다.
 
 ## 사용자가 정한 방향
 
@@ -76,7 +76,7 @@ M1 Pro에서도 실행되는 수준을 기준으로 삼고, 두 기기에서 같
 
 ## 무료 도구 기본안
 
-- **Godot 4.7.2 Standard 네이티브 앱:** 현재 M1에 설치하고 3D 편집기·세 렌더러의 실제 기동을 확인했다. 개발 기준은 Forward+/Metal이다. MIT 라이선스의 무료 엔진이며, E03 서울 지도 표시는 완료했으며 3인칭 이동·충돌 구현은 후속 작업이다. [시험 장면 실행 방법](docs/environment.md).
+- **Godot 4.7.2 Standard 네이티브 앱:** 현재 M1에 설치하고 3D 편집기·세 렌더러의 실제 기동을 확인했다. 개발 기준은 Forward+/Metal이다. MIT 라이선스의 무료 엔진이며, E03 서울 표시·P03 시험장3인칭·P04 도시 정적 충돌을 완료했고 실제 도시 보행은 W 단계다. [시험 장면 실행 방법](docs/environment.md).
 - **Python:** 원본 자료 검사와 좌표·도형 변환에 사용한다. 현재 기기에서 사용할 수 있다.
 - **OpenStreetMap:** 도로, 건물 윤곽, 보행로, 일부 담장·출입구·높이 속성을 초기 배치 자료로 확보했다. 독립 자료 대비 누락률과 실제 높이·접근 가능성 검증은 남아 있다.
 - **국내 공개 공간정보:** OSM의 누락을 보완할 후보로 검토한다. 다운로드 가능 여부, 좌표계, 갱신일, 이용 조건을 자료별로 확인한다.

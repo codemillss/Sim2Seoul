@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task": "P04",
+  "body_roles": {
+    "static_world": {"layer_number": 1, "layer": 1, "mask": 14},
+    "player": {"layer_number": 2, "layer": 2, "mask": 13},
+    "pedestrian": {"layer_number": 3, "layer": 4, "mask": 15},
+    "vehicle": {"layer_number": 4, "layer": 8, "mask": 15}
+  },
+  "camera_query": {"layer": null, "mask": 1, "exclude_player_rid": true},
+  "static_selection": {"roles": ["Buildings", "Barriers"], "ground_ids": ["temporary_support"], "shape": "ConcavePolygonShape3D", "backface_collision": true},
+  "actor_response": "Kinematic contact blocking; pedestrian/vehicle routing and stopping controllers remain N-stage work",
+  "scope": {"runtime_permission": null, "walkability_verified": false, "physical_terrain_verified": false, "playable_boundary": null, "spawn": null, "gate_openings": "W01_pending", "support_plane": "G03 temporary engineering plane only"}
+}

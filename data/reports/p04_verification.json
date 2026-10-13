@@ -1,0 +1,556 @@
+{
+  "task": "P04",
+  "date": "2026-10-13",
+  "passed": true,
+  "checks": [
+    {
+      "name": "contract.pass",
+      "passed": true,
+      "count": 17
+    },
+    {
+      "name": "gpu.pass",
+      "passed": true,
+      "count": 5
+    },
+    {
+      "name": "independent.pass",
+      "passed": true,
+      "count": 99
+    },
+    {
+      "name": "contract.source_hashes",
+      "passed": true,
+      "count": 22
+    },
+    {
+      "name": "contract.runtime_hashes",
+      "passed": true,
+      "count": 4
+    },
+    {
+      "name": "contract.probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "contract.parent_probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "contract.checker_sha256",
+      "passed": true
+    },
+    {
+      "name": "contract.driver_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.source_hashes",
+      "passed": true,
+      "count": 22
+    },
+    {
+      "name": "gpu.runtime_hashes",
+      "passed": true,
+      "count": 4
+    },
+    {
+      "name": "gpu.probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.parent_probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.checker_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.driver_sha256",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.pass",
+      "passed": true,
+      "count": 17904
+    },
+    {
+      "name": "headless_engine.runtime_provenance",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.all_tick_penetration",
+      "passed": true,
+      "ticks": 10532,
+      "max_box_penetration_m": 0.00217511365190148
+    },
+    {
+      "name": "headless_engine.extra_contacts",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.pass",
+      "passed": true,
+      "count": 17904
+    },
+    {
+      "name": "repeat_engine.runtime_provenance",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.all_tick_penetration",
+      "passed": true,
+      "ticks": 10532,
+      "max_box_penetration_m": 0.00217511365190148
+    },
+    {
+      "name": "repeat_engine.extra_contacts",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.pass",
+      "passed": true,
+      "count": 13333
+    },
+    {
+      "name": "gpu_30_engine.runtime_provenance",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.all_tick_penetration",
+      "passed": true,
+      "ticks": 7052,
+      "max_box_penetration_m": 0.00217511365190148
+    },
+    {
+      "name": "gpu_30_engine.extra_contacts",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.pass",
+      "passed": true,
+      "count": 13333
+    },
+    {
+      "name": "gpu_60_engine.runtime_provenance",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.all_tick_penetration",
+      "passed": true,
+      "ticks": 7052,
+      "max_box_penetration_m": 0.00217511365190148
+    },
+    {
+      "name": "gpu_60_engine.extra_contacts",
+      "passed": true
+    },
+    {
+      "name": "actual_fault.player_mask_zero",
+      "passed": true,
+      "expected_failure": "matrix.actual_player"
+    },
+    {
+      "name": "actual_fault.fixture_wall_disabled",
+      "passed": true,
+      "expected_failure": "fixture_extra.wall_walk.all_ticks"
+    },
+    {
+      "name": "actual_fault.camera_all_layers",
+      "passed": true,
+      "expected_failure": "camera_fixture.contract.mask"
+    },
+    {
+      "name": "actual_fault.city_layer_wrong",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10718798:building.body"
+    },
+    {
+      "name": "actual_fault.city_shape_disabled",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10718798:building.shape"
+    },
+    {
+      "name": "actual_fault.city_shape_missing",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10718798:building.body"
+    },
+    {
+      "name": "actual_fault.city_transform_shift",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10718798:building.body"
+    },
+    {
+      "name": "actual_fault.city_faces_shift",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10718798:building.shape"
+    },
+    {
+      "name": "actual_fault.display_collision_added",
+      "passed": true,
+      "expected_failure": "city.osm:relation:10647518:land_area.source"
+    },
+    {
+      "name": "actual_fault.hole_blocked",
+      "passed": true,
+      "expected_failure": "hole_probes[0].actual_clear"
+    },
+    {
+      "name": "actual_fault.coverage",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.world_hash",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.rules_hash",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.missing_body",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.duplicate_body",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.reference_promoted",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.permission_promoted",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.gate_opened_claim",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.entry_mask",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.entry_backface",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.counts",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejection.sources",
+      "passed": true
+    },
+    {
+      "name": "mode.city_inspection",
+      "passed": true
+    },
+    {
+      "name": "mode.fixture_recovery",
+      "passed": true
+    },
+    {
+      "name": "mode.support_plane",
+      "passed": true
+    },
+    {
+      "name": "mode.capture_scope",
+      "passed": true
+    },
+    {
+      "name": "plan.scope",
+      "passed": true
+    },
+    {
+      "name": "plan.counts",
+      "passed": true
+    },
+    {
+      "name": "plan.gates",
+      "passed": true
+    },
+    {
+      "name": "prepared_input_copy.portability",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/project.godot",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/player/player.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/tests/player_fixture.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/player/idle_support.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/player_fixture.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/input_router.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/tests/movement_test.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/player/movement_controller.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/movement_test.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/player/camera_rig.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/player/camera_rig.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/tests/camera_test.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/camera_test.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/world/base_world.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/base_world.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/resources/world_config.tres",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/world_config.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scenes/main.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved.game/scripts/main.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved.config/region.json",
+      "passed": true
+    },
+    {
+      "name": "preserved.config/world_display.json",
+      "passed": true
+    },
+    {
+      "name": "preserved.tools/check_camera_contract.py",
+      "passed": true
+    },
+    {
+      "name": "preserved.tests/game/check_camera_test.gd",
+      "passed": true
+    },
+    {
+      "name": "plan.hash.world_sha256",
+      "passed": true
+    },
+    {
+      "name": "plan.hash.rules_sha256",
+      "passed": true
+    },
+    {
+      "name": "plan.hash.region_sha256",
+      "passed": true
+    },
+    {
+      "name": "plan.hash.generator_sha256",
+      "passed": true
+    },
+    {
+      "name": "failure_preserved",
+      "passed": true
+    },
+    {
+      "name": "native_preview.ready",
+      "passed": true
+    },
+    {
+      "name": "screenshots",
+      "passed": true
+    },
+    {
+      "name": "state.next_w01",
+      "passed": true
+    },
+    {
+      "name": "state.completion",
+      "passed": true
+    },
+    {
+      "name": "state.human_unverified",
+      "passed": true
+    }
+  ],
+  "baseline_commit": "2381567d1b217d685ab42d3016051c65fe1f1b30",
+  "source_files": {
+    ".gitattributes": "a331d7b20ca95cf5d00c657489c1ffb65360244e0c225357f4575a9b0643b1e4",
+    "game/resources/collision/rules.json": "949294fe9424994919d244b352c2f7444a1d4f6feec91f3562dfabfc80f10ae8",
+    "game/scenes/tests/collision_test.tscn": "c9153da4fb59b75ef756032ef51c9ec9193da754857cce96367af54d4d389d79",
+    "game/scenes/world/collision_world.tscn": "d7f94a2a443a88a6e0deaaa5d23e06750b3520fe98737b0dfc125b0a8c6454fc",
+    "game/scripts/collision_test.gd": "42b33663b364acd5c9cda67914dab39452d79b8f44ad518d9712038bdcb1d86f",
+    "game/scripts/collision_world.gd": "78ea28c07e6901b2b6096a298eef1b1ccb3185e9a1e87bc23cbda1f232421231",
+    "tests/game/check_collision_test.gd": "41d6d0879cc30513bc460d861d62dbda2a79bb58ee7a3cda401442493dcff5ee",
+    "tests/game/check_collision_mode.gd": "fb164f0267dda5cb71fd6cd6300b4c344612f4cecc4e575016116e3c9395123c",
+    "tests/game/check_collision_rejection.gd": "c02c9ca6d10348c41295f1489a2b35196bded3969f858a49012427c8e0d4d2f9",
+    "tools/prepare_collision.py": "ee7659dcc7fc34174d54d390c7ee4b49dc862b4d029494966c84b788d8da7108",
+    "tools/check_collision_bundle.py": "969cdcde44b29d02cc73329afcbfade61380d9a75fe50385d1ae84b5b9e42d08",
+    "tools/check_collision_contract.py": "09b3d0cddd2ade891167b074d33018bd8da926cdc97435afca6f4a94b12bb361",
+    "tools/check_collision_evidence.py": "32433bf81b9d7b8c7edd122a027cd6b8df7dd611c7466f705bba7461cab02c4d",
+    "tools/check_collision_rejections.py": "5f380b9d0fcea24f4738797a2824f9d7cf89af911640a1c3c4f939d6d256e2b8",
+    "tools/run_collision_test.sh": "e094a60620ccc85a6b10d13f147ad6ef890982200a40794be6b8d5fe9514236b"
+  },
+  "evidence_files": {
+    "data/reports/collision/contract_check.json": "370ed1d37ead16eff966d3fcef31a92dae1257d624b7c12ecd51d6acc6137de0",
+    "data/reports/collision/development/before_metadata_fix.json": "9515e867cf07df840fa4824e550ffb406a3e44bbd34daace38a1eae34fa8953f",
+    "data/reports/collision/development/failures.json": "76330a22a5fb24ef61bac417c2660ae007a20837c0922022c62552b9f34def4e",
+    "data/reports/collision/development/gpu_parallel_timing_failure/gpu_30_engine.json": "d13dc4d935fcb7818367c4fa89210a675282edc4acc80d20b59b9856a8027f27",
+    "data/reports/collision/development/gpu_parallel_timing_failure/gpu_30_engine.log": "8fd5e7a43c84cd320c97db9d34a676a570a194788a1f8dabfaf2847bd292ba04",
+    "data/reports/collision/development/gpu_parallel_timing_failure/gpu_30_engine_check.json": "1c45bde1c97bc5eeba32afc3ec94167d5bbd451289df987331f9310929d52647",
+    "data/reports/collision/development/gpu_parallel_timing_failure/gpu_check.json": "5fa7c93e5bb4f4c1fc1baabdde7ce28fc667a77822096b5d9632fbb8890b2a82",
+    "data/reports/collision/development/initial_smoke.log": "9077c58b70b859d97f78c8b8430a7a1e05d69c6c56643e61b7b38c8ce074d6fb",
+    "data/reports/collision/gpu_30_engine.json": "07c73be79895e75fce02ad595ccac7202894fab2d2de0126fc56ca3de4405faa",
+    "data/reports/collision/gpu_30_engine.log": "8fd5e7a43c84cd320c97db9d34a676a570a194788a1f8dabfaf2847bd292ba04",
+    "data/reports/collision/gpu_30_engine_check.json": "792117c6402e4f643577087ae9d58f67939f9780c2c190e4959237cce6dd2e39",
+    "data/reports/collision/gpu_60_engine.json": "b2cd619e23cabc6c132b605d519d3132178d49f758673941d4b654409d9c9f23",
+    "data/reports/collision/gpu_60_engine.log": "8fd5e7a43c84cd320c97db9d34a676a570a194788a1f8dabfaf2847bd292ba04",
+    "data/reports/collision/gpu_60_engine_check.json": "d4a5f3c614e7b59e8805371749744af9f2a26ebc2487afd54e73383d8aac9a16",
+    "data/reports/collision/gpu_check.json": "5bb8f5f1ee9a51a0da740a8417c3575ebebbd4f05f5d7ef61e148a6a1f8947bf",
+    "data/reports/collision/headless_engine.json": "c86689de0822f23795c456860c8b286fd4f30261b9941a4ea30c6f4150f0f141",
+    "data/reports/collision/headless_engine.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/headless_engine_check.json": "cf79fe22ddb75b64f30900eb585b59e65541c1abd43320c8a8f7ec40f1126b13",
+    "data/reports/collision/independent_review.json": "713069f91576a7d2004fd71df114e84c5d13329b9f20c0daf38d42aad3a6704f",
+    "data/reports/collision/mode_engine.json": "dee17ad3c148b86c052215f28bbe6f28b159625985a8e3fe39465c80ab7b7f75",
+    "data/reports/collision/mode_engine.log": "ab9e567a9f2bddd8373f85b0636637830471f1b3e22ade8892dc94f30b3db32b",
+    "data/reports/collision/portability_check.json": "fe7f9bb11284fa0d7294bf30475fe7a28a192ed4943a0974801e918bbfa73226",
+    "data/reports/collision/preview_launch.json": "65f1d4f7d6ba8ed8caf59a4862960b61217f76592dcccdd70903606e3b42ebe8",
+    "data/reports/collision/regression/camera_all_layers.json": "bdd511d96dc37a69986b32a616d49732dadf4a74e4297b31a23352b4ecf4d381",
+    "data/reports/collision/regression/camera_all_layers.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/camera_all_layers_check.json": "60e73bdca1a10dc7067b9902801c2db8a1976faee45b55b029198a0de8bd8367",
+    "data/reports/collision/regression/city_faces_shift.json": "e03f4202c162501f3ca2c731054fd3ed757e72d014a41493298ca3fbe48b2394",
+    "data/reports/collision/regression/city_faces_shift.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/city_faces_shift_check.json": "f2c263337a59db8afc621ea87a63b151fde913ad47a84e54e93b0b419f61e7b3",
+    "data/reports/collision/regression/city_layer_wrong.json": "d7f45af6387efcbe9b5bc5b3bad7d410af3fc80c3e22a05ed6a9eb1b213a0f98",
+    "data/reports/collision/regression/city_layer_wrong.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/city_layer_wrong_check.json": "430213708808bf5bb235145e6b4adf016dd1337a7b04bd0cdff8c38f153d00cd",
+    "data/reports/collision/regression/city_shape_disabled.json": "ae3b26ec6dbc975dd9b6858dc9332c17f208c155f7835245573b8ea7ae3cf216",
+    "data/reports/collision/regression/city_shape_disabled.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/city_shape_disabled_check.json": "5c3558f2ec07203cbac57f2990db87eec21752b1a6a5b1b69daa9e3483b5d568",
+    "data/reports/collision/regression/city_shape_missing.json": "bbfb261a5d6634a3b7b27d402f4f0a08dac209513fc335a7a222db9f2f145f4a",
+    "data/reports/collision/regression/city_shape_missing.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/city_shape_missing_check.json": "749c3960efd52b227fcd41f3f218d270021a59fcab66a90a01ece36556d91b96",
+    "data/reports/collision/regression/city_transform_shift.json": "19409e0c28409529fde340ce2fcb9ca7accc3d14dadb33766df9ac3e3f10bd7b",
+    "data/reports/collision/regression/city_transform_shift.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/city_transform_shift_check.json": "e75a4056333744fcc0d81e99303bce3dac876643850e7c09284e27480436e876",
+    "data/reports/collision/regression/display_collision_added.json": "ab4ceb7ea835a72fa2952172569992b66413f905d9cdd28dc71efc1ef2b054e5",
+    "data/reports/collision/regression/display_collision_added.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/display_collision_added_check.json": "85036d9426747b132db3adbaf16465260c05af5823fd4ba15826c51c3e85f853",
+    "data/reports/collision/regression/fixture_wall_disabled.json": "64a46e08906295a580214d254b3bd794c2906d883fed9337131447d715c9315d",
+    "data/reports/collision/regression/fixture_wall_disabled.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/fixture_wall_disabled_check.json": "c64512f9780d40c983712dfb478f26452693df4fd3ac3f119ae35f21d5cf847a",
+    "data/reports/collision/regression/hole_blocked.json": "ff621e77ed86c5ee1ca8e89154f9f71c36d63aec01a0026bf57c403e49be4270",
+    "data/reports/collision/regression/hole_blocked.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/hole_blocked_check.json": "c646cc9956d8a72ef7bcd8673092d6901a57512c0e7bdfdf154e0e4dcbf6f6f0",
+    "data/reports/collision/regression/player_mask_zero.json": "0c252753829d9cf54da187a0f809850704e2bba8b7d32fe368d6ce4cc3234924",
+    "data/reports/collision/regression/player_mask_zero.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/regression/player_mask_zero_check.json": "b838abed0532a0d0f1ce92fe8fec73b3368f1ee2649aa06983ad870d31af92e7",
+    "data/reports/collision/rejections/counts.json": "3ca060b32f2812171cb885243e1060bcb7defe34c9e45b8c3eecc00a7f99412d",
+    "data/reports/collision/rejections/counts.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/duplicate_body.json": "f6d1d8020a6c19ee34c300274542df11fea47e6d82480617d24cdf69f9210493",
+    "data/reports/collision/rejections/duplicate_body.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/entry_backface.json": "24e0659ea4df0e6e844fa390068a244f41fb171c555eed992d0daf1294c6f1f8",
+    "data/reports/collision/rejections/entry_backface.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/entry_mask.json": "24e0659ea4df0e6e844fa390068a244f41fb171c555eed992d0daf1294c6f1f8",
+    "data/reports/collision/rejections/entry_mask.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/gate_opened_claim.json": "3c82e55896e61d2e0a68fe630e27a7851409e131df892c51b205531818d3b8f9",
+    "data/reports/collision/rejections/gate_opened_claim.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/missing_body.json": "22508ed72b95c41f07b4db997162e9a09a4ffb10b662c1c17e1b1f7aa36825cc",
+    "data/reports/collision/rejections/missing_body.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/permission_promoted.json": "3c82e55896e61d2e0a68fe630e27a7851409e131df892c51b205531818d3b8f9",
+    "data/reports/collision/rejections/permission_promoted.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/reference_promoted.json": "f6d1d8020a6c19ee34c300274542df11fea47e6d82480617d24cdf69f9210493",
+    "data/reports/collision/rejections/reference_promoted.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/rejection_check.json": "9072db794add8f64b4c455b4188451acf7f5a30287baad40247043c130a9b353",
+    "data/reports/collision/rejections/rules_hash.json": "89f18fe87103281d4c5d476f93d0bc928649db1551cfa88e4de30650a85fb001",
+    "data/reports/collision/rejections/rules_hash.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/rejections/world_hash.json": "89f18fe87103281d4c5d476f93d0bc928649db1551cfa88e4de30650a85fb001",
+    "data/reports/collision/rejections/world_hash.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    "data/reports/collision/repeat_engine.json": "2630e036394a5bb9dc7bcdf0f7f6233fc986320f085d9c72bd41658108f15fac",
+    "data/reports/collision/repeat_engine.log": "6b70c503952d28fde4db6516abce9753a60526a7f7a20ede4a2d356f94b6c641",
+    "data/reports/collision/repeat_engine_check.json": "cf79fe22ddb75b64f30900eb585b59e65541c1abd43320c8a8f7ec40f1126b13",
+    "data/reports/collision/view_city_overview.png": "8a8bbc5b66ddfc6190c132762eafb031e74a283c778128a115d9235463f8940f",
+    "data/reports/collision/view_city_palace.png": "edcbe63a24d925d63fafb96f46ec400093b562d9f58a7d8fd3afd07a843a5e47",
+    "data/reports/collision/view_corner.png": "a88cf27c8876dfa84896288ace48714c2dcd6e162ca7752387cc3225ab18e1f2",
+    "data/reports/collision/view_door.png": "502bafc4a09e86381cc6f02638c1ce760d90b80060a70dc20733e4fb049789d6",
+    "data/reports/collision/view_fixture_building.png": "c85c206df0a0a3ef07c470896d74badb16b44af8060cf32c0f6115ce4787ca8c",
+    "data/reports/collision/view_lintel.png": "6976ef97611fb2a9138fea2b1733ca2959d8a55a80a46f4978068cf2c2310637",
+    "data/reports/collision/view_menu.png": "7e5e12d16fbbb9d4af20a0a5a20c54827baee0f5108c134266a966a7f81bead2",
+    "data/reports/collision/view_open.png": "d5f67bfa852df1a4f6ad7108259d4c929c48d699e63e3c2a45633f907ef0748e",
+    "data/reports/collision/view_wall.png": "1a457705262abe3bfab95dc76422470eb36cd23d0bd7e8be45ba2309600bbfa4"
+  },
+  "preserved_baseline_files": [
+    "game/project.godot",
+    "game/scenes/player/player.tscn",
+    "game/scenes/tests/player_fixture.tscn",
+    "game/scripts/player/idle_support.gd",
+    "game/scripts/player_fixture.gd",
+    "game/scripts/input_router.gd",
+    "game/scenes/tests/movement_test.tscn",
+    "game/scripts/player/movement_controller.gd",
+    "game/scripts/movement_test.gd",
+    "game/scenes/player/camera_rig.tscn",
+    "game/scripts/player/camera_rig.gd",
+    "game/scenes/tests/camera_test.tscn",
+    "game/scripts/camera_test.gd",
+    "game/scenes/world/base_world.tscn",
+    "game/scripts/base_world.gd",
+    "game/resources/world_config.tres",
+    "game/scripts/world_config.gd",
+    "game/scenes/main.tscn",
+    "game/scripts/main.gd",
+    "config/region.json",
+    "config/world_display.json",
+    "tools/check_camera_contract.py",
+    "tests/game/check_camera_test.gd"
+  ],
+  "environment": "M1 Pro 16GB / Godot 4.7.2 / Forward+ Metal / 1152x720 physics60Hz",
+  "not_tested": [
+    "city free walking/routes/Daehanmun opening",
+    "permission/terrain/geographical accuracy",
+    "real NPC/vehicle route/controllers",
+    "human handling",
+    "OS-driven focus changes",
+    "M4",
+    "city performance",
+    "W0/V0"
+  ],
+  "next_task": "W01",
+  "next_first_action": "Compare G04 R1/source gate nodes, G03 exceptions, official access evidence and P04 pending gate bodies before designing Daehanmun opening, support connection and city spawn/recovery. Preserve source scale and permissions."
+}

@@ -1,6 +1,6 @@
 # 정식 Godot 프로젝트와 데이터 경계
 
-2026-10-13 · E03/E04/P01/P02/P03 · [카메라](../data/reports/camera.md) · [이동/복귀](../data/reports/movement.md) · [서울 표시](../data/reports/world_import.md) · [거리·축척](../data/reports/scale_view/README.md) · [사람 크기·시험장](../data/reports/player_scale.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
+2026-10-13 · E03/E04/P01/P02/P03/P04 · [충돌](../data/reports/collision.md) · [카메라](../data/reports/camera.md) · [이동/복귀](../data/reports/movement.md) · [서울 표시](../data/reports/world_import.md) · [거리·축척](../data/reports/scale_view/README.md) · [사람 크기·시험장](../data/reports/player_scale.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
 
 ## 실행과 보기
 
@@ -108,7 +108,7 @@ sh tools/run_player_fixture.sh observe
 
 시험장의 7개 정적 충돌 구조·1.20×2.20m 개구부·0.15/0.30m 단차·미터 기준물은 합성 자료다. 생성 manifest나 원본/가공 지도·Python을 런타임에서 읽지 않는다. `observe`는 기본 정착 1초+60초 실제 관측·세 시점/메뉴 캡처를 `data/cache/player/`에 저장한다. `observe 2` 같은 짧은 관측은 화면/실행 확인용이며 60초 완료 근거와 구분한다.
 
-`python3 tools/check_player_contract.py`는 지도/초기 캐시 없는 5개 authored 파일 사본에서 실제 엔진 오류 9종·가속 60초 물리·반복 측정을 검사한다. 정상 검사기는 `tools/check_player_fixture.py`이고 `--require-real-time`은 실제 벽시계 관측을 요구한다. [P01 결과/한계/정확한 실행](../data/reports/player_scale.md). P02 별도 시험장에서 입력/이동·낙하 복귀를 구현했다. P03 별도 시험장에 3인칭도 구현했고 P04에서 도시 충돌을 연결하며 시험장 결과를 서울 보행 완료로 해석하지 않는다.
+`python3 tools/check_player_contract.py`는 지도/초기 캐시 없는 5개 authored 파일 사본에서 실제 엔진 오류 9종·가속 60초 물리·반복 측정을 검사한다. 정상 검사기는 `tools/check_player_fixture.py`이고 `--require-real-time`은 실제 벽시계 관측을 요구한다. [P01 결과/한계/정확한 실행](../data/reports/player_scale.md). P02 별도 시험장에서 입력/이동·낙하 복귀를 구현했다. P03 별도 시험장에 3인칭도 구현했고 P04 별도 장면에 도시 충돌을 연결했으며 시험장 결과를 서울 보행 완료로 해석하지 않는다.
 
 ## P02 이동·중력·복귀 시험장
 
@@ -136,4 +136,20 @@ sh tools/run_camera_test.sh observe
 
 카메라가 따라오고 마우스로 회전·휠로 거리를 바꾼다. Esc 메뉴에서는 마우스를 풀고 Actor/리그를 정지하며 돌아온 후 마우스 첫 움직임/키 중립을 처리한다. 창 포커스 이탈도 메뉴를 열어 수동 재개하도록 한다. 가까운 벽/문에서 거리를 줄이고 화면을 가리는 몸체를 잠시 숨긴다. 코너 최종 겹침 보완과 근접면 검사를 별도로 둔다. [실행·검증·화면·한계](../data/reports/camera.md).
 
-`check_camera_contract.py`는 지도 없는13개 authored 파일 사본과 실제 오류5종, `check_camera_guard_regression.py`는 코너 보완을 실제로 제거한 사본1종을 검사한다. `--mode gpu`는 실제30/60fps 전체 카메라 시험·문20회 왕복을 측정하고 표준 Python 검사기가 관측을 채점한다. 기본 출력은 캐시이며 공유 스냅샷은 `data/reports/camera/`다. P04 실제 도시 충돌·W 대한문/경로·M4·직접 조작감 완료로 확대 해석하지 않는다.
+`check_camera_contract.py`는 지도 없는13개 authored 파일 사본과 실제 오류5종, `check_camera_guard_regression.py`는 코너 보완을 실제로 제거한 사본1종을 검사한다. `--mode gpu`는 실제30/60fps 전체 카메라 시험·문20회 왕복을 측정하고 표준 Python 검사기가 관측을 채점한다. 기본 출력은 캐시이며 공유 스냅샷은 `data/reports/camera/`다. P04 실제 도시 충돌은 아래 절의 별도 검증이며 W 대한문/경로·M4·직접 조작감 완료로 확대 해석하지 않는다.
+
+## P04 역할별 충돌과 도시 배치 확인
+
+```sh
+.venv-data/bin/python tools/prepare_collision.py
+python3 tools/check_collision_bundle.py
+sh tools/run_collision_test.sh run
+sh tools/run_collision_test.sh editor
+sh tools/run_collision_test.sh observe
+```
+
+P03 상속 [collision_test](../game/scenes/tests/collision_test.tscn)에 합성 건물1개를 추가해14개 정적 시험 구조를 만들었다. 기존 이동/카메라/메뉴는 보존한다. E03 상속 [collision_world](../game/scenes/world/collision_world.tscn)는 기존 actual ArrayMesh를 읽어 selected685개에만 StaticBody3D/ConcavePolygonShape3D를 붙인다. [rules](../game/resources/collision/rules.json)는 이름별 matrix, 기기별 generated.json은 source hash/ID/삼각형·검사 위치·W01 gate pending을 연결한다. 표준 Python bundle checker와 runtime loader가 잘못된 계획을 거부한다.
+
+fixture에서는 City layer/mask0·시험장1/14·Player2/13·camera query mask1이다. 메뉴의 서울/덕수궁 보기에서는 시험장0/0·City1/14, Player/리그의 일반 물리 갱신·입력을 중단하고 고정 CityCamera를 쓴다. 시험장 복귀 버튼은 확인한 합성 지면으로 돌아오고 카메라/키 중립을 복원한다. 도시 보기에는 스폰·플레이 경계·실제 보행을 추가하지 않았다. 토지/도로 표시548개는 충돌0이며 y=0 지원평면은 현실 지형이 아니다.
+
+`check_collision_contract.py`는 authored22+runtime4의 초기캐시 없는 사본과 실제 도형/설정 고장10종을 검사하고 GPU mode는30/60fps를 실제 측정한다. `check_collision_rejections.py`는 runtime 계획 손상10종의 실제 거부를 검증한다. `check_collision_evidence.py`는 표준 Python으로 엔진 관측을 독립 채점한다. [결과/실패/측정 범위](../data/reports/collision.md). generation/test_support는 Git 제외며 기존 E03 manifest의 표시 provenance를 P04 권한으로 바꾸지 않는다. 다음W01은 대한문 개구부·앞뒤 지면·도시 시작점/복귀부터 준비한다.

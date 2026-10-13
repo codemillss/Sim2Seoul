@@ -156,7 +156,7 @@ sh tools/run_game.sh observe
 python3 tools/check_game_project.py --report /tmp/sim2seoul-e03-project-check.json
 ```
 
-[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. P01 독립 시험장·P02 이동/지면 복귀·P03 3인칭 카메라를 완료했으며 다음 P04 충돌 계층/도시 적용을 이어간다.
+[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. P01 독립 시험장·P02 이동/지면 복귀·P03 3인칭 카메라를 완료했으며 P04 도시 정적 충돌도 완료했고 다음 W01 대한문 연결을 이어간다.
 
 ```sh
 python3 tools/prepare_scale_view.py
@@ -193,7 +193,7 @@ python3 tools/check_movement_contract.py --mode gpu
 
 WASD/방향키·Shift 달리기·Esc 메뉴·시작점 복귀 버튼. 녹색 램프는 단차 진입용, 거리 구간 큰 격자는5m이며 카메라는 고정이다. `observe`는 실제60fps 제한의10초 걷기/달리기·화면을 Git 제외 캐시에 저장한다. `contract`는9개 authored 파일 사본과 실제 오류6종을 가속 물리로 검사하고, `gpu`는30/60fps 조건과 실제60초 정지를 각각 실행한다. 표준 Python만 필요하며 macOS offline.sb는 시험 프로세스 네트워크만 차단한다. 다른 OS의 실행/프로파일은 별도 준비한다.
 
-[현재 M1 증거](../data/reports/movement.md)는 새 Mac 결과가 아니다. 기기명/칩/RAM/OS·실제 렌더러와 직접 조작감을 해당 기기에서 기록하고 `.godot`/캐시·생성물/앱은 공유하지 않는다. P03의 마우스 회전/가림은 아래 별도 시험장에서 완료했다. 실제 도시 보행은 미검증이며 다음 P04다.
+[현재 M1 증거](../data/reports/movement.md)는 새 Mac 결과가 아니다. 기기명/칩/RAM/OS·실제 렌더러와 직접 조작감을 해당 기기에서 기록하고 `.godot`/캐시·생성물/앱은 공유하지 않는다. P03의 마우스 회전/가림은 아래 별도 시험장에서 완료했다. 실제 도시 보행은 미검증이며 P04 충돌 완료 후 다음 W01이다.
 
 ## P03 카메라 시험장과 다른 Mac 인수
 
@@ -210,4 +210,22 @@ python3 tools/check_camera_guard_regression.py
 
 `observe`는 실제60fps 제한에서 전체 카메라 시험/문 왕복/캡처를 캐시에 남긴다. `contract`는13개 authored 파일 사본/가속 물리/실제 오류5종, `gpu`는 실제30/60fps 입력/충돌/문 회전 시험, guard regression은 실제 코너 보완 제거1종을 별도 사본에서 검사한다. native mouse capture가 없는 headless의 모의 의도 시험은 실제 Mac 화면 결과와 구분한다. 기존 P01/P02 원본은 보존했으므로 각 독립 시험을 그대로 실행할 수 있다.
 
-[현재 M1 카메라 증거](../data/reports/camera.md)는1152×720/기존 환경이다. 새 Mac은 칩/RAM/OS와 실제 렌더러·마우스/트랙패드 감도·창 포커스·시야를 해당 기기에서 기록한다. M4/임의 화면비·사람 조작감·도시 성능은 이 결과로 대신하지 않는다. 다음 P04는 E03 도형/보류 상태와 카메라 검사를 유지하며 충돌 계층/도시 정적 충돌을 연결한다.
+[현재 M1 카메라 증거](../data/reports/camera.md)는1152×720/기존 환경이다. 새 Mac은 칩/RAM/OS와 실제 렌더러·마우스/트랙패드 감도·창 포커스·시야를 해당 기기에서 기록한다. M4/임의 화면비·사람 조작감·도시 성능은 이 결과로 대신하지 않는다. P04 충돌 장면은 아래 절, 현재 다음 작업은 W01 대한문 연결이다.
+
+## P04 충돌 시험과 다음 W01 인수
+
+기존 위 G/E03 준비를 재사용하고 정적 충돌 계획만 기기별로 생성한다.
+
+```sh
+.venv-data/bin/python tools/prepare_collision.py
+python3 tools/check_collision_bundle.py
+sh tools/run_collision_test.sh run
+sh tools/run_collision_test.sh observe
+python3 tools/check_collision_contract.py --mode contract
+python3 tools/check_collision_contract.py --mode gpu
+python3 tools/check_collision_rejections.py
+```
+
+생성에는 기존 Shapely 환경, 실행 도구의 사전 검사에는 표준 Python을 사용한다. 준비된 game 런타임은 지도/패키지/인터넷을 읽지 않는다. generated.json·test_support·캐시·.godot는 공유하지 않는다. 22개 authored/4개 런타임 사본의 실행과 이미 준비된32입력의 P04 동일 재생성은 [현재 M1 증거](../data/reports/collision.md)이며 전체 G 재준비·새 가상환경·M4 검증은 아니다.
+
+WASD/Shift/마우스/휠/Esc는 시험장 조작이고 메뉴의 서울/덕수궁 보기는 고정 시점이다. 대한문/중화문은 아직 막혀 있다. 다음 W01은 G04 R1/공식 근거/pending gate를 대조해 개구부·앞뒤 지면·도시 시작점/복귀를 준비한다. 도시 보행·권한/지형·NPC 제어·사람 조작감·기기 성능을 기존 검사 통과로 대신하지 않는다.
