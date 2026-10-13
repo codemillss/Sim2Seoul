@@ -1,0 +1,891 @@
+{
+  "task": "W02",
+  "schema_version": 1,
+  "passed": true,
+  "method": "Separate agent fresh standard-library audits of completed engine records; no generator imports, engine execution, downloads or proof-source edits in this review",
+  "examined_raw_base": "data/cache/palace_final",
+  "archive_destination": "data/reports/palace",
+  "checks": [
+    {
+      "name": "fresh_normal.headless_engine",
+      "passed": true,
+      "count": 1237,
+      "case_count": 85,
+      "suite": "full"
+    },
+    {
+      "name": "fresh_normal.repeat_engine",
+      "passed": true,
+      "count": 1237,
+      "case_count": 85,
+      "suite": "full"
+    },
+    {
+      "name": "fresh_normal.gpu_30_engine",
+      "passed": true,
+      "count": 854,
+      "case_count": 9,
+      "suite": "short"
+    },
+    {
+      "name": "fresh_normal.gpu_60_engine",
+      "passed": true,
+      "count": 1252,
+      "case_count": 85,
+      "suite": "full"
+    },
+    {
+      "name": "actual_engine_fault.support_disabled",
+      "passed": true,
+      "relevant_check": "inventory.W02_support"
+    },
+    {
+      "name": "actual_engine_fault.preserved_wall_removed",
+      "passed": true,
+      "relevant_check": "inventory.osm:way:381755262:barrier"
+    },
+    {
+      "name": "actual_engine_fault.player_mask_zero",
+      "passed": true,
+      "relevant_check": "actual_player_contract"
+    },
+    {
+      "name": "actual_engine_fault.camera_mask_zero",
+      "passed": true,
+      "relevant_check": "actual_player_contract"
+    },
+    {
+      "name": "actual_engine_fault.global_support_reenabled",
+      "passed": true,
+      "relevant_check": "inventory.actual_disabled_bodies"
+    },
+    {
+      "name": "actual_engine_fault.courtyard_hole_filled",
+      "passed": true,
+      "relevant_check": "inventory.census"
+    },
+    {
+      "name": "json_observation_mutation.sample_floor_id",
+      "passed": true
+    },
+    {
+      "name": "json_observation_mutation.sample_camera_query_mask",
+      "passed": true
+    },
+    {
+      "name": "json_observation_mutation.source_face_observation_hash",
+      "passed": true
+    },
+    {
+      "name": "json_observation_mutation.unretained_outside_tick",
+      "passed": true
+    },
+    {
+      "name": "frozen_sources_and_proofs.contract",
+      "passed": true,
+      "driver_checks": 24
+    },
+    {
+      "name": "frozen_sources_and_proofs.gpu",
+      "passed": true,
+      "driver_checks": 10
+    },
+    {
+      "name": "repeat_exact_inventory_and_retained_paths",
+      "passed": true
+    },
+    {
+      "name": "runtime_rejections_15",
+      "passed": true
+    },
+    {
+      "name": "clean_portable_regeneration",
+      "passed": true
+    },
+    {
+      "name": "capture_files_27",
+      "passed": true
+    },
+    {
+      "name": "preserved_containment_regression",
+      "passed": true
+    },
+    {
+      "name": "available_archive_copies_match",
+      "passed": true,
+      "available_files": 37,
+      "examined_files": 37
+    },
+    {
+      "name": "proof_files_unchanged_during_review",
+      "passed": true
+    }
+  ],
+  "normal_records": [
+    {
+      "examined_raw": "data/cache/palace_final/headless_engine.json",
+      "archive": "data/reports/palace/headless_engine.json",
+      "sha256": "bd34e6c03e020345bf72ef670f4360f84769b07ef41e4b44440fd38b91ef842e",
+      "passed": true,
+      "checks": 1237,
+      "case_count": 85,
+      "suite": "full"
+    },
+    {
+      "examined_raw": "data/cache/palace_final/repeat_engine.json",
+      "archive": "data/reports/palace/repeat_engine.json",
+      "sha256": "4ae59cf76572cf2b7fbe79a038cfc4c71d25425a19d0b352b1b03f3f6db5b35d",
+      "passed": true,
+      "checks": 1237,
+      "case_count": 85,
+      "suite": "full"
+    },
+    {
+      "examined_raw": "data/cache/palace_final/gpu_30_engine.json",
+      "archive": "data/reports/palace/gpu_30_engine.json",
+      "sha256": "62093344c07ebdfb152828c79ea7ee75a14fbca3e9e3faefa4b9a299accdc3c6",
+      "passed": true,
+      "checks": 854,
+      "case_count": 9,
+      "suite": "short"
+    },
+    {
+      "examined_raw": "data/cache/palace_final/gpu_60_engine.json",
+      "archive": "data/reports/palace/gpu_60_engine.json",
+      "sha256": "b436bae5f1b2f60fb023e38fde1596666cbd6ebf801ba09feee4d789cd5ef9d7",
+      "passed": true,
+      "checks": 1252,
+      "case_count": 85,
+      "suite": "full"
+    }
+  ],
+  "actual_engine_faults": [
+    {
+      "fault": "support_disabled",
+      "examined_raw": "data/cache/palace_final/regression/support_disabled.json",
+      "archive": "data/reports/palace/regression/support_disabled.json",
+      "sha256": "6e9236422fa1305fda092b152c93535993e1416a9976c33d6cbfb1859e690377",
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.census",
+        "inventory.W02_support",
+        "spawn_valid",
+        "boundary_court_hole.all_ticks",
+        "boundary_court_hole.independent_samples",
+        "boundary_court_hole.boundary_stop",
+        "boundary_footway.all_ticks",
+        "boundary_footway.independent_samples",
+        "boundary_footway.boundary_stop",
+        "boundary_lawn.all_ticks",
+        "boundary_lawn.independent_samples",
+        "boundary_lawn.boundary_stop",
+        "boundary_seok_stairs.all_ticks",
+        "boundary_seok_stairs.independent_samples",
+        "boundary_seok_stairs.boundary_stop",
+        "gate_forward.all_ticks",
+        "gate_forward.independent_samples",
+        "gate_forward.actual_passage_crossing",
+        "gate_reverse.all_ticks",
+        "gate_reverse.independent_samples",
+        "gate_reverse.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "speed_run.all_ticks",
+        "speed_run.independent_samples",
+        "speed_run.speed",
+        "speed_walk.all_ticks",
+        "speed_walk.independent_samples",
+        "speed_walk.speed",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart",
+        "ray.court_floor",
+        "ray.court_floor.independent_source_hit",
+        "ray.loop_floor",
+        "ray.loop_floor.independent_source_hit"
+      ]
+    },
+    {
+      "fault": "preserved_wall_removed",
+      "examined_raw": "data/cache/palace_final/regression/preserved_wall_removed.json",
+      "archive": "data/reports/palace/regression/preserved_wall_removed.json",
+      "sha256": "99b27aeefe4df6bf8b3b4edb8544daacd30c6044b27c5f4864fa256ce4f3103a",
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.census",
+        "inventory.actual_disabled_bodies",
+        "inventory.osm:way:381755262:barrier",
+        "ray.preserved_retaining_wall",
+        "ray.preserved_retaining_wall.independent_source_hit"
+      ]
+    },
+    {
+      "fault": "player_mask_zero",
+      "examined_raw": "data/cache/palace_final/regression/player_mask_zero.json",
+      "archive": "data/reports/palace/regression/player_mask_zero.json",
+      "sha256": "5dead6c0325268cde13cc1742871b4942691c6440ccfa63a675283a2272e6d81",
+      "checker_passed": false,
+      "failed_checks": [
+        "actual_player_contract",
+        "spawn_valid",
+        "boundary_court_hole.all_ticks",
+        "boundary_court_hole.independent_samples",
+        "boundary_court_hole.boundary_stop",
+        "boundary_footway.all_ticks",
+        "boundary_footway.independent_samples",
+        "boundary_footway.boundary_stop",
+        "boundary_lawn.all_ticks",
+        "boundary_lawn.independent_samples",
+        "boundary_lawn.boundary_stop",
+        "boundary_seok_stairs.all_ticks",
+        "boundary_seok_stairs.independent_samples",
+        "boundary_seok_stairs.boundary_stop",
+        "gate_forward.all_ticks",
+        "gate_forward.independent_samples",
+        "gate_forward.actual_passage_crossing",
+        "gate_reverse.all_ticks",
+        "gate_reverse.independent_samples",
+        "gate_reverse.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "speed_run.all_ticks",
+        "speed_run.independent_samples",
+        "speed_run.speed",
+        "speed_walk.all_ticks",
+        "speed_walk.independent_samples",
+        "speed_walk.speed",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart"
+      ]
+    },
+    {
+      "fault": "camera_mask_zero",
+      "examined_raw": "data/cache/palace_final/regression/camera_mask_zero.json",
+      "archive": "data/reports/palace/regression/camera_mask_zero.json",
+      "sha256": "1663207b463ea2ad9950ed3e15974d0e423ae7300b1840d2a3aab7f7ecd5ee47",
+      "checker_passed": false,
+      "failed_checks": [
+        "actual_player_contract",
+        "boundary_court_hole.independent_samples",
+        "boundary_footway.independent_samples",
+        "boundary_lawn.independent_samples",
+        "boundary_seok_stairs.independent_samples",
+        "gate_forward.all_ticks",
+        "gate_forward.independent_samples",
+        "gate_reverse.all_ticks",
+        "gate_reverse.independent_samples",
+        "idle.independent_samples",
+        "speed_run.independent_samples",
+        "speed_walk.independent_samples"
+      ]
+    },
+    {
+      "fault": "global_support_reenabled",
+      "examined_raw": "data/cache/palace_final/regression/global_support_reenabled.json",
+      "archive": "data/reports/palace/regression/global_support_reenabled.json",
+      "sha256": "fd79a186d14b6e4cf4fbf74864dc20763a39e335ade436c4e431023a0259e501",
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.census",
+        "inventory.actual_disabled_bodies",
+        "inventory.temporary_support",
+        "boundary_court_hole.all_ticks",
+        "boundary_court_hole.independent_samples",
+        "boundary_footway.all_ticks",
+        "boundary_footway.independent_samples",
+        "boundary_lawn.all_ticks",
+        "boundary_lawn.independent_samples",
+        "boundary_seok_stairs.all_ticks",
+        "boundary_seok_stairs.independent_samples",
+        "gate_forward.all_ticks",
+        "gate_forward.independent_samples",
+        "gate_reverse.all_ticks",
+        "gate_reverse.independent_samples",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "speed_run.all_ticks",
+        "speed_run.independent_samples",
+        "speed_walk.all_ticks",
+        "speed_walk.independent_samples",
+        "ray.off_support",
+        "ray.court_hole",
+        "ray.lawn",
+        "ray.seokjojeon_stairs"
+      ]
+    },
+    {
+      "fault": "courtyard_hole_filled",
+      "examined_raw": "data/cache/palace_final/regression/courtyard_hole_filled.json",
+      "archive": "data/reports/palace/regression/courtyard_hole_filled.json",
+      "sha256": "59a74ac03d13e80c7c783f673739914d4e3c54642d0aeef03840f09b54fe881c",
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.census",
+        "ray.court_hole"
+      ]
+    }
+  ],
+  "json_observation_mutations": [
+    {
+      "mutation": "sample_floor_id",
+      "actual_engine_fault": false,
+      "source_record": "gpu_30_engine.json",
+      "memory_only": true,
+      "checker_passed": false,
+      "failed_checks": [
+        "idle.independent_samples"
+      ]
+    },
+    {
+      "mutation": "sample_camera_query_mask",
+      "actual_engine_fault": false,
+      "source_record": "gpu_30_engine.json",
+      "memory_only": true,
+      "checker_passed": false,
+      "failed_checks": [
+        "idle.independent_samples"
+      ]
+    },
+    {
+      "mutation": "source_face_observation_hash",
+      "actual_engine_fault": false,
+      "source_record": "gpu_30_engine.json",
+      "memory_only": true,
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.osm:way:381755262:barrier"
+      ]
+    },
+    {
+      "mutation": "unretained_outside_tick",
+      "actual_engine_fault": false,
+      "source_record": "gpu_30_engine.json",
+      "memory_only": true,
+      "checker_passed": false,
+      "failed_checks": [
+        "idle.all_ticks"
+      ]
+    }
+  ],
+  "runtime_rejections": [
+    {
+      "case": "checksum",
+      "passed": true
+    },
+    {
+      "case": "worldhash",
+      "passed": true
+    },
+    {
+      "case": "w01hash",
+      "passed": true
+    },
+    {
+      "case": "manifestfiletype",
+      "passed": true
+    },
+    {
+      "case": "wrongtask",
+      "passed": true
+    },
+    {
+      "case": "terrainclaim",
+      "passed": true
+    },
+    {
+      "case": "wrongrole",
+      "passed": true
+    },
+    {
+      "case": "fragmentnumber",
+      "passed": true
+    },
+    {
+      "case": "movementnumber",
+      "passed": true
+    },
+    {
+      "case": "volumenumber",
+      "passed": true
+    },
+    {
+      "case": "routenumber",
+      "passed": true
+    },
+    {
+      "case": "missingroutes",
+      "passed": true
+    },
+    {
+      "case": "spawnchange",
+      "passed": true
+    },
+    {
+      "case": "directionchange",
+      "passed": true
+    },
+    {
+      "case": "checkpointnumber",
+      "passed": true
+    }
+  ],
+  "gpu_observations": [
+    {
+      "fps": 30,
+      "suite": "short",
+      "case_count": 9,
+      "route_group_count": 0,
+      "warmup": {
+        "pipelines_after": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 5.0
+        },
+        "pipelines_before": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 5.0
+        },
+        "poses": 15,
+        "scope": "15 checkpoint camera poses and neutral settle; cold startup excluded",
+        "wall_s": 9.000529
+      },
+      "clock_measurements": [
+        {
+          "case": "idle",
+          "clock_deviation_percent": 0.16935000000000144,
+          "observed_fps": 29.94928089280803
+        },
+        {
+          "case": "speed_walk",
+          "clock_deviation_percent": 0.024359999998990745,
+          "observed_fps": 29.992693779795243
+        },
+        {
+          "case": "speed_run",
+          "clock_deviation_percent": 0.018969999998996734,
+          "observed_fps": 29.994310079377943
+        },
+        {
+          "case": "gate_forward",
+          "clock_deviation_percent": 0.023267477204869103,
+          "observed_fps": 30.006981867665562
+        },
+        {
+          "case": "gate_reverse",
+          "clock_deviation_percent": 0.044091185409111944,
+          "observed_fps": 29.986778473904486
+        },
+        {
+          "case": "boundary_footway",
+          "clock_deviation_percent": 0.07382500000026049,
+          "observed_fps": 29.977868838330103
+        },
+        {
+          "case": "boundary_lawn",
+          "clock_deviation_percent": 0.11382500000025608,
+          "observed_fps": 29.965891324200232
+        },
+        {
+          "case": "boundary_court_hole",
+          "clock_deviation_percent": 0.11062500000027509,
+          "observed_fps": 29.966849173102254
+        },
+        {
+          "case": "boundary_seok_stairs",
+          "clock_deviation_percent": 0.003224999999740241,
+          "observed_fps": 30.00096753120288
+        }
+      ],
+      "max_accepted_clock_deviation_percent": 0.16935000000000144,
+      "minimum_camera_arm_distance_m": 1.4765625,
+      "body_outside_projection_sample_count": 10,
+      "external_movement_events_ignored": 0,
+      "route_maximum_target_error_m": 0,
+      "pipeline_changes": []
+    },
+    {
+      "fps": 60,
+      "suite": "full",
+      "case_count": 85,
+      "route_group_count": 6,
+      "warmup": {
+        "pipelines_after": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 5.0
+        },
+        "pipelines_before": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 5.0
+        },
+        "poses": 15,
+        "scope": "15 checkpoint camera poses and neutral settle; cold startup excluded",
+        "wall_s": 8.99959
+      },
+      "clock_measurements": [
+        {
+          "case": "idle",
+          "clock_deviation_percent": 0.04843333332983368,
+          "observed_fps": 59.99572459594597
+        },
+        {
+          "case": "speed_walk",
+          "clock_deviation_percent": 0.012039999998991746,
+          "observed_fps": 59.992776869664894
+        },
+        {
+          "case": "speed_run",
+          "clock_deviation_percent": 0.023340000000993122,
+          "observed_fps": 60.01400726929665
+        },
+        {
+          "case": "gate_forward",
+          "clock_deviation_percent": 0.004182370821881332,
+          "observed_fps": 60.002509527450144
+        },
+        {
+          "case": "gate_reverse",
+          "clock_deviation_percent": 0.004927051670522431,
+          "observed_fps": 59.99704391464481
+        },
+        {
+          "case": "boundary_footway",
+          "clock_deviation_percent": 0.028475000000272033,
+          "observed_fps": 59.982919863568846
+        },
+        {
+          "case": "boundary_lawn",
+          "clock_deviation_percent": 0.03742500000025739,
+          "observed_fps": 59.97755340063981
+        },
+        {
+          "case": "boundary_court_hole",
+          "clock_deviation_percent": 0.030625000000261693,
+          "observed_fps": 59.98163062562091
+        },
+        {
+          "case": "boundary_seok_stairs",
+          "clock_deviation_percent": 0.0674000000002728,
+          "observed_fps": 59.95958723820145
+        },
+        {
+          "route": "entrance",
+          "direction": "forward",
+          "clock_deviation_percent": 0.008453333332791857,
+          "observed_fps": 59.99492842871683
+        },
+        {
+          "route": "entrance",
+          "direction": "reverse",
+          "clock_deviation_percent": 0.008192000000539768,
+          "observed_fps": 60.004915602686175
+        },
+        {
+          "route": "palace_loop",
+          "direction": "forward",
+          "clock_deviation_percent": 0.003739642525268927,
+          "observed_fps": 60.00224386942773
+        },
+        {
+          "route": "palace_loop",
+          "direction": "reverse",
+          "clock_deviation_percent": 0.00592416571980614,
+          "observed_fps": 60.003554710018676
+        },
+        {
+          "route": "court_approach",
+          "direction": "forward",
+          "clock_deviation_percent": 0.00029171817033102343,
+          "observed_fps": 60.000175031412944
+        },
+        {
+          "route": "court_approach",
+          "direction": "reverse",
+          "clock_deviation_percent": 0.004617100371739902,
+          "observed_fps": 60.00277038813465
+        }
+      ],
+      "max_accepted_clock_deviation_percent": 0.0674000000002728,
+      "minimum_camera_arm_distance_m": 1.4765625,
+      "body_outside_projection_sample_count": 10,
+      "external_movement_events_ignored": 0,
+      "route_maximum_target_error_m": 0.0582349710166454,
+      "pipeline_changes": []
+    }
+  ],
+  "captures": [
+    {
+      "examined_file": "data/cache/palace_final/view_30_outside_spawn.png",
+      "archive": "data/reports/palace/view_30_outside_spawn.png",
+      "sha256": "91a2e544d0514de9aabdba69cccd6ee44f96e3341aed71e0161f5a929b737638",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_gate_inside.png",
+      "archive": "data/reports/palace/view_30_gate_inside.png",
+      "sha256": "b57eab68cad3c70b44c9c1e57fadbc86f9a0e18ce492f13521f9bb14466bb8ba",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_gate_outside.png",
+      "archive": "data/reports/palace/view_30_gate_outside.png",
+      "sha256": "1befe9c3cd34689b18d29e2ae3dbb05c874cea9dfabc131342a2af5c7121b50c",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_boundary_footway.png",
+      "archive": "data/reports/palace/view_30_boundary_footway.png",
+      "sha256": "15f603ed540b2fe248d6e73de23ad8b9e83fd76ccdeb3e576a8276fb1af612eb",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_boundary_lawn.png",
+      "archive": "data/reports/palace/view_30_boundary_lawn.png",
+      "sha256": "ab3139dab1c6c694ba5bc05aa451b3f8da59eb3c65ad18f12937b308a41d8889",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_boundary_court_hole.png",
+      "archive": "data/reports/palace/view_30_boundary_court_hole.png",
+      "sha256": "bfa8eaf75b80108cec0c21f6b9c42c487334888bdd09db2e04b0613e7f6e2ce6",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_boundary_seok_stairs.png",
+      "archive": "data/reports/palace/view_30_boundary_seok_stairs.png",
+      "sha256": "6a47dc4c3b3ba7e3cfd3f4fc40824fc2211ee38d33a1882101688f325861aade",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_30_menu.png",
+      "archive": "data/reports/palace/view_30_menu.png",
+      "sha256": "603ff4134a2cbceb6c5a4a4484f520881cdc36c2a6969fcb9206cecc2a4abdd8",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_outside_spawn.png",
+      "archive": "data/reports/palace/view_outside_spawn.png",
+      "sha256": "91a2e544d0514de9aabdba69cccd6ee44f96e3341aed71e0161f5a929b737638",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_entrance_forward.png",
+      "archive": "data/reports/palace/view_entrance_forward.png",
+      "sha256": "7a6f4eb8b3fccb53cc0e07eaed7b90b4b3afebfbfb6a7d0a03d2e0fa4c3f08cf",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_entrance_reverse.png",
+      "archive": "data/reports/palace/view_entrance_reverse.png",
+      "sha256": "4231a158b31b2bfae6958dd63aa98ef49207012c724d01481e928d429bbc6b7e",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_palace_loop_forward.png",
+      "archive": "data/reports/palace/view_palace_loop_forward.png",
+      "sha256": "a3bdffaa67446d53b230622ee86a874f80450d5f8a965d3231f39b88a36e155d",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_palace_loop_reverse.png",
+      "archive": "data/reports/palace/view_palace_loop_reverse.png",
+      "sha256": "a8a914f436156dc1d6a3bc33948e773f86e6442b7446e834523c439cfeb7ea2a",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_court_approach_forward.png",
+      "archive": "data/reports/palace/view_court_approach_forward.png",
+      "sha256": "16a328979d244fe2e188fcda2f5c5135ba9cc3de8c0ec05a0f0c7416bc7f7ac9",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_court_approach_reverse.png",
+      "archive": "data/reports/palace/view_court_approach_reverse.png",
+      "sha256": "7d37c3f84d2cc0145623a3b2e66d5df0988d24a34d8a4170af26b10041e442cf",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_checkpoint_0.png",
+      "archive": "data/reports/palace/view_checkpoint_0.png",
+      "sha256": "72a7c8b0ebf4543e895a7a33a155d2350880bef509e7a492ad8162f9761e523e",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_checkpoint_1.png",
+      "archive": "data/reports/palace/view_checkpoint_1.png",
+      "sha256": "f58b53d4d2c59b43528a77ebff37b914bf1d8773f591fd807311b054f517de8c",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_checkpoint_2.png",
+      "archive": "data/reports/palace/view_checkpoint_2.png",
+      "sha256": "a68af6386496c3271ebde73e93d88bee2e30865b3873d1c93cc4f36dbb27719f",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_checkpoint_3.png",
+      "archive": "data/reports/palace/view_checkpoint_3.png",
+      "sha256": "d331253cf46396d2ea928f60f0df3506a138c0abaa2dd876b2dbd8c4378412c3",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_checkpoint_4.png",
+      "archive": "data/reports/palace/view_checkpoint_4.png",
+      "sha256": "075f9c2dfb44db410d5629f46deedb80f0f8995de17e910d382ce2d104d296e6",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_gate_inside.png",
+      "archive": "data/reports/palace/view_gate_inside.png",
+      "sha256": "f30bc86687952ddbf1f831de9223de8c69d48e333f0f068b1a548f91dca00cfe",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_gate_outside.png",
+      "archive": "data/reports/palace/view_gate_outside.png",
+      "sha256": "f206ee1cf70b042c1fe1336647b901d2b09b7b843d9db14cce4e39fd5c0fc301",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_boundary_footway.png",
+      "archive": "data/reports/palace/view_boundary_footway.png",
+      "sha256": "b67d47ef15e347dec2d91eed034c7203625625a4d2ae117734d51fdb8fbf3507",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_boundary_lawn.png",
+      "archive": "data/reports/palace/view_boundary_lawn.png",
+      "sha256": "f2619f5f91113bae9fc2b16f8ec9a074b83d5f3453b0f79d32f13449dde395c0",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_boundary_court_hole.png",
+      "archive": "data/reports/palace/view_boundary_court_hole.png",
+      "sha256": "f162cb762f9247313eaa5a8ffd5aecf832800185839714e736381eb8eadb7ea4",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_boundary_seok_stairs.png",
+      "archive": "data/reports/palace/view_boundary_seok_stairs.png",
+      "sha256": "e1f20c59ca13b5e054350d09afd7b21f5b64b0f60a18971ca68a8fc3fc22be74",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "examined_file": "data/cache/palace_final/view_menu.png",
+      "archive": "data/reports/palace/view_menu.png",
+      "sha256": "81b5ea9bf6528dce2b731881421df6288e0ccc949f58806a914fc4d9999364be",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    }
+  ],
+  "frozen_proof_sha256": {
+    "tests/game/check_palace_walk.gd": "50740fba72206df715a5d7c28a96f5085380efd3cb7b071dde3e384dc094b01c",
+    "tools/check_palace_evidence.py": "d2c349cf7e6643f99f4d735bb8e9160e7f7122891e62bc0fbe43429a202ed430",
+    "tools/check_palace_contract.py": "a0cde796f3363ce465fc726a9bc947c7363c3ff38784e3c29a6ee066885cc50b",
+    "tests/game/check_camera_test.gd": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7",
+    "tests/game/check_daehanmun_walk.gd": "4cfd5828a47e32b2325ce2be558a9297f099a319105dbcdc53935449ef0ac1f4",
+    "tests/game/daehanmun_probe_input.gd": "ff5074388a520d678225c009814359a07c265607731b6f97f3b236b3827a0221",
+    "tools/check_daehanmun_evidence.py": "10ac76d2c9b67d53653a7bcb99100ad839fbfa8cb0a6a60b385ddd8f3851fed4",
+    "tools/check_daehanmun_contract.py": "49629d8de0d5e5a14d995cb2a1f8922ed6bbf2328e71d18f9d2990ef30af853d",
+    "tools/check_collision_contract.py": "09b3d0cddd2ade891167b074d33018bd8da926cdc97435afca6f4a94b12bb361",
+    "tools/check_palace_bundle.py": "78ff52e17a12b66332330733538f0ac4d65e4ebd8f17d87f47094a4cf90284d5",
+    "tools/check_daehanmun_bundle.py": "2d3ce51ca1f3b7d4224835e12ece41338deb23627ee736cb7cc2bc7bf6e24b39",
+    "tools/check_collision_bundle.py": "969cdcde44b29d02cc73329afcbfade61380d9a75fe50385d1ae84b5b9e42d08",
+    "tests/game/offline.sb": "5c358b8d847211333e7ba22df82d84f796b5f30a41a2682209a949d783adbd08"
+  },
+  "source_route": {
+    "source_nodes": 24,
+    "source_length_m": 564.4121074158762,
+    "runtime_length_m": 564.4463031376771,
+    "maximum_declared_clearance_adjustment_m": 0.3002153331744771,
+    "adjustment_acceptance_m": 0.75,
+    "independent_bound": "Runtime vertices to source segment exact; source segment to runtime sampled at <=.05m and bounded with a conservative .025m Lipschitz allowance"
+  },
+  "containment_history": {
+    "old_raw": "data/reports/palace/development_failure/engine.json",
+    "old_raw_sha256": "f6656e7de44c3005d2d60677939f84a40c54abc4d7a2bfa01c6f2548b42bfaa1",
+    "failed_case": "palace_loop_forward_18",
+    "old_recoveries": 1,
+    "point_xz": [
+      -131.03157043457,
+      -1.73030984401703
+    ],
+    "independent_inside_movement": true,
+    "independent_boundary_distance_m": 0.7996440806111793,
+    "source_before_fix": "data/reports/palace/development_failure/palace_world_before_fix.gd",
+    "source_before_fix_sha256": "7a0022741c04a55294662cb173f41987ea798383a42c770c4ef7e9fde0e144ce",
+    "final_current_contains": true,
+    "interpretation": "Prior runtime containment falsely rejected this interior point once. W02 containment predicate changed; source geometry, mesh layout and numeric acceptance limits were preserved. Final full/repeat/GPU60 evidence must establish the corrected behavior; old failure is not accepted evidence."
+  },
+  "scope": "Automatic W02 source-footway loop and eligible courtyard on bounded engineering flat support; original W01/P04 geometry authority remains separate",
+  "limits": [
+    "GPU30 is a short suite with 10s walking/running, gate, idle and boundary checks. Full source loop in both directions, entrance and courtyard groups were accepted in headless full/repeat and GPU60 full.",
+    "Short source bends can last one physics tick. GPU clock2%/render20% acceptance uses complete route-group sums, not each subleg; basic measured segments keep those original thresholds.",
+    "Independent capsule/sphere/near-plane geometry uses retained approximately10Hz samples. Every-tick extrema and counters are engine-produced metadata, not independently retained full raw trajectories.",
+    "Support eligibility is checked independently on source corridors/courtyard and mesh cap vertices/centroids, with source lawns/water/restricted stairs/solid interiors excluded. This is not a surveyed terrain or exact independent GIS boolean proof of every infinitesimal patch.",
+    "15 checkpoint camera poses and neutral settle precede GPU measurement. These results exclude cold startup and do not establish broad city performance or causes of historical stalls.",
+    "Automatic input isolation removes physical movement/Shift bindings in the test process and filters unmarked menu events. Programmatic action API, original controller/router and marked authored Esc binding remain. Ordinary keyboard/OS focus and human handling are unverified.",
+    "Explicit camera RID registration has no new runtime getter observation here; inherited immutable camera wiring and query geometry are evidence boundaries.",
+    "Projected body visibility can fail in some camera poses. PNG header/dimensions/hash verification does not approve visual impression, continuous body visibility or natural handling.",
+    "The viewpoint[-130,-40] is an authored external courtyard game viewpoint, not a surveyed door or landmark centre. Building interiors, original Jungwhamun passage/stairs and unsupported lawn/water branches remain excluded/unresolved.",
+    "Measured heights, grade, bridge correspondence, real access/ticket/schedule conditions, M4, W03/W04, W0/V0 and NPC/vehicle controllers remain unverified."
+  ]
+}

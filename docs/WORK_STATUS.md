@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-13 · 최근 실행: **W01 대한문 밖↔경내 입구 연결 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01 완료, 다음 W02 · 전체 보행 W0는 미완료
+갱신: 2026-10-14 · 최근 실행: **W02 경내 순환·중화전 앞마당 연결 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W02 완료, 다음 W03 · 전체 보행 W0는 미완료
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -35,6 +35,7 @@
 | P02 시험장 이동/복귀 | 1.4/3.5m/s·Visual 회전·중력/접촉·안전 복귀/입력 중립. 실제30/60fps 거리·60초 정지·벽/문/램프 검증 | [P02 실행/결과](../data/reports/movement.md), [인수28개](../data/reports/p02_verification.json) |
 | P03 시험장 3인칭 카메라 | 마우스 회전·휠 거리·추적/자기 제외·벽/문 가림·잠금/메뉴. 회전 병행 문 각10회·실제30/60fps 검증 | [P03 실행/결과](../data/reports/camera.md), [인수](../data/reports/p03_verification.json) |
 | P04 충돌 계층·도시 정적 충돌 | 685개 body·20,302삼각형, 보기용548개 제외. 시험장/문/카메라30·60fps 유지 | [P04 화면/검증](../data/reports/collision.md), [인수](../data/reports/p04_verification.json) |
+| W02 경내 순환/앞마당 | 원문564.412m→보정564.446m·47.011m 앞마당·기존 대한문 재사용, 전체 왕복/경계·GPU30/60 | [W02 결과](../data/reports/palace_walk.md), [인수](../data/reports/w02_verification.json) |
 | W01 대한문 연결 | 원문65.608m·임시3×3m 개구부·687활성충돌·문 양방향각10회·GPU30/60 | [W01 결과](../data/reports/daehanmun_walk.md), [인수](../data/reports/w01_verification.json) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
@@ -91,7 +92,7 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - 국내 SHP/NGII 지역 원본 수신, 독립 높이·상세 지형 검증. Overture 원본은 취득 완료이며 후보의 현실 대응 검토는 남음.
 - 독립 기준 대비 위치·누락률 검증, 상세 부분별 수직 메시와 정관헌/상동교회의 실제 외형·높이 확인. G03 단순 본체 선택은 이 확인과 구분한다.
 - 실제 지면·계단·도로폭·대한문 개구부 실측과 세 필수 동선 전체의 물리 연결/통행·게임 완주 검증. 대한문 밖↔경내 입구의 제한된 게임 연결은 W01에서 검증했고, 원본 2D 연결과 경계 후보는 G04에서 검토 완료.
-- 상세 랜드마크·실제 지형·전체 도시 보행 경로는 미구현이다. 대한문 밖↔경내 입구의 제한된 보행 연결은 W01에서 구현했다. P01 크기·P02 이동/복귀·P03 3인칭 카메라는 독립 시험장에 있고 P04는 실제 도시 정적 충돌을 별도 장면에 연결했다. W01에서 대한문 개구부/연결 보행을 검증했고 경내 상세/전체 경로는 W02–W04다.
+- 상세 랜드마크·실제 지형·전체 도시 보행 경로는 미구현이다. 대한문 밖↔경내 입구의 제한된 보행 연결은 W01에서 구현했다. P01 크기·P02 이동/복귀·P03 3인칭 카메라는 독립 시험장에 있고 P04는 실제 도시 정적 충돌을 별도 장면에 연결했다. W01에서 대한문 연결, W02에서 원문 경내 순환·앞마당을 검증했다. 광장/돌담길과 전체 W0는 W03–W04다.
 - 직접 키보드·마우스 조작은 미실행. E02는 화면 잠금 때문에 미실행이었으며, E03 실제 GPU 화면과 자동 키 이벤트/시점 선택 검증은 직접 조작과 구분한다.
 - 실제 플레이, 성능 측정, M4 Pro 확인, 패키지 제작.
 
@@ -116,15 +117,14 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - **P03 완료:** P02 파일을 보존한 별도 시험장/리그에 추적·마우스 회전·휠 거리·상하/거리 한계·자기 제외·SpringArm 구 탐색/최종 겹침 보완·안전 복귀/메뉴 잠금을 연결했다. 카메라 회전 병행 문 양방향 각10회, 벽/모서리/문 위·경사/램프·확장/정지·입력/메뉴·포커스 알림 주입 검증을 통과했다. 정상 headless13,367개·GPU30/60 각8,788개, 실제 오류6종을 감지했다. [P03 화면/검증/한계](../data/reports/camera.md). 사람의 조작감·OS가 발생시킨 포커스 전환·도시 적용/대한문·M4·성능은 미검증이다.
 - **P04 완료:** 별도 충돌 시험장에 역할별 레이어/마스크와 합성 건물14번째 구조를 추가하고 E03 selected635건물+49담장+임시 평면1에 정적 충돌을 연결했다. 보기용548개는 충돌0·권한null 유지. 정상/반복17,904개·실제GPU30/60 각13,333개·계약17/GPU5, 실제 도형/설정 고장10종·런타임 계획 거부10종·독립99개 검토를 통과했다. 44표면ray·24원천구멍·8외부→건물 capsule·실메뉴 전환/복귀도 확인했다. 첫GPU30 시간 실패와 동일조건 재측정 성공을 함께 보존했다. [P04 범위/실패/재현](../data/reports/collision.md). 대한문/중화문 본체는 아직 막혀 있고 실제 도시 보행·NPC/차량 controller·사람 조작감·M4·성능·W0/V0는 미완료다.
 - **W01 완료:** 원문 4점65.608m·통과선 11.341m에 임시 3×3m 개구부/폭 6m y0 지원면을 연결했다. 기존 682충돌 + 교체 5 = 687, 원천 파일/보기용 권한 유지. 31구간·문 양방향 각 10회·전체 동선 왕복·앞뒤 좌우 차단·지면/낙하/영역/수동복귀·메뉴를 검증했다. 정상/반복 904·GPU30/ 935·GPU60/ 935개 PASS, 실제 고장 6종·자료 거부 12종 감지. [실패/한계/실행](../data/reports/daehanmun_walk.md). 자동 판정 버전 혼재/화면 메뉴 정지 실패는 보존하고 최종 고정 도구로 재실행했다. 실측 지형/치수·사람 조작·M4·경내 전체 경로·W0/V0는 미완료다.
-- **W02 이후:** 미실행.
+- **W02 완료:** 원본24좌표 순환564.412m를 보존하고 잔디/기단을 피한 실행경로564.446m·최대0.300215m 보정을 분리했다. 중화전 열린 앞마당47.011m·석조전 계단 아래를 연결하고 중화문·실내·금지계단을 제외했다. 실제691생성/687활성, 지원면1,068삼각형/구멍2개. 정상/반복1,237·GPU30 짧은854·GPU60 전체1,252검사 PASS, 실제고장6종/자료거부15종 감지. 초기 내부좌표의 잘못된 복귀를 수정하고 실패/수정 전 소스를 보존했다. [경로/실패/한계](../data/reports/palace_walk.md). 임시 평면/폭이며 현실 지형·사람 조작·M4·W0/V0는 미완료다.
+- **W03 이후:** 미실행. W03 원문 입력/공유 노드 검토만 수행했다.
 
-## 다음 작업: W02 경내 길·마당·전각 사이 보행
+## 다음 작업: W03 돌담길·서울광장 연결과 경계
 
-첫 행동은 [W01 결과/한계](../data/reports/daehanmun_walk.md), 상세W02·C07/V04와 G04 R1 원문/공식근거를 읽는 것이다. W01 안쪽끝 n/921242931부터 중화전 앞/측면과 석조전 계단 아래 외부까지 경로를 구체화한다. 중화문 본체/금천교 대응·수직예외·기단/분수/잔디·실내 미정 범위를 대조하고 출처 있는 지원면/보정·지역경계·복귀를 확장한다. 기존 대한문 개구부/담장·31사례·3인칭 검사를 유지하고 전체R1 완주 증거를 따로 남긴다. W03/W04 및 W0/V0는 자동 완료하지 않는다.
+첫 행동은 [W02 결과/한계](../data/reports/palace_walk.md)와 [W03 시작 입력 검토](evidence/W03_INPUT_REVIEW.md), 상세 W03·C07/V04를 읽는 것이다. 기존 경내 장면을 보존하고 G04 R2의 북측 원문 지상 횡단 w1230789306(32.5095m)과 양쪽 공유 보행 지정 길을 사용해 시청 전면/서울광장 외곽을 연결한다. 광장 구멍 2개·차도 이탈·사유지 제외를 유지하고 R3 돌담길 면 내부 경로와 공사 안내를 검토한다. 원문 횡단 존재를 현재 현장 안전이나 게임 완주로 해석하지 않는다. 근거 없는 대한문 정면 직선 횡단을 만들지 않는다.
 
-사용자가 직접 판단하면 유용한 배치/축척 첫 화면, 걷기·카메라, 랜드마크 인상 시점에는 화면과 관찰 항목을 준비해 알린다. 매 작업마다 확인을 요구하지 않는다. M4에서는 칩/RAM/OS를 확인하고 동일 버전의 실제 기동을 별도로 검증한다.
-
-조사 bbox는 플레이 경계가 아니고 원점은 스폰 지점이 아니다. 미수신 국내 상세 자료 때문에 정상 원본을 다시 받거나 같은 취득 실패를 반복하지 않는다. `data_usage.json`의 보류/참고 전용 범위를 유지하며 G02–G04에서 도형·높이·지면·경로를 순서대로 준비한다.
+사용자는 당분간 기존 계획의 구현·검증·기록·Git 공유를 위임했다. 사람 조작 피드백을 재개 조건으로 삼지 않고 큰 범위 변경만 구체화한다. W03/W04 및 W0/V0를 자동 완료하지 않는다.
 
 ## 파일과 재현 방법
 
@@ -147,7 +147,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 W02이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 W03이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 

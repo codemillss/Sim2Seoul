@@ -165,3 +165,15 @@ sh tools/run_daehanmun_walk.sh observe
 [daehanmun_walk](../game/scenes/tests/daehanmun_walk.tscn)은 기존 3인칭/이동을 상속하고 합성 Fixtures를 제거한다. World의 [daehanmun_connection](../game/scenes/world/daehanmun_connection.tscn)은 P04 원천 충돌을 생성한 뒤 gate/담장/광역 지원 평면 3개를 0/0·숨김으로 처리하고 지역 교체 5개를 붙인다. 제한 원문 연결/지역 spawn·복귀만 열며 기존 E03/P04 파일은 유지한다. `daehanmun_player.gd`는 지역 polygon과 추가 source-volume spawn guard를 적용하고, root는 복귀 yaw와 안내/메뉴를 연결한다.
 
 자료는 수동 결정→Git 제외 daehanmun.json/decision/manifest 3개다. 실행 전 stdlib bundle checker와 runtime hash/형식/scope를 대조한다. 독립 game 사본은 authored 27/runtime 7·측정 helper 2개이며 평소 run에는 helper를 붙이지 않는다. `check_daehanmun_contract.py`는 고정 checker bytes로 정상/반복/실제 고장 6종과 GPU30/60을 검사, `check_daehanmun_rejections.py`는 실제 잘못된 자료 12종을 거부한다. [정확한 실행/결과/한계](../data/reports/daehanmun_walk.md). 다음은 W02 경내 전체 연결이다.
+
+## W02 경내 순환과 앞마당
+
+```sh
+.venv-data/bin/python tools/prepare_palace_walk.py
+sh tools/run_palace_walk.sh run
+sh tools/run_palace_walk.sh editor
+```
+
+[palace_walk](../game/scenes/world/palace_walk.tscn)은 별도 장면이고 기존 W01/P04 authored 파일은 유지한다. [palace_world](../game/scenes/world/palace_world.tscn)는 기존 685+5body를 생성하되 W01지원면만0/0·숨김으로 바꾸고 W02지원면1개를 붙인다. 실제691생성/687활성, 원본 문/담장 조각4개 유지다. 원천 순환선과 별도 계산 보정선을 분리하고 보행로/원본 열린 마당의 holes·제외 체적을 보존한다. 임시 지원면과 바깥에서0.4m 안쪽 이동 중심 영역은 지역 게임 가정이다. `palace_player.gd`는 경계에서 멈춤/축방향 미끄러짐을 추가하고 기존 중력/카메라/스폰/복귀/메뉴를 재사용한다.
+
+수동 결정과 생성3파일은 W01과 분리한다. 실행 전 stdlib checker와 runtime manifest/hash/형식/scope 검사를 수행하며 잘못된W02자료는 기존body 생성 전에 거부한다. 시험사본은 authored32/runtime10/helper3이며 실행 중 지도/Python/네트워크가 필요 없다. 독립 검사기는 source노드/지원면 적합성·실제bodycensus/float32hash/약10Hz캡슐·카메라 표본을 확인하며 엔진 매tick 극값과 구분한다. GPU30은 짧은 조작·경계/속도시험, GPU60은 전체 경내 왕복이다. [실제 결과·실패·한계](../data/reports/palace_walk.md).

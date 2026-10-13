@@ -245,3 +245,18 @@ python3 tools/check_daehanmun_contract.py --mode gpu
 현재는 문 밖↔경내 입구 65.6m 연결이다. WASD/Shift·마우스/휠·Esc/밖으로 복귀 메뉴를 쓰며 지역 영역 밖은 자동 복귀한다. 자동 생성 3파일/.godot/test_support/앱/캐시는 공유하지 않는다. [현재 M1 증거](../data/reports/daehanmun_walk.md)의75개 준비 입력/도구 사본 재생성은 기존 인터프리터 검증이고 새 기기/전체 G/M4 결과가 아니다. 새 Mac의 RAM/OS/실제 render/input은 해당 기기에서 확인한다. 다음 W02는 안쪽 n/921242931부터 기존 R1 원문/수직 예외/중화문·금천교·계단을 대조해 전각 앞 경로를 확장한다.
 
 W01 자동 GPU 판정은 12카메라 시점과 중립 정지의 준비 후 결과다. 측정 과정의 실제 이동/Shift 키 바인딩은 시험 프로세스에서만 제거하며 일반 `run`에는 그대로다. 기존 정지/관통/시간 허용치는 유지했고 초기 기동·첫 렌더링 끊김과 사람/OS 조작은 별도 검증이다. 준비 시간·pipeline count·입력 격리·최초 실패는 [W01 결과](../data/reports/daehanmun_walk.md)와 raw 기록에서 확인한다.
+
+## W02 경내 보행 재개
+
+위 G/E03/P04/W01 준비를 재사용한 후 다음을 실행한다. 전국 지도와 전체 DSM은 필요 없다.
+
+```sh
+.venv-data/bin/python tools/prepare_palace_walk.py
+python3 tools/check_palace_bundle.py
+sh tools/run_palace_walk.sh run
+python3 tools/check_palace_contract.py --mode contract
+python3 tools/check_palace_contract.py --mode gpu30
+python3 tools/check_palace_contract.py --mode gpu60
+```
+
+원본 경내 순환 약564m와 중화전 앞마당 접근을 사용한다. 중화문/전각·기단·계단·잔디를 보존/제외하고 실제 지면 대신 명시한 지역 y=0지원면을 쓴다. 생성3파일/캐시는 공유하지 않는다. [경로 선택·실패·검증범위](../data/reports/palace_walk.md). 준비된 작은 입력의 W02-only 사본 재생성은 기존 M1 환경 검사이며 새 Mac/M4 실행을 대신하지 않는다. 새 Mac의 RAM/OS/GPU/조작은 해당 기기에서 기록한다. 사용자는 당분간 기존 계획의 구현·검증·기록·공유를 위임했으며 사람 조작 확인을 재개 조건으로 삼지 않는다.
