@@ -1,0 +1,69 @@
+{
+  "task": "P02",
+  "mode": "gpu",
+  "passed": true,
+  "checks": [
+    {
+      "name": "engine.version",
+      "passed": true
+    },
+    {
+      "name": "copy.authored_only",
+      "passed": true,
+      "files": [
+        "project.godot",
+        "scenes/player/player.tscn",
+        "scenes/tests/player_fixture.tscn",
+        "scripts/player/idle_support.gd",
+        "scripts/player_fixture.gd",
+        "scripts/input_router.gd",
+        "scenes/tests/movement_test.tscn",
+        "scripts/player/movement_controller.gd",
+        "scripts/movement_test.gd"
+      ]
+    },
+    {
+      "name": "actual_gpu.timing_30",
+      "passed": true,
+      "checks": 35
+    },
+    {
+      "name": "actual_gpu.timing_60",
+      "passed": true,
+      "checks": 35
+    },
+    {
+      "name": "actual_gpu.idle_60_seconds",
+      "passed": true,
+      "checks": 27
+    },
+    {
+      "name": "authored_inputs_unchanged",
+      "passed": true
+    }
+  ],
+  "actual_mutations": [],
+  "sources": {
+    "project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "scenes/tests/player_fixture.tscn": "6fc75704f2e89f5ecba6b790adabbb4d0d711f4d153802f637b7436bccd553e4",
+    "scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "scripts/player_fixture.gd": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6",
+    "scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "scenes/tests/movement_test.tscn": "05ffd927c1825d3d92155dc0f2f1fa2aa8dfa323be33d74014f26ab39d180c99",
+    "scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+    "scripts/movement_test.gd": "16ad475cd5f56ebfacc59d0fcfa009869fa3269415ea805f0c16a97672e7ba82"
+  },
+  "probe_sha256": "ef35583c75ec1549bdcabcea7930f8e1c27233128bcaf14557dcbc81dfe2b0db",
+  "orchestrator_sha256": "2a1ea7097a2da81a79de68a2c9d140bd853da0b8a2f31f00fa1d3bf87f7e4157",
+  "checker_sha256": "f08be84afd153dda9dccd8136735e1e6aee46b0d75bda422019dea7d0f98b5b8",
+  "network": "deny network*",
+  "scope": "authored-only copied project; existing M1, installed Godot; no map/cache/Python packages",
+  "not_tested": [
+    "human keyboard feel",
+    "P03 orbit/occlusion",
+    "Seoul collision/Daehanmun",
+    "M4",
+    "city performance"
+  ]
+}

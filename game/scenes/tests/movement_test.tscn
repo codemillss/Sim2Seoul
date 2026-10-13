@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/tests/player_fixture.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/movement_test.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/player/movement_controller.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/input_router.gd" id="4"]
+
+[node name="MovementTest" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="Player" parent="Actors" index="0"]
+script = ExtResource("3")
+input_router_path = NodePath("../../InputRouter")
+camera_path = NodePath("../../Presentation/Camera")
+floor_snap_length = 0.2
+floor_constant_speed = true
+
+[node name="InputRouter" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4")

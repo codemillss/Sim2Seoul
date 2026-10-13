@@ -1,0 +1,36 @@
+{
+  "task": "P02",
+  "attempts": [
+    {
+      "issue": "script path relative to --path game was unresolved",
+      "resolution": "probe and result use absolute paths",
+      "completed_evidence": false
+    },
+    {
+      "issue": "probe GDScript inferred Variant float type warnings treated as parser errors",
+      "resolution": "explicit float declarations; engine errors checked even when process exits zero",
+      "completed_evidence": false
+    },
+    {
+      "issue": "initial independent check: exact float32 arrays and 59.9999999999979s rejected; Esc read before dispatch",
+      "observed_failed_checks": [
+        "contract.spawn",
+        "contract.fixture",
+        "idle.stability",
+        "menu_pause.freeze"
+      ],
+      "observed_menu_fields": {
+        "actor_can_process": true,
+        "paused": false,
+        "ticks_during_pause": 0
+      },
+      "resolution": "dimensions tolerance1e-6, time tolerance1e-6 with3600ticks retained, wait2processframes after key dispatch; physical actor signals remain pause criterion",
+      "evidence_kind": "observed development summary, original full record superseded; no fabricated raw snapshot"
+    },
+    {
+      "issue": "distance view initially omitted actor at the starting point",
+      "evidence": "distance_before_view_fix.png",
+      "resolution": "top view centred z20 with64m vertical extent; includes main test ground and distance plane"
+    }
+  ]
+}

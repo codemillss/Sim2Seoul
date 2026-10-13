@@ -1,0 +1,315 @@
+{
+  "task": "P02",
+  "mode": "contract",
+  "passed": true,
+  "checks": [
+    {
+      "name": "engine.version",
+      "passed": true
+    },
+    {
+      "name": "copy.authored_only",
+      "passed": true,
+      "files": [
+        "project.godot",
+        "scenes/player/player.tscn",
+        "scenes/tests/player_fixture.tscn",
+        "scripts/player/idle_support.gd",
+        "scripts/player_fixture.gd",
+        "scripts/input_router.gd",
+        "scenes/tests/movement_test.tscn",
+        "scripts/player/movement_controller.gd",
+        "scripts/movement_test.gd"
+      ]
+    },
+    {
+      "name": "normal.full",
+      "passed": true,
+      "checks": 302
+    },
+    {
+      "name": "repeat.full",
+      "passed": true
+    },
+    {
+      "name": "repeat.contract",
+      "passed": true
+    },
+    {
+      "name": "repeat.distances",
+      "passed": true
+    },
+    {
+      "name": "regression.speed_wrong",
+      "passed": true
+    },
+    {
+      "name": "regression.gravity_zero",
+      "passed": true
+    },
+    {
+      "name": "regression.turn_zero",
+      "passed": true
+    },
+    {
+      "name": "regression.mask_disabled",
+      "passed": true
+    },
+    {
+      "name": "regression.door_blocked",
+      "passed": true
+    },
+    {
+      "name": "regression.spawn_unsupported",
+      "passed": true
+    },
+    {
+      "name": "authored_inputs_unchanged",
+      "passed": true
+    }
+  ],
+  "actual_mutations": [
+    {
+      "case": "speed_wrong",
+      "expected_failed_check": "walk.speed",
+      "checker_passed": false,
+      "failed_checks": [
+        "contract.walk_mps",
+        "walk.speed",
+        "diagonal_walk.speed",
+        "step_up.traversal",
+        "step_down.traversal",
+        "slope_up.traversal",
+        "slope_down.traversal",
+        "door_passages.passages[0].crossing",
+        "door_passages.passages[1].crossing",
+        "door_passages.passages[2].crossing",
+        "door_passages.passages[3].crossing",
+        "door_passages.passages[4].crossing",
+        "door_passages.passages[5].crossing",
+        "door_passages.passages[6].crossing",
+        "door_passages.passages[7].crossing",
+        "door_passages.passages[8].crossing",
+        "door_passages.passages[9].crossing",
+        "door_passages.passages[10].crossing",
+        "door_passages.passages[11].crossing",
+        "door_passages.passages[12].crossing",
+        "door_passages.passages[13].crossing",
+        "door_passages.passages[14].crossing",
+        "door_passages.passages[15].crossing",
+        "door_passages.passages[16].crossing",
+        "door_passages.passages[17].crossing",
+        "door_passages.passages[18].crossing",
+        "door_passages.passages[19].crossing"
+      ],
+      "evidence": "regression/speed_wrong.json"
+    },
+    {
+      "case": "gravity_zero",
+      "expected_failed_check": "gravity_drop.gravity",
+      "checker_passed": false,
+      "failed_checks": [
+        "contract.gravity_mps2",
+        "idle.stability",
+        "idle.foot_contact",
+        "walk.speed",
+        "run.speed",
+        "diagonal_walk.speed",
+        "diagonal_run.speed",
+        "gravity_drop.gravity",
+        "gravity_drop.acceleration",
+        "step_up.traversal",
+        "wall_corner_run.contact"
+      ],
+      "evidence": "regression/gravity_zero.json"
+    },
+    {
+      "case": "turn_zero",
+      "expected_failed_check": "turn_left.rotation",
+      "checker_passed": false,
+      "failed_checks": [
+        "contract.turn",
+        "turn_left.rotation",
+        "turn_left.smooth_rotation",
+        "turn_right.rotation",
+        "turn_right.smooth_rotation"
+      ],
+      "evidence": "regression/turn_zero.json"
+    },
+    {
+      "case": "mask_disabled",
+      "expected_failed_check": "contract.mask",
+      "checker_passed": false,
+      "failed_checks": [
+        "contract.mask",
+        "contract.spawn",
+        "idle.stability",
+        "idle.foot_contact",
+        "walk.speed",
+        "run.speed",
+        "diagonal_walk.speed",
+        "diagonal_run.speed",
+        "turn_left.rotation",
+        "turn_left.smooth_rotation",
+        "turn_right.rotation",
+        "turn_right.smooth_rotation",
+        "camera_relative.direction",
+        "gravity_drop.gravity",
+        "gravity_drop.acceleration",
+        "step_up.traversal",
+        "step_down.traversal",
+        "slope_up.traversal",
+        "slope_down.traversal",
+        "wall_front_walk.contact",
+        "wall_front_run.contact",
+        "wall_oblique_walk.contact",
+        "wall_oblique_run.contact",
+        "wall_corner_walk.contact",
+        "wall_corner_run.contact",
+        "door.count",
+        "door_passages.passages[0].crossing",
+        "door_passages.passages[1].crossing",
+        "door_passages.passages[2].crossing",
+        "door_passages.passages[3].crossing",
+        "door_passages.passages[4].crossing",
+        "door_passages.passages[5].crossing",
+        "door_passages.passages[6].crossing",
+        "door_passages.passages[7].crossing",
+        "door_passages.passages[8].crossing",
+        "door_passages.passages[9].crossing",
+        "door_passages.passages[10].crossing",
+        "door_passages.passages[11].crossing",
+        "door_passages.passages[12].crossing",
+        "door_passages.passages[13].crossing",
+        "door_passages.passages[14].crossing",
+        "door_passages.passages[15].crossing",
+        "door_passages.passages[16].crossing",
+        "door_passages.passages[17].crossing",
+        "door_passages.passages[18].crossing",
+        "door_passages.passages[19].crossing",
+        "fall_return.spawn",
+        "fall_return.input_latch",
+        "outside_return.spawn",
+        "outside_return.input_latch",
+        "manual_return.spawn",
+        "manual_return.input_latch",
+        "edge_return.recovery",
+        "menu_pause.input_latch"
+      ],
+      "evidence": "regression/mask_disabled.json"
+    },
+    {
+      "case": "door_blocked",
+      "expected_failed_check": "door.count",
+      "checker_passed": false,
+      "failed_checks": [
+        "door.count",
+        "door_passages.passages[0].crossing",
+        "door_passages.passages[1].crossing",
+        "door_passages.passages[2].crossing",
+        "door_passages.passages[3].crossing",
+        "door_passages.passages[4].crossing",
+        "door_passages.passages[5].crossing",
+        "door_passages.passages[6].crossing",
+        "door_passages.passages[7].crossing",
+        "door_passages.passages[8].crossing",
+        "door_passages.passages[9].crossing",
+        "door_passages.passages[10].crossing",
+        "door_passages.passages[11].crossing",
+        "door_passages.passages[12].crossing",
+        "door_passages.passages[13].crossing",
+        "door_passages.passages[14].crossing",
+        "door_passages.passages[15].crossing",
+        "door_passages.passages[16].crossing",
+        "door_passages.passages[17].crossing",
+        "door_passages.passages[18].crossing",
+        "door_passages.passages[19].crossing"
+      ],
+      "evidence": "regression/door_blocked.json"
+    },
+    {
+      "case": "spawn_unsupported",
+      "expected_failed_check": "contract.spawn",
+      "checker_passed": false,
+      "failed_checks": [
+        "contract.spawn",
+        "idle.stability",
+        "idle.foot_contact",
+        "walk.speed",
+        "run.speed",
+        "diagonal_walk.speed",
+        "diagonal_run.speed",
+        "turn_left.rotation",
+        "turn_left.smooth_rotation",
+        "turn_right.rotation",
+        "turn_right.smooth_rotation",
+        "camera_relative.direction",
+        "gravity_drop.gravity",
+        "gravity_drop.acceleration",
+        "step_up.traversal",
+        "step_down.traversal",
+        "slope_up.traversal",
+        "slope_down.traversal",
+        "wall_front_walk.contact",
+        "wall_front_run.contact",
+        "wall_oblique_walk.contact",
+        "wall_oblique_run.contact",
+        "wall_corner_walk.contact",
+        "wall_corner_run.contact",
+        "door.count",
+        "door_passages.passages[0].crossing",
+        "door_passages.passages[1].crossing",
+        "door_passages.passages[2].crossing",
+        "door_passages.passages[3].crossing",
+        "door_passages.passages[4].crossing",
+        "door_passages.passages[5].crossing",
+        "door_passages.passages[6].crossing",
+        "door_passages.passages[7].crossing",
+        "door_passages.passages[8].crossing",
+        "door_passages.passages[9].crossing",
+        "door_passages.passages[10].crossing",
+        "door_passages.passages[11].crossing",
+        "door_passages.passages[12].crossing",
+        "door_passages.passages[13].crossing",
+        "door_passages.passages[14].crossing",
+        "door_passages.passages[15].crossing",
+        "door_passages.passages[16].crossing",
+        "door_passages.passages[17].crossing",
+        "door_passages.passages[18].crossing",
+        "door_passages.passages[19].crossing",
+        "fall_return.spawn",
+        "fall_return.input_latch",
+        "outside_return.spawn",
+        "outside_return.input_latch",
+        "manual_return.spawn",
+        "manual_return.input_latch",
+        "edge_return.recovery",
+        "menu_pause.input_latch"
+      ],
+      "evidence": "regression/spawn_unsupported.json"
+    }
+  ],
+  "sources": {
+    "project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "scenes/tests/player_fixture.tscn": "6fc75704f2e89f5ecba6b790adabbb4d0d711f4d153802f637b7436bccd553e4",
+    "scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "scripts/player_fixture.gd": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6",
+    "scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "scenes/tests/movement_test.tscn": "05ffd927c1825d3d92155dc0f2f1fa2aa8dfa323be33d74014f26ab39d180c99",
+    "scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+    "scripts/movement_test.gd": "16ad475cd5f56ebfacc59d0fcfa009869fa3269415ea805f0c16a97672e7ba82"
+  },
+  "probe_sha256": "ef35583c75ec1549bdcabcea7930f8e1c27233128bcaf14557dcbc81dfe2b0db",
+  "orchestrator_sha256": "2a1ea7097a2da81a79de68a2c9d140bd853da0b8a2f31f00fa1d3bf87f7e4157",
+  "checker_sha256": "f08be84afd153dda9dccd8136735e1e6aee46b0d75bda422019dea7d0f98b5b8",
+  "network": "deny network*",
+  "scope": "authored-only copied project; existing M1, installed Godot; no map/cache/Python packages",
+  "not_tested": [
+    "human keyboard feel",
+    "P03 orbit/occlusion",
+    "Seoul collision/Daehanmun",
+    "M4",
+    "city performance"
+  ]
+}

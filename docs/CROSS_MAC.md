@@ -156,7 +156,7 @@ sh tools/run_game.sh observe
 python3 tools/check_game_project.py --report /tmp/sim2seoul-e03-project-check.json
 ```
 
-[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. P01 독립 시험장도 완료했으며 다음 P02 이동·지면 복귀를 이어간다.
+[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. E04도 [기준점·10m·고정 화면 검증](../data/reports/scale_view/README.md)을 완료했다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. P01 독립 시험장과 P02 시험장 이동·지면 복귀도 완료했으며 다음 P03 카메라를 이어간다.
 
 ```sh
 python3 tools/prepare_scale_view.py
@@ -177,4 +177,20 @@ sh tools/run_player_fixture.sh observe
 python3 tools/check_player_contract.py
 ```
 
-기본 관측은 정착 후 60초이며 `observe 2`는 짧은 실행 확인용이다. 검사기는 표준 Python, 계약 검사는 macOS의 설치된 Godot/네트워크 차단 프로파일을 사용한다. 현재 M1의 60초/3,600회 안정 정지와 지도 없는 사본 검증은 [P01 보고서](../data/reports/player_scale.md)에 있다. 실제 M4·새 환경·직접 조작·서울 보행 결과는 이 증거로 대신하지 않는다. 다음 P02는 같은 캐릭터/충돌 시험장의 이동·지면 복귀다.
+기본 관측은 정착 후 60초이며 `observe 2`는 짧은 실행 확인용이다. 검사기는 표준 Python, 계약 검사는 macOS의 설치된 Godot/네트워크 차단 프로파일을 사용한다. 현재 M1의 60초/3,600회 안정 정지와 지도 없는 사본 검증은 [P01 보고서](../data/reports/player_scale.md)에 있다. 실제 M4·새 환경·직접 조작·서울 보행 결과는 이 증거로 대신하지 않는다. P02는 아래 별도 이동 시험장에서 같은 캐릭터/충돌을 재사용한다.
+
+## P02 이동 시험장과 재현
+
+지도/가공 자산 없이 동일 Godot과 저장소로 실행한다.
+
+```sh
+sh tools/run_movement_test.sh run
+sh tools/run_movement_test.sh editor
+sh tools/run_movement_test.sh observe
+python3 tools/check_movement_contract.py --mode contract
+python3 tools/check_movement_contract.py --mode gpu
+```
+
+WASD/방향키·Shift 달리기·Esc 메뉴·시작점 복귀 버튼. 녹색 램프는 단차 진입용, 거리 구간 큰 격자는5m이며 카메라는 고정이다. `observe`는 실제60fps 제한의10초 걷기/달리기·화면을 Git 제외 캐시에 저장한다. `contract`는9개 authored 파일 사본과 실제 오류6종을 가속 물리로 검사하고, `gpu`는30/60fps 조건과 실제60초 정지를 각각 실행한다. 표준 Python만 필요하며 macOS offline.sb는 시험 프로세스 네트워크만 차단한다. 다른 OS의 실행/프로파일은 별도 준비한다.
+
+[현재 M1 증거](../data/reports/movement.md)는 새 Mac 결과가 아니다. 기기명/칩/RAM/OS·실제 렌더러와 직접 조작감을 해당 기기에서 기록하고 `.godot`/캐시·생성물/앱은 공유하지 않는다. 현재 다음 작업 P03의 마우스 회전/가림·도시 보행은 미검증이다.

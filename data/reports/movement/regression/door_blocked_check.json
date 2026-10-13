@@ -1,0 +1,2283 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "name": "finite_values",
+      "passed": true,
+      "details": {
+        "invalid_fields": []
+      }
+    },
+    {
+      "name": "schema",
+      "passed": true,
+      "details": {
+        "fields": [
+          "schema_version",
+          "task",
+          "suite",
+          "case",
+          "scope"
+        ]
+      }
+    },
+    {
+      "name": "engine",
+      "passed": true,
+      "details": {
+        "field": "engine"
+      }
+    },
+    {
+      "name": "contract.walk_mps",
+      "passed": true,
+      "details": {
+        "field": "contract.walk_mps",
+        "expected": 1.4,
+        "actual": 1.4
+      }
+    },
+    {
+      "name": "contract.run_mps",
+      "passed": true,
+      "details": {
+        "field": "contract.run_mps",
+        "expected": 3.5,
+        "actual": 3.5
+      }
+    },
+    {
+      "name": "contract.gravity_mps2",
+      "passed": true,
+      "details": {
+        "field": "contract.gravity_mps2",
+        "expected": 9.8,
+        "actual": 9.8
+      }
+    },
+    {
+      "name": "contract.height",
+      "passed": true,
+      "details": {
+        "field": "contract.height",
+        "expected": 1.7,
+        "actual": 1.70000004768372
+      }
+    },
+    {
+      "name": "contract.radius",
+      "passed": true,
+      "details": {
+        "field": "contract.radius",
+        "expected": 0.3,
+        "actual": 0.300000011920929
+      }
+    },
+    {
+      "name": "contract.layer",
+      "passed": true,
+      "details": {
+        "field": "contract.layer",
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "contract.mask",
+      "passed": true,
+      "details": {
+        "field": "contract.mask",
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "contract.physics_hz",
+      "passed": true,
+      "details": {
+        "field": "contract.physics_hz",
+        "expected": 60,
+        "actual": 60
+      }
+    },
+    {
+      "name": "contract.static_count",
+      "passed": true,
+      "details": {
+        "field": "contract.static_count",
+        "expected": 12,
+        "actual": 12
+      }
+    },
+    {
+      "name": "contract.turn",
+      "passed": true,
+      "details": {
+        "field": "contract.turn_radians_per_second"
+      }
+    },
+    {
+      "name": "contract.spawn",
+      "passed": true,
+      "details": {
+        "fields": [
+          "contract.spawn",
+          "contract.spawn_valid"
+        ]
+      }
+    },
+    {
+      "name": "contract.fixture",
+      "passed": true,
+      "details": {
+        "field": "contract"
+      }
+    },
+    {
+      "name": "cases.structure",
+      "passed": true,
+      "details": {
+        "field": "cases"
+      }
+    },
+    {
+      "name": "idle.present",
+      "passed": true,
+      "details": {
+        "field": "cases.idle"
+      }
+    },
+    {
+      "name": "idle.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.idle"
+      }
+    },
+    {
+      "name": "idle.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.idle"
+      }
+    },
+    {
+      "name": "idle.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.idle.path_samples"
+      }
+    },
+    {
+      "name": "idle.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.idle.horizontal_distance_m",
+        "computed_m": 0.0
+      }
+    },
+    {
+      "name": "idle.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.idle.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "idle.stability",
+      "passed": true,
+      "details": {
+        "field": "cases.idle"
+      }
+    },
+    {
+      "name": "idle.foot_contact",
+      "passed": true,
+      "details": {
+        "fields": [
+          "cases.idle.min_y",
+          "cases.idle.max_y"
+        ]
+      }
+    },
+    {
+      "name": "walk.present",
+      "passed": true,
+      "details": {
+        "field": "cases.walk"
+      }
+    },
+    {
+      "name": "walk.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.walk"
+      }
+    },
+    {
+      "name": "walk.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.walk"
+      }
+    },
+    {
+      "name": "walk.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.walk.path_samples"
+      }
+    },
+    {
+      "name": "walk.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.walk.horizontal_distance_m",
+        "computed_m": 14.00000858306885
+      }
+    },
+    {
+      "name": "walk.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.walk.max_penetration_m",
+        "actual": 0.00217511365190148,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "walk.speed",
+      "passed": true,
+      "details": {
+        "field": "cases.walk",
+        "expected_m": 14.000000000000139,
+        "actual_m": 14.0000085830688
+      }
+    },
+    {
+      "name": "run.present",
+      "passed": true,
+      "details": {
+        "field": "cases.run"
+      }
+    },
+    {
+      "name": "run.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.run"
+      }
+    },
+    {
+      "name": "run.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.run"
+      }
+    },
+    {
+      "name": "run.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.run.path_samples"
+      }
+    },
+    {
+      "name": "run.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.run.horizontal_distance_m",
+        "computed_m": 35.0000190734863
+      }
+    },
+    {
+      "name": "run.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.run.max_penetration_m",
+        "actual": 0.00217102700844407,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "run.speed",
+      "passed": true,
+      "details": {
+        "field": "cases.run",
+        "expected_m": 35.00000000000035,
+        "actual_m": 35.0000190734863
+      }
+    },
+    {
+      "name": "diagonal_walk.present",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk"
+      }
+    },
+    {
+      "name": "diagonal_walk.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk"
+      }
+    },
+    {
+      "name": "diagonal_walk.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk"
+      }
+    },
+    {
+      "name": "diagonal_walk.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk.path_samples"
+      }
+    },
+    {
+      "name": "diagonal_walk.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk.horizontal_distance_m",
+        "computed_m": 13.999940249092367
+      }
+    },
+    {
+      "name": "diagonal_walk.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk.max_penetration_m",
+        "actual": 0.00203103688545525,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "diagonal_walk.speed",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_walk",
+        "expected_m": 14.000000000000139,
+        "actual_m": 13.9999399185181
+      }
+    },
+    {
+      "name": "diagonal_run.present",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run"
+      }
+    },
+    {
+      "name": "diagonal_run.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run"
+      }
+    },
+    {
+      "name": "diagonal_run.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run"
+      }
+    },
+    {
+      "name": "diagonal_run.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run.path_samples"
+      }
+    },
+    {
+      "name": "diagonal_run.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run.horizontal_distance_m",
+        "computed_m": 34.999554924288596
+      }
+    },
+    {
+      "name": "diagonal_run.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run.max_penetration_m",
+        "actual": 0.00217744172550738,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "diagonal_run.speed",
+      "passed": true,
+      "details": {
+        "field": "cases.diagonal_run",
+        "expected_m": 35.00000000000035,
+        "actual_m": 34.9995536804199
+      }
+    },
+    {
+      "name": "physical_key_dispatch.present",
+      "passed": true,
+      "details": {
+        "field": "cases.physical_key_dispatch"
+      }
+    },
+    {
+      "name": "physical_key_dispatch.input",
+      "passed": true,
+      "details": {
+        "field": "cases.physical_key_dispatch"
+      }
+    },
+    {
+      "name": "turn_left.present",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left"
+      }
+    },
+    {
+      "name": "turn_left.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left"
+      }
+    },
+    {
+      "name": "turn_left.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left"
+      }
+    },
+    {
+      "name": "turn_left.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left.path_samples"
+      }
+    },
+    {
+      "name": "turn_left.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left.horizontal_distance_m",
+        "computed_m": 1.39999985694885
+      }
+    },
+    {
+      "name": "turn_left.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "turn_left.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left"
+      }
+    },
+    {
+      "name": "turn_left.rotation",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left"
+      }
+    },
+    {
+      "name": "turn_left.smooth_rotation",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_left.path_samples",
+        "invalid_samples": [],
+        "angle_tolerance_rad": 0.01,
+        "overshoot_tolerance_rad": 1e-06
+      }
+    },
+    {
+      "name": "turn_right.present",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right"
+      }
+    },
+    {
+      "name": "turn_right.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right"
+      }
+    },
+    {
+      "name": "turn_right.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right"
+      }
+    },
+    {
+      "name": "turn_right.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right.path_samples"
+      }
+    },
+    {
+      "name": "turn_right.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right.horizontal_distance_m",
+        "computed_m": 1.39999997615814
+      }
+    },
+    {
+      "name": "turn_right.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "turn_right.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right"
+      }
+    },
+    {
+      "name": "turn_right.rotation",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right"
+      }
+    },
+    {
+      "name": "turn_right.smooth_rotation",
+      "passed": true,
+      "details": {
+        "field": "cases.turn_right.path_samples",
+        "invalid_samples": [],
+        "angle_tolerance_rad": 0.01,
+        "overshoot_tolerance_rad": 1e-06
+      }
+    },
+    {
+      "name": "camera_relative.present",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative"
+      }
+    },
+    {
+      "name": "camera_relative.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative"
+      }
+    },
+    {
+      "name": "camera_relative.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative"
+      }
+    },
+    {
+      "name": "camera_relative.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative.path_samples"
+      }
+    },
+    {
+      "name": "camera_relative.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative.horizontal_distance_m",
+        "computed_m": 1.39999985694885
+      }
+    },
+    {
+      "name": "camera_relative.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "camera_relative.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative"
+      }
+    },
+    {
+      "name": "camera_relative.direction",
+      "passed": true,
+      "details": {
+        "field": "cases.camera_relative.expected_direction"
+      }
+    },
+    {
+      "name": "gravity_drop.present",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop"
+      }
+    },
+    {
+      "name": "gravity_drop.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop"
+      }
+    },
+    {
+      "name": "gravity_drop.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop"
+      }
+    },
+    {
+      "name": "gravity_drop.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop.path_samples"
+      }
+    },
+    {
+      "name": "gravity_drop.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop.horizontal_distance_m",
+        "computed_m": 0.0
+      }
+    },
+    {
+      "name": "gravity_drop.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "gravity_drop.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop"
+      }
+    },
+    {
+      "name": "gravity_drop.gravity",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop"
+      }
+    },
+    {
+      "name": "gravity_drop.acceleration",
+      "passed": true,
+      "details": {
+        "field": "cases.gravity_drop.path_samples",
+        "observed_mps2": 9.800000309944155,
+        "expected_mps2": 9.8,
+        "relative_limit": 0.01
+      }
+    },
+    {
+      "name": "step_up.present",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up"
+      }
+    },
+    {
+      "name": "step_up.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up"
+      }
+    },
+    {
+      "name": "step_up.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up"
+      }
+    },
+    {
+      "name": "step_up.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up.path_samples"
+      }
+    },
+    {
+      "name": "step_up.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up.horizontal_distance_m",
+        "computed_m": 5.15337800979614
+      }
+    },
+    {
+      "name": "step_up.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up.max_penetration_m",
+        "actual": 0.00212690490297973,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "step_up.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up"
+      }
+    },
+    {
+      "name": "step_up.traversal",
+      "passed": true,
+      "details": {
+        "field": "cases.step_up"
+      }
+    },
+    {
+      "name": "step_down.present",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down"
+      }
+    },
+    {
+      "name": "step_down.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down"
+      }
+    },
+    {
+      "name": "step_down.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down"
+      }
+    },
+    {
+      "name": "step_down.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down.path_samples"
+      }
+    },
+    {
+      "name": "step_down.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down.horizontal_distance_m",
+        "computed_m": 5.158668935298917
+      }
+    },
+    {
+      "name": "step_down.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down.max_penetration_m",
+        "actual": 0.00178841291926801,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "step_down.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down"
+      }
+    },
+    {
+      "name": "step_down.traversal",
+      "passed": true,
+      "details": {
+        "field": "cases.step_down"
+      }
+    },
+    {
+      "name": "slope_up.present",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up"
+      }
+    },
+    {
+      "name": "slope_up.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up"
+      }
+    },
+    {
+      "name": "slope_up.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up"
+      }
+    },
+    {
+      "name": "slope_up.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up.path_samples"
+      }
+    },
+    {
+      "name": "slope_up.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up.horizontal_distance_m",
+        "computed_m": 6.1651816368103
+      }
+    },
+    {
+      "name": "slope_up.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "slope_up.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up"
+      }
+    },
+    {
+      "name": "slope_up.traversal",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_up"
+      }
+    },
+    {
+      "name": "slope_down.present",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down"
+      }
+    },
+    {
+      "name": "slope_down.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down"
+      }
+    },
+    {
+      "name": "slope_down.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down"
+      }
+    },
+    {
+      "name": "slope_down.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down.path_samples"
+      }
+    },
+    {
+      "name": "slope_down.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down.horizontal_distance_m",
+        "computed_m": 6.1783032417297
+      }
+    },
+    {
+      "name": "slope_down.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down.max_penetration_m",
+        "actual": 0.0,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "slope_down.no_recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down"
+      }
+    },
+    {
+      "name": "slope_down.traversal",
+      "passed": true,
+      "details": {
+        "field": "cases.slope_down"
+      }
+    },
+    {
+      "name": "wall_front_walk.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk"
+      }
+    },
+    {
+      "name": "wall_front_walk.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk"
+      }
+    },
+    {
+      "name": "wall_front_walk.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk"
+      }
+    },
+    {
+      "name": "wall_front_walk.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk.path_samples"
+      }
+    },
+    {
+      "name": "wall_front_walk.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk.horizontal_distance_m",
+        "computed_m": 1.1739459037780802
+      }
+    },
+    {
+      "name": "wall_front_walk.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk.max_penetration_m",
+        "actual": 9.67752202996053e-05,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_front_walk.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_walk"
+      }
+    },
+    {
+      "name": "wall_front_run.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run"
+      }
+    },
+    {
+      "name": "wall_front_run.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run"
+      }
+    },
+    {
+      "name": "wall_front_run.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run"
+      }
+    },
+    {
+      "name": "wall_front_run.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run.path_samples"
+      }
+    },
+    {
+      "name": "wall_front_run.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run.horizontal_distance_m",
+        "computed_m": 1.16666555404663
+      }
+    },
+    {
+      "name": "wall_front_run.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run.max_penetration_m",
+        "actual": 0.0020873520988971,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_front_run.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_front_run"
+      }
+    },
+    {
+      "name": "wall_oblique_walk.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk"
+      }
+    },
+    {
+      "name": "wall_oblique_walk.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk"
+      }
+    },
+    {
+      "name": "wall_oblique_walk.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk"
+      }
+    },
+    {
+      "name": "wall_oblique_walk.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk.path_samples"
+      }
+    },
+    {
+      "name": "wall_oblique_walk.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk.horizontal_distance_m",
+        "computed_m": 3.928880522492014
+      }
+    },
+    {
+      "name": "wall_oblique_walk.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk.max_penetration_m",
+        "actual": 0.00212694192305207,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_oblique_walk.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_walk"
+      }
+    },
+    {
+      "name": "wall_oblique_run.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run"
+      }
+    },
+    {
+      "name": "wall_oblique_run.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run"
+      }
+    },
+    {
+      "name": "wall_oblique_run.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run"
+      }
+    },
+    {
+      "name": "wall_oblique_run.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run.path_samples"
+      }
+    },
+    {
+      "name": "wall_oblique_run.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run.horizontal_distance_m",
+        "computed_m": 10.23210876337417
+      }
+    },
+    {
+      "name": "wall_oblique_run.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run.max_penetration_m",
+        "actual": 0.00178884132765234,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_oblique_run.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_oblique_run"
+      }
+    },
+    {
+      "name": "wall_corner_walk.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk"
+      }
+    },
+    {
+      "name": "wall_corner_walk.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk"
+      }
+    },
+    {
+      "name": "wall_corner_walk.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk"
+      }
+    },
+    {
+      "name": "wall_corner_walk.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk.path_samples"
+      }
+    },
+    {
+      "name": "wall_corner_walk.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk.horizontal_distance_m",
+        "computed_m": 0.4631967311229105
+      }
+    },
+    {
+      "name": "wall_corner_walk.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk.max_penetration_m",
+        "actual": 0.00300748134031892,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_corner_walk.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_walk"
+      }
+    },
+    {
+      "name": "wall_corner_run.present",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run"
+      }
+    },
+    {
+      "name": "wall_corner_run.fields",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run"
+      }
+    },
+    {
+      "name": "wall_corner_run.physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run"
+      }
+    },
+    {
+      "name": "wall_corner_run.samples",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run.path_samples"
+      }
+    },
+    {
+      "name": "wall_corner_run.distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run.horizontal_distance_m",
+        "computed_m": 0.46397298307531626
+      }
+    },
+    {
+      "name": "wall_corner_run.penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run.max_penetration_m",
+        "actual": 0.00187536003068089,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "wall_corner_run.contact",
+      "passed": true,
+      "details": {
+        "field": "cases.wall_corner_run"
+      }
+    },
+    {
+      "name": "door_passages.present",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages"
+      }
+    },
+    {
+      "name": "door.count",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages"
+      }
+    },
+    {
+      "name": "door_passages.passages[0].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[0]"
+      }
+    },
+    {
+      "name": "door_passages.passages[0].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[0]"
+      }
+    },
+    {
+      "name": "door_passages.passages[0].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[0].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[0].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[0].horizontal_distance_m",
+        "computed_m": 1.5706126689910902
+      }
+    },
+    {
+      "name": "door_passages.passages[0].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[0].max_penetration_m",
+        "actual": 0.00191432028077543,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[0].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[0]"
+      }
+    },
+    {
+      "name": "door_passages.passages[1].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[1]"
+      }
+    },
+    {
+      "name": "door_passages.passages[1].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[1]"
+      }
+    },
+    {
+      "name": "door_passages.passages[1].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[1].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[1].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[1].horizontal_distance_m",
+        "computed_m": 4.013331383466722
+      }
+    },
+    {
+      "name": "door_passages.passages[1].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[1].max_penetration_m",
+        "actual": 0.00179582892451435,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[1].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[1]"
+      }
+    },
+    {
+      "name": "door_passages.passages[2].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[2]"
+      }
+    },
+    {
+      "name": "door_passages.passages[2].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[2]"
+      }
+    },
+    {
+      "name": "door_passages.passages[2].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[2].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[2].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[2].horizontal_distance_m",
+        "computed_m": 4.013331383466722
+      }
+    },
+    {
+      "name": "door_passages.passages[2].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[2].max_penetration_m",
+        "actual": 0.00212734146043658,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[2].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[2]"
+      }
+    },
+    {
+      "name": "door_passages.passages[3].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[3]"
+      }
+    },
+    {
+      "name": "door_passages.passages[3].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[3]"
+      }
+    },
+    {
+      "name": "door_passages.passages[3].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[3].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[3].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[3].horizontal_distance_m",
+        "computed_m": 4.01333123445511
+      }
+    },
+    {
+      "name": "door_passages.passages[3].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[3].max_penetration_m",
+        "actual": 0.00212703109718859,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[3].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[3]"
+      }
+    },
+    {
+      "name": "door_passages.passages[4].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[4]"
+      }
+    },
+    {
+      "name": "door_passages.passages[4].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[4]"
+      }
+    },
+    {
+      "name": "door_passages.passages[4].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[4].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[4].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[4].horizontal_distance_m",
+        "computed_m": 4.01333147287369
+      }
+    },
+    {
+      "name": "door_passages.passages[4].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[4].max_penetration_m",
+        "actual": 0.00216179969720542,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[4].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[4]"
+      }
+    },
+    {
+      "name": "door_passages.passages[5].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[5]"
+      }
+    },
+    {
+      "name": "door_passages.passages[5].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[5]"
+      }
+    },
+    {
+      "name": "door_passages.passages[5].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[5].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[5].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[5].horizontal_distance_m",
+        "computed_m": 4.013331502676012
+      }
+    },
+    {
+      "name": "door_passages.passages[5].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[5].max_penetration_m",
+        "actual": 0.00203310372307897,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[5].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[5]"
+      }
+    },
+    {
+      "name": "door_passages.passages[6].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[6]"
+      }
+    },
+    {
+      "name": "door_passages.passages[6].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[6]"
+      }
+    },
+    {
+      "name": "door_passages.passages[6].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[6].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[6].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[6].horizontal_distance_m",
+        "computed_m": 4.013331502676012
+      }
+    },
+    {
+      "name": "door_passages.passages[6].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[6].max_penetration_m",
+        "actual": 0.00212732399813831,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[6].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[6]"
+      }
+    },
+    {
+      "name": "door_passages.passages[7].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[7]"
+      }
+    },
+    {
+      "name": "door_passages.passages[7].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[7]"
+      }
+    },
+    {
+      "name": "door_passages.passages[7].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[7].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[7].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[7].horizontal_distance_m",
+        "computed_m": 4.013328492641451
+      }
+    },
+    {
+      "name": "door_passages.passages[7].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[7].max_penetration_m",
+        "actual": 0.00182298850268126,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[7].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[7]"
+      }
+    },
+    {
+      "name": "door_passages.passages[8].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[8]"
+      }
+    },
+    {
+      "name": "door_passages.passages[8].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[8]"
+      }
+    },
+    {
+      "name": "door_passages.passages[8].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[8].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[8].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[8].horizontal_distance_m",
+        "computed_m": 4.013331115245821
+      }
+    },
+    {
+      "name": "door_passages.passages[8].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[8].max_penetration_m",
+        "actual": 0.00217669643461704,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[8].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[8]"
+      }
+    },
+    {
+      "name": "door_passages.passages[9].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[9]"
+      }
+    },
+    {
+      "name": "door_passages.passages[9].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[9]"
+      }
+    },
+    {
+      "name": "door_passages.passages[9].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[9].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[9].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[9].horizontal_distance_m",
+        "computed_m": 4.013331204652788
+      }
+    },
+    {
+      "name": "door_passages.passages[9].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[9].max_penetration_m",
+        "actual": 0.00187523989006877,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[9].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[9]"
+      }
+    },
+    {
+      "name": "door_passages.passages[10].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[10]"
+      }
+    },
+    {
+      "name": "door_passages.passages[10].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[10]"
+      }
+    },
+    {
+      "name": "door_passages.passages[10].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[10].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[10].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[10].horizontal_distance_m",
+        "computed_m": 4.013331204652788
+      }
+    },
+    {
+      "name": "door_passages.passages[10].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[10].max_penetration_m",
+        "actual": 0.00217669596895576,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[10].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[10]"
+      }
+    },
+    {
+      "name": "door_passages.passages[11].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[11]"
+      }
+    },
+    {
+      "name": "door_passages.passages[11].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[11]"
+      }
+    },
+    {
+      "name": "door_passages.passages[11].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[11].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[11].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[11].horizontal_distance_m",
+        "computed_m": 4.0133313834667215
+      }
+    },
+    {
+      "name": "door_passages.passages[11].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[11].max_penetration_m",
+        "actual": 0.00202226429246366,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[11].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[11]"
+      }
+    },
+    {
+      "name": "door_passages.passages[12].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[12]"
+      }
+    },
+    {
+      "name": "door_passages.passages[12].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[12]"
+      }
+    },
+    {
+      "name": "door_passages.passages[12].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[12].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[12].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[12].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[12].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[12].max_penetration_m",
+        "actual": 0.00215749000199139,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[12].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[12]"
+      }
+    },
+    {
+      "name": "door_passages.passages[13].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[13]"
+      }
+    },
+    {
+      "name": "door_passages.passages[13].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[13]"
+      }
+    },
+    {
+      "name": "door_passages.passages[13].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[13].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[13].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[13].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[13].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[13].max_penetration_m",
+        "actual": 0.00202226429246366,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[13].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[13]"
+      }
+    },
+    {
+      "name": "door_passages.passages[14].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[14]"
+      }
+    },
+    {
+      "name": "door_passages.passages[14].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[14]"
+      }
+    },
+    {
+      "name": "door_passages.passages[14].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[14].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[14].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[14].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[14].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[14].max_penetration_m",
+        "actual": 0.00215749000199139,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[14].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[14]"
+      }
+    },
+    {
+      "name": "door_passages.passages[15].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[15]"
+      }
+    },
+    {
+      "name": "door_passages.passages[15].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[15]"
+      }
+    },
+    {
+      "name": "door_passages.passages[15].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[15].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[15].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[15].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[15].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[15].max_penetration_m",
+        "actual": 0.00202226429246366,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[15].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[15]"
+      }
+    },
+    {
+      "name": "door_passages.passages[16].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[16]"
+      }
+    },
+    {
+      "name": "door_passages.passages[16].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[16]"
+      }
+    },
+    {
+      "name": "door_passages.passages[16].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[16].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[16].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[16].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[16].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[16].max_penetration_m",
+        "actual": 0.00215749000199139,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[16].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[16]"
+      }
+    },
+    {
+      "name": "door_passages.passages[17].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[17]"
+      }
+    },
+    {
+      "name": "door_passages.passages[17].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[17]"
+      }
+    },
+    {
+      "name": "door_passages.passages[17].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[17].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[17].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[17].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[17].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[17].max_penetration_m",
+        "actual": 0.00202226429246366,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[17].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[17]"
+      }
+    },
+    {
+      "name": "door_passages.passages[18].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[18]"
+      }
+    },
+    {
+      "name": "door_passages.passages[18].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[18]"
+      }
+    },
+    {
+      "name": "door_passages.passages[18].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[18].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[18].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[18].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[18].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[18].max_penetration_m",
+        "actual": 0.00215749000199139,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[18].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[18]"
+      }
+    },
+    {
+      "name": "door_passages.passages[19].fields",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[19]"
+      }
+    },
+    {
+      "name": "door_passages.passages[19].physical_time",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[19]"
+      }
+    },
+    {
+      "name": "door_passages.passages[19].samples",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[19].path_samples"
+      }
+    },
+    {
+      "name": "door_passages.passages[19].distance_consistency",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[19].horizontal_distance_m",
+        "computed_m": 4.0133311450481415
+      }
+    },
+    {
+      "name": "door_passages.passages[19].penetration",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages[19].max_penetration_m",
+        "actual": 0.00202226429246366,
+        "limit_m": 0.005
+      }
+    },
+    {
+      "name": "door_passages.passages[19].crossing",
+      "passed": false,
+      "details": {
+        "field": "cases.door_passages.passages[19]"
+      }
+    },
+    {
+      "name": "door.directions",
+      "passed": true,
+      "details": {
+        "field": "cases.door_passages.passages"
+      }
+    },
+    {
+      "name": "fall_return.present",
+      "passed": true,
+      "details": {
+        "field": "cases.fall_return"
+      }
+    },
+    {
+      "name": "fall_return.spawn",
+      "passed": true,
+      "details": {
+        "field": "cases.fall_return"
+      }
+    },
+    {
+      "name": "fall_return.input_latch",
+      "passed": true,
+      "details": {
+        "field": "cases.fall_return"
+      }
+    },
+    {
+      "name": "outside_return.present",
+      "passed": true,
+      "details": {
+        "field": "cases.outside_return"
+      }
+    },
+    {
+      "name": "outside_return.spawn",
+      "passed": true,
+      "details": {
+        "field": "cases.outside_return"
+      }
+    },
+    {
+      "name": "outside_return.input_latch",
+      "passed": true,
+      "details": {
+        "field": "cases.outside_return"
+      }
+    },
+    {
+      "name": "manual_return.present",
+      "passed": true,
+      "details": {
+        "field": "cases.manual_return"
+      }
+    },
+    {
+      "name": "manual_return.spawn",
+      "passed": true,
+      "details": {
+        "field": "cases.manual_return"
+      }
+    },
+    {
+      "name": "manual_return.input_latch",
+      "passed": true,
+      "details": {
+        "field": "cases.manual_return"
+      }
+    },
+    {
+      "name": "edge_return.present",
+      "passed": true,
+      "details": {
+        "field": "cases.edge_return"
+      }
+    },
+    {
+      "name": "edge_return.recovery",
+      "passed": true,
+      "details": {
+        "field": "cases.edge_return"
+      }
+    },
+    {
+      "name": "menu_pause.present",
+      "passed": true,
+      "details": {
+        "field": "cases.menu_pause"
+      }
+    },
+    {
+      "name": "menu_pause.freeze",
+      "passed": true,
+      "details": {
+        "field": "cases.menu_pause"
+      }
+    },
+    {
+      "name": "menu_pause.input_latch",
+      "passed": true,
+      "details": {
+        "field": "cases.menu_pause"
+      }
+    },
+    {
+      "name": "invalid_spawn_guard.present",
+      "passed": true,
+      "details": {
+        "field": "cases.invalid_spawn_guard"
+      }
+    },
+    {
+      "name": "invalid_spawn_guard.reject",
+      "passed": true,
+      "details": {
+        "field": "cases.invalid_spawn_guard"
+      }
+    }
+  ]
+}
