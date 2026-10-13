@@ -1,0 +1,243 @@
+{
+  "task": "P03",
+  "passed": true,
+  "checks": [
+    {
+      "name": "contract.pass_12",
+      "passed": true
+    },
+    {
+      "name": "gpu.pass_5",
+      "passed": true
+    },
+    {
+      "name": "actual_guard_fault_detected",
+      "passed": true
+    },
+    {
+      "name": "actual_configuration_faults_detected",
+      "passed": true
+    },
+    {
+      "name": "independent_review",
+      "passed": true
+    },
+    {
+      "name": "authored_sources_equal",
+      "passed": true
+    },
+    {
+      "name": "contract.probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "contract.checker_sha256",
+      "passed": true
+    },
+    {
+      "name": "contract.orchestrator_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.probe_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.checker_sha256",
+      "passed": true
+    },
+    {
+      "name": "gpu.orchestrator_sha256",
+      "passed": true
+    },
+    {
+      "name": "guard_source_matches",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.checks",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.37_cases",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.every_tick_safety",
+      "passed": true
+    },
+    {
+      "name": "headless_engine.close_body_hidden",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.checks",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.37_cases",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.every_tick_safety",
+      "passed": true
+    },
+    {
+      "name": "repeat_engine.close_body_hidden",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.checks",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.37_cases",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.every_tick_safety",
+      "passed": true
+    },
+    {
+      "name": "gpu_30_engine.close_body_hidden",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.checks",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.37_cases",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.every_tick_safety",
+      "passed": true
+    },
+    {
+      "name": "gpu_60_engine.close_body_hidden",
+      "passed": true
+    },
+    {
+      "name": "p02.nine_authored_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "city_authored_unchanged",
+      "passed": true
+    },
+    {
+      "name": "region.unchanged",
+      "passed": true
+    },
+    {
+      "name": "world.generated_unchanged",
+      "passed": true
+    },
+    {
+      "name": "prior_p01_p02_evidence_unchanged",
+      "passed": true
+    },
+    {
+      "name": "p03_complete_p04_pending",
+      "passed": true
+    },
+    {
+      "name": "captures.six_1152x720",
+      "passed": true
+    }
+  ],
+  "source_commit": "904d0c5ce1094a90e26f59e787dd3d9ed5d01c5c",
+  "sources": {
+    "project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "scenes/tests/player_fixture.tscn": "6fc75704f2e89f5ecba6b790adabbb4d0d711f4d153802f637b7436bccd553e4",
+    "scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "scripts/player_fixture.gd": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6",
+    "scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "scenes/tests/movement_test.tscn": "05ffd927c1825d3d92155dc0f2f1fa2aa8dfa323be33d74014f26ab39d180c99",
+    "scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+    "scripts/movement_test.gd": "16ad475cd5f56ebfacc59d0fcfa009869fa3269415ea805f0c16a97672e7ba82",
+    "scenes/player/camera_rig.tscn": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6",
+    "scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "scenes/tests/camera_test.tscn": "943fac140775d173e38fbcb133acda196dbbaef0c4e07cd8116d8d9819158784",
+    "scripts/camera_test.gd": "85dac21a6d8e6a941b17fef83230fdb257811a3dbb3ec5415169552bda6dd063"
+  },
+  "verification_inputs": {
+    "tests/game/check_camera_test.gd": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7",
+    "tests/game/offline.sb": "5c358b8d847211333e7ba22df82d84f796b5f30a41a2682209a949d783adbd08",
+    "tools/check_camera_evidence.py": "f14051234d2eeb1545886d7f11e8f9edb5f6218d55de0e4d6e6f95eaf771862b",
+    "tools/check_camera_contract.py": "818fb2d16a3b78ccd84d4d44bd6cbcedd3172dabdd6dae71ffa4bdf4ec4ebbc2",
+    "tools/check_camera_guard_regression.py": "ae977db7c47684a9c52cb276ba03195028457c26081d3a89b853ac1967bfd176",
+    "tools/run_camera_test.sh": "831d616339c986e5b2093e7ae5d6ec6572c8656a950d0125c3bb4b3aabf30b4a"
+  },
+  "evidence_sha256": {
+    "data/reports/camera/contract_check.json": "888028ec904e4a5a47756e0e4614542eb0f56ab96e418087dfd6fcbbf87774b5",
+    "data/reports/camera/development/before_corner_guard.json": "b93fe573212eba0ac67749e89bc424c44b870f86398e292d2ae81449e382346d",
+    "data/reports/camera/development/before_visibility_refinement/gpu_30_engine.json": "0dfea0ec36ef93fcbe8e9151d933d7e678acae5532f6ec9d1b48bcee79b495e5",
+    "data/reports/camera/development/before_visibility_refinement/gpu_60_engine.json": "e0838e82504a196a5387d86ba4825926faa94ebbfc01986c4522347d92e16b5e",
+    "data/reports/camera/development/before_visibility_refinement/gpu_check.json": "25c8f6e8c675d5ea320e97ca98373fe74573f6d0d65ea6ce3eb81d262062ffa5",
+    "data/reports/camera/development/before_visibility_refinement/view_lintel.png": "e31ac2ab39ef0db884930557c5e1827911c55473e1375c808e4e227ea9baa2b7",
+    "data/reports/camera/development/before_visibility_refinement/view_wall.png": "e24073187e626c249f33033b1eaf5b1cdaff06486b0c83ff5427fe2d9d395d5f",
+    "data/reports/camera/development/failures.json": "2caf206fedfa470491dc7441388a8df83d276e9e6869503f35afb7324762caee",
+    "data/reports/camera/gpu_30_engine.json": "f3b1013f925dd14ce5e4a14055f962317d5d982822615be33e32b1cc81b0233c",
+    "data/reports/camera/gpu_30_engine.log": "3d09501ea28a3431f35852949feba4f1fc822f1dba3936abd16e166611768dd8",
+    "data/reports/camera/gpu_30_engine_check.json": "a12d08f2f32b65adcf5e87347c21bfe4aaf773973847b1110b847ddeea6abdd8",
+    "data/reports/camera/gpu_60_engine.json": "158210a1b2dc214ac79d7cd7fd6197d813758edb65d44ae82150dd774b1e5506",
+    "data/reports/camera/gpu_60_engine.log": "3d09501ea28a3431f35852949feba4f1fc822f1dba3936abd16e166611768dd8",
+    "data/reports/camera/gpu_60_engine_check.json": "a12d08f2f32b65adcf5e87347c21bfe4aaf773973847b1110b847ddeea6abdd8",
+    "data/reports/camera/gpu_check.json": "585e8b95819f6ca0f517cca92789d976d49bd6a15080ff9d35db2cebd5103d87",
+    "data/reports/camera/headless_engine.json": "393350efbcd367b96871b553ccf2cff4a1c7753f1212fef0c6d099cf701548f1",
+    "data/reports/camera/headless_engine.log": "b55f5c0dcbcca5f6b4c1127a2a987a2c9fed3980d649654bab90a3f2f3c5ca87",
+    "data/reports/camera/headless_engine_check.json": "0c5ed8a728afd862548eb2590c26878689db5369a1d20d93b3813ed264912d2e",
+    "data/reports/camera/independent_review.json": "356a79459d82e5f84aba6ca352e3fe81bc97186cf6ea0f236e11a97a51ed29d8",
+    "data/reports/camera/regression/guard_disabled.json": "b790855fe4a86c7b36b5cbb128e2c5a093f1a9a2dc46530307c3587fdf086f38",
+    "data/reports/camera/regression/guard_disabled.log": "b55f5c0dcbcca5f6b4c1127a2a987a2c9fed3980d649654bab90a3f2f3c5ca87",
+    "data/reports/camera/regression/guard_disabled_check.json": "082398d8cbcf6dd9640b894398feacc49fe4f2908d1a49a79c9d1d8b2c41a0c7",
+    "data/reports/camera/regression/guard_regression.json": "4eed41853fc1e80db37d1b957093b10c3c5e1696392b6cb1f672554d7c72bbde",
+    "data/reports/camera/regression/mask_disabled.json": "9747cfcf8bc0c57a0475f26fce76b64e2c1172e07cc6b9df7a9e762212da67b9",
+    "data/reports/camera/regression/mask_disabled.log": "34f633e918efd450937bd66e18888ff64ee8ce3ec011bd9604a57529404ebc10",
+    "data/reports/camera/regression/mask_disabled_check.json": "3e91e3b4b347fdd861e7c92a7ca97f2b60b6dd0a44b711072510a1353c795f26",
+    "data/reports/camera/regression/menu_capture_leak.json": "0272242cbfc59482d8d16c316b386504f54287c311ea7830bd1b3be2456eed6e",
+    "data/reports/camera/regression/menu_capture_leak.log": "121a4c68a74b2bead8174493ddf3f0b4895aa457b6887cb3ea1cc0751d096b6c",
+    "data/reports/camera/regression/menu_capture_leak_check.json": "59834e6bb0acffb4446a12ed15ebdffdef80faca86e1098ba86d1f2646c6fd73",
+    "data/reports/camera/regression/self_exclusion_removed.json": "05c2a91b2cf361a968109f826fae75055d72564adf73386d03f623928889f03d",
+    "data/reports/camera/regression/self_exclusion_removed.log": "13502a80ebf3eb73f8ee7a1ac4c94c84bf8f2fdf4b582d523cb133a828e79a7a",
+    "data/reports/camera/regression/self_exclusion_removed_check.json": "6d80a41cde1a0663d390fce431a2361ee68871650450cce69ce82cefa6354190",
+    "data/reports/camera/regression/unclamped_pitch.json": "f60b659230a09a54387908f28a46952bcd4df1916e4fc4cb4d0ef76eabb9d6c1",
+    "data/reports/camera/regression/unclamped_pitch.log": "82717ea77348edf0537f534968e7e8426cca7111ad3a1da3dce7134d0d211459",
+    "data/reports/camera/regression/unclamped_pitch_check.json": "0367256a79bc473ebfcad661aaeaba70e2d0d94e73b9c11e56f22db7a0e97811",
+    "data/reports/camera/regression/wrong_player_camera.json": "f65bbdd78446a341fcc862c8117ae6484abb05a2da5367b38fbc253d188459a7",
+    "data/reports/camera/regression/wrong_player_camera.log": "f0b3c69a302604b6dfaa01a683ee2399852904878fd98cf73c55d7ef8688d48b",
+    "data/reports/camera/regression/wrong_player_camera_check.json": "57a3c6bb65542898972455d78f93faf583aec3921ddc9091733dff761a6c0f8d",
+    "data/reports/camera/repeat_engine.json": "c58de55d6edf9157630b24516dd05bf2615f0d5da533205444655c226652f812",
+    "data/reports/camera/repeat_engine.log": "b55f5c0dcbcca5f6b4c1127a2a987a2c9fed3980d649654bab90a3f2f3c5ca87",
+    "data/reports/camera/repeat_engine_check.json": "0c5ed8a728afd862548eb2590c26878689db5369a1d20d93b3813ed264912d2e",
+    "data/reports/camera/view_corner.png": "963666df876ba15a0a7689fc8f03985d5ab50b483a3bb09230d39b1864b90939",
+    "data/reports/camera/view_door.png": "2fe5aa8b983c1fca26268e5f8c3b97c8b813ab1e5f3f964776a3a6682c2063e3",
+    "data/reports/camera/view_lintel.png": "d6efc19ddf3edadce7a5e5ae7eb8d9ff0823c84ca346fc5d6c10ba50e98aedd4",
+    "data/reports/camera/view_menu.png": "09890c6d002ab56115c01d014d935304f18084fe2bc4312248fac0efc05bbbee",
+    "data/reports/camera/view_open.png": "a9dfd5d6911fb60e65f78efe43efa897c72173aff69581f9f367556b5d1bf75d",
+    "data/reports/camera/view_wall.png": "799c189a5778060bf27dfc9528b3349f6c77f08d494332032aebf7683cbbbee1"
+  },
+  "implementation": "Authored synthetic P02-derived third person camera only; P02 and city inputs unchanged",
+  "evidence_density": "37 cases; continuous segments have every-physics-tick extrema/counts and about10Hz retained paths",
+  "actual_engine_fault_cases": 6,
+  "checker_json_mutation_cases": 8,
+  "environment": "Existing M1 Pro16GB/Godot4.7.2/Forward+/Metal,1152x720; authored-only offline copies",
+  "headless_capture": "Simulated intent only, native mode0; actual GPU native mode2/visible0 required",
+  "human_handling": "not performed; final native fixture opened for optional user feedback",
+  "next_task": "P04",
+  "next_first_action": "Read P03/C07/V03 and E03/G03/G04 holds; configure world/player/NPC/vehicle/camera collision matrix and static city collision while preserving camera/movement/recovery tests",
+  "not_tested": [
+    "human keyboard/mouse feel",
+    "OS-driven native focus loss",
+    "extreme aspect ratios",
+    "initial camera pivot inside static obstacles",
+    "Seoul collision/Daehanmun/routes",
+    "automatic stair/curb climb",
+    "M4 RAM/OS/run",
+    "city performance",
+    "W0/V0"
+  ]
+}

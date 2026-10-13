@@ -1,0 +1,1176 @@
+{
+  "task": "P03",
+  "review_kind": "independent_evidence_and_document_cross_review",
+  "review_date": "2026-10-13",
+  "passed": true,
+  "baseline_input": "data/reports/camera/headless_engine.json",
+  "baseline_sha256": "393350efbcd367b96871b553ccf2cff4a1c7753f1212fef0c6d099cf701548f1",
+  "checker": "tools/check_camera_evidence.py",
+  "checker_sha256": "f14051234d2eeb1545886d7f11e8f9edb5f6218d55de0e4d6e6f95eaf771862b",
+  "probe_sha256": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7",
+  "normal_reaudits": [
+    {
+      "input": "data/reports/camera/headless_engine.json",
+      "input_sha256": "393350efbcd367b96871b553ccf2cff4a1c7753f1212fef0c6d099cf701548f1",
+      "passed": true,
+      "checks": 13367,
+      "matches_saved_audit": true
+    },
+    {
+      "input": "data/reports/camera/repeat_engine.json",
+      "input_sha256": "c58de55d6edf9157630b24516dd05bf2615f0d5da533205444655c226652f812",
+      "passed": true,
+      "checks": 13367,
+      "matches_saved_audit": true
+    },
+    {
+      "input": "data/reports/camera/gpu_30_engine.json",
+      "input_sha256": "f3b1013f925dd14ce5e4a14055f962317d5d982822615be33e32b1cc81b0233c",
+      "passed": true,
+      "checks": 8788,
+      "matches_saved_audit": true
+    },
+    {
+      "input": "data/reports/camera/gpu_60_engine.json",
+      "input_sha256": "158210a1b2dc214ac79d7cd7fd6197d813758edb65d44ae82150dd774b1e5506",
+      "passed": true,
+      "checks": 8788,
+      "matches_saved_audit": true
+    }
+  ],
+  "source_hash_matches": {
+    "project.godot": true,
+    "scenes/player/player.tscn": true,
+    "scenes/tests/player_fixture.tscn": true,
+    "scripts/player/idle_support.gd": true,
+    "scripts/player_fixture.gd": true,
+    "scripts/input_router.gd": true,
+    "scenes/tests/movement_test.tscn": true,
+    "scripts/player/movement_controller.gd": true,
+    "scripts/movement_test.gd": true,
+    "scenes/player/camera_rig.tscn": true,
+    "scripts/player/camera_rig.gd": true,
+    "scenes/tests/camera_test.tscn": true,
+    "scripts/camera_test.gd": true,
+    "probe": true,
+    "checker": true,
+    "orchestrator": true
+  },
+  "measurements": {
+    "headless_engine.json": {
+      "case_count": 37,
+      "segment_count": 30,
+      "physics_ticks": 9572,
+      "near_corner_radius_m": 0.0781805068254471
+    },
+    "repeat_engine.json": {
+      "case_count": 37,
+      "segment_count": 30,
+      "physics_ticks": 9572,
+      "near_corner_radius_m": 0.0781805068254471
+    },
+    "gpu_30_engine.json": {
+      "case_count": 37,
+      "segment_count": 30,
+      "physics_ticks": 6092,
+      "near_corner_radius_m": 0.0781805068254471
+    },
+    "gpu_60_engine.json": {
+      "case_count": 37,
+      "segment_count": 30,
+      "physics_ticks": 6092,
+      "near_corner_radius_m": 0.0781805068254471
+    }
+  },
+  "evidence_mutations": [
+    {
+      "name": "mask0",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "contract.mask"
+      ]
+    },
+    {
+      "name": "wrong_camera",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "contract.player_camera"
+      ]
+    },
+    {
+      "name": "unclamped_pitch",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "contract.pitch_max"
+      ]
+    },
+    {
+      "name": "self_not_excluded",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "self_exclusion.explicit"
+      ]
+    },
+    {
+      "name": "capture_leak",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "menu_input.pause"
+      ]
+    },
+    {
+      "name": "between_sample_overlap",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "corner_orbit.all_tick_stats"
+      ]
+    },
+    {
+      "name": "missing_case",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "eye_clearance.present",
+        "eye_clearance.radius"
+      ]
+    },
+    {
+      "name": "nonfinite",
+      "kind": "in_memory_JSON_evidence_mutation_not_engine_execution",
+      "rejected": true,
+      "failed_checks": [
+        "finite_values",
+        "contract.near"
+      ]
+    }
+  ],
+  "actual_engine_faults_separate": {
+    "count": 6,
+    "configuration_faults": [
+      "mask_disabled",
+      "self_exclusion_removed",
+      "wrong_player_camera",
+      "unclamped_pitch",
+      "menu_capture_leak"
+    ],
+    "configuration_fault_count": 5,
+    "guard_source_fault": "actual_guard_source_disabled",
+    "guard_rejected_by": [
+      "corner_orbit.all_tick_stats"
+    ],
+    "evidence_mutations_are_not_actual_engine_faults": true
+  },
+  "projection_retained_samples": [
+    {
+      "input": "headless_engine.json",
+      "case": "open_idle",
+      "point_count": 1202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339080810547
+      ],
+      "max_xy": [
+        576.0,
+        506.714965820312
+      ]
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "follow_walk",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "follow_run",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "open_idle",
+      "point_count": 1202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339080810547
+      ],
+      "max_xy": [
+        576.0,
+        506.714965820312
+      ]
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "follow_walk",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "follow_run",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "open_idle",
+      "point_count": 42,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339080810547
+      ],
+      "max_xy": [
+        576.0,
+        506.714965820312
+      ]
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "follow_walk",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "follow_run",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "open_idle",
+      "point_count": 42,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339080810547
+      ],
+      "max_xy": [
+        576.0,
+        506.714965820312
+      ]
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "follow_walk",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "follow_run",
+      "point_count": 202,
+      "viewport": [
+        1152,
+        720
+      ],
+      "outside_count": 0,
+      "behind_or_near_count": 0,
+      "min_xy": [
+        576.0,
+        310.339050292969
+      ],
+      "max_xy": [
+        576.0,
+        506.714996337891
+      ]
+    }
+  ],
+  "visual_hysteresis_retained_samples": [
+    {
+      "input": "headless_engine.json",
+      "case": "open_idle",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "follow_walk",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "follow_run",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "wall_still",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "wall_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "corner_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "lintel_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "clear_expansion",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "step_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "slope_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_forward_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "headless_engine.json",
+      "case": "door_reverse_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "open_idle",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "follow_walk",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "follow_run",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "wall_still",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "wall_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "corner_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "lintel_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "clear_expansion",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "step_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "slope_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_forward_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "repeat_engine.json",
+      "case": "door_reverse_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "open_idle",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "follow_walk",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "follow_run",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "wall_still",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "wall_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "corner_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "lintel_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "clear_expansion",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "step_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "slope_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_forward_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_30_engine.json",
+      "case": "door_reverse_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "open_idle",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "follow_walk",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "follow_run",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "wall_still",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "wall_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "corner_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "lintel_orbit",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "clear_expansion",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "step_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "slope_camera",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_0",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_1",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_2",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_3",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_4",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_5",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_6",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_7",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_8",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_forward_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    },
+    {
+      "input": "gpu_60_engine.json",
+      "case": "door_reverse_9",
+      "hidden_below_1_5m_violations": 0,
+      "shown_above_1_8m_violations": 0
+    }
+  ],
+  "near_plane_scope": {
+    "viewport": [
+      1152,
+      720
+    ],
+    "near_m": 0.05,
+    "fov_degrees": 65,
+    "probe_radius_m": 0.2,
+    "observed_max_corner_radius_m": 0.0781805068254471,
+    "maximum_aspect_for_sphere_containment_theoretical": 5.9965566923994,
+    "arbitrary_aspect_verified": false
+  },
+  "documents_reviewed": [
+    {
+      "path": "data/reports/camera.md",
+      "sha256": "b733ba355ce43bcafe4a26d3be44b9e7be3fba4ab7fb870c6175b341e74d89fe"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "sha256": "467a471ce15d82421a19c0418cf66c696fce484242a498d86d49fdf3fee3a074"
+    },
+    {
+      "path": "docs/CROSS_MAC.md",
+      "sha256": "e7c868ea5ebd51ac293cca63f40e256c526db9517466b4cdb779bc64a00111bf"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "sha256": "5c0811ba75cce816dc3dd045c8d8f42be26c3bd3fd46e6520431d27bb1d6409b"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor_document_ambiguity",
+      "path": "docs/WORK_STATUS.md",
+      "line": 113,
+      "issue": "P02 scope bullet still says P03 camera is unverified, while current next bullet completes P03; parent notified to mark this as P02 evidence scope.",
+      "status": "resolved",
+      "resolution": "P02 evidence scope is now explicit; current P03 completion remains in the next item."
+    }
+  ],
+  "scope": [
+    "Current-source baseline and repeat audits, actual GPU30/60 retained evidence, all-tick aggregate bounds and retained 10Hz independent geometric calculations",
+    "Report counts, physics ticks, wall clocks/render frames, distance and near-plane values matched raw evidence",
+    "Native GPU capture0/2 distinct from headless simulated intent; focus-out notification injected into actual notification code path",
+    "Visual hidden<1.5m and shown>1.8m verified in retained samples; open_idle/follow_walk/follow_run head/feet pixels inside viewport and forward of near plane"
+  ],
+  "limits": [
+    "No new engine run by independent reviewer; real engine faults reviewed from separately executed records",
+    "Eight in-memory evidence mutations do not prove eight engine fault executions",
+    "Every-tick aggregate statistics are producer measurements; retained raw paths are approximately10Hz",
+    "No human handling or OS-generated focus transition; notification was injected",
+    "No all-render-frame pixel/black-screen or video validation; selected PNGs and physics evidence only",
+    "No arbitrary window aspect, pivot initially inside solid, Seoul city collision/Daehanmun/routes, M4 or city performance verification"
+  ],
+  "unresolved_findings": []
+}

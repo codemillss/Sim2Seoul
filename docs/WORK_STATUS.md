@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-13 · 최근 실행: **P02 시험장 이동·중력·지면 복귀 완료** · D01–D04/G01–G04/E01–E04/P01–P02 완료, 다음 P03 · 서울 도시 보행은 미구현
+갱신: 2026-10-13 · 최근 실행: **P03 시험장 3인칭 카메라·회전·벽/문 가림 완료** · D01–D04/G01–G04/E01–E04/P01–P03 완료, 다음 P04 · 서울 도시 보행은 미구현
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -33,6 +33,7 @@
 | E04 거리·축척 고정 | 원본 외곽점 7곳·거리 4쌍·5방향 10m·큐브·정사영 비례. 정상 209개·실제 오류 10종·자료 거부 11종·계약 36개 통과 | [화면/재현](../data/reports/scale_view/README.md), [인수](../data/reports/e04_verification.json) |
 | P01 캐릭터·시험장 | 1.70m/반경 0.30m 캡슐, 외형/충돌 분리·7개 정적 구조. GPU 60.009초/3,600회 안정 정지·11개 검사 그룹, 실제 오류 9종 감지·계약 15개 통과 | [화면/재현](../data/reports/player_scale.md), [인수](../data/reports/p01_verification.json) |
 | P02 시험장 이동/복귀 | 1.4/3.5m/s·Visual 회전·중력/접촉·안전 복귀/입력 중립. 실제30/60fps 거리·60초 정지·벽/문/램프 검증 | [P02 실행/결과](../data/reports/movement.md), [인수28개](../data/reports/p02_verification.json) |
+| P03 시험장 3인칭 카메라 | 마우스 회전·휠 거리·추적/자기 제외·벽/문 가림·잠금/메뉴. 회전 병행 문 각10회·실제30/60fps 검증 | [P03 실행/결과](../data/reports/camera.md), [인수](../data/reports/p03_verification.json) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
@@ -88,7 +89,7 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - 국내 SHP/NGII 지역 원본 수신, 독립 높이·상세 지형 검증. Overture 원본은 취득 완료이며 후보의 현실 대응 검토는 남음.
 - 독립 기준 대비 위치·누락률 검증, 상세 부분별 수직 메시와 정관헌/상동교회의 실제 외형·높이 확인. G03 단순 본체 선택은 이 확인과 구분한다.
 - 실제 지면·계단·도로폭·대한문 개구부·세 필수 동선의 물리 연결/통행·게임 완주 검증. 원본 2D 연결과 경계 후보는 G04에서 검토 완료.
-- 상세 랜드마크·실제 지형·도시 충돌·3인칭 카메라는 미구현이다. P01 사람 크기와 P02 독립 시험장 이동/복귀는 완료했고 실제 도시에는 아직 적용하지 않았다.
+- 상세 랜드마크·실제 지형·도시 충돌은 미구현이다. P01 크기·P02 이동/복귀·P03 3인칭 카메라는 독립 시험장에서 완료했고 실제 도시에는 아직 적용하지 않았다.
 - 직접 키보드·마우스 조작은 미실행. E02는 화면 잠금 때문에 미실행이었으며, E03 실제 GPU 화면과 자동 키 이벤트/시점 선택 검증은 직접 조작과 구분한다.
 - 실제 플레이, 성능 측정, M4 Pro 확인, 패키지 제작.
 
@@ -109,12 +110,13 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - **E03 완료:** 1,233개 표시 도형(삼각형 27,054)·단일 본체/구멍/법선/높이·132개 지면 보류를 확인했다. 자동 입력 27개·변형/오래된 자료 27건 거부·headless 도형 12개·GPU 12개+캡처 4개 통과. 별도 game 사본의 오프라인 정상 실행과 공유 지역 자료에서 동일 기하/결정 재생성 확인. 사용자는 첫 배치에 “이대로 ㄱ” 피드백. 실제 걷기·개구부·조작감·도시 성능·M4는 미검증.
 - **E04 완료:** 원본 외곽 정점 7곳·거리 4쌍·10m 축 5방향·큐브·고정 카메라 투영 비례를 실제 엔진에서 확인했다. 정상 headless/GPU 각각 209개 통과, 실제 장면 변형 10종/잘못된 실행 자료 11종 거부, 계약 36개 통과·별도 사본 재생성/반복 측정 일치. 최대 거리 전달 오차 약 0.0000083m이며 외부 위치 정확도나 걷는 거리의 검증은 아니다. [E04 결과](../data/reports/scale_view/README.md).
 - **P01 완료:** 1.70m/반경 0.30m 캡슐의 외형/충돌체·미터 기준물·7개 정적 구조를 확인했다. 실제 GPU 정착 후 60.009초/3,600회 모두 지면 접촉, 높이 범위·속도·XZ 이동 0. 발 접촉 오차 약 0.135mm를 ±2mm 기준 안으로 기록했다. 정상 GPU 11개 그룹·headless 10개·계약 15개 및 실제 오류 9종 감지, 지도 없는 5개 authored 파일 사본 기동·반복 측정 일치. [P01 결과](../data/reports/player_scale.md). 본격 이동·복귀·3인칭·실제 도시 충돌은 후속이다.
-- **P02 완료:** P01을 변경하지 않고 상속한 시험장에 1.4/3.5m/s·카메라 기준 정규화 이동·시각 몸체 제한 회전·9.8m/s²·지면 접촉·안전 지면/겹침 검사 후 복귀를 연결했다. 직선/대각선 10초 거리, 벽 정면/사선/모서리 걷기·달리기, 시험문 양방향 각10회, 단차 진입 램프/경사 왕복, 강제 낙하/이탈/수동 복귀·입력 중립·메뉴 정지 검증을 통과했다. 실제 렌더 30/60fps에서 고정 물리60Hz와 거리, GPU 60초/3,600회 정지를 확인했다. [P02 증거/화면/인수](../data/reports/movement.md). P03 카메라 조작·P04 도시 충돌·W 대한문/경로·직접 조작감·M4는 미검증이다.
-- **P03 이후:** 미실행.
+- **P02 완료:** P01을 변경하지 않고 상속한 시험장에 1.4/3.5m/s·카메라 기준 정규화 이동·시각 몸체 제한 회전·9.8m/s²·지면 접촉·안전 지면/겹침 검사 후 복귀를 연결했다. 직선/대각선 10초 거리, 벽 정면/사선/모서리 걷기·달리기, 시험문 양방향 각10회, 단차 진입 램프/경사 왕복, 강제 낙하/이탈/수동 복귀·입력 중립·메뉴 정지 검증을 통과했다. 실제 렌더 30/60fps에서 고정 물리60Hz와 거리, GPU 60초/3,600회 정지를 확인했다. [P02 증거/화면/인수](../data/reports/movement.md). P02 결과만으로 P03 카메라 조작 검증을 대신하지 않는다. P03 결과는 다음 항목에 기록했다. P04 도시 충돌·W 대한문/경로·직접 조작감·M4는 미검증이다.
+- **P03 완료:** P02 파일을 보존한 별도 시험장/리그에 추적·마우스 회전·휠 거리·상하/거리 한계·자기 제외·SpringArm 구 탐색/최종 겹침 보완·안전 복귀/메뉴 잠금을 연결했다. 카메라 회전 병행 문 양방향 각10회, 벽/모서리/문 위·경사/램프·확장/정지·입력/메뉴·포커스 알림 주입 검증을 통과했다. 정상 headless13,367개·GPU30/60 각8,788개, 실제 오류6종을 감지했다. [P03 화면/검증/한계](../data/reports/camera.md). 사람의 조작감·OS가 발생시킨 포커스 전환·도시 적용/대한문·M4·성능은 미검증이다.
+- **P04 이후:** 미실행.
 
-## 다음 작업: P03 3인칭 카메라
+## 다음 작업: P04 충돌 계층과 관통 검사
 
-첫 행동은 [P02 실행/검증](../data/reports/movement.md), 상세 P03와 C06/C07·V03을 읽고 `movement_test.tscn`·`movement_controller.gd`를 재사용하는 것이다. 플레이어를 추적하는 카메라 리그·마우스 회전·거리/상하 한계·감도, 자기 충돌을 제외한 벽/문 가림 처리와 메뉴의 마우스 잠금 해제/복구를 구성한다. P02의 고정 카메라 기준 방향·정규화 속도·시각 몸체 회전·복귀 위치/회전/입력 중립·전체 정지 검사를 유지한다. P02의 문 양방향 각10회 결과는 카메라 회전 병행 검사를 완료한 것이 아니다. P04에서 도시 충돌, W 단계에서 실제 대한문과 필수 경로를 연결·검증한다. 시험장 영역/시작점은 실제 서울 경계/스폰이 아니다.
+첫 행동은 [P03 카메라 결과](../data/reports/camera.md), 상세 P04와 C07·V03, E03 도형/겹침·G03/G04 보류 상태를 읽는 것이다. P01–P03 합성 시험장의 물리/카메라를 재사용해 정적 월드·플레이어·NPC·차량·카메라 탐색 레이어/마스크 행렬과 검사 장면을 만들고, E03의 실제 도시 건물/지면/담장에 정적 충돌을 연결한다. 보기용/보류 지면·통행 후보는 자동으로 최종 보행 지면/권한이 되지 않는다. P03 camera mask1/self RID 제외·근접면 안전·메뉴/입력 중립·복귀/문 회전 검사를 유지한다. 실제 대한문 개구부는 W01에서 제작/검증하며 세 경로 완주와 W0/V0는 남겨둔다.
 
 사용자가 직접 판단하면 유용한 배치/축척 첫 화면, 걷기·카메라, 랜드마크 인상 시점에는 화면과 관찰 항목을 준비해 알린다. 매 작업마다 확인을 요구하지 않는다. M4에서는 칩/RAM/OS를 확인하고 동일 버전의 실제 기동을 별도로 검증한다.
 
@@ -141,7 +143,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 P03이다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 P04이다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/tests/movement_test.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/camera_test.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/player/camera_rig.tscn" id="3"]
+
+[node name="CameraTest" instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="Player" parent="Actors" index="0"]
+camera_path = NodePath("../../Presentation/CameraRig/SpringArm/Camera")
+
+[node name="CameraRig" parent="Presentation" instance=ExtResource("3")]
+target_path = NodePath("../../Actors/Player")
