@@ -1,0 +1,4 @@
+extends "res://scripts/input_router.gd"
+## Test-only external-menu isolation; authored binding and routing are unchanged.
+func _unhandled_input(event: InputEvent) -> void:
+	if event.get_meta("w01_probe",false):super._unhandled_input(event)

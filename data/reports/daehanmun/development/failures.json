@@ -1,0 +1,76 @@
+{
+  "task": "W01",
+  "attempts": [
+    {
+      "issue": "First prototype used a relative --script path; Godot resolved under --path game, reported file missing despite exit0.",
+      "resolution": "Absolute script/result/log paths; ERROR or absent completed JSON rejected."
+    },
+    {
+      "issue": "Review found some malformed coordinate numbers could trigger a script type error instead of explicit rejection.",
+      "resolution": "Explicit finite numeric and dictionary/array checks before world/body creation; 12 actual rejection cases."
+    },
+    {
+      "issue": "First contract run imported checker while independent all-tick ground-Y audit was being refined, so initial scores used a different predicate than the final source hash.",
+      "resolution": "Preserved complete initial driver records in checker_update_failure; bind checker executable bytes and all probe/driver hashes at start, require unchanged at finish. Re-ran contract normal/repeat/6 actual faults after checker frozen.",
+      "criterion": "Moving player penetration/ground Y 5mm from existing P04 contract; idle height range1mm remains. Original overly strict all-tick2mm was corrected to this contract; no movement/physics geometry change."
+    },
+    {
+      "issue": "First GPU30 observation became paused before planned menu event; native screenshot showed the menu after idle, no completed JSON.",
+      "cause": "Unplanned input route was active; origin of pause not independently established.",
+      "resolution": "Abort/preserve log. Add test-only inherited InputRouter wrapper ignoring non-device42 Esc events; scripted device42 physical events still traverse Input.parse_input_event and inherited router. Production game/menu behavior unchanged. Re-run full contract before GPU.",
+      "not_accepted": "The paused attempt is not a time/gameplay completion result.",
+      "outcome": "Driver timeout at330seconds; attempted explicit stop afterwards found process already exited. No completed gameplay JSON was produced."
+    },
+    {
+      "issue": "Test-only device42 Esc reached wrapper but did not match authored device0 key binding, so planned menu checks failed.",
+      "resolution": "After rejecting external devices, normalize injected event to device0 only while calling inherited InputMap/router matcher, then restore marker42. Preserve failed headless record. Production InputMap/router remains byte-identical.",
+      "correction": "Device0 interpretation was not confirmed: later tiny probes showed all devices still mismatched a freshly constructed key. Cloning the actual authored InputMap key event matched. Final isolation uses event metadata, never changing device/key bindings."
+    },
+    {
+      "issue": "Freshly constructed physical-key event in isolated wrapper did not match InputMap binding.",
+      "resolution": "Clone the actual authored toggle_menu InputEventKey, mark metadata w01_probe, set pressed, then Input.parse_input_event. Tiny headless proof: unmarked event ignored, marked event opens menu; production handler unchanged.",
+      "official_reference": "https://docs.godotengine.org/en/stable/classes/class_inputeventkey.html"
+    }
+  ],
+  "additional_failures": [
+    {
+      "name": "gpu30_clock_and_capture",
+      "raw": "gpu_clock_capture_failure/gpu_30_engine.json",
+      "scored": "gpu_clock_capture_failure/gpu_30_engine_check.json",
+      "observed": "route_out_2 wall6.010185s vs physical5.08333333333332s (+18.2331%); captures[]",
+      "cause": "capture-prefix missing at30fps is confirmed driver error; isolated clock outlier cause not determined",
+      "resolution": "Add distinct30fps PNG prefix without changing checker; preserve2% clock/20%render thresholds and repeat final GPU suites"
+    },
+    {
+      "name": "gpu60_first_capture_timeout",
+      "log": "gpu_clock_capture_failure/gpu_60_engine.log",
+      "observed": "Ready then timeout330 without completed record or PNG; native screen showed unpaused outside spawn",
+      "cause": "Not established; separate plain scene and full first-capture diagnostics both succeeded; cannot prove wait vs image stage from original log",
+      "resolution": "Add progress log only around initial settle/capture; retry final same engine/geometry/checker and require completed JSON/actual screenshots"
+    },
+    {
+      "name": "repeated_first_capture_stall",
+      "log": "gpu_capture_retry_stopped.log",
+      "observed": "GPU30 settle_end and first_capture_begin, no end/image after56s; root stopped only its own test process",
+      "cause": "Isolated direct/diagnostic first-capture methods succeeded; exact renderer scheduling/root cause not established",
+      "resolution": "W01-only capture awaits main process_frame then calls official RenderingServer.force_draw before get_image/save; same subprocess capture_output/30fps/native engine/repo PNG diagnostic completed under20s. Captures are outside measured segments. OriginalP03 source unchanged. Driver removes prior result before invoking engine to reject missing fresh JSON. Full normal/fault/GPU re-run required",
+      "reference": "https://docs.godotengine.org/en/stable/classes/class_renderingserver.html#class-renderingserver-method-force-draw"
+    },
+    {
+      "name": "gpu_clock_and_idle_after_capture_fix",
+      "archive": "gpu_capture_clock_idle_failure/",
+      "observed": "Bothfullsuites produced31cases+8PNG.30fps idle2s/wall1.944362s andgateforward1 physical4.383333/wall5.318394failed2%clock.60fpsallclockpassedmax1.31% butidle accumulated .093m in four exact forward1.4m/ssteps; sampledvelocitiesneutral",
+      "cause": "Post-readback physics catch-up plausibly biases short idle clock. Idleforwardsteps suggest real movement events between injections, not confirmed by raw event log. Shader compilation/stall cause not established",
+      "resolution": "Test-only InputMap physical movement/Shift binding isolation while preserving programmaticaction API andoriginalcontroller/router/menu authored binding. Aggregate ignored gameplay event count without rawkeys. Explicit12camera pose warmup and1sneutralsettlebefore measuredsuite; percase pipelinecounters. Cold startup excluded from final acceptance and failedcoldruns preserved. No5mm/1mm/2%/20%criteria relaxation; productionbindingsunchanged"
+    }
+  ],
+  "cold_failure_source_snapshot": {
+    "method": "Reversed final probe warmup/pipeline/input-isolation changes and restored earlier helper; exact byteSHA matches prior driver evidence. Driver/checker unchanged snapshots copied only after exactSHAcomparison",
+    "hashes": {
+      "check_daehanmun_contract.py.snapshot": "49629d8de0d5e5a14d995cb2a1f8922ed6bbf2328e71d18f9d2990ef30af853d",
+      "daehanmun_probe_input.gd.snapshot": "0d1fe5d9895d67fb630b4def285424281688216a4d24f8af1f6c433a8efc64e1",
+      "check_daehanmun_evidence.py.snapshot": "10ac76d2c9b67d53653a7bcb99100ad839fbfa8cb0a6a60b385ddd8f3851fed4",
+      "check_daehanmun_walk.gd.snapshot": "0f7bcc8aa8d33bb51dc820ae940e2e6e88963c1bf105f9c8a5a2f585a06fe2c9"
+    }
+  }
+}

@@ -1,0 +1,262 @@
+extends "res://test_support/check_camera_test.gd"
+## Actual W01 movement and queries, inherited camera observations, independent Python acceptance.
+func _sample(time: float) -> Dictionary:
+	var row: Dictionary=super._sample(time)
+	row["player_penetration_m"]=scene.city.volume_penetration(scene.player.global_position,1.7,0.3)
+	row["camera_penetration_m"]=scene.city.volume_penetration(scene.rig.camera.global_position-Vector3.UP*0.2,0.4,0.2)
+	var hit: Dictionary=scene.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(scene.player.global_position+Vector3.UP*0.3,scene.player.global_position-Vector3.UP*0.5,13,[scene.player.get_rid()]))
+	row["floor_id"]="" if hit.is_empty() else hit.collider.get_meta("geometry_id","")
+	row["floor_normal"]=[] if hit.is_empty() else _v(hit.normal)
+	var contacts:=[]
+	for i in scene.player.get_slide_collision_count():
+		var collider=scene.player.get_slide_collision(i).get_collider()
+		var id: String=collider.get_meta("geometry_id","")
+		if id!="W01_support" and not contacts.has(id):contacts.append(id)
+	row["contact_ids"]=contacts
+	return row
+
+func _segment(title: String,seconds: float,direction:=Vector3.ZERO,fast:=false,orbit:=0.0) -> Dictionary:
+	var pipelines_before := _pipelines()
+	var stats:={"ticks":0,"max_player_penetration_m":0.0,"max_camera_penetration_m":0.0,"floor_support_ticks":0,"solid_contact_ticks":0,"contact_ids":[]}
+	var observe:=func(_dt: float):
+		var s: Dictionary=_sample(0)
+		stats.ticks+=1
+		stats.max_player_penetration_m=maxf(stats.max_player_penetration_m,s.player_penetration_m)
+		stats.max_camera_penetration_m=maxf(stats.max_camera_penetration_m,s.camera_penetration_m)
+		if s.floor_id=="W01_support" and s.floor:stats.floor_support_ticks+=1
+		if not s.contact_ids.is_empty():stats.solid_contact_ticks+=1
+		for id in s.contact_ids:
+			if not stats.contact_ids.has(id):stats.contact_ids.append(id)
+	scene.rig.camera_stepped.connect(observe)
+	var row: Dictionary=await super._segment(title,seconds,direction,fast,orbit)
+	scene.rig.camera_stepped.disconnect(observe)
+	row["W01_stats"]=stats
+	row["pipelines"]={"before":pipelines_before,"after":_pipelines()}
+	print("W01_SEGMENT %s ticks=%d floor=%d recoveries=%d"%[title,row.ticks,stats.floor_support_ticks,row.recoveries])
+	return row
+
+func _pipelines() -> Dictionary:
+	return {"mesh":Performance.get_monitor(Performance.PIPELINE_COMPILATIONS_MESH),"surface":Performance.get_monitor(Performance.PIPELINE_COMPILATIONS_SURFACE),"draw":Performance.get_monitor(Performance.PIPELINE_COMPILATIONS_DRAW)}
+func _warmup() -> Dictionary:
+	var before := _pipelines()
+	var started := Time.get_ticks_usec()
+	var poses := 0
+	for xz in scene.city.connection.route_xz:
+		for offset in [-PI/2,0.0,PI/2]:
+			await _pose(_point(xz),scene.starting_yaw+offset)
+			if DisplayServer.get_name()!="headless":
+				await process_frame
+				RenderingServer.force_draw()
+			poses+=1
+	await _pose(_point(scene.city.connection.route_xz[0]),scene.starting_yaw)
+	await _wait(1)
+	print("W01_WARMUP poses=",poses)
+	return {"poses":poses,"wall_s":(Time.get_ticks_usec()-started)/1000000.0,"pipelines_before":before,"pipelines_after":_pipelines(),"scope":"12 camera poses plus neutral settle before measurement; no starting cache copied; cold startup excluded"}
+
+func _capture(title: String) -> void:
+	if capture_prefix.is_empty() or DisplayServer.get_name()=="headless":return
+	# Explicit main-loop drawing avoids awaiting a renderer callback during readback.
+	# Capture is outside each measured movement segment.
+	await process_frame
+	print("W01_CAPTURE draw ",title)
+	RenderingServer.force_draw()
+	var picture:=root.get_texture().get_image()
+	if picture.save_png(capture_prefix+"_"+title+".png")!=OK:
+		push_error("W01 capture failed")
+		quit(1)
+		return
+	capture_names.append({"name":title,"width":picture.get_width(),"height":picture.get_height()})
+	print("W01_CAPTURE saved ",title)
+
+func _point(xz: Array) -> Vector3:return Vector3(xz[0],0.08,xz[1])
+func _hash_faces(points: PackedVector3Array) -> String:
+	var c:=HashingContext.new()
+	c.start(HashingContext.HASH_SHA256)
+	c.update(points.to_byte_array())
+	return c.finish().hex_encode()
+func _body_row(id: String,body: StaticBody3D) -> Dictionary:
+	var shape: ConcavePolygonShape3D=body.get_node("CollisionShape").shape
+	return {"id":id,"layer":body.collision_layer,"mask":body.collision_mask,"identity":body.global_transform.is_equal_approx(Transform3D.IDENTITY),"face_sha256":_hash_faces(shape.get_faces()),"shape":shape.get_class(),"backface":shape.backface_collision,"disabled":body.get_node("CollisionShape").disabled}
+func _inventory() -> Dictionary:
+	var originals:=[]
+	var replacements:=[]
+	var disabled:=[]
+	for id in scene.city.bodies:
+		var body: StaticBody3D=scene.city.bodies[id]
+		originals.append(_body_row(id,body))
+		if body.collision_layer==0:disabled.append({"id":id,"layer":body.collision_layer,"mask":body.collision_mask,"visible":scene.city.source_nodes[id].visible})
+	for id in scene.city.fragments:
+		var row:=_body_row(id,scene.city.fragments[id])
+		var visual: MeshInstance3D=scene.city.fragments[id].get_parent()
+		row["visual_face_sha256"]=_hash_faces(visual.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX])
+		replacements.append(row)
+	return {"source_bodies":originals,"fragments":replacements,"disabled_ids":disabled.map(func(v):return v.id),"disabled_bodies":disabled,"source_display_unchanged":true}
+func _rays() -> Array:
+	var c: Dictionary=scene.city.connection
+	var p:=_point(c.route_xz[1])
+	var q:=_point(c.route_xz[2])
+	var u:=Vector3(c.direction_xz[0],0,c.direction_xz[1])
+	var n:=Vector3(c.normal_xz[0],0,c.normal_xz[1])
+	var specs:=[["gate_center",p-u*2,q+u*2,false],["lintel",p-u*2,q+u*2,false],["wall_left",p-u*2+n*6,p+u*2+n*6,true],["wall_right",p-u*2-n*6,p+u*2-n*6,true],["off_support",_point(c.route_xz[0])+n*6,_point(c.route_xz[0])+n*6,false]]
+	var result:=[]
+	for s in specs:
+		var from: Vector3=s[1]
+		var to: Vector3=s[2]
+		from.y=3.5 if s[0]=="lintel" else 1.0
+		to.y=from.y
+		var exclude: Array[RID]=[]
+		if s[3]:
+			for b in scene.city.bodies.values():exclude.append(b.get_rid())
+			for id in scene.city.fragments:
+				if id!="W01_palace_wall":exclude.append(scene.city.fragments[id].get_rid())
+		if s[0]=="off_support":to.y=-1.0
+		var hit: Dictionary=scene.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from,to,1,exclude))
+		result.append({"name":s[0],"from":_v(from),"to":_v(to),"hit":not hit.is_empty(),"id":"" if hit.is_empty() else hit.collider.get_meta("geometry_id",""),"position":[] if hit.is_empty() else _v(hit.position),"isolated_wall":s[3]})
+	return result
+
+func _events() -> Array:
+	var events:=[]
+	await _pose(_point(scene.city.connection.route_xz[0]),scene.starting_yaw)
+	_keys(["move_forward"])
+	await _escape()
+	var before: Vector3=scene.player.global_position
+	var yaw: float=scene.rig.yaw
+	var counter:=[0,0]
+	var a:=func(_dt: float):counter[0]+=1
+	var r:=func(_dt: float):counter[1]+=1
+	scene.player.physics_stepped.connect(a)
+	scene.rig.camera_stepped.connect(r)
+	var e:={"name":"menu","paused":paused,"mouse_open":Input.mouse_mode,"capture_open":scene.rig.input_enabled}
+	_mouse(300,80)
+	await create_timer(.25).timeout
+	await _capture("menu")
+	e["actor_ticks"]=counter[0]
+	e["rig_ticks"]=counter[1]
+	e["drift"]=scene.player.global_position.distance_to(before)
+	e["yaw_drift"]=abs(scene.rig.yaw-yaw)
+	scene.player.physics_stepped.disconnect(a)
+	scene.rig.camera_stepped.disconnect(r)
+	await _escape()
+	e["mouse_closed"]=Input.mouse_mode
+	e["capture_closed"]=scene.rig.input_enabled
+	_mouse(300,80)
+	await _wait(.1)
+	e["first_motion_ignored"]=is_equal_approx(scene.rig.yaw,yaw)
+	await _wait(.5)
+	e["held_drift"]=scene.player.global_position.distance_to(before)
+	_keys([])
+	await _wait(.1)
+	var released: Vector3=scene.player.global_position
+	_keys(["move_forward"])
+	await _wait(.5)
+	e["release_move_m"]=Vector2(scene.player.global_position.x-released.x,scene.player.global_position.z-released.z).length()
+	_keys([])
+	events.append(e)
+	for reason in ["fall","outside_test_area","manual_restart"]:
+		await _pose(_point(scene.city.connection.route_xz[0]),scene.starting_yaw)
+		var prior: int=scene.player.recoveries
+		_keys(["move_forward"])
+		if reason=="fall":scene.player.global_position.y=-10
+		elif reason=="outside_test_area":scene.player.global_position=Vector3(300,0.08,300)
+		else:scene.reset_button.pressed.emit()
+		await scene.rig.camera_stepped
+		var rec:={"name":reason,"reason":scene.player.last_recovery_reason,"recoveries":scene.player.recoveries-prior,"point":_v(scene.player.global_position),"latched":scene.player.input_latched,"spawn_valid":scene.player.spawn_valid,"yaw":scene.rig.yaw,"pitch":scene.rig.pitch,"requested_distance":scene.rig.requested_distance}
+		await _wait(.5)
+		rec["held_drift"]=Vector2(scene.player.global_position.x-scene.city.connection.spawn[0],scene.player.global_position.z-scene.city.connection.spawn[2]).length()
+		rec["floor"]=scene.player.is_on_floor()
+		_keys([])
+		await _wait(.1)
+		var pos: Vector3=scene.player.global_position
+		_keys(["move_forward"])
+		await _wait(.5)
+		rec["release_move_m"]=Vector2(scene.player.global_position.x-pos.x,scene.player.global_position.z-pos.z).length()
+		_keys([])
+		events.append(rec)
+	return events
+
+
+func _escape() -> void:
+	for down in [true,false]:
+		var event: InputEventKey=InputMap.action_get_events("toggle_menu")[0].duplicate()
+		event.set_meta("w01_probe",true)
+		event.pressed=down
+		Input.parse_input_event(event)
+		await process_frame
+		await process_frame
+
+func _run() -> void:
+	scene=load("res://scenes/tests/daehanmun_walk.tscn").instantiate()
+	root.add_child(scene)
+	if not scene.runtime_ok:push_error("W01 did not load");quit(1);return
+	scene.input_router.set_script(load("res://test_support/daehanmun_probe_input.gd"))
+	scene.input_router.isolate_movement_bindings()
+	if not scene.input_router.menu_toggle_requested.is_connected(scene.toggle_menu):scene.input_router.menu_toggle_requested.connect(scene.toggle_menu)
+	match variant:
+		"gate_blocked":scene.city.bodies["osm:way:377289797:building"].collision_layer=1;scene.city.bodies["osm:way:377289797:building"].collision_mask=14
+		"wall_removed":scene.city.fragments.W01_palace_wall.collision_layer=0;scene.city.fragments.W01_palace_wall.collision_mask=0
+		"support_disabled":scene.city.fragments.W01_support.collision_layer=0;scene.city.fragments.W01_support.collision_mask=0
+		"player_mask_zero":scene.player.collision_mask=0
+		"camera_mask_zero":scene.rig.arm.collision_mask=0
+		"wrong_gate_transform":scene.city.fragments.W01_gate_lintel.position.y=0.5
+		"normal":pass
+		_:push_error("Unknown W01 fault");quit(1);return
+	print("W01_STAGE settle_begin")
+	await _wait(1)
+	print("W01_STAGE settle_end")
+	var initial:={"point":_v(scene.player.global_position),"valid":scene.player.spawn_valid,"volume_guard_clear":scene.city.volume_clear(scene.player.spawn_transform.origin,1.7,.3)}
+	var old_transform: Transform3D=scene.player.spawn_transform
+	var c: Dictionary=scene.city.connection
+	var mid: Vector3=(_point(c.route_xz[1])+_point(c.route_xz[2]))/2
+	var normal:=Vector3(c.normal_xz[0],0,c.normal_xz[1])
+	scene.player.spawn_transform=Transform3D(Basis.IDENTITY,mid+normal*2)
+	initial["rejected_inside_gate"]=not scene.player._valid_spawn()
+	scene.player.spawn_transform=old_transform
+	var actor:={"height":scene.player.get_node("CollisionShape").shape.height,"radius":scene.player.get_node("CollisionShape").shape.radius,"layer":scene.player.collision_layer,"mask":scene.player.collision_mask,"walk_mps":scene.player.walk_speed_mps,"run_mps":scene.player.run_speed_mps,"gravity":scene.player.gravity_mps2,"safe_margin":scene.player.safe_margin,"identity":scene.player.global_basis.is_equal_approx(Basis.IDENTITY)}
+	var warmup: Dictionary=await _warmup()
+	print("W01_STAGE first_capture_begin")
+	await _capture("outside_spawn")
+	print("W01_STAGE first_capture_end")
+	await _wait(1)
+	var cases:=[]
+	cases.append(await _segment("idle",60 if suite=="full" or fps==60 else 2))
+	var full_routes:=[]
+	for sense in ["in","out"]:
+		var points: Array=c.route_xz.duplicate(true)
+		if sense=="out":points.reverse()
+		await _pose(_point(points[0]),scene.starting_yaw if sense=="in" else scene.starting_yaw+PI)
+		var legs:=[]
+		for i in range(3):
+			var destination:=_point(points[i+1])
+			var delta: Vector3=destination-scene.player.global_position
+			delta.y=0
+			var name: String="route_%s_%d"%[sense,i]
+			cases.append(await _segment(name,ceil(delta.length()/3.5*60)/60,delta.normalized(),true,20))
+			legs.append(name)
+		full_routes.append({"direction":sense,"legs":legs})
+		await _capture("inside_entry" if sense=="in" else "return_outside")
+	var u:=Vector3(c.direction_xz[0],0,c.direction_xz[1])
+	var p:=_point(c.route_xz[1])-u*2
+	var q:=_point(c.route_xz[2])+u*2
+	for i in range(10):
+		for forward in [true,false]:
+			await _pose(p if forward else q,scene.starting_yaw if forward else scene.starting_yaw+PI)
+			var name: String="gate_%s_%d"%["forward" if forward else "reverse",i]
+			cases.append(await _segment(name,ceil((c.passage_length_m+4)/(1.4 if i==0 else 3.5)*60)/60,u if forward else -u,i>0,45 if forward else -45))
+			if i==0:await _capture("gate_inside" if forward else "gate_outside")
+	await _pose(mid,scene.starting_yaw)
+	await _capture("under_gate")
+	for front in [true,false]:
+		for left in [true,false]:
+			var start: Vector3=(_point(c.route_xz[1])-u*1.4 if front else _point(c.route_xz[2])+u*1.4)+normal*(2 if left else -2)
+			await _pose(start,scene.starting_yaw if front else scene.starting_yaw+PI)
+			cases.append(await _segment("block_%s_%s"%["front" if front else "back","left" if left else "right"],2,u if front else -u,true,30))
+			if front and left:await _capture("wall_contact")
+	var events: Array=await _events()
+	var record:={"schema_version":1,"task":"W01","suite":suite,"fault":variant,"engine":{"version":Engine.get_version_info().string,"display":DisplayServer.get_name(),"renderer":RenderingServer.get_current_rendering_method(),"driver":RenderingServer.get_current_rendering_driver_name(),"physics_hz":Engine.physics_ticks_per_second,"render_fps":fps},"plan_sha256":FileAccess.get_sha256("res://data/generated/daehanmun.json"),"inventory":_inventory(),"spawn":initial,"actor":actor,"cases":cases,"full_routes":full_routes,"events":events,"rays":_rays(),"captures":capture_names,"warmup":warmup,"external_movement_events_ignored":scene.input_router.external_movement_events,"scope":"Automatic injected W01 connection only; engineering opening/ground, no human/M4/real terrain/W0 acceptance"}
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	var file:=FileAccess.open(output_path,FileAccess.WRITE)
+	if file==null:push_error("W01 result required");quit(1);return
+	file.store_string(JSON.stringify(record)+"\n")
+	print("W01_PROBE_DONE cases=%d"%cases.size())
+	scene.queue_free()
+	quit(0)

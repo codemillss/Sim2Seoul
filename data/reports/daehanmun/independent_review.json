@@ -1,0 +1,1556 @@
+{
+  "task": "W01",
+  "schema_version": 1,
+  "passed": true,
+  "method": "Separate agent fresh read and execution of the frozen standard-library checker against retained engine evidence; not a second physical survey or human usability test",
+  "checks": [
+    {
+      "name": "fresh_normal.headless_engine",
+      "passed": true,
+      "count": 904
+    },
+    {
+      "name": "fresh_normal.repeat_engine",
+      "passed": true,
+      "count": 904
+    },
+    {
+      "name": "fresh_normal.gpu_30_engine",
+      "passed": true,
+      "count": 935
+    },
+    {
+      "name": "fresh_normal.gpu_60_engine",
+      "passed": true,
+      "count": 935
+    },
+    {
+      "name": "actual_engine_fault.gate_blocked",
+      "passed": true,
+      "failed_checks": [
+        "inventory.source_coverage",
+        "inventory.actual_disabled_bodies",
+        "block_back_right.solid_contact",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.actual_passage_crossing",
+        "route_in_0.source_leg",
+        "route_in_1.source_leg",
+        "route_in_2.source_leg",
+        "route_out_0.source_leg",
+        "route_out_1.source_leg",
+        "route_out_2.source_leg",
+        "ray.gate_center.observed",
+        "ray.lintel.observed"
+      ]
+    },
+    {
+      "name": "actual_engine_fault.wall_removed",
+      "passed": true,
+      "failed_checks": [
+        "inventory.W01_palace_wall",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "ray.wall_left.observed",
+        "ray.wall_left.independent_source_hit",
+        "ray.wall_right.observed",
+        "ray.wall_right.independent_source_hit"
+      ]
+    },
+    {
+      "name": "actual_engine_fault.support_disabled",
+      "passed": true,
+      "failed_checks": [
+        "inventory.W01_support",
+        "spawn_valid",
+        "block_back_left.all_ticks",
+        "block_back_left.independent_samples",
+        "block_back_left.solid_contact",
+        "block_back_right.all_ticks",
+        "block_back_right.independent_samples",
+        "block_back_right.solid_contact",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_left.solid_contact",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "block_front_right.solid_contact",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "gate_reverse_9.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "route_in_0.all_ticks",
+        "route_in_0.independent_samples",
+        "route_in_0.source_leg",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_1.source_leg",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_in_2.source_leg",
+        "route_out_0.all_ticks",
+        "route_out_0.independent_samples",
+        "route_out_0.source_leg",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_1.source_leg",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "route_out_2.source_leg",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart"
+      ]
+    },
+    {
+      "name": "actual_engine_fault.player_mask_zero",
+      "passed": true,
+      "failed_checks": [
+        "actual_player_contract",
+        "spawn_valid",
+        "block_back_left.all_ticks",
+        "block_back_left.independent_samples",
+        "block_back_left.solid_contact",
+        "block_back_right.all_ticks",
+        "block_back_right.independent_samples",
+        "block_back_right.solid_contact",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_left.solid_contact",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "block_front_right.solid_contact",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "gate_reverse_9.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "route_in_0.all_ticks",
+        "route_in_0.independent_samples",
+        "route_in_0.source_leg",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_1.source_leg",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_in_2.source_leg",
+        "route_out_0.all_ticks",
+        "route_out_0.independent_samples",
+        "route_out_0.source_leg",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_1.source_leg",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "route_out_2.source_leg",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart"
+      ]
+    },
+    {
+      "name": "actual_engine_fault.camera_mask_zero",
+      "passed": true,
+      "failed_checks": [
+        "block_back_left.independent_samples",
+        "block_back_right.independent_samples",
+        "block_front_left.independent_samples",
+        "block_front_right.independent_samples",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "idle.independent_samples",
+        "route_in_0.independent_samples",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_out_0.independent_samples",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples"
+      ]
+    },
+    {
+      "name": "actual_engine_fault.wrong_gate_transform",
+      "passed": true,
+      "failed_checks": [
+        "inventory.W01_gate_lintel"
+      ]
+    },
+    {
+      "name": "evidence_json_mutation.actor_mask_zero",
+      "passed": true
+    },
+    {
+      "name": "evidence_json_mutation.camera_mask_zero",
+      "passed": true
+    },
+    {
+      "name": "evidence_json_mutation.fragment_transform_false",
+      "passed": true
+    },
+    {
+      "name": "evidence_json_mutation.fake_floor_id",
+      "passed": true
+    },
+    {
+      "name": "frozen_inputs.contract",
+      "passed": true,
+      "driver_checks": 21
+    },
+    {
+      "name": "frozen_inputs.gpu",
+      "passed": true,
+      "driver_checks": 7
+    },
+    {
+      "name": "runtime_rejections_12",
+      "passed": true
+    },
+    {
+      "name": "portable_regeneration",
+      "passed": true
+    },
+    {
+      "name": "warm_measurement_metadata.30",
+      "passed": true
+    },
+    {
+      "name": "warm_measurement_metadata.60",
+      "passed": true
+    },
+    {
+      "name": "capture_files_16",
+      "passed": true
+    },
+    {
+      "name": "failed_cold_snapshot_hashes",
+      "passed": true
+    },
+    {
+      "name": "proof_files_unchanged_during_review",
+      "passed": true
+    }
+  ],
+  "normal_records": [
+    {
+      "record": "data/reports/daehanmun/headless_engine.json",
+      "sha256": "b11a553bd639a6a89a41bfa5d37791f000a724f6c218d3b0010df3740191b060",
+      "passed": true,
+      "checks": 904
+    },
+    {
+      "record": "data/reports/daehanmun/repeat_engine.json",
+      "sha256": "f3f61c7efceea98bd30539b63756b41257507acd288d4313ae96f9599b88085f",
+      "passed": true,
+      "checks": 904
+    },
+    {
+      "record": "data/reports/daehanmun/gpu_30_engine.json",
+      "sha256": "03ad226a8d871542e1f1f4b1646378619997edb7da30bd0d755c7cb04391e6c2",
+      "passed": true,
+      "checks": 935
+    },
+    {
+      "record": "data/reports/daehanmun/gpu_60_engine.json",
+      "sha256": "c8ce8628e6df7c521f167df18010c8f8b28135ec8888a338e999aab1b3ab4168",
+      "passed": true,
+      "checks": 935
+    }
+  ],
+  "actual_engine_faults": [
+    {
+      "fault": "gate_blocked",
+      "record": "data/reports/daehanmun/regression/gate_blocked.json",
+      "sha256": "e6785e6f43d8fac1ef07072b008b7076acc00b6c3bbd3f90b38b906e9dbcc01d",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "inventory.source_coverage",
+        "inventory.actual_disabled_bodies",
+        "block_back_right.solid_contact",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.actual_passage_crossing",
+        "route_in_0.source_leg",
+        "route_in_1.source_leg",
+        "route_in_2.source_leg",
+        "route_out_0.source_leg",
+        "route_out_1.source_leg",
+        "route_out_2.source_leg",
+        "ray.gate_center.observed",
+        "ray.lintel.observed"
+      ]
+    },
+    {
+      "fault": "wall_removed",
+      "record": "data/reports/daehanmun/regression/wall_removed.json",
+      "sha256": "e4b5036f216294db360479160b4b95c16c441233d3f33f384b926153b70a4d53",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "inventory.W01_palace_wall",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "ray.wall_left.observed",
+        "ray.wall_left.independent_source_hit",
+        "ray.wall_right.observed",
+        "ray.wall_right.independent_source_hit"
+      ]
+    },
+    {
+      "fault": "support_disabled",
+      "record": "data/reports/daehanmun/regression/support_disabled.json",
+      "sha256": "458a3bfe562cf36da50ebad9c1a00afc20c0b665f0f424b2131e81c555147222",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "inventory.W01_support",
+        "spawn_valid",
+        "block_back_left.all_ticks",
+        "block_back_left.independent_samples",
+        "block_back_left.solid_contact",
+        "block_back_right.all_ticks",
+        "block_back_right.independent_samples",
+        "block_back_right.solid_contact",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_left.solid_contact",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "block_front_right.solid_contact",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "gate_reverse_9.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "route_in_0.all_ticks",
+        "route_in_0.independent_samples",
+        "route_in_0.source_leg",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_1.source_leg",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_in_2.source_leg",
+        "route_out_0.all_ticks",
+        "route_out_0.independent_samples",
+        "route_out_0.source_leg",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_1.source_leg",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "route_out_2.source_leg",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart"
+      ]
+    },
+    {
+      "fault": "player_mask_zero",
+      "record": "data/reports/daehanmun/regression/player_mask_zero.json",
+      "sha256": "f713dad9fc279887b81a9449361ddf5f7e04aee4f4bc47e2f3854e80e8ed1717",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "actual_player_contract",
+        "spawn_valid",
+        "block_back_left.all_ticks",
+        "block_back_left.independent_samples",
+        "block_back_left.solid_contact",
+        "block_back_right.all_ticks",
+        "block_back_right.independent_samples",
+        "block_back_right.solid_contact",
+        "block_front_left.all_ticks",
+        "block_front_left.independent_samples",
+        "block_front_left.solid_contact",
+        "block_front_right.all_ticks",
+        "block_front_right.independent_samples",
+        "block_front_right.solid_contact",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_0.actual_passage_crossing",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_1.actual_passage_crossing",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_2.actual_passage_crossing",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_3.actual_passage_crossing",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_4.actual_passage_crossing",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_5.actual_passage_crossing",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_6.actual_passage_crossing",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_7.actual_passage_crossing",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_8.actual_passage_crossing",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_forward_9.actual_passage_crossing",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_0.actual_passage_crossing",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_1.actual_passage_crossing",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_2.actual_passage_crossing",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_3.actual_passage_crossing",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_4.actual_passage_crossing",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_5.actual_passage_crossing",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_6.actual_passage_crossing",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_7.actual_passage_crossing",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_8.actual_passage_crossing",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "gate_reverse_9.actual_passage_crossing",
+        "idle.all_ticks",
+        "idle.independent_samples",
+        "route_in_0.all_ticks",
+        "route_in_0.independent_samples",
+        "route_in_0.source_leg",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_1.source_leg",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_in_2.source_leg",
+        "route_out_0.all_ticks",
+        "route_out_0.independent_samples",
+        "route_out_0.source_leg",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_1.source_leg",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples",
+        "route_out_2.source_leg",
+        "menu.actual_pause_and_capture",
+        "recovery.fall",
+        "recovery.outside_test_area",
+        "recovery.manual_restart"
+      ]
+    },
+    {
+      "fault": "camera_mask_zero",
+      "record": "data/reports/daehanmun/regression/camera_mask_zero.json",
+      "sha256": "2637be4042478d4ece29caaa2a26e814cc7d93b195b8208056dc64f165de4bb5",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "block_back_left.independent_samples",
+        "block_back_right.independent_samples",
+        "block_front_left.independent_samples",
+        "block_front_right.independent_samples",
+        "gate_forward_0.all_ticks",
+        "gate_forward_0.independent_samples",
+        "gate_forward_1.all_ticks",
+        "gate_forward_1.independent_samples",
+        "gate_forward_2.all_ticks",
+        "gate_forward_2.independent_samples",
+        "gate_forward_3.all_ticks",
+        "gate_forward_3.independent_samples",
+        "gate_forward_4.all_ticks",
+        "gate_forward_4.independent_samples",
+        "gate_forward_5.all_ticks",
+        "gate_forward_5.independent_samples",
+        "gate_forward_6.all_ticks",
+        "gate_forward_6.independent_samples",
+        "gate_forward_7.all_ticks",
+        "gate_forward_7.independent_samples",
+        "gate_forward_8.all_ticks",
+        "gate_forward_8.independent_samples",
+        "gate_forward_9.all_ticks",
+        "gate_forward_9.independent_samples",
+        "gate_reverse_0.all_ticks",
+        "gate_reverse_0.independent_samples",
+        "gate_reverse_1.all_ticks",
+        "gate_reverse_1.independent_samples",
+        "gate_reverse_2.all_ticks",
+        "gate_reverse_2.independent_samples",
+        "gate_reverse_3.all_ticks",
+        "gate_reverse_3.independent_samples",
+        "gate_reverse_4.all_ticks",
+        "gate_reverse_4.independent_samples",
+        "gate_reverse_5.all_ticks",
+        "gate_reverse_5.independent_samples",
+        "gate_reverse_6.all_ticks",
+        "gate_reverse_6.independent_samples",
+        "gate_reverse_7.all_ticks",
+        "gate_reverse_7.independent_samples",
+        "gate_reverse_8.all_ticks",
+        "gate_reverse_8.independent_samples",
+        "gate_reverse_9.all_ticks",
+        "gate_reverse_9.independent_samples",
+        "idle.independent_samples",
+        "route_in_0.independent_samples",
+        "route_in_1.all_ticks",
+        "route_in_1.independent_samples",
+        "route_in_2.all_ticks",
+        "route_in_2.independent_samples",
+        "route_out_0.independent_samples",
+        "route_out_1.all_ticks",
+        "route_out_1.independent_samples",
+        "route_out_2.all_ticks",
+        "route_out_2.independent_samples"
+      ]
+    },
+    {
+      "fault": "wrong_gate_transform",
+      "record": "data/reports/daehanmun/regression/wrong_gate_transform.json",
+      "sha256": "f469612be711b98b3a8242f075530339b71a36d60b40ee5c372a8eb7e13aef5b",
+      "checker_passed": false,
+      "relevant_failure": true,
+      "failed_checks": [
+        "inventory.W01_gate_lintel"
+      ]
+    }
+  ],
+  "runtime_rejections": [
+    {
+      "case": "connection_checksum",
+      "passed": true
+    },
+    {
+      "case": "manifest_world_hash",
+      "passed": true
+    },
+    {
+      "case": "manifest_collision_hash",
+      "passed": true
+    },
+    {
+      "case": "manifest_file_type",
+      "passed": true
+    },
+    {
+      "case": "wrong_task",
+      "passed": true
+    },
+    {
+      "case": "opening_width",
+      "passed": true
+    },
+    {
+      "case": "terrain_claim",
+      "passed": true
+    },
+    {
+      "case": "missing_fragment",
+      "passed": true
+    },
+    {
+      "case": "fragment_number",
+      "passed": true
+    },
+    {
+      "case": "movement_number",
+      "passed": true
+    },
+    {
+      "case": "volume_number",
+      "passed": true
+    },
+    {
+      "case": "route_number",
+      "passed": true
+    }
+  ],
+  "evidence_json_mutations": [
+    {
+      "mutation": "actor_mask_zero",
+      "actual_engine_fault": false,
+      "checker_passed": false,
+      "failed_checks": [
+        "actual_player_contract"
+      ]
+    },
+    {
+      "mutation": "camera_mask_zero",
+      "actual_engine_fault": false,
+      "checker_passed": false,
+      "failed_checks": [
+        "idle.independent_samples"
+      ]
+    },
+    {
+      "mutation": "fragment_transform_false",
+      "actual_engine_fault": false,
+      "checker_passed": false,
+      "failed_checks": [
+        "inventory.W01_gate_side_0"
+      ]
+    },
+    {
+      "mutation": "fake_floor_id",
+      "actual_engine_fault": false,
+      "checker_passed": false,
+      "failed_checks": [
+        "idle.independent_samples"
+      ]
+    }
+  ],
+  "frozen_proof_sha256": {
+    "tools/check_daehanmun_evidence.py": "10ac76d2c9b67d53653a7bcb99100ad839fbfa8cb0a6a60b385ddd8f3851fed4",
+    "tools/check_daehanmun_contract.py": "49629d8de0d5e5a14d995cb2a1f8922ed6bbf2328e71d18f9d2990ef30af853d",
+    "tests/game/check_daehanmun_walk.gd": "4cfd5828a47e32b2325ce2be558a9297f099a319105dbcdc53935449ef0ac1f4",
+    "tests/game/check_camera_test.gd": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7",
+    "tests/game/daehanmun_probe_input.gd": "ff5074388a520d678225c009814359a07c265607731b6f97f3b236b3827a0221"
+  },
+  "gpu_observations": [
+    {
+      "fps": 30,
+      "warmup": {
+        "pipelines_after": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 4.0
+        },
+        "pipelines_before": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 4.0
+        },
+        "poses": 12,
+        "scope": "12 camera poses plus neutral settle before measurement; no starting cache copied; cold startup excluded",
+        "wall_s": 8.51057
+      },
+      "case_pipeline_deltas": [
+        {
+          "case": "idle",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_3",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_3",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_4",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_4",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_5",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_5",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_6",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_6",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_7",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_7",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_8",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_8",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_9",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_9",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_front_left",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_front_right",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_back_left",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_back_right",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        }
+      ],
+      "external_movement_events_ignored": 0,
+      "max_clock_deviation_percent": 1.212662295082234,
+      "min_camera_distance_m": 1.4765625,
+      "body_outside_projection_samples": 10
+    },
+    {
+      "fps": 60,
+      "warmup": {
+        "pipelines_after": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 4.0
+        },
+        "pipelines_before": {
+          "draw": 0.0,
+          "mesh": 0.0,
+          "surface": 4.0
+        },
+        "poses": 12,
+        "scope": "12 camera poses plus neutral settle before measurement; no starting cache copied; cold startup excluded",
+        "wall_s": 7.481626
+      },
+      "case_pipeline_deltas": [
+        {
+          "case": "idle",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_in_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "route_out_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_0",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_1",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_2",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_3",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_3",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_4",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_4",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_5",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_5",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_6",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_6",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_7",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_7",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_8",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_8",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_forward_9",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "gate_reverse_9",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_front_left",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_front_right",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_back_left",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        },
+        {
+          "case": "block_back_right",
+          "delta": {
+            "mesh": 0.0,
+            "surface": 0.0,
+            "draw": 0.0
+          }
+        }
+      ],
+      "external_movement_events_ignored": 0,
+      "max_clock_deviation_percent": 0.3975349999965072,
+      "min_camera_distance_m": 1.4765625,
+      "body_outside_projection_samples": 10
+    }
+  ],
+  "captures": [
+    {
+      "path": "data/reports/daehanmun/view_30_outside_spawn.png",
+      "sha256": "50e13f60f41df3c624b0e14a66c0ae33e3bbf914285ab32b92a1c4a76902768a",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_inside_entry.png",
+      "sha256": "5bd89c262e0e75583f1fa769c02b0b0d81a16a26d4683968f454638c93499fed",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_return_outside.png",
+      "sha256": "951ca74c2ac81a9deac46c042f43470e364f71f33bddd154fc601737b734ae91",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_gate_inside.png",
+      "sha256": "93a90c123c8ce8b8689874e59f7bb9748fbfaa0329af9e0b8603fe6f571bc539",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_gate_outside.png",
+      "sha256": "201d29a5ce35a5c7373044f6db8dc5fd2399aa3d1e8e9c86a0419795759819a1",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_under_gate.png",
+      "sha256": "4043703d3ccf5a6b974b07a4727bd4bf2bb19f6bf1921d5653258be4f722003d",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_wall_contact.png",
+      "sha256": "3ae33ec37ffc03d7a53c7eff81d1b61e63c60313c186e92a152b0034ee4a95bd",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_30_menu.png",
+      "sha256": "836aca4c87affb99699bbab129009be3833e93dcbb86fe381c50c1c25da9a139",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_outside_spawn.png",
+      "sha256": "50e13f60f41df3c624b0e14a66c0ae33e3bbf914285ab32b92a1c4a76902768a",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_inside_entry.png",
+      "sha256": "4ae7e30678f385efcc9fd4eda744e5fe371c20eab70234421966cd4c1a1c4e49",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_return_outside.png",
+      "sha256": "47cef3455d82222ca479850b95cae01844638dd30ab6958924a28209e3f476a1",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_gate_inside.png",
+      "sha256": "cefa2725f119d243e9520d9a0497a4b8d6fba541df2888c86db76ad95470f99b",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_gate_outside.png",
+      "sha256": "b9356b23ee1f18439d49a86d5fa9f1c38d4fcf0bd0e6147168aa34c21a981b31",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_under_gate.png",
+      "sha256": "4c5195b29277bf22b7e89d2bef36f524187ed9b3b18dcd97ef9d9320dbd0bbb4",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_wall_contact.png",
+      "sha256": "fb1059a2a9ce457a4ad6aceea8296213c6c251c4778ba39b0b3d4dcc07cb0413",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    },
+    {
+      "path": "data/reports/daehanmun/view_menu.png",
+      "sha256": "c341b0c9c4adb33b7e07e259c6ce9f789c2c3cdb17a3d2cba4f229718d749d0b",
+      "width": 1152,
+      "height": 720,
+      "header_matches_observation": true
+    }
+  ],
+  "scope": "Bounded original-source Daehanmun footway connection on current M1; engineering 3m opening and 6m local support slab; automatic injected warm measurements only",
+  "limits": [
+    "Independent geometry is recomputed from retained approximately 10Hz samples; engine-produced every-tick extrema bound unsaved intervals and are not independent raw paths.",
+    "Test-only movement/Shift physical bindings are erased and external menu events filtered; programmatic action API, original controller/router and marked authored Esc binding remain. Normal physical keyboard/OS focus behavior and human handling are unverified.",
+    "Final GPU records follow 12 camera poses and neutral settle. Cold startup and full city performance are not accepted by these measurements. Pipeline counters do not establish the cause of prior clock stalls.",
+    "Some first walking/orbit samples project the body outside the viewport when the arm shortens near 1.5m. This passes the declared geometry contract but does not prove the body is always visible or the camera feels natural.",
+    "PNG files and dimensions were verified; this review does not approve landmark impression or visual usability.",
+    "Original E03/G04 source geometry/access authority remains separate from the local W01 engineering override. Measured gate dimensions, real access conditions and physical terrain are unverified.",
+    "M4, W02/W03/W04, Jungwhamun opening, full R1/R2/R3, W0/V0, NPC/vehicle controllers and broad performance remain unverified."
+  ],
+  "preserved_failure_history": "data/reports/daehanmun/development/failures.json",
+  "cold_failed_records_archive": "data/reports/daehanmun/development/gpu_capture_clock_idle_failure",
+  "prior_cause_status": "Missing GPU30 capture prefix was confirmed. Exact causes of unplanned pause, renderer readback stalls, clock outliers and prior idle movement were not independently established."
+}

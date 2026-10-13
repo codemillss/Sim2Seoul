@@ -152,4 +152,16 @@ P03 상속 [collision_test](../game/scenes/tests/collision_test.tscn)에 합성 
 
 fixture에서는 City layer/mask0·시험장1/14·Player2/13·camera query mask1이다. 메뉴의 서울/덕수궁 보기에서는 시험장0/0·City1/14, Player/리그의 일반 물리 갱신·입력을 중단하고 고정 CityCamera를 쓴다. 시험장 복귀 버튼은 확인한 합성 지면으로 돌아오고 카메라/키 중립을 복원한다. 도시 보기에는 스폰·플레이 경계·실제 보행을 추가하지 않았다. 토지/도로 표시548개는 충돌0이며 y=0 지원평면은 현실 지형이 아니다.
 
-`check_collision_contract.py`는 authored22+runtime4의 초기캐시 없는 사본과 실제 도형/설정 고장10종을 검사하고 GPU mode는30/60fps를 실제 측정한다. `check_collision_rejections.py`는 runtime 계획 손상10종의 실제 거부를 검증한다. `check_collision_evidence.py`는 표준 Python으로 엔진 관측을 독립 채점한다. [결과/실패/측정 범위](../data/reports/collision.md). generation/test_support는 Git 제외며 기존 E03 manifest의 표시 provenance를 P04 권한으로 바꾸지 않는다. 다음W01은 대한문 개구부·앞뒤 지면·도시 시작점/복귀부터 준비한다.
+`check_collision_contract.py`는 authored22+runtime4의 초기캐시 없는 사본과 실제 도형/설정 고장10종을 검사하고 GPU mode는30/60fps를 실제 측정한다. `check_collision_rejections.py`는 runtime 계획 손상10종의 실제 거부를 검증한다. `check_collision_evidence.py`는 표준 Python으로 엔진 관측을 독립 채점한다. [결과/실패/측정 범위](../data/reports/collision.md). generation/test_support는 Git 제외며 기존 E03 manifest의 표시 provenance를 P04 권한으로 바꾸지 않는다. W01의 별도 장면에서 대한문 개구부·앞뒤 지면·도시 시작점/복귀를 연결했다. 다음 W02는 경내 길·마당·전각 앞 경로를 확장한다.
+
+## W01 대한문 실제 배치 보행
+
+```sh
+.venv-data/bin/python tools/prepare_daehanmun.py
+sh tools/run_daehanmun_walk.sh run
+sh tools/run_daehanmun_walk.sh observe
+```
+
+[daehanmun_walk](../game/scenes/tests/daehanmun_walk.tscn)은 기존 3인칭/이동을 상속하고 합성 Fixtures를 제거한다. World의 [daehanmun_connection](../game/scenes/world/daehanmun_connection.tscn)은 P04 원천 충돌을 생성한 뒤 gate/담장/광역 지원 평면 3개를 0/0·숨김으로 처리하고 지역 교체 5개를 붙인다. 제한 원문 연결/지역 spawn·복귀만 열며 기존 E03/P04 파일은 유지한다. `daehanmun_player.gd`는 지역 polygon과 추가 source-volume spawn guard를 적용하고, root는 복귀 yaw와 안내/메뉴를 연결한다.
+
+자료는 수동 결정→Git 제외 daehanmun.json/decision/manifest 3개다. 실행 전 stdlib bundle checker와 runtime hash/형식/scope를 대조한다. 독립 game 사본은 authored 27/runtime 7·측정 helper 2개이며 평소 run에는 helper를 붙이지 않는다. `check_daehanmun_contract.py`는 고정 checker bytes로 정상/반복/실제 고장 6종과 GPU30/60을 검사, `check_daehanmun_rejections.py`는 실제 잘못된 자료 12종을 거부한다. [정확한 실행/결과/한계](../data/reports/daehanmun_walk.md). 다음은 W02 경내 전체 연결이다.
