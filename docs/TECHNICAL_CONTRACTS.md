@@ -1,6 +1,6 @@
 # 공간·데이터·게임 계약
 
-상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. E02 정식 빈 프로젝트·입력/메뉴·로컬 계약 코드는 있으며 서울 메시·캐릭터 이동은 아직 없다.
+상태: 구현 기본안. 사용자 확정 사항과 구분하며, 변경 시 영향받는 작업·검증을 함께 갱신한다. E02 정식 구조·입력/메뉴·로컬 계약과 E03 서울 표시 코드는 있다. 캐릭터 이동·충돌은 아직 없다.
 
 D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../config/data_usage.json)에 정리했다. 좌표 수치는 기존 `config/region.json`이 기준이며 사용 정책이 좌표 계약을 대체하지 않는다. [data_gaps](data_gaps.md)와 [수동 검토 큐](../data/manual/review_queue.json)는 G02–G04/W 단계의 입력이다.
 
@@ -55,7 +55,7 @@ builds/                              # 로컬 실행 파일, Git 제외
 
 원본 갱신은 기존 스냅샷 덮어쓰기가 아니라 새 버전으로 수행한다. 생성 자산 manifest에 원본 해시·설정 해시·도구 버전을 기록한다. 자동 생성과 수동 보정을 분리해 두 번 생성해도 같은 ID와 배치가 유지돼야 한다.
 
-E02는 `game/`를 Godot의 프로젝트 경계로 정했다. authored `world_config.tres`는 manifest 경로만 보유하며 `config/region.json`의 좌표 값은 중복 작성하지 않는다. G01 원천 해시를 대조한 뒤 Git 제외 `game/data/generated/region.json` 원본 바이트 사본과 manifest를 생성한다. 런타임은 허용된 `res://` 계약만 읽고 외부 원본/가공물/Python/네트워크를 요구하지 않는다. 자산 목록은 아직 비어 있다. [실제 경로·입력·처리 역할](GAME_PROJECT.md). 수동 모델은 `game/assets/authored/`, 자동 생성 결과는 별도 경계에서 재생성한다.
+E02는 `game/`를 Godot의 프로젝트 경계로 정했다. authored `world_config.tres`는 manifest 경로만 보유하며 `config/region.json`의 좌표 값은 중복 작성하지 않는다. G01 원천 해시를 대조한 뒤 Git 제외 `game/data/generated/region.json` 원본 바이트 사본과 manifest를 생성한다. 런타임은 허용된 `res://` 계약만 읽고 외부 원본/가공물/Python/네트워크를 요구하지 않는다. E02 당시 자산 목록은 비어 있었고, E03은 manifest v2/`E03_display_only`에서 로컬 `world.json` 하나를 체크섬/크기로 연결한다. 28개 필수 원천/정책/근거 해시를 실행 준비 때 대조한다. [실제 경로·입력·처리 역할](GAME_PROJECT.md). 수동 모델은 `game/assets/authored/`, 자동 생성 결과는 별도 경계에서 재생성한다.
 
 ## C04. 공간 객체 스키마
 
@@ -75,7 +75,7 @@ E02는 `game/`를 Godot의 프로젝트 경계로 정했다. authored `world_con
 
 G02 중간물은 `data/processed/features.json`의 **별도 JSON 형식**이다. 위경도 GeoJSON으로 읽지 않는다. `coordinate_system`에 EPSG:32652·고정 원점·단위를 적고 `geometry`는 `[x,z]` 미터 좌표, `source_geometry`는 원본 `[경도,위도]`와 EPSG:4326을 보존한다. y/지면/건물 높이는 아직 배정하지 않는다. 같은 원천의 선/면 등 여러 표현은 `feature_id=정식 원천 ID:source_kind`로 구분하고 `entity_id`와 직접 원천·노드/관계 참조를 남긴다.
 
-XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한다. 이는 중간물 링 규칙이며 Godot 메시 앞면·법선 검증은 E02/E04에서 수행한다. 빈/비유효 도형을 조용히 수리하지 않고 작업을 중단하며 원본 오류를 기록한다. 조사 bbox에서 도형을 자르거나 도로폭 버퍼를 만들지 않는다. [생성 규칙](../config/geometry_rules.json)·[G02 증거](../data/reports/geometry_check.json).
+XZ 폴리곤의 외곽은 반시계·구멍은 시계 방향으로 정규화한다. 이는 중간물 링 규칙이며 E03은 시계 방향 앞면/명시 법선과 실제 엔진 배열을 검증했으며, 고정 거리·기준물 검증은 E04에서 수행한다. 빈/비유효 도형을 조용히 수리하지 않고 작업을 중단하며 원본 오류를 기록한다. 조사 bbox에서 도형을 자르거나 도로폭 버퍼를 만들지 않는다. [생성 규칙](../config/geometry_rules.json)·[G02 증거](../data/reports/geometry_check.json).
 
 G03의 높이 가공물은 `heights.json`이며 G02 feature_id로 연결한다. 실제 필드는 `height_class`, `height_m`, `min_height_m`, `vertical_span_m`, `source_tags`, 원문 파싱 상태, `source_levels`, `assumption_id`, `component_evidence_ids`, `emit_coarse_body`다. 단일 유효 height를 우선하고, 원문이 있지만 다중/해석 불가면 보류한다. height가 없는 부분/지붕은 전체 높이를 임의로 만들지 않는다. 석조전은 명시 부분의 유효 상단 최대값으로 단순 외곽 상한을 도출한다. 랜드마크 임시값·층수 환산·용도 기본값과 계수는 [height_rules.json](../config/height_rules.json)에 구분한다. 원문 height에는 지붕이 포함되며 min_height와의 차이가 수직 길이다. 원문 min_height가 없을 때 하단 오프셋 0은 관측값이 아닌 로컬 기본안이다. 일반 빌딩 높이를 궁궐 전각에 일괄 적용하지 않는다.
 
@@ -98,11 +98,13 @@ G04 보행/차량 가공물은 동일 478개 도로선·보행면의 모드별 �
 - 나라 전체 파일에서 뽑았다고 모든 지역 관계가 완전한 것은 아니다. 추출 정책의 한계와 참조 검사 결과를 보존한다.
 - 현재 데이터 감사 수량은 **OSM 객체/미리보기 도형 수**이지 현실의 건물 개수나 독립 조사 대비 포괄률이 아니다.
 
-G02의 보수적 생성 역할은 명시 `type=building` 관계의 outline/part를 먼저 연결하며 공간 겹침은 부모 후보로만 기록한다. 부모 외곽과 부분을 동시에 전체 건물 볼륨으로 생성하지 않는다. 기본 몸체 후보에는 primary 외곽만 넣고 `building:part`와 `building=roof`는 역할을 보존한 참조다. G03/E02에서 부분 표현을 채택할 때 부모 전체 볼륨과 겹치지 않도록 전략을 교체한다. 이 목록은 실제 메시가 아니다.
+G02의 보수적 생성 역할은 명시 `type=building` 관계의 outline/part를 먼저 연결하며 공간 겹침은 부모 후보로만 기록한다. 부모 외곽과 부분을 동시에 전체 건물 볼륨으로 생성하지 않는다. 기본 몸체 후보에는 primary 외곽만 넣고 `building:part`와 `building=roof`는 역할을 보존한 참조다. G03 이후 실제 부분 표현을 채택할 때 부모 전체 볼륨과 겹치지 않도록 전략을 교체한다. 이 목록은 실제 메시가 아니다.
 
 동일 유형의 도형과 원본 태그(높이 의미 포함)가 모두 같을 때만 별칭으로 묶고 원본 기록은 남긴다. 설명되지 않은 본체 겹침은 양쪽을 기본 몸체 생성에서 보류한다. 겹침 보고 임계값 0.01㎡는 수치적인 검토 기준이지 측량 정확도가 아니다. 같은 원천의 담장 선/면은 선을 기본 표현, 면을 참조로 구분한다. 모든 보류·별칭과 Overture 22개 미승인 후보의 사유는 검사 보고서에 기록한다.
 
 G03은 [잠정 생성 결정](../data/manual/height_review_decisions.json)에 따라 정관헌의 이름 윤곽 `w/381755268`과 상동교회 본체 `w/1128365145`만 단순 본체에 복원했다. 정관헌의 큰 윤곽/sand 구멍과 교회의 52.1m 작은 면은 참조로 보존한다. 좌표 수정·부분 높이 승인·탑의 시작 높이 추정은 하지 않는다. 상세 부분 전략으로 교체할 때 본체 전체 부피와 동시 생성하지 않도록 다시 검사한다.
+
+E03은 G03 본체 635개만 실제 부피로 표시하며 부분/지붕 참조·지면 예외는 그대로 보류한다. G04 면 370개를 별도 보기용 길/도로로 표시하고 `runtime_permission=null`, `runtime_surface_ready=false`, 충돌 없음 상태를 유지한다. 토지 참조 178개를 색으로 표시해도 통행 권한은 주지 않는다. 겹침을 자동 절단하지 않는다. 담장 두께 0.35m, 15–21/35/55mm 표면 분리는 시각 가정이며 측량값/단차가 아니다. [표시 설정](../config/world_display.json)·[E03 증거](../data/reports/world_import.md). `game/resources/world_geometry/`는 기기별 생성 경계이며 Git 제외다.
 
 ## C06. 게임 구성과 이동
 

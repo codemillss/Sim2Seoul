@@ -1,0 +1,124 @@
+{
+  "task": "E03",
+  "passed": true,
+  "checker_sha256": "a618d1da441c1789e49981e7a9d57ec8933124753e4f5480e25d63846544ab89",
+  "world_sha256": "d1303014758947b111fefb37c046361a24319232f1ab73a8072e97ee6e7edcb9",
+  "tolerances": {
+    "area_m2": 0.02,
+    "hausdorff_m": 1e-05,
+    "height_m": 2e-06
+  },
+  "source_sha256": {
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "data/processed/heights.json": "b926b2f490b26016b5bee7bf2f86ba1f44edaf87485b47f3d574a0a1f237f92c",
+    "data/processed/terrain.json": "875e14459f2e6835f1c9ce8a1e24d73b2ba474d42ab7cd7afaf9ca98764ca249",
+    "data/processed/walkable_areas.json": "00b2a31b40fdd8c9248cf0bc22b1d449720901a202f12338aef63bea65e43b7b",
+    "data/processed/driveable_areas.json": "7a3cb92b240011052c3dcafe61ee41393a32e3507ec2da21c80c71e08c7938ac",
+    "data/processed/coordinate_reference.json": "e3f9ad84c80cea8b6cb71e6d8caba95866f4a6cd7bcb8d2b0c3a236850cd157d",
+    "config/world_display.json": "7f84918ae20d4827e1c693437994097e193acd516c79df9035888510e27048d1",
+    "config/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834"
+  },
+  "source_comparison": {
+    "mesh_count": 1233,
+    "role_counts": {
+      "Ground": 179,
+      "Buildings": 635,
+      "Barriers": 49,
+      "Routes": 370
+    },
+    "unresolved_ground_held": 132,
+    "anchors": [
+      {
+        "name": "대한문",
+        "feature_id": "osm:way:377289797:building",
+        "horizontal_vertex_error_m": 4.851111326689721e-07
+      },
+      {
+        "name": "중화전",
+        "feature_id": "osm:way:181574577:building",
+        "horizontal_vertex_error_m": 4.3269909069600733e-07
+      },
+      {
+        "name": "석조전",
+        "feature_id": "osm:relation:19357693:building",
+        "horizontal_vertex_error_m": 3.7847850045800935e-07
+      },
+      {
+        "name": "돈덕전",
+        "feature_id": "osm:way:517072312:building",
+        "horizontal_vertex_error_m": 4.349979113143346e-07
+      },
+      {
+        "name": "서울시청",
+        "feature_id": "osm:way:198561926:building",
+        "horizontal_vertex_error_m": 3.7494581699483646e-07
+      },
+      {
+        "name": "서울도서관",
+        "feature_id": "osm:relation:10757525:building",
+        "horizontal_vertex_error_m": 5.687129481934854e-07
+      },
+      {
+        "name": "서울광장",
+        "feature_id": "osm:way:370019676:land_area",
+        "horizontal_vertex_error_m": 5.021595130437397e-07
+      },
+      {
+        "name": "정관헌",
+        "feature_id": "osm:way:381755268:building",
+        "horizontal_vertex_error_m": 4.529335941397797e-07,
+        "basis": "G02 first exterior source vertex; not an independent survey"
+      }
+    ],
+    "max_cap_area_error_m2": 0.0027787150236604167,
+    "max_cap_hausdorff_m": 6.976155352386504e-07,
+    "known_overlaps_retained": {
+      "walk_obstacle_pairs": 77,
+      "drive_obstacle_pairs": 133,
+      "policy": "retained, no automatic clipping/access approval"
+    },
+    "scope": "Source-relative display geometry only; no physical position, terrain, access or walking validation"
+  },
+  "fixtures": [
+    {
+      "fixture": "donut_and_two_disjoint_polygons",
+      "passed": true
+    },
+    {
+      "fixture": "missing_top_face",
+      "rejected": true,
+      "check": "top_coverage",
+      "error": "top_coverage: synthetic_donut_two_disjoint error=10.0, hausdorff=0.0, overlap=0.0"
+    },
+    {
+      "fixture": "flipped_triangle",
+      "rejected": true,
+      "check": "clockwise_normal",
+      "error": "clockwise_normal: synthetic_donut_two_disjoint triangle 0"
+    },
+    {
+      "fixture": "filled_hole",
+      "rejected": true,
+      "check": "top_coverage",
+      "error": "top_coverage: filled_hole error=36.0, hausdorff=2.0, overlap=0.0"
+    },
+    {
+      "fixture": "geometry_drift",
+      "rejected": true,
+      "check": "side_boundary",
+      "error": "side_boundary: synthetic_donut_two_disjoint"
+    },
+    {
+      "fixture": "part_duplicate",
+      "rejected": true,
+      "check": "source_selection",
+      "error": "source_selection: missing=[], extra=['osm:relation:10757526:building_part']"
+    },
+    {
+      "fixture": "unknown_ground",
+      "rejected": true,
+      "check": "body_ground_selection",
+      "error": "body_ground_selection: osm:relation:10650821:building"
+    }
+  ]
+}

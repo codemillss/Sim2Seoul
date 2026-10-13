@@ -1,0 +1,25 @@
+{
+  "task": "E03",
+  "review_model": "Sol",
+  "scope": "narrow independent source/mesh and runtime/preparation review",
+  "findings": [
+    {
+      "issue": "source/raw/preview/official evidence hash checks incomplete",
+      "fix": "added actual input checks and all 28 provenance hashes",
+      "evidence": "geometry_check.json"
+    },
+    {
+      "issue": "required preparation provenance list could be omitted",
+      "fix": "required set plus uniqueness checks",
+      "regression": "world_provenance_omitted"
+    },
+    {
+      "issue": "observation save failure exit could be overwritten by normal quit",
+      "fix": "observation returns success and caller owns quit code",
+      "regression": "observation_write_failure_exit_code=1"
+    }
+  ],
+  "reviewer_added": "tools/check_world_geometry.py: independent cap/side recovery and source audit, six corrupt fixtures",
+  "all_findings_addressed": true,
+  "note": "Automated/code review, not manual keyboard or physical accuracy validation"
+}

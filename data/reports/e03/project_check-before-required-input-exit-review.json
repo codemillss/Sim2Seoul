@@ -1,0 +1,260 @@
+{
+  "task": "E03",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "scope": "headless structure/input/data tests, not GPU or walking acceptance",
+  "project_checks": {
+    "checks": [
+      {
+        "name": "local_contract_loaded",
+        "passed": true
+      },
+      {
+        "name": "world_manifest_and_geometry_loaded",
+        "passed": true
+      },
+      {
+        "name": "technical_origin_not_spawn",
+        "passed": true
+      },
+      {
+        "name": "unit_scale_role_World/Ground",
+        "passed": true
+      },
+      {
+        "name": "unit_scale_role_World/Buildings",
+        "passed": true
+      },
+      {
+        "name": "unit_scale_role_World/Routes",
+        "passed": true
+      },
+      {
+        "name": "unit_scale_role_World/Barriers",
+        "passed": true
+      },
+      {
+        "name": "unit_scale_role_Actors/PlayerSlot",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_move_forward",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_move_backward",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_move_left",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_move_right",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_move_fast",
+        "passed": true
+      },
+      {
+        "name": "physical_keys_toggle_menu",
+        "passed": true
+      },
+      {
+        "name": "forward_key_produces_intent",
+        "passed": true
+      },
+      {
+        "name": "diagonal_intent_bounded",
+        "passed": true
+      },
+      {
+        "name": "shift_produces_fast_intent",
+        "passed": true
+      },
+      {
+        "name": "esc_opens_paused_menu",
+        "passed": true
+      },
+      {
+        "name": "menu_blocks_held_movement_and_fast",
+        "passed": true
+      },
+      {
+        "name": "menu_pauses_world_actors_presentation",
+        "passed": true
+      },
+      {
+        "name": "key_repeat_does_not_toggle_menu",
+        "passed": true
+      },
+      {
+        "name": "esc_closes_menu_and_releases_focus",
+        "passed": true
+      },
+      {
+        "name": "arrow_key_produces_intent",
+        "passed": true
+      },
+      {
+        "name": "esc_reopens_menu",
+        "passed": true
+      },
+      {
+        "name": "resume_button_unpauses_and_enables_intent",
+        "passed": true
+      },
+      {
+        "name": "resume_enables_world_and_actors",
+        "passed": true
+      },
+      {
+        "name": "input_does_not_move_placeholder",
+        "passed": true
+      }
+    ],
+    "failed": 0,
+    "passed": 27
+  },
+  "normal_bundle_loaded": true,
+  "deterministic_preparation": true,
+  "check_mode_passed": true,
+  "runtime_files": [
+    {
+      "file": "game/data/generated/region.json",
+      "bytes": 949,
+      "sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834"
+    },
+    {
+      "file": "game/data/generated/manifest.json",
+      "bytes": 722,
+      "sha256": "7f3b858877f3a6a37ddf29249fdf04c2e710470c8f499289427881de5521e203"
+    }
+  ],
+  "invalid_bundle_rejections": [
+    {
+      "case": "missing_manifest",
+      "rejected": true,
+      "error": "로컬 실행 자료가 없습니다. 실행 준비 도구를 실행해주세요."
+    },
+    {
+      "case": "missing_region",
+      "rejected": true,
+      "error": "로컬 좌표 설정이 없습니다. 실행 준비 도구를 실행해주세요."
+    },
+    {
+      "case": "bad_json",
+      "rejected": true,
+      "error": "로컬 실행 자료의 JSON 형식이 잘못됐습니다."
+    },
+    {
+      "case": "checksum_mismatch",
+      "rejected": true,
+      "error": "좌표 설정의 체크섬이 다릅니다. 원천에서 다시 준비해주세요."
+    },
+    {
+      "case": "units_changed",
+      "rejected": true,
+      "error": "지원하지 않는 좌표 계약: meters_per_world_unit"
+    },
+    {
+      "case": "axes_changed",
+      "rejected": true,
+      "error": "지원하지 않는 좌표 계약: world_axes"
+    },
+    {
+      "case": "spawn_origin",
+      "rejected": true,
+      "error": "지원하지 않는 좌표 계약: origin_role"
+    },
+    {
+      "case": "final_boundary",
+      "rejected": true,
+      "error": "지원하지 않는 좌표 계약: playable_boundary"
+    },
+    {
+      "case": "external_manifest",
+      "rejected": true,
+      "error": "런타임 manifest 경로가 허용된 프로젝트 경로와 다릅니다."
+    },
+    {
+      "case": "traversal_region",
+      "rejected": true,
+      "error": "좌표 설정 경로가 허용된 로컬 경로와 다릅니다."
+    },
+    {
+      "case": "remote_region",
+      "rejected": true,
+      "error": "좌표 설정 경로가 허용된 로컬 경로와 다릅니다."
+    },
+    {
+      "case": "wrong_schema",
+      "rejected": true,
+      "error": "지원하지 않는 런타임 manifest 버전 또는 단계입니다."
+    },
+    {
+      "case": "external_asset",
+      "rejected": true,
+      "error": "도시 표시 자료 경로가 허용된 로컬 경로와 다릅니다."
+    },
+    {
+      "case": "malformed_source",
+      "rejected": true,
+      "error": "좌표 원천 기록이 없습니다."
+    },
+    {
+      "case": "nonnumeric_origin",
+      "rejected": true,
+      "error": "고정 원점에 유효하지 않은 값이 있습니다."
+    },
+    {
+      "case": "missing_world",
+      "rejected": true,
+      "error": "도시 표시 자료가 없습니다. 실행 준비 도구를 실행해주세요."
+    },
+    {
+      "case": "world_checksum",
+      "rejected": true,
+      "error": "도시 표시 자료의 크기 또는 체크섬이 다릅니다."
+    },
+    {
+      "case": "world_stage",
+      "rejected": true,
+      "error": "도시 표시 자료의 좌표 계약 또는 단계가 다릅니다."
+    },
+    {
+      "case": "world_permission",
+      "rejected": true,
+      "error": "도시 표시는 아직 통행이나 충돌을 승인하지 않습니다."
+    },
+    {
+      "case": "world_nan",
+      "rejected": true,
+      "error": "도시 도형에 유효하지 않은 숫자가 있습니다."
+    },
+    {
+      "case": "world_arrays",
+      "rejected": true,
+      "error": "도시 도형의 삼각형 배열이 잘못됐습니다."
+    },
+    {
+      "case": "world_duplicate",
+      "rejected": true,
+      "error": "도시 표시 도형 ID가 잘못됐거나 중복됐습니다."
+    },
+    {
+      "case": "world_axes",
+      "rejected": true,
+      "error": "도시 표시의 축·단위·원점이 좌표 계약과 다릅니다."
+    },
+    {
+      "case": "stale_prepared_bundle",
+      "rejected": true
+    },
+    {
+      "case": "source_changed_after_G01",
+      "rejected": true
+    }
+  ],
+  "result": "passed"
+}

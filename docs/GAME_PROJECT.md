@@ -1,10 +1,17 @@
 # 정식 Godot 프로젝트와 데이터 경계
 
-2026-10-13 · E02 · [실행/검증 결과](../data/reports/project_setup.md)
+2026-10-13 · E03 · [서울 표시/검증](../data/reports/world_import.md) · [E02 준비 당시 증거](../data/reports/project_setup.md)
 
-## 로컬에서 실행하기
+## 실행과 보기
 
-Godot은 [고정 환경](environment.md)의 **4.7.2 Standard·Forward+/Metal**을 사용한다. 저장소 루트에서 실행한다.
+고정 환경은 Godot **4.7.2 Standard·Forward+/Metal**이다. 새 Mac은 [CROSS_MAC](CROSS_MAC.md)의 작은 공유 지도 준비와 [엔진 설치](environment.md)를 먼저 수행한다. 기존 G01–G04 환경에서 E03 자료를 처음 만들거나 관련 입력을 변경했을 때만 실행한다.
+
+```sh
+.venv-data/bin/python tools/prepare_world.py
+python3 tools/prepare_game_data.py
+```
+
+이후 실행 도구가 소스 최신성·manifest를 확인해 게임을 연다.
 
 ```sh
 sh tools/run_game.sh run
@@ -12,74 +19,64 @@ sh tools/run_game.sh editor
 sh tools/run_game.sh observe
 ```
 
-`run`은 정식 프로젝트를 연다. Esc로 메뉴를 열고 **돌아가기** 또는 Esc로 닫으며 **종료**로 끝낸다. `editor`는 정식 main 장면을 편집기로 연다. `observe`는 약 12초의 장면 처리 후 PNG/JSON/로그를 `data/cache/game/`에 남기고 종료한다. 이 진단 시간은 기동 시간이나 도시 성능 측정값이 아니다.
+아래 버튼으로 **전체 배치 / 위에서 보기 / 덕수궁 가까이**를 선택한다. Esc는 메뉴를 열고 Esc나 **돌아가기**로 닫으며 **종료**로 끝낸다. 실제 사람 이동·마우스 회전은 아직 없다. `observe`는 약 12초의 장면 처리 후 PNG/JSON/로그를 Git 제외 `data/cache/game/`에 남기고 종료한다. 12초는 기동 시간·도시 성능 측정이 아니다.
 
-실행 도구는 엔진 버전을 확인한 뒤 표준 Python 3으로 작은 로컬 계약을 준비하고 Godot을 실행한다. 가상환경·전국 지도·네트워크·내보내기 템플릿은 E02 실행 준비에 필요하지 않다. 경로가 다르면 `GODOT_BIN`·`SIM2SEOUL_PYTHON`을 지정한다. 지도 가공 환경은 별도 [CROSS_MAC](CROSS_MAC.md)을 따른다.
+실행 준비의 삼각분할은 `.venv-data` Shapely 환경이 필요하다. 준비된 `game/` 사본을 Godot으로 실행할 때는 Python·원본·인터넷·내보내기 템플릿이 필요 없다. `run_game.sh`의 자료 확인은 엔진 밖의 표준 Python이다. 새/오래된 자산을 좌표 기본값으로 조용히 대체하지 않고 재생성 안내를 낸다. 엔진/Python 위치가 다르면 `GODOT_BIN`·`SIM2SEOUL_PYTHON`을 지정한다.
 
-```sh
-GODOT_BIN=/Applications/Godot-4.7.2.app/Contents/MacOS/Godot sh tools/run_game.sh run
-python3 tools/prepare_game_data.py
-python3 tools/prepare_game_data.py --check
-```
-
-자료 준비 후 `game/project.godot`을 Godot에서 직접 열어도 된다. 준비되지 않은 새 복제본을 직접 실행하면 자료 준비가 필요하다는 안내를 표시하며 좌표 기본값으로 조용히 대체하지 않는다.
-
-## 장면의 역할
+## 장면과 입력 역할
 
 ```text
-Main                              # 상태·메뉴와 실행 계약 확인
-├── World                         # 메뉴 중 처리 중단
-│   ├── Ground                    # 지면 표시 자리
-│   ├── Buildings                 # 건물 표시 자리
-│   ├── Routes                    # 보행/차량 표현 자리
-│   └── Barriers                  # 담장 등 표시 자리
-├── Actors                        # 메뉴 중 처리 중단
-│   └── PlayerSlot                # P01 캐릭터의 빈 자리
-├── Presentation                  # 초기 확인용 카메라·환경, 메뉴 중 처리 중단
-├── InputRouter                   # 입력 의도·Esc 전달, 메뉴 중 계속 처리
-└── Interface                     # 안내·메뉴, 메뉴 중 계속 처리
+Main                          # 계약/표시 연결·안내·메뉴, ALWAYS
+├── World (base_world)        # 지면/건물/길/담장 표시, PAUSABLE
+│   ├── Ground
+│   ├── Buildings
+│   ├── Routes
+│   └── Barriers
+├── Actors                    # PAUSABLE
+│   └── PlayerSlot            # P01의 빈 자리, 기본 위치는 스폰이 아님
+├── Presentation              # 고정 카메라·낮 조명·표시 원점/북쪽, PAUSABLE
+├── InputRouter               # 정규화한 입력 의도·Esc, ALWAYS
+└── Interface                 # 안내/보기 버튼/메뉴·원천 표시, ALWAYS
 ```
 
-[main](../game/scenes/main.tscn)·[world_root](../game/scenes/world/world_root.tscn)·[player_slot](../game/scenes/actors/player_slot.tscn)는 독립 장면이다. World/Actors/Presentation은 명시 `PAUSABLE`, Main/InputRouter/Interface는 `ALWAYS`다. 메뉴를 열면 SceneTree를 멈추고 입력 의도를 0/false로 차단한다. 메뉴를 닫으면 처리·입력이 복구되고 버튼 초점을 해제한다.
+[main](../game/scenes/main.tscn)·[base_world](../game/scenes/world/base_world.tscn)·[loader](../game/scripts/base_world.gd)가 실행 장면이다. E02의 [빈 역할 장면](../game/scenes/world/world_root.tscn)은 보존하지만 현재 main은 base_world를 쓴다. 월드/역할/메시 변환은 identity·scale 1이며 이미 변환된 XZ 미터 좌표를 다시 투영/이동/축 반전하지 않는다.
 
-현재 역할 노드는 모두 비어 있고 스케일은 1이다. PlayerSlot의 `(0,0,0)`은 빈 노드의 기본 변환이며 **실제 스폰이 아니다**. 카메라도 구조 확인용이며 최종 3인칭 카메라가 아니다. 지면·건물·경로 메시, 충돌, 캐릭터 이동은 없다.
+메뉴는 SceneTree를 멈추고 이동/빠른 이동 의도를 0/false로 차단한다. World/Actors/Presentation은 명시 PAUSABLE로 두며 재개 시 초점을 해제한다. [InputMap](../game/project.godot)은 물리 키 W/↑, S/↓, A/←, D/→·Shift·Esc를 등록한다. [InputRouter](../game/scripts/input_router.gd)는 대각선 길이 ≤1인 의도만 전달한다. 걷기/달리기 속도·카메라 기준 이동·마우스 잠금은 P01/P02에서 구현한다. 점프/실내/새 게임 규칙을 자동 추가하지 않는다.
 
-## 입력 계약
-
-| 입력 동작 | 물리 키 | 현재 의미 |
-|---|---|---|
-| `move_forward` / `move_backward` | W/↑, S/↓ | 이동 의도의 앞/뒤 성분 |
-| `move_left` / `move_right` | A/←, D/→ | 이동 의도의 좌/우 성분 |
-| `move_fast` | Shift | 빠른 이동 요청 여부 |
-| `toggle_menu` | Esc | 메뉴 열기/닫기, 키 반복은 무시 |
-
-[project.godot](../game/project.godot)의 InputMap이 키 매핑의 기준이다. [InputRouter](../game/scripts/input_router.gd)는 정규화된 2D 의도를 반환한다. 대각선 길이는 1을 넘지 않는다. 현재 의도는 안내 화면/시험에만 사용하며 플레이어를 움직이지 않는다. 카메라 기준 월드 방향·실제 속도·달리기는 P01/P02에서 구현하고 점프·복귀를 임의로 추가하지 않는다. 마우스는 현재 항상 보이며 잠금·회전·복구는 P02에서 검증한다.
-
-## 원본 → 가공 → 실행 자료
+## 원본 → 가공 → 실행 경계
 
 | 경로 | 역할 / 공유 |
 |---|---|
-| `config/region.json` | 좌표 값의 단일 원천, Git 공유 |
+| `config/region.json` | 좌표 값의 단일 원천, 공유 |
+| `config/world_display.json` | 색·시점·표시용 오프셋/담장 두께 가정, 공유 |
 | `data/raw/`, `data/manual/` | 원본·검토 입력. Godot이 읽지 않음 |
-| `data/processed/` | G01–G04 지역 가공물, Git 제외. E03 생성기의 입력 |
-| `game/resources/world_config.tres` | 사람이 관리하는 Resource. 런타임 manifest 경로만 지정, 별도 좌표 값 없음 |
-| `game/data/generated/region.json` | region 원본 바이트 사본, 기기별 재생성·Git 제외 |
-| `game/data/generated/manifest.json` | 계약 원천 SHA-256·G01 증거 해시·자산 목록, 기기별 재생성·Git 제외 |
-| `game/assets/generated/` | 자동 생성 자산의 예정 경계, 현재 자산 없음·Git 제외 |
-| `game/assets/authored/` | 수동 제작 모델의 예정 경계, 현재 모델 없음·소스 공유 |
+| `data/processed/` | G01–G04 미터 도형/높이/지면/후보, 기기별·Git 제외 |
+| `tools/prepare_world.py` | 검증된 가공물의 표시 삼각형 생성, 공유 |
+| `game/resources/world_geometry/world.json` | 약 5.04MB 생성 결과·출처/보류 ID, Git 제외 |
+| `game/resources/world_config.tres` | manifest 경로만 보유. 좌표 숫자를 중복 작성하지 않음 |
+| `game/data/generated/region.json` | region 원본 바이트 사본, Git 제외 |
+| `game/data/generated/manifest.json` | v2/E03_display_only·region과 world 해시/크기, Git 제외 |
+| `game/assets/authored/` | 이후 수동 모델 소스, 현재 모델 없음 |
+| `game/assets/generated/` | 이후 별도 생성 모델 경계, 현재 없음 |
 
-[prepare_game_data.py](../tools/prepare_game_data.py)는 G01 공유 검사의 region 해시와 현재 원천을 대조한다. 원점/축척을 변경하고 G01을 다시 검증하지 않았다면 준비를 중단한다. 생성 시각/기기 절대경로를 넣지 않아 두 번 생성한 결과가 동일하다. `--check`는 원천 대비 현재 실행 사본이 오래되거나 없는 경우를 거부한다. 자동 생성기가 수동 자산·보정 입력을 수정하지 않는다.
+[prepare_game_data.py](../tools/prepare_game_data.py)는 G01 region 해시와 E03의 28개 필수 원천·정책·검토/근거/생성기 입력을 확인한다. 필수 해시 누락/중복·현재 파일 변경·오래된 사본은 거부한다. `--check`는 현재 사본의 바이트 일치도 검사한다. 원본 갱신 때 새 스냅샷과 재검증을 먼저 수행한다. 자동 생성과 수동 제작/보정 입력을 함께 덮어쓰지 않는다.
 
-[world_config.gd](../game/scripts/world_config.gd)는 허용된 `res://data/generated/`의 정확 경로에서만 계약을 읽고 SHA-256·JSON·버전·축/단위·원점 역할을 확인한다. 원본 파일 경로는 provenance 문자열이며 런타임에서 그 경로를 열지 않는다. E02 manifest의 자산 목록은 빈 배열이고 도시 로더는 아직 없다. 위경도를 엔진에서 재투영하거나 조사 bbox/기술 원점을 경계/스폰으로 사용하는 코드도 없다.
+[world_config.gd](../game/scripts/world_config.gd)는 허용된 정확 `res://` 경로, 체크섬/크기, schema·축/단위/원점, 표시 범위·배열/숫자를 검사한다. `base_world.gd`는 이 자료의 삼각형과 명시 법선을 실제 ArrayMesh에 전달하며 뒤쪽 면을 제거한다. 외부 원본 경로는 provenance 문자열이며 런타임에서 해당 경로를 열지 않는다. E02 빈 manifest는 새 계약으로 대체했으므로 새 소스로 실행할 때 자료를 다시 준비한다.
 
-`playable_boundary=null`, `vertical_datum=not_yet_resolved`, 조사 bbox와 기술 원점의 역할을 사본에서 그대로 보존한다. 실행 사본의 수치 읽기는 좌표 전달·실제 거리/축척 검증(E04)을 대신하지 않는다. 저장·설정은 이후 `user://`에서 다루며 E02는 사용자 위치/설정을 저장하지 않는다. [Godot 경로 규칙](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html)·[Resource](https://docs.godotengine.org/en/stable/classes/class_resource.html).
+635개 본체, 참조 부분/지붕, 132개 미정 지면을 구분한다. 구멍·분리 면을 보존한다. 190/180개 보행/차량 후보를 보여도 `runtime_permission=null`, `runtime_surface_ready=false`, 충돌 없음이다. 토지 색과 임시 y=0 평면은 보행 권한·현실 표고·플레이 경계가 아니다. 도로/장애물의 210개 표시 교차는 절단/승인하지 않았다. 자세한 겹침/추정은 [E03 결과](../data/reports/world_import.md)에 있다.
 
-## 검증 재현
+## 검증과 인수
 
 ```sh
-python3 tools/check_game_project.py --report /tmp/sim2seoul-e02-check.json
+.venv-data/bin/python tools/prepare_world.py --check
+python3 tools/prepare_game_data.py --check
+.venv-data/bin/python tools/check_world_geometry.py
+.venv-data/bin/python tools/check_world_overlaps.py
+python3 tools/check_game_project.py
 ```
 
-실제 엔진의 headless 구조/물리 키 이벤트·메뉴·자료 검사를 수행한다. 자동 입력은 직접 키 조작과 구분한다. macOS의 앱별 네트워크 차단 GPU 시험은 [실행 기록](../data/reports/project_setup.md)에 있다. `tests/game/offline.sb`는 해당 시험 프로세스에만 적용하며 시스템/다른 앱 네트워크 설정을 바꾸지 않는다.
+검사 기본 출력은 Git 제외 캐시다. 현재 입력의 독립 원본↔삼각형 대조·손상 6건 거부, 엔진 구조/물리 키 이벤트 27개·잘못된 자료 27건 거부·전달 12개를 수행한다. 자동 키/시점 선택은 실제 사람 조작과 구분한다. 저장 실패는 성공 종료로 덮지 않으며 종료 코드 1을 검사했다.
 
-새 Mac에서는 공유 소스에서 자료를 준비한 뒤 빈 기동부터 확인한다. `.godot`, UID sidecar, 준비된 자동 자료·설치 앱·빌드·사용자 설정은 기기별로 유지한다. E03에서는 기존 G02–G04 가공물의 도형/높이/면과 보류 정책을 읽고 실제 지도 표시를 만든다.
+`tests/game/check_world.gd`는 actual ArrayMesh의 모든 정점을 읽고 변환/법선·삼각형 수를 검사한다. 현재 M1 GPU에서 12개+세 시점/메뉴 캡처 4개를 통과했다. `tests/game/offline.sb`는 시험 프로세스에만 네트워크 차단을 적용하며 시스템 설정을 바꾸지 않는다. 별도 game 사본의 관측 결과·정상 종료와 환경 범위는 [E03 보고서](../data/reports/world_import.md)에 있다.
+
+작은 공유 파일에서 G01–G04→E03 재생성 검사는 `tools/check_world_portability.py`다. 현재 M1의 기존 인터프리터를 사용한 사본 검사이며 새 가상환경/M4 실측을 대신하지 않는다. `.godot`·UID·생성 JSON·빌드·설치 앱·사용자 설정은 복사/공유하지 않는다. 다음 E04는 고정 대표 거리·10m 기준물 검증, 이후 P/W는 실제 조작/충돌/대한문 통과 검증이다.

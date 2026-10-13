@@ -35,7 +35,7 @@ Python 명령 이름이 다르면 Python 3.14를 가리키는 실행 파일을 �
 SIM2SEOUL_PYTHON=python3 bash tools/setup_mac.sh
 ```
 
-준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. E01에서 현재 M1에 Godot **4.7.2 Standard·Forward+/Metal**을 설치하고 실제 편집기·GPU 창을 확인했다. 다른 Mac에는 [엔진 환경](environment.md)의 공식 동일 버전 설치·체크섬·기동 절차를 따른다. 템플릿은 장면 실행에 필요하지 않으며 R03 전에 4.7.2.stable로 준비한다.
+준비 도구는 공유 지도와 D03 참고 파일의 해시를 확인하고, 고정 의존성을 설치하며, 현재 지역 지도로 미리보기·G01 좌표 기준·G02 미터 도형과 검사, G03 높이·지면 분류와 검사, G04 이동/경계 후보와 검사, E03 표시 삼각형·실행 자료를 재생성한다. 전국 원본과 게임 엔진은 설치하지 않는다. E01에서 현재 M1에 Godot **4.7.2 Standard·Forward+/Metal**을 설치하고 실제 편집기·GPU 창을 확인했다. 다른 Mac에는 [엔진 환경](environment.md)의 공식 동일 버전 설치·체크섬·기동 절차를 따른다. 템플릿은 장면 실행에 필요하지 않으며 R03 전에 4.7.2.stable로 준비한다.
 
 환경 설치 전 지도 파일만 확인하려면 다음을 실행한다.
 
@@ -122,7 +122,7 @@ G04의 `walkable_areas.json`·`driveable_areas.json`·`boundary_candidate.json`�
 
 [G04 인수 검사](../data/reports/g04_verification.json)는 국가 원본·전체 DSM 없는 파일 사본과 기존 M1 인터프리터의 재현 증거다. 새 설치·M4·게임 시험과 구분한다. SVG 지도는 공유되며 재생성은 `tools/map_movement.py`, 선택 PNG 렌더는 별도 도구이며 기본 준비의 의존성은 아니다. 최종 경계·스폰·gate·실제 통행 검증은 남아 있다.
 
-현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. E02 정식 빈 프로젝트·입력/메뉴·로컬 자료 구성은 완료됐지만 서울 메시·보행은 미구현이다.
+현재 기기에서 국가 원본이 없는 새 복제본과 새 Python 3.14 환경으로 지역 지도 검사·미리보기 재생성을 확인했다. 준비 후 추적 파일 변경도 없었다. [준비 검증 기록](../data/reports/git_portability_check.json)을 참고한다. 실제 M4 Pro의 실행/성능 검증은 R04에서 별도로 기록한다. E02 정식 구조·입력/메뉴에 이어 E03 서울 표시와 별도 게임 사본 GPU 기동을 확인했다. 실제 보행은 미구현이다.
 
 ## 엔진 기동 확인
 
@@ -138,13 +138,22 @@ M4 Pro의 RAM/OS와 실제 기동은 아직 미확인이다. M1의 보고서를 
 
 ## 정식 프로젝트 실행
 
-E02 이후 정식 프로젝트는 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. 지역 지도 가공과 독립적으로 작은 계약을 준비하며 표준 Python 3·고정 Godot만 필요하다. 다른 작업 폴더에서도 실행 도구의 절대 경로를 사용하면 같은 자료를 준비한다.
+E03 정식 프로젝트는 [GAME_PROJECT](GAME_PROJECT.md)를 따른다. 최초 `setup_mac.sh`가 지역 지도에서 현재 G01–G04 가공물·E03 삼각형/실행 manifest를 만든다. 준비된 기존 환경에서 표시 입력만 갱신하면 아래 생성기를 사용한다. 엔진은 [고정 환경](environment.md)대로 별도 설치한다.
 
 ```sh
+.venv-data/bin/python tools/prepare_world.py
+python3 tools/prepare_game_data.py
 sh tools/run_game.sh run
 sh tools/run_game.sh editor
 sh tools/run_game.sh observe
-python3 tools/check_game_project.py --report /tmp/sim2seoul-e02-check.json
 ```
 
-`config/region.json`과 공유 G01 해시를 대조해 `game/data/generated/`를 재생성한다. 생성된 파일·UID·캐시를 다른 Mac에서 복사하지 않는다. E03 도시 자산 준비는 아직 없다. 현재 M1의 GPU/자동 입력 시험은 [E02 기록](../data/reports/project_setup.md), 직접 키 조작과 M4 실제 기동은 미검증이다.
+아래 세 보기 버튼과 Esc 메뉴를 사용할 수 있다. 생성기에는 `.venv-data`가 필요하고 준비된 game 사본의 실제 Godot 실행에는 원본/Python/네트워크가 필요 없다. 입력 변화·누락은 확인하고 묵은 geometry로 실행하지 않는다. 생성 JSON/UID/캐시를 다른 Mac에서 복사하지 않는다.
+
+```sh
+.venv-data/bin/python tools/check_world_geometry.py
+.venv-data/bin/python tools/check_world_overlaps.py
+python3 tools/check_game_project.py --report /tmp/sim2seoul-e03-project-check.json
+```
+
+[E03 화면/기하·독립 검토](../data/reports/world_import.md)와 [사본 재생성](../data/reports/e03/portability_check.json)은 현재 M1·기존 인터프리터에서 얻은 증거다. 두 번 생성한 기하와 수동 결정이 같음을 확인했고 전국 원본·전체 DSM은 사용하지 않았다. 새 Mac의 준비/실행은 그 기기에서 별도로 기록한다. M4 RAM·OS·GPU/성능, 직접 키 조작, 실제 보행은 미검증이다. 다음 E04 고정 거리·축척 장면을 이어간다.

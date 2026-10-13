@@ -31,11 +31,11 @@ func _run() -> void:
 	await process_frame
 	_check("local_contract_loaded",scene.runtime_state.get("ok",false))
 	await _capture("ready")
-	_check("empty_asset_manifest",scene.runtime_state.manifest.assets.is_empty())
+	_check("world_manifest_and_geometry_loaded",scene.runtime_state.manifest.assets.size()==1 and scene.get_node("World").loaded_geometry_count==scene.runtime_state.world.counts.meshes)
 	_check("technical_origin_not_spawn",scene.runtime_state.region.origin_role == "fixed_technical_origin_not_spawn_point" and scene.runtime_state.region.playable_boundary == null)
 	for path in ["World/Ground","World/Buildings","World/Routes","World/Barriers","Actors/PlayerSlot"]:
 		var node = scene.get_node(path)
-		_check("empty_unit_scale_role_"+path,node is Node3D and node.get_child_count()==0 and node.scale==Vector3.ONE and node.position==Vector3.ZERO)
+		_check("unit_scale_role_"+path,node is Node3D and node.scale==Vector3.ONE and node.position==Vector3.ZERO and (node.get_child_count()==0 if path=="Actors/PlayerSlot" else node.get_child_count()>0))
 	var keys := {"move_forward":[KEY_W,KEY_UP],"move_backward":[KEY_S,KEY_DOWN],"move_left":[KEY_A,KEY_LEFT],"move_right":[KEY_D,KEY_RIGHT],"move_fast":[KEY_SHIFT],"toggle_menu":[KEY_ESCAPE]}
 	for action in keys:
 		var mapped := InputMap.has_action(action)
@@ -82,6 +82,6 @@ func _run() -> void:
 	_check("resume_enables_world_and_actors",scene.get_node("World").can_process() and scene.get_node("Actors/PlayerSlot").can_process())
 	_check("input_does_not_move_placeholder",scene.get_node("Actors/PlayerSlot").position==Vector3.ZERO)
 	var failed := checks.filter(func(item):return not item.passed)
-	print("E02_TEST_RESULT "+JSON.stringify({"checks":checks,"passed":checks.size()-failed.size(),"failed":failed.size()}))
+	print("E03_TEST_RESULT "+JSON.stringify({"checks":checks,"passed":checks.size()-failed.size(),"failed":failed.size()}))
 	scene.queue_free()
 	quit(0 if failed.is_empty() else 1)

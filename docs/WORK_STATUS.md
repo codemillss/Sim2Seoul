@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-13 · 최근 실행: **E02 정식 빈 프로젝트·입력/메뉴·로컬 데이터 경계 완료** · D01–D04/G01–G04/E01–E02 완료, 다음 E03 · 서울 표시/보행은 미구현
+갱신: 2026-10-13 · 최근 실행: **E03 실제 서울 바닥·길·건물 표시 완료** · D01–D04/G01–G04/E01–E03 완료, 다음 E04 · 보행은 미구현
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -29,6 +29,7 @@
 | G04 이동/경계 후보 | 두 모드별 478개 판정. 보행/차량 구조 후보 279/190·검토용 면 190/180. R1/R2/R3 원문 연결·사유지 제외 경계, 정상 23개/변형 17개 검사 통과 | [G04 검토/지도](../data/reports/movement_review.md), [이동 검사](../data/reports/movement_check.json), [인수 검사](../data/reports/g04_verification.json) |
 | E01 설치/기동 | 공식 Godot 4.7.2 설치·무결성/서명/공증, 3D 편집기와 세 GPU 렌더러 창/종료 확인. Forward+/Metal 선택, 캐시 없는 별도 사본 재실행 | [환경](environment.md), [기동 결과](../data/reports/engine_startup.md), [인수 검사](../data/reports/e01_verification.json) |
 | E02 프로젝트/입력/자료 | 정식 game·역할 분리, 단일 region 재생성, 입력 의도/Esc 메뉴·처리 차단. 27개 구조/입력, 17건 변형 거부·네트워크 차단 실제 GPU 기동/자동 입력 통과 | [구성/재현](GAME_PROJECT.md), [실행 결과](../data/reports/project_setup.md), [인수](../data/reports/e02_verification.json) |
+| E03 서울 표시 | 본체 635·길/도로 370·지면 179·담장 49. 구멍/법선/높이·보류 검증, 실제 오프라인 GPU 세 시점, 작은 원본 사본 재생성 | [화면/결과](../data/reports/world_import.md), [인수](../data/reports/e03_verification.json) |
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
@@ -84,8 +85,8 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - 국내 SHP/NGII 지역 원본 수신, 독립 높이·상세 지형 검증. Overture 원본은 취득 완료이며 후보의 현실 대응 검토는 남음.
 - 독립 기준 대비 위치·누락률 검증, 상세 부분별 수직 메시와 정관헌/상동교회의 실제 외형·높이 확인. G03 단순 본체 선택은 이 확인과 구분한다.
 - 실제 지면·계단·도로폭·대한문 개구부·세 필수 동선의 물리 연결/통행·게임 완주 검증. 원본 2D 연결과 경계 후보는 G04에서 검토 완료.
-- 서울 지도 표시·축척 전달, 캐릭터·충돌·3인칭 카메라, 서울 3D 자산 생성. E01 기동/E02 정식 빈 프로젝트·입력/자료 구성은 완료.
-- 직접 키 조작은 화면 잠금으로 미실행. E02의 실제 GPU 캡처·엔진 이벤트 자동 검사와 구분하며 잠금 해제 후 추가 점검 가능.
+- E04 고정 거리·10m 기준물 검증 장면. E03 서울 표시와 원본→엔진 정점 전달 검사는 완료했다. 상세 랜드마크·실제 지형·캐릭터·충돌·3인칭 카메라는 미구현.
+- 직접 키보드·마우스 조작은 미실행. E02는 화면 잠금 때문에 미실행이었으며, E03 실제 GPU 화면과 자동 키 이벤트/시점 선택 검증은 직접 조작과 구분한다.
 - 실제 플레이, 성능 측정, M4 Pro 확인, 패키지 제작.
 
 따라서 **W0 보행 중간 버전과 V0 첫 버전은 모두 미완료**다. 원본 무결성 확인만으로 실제 공간 완성도나 보행 가능성을 판정하지 않는다.
@@ -102,11 +103,12 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - **G04 완료:** 두 모드별 478개 원천을 판정하고 R1/R2/R3의 원본 공유 노드/면 접촉 연결, 북측 지상 횡단·남측 돌담길·gate/계단·공사 제한을 검토했다. 폭은 추정이며 토지/공원 참조·사유지 제외 경계·겹침을 보존했다. 정상 23개·변형 17개 검사 통과. 실제 단차/폭/허가/충돌·보행과 최종 경계는 미검증이다.
 - **E01 완료:** 공식 4.7.2의 설치/체크섬/서명/공증과 실제 3D 편집기·Forward+/Mobile/Compatibility 창·종료를 확인했다. Forward+/Metal 기준 고정, 별도 캐시 없는 사본에서도 실제 GPU 재실행 성공. 템플릿은 R03 전에 동일 버전으로 준비한다. 서울 게임·도시 성능·M4는 미검증이다.
 - **E02 완료:** 정식 빈 프로젝트와 역할/입력/메뉴·지역 계약 경계를 구성했다. 27개 구조/입력·17건 잘못된/오래된 자료 거부, 실제 네트워크 차단 GPU 사본 기동과 자동 입력/메뉴/캡처를 통과했다. 직접 키 조작은 미실행이며 도시 배치/보행 검증이 아니다.
-- **E03 이후:** 미실행. 실제 서울 바닥·길·건물을 다음으로 표시한다.
+- **E03 완료:** 1,233개 표시 도형(삼각형 27,054)·단일 본체/구멍/법선/높이·132개 지면 보류를 확인했다. 자동 입력 27개·변형/오래된 자료 27건 거부·headless 도형 12개·GPU 12개+캡처 4개 통과. 별도 game 사본의 오프라인 정상 실행과 공유 지역 자료에서 동일 기하/결정 재생성 확인. 사용자는 첫 배치에 “이대로 ㄱ” 피드백. 실제 걷기·개구부·조작감·도시 성능·M4는 미검증.
+- **E04 이후:** 미실행. 대표 거리·10m 기준물의 고정 검증 장면부터 진행한다.
 
-## 다음 작업: E03 바닥·길·건물 일괄 표시
+## 다음 작업: E04 고정 검증 장면 저장
 
-첫 행동은 [정식 구조](GAME_PROJECT.md), 상세 E03/C01/C04/C05와 현재 G02 features·G03 heights/terrain·G04 이동/경계 후보 및 검사/보류를 읽는 것이다. 정식 World 역할에 미터 지면/길/건물의 표시를 생성하며 구멍·부품/겹침 역할과 원문/추정 높이를 보존한다. runtime manifest와 생성 자산 연결은 E03에서 확장한다. 엔진/원본 다운로드나 완료한 자료 준비를 반복하지 않는다. G04 후보를 통행 허가나 최종 경계로 읽지 않으며 E03/P/W에서 gate·단차·폭·충돌을 이어서 검증한다.
+첫 행동은 [E03 화면/검사](../data/reports/world_import.md), 상세 E04와 V02/C01을 확인한 뒤 `game/scenes/tests/scale_view.tscn`을 만드는 것이다. 대한문·중화전·서울광장·시청과 10m 기준물을 고정하고 원천 좌표 거리→실제 엔진 거리/축과 지정 화면을 대조한다. 현재 G02–G04 입력·E03 배치/높이 가정·원점을 재사용한다. 사용자는 현재 배치 유지를 요청했다. 창 기동·화면 눈대중·E03 정점 전달 오차만으로 E04를 완료 처리하지 않는다.
 
 사용자가 직접 판단하면 유용한 배치/축척 첫 화면, 걷기·카메라, 랜드마크 인상 시점에는 화면과 관찰 항목을 준비해 알린다. 매 작업마다 확인을 요구하지 않는다. M4에서는 칩/RAM/OS를 확인하고 동일 버전의 실제 기동을 별도로 검증한다.
 
@@ -133,14 +135,14 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 E01이다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 E04다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다.
 
 ## 개발 환경 기록
 
 - 현재 기기: M1 Pro, CPU 8코어/GPU 14코어, RAM 16GB, macOS 27.0. 직접 확인한 사양.
 - 추가 기기: 사용자 제공 M4 Pro, SSD 1TB. RAM·OS는 아직 확인하지 않음.
-- 지도 다운로드와 데이터 환경 준비 후 작업 볼륨 여유: 약 18GiB. 엔진/템플릿 설치 전에 재확인.
-- Godot는 일반 앱 폴더/실행 경로에서 발견하지 못했으며 이번 요청에서는 설치하지 않음.
+- 디스크 여유는 E01 시작 때 약 12.02GiB였으며 현재 값으로 가정하지 않는다. 큰 다운로드/템플릿 준비 전에 재확인.
+- Godot 4.7.2 Standard 설치 완료, Forward+/Metal. E03 actual map GPU 표시 확인. 내보내기 템플릿은 R03 전 준비.
 
 ## 이번 검증의 한계
 

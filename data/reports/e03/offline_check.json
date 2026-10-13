@@ -1,0 +1,29 @@
+{
+  "task": "E03",
+  "profile": "tests/game/offline.sb",
+  "profile_sha256": "5c358b8d847211333e7ba22df82d84f796b5f30a41a2682209a949d783adbd08",
+  "network_probe": {
+    "network_denied": true,
+    "errno": 1,
+    "error_class": "PermissionError"
+  },
+  "runtime_copy_contains": [
+    "game/ only, generated local data"
+  ],
+  "runtime_copy_excludes": [
+    "repository config/",
+    "raw/",
+    "processed/",
+    "Python environment/",
+    "country map",
+    "full DSM"
+  ],
+  "gpu_display_server": "macOS",
+  "renderer": "forward_plus",
+  "driver": "metal",
+  "normal_exit_code": 0,
+  "automated_gpu_check_exit_code": 0,
+  "manual_keyboard_mouse_test": "not_run",
+  "M4": "not_run",
+  "system_network_settings_changed": false
+}

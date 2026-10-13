@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/world_config.tres" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/world/world_root.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/world/base_world.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/actors/player_slot.tscn" id="4"]
 [ext_resource type="Script" path="res://scripts/input_router.gd" id="5"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
-background_color = Color(0.06, 0.09, 0.13, 1)
+background_color = Color(0.76, 0.81, 0.82, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.82, 0.86, 0.89, 1)
+ambient_light_energy = 0.55
+tonemap_mode = 0
 
 [node name="Main" type="Node3D"]
 process_mode = 3
@@ -26,8 +30,10 @@ process_mode = 1
 process_mode = 1
 
 [node name="OverviewCamera" type="Camera3D" parent="Presentation"]
-position = Vector3(0, 20, 20)
-rotation_degrees = Vector3(-45, 0, 0)
+projection = 1
+size = 650.0
+far = 6000.0
+position = Vector3(360, 480, 520)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Presentation"]
@@ -39,3 +45,10 @@ script = ExtResource("5")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 process_mode = 3
+
+[node name="Sun" type="DirectionalLight3D" parent="Presentation"]
+rotation_degrees = Vector3(-60, -35, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.05
+shadow_enabled = true
+directional_shadow_max_distance = 2000.0
