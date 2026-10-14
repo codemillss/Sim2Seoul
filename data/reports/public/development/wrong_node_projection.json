@@ -1,0 +1,80 @@
+{
+  "task": "W03",
+  "acceptance_status": "rejected_source_link_projection",
+  "reason": "G02 polygon rings were reoriented/rotated; their vertex index does not map to the original OSM node list. Use strict LineString topology for shared-node coordinates.",
+  "wrong_plan_sha256": "b807077fd18d95af830f0d042bf50ef6852f9e192caa2f3209009a827854a184",
+  "incorrect_links": [
+    {
+      "source_nodes": [
+        13012013154,
+        13721232762
+      ],
+      "source_endpoints": [
+        [
+          49.192621447262354,
+          25.94878114713356
+        ],
+        [
+          59.02697846200317,
+          9.175550110638142
+        ]
+      ],
+      "length_m": 20.23114318791177
+    },
+    {
+      "source_nodes": [
+        13012013154,
+        7245912943
+      ],
+      "source_endpoints": [
+        [
+          49.192621447262354,
+          25.94878114713356
+        ],
+        [
+          -240.2988715347601,
+          -35.73114704526961
+        ]
+      ],
+      "length_m": 324.8590185102732
+    }
+  ],
+  "correct_links": [
+    {
+      "source_nodes": [
+        13012013154,
+        13721232762
+      ],
+      "source_endpoints": [
+        [
+          54.8136792833684,
+          23.039177602622658
+        ],
+        [
+          65.42821248981636,
+          15.58565148897469
+        ]
+      ],
+      "length_m": 12.970095092851809
+    },
+    {
+      "source_nodes": [
+        13012013154,
+        7245912943
+      ],
+      "source_endpoints": [
+        [
+          54.8136792833684,
+          23.039177602622658
+        ],
+        [
+          -240.8138266885653,
+          -31.112993377726525
+        ]
+      ],
+      "length_m": 327.52354444217735
+    }
+  ],
+  "checker_common_mode_issue": "Initial audit shared polygon zip assumption. Independent audit was corrected to strict LineString node topology before acceptance.",
+  "prior_snapshot_not_acceptance": true
+}

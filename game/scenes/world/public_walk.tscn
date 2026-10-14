@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://scenes/tests/camera_test.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/public_walk.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/world/public_world.tscn" id="3"]
+[ext_resource type="Script" path="res://scripts/player/public_player.gd" id="4"]
+[node name="PalaceWalk" instance=ExtResource("1")]
+script = ExtResource("2")
+[node name="Player" parent="Actors" index="0"]
+script = ExtResource("4")
+world_path = NodePath("../../World")
+[node name="World" parent="." instance=ExtResource("3")]
+process_mode = 1

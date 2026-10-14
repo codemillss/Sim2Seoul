@@ -260,3 +260,15 @@ python3 tools/check_palace_contract.py --mode gpu60
 ```
 
 원본 경내 순환 약564m와 중화전 앞마당 접근을 사용한다. 중화문/전각·기단·계단·잔디를 보존/제외하고 실제 지면 대신 명시한 지역 y=0지원면을 쓴다. 생성3파일/캐시는 공유하지 않는다. [경로 선택·실패·검증범위](../data/reports/palace_walk.md). 준비된 작은 입력의 W02-only 사본 재생성은 기존 M1 환경 검사이며 새 Mac/M4 실행을 대신하지 않는다. 새 Mac의 RAM/OS/GPU/조작은 해당 기기에서 기록한다. 사용자는 당분간 기존 계획의 구현·검증·기록·공유를 위임했으며 사람 조작 확인을 재개 조건으로 삼지 않는다.
+
+## W03 도심·돌담길 보행 재개
+
+위 G/E03/P04/W01/W02 준비가 끝나면 전국 지도 없이 실행한다.
+
+```sh
+.venv-data/bin/python tools/prepare_public_walk.py
+python3 tools/check_public_bundle.py
+sh tools/run_public_walk.sh run
+```
+
+북측 원문 횡단을 통해 시청 전면/광장 외곽, 남측 돌담길을 왕복한다. [경계·국소 보정·공사 근거·검증범위](../data/reports/public_walk.md). `play_boundary.tres`는 장면 계약이며 현실 통행 경계가 아니다. generated3파일/자동 가공/캐시/앱/가상환경을 공유하지 않는다. 작은 prepared98입력의 W03-only 사본2회 생성은 기존 M1 환경 검사다. 새 Mac의 RAM/OS/Metal/물리/실제 조작은 별도로 확인한다. 다음은 W04 전체 보행 통합 검사이며 사용자 위임에 따라 사람 피드백 대기를 진행 조건으로 삼지 않는다.

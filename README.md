@@ -26,7 +26,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 
 ## 현재 상태
 
-**D01–D04/G01–G04/E01–E04/P01–P04/W01–W02를 완료했고, 다음은 W03 돌담길·서울광장 연결이다.** 독립 시험장에서 걷기·달리기·회전·중력/지면 접촉·낙하/영역 이탈/수동 복귀를 구현했다. 10초 거리·대각선 속도, 실제 화면 30/60fps와 물리 60Hz, 60초 정지, 벽·시험문 왕복·램프/경사를 검증했다. [P02 실행/화면/결과](data/reports/movement.md)·[P01 사람 크기](data/reports/player_scale.md)·[E04 거리/축척](data/reports/scale_view/README.md)·[E03 서울 배치](data/reports/world_import.md)·[구조/실행](docs/GAME_PROJECT.md). P03에서 시험장 3인칭 추적·마우스 회전/휠 거리·벽/문 가림과 메뉴/잠금 복구도 구현했다. [P03 화면·검증](data/reports/camera.md). P04에서 도시 정적 충돌685개·역할별 행렬과 별도 충돌 시험장을 검증했다. [P04 화면·검증](data/reports/collision.md). W01에서 대한문 개구부와 원문 보행선65.6m를 연결해 경내 입구 왕복을 검증했다. [W01 실행·화면·검증](data/reports/daehanmun_walk.md). W02에서 경내 약564m 순환·중화전 앞마당 왕복을 검증했다. [W02 실행·화면·검증](data/reports/palace_walk.md). 광장·돌담길 연결과 랜드마크 외형·전체W0는 후속이다.
+**D01–D04/G01–G04/E01–E04/P01–P04/W01–W03를 완료했고, 다음은 W04 전체 보행 통합 검수다.** 독립 시험장에서 걷기·달리기·회전·중력/지면 접촉·낙하/영역 이탈/수동 복귀를 구현했다. 10초 거리·대각선 속도, 실제 화면 30/60fps와 물리 60Hz, 60초 정지, 벽·시험문 왕복·램프/경사를 검증했다. [P02 실행/화면/결과](data/reports/movement.md)·[P01 사람 크기](data/reports/player_scale.md)·[E04 거리/축척](data/reports/scale_view/README.md)·[E03 서울 배치](data/reports/world_import.md)·[구조/실행](docs/GAME_PROJECT.md). P03에서 시험장 3인칭 추적·마우스 회전/휠 거리·벽/문 가림과 메뉴/잠금 복구도 구현했다. [P03 화면·검증](data/reports/camera.md). P04에서 도시 정적 충돌685개·역할별 행렬과 별도 충돌 시험장을 검증했다. [P04 화면·검증](data/reports/collision.md). W01에서 대한문 개구부와 원문 보행선65.6m를 연결해 경내 입구 왕복을 검증했다. [W01 실행·화면·검증](data/reports/daehanmun_walk.md). W02에서 경내 약564m 순환·중화전 앞마당 왕복을 검증했다. [W02 실행·화면·검증](data/reports/palace_walk.md). W03에서 북측 원문 횡단을 통해 시청 전면·서울광장 외곽과 남측 돌담길을 연결하고 장면 보행 경계를 구성했다. [W03 출처·실패·실행·검증](data/reports/public_walk.md). 전체W0 통합 판정·랜드마크 외형·보행자/차량은 후속이다.
 
 이미 데이터 환경을 준비한 Mac은 `.venv-data/bin/python tools/prepare_world.py` 후 `sh tools/run_game.sh run`으로 연다. 아래 보기 버튼 세 개와 Esc 메뉴를 사용할 수 있다. 처음 쓰는 Mac은 위 준비 도구와 고정 Godot 설치를 먼저 수행한다. 생성 자산은 기기별 준비하며 게임 실행은 원본/Python/네트워크를 요구하지 않는다. 자동 입력과 실제 사용자의 직접 조작 검증은 구분한다.
 
@@ -45,7 +45,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 - [좌표·자료·게임 구성 계약](docs/TECHNICAL_CONTRACTS.md)
 - [보행·축척·충돌·성능·두 기기 검증 계획](docs/VALIDATION_PLAN.md)
 
-3인칭 시험장은 `sh tools/run_camera_test.sh run`으로 연다. WASD/방향키·Shift, 마우스 회전·휠 거리, Esc 메뉴/마우스 해제를 사용한다. 창을 벗어나면 일시 정지되고 Esc/돌아가기로 재개한다. 최신 충돌 시험장은 `.venv-data/bin/python tools/prepare_collision.py` 후 `sh tools/run_collision_test.sh run`으로 연다. Esc 메뉴에서 서울/덕수궁 충돌 배치를 볼 수 있다. P04 서울 보기는 고정 시점이다. 실제 대한문 보행은 `.venv-data/bin/python tools/prepare_daehanmun.py` 후 `sh tools/run_daehanmun_walk.sh run`으로 연다. 문 밖↔경내 입구를 걸을 수 있다. 최신 경내 순환은 `.venv-data/bin/python tools/prepare_palace_walk.py` 후 `sh tools/run_palace_walk.sh run`으로 열며 중화전 앞마당·석조전 계단 아래까지 걷는다.
+3인칭 시험장은 `sh tools/run_camera_test.sh run`으로 연다. WASD/방향키·Shift, 마우스 회전·휠 거리, Esc 메뉴/마우스 해제를 사용한다. 창을 벗어나면 일시 정지되고 Esc/돌아가기로 재개한다. 최신 충돌 시험장은 `.venv-data/bin/python tools/prepare_collision.py` 후 `sh tools/run_collision_test.sh run`으로 연다. Esc 메뉴에서 서울/덕수궁 충돌 배치를 볼 수 있다. P04 서울 보기는 고정 시점이다. 실제 대한문 보행은 `.venv-data/bin/python tools/prepare_daehanmun.py` 후 `sh tools/run_daehanmun_walk.sh run`으로 연다. 문 밖↔경내 입구를 걸을 수 있다. 경내 순환은 `.venv-data/bin/python tools/prepare_palace_walk.py` 후 `sh tools/run_palace_walk.sh run`으로 열며 중화전 앞마당·석조전 계단 아래까지 걷는다. 최신 도심/돌담길 연결은 W02 준비 뒤 `.venv-data/bin/python tools/prepare_public_walk.py` 후 `sh tools/run_public_walk.sh run`으로 연다.
 
 ## 사용자가 정한 방향
 
@@ -63,7 +63,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 | 예산 | 무료 도구와 공개 데이터로 시작 |
 | 확장 방향 | 생활·꾸미기·주민 또는 다른 시뮬레이션 |
 
-덕수궁 경내를 걷는 범위는 포함한다. 전각과 일반 건물의 실내 진입 범위는 아직 정하지 않았다. 지도상의 정확한 경계도 데이터와 보행 동선을 검토한 뒤 정한다.
+덕수궁 경내를 걷는 범위는 포함한다. 전각과 일반 건물의 실내 진입 범위는 아직 정하지 않았다. 현재 게임 보행 경계는 W03의 원문 지원면/사유지 제외/차도 접속 규칙으로 구성했다. 현실 통행 경계·실측 지형과 구분한다.
 
 ## 개발 환경
 
@@ -76,7 +76,7 @@ M1 Pro에서도 실행되는 수준을 기준으로 삼고, 두 기기에서 같
 
 ## 무료 도구 기본안
 
-- **Godot 4.7.2 Standard 네이티브 앱:** 현재 M1에 설치하고 3D 편집기·세 렌더러의 실제 기동을 확인했다. 개발 기준은 Forward+/Metal이다. MIT 라이선스의 무료 엔진이며, E03 서울 표시·P03 시험장3인칭·P04 도시 정적 충돌을 완료했고 W01 대한문 연결 보행은 완료했고 W02 경내 순환도 완료했고 도심/돌담길·전체 검수는 W03–W04다. [시험 장면 실행 방법](docs/environment.md).
+- **Godot 4.7.2 Standard 네이티브 앱:** 현재 M1에 설치하고 3D 편집기·세 렌더러의 실제 기동을 확인했다. 개발 기준은 Forward+/Metal이다. MIT 라이선스의 무료 엔진이며, E03 서울 표시·P03 시험장3인칭·P04 도시 정적 충돌을 완료했고 W01 대한문 연결 보행은 완료했고 W02 경내 순환·W03 도심/돌담길 연결도 완료했고 전체 검수는 W04다. [시험 장면 실행 방법](docs/environment.md).
 - **Python:** 원본 자료 검사와 좌표·도형 변환에 사용한다. 현재 기기에서 사용할 수 있다.
 - **OpenStreetMap:** 도로, 건물 윤곽, 보행로, 일부 담장·출입구·높이 속성을 초기 배치 자료로 확보했다. 독립 자료 대비 누락률과 실제 높이·접근 가능성 검증은 남아 있다.
 - **국내 공개 공간정보:** OSM의 누락을 보완할 후보로 검토한다. 다운로드 가능 여부, 좌표계, 갱신일, 이용 조건을 자료별로 확인한다.

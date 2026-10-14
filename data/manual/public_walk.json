@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "task": "W03",
+  "assumption_id": "W03-connected-public-floor-v1",
+  "public_areas": ["osm:way:776588359:highway_area", "osm:way:768397718:highway_area", "osm:relation:6012272:highway_area"],
+  "line_sections": [
+    ["osm:way:1530764334:highway_line", 14113953845, 13012013154],
+    ["osm:way:1415923127:highway_line", 13721232762, 13012013153],
+    ["osm:way:1415923126:highway_line", 13012013153, 11414286298],
+    ["osm:way:1230789306:highway_line", 11414286298, 13721232744],
+    ["osm:way:1498257483:highway_line", 13721232744, 13721232743],
+    ["osm:way:1415923123:highway_line", 7245912943, 13012013129]
+  ],
+  "area_links": [["osm:way:776588359:highway_area", 13012013154, 13721232762], ["osm:way:776588359:highway_area", 13012013154, 7245912943]],
+  "city_viewpoint_xz": [130.0, -140.0],
+  "plaza_viewpoint_xz": [190.0, -100.0],
+  "viewpoint_basis": "Authored game observation points inside source pedestrian areas; not surveyed doors or landmark centres",
+  "path_width_m": 2.4,
+  "width_basis": "G04 footway width assumption, also used only for a pedestrian corridor along foot=designated segregated cycleways; actual pedestrian split/width unknown",
+  "ground_y_m": 0.0,
+  "support_depth_m": 0.2,
+  "movement_edge_margin_m": 0.4,
+  "routing_extra_margin_m": 0.08,
+  "max_line_adjustment_m": 0.75,
+  "solid_exclusion_margin_m": 0.02,
+  "road_center_exclusion_m": 0.5,
+  "local_support_repair": {"source": "osm:way:776588359:highway_area", "bounds_xz": [36.0, 20.0, 58.0, 33.0], "outward_m": 0.3, "join": "round", "basis": "Source pedestrian area pinch at southeast wall corner; retain all ground-level solids; 0.3m local extent preserves 0.4m movement and 0.08m routing clearance. Not a surveyed pavement widening."},
+  "crossing_policy": "Player limited to source marked crossing or source designated footpath/shared-road-node junctions. No vehicles/signals implemented; future vehicles must yield to occupied junctions.",
+  "boundary_contract_id": "W03-play-boundary-v1",
+  "scope": {
+    "game_access": "Connected R1 palace, R2 city/plaza, R3 wall route on source-derived bounded engineering support",
+    "physical_terrain_verified": false,
+    "real_world_access_verified": false,
+    "global_playable_boundary": "W03-play-boundary-v1 finalized only for this game scene/source snapshot",
+    "source_display_permissions": "unchanged/null",
+    "building_interiors": "unresolved/excluded",
+    "lawns_water_and_source_holes": "excluded",
+    "construction_clearance": "Official southern-wall works active; current hoarding/passage width unverified; no invented closure geometry or current real-world walking permission",
+    "vehicle_controller": "not implemented; junction occupancy contract only"
+  }
+}

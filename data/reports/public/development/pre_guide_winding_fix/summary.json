@@ -1,0 +1,23 @@
+{
+  "task": "W03",
+  "acceptance_status": "superseded_visual_failure",
+  "reason": "Boundary guide triangles face downward under default backface culling; above-ground boundary is invisible. Movement itself passed contract and GPU30. GPU60 deliberately interrupted after city route before publishing; final fresh result absent.",
+  "source_sha256": {
+    "game/scripts/public_walk.gd": "67c533d4d535e9180702b73d3ec6fdc879db36423aed6a5a5dff8b889943b978",
+    "tests/game/check_public_walk.gd": "28e50a2795cec0b094b87c332d6ed9fcff275b6b117d481e2e35be0454eb74fe",
+    "tools/check_public_evidence.py": "4c913af55daaad5bb380d444cf3172a317dcf61777b04521b64329d23f9be6c8"
+  },
+  "next_action": "Reverse guide triangle winding, observe actual faces independently, refreeze tools and rerun final contract/GPU.",
+  "guide_probe_observation": {
+    "triangles": 1332,
+    "upward_before_fix": false,
+    "upward_after_fix": true,
+    "actual_cull_mode": 0,
+    "actual_shading_mode": 0,
+    "actual_shadow_mode": 0,
+    "independent_guide_tolerance_m": 0.0004,
+    "guide_width_m": 0.05,
+    "reason_for_tolerance": "Double source coordinates vs actual Godot float32 normal/vertex operations on short strips; observed maximum .000301843m. Guide-only comparison; no physics tolerance change."
+  },
+  "new_checker_sha256": "d09c62f9976553272106499cd1b562b6de3bbc2d69eb6ae493366fa7a4c3a4b5"
+}

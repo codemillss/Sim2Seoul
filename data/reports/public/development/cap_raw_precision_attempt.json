@@ -1,0 +1,73 @@
+{
+  "task": "W03",
+  "passed": false,
+  "connection_sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+  "checks": [
+    {
+      "name": "cap_coverage_0.0",
+      "passed": false,
+      "triangles": 764,
+      "symmetric_difference_m2": 0.0008299858829557234,
+      "overlapping_area_m2": -1.4551915228366852e-11
+    },
+    {
+      "name": "cap_coverage_-0.2",
+      "passed": false,
+      "triangles": 764,
+      "symmetric_difference_m2": 0.0008299858829557234,
+      "overlapping_area_m2": -1.4551915228366852e-11
+    },
+    {
+      "name": "vertical_levels",
+      "passed": true,
+      "levels": [
+        -0.2,
+        0.0
+      ]
+    },
+    {
+      "name": "wall_boundary",
+      "passed": false,
+      "wall_triangles": 1500
+    },
+    {
+      "name": "interior_partition",
+      "passed": true,
+      "patch_area_m2": 4.0,
+      "bounds": [
+        48.05253482348053,
+        12.578887802548707,
+        50.05253482348053,
+        14.578887802548707
+      ]
+    },
+    {
+      "name": "repair_bounded",
+      "passed": true,
+      "max_source_deviation_m": 0.3000000000000029,
+      "area_m2": 13.757727402624798
+    },
+    {
+      "name": "repair_road_private",
+      "passed": true,
+      "road_center_distance_m": 1.8192647290742345,
+      "private_distance_m": 221.96181178279792
+    },
+    {
+      "name": "source_unchanged.game/resources/world_geometry/world.json",
+      "passed": true,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "name": "source_unchanged.game/data/generated/palace_walk.json",
+      "passed": true,
+      "sha256": "13fe77192cd9824607cb2b723bfa896e6089e845cc71cf06cfbe8df805ca401a"
+    },
+    {
+      "name": "source_unchanged.game/data/generated/daehanmun.json",
+      "passed": true,
+      "sha256": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa"
+    }
+  ],
+  "scope": "Independent Shapely triangle-union/side-boundary review of final cap subdivision and bounded support repair; geometry only, no engine/human/real terrain acceptance."
+}

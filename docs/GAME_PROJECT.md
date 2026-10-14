@@ -177,3 +177,14 @@ sh tools/run_palace_walk.sh editor
 [palace_walk](../game/scenes/world/palace_walk.tscn)은 별도 장면이고 기존 W01/P04 authored 파일은 유지한다. [palace_world](../game/scenes/world/palace_world.tscn)는 기존 685+5body를 생성하되 W01지원면만0/0·숨김으로 바꾸고 W02지원면1개를 붙인다. 실제691생성/687활성, 원본 문/담장 조각4개 유지다. 원천 순환선과 별도 계산 보정선을 분리하고 보행로/원본 열린 마당의 holes·제외 체적을 보존한다. 임시 지원면과 바깥에서0.4m 안쪽 이동 중심 영역은 지역 게임 가정이다. `palace_player.gd`는 경계에서 멈춤/축방향 미끄러짐을 추가하고 기존 중력/카메라/스폰/복귀/메뉴를 재사용한다.
 
 수동 결정과 생성3파일은 W01과 분리한다. 실행 전 stdlib checker와 runtime manifest/hash/형식/scope 검사를 수행하며 잘못된W02자료는 기존body 생성 전에 거부한다. 시험사본은 authored32/runtime10/helper3이며 실행 중 지도/Python/네트워크가 필요 없다. 독립 검사기는 source노드/지원면 적합성·실제bodycensus/float32hash/약10Hz캡슐·카메라 표본을 확인하며 엔진 매tick 극값과 구분한다. GPU30은 짧은 조작·경계/속도시험, GPU60은 전체 경내 왕복이다. [실제 결과·실패·한계](../data/reports/palace_walk.md).
+
+## W03 도심·돌담길과 장면 경계
+
+```sh
+.venv-data/bin/python tools/prepare_public_walk.py
+sh tools/run_public_walk.sh run
+```
+
+[public_walk](../game/scenes/world/public_walk.tscn)은 W02/P03를 상속한 별도 장면이다. 기존 authored/source는 바이트 보존하며 W02 지원면만 비활성화하고 W03 지원면으로 확장한다. actual692생성/687활성·3,028삼각형/구멍4개, 기존 담장/대한문 조각4개를 유지한다. 북측 원문 marked 횡단·보행 지정 분리길과 원문 보행면을 따라 시청/광장 및 남측 돌담길을 잇는다. 도서관 실내·잔디·물·분수·계단/사유지는 제외한다.
+
+[play_boundary](../game/resources/play_boundary.tres)는 W03 장면 범위만 고정한다. 지원면0.4m 안쪽 이동/추가0.08m 경로 여유·원문 도로 접속3곳·차도 중심선 제외·정지/복귀를 연결한다. 금색 경계선은 시각 메시다. runtime manifest/Resource hash·형식/scope·수치/원문 스폰을 실제body 생성 전에 검사한다. 사본은 authored39/runtime13/helper5개, 일반 실행에는 helper가 없다. [출처·보정·실패·검증/한계](../data/reports/public_walk.md). 실제 지형/통행/사람 조작/M4/전체W0는 별도이며 다음 통합 검수는 W04다.
