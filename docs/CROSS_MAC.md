@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L01 참조·명세를 완료해 다음 제작 작업은 L02다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L03 도시 외형까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -286,7 +286,7 @@ sh tools/run_walkable_milestone.sh run
 
 이 명령은 일반 장면을 열며 캐릭터를 자동으로 움직이지 않는다. [직접 확인 체크리스트](WALKABLE_CHECKLIST.md)와 [W04 기록](../data/reports/walkable_milestone.md)을 따른다. 생성 itinerary/manifest·.godot·가상환경·앱은 공유하지 않는다. 작은 prepared65입력의 W04-only 사본2회 표준 라이브러리 재생성은 기존 M1 검사이며 새 설치/전체G재구축/M4 결과가 아니다. 실제 새 Mac의 RAM/OS/renderer/조작·물리는 해당 기기에서 기록한다.
 
-W04의 현재 자동 검수판은 `W0-engineering-walk-v1`이다. 증거/문서/소스의 고정 스냅샷은 `data/reports/walkable_milestone/snapshot.json`, 준비 후 인수 재대조는 `python3 data/reports/walkable_milestone/handoff_check.py`다. 재검사는 이 스냅샷의 동일 입력·상태에서 사용하며, 의도한 변경 뒤에는 해당 새 작업의 기준을 사용한다. 과거 W03 input 해시의 저장 당시 절대 경로는 현재 체크아웃으로 재배치하며 원래 컴퓨터 폴더로 fallback하지 않는다. 현재 다음 작업은 아래 L01 준비 이후 WORK_STATUS의 L02다.
+W04의 현재 자동 검수판은 `W0-engineering-walk-v1`이다. 증거/문서/소스의 고정 스냅샷은 `data/reports/walkable_milestone/snapshot.json`, 준비 후 인수 재대조는 `python3 data/reports/walkable_milestone/handoff_check.py`다. 재검사는 이 스냅샷의 동일 입력·상태에서 사용하며, 의도한 변경 뒤에는 해당 새 작업의 기준을 사용한다. 과거 W03 input 해시의 저장 당시 절대 경로는 현재 체크아웃으로 재배치하며 원래 컴퓨터 폴더로 fallback하지 않는다. 아래 절은 단계별 인수 이력이며 현재 다음 작업은 WORK_STATUS를 따른다.
 
 ## L01 외형 명세 재생성
 
@@ -322,3 +322,29 @@ sh tools/run_palace_landmarks.sh run
 ```
 
 여섯 준비 입력을 별도 폴더에서 두 번 재생성하는 검사는 현재 M1의 기존 인터프리터를 사용한다. 새 기기 설치/전체GIS 재구축·M4 실행을 완료했다는 뜻이 아니다. [현재 M1의 화면과 검사 범위](../data/reports/palace_landmarks.md)를 참고하고 새 Mac의 RAM/OS/렌더러·직접 조작은 해당 기기에서 기록한다. 현재 재개 작업은 WORK_STATUS가 기준이며 과거 절의 다음 단계 문장은 당시 이력이다.
+
+## L03 도시 외형과 공개 모델 재생성
+
+위 W04/L01/L02를 준비한 다음 실행한다. 기존 Shapely 환경과 고정 Godot 4.7.2를 사용하며 새 패키지/국가 지도/전체 모델 ZIP 다운로드는 필요 없다. 원본 GLB·상대 PNG·CC0 문구·취득 해시는 저장소에 포함한다. 원본 모델은 실제 SFC 복제가 아니고 수정 범위/가정은 [L03 결과](../data/reports/city_landmarks.md)에 남긴다.
+
+```sh
+.venv-data/bin/python tools/prepare_city_landmarks.py
+.venv-data/bin/python tools/prepare_city_landmarks.py --check
+sh tools/run_city_landmarks.sh run
+```
+
+준비할 때 GLTFDocument로 원본을 실제 읽고 실행용 `city_landmarks.json`/manifest를 만든다. 일반 실행은 만들어진 표시 배열을 읽으며 자동 probe가 없다. `GODOT_BIN`으로 고정 버전의 다른 위치를 지정할 수 있다. 원본 GLB의 `Textures/colormap.png` 상대 경로를 유지하고 `.godot`/실행 JSON/캐시는 공유하지 않는다.
+
+편집기는 `sh tools/run_city_landmarks.sh editor`로 해당 장면을 열고 ‘현재 장면 실행’(F6)을 사용한다. 프로젝트의 기존 기본 장면은 이전 검증을 위해 유지했으므로 최신 도시 보행은 위 launcher/현재 장면으로 연다.
+
+```sh
+.venv-data/bin/python tools/check_city_landmarks_portability.py
+.venv-data/bin/python tools/check_city_landmarks_contract.py --mode views
+.venv-data/bin/python tools/check_city_landmarks_contract.py --mode contract
+.venv-data/bin/python tools/check_city_landmarks_contract.py --mode gpu_trial
+.venv-data/bin/python tools/check_city_landmarks_contract.py --mode gpu
+```
+
+`gpu`는 약16분의 실제 전체 여정이다. 측정 중 다른 엔진/무거운 검사를 동시에 돌리지 않는다. prepared14입력의 다른 폴더 재생성은 현재 M1의 기존 설치를 사용했으며 새 환경/M4 검사로 읽지 않는다. 시청13층/기존12층 추정, SFC130m/기존124m, 광장2025년 내부 변경 차이는 해결되지 않아 현재 높이·분류·지면/보행을 유지했다. 새 Mac은 RAM/OS/실제 실행과 직접 조작을 해당 기기에서 확인한다.
+
+CC0 동봉 라이선스는 원래 CRLF/공백까지 해시에 포함된다. 저장소의 파일별 보존 규칙을 유지하며 원문을 자동 정리하지 않는다. 실제 Git 인덱스의 GLB/PNG/라이선스 바이트도 [원본과 대조](../data/reports/landmarks/l03/git_source_bytes.json)했다.

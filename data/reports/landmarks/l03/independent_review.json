@@ -1,0 +1,31 @@
+{
+  "task": "L03",
+  "date": "2026-10-15",
+  "reviewed_sha256": {
+    "game/scripts/city_visuals.gd": "dde6da1d14a623c6b565ab2d3db8745c55575c7ada06e826574fa11586c68f4d",
+    "game/scripts/city_landmark_walk.gd": "d9b6a6e3456e3216afba92f293791ebc871346f9256b0cd8f0dcdb98afc04f7a",
+    "tools/prepare_city_landmarks.py": "8e2b05057b32502fadc897da9573d49c7fa836a16a811fdb050692a7d01bd4c5",
+    "tools/check_city_landmarks_contract.py": "ec695bcb8837e93e1ab834b1c47a02346dc087859826a58c969d63e1347e3683",
+    "tests/game/check_city_landmarks_walk.gd": "6a0a154628f1043b50e5c971adcd3ea70bdd55bc121a78147432ddbb713909ba",
+    "tools/check_city_landmarks_evidence.py": "fda4d67fae4f9bec3bfc54c1525c52506126b6cf4b3b46c612343373aa9c21cc"
+  },
+  "reviews": [
+    {
+      "scope": "Official source conflicts and independently authored geometry",
+      "result": "Keep existing heights/classes, plaza layout uncertainty recorded; generated city geometry and source-hole checks; no production collider changes"
+    },
+    {
+      "scope": "External candidates and independent evidence checker",
+      "result": "Actual CC0 source selected, initial clipping precision and barycentric extrapolation rejected; raw GLB independently parsed. Three nonlinear glass sections accepted; flat/sloped facade negative controls rejected in reviewer diagnostic",
+      "limit": "Reviewer diagnostics are not additional actual engine runs"
+    },
+    {
+      "scope": "Final loader/generator/driver/walk source review",
+      "result": "No blocking P1/P2 finding in inspected files; display-only replacement, no probe in normal scene, raw evidence and frozen physical audit retained",
+      "limit": "Code inspection does not substitute for final GPU result"
+    }
+  ],
+  "human_recognition_review": false,
+  "M4_test": false,
+  "full_GPU_result": "Separate gpu_check.json; not inferred by reviewer"
+}

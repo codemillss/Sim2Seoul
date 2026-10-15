@@ -1,0 +1,69 @@
+{
+  "task": "L03",
+  "reviewed_on": "2026-10-15",
+  "user_direction": "Compare importing and modifying existing models first; implement, verify, record and push",
+  "model_choice": {
+    "source": "Kenney City Kit Commercial 2.1 / building-skyscraper-a.glb",
+    "license": "CC0-1.0; actual bundled License.txt retained",
+    "experiment": "Actual Godot native import, original textured fit, source-footprint-clipped muted adaptation and floor marks",
+    "selected_scope": "One representational background building at existing SFC footprint; not an exact SFC replica",
+    "remaining_buildings": "Current generic source masses remain",
+    "city_hall_library": "Distinctive forms authored independently; no usable exact free model file and redistribution permission obtained",
+    "plaza": "Retained source oval and plane, grass/paving contrast; no imported modern layout"
+  },
+  "unresolved_source_differences": [
+    {
+      "target": "city_hall",
+      "current": "OSM 12 levels; existing G03 estimate 40.2 m",
+      "reference": "Seoul official articles describe 13 above-ground and 5 basement levels",
+      "decision": "Retain 40.2 m and estimated classification; floor count is not a metre measurement",
+      "sources": [
+        "https://news.seoul.go.kr/citybuild/archives/205773",
+        "https://love.seoul.go.kr/articles/7121"
+      ]
+    },
+    {
+      "target": "sfc",
+      "current": "OSM 124 m, 28 levels, address 36, start_date 2001",
+      "reference": "Owner address 136; architect 130 m, 30 above-ground and 8 basement levels, completed 2000",
+      "decision": "Retain source 124 m/height class; identity, measurement, floor and event-date differences unresolved. Thin 28 divisions are authored from current tag, not confirmed facade floors",
+      "sources": [
+        "https://sfckorea.co.kr/about.do",
+        "https://samoo.com/home/works/view.do?cntntsSn=11210"
+      ]
+    },
+    {
+      "target": "plaza",
+      "current": "Existing grass-oval source geometry; plane Y=0.017",
+      "reference": "Official 2025 renovation describes grass, patterned wood paving, larch paths and zelkova planters; usage diagram shows internal paths/stage",
+      "decision": "Do not describe current depiction as an accurate 2026 layout; defer internal paths/planting without georeferenced dimensions. The 0.6 m inset paving rim is an authored visual choice",
+      "sources": [
+        "https://plaza.seoul.go.kr/archives/247",
+        "https://plaza.seoul.go.kr/archives/1041"
+      ]
+    }
+  ],
+  "protected": [
+    "source coordinates and holes",
+    "height values and classifications",
+    "W04 bodies and boundary",
+    "Daehanmun opening and complete route",
+    "L02 palace display"
+  ],
+  "unverified": [
+    "real architectural accuracy",
+    "human recognition and controls",
+    "M4 hardware and execution",
+    "NPC/vehicles",
+    "city performance benchmark",
+    "V0 completion"
+  ],
+  "additional_references": {
+    "C07": {
+      "url": "https://plaza.seoul.go.kr/archives/1041",
+      "description": "Official account of Seoul Plaza renovation in 2025",
+      "page_modified_on": "2026-02-05",
+      "use": "Textual reference only; media not imported; paths and planter coordinates not obtained"
+    }
+  }
+}

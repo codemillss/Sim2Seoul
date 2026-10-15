@@ -1,0 +1,70 @@
+{
+  "task": "L03",
+  "passed": true,
+  "checks": [
+    {
+      "name": "copy.prepared_inputs_only",
+      "passed": true,
+      "files": 14
+    },
+    {
+      "name": "native_import_regenerate.1",
+      "passed": true,
+      "output_sha256": {
+        "game/data/generated/city_landmarks.json": "161a1052c70b822f709c2e9ee92c28ab96524607dd8207c70bb61f84b32f3c90",
+        "game/data/generated/city_landmarks_manifest.json": "622688e6193399d772a1513af1067247a2e35385f32875894bf9c5c06146080b"
+      },
+      "messages": "L03 PREPARED {'landmarks': 4, 'components': 18, 'triangles': 10024, 'new_collision_bodies': 0, 'new_routes': 0, 'imported_media_files': 2}\n"
+    },
+    {
+      "name": "native_import_regenerate.2",
+      "passed": true,
+      "output_sha256": {
+        "game/data/generated/city_landmarks.json": "161a1052c70b822f709c2e9ee92c28ab96524607dd8207c70bb61f84b32f3c90",
+        "game/data/generated/city_landmarks_manifest.json": "622688e6193399d772a1513af1067247a2e35385f32875894bf9c5c06146080b"
+      },
+      "messages": "L03 PREPARED {'landmarks': 4, 'components': 18, 'triangles': 10024, 'new_collision_bodies': 0, 'new_routes': 0, 'imported_media_files': 2}\n"
+    },
+    {
+      "name": "check.fresh",
+      "passed": true
+    },
+    {
+      "name": "check.stale_bundle_rejected",
+      "passed": true
+    },
+    {
+      "name": "check.modified_recipe_rejected",
+      "passed": true
+    },
+    {
+      "name": "copy.no_national_maps_venv_or_editor_cache",
+      "passed": true
+    },
+    {
+      "name": "original_inputs_and_runtime_unchanged",
+      "passed": true
+    }
+  ],
+  "input_sha256": {
+    "data/processed/landmark_spec.json": "1f701106fea9c267499ccf7adaa02ed67dc730caa141f87eeecb59904b90d29f",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/daehanmun.json": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa",
+    "game/assets/authored/landmarks/city/recipes.json": "0a4b2fbff36a34a2fdf4a9b817de146739fd83c1d1749e7f7d46378450d73bf3",
+    "game/assets/vendor/kenney_city_kit_commercial/building-skyscraper-a.glb": "d8339bbb75944ff91d1ec9a70ec6dead71bd98b94a42d3dd0fc1f3b107ddbe85",
+    "game/assets/vendor/kenney_city_kit_commercial/Textures/colormap.png": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d",
+    "game/assets/vendor/kenney_city_kit_commercial/License.txt": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69",
+    "tools/prepare_city_landmarks.py": "8e2b05057b32502fadc897da9573d49c7fa836a16a811fdb050692a7d01bd4c5",
+    "tools/prepare_city_authored.py": "b17ae0788cd87e10a81d0923fe27b4121cd00c974b9c3c55767c04bbee1e4ed6",
+    "tools/prepare_palace_landmarks.py": "f63017b3ee431ee936bab094dc174df55d04feea2b438c1dc57801666afbe732",
+    "tools/prepare_world.py": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b",
+    "tests/game/inspect_city_reuse.gd": "ed3c241549bdcf472da03012c4c22034949dab0053064cb33774550cde3eed16",
+    "tests/game/offline.sb": "5c358b8d847211333e7ba22df82d84f796b5f30a41a2682209a949d783adbd08",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+  },
+  "output_sha256": {
+    "game/data/generated/city_landmarks.json": "161a1052c70b822f709c2e9ee92c28ab96524607dd8207c70bb61f84b32f3c90",
+    "game/data/generated/city_landmarks_manifest.json": "622688e6193399d772a1513af1067247a2e35385f32875894bf9c5c06146080b"
+  },
+  "scope": "Prepared-input relocation with original GLB/texture and native importer on existing M1; no fresh install/full GIS/M4 proof"
+}

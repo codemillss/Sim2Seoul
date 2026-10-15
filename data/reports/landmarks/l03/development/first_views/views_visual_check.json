@@ -1,0 +1,691 @@
+{
+  "task": "L03",
+  "passed": false,
+  "checks": [
+    {
+      "name": "scope.four_unique_source_bound_city_landmarks",
+      "passed": true
+    },
+    {
+      "name": "scope.no_new_colliders_routes_or_permissions",
+      "passed": true
+    },
+    {
+      "name": "engine.loaded_visible_overlay",
+      "passed": true
+    },
+    {
+      "name": "engine.unique_complete_component_inventory",
+      "passed": true
+    },
+    {
+      "name": "materials.finite_rgb_palette",
+      "passed": true
+    },
+    {
+      "name": "dependencies.current_L02_hidden_inventory_retained",
+      "passed": true
+    },
+    {
+      "name": "engine.only_four_replaced_city_sources_hidden",
+      "passed": true
+    },
+    {
+      "name": "engine.no_additional_fragment_hiding",
+      "passed": true
+    },
+    {
+      "name": "engine.all_source_mesh_visibility_exact",
+      "passed": true,
+      "details": {
+        "expected_total": 1233,
+        "expected_hidden": [
+          "osm:relation:10757525:building",
+          "osm:relation:19357693:building",
+          "osm:way:181574577:building",
+          "osm:way:181574580:building",
+          "osm:way:198561926:building",
+          "osm:way:26658458:barrier",
+          "osm:way:332565592:building",
+          "osm:way:370019676:land_area",
+          "osm:way:377289797:building",
+          "osm:way:381755268:building",
+          "osm:way:517072312:building",
+          "temporary_support"
+        ]
+      }
+    },
+    {
+      "name": "engine.all_L02_fragment_visibility_exact",
+      "passed": true,
+      "details": {
+        "expected_total": 7,
+        "expected_hidden": [
+          "W01_gate_lintel",
+          "W01_gate_side_0",
+          "W01_gate_side_1",
+          "W01_support",
+          "W02_support"
+        ]
+      }
+    },
+    {
+      "name": "reuse.actual_external_GLB_source_and_transform_parseable",
+      "passed": true
+    },
+    {
+      "name": "city_hall.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "city_hall.nonempty_unique_source_components",
+      "passed": true
+    },
+    {
+      "name": "city_hall.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "city_hall.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32; tolerance 1e-9 m",
+        "normals": "independent octahedral uint16x2 float32 round trip; tolerance 1e-9"
+      }
+    },
+    {
+      "name": "city_hall.actual_visible_identity_material_and_backface_culling",
+      "passed": false
+    },
+    {
+      "name": "city_hall.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "city_hall.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "flat_source_if_top_null": false
+      }
+    },
+    {
+      "name": "city_hall.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "city_hall.required_roles_have_positive_geometry",
+      "passed": false
+    },
+    {
+      "name": "city_hall.geometric_faceted_curve_and_long_roofline",
+      "passed": false,
+      "details": {}
+    },
+    {
+      "name": "city_hall.broad_glass_and_spread_frame_geometry",
+      "passed": false,
+      "details": {
+        "glass": {},
+        "frame": {}
+      }
+    },
+    {
+      "name": "city_hall.required_material_roles_have_actual_colour_contrast",
+      "passed": false,
+      "details": {
+        "frame": [],
+        "glass": [],
+        "curved_roof": []
+      }
+    },
+    {
+      "name": "library.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "library.nonempty_unique_source_components",
+      "passed": true
+    },
+    {
+      "name": "library.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "library.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32; tolerance 1e-9 m",
+        "normals": "independent octahedral uint16x2 float32 round trip; tolerance 1e-9"
+      }
+    },
+    {
+      "name": "library.actual_visible_identity_material_and_backface_culling",
+      "passed": false
+    },
+    {
+      "name": "library.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "library.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "flat_source_if_top_null": false
+      }
+    },
+    {
+      "name": "library.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "library.required_roles_have_positive_geometry",
+      "passed": false
+    },
+    {
+      "name": "library.low_stone_mass_and_actual_vertical_window_rhythm",
+      "passed": false,
+      "details": {
+        "stone": {},
+        "window": {},
+        "separated_window_patches": 0,
+        "patch_span_m": 0
+      }
+    },
+    {
+      "name": "library.geometric_emphasized_central_facade",
+      "passed": true,
+      "details": {
+        "central": {
+          "area_m2": 213.32270379911608,
+          "horizontal_area_m2": 33.35743877094973,
+          "vertical_area_m2": 179.9652650281663,
+          "y_span_m": 17.11249995231628,
+          "xz_span_m": 18.668380737305,
+          "y_levels": 4,
+          "upward_normal_directions": 1,
+          "triangles": 36,
+          "projected_area_m2": 16.41575991124968
+        },
+        "long_axis_span_m": 18.649585179881655,
+        "centre_error_m": 2.203971419589834e-06
+      }
+    },
+    {
+      "name": "library.required_material_roles_have_actual_colour_contrast",
+      "passed": false,
+      "details": {
+        "window": [],
+        "stone": [],
+        "central_facade": [
+          [
+            0.71,
+            0.69,
+            0.62
+          ]
+        ]
+      }
+    },
+    {
+      "name": "plaza.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "plaza.nonempty_unique_source_components",
+      "passed": true
+    },
+    {
+      "name": "plaza.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "plaza.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32; tolerance 1e-9 m",
+        "normals": "independent octahedral uint16x2 float32 round trip; tolerance 1e-9"
+      }
+    },
+    {
+      "name": "plaza.actual_visible_identity_material_and_backface_culling",
+      "passed": false
+    },
+    {
+      "name": "plaza.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "plaza.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "flat_source_if_top_null": true
+      }
+    },
+    {
+      "name": "plaza.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "plaza.required_roles_have_positive_geometry",
+      "passed": false
+    },
+    {
+      "name": "plaza.actual_grass_and_paving_cover_original_outline",
+      "passed": false,
+      "details": {
+        "grass": {},
+        "paving": {},
+        "outline_difference_m2": 0.0004175730064049741
+      }
+    },
+    {
+      "name": "plaza.required_material_roles_have_actual_colour_contrast",
+      "passed": false,
+      "details": {
+        "paving": [],
+        "grass": []
+      }
+    },
+    {
+      "name": "sfc.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "sfc.nonempty_unique_source_components",
+      "passed": true
+    },
+    {
+      "name": "sfc.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "sfc.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32; tolerance 1e-9 m",
+        "normals": "independent octahedral uint16x2 float32 round trip; tolerance 1e-9"
+      }
+    },
+    {
+      "name": "sfc.actual_visible_identity_material_and_backface_culling",
+      "passed": true
+    },
+    {
+      "name": "sfc.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "sfc.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "flat_source_if_top_null": false
+      }
+    },
+    {
+      "name": "sfc.clockwise_faces_and_unit_consistent_normals",
+      "passed": false,
+      "details": {
+        "bad_normals": [
+          [
+            "sfc_reused_glass",
+            988
+          ],
+          [
+            "sfc_reused_glass",
+            1024
+          ],
+          [
+            "sfc_reused_glass",
+            1060
+          ],
+          [
+            "sfc_reused_glass",
+            1096
+          ],
+          [
+            "sfc_reused_glass",
+            1132
+          ]
+        ],
+        "collapsed_faces": [
+          [
+            "sfc_reused_glass",
+            965
+          ],
+          [
+            "sfc_reused_glass",
+            966
+          ],
+          [
+            "sfc_reused_glass",
+            969
+          ],
+          [
+            "sfc_reused_glass",
+            970
+          ],
+          [
+            "sfc_reused_glass",
+            974
+          ],
+          [
+            "sfc_reused_glass",
+            990
+          ],
+          [
+            "sfc_reused_glass",
+            1001
+          ],
+          [
+            "sfc_reused_glass",
+            1002
+          ],
+          [
+            "sfc_reused_glass",
+            1005
+          ],
+          [
+            "sfc_reused_glass",
+            1006
+          ],
+          [
+            "sfc_reused_glass",
+            1010
+          ],
+          [
+            "sfc_reused_glass",
+            1026
+          ]
+        ]
+      }
+    },
+    {
+      "name": "sfc.required_roles_have_positive_geometry",
+      "passed": true
+    },
+    {
+      "name": "sfc.actual_external_model_triangle_lineage",
+      "passed": false,
+      "details": {
+        "source": "game/assets/vendor/kenney_city_kit_commercial/building-skyscraper-a.glb",
+        "source_triangles": 1292,
+        "tolerance_m": 1e-06,
+        "meaning": "Every clipped vertex reconstructed from an original external GLB triangle"
+      }
+    },
+    {
+      "name": "sfc.tall_nontrivial_reused_geometry",
+      "passed": true,
+      "details": {
+        "area_m2": 37321.78718807337,
+        "horizontal_area_m2": 11526.095127705414,
+        "vertical_area_m2": 25795.69206036799,
+        "y_span_m": 124.0,
+        "xz_span_m": 84.33511352539102,
+        "y_levels": 239,
+        "upward_normal_directions": 5,
+        "triangles": 2060,
+        "projected_area_m2": 2207.203115638563
+      }
+    },
+    {
+      "name": "counts.actual_geometry_matches_declared_counts",
+      "passed": true,
+      "details": {
+        "landmarks": 4,
+        "components": 17,
+        "triangles": 5387
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "id": "city_hall",
+      "components": 5,
+      "triangles": 1044,
+      "roles": {
+        "base": 1,
+        "curved_glass_mass": 1,
+        "long_eave": 1,
+        "glass_grid": 1,
+        "roof": 1
+      },
+      "geometry": {
+        "base": {
+          "area_m2": 11051.293747530815,
+          "horizontal_area_m2": 10365.158158460375,
+          "vertical_area_m2": 686.1355890704386,
+          "y_span_m": 2.21099996566772,
+          "xz_span_m": 106.61274719238298,
+          "y_levels": 2,
+          "upward_normal_directions": 1,
+          "triangles": 40,
+          "projected_area_m2": 5182.579079230187
+        },
+        "curved_glass_mass": {
+          "area_m2": 30781.78052064454,
+          "horizontal_area_m2": 20248.81698915428,
+          "vertical_area_m2": 10532.963531490279,
+          "y_span_m": 37.948999881744385,
+          "xz_span_m": 106.375228881836,
+          "y_levels": 22,
+          "upward_normal_directions": 30,
+          "triangles": 204,
+          "projected_area_m2": 5062.204519603897
+        },
+        "long_eave": {
+          "area_m2": 244.1183947919498,
+          "horizontal_area_m2": 183.01870000689837,
+          "vertical_area_m2": 61.09969478505158,
+          "y_span_m": 4.701927185058601,
+          "xz_span_m": 106.240386962891,
+          "y_levels": 38,
+          "upward_normal_directions": 30,
+          "triangles": 166,
+          "projected_area_m2": 91.50935000344914
+        },
+        "glass_grid": {
+          "area_m2": 551.0364113065443,
+          "horizontal_area_m2": 35.29714003267359,
+          "vertical_area_m2": 515.739271273869,
+          "y_span_m": 36.86500096321103,
+          "xz_span_m": 106.033432006836,
+          "y_levels": 16,
+          "upward_normal_directions": 1,
+          "triangles": 516,
+          "projected_area_m2": 6.1568924474936635
+        },
+        "roof": {
+          "area_m2": 9913.925809219845,
+          "horizontal_area_m2": 9822.607688752707,
+          "vertical_area_m2": 91.31812046714096,
+          "y_span_m": 4.505661010742202,
+          "xz_span_m": 105.642486572266,
+          "y_levels": 36,
+          "upward_normal_directions": 29,
+          "triangles": 118,
+          "projected_area_m2": 4911.303844376353
+        }
+      }
+    },
+    {
+      "id": "library",
+      "components": 6,
+      "triangles": 2136,
+      "roles": {
+        "base": 1,
+        "low_stone_mass": 1,
+        "roof": 1,
+        "stone_bands": 1,
+        "vertical_window_rhythm": 1,
+        "central_facade": 1
+      },
+      "geometry": {
+        "base": {
+          "area_m2": 3967.520536581398,
+          "horizontal_area_m2": 3631.246778797554,
+          "vertical_area_m2": 336.2737577838454,
+          "y_span_m": 1.38750004768372,
+          "xz_span_m": 80.357673645019,
+          "y_levels": 2,
+          "upward_normal_directions": 1,
+          "triangles": 96,
+          "projected_area_m2": 1815.6233893987778
+        },
+        "low_stone_mass": {
+          "area_m2": 7072.391347950508,
+          "horizontal_area_m2": 3496.147120991926,
+          "vertical_area_m2": 3576.244226958577,
+          "y_span_m": 14.892500638961781,
+          "xz_span_m": 79.67597961425801,
+          "y_levels": 2,
+          "upward_normal_directions": 1,
+          "triangles": 96,
+          "projected_area_m2": 1748.0735604959636
+        },
+        "roof": {
+          "area_m2": 3732.301199003319,
+          "horizontal_area_m2": 3553.894932473433,
+          "vertical_area_m2": 178.4062665298861,
+          "y_span_m": 0.7399997711181996,
+          "xz_span_m": 79.96813201904298,
+          "y_levels": 2,
+          "upward_normal_directions": 1,
+          "triangles": 96,
+          "projected_area_m2": 1776.9474662367168
+        },
+        "stone_bands": {
+          "area_m2": 7369.131761320276,
+          "horizontal_area_m2": 7262.493557595109,
+          "vertical_area_m2": 106.6382037251728,
+          "y_span_m": 14.372500181198081,
+          "xz_span_m": 80.357673645019,
+          "y_levels": 4,
+          "upward_normal_directions": 1,
+          "triangles": 192,
+          "projected_area_m2": 1815.6233893987778
+        },
+        "vertical_window_rhythm": {
+          "area_m2": 1109.3140303506832,
+          "horizontal_area_m2": 55.95956531864824,
+          "vertical_area_m2": 1053.354465032032,
+          "y_span_m": 12.60898375511169,
+          "xz_span_m": 79.09761047363301,
+          "y_levels": 6,
+          "upward_normal_directions": 1,
+          "triangles": 1620,
+          "projected_area_m2": 9.326594219774693
+        },
+        "central_facade": {
+          "area_m2": 213.32270379911608,
+          "horizontal_area_m2": 33.35743877094973,
+          "vertical_area_m2": 179.9652650281663,
+          "y_span_m": 17.11249995231628,
+          "xz_span_m": 18.668380737305,
+          "y_levels": 4,
+          "upward_normal_directions": 1,
+          "triangles": 36,
+          "projected_area_m2": 16.41575991124968
+        }
+      }
+    },
+    {
+      "id": "plaza",
+      "components": 2,
+      "triangles": 73,
+      "roles": {
+        "grass_surface": 1,
+        "paving_surface": 1
+      },
+      "geometry": {
+        "grass_surface": {
+          "area_m2": 4144.666152094699,
+          "horizontal_area_m2": 4144.666152094699,
+          "vertical_area_m2": 0.0,
+          "y_span_m": 0.0,
+          "xz_span_m": 82.3598394393921,
+          "y_levels": 1,
+          "upward_normal_directions": 1,
+          "triangles": 23,
+          "projected_area_m2": 4144.6661520947
+        },
+        "paving_surface": {
+          "area_m2": 141.1638066923834,
+          "horizontal_area_m2": 141.1638066923834,
+          "vertical_area_m2": 0.0,
+          "y_span_m": 0.0,
+          "xz_span_m": 83.567855834961,
+          "y_levels": 1,
+          "upward_normal_directions": 1,
+          "triangles": 50,
+          "projected_area_m2": 141.16380669238333
+        }
+      }
+    },
+    {
+      "id": "sfc",
+      "components": 4,
+      "triangles": 2134,
+      "roles": {
+        "reused_model": 3,
+        "stone": 1
+      },
+      "geometry": {
+        "reused_model": {
+          "area_m2": 37321.78718807337,
+          "horizontal_area_m2": 11526.095127705414,
+          "vertical_area_m2": 25795.69206036799,
+          "y_span_m": 124.0,
+          "xz_span_m": 84.33511352539102,
+          "y_levels": 239,
+          "upward_normal_directions": 5,
+          "triangles": 2060,
+          "projected_area_m2": 2207.203115638563
+        },
+        "stone": {
+          "area_m2": 5927.985844244804,
+          "horizontal_area_m2": 4594.693244172224,
+          "vertical_area_m2": 1333.2926000725824,
+          "y_span_m": 6.0,
+          "xz_span_m": 84.64994812011702,
+          "y_levels": 2,
+          "upward_normal_directions": 1,
+          "triangles": 44,
+          "projected_area_m2": 2297.346622086112
+        }
+      }
+    }
+  ],
+  "scope": "Actual visible arrays/materials, full source-volume containment, numerical feature presence, and external-model triangle lineage. Geometric feature thresholds are development diagnostics, not human landmark recognition or surveyed exterior accuracy. Byte-hash binding of executed files, unchanged collision bodies/routes, continuous walking/camera, rendered visibility, human handling, performance and M4 require separate evidence."
+}

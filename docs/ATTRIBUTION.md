@@ -36,7 +36,7 @@ Copernicus WorldDEM-30를 사용해 만든 지역 추출 사본이다. 출처 �
 
 ## 로컬 참고 자료와 이후 작업
 
-국내 SHP·NGII 지역 원본·사진·거리뷰·외부 3D 모델은 포함하지 않았다. VWorld 컬럼 정의서와 공식 궁궐 안내 HTML은 로컬 참고용이며 Git에서는 제외한다. 공개 열람만으로 지도·사진의 게임 재사용을 허용하지 않는다. 출처 URL·해시·조사 요약은 공유한다.
+국내 SHP·NGII 지역 원본·사진·거리뷰는 포함하지 않았다. 외부 3D 모델은 아래 L03 CC0 파일만 추가했다. VWorld 컬럼 정의서와 공식 궁궐 안내 HTML은 로컬 참고용이며 Git에서는 제외한다. 공개 열람만으로 지도·사진의 게임 재사용을 허용하지 않는다. 출처 URL·해시·조사 요약은 공유한다.
 
 D04에서 실제 공유 파일·원천·사용 판정을 대조했다. 사용 범위는 [data_gaps](data_gaps.md), 기계 판독 규칙은 [data_usage](../config/data_usage.json)를 따른다. 국내 본체나 미허가 이미지가 새로 들어오면 이 판정을 다시 확인한다.
 
@@ -59,3 +59,11 @@ Godot과 새 자산은 실제 사용하는 버전·파일에 따라 출처를 �
 ## L02 궁궐 절차형 외형
 
 [recipes/설명](../game/assets/authored/landmarks/palace/README.md)과 생성 코드는 독립 제작한 색·비례·부재 배치 규칙이다. 외형의 원본 footprint는 기존 OSM 파생 입력을 그대로 사용하므로 공간 원천·변경 재현 방법과 위 ODbL 표시를 유지한다. 사진/도면 추적·외부 텍스처/모델·로고/서체 이미지 파일은 추가하지 않았다. 공식 참조의 사실/관찰과 제작상 비율은 구분한다. 기존 모델을 수정하는 [대안 조사](ASSET_REUSE_OPTIONS.md)는 실제 파일 확보나 개별 이용권 확인이 아니며 새 자산을 도입할 때 파일별로 기록한다.
+
+## L03 Kenney 원본과 수정한 도시 외형
+
+**Kenney — City Kit Commercial 2.1, CC0 1.0.** [공식 배포 페이지](https://kenney.nl/assets/city-kit-commercial)에서 ZIP을 실제 수신하고 동봉된 [License.txt](../game/assets/vendor/kenney_city_kit_commercial/License.txt)를 확인했다. 원본 `building-skyscraper-a.glb`·상대 경로 `Textures/colormap.png`·라이선스 문구와 [취득 해시](../game/assets/vendor/kenney_city_kit_commercial/provenance.json)를 공유한다. 배포 모델과 팔레트 PNG는 수정하지 않았다. 전체 ZIP은 캐시에만 둔다.
+
+게임용 수정은 방향/높이 외곽에 비균일하게 맞추기, 지도 footprint로 자르기, 법선 재계산, 세 가지 색으로 줄이기와 석재 저층부·얇은 층 분할 추가다. 원본 삼각형 연결과 재현 코드는 [L03 결과](../data/reports/city_landmarks.md)에 남긴다. 이 모델은 실제 서울파이낸스센터를 표현한 원본이 아니며 수정본도 정확한 복제가 아니다. CC0 원본 조건과 OSM에서 파생한 공간 배치의 ODbL 조건을 구분해 보존한다.
+
+시청·도서관·광장 표시 규칙은 독립 제작했다. 공식 참조의 사진·도면·로고는 가져오지 않았다. 이번 실제 수입 결과는 위 L01/L02 당시 ‘외부 모델 미수입’ 기록 이후의 변경이며, 다른 후보의 파일 이용권을 함께 확정하지 않는다.
