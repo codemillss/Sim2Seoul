@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L03 도시 외형까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L04 결합 검수까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -348,3 +348,17 @@ sh tools/run_city_landmarks.sh run
 `gpu`는 약16분의 실제 전체 여정이다. 측정 중 다른 엔진/무거운 검사를 동시에 돌리지 않는다. prepared14입력의 다른 폴더 재생성은 현재 M1의 기존 설치를 사용했으며 새 환경/M4 검사로 읽지 않는다. 시청13층/기존12층 추정, SFC130m/기존124m, 광장2025년 내부 변경 차이는 해결되지 않아 현재 높이·분류·지면/보행을 유지했다. 새 Mac은 RAM/OS/실제 실행과 직접 조작을 해당 기기에서 확인한다.
 
 CC0 동봉 라이선스는 원래 CRLF/공백까지 해시에 포함된다. 저장소의 파일별 보존 규칙을 유지하며 원문을 자동 정리하지 않는다. 실제 Git 인덱스의 GLB/PNG/라이선스 바이트도 [원본과 대조](../data/reports/landmarks/l03/git_source_bytes.json)했다.
+
+
+## L04 검수 재현과 다음 작업 인수
+
+위 L03 실행 자산까지 재생성한 뒤 기존 Python/NumPy/Shapely와 동일 Godot4.7.2로 실행한다. 새 설치·국가 지도·새 모델 다운로드는 필요 없다. 실제 M4 실행을 검증한 절차로 해석하지 않는다.
+
+```sh
+.venv-data/bin/python tools/check_landmark_review.py --output data/cache/l04_headless
+.venv-data/bin/python tools/check_landmark_review.py --gpu --output data/cache/l04_gpu
+```
+
+16시점80PNG와 국소 회전/문·광장 보행을 새로 기록한다. 소스/실행자산/입력/검사 또는 원관측 해시가 L03 합격본과 다르면 전체 회귀 재사용을 거부한다. 자료를 변경한 경우 해당 회귀와 인수 기록을 새 스냅샷으로 만든다. GPU 측정 중 다른 엔진/무거운 검사를 동시에 실행하지 않는다. 검수 도구는 `--engine`으로 동일 버전의 다른 설치 위치를 받으며 일반 게임은 기존 `run_city_landmarks.sh run`이다.
+
+[L04 화면·한계·실패·재현](../data/reports/landmark_review.md)와 [인수](../data/reports/l04_verification.json)를 읽고 다음 N01을 시작한다. 돈덕전·정관헌 가림/중화문 인지와 사람 조작·M4는 미검증이다. 정보 UI·실내·엘리베이터는 질의/제안 상태이므로 자동 착수하지 않는다.

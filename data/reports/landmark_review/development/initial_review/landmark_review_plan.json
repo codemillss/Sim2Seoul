@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "task": "L04",
+  "base_commit": "29f316f74905dcb8ec5528e2fa49b2f519337153",
+  "views": [
+    {
+      "id": "V_GATE",
+      "checkpoint_index": 0,
+      "xz": [
+        49.05253482348053,
+        13.578887802548707
+      ],
+      "target": "daehanmun",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_COURT_HALL",
+      "checkpoint_index": 4,
+      "xz": [
+        -130.0,
+        -40.0
+      ],
+      "target": "junghwajeon",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_COURT_GATE",
+      "checkpoint_index": 4,
+      "xz": [
+        -130.0,
+        -40.0
+      ],
+      "target": "junghwamun",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_STONE",
+      "checkpoint_index": 3,
+      "xz": [
+        -174.64916787832044,
+        -116.49845178145915
+      ],
+      "target": "seokjojeon",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_STONE_BRICK",
+      "checkpoint_index": 3,
+      "xz": [
+        -174.64916787832044,
+        -116.49845178145915
+      ],
+      "target": "dondeokjeon",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_CITY_NEW",
+      "checkpoint_index": 5,
+      "xz": [
+        130.0,
+        -140.0
+      ],
+      "target": "city_hall",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_CITY_OLD",
+      "checkpoint_index": 5,
+      "xz": [
+        130.0,
+        -140.0
+      ],
+      "target": "library",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_PLAZA",
+      "checkpoint_index": 6,
+      "xz": [
+        190.0,
+        -100.0
+      ],
+      "target": "plaza",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_SKYLINE",
+      "checkpoint_index": 6,
+      "xz": [
+        190.0,
+        -100.0
+      ],
+      "target": "sfc",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_PALACE_CITY_GATE",
+      "checkpoint_index": 1,
+      "xz": [
+        -15.734371701895725,
+        3.9128294247202575
+      ],
+      "target": "daehanmun",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_PALACE_CITY_NEW",
+      "checkpoint_index": 1,
+      "xz": [
+        -15.734371701895725,
+        3.9128294247202575
+      ],
+      "target": "city_hall",
+      "basis": "Existing W03 checkpoint; pan toward target, not a new spawn"
+    },
+    {
+      "id": "V_JEONG",
+      "xz": [
+        -96.828304382856,
+        -99.48967385524884
+      ],
+      "target": "jeonggwanheon",
+      "basis": "Existing palace_loop route vertex 6; supplementary occlusion review"
+    },
+    {
+      "id": "V_BRICK_WEST",
+      "xz": [
+        -199.2912708116928,
+        -117.07429670868441
+      ],
+      "target": "dondeokjeon",
+      "basis": "Existing palace_loop route vertex 9; supplementary occlusion review"
+    },
+    {
+      "id": "V_PLAZA_SOUTH",
+      "xz": [
+        150,
+        0
+      ],
+      "target": "city_hall",
+      "basis": "Authored review point inside existing W03 movement boundary; targeted walk reaches it; not a surveyed door or production route change",
+      "context_targets": [
+        "city_hall",
+        "library",
+        "plaza"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "name": "orbit_0",
+      "purpose": "orbit",
+      "checkpoint_index": 0,
+      "seconds": 6.0
+    },
+    {
+      "name": "orbit_4",
+      "purpose": "orbit",
+      "checkpoint_index": 4,
+      "seconds": 6.0
+    },
+    {
+      "name": "orbit_3",
+      "purpose": "orbit",
+      "checkpoint_index": 3,
+      "seconds": 6.0
+    },
+    {
+      "name": "orbit_5",
+      "purpose": "orbit",
+      "checkpoint_index": 5,
+      "seconds": 6.0
+    },
+    {
+      "name": "orbit_6",
+      "purpose": "orbit",
+      "checkpoint_index": 6,
+      "seconds": 6.0
+    },
+    {
+      "name": "orbit_1",
+      "purpose": "orbit",
+      "checkpoint_index": 1,
+      "seconds": 6.0
+    },
+    {
+      "name": "gate_0",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        49.05253482348053,
+        13.578887802548707
+      ],
+      "expected_end_xz": [
+        31.613148442818783,
+        10.083805003203452
+      ]
+    },
+    {
+      "name": "gate_1",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        31.613148442818783,
+        10.083805003203452
+      ],
+      "expected_end_xz": [
+        20.56962844572263,
+        7.503550020046532
+      ]
+    },
+    {
+      "name": "gate_2",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        20.56962844572263,
+        7.503550020046532
+      ],
+      "expected_end_xz": [
+        -15.734371701895725,
+        3.9128294247202575
+      ]
+    },
+    {
+      "name": "gate_3",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        -15.734371701895725,
+        3.9128294247202575
+      ],
+      "expected_end_xz": [
+        20.56962844572263,
+        7.503550020046532
+      ]
+    },
+    {
+      "name": "gate_4",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        20.56962844572263,
+        7.503550020046532
+      ],
+      "expected_end_xz": [
+        31.613148442818783,
+        10.083805003203452
+      ]
+    },
+    {
+      "name": "gate_5",
+      "purpose": "walk",
+      "group": "gate",
+      "from_xz": [
+        31.613148442818783,
+        10.083805003203452
+      ],
+      "expected_end_xz": [
+        49.05253482348053,
+        13.578887802548707
+      ]
+    },
+    {
+      "name": "plaza_0",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        190,
+        -100
+      ],
+      "expected_end_xz": [
+        190,
+        -55
+      ]
+    },
+    {
+      "name": "plaza_1",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        190,
+        -55
+      ],
+      "expected_end_xz": [
+        190,
+        -10
+      ]
+    },
+    {
+      "name": "plaza_2",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        190,
+        -10
+      ],
+      "expected_end_xz": [
+        150,
+        0
+      ]
+    },
+    {
+      "name": "plaza_3",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        150,
+        0
+      ],
+      "expected_end_xz": [
+        190,
+        -10
+      ]
+    },
+    {
+      "name": "plaza_4",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        190,
+        -10
+      ],
+      "expected_end_xz": [
+        190,
+        -55
+      ]
+    },
+    {
+      "name": "plaza_5",
+      "purpose": "walk",
+      "group": "plaza",
+      "from_xz": [
+        190,
+        -55
+      ],
+      "expected_end_xz": [
+        190,
+        -100
+      ]
+    }
+  ],
+  "policy": {
+    "production_scene_unchanged": true,
+    "baseline": "L03 accepted full GPU and exact source/runtime/input/proof hashes",
+    "eye_height_m": 1.6,
+    "third_person": "Actual production rig; eye-level camera is inspection only",
+    "lighting": "Existing fixed daytime; confirmed implementation choice for this review, no day-night system",
+    "labels_hidden": true,
+    "visibility_pixels": "Diagnostic silhouette exposure only, not human identity recognition",
+    "supporting_occlusion": "Record blocked views honestly; do not move buildings or invent new access to improve composition",
+    "whole_3km": "Reuse only with exact bytes; new local cases are separate, no continuous full journey claim"
+  }
+}
