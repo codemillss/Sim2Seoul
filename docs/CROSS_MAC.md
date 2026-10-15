@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, N02 보행자까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, 최신 차량 장면은 아래 N03 절, 진행 상태와 다음 작업은 [WORK_STATUS](WORK_STATUS.md)를 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -396,4 +396,21 @@ sh tools/run_pedestrians.sh run
 
 `pedestrians.json`/manifest·N01 두 가공 JSON과 `.godot`/환경/캐시는 Git 제외다. 공유 source/수동 계획과 도구로 재생성하며 [검증용 snapshot/실제 결과](../data/reports/pedestrians.md)를 대조한다. 준비된27입력16,327,528bytes를 다른 폴더에 복사해 두 번 생성/폴더 이동 후 같은 bytes/SHA와 입력불변을19검사로 확인했다. 기존 M1 설치에서의 N02-only 증거이며 새Mac 설치/전체GIS/M4 검증은 아니다.
 
-저장소 코드·문서·검증 기록의 인수는 `python3 tools/check_pedestrians_handoff.py`, 실행 자산까지 준비한 뒤에는 `--prepared`를 덧붙인다. 재시험은 위 결과 문서의 cache 출력 경로를 사용해 합격/실패 원기록을 덮어쓰지 않는다. 현재 다음 작업은 **N03**이며 기존 보행자 장면을 바탕으로 차도 지지/접촉부터 실제 확인한다. 차량·10분 이상 통합/성능·사람/M4·실내/V0는 미완료다.
+N02 당시 코드·문서·검증 기록의 인수는 `python3 tools/check_pedestrians_handoff.py`, 실행 자산까지 준비한 뒤에는 `--prepared`를 덧붙인다. 이후 단계에서 갱신한 문서 SHA와 과거 snapshot의 차이는 정상이며 현재 인수는 아래 N03을 따른다. 재시험은 cache 출력 경로를 사용해 합격/실패 원기록을 덮어쓰지 않는다. N02 종료 당시 다음은 N03이었다.
+
+## N03 차량 장면 재생성·실행·인수
+
+위 L03/N01/N02 준비를 재사용한다. 원래 지도 추출·준비나 설치를 이유 없이 반복하지 않는다.
+
+```sh
+.venv-data/bin/python tools/prepare_routes.py --check
+.venv-data/bin/python tools/prepare_pedestrians.py --check
+.venv-data/bin/python tools/prepare_traffic.py
+sh tools/run_traffic.sh run
+```
+
+`traffic_walk.tscn`은 N02를 상속하며 두 차량과 차량용 지원체2개를 더한다. WASD·Shift·마우스·휠은 그대로이며 `Esc`는 전체 정지, `차량 이동`/`보행자 이동`은 각 이동 스위치다. 차량은 북측 지정 횡단에서 사람을 기다리고 화면/사람/진입 조건이 맞아야 끝에서 반복한다. 바닥은 기존 y0 가정이며 W03 사람 경계·축척·원본/추정 출처를 유지한다.
+
+`traffic.json`/manifest는 Git 제외 로컬 생성물이다. N01/N02 준비 자료와 수동 원천·공유 도구를 사용해 생성하고 [N03 결과/실패/재현](../data/reports/vehicles.md)의 snapshot과 대조한다. 준비31파일16,336,566bytes만 복사한 다른 폴더에서 두 번 생성, 폴더 이동/출력 삭제 후 같은 bytes/SHA와 입력 불변을27검사로 확인했다. 기존 Python3.14.7/Shapely2.2.0에서의 N03-only 증거이며 새Mac 설치·전체GIS·M4 검증은 아니다.
+
+현재 인수는 `python3 tools/check_vehicles_handoff.py`, 실행 자료 준비 뒤에는 `--prepared`를 덧붙인다. 고정된 원시/판정·화면과 개발 실패를 덮어쓰지 않도록 재시험은 위 결과 문서의 cache 경로를 쓴다. 다음 N04는 두 보행자/두 차량을 켠 채 필수 보행 여정·10분 이상·각2주기·교차 정지/재개3회를 통합 관측한다. 이번 독립19case는 그 연속 보행 증거를 대신하지 않는다. 성능/패키지·사람 조작/OS·M4·실내/V0는 후속이다.

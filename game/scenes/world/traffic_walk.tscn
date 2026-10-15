@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://scenes/world/pedestrian_walk.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/traffic_walk.gd" id="2"]
+[node name="TrafficWalk" instance=ExtResource("1")]
+script = ExtResource("2")
+[node name="Vehicles" type="Node3D" parent="Actors" index="2"]
+process_mode = 1
+[node name="Infrastructure" type="Node3D" parent="." index="6"]
+process_mode = 1
+[node name="RoadSupports" type="Node3D" parent="Infrastructure"]

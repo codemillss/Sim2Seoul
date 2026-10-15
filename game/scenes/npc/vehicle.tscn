@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/traffic/vehicle.gd" id="1"]
+
+[sub_resource type="BoxShape3D" id="VehicleShape"]
+size = Vector3(1.8, 1.5, 4.2)
+
+[sub_resource type="StandardMaterial3D" id="BodyMaterial"]
+albedo_color = Color(0.18, 0.36, 0.56, 1)
+roughness = 0.65
+
+[sub_resource type="BoxMesh" id="BodyMesh"]
+material = SubResource("BodyMaterial")
+size = Vector3(1.8, 1.5, 4.2)
+
+[sub_resource type="StandardMaterial3D" id="FrontMaterial"]
+albedo_color = Color(1, 0.94, 0.65, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="FrontMesh"]
+material = SubResource("FrontMaterial")
+size = Vector3(1.45, 0.16, 0.015)
+
+[node name="Vehicle" type="CharacterBody3D"]
+process_mode = 1
+process_physics_priority = 1
+collision_layer = 8
+collision_mask = 31
+safe_margin = 0.001
+floor_snap_length = 0.1
+script = ExtResource("1")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.75, 0)
+shape = SubResource("VehicleShape")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("BodyMesh")
+
+[node name="Front" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.62, -2.091)
+mesh = SubResource("FrontMesh")

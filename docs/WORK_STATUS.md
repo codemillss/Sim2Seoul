@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-15 · 최근 실행: **N02 두 보행자 왕복·회전·정지/재개·플레이어 접촉 검증 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N02 완료·다음 N03 · 최신 실행은 pedestrian_walk, 차량/M4/V0 미완료
+갱신: 2026-10-16 · 최근 실행: **N03 차도 지지·차량 이동·사람 우선/FIFO·재배치 검증 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N03 완료·다음 N04 · 최신 실행은 traffic_walk, 동적 연속 통합/M4/V0 미완료
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -40,7 +40,7 @@
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
-현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이고 L04/N01/N02 결과와 다음 N03은 아래 최신 절을 따른다.
+현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이고 L04/N01–N03 결과와 다음 N04는 아래 최신 절을 따른다.
 
 ## 이번 실제 데이터에서 확인한 점
 
@@ -94,7 +94,7 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - 국내 SHP/NGII 지역 원본 수신, 독립 높이·상세 지형 검증. Overture 원본은 취득 완료이며 후보의 현실 대응 검토는 남음.
 - 독립 기준 대비 위치·누락률 검증, 상세 부분별 수직 메시와 정관헌/상동교회의 실제 외형·높이 확인. G03 단순 본체 선택은 이 확인과 구분한다.
 - 실제 지면·계단·도로폭·대한문 개구부 실측과 현장 통행 확인. 세 필수 게임 동선의 물리 연결·연속 왕복은 W04 자동 검수로 확인했으며 현실 접근과 구분한다.
-- 상세 랜드마크 외형·실제 지형·NPC/차량 구현. 기존 P/W 단계의 캐릭터·카메라·충돌/경계와 W04 전체 보행 자동 검증판은 완료했다.
+- 상세 랜드마크 외형 보완·실제 지형·NPC/차량을 포함한 연속 보행 통합. 기존 P/W 단계와 W04 자동 보행 검증판·N02/N03 개별 동작은 완료했다.
 - 직접 키보드·마우스 조작은 미실행. E02는 화면 잠금 때문에 미실행이었으며, E03 실제 GPU 화면과 자동 키 이벤트/시점 선택 검증은 직접 조작과 구분한다.
 - 직접 사람 조작을 통한 플레이 검수, 도시 성능 측정, M4 Pro 확인, 패키지 제작.
 
@@ -180,9 +180,19 @@ L03 전체3.3km 증거는 소스/실행자산/입력/검사118개와 원시/판�
 
 두 선은 분리돼 있어 NPC끼리 실제 조우·군중은 미검증이다. 차량/교차·N04 10분 통합·직접 사람/OS·M4·현실 지형/접근·도시 성능/패키지·실내/V0는 남았다. 과거3.3km를 새 동적 통합 완주로 주장하지 않는다.
 
-## 다음 작업: N03 단순 차량 이동
+## N03 현재 결과와 남은 검증
 
-첫 행동은 route_rules와 N01 차량 경로/현재 N02 장면을 읽고 세종대로 두 경로의 실제 차도 지원면과 차체 접촉을 엔진에서 확인하는 것이다. 이후 N02 장면을 상속해 단순 차량2대의 원문 진행방향·확장 교차구역 앞 정지·사람 우선/1대FIFO·점유 해제와 시야밖/30m/빈진입 조건 반복을 구현한다. N01 기하 계획으로 물리 지지나 제동을 통과시키지 않는다. 기존 NPC·문/보행·축척·출처/권한을 유지하고 실제 차량 증거 후 N04 통합으로 간다. 사람 피드백을 대기 조건으로 추가하지 않는다.
+N01 세종대로 두 편도선에 각1대를 추가했다. 기존460ray 중455개 지지 누락/6차체 낙하를 먼저 확인했고, N01 차체 띠에서 W03 지원면을 뺀 부분의 y0 차량용 지지체2개로460ray/6차체 접촉을 통과했다. 차량mask31·지원체layer16/mask8 확장 외 기존225소스와 사람/카메라mask·경계·원래692생성/687활성은 그대로다. N03 전체 정적 body는694/689다. [실행·화면·실패·재현](../data/reports/vehicles.md), [인수](../data/reports/n03_verification.json).
+
+최고5m/s·횡단2m/s, 실제 선분별 물리 이동·사람 우선/빈상태1초/한 대FIFO·관측불명 정지·구역 내 사람 출현/이탈·끝점 정지와 실제시야/표면30m/빈진입 조건 반복을 구현했다. 차량OFF에도 사람 관측을 계속하고 관측 공백이면 빈 시간을 초기화한다. 실제 플레이어 접촉/탈출과 정지 NPC역할물체 앞 대기/재개를 구분했다.
+
+최종 headless281/계약25·GPU301/계약9·도시58/궁궐76개 PASS. GPU19case22,608tick·376.8물리초/377.665162실제초·두 차량45,216tick 전부접지·자유150초남행3/북행2반복, 주행중사람접촉0·플레이어복귀0이다. 최대step83.336234mm·Y.941532mm·구간시간차.580007%로 원래 상한을 유지했다. 실제mask결함1종/저장변조5종/loader4종을 구분해 거부했다. 다른폴더 prepared31파일2회/이동재생성27검사도 통과했다.
+
+독립 장면 재시작/시험 사람 배치·역할물체가 있는19case다. 두 실제 NPC와 차도의 자연 조우·새3.3km 연속 보행·N04 내구성/사람 조작/M4/성능/V0로 확대하지 않는다. 카메라far 밖에서 바라본 초기 시야시험 실패와 차량OFF 관측 공백의 수정/재검증을 기록했다.
+
+## 다음 작업: N04 도시 움직임 통합 검수
+
+첫 행동은 현재 N03 장면을 W04 필수 여정/검사에 연결하고, 두 보행자와 두 차량을 켠 채10분 이상 연속 보행하는 것이다. 대한문 양방향·경내/마당·시청/광장·돌담길의 실제 통과, 각 개체2회 이상 순환·지정 횡단 정지/재개3회·관통/영구고착/눈앞재배치0을 같은 실행에서 관측한다. N03의 독립case나 과거 NPC 없는3.3km 증거를 새 동적 통합 완료로 재사용하지 않는다. 기존 입력/경계/축척·원본/추정 출처를 유지하고 사람 피드백을 대기 조건으로 추가하지 않는다.
 
 ## 파일과 재현 방법
 
@@ -205,7 +215,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 N03이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 N04다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 
