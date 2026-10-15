@@ -1,0 +1,89 @@
+{
+  "task": "L02",
+  "state": "failed_first_full_GPU_clock_preserved",
+  "bundle_sha256": "346e3fac6f7244e25c96e3b5031a1da008d0b19f05f4f3638835b1bc4d342e18",
+  "checks_passed": 3517,
+  "checks_total": 3520,
+  "failed": [
+    "stage.entrance_forward.real_clock",
+    "stage.palace_loop_prefix.real_clock",
+    "stage.court_reverse.real_clock"
+  ],
+  "groups": [
+    {
+      "id": "entrance_forward",
+      "physics_seconds": 18.75,
+      "wall_seconds": 19.962048,
+      "time_error_percent": 6.464256000000002
+    },
+    {
+      "id": "palace_loop_prefix",
+      "physics_seconds": 42.5166666666667,
+      "wall_seconds": 43.389179,
+      "time_error_percent": 2.0521654253233157
+    },
+    {
+      "id": "court_forward",
+      "physics_seconds": 13.4666666666667,
+      "wall_seconds": 13.497697,
+      "time_error_percent": 0.2304232673264739
+    },
+    {
+      "id": "court_reverse",
+      "physics_seconds": 13.5,
+      "wall_seconds": 14.331154,
+      "time_error_percent": 6.1566962962962934
+    },
+    {
+      "id": "palace_loop_suffix",
+      "physics_seconds": 118.8,
+      "wall_seconds": 120.575616,
+      "time_error_percent": 1.494626262626264
+    },
+    {
+      "id": "palace_loop_reverse",
+      "physics_seconds": 161.316666666667,
+      "wall_seconds": 161.310288,
+      "time_error_percent": -0.00395412749271129
+    },
+    {
+      "id": "city_forward",
+      "physics_seconds": 164.083333333333,
+      "wall_seconds": 164.153626,
+      "time_error_percent": 0.042839614017475824
+    },
+    {
+      "id": "city_reverse",
+      "physics_seconds": 164.15,
+      "wall_seconds": 164.952116,
+      "time_error_percent": 0.488648187633256
+    },
+    {
+      "id": "stonewall_forward",
+      "physics_seconds": 118.316666666667,
+      "wall_seconds": 118.410412,
+      "time_error_percent": 0.07923256796702471
+    },
+    {
+      "id": "stonewall_reverse",
+      "physics_seconds": 118.266666666667,
+      "wall_seconds": 118.180983,
+      "time_error_percent": -0.07244954904200851
+    },
+    {
+      "id": "entrance_reverse",
+      "physics_seconds": 18.7666666666667,
+      "wall_seconds": 18.765248,
+      "time_error_percent": -0.007559502664489237
+    }
+  ],
+  "observations": {
+    "continuous_complete_journey": true,
+    "physical_and_camera_checks_passed": true,
+    "all_76_visual_checks_passed": true,
+    "overall_time_difference_percent": 0.5929008334484731,
+    "pipelines_changed_during_failed_cases": false,
+    "root_cause": "Unconfirmed; do not label shader compilation as proven cause"
+  },
+  "next": "Unchanged source/input/limits, short GPU observation then one full repeat without concurrent processing; retain both outcomes"
+}

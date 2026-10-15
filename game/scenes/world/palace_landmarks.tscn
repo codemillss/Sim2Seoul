@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://scenes/world/public_walk.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/landmark_walk.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/landmark_visuals.gd" id="3"]
+[node name="PalaceLandmarksWalk" instance=ExtResource("1")]
+script = ExtResource("2")
+[node name="PalaceLandmarks" type="Node3D" parent="."]
+process_mode = 1
+script = ExtResource("3")

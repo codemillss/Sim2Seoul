@@ -298,4 +298,27 @@ python3 tools/prepare_landmark_spec.py --check
 python3 tools/check_landmark_spec.py --output /tmp/sim2seoul-l01-check.json
 ```
 
-공유 대상은 수동 `data/manual/landmark_plan.json`·`landmark_references.json`과 도구·[제작 기준](landmark_reference.md)·검사 기록이다. `data/processed/landmark_spec.json`은 기기별 재생성하며 자동 가공물 Git 제외 규칙을 유지한다. prepared98입력 사본의 두 번 생성은 기존 M1에서 확인한 L01-only 검사이며 전체 GIS/새 설치/게임 실행/M4 검증이 아니다. 현재 외형 제작 시작점은 L02다. W04 스냅샷의 문서 해시는 당시 문서이므로 L01의 의도한 상태 변경에는 새 L01 검사/기록을 사용한다.
+공유 대상은 수동 `data/manual/landmark_plan.json`·`landmark_references.json`과 도구·[제작 기준](landmark_reference.md)·검사 기록이다. `data/processed/landmark_spec.json`은 기기별 재생성하며 자동 가공물 Git 제외 규칙을 유지한다. prepared98입력 사본의 두 번 생성은 기존 M1에서 확인한 L01-only 검사이며 전체 GIS/새 설치/게임 실행/M4 검증이 아니다. L01 종료 당시 외형 제작 시작점은 L02였다. W04 스냅샷의 문서 해시는 당시 문서이므로 L01의 의도한 상태 변경에는 새 L01 검사/기록을 사용한다.
+
+## L02 궁궐 외형 재생성과 실행
+
+W04와 위 L01 자료를 준비한 뒤 실행한다. 새 의존성은 추가하지 않았으며 기존 `requirements-data.txt`의 Shapely 환경을 사용한다.
+
+```sh
+.venv-data/bin/python tools/prepare_palace_landmarks.py
+.venv-data/bin/python tools/prepare_palace_landmarks.py --check
+sh tools/run_palace_landmarks.sh run
+```
+
+공유하는 것은 [외형 원천](../game/assets/authored/landmarks/palace/README.md)의 recipes/생성기·새 scene/script·관측/검사와 기록이다. 실행용 `game/data/generated/palace_landmarks.json`/`palace_landmarks_manifest.json`은 기기별 생성한다. 원본 footprint·G03 높이 분류·W04 물리/경계를 유지하므로 L01과 기존 지원 자료의 준비가 먼저 필요하다. 사진/외부 모델·앱·캐시·가상환경은 포함하지 않는다.
+
+검사를 다시 실행하려면 아래 명령을 사용한다. 결과는 Git 제외 캐시에 둔다. `gpu`는 현재 약16분 길이의 실제 전체 왕복이므로 다른 엔진이나 무거운 검사를 동시에 돌리지 않는다.
+
+```sh
+.venv-data/bin/python tools/check_palace_landmarks_portability.py
+.venv-data/bin/python tools/check_palace_landmarks_contract.py --mode views
+.venv-data/bin/python tools/check_palace_landmarks_contract.py --mode contract
+.venv-data/bin/python tools/check_palace_landmarks_contract.py --mode gpu
+```
+
+여섯 준비 입력을 별도 폴더에서 두 번 재생성하는 검사는 현재 M1의 기존 인터프리터를 사용한다. 새 기기 설치/전체GIS 재구축·M4 실행을 완료했다는 뜻이 아니다. [현재 M1의 화면과 검사 범위](../data/reports/palace_landmarks.md)를 참고하고 새 Mac의 RAM/OS/렌더러·직접 조작은 해당 기기에서 기록한다. 현재 재개 작업은 WORK_STATUS가 기준이며 과거 절의 다음 단계 문장은 당시 이력이다.

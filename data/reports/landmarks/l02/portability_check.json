@@ -1,0 +1,60 @@
+{
+  "task": "L02",
+  "passed": true,
+  "checks": [
+    {
+      "name": "copy.only_six_prepared_inputs",
+      "passed": true,
+      "bytes": 5255598
+    },
+    {
+      "name": "generate.1",
+      "passed": true,
+      "output_hashes": {
+        "game/data/generated/palace_landmarks.json": "346e3fac6f7244e25c96e3b5031a1da008d0b19f05f4f3638835b1bc4d342e18",
+        "game/data/generated/palace_landmarks_manifest.json": "b15f096ff32f631db3ceee29ad6363aab646f7d583808d4d0abac9f638c9c533"
+      }
+    },
+    {
+      "name": "generate.2",
+      "passed": true,
+      "output_hashes": {
+        "game/data/generated/palace_landmarks.json": "346e3fac6f7244e25c96e3b5031a1da008d0b19f05f4f3638835b1bc4d342e18",
+        "game/data/generated/palace_landmarks_manifest.json": "b15f096ff32f631db3ceee29ad6363aab646f7d583808d4d0abac9f638c9c533"
+      }
+    },
+    {
+      "name": "check.fresh",
+      "passed": true
+    },
+    {
+      "name": "check.stale_runtime_rejected",
+      "passed": true
+    },
+    {
+      "name": "check.changed_authored_input_rejected",
+      "passed": true
+    },
+    {
+      "name": "copy.no_raw_cache_engine_or_venv",
+      "passed": true
+    },
+    {
+      "name": "original_inputs_and_runtime_unchanged",
+      "passed": true
+    }
+  ],
+  "input_sha256": {
+    "data/processed/landmark_spec.json": "1f701106fea9c267499ccf7adaa02ed67dc730caa141f87eeecb59904b90d29f",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/daehanmun.json": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa",
+    "game/assets/authored/landmarks/palace/recipes.json": "b36647ffcac6063d5a71d603dbc3d0eeedeb76fbe431de017d4294528204b83e",
+    "tools/prepare_palace_landmarks.py": "f63017b3ee431ee936bab094dc174df55d04feea2b438c1dc57801666afbe732",
+    "tools/prepare_world.py": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b"
+  },
+  "output_sha256": {
+    "game/data/generated/palace_landmarks.json": "346e3fac6f7244e25c96e3b5031a1da008d0b19f05f4f3638835b1bc4d342e18",
+    "game/data/generated/palace_landmarks_manifest.json": "b15f096ff32f631db3ceee29ad6363aab646f7d583808d4d0abac9f638c9c533"
+  },
+  "scope": "Prepared six-input relocation/regeneration on current M1 interpreter; not full GIS rebuild, fresh dependency installation or another Mac test"
+}

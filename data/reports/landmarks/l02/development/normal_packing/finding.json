@@ -1,0 +1,22 @@
+{
+  "task": "L02",
+  "issue": "ArrayMesh normal array was assumed byte-identical to original float32 normals; actual GPU restored packed normals differ, vertices match exactly",
+  "actual_checks": 74,
+  "failed_checks": 6,
+  "producer_sha256": "81e801777b26d8cd2c0106471ee9112aaa7e33ba8bdc21d41dceedfa95f6bdd2",
+  "evidence": "views.json.gz",
+  "scope": "Development failure, not accepted; independent source diagnosis required before tolerance adjustment",
+  "diagnosis": {
+    "cause": "ArrayMesh default normal storage uses octahedral encoding, two uint16 components and decoding even when attribute compression flag is off",
+    "source_urls": [
+      "https://github.com/godotengine/godot/blob/ed1daf0bf/servers/rendering/rendering_server.cpp#L562-L579",
+      "https://github.com/godotengine/godot/blob/ed1daf0bf/servers/rendering/rendering_server.cpp#L1382-L1396",
+      "https://github.com/godotengine/godot/blob/ed1daf0bf/core/math/vector3.cpp#L84-L105"
+    ],
+    "actual_original_float32_normal_max_difference": 9.062886e-05,
+    "maximum_angle_degrees": 0.005941,
+    "independent_packing_prediction_max_difference": 5.55e-16,
+    "vertex_max_difference_m": 5.12e-13,
+    "correction": "Independently predict float32/octencode/uint16 truncation/decode/normalize and compare at 1e-9; retain vertex 1e-9m check, no arbitrary tolerance expansion"
+  }
+}

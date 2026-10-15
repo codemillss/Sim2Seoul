@@ -194,3 +194,15 @@ sh tools/run_public_walk.sh run
 기존 W03 장면/플레이어/자료는 변경하지 않는다. [수동 여정](../data/manual/walkable_milestone.json)→[표준 생성기](../tools/prepare_walkable_itinerary.py)→Git 제외 itinerary/manifest2파일로 정확한 원문 구간을 복사한다. 일반 실행은 [run_walkable_milestone](../tools/run_walkable_milestone.sh)로 기존 public_walk를 열고, 자동 시험만 새 probe/동일39authored+15runtime/6helper 사본을 쓴다.
 
 관측 도구는 W03 helper를 상속하되 여정 중 구간별 pose를 호출하지 않는다. 전역 camera_stepped 관측은 PNG 대기 중에도 이어지고 물리 tick·프레임/시간·체크포인트·연결부를 대조한다. 여정 종료 후에만 기존 복귀/메뉴5이벤트를 호출한다. [검증·실행·범위](../data/reports/walkable_milestone.md). 직접 사용자 조작·현장 접근·M4·성능·V0 판정은 포함하지 않는다.
+
+## L02 궁궐 외형과 보행
+
+```sh
+python3 tools/prepare_landmark_spec.py
+.venv-data/bin/python tools/prepare_palace_landmarks.py
+sh tools/run_palace_landmarks.sh run
+```
+
+위 W04까지의 준비를 재사용한다. [새 장면](../game/scenes/world/palace_landmarks.tscn)은 public_walk의 기존 이동/카메라/메뉴/경계를 재사용하고 [외형 loader](../game/scripts/landmark_visuals.gd)만 붙인다. 대한문·중화전·닫힌 중화문·석조전·돈덕전·정관헌을 구별하는 간결한 지붕/기둥/기단/창·열주를 만든다. 표시용401부재와 기존 물리는 분리돼 나중에 적합한 모델로 외형만 교체할 수 있다. 기존 public_walk와 이전 시험장 진입점은 보존한다.
+
+일반 실행은 WASD/방향키·Shift·마우스/휠·Esc이며 자동 보행 도구는 붙이지 않는다. 생성 단계만 기존 GIS 가상환경/Shapely를 쓰고 실행 중 Python/원본/네트워크는 필요 없다. [전후 화면·기하/보행 검증·한계](../data/reports/palace_landmarks.md). 외형 확인용 고정 카메라 위치는 새 스폰/보행 권한이 아니다. 실제 장소 인상/사람 조작·M4 확인과 L03 도시 외형은 별도로 남긴다.

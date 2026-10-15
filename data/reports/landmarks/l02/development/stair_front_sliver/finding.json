@@ -1,0 +1,8 @@
+{
+  "task": "L02",
+  "issue": "Three stair-relief meshes passed geometry checks but remained hidden behind a 0.01m strip of full-height front base",
+  "cause": "front sampled with 0.03m inset, cut ended at front+0.02m, leaving original front skin",
+  "correction": "Extend subtraction through positive-V source boundary, clip first step at source boundary; no footprint or collision changes",
+  "previous_bundle_sha256": "ec2fdf8fad7545744336761573988329408c7c03beef8550ff6a5c7c1a01c7f8",
+  "scope": "Actual close rendered screenshot plus observed producer geometry; automated presence alone did not prove visibility"
+}

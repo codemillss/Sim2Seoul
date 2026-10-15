@@ -234,3 +234,13 @@ W04 관측은 한 session/actor로 실제 물리를 진행하고 전역 tick/이
 `data/manual/landmark_plan.json`·`landmark_references.json`이 수동 원천이며 `prepare_landmark_spec.py`는 기존 feature/height/mesh와 연결해 로컬 `data/processed/landmark_spec.json`만 만든다. 게임 자산/통행/충돌을 만들지 않는다. [최소 특징·생략·대안](landmark_reference.md)을 따르며 source tag·층수 추정·임시 높이·부분 상단 외곽 상한을 실측으로 바꾸지 않는다. 외관 사실/사진 관찰·제작 비율·확인하지 않은 용어와 시점을 구분한다. 지붕 층수와 처마 구조는 같은 분류가 아니다.
 
 L02/L03은 외형 교체 시 W04 body·경계·좌표/미터 축척·문3×3m 개구부와 전체 경로를 유지한다. 시각 부모를 끄면서 body까지 비활성화하지 않는다. 석조전 전체-부분 이중 표시와 정관헌의 보류 윤곽 복원을 막는다. 중화문은 닫힌 상태다. 사진·행정 도면에서 새 지형/동선·숫자 치수를 승인하지 않으며 광장/SFC의 차이는 별도 기록에 따른다. 외형 구현 뒤 카메라/동선 회귀는 L02–L04에서 실제로 검사한다. L01 자료 연결 검사를 그 결과로 재사용하지 않는다.
+
+## L02 궁궐 외형 교체
+
+새 [palace_landmarks 장면](../game/scenes/world/palace_landmarks.tscn)은 기존 public_walk를 상속한다. [recipes](../game/assets/authored/landmarks/palace/recipes.json)의 색·비례·반복 간격과 L01 spatial binding을 [생성기](../tools/prepare_palace_landmarks.py)로 결합한다. 원본 footprint/구멍·현재 수직 외곽 안으로 모든 삼각형을 자른 표시 전용 자료이며 원점 이동/전체 축척 변경을 하지 않는다. 대한문은 기존 W01 통로의 수직/진행 축을 사용한다. 나머지는 원본 최소 회전 외곽의 긴 축과 제작상 정면을 기록하며 측량 방향으로 주장하지 않는다.
+
+외형은 Node3D/MeshInstance3D/ArrayMesh/Material만 추가한다. 원본 6메시와 대한문 3조각은 시각 가시성만 끄고 원래 자식 body·ConcavePolygonShape3D·레이어/마스크·전역 변환은 보존한다. 기존 692생성/687활성 충돌 구조와 지원면/스폰/복귀·경계/경로를 바꾸지 않는다. 석조전은 부모 외형 하나로 교체하며 현재 E03에는 부분 외형이 별도로 없음을 확인한다. 정관헌의 보류된 큰 겹침 윤곽을 복원하지 않는다.
+
+새 면은 원래 닫힌 체적 안에만 있다. 다섯 닫힌 건물의 안쪽 0.2~0.32m 부조·열주/창호·석조전 단차 띠는 실내/포치/계단 보행을 추가하지 않는다. 대한문은 기존3×3m 임시 개구부 아래를 비우고 새 외형이 원래 좌우 조각 안에 있는지 별도 검사한다. 지붕/기둥/기단 비율과 색은 제작 가정이며 G03의 임시/추정/부분 유래 높이 분류를 유지한다.
+
+실행용 JSON/manifest 두 파일은 Git 제외 재생성물이다. loader는 버전/대상/자료SHA/원천 worldSHA와 배열을 대조한 뒤에만 외형을 교체한다. 고정 W04 검사의 **대한문 시각 가시성3개**만 의도된 차이로 정규화하며 원래 관측을 보존한다. 실제 전체1,233메시/7조각 가시성과 표시 자산/물리 구조는 독립 검사한다. 보행/시간/침투 허용치는 변경하지 않는다. [실제 결과와 실패](../data/reports/palace_landmarks.md).

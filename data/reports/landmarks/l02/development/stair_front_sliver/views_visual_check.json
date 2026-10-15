@@ -1,0 +1,541 @@
+{
+  "task": "L02",
+  "passed": true,
+  "checks": [
+    {
+      "name": "scope.six_unique_source_bound_landmarks",
+      "passed": true
+    },
+    {
+      "name": "scope.no_new_colliders_or_permissions",
+      "passed": true
+    },
+    {
+      "name": "engine.loaded_visible_overlay",
+      "passed": true
+    },
+    {
+      "name": "engine.unique_complete_component_inventory",
+      "passed": true
+    },
+    {
+      "name": "engine.only_replaced_source_meshes_hidden",
+      "passed": true
+    },
+    {
+      "name": "engine.only_gate_fragments_hidden",
+      "passed": true
+    },
+    {
+      "name": "engine.all_source_mesh_visibility_exact",
+      "passed": true,
+      "details": {
+        "expected_total": 1233,
+        "expected_hidden": [
+          "osm:relation:19357693:building",
+          "osm:way:181574577:building",
+          "osm:way:181574580:building",
+          "osm:way:26658458:barrier",
+          "osm:way:377289797:building",
+          "osm:way:381755268:building",
+          "osm:way:517072312:building",
+          "temporary_support"
+        ]
+      }
+    },
+    {
+      "name": "engine.all_fragment_visibility_exact",
+      "passed": true,
+      "details": {
+        "expected_total": 7,
+        "expected_hidden": [
+          "W01_gate_lintel",
+          "W01_gate_side_0",
+          "W01_gate_side_1",
+          "W01_support",
+          "W02_support"
+        ]
+      }
+    },
+    {
+      "name": "gate.original_opening_and_route_retained",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.original_passage_axis",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "daehanmun.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "daehanmun.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "daehanmun.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "daehanmun.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "daehanmun.geometric_sloped_roof_and_separated_column_rhythm",
+      "passed": true,
+      "details": {
+        "sloped_roof_area_m2": 272.12302216087176,
+        "columns": 10,
+        "column_u_span_m": 18.319368810159553
+      }
+    },
+    {
+      "name": "junghwajeon.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "junghwajeon.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "junghwajeon.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "junghwajeon.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "junghwajeon.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "junghwajeon.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "junghwajeon.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "junghwajeon.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "junghwajeon.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "junghwajeon.geometric_sloped_roof_and_separated_column_rhythm",
+      "passed": true,
+      "details": {
+        "sloped_roof_area_m2": 553.4407389621965,
+        "columns": 18,
+        "column_u_span_m": 26.974812914686243
+      }
+    },
+    {
+      "name": "junghwajeon.stone_podium_and_closed_gate_or_hall",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "junghwamun.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "junghwamun.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "junghwamun.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "junghwamun.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "junghwamun.geometric_sloped_roof_and_separated_column_rhythm",
+      "passed": true,
+      "details": {
+        "sloped_roof_area_m2": 262.30937667434034,
+        "columns": 10,
+        "column_u_span_m": 19.265853400619246
+      }
+    },
+    {
+      "name": "junghwamun.stone_podium_and_closed_gate_or_hall",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "seokjojeon.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "seokjojeon.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "seokjojeon.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "seokjojeon.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "seokjojeon.light_classical_columns_and_raised_pediment",
+      "passed": true,
+      "details": {
+        "columns": 16,
+        "pediments": 2
+      }
+    },
+    {
+      "name": "seokjojeon.actual_multi_height_stair_relief",
+      "passed": true,
+      "details": {
+        "steps": 3,
+        "top_heights_m": [
+          0.9917,
+          1.9833,
+          2.975
+        ]
+      }
+    },
+    {
+      "name": "dondeokjeon.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "dondeokjeon.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "dondeokjeon.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "dondeokjeon.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "dondeokjeon.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "dondeokjeon.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "dondeokjeon.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "dondeokjeon.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "dondeokjeon.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "dondeokjeon.brick_teal_contrast_two_actual_window_levels_and_corner_roofs",
+      "passed": true,
+      "details": {
+        "window_centre_y_m": [
+          3.272,
+          8.558
+        ],
+        "corner_roofs": 3
+      }
+    },
+    {
+      "name": "jeonggwanheon.exact_L01_spatial_and_height_binding",
+      "passed": true
+    },
+    {
+      "name": "jeonggwanheon.metre_unit_axes_and_documented_orientation",
+      "passed": true
+    },
+    {
+      "name": "jeonggwanheon.actual_finite_triangle_arrays",
+      "passed": true
+    },
+    {
+      "name": "jeonggwanheon.actual_float32_arrays_match_bundle",
+      "passed": true,
+      "details": {
+        "vertices": "source float32, tolerance 1e-9 m",
+        "normals": "independent float32 octahedral uint16x2 encode/decode prediction, tolerance 1e-9"
+      }
+    },
+    {
+      "name": "jeonggwanheon.actual_visible_identity_material_and_front_culling",
+      "passed": true
+    },
+    {
+      "name": "jeonggwanheon.full_projected_triangles_inside_original_footprint",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "jeonggwanheon.actual_vertical_envelope_preserved",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "jeonggwanheon.clockwise_faces_and_unit_consistent_normals",
+      "passed": true,
+      "details": {
+        "bad_normals": [],
+        "collapsed_faces": []
+      }
+    },
+    {
+      "name": "jeonggwanheon.nonempty_roof_and_closed_backing_geometry",
+      "passed": true
+    },
+    {
+      "name": "jeonggwanheon.geometric_sloped_roof_and_separated_column_rhythm",
+      "passed": true,
+      "details": {
+        "sloped_roof_area_m2": 353.6397023663892,
+        "columns": 18,
+        "column_u_span_m": 21.641311840866038
+      }
+    },
+    {
+      "name": "jeonggwanheon.low_selected_body_and_actual_railings",
+      "passed": true
+    },
+    {
+      "name": "gate.all_visible_geometry_below_3m_in_original_side_solids",
+      "passed": true,
+      "details": {
+        "offenders": [],
+        "tolerance_m": 4e-05
+      }
+    },
+    {
+      "name": "counts.actual_geometry_matches_bundle",
+      "passed": true
+    }
+  ],
+  "target_summary": [
+    {
+      "id": "daehanmun",
+      "components": 30,
+      "triangles": 780,
+      "roles": {
+        "backing": 2,
+        "beam": 2,
+        "window": 14,
+        "column": 10,
+        "roof": 2
+      },
+      "sloped_roof_area_m2": 272.12302216087176
+    },
+    {
+      "id": "junghwajeon",
+      "components": 43,
+      "triangles": 1175,
+      "roles": {
+        "podium": 1,
+        "backing": 1,
+        "beam": 2,
+        "window": 17,
+        "column": 18,
+        "roof": 4
+      },
+      "sloped_roof_area_m2": 553.4407389621965
+    },
+    {
+      "id": "junghwamun",
+      "components": 32,
+      "triangles": 744,
+      "roles": {
+        "podium": 1,
+        "backing": 1,
+        "beam": 2,
+        "window": 14,
+        "column": 10,
+        "roof": 4
+      },
+      "sloped_roof_area_m2": 262.30937667434034
+    },
+    {
+      "id": "seokjojeon",
+      "components": 124,
+      "triangles": 4455,
+      "roles": {
+        "podium": 4,
+        "backing": 1,
+        "beam": 2,
+        "window": 66,
+        "column": 48,
+        "roof": 1,
+        "pediment": 2
+      },
+      "sloped_roof_area_m2": 0.0
+    },
+    {
+      "id": "dondeokjeon",
+      "components": 104,
+      "triangles": 1907,
+      "roles": {
+        "podium": 1,
+        "backing": 1,
+        "beam": 3,
+        "window": 94,
+        "roof": 5
+      },
+      "sloped_roof_area_m2": 1369.8961362261612
+    },
+    {
+      "id": "jeonggwanheon",
+      "components": 68,
+      "triangles": 1717,
+      "roles": {
+        "podium": 1,
+        "backing": 1,
+        "beam": 2,
+        "window": 16,
+        "column": 44,
+        "railing": 2,
+        "roof": 2
+      },
+      "sloped_roof_area_m2": 353.6397023663892
+    }
+  ],
+  "scope": "Actual visible surfaces and source-volume preservation only; recognition, continuous walking/camera, human handling, performance and M4 need separate evidence."
+}

@@ -21,7 +21,7 @@
 - 첫 중간 결과 W0는 보행 검증이다. 사용자 합의 첫 버전 V0는 랜드마크·간단한 보행자·차량을 포함한다.
 - M1 Pro 16GB 기준으로 개발하고 M4 Pro에서도 확인한다. M4의 1TB는 저장공간이며 RAM은 아직 모른다.
 - 데이터에 없는 높이·도로폭·지형은 출처와 추정을 구분한다. 핵심 동선을 임의의 길로 연결하지 않는다.
-- 개발 기준은 Godot 4.7.2 Standard·Forward+/Metal이다. E02 정식 `game/`은 [실행 도구와 구조](GAME_PROJECT.md)로 로컬 기동된다. 원천 region→G01 해시 대조→Git 제외 실행 사본을 준비하며 입력은 의도만 전달한다. E03 서울 배치·E04 외곽점 거리/10m 기준물/화면 비례 검증을 완료했다. [E04 화면/재현](../data/reports/scale_view/README.md)을 유지하고 P01 사람 크기 캐릭터/독립 시험장·60초 안정 정지 검증도 완료했다. P02에서 [시험장 이동/복귀·증거](../data/reports/movement.md)도 완료했다. P03의 [카메라 조작/가림·문 회전·잠금 검증](../data/reports/camera.md)도 완료했다. P04의 [충돌 계층·도시 배치 검증](../data/reports/collision.md)도 완료했다. W01의 [대한문 밖↔경내 입구 연결](../data/reports/daehanmun_walk.md)도 완료했고 W02의 [경내 순환·앞마당](../data/reports/palace_walk.md)도 완료했다. W03의 [도심·돌담길 연결/장면 경계](../data/reports/public_walk.md)도 완료했다. W04의 [자동 연속 여정·중간 버전 보존](../data/reports/walkable_milestone.md)도 완료했다. `W0-engineering-walk-v1` 스냅샷/인수는 기존 W03 게임·원천/경계를 유지한 자동 엔진 판정이며 직접 사람/OS·현실 접근/지형·M4는 미검증이다. L01의 참조·제작 명세도 완료했으며 다음은 WORK_STATUS의 L02 궁궐 외형이다. 기존 W01/W02/W03 원문·실패·검증을 재사용한다. 시험장 이동은 실제 서울 보행과 구분하며 직접 키 조작감은 미검증이다. E02 화면 잠금 이력과 GPU/엔진 자동 검증을 직접 사용성 검사와 구분한다.
+- 개발 기준은 Godot 4.7.2 Standard·Forward+/Metal이다. E02 정식 `game/`은 [실행 도구와 구조](GAME_PROJECT.md)로 로컬 기동된다. 원천 region→G01 해시 대조→Git 제외 실행 사본을 준비하며 입력은 의도만 전달한다. E03 서울 배치·E04 외곽점 거리/10m 기준물/화면 비례 검증을 완료했다. [E04 화면/재현](../data/reports/scale_view/README.md)을 유지하고 P01 사람 크기 캐릭터/독립 시험장·60초 안정 정지 검증도 완료했다. P02에서 [시험장 이동/복귀·증거](../data/reports/movement.md)도 완료했다. P03의 [카메라 조작/가림·문 회전·잠금 검증](../data/reports/camera.md)도 완료했다. P04의 [충돌 계층·도시 배치 검증](../data/reports/collision.md)도 완료했다. W01의 [대한문 밖↔경내 입구 연결](../data/reports/daehanmun_walk.md)도 완료했고 W02의 [경내 순환·앞마당](../data/reports/palace_walk.md)도 완료했다. W03의 [도심·돌담길 연결/장면 경계](../data/reports/public_walk.md)도 완료했다. W04의 [자동 연속 여정·중간 버전 보존](../data/reports/walkable_milestone.md)도 완료했다. `W0-engineering-walk-v1` 스냅샷/인수는 기존 W03 게임·원천/경계를 유지한 자동 엔진 판정이며 직접 사람/OS·현실 접근/지형·M4는 미검증이다. L01의 참조·제작 명세도 완료했으며 다음은 WORK_STATUS의 L03 도시 외형이다. 기존 W01/W02/W03 원문·실패·검증을 재사용한다. 시험장 이동은 실제 서울 보행과 구분하며 직접 키 조작감은 미검증이다. E02 화면 잠금 이력과 GPU/엔진 자동 검증을 직접 사용성 검사와 구분한다.
 
 ## 작업을 작게 수행하는 규칙
 
@@ -63,3 +63,8 @@ W01 자동 GPU 판정은 12카메라 시점과 중립 정지의 준비 후 결�
 최근 사용자 지시(2026-10-13): “알아서 계속 만들어 당분간은너가해”. 선행 조건이 준비된 다음 작업을 구현·검증·기록하고 기존 전용 저장소에 함께 공유하는 흐름을 이어간다. 매 단계의 사람 조작 확인을 대기 조건으로 삼지 않으며, 자동 검사와 미확인 사람 조작감을 구분한다. 큰 범위 변경 직전에만 질문한다.
 
 L01 참조·명세는 [landmark_reference](landmark_reference.md)로 완료했다. 현재 다음은 **L02 궁궐 외형**이다. `landmark_plan.json`/`landmark_references.json`은 수동 원천, `prepare_landmark_spec.py`로 만든 `data/processed/landmark_spec.json`은 Git 제외 로컬 연결물이다. L02는 대한문의 단일 지붕 층을 미확인 홑처마 형식으로 읽지 않고, 현재 문 개구부/기존 충돌·중화문 닫힘과 석조전 부모-부분·정관헌 선택 윤곽을 보존한다. L01에서 새 모델·실내·GPU 회귀·사람/M4·장소 인지 검증은 하지 않았다. 위 단계별 이력의 ‘다음 L01’은 당시 기록이며 현재 재개는 WORK_STATUS의 L02를 따른다.
+
+
+L02 궁궐6곳 외형과 보행 회귀는 [실제 결과](../data/reports/palace_landmarks.md)로 완료했다. 현재 다음 작업은 **WORK_STATUS의 L03**이며 위 L01 종료 당시 ‘다음L02’ 문장은 이력이다. `recipes.json`과 `prepare_palace_landmarks.py`로 표시용 JSON/manifest를 재생성하고 `run_palace_landmarks.sh`로 최신 장면을 연다. 기존 충돌/경계·문/경로는 유지한다. 첫GPU 시간3항목 실패와 동일 소스/입력/허용치의 짧은/전체 재시험 통과를 함께 보존했고 초기 지연 원인은 미확정이다.
+
+사용자의 기존 결과물 수정 질문은 [재사용 대안](ASSET_REUSE_OPTIONS.md), 메타버스/심즈 구분은 [맥락](PROJECT_CONTEXT.md)에 남겼다. 기존 자산 후보 한 개의 비교를 권고하며 아직 실제 비교/파일 이용권 확보로 주장하지 않는다. 현재 목표는 서울 탐험 기반에 생활/시뮬레이션을 확장하는 것이고 메타버스/멀티플레이를 확정하지 않았다. 핵심 반복 활동/개별 실내는 미정이다.
