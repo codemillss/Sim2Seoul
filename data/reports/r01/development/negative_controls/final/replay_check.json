@@ -1,0 +1,65 @@
+{
+  "task": "R01-retained-negative-replay",
+  "passed": true,
+  "raw_gzip_sha256": "df7106c855980f2f2387ba68d9e1640eb5541b1da1a0c221d01a3d70b299bbb7",
+  "index_sha256": "46e5e60ce79dbc3f64bd9bcad17f48f723036cbfd011cd53b07ef2fa62da5a6d",
+  "checker_sha256": "2e5aab88510a23ebd2e0e48145c3bf17e3007c341a6315619db0b492677daac8",
+  "controls": [
+    {
+      "name": "mid_measurement_3d_scale",
+      "passed": true,
+      "target_check": "render.every_frame_internal_3d_scale",
+      "failed_checks": [
+        "render.every_frame_internal_3d_scale"
+      ],
+      "patch_count": 1
+    },
+    {
+      "name": "first_frame_removed_count_adjusted",
+      "passed": true,
+      "target_check": "clock.actual_complete",
+      "failed_checks": [
+        "clock.actual_complete"
+      ],
+      "patch_count": 2
+    },
+    {
+      "name": "observation_and_actor_ticks_shifted",
+      "passed": true,
+      "target_check": "observations.exact_raw_frame_schedule_and_physics_join",
+      "failed_checks": [
+        "observations.exact_raw_frame_schedule_and_physics_join"
+      ],
+      "patch_count": 5
+    },
+    {
+      "name": "double_speed_camera_with_consistent_source_poses",
+      "passed": true,
+      "target_check": "camera.every_frame_clock_bound_and_source_index",
+      "failed_checks": [
+        "camera.every_frame_clock_bound_and_source_index",
+        "camera.actual_discrete_source_replay"
+      ],
+      "patch_count": 1829
+    },
+    {
+      "name": "vehicle_stopped_with_frozen_position_and_distance",
+      "passed": true,
+      "target_check": "actors.sejong_south.measurable_route_motion",
+      "failed_checks": [
+        "actors.sejong_south.running_and_physics_advancing",
+        "actors.sejong_south.measurable_route_motion"
+      ],
+      "patch_count": 26
+    },
+    {
+      "name": "all_rss_observations_unavailable",
+      "passed": true,
+      "target_check": "memory.measurement_coverage",
+      "failed_checks": [
+        "memory.measurement_coverage"
+      ],
+      "patch_count": 7
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "task": "R01-retained-negative-controls",
+  "passed": true,
+  "inputs": {
+    "record": {
+      "path": "data/cache/r01_development/smoke02/B_smoke.json.gz",
+      "sha256": "df7106c855980f2f2387ba68d9e1640eb5541b1da1a0c221d01a3d70b299bbb7",
+      "decoded_sha256": "509a54353dcfa97ed71346803435d1ad83e625302facc15ec1e982559455db5e",
+      "bytes": 16425,
+      "decoded_bytes": 97606
+    },
+    "plan": {
+      "path": "data/cache/r01_development/smoke02/B_smoke_benchmark_camera.json.gz",
+      "sha256": "0bf9e9b0fcd758bb19cf2efa589a93129b4ca92bdaaf6296527ec84b1a9f1ee8",
+      "decoded_sha256": "54ccce47ff6c5a442c7db2a71cee3ad45fcd7319754e49cc7b8e96b0d3bb60a4",
+      "bytes": 1000427,
+      "decoded_bytes": 5159987
+    },
+    "report": {
+      "path": "data/cache/r01_development/smoke02/B_smoke_performance.json",
+      "sha256": "83b3acdf97d098f6d4e96e0ecf7bdb662986559663a195d574b819d2a7de3317",
+      "decoded_sha256": "83b3acdf97d098f6d4e96e0ecf7bdb662986559663a195d574b819d2a7de3317",
+      "bytes": 43066,
+      "decoded_bytes": 43066
+    },
+    "frame_batches": {
+      "path": "data/cache/r01_development/smoke02/B_smoke_frames.jsonl.gz",
+      "sha256": "d2165c6fb8b1363034f33cfab0c1a049caa8cc5bf416322aed508db49c07d4ec",
+      "decoded_sha256": "c60c5c148be520a4e4f53cc3ff6958dc4d0dacc934d233f742352a743a529d62",
+      "bytes": 11235,
+      "decoded_bytes": 80549
+    }
+  },
+  "baseline_pure_check_count": 29,
+  "baseline_passed": true,
+  "checker_sha256": "1338eae2d8b0d3ecbfbb2e75dcafa7875fed785113bafce82246638b64bc2a37",
+  "controls": [
+    {
+      "name": "mid_measurement_3d_scale",
+      "passed": true,
+      "target_check": "render.every_frame_internal_3d_scale",
+      "failed_checks": [
+        "render.every_frame_internal_3d_scale"
+      ],
+      "patch_count": 1,
+      "path": "data/cache/r01_development/negative_controls/mid_measurement_3d_scale.json",
+      "sha256": "519cb7ed0fdce8c17f3b6a4c496ee018ca264ba3305816146a553be186aed266"
+    },
+    {
+      "name": "first_frame_removed_count_adjusted",
+      "passed": true,
+      "target_check": "clock.actual_complete",
+      "failed_checks": [
+        "clock.actual_complete"
+      ],
+      "patch_count": 2,
+      "path": "data/cache/r01_development/negative_controls/first_frame_removed_count_adjusted.json",
+      "sha256": "9fbd7ef7ff9dbbf7f865978a74e501be8c20c506d997faf02fd0ba7d3ffb6275"
+    },
+    {
+      "name": "observation_and_actor_ticks_shifted",
+      "passed": true,
+      "target_check": "observations.exact_raw_frame_schedule_and_physics_join",
+      "failed_checks": [
+        "observations.exact_raw_frame_schedule_and_physics_join"
+      ],
+      "patch_count": 5,
+      "path": "data/cache/r01_development/negative_controls/observation_and_actor_ticks_shifted.json",
+      "sha256": "fbb738a117f33d01ebb7b5ec4b60e0536080b134d65e4318cb8879b6f28f4b85"
+    },
+    {
+      "name": "double_speed_camera_with_consistent_source_poses",
+      "passed": true,
+      "target_check": "camera.every_frame_clock_bound_and_source_index",
+      "failed_checks": [
+        "camera.every_frame_clock_bound_and_source_index",
+        "camera.actual_discrete_source_replay"
+      ],
+      "patch_count": 1829,
+      "path": "data/cache/r01_development/negative_controls/double_speed_camera_with_consistent_source_poses.json",
+      "sha256": "acc75ada5e58d8ae77c6ff1bc3ec72b182908dec54d9ea1bf6ab6bcdef7c773d"
+    },
+    {
+      "name": "vehicle_stopped_with_frozen_position_and_distance",
+      "passed": true,
+      "target_check": "actors.sejong_south.measurable_route_motion",
+      "failed_checks": [
+        "actors.sejong_south.running_and_physics_advancing",
+        "actors.sejong_south.measurable_route_motion"
+      ],
+      "patch_count": 26,
+      "path": "data/cache/r01_development/negative_controls/vehicle_stopped_with_frozen_position_and_distance.json",
+      "sha256": "7b61f644bac5b6d967b300ebfe516daa871d3189c392647457bc6f84bfdbad2b"
+    },
+    {
+      "name": "all_rss_observations_unavailable",
+      "passed": true,
+      "target_check": "memory.measurement_coverage",
+      "failed_checks": [
+        "memory.measurement_coverage"
+      ],
+      "patch_count": 7,
+      "path": "data/cache/r01_development/negative_controls/all_rss_observations_unavailable.json",
+      "sha256": "deb18af647053711253e4825d8f648b1bc78f284be23b7bcadfc7c4f67229a3a"
+    }
+  ],
+  "scope": "Six small saved-observation controls from one unchanged B smoke recording. Each JSON records exact old/new patches and target failures. No engine execution or full performance acceptance."
+}

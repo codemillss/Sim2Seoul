@@ -1,0 +1,1900 @@
+{
+  "schema_version": 1,
+  "task": "R01",
+  "passed": true,
+  "hardware": {
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "os": {
+      "available": true,
+      "command": [
+        "/usr/bin/sw_vers"
+      ],
+      "returncode": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A428",
+      "stderr": null
+    },
+    "sysctl": {
+      "hw.model": {
+        "available": true,
+        "command": [
+          "/usr/sbin/sysctl",
+          "-n",
+          "hw.model"
+        ],
+        "returncode": 0,
+        "stdout": "MacBookPro18,3",
+        "stderr": null
+      },
+      "hw.memsize": {
+        "available": true,
+        "command": [
+          "/usr/sbin/sysctl",
+          "-n",
+          "hw.memsize"
+        ],
+        "returncode": 0,
+        "stdout": "17179869184",
+        "stderr": null
+      },
+      "hw.physicalcpu": {
+        "available": true,
+        "command": [
+          "/usr/sbin/sysctl",
+          "-n",
+          "hw.physicalcpu"
+        ],
+        "returncode": 0,
+        "stdout": "8",
+        "stderr": null
+      },
+      "hw.logicalcpu": {
+        "available": true,
+        "command": [
+          "/usr/sbin/sysctl",
+          "-n",
+          "hw.logicalcpu"
+        ],
+        "returncode": 0,
+        "stdout": "8",
+        "stderr": null
+      },
+      "machdep.cpu.brand_string": {
+        "available": true,
+        "command": [
+          "/usr/sbin/sysctl",
+          "-n",
+          "machdep.cpu.brand_string"
+        ],
+        "returncode": 0,
+        "stdout": "Apple M1 Pro",
+        "stderr": null
+      }
+    },
+    "system_profiler": {
+      "available": true,
+      "command": [
+        "/usr/sbin/system_profiler",
+        "-json",
+        "SPHardwareDataType",
+        "SPDisplaysDataType"
+      ],
+      "returncode": 0,
+      "selected_fields": {
+        "SPHardwareDataType": [
+          {
+            "chip_type": "Apple M1 Pro",
+            "machine_model": "MacBookPro18,3",
+            "machine_name": "MacBook Pro",
+            "number_processors": "proc 8:0:6:2",
+            "physical_memory": "16 GB"
+          }
+        ],
+        "SPDisplaysDataType": [
+          {
+            "spdisplays_vendor": "sppci_vendor_Apple",
+            "sppci_model": "Apple M1 Pro"
+          }
+        ]
+      },
+      "reason": null
+    }
+  },
+  "profiles": {
+    "A": {
+      "report": "data/reports/r01/A_performance.json",
+      "report_sha256": "9aa63200fff13d4d6bcd870a0670d51b326af18724ab5cd2d72d996046312bb2",
+      "recheck": "data/reports/r01/A_saved_check.json",
+      "recheck_sha256": "c32635a30a629e6395140861e3bbe73e00bfd420dc49fef2f05c05367442d416",
+      "passed": true,
+      "full_protocol_complete": true,
+      "profile": {
+        "id": "R01-A-static-0NPC-0vehicle-v1",
+        "pedestrians": 0,
+        "vehicles": 0,
+        "duration_s": 600
+      },
+      "summary": {
+        "frames": 71982,
+        "covered_elapsed_s": 600.007201,
+        "average_fps": 119.96856017733027,
+        "frame_ms": {
+          "count": 71982,
+          "mean": 8.335517226528854,
+          "min": 3.433,
+          "p50": 8.332,
+          "p95": 9.952949999999996,
+          "p99": 10.966190000000001,
+          "max": 23.038
+        },
+        "monitors": {
+          "TIME_PROCESS": {
+            "count": 71982,
+            "mean": 0.011433611652913228,
+            "min": 0.009268,
+            "p50": 0.01121,
+            "p95": 0.01372,
+            "p99": 0.01597,
+            "max": 0.02286
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "count": 71982,
+            "mean": 0.002339314634214109,
+            "min": 0.000379,
+            "p50": 0.002218,
+            "p95": 0.004027749999999811,
+            "p99": 0.007406,
+            "max": 0.01134
+          },
+          "MEMORY_STATIC": {
+            "count": 71982,
+            "mean": 175437982.37790003,
+            "min": 174150279.0,
+            "p50": 175448471.0,
+            "p95": 176534114.6,
+            "p99": 176632297.08,
+            "max": 176686595.0
+          },
+          "OBJECT_COUNT": {
+            "count": 71982,
+            "mean": 7052.0,
+            "min": 7052.0,
+            "p50": 7052.0,
+            "p95": 7052.0,
+            "p99": 7052.0,
+            "max": 7052.0
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "count": 71982,
+            "mean": 266.45273818454615,
+            "min": 122.0,
+            "p50": 231.0,
+            "p95": 517.0,
+            "p99": 566.0,
+            "max": 597.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "count": 71982,
+            "mean": 266.45273818454615,
+            "min": 122.0,
+            "p50": 231.0,
+            "p95": 517.0,
+            "p99": 566.0,
+            "max": 597.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "count": 71982,
+            "mean": 141803058.40193382,
+            "min": 133496832.0,
+            "p50": 141803520.0,
+            "p95": 141803520.0,
+            "p99": 141803520.0,
+            "max": 141803520.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "count": 71982,
+            "mean": 55392896.0,
+            "min": 55392896.0,
+            "p50": 55392896.0,
+            "p95": 55392896.0,
+            "p99": 55392896.0,
+            "max": 55392896.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "count": 71982,
+            "mean": 31086692.0,
+            "min": 31086692.0,
+            "p50": 31086692.0,
+            "p95": 31086692.0,
+            "p99": 31086692.0,
+            "max": 31086692.0
+          }
+        },
+        "gpu_frame_time_ms": null
+      },
+      "windows": [
+        {
+          "index": 1,
+          "nominal_start_s": 0.0,
+          "nominal_end_s": 300.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35987,
+          "covered_elapsed_s": 299.992275,
+          "average_fps": 119.95975563037415,
+          "frame_ms": {
+            "count": 35987,
+            "mean": 8.336129018812349,
+            "min": 3.536,
+            "p50": 8.323,
+            "p95": 9.923699999999997,
+            "p99": 10.97714,
+            "max": 20.198
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35987,
+              "mean": 0.01139870378192125,
+              "min": 0.009268,
+              "p50": 0.011201,
+              "p95": 0.013876,
+              "p99": 0.016286,
+              "max": 0.019025
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35987,
+              "mean": 0.002247113652152166,
+              "min": 0.000379,
+              "p50": 0.00215,
+              "p95": 0.003966,
+              "p99": 0.007543759999999428,
+              "max": 0.011126
+            },
+            "MEMORY_STATIC": {
+              "count": 35987,
+              "mean": 174823072.2620113,
+              "min": 174150279.0,
+              "p50": 174822599.0,
+              "p95": 175387630.2,
+              "p99": 175441563.96,
+              "max": 175477939.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35987,
+              "mean": 7052.0,
+              "min": 7052.0,
+              "p50": 7052.0,
+              "p95": 7052.0,
+              "p99": 7052.0,
+              "max": 7052.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35987,
+              "mean": 266.44813404840636,
+              "min": 122.0,
+              "p50": 231.0,
+              "p95": 517.0,
+              "p99": 566.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35987,
+              "mean": 266.44813404840636,
+              "min": 122.0,
+              "p50": 231.0,
+              "p95": 517.0,
+              "p99": 566.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35987,
+              "mean": 141802596.70125324,
+              "min": 133496832.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35987,
+              "mean": 55392896.0,
+              "min": 55392896.0,
+              "p50": 55392896.0,
+              "p95": 55392896.0,
+              "p99": 55392896.0,
+              "max": 55392896.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35987,
+              "mean": 31086692.0,
+              "min": 31086692.0,
+              "p50": 31086692.0,
+              "p95": 31086692.0,
+              "p99": 31086692.0,
+              "max": 31086692.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        },
+        {
+          "index": 2,
+          "nominal_start_s": 300.0,
+          "nominal_end_s": 600.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35995,
+          "covered_elapsed_s": 300.014926,
+          "average_fps": 119.97736405954683,
+          "frame_ms": {
+            "count": 35995,
+            "mean": 8.334905570218085,
+            "min": 3.433,
+            "p50": 8.341,
+            "p95": 9.976299999999997,
+            "p99": 10.957059999999998,
+            "max": 23.038
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35995,
+              "mean": 0.01146851176552299,
+              "min": 0.009429,
+              "p50": 0.011235,
+              "p95": 0.013344,
+              "p99": 0.015342719999999971,
+              "max": 0.02286
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35995,
+              "mean": 0.0024314951243228225,
+              "min": 0.000419,
+              "p50": 0.002262,
+              "p95": 0.004067299999999996,
+              "p99": 0.00635,
+              "max": 0.01134
+            },
+            "MEMORY_STATIC": {
+              "count": 35995,
+              "mean": 176052755.82811502,
+              "min": 175417707.0,
+              "p50": 176050283.0,
+              "p95": 176594799.0,
+              "p99": 176648821.88,
+              "max": 176686595.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35995,
+              "mean": 7052.0,
+              "min": 7052.0,
+              "p50": 7052.0,
+              "p95": 7052.0,
+              "p99": 7052.0,
+              "max": 7052.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35995,
+              "mean": 266.4573412974024,
+              "min": 122.0,
+              "p50": 231.0,
+              "p95": 517.0,
+              "p99": 566.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35995,
+              "mean": 266.4573412974024,
+              "min": 122.0,
+              "p50": 231.0,
+              "p95": 517.0,
+              "p99": 566.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35995,
+              "mean": 141803520.0,
+              "min": 141803520.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35995,
+              "mean": 55392896.0,
+              "min": 55392896.0,
+              "p50": 55392896.0,
+              "p95": 55392896.0,
+              "p99": 55392896.0,
+              "max": 55392896.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35995,
+              "mean": 31086692.0,
+              "min": 31086692.0,
+              "p50": 31086692.0,
+              "p95": 31086692.0,
+              "p99": 31086692.0,
+              "max": 31086692.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        }
+      ],
+      "memory_measurement": {
+        "measurement_valid": true,
+        "available": true,
+        "valid_sample_count": 590,
+        "first_valid_offset_s": 0.688438791083172,
+        "last_valid_offset_s": 599.1364014579449,
+        "rss_bytes_summary": {
+          "count": 590,
+          "mean": 154210789.9661017,
+          "min": 115916800,
+          "p50": 131604480.0,
+          "p95": 230189465.6,
+          "p99": 236130795.5200003,
+          "max": 362086400
+        },
+        "start_rss_bytes_summary": {
+          "count": 29,
+          "mean": 241776993.10344827,
+          "min": 228130816,
+          "p50": 229228544.0,
+          "p95": 279684710.4,
+          "p99": 339015761.9199999,
+          "max": 362086400
+        },
+        "end_rss_bytes_summary": {
+          "count": 29,
+          "mean": 132129615.44827586,
+          "min": 131579904,
+          "p50": 132136960.0,
+          "p95": 132674355.2,
+          "p99": 132729405.44,
+          "max": 132743168
+        },
+        "edge_window_s": 30.0,
+        "maximum_allowed_gap_s": 5.0,
+        "endpoint_margin_s": 5.0,
+        "reason": null,
+        "time_basis": "ps sample start relative to monotonic receipt of R01_MEASURE_START. Excludes startup/warmup. Receipt and ps invocation add scheduling latency; this is periodic process RSS, not frame-synchronous memory."
+      },
+      "physics_effective_hz": 60.00094655530643,
+      "startup_log_receipt_events": [
+        {
+          "line": "R01_FIRST_FRAME profile=A",
+          "since_process_spawn_s": 1.897381833055988,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_READY profile=A scene_spawn_to_first_frame_s=0.907084 actual_render=1920x1080",
+          "since_process_spawn_s": 1.9644378330558538,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_MEASURE_START profile=A",
+          "since_process_spawn_s": 31.978940417058766,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_DONE profile=A frames=71982 elapsed_s=600.007201",
+          "since_process_spawn_s": 632.0803360829595,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        }
+      ],
+      "system_before": {
+        "wall_unix_s": 1792084395.616162,
+        "swap": {
+          "available": true,
+          "command": [
+            "/usr/sbin/sysctl",
+            "vm.swapusage"
+          ],
+          "returncode": 0,
+          "stdout": "vm.swapusage: total = 6144.00M  used = 5166.81M  free = 977.19M  (encrypted)",
+          "stderr": null
+        },
+        "memory_pressure_query": {
+          "available": true,
+          "command": [
+            "/usr/bin/memory_pressure",
+            "-Q"
+          ],
+          "returncode": 0,
+          "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 51%",
+          "stderr": null
+        },
+        "power_source": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+          "stderr": null
+        },
+        "power_settings": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "custom"
+          ],
+          "returncode": 0,
+          "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+          "stderr": null
+        },
+        "heavy_processes": {
+          "available": true,
+          "returncode": 0,
+          "top_cpu": [
+            {
+              "executable": "ANECompilerService",
+              "cpu_percent": 96.7,
+              "rss_bytes": 377274368
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 36.9,
+              "rss_bytes": 488456192
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 28.7,
+              "rss_bytes": 608256000
+            },
+            {
+              "executable": "trustd",
+              "cpu_percent": 15.4,
+              "rss_bytes": 11436032
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 4.3,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "WindowServer",
+              "cpu_percent": 4.2,
+              "rss_bytes": 31883264
+            },
+            {
+              "executable": "homed",
+              "cpu_percent": 3.7,
+              "rss_bytes": 11894784
+            },
+            {
+              "executable": "syspolicyd",
+              "cpu_percent": 3.0,
+              "rss_bytes": 9863168
+            },
+            {
+              "executable": "trustd",
+              "cpu_percent": 2.8,
+              "rss_bytes": 9650176
+            },
+            {
+              "executable": "tccd",
+              "cpu_percent": 2.3,
+              "rss_bytes": 10616832
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 0.9,
+              "rss_bytes": 274055168
+            },
+            {
+              "executable": "opendirectoryd",
+              "cpu_percent": 0.7,
+              "rss_bytes": 6438912
+            }
+          ],
+          "top_rss": [
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 4.3,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 28.7,
+              "rss_bytes": 608256000
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 36.9,
+              "rss_bytes": 488456192
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.6,
+              "rss_bytes": 453918720
+            },
+            {
+              "executable": "ANECompilerService",
+              "cpu_percent": 96.7,
+              "rss_bytes": 377274368
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 0.9,
+              "rss_bytes": 274055168
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.1,
+              "rss_bytes": 212729856
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 0.0,
+              "rss_bytes": 161480704
+            },
+            {
+              "executable": "Notion Helper (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 161218560
+            },
+            {
+              "executable": "mds_stores",
+              "cpu_percent": 0.0,
+              "rss_bytes": 155795456
+            },
+            {
+              "executable": "Slack Helper (Renderer)",
+              "cpu_percent": 0.3,
+              "rss_bytes": 110477312
+            },
+            {
+              "executable": "Google Chrome",
+              "cpu_percent": 0.0,
+              "rss_bytes": 90800128
+            }
+          ],
+          "fields": "ps comm basename, CPU percent and RSS only; no raw process output retained"
+        }
+      },
+      "system_after": {
+        "wall_unix_s": 1792085031.015939,
+        "swap": {
+          "available": true,
+          "command": [
+            "/usr/sbin/sysctl",
+            "vm.swapusage"
+          ],
+          "returncode": 0,
+          "stdout": "vm.swapusage: total = 6144.00M  used = 5150.81M  free = 993.19M  (encrypted)",
+          "stderr": null
+        },
+        "memory_pressure_query": {
+          "available": true,
+          "command": [
+            "/usr/bin/memory_pressure",
+            "-Q"
+          ],
+          "returncode": 0,
+          "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 53%",
+          "stderr": null
+        },
+        "power_source": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+          "stderr": null
+        },
+        "power_settings": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "custom"
+          ],
+          "returncode": 0,
+          "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+          "stderr": null
+        },
+        "heavy_processes": {
+          "available": true,
+          "returncode": 0,
+          "top_cpu": [
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 388857856
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1049870336
+            },
+            {
+              "executable": "VTDecoderXPCService",
+              "cpu_percent": 20.1,
+              "rss_bytes": 23822336
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 15.6,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "VTEncoderXPCService",
+              "cpu_percent": 6.9,
+              "rss_bytes": 29736960
+            },
+            {
+              "executable": "mds_stores",
+              "cpu_percent": 3.9,
+              "rss_bytes": 63864832
+            },
+            {
+              "executable": "com.apple.DriverKit-AppleBCMWLAN",
+              "cpu_percent": 2.7,
+              "rss_bytes": 40173568
+            },
+            {
+              "executable": "mds",
+              "cpu_percent": 1.3,
+              "rss_bytes": 25575424
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 1.3,
+              "rss_bytes": 305332224
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 1.3,
+              "rss_bytes": 425197568
+            },
+            {
+              "executable": "mdworker_shared",
+              "cpu_percent": 1.1,
+              "rss_bytes": 22003712
+            }
+          ],
+          "top_rss": [
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1049870336
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 15.6,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 1.3,
+              "rss_bytes": 425197568
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 388857856
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 1.3,
+              "rss_bytes": 305332224
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 202981376
+            },
+            {
+              "executable": "Google Chrome",
+              "cpu_percent": 0.0,
+              "rss_bytes": 166821888
+            },
+            {
+              "executable": "Slack Helper (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 140607488
+            },
+            {
+              "executable": "Notion Helper (Renderer)",
+              "cpu_percent": 0.1,
+              "rss_bytes": 140525568
+            },
+            {
+              "executable": "Spotify",
+              "cpu_percent": 0.0,
+              "rss_bytes": 119980032
+            },
+            {
+              "executable": "language_server",
+              "cpu_percent": 0.0,
+              "rss_bytes": 112050176
+            }
+          ],
+          "fields": "ps comm basename, CPU percent and RSS only; no raw process output retained"
+        }
+      },
+      "engine_checks": 29,
+      "saved_checks": 42
+    },
+    "B": {
+      "report": "data/reports/r01/B_performance.json",
+      "report_sha256": "abcef8e736551bba5aaf8faa006ef3297e66ff41cd920345b16eb7cca0ddc9f5",
+      "recheck": "data/reports/r01/B_saved_check.json",
+      "recheck_sha256": "77411a24498cfb91a111839e9e9d7b8bb69423bcd1595d02a7bf96c907486e70",
+      "passed": true,
+      "full_protocol_complete": true,
+      "profile": {
+        "id": "R01-B-V0-2NPC-2vehicle-v1",
+        "pedestrians": 2,
+        "vehicles": 2,
+        "duration_s": 1200
+      },
+      "summary": {
+        "frames": 143935,
+        "covered_elapsed_s": 1200.0038789999999,
+        "average_fps": 119.94544560968042,
+        "frame_ms": {
+          "count": 143935,
+          "mean": 8.337123555771702,
+          "min": 3.413,
+          "p50": 8.329,
+          "p95": 9.613299999999988,
+          "p99": 10.481,
+          "max": 20.407
+        },
+        "monitors": {
+          "TIME_PROCESS": {
+            "count": 143935,
+            "mean": 0.011378023177128565,
+            "min": 0.008562,
+            "p50": 0.011083,
+            "p95": 0.014571,
+            "p99": 0.016159,
+            "max": 0.018397
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "count": 143935,
+            "mean": 0.0027520007920241777,
+            "min": 0.000625,
+            "p50": 0.002893,
+            "p95": 0.005303,
+            "p99": 0.007125,
+            "max": 0.016849
+          },
+          "MEMORY_STATIC": {
+            "count": 143935,
+            "mean": 182187882.16717267,
+            "min": 175836876.0,
+            "p50": 182203588.0,
+            "p95": 187820852.8,
+            "p99": 188315847.84,
+            "max": 188482036.0
+          },
+          "OBJECT_COUNT": {
+            "count": 143935,
+            "mean": 7106.0,
+            "min": 7106.0,
+            "p50": 7106.0,
+            "p95": 7106.0,
+            "p99": 7106.0,
+            "max": 7106.0
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "count": 143935,
+            "mean": 268.99174627435997,
+            "min": 122.0,
+            "p50": 235.0,
+            "p95": 517.0,
+            "p99": 572.0,
+            "max": 597.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "count": 143935,
+            "mean": 269.0424497168861,
+            "min": 122.0,
+            "p50": 235.0,
+            "p95": 517.0,
+            "p99": 572.0,
+            "max": 597.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "count": 143935,
+            "mean": 141803520.0,
+            "min": 141803520.0,
+            "p50": 141803520.0,
+            "p95": 141803520.0,
+            "p99": 141803520.0,
+            "max": 141803520.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "count": 143935,
+            "mean": 55396992.0,
+            "min": 55396992.0,
+            "p50": 55396992.0,
+            "p95": 55396992.0,
+            "p99": 55396992.0,
+            "max": 55396992.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "count": 143935,
+            "mean": 31112076.0,
+            "min": 31112076.0,
+            "p50": 31112076.0,
+            "p95": 31112076.0,
+            "p99": 31112076.0,
+            "max": 31112076.0
+          }
+        },
+        "gpu_frame_time_ms": null
+      },
+      "windows": [
+        {
+          "index": 1,
+          "nominal_start_s": 0.0,
+          "nominal_end_s": 300.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35990,
+          "covered_elapsed_s": 299.992881,
+          "average_fps": 119.96951354322304,
+          "frame_ms": {
+            "count": 35990,
+            "mean": 8.335450986385107,
+            "min": 3.413,
+            "p50": 8.323,
+            "p95": 9.777549999999996,
+            "p99": 10.710110000000002,
+            "max": 15.623
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35990,
+              "mean": 0.01143459069185885,
+              "min": 0.009185,
+              "p50": 0.01125,
+              "p95": 0.013616,
+              "p99": 0.014406120000000053,
+              "max": 0.01565
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35990,
+              "mean": 0.003101905807168658,
+              "min": 0.000682,
+              "p50": 0.003036,
+              "p95": 0.004848849999998572,
+              "p99": 0.006716100000000064,
+              "max": 0.008266
+            },
+            "MEMORY_STATIC": {
+              "count": 35990,
+              "mean": 177480160.96626842,
+              "min": 175836876.0,
+              "p50": 177466324.0,
+              "p95": 178910262.4,
+              "p99": 179050512.4,
+              "max": 179107084.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35990,
+              "mean": 7106.0,
+              "min": 7106.0,
+              "p50": 7106.0,
+              "p95": 7106.0,
+              "p99": 7106.0,
+              "max": 7106.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35990,
+              "mean": 269.1254237288136,
+              "min": 122.0,
+              "p50": 235.0,
+              "p95": 517.0,
+              "p99": 573.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35990,
+              "mean": 269.19772158933034,
+              "min": 122.0,
+              "p50": 235.0,
+              "p95": 517.0,
+              "p99": 574.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35990,
+              "mean": 141803520.0,
+              "min": 141803520.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35990,
+              "mean": 55396992.0,
+              "min": 55396992.0,
+              "p50": 55396992.0,
+              "p95": 55396992.0,
+              "p99": 55396992.0,
+              "max": 55396992.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35990,
+              "mean": 31112076.0,
+              "min": 31112076.0,
+              "p50": 31112076.0,
+              "p95": 31112076.0,
+              "p99": 31112076.0,
+              "max": 31112076.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        },
+        {
+          "index": 2,
+          "nominal_start_s": 300.0,
+          "nominal_end_s": 600.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35986,
+          "covered_elapsed_s": 300.000971,
+          "average_fps": 119.95294508563441,
+          "frame_ms": {
+            "count": 35986,
+            "mean": 8.336602317567944,
+            "min": 3.63,
+            "p50": 8.33,
+            "p95": 9.722,
+            "p99": 10.537,
+            "max": 15.369
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35986,
+              "mean": 0.011559479769910522,
+              "min": 0.009375,
+              "p50": 0.011325,
+              "p95": 0.014267,
+              "p99": 0.014984,
+              "max": 0.01554
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35986,
+              "mean": 0.0030574675151447787,
+              "min": 0.000641,
+              "p50": 0.003005,
+              "p95": 0.004781,
+              "p99": 0.005996,
+              "max": 0.008079
+            },
+            "MEMORY_STATIC": {
+              "count": 35986,
+              "mean": 180633317.83415774,
+              "min": 179051548.0,
+              "p50": 180627718.0,
+              "p95": 182033990.0,
+              "p99": 182176161.2,
+              "max": 182231352.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35986,
+              "mean": 7106.0,
+              "min": 7106.0,
+              "p50": 7106.0,
+              "p95": 7106.0,
+              "p99": 7106.0,
+              "max": 7106.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35986,
+              "mean": 268.8540543544712,
+              "min": 122.0,
+              "p50": 235.0,
+              "p95": 517.0,
+              "p99": 570.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35986,
+              "mean": 268.89857166675927,
+              "min": 122.0,
+              "p50": 236.0,
+              "p95": 517.0,
+              "p99": 570.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35986,
+              "mean": 141803520.0,
+              "min": 141803520.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35986,
+              "mean": 55396992.0,
+              "min": 55396992.0,
+              "p50": 55396992.0,
+              "p95": 55396992.0,
+              "p99": 55396992.0,
+              "max": 55396992.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35986,
+              "mean": 31112076.0,
+              "min": 31112076.0,
+              "p50": 31112076.0,
+              "p95": 31112076.0,
+              "p99": 31112076.0,
+              "max": 31112076.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        },
+        {
+          "index": 3,
+          "nominal_start_s": 600.0,
+          "nominal_end_s": 900.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35984,
+          "covered_elapsed_s": 299.997761,
+          "average_fps": 119.94756187530345,
+          "frame_ms": {
+            "count": 35984,
+            "mean": 8.336976461760782,
+            "min": 3.577,
+            "p50": 8.329,
+            "p95": 9.425,
+            "p99": 10.193339999999996,
+            "max": 20.407
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35984,
+              "mean": 0.010962984020675855,
+              "min": 0.008562,
+              "p50": 0.010259,
+              "p95": 0.014718,
+              "p99": 0.016018979999999836,
+              "max": 0.018397
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35984,
+              "mean": 0.0021748200311249443,
+              "min": 0.000625,
+              "p50": 0.001796,
+              "p95": 0.004828,
+              "p99": 0.007570009999997288,
+              "max": 0.01181
+            },
+            "MEMORY_STATIC": {
+              "count": 35984,
+              "mean": 183758192.66029346,
+              "min": 182175816.0,
+              "p50": 183755158.0,
+              "p95": 185156352.0,
+              "p99": 185298252.68,
+              "max": 185352928.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35984,
+              "mean": 7106.0,
+              "min": 7106.0,
+              "p50": 7106.0,
+              "p95": 7106.0,
+              "p99": 7106.0,
+              "max": 7106.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35984,
+              "mean": 268.91326700755894,
+              "min": 122.0,
+              "p50": 236.0,
+              "p95": 517.0,
+              "p99": 573.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35984,
+              "mean": 268.95628612716763,
+              "min": 122.0,
+              "p50": 236.0,
+              "p95": 517.0,
+              "p99": 573.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35984,
+              "mean": 141803520.0,
+              "min": 141803520.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35984,
+              "mean": 55396992.0,
+              "min": 55396992.0,
+              "p50": 55396992.0,
+              "p95": 55396992.0,
+              "p99": 55396992.0,
+              "max": 55396992.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35984,
+              "mean": 31112076.0,
+              "min": 31112076.0,
+              "p50": 31112076.0,
+              "p95": 31112076.0,
+              "p99": 31112076.0,
+              "max": 31112076.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        },
+        {
+          "index": 4,
+          "nominal_start_s": 900.0,
+          "nominal_end_s": 1200.0,
+          "source_stages_observed": [
+            "entrance_forward",
+            "palace_loop_prefix",
+            "court_forward",
+            "court_reverse",
+            "palace_loop_suffix",
+            "palace_loop_reverse",
+            "city_forward",
+            "city_reverse",
+            "stonewall_forward",
+            "stonewall_reverse",
+            "entrance_reverse"
+          ],
+          "frames": 35975,
+          "covered_elapsed_s": 300.012266,
+          "average_fps": 119.91176387434771,
+          "frame_ms": {
+            "count": 35975,
+            "mean": 8.339465350938152,
+            "min": 3.594,
+            "p50": 8.335,
+            "p95": 9.544299999999996,
+            "p99": 10.379520000000003,
+            "max": 17.677
+          },
+          "monitors": {
+            "TIME_PROCESS": {
+              "count": 35975,
+              "mean": 0.01155506298818624,
+              "min": 0.008678,
+              "p50": 0.011025,
+              "p95": 0.015824,
+              "p99": 0.016935,
+              "max": 0.018143
+            },
+            "TIME_PHYSICS_PROCESS": {
+              "count": 35975,
+              "mean": 0.0026737149131341206,
+              "min": 0.000631,
+              "p50": 0.00284,
+              "p95": 0.005876,
+              "p99": 0.007192200000000449,
+              "max": 0.016849
+            },
+            "MEMORY_STATIC": {
+              "count": 35975,
+              "mean": 186881902.60703266,
+              "min": 185297912.0,
+              "p50": 186869120.0,
+              "p95": 188285793.6,
+              "p99": 188427013.52,
+              "max": 188482036.0
+            },
+            "OBJECT_COUNT": {
+              "count": 35975,
+              "mean": 7106.0,
+              "min": 7106.0,
+              "p50": 7106.0,
+              "p95": 7106.0,
+              "p99": 7106.0,
+              "max": 7106.0
+            },
+            "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+              "count": 35975,
+              "mean": 269.07424600416954,
+              "min": 122.0,
+              "p50": 235.0,
+              "p95": 517.0,
+              "p99": 572.0,
+              "max": 597.0
+            },
+            "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+              "count": 35975,
+              "mean": 269.11722029186933,
+              "min": 122.0,
+              "p50": 236.0,
+              "p95": 517.0,
+              "p99": 572.0,
+              "max": 597.0
+            },
+            "RENDER_VIDEO_MEM_USED": {
+              "count": 35975,
+              "mean": 141803520.0,
+              "min": 141803520.0,
+              "p50": 141803520.0,
+              "p95": 141803520.0,
+              "p99": 141803520.0,
+              "max": 141803520.0
+            },
+            "RENDER_TEXTURE_MEM_USED": {
+              "count": 35975,
+              "mean": 55396992.0,
+              "min": 55396992.0,
+              "p50": 55396992.0,
+              "p95": 55396992.0,
+              "p99": 55396992.0,
+              "max": 55396992.0
+            },
+            "RENDER_BUFFER_MEM_USED": {
+              "count": 35975,
+              "mean": 31112076.0,
+              "min": 31112076.0,
+              "p50": 31112076.0,
+              "p95": 31112076.0,
+              "p99": 31112076.0,
+              "max": 31112076.0
+            }
+          },
+          "gpu_frame_time_ms": null
+        }
+      ],
+      "memory_measurement": {
+        "measurement_valid": true,
+        "available": true,
+        "valid_sample_count": 1184,
+        "first_valid_offset_s": 0.2750453751068562,
+        "last_valid_offset_s": 1199.2263043751009,
+        "rss_bytes_summary": {
+          "count": 1184,
+          "mean": 221805360.43243244,
+          "min": 173490176,
+          "p50": 198066176.0,
+          "p95": 339324108.8,
+          "p99": 342933504.0,
+          "max": 343392256
+        },
+        "start_rss_bytes_summary": {
+          "count": 30,
+          "mean": 342799701.3333333,
+          "min": 338755584,
+          "p50": 342892544.0,
+          "p95": 343352115.2,
+          "p99": 343382753.28,
+          "max": 343392256
+        },
+        "end_rss_bytes_summary": {
+          "count": 29,
+          "mean": 185352756.96551725,
+          "min": 184844288,
+          "p50": 185286656.0,
+          "p95": 185912524.8,
+          "p99": 185949224.96,
+          "max": 185958400
+        },
+        "edge_window_s": 30.0,
+        "maximum_allowed_gap_s": 5.0,
+        "endpoint_margin_s": 5.0,
+        "reason": null,
+        "time_basis": "ps sample start relative to monotonic receipt of R01_MEASURE_START. Excludes startup/warmup. Receipt and ps invocation add scheduling latency; this is periodic process RSS, not frame-synchronous memory."
+      },
+      "physics_effective_hz": 59.99980605062694,
+      "startup_log_receipt_events": [
+        {
+          "line": "R01_FIRST_FRAME profile=B",
+          "since_process_spawn_s": 2.1068069578614086,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_READY profile=B scene_spawn_to_first_frame_s=1.187305 actual_render=1920x1080",
+          "since_process_spawn_s": 2.1824550828896463,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_MEASURE_START profile=B",
+          "since_process_spawn_s": 32.19363158289343,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        },
+        {
+          "line": "R01_DONE profile=B frames=143935 elapsed_s=1200.003879",
+          "since_process_spawn_s": 1232.378019124968,
+          "meaning": "Monotonic log-receipt time; includes process launch and log-delivery latency."
+        }
+      ],
+      "system_before": {
+        "wall_unix_s": 1792085031.120914,
+        "swap": {
+          "available": true,
+          "command": [
+            "/usr/sbin/sysctl",
+            "vm.swapusage"
+          ],
+          "returncode": 0,
+          "stdout": "vm.swapusage: total = 6144.00M  used = 5150.81M  free = 993.19M  (encrypted)",
+          "stderr": null
+        },
+        "memory_pressure_query": {
+          "available": true,
+          "command": [
+            "/usr/bin/memory_pressure",
+            "-Q"
+          ],
+          "returncode": 0,
+          "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 53%",
+          "stderr": null
+        },
+        "power_source": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+          "stderr": null
+        },
+        "power_settings": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "custom"
+          ],
+          "returncode": 0,
+          "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+          "stderr": null
+        },
+        "heavy_processes": {
+          "available": true,
+          "returncode": 0,
+          "top_cpu": [
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 389840896
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1052966912
+            },
+            {
+              "executable": "VTDecoderXPCService",
+              "cpu_percent": 20.1,
+              "rss_bytes": 23822336
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 15.6,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "VTEncoderXPCService",
+              "cpu_percent": 6.9,
+              "rss_bytes": 29736960
+            },
+            {
+              "executable": "mds_stores",
+              "cpu_percent": 3.9,
+              "rss_bytes": 63864832
+            },
+            {
+              "executable": "com.apple.DriverKit-AppleBCMWLAN",
+              "cpu_percent": 2.7,
+              "rss_bytes": 40189952
+            },
+            {
+              "executable": "mds",
+              "cpu_percent": 1.3,
+              "rss_bytes": 25575424
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 1.3,
+              "rss_bytes": 305332224
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 1.3,
+              "rss_bytes": 425197568
+            },
+            {
+              "executable": "mdworker_shared",
+              "cpu_percent": 1.1,
+              "rss_bytes": 22003712
+            }
+          ],
+          "top_rss": [
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1052966912
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 15.6,
+              "rss_bytes": 903643136
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 1.3,
+              "rss_bytes": 425197568
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 389840896
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 1.3,
+              "rss_bytes": 305332224
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 202981376
+            },
+            {
+              "executable": "Google Chrome",
+              "cpu_percent": 0.0,
+              "rss_bytes": 166821888
+            },
+            {
+              "executable": "Slack Helper (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 140607488
+            },
+            {
+              "executable": "Notion Helper (Renderer)",
+              "cpu_percent": 0.1,
+              "rss_bytes": 140525568
+            },
+            {
+              "executable": "Spotify",
+              "cpu_percent": 0.0,
+              "rss_bytes": 119980032
+            },
+            {
+              "executable": "language_server",
+              "cpu_percent": 0.0,
+              "rss_bytes": 112050176
+            }
+          ],
+          "fields": "ps comm basename, CPU percent and RSS only; no raw process output retained"
+        }
+      },
+      "system_after": {
+        "wall_unix_s": 1792086268.698886,
+        "swap": {
+          "available": true,
+          "command": [
+            "/usr/sbin/sysctl",
+            "vm.swapusage"
+          ],
+          "returncode": 0,
+          "stdout": "vm.swapusage: total = 6144.00M  used = 5126.81M  free = 1017.19M  (encrypted)",
+          "stderr": null
+        },
+        "memory_pressure_query": {
+          "available": true,
+          "command": [
+            "/usr/bin/memory_pressure",
+            "-Q"
+          ],
+          "returncode": 0,
+          "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 54%",
+          "stderr": null
+        },
+        "power_source": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "batt"
+          ],
+          "returncode": 0,
+          "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+          "stderr": null
+        },
+        "power_settings": {
+          "available": true,
+          "command": [
+            "/usr/bin/pmset",
+            "-g",
+            "custom"
+          ],
+          "returncode": 0,
+          "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+          "stderr": null
+        },
+        "heavy_processes": {
+          "available": true,
+          "returncode": 0,
+          "top_cpu": [
+            {
+              "executable": "Python",
+              "cpu_percent": 92.9,
+              "rss_bytes": 488357888
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 49.6,
+              "rss_bytes": 275595264
+            },
+            {
+              "executable": "VTDecoderXPCService",
+              "cpu_percent": 4.9,
+              "rss_bytes": 20873216
+            },
+            {
+              "executable": "VTEncoderXPCService",
+              "cpu_percent": 4.5,
+              "rss_bytes": 26525696
+            },
+            {
+              "executable": "signpost_reporter",
+              "cpu_percent": 4.4,
+              "rss_bytes": 44941312
+            },
+            {
+              "executable": "launchservicesd",
+              "cpu_percent": 2.5,
+              "rss_bytes": 12566528
+            },
+            {
+              "executable": "logioptionsplus_agent",
+              "cpu_percent": 2.5,
+              "rss_bytes": 31604736
+            },
+            {
+              "executable": "LogiPluginService",
+              "cpu_percent": 1.6,
+              "rss_bytes": 84656128
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 0.8,
+              "rss_bytes": 347963392
+            },
+            {
+              "executable": "logd",
+              "cpu_percent": 0.5,
+              "rss_bytes": 31801344
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.5,
+              "rss_bytes": 1133543424
+            },
+            {
+              "executable": "com.apple.DriverKit-AppleBCMWLAN",
+              "cpu_percent": 0.3,
+              "rss_bytes": 40517632
+            }
+          ],
+          "top_rss": [
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.5,
+              "rss_bytes": 1133543424
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 0.0,
+              "rss_bytes": 745406464
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 92.9,
+              "rss_bytes": 488357888
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 477806592
+            },
+            {
+              "executable": "ChatGPT",
+              "cpu_percent": 0.8,
+              "rss_bytes": 347963392
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 281968640
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 49.6,
+              "rss_bytes": 275595264
+            },
+            {
+              "executable": "Google Chrome",
+              "cpu_percent": 0.0,
+              "rss_bytes": 159744000
+            },
+            {
+              "executable": "mds_stores",
+              "cpu_percent": 0.1,
+              "rss_bytes": 157433856
+            },
+            {
+              "executable": "Notion Helper (Renderer)",
+              "cpu_percent": 0.0,
+              "rss_bytes": 138936320
+            },
+            {
+              "executable": "Slack Helper (Renderer)",
+              "cpu_percent": 0.1,
+              "rss_bytes": 132874240
+            },
+            {
+              "executable": "Spotify",
+              "cpu_percent": 0.0,
+              "rss_bytes": 123125760
+            }
+          ],
+          "fields": "ps comm basename, CPU percent and RSS only; no raw process output retained"
+        }
+      },
+      "engine_checks": 41,
+      "saved_checks": 54
+    }
+  },
+  "measurement": {
+    "actual_render_pixels": [
+      1920,
+      1080
+    ],
+    "scaling_3d_scale": 1.0,
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "Forward+ / Metal",
+    "warmup_seconds": 30,
+    "camera_loop_seconds": 300,
+    "network": "deny network*",
+    "production_player_motion": false,
+    "runtime": "Installed Standard binary in native game mode outside editor UI; not exported release app",
+    "current_b_load": {
+      "pedestrians": 2,
+      "vehicles": 2
+    },
+    "initial_b_proposal_12_4_executed": false
+  },
+  "target": {
+    "p95_frame_ms": 33.3,
+    "met": true,
+    "scope": "Observed current 2NPC/2vehicle V0 load; adoption decision in R02, no 120FPS or larger-crowd guarantee"
+  },
+  "runtime_asset_bytes": 16500248,
+  "runtime_asset_count": 26,
+  "source_file_bytes": 176584,
+  "exported_app_bytes": null,
+  "exported_app_bytes_reason": "R03 actual app not yet built at this measurement; app size will be reported with the R03 export manifest.",
+  "gpu_frame_time_ms": null,
+  "temperature_celsius": null,
+  "unavailable_reason": "No documented script GPU frame timing or queried temperature sensor; engine CPU/physics monitors and screen records retained with their semantics.",
+  "saved_negative_controls": {
+    "path": "data/reports/r01/development/negative_controls/final/index.json",
+    "sha256": "46e5e60ce79dbc3f64bd9bcad17f48f723036cbfd011cd53b07ef2fa62da5a6d",
+    "replay": "data/reports/r01/development/negative_controls/final/replay_check.json",
+    "all_six_targeted_rejections": true,
+    "scope": "Exact retained-data patches on passing B smoke; not six engine fault injections."
+  },
+  "visual_review": {
+    "completed": true,
+    "views": {
+      "A": {
+        "path": "data/reports/r01/A_render.png",
+        "sha256": "036f034b1b4692a5227f08074f040b35e5f0a521b4ac1ee3ac7cc81367de5743",
+        "review": "Opened actual 1920x1080 capture; same Daehanmun-facing camera, HUD intentionally hidden for benchmark, simplified city geometry and source boundary lines visible."
+      },
+      "B": {
+        "path": "data/reports/r01/B_render.png",
+        "sha256": "036f034b1b4692a5227f08074f040b35e5f0a521b4ac1ee3ac7cc81367de5743",
+        "review": "Opened actual 1920x1080 capture; same Daehanmun-facing camera, HUD intentionally hidden for benchmark, simplified city geometry and source boundary lines visible."
+      }
+    }
+  },
+  "limitations": [
+    "One ordered A then B run on this M1 with ordinary background applications; no actor-cost causal claim from B p95 being lower.",
+    "Camera replay benchmarks display/actors; it does not replace physical walking or new-aspect camera collision validation.",
+    "Engine MEMORY_STATIC is not RSS; retained 1Hz observations also consume memory. No unlimited-session leak-free claim.",
+    "No exported-package, M4 Pro, human handling, real terrain, location accuracy or public-distribution acceptance."
+  ]
+}

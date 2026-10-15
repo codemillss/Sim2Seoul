@@ -1,0 +1,1183 @@
+{
+  "schema_version": 1,
+  "task": "R01",
+  "analysis": "eleven_stage_frame_times_and_rss_windows",
+  "input_directory": "data/reports/r01",
+  "origin": "Retained full01 A/B evidence copied to the canonical R01 report directory.",
+  "method": {
+    "stage_assignment": "Assign each raw frame by its observed source_tick to the unique inclusive [first_tick,last_tick] interval in benchmark_camera.source_stage_ticks. Do not infer a stage from elapsed-time fractions or a nearest camera position.",
+    "window_assignment": "floor(t_end_s/window_s), with the terminal boundary frame clamped to the last nominal window. Counts and p95 are checked against each retained performance-report window.",
+    "quantile": "Linear interpolation at (count-1)*q in sorted observations (q=0.50,0.95,0.99). Means use statistics.fmean. No rounding is applied to saved computed values.",
+    "rss_alignment": "PS invocation-start since_process_spawn_s minus monotonic receipt of R01_MEASURE_START. Keep numeric RSS for the raw PID only at offsets [0,duration_actual_s], excluding startup/warmup. Window intervals are left-closed, right-open; edge summaries use the first/last 30 measured seconds.",
+    "rss_coverage_note": "Temporal span fraction is the span between first and last valid sample divided by measured duration; it is not frame-synchronous coverage or a count/seconds sampling percentage.",
+    "sha_binding": "Inputs include compressed raw/report/batch/camera SHA-256. Frame batches also include the decompressed JSONL SHA-256 checked against raw.frame_storage.batch_file_sha256; compressed batch SHA is checked against report.frame_batches_sha256.",
+    "reproduction": "Run reproduction_code with Python 3 from the repository root. It only reads evidence and prints the computed section; no engine, producer, generator or third-party dependency is invoked."
+  },
+  "computed": {
+    "profiles": {
+      "A": {
+        "inputs": {
+          "raw": {
+            "path": "data/reports/r01/A.json.gz",
+            "bytes": 1431653,
+            "sha256": "23fec14c3e447fd5359a2162b9b16c91b57d14e50d51df223255ad997c5bca10"
+          },
+          "report": {
+            "path": "data/reports/r01/A_performance.json",
+            "bytes": 320232,
+            "sha256": "9aa63200fff13d4d6bcd870a0670d51b326af18724ab5cd2d72d996046312bb2"
+          },
+          "frame_batches": {
+            "path": "data/reports/r01/A_frames.jsonl.gz",
+            "bytes": 1342866,
+            "sha256": "58fd16d277b2436720135fc260c7b5deb323a73b6f49bb0c00d6aca12ff7659c",
+            "decompressed_sha256": "c8ff860eb42eed85009adc6c57bd005ffa0edafcca95cf314c3840c648bd9458"
+          },
+          "camera_plan": {
+            "path": "data/reports/r01/A_benchmark_camera.json.gz",
+            "bytes": 1005049,
+            "sha256": "74325ed051674d7cde71be5ee094181a3bfee17b07c3bb22a28b48fd02ebc882"
+          }
+        },
+        "profile": {
+          "id": "R01-A-static-0NPC-0vehicle-v1",
+          "pedestrians": 0,
+          "vehicles": 0,
+          "duration_s": 600
+        },
+        "engine": {
+          "debug_build": true,
+          "display": "macOS",
+          "driver": "metal",
+          "max_fps": 0,
+          "physics_hz": 60,
+          "renderer": "forward_plus",
+          "version": "4.7.2-stable (official)",
+          "vsync_mode": 0
+        },
+        "duration_actual_s": 600.007201,
+        "warmup_actual_s": 30.003746,
+        "frame_ms": {
+          "count": 71982,
+          "mean": 8.335517226528854,
+          "min": 3.433,
+          "p50": 8.332,
+          "p95": 9.952949999999996,
+          "p99": 10.966190000000001,
+          "max": 23.038
+        },
+        "frames_above_33_3ms": 0,
+        "unassigned_frame_count": 0,
+        "ambiguous_frame_count": 0,
+        "windows": [
+          {
+            "index": 1,
+            "frame_ms": {
+              "count": 35987,
+              "mean": 8.336129018812349,
+              "min": 3.536,
+              "p50": 8.323,
+              "p95": 9.923699999999997,
+              "p99": 10.97714,
+              "max": 20.198
+            }
+          },
+          {
+            "index": 2,
+            "frame_ms": {
+              "count": 35995,
+              "mean": 8.334905570218085,
+              "min": 3.433,
+              "p50": 8.341,
+              "p95": 9.976299999999997,
+              "p99": 10.957059999999998,
+              "max": 23.038
+            }
+          }
+        ],
+        "rss": {
+          "unit": "bytes; MiB=bytes/1048576",
+          "valid_sample_count": 590,
+          "first_valid_offset_s": 0.688438791083172,
+          "last_valid_offset_s": 599.1364014579449,
+          "first_endpoint_gap_s": 0.688438791083172,
+          "last_endpoint_gap_s": 0.8707995420551242,
+          "maximum_inter_sample_gap_s": 1.0515139589551836,
+          "temporal_span_fraction": 0.9974013006334931,
+          "all_valid_rss_bytes": {
+            "count": 590,
+            "mean": 154210789.9661017,
+            "min": 115916800,
+            "p50": 131604480.0,
+            "p95": 230189465.6,
+            "p99": 236130795.5200003,
+            "max": 362086400
+          },
+          "windows": [
+            {
+              "index": 1,
+              "nominal_interval_s": [
+                0.0,
+                300.0
+              ],
+              "first_valid_offset_s": 0.688438791083172,
+              "last_valid_offset_s": 299.44775479100645,
+              "rss_bytes": {
+                "count": 295,
+                "mean": 176895881.97966102,
+                "min": 115916800,
+                "p50": 184680448.0,
+                "p95": 230865305.6,
+                "p99": 279567073.28,
+                "max": 362086400
+              },
+              "rss_MiB": {
+                "count": 295,
+                "mean": 168.7010593220339,
+                "min": 110.546875,
+                "p50": 176.125,
+                "p95": 220.1703125,
+                "p99": 266.6159375,
+                "max": 345.3125
+              }
+            },
+            {
+              "index": 2,
+              "nominal_interval_s": [
+                300.0,
+                600.0
+              ],
+              "first_valid_offset_s": 300.4665886249859,
+              "last_valid_offset_s": 599.1364014579449,
+              "rss_bytes": {
+                "count": 295,
+                "mean": 131525697.95254238,
+                "min": 127631360,
+                "p50": 131579904.0,
+                "p95": 133714739.2,
+                "p99": 133941166.08,
+                "max": 134037504
+              },
+              "rss_MiB": {
+                "count": 295,
+                "mean": 125.43268008474577,
+                "min": 121.71875,
+                "p50": 125.484375,
+                "p95": 127.5203125,
+                "p99": 127.73625,
+                "max": 127.828125
+              }
+            }
+          ],
+          "start_30s_rss_bytes": {
+            "count": 29,
+            "mean": 241776993.10344827,
+            "min": 228130816,
+            "p50": 229228544.0,
+            "p95": 279684710.4,
+            "p99": 339015761.9199999,
+            "max": 362086400
+          },
+          "end_30s_rss_bytes": {
+            "count": 29,
+            "mean": 132129615.44827586,
+            "min": 131579904,
+            "p50": 132136960.0,
+            "p95": 132674355.2,
+            "p99": 132729405.44,
+            "max": 132743168
+          }
+        },
+        "static_memory_first_last_bytes": [
+          174150279.0,
+          176686595.0
+        ],
+        "gpu_time": {
+          "raw_gpu_time_ms": null,
+          "report_gpu_frame_time_ms": null
+        },
+        "system_before": {
+          "wall_unix_s": 1792084395.616162,
+          "swap": {
+            "available": true,
+            "command": [
+              "/usr/sbin/sysctl",
+              "vm.swapusage"
+            ],
+            "returncode": 0,
+            "stdout": "vm.swapusage: total = 6144.00M  used = 5166.81M  free = 977.19M  (encrypted)",
+            "stderr": null
+          },
+          "memory_pressure_query": {
+            "available": true,
+            "command": [
+              "/usr/bin/memory_pressure",
+              "-Q"
+            ],
+            "returncode": 0,
+            "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 51%",
+            "stderr": null
+          },
+          "power_source": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "batt"
+            ],
+            "returncode": 0,
+            "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+            "stderr": null
+          },
+          "power_settings": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "custom"
+            ],
+            "returncode": 0,
+            "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+            "stderr": null
+          }
+        },
+        "system_after": {
+          "wall_unix_s": 1792085031.015939,
+          "swap": {
+            "available": true,
+            "command": [
+              "/usr/sbin/sysctl",
+              "vm.swapusage"
+            ],
+            "returncode": 0,
+            "stdout": "vm.swapusage: total = 6144.00M  used = 5150.81M  free = 993.19M  (encrypted)",
+            "stderr": null
+          },
+          "memory_pressure_query": {
+            "available": true,
+            "command": [
+              "/usr/bin/memory_pressure",
+              "-Q"
+            ],
+            "returncode": 0,
+            "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 53%",
+            "stderr": null
+          },
+          "power_source": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "batt"
+            ],
+            "returncode": 0,
+            "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+            "stderr": null
+          },
+          "power_settings": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "custom"
+            ],
+            "returncode": 0,
+            "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+            "stderr": null
+          }
+        },
+        "background_process_snapshot_top_cpu": {
+          "before": [
+            {
+              "executable": "ANECompilerService",
+              "cpu_percent": 96.7,
+              "rss_bytes": 377274368
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 36.9,
+              "rss_bytes": 488456192
+            },
+            {
+              "executable": "codex",
+              "cpu_percent": 28.7,
+              "rss_bytes": 608256000
+            }
+          ],
+          "after": [
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 388857856
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1049870336
+            }
+          ]
+        },
+        "recorded_preservation_checks": {
+          "source.unchanged": true,
+          "runtime.unchanged": true,
+          "proof.unchanged": true,
+          "camera.source_record_unchanged": true,
+          "camera.source_check_unchanged": true,
+          "camera.acceptance_binding_unchanged": true
+        },
+        "performance_target_adopted_in_report": false,
+        "input_artifacts_unchanged_during_analysis": true
+      },
+      "B": {
+        "inputs": {
+          "raw": {
+            "path": "data/reports/r01/B.json.gz",
+            "bytes": 3071833,
+            "sha256": "b14bb2cd1330efef6943d5770240051b7a64241fa721fd5894552a76ce9705b2"
+          },
+          "report": {
+            "path": "data/reports/r01/B_performance.json",
+            "bytes": 587484,
+            "sha256": "abcef8e736551bba5aaf8faa006ef3297e66ff41cd920345b16eb7cca0ddc9f5"
+          },
+          "frame_batches": {
+            "path": "data/reports/r01/B_frames.jsonl.gz",
+            "bytes": 2671827,
+            "sha256": "dfc173b41a5758f90f5fb866eb1d3d0156d650ace9aed0c14420ad420a019a91",
+            "decompressed_sha256": "d7866f2c820b12aa4d83b4e42b293673491c01e18be35d64caf361fb47f1ea3a"
+          },
+          "camera_plan": {
+            "path": "data/reports/r01/B_benchmark_camera.json.gz",
+            "bytes": 1005049,
+            "sha256": "74325ed051674d7cde71be5ee094181a3bfee17b07c3bb22a28b48fd02ebc882"
+          }
+        },
+        "profile": {
+          "id": "R01-B-V0-2NPC-2vehicle-v1",
+          "pedestrians": 2,
+          "vehicles": 2,
+          "duration_s": 1200
+        },
+        "engine": {
+          "debug_build": true,
+          "display": "macOS",
+          "driver": "metal",
+          "max_fps": 0,
+          "physics_hz": 60,
+          "renderer": "forward_plus",
+          "version": "4.7.2-stable (official)",
+          "vsync_mode": 0
+        },
+        "duration_actual_s": 1200.003879,
+        "warmup_actual_s": 30.00447,
+        "frame_ms": {
+          "count": 143935,
+          "mean": 8.337123555771702,
+          "min": 3.413,
+          "p50": 8.329,
+          "p95": 9.613299999999988,
+          "p99": 10.481,
+          "max": 20.407
+        },
+        "frames_above_33_3ms": 0,
+        "unassigned_frame_count": 0,
+        "ambiguous_frame_count": 0,
+        "windows": [
+          {
+            "index": 1,
+            "frame_ms": {
+              "count": 35990,
+              "mean": 8.335450986385107,
+              "min": 3.413,
+              "p50": 8.323,
+              "p95": 9.777549999999996,
+              "p99": 10.710110000000002,
+              "max": 15.623
+            }
+          },
+          {
+            "index": 2,
+            "frame_ms": {
+              "count": 35986,
+              "mean": 8.336602317567944,
+              "min": 3.63,
+              "p50": 8.33,
+              "p95": 9.722,
+              "p99": 10.537,
+              "max": 15.369
+            }
+          },
+          {
+            "index": 3,
+            "frame_ms": {
+              "count": 35984,
+              "mean": 8.336976461760782,
+              "min": 3.577,
+              "p50": 8.329,
+              "p95": 9.425,
+              "p99": 10.193339999999996,
+              "max": 20.407
+            }
+          },
+          {
+            "index": 4,
+            "frame_ms": {
+              "count": 35975,
+              "mean": 8.339465350938152,
+              "min": 3.594,
+              "p50": 8.335,
+              "p95": 9.544299999999996,
+              "p99": 10.379520000000003,
+              "max": 17.677
+            }
+          }
+        ],
+        "rss": {
+          "unit": "bytes; MiB=bytes/1048576",
+          "valid_sample_count": 1184,
+          "first_valid_offset_s": 0.2750453751068562,
+          "last_valid_offset_s": 1199.2263043751009,
+          "first_endpoint_gap_s": 0.2750453751068562,
+          "last_endpoint_gap_s": 0.7775746248992164,
+          "maximum_inter_sample_gap_s": 1.0424106670543551,
+          "temporal_span_fraction": 0.9991228195021475,
+          "all_valid_rss_bytes": {
+            "count": 1184,
+            "mean": 221805360.43243244,
+            "min": 173490176,
+            "p50": 198066176.0,
+            "p95": 339324108.8,
+            "p99": 342933504.0,
+            "max": 343392256
+          },
+          "windows": [
+            {
+              "index": 1,
+              "nominal_interval_s": [
+                0.0,
+                300.0
+              ],
+              "first_valid_offset_s": 0.2750453751068562,
+              "last_valid_offset_s": 299.7137892919127,
+              "rss_bytes": {
+                "count": 296,
+                "mean": 312545335.3513514,
+                "min": 192774144,
+                "p50": 337780736.0,
+                "p95": 342888448.0,
+                "p99": 343265280.0,
+                "max": 343392256
+              },
+              "rss_MiB": {
+                "count": 296,
+                "mean": 298.0664590371622,
+                "min": 183.84375,
+                "p50": 322.1328125,
+                "p95": 327.00390625,
+                "p99": 327.36328125,
+                "max": 327.484375
+              }
+            },
+            {
+              "index": 2,
+              "nominal_interval_s": [
+                300.0,
+                600.0
+              ],
+              "first_valid_offset_s": 300.72762474999763,
+              "last_valid_offset_s": 599.8321911669336,
+              "rss_bytes": {
+                "count": 296,
+                "mean": 198395073.72972974,
+                "min": 194838528,
+                "p50": 198541312.0,
+                "p95": 201658368.0,
+                "p99": 201935257.6,
+                "max": 202047488
+              },
+              "rss_MiB": {
+                "count": 296,
+                "mean": 189.20428631756758,
+                "min": 185.8125,
+                "p50": 189.34375,
+                "p95": 192.31640625,
+                "p99": 192.58046875,
+                "max": 192.6875
+              }
+            },
+            {
+              "index": 3,
+              "nominal_interval_s": [
+                600.0,
+                900.0
+              ],
+              "first_valid_offset_s": 600.8488203340676,
+              "last_valid_offset_s": 899.422741916962,
+              "rss_bytes": {
+                "count": 296,
+                "mean": 194626643.02702704,
+                "min": 173490176,
+                "p50": 198295552.0,
+                "p95": 202551296.0,
+                "p99": 203082137.6,
+                "max": 203276288
+              },
+              "rss_MiB": {
+                "count": 296,
+                "mean": 185.61043074324326,
+                "min": 165.453125,
+                "p50": 189.109375,
+                "p95": 193.16796875,
+                "p99": 193.67421875,
+                "max": 193.859375
+              }
+            },
+            {
+              "index": 4,
+              "nominal_interval_s": [
+                900.0,
+                1200.0
+              ],
+              "first_valid_offset_s": 900.4303442919627,
+              "last_valid_offset_s": 1199.2263043751009,
+              "rss_bytes": {
+                "count": 296,
+                "mean": 181654389.6216216,
+                "min": 176439296,
+                "p50": 181551104.0,
+                "p95": 185274368.0,
+                "p99": 185877299.2,
+                "max": 185958400
+              },
+              "rss_MiB": {
+                "count": 296,
+                "mean": 173.23912584459458,
+                "min": 168.265625,
+                "p50": 173.140625,
+                "p95": 176.69140625,
+                "p99": 177.26640625,
+                "max": 177.34375
+              }
+            }
+          ],
+          "start_30s_rss_bytes": {
+            "count": 30,
+            "mean": 342799701.3333333,
+            "min": 338755584,
+            "p50": 342892544.0,
+            "p95": 343352115.2,
+            "p99": 343382753.28,
+            "max": 343392256
+          },
+          "end_30s_rss_bytes": {
+            "count": 29,
+            "mean": 185352756.96551725,
+            "min": 184844288,
+            "p50": 185286656.0,
+            "p95": 185912524.8,
+            "p99": 185949224.96,
+            "max": 185958400
+          }
+        },
+        "static_memory_first_last_bytes": [
+          175836876.0,
+          188482036.0
+        ],
+        "gpu_time": {
+          "raw_gpu_time_ms": null,
+          "report_gpu_frame_time_ms": null
+        },
+        "system_before": {
+          "wall_unix_s": 1792085031.120914,
+          "swap": {
+            "available": true,
+            "command": [
+              "/usr/sbin/sysctl",
+              "vm.swapusage"
+            ],
+            "returncode": 0,
+            "stdout": "vm.swapusage: total = 6144.00M  used = 5150.81M  free = 993.19M  (encrypted)",
+            "stderr": null
+          },
+          "memory_pressure_query": {
+            "available": true,
+            "command": [
+              "/usr/bin/memory_pressure",
+              "-Q"
+            ],
+            "returncode": 0,
+            "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 53%",
+            "stderr": null
+          },
+          "power_source": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "batt"
+            ],
+            "returncode": 0,
+            "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+            "stderr": null
+          },
+          "power_settings": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "custom"
+            ],
+            "returncode": 0,
+            "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+            "stderr": null
+          }
+        },
+        "system_after": {
+          "wall_unix_s": 1792086268.698886,
+          "swap": {
+            "available": true,
+            "command": [
+              "/usr/sbin/sysctl",
+              "vm.swapusage"
+            ],
+            "returncode": 0,
+            "stdout": "vm.swapusage: total = 6144.00M  used = 5126.81M  free = 1017.19M  (encrypted)",
+            "stderr": null
+          },
+          "memory_pressure_query": {
+            "available": true,
+            "command": [
+              "/usr/bin/memory_pressure",
+              "-Q"
+            ],
+            "returncode": 0,
+            "stdout": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 54%",
+            "stderr": null
+          },
+          "power_source": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "batt"
+            ],
+            "returncode": 0,
+            "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=37945443)\t79%; AC attached; not charging present: true",
+            "stderr": null
+          },
+          "power_settings": {
+            "available": true,
+            "command": [
+              "/usr/bin/pmset",
+              "-g",
+              "custom"
+            ],
+            "returncode": 0,
+            "stdout": "Battery Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         10\n womp                 0\n networkoversleep     0\n sleep                1\n lessbright           1\n tcpkeepalive         1\n disksleep            0\nAC Power:\n Sleep On Power Button 1\n lowpowermode         0\n standby              1\n ttyskeepawake        1\n hibernatemode        3\n powernap             1\n hibernatefile        /var/vm/sleepimage\n displaysleep         0\n womp                 1\n networkoversleep     0\n sleep                0\n tcpkeepalive         1\n disksleep            10",
+            "stderr": null
+          }
+        },
+        "background_process_snapshot_top_cpu": {
+          "before": [
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 156.4,
+              "rss_bytes": 436502528
+            },
+            {
+              "executable": "Python",
+              "cpu_percent": 84.9,
+              "rss_bytes": 389840896
+            },
+            {
+              "executable": "Codex (Renderer)",
+              "cpu_percent": 52.5,
+              "rss_bytes": 1052966912
+            }
+          ],
+          "after": [
+            {
+              "executable": "Python",
+              "cpu_percent": 92.9,
+              "rss_bytes": 488357888
+            },
+            {
+              "executable": "mediaanalysisd",
+              "cpu_percent": 49.6,
+              "rss_bytes": 275595264
+            },
+            {
+              "executable": "VTDecoderXPCService",
+              "cpu_percent": 4.9,
+              "rss_bytes": 20873216
+            }
+          ]
+        },
+        "recorded_preservation_checks": {
+          "source.unchanged": true,
+          "runtime.unchanged": true,
+          "proof.unchanged": true,
+          "camera.source_record_unchanged": true,
+          "camera.source_check_unchanged": true,
+          "camera.acceptance_binding_unchanged": true
+        },
+        "performance_target_adopted_in_report": false,
+        "input_artifacts_unchanged_during_analysis": true
+      }
+    },
+    "stage_table": [
+      {
+        "stage": "entrance_forward",
+        "source_tick_inclusive": [
+          670,
+          1793
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 1420,
+            "mean": 8.332085915492957,
+            "min": 5.095,
+            "p50": 8.344000000000001,
+            "p95": 9.9383,
+            "p99": 10.79929,
+            "max": 11.867
+          },
+          "window_p95_frame_ms": [
+            10.04855,
+            9.746999999999996
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 2841,
+            "mean": 8.332847940865893,
+            "min": 4.653,
+            "p50": 8.332,
+            "p95": 9.423,
+            "p99": 10.484,
+            "max": 12.555
+          },
+          "window_p95_frame_ms": [
+            9.6335,
+            10.0791,
+            9.020100000000001,
+            9.0323
+          ]
+        }
+      },
+      {
+        "stage": "palace_loop_prefix",
+        "source_tick_inclusive": [
+          1794,
+          4342
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 3208,
+            "mean": 8.34385193266833,
+            "min": 3.606,
+            "p50": 8.369499999999999,
+            "p95": 10.22195,
+            "p99": 11.402879999999998,
+            "max": 19.242
+          },
+          "window_p95_frame_ms": [
+            10.346499999999999,
+            10.09905
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 6423,
+            "mean": 8.334789039389692,
+            "min": 4.923,
+            "p50": 8.383,
+            "p95": 9.2289,
+            "p99": 10.174,
+            "max": 11.703
+          },
+          "window_p95_frame_ms": [
+            9.6352,
+            9.3525,
+            9.096499999999999,
+            9.11075
+          ]
+        }
+      },
+      {
+        "stage": "court_forward",
+        "source_tick_inclusive": [
+          4343,
+          5159
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 1028,
+            "mean": 8.333351167315175,
+            "min": 4.784,
+            "p50": 8.2595,
+            "p95": 10.51365,
+            "p99": 11.52246,
+            "max": 13.09
+          },
+          "window_p95_frame_ms": [
+            10.666649999999999,
+            10.36985
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 2056,
+            "mean": 8.335417315175096,
+            "min": 4.728,
+            "p50": 8.37,
+            "p95": 9.67975,
+            "p99": 10.588750000000003,
+            "max": 13.128
+          },
+          "window_p95_frame_ms": [
+            10.16415,
+            9.803549999999998,
+            9.104,
+            9.626399999999999
+          ]
+        }
+      },
+      {
+        "stage": "court_reverse",
+        "source_tick_inclusive": [
+          5160,
+          6018
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 1080,
+            "mean": 8.335746296296296,
+            "min": 4.823,
+            "p50": 8.288,
+            "p95": 10.047199999999998,
+            "p99": 10.962040000000002,
+            "max": 11.874
+          },
+          "window_p95_frame_ms": [
+            10.0024,
+            10.114749999999997
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 2159,
+            "mean": 8.334101899027328,
+            "min": 4.496,
+            "p50": 8.35,
+            "p95": 9.5702,
+            "p99": 10.52114,
+            "max": 11.202
+          },
+          "window_p95_frame_ms": [
+            10.1541,
+            9.6101,
+            9.02515,
+            9.80705
+          ]
+        }
+      },
+      {
+        "stage": "palace_loop_suffix",
+        "source_tick_inclusive": [
+          6019,
+          13143
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 8973,
+            "mean": 8.336688287083474,
+            "min": 3.82,
+            "p50": 8.35,
+            "p95": 9.9942,
+            "p99": 11.00920000000001,
+            "max": 19.183
+          },
+          "window_p95_frame_ms": [
+            10.005600000000001,
+            9.9833
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 17946,
+            "mean": 8.336422991195809,
+            "min": 4.352,
+            "p50": 8.327,
+            "p95": 9.619,
+            "p99": 10.57355,
+            "max": 20.143
+          },
+          "window_p95_frame_ms": [
+            10.032399999999997,
+            9.868599999999999,
+            9.143,
+            9.533
+          ]
+        }
+      },
+      {
+        "stage": "palace_loop_reverse",
+        "source_tick_inclusive": [
+          13144,
+          22816
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 12178,
+            "mean": 8.334250205288225,
+            "min": 3.725,
+            "p50": 8.3345,
+            "p95": 10.004,
+            "p99": 11.065609999999998,
+            "max": 17.073
+          },
+          "window_p95_frame_ms": [
+            10.011199999999999,
+            9.998999999999997
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 24353,
+            "mean": 8.335838705703608,
+            "min": 3.945,
+            "p50": 8.323,
+            "p95": 9.545,
+            "p99": 10.390919999999998,
+            "max": 20.407
+          },
+          "window_p95_frame_ms": [
+            9.671,
+            9.697899999999999,
+            9.6908,
+            9.13355
+          ]
+        }
+      },
+      {
+        "stage": "city_forward",
+        "source_tick_inclusive": [
+          22817,
+          32715
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 12465,
+            "mean": 8.33541540312876,
+            "min": 4.045,
+            "p50": 8.306,
+            "p95": 9.602199999999996,
+            "p99": 10.621440000000002,
+            "max": 23.038
+          },
+          "window_p95_frame_ms": [
+            9.498,
+            9.75
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 24917,
+            "mean": 8.338669944214793,
+            "min": 4.084,
+            "p50": 8.327,
+            "p95": 9.663199999999998,
+            "p99": 10.508040000000001,
+            "max": 17.677
+          },
+          "window_p95_frame_ms": [
+            9.6459,
+            9.6905,
+            9.7903,
+            9.511
+          ]
+        }
+      },
+      {
+        "stage": "city_reverse",
+        "source_tick_inclusive": [
+          32716,
+          42548
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 12373,
+            "mean": 8.334723106764729,
+            "min": 3.718,
+            "p50": 8.341,
+            "p95": 9.9378,
+            "p99": 10.869680000000004,
+            "max": 18.837
+          },
+          "window_p95_frame_ms": [
+            9.92575,
+            9.9552
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 24736,
+            "mean": 8.338109516494178,
+            "min": 3.577,
+            "p50": 8.332,
+            "p95": 9.70925,
+            "p99": 10.540600000000007,
+            "max": 14.754
+          },
+          "window_p95_frame_ms": [
+            9.85375,
+            9.70685,
+            9.505,
+            9.751
+          ]
+        }
+      },
+      {
+        "stage": "stonewall_forward",
+        "source_tick_inclusive": [
+          42549,
+          49635
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 8927,
+            "mean": 8.33485762294164,
+            "min": 3.536,
+            "p50": 8.341,
+            "p95": 10.048,
+            "p99": 10.98092,
+            "max": 20.198
+          },
+          "window_p95_frame_ms": [
+            10.065900000000001,
+            10.043549999999998
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 17851,
+            "mean": 8.3381041398241,
+            "min": 3.913,
+            "p50": 8.316,
+            "p95": 9.715,
+            "p99": 10.5185,
+            "max": 15.505
+          },
+          "window_p95_frame_ms": [
+            9.8989,
+            9.80185,
+            9.374600000000001,
+            9.729399999999996
+          ]
+        }
+      },
+      {
+        "stage": "stonewall_reverse",
+        "source_tick_inclusive": [
+          49636,
+          56722
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 8921,
+            "mean": 8.33589687254792,
+            "min": 3.433,
+            "p50": 8.331,
+            "p95": 9.921,
+            "p99": 10.806799999999996,
+            "max": 16.137
+          },
+          "window_p95_frame_ms": [
+            9.87905,
+            9.982
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 17839,
+            "mean": 8.337015079320588,
+            "min": 3.413,
+            "p50": 8.317,
+            "p95": 9.546,
+            "p99": 10.332099999999995,
+            "max": 14.872
+          },
+          "window_p95_frame_ms": [
+            9.539150000000001,
+            9.71615,
+            9.25,
+            9.756799999999997
+          ]
+        }
+      },
+      {
+        "stage": "entrance_reverse",
+        "source_tick_inclusive": [
+          56723,
+          57845
+        ],
+        "A": {
+          "frame_ms": {
+            "count": 1409,
+            "mean": 8.33454648687012,
+            "min": 4.833,
+            "p50": 8.37,
+            "p95": 10.049999999999999,
+            "p99": 10.941440000000004,
+            "max": 13.31
+          },
+          "window_p95_frame_ms": [
+            9.7264,
+            10.1855
+          ]
+        },
+        "B": {
+          "frame_ms": {
+            "count": 2814,
+            "mean": 8.33802842928216,
+            "min": 4.884,
+            "p50": 8.31,
+            "p95": 9.55245,
+            "p99": 10.343,
+            "max": 11.797
+          },
+          "window_p95_frame_ms": [
+            9.938699999999999,
+            9.0611,
+            9.123700000000001,
+            10.062
+          ]
+        }
+      }
+    ]
+  },
+  "scope": {
+    "observed_configuration": "Apple M1 Pro, 16 GB, native Godot 4.7.2 debug build outside editor, Metal forward_plus, 1920x1080, 3D scale 1.0, uncapped and VSync disabled. A=0 NPC/0 vehicle for two 300-second loops; B=2 NPC/2 vehicle for four 300-second loops.",
+    "camera": "Time-compressed discrete replay of observed N04 poses from eleven source stages. Player remains stationary; this does not revalidate physical walking, human handling or traffic safety.",
+    "gpu_frame_time_ms": null,
+    "temperature_observed": false,
+    "causal_attribution": "CPU versus GPU work, operating-system pacing, temperature effects and background-process effects are not separated. A/B observations are not randomized repeated trials; lower B frame times do not establish an actor-related performance improvement.",
+    "memory": "PS RSS is periodic resident process memory, not total allocation or GPU memory. Retained 1Hz actor/camera observations are part of the benchmark; MEMORY_STATIC rises while RSS does not grow monotonically. These data do not prove absence of a memory leak.",
+    "system": "Power, memory_pressure -Q, swap and background processes are before/after snapshots, not continuous pressure or thermal measurements. Swap already existed before both runs; no application-specific swap cause is established.",
+    "claim_boundary": "Supports adopting p95 frame time <=33.3 ms for this current M1 Pro/native/current-load configuration and deferring speculative optimization. No exported-package, M4, larger actor load, long-session guarantee or formal target-adoption mutation is implied."
+  },
+  "preservation": {
+    "only_created_file": "data/reports/r01/stage_analysis.json",
+    "source_files_modified": false,
+    "n04_files_modified": false,
+    "raw_copies_created": false,
+    "basis": "This analysis reads existing R01 files and creates only this new JSON. Raw/report/batch/camera hashes are checked before and after analysis; original R01 source/runtime/proof and N04 camera acceptance preservation checks are retained in computed.profiles. No current N04 source inventory is rehashed or N04 engine validation rerun."
+  },
+  "reproduction_code": "import gzip,hashlib,json,math,statistics\nfrom pathlib import Path\n\ndef sha256(path,gzip_payload=False):\n    digest=hashlib.sha256()\n    with (gzip.open(path,'rb') if gzip_payload else path.open('rb')) as stream:\n        for block in iter(lambda:stream.read(1024*1024),b''):\n            digest.update(block)\n    return digest.hexdigest()\n\ndef distribution(values):\n    ordered=sorted(values)\n    if not ordered:return {'count':0}\n    def quantile(q):\n        position=(len(ordered)-1)*q\n        lo=math.floor(position);hi=math.ceil(position)\n        return ordered[lo]+(ordered[hi]-ordered[lo])*(position-lo)\n    return {'count':len(ordered),'mean':statistics.fmean(ordered),'min':ordered[0],\n            'p50':quantile(.5),'p95':quantile(.95),'p99':quantile(.99),'max':ordered[-1]}\n\ndef analyze(root):\n    root=Path(root).resolve();base=root/'data/reports/r01'\n    computed={'profiles':{},'stage_table':[]};common_stages=None\n    for profile in ('A','B'):\n        files={kind:base/name for kind,name in (\n            ('raw',profile+'.json.gz'),('report',profile+'_performance.json'),\n            ('frame_batches',profile+'_frames.jsonl.gz'),\n            ('camera_plan',profile+'_benchmark_camera.json.gz'))}\n        bound={kind:{'path':path.relative_to(root).as_posix(),'bytes':path.stat().st_size,\n                     'sha256':sha256(path)} for kind,path in files.items()}\n        report=json.loads(files['report'].read_text())\n        with gzip.open(files['raw'],'rt') as stream:raw=json.load(stream)\n        with gzip.open(files['camera_plan'],'rt') as stream:plan=json.load(stream)\n        assert bound['raw']['sha256']==report['raw_sha256']\n        assert bound['frame_batches']['sha256']==report['frame_batches_sha256']\n        bound['frame_batches']['decompressed_sha256']=sha256(files['frame_batches'],gzip_payload=True)\n        assert bound['frame_batches']['decompressed_sha256']==raw['frame_storage']['batch_file_sha256']\n        assert bound['camera_plan']['sha256']==report['camera_plan_archive_sha256']\n        assert report['measurement_valid'] and report['full_protocol_complete'] and report['passed']\n        stages=plan['source_stage_ticks']\n        if common_stages is None:common_stages=stages\n        else:assert common_stages==stages\n        columns={name:index for index,name in enumerate(raw['frame_columns'])}\n        frames=raw['frames'];window_count=len(report['windows']);window_s=raw['window_s']\n        stage_frames={name:[] for name in stages}\n        stage_windows={name:[[] for _ in range(window_count)] for name in stages}\n        window_frames=[[] for _ in range(window_count)];unknown=0;ambiguous=0\n        for row in frames:\n            matching=[name for name,(lo,hi) in stages.items() if lo<=row[columns['source_tick']]<=hi]\n            unknown+=not matching;ambiguous+=len(matching)>1\n            if len(matching)!=1:continue\n            name=matching[0];ms=row[columns['monotonic_frame_ms']]\n            window=min(int(row[columns['t_end_s']]//window_s),window_count-1)\n            stage_frames[name].append(ms);stage_windows[name][window].append(ms)\n            window_frames[window].append(ms)\n        assert unknown==ambiguous==0\n        assert sum(map(len,stage_frames.values()))==len(frames)==raw['frame_count']==report['summary']['frames']\n        for values,recorded in zip(window_frames,report['windows']):\n            assert len(values)==recorded['frames']\n            assert abs(distribution(values)['p95']-recorded['frame_ms']['p95'])<1e-10\n        first_receipt=next(row['since_process_spawn_s'] for row in report['startup_log_receipt_events']\n                           if row['line'].startswith('R01_MEASURE_START'))\n        rss=[]\n        for row in report['rss_samples']:\n            offset=row['since_process_spawn_s']-first_receipt\n            if row.get('pid')==raw['pid'] and isinstance(row.get('rss_bytes'),(int,float)) and 0<=offset<=raw['duration_actual_s']:\n                rss.append((offset,row['rss_bytes']))\n        assert len(rss)==report['memory_measurement']['valid_sample_count']\n        gaps=[b[0]-a[0] for a,b in zip(rss,rss[1:])];rss_windows=[]\n        for index in range(window_count):\n            samples=[(t,value) for t,value in rss if index*window_s<=t<(index+1)*window_s]\n            rss_windows.append({'index':index+1,'nominal_interval_s':[index*window_s,(index+1)*window_s],\n                'first_valid_offset_s':samples[0][0],'last_valid_offset_s':samples[-1][0],\n                'rss_bytes':distribution([value for _,value in samples]),\n                'rss_MiB':distribution([value/1048576 for _,value in samples])})\n        stats=distribution([row[columns['monotonic_frame_ms']] for row in frames])\n        assert abs(stats['p95']-report['summary']['frame_ms']['p95'])<1e-10\n        source_checks={row['name']:row['passed'] for row in report['checks'] if row['name'] in (\n            'source.unchanged','runtime.unchanged','proof.unchanged','camera.source_record_unchanged',\n            'camera.source_check_unchanged','camera.acceptance_binding_unchanged')}\n        assert len(source_checks)==6 and all(source_checks.values())\n        gpu_time={'raw_gpu_time_ms':raw['gpu_time_ms'],'report_gpu_frame_time_ms':report['gpu_frame_time_ms']}\n        assert all(value is None for value in gpu_time.values())\n        computed['profiles'][profile]={'inputs':bound,'profile':report['profile'],'engine':raw['engine'],\n            'duration_actual_s':raw['duration_actual_s'],'warmup_actual_s':raw['warmup_actual_s'],\n            'frame_ms':stats,'frames_above_33_3ms':sum(row[columns['monotonic_frame_ms']]>33.3 for row in frames),\n            'unassigned_frame_count':unknown,'ambiguous_frame_count':ambiguous,\n            'windows':[{'index':i+1,'frame_ms':distribution(values)} for i,values in enumerate(window_frames)],\n            'rss':{'unit':'bytes; MiB=bytes/1048576','valid_sample_count':len(rss),\n                'first_valid_offset_s':rss[0][0],'last_valid_offset_s':rss[-1][0],\n                'first_endpoint_gap_s':rss[0][0],'last_endpoint_gap_s':raw['duration_actual_s']-rss[-1][0],\n                'maximum_inter_sample_gap_s':max(gaps),'temporal_span_fraction':(rss[-1][0]-rss[0][0])/raw['duration_actual_s'],\n                'all_valid_rss_bytes':distribution([value for _,value in rss]),'windows':rss_windows,\n                'start_30s_rss_bytes':distribution([value for t,value in rss if t<30]),\n                'end_30s_rss_bytes':distribution([value for t,value in rss if t>=raw['duration_actual_s']-30])},\n            'static_memory_first_last_bytes':[frames[0][columns['MEMORY_STATIC']],frames[-1][columns['MEMORY_STATIC']]],\n            'gpu_time':gpu_time,'system_before':{key:value for key,value in report['system_before'].items() if key!='heavy_processes'},\n            'system_after':{key:value for key,value in report['system_after'].items() if key!='heavy_processes'},\n            'background_process_snapshot_top_cpu':{'before':report['system_before']['heavy_processes']['top_cpu'][:3],\n                                                    'after':report['system_after']['heavy_processes']['top_cpu'][:3]},\n            'recorded_preservation_checks':source_checks,\n            'performance_target_adopted_in_report':report['target_proposal']['performance_target_adopted']}\n        for name in stages:\n            row=next((item for item in computed['stage_table'] if item['stage']==name),None)\n            if row is None:\n                row={'stage':name,'source_tick_inclusive':stages[name]};computed['stage_table'].append(row)\n            row[profile]={'frame_ms':distribution(stage_frames[name]),\n                          'window_p95_frame_ms':[distribution(values)['p95'] for values in stage_windows[name]]}\n        assert all(sha256(path)==bound[kind]['sha256'] for kind,path in files.items())\n        computed['profiles'][profile]['input_artifacts_unchanged_during_analysis']=True\n    return computed\n\nif __name__=='__main__':\n    print(json.dumps(analyze(Path.cwd()),ensure_ascii=False,indent=2,allow_nan=False))\n"
+}

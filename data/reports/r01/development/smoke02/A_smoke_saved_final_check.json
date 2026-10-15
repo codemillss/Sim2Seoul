@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "task": "R01-saved-evidence",
+  "profile": "A",
+  "diagnostic_only": true,
+  "passed": true,
+  "full_protocol_complete": false,
+  "checks": [
+    {
+      "name": "engine.native_metal_fixed",
+      "passed": true
+    },
+    {
+      "name": "engine.uncapped_60physics",
+      "passed": true
+    },
+    {
+      "name": "render.actual_1920x1080",
+      "passed": true
+    },
+    {
+      "name": "render.actual_capture_saved",
+      "passed": true
+    },
+    {
+      "name": "render.every_frame_texture_size",
+      "passed": true
+    },
+    {
+      "name": "render.every_frame_internal_3d_scale",
+      "passed": true
+    },
+    {
+      "name": "clock.actual_complete",
+      "passed": true
+    },
+    {
+      "name": "engine.actual_60physics",
+      "passed": true,
+      "effective_hz": 60.09597386923236,
+      "tolerance_hz": 0.49965439823665236
+    },
+    {
+      "name": "observations.exact_raw_frame_schedule_and_physics_join",
+      "passed": true
+    },
+    {
+      "name": "render.observed_window_and_viewport_size",
+      "passed": true
+    },
+    {
+      "name": "render.conditions_unchanged",
+      "passed": true
+    },
+    {
+      "name": "actors.actual_profile_count",
+      "passed": true
+    },
+    {
+      "name": "setup.player_stationary_no_recovery",
+      "passed": true
+    },
+    {
+      "name": "setup.actual_controls_and_spawn",
+      "passed": true
+    },
+    {
+      "name": "camera.every_frame_clock_bound_and_source_index",
+      "passed": true,
+      "maximum_clock_lead_s": 0.002,
+      "lag_budget": "current render interval + 1/60 second + 0.005 second"
+    },
+    {
+      "name": "camera.actual_discrete_source_replay",
+      "passed": true
+    },
+    {
+      "name": "protocol.requested_duration",
+      "passed": true
+    },
+    {
+      "name": "protocol.warmup_completed",
+      "passed": true
+    },
+    {
+      "name": "memory.measurement_coverage",
+      "passed": true,
+      "valid_sample_count": 5,
+      "first_valid_offset_s": 0.2253526661079377,
+      "last_valid_offset_s": 4.290581250097603
+    },
+    {
+      "name": "saved.schema_and_profile",
+      "passed": true
+    },
+    {
+      "name": "binding.raw_gzip_sha256",
+      "passed": true
+    },
+    {
+      "name": "binding.camera_plan_archive_sha256",
+      "passed": true
+    },
+    {
+      "name": "binding.camera_plan_decoded_sha256",
+      "passed": true
+    },
+    {
+      "name": "binding.frame_batch_archive_sha256",
+      "passed": true
+    },
+    {
+      "name": "binding.frame_batch_decoded_sha256",
+      "passed": true
+    },
+    {
+      "name": "binding.camera_source_record",
+      "passed": true
+    },
+    {
+      "name": "binding.saved_camera_plan_metadata",
+      "passed": true
+    },
+    {
+      "name": "binding.saved_public_asset_sha256",
+      "passed": true
+    },
+    {
+      "name": "frames.batch_reconstruction_exact",
+      "passed": true,
+      "details": {
+        "frame_count": 601
+      }
+    },
+    {
+      "name": "binding.current_producer_proof.tools/measure_performance.py",
+      "passed": true
+    },
+    {
+      "name": "binding.current_producer_proof.tests/game/measure_performance.gd",
+      "passed": true
+    },
+    {
+      "name": "binding.current_producer_proof.tests/game/offline.sb",
+      "passed": true
+    },
+    {
+      "name": "saved.summary_exact",
+      "passed": true
+    },
+    {
+      "name": "saved.windows_exact",
+      "passed": true
+    },
+    {
+      "name": "saved.actor_liveness_exact",
+      "passed": true
+    },
+    {
+      "name": "saved.memory_recalculation_exact",
+      "passed": true
+    },
+    {
+      "name": "saved.pure_checks_exact",
+      "passed": true
+    },
+    {
+      "name": "saved.complete_producer_checks_passed",
+      "passed": true
+    },
+    {
+      "name": "saved.protocol_status_consistent",
+      "passed": true
+    },
+    {
+      "name": "saved.acceptance_scope",
+      "passed": true
+    }
+  ],
+  "inputs": {
+    "record": {
+      "path": "data/cache/r01_development/smoke02/A_smoke.json.gz",
+      "sha256": "4ebeb9d964628d4e55f6543292a52172796120341e918f60cfc7b9b710b4e881",
+      "decoded_sha256": "36eeefbd6d1a460b0dc7bf4c5639cc4ccc55ab45dc8ec9c6648400e3a99b1d75",
+      "bytes": 14739,
+      "decoded_bytes": 90139
+    },
+    "plan": {
+      "path": "data/cache/r01_development/smoke02/A_smoke_benchmark_camera.json.gz",
+      "sha256": "0bf9e9b0fcd758bb19cf2efa589a93129b4ca92bdaaf6296527ec84b1a9f1ee8",
+      "decoded_sha256": "54ccce47ff6c5a442c7db2a71cee3ad45fcd7319754e49cc7b8e96b0d3bb60a4",
+      "bytes": 1000427,
+      "decoded_bytes": 5159987
+    },
+    "report": {
+      "path": "data/cache/r01_development/smoke02/A_smoke_performance.json",
+      "sha256": "d163747b311e2fa9ed4b002dc7e64ece4ff66e2573867f31d4d70fc61a428070",
+      "decoded_sha256": "d163747b311e2fa9ed4b002dc7e64ece4ff66e2573867f31d4d70fc61a428070",
+      "bytes": 39377,
+      "decoded_bytes": 39377
+    },
+    "frame_batches": {
+      "path": "data/cache/r01_development/smoke02/A_smoke_frames.jsonl.gz",
+      "sha256": "b0c38ab738aa548d05b320387ef135d1f88512b13bf605585a945d6443d51cfd",
+      "decoded_sha256": "7dbfc2840041c0171d4451cd482ce72cf854e9f8d35050e5a4d8d9ae8c6b1fe9",
+      "bytes": 10999,
+      "decoded_bytes": 80499
+    }
+  },
+  "checker_sha256": "2e5aab88510a23ebd2e0e48145c3bf17e3007c341a6315619db0b492677daac8",
+  "recomputed": {
+    "summary": {
+      "frames": 601,
+      "covered_elapsed_s": 5.008655,
+      "average_fps": 119.99229334022806,
+      "frame_ms": {
+        "count": 601,
+        "mean": 8.333868552412644,
+        "min": 6.336,
+        "p50": 8.425,
+        "p95": 8.87,
+        "p99": 9.484,
+        "max": 11.662
+      },
+      "monitors": {
+        "TIME_PROCESS": {
+          "count": 601,
+          "mean": 0.012388153078202993,
+          "min": 0.009204,
+          "p50": 0.0095,
+          "p95": 0.044736,
+          "p99": 0.044736,
+          "max": 0.044736
+        },
+        "TIME_PHYSICS_PROCESS": {
+          "count": 601,
+          "mean": 0.000444099833610649,
+          "min": 0.000409,
+          "p50": 0.00043,
+          "p95": 0.000545,
+          "p99": 0.000545,
+          "max": 0.000545
+        },
+        "MEMORY_STATIC": {
+          "count": 601,
+          "mean": 173566242.78036606,
+          "min": 173526591.0,
+          "p50": 173566191.0,
+          "p95": 173597823.0,
+          "p99": 173604063.0,
+          "max": 173607183.0
+        },
+        "OBJECT_COUNT": {
+          "count": 601,
+          "mean": 7052.0,
+          "min": 7052.0,
+          "p50": 7052.0,
+          "p95": 7052.0,
+          "p99": 7052.0,
+          "max": 7052.0
+        },
+        "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+          "count": 601,
+          "mean": 333.56239600665555,
+          "min": 290.0,
+          "p50": 329.0,
+          "p95": 384.0,
+          "p99": 391.0,
+          "max": 391.0
+        },
+        "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+          "count": 601,
+          "mean": 333.56239600665555,
+          "min": 290.0,
+          "p50": 329.0,
+          "p95": 384.0,
+          "p99": 391.0,
+          "max": 391.0
+        },
+        "RENDER_VIDEO_MEM_USED": {
+          "count": 601,
+          "mean": 133496832.0,
+          "min": 133496832.0,
+          "p50": 133496832.0,
+          "p95": 133496832.0,
+          "p99": 133496832.0,
+          "max": 133496832.0
+        },
+        "RENDER_TEXTURE_MEM_USED": {
+          "count": 601,
+          "mean": 55392896.0,
+          "min": 55392896.0,
+          "p50": 55392896.0,
+          "p95": 55392896.0,
+          "p99": 55392896.0,
+          "max": 55392896.0
+        },
+        "RENDER_BUFFER_MEM_USED": {
+          "count": 601,
+          "mean": 31086692.0,
+          "min": 31086692.0,
+          "p50": 31086692.0,
+          "p95": 31086692.0,
+          "p99": 31086692.0,
+          "max": 31086692.0
+        }
+      },
+      "gpu_frame_time_ms": null
+    },
+    "windows": [
+      {
+        "index": 1,
+        "nominal_start_s": 0.0,
+        "nominal_end_s": 5.0,
+        "source_stages_observed": [
+          "entrance_forward"
+        ],
+        "frames": 601,
+        "covered_elapsed_s": 5.008655,
+        "average_fps": 119.99229334022806,
+        "frame_ms": {
+          "count": 601,
+          "mean": 8.333868552412644,
+          "min": 6.336,
+          "p50": 8.425,
+          "p95": 8.87,
+          "p99": 9.484,
+          "max": 11.662
+        },
+        "monitors": {
+          "TIME_PROCESS": {
+            "count": 601,
+            "mean": 0.012388153078202993,
+            "min": 0.009204,
+            "p50": 0.0095,
+            "p95": 0.044736,
+            "p99": 0.044736,
+            "max": 0.044736
+          },
+          "TIME_PHYSICS_PROCESS": {
+            "count": 601,
+            "mean": 0.000444099833610649,
+            "min": 0.000409,
+            "p50": 0.00043,
+            "p95": 0.000545,
+            "p99": 0.000545,
+            "max": 0.000545
+          },
+          "MEMORY_STATIC": {
+            "count": 601,
+            "mean": 173566242.78036606,
+            "min": 173526591.0,
+            "p50": 173566191.0,
+            "p95": 173597823.0,
+            "p99": 173604063.0,
+            "max": 173607183.0
+          },
+          "OBJECT_COUNT": {
+            "count": 601,
+            "mean": 7052.0,
+            "min": 7052.0,
+            "p50": 7052.0,
+            "p95": 7052.0,
+            "p99": 7052.0,
+            "max": 7052.0
+          },
+          "RENDER_TOTAL_DRAW_CALLS_IN_FRAME": {
+            "count": 601,
+            "mean": 333.56239600665555,
+            "min": 290.0,
+            "p50": 329.0,
+            "p95": 384.0,
+            "p99": 391.0,
+            "max": 391.0
+          },
+          "RENDER_TOTAL_OBJECTS_IN_FRAME": {
+            "count": 601,
+            "mean": 333.56239600665555,
+            "min": 290.0,
+            "p50": 329.0,
+            "p95": 384.0,
+            "p99": 391.0,
+            "max": 391.0
+          },
+          "RENDER_VIDEO_MEM_USED": {
+            "count": 601,
+            "mean": 133496832.0,
+            "min": 133496832.0,
+            "p50": 133496832.0,
+            "p95": 133496832.0,
+            "p99": 133496832.0,
+            "max": 133496832.0
+          },
+          "RENDER_TEXTURE_MEM_USED": {
+            "count": 601,
+            "mean": 55392896.0,
+            "min": 55392896.0,
+            "p50": 55392896.0,
+            "p95": 55392896.0,
+            "p99": 55392896.0,
+            "max": 55392896.0
+          },
+          "RENDER_BUFFER_MEM_USED": {
+            "count": 601,
+            "mean": 31086692.0,
+            "min": 31086692.0,
+            "p50": 31086692.0,
+            "p95": 31086692.0,
+            "p99": 31086692.0,
+            "max": 31086692.0
+          }
+        },
+        "gpu_frame_time_ms": null
+      }
+    ],
+    "actor_liveness": [],
+    "memory_measurement": {
+      "measurement_valid": true,
+      "available": true,
+      "valid_sample_count": 5,
+      "first_valid_offset_s": 0.2253526661079377,
+      "last_valid_offset_s": 4.290581250097603,
+      "rss_bytes_summary": {
+        "count": 5,
+        "mean": 309929574.4,
+        "min": 222642176,
+        "p50": 228392960.0,
+        "p95": 444157132.8,
+        "p99": 448742031.36,
+        "max": 449888256
+      },
+      "start_rss_bytes_summary": {
+        "count": 3,
+        "mean": 366204245.3333333,
+        "min": 227491840,
+        "p50": 421232640.0,
+        "p95": 447022694.4,
+        "p99": 449315143.68,
+        "max": 449888256
+      },
+      "end_rss_bytes_summary": {
+        "count": 2,
+        "mean": 225517568.0,
+        "min": 222642176,
+        "p50": 225517568.0,
+        "p95": 228105420.8,
+        "p99": 228335452.16,
+        "max": 228392960
+      },
+      "edge_window_s": 2.5043275,
+      "maximum_allowed_gap_s": 5.0,
+      "endpoint_margin_s": 2.5043275,
+      "reason": null,
+      "time_basis": "ps sample start relative to monotonic receipt of R01_MEASURE_START. Excludes startup/warmup. Receipt and ps invocation add scheduling latency; this is periodic process RSS, not frame-synchronous memory."
+    }
+  },
+  "scope": "Saved observations re-audited with the byte-bound existing R01 pure audits. Raw/plan/batch SHA and exact batch reconstruction/summary/memory reproduction are checked. No engine or hardware sampling, no large historical N04 source reread, and no renewed historical rendering attestation. Smoke is diagnostic."
+}
