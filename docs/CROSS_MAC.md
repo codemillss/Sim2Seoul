@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 최신 일반 실행은 아래 N03 차량 장면이며, N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 진행 상태와 다음 작업은 [WORK_STATUS](WORK_STATUS.md)를 따른다. 사람 조작·성능/앱·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 최신 개발 실행은 아래 R02의 `v0_walk`이며, N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 현재 M1의고정1920×1080성능은R01로측정했고품질/메뉴회귀는R02로확인했다. R03은 같은 V0의 M1 로컬 앱 검수를 완료했고 R04는 M4 UNRUN 대안으로 판정했다. 진행 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. M4·사람조작감·현실지형/접근은별도다.
 
 ## 공유되는 것
 
@@ -414,3 +414,55 @@ sh tools/run_traffic.sh run
 `traffic.json`/manifest는 Git 제외 로컬 생성물이다. N01/N02 준비 자료와 수동 원천·공유 도구를 사용해 생성하고 [N03 결과/실패/재현](../data/reports/vehicles.md)의 snapshot과 대조한다. 준비31파일16,336,566bytes만 복사한 다른 폴더에서 두 번 생성, 폴더 이동/출력 삭제 후 같은 bytes/SHA와 입력 불변을27검사로 확인했다. 기존 Python3.14.7/Shapely2.2.0에서의 N03-only 증거이며 새Mac 설치·전체GIS·M4 검증은 아니다.
 
 현재 인수는 `python3 tools/check_vehicles_handoff.py`, 실행 자료 준비 뒤에는 `--prepared`를 덧붙인다. 고정된 원시/판정·화면과 개발 실패를 덮어쓰지 않도록 재시험은 위 결과 문서의 cache 경로를 쓴다. 다음 N04는 두 보행자/두 차량을 켠 채 필수 보행 여정·10분 이상·각2주기·교차 정지/재개3회를 통합 관측한다. 이번 독립19case는 그 연속 보행 증거를 대신하지 않는다. 성능/패키지·사람 조작/OS·M4·실내/V0는 후속이다.
+
+## V0 개발 자료를 처음 만드는 Mac의 추가 준비
+
+`setup_mac.sh`의 E03/E04 준비가 끝난 새 사본에서만 다음 순서로 생성한다. 현재 사본에 같은 자료가 이미 있으면 반복하지 않는다. 각 명령의 성공을 확인한 뒤 다음으로 진행한다. `prepare_city_landmarks.py`는 Godot의 네이티브 import를 사용하므로 공식 4.7.2가 필요하며, 다른 설치 위치는 `GODOT_BIN`으로 지정한다. 이 순서의 의존성을 코드와 대조했지만, 이를 새 M4 실행 결과로 기록하지 않는다.
+
+```sh
+.venv-data/bin/python tools/prepare_collision.py
+.venv-data/bin/python tools/prepare_daehanmun.py
+.venv-data/bin/python tools/prepare_palace_walk.py
+.venv-data/bin/python tools/prepare_public_walk.py
+.venv-data/bin/python tools/prepare_walkable_itinerary.py
+.venv-data/bin/python tools/prepare_landmark_spec.py
+.venv-data/bin/python tools/prepare_palace_landmarks.py
+.venv-data/bin/python tools/prepare_city_landmarks.py
+.venv-data/bin/python tools/prepare_routes.py
+.venv-data/bin/python tools/prepare_pedestrians.py
+.venv-data/bin/python tools/prepare_traffic.py
+```
+
+이 자료를 기존 패키지와 대조할 때는 원 export manifest의 source/runtime SHA와 일치해야 한다. 차이가 나면 원인과 생성 조건을 확인하며 과거 manifest·raw·snapshot을 새 값으로 덮어쓰지 않는다. Python/편집기가 필요한 개발 자료 준비와, 해당 도구가 필요 없는 완성 앱 사용을 구분한다.
+
+## R02 이후 최신 개발 장면
+
+위 준비와 도구 검사가 끝난 뒤 최신 품질/메뉴가 있는 장면은 다음으로 연다.
+
+```sh
+sh tools/run_v0.sh run
+```
+
+기존 `traffic_walk`의 지도·충돌·두 NPC/두 차량을 상속하고 화면 품질, 설정 복원, 출처 팝업을 제공한다. 프로젝트 기본 main은 준비용 E02를 보존하므로 Godot 프로젝트를 열기만 한 화면과 위 V0 장면을 구분한다. [R02 실제 검사](../data/reports/performance_comparison.md), [M1 성능 조건](performance_notes.md)을 따른다. 새 Mac을 M1과 같은 성능으로 간주하지 않는다.
+
+앱만 사용하려면 개발 환경을 설치하지 않고 R03에서 검증한 동일 ZIP을 별도로 옮긴다. `builds/`, 내보내기 템플릿과 캐시는 Git에 넣지 않으므로 Git pull만으로 앱 ZIP이 생기지 않는다. 코드·지도·재현 도구·보고서/해시는 Git으로 공유한다. 앱 경로·해시·실제 검증 범위와 조작법은 [실행 안내](RUN_GUIDE.md)에 기록한다. 이 경로의 로컬 파일 유무와 다른 Mac에서의 실제 실행 여부는 구분한다.
+
+## R03 앱 사용과 R04 같은 패키지 재검수
+
+M1의 최종 앱은 [R03 결과](../data/reports/package_check.md)와 [실행 안내](RUN_GUIDE.md)로 인수했다. M4 실행은 [UNRUN](../data/reports/performance_m4pro.json)이며, 아래는 실제 기기 접근이 생겼을 때의 재개 절차다. 기기 이름으로 M4/RAM/OS를 추정하지 않는다.
+
+앱만 쓰려면 동일 ZIP을 별도로 옮기고 SHA-256 `feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb`를 대조해 푼다. Godot/Python/개발 저장소가 없어도 앱 실행 자료는 포함돼 있다. 앱은 ad-hoc 로컬 서명이고 Developer ID/공증·전송 Gatekeeper는 미검증이다. macOS의 해당 앱 경고 사유를 기록하며 시스템 전체 보안 설정을 끄지 않는다.
+
+개발 검수에는 현재 소스와 앞 절의 생성 자료, 고정 Python 환경·Shapely가 필요하다. **원본 [export manifest](../data/reports/r03/exports/final/manifest.json)를 수정하지 않는다.** 원 manifest SHA는 `65e4fd2c9858120a1fe27fb01ece028df78de291685f4b3ad01f403ebf1da3bb`다. 실제 앱/ZIP/catalog bytes를 검사한 뒤 `relocate_package_manifest.py`가 catalog/app/ZIP 경로3개와 preservation의 catalog key2개만 바꾼 파생 manifest를 만든다. 나머지 JSON 값과 역적용 복원을 검증하며 역사적인 engine/template/log 경로는 현재 기기 경로로 꾸미지 않는다.
+
+다음 `/delivery`는 옮긴 파일을 둔 실제 폴더로 바꾼다. 앱 이름과 실행 권한·심볼릭 링크를 보존해 추출한다. 출력은 매번 새 폴더를 사용한다.
+
+```sh
+ditto -x -k /delivery/Sim2Seoul.zip /delivery/unpacked
+.venv-data/bin/python -B tools/relocate_package_manifest.py data/reports/r03/exports/final/manifest.json --zip /delivery/Sim2Seoul.zip --app /delivery/unpacked/Sim2Seoul.app --catalog "$PWD/data/reports/n04/gpu_check.json" --output data/cache/r04_run01/binding
+.venv-data/bin/python -B tools/check_package_contract.py data/cache/r04_run01/binding/derived_manifest.json --output data/cache/r04_run01/package_check
+```
+
+기존 package checker가 같은 source/runtime SHA, 실제 기기/release/설정·오프라인 기동·전체 여정·서명을 검사한다. 새 clone의 원천/생성 SHA가 다르면 원인을 확인하며 원 manifest/PASS 증거를 덮어쓰지 않는다. 과거 N04 인수 snapshot의 문서 SHA는 이후 기록 갱신과 다를 수 있으므로 현재 문서를 과거 값으로 되돌리지 않는다. 최신 앱 인수는 위 R03 manifest와 checker로 수행한다.
+
+[작은 입력29검사](../data/reports/r04/manifest_relocation_checks.json)는 과거 시점의 fixture 기록이다. [최종 실제 앱/ZIP·113source 경로 검수](../data/reports/r04/final_path_binding/source_check.json)는 현재 M1에서 수행했다. 다른 clone/M4/앱 재실행 결과가 아니며 M4 기록은 계속 UNRUN이다. 실제 M4에서는 칩/RAM/OS·전원/품질/출력 크기를 기록하고 같은 검수의 raw/check/log/PNG를 별도 보존한다. OS 입력/초점과 사람 조작감, R01과 같은 성능 측정은 서로 구분한다.

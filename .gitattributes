@@ -12,3 +12,6 @@ data/reports/public/development/pre_guide_winding_fix/rejections/*.log whitespac
 data/reports/n03/development/smoke02/smoke.log whitespace=-blank-at-eol
 # Preserve the unmodified upstream CC0 license, including CRLF and blank tabs.
 game/assets/vendor/kenney_city_kit_commercial/License.txt -text -eol whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+# R03 command output and unified-diff context are exact-byte evidence.
+data/reports/r03/**/*.log -text -eol whitespace=-blank-at-eof
+data/reports/r03/exports/**/temporary_project.diff -text -eol whitespace=-blank-at-eol

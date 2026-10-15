@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task": "R04",
+  "status": "UNRUN",
+  "passed": null,
+  "recorded_at_utc": "2026-10-15T18:31:08.507734+00:00",
+  "reason": "No verified M4 execution surface is available in this session. Current shell is the verified M1 Pro; known remote host labels and SSH configuration do not establish an M4 execution target.",
+  "access_review": {
+    "read_only": true,
+    "remote_connections_attempted": 0,
+    "network_scan_performed": false,
+    "credentials_read": false,
+    "other_chats_messaged": false
+  },
+  "user_provided_hardware": {
+    "chip": "Apple M4 Pro",
+    "ssd_bytes_approx": 1000000000000,
+    "ram_provided": false
+  },
+  "verified_hardware": {
+    "chip": null,
+    "ram_bytes": null,
+    "gpu": null,
+    "os": null
+  },
+  "measurement": {
+    "renderer": null,
+    "render_pixels": null,
+    "quality": null,
+    "duration_s": null,
+    "frames": null,
+    "frame_ms_p95": null,
+    "rss_bytes": null
+  },
+  "scenarios": {
+    "normal_startup": "UNRUN",
+    "native_keyboard_mouse_focus": "UNRUN",
+    "r1_palace_and_gate": "UNRUN",
+    "r2_cityhall_plaza": "UNRUN",
+    "r3_stonewall": "UNRUN",
+    "camera_collision": "UNRUN",
+    "npc_vehicle_crossings": "UNRUN",
+    "pause_reset_quality_restore": "UNRUN",
+    "offline_credits": "UNRUN",
+    "quit": "UNRUN",
+    "performance_comparison": "UNRUN",
+    "gatekeeper_after_transfer": "UNRUN"
+  },
+  "same_package_to_resume": {
+    "original_manifest": "data/reports/r03/exports/final/manifest.json",
+    "original_build": "builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z",
+    "zip_name": "Sim2Seoul.zip",
+    "zip_bytes": 64884999,
+    "zip_sha256": "feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb",
+    "app_tree_sha256": "326fedaf76a80b1889dc2e950e73109979f1464b4e659493ac7ccda95b11ceb7",
+    "catalog": "data/reports/n04/gpu_check.json",
+    "catalog_sha256": "2d74be8cb8e3326ace8a3761a8529125c347a4f3af9b8a37f26541e714b9f793",
+    "binding_tool": "tools/relocate_package_manifest.py",
+    "binding_tool_sha256": "4d627b151b27857ca4f6bfeee30729a54d81eb880ea2e24ad1added13eafec1d",
+    "runtime_checker": "tools/check_package_contract.py",
+    "source_and_assets": "Use this completed repository revision and reproduce generated runtime bytes against original manifest. Preserve original manifest; derive only permitted path bindings."
+  },
+  "resume_conditions": [
+    "Obtain a verified execution session on the actual M4 Pro without inferring hardware from a host label.",
+    "Record chip, RAM, OS, GPU/renderer, output pixels, power and selected quality.",
+    "Transfer the identical ZIP separately from Git; compare SHA256 and extract preserving executable permissions/symlinks.",
+    "Use the immutable original manifest, same catalog/source/generated assets and the path binding tool to create a derived manifest in a fresh directory.",
+    "Run the same package checker and preserve separate raw, checks, logs and PNGs; native OS input and human handling remain separate observations.",
+    "For performance comparison reproduce R01 actual 1920x1080, standard quality, 2NPC/2vehicle, camera loop and warmup/measurement durations. Do not compare unequal protocols."
+  ],
+  "scope": "Permitted R04 unavailable-device disposition; not M4 execution success, not a failed M4 test, and not proof of equal performance on two Macs.",
+  "planned_unavailable_device_disposition_complete": true,
+  "m1_final_package_acceptance": "data/reports/r03/summary.json",
+  "path_binding_validation": {
+    "fixture": "data/reports/r04/manifest_relocation_checks.json",
+    "fixture_checks": 29,
+    "actual_final_package_and_source_binding": "data/reports/r04/final_path_binding/source_check.json",
+    "device": "existing M1 only",
+    "m4_execution": false
+  }
+}

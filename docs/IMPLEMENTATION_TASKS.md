@@ -308,21 +308,23 @@ P01–P04의 조작 검증은 충돌이 있는 작은 독립 시험 장면에서
 - 대안: 목표 미달이면 낮은 품질 프리셋과 한계를 제시한다. 측정 없이 실행 성능을 보장하지 않는다.
 - 실제 증거: [채택/비교와 한계](../data/reports/performance_comparison.md)·[64/68검사와 직접 화면](../data/reports/r02/summary.json). R01의현재2/2 p95 9.6133ms를근거로기본1.0/그림자/200m와33.3ms목표를채택했다. 큰최적화는필요없어기본값을유지하고0.75/그림자OFF를선택지로제공한다. 두설정각90초의대한문왕복/카메라·동일4actor·메뉴·저장/손상복구와3PNG한글검토를통과했다. low개선율/새HUD성능·M4·release앱을측정했다고쓰지않는다. 최초신호중장면해제실패는보존하고시험helper생명주기만수정했다.
 
-### [ ] R03 로컬 macOS 패키지와 실행 안내 — 계획
+### [x] R03 로컬 macOS 패키지와 실행 안내 — M1 로컬 앱 검수 완료 (2026-10-16)
 - 선행: R02, D04.
 - 입력: 확정 엔진·자산·표시 조건, ATTRIBUTION.
 - 산출: `builds/macos/` 앱, `docs/RUN_GUIDE.md`, `data/reports/package_check.md`.
 - 실행: 로컬 개인용 패키지를 만들고 조작·복귀·종료·품질 설정·출처를 안내한다. 편집기 없이 새 실행 조건에서 열어 데이터 누락·절대경로 의존·지도 서버 의존을 검사한다. 배포 서명/공증 필요 여부는 실제 실행 결과로 기록한다.
 - 완료 기준: M1 Pro에서 패키지가 시작되고 필수 경로·NPC·차량이 오프라인으로 동작한다.
 - 대안: 패키지 오류는 리소스 포함·경로·아키텍처를 검사한다. 편집기 실행만 성공한 상태를 패키지 완료로 처리하지 않는다.
+- 실제 증거: [앱/ZIP·실패 수정·58/55/398/58/76검사](../data/reports/package_check.md)·[13PNG 직접 검토](../data/reports/r03/final_views.json). source/network 차단 실제 release 앱에서 완료했다. OS 입력/사람 조작감·M4·전송 Gatekeeper·release 성능은 별도다.
 
-### [ ] R04 M4 Pro 재현과 첫 버전 판정 — 계획
+### [x] R04 M4 Pro 재현과 첫 버전 판정 — 기기별 판정 완료, M4 UNRUN 대안 (2026-10-16)
 - 선행: R03.
 - 입력: 동일 패키지·해시·데이터·시험 조건, M4 Pro 실제 사양.
 - 산출: `data/reports/performance_m4pro.json`, `data/reports/first_version_acceptance.md`, 갱신 WORK_STATUS.
 - 실행: M4 Pro RAM·OS·GPU를 실제 확인하고 동일 파일을 옮겨 실행한다. 기동·조작·지도 배치·필수 동선·NPC·차량을 검사하고 측정값을 따로 기록한다. 두 기기의 설정 차이와 미해결 사항을 정리한다.
 - 완료 기준: 합의 첫 버전의 기능과 증거가 모이고, 기기별 시험 성공/실패/미실행이 분명하다. 사용자 검토용 패키지·안내·제한 목록을 제시한다.
 - 대안: 다른 Mac 접근 불가면 해당 시험을 미실행으로 남긴다. M1 Pro 확인 결과를 M4 Pro 실행 확인으로 대신하지 않고 이후 재개 조건을 명시한다.
+- 실제 증거: [첫 버전 인수](../data/reports/first_version_acceptance.md)·[M4 UNRUN/사양null/재개 조건](../data/reports/performance_m4pro.json). 다섯 경로 재결합29fixture검사와 실제 최종 앱/ZIP·113source 바인딩은 M1에서 확인했으며 다른 Mac PASS가 아니다. [기기 인수 절차](CROSS_MAC.md).
 
 ## 비용을 줄이기 위해 한 작업만 요청할 때의 선택 문장
 

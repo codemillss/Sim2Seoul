@@ -205,3 +205,18 @@ N01 계획의2NPC/2차량과1.2/5m/s는 초기 제안이다. 정적 검사로 �
 명령5.0002m/s·실제 위치 차분5.01m/s, tick당5/60m+1mm·누적거리/원문선 오차5mm·지면/침투5mm·실제 화면 시간2%를 유지한다. 실제 위치 차분 가속/제동의 float32 허용치는1.53/3.03m/s²다. 원래 도시58/궁궐76표시 및 사람 지지/경계/복귀0도 대조한다. 실제 collision_mask 결함1종, 저장 관측 변조5종, loader 자료 손상4종의 거부는 별개 증거로 보존한다. [N03 실행·실패·원시 자료·재현](../data/reports/vehicles.md). N04의 연속 필수 보행·10분 이상/각2주기/교차 정지·재개3회 기준은 그대로 남는다.
 
 N04는같은2NPC/2차량·원문11단계/334구간의 실제도착·4회측면양보/원문선복귀와횡단3회/별도경내막힘회복3회를한전역시계에서검산했다. GPU94,883tick/1,581.406079실제초·전tick접지·pose/복귀0·NPC19/12왕복/차량31/24반복·headless396/GPU398독립검사를통과했다. 일반원문오차0.18m/검증된양보중1.05m·도착0.065m와기존지원/5mm/2%기준을구분한다. 실제2mteleport결함과5종저장변조의관련실패를확인하며, 최초proof갱신중실행은개발증거로남긴다. [N04실제관측·최초실패·판정·원시자료](../data/reports/urban_motion.md). 이것은실제1920×1080성능·독립앱·사람/M4시험을대신하지않는다.
+
+
+## R03 실제 release 앱 재검증 규칙
+
+정적 export 성공과 실제 앱 성공을 분리한다. 먼저 동일 ZIP을 저장소 밖에 추출하고 파일/권한/심볼릭 링크·PCK의 FileAccess 원문·universal2·ad-hoc 서명을 대조한다. 네트워크와 원본 저장소 읽기/쓰기를 차단하며, 외부 파일 읽기 성공/원본 읽기 거부를 실제 대조 시험으로 남긴다. 일반 실행은 V0 READY와 QA dispatcher 비발동을 확인한다.
+
+품질 short phase는 두 품질·Esc/메뉴·복귀/스위치·출처·960/1152 배치·같은 저장 파일에서 새 장면의 품질 복원/손상 복구를 검사한다. 이것만으로 필수 여정 완료나 전체 R02 재시험을 선언하지 않는다. 별도 full phase에서 같은 release 앱의 standard/2NPC/2차량·원문11단계/334구간·횡단3회·NPC 막힘/회복3회와 기존 N04 독립 물리/도시/궁궐 기준을 그대로 적용한다. 실제 화면 시계·물리 tick·5mm/step·전tick 접지·복귀/pose0 기준을 낮추지 않는다.
+
+최초 standard/no-resize0 및 최종 앱의 실제 PNG를 직접 열어 HUD/player 가림과 한글/출처를 확인한다. 화면 검사와 물리 검사는 서로 대신하지 않는다. OS 키보드·마우스/초점 전달, 사람 조작감, 타 Mac/Gatekeeper 최초 실행이 실행되지 않았으면 UNRUN으로 남긴다. 로그/캡처와 실패·중단 증거를 보존하고, 큰 raw JSON은 원문 바이트 SHA를 검증한 gzip으로만 보관할 수 있다.
+
+## R03/R04 최종 기기별 판정
+
+R03은 M1 실제 release 앱에서 package58·quality55·motion398·city58·palace76검사를 통과했고, 압축 raw 독립 재검산398검사와13PNG 직접 검토를 별도로 보존했다. [최종 패키지 증거](../data/reports/package_check.md). OS 입력/초점·사람 조작감과 전송 Gatekeeper는 미실행이다.
+
+R04는 원래 미접근 대안으로 M4를 UNRUN 처리한다. 경로 adapter의29fixture검사와 실제 final ZIP/app·113source 검수는 M1에서의 바인딩 증거이며 다른 Mac 실행/성능 증거가 아니다. 원 manifest와 source/runtime SHA를 유지하고 실제 기기 사양·동일 품질/출력/전원·동일 시나리오로 재개한다. [M4 사양null/재개 조건](../data/reports/performance_m4pro.json)·[첫 버전 판정](../data/reports/first_version_acceptance.md).

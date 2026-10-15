@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-16 · 최근 실행: **R03 패키지 검수 중 발견한 최초 HUD 가림 수정·전후 검증 완료** · D01–N04와 R01–R02 완료·R03 진행 중 · 최신 개발 실행은 v0_walk, 패키지 최종 인수/M4/V0 판정 미완료
+갱신: 2026-10-16 · **첫 탐험 V0의 M1 로컬 앱 인수 완료** · D01–R03 완료, R04는 기기별 판정 완료(M4 접근 불가 UNRUN 대안). 실제 OS 입력/사람 조작감·전송 Gatekeeper·M4 실행은 미검증.
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -40,7 +40,7 @@
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
-현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이고 L04/N01–N03 결과와 다음 N04는 아래 최신 절을 따른다.
+현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이며 L04/N01–N04와 R01–R04 결과는 아래 최신 절을 따른다.
 
 ## 이번 실제 데이터에서 확인한 점
 
@@ -96,9 +96,9 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 - 실제 지면·계단·도로폭·대한문 개구부 실측과 현장 통행 확인. 세 필수 게임 동선의 물리 연결·연속 왕복은 W04 자동 검수로 확인했으며 현실 접근과 구분한다.
 - 상세 랜드마크의 남은 가림/인지 보완과 실제 지형 확인. NPC/차량 포함 연속 보행 통합은 N04로 완료했고 아래 증거와 한계를 따른다.
 - 직접 키보드·마우스 조작은 미실행. E02는 화면 잠금 때문에 미실행이었으며, E03 실제 GPU 화면과 자동 키 이벤트/시점 선택 검증은 직접 조작과 구분한다.
-- 직접 사람 조작을 통한 플레이 검수, M4 Pro 확인, 패키지 제작. 현재 M1의 고정 화면/부하 성능 측정은 R01로 완료했다.
+- 직접 사람 조작을 통한 플레이 검수, 실제 OS 입력/초점·M4 Pro·전송 Gatekeeper 확인. M1의 고정 화면/부하 성능은 R01, 실제 로컬 패키지는 R03으로 완료했다.
 
-따라서 **W0의 자동 엔진 검증판은 완료했고, 직접 사람 조작·현실 지형/접근·M4와 V0 첫 버전은 미완료**다. 원본 무결성 확인만으로 실제 공간 완성도나 보행 가능성을 판정하지 않는다.
+따라서 **M1 로컬 V0의 자동 엔진/앱 인수는 완료했으며, 직접 사람 조작·OS 입력/초점·현실 지형/접근·M4·전송 Gatekeeper는 미검증**이다. 원본 무결성 확인만으로 실제 공간 완성도나 보행 가능성을 판정하지 않는다.
 
 ## 계획 작업 ID와 연결
 
@@ -210,11 +210,19 @@ R01을근거로기본1.0/그림자ON/200m와현재2명2대의33.3ms목표를채�
 
 계약64/GPU68검사,두설정각약90초의대한문양방향·2m/6m카메라회전·같은4개actor이동·메뉴정지/재개·low저장재시작·손상JSON/미지원ID복구를통과했다. 실제960/1152의3PNG를직접열어한글/메뉴/출처를검토했다. 최초smoke01의신호발신중즉시장면해제ERROR3회를보존하고queue_free와2frame대기로수정했다. [비교/재현](../data/reports/performance_comparison.md)·[요약/화면](../data/reports/r02/summary.json). 새HUD의1080p성능·fullN04재완주·release앱/M4·직접사람조작은이번범위가아니다.
 
-## 다음 작업: R03 편집기 없는 개인용 macOS 앱
+## 최신 결과: R03 앱과 R04 기기별 인수
 
-R03의실제앱화면에서최초HUD가높이1471px로남아world/player를덮는문제를찾았다. 이전R02의resize후화면만으로최초시작을검증할수없었다. 기존V0에서no_resize0·standard시작의119px minimum과실제1471px/가림을재현해초기2검사로거부했다. 폭을먼저정하고minimum_size_changed뒤HUD높이만맞추도록수정한뒤같은첫화면에서119px/가림없음과GPU67·headless62개진단검사를통과했다. map/physics/속도/개체는변경없음이다. [전후증거](../data/reports/r03/development/hud_fix_summary.json). 물리전체시험으로확대하지않고수정앱에서R03전체검증을새로실행한다.
+고정 ZIP의 실제 release 앱을 저장소 밖으로 복원하고 source 읽기/쓰기·network를 막아 일반 기동과 필수 전체 여정을 검수했다. package58/quality55/motion398/city58/palace76검사 PASS, 실제1,581.386399초·94,883tick/334구간·전tick접지·pose/복귀0, 횡단3/NPC막힘회복3회를 확인했다. 141입력·앱·ZIP·서명 전후 동일이며 최종13PNG를 직접 열었다. [앱/파일 식별·실패·검증](../data/reports/package_check.md)·[실행 안내](RUN_GUIDE.md).
 
-첫행동은공식동일4.7.2 macOS템플릿으로새runtime-only사본을내보내는것이다. 새V0메인과양쪽CPU텍스처/ICU·출처/라이선스를사본에포함하고최종서명/아키텍처/파일목록을검사한다. ZIP을개발폴더밖으로재추출해원본폴더접근/네트워크를막고일반기동·설정복원·전체필수여정/NPC·차량을실제release앱에서검증한다. 앱크기는실측한다. R04는동일앱의기기별성공/실패/미실행을분명히기록한다. 사용자단계승인을기다리지않는다.
+첫 `.tres` 누락과 `--script` 제약, full03 최초 HUD 가림을 실패/중단으로 보존했다. HUD는 no-resize0 재현 후119px로 수정하고 새 앱 full04를 끝까지 통과했다. 이전 R02 resize후 화면의 최초 시작 검증 한계를 정정했다. 원문/물리/속도/개체수/허용치는 유지한다.
+
+R04는 원래 접근 불가 대안으로 M4를 UNRUN·실제 RAM/OS/성능null로 기록했다. 원 manifest와 같은 ZIP·앱의 경로만 재결합하는 도구는29fixture검사와 실제 final 앱/ZIP·113source 바인딩을 M1에서 확인했다. 다른 Mac 실행이 아니다. [첫 버전 인수 판정](../data/reports/first_version_acceptance.md)·[M4 재개 조건](../data/reports/performance_m4pro.json)·[두 Mac의 마지막 절](CROSS_MAC.md).
+
+## 다음 행동
+
+현재 원래32작업 계획의 기능·검증·패키지·기기별 판정을 정리했다. 사용자 승인을 기다리는 구현 단계는 없다. 이 기기에서는 `builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z/Sim2Seoul.app`을 열 수 있으며 ZIP은 별도 전달 파일이다. Git에는 앱을 넣지 않고 코드·작은 지도·계획/실행 이력·검수 증거를 공유한다.
+
+이후 M4 접근이 생기면 같은 ZIP과 원 manifest로 미실행 시험을 재개한다. Mac이 잠금 해제된 상태의 실제 OS 입력/초점·사람 조작감도 별도 확인 대상이다. 외형3곳·실측 지형/접근·실내·생활AI는 인수 문서의 제한/미정이며 자동으로 새 작업에 착수하지 않는다. 아래 과거 단계의 다음 작업은 당시 이력이다.
 
 ## 파일과 재현 방법
 
@@ -237,14 +245,14 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 R01이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 행동은 위 최신 결과와 다음 행동 절을 따른다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 
 - 현재 기기: M1 Pro, CPU 8코어/GPU 14코어, RAM 16GB, macOS 27.0. 직접 확인한 사양.
 - 추가 기기: 사용자 제공 M4 Pro, SSD 1TB. RAM·OS는 아직 확인하지 않음.
 - 디스크 여유는 E01 시작 때 약 12.02GiB였으며 현재 값으로 가정하지 않는다. 큰 다운로드/템플릿 준비 전에 재확인.
-- Godot 4.7.2 Standard 설치 완료, Forward+/Metal. E03 actual map GPU 표시 확인. 내보내기 템플릿은 R03 전 준비.
+- Godot 4.7.2 Standard 설치 완료, Forward+/Metal. E03 actual map GPU 표시 확인. R03은 동일 버전 공식 macOS 템플릿을 로컬 캐시에서 사용했고 전역 설치는 하지 않았다.
 
 ## 이번 검증의 한계
 

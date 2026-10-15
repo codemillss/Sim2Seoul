@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "task": "R03",
+  "status": "PASS",
+  "passed": true,
+  "completed_at_utc": "2026-10-15T18:52:07.855295+00:00",
+  "source_base_git_head": "fc348ad45c71177203c733bc36f42d56061c3358",
+  "source_file_bindings": 113,
+  "export_manifest": {
+    "path": "data/reports/r03/exports/final/manifest.json",
+    "bytes": 101179,
+    "sha256": "65e4fd2c9858120a1fe27fb01ece028df78de291685f4b3ad01f403ebf1da3bb",
+    "original_static_flags_preserved": true
+  },
+  "package": {
+    "build": "builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z",
+    "app_bytes": 192828113,
+    "app_tree_sha256": "326fedaf76a80b1889dc2e950e73109979f1464b4e659493ac7ccda95b11ceb7",
+    "zip_bytes": 64884999,
+    "zip_sha256": "feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb",
+    "pck": {
+      "bytes": 21659956,
+      "sha256": "774b812789a16f1d4da6f97b417cba8bc377540a34e1fd86ec8ddf49611fd57a"
+    },
+    "architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "ad_hoc_signature_verified": true,
+    "developer_id_signed": false,
+    "notarized": false,
+    "public_distribution_authorized": false
+  },
+  "checks": {
+    "package": {
+      "path": "data/reports/r03/final/package_check.json",
+      "bytes": 85270,
+      "sha256": "6e60f098b703c1fd677a32b682487313fc4a7b836320088c3682f2696450c2c6",
+      "checks": 58,
+      "passed": true
+    },
+    "quality": {
+      "path": "data/reports/r03/final/quality_check.json",
+      "bytes": 35210,
+      "sha256": "91b4329da4a9401f33bab0993b80e8bd477a45d37dd2a9b768f522df3309a67e",
+      "checks": 55,
+      "passed": true
+    },
+    "motion": {
+      "path": "data/reports/r03/final/motion_check.json",
+      "bytes": 59049,
+      "sha256": "bdbed3da238987da9521346499968ea0128ceea453ffacabc937c65052b7a5fb",
+      "checks": 398,
+      "passed": true
+    },
+    "city": {
+      "path": "data/reports/r03/final/city_check.json",
+      "bytes": 22750,
+      "sha256": "ad341f03f7a9aa2d1934f975fac7fad0448537195a3a4cd8aa1a2c0aac1dec44",
+      "checks": 58,
+      "passed": true
+    },
+    "palace": {
+      "path": "data/reports/r03/final/palace_check.json",
+      "bytes": 13617,
+      "sha256": "8b15a978ca6bfc442a05539f30bddc120c8593c1ead179187c4b0e4bedaa6e5e",
+      "checks": 76,
+      "passed": true
+    }
+  },
+  "physical": {
+    "timeline_ticks": 94883,
+    "timeline_physics_s": 1581.38333333333,
+    "timeline_wall_s": 1581.386399,
+    "timeline_frames": 94882,
+    "retained_samples": 16169,
+    "journey_ticks": 57176,
+    "journey_physics_s": 952.933333332795,
+    "journey_wall_s": 952.923186,
+    "checkpoint_events": 21,
+    "expected_source_legs": 334,
+    "expected_source_stages": 11,
+    "expected_source_distance_m": 3327.04810656,
+    "stats": {
+      "max_camera_overlap_count": 0,
+      "max_camera_penetration_m": 0.0,
+      "max_follow_error_m": 0.0,
+      "max_length_excess_m": 0.0,
+      "max_near_hit_count": 0,
+      "max_npc_source_penetration_m": 0.0,
+      "max_npc_speed_mps": 1.20000004768372,
+      "max_npc_step_m": 0.0200074147433043,
+      "max_npc_y_m": 0.000942309387028217,
+      "max_player_penetration_m": 0.00217756349593401,
+      "max_player_step_m": 0.0600981451570988,
+      "max_tick_mismatch": 0,
+      "max_vehicle_speed_mps": 5.00034809112549,
+      "max_vehicle_step_m": 0.0833362340927124,
+      "max_vehicle_y_m": 0.000941531441640109,
+      "npc_floor_ticks": 189766,
+      "npc_max_count": 2,
+      "npc_min_count": 2,
+      "player_floor_ticks": 94883,
+      "player_outside_ticks": 0,
+      "pose_calls": 0,
+      "recoveries": 0,
+      "ticks": 94883,
+      "vehicle_floor_ticks": 189766,
+      "vehicle_human_contacts": 0,
+      "vehicle_max_count": 2,
+      "vehicle_min_count": 2
+    },
+    "npcs": [
+      {
+        "route_id": "palace_court",
+        "completed_cycles": 19,
+        "actual_distance_m": 1831.42859736318
+      },
+      {
+        "route_id": "plaza_front",
+        "completed_cycles": 12,
+        "actual_distance_m": 1865.45712562837
+      }
+    ],
+    "vehicles": [
+      {
+        "route_id": "sejong_south",
+        "completed_cycles": 31,
+        "actual_distance_m": 6060.41582532156
+      },
+      {
+        "route_id": "sejong_north",
+        "completed_cycles": 24,
+        "actual_distance_m": 6374.70551058292
+      }
+    ],
+    "exercise_count": 6,
+    "scope": "One relocated release session. Full frozen N04 auditor proves actual route order/endpoints, clocks, geometry, actors and crossing/blockage exercises; all-tick extrema and 10Hz retained samples have distinct coverage."
+  },
+  "views": {
+    "path": "data/reports/r03/final_views.json",
+    "bytes": 3901,
+    "sha256": "a2ab8321ce058d6d590ab3968ccc8a10437cad049ef3d3ba548c5597f8af1043"
+  },
+  "retention": {
+    "path": "data/reports/r03/final_retention.json",
+    "bytes": 33155,
+    "sha256": "0df96ac926dbb888b5e75dd3735e75967b917713630fbaac51043306516af554"
+  },
+  "source_after_equal_before": true,
+  "runtime_context": {
+    "configured_main_scene": "res://scenes/world/v0_walk.tscn",
+    "debug_build": false,
+    "editor_feature": false,
+    "engine_version": "4.7.2-stable (official)",
+    "executable_path": "/private/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r03-roundtrip-6e9nnc3q/unpacked/Sim2Seoul.app/Contents/MacOS/Sim2Seoul",
+    "executable_sha256": "ed02230c14966283f00ccee02e4f8ae789ec796f0ca65f168626baed388aec36",
+    "packed_files": {
+      "res://icudt_godot.dat": {
+        "bytes": 4797472,
+        "exists": true,
+        "sha256": "64e407b570a21a4b740531a14cd95f0cefc46cef3d8224fd09a0dd386fb7016a"
+      },
+      "res://resources/legal/ATTRIBUTION.md": {
+        "bytes": 10576,
+        "exists": true,
+        "sha256": "ce48a376a2677f70156f5fd2b78eac98d8f0b1c294bbb239a473201fb1bdc1aa"
+      },
+      "res://resources/legal/GODOT_LICENSE.txt": {
+        "bytes": 1149,
+        "exists": true,
+        "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+      },
+      "res://resources/legal/GODOT_THIRD_PARTY.txt": {
+        "bytes": 109771,
+        "exists": true,
+        "sha256": "ce3e56cec116cf586e3b14cd33ca76bc015c93af510738da9eb7124d4a1d6d13"
+      },
+      "res://resources/legal/KENNEY_CC0.txt": {
+        "bytes": 708,
+        "exists": true,
+        "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69"
+      },
+      "res://resources/legal/NOTICES.txt": {
+        "bytes": 456,
+        "exists": true,
+        "sha256": "b27841317cf8cee847ed82e3215378b28031bcdedab001fe781e85901de4d990"
+      },
+      "res://resources/quality_presets/low.json": {
+        "bytes": 226,
+        "exists": true,
+        "sha256": "89c26f19985bc551886450eb7bf2335d3712c41aafec7184485c6b41fef9e6c4"
+      },
+      "res://resources/quality_presets/standard.json": {
+        "bytes": 229,
+        "exists": true,
+        "sha256": "5ce46aa6155ef0c2e3c38daefda59f52ab0b4a81e18e55f58ddd33ca70187d99"
+      }
+    },
+    "quality": {
+      "camera_far_m": 200.0,
+      "pedestrian_count": 2,
+      "preset_id": "standard",
+      "quality_settings_path": "/private/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r03-roundtrip-6e9nnc3q/evidence/full.json.quality.json",
+      "runtime_ok": true,
+      "scaling_3d_scale": 1.0,
+      "sun_shadow_enabled": true,
+      "vehicle_count": 2
+    },
+    "resolved_main_scene": "res://scenes/world/v0_walk.tscn",
+    "scene_path": "res://scenes/world/v0_walk.tscn",
+    "scope": "Actual exported release executable and PCK resources; N04 continuous-input observations follow in the primary raw file. Automatic input is not human handling or another-Mac acceptance.",
+    "task": "R03"
+  },
+  "normal_startup_tested": true,
+  "normal_qa_dispatch_inert": true,
+  "settings_fresh_scene_restore_tested": true,
+  "settings_os_process_relaunch_tested": false,
+  "os_input_status": "UNRUN",
+  "os_input_evidence": "data/reports/r03/os_input_status.json",
+  "human_handling_status": "UNRUN",
+  "m4_status": "UNRUN",
+  "gatekeeper_transfer_status": "UNRUN",
+  "release_performance_measured": false,
+  "scope": "M1 Pro private local V0 release acceptance, offline and outside source repository. Not human control feel, native OS input/focus, cross-Mac/quarantine acceptance, surveyed accuracy or public distribution.",
+  "runtime_source_file_bindings": 141,
+  "retained_motion_recheck": {
+    "path": "data/reports/r03/retained_motion_recheck.json",
+    "passed": true,
+    "checks": 398
+  }
+}

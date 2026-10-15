@@ -26,15 +26,21 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 
 ## 현재 상태
 
-**D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N04를 마쳤다. 2NPC/2차량을 켠3.33km 연속 보행·횡단/막힘 회복을 실제26분간 검수했고 다음은 R01 M1 성능 측정이다.** [N04 결과·실패·화면·재현](data/reports/urban_motion.md). 독립 시험장에서 걷기·달리기·회전·중력/지면 접촉·낙하/영역 이탈/수동 복귀를 구현했다. 10초 거리·대각선 속도, 실제 화면 30/60fps와 물리 60Hz, 60초 정지, 벽·시험문 왕복·램프/경사를 검증했다. [P02 실행/화면/결과](data/reports/movement.md)·[P01 사람 크기](data/reports/player_scale.md)·[E04 거리/축척](data/reports/scale_view/README.md)·[E03 서울 배치](data/reports/world_import.md)·[구조/실행](docs/GAME_PROJECT.md). P03에서 시험장 3인칭 추적·마우스 회전/휠 거리·벽/문 가림과 메뉴/잠금 복구도 구현했다. [P03 화면·검증](data/reports/camera.md). P04에서 도시 정적 충돌685개·역할별 행렬과 별도 충돌 시험장을 검증했다. [P04 화면·검증](data/reports/collision.md). W01에서 대한문 개구부와 원문 보행선65.6m를 연결해 경내 입구 왕복을 검증했다. [W01 실행·화면·검증](data/reports/daehanmun_walk.md). W02에서 경내 약564m 순환·중화전 앞마당 왕복을 검증했다. [W02 실행·화면·검증](data/reports/palace_walk.md). W03에서 북측 원문 횡단을 통해 시청 전면·서울광장 외곽과 남측 돌담길을 연결하고 장면 보행 경계를 구성했다. [W03 출처·실패·실행·검증](data/reports/public_walk.md). W04는 같은 캐릭터로 약3.33km의 필수 경로를 연속 왕복한 자동 검증판 `W0-engineering-walk-v1`이다. [W04 결과·실패·재현](data/reports/walkable_milestone.md). 직접 사람 조작·M4·현실 지형/접근은 미검증이며 도시 성능/패키지·V0 판정과 세부 외형의 후속 보완은 남아 있다. L01에서10대상/11공식 출처의 최소 특징·보존/생략·자료 차이와 재생성 가능한 명세를 정했다. [L01 제작 기준·공식 참조·재현](docs/landmark_reference.md). L02에서 대한문·중화전·중화문·석조전·돈덕전·정관헌의 외형을 붙이고 기존 약3.3km 보행을 다시 검수했다. [L02 전후 화면·실패·최종 결과](data/reports/palace_landmarks.md). 첫 시간 기준 실패와 같은 조건의 재시험 통과를 함께 보존했다.
+2026-10-16: **M1 Pro에서 첫 탐험 V0의 로컬 앱 검수를 완료했다.** [앱 실행 안내](docs/RUN_GUIDE.md)·[실제 패키지 검증](data/reports/package_check.md)·[기기별 인수 판정](data/reports/first_version_acceptance.md). M4는 접근 불가 대안으로 UNRUN이며 OS 입력/사람 조작감·전송 Gatekeeper도 미실행이다. 다음 행동은 [WORK_STATUS](docs/WORK_STATUS.md)를 기준으로 한다. 과거 단계의 ‘다음 작업’은 해당 시점의 기록이다.
 
-최신 궁궐 보행 장면은 W04/L01 준비 뒤 `.venv-data/bin/python tools/prepare_palace_landmarks.py`와 `sh tools/run_palace_landmarks.sh run`으로 연다. 기존 자산을 가져와 수정하는 [대안 조사](docs/ASSET_REUSE_OPTIONS.md)도 기록했다. 실제 서울의 탐험 공간에 생활/시뮬레이션을 확장하는 방향이며 메타버스/멀티플레이를 목표로 정한 상태는 아니다.
+현재 개발 장면은 다음으로 연다. 처음 준비하는 Mac은 [V0 자료 생성 순서](docs/CROSS_MAC.md#v0-개발-자료를-처음-만드는-mac의-추가-준비)를 먼저 따른다. 기본 Godot 프로젝트 main은 초기 E02 장면을 보존하므로 현재 V0와 구분한다.
 
-이미 데이터 환경을 준비한 Mac은 `.venv-data/bin/python tools/prepare_world.py` 후 `sh tools/run_game.sh run`으로 연다. 아래 보기 버튼 세 개와 Esc 메뉴를 사용할 수 있다. 처음 쓰는 Mac은 위 준비 도구와 고정 Godot 설치를 먼저 수행한다. 생성 자산은 기기별 준비하며 게임 실행은 원본/Python/네트워크를 요구하지 않는다. 자동 입력과 실제 사용자의 직접 조작 검증은 구분한다.
+```sh
+sh tools/run_v0.sh run
+```
 
-거리·축척 검증 화면은 `sh tools/run_scale_view.sh run`으로 연다. 대표점은 출입구나 중심이 아닌 원본 외곽 정점이며 표시 거리는 보행 거리가 아니다. 상세 재검증은 [E04 안내](data/reports/scale_view/README.md)를 따른다.
+실제 배치·미터 축척의 대한문 밖↔경내, 중화전 앞마당·석조전 계단 아래, 시청·서울광장·돌담길을 3인칭으로 탐험한다. 걷기·달리기·마우스/휠 카메라·충돌·안전 복귀·Esc 메뉴, 두 보행자·두 차량과 사람 우선 횡단, 품질/출처 표시를 구현했다. [N03 차량 지지·교차/실패](data/reports/vehicles.md), [N04 같은 개체의 약3.33km/26분 연속 검수](data/reports/urban_motion.md), [R02 품질·메뉴](data/reports/performance_comparison.md)를 참고한다.
 
-사람 크기·충돌 시험장은 `sh tools/run_player_fixture.sh run`으로 연다. 동일 Godot과 저장소만 있으면 지도 가공 없이 실행된다. 전체/사람/시험문 보기, 다시 놓기·Esc 메뉴를 사용할 수 있다. P01은 크기/정지 시험으로 보존한다. 이동 시험은 `sh tools/run_movement_test.sh run`으로 열며 WASD/방향키·Shift 달리기·Esc 메뉴·시작점 복귀 버튼을 사용한다. 녹색 램프로 단차에 진입하고 거리 시험 구간은 큰 격자 5m다. 카메라는 고정 시점이다.
+M1 Pro16GB의 R01은 실제1920×1080·현재2명2대·20분에서 p95 9.6133ms를 관측했다. 편집기 밖 Standard 실행의 측정이며 실제 release 앱·가벼운 품질의 성능 개선율·M4 결과로 확대하지 않는다. [측정 조건/한계](docs/performance_notes.md).
+
+현재 지면은 임시 y=0 지원면이며 높이·문 폭·세부 외형에는 추정/수동 보정이 있다. 현장 정확도/실제 통행·사람 조작감·M4 실행은 별도다. 돈덕전·정관헌의 가림과 중화문의 약한 문 인지는 [L04 검토](data/reports/landmark_review.md)에 남겼다. 개별 건물 실내·생활AI·꾸미기는 이후 구체화할 확장 방향이다.
+
+축척과 독립 시험장을 다시 볼 때는 [E04](data/reports/scale_view/README.md)·[사람 크기](data/reports/player_scale.md)·[이동](data/reports/movement.md)·[카메라](data/reports/camera.md)·[충돌](data/reports/collision.md)의 각 장면과 실행 방법을 따른다. 일반 사용자용 앱은 [실행 안내](docs/RUN_GUIDE.md)에 별도로 기록하며, Git pull만으로 Git 제외 앱/ZIP이 생기지는 않는다.
 
 ## 계획과 다음 작업
 
@@ -106,7 +112,7 @@ Godot 공식 요구사항은 간단한 3D 프로젝트의 시작 가능성을 �
 | 5. 도시의 움직임 | 보행로와 도로를 구분한 NPC·차량 경로 | 보행자가 담장·건물을 관통하지 않고 차량이 궁궐 보행로로 진입하지 않음 |
 | 6. 기기 확인 | M1 Pro에서 해상도·부하·메모리 측정, M4 Pro에서도 실행 | 동일 자료를 사용한 측정 결과를 남기고 적절한 표시 거리·그림자 설정을 정함 |
 
-카메라가 담장이나 건물 안으로 파고들지 않는지도 첫 보행 검증에 포함한다. 개발 일정, 목표 프레임, 낮밤·날씨, 전각 실내는 아직 확정하지 않았다.
+카메라가 담장이나 건물 안으로 파고들지 않는지도 첫 보행 검증에 포함한다. 현재2NPC/2차량의 p95≤33.3ms를 R02에서 채택했다. 개발 일정·낮밤/날씨·전각 실내의 확장 범위는 정하지 않았다.
 
 ## 관련 파일
 
@@ -120,6 +126,10 @@ Godot 공식 요구사항은 간단한 3D 프로젝트의 시작 가능성을 �
 - [Godot 시스템 요구사항](https://docs.godotengine.org/en/stable/about/system_requirements.html)
 - [OpenStreetMap 저작권과 라이선스](https://www.openstreetmap.org/copyright)
 
+## 이전 단계별 실행 안내
+
+아래의 구현/다음 단계는 각 작업 종료 당시의 기록이다. 현재 V0 실행과 인수는 위 현재 상태 및 WORK_STATUS를 따른다.
+
 L03 도시 보행 기준판은 `sh tools/run_city_landmarks.sh run`으로 연다. [L03 기존 모델 비교·도시 외형·검사/실패](data/reports/city_landmarks.md), [다른 Mac 재생성](docs/CROSS_MAC.md), [다음 행동](docs/WORK_STATUS.md)을 따른다. CC0 원본과 수정 규칙은 공유하고 생성 자산은 기기에서 다시 만든다.
 
 
@@ -132,4 +142,4 @@ N01의 [보행자·차량 경로도/정적 검증](data/reports/route_review.md)
 N02 당시 게임은 [보행자 실행·화면·검증](data/reports/pedestrians.md)을 따른다. L03/N01 준비 뒤 `.venv-data/bin/python tools/prepare_pedestrians.py`와 `sh tools/run_pedestrians.sh run`으로 연다. 앞마당·광장 전면에 각각1명이 왕복하고 `Esc` 메뉴의 `보행자 이동`으로 멈추거나 재개할 수 있다. 기존 지도/문·플레이어/카메라와 정적 충돌은 그대로다. 실행 자료는 기기에서 재생성하며 차량·통합 내구성·사람 조작/M4·V0는 후속이다. [단계별 현재 상태](docs/WORK_STATUS.md)·[다른 Mac 인수](docs/CROSS_MAC.md).
 
 
-최신 게임은 N03 [차량 지지·이동·교차·화면/검증](data/reports/vehicles.md)을 따른다. L03/N01/N02 준비 뒤 `.venv-data/bin/python tools/prepare_traffic.py`와 `sh tools/run_traffic.sh run`으로 연다. 보행자2명·차량2대가 움직이고 북측 지정 횡단에서 사람을 기다린다. `Esc` 메뉴에서 차량/보행자 이동을 각각 끌 수 있다. 차량용 평면2개를 추가하되 기존 사람 경계·문/축척/출처는 유지한다. [다음 N04](docs/WORK_STATUS.md)에서는 이를 켠 채10분 이상 필수 동선을 통합 검수한다. 다른 Mac은 [재생성/인수](docs/CROSS_MAC.md)를 따른다.
+N03 종료 당시 게임은 [차량 지지·이동·교차·화면/검증](data/reports/vehicles.md)을 따른다. L03/N01/N02 준비 뒤 `.venv-data/bin/python tools/prepare_traffic.py`와 `sh tools/run_traffic.sh run`으로 연다. 보행자2명·차량2대가 움직이고 북측 지정 횡단에서 사람을 기다린다. `Esc` 메뉴에서 차량/보행자 이동을 각각 끌 수 있다. 차량용 평면2개를 추가하되 기존 사람 경계·문/축척/출처는 유지한다. 이후 [N04](data/reports/urban_motion.md)에서 이를 켠 채26분 필수 동선을 통합 검수했다. 다른 Mac은 [재생성/인수](docs/CROSS_MAC.md)를 따른다.

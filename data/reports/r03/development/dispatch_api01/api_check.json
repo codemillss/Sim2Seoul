@@ -1,0 +1,80 @@
+{
+  "task": "R03",
+  "scope": "Tiny headless API/lifecycle diagnostic only, not packaged-world acceptance.",
+  "commands": [
+    {
+      "label": "normal",
+      "argv": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tests/game/offline.sb",
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r03_development/dispatch_api01/game",
+        "--quit-after",
+        "4",
+        "--log-file",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r03_development/dispatch_api01/normal.native.log"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "wall_s": 0.5890138749964535,
+      "stdout": {
+        "path": "normal.stdout.log",
+        "bytes": 95,
+        "sha256": "0378bf0981e88f9f7e71c9fd14c4d7f4a1a49991084cd60f337c950300584d7d"
+      },
+      "stderr": {
+        "path": "normal.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "dispatch",
+      "argv": [
+        "/usr/bin/sandbox-exec",
+        "-f",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tests/game/offline.sb",
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r03_development/dispatch_api01/game",
+        "--log-file",
+        "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r03_development/dispatch_api01/dispatch.native.log",
+        "--",
+        "--automatic-probe",
+        "--sim2seoul-test=quality",
+        "--result=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r03_development/dispatch_api01/dispatch.json"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "wall_s": 0.2757795420475304,
+      "stdout": {
+        "path": "dispatch.stdout.log",
+        "bytes": 396,
+        "sha256": "54a056b92a29b1e100a1a1beced4463db6d609e5676a5afafbc5e99f19419c95"
+      },
+      "stderr": {
+        "path": "dispatch.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "passed": true,
+  "actual": {
+    "autoload_inert": true,
+    "autoload_retained": true,
+    "engine": "4.7.2-stable (official)",
+    "initialize_calls": 1,
+    "main_setting": "res://main.tscn",
+    "old_main_gone": true,
+    "script_path": "res://test_support/check_quality.gd"
+  },
+  "dispatcher_source": {
+    "bytes": 1617,
+    "sha256": "00b0f722b51c7f21a6cd42805369e432b4ae8d0d4ca0961b1bd495d07c6f7faf"
+  }
+}

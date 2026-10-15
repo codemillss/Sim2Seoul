@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "task": "R04",
+  "stage": "manifest_relocation_fixture_validation",
+  "passed": true,
+  "scope": "Small synthetic package only, plus pure path rebinding of the current original manifest. No real app or ZIP was read or hashed; no engine, game, transfer, or M4 execution. This is not M4/game acceptance.",
+  "checks": [
+    {
+      "name": "python_syntax",
+      "passed": true
+    },
+    {
+      "name": "positive_fixture_outputs_exactly_two",
+      "passed": true
+    },
+    {
+      "name": "five_allowed_path_patches",
+      "passed": true
+    },
+    {
+      "name": "inverse_exact_json_types_values_and_order",
+      "passed": true
+    },
+    {
+      "name": "original_manifest_bytes_unchanged",
+      "passed": true
+    },
+    {
+      "name": "derived_and_original_sha_binding",
+      "passed": true
+    },
+    {
+      "name": "app_modes_symlinks_and_pck_bound",
+      "passed": true
+    },
+    {
+      "name": "historical_paths_and_source_hashes_preserved",
+      "passed": true
+    },
+    {
+      "name": "scope_does_not_claim_execution",
+      "passed": true
+    },
+    {
+      "name": "reject_undeclared_source_sha",
+      "passed": true,
+      "detail": "Derived manifest contains an undeclared change"
+    },
+    {
+      "name": "reject_historical_engine_path_rewrite",
+      "passed": true,
+      "detail": "Derived manifest contains an undeclared change"
+    },
+    {
+      "name": "reject_boolean_to_integer",
+      "passed": true,
+      "detail": "Derived manifest contains an undeclared change"
+    },
+    {
+      "name": "reject_float_to_integer",
+      "passed": true,
+      "detail": "Derived manifest contains an undeclared change"
+    },
+    {
+      "name": "reject_sixth_unauthorized_patch",
+      "passed": true,
+      "detail": "Only the five declared path bindings may change"
+    },
+    {
+      "name": "reject_different_zip",
+      "passed": true,
+      "detail": "Unchanged zip bytes/SHA-256 are required"
+    },
+    {
+      "name": "reject_different_app_name",
+      "passed": true,
+      "detail": "The extracted app must retain the name Sim2Seoul.app"
+    },
+    {
+      "name": "reject_app_file_bytes_changed",
+      "passed": true,
+      "detail": "App file bytes, modes or symlinks differ from the original inventory"
+    },
+    {
+      "name": "reject_app_executable_mode_changed",
+      "passed": true,
+      "detail": "App file bytes, modes or symlinks differ from the original inventory"
+    },
+    {
+      "name": "reject_app_symlink_target_changed",
+      "passed": true,
+      "detail": "App file bytes, modes or symlinks differ from the original inventory"
+    },
+    {
+      "name": "reject_catalog_bytes_changed",
+      "passed": true,
+      "detail": "Unchanged catalog bytes/SHA-256 are required"
+    },
+    {
+      "name": "reject_catalog_outside_clone",
+      "passed": true,
+      "detail": "Catalog must belong to the current clone"
+    },
+    {
+      "name": "reject_catalog_preservation_binding_mismatch",
+      "passed": true,
+      "detail": "Catalog does not match original preservation binding"
+    },
+    {
+      "name": "reject_existing_output",
+      "passed": true,
+      "detail": "A fresh output directory is required"
+    },
+    {
+      "name": "reject_dangling_output_symlink",
+      "passed": true,
+      "detail": "A fresh output directory is required"
+    },
+    {
+      "name": "reject_output_inside_input_app",
+      "passed": true,
+      "detail": "Output must not be inside the input app"
+    },
+    {
+      "name": "rejection_cases_created_no_output_artifacts",
+      "passed": true
+    },
+    {
+      "name": "current_original_manifest_pure_path_rebind",
+      "passed": true
+    },
+    {
+      "name": "current_original_manifest_inverse_exact",
+      "passed": true
+    },
+    {
+      "name": "frozen_R03_and_production_files_unchanged",
+      "passed": true
+    }
+  ],
+  "check_count": 29,
+  "fixture": {
+    "zip_bytes": 571,
+    "app_bytes": 69,
+    "app_file_count": 4,
+    "temporary_inputs_and_outputs_removed": true,
+    "engine_commands": 0
+  },
+  "current_original_manifest": {
+    "path": "builds/macos/v0.1.0-2f0ce7720ef1-20261015T180748102893Z/manifest.json",
+    "bytes": 101166,
+    "sha256": "e23907a9ae75f54c414103b48120a148483addf3838e7b506900e6f76a6cb271",
+    "artifact_inventory_execution_performed": false
+  },
+  "frozen_file_descriptors_before_and_after": {
+    "tools/export_macos.py": {
+      "bytes": 31729,
+      "sha256": "393c31e6b89eda3f2fe4c6359da48b3eab6e1881e0f8fe7f47a39532a1d6303d"
+    },
+    "tools/check_package_contract.py": {
+      "bytes": 21625,
+      "sha256": "c3b7d7f204705b02e1861fd953e59decc80904039d66c225903bcbe9aa25a0b1"
+    },
+    "tests/game/package_dispatch.gd": {
+      "bytes": 1617,
+      "sha256": "00b0f722b51c7f21a6cd42805369e432b4ae8d0d4ca0961b1bd495d07c6f7faf"
+    },
+    "game/scripts/v0_walk.gd": {
+      "bytes": 15874,
+      "sha256": "0265608762ab42c3838129602a168ffdbc432749d83685966366d62306fd085c"
+    }
+  },
+  "implementation": {
+    "path": "tools/relocate_package_manifest.py",
+    "bytes": 8833,
+    "sha256": "4d627b151b27857ca4f6bfeee30729a54d81eb880ea2e24ad1added13eafec1d"
+  },
+  "independent_review": "Read-only review of the new adapter and imported utility definitions found no blocker; no existing file was changed.",
+  "next_step": "On the other clone, extract the unchanged ZIP separately, invoke this adapter with the original manifest and local paths, then pass derived_manifest.json to the existing package runner. Source-relative hash checks and actual device/game acceptance remain with that runner."
+}

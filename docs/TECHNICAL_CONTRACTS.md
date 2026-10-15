@@ -182,7 +182,7 @@ P04 selected635건물+49담장+temporary_support1만 StaticBody3D/ConcavePolygon
 
 - Godot 정확 버전·렌더러·내보내기 템플릿 버전을 기동 성공 후 기록한다. 두 기기에 동일 버전 사용.
 - 먼저 간단한 장면으로 기본 렌더러를 시험한다. 기기/OS 결함이면 Compatibility 등 대안을 비교하고 측정 결과로 선택한다. 기능 이름만으로 성능을 가정하지 않는다.
-- E01 현재 개발 기준: Godot **4.7.2 Standard / Forward+ / Metal**. 현재 M1의 편집기·실제 GPU 장면과 세 후보를 확인했다. [환경/기동 증거](environment.md). 내보내기 템플릿은 미설치이며 R03 전에 **4.7.2.stable**로 준비한다. 빈 장면 결과는 도시 성능·M4 기동 판정이 아니다.
+- E01 현재 개발 기준: Godot **4.7.2 Standard / Forward+ / Metal**. 현재 M1의 편집기·실제 GPU 장면과 세 후보를 확인했다. [환경/기동 증거](environment.md). R03은 같은 **4.7.2.stable** 공식 macOS 템플릿을 로컬 캐시에 받아 임시 프로젝트에서 사용한다. 전역 템플릿 설치와 구분한다. 빈 장면 결과는 도시 성능·M4 기동 판정이 아니다.
 - 작은 지도를 한 장면에 다 넣을 수 있는지 먼저 측정한다. 처음부터 대규모 월드 스트리밍을 구현하지 않는다. 필요 시 구역 분할·표시 거리·LOD·그림자·반복 자산 인스턴싱 순으로 줄인다.
 - 실행 중 지도 API/네트워크가 없어도 돌아가야 한다. 원본 전국 PBF·Python 환경은 배포 앱에 넣지 않는다.
 - R02의`v0_walk`는기존traffic상속장면이다. 기본배율1/그림자ON/카메라far200m를유지하고low는0.75/그림자OFF/far200m만바꾼다. 실제배치/축척/지지/충돌/속도/2명2대는같다. 품질선택만`user://sim2seoul_quality.json`의`schema_version:1,preset_id:standard|low`로저장한다. 잘못된JSON/ID는기본복구·안내하며위치나생활진행저장을추가하지않는다. 메뉴/출처팝업은일시정지를유지하고출처창닫기→메뉴→계속하기순서다. [검증/한계](../data/reports/performance_comparison.md).
@@ -304,3 +304,20 @@ N03 일반 게임의 장면·지도·충돌·속도·2NPC/2차량을 바꾸지 �
 워밍업 뒤 첫 이동부터 최종 복귀까지 같은 actor 인스턴스·전역tick·끝점/누적거리 이력을 사용한다. 원문 여정 뒤 실제 횡단 점유/정지/비우기/재개3회와 경내 실제NPC 앞 막힘/비우기/회복3회를 같은 연속 구간에 둔다. 서측 대기점은 원문 city_plaza22→23의80% 지점이며, 차량 반복에 필요한 사람 표면30m를 확보한다. 교차 해제는 먼 대기점 도착이 아니라 실제 사람 점유가 처음 해제된 tick과 위치로 판정한다. 메뉴·낙하·경계·수동복귀의 위치 주입은 연속 구간이 끝난 뒤 별도로 수행한다.
 
 모든tick의 개체수/접지·step/고도/접촉·플레이어/카메라 침투·near/overlap·추적·복귀를 요약하고10Hz 및 각 원문 끝점의 실제 표본을 단일 `timeline.samples`에 보존한다. 전체 차체/캡슐·원천 체적/지원·현재 카메라6평면·교차 차량/FIFO 소유권을 독립 검산한다. 양쪽 NPC 실제 왕복·차량 실제 끝점/guard·재진입을 관측 위치와 누적거리로 확인하며 counter만 믿지 않는다. 전역 순간이동/강제pose/복귀0, 전tick 접지·5mm/2%·각2주기/10분 기준을 유지한다. [실행·실패·증거](../data/reports/urban_motion.md).
+
+
+## R03 내보낸 앱과 검수 입력 경계
+
+원본 `game/project.godot`의 E02 main과 기존 지도·충돌·이동 코드는 보존한다. 내보내기는 별도 임시 프로젝트에서 `v0_walk.tscn`을 main으로 지정하고, 고정된 지역 실행 번들·품질 설정·출처·Godot/제3자 라이선스·ICU만 복사한다. Python·전국 원본·개발 캐시는 앱 실행에 필요하지 않다. 공식 동일 버전 universal2 macOS 템플릿을 사용하고, 텍스트 `.tres`를 런타임에서 원문 SHA로 읽는 기존 계약 때문에 임시 프로젝트의 `editor/export/convert_text_resources_to_binary=false`를 유지한다. 기존 loader의 원문 검사를 완화하지 않는다.
+
+새 `PackageProbeDispatch` autoload는 내보내기 사본에만 추가한다. 일반 실행에서는 입력·물리를 처리하지 않고 아무 검수기도 실행하지 않는다. `--automatic-probe`와 허용된 `--sim2seoul-test=quality|urban`이 함께 있을 때만 앱에 포함된 두 고정 검수기로 전환한다. 표준 export 템플릿이 무시하는 `--script`를 성공한 실행 수단으로 기록하지 않는다. QA는 실제 release 바이너리/PCK에서 실행하며, 합성 엔진 입력과 OS 입력·사람 조작을 구분한다.
+
+정적 export manifest는 제작 당시 입력/앱/ZIP/서명을 기록한 불변 자료다. 제작 시점의 `runtime_tested=false`나 `roundtrip_verified=false`를 나중에 고쳐 쓰지 않는다. ZIP을 저장소 밖으로 풀어 원래 앱의 파일별 SHA·권한·심볼릭 링크와 대조한 뒤, 네트워크와 저장소 읽기/쓰기를 차단해 실행한 별도 `package_check.json`으로 실제 기동/품질/전체 여정 판정을 보탠다. 완료 후 같은 source·manifest·원 앱·ZIP·추출 앱·서명을 재확인한다. `.app`/ZIP/템플릿은 Git 제외이며 코드·지역 원본·검수 도구·증거와 해시를 함께 공유한다.
+
+최초 V0 HUD는 창 크기를 바꾸기 전에도 실제 minimum 높이로 맞아야 한다. 폭을 먼저 정한 뒤 `minimum_size_changed`에 지연 높이 조정을 연결하며, 전체 메뉴를 매 프레임 다시 배치하지 않는다. standard/no-resize0 최초 프레임과 캡처 전후의 HUD·player 화면 사각형을 따로 관측한다. [발견·수정 전후](../data/reports/r03/development/hud_fix_summary.json).
+
+## R04 패키지 경로와 미접근 기기의 계약
+
+다른 clone에서 원 manifest의 옛 절대경로를 수동 수정하지 않는다. 같은 ZIP·app inventory/PCK·catalog bytes가 맞을 때만 세 경로와 preservation catalog key 두 개의 파생 바인딩을 허용한다. 모든 다른 JSON 값과 key 순서·역적용 원본 복원을 확인하고 원 manifest를 그대로 보존한다. 상대 source SHA와 실제 앱 실행은 기존 package checker에 남긴다. [도구/실제 M1 검수](../data/reports/r04/final_path_binding/source_check.json).
+
+M4에 접근할 수 없으면 원래 계획의 대안으로 실제 사양/성능을 null, 시나리오를 UNRUN으로 기록한다. M1의 실행 성공이나 경로 바인딩 검사를 M4 성공으로 바꾸지 않는다. SSD1TB는 RAM 근거가 아니며, 같은 ZIP의 SHA·실제 기기 사양과 동일 검수 조건이 있어야 재개한다. [기기별 인수](../data/reports/first_version_acceptance.md).

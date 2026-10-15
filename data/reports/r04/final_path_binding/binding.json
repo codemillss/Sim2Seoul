@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "task": "R04",
+  "stage": "package_path_rebinding_only",
+  "path_binding_valid": true,
+  "original_manifest": {
+    "path": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z/manifest.json",
+    "bytes": 101179,
+    "sha256": "65e4fd2c9858120a1fe27fb01ece028df78de291685f4b3ad01f403ebf1da3bb"
+  },
+  "derived_manifest": {
+    "path": "derived_manifest.json",
+    "bytes": 101109,
+    "sha256": "0a01859d8260bc0611dce852f69af31a04a767eb05fb619c5cd9c108dc71e384"
+  },
+  "path_patches": [
+    {
+      "op": "replace",
+      "path": [
+        "catalog",
+        "path"
+      ],
+      "old": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/n04/gpu_check.json",
+      "new": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/gpu_check.json"
+    },
+    {
+      "op": "replace",
+      "path": [
+        "outputs",
+        "app",
+        "path"
+      ],
+      "old": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z/Sim2Seoul.app",
+      "new": "/private/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r03-roundtrip-6e9nnc3q/unpacked/Sim2Seoul.app"
+    },
+    {
+      "op": "replace",
+      "path": [
+        "outputs",
+        "zip",
+        "path"
+      ],
+      "old": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/builds/macos/v0.1.0-fc348ad45c71-20261015T182258776232Z/Sim2Seoul.zip",
+      "new": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/Sim2Seoul.zip"
+    },
+    {
+      "op": "rename_key",
+      "path": [
+        "source_preservation",
+        "before"
+      ],
+      "old": "evidence_catalog:/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/n04/gpu_check.json",
+      "new": "evidence_catalog:/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/gpu_check.json"
+    },
+    {
+      "op": "rename_key",
+      "path": [
+        "source_preservation",
+        "after"
+      ],
+      "old": "evidence_catalog:/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/n04/gpu_check.json",
+      "new": "evidence_catalog:/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/gpu_check.json"
+    }
+  ],
+  "zip": {
+    "path": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/Sim2Seoul.zip",
+    "bytes": 64884999,
+    "sha256": "feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb"
+  },
+  "catalog": {
+    "path": "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/cache/r04_development/final_delivery/gpu_check.json",
+    "bytes": 10503,
+    "sha256": "2d74be8cb8e3326ace8a3761a8529125c347a4f3af9b8a37f26541e714b9f793"
+  },
+  "app": {
+    "path": "/private/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r03-roundtrip-6e9nnc3q/unpacked/Sim2Seoul.app",
+    "bytes": 192828113,
+    "tree_sha256": "326fedaf76a80b1889dc2e950e73109979f1464b4e659493ac7ccda95b11ceb7",
+    "file_count": 14,
+    "pck": {
+      "bytes": 21659956,
+      "sha256": "774b812789a16f1d4da6f97b417cba8bc377540a34e1fd86ec8ddf49611fd57a"
+    }
+  },
+  "original_inputs_unchanged": true,
+  "inverse_original_json_exact": true,
+  "relative_source_hashes_checked": false,
+  "engine_execution_performed": false,
+  "game_execution_performed": false,
+  "m4_execution_performed": false,
+  "scope": "Path rebinding only. Historical engine/template/PCK/log paths and every non-path value remain unchanged. Run the existing package contract next for source hashes and game evidence; this is not M4 or game acceptance."
+}

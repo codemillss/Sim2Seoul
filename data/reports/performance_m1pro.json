@@ -1864,8 +1864,8 @@
   "runtime_asset_bytes": 16500248,
   "runtime_asset_count": 26,
   "source_file_bytes": 176584,
-  "exported_app_bytes": null,
-  "exported_app_bytes_reason": "R03 actual app not yet built at this measurement; app size will be reported with the R03 export manifest.",
+  "exported_app_bytes": 192828113,
+  "exported_app_bytes_reason": "Subsequent R03 static package size observation, not a value measured during the original R01 benchmark. See R03 final package evidence for execution acceptance.",
   "gpu_frame_time_ms": null,
   "temperature_celsius": null,
   "unavailable_reason": "No documented script GPU frame timing or queried temperature sensor; engine CPU/physics monitors and screen records retained with their semantics.",
@@ -1896,5 +1896,18 @@
     "Camera replay benchmarks display/actors; it does not replace physical walking or new-aspect camera collision validation.",
     "Engine MEMORY_STATIC is not RSS; retained 1Hz observations also consume memory. No unlimited-session leak-free claim.",
     "No exported-package, M4 Pro, human handling, real terrain, location accuracy or public-distribution acceptance."
-  ]
+  ],
+  "subsequent_r03_package_observation": {
+    "recorded_at_utc": "2026-10-15T18:34:52.691869+00:00",
+    "original_r01_exported_app_bytes": null,
+    "manifest": "data/reports/r03/exports/final/manifest.json",
+    "source_git_head": "fc348ad45c71177203c733bc36f42d56061c3358",
+    "app_bytes": 192828113,
+    "app_tree_sha256": "326fedaf76a80b1889dc2e950e73109979f1464b4e659493ac7ccda95b11ceb7",
+    "zip_bytes": 64884999,
+    "zip_sha256": "feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb",
+    "release_performance_measured": false,
+    "r01_raw_reports_modified": false,
+    "scope": "Package inventory size only; the R01 benchmark remains native Standard binary outside editor UI with its documented HUD/measurement conditions."
+  }
 }

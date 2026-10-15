@@ -1,0 +1,67 @@
+{
+  "task": "R03",
+  "quality_views": [
+    {
+      "file": "quality_view_menu_960.png",
+      "sha256": "5838f330a25df28e76d8551d3878fbba37931e13eafbc4e65afd16da2bd76174",
+      "directly_opened": true,
+      "reviewed_utc": "2026-10-15T18:09:00Z",
+      "observation": "전체 메뉴·품질·이동 스위치·복귀/종료·하단 두 기관 출처가 화면 안에서 읽힌다."
+    },
+    {
+      "file": "quality_view_popup_1152.png",
+      "sha256": "1bbbb7fa90208bf3498042a385e5f355bb25a2b7180796c90161fc600c393674",
+      "directly_opened": true,
+      "reviewed_utc": "2026-10-15T18:09:00Z",
+      "observation": "실제 release의 한글·Godot MIT·OSM/ODbL/Overture와 Qian Shi DOI/CC BY·Kenney 출처, 스크롤·문서 선택·닫기 버튼이 보인다."
+    },
+    {
+      "file": "quality_view_hud_1152.png",
+      "sha256": "2e2b470f15501d523d2423414bcb87449577515f7c9ef1d581ea8eb21243719f",
+      "directly_opened": true,
+      "reviewed_utc": "2026-10-15T18:09:00Z",
+      "observation": "독립 앱에서 대한문과 캐릭터·조작법·두 기관 출처가 보이고 한글 누락이 없다. low의 외곽선 거칠어짐은 설정에 따른다."
+    }
+  ],
+  "journey_views": [
+    {
+      "file": "full_view_checkpoint_0.png",
+      "sha256": "b9ae737292e95dfb33b0ac2e1ed690080bcbace02f6454302d4e358c5b53c6ff",
+      "directly_opened": true,
+      "passed_visual": false,
+      "observation": "A tall translucent white HUD background obscures the left world/player. Same fixed screen x16..576; not a successful clean display."
+    },
+    {
+      "file": "full_view_checkpoint_1.png",
+      "sha256": "80aa5a4f79d5ce949ee61a8dc93075ffb43fc6702f620cb6c1e6ea7ddc13680c",
+      "directly_opened": true,
+      "passed_visual": false,
+      "observation": "A tall translucent white HUD background obscures the left world/player. Same fixed screen x16..576; not a successful clean display."
+    },
+    {
+      "file": "full_view_checkpoint_3.png",
+      "sha256": "83a16ef85be18135c88df531eef2246cb588164591071f5b6ca44e2a2be10a25",
+      "directly_opened": true,
+      "passed_visual": false,
+      "observation": "A tall translucent white HUD background obscures the left world/player. Same fixed screen x16..576; not a successful clean display."
+    }
+  ],
+  "scope": "Development full03 only. Three low-quality/resize-after UI views are readable; three reviewed full-journey startup standard views reveal HUD overheight. Full run interrupted and not accepted. No final-package/human/M4 acceptance.",
+  "overall_visual_passed": false,
+  "later_reproduction": {
+    "path": "data/cache/r03_development/hud_before01",
+    "hud_rect": [
+      16,
+      16,
+      560,
+      1471
+    ],
+    "combined_minimum": [
+      29,
+      119
+    ],
+    "startup_resize_calls": 0,
+    "player_overlap": true,
+    "status": "same old V0 startup error reproduced before fix"
+  }
+}
