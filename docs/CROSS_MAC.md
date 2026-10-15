@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, 다음 제작 작업은 L01이다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 마지막 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L01 참조·명세를 완료해 다음 제작 작업은 L02다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -286,4 +286,16 @@ sh tools/run_walkable_milestone.sh run
 
 이 명령은 일반 장면을 열며 캐릭터를 자동으로 움직이지 않는다. [직접 확인 체크리스트](WALKABLE_CHECKLIST.md)와 [W04 기록](../data/reports/walkable_milestone.md)을 따른다. 생성 itinerary/manifest·.godot·가상환경·앱은 공유하지 않는다. 작은 prepared65입력의 W04-only 사본2회 표준 라이브러리 재생성은 기존 M1 검사이며 새 설치/전체G재구축/M4 결과가 아니다. 실제 새 Mac의 RAM/OS/renderer/조작·물리는 해당 기기에서 기록한다.
 
-W04의 현재 자동 검수판은 `W0-engineering-walk-v1`이다. 증거/문서/소스의 고정 스냅샷은 `data/reports/walkable_milestone/snapshot.json`, 준비 후 인수 재대조는 `python3 data/reports/walkable_milestone/handoff_check.py`다. 재검사는 이 스냅샷의 동일 입력·상태에서 사용하며, 의도한 변경 뒤에는 해당 새 작업의 기준을 사용한다. 과거 W03 input 해시의 저장 당시 절대 경로는 현재 체크아웃으로 재배치하며 원래 컴퓨터 폴더로 fallback하지 않는다. 다음 작업은 WORK_STATUS의 L01이다.
+W04의 현재 자동 검수판은 `W0-engineering-walk-v1`이다. 증거/문서/소스의 고정 스냅샷은 `data/reports/walkable_milestone/snapshot.json`, 준비 후 인수 재대조는 `python3 data/reports/walkable_milestone/handoff_check.py`다. 재검사는 이 스냅샷의 동일 입력·상태에서 사용하며, 의도한 변경 뒤에는 해당 새 작업의 기준을 사용한다. 과거 W03 input 해시의 저장 당시 절대 경로는 현재 체크아웃으로 재배치하며 원래 컴퓨터 폴더로 fallback하지 않는다. 현재 다음 작업은 아래 L01 준비 이후 WORK_STATUS의 L02다.
+
+## L01 외형 명세 재생성
+
+W04까지 준비한 Mac에서 다음을 실행한다. 표준 Python만 필요하며 네트워크/엔진을 호출하지 않는다.
+
+```sh
+python3 tools/prepare_landmark_spec.py
+python3 tools/prepare_landmark_spec.py --check
+python3 tools/check_landmark_spec.py --output /tmp/sim2seoul-l01-check.json
+```
+
+공유 대상은 수동 `data/manual/landmark_plan.json`·`landmark_references.json`과 도구·[제작 기준](landmark_reference.md)·검사 기록이다. `data/processed/landmark_spec.json`은 기기별 재생성하며 자동 가공물 Git 제외 규칙을 유지한다. prepared98입력 사본의 두 번 생성은 기존 M1에서 확인한 L01-only 검사이며 전체 GIS/새 설치/게임 실행/M4 검증이 아니다. 현재 외형 제작 시작점은 L02다. W04 스냅샷의 문서 해시는 당시 문서이므로 L01의 의도한 상태 변경에는 새 L01 검사/기록을 사용한다.

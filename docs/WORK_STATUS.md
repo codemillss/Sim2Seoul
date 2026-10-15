@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-15 · 최근 실행: **W04 자동 통합 검수·보존 완료 — W0-engineering-walk-v1** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04 자동 엔진 검수 완료, 다음 L01 · 직접 사람 조작·M4 미검증, V0 미완료
+갱신: 2026-10-15 · 최근 실행: **L01 랜드마크 참조·제작 명세 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04 완료, L01 완료·다음 L02 · 자동 보행판 W0-engineering-walk-v1 유지, 직접 사람 조작·M4 미검증, V0 미완료
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -40,7 +40,7 @@
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
-현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지하며 재개 기준은 아래 L01이다.
+현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했으며 재개 기준은 아래 L02다.
 
 ## 이번 실제 데이터에서 확인한 점
 
@@ -130,9 +130,17 @@ D04는 원천과 부족한 항목의 처리 기준을 정한 작업이다. 단�
 
 사용자는 당분간 기존 계획의 구현·검증·기록·Git 공유를 위임했다. 사람 조작 피드백을 재개 조건으로 삼지 않으며, 자동 엔진 검수와 직접 사람 조작을 구분한다. 직접 조작감/OS 포커스·실측 지형/현장 공사 접근·M4는 미검증이다. 임시 외형·y0 지원면이며 상세 랜드마크/NPC/차량/품질·성능·패키지/V0는 완료하지 않았다. [직접 확인 안내](WALKABLE_CHECKLIST.md)는 필요할 때 사용한다.
 
-## 다음 작업: L01 랜드마크 범위와 참조 정리
+## L01 현재 결과와 남은 검증
 
-첫 행동은 상세 L01·D04 사용정책과 W04의 변경 금지 동선/스냅샷을 읽는 것이다. 대한문·주요 전각·석조전·시청/도서관·주변 빌딩에서 장소 인지에 필요한 최소 특징(지붕·기단·개구부·비례)을 정리한다. 무료 참조의 촬영/기준일·이용/재배포 조건과 실제값/추정값을 구분해 `docs/landmark_reference.md`·`data/processed/landmark_spec.json`을 만든다. 실제 모델 제작은 L02/L03이며 개별 건물 실내는 이번 범위에 추가하지 않는다. 원본 좌표/충돌·대한문/R1/R2/R3 보행 경로를 유지한다.
+궁궐6대상(대한문·중화전·중화문·석조전·돈덕전·정관헌), 도심4대상(신청사·서울도서관·서울광장·SFC)에 공식출처11개/근거18개·최소특징/생략/대안·기존W04 시점6곳을 연결했다. [제작 기준](landmark_reference.md)·[수동 계획](../data/manual/landmark_plan.json)·[참조 목록](../data/manual/landmark_references.json)·[검사](../data/reports/landmarks/l01_validation.json). `prepare_landmark_spec.py`로 로컬 `data/processed/landmark_spec.json`을 재생성하며 가공물은 Git에 넣지 않는다.
+
+기존 W04 게임·지도/높이·충돌/문/경로와 이전 도구·수동 원천165개를 보존했다. prepared98입력의 별도 사본2회 동일 생성은 L01-only 검사다. 새 외형·장소 인지/보행 회귀·사진 수입·실내·M4 검증은 아니다. 독립 검토의 지붕 층/처마 구조 용어 혼동을 수정하고 이전 입력/검사도 보존했다. [검토](../data/reports/landmarks/independent_review.json).
+
+광장 최신 행정 안내도와 기존 단순 타원 표현, SFC의 높이/층수/주소·완공연도 차이는 자동 반영하지 않았다. 현재 배치를 유지하고 L03 상세 전에 근거/범위를 검토한다. 사진의 촬영일과 페이지 확인/수정일은 구분한다.
+
+## 다음 작업: L02 대한문·궁궐 전각 외형
+
+첫 행동은 위 L01 입력을 재생성/검사하고 상세 L02·공간 보존 계약을 읽는 것이다. 대한문을 첫 작은 교체 대상으로 삼아 기존3×3m 개구부/충돌과 문 통로를 유지한 채 지붕·기둥·문 구획의 단순 외형을 별도 시각 자식으로 만든다. 기존 body를 함께 끄지 않는다. 그다음 중화전/닫힌 중화문·석조전·돈덕전·정관헌의 최소 특징으로 확장한다. 부모/부분 중복과 보류 윤곽 재생성을 피하고 좌표·미터축척·기존 높이 분류를 유지한다. 외형 교체 후 W04/문·카메라 회귀를 실행한다. 장소 인상 판단에는 검토 가능한 첫 외형 비교 화면을 준비한 뒤 알리며, 사용자 위임에 따라 확인 대기를 매번 승인 조건으로 삼지 않는다. 개별 실내/새 통행은 추가하지 않는다.
 
 ## 파일과 재현 방법
 
@@ -155,7 +163,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 L01이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 구현 작업은 위 L02다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 
