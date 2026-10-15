@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-15 · 최근 실행: **N01 보행자·차량 경로/교차 규칙 계획·정적 검증 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01 완료·다음 N02 · 일반 게임은 L03 유지, NPC/차량 실제 이동·M4/V0 미완료
+갱신: 2026-10-15 · 최근 실행: **N02 두 보행자 왕복·회전·정지/재개·플레이어 접촉 검증 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N02 완료·다음 N03 · 최신 실행은 pedestrian_walk, 차량/M4/V0 미완료
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -40,7 +40,7 @@
 
 OSM 기준 시각은 **2026-10-09T20:21:04Z**이다. 모든 객체가 그날 측량/갱신됐다는 뜻은 아니다.
 
-현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이고 L04/N01 결과와 다음 N02는 아래 최신 절을 따른다.
+현재 W04 결과: [연속 보행·실패·재현](../data/reports/walkable_milestone.md)·[스냅샷](../data/reports/walkable_milestone/snapshot.json)·[인수 검사](../data/reports/w04_verification.json). W03 결과는 기존 경계·지면·출처 증거로 유지한다. L01의 [참조/제작 기준](landmark_reference.md)과 [검사](../data/reports/landmarks/l01_validation.json)를 추가했다. 궁궐 외형/회귀는 [L02 결과](../data/reports/palace_landmarks.md), 현재 도시 외형/회귀는 [L03 결과](../data/reports/city_landmarks.md)이고 L04/N01/N02 결과와 다음 N03은 아래 최신 절을 따른다.
 
 ## 이번 실제 데이터에서 확인한 점
 
@@ -170,11 +170,19 @@ L03 전체3.3km 증거는 소스/실행자산/입력/검사118개와 원시/판�
 
 초기NPC2/차량2는 제안이며 아직 생성하지 않았다. 차량은 끝점 정지 후 실제 카메라에서 두 끝 차체가 안 보이고 사람과30m·진입 공간이 빌 때만 반복 허용한다. 실제 제동/점유/반복·차도 지지면/접촉·물리/성능을 검증하지 않았다. N01은 game/경계·지원면·원본권한을 바꾸지 않은 계획이다. 기존 외형3곳 보완·사람/OS·M4·실내/V0는 그대로 남아 있다.
 
-## 다음 작업: N02 단순 보행자 이동
+## N02 현재 결과와 남은 검증
 
-첫 행동은 route_rules와 N01 정상 스냅샷/검사를 읽고 `prepare_routes.py`로 현재 입력을 확인한 뒤 NPC2개 경로에 가벼운 capsule 이동을 연결하는 것이다. 원래3인칭/대한문·플레이어 경계와 collision pedestrian 레이어3/bit4/mask15를 유지하며 왕복/회전·정지/재개·플레이어/서로 접촉·영구 고착0을 실제 엔진에서 관측한다. 차량은 N03에서 지지/제동/시야/반복부터 검증한다.
+앞마당47.011114m·광장 전면73.713895m의 기존 선에 capsule 보행자 각1명을 추가했다. 경로 중간 시작·1.2m/s 왕복·끝점 정지/회전·막힘 대기/재개·뒤가 빌 때 퇴각·메뉴/스위치 정지·중복 생성 거부를 구현했다. 새 장면은 L03을 상속하며 원본 축척/높이/권한·W03 지원면/플레이어 경계·문/입력/카메라와692생성/687활성 정적 충돌을 유지한다. [실행·화면·실패·재현](../data/reports/pedestrians.md), [최종 인수](../data/reports/n02_verification.json).
 
-최신 일반 실행은 `sh tools/run_city_landmarks.sh run`이며 아직 NPC/차량이 없다. [다른 Mac 준비](CROSS_MAC.md)의 기존 W/L→N01 순서를 따른다. 사용자 위임에 따라 직접 피드백을 대기 조건으로 만들지 않는다. 건물정보/실내/엘리베이터·생활 핵심규칙을 새 범위로 자동 추가하지 않는다.
+최종 headless 독립162개·GPU171개와 도시58개/궁궐76개를 통과했다. GPU9case·18,408tick/306.8물리초·306.806859실제초, 자유280초에서 앞마당3/광장2왕복·교대 끝점7/4회다. 전tick접지·이탈/플레이어복귀0, 수평step최대0.020007415m·경로오차0.000017060m·Y0.000942310m·NPC침투0, 시간차최대0.6223%다. 별도폴더 prepared27파일2회/이동 재생성19검사도 통과했다.
+
+처음 JSON 숫자 동등 비교/검사 코드 타입 오류, 굽은 길 추종 오차, 미세 충돌 여유 실험과 전체반복 지면 이음부 보정을 실제 기록으로 보존했다. 공중에서만 중력을 더하고 접지 중 기존 스냅을 사용해 해결했으며 최종0.0202m/tick·5mm/2% 기준을 유지했다. 실제화면5PNG 중 검토용2장은30도 카메라 시점이며 보행자는 잠시 멈춘 상태다. 움직임 증거는 원시 궤적이다.
+
+두 선은 분리돼 있어 NPC끼리 실제 조우·군중은 미검증이다. 차량/교차·N04 10분 통합·직접 사람/OS·M4·현실 지형/접근·도시 성능/패키지·실내/V0는 남았다. 과거3.3km를 새 동적 통합 완주로 주장하지 않는다.
+
+## 다음 작업: N03 단순 차량 이동
+
+첫 행동은 route_rules와 N01 차량 경로/현재 N02 장면을 읽고 세종대로 두 경로의 실제 차도 지원면과 차체 접촉을 엔진에서 확인하는 것이다. 이후 N02 장면을 상속해 단순 차량2대의 원문 진행방향·확장 교차구역 앞 정지·사람 우선/1대FIFO·점유 해제와 시야밖/30m/빈진입 조건 반복을 구현한다. N01 기하 계획으로 물리 지지나 제동을 통과시키지 않는다. 기존 NPC·문/보행·축척·출처/권한을 유지하고 실제 차량 증거 후 N04 통합으로 간다. 사람 피드백을 대기 조건으로 추가하지 않는다.
 
 ## 파일과 재현 방법
 
@@ -197,7 +205,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 N02이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 N03이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 

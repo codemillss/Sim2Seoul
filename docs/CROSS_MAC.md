@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, N01 경로 계획까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, N02 보행자까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -378,4 +378,22 @@ CC0 동봉 라이선스는 원래 CRLF/공백까지 해시에 포함된다. 저�
 
 `data/processed/npc_routes.json`·`vehicle_routes.json`은 기기에서 다시 생성한다. Git에는 수동 원천·생성/독립 검사·정상2 gzip 스냅샷과 근거/인수를 공유한다. 별도폴더 prepared23입력2회 재생성은 현재 M1 설치를 사용한 N01-only 결과이며 새Mac설치/전체GIS/M4/실제controller 결과가 아니다. SVG 경로도는 `tools/map_routes.py`로 생성하고 공유 PNG는 실제 렌더로 확인했다.
 
-다음N02는 [규칙](route_rules.md)·[정적 검증과 한계](../data/reports/route_review.md)·[인수](../data/reports/n01_verification.json)를 읽고 NPC 실제 왕복/정지/접촉부터 구현한다. 최신 일반게임은 기존 run_city_landmarks.sh이며 아직 NPC/차량이 없다. 원문/가정·모드영역·반복 guard와 미검증 차량 지지면을 유지한다.
+N01 종료 당시 다음N02는 [규칙](route_rules.md)·[정적 검증과 한계](../data/reports/route_review.md)·[인수](../data/reports/n01_verification.json)를 읽고 NPC 실제 왕복/정지/접촉부터 구현한다. 당시 일반게임은 기존 run_city_landmarks.sh이며 NPC/차량이 없었다. 원문/가정·모드영역·반복 guard와 미검증 차량 지지면을 유지한다.
+
+
+## N02 보행자 장면 재생성·실행·인수
+
+위 L03와 N01 준비 뒤 실행한다. 현재 일반 게임에 두 보행자가 추가된 장면이며 이전 `run_city_landmarks.sh`는 NPC 없는 기준판으로 유지한다.
+
+```sh
+.venv-data/bin/python tools/prepare_routes.py --check
+.venv-data/bin/python tools/prepare_pedestrians.py
+.venv-data/bin/python tools/prepare_pedestrians.py --check
+sh tools/run_pedestrians.sh run
+```
+
+편집기는 `sh tools/run_pedestrians.sh editor` 뒤 현재 장면 실행(F6)이다. 앞마당/광장 전면의 청록색 capsule 각1명이 왕복한다. WASD·Shift·마우스·휠과 대한문 시작 위치는 기존과 같다. Esc 메뉴는 모두 멈추며 `보행자 이동` 스위치로 두 보행자만 정지/재개할 수 있다. 런처는 Python으로 자료를 사전 대조하고 실제 게임은 준비된 작은 자료로 오프라인 실행한다.
+
+`pedestrians.json`/manifest·N01 두 가공 JSON과 `.godot`/환경/캐시는 Git 제외다. 공유 source/수동 계획과 도구로 재생성하며 [검증용 snapshot/실제 결과](../data/reports/pedestrians.md)를 대조한다. 준비된27입력16,327,528bytes를 다른 폴더에 복사해 두 번 생성/폴더 이동 후 같은 bytes/SHA와 입력불변을19검사로 확인했다. 기존 M1 설치에서의 N02-only 증거이며 새Mac 설치/전체GIS/M4 검증은 아니다.
+
+저장소 코드·문서·검증 기록의 인수는 `python3 tools/check_pedestrians_handoff.py`, 실행 자산까지 준비한 뒤에는 `--prepared`를 덧붙인다. 재시험은 위 결과 문서의 cache 출력 경로를 사용해 합격/실패 원기록을 덮어쓰지 않는다. 현재 다음 작업은 **N03**이며 기존 보행자 장면을 바탕으로 차도 지지/접촉부터 실제 확인한다. 차량·10분 이상 통합/성능·사람/M4·실내/V0는 미완료다.

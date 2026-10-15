@@ -1,0 +1,62 @@
+{
+  "task": "N02",
+  "scope": "Development evidence, not final acceptance",
+  "attempts": [
+    {
+      "paths": [
+        "short01"
+      ],
+      "finding": "Probe type inference parse error; explicit bool type fixed."
+    },
+    {
+      "paths": [
+        "short02",
+        "short03",
+        "short04"
+      ],
+      "finding": "Normal bundle rejected due JSON float vs int Dictionary equality; numeric policy comparison and source-binding/scope types fixed."
+    },
+    {
+      "paths": [
+        "short05"
+      ],
+      "finding": "Distant-endpoint following accumulated route error 3.685mm and stopped off_route; use next physical station steering."
+    },
+    {
+      "paths": [
+        "short06",
+        "short07"
+      ],
+      "finding": "Short trial floor recovery above initial .0202 step assumption; independent checker also omitted support prism and confused accelerated timer with wall clock."
+    },
+    {
+      "paths": [
+        "short08",
+        "short09"
+      ],
+      "finding": "0.1mm safe_margin trial repeatedly stalled on physical floor contact. Returned to 1mm; short08 fresh raw was not retained by then-driver, log/failure only. Driver subsequently preserves fresh raw even on engine ERROR."
+    },
+    {
+      "paths": [
+        "short10",
+        "short11",
+        "first_full"
+      ],
+      "finding": "1mm contact allowance .021m considered with velocity/distance safeguards; full trial still exceeded it at .0227015m. Not final criteria."
+    },
+    {
+      "paths": [
+        "full_constant_speed"
+      ],
+      "finding": "floor_constant_speed alone still .0223943m maximum step; stopped after baseline/fault results during redundant retained mutation audits."
+    },
+    {
+      "paths": [
+        "full_ground_snap"
+      ],
+      "finding": "Gravity only while airborne fixes floor-seam recovery. Actual full baseline passed; stopped during retained-mutation audits before final proof freeze. Final root contract/GPU reran after restoring .0202m limit."
+    }
+  ],
+  "final_policy": "MAX_STEP=.0202m; commanded velocity<=1.2002m/s; case cumulative<=1.2*seconds+.005m; source/route/Y/penetration5mm and GPU clock2% unchanged.",
+  "evidence_limits": "Some development attempts saved failure logs only. Development source bytes were not archived at every edit; do not equate their current code with the historic stage. Final source hashes are in contract/gpu checks."
+}

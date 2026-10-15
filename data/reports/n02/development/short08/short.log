@@ -1,0 +1,33 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+W03_READY active=687 city=572.949m wall=413.510m boundary=W03-play-boundary-v1
+L02_READY landmarks=6 components=401 new_collision=0
+L03_READY landmarks=4 components=18 new_collision=0
+N02_READY pedestrians=2 vehicles=0 inherited_static=687
+N02_CASE free_cycles ticks=720 ends=[0, 0] states=["waiting", "waiting"]
+N02_CASE manual_stop ticks=120 ends=[0, 0] states=["paused", "paused"]
+N02_CASE manual_resume ticks=180 ends=[0, 0] states=["waiting", "waiting"]
+ERROR: N02 target never reached middle
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _middle (/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tests/game/check_pedestrians.gd:99)
+       [1] _wait (res://test_support/check_camera_test.gd:46)
+       [2] _physics_process (res://scripts/player/camera_rig.gd:98)
+N02_CASE brief_block ticks=48 ends=[0, 0] states=["waiting", "waiting"]
+N02_CASE clear_and_resume ticks=240 ends=[0, 0] states=["waiting", "waiting"]
+ERROR: N02 target never reached middle
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _middle (/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tests/game/check_pedestrians.gd:99)
+       [1] _wait (res://test_support/check_camera_test.gd:46)
+       [2] _physics_process (res://scripts/player/camera_rig.gd:98)
+N02_CASE persistent_block ticks=300 ends=[0, 0] states=["waiting", "waiting"]
+ERROR: N02 target never reached middle
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _middle (/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tests/game/check_pedestrians.gd:99)
+       [1] _wait (res://test_support/check_camera_test.gd:46)
+       [2] _physics_process (res://scripts/player/camera_rig.gd:98)
+N02_CASE player_push ticks=240 ends=[0, 0] states=["waiting", "paused"]
+N02_CASE backoff ticks=120 ends=[0, 0] states=["waiting", "waiting"]
+N02_CASE escape ticks=360 ends=[0, 0] states=["waiting", "waiting"]
