@@ -1,0 +1,25 @@
+{
+  "task": "N04",
+  "mutation": "invalid_south_recycle_guard",
+  "normal_record": "contract.json.gz",
+  "normal_raw_gzip_sha256": "9bc2b37002500ee307a8f532bdc2d1b6a1baed2ba074dd7e45892d0146be1ccb",
+  "changed_canonical_json_sha256": "839275cd5a388b10f6ee023facad30289a26d5e34f41a0db4e7b0658b60baefd",
+  "canonical_json": {
+    "ensure_ascii": false,
+    "sort_keys": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "trailing_newline": false
+  },
+  "patches": [
+    {
+      "op": "replace",
+      "path": "/final_vehicles/0/recycle_history/0/guard/start_outside",
+      "old": true,
+      "new": false
+    }
+  ],
+  "targeted_check": "cars.sejong_south.endpoint_and_reentry_geometry"
+}

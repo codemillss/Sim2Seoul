@@ -1,0 +1,90 @@
+{
+  "task": "N04",
+  "mutation": "missing_walk_leg",
+  "normal_record": "contract.json.gz",
+  "normal_raw_gzip_sha256": "9bc2b37002500ee307a8f532bdc2d1b6a1baed2ba074dd7e45892d0146be1ccb",
+  "changed_canonical_json_sha256": "47c49adb2bcdc05d9e9260f11807d302cce5c87966b98e0f51e217a68176f47d",
+  "canonical_json": {
+    "ensure_ascii": false,
+    "sort_keys": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "trailing_newline": false
+  },
+  "patches": [
+    {
+      "op": "remove",
+      "path": "/walk/cases/167",
+      "old": {
+        "W03_stats": {
+          "boundary_reasons": {},
+          "contact_ids": [],
+          "crossing_ticks": {},
+          "first_outside_point": [],
+          "floor_support_ticks": 29,
+          "max_camera_penetration_m": 0.0,
+          "max_player_penetration_m": 0.00212695077061653,
+          "outside_movement_ticks": 0,
+          "solid_contact_ticks": 0,
+          "ticks": 29
+        },
+        "all_tick_stats": {
+          "camera_max_step_m": 0.233650088310242,
+          "floor_ticks": 29,
+          "max_camera_overlap_count": 0,
+          "max_distance": 1.458984375,
+          "max_follow_error_m": 0.0,
+          "max_length_excess_m": 0.0,
+          "max_near_hit_count": 0,
+          "max_player_y": 0.00083946977974847,
+          "max_tick_mismatch": 0,
+          "min_distance": 0.4658203125,
+          "min_player_y": -0.00212695077061653,
+          "ticks": 29
+        },
+        "boundary_stops": 0,
+        "duration_s": 0.483333333333333,
+        "end": [
+          118.200889587402,
+          0.000837922212667763,
+          -117.253448486328
+        ],
+        "first_physics_tick": 31340,
+        "frames": 29,
+        "last_physics_tick": 31368,
+        "name": "city_forward_94",
+        "pipelines": {
+          "after": {
+            "draw": 0.0,
+            "mesh": 0.0,
+            "surface": 0.0
+          },
+          "before": {
+            "draw": 0.0,
+            "mesh": 0.0,
+            "surface": 0.0
+          }
+        },
+        "recoveries": 0,
+        "stage_id": "city_forward",
+        "start": [
+          116.650856018066,
+          0.000839703425299376,
+          -117.930992126465
+        ],
+        "target_error_m": 0.0499424673616886,
+        "target_xz": [
+          118.246653173276,
+          -117.233447693613
+        ],
+        "ticks": 29,
+        "wall_s": 0.049963,
+        "yield_events": []
+      },
+      "new": null
+    }
+  ],
+  "targeted_check": "walk.full334_coverage"
+}

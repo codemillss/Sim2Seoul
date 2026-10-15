@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "task": "N04",
+  "passed": false,
+  "checks": [
+    {
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "name": "finite_values",
+      "passed": true
+    },
+    {
+      "name": "acceptance.full_suite",
+      "passed": false
+    },
+    {
+      "name": "execution.no_unresolved_error",
+      "passed": false
+    },
+    {
+      "name": "input.observed_bytes",
+      "passed": true
+    },
+    {
+      "name": "bundle.source_routes",
+      "passed": true
+    },
+    {
+      "name": "bundle.scope_and_collision",
+      "passed": true
+    },
+    {
+      "name": "bundle.unchanged_physical_and_priority_policy",
+      "passed": true
+    },
+    {
+      "name": "inventory.frozen_before_after",
+      "passed": true
+    },
+    {
+      "name": "supports.count",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_south.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_north.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "actors.vehicle_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.npc_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.original_player_camera",
+      "passed": true
+    },
+    {
+      "name": "boundary.original_resource",
+      "passed": true
+    },
+    {
+      "name": "engine",
+      "passed": true
+    },
+    {
+      "name": "timeline.clock_and_duration",
+      "passed": true
+    },
+    {
+      "name": "timeline.all_tick_summary",
+      "passed": false
+    },
+    {
+      "name": "timeline.all_tick_camera_and_npc_geometry",
+      "passed": true
+    },
+    {
+      "name": "timeline.retained_clock",
+      "passed": true
+    },
+    {
+      "name": "timeline.actor_ids",
+      "passed": true
+    },
+    {
+      "name": "timeline.independent_source_samples",
+      "passed": true,
+      "details": {
+        "failed_sample_indices": []
+      }
+    },
+    {
+      "name": "timeline.independent_cached_guards",
+      "passed": true,
+      "details": {
+        "failed_guard_keys": []
+      }
+    },
+    {
+      "name": "timeline.player_continuity",
+      "passed": false
+    },
+    {
+      "name": "cars.sejong_south.physical_continuity",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_acceleration_mps2": 1.483319699764305,
+        "maximum_deceleration_mps2": 2.984677255153594
+      }
+    },
+    {
+      "name": "cars.sejong_south.endpoint_and_reentry_geometry",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "cars.sejong_south.two_actual_cycles",
+      "passed": true,
+      "details": {
+        "actual_endpoint_visits": 2,
+        "guarded_reentries": 2,
+        "source_distance_m": 491.98246826105554
+      }
+    },
+    {
+      "name": "cars.sejong_south.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "cars.sejong_north.physical_continuity",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_acceleration_mps2": 1.5005551278590978,
+        "maximum_deceleration_mps2": 2.9879920184612008
+      }
+    },
+    {
+      "name": "cars.sejong_north.endpoint_and_reentry_geometry",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "cars.sejong_north.two_actual_cycles",
+      "passed": false,
+      "details": {
+        "actual_endpoint_visits": 2,
+        "guarded_reentries": 2,
+        "source_distance_m": 480.4798133179854
+      }
+    },
+    {
+      "name": "cars.sejong_north.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "npcs.palace_court.physical_continuity_and_turns",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_yaw_rate_radps": 3.1415927410125697
+      }
+    },
+    {
+      "name": "npcs.palace_court.two_actual_roundtrips",
+      "passed": false,
+      "details": {
+        "alternating_endpoint_visits": [
+          1,
+          0,
+          1
+        ],
+        "retained_source_distance_m": 133.024154884238,
+        "two_roundtrip_distance_m": 188.04445641994474
+      }
+    },
+    {
+      "name": "npcs.palace_court.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "npcs.plaza_front.physical_continuity_and_turns",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_yaw_rate_radps": 3.14159274101258
+      }
+    },
+    {
+      "name": "npcs.plaza_front.two_actual_roundtrips",
+      "passed": false,
+      "details": {
+        "alternating_endpoint_visits": [
+          1,
+          0
+        ],
+        "retained_source_distance_m": 135.187543003342,
+        "two_roundtrip_distance_m": 294.855579288457
+      }
+    },
+    {
+      "name": "npcs.plaza_front.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.entrance_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_prefix",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.court_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.court_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_suffix",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.city_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.city_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.stonewall_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.stonewall_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.entrance_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.itinerary_source_and_counts",
+      "passed": true
+    },
+    {
+      "name": "walk.full334_coverage",
+      "passed": false
+    },
+    {
+      "name": "walk.same_global_session",
+      "passed": false
+    },
+    {
+      "name": "walk.entrance_forward_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.entrance_forward_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.entrance_forward_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_0.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          1790,
+          1796,
+          1802,
+          1808,
+          1814,
+          1820,
+          1826,
+          1832,
+          1838,
+          1844
+        ]
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_1.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          7600
+        ]
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_2.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          7601
+        ]
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_3.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          7602
+        ]
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_4.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          7603
+        ]
+      }
+    },
+    {
+      "name": "walk.yield_guidance_valid",
+      "passed": true,
+      "details": {
+        "yield_samples": 0,
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.yield_events_source_capsule_and_actor_binding",
+      "passed": true,
+      "details": {
+        "failed_indices_or_ticks": [],
+        "actual_yields": 0
+      }
+    },
+    {
+      "name": "exercises.extra_waypoints_are_preserved_source",
+      "passed": true,
+      "details": {
+        "allowed_source_fraction": [
+          65.6169741674792,
+          -188.3327600158751
+        ]
+      }
+    },
+    {
+      "name": "post_timeline_recovery_injections_separate",
+      "passed": true
+    },
+    {
+      "name": "traffic.FIFO_and_current_guard_events",
+      "passed": true,
+      "details": {
+        "failed_event_indices": []
+      }
+    },
+    {
+      "name": "traffic.events_match_retained_owner_queue",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "exercises.three_crossing_and_three_npc_block",
+      "passed": false
+    },
+    {
+      "name": "exercises.observed_human_crossing_stop_and_release",
+      "passed": true,
+      "details": {
+        "failed_exercise_indices": []
+      }
+    },
+    {
+      "name": "exercises.observed_npc_block_and_recovery",
+      "passed": true,
+      "details": {
+        "failed_exercise_indices": []
+      }
+    }
+  ],
+  "scope": "One continuous automatic physical journey with two pedestrians and two vehicles. Source/retained geometry is independently checked; tick extrema are observer summaries. Three vehicle crossing stop/release and three separate NPC blockage/recovery exercises remain inside this timeline. Human controls/OS/M4, real terrain/access and city performance remain unverified."
+}

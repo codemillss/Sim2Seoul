@@ -1,0 +1,103 @@
+{
+  "task": "N04",
+  "mutation": "duplicate_vehicle",
+  "normal_record": "contract.json.gz",
+  "normal_raw_gzip_sha256": "9bc2b37002500ee307a8f532bdc2d1b6a1baed2ba074dd7e45892d0146be1ccb",
+  "changed_canonical_json_sha256": "0c0219460448377483b5ec5598f3dff3bfed1791c64c12eec26cdd5c2dde0cc0",
+  "canonical_json": {
+    "ensure_ascii": false,
+    "sort_keys": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "trailing_newline": false
+  },
+  "patches": [
+    {
+      "op": "add",
+      "path": "/timeline/samples/8084/vehicles/2",
+      "old": null,
+      "new": {
+        "accel_mps2": 1.5,
+        "actual_distance_m": 2879.03012435643,
+        "at_end": false,
+        "blocked_reason": "",
+        "body_yaw_rad": 3.1293408870697,
+        "can_recycle": false,
+        "clearance_m": 1.0,
+        "command_speed_mps": 2.12354535758495,
+        "completed_cycles": 15,
+        "contacts": [
+          {
+            "id": "N03_support_sejong_south",
+            "layer": 16,
+            "normal": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "crossing_speed_limit_mps": 2.0,
+        "cycle_count": 15,
+        "cycle_distance_m": 29.5909860001993,
+        "decel_mps2": 3.0,
+        "direction": 1,
+        "elapsed_s": 795.499999999605,
+        "end_events": 15,
+        "floor_collider": "N03_support_sejong_south",
+        "floor_collider_path": "/root/TrafficWalk/Infrastructure/RoadSupports/N03_support_sejong_south",
+        "floor_id": "N03_support_sejong_south",
+        "floor_reason": "up_floor_ray",
+        "gravity_mps2": 9.8,
+        "last_recycle_tick": 47020,
+        "layer": 8,
+        "mask": 31,
+        "max_route_offset_m": 2.288818359375e-05,
+        "max_speed_limit_mps": 5.0,
+        "max_speed_mps": 5.00023975968361,
+        "max_step_m": 0.0833373293280602,
+        "motion_parts": 1,
+        "obstacle": {},
+        "on_floor": true,
+        "pause_ticks": 0,
+        "permission": {
+          "allow_crossing": false,
+          "clear_s": 172.65000000003,
+          "fresh": true,
+          "human_present": false,
+          "observation_age_s": 0.0,
+          "observation_tick": 47732,
+          "occupied_by": "",
+          "queue": [],
+          "reason": "fifo_or_clear_hold",
+          "tick": 47732
+        },
+        "physics_priority": 1,
+        "physics_steps": 47730,
+        "position": [
+          78.8887023925781,
+          0.0,
+          -190.326263427734
+        ],
+        "reaction_s": 0.5,
+        "route_id": "sejong_south",
+        "route_length_m": 189.962615966797,
+        "running": true,
+        "segment": 1,
+        "speed_mps": 2.12326817214489,
+        "state": "accelerating",
+        "station_m": 29.5909857749939,
+        "velocity": [
+          -0.0260131601244211,
+          0.0,
+          2.12310886383057
+        ],
+        "visual_yaw_rad": 3.1293408870697,
+        "yaw_rad": 3.1293408870697
+      }
+    }
+  ],
+  "targeted_check": "evidence_structure"
+}

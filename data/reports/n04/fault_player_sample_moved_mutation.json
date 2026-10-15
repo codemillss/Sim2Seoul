@@ -1,0 +1,25 @@
+{
+  "task": "N04",
+  "mutation": "player_sample_moved",
+  "normal_record": "contract.json.gz",
+  "normal_raw_gzip_sha256": "9bc2b37002500ee307a8f532bdc2d1b6a1baed2ba074dd7e45892d0146be1ccb",
+  "changed_canonical_json_sha256": "cc596b4de1a2d4bb98cee675a03e6882557ffec97ab9e4d328c51ad15b6b1fed",
+  "canonical_json": {
+    "ensure_ascii": false,
+    "sort_keys": true,
+    "separators": [
+      ",",
+      ":"
+    ],
+    "trailing_newline": false
+  },
+  "patches": [
+    {
+      "op": "replace",
+      "path": "/timeline/samples/8084/player/position/0",
+      "old": -169.099716186523,
+      "new": -168.099716186523
+    }
+  ],
+  "targeted_check": "timeline.player_continuity"
+}

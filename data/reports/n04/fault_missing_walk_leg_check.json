@@ -1,0 +1,3604 @@
+{
+  "schema_version": 1,
+  "task": "N04",
+  "passed": false,
+  "checks": [
+    {
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "name": "finite_values",
+      "passed": true
+    },
+    {
+      "name": "acceptance.full_suite",
+      "passed": true
+    },
+    {
+      "name": "execution.no_unresolved_error",
+      "passed": true
+    },
+    {
+      "name": "input.observed_bytes",
+      "passed": true
+    },
+    {
+      "name": "bundle.source_routes",
+      "passed": true
+    },
+    {
+      "name": "bundle.scope_and_collision",
+      "passed": true
+    },
+    {
+      "name": "bundle.unchanged_physical_and_priority_policy",
+      "passed": true
+    },
+    {
+      "name": "inventory.frozen_before_after",
+      "passed": true
+    },
+    {
+      "name": "supports.count",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_south.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_north.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "actors.vehicle_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.npc_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.original_player_camera",
+      "passed": true
+    },
+    {
+      "name": "boundary.original_resource",
+      "passed": true
+    },
+    {
+      "name": "engine",
+      "passed": true
+    },
+    {
+      "name": "timeline.clock_and_duration",
+      "passed": true
+    },
+    {
+      "name": "timeline.all_tick_summary",
+      "passed": true
+    },
+    {
+      "name": "timeline.all_tick_camera_and_npc_geometry",
+      "passed": true
+    },
+    {
+      "name": "timeline.retained_clock",
+      "passed": true
+    },
+    {
+      "name": "timeline.actor_ids",
+      "passed": true
+    },
+    {
+      "name": "timeline.independent_source_samples",
+      "passed": true,
+      "details": {
+        "failed_sample_indices": []
+      }
+    },
+    {
+      "name": "timeline.independent_cached_guards",
+      "passed": true,
+      "details": {
+        "failed_guard_keys": []
+      }
+    },
+    {
+      "name": "timeline.player_continuity",
+      "passed": true
+    },
+    {
+      "name": "cars.sejong_south.physical_continuity",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_acceleration_mps2": 1.4833800494670024,
+        "maximum_deceleration_mps2": 3.021518513560292
+      }
+    },
+    {
+      "name": "cars.sejong_south.endpoint_and_reentry_geometry",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "cars.sejong_south.two_actual_cycles",
+      "passed": true,
+      "details": {
+        "actual_endpoint_visits": 31,
+        "guarded_reentries": 31,
+        "source_distance_m": 6032.563815958944
+      }
+    },
+    {
+      "name": "cars.sejong_south.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "cars.sejong_north.physical_continuity",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_acceleration_mps2": 1.5009775757790145,
+        "maximum_deceleration_mps2": 3.024351596832009
+      }
+    },
+    {
+      "name": "cars.sejong_north.endpoint_and_reentry_geometry",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "cars.sejong_north.two_actual_cycles",
+      "passed": true,
+      "details": {
+        "actual_endpoint_visits": 24,
+        "guarded_reentries": 24,
+        "source_distance_m": 6328.081712394548
+      }
+    },
+    {
+      "name": "cars.sejong_north.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "npcs.palace_court.physical_continuity_and_turns",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_yaw_rate_radps": 3.1415927410125697
+      }
+    },
+    {
+      "name": "npcs.palace_court.two_actual_roundtrips",
+      "passed": true,
+      "details": {
+        "alternating_endpoint_visits": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "retained_source_distance_m": 1818.34435173732,
+        "two_roundtrip_distance_m": 188.04445641994474
+      }
+    },
+    {
+      "name": "npcs.palace_court.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "npcs.plaza_front.physical_continuity_and_turns",
+      "passed": true,
+      "details": {
+        "failed_ticks": [],
+        "maximum_yaw_rate_radps": 3.14159274101262
+      }
+    },
+    {
+      "name": "npcs.plaza_front.two_actual_roundtrips",
+      "passed": true,
+      "details": {
+        "alternating_endpoint_visits": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "retained_source_distance_m": 1852.2621824133678,
+        "two_roundtrip_distance_m": 294.855579288457
+      }
+    },
+    {
+      "name": "npcs.plaza_front.final_alignment",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.entrance_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_prefix",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.court_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.court_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_suffix",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.palace_loop_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.city_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.city_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.stonewall_forward",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.stonewall_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.source_seam.entrance_reverse",
+      "passed": true
+    },
+    {
+      "name": "walk.itinerary_source_and_counts",
+      "passed": true
+    },
+    {
+      "name": "walk.full334_coverage",
+      "passed": false
+    },
+    {
+      "name": "walk.same_global_session",
+      "passed": true
+    },
+    {
+      "name": "walk.entrance_forward_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.entrance_forward_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.entrance_forward_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_prefix_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_forward_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.court_reverse_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_11.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_12.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_13.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_14.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_15.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_16.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_17.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_suffix_18.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_11.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_12.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_13.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_14.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_15.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_16.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_17.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_18.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_19.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_20.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_21.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_22.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.palace_loop_reverse_23.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_11.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_12.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_13.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_14.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_15.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_16.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_17.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_18.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_19.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_20.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_21.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_22.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_23.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_24.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_25.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_26.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_27.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_28.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_29.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_30.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_31.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_32.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_33.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_34.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_35.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_36.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_37.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_38.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_39.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_40.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_41.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_42.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_43.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_44.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_45.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_46.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_47.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_48.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_49.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_50.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_51.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_52.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_53.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_54.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_55.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_56.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_57.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_58.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_59.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_60.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_61.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_62.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_63.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_64.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_65.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_66.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_67.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_68.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_69.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_70.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_71.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_72.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_73.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_74.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_75.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_76.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_77.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_78.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_79.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_80.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_81.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_82.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_83.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_84.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_85.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_86.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_87.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_88.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_89.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_90.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_91.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_92.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_93.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_94.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_95.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_forward_96.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          31376,
+          31382,
+          31388,
+          31394,
+          31400,
+          31406,
+          31412,
+          31418,
+          31424,
+          31430
+        ]
+      }
+    },
+    {
+      "name": "walk.city_forward_97.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          32954,
+          32960,
+          32966,
+          32972,
+          32978,
+          32984,
+          32990,
+          32996,
+          33002,
+          33008
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_0.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_1.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_2.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          33992,
+          33998,
+          34004,
+          34010,
+          34012
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_5.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_6.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_7.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_8.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          34022,
+          34028,
+          34034,
+          34040,
+          34046,
+          34052,
+          34058,
+          34064,
+          34070,
+          34076
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_10.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_11.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          34274,
+          34280,
+          34286,
+          34292,
+          34298,
+          34303
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_12.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_13.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_14.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_15.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_16.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_17.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          34316,
+          34322,
+          34328,
+          34334,
+          34340,
+          34346,
+          34352,
+          34358,
+          34364,
+          34370
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_18.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_19.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_20.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_21.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_22.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_23.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_24.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_25.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_26.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_27.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_28.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_29.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_30.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_31.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_32.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_33.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_34.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          34802,
+          34808,
+          34814,
+          34820,
+          34826,
+          34832,
+          34838,
+          34844,
+          34850,
+          34856
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_35.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_36.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_37.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_38.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_39.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_40.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_41.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_42.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_43.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_44.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_45.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_46.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_47.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_48.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_49.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          35090,
+          35096,
+          35102,
+          35108,
+          35114,
+          35120,
+          35126,
+          35132,
+          35138,
+          35144
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_50.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          35366,
+          35372,
+          35378,
+          35384,
+          35390,
+          35396,
+          35402,
+          35408,
+          35414,
+          35420
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_51.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_52.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          35534,
+          35540,
+          35546,
+          35552,
+          35558,
+          35564,
+          35570,
+          35576,
+          35582,
+          35588
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_53.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_54.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_55.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_56.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_57.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_58.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_59.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_60.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_61.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_62.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_63.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_64.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.city_reverse_65.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          35822,
+          35828,
+          35834,
+          35840,
+          35846,
+          35852,
+          35858,
+          35864,
+          35870,
+          35876
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_66.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36236,
+          36242,
+          36244
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_67.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36248,
+          36254,
+          36260,
+          36266,
+          36272,
+          36278,
+          36284,
+          36290,
+          36296,
+          36302
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_68.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36596,
+          36602,
+          36608,
+          36614,
+          36620,
+          36626,
+          36632,
+          36638,
+          36644,
+          36650
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_69.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36794,
+          36800,
+          36806,
+          36812,
+          36818,
+          36824,
+          36830,
+          36832
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_70.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36836,
+          36842,
+          36848,
+          36854,
+          36860,
+          36866,
+          36872,
+          36878,
+          36884,
+          36890
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_71.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          36914,
+          36920,
+          36926,
+          36932,
+          36938,
+          36944,
+          36950,
+          36956,
+          36962,
+          36968
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_72.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37106,
+          37112,
+          37118,
+          37124,
+          37130,
+          37136,
+          37142,
+          37148,
+          37154,
+          37160
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_73.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37352,
+          37358,
+          37364,
+          37370,
+          37376,
+          37382,
+          37388,
+          37394,
+          37400,
+          37406
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_74.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37430,
+          37436,
+          37442,
+          37448,
+          37454,
+          37460,
+          37466,
+          37472,
+          37478,
+          37484
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_75.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37634,
+          37640,
+          37646,
+          37652,
+          37658,
+          37664,
+          37670,
+          37676,
+          37682,
+          37688
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_76.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37712,
+          37718,
+          37724,
+          37730,
+          37736,
+          37742,
+          37748,
+          37754,
+          37760,
+          37766
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_77.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37802,
+          37808,
+          37814,
+          37820,
+          37826,
+          37832,
+          37838,
+          37844,
+          37850,
+          37854
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_78.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37862,
+          37868,
+          37874,
+          37880,
+          37886,
+          37892,
+          37898,
+          37904,
+          37910,
+          37916
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_79.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          37970,
+          37976,
+          37982,
+          37988,
+          37994,
+          38000,
+          38006,
+          38012,
+          38018,
+          38024
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_80.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          38588,
+          38594,
+          38600,
+          38606,
+          38612,
+          38618,
+          38624,
+          38630,
+          38636,
+          38642
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_81.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          38804,
+          38810,
+          38816,
+          38822,
+          38828,
+          38834,
+          38840,
+          38846,
+          38852,
+          38858
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_82.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          38966,
+          38972,
+          38978,
+          38984,
+          38990,
+          38996,
+          39002,
+          39008,
+          39014,
+          39020
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_83.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          39200,
+          39206,
+          39212,
+          39218,
+          39224,
+          39230,
+          39236,
+          39242,
+          39248,
+          39254
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_84.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          39350,
+          39356,
+          39362,
+          39368,
+          39374,
+          39380,
+          39386,
+          39392,
+          39398,
+          39404
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_85.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          40082,
+          40088,
+          40094,
+          40100,
+          40106,
+          40112,
+          40118,
+          40124,
+          40130,
+          40136
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_86.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          40406,
+          40412,
+          40418,
+          40424,
+          40430,
+          40436,
+          40442,
+          40448,
+          40454,
+          40460
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_87.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          40904,
+          40910,
+          40916,
+          40922,
+          40928,
+          40934,
+          40940,
+          40946,
+          40952,
+          40958
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_88.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41006,
+          41012,
+          41018,
+          41022
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_89.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41030,
+          41036,
+          41042,
+          41048,
+          41054,
+          41060,
+          41066,
+          41072,
+          41078,
+          41084
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_90.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41168,
+          41174,
+          41180,
+          41186,
+          41192,
+          41198,
+          41204,
+          41210,
+          41212
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_91.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41216,
+          41222,
+          41225
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_92.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41234,
+          41240,
+          41246,
+          41252,
+          41258,
+          41264,
+          41270,
+          41276,
+          41282,
+          41288
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_93.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41336,
+          41342,
+          41348,
+          41354,
+          41360,
+          41366,
+          41372,
+          41378,
+          41384,
+          41390
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_94.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41420,
+          41426,
+          41432,
+          41438,
+          41444,
+          41450,
+          41456,
+          41462,
+          41468,
+          41474
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_95.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41726,
+          41732,
+          41738,
+          41744,
+          41750,
+          41756,
+          41762,
+          41768,
+          41774,
+          41780
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_96.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          41924,
+          41930,
+          41936,
+          41942,
+          41948,
+          41954,
+          41960,
+          41966,
+          41972,
+          41978
+        ]
+      }
+    },
+    {
+      "name": "walk.city_reverse_97.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_0.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43172,
+          43178,
+          43184,
+          43190,
+          43196,
+          43202,
+          43208,
+          43214,
+          43220,
+          43226
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_1.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43364,
+          43370,
+          43376,
+          43382,
+          43388,
+          43394,
+          43400,
+          43406,
+          43412,
+          43418
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_2.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43670,
+          43676,
+          43682,
+          43688,
+          43694,
+          43700,
+          43706,
+          43712,
+          43718,
+          43724
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_3.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43760,
+          43766,
+          43772,
+          43778,
+          43784,
+          43790,
+          43796,
+          43802,
+          43808,
+          43814
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_4.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43862,
+          43868,
+          43869
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_5.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43874,
+          43880,
+          43886,
+          43892,
+          43898,
+          43904,
+          43910,
+          43916,
+          43922,
+          43928
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_6.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          43970,
+          43976,
+          43982,
+          43988,
+          43994,
+          44000,
+          44006,
+          44012,
+          44018,
+          44024
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_7.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          44066,
+          44072,
+          44078,
+          44084,
+          44090,
+          44096,
+          44102,
+          44108,
+          44114,
+          44120
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_8.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          44150,
+          44156,
+          44162,
+          44168,
+          44174,
+          44180,
+          44186,
+          44188
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_9.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          44192,
+          44198,
+          44204,
+          44210,
+          44216,
+          44222,
+          44228,
+          44234,
+          44240,
+          44246
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_10.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          44390,
+          44396,
+          44402,
+          44408,
+          44414,
+          44420,
+          44426,
+          44432,
+          44438,
+          44444
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_11.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          45260,
+          45266,
+          45272,
+          45278,
+          45284,
+          45290,
+          45296,
+          45302,
+          45308,
+          45314
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_12.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          45410,
+          45416,
+          45422,
+          45428,
+          45434,
+          45440,
+          45446,
+          45452,
+          45458,
+          45464
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_13.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          47354,
+          47360,
+          47366,
+          47372,
+          47378,
+          47384,
+          47390,
+          47396,
+          47402,
+          47408
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_14.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_15.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_16.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_17.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          48152,
+          48158,
+          48164,
+          48170,
+          48176,
+          48182,
+          48188,
+          48194,
+          48200,
+          48206
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_18.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_19.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_20.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_21.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_22.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_23.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          48278,
+          48284,
+          48290,
+          48296,
+          48302,
+          48308,
+          48314,
+          48320,
+          48326,
+          48332
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_24.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_25.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_26.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_27.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          48344,
+          48350,
+          48356,
+          48362,
+          48368,
+          48374,
+          48380,
+          48386,
+          48392,
+          48398
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_28.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          49496,
+          49502,
+          49508,
+          49514,
+          49520,
+          49526,
+          49532,
+          49538,
+          49539
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_29.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          49544,
+          49550,
+          49556,
+          49562,
+          49568,
+          49574,
+          49580,
+          49586,
+          49592,
+          49598
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_forward_30.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_0.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          49724,
+          49730,
+          49736,
+          49742,
+          49748,
+          49754,
+          49760,
+          49766,
+          49768
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_1.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          49772,
+          49778,
+          49784,
+          49790,
+          49796,
+          49802,
+          49808,
+          49814,
+          49820,
+          49826
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_2.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_3.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_4.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_5.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          50924,
+          50930,
+          50936,
+          50942,
+          50948,
+          50954,
+          50960,
+          50966,
+          50972,
+          50978
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_6.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_7.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_8.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_9.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_10.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_11.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          50996,
+          51002,
+          51008,
+          51014,
+          51020,
+          51026,
+          51032,
+          51038,
+          51044,
+          51050
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_12.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_13.actual_source_arrival",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_14.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_15.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          51116,
+          51122,
+          51128,
+          51134,
+          51140,
+          51146,
+          51152,
+          51158,
+          51164,
+          51170
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_16.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          51914,
+          51920,
+          51926,
+          51932,
+          51938,
+          51944,
+          51950,
+          51956,
+          51962,
+          51968
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_17.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          53858,
+          53864,
+          53870,
+          53876,
+          53882,
+          53888,
+          53894,
+          53900,
+          53906,
+          53912
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_18.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          54008,
+          54014,
+          54020,
+          54026,
+          54032,
+          54038,
+          54044,
+          54050,
+          54056,
+          54062
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_19.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          54878,
+          54884,
+          54890,
+          54896,
+          54902,
+          54908,
+          54914,
+          54920,
+          54926,
+          54932
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_20.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55076,
+          55082,
+          55088,
+          55094,
+          55100,
+          55106,
+          55112,
+          55114
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_21.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55118,
+          55124,
+          55130,
+          55136,
+          55142,
+          55148,
+          55154,
+          55160,
+          55166,
+          55172
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_22.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55202,
+          55208,
+          55214,
+          55220,
+          55226,
+          55232,
+          55238,
+          55244,
+          55250,
+          55256
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_23.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55298,
+          55304,
+          55310,
+          55316,
+          55322,
+          55328,
+          55334,
+          55340,
+          55346,
+          55352
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_24.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55394,
+          55399
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_25.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55406,
+          55412,
+          55418,
+          55424,
+          55430,
+          55436,
+          55442,
+          55448,
+          55454,
+          55460
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_26.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55508,
+          55514,
+          55520,
+          55526,
+          55532,
+          55538,
+          55544,
+          55550,
+          55556,
+          55562
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_27.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55598,
+          55604,
+          55610,
+          55616,
+          55622,
+          55628,
+          55634,
+          55640,
+          55646,
+          55652
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_28.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          55904,
+          55910,
+          55916,
+          55922,
+          55928,
+          55934,
+          55940,
+          55946,
+          55952,
+          55958
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_29.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          56096,
+          56102,
+          56108,
+          56114,
+          56120,
+          56126,
+          56132,
+          56138,
+          56144,
+          56150
+        ]
+      }
+    },
+    {
+      "name": "walk.stonewall_reverse_30.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "walk.entrance_reverse_0.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          57344,
+          57350,
+          57356,
+          57362,
+          57368,
+          57374,
+          57380,
+          57386,
+          57392,
+          57398
+        ]
+      }
+    },
+    {
+      "name": "walk.entrance_reverse_1.actual_source_arrival",
+      "passed": false,
+      "details": {
+        "failed_ticks": [
+          57542,
+          57548,
+          57554,
+          57560,
+          57566,
+          57572,
+          57578,
+          57584,
+          57590,
+          57596
+        ]
+      }
+    },
+    {
+      "name": "walk.yield_guidance_valid",
+      "passed": false,
+      "details": {
+        "yield_samples": 220,
+        "failed_ticks": [
+          32492,
+          32498,
+          32504,
+          32510,
+          32516,
+          32522,
+          32528,
+          32534,
+          32540,
+          32546,
+          32552,
+          32558,
+          32564,
+          32570,
+          32576,
+          32582,
+          32588,
+          32594,
+          32600,
+          32606,
+          32612,
+          32618,
+          32624,
+          32630,
+          32636
+        ]
+      }
+    },
+    {
+      "name": "walk.yield_events_source_capsule_and_actor_binding",
+      "passed": true,
+      "details": {
+        "failed_indices_or_ticks": [],
+        "actual_yields": 4
+      }
+    },
+    {
+      "name": "exercises.extra_waypoints_are_preserved_source",
+      "passed": true,
+      "details": {
+        "allowed_source_fraction": [
+          65.6169741674792,
+          -188.3327600158751
+        ]
+      }
+    },
+    {
+      "name": "post_timeline_recovery_injections_separate",
+      "passed": true
+    },
+    {
+      "name": "traffic.FIFO_and_current_guard_events",
+      "passed": true,
+      "details": {
+        "failed_event_indices": []
+      }
+    },
+    {
+      "name": "traffic.events_match_retained_owner_queue",
+      "passed": true,
+      "details": {
+        "failed_ticks": []
+      }
+    },
+    {
+      "name": "exercises.three_crossing_and_three_npc_block",
+      "passed": true
+    },
+    {
+      "name": "exercises.observed_human_crossing_stop_and_release",
+      "passed": true,
+      "details": {
+        "failed_exercise_indices": []
+      }
+    },
+    {
+      "name": "exercises.observed_npc_block_and_recovery",
+      "passed": true,
+      "details": {
+        "failed_exercise_indices": []
+      }
+    }
+  ],
+  "scope": "One continuous automatic physical journey with two pedestrians and two vehicles. Source/retained geometry is independently checked; tick extrema are observer summaries. Three vehicle crossing stop/release and three separate NPC blockage/recovery exercises remain inside this timeline. Human controls/OS/M4, real terrain/access and city performance remain unverified."
+}

@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-16 · 최근 실행: **N03 차도 지지·차량 이동·사람 우선/FIFO·재배치 검증 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N03 완료·다음 N04 · 최신 실행은 traffic_walk, 동적 연속 통합/M4/V0 미완료
+갱신: 2026-10-16 · 최근 실행: **N04 보행자·차량 포함 연속 도시 검수 완료** · D01–D04/G01–G04/E01–E04/P01–P04/W01–W04/L01–L04/N01–N04 완료·다음 R01 · 최신 일반 실행은 traffic_walk, 성능/패키지/M4/V0 판정 미완료
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -190,9 +190,17 @@ N01 세종대로 두 편도선에 각1대를 추가했다. 기존460ray 중455�
 
 독립 장면 재시작/시험 사람 배치·역할물체가 있는19case다. 두 실제 NPC와 차도의 자연 조우·새3.3km 연속 보행·N04 내구성/사람 조작/M4/성능/V0로 확대하지 않는다. 카메라far 밖에서 바라본 초기 시야시험 실패와 차량OFF 관측 공백의 수정/재검증을 기록했다.
 
-## 다음 작업: N04 도시 움직임 통합 검수
+## N04 현재 결과와 남은 검증
 
-첫 행동은 현재 N03 장면을 W04 필수 여정/검사에 연결하고, 두 보행자와 두 차량을 켠 채10분 이상 연속 보행하는 것이다. 대한문 양방향·경내/마당·시청/광장·돌담길의 실제 통과, 각 개체2회 이상 순환·지정 횡단 정지/재개3회·관통/영구고착/눈앞재배치0을 같은 실행에서 관측한다. N03의 독립case나 과거 NPC 없는3.3km 증거를 새 동적 통합 완료로 재사용하지 않는다. 기존 입력/경계/축척·원본/추정 출처를 유지하고 사람 피드백을 대기 조건으로 추가하지 않는다.
+N03 production을 유지하고 보행자2명·차량2대가 움직이는 같은 세션에서 W04의11단계/334구간·3,327.048107m와 대한문 밖 복귀를 검수했다. 실제 NPC를 피하는 측면 입력/원문선 복귀4회, 횡단 정지/재개3회와 별도 경내 NPC 막힘/회복3회를 포함한다. 원문 여정 뒤 시험도 실제 길을 걸어 이동했으며 연속 구간의 위치 주입·개체 끄기/재생성은0이다. [실행/실패/화면/재현](../data/reports/urban_motion.md), [인수](../data/reports/n04_verification.json).
+
+최종 headless 독립396/계약16, GPU 독립398/계약8, 도시58/궁궐76개 PASS. GPU94,883tick·1,581.383333물리초·1,581.406079실제초로 시간차0.001439%다. NPC19/12왕복·차량31/24반복, 최대 도착 오차0.059671775m이며 모든 개체가 모든tick 접지했다. 영역 이탈·강제pose·복귀·주행 중 사람 접촉·카메라/near 충돌은0, 최대 플레이어 침투는2.177563mm로5mm 기준 안이다. 원시16,169표본·실제9PNG, 실제teleport 결함과 저장변조5종 거부, 기존243소스 보존과 인수807검사를 기록했다.
+
+최초 probe 타입 오류와 실행 중 proof 변경 실패를 보존하고 최종 동결 코드로 다시 실행했다. 시험 운전용 양보 helper를 일반 게임의 자동 이동으로 설명하지 않는다. 도로 접속부의 오래된 ‘현재 차량 없음’ 문구는 R02에서 수정한다. 사람/OS·M4·현실 지형/출입·세부 외형3곳·실내/생활AI·성능/앱/V0 판정은 별도다.
+
+## 다음 작업: R01 M1 Pro 기준 측정
+
+첫 행동은 실제1920×1080·같은 카메라/조명/그림자/시야에서 A0NPC/0차량과 현재B2NPC/2차량을 비교하는 것이다.30초 준비 뒤 같은5분2회와 B20분에서 프레임 분포·실제 이동·메모리·기동·전원/호스트 조건을 기록한다. V06의12/4는 초기 제안과 구분한다. 읽을 수 없는 수치는 만들지 않는다. 이후 R02 품질 설정/필요한 조정→R03 편집기 없는 앱→R04 기기별 판정으로 이어간다. 최초 계획 완료까지 자체 검증하라는 사용자 지시에 따라 단계별 사람 승인을 기다리지 않는다.
 
 ## 파일과 재현 방법
 
@@ -215,7 +223,7 @@ bash tools/setup_mac.sh
 .venv-data/bin/python tools/review_osm_extract.py
 ```
 
-`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 N04다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
+`data/processed/osm_preview.geojson`은 WGS84 검사 결과이지 게임용 미터 좌표 자산이 아니다. `tools/check_coordinates.py`로 `coordinate_reference.json`을 생성하며 같은 기준은 공유 보고서에도 담겨 있다. 재현 시 감사 보고서의 미리보기 해시와 설정 해시도 대조한다. 지역 지도 v2·비교용 v1·명시한 Overture 소구역·DSM 참고 사본은 Git 공유 대상이다. 국가 원본·전체 DSM·컬럼 정의서/참고 HTML·가상환경·가공물은 제외하며 보고서/설정/도구/수동 보정은 추적한다. 전용 저장소는 [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul), 다른 Mac 준비는 [CROSS_MAC.md](CROSS_MAC.md)를 따른다. 현재 다음 작업은 위 R01이다. P04 정적 충돌 계획은 기존 E03 준비 후 `tools/prepare_collision.py`로 생성한다. `tools/prepare_features.py`→`tools/check_geometry.py`→`tools/prepare_heights.py`→`tools/check_heights.py`→`tools/prepare_movement.py`→`tools/check_movement.py`로 도형·높이·지면·이동 후보를 재생성한다. G03/G04 분류는 [height_review](../data/reports/height_review.md)와 [movement_review](../data/reports/movement_review.md)를 따른다. 이전 공유 검사도 [G02](../data/reports/geometry_check-g02.json)·[G03 도형](../data/reports/geometry_check-g03.json)·[G03 높이](../data/reports/height_check-g03.json) 스냅샷으로 보존했다. E04는 `prepare_scale_view.py`로 고정 기준을 재생성하며 `run_scale_view.sh`로 다시 연다.
 
 ## 개발 환경 기록
 

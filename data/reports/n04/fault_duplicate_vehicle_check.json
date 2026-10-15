@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "task": "N04",
+  "passed": false,
+  "checks": [
+    {
+      "name": "schema",
+      "passed": true
+    },
+    {
+      "name": "finite_values",
+      "passed": true
+    },
+    {
+      "name": "acceptance.full_suite",
+      "passed": true
+    },
+    {
+      "name": "execution.no_unresolved_error",
+      "passed": true
+    },
+    {
+      "name": "input.observed_bytes",
+      "passed": true
+    },
+    {
+      "name": "bundle.source_routes",
+      "passed": true
+    },
+    {
+      "name": "bundle.scope_and_collision",
+      "passed": true
+    },
+    {
+      "name": "bundle.unchanged_physical_and_priority_policy",
+      "passed": true
+    },
+    {
+      "name": "inventory.frozen_before_after",
+      "passed": true
+    },
+    {
+      "name": "supports.count",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_south.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "supports.N03_support_sejong_north.limited_actual_geometry",
+      "passed": true
+    },
+    {
+      "name": "actors.vehicle_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.npc_descriptors",
+      "passed": true
+    },
+    {
+      "name": "actors.original_player_camera",
+      "passed": true
+    },
+    {
+      "name": "boundary.original_resource",
+      "passed": true
+    },
+    {
+      "name": "engine",
+      "passed": true
+    },
+    {
+      "name": "timeline.clock_and_duration",
+      "passed": true
+    },
+    {
+      "name": "timeline.all_tick_summary",
+      "passed": true
+    },
+    {
+      "name": "timeline.all_tick_camera_and_npc_geometry",
+      "passed": true
+    },
+    {
+      "name": "timeline.retained_clock",
+      "passed": true
+    },
+    {
+      "name": "timeline.actor_ids",
+      "passed": true
+    },
+    {
+      "name": "evidence_structure",
+      "passed": false,
+      "details": {
+        "error": "ValueError: duplicate actor route_id"
+      }
+    }
+  ],
+  "scope": "One continuous automatic physical journey with two pedestrians and two vehicles. Source/retained geometry is independently checked; tick extrema are observer summaries. Three vehicle crossing stop/release and three separate NPC blockage/recovery exercises remain inside this timeline. Human controls/OS/M4, real terrain/access and city performance remain unverified."
+}
