@@ -2,6 +2,8 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, 다음 제작 작업은 L01이다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 마지막 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+
 ## 공유되는 것
 
 - 코드·데이터 준비 도구·설정·32개 작업 계획·결정 이유·실행 이력·검증 증거.
@@ -271,4 +273,17 @@ python3 tools/check_public_bundle.py
 sh tools/run_public_walk.sh run
 ```
 
-북측 원문 횡단을 통해 시청 전면/광장 외곽, 남측 돌담길을 왕복한다. [경계·국소 보정·공사 근거·검증범위](../data/reports/public_walk.md). `play_boundary.tres`는 장면 계약이며 현실 통행 경계가 아니다. generated3파일/자동 가공/캐시/앱/가상환경을 공유하지 않는다. 작은 prepared98입력의 W03-only 사본2회 생성은 기존 M1 환경 검사다. 새 Mac의 RAM/OS/Metal/물리/실제 조작은 별도로 확인한다. 다음은 W04 전체 보행 통합 검사이며 사용자 위임에 따라 사람 피드백 대기를 진행 조건으로 삼지 않는다.
+북측 원문 횡단을 통해 시청 전면/광장 외곽, 남측 돌담길을 왕복한다. [경계·국소 보정·공사 근거·검증범위](../data/reports/public_walk.md). `play_boundary.tres`는 장면 계약이며 현실 통행 경계가 아니다. generated3파일/자동 가공/캐시/앱/가상환경을 공유하지 않는다. 작은 prepared98입력의 W03-only 사본2회 생성은 기존 M1 환경 검사다. 새 Mac의 RAM/OS/Metal/물리/실제 조작은 별도로 확인한다. W04 전체 보행의 자동 통합 결과는 아래 검증판 절을 따른다. 사용자 위임에 따라 사람 피드백 대기를 진행 조건으로 삼지 않는다.
+
+## W04 보행 검증판 재개
+
+위 W03 준비 뒤, 표준 Python만으로 기존5경로를 잇는 itinerary를 만든다.
+
+```sh
+python3 tools/prepare_walkable_itinerary.py
+sh tools/run_walkable_milestone.sh run
+```
+
+이 명령은 일반 장면을 열며 캐릭터를 자동으로 움직이지 않는다. [직접 확인 체크리스트](WALKABLE_CHECKLIST.md)와 [W04 기록](../data/reports/walkable_milestone.md)을 따른다. 생성 itinerary/manifest·.godot·가상환경·앱은 공유하지 않는다. 작은 prepared65입력의 W04-only 사본2회 표준 라이브러리 재생성은 기존 M1 검사이며 새 설치/전체G재구축/M4 결과가 아니다. 실제 새 Mac의 RAM/OS/renderer/조작·물리는 해당 기기에서 기록한다.
+
+W04의 현재 자동 검수판은 `W0-engineering-walk-v1`이다. 증거/문서/소스의 고정 스냅샷은 `data/reports/walkable_milestone/snapshot.json`, 준비 후 인수 재대조는 `python3 data/reports/walkable_milestone/handoff_check.py`다. 재검사는 이 스냅샷의 동일 입력·상태에서 사용하며, 의도한 변경 뒤에는 해당 새 작업의 기준을 사용한다. 과거 W03 input 해시의 저장 당시 절대 경로는 현재 체크아웃으로 재배치하며 원래 컴퓨터 폴더로 fallback하지 않는다. 다음 작업은 WORK_STATUS의 L01이다.

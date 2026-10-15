@@ -1,0 +1,25 @@
+{
+  "task": "W04",
+  "passed": true,
+  "fix_scope": "Historical W03 absolute input paths are rebased relative to saved W03 project root into the current checkout. Hash/geometry/runtime acceptance criteria unchanged. Absolute historical paths outside saved root fail; no original-path fallback.",
+  "checker_sha256": "aff4169340df1ee94e0f66c781a188dd4766ee2bd5359b59d67707ffd69ebb9d",
+  "raw": "data/reports/walkable_milestone/development/legacy_path_rebase/gpu_trial_engine.json",
+  "raw_sha256": "8ac5d068192da274364affa5c4c69eda074d5c7953a9299091b48f9e3a898831",
+  "normal": {
+    "passed": true,
+    "checks": 874,
+    "failed": []
+  },
+  "relocated": {
+    "passed": true,
+    "checks": 874,
+    "failed": [],
+    "virtual_root": "/__w04_read_blocked_relocation__/checkout",
+    "file_snapshot_count": 94,
+    "read_count": 116,
+    "unique_read_count": 94,
+    "original_absolute_access_attempts": [],
+    "identical_result": true
+  },
+  "method": "Virtual relocated checkout supplied only from preloaded immutable file bytes; pathlib read/exists operations blocked any original/non-relocated absolute path during audit. This is a relocation-resolution test, not an engine rerun or another Mac test."
+}

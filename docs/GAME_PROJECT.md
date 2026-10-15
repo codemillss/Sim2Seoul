@@ -187,4 +187,10 @@ sh tools/run_public_walk.sh run
 
 [public_walk](../game/scenes/world/public_walk.tscn)은 W02/P03를 상속한 별도 장면이다. 기존 authored/source는 바이트 보존하며 W02 지원면만 비활성화하고 W03 지원면으로 확장한다. actual692생성/687활성·3,028삼각형/구멍4개, 기존 담장/대한문 조각4개를 유지한다. 북측 원문 marked 횡단·보행 지정 분리길과 원문 보행면을 따라 시청/광장 및 남측 돌담길을 잇는다. 도서관 실내·잔디·물·분수·계단/사유지는 제외한다.
 
-[play_boundary](../game/resources/play_boundary.tres)는 W03 장면 범위만 고정한다. 지원면0.4m 안쪽 이동/추가0.08m 경로 여유·원문 도로 접속3곳·차도 중심선 제외·정지/복귀를 연결한다. 금색 경계선은 시각 메시다. runtime manifest/Resource hash·형식/scope·수치/원문 스폰을 실제body 생성 전에 검사한다. 사본은 authored39/runtime13/helper5개, 일반 실행에는 helper가 없다. [출처·보정·실패·검증/한계](../data/reports/public_walk.md). 실제 지형/통행/사람 조작/M4/전체W0는 별도이며 다음 통합 검수는 W04다.
+[play_boundary](../game/resources/play_boundary.tres)는 W03 장면 범위만 고정한다. 지원면0.4m 안쪽 이동/추가0.08m 경로 여유·원문 도로 접속3곳·차도 중심선 제외·정지/복귀를 연결한다. 금색 경계선은 시각 메시다. runtime manifest/Resource hash·형식/scope·수치/원문 스폰을 실제body 생성 전에 검사한다. 사본은 authored39/runtime13/helper5개, 일반 실행에는 helper가 없다. [출처·보정·실패·검증/한계](../data/reports/public_walk.md). 실제 지형/통행/사람 조작/M4는 별도다. 통합 자동 엔진 검수는 아래 W04 결과를 따른다.
+
+## W04 연속 통합 관측과 스냅샷
+
+기존 W03 장면/플레이어/자료는 변경하지 않는다. [수동 여정](../data/manual/walkable_milestone.json)→[표준 생성기](../tools/prepare_walkable_itinerary.py)→Git 제외 itinerary/manifest2파일로 정확한 원문 구간을 복사한다. 일반 실행은 [run_walkable_milestone](../tools/run_walkable_milestone.sh)로 기존 public_walk를 열고, 자동 시험만 새 probe/동일39authored+15runtime/6helper 사본을 쓴다.
+
+관측 도구는 W03 helper를 상속하되 여정 중 구간별 pose를 호출하지 않는다. 전역 camera_stepped 관측은 PNG 대기 중에도 이어지고 물리 tick·프레임/시간·체크포인트·연결부를 대조한다. 여정 종료 후에만 기존 복귀/메뉴5이벤트를 호출한다. [검증·실행·범위](../data/reports/walkable_milestone.md). 직접 사용자 조작·현장 접근·M4·성능·V0 판정은 포함하지 않는다.

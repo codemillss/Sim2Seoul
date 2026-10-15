@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task": "W04",
+  "milestone_id": "W0-engineering-walk-v1",
+  "recipe_basis": "Ordered copies of the five unchanged W03 runtime routes; all source bounds are inclusive. No new links, path search, coordinate edits, or seam tolerance.",
+  "court_anchor": {"route_id": "palace_loop", "runtime_index": 5, "checkpoint_index": 2, "source_node": 921242850},
+  "stages": [
+    {"id": "entrance_forward", "route_id": "entrance", "direction": "forward", "source_start_index": 0, "source_end_index": 3},
+    {"id": "palace_loop_prefix", "route_id": "palace_loop", "direction": "forward", "source_start_index": 0, "source_end_index": 5},
+    {"id": "court_forward", "route_id": "court_approach", "direction": "forward", "source_start_index": 0, "source_end_index": 11},
+    {"id": "court_reverse", "route_id": "court_approach", "direction": "reverse", "source_start_index": 11, "source_end_index": 0},
+    {"id": "palace_loop_suffix", "route_id": "palace_loop", "direction": "forward", "source_start_index": 5, "source_end_index": 24},
+    {"id": "palace_loop_reverse", "route_id": "palace_loop", "direction": "reverse", "source_start_index": 24, "source_end_index": 0},
+    {"id": "city_forward", "route_id": "city_plaza", "direction": "forward", "source_start_index": 0, "source_end_index": 98},
+    {"id": "city_reverse", "route_id": "city_plaza", "direction": "reverse", "source_start_index": 98, "source_end_index": 0},
+    {"id": "stonewall_forward", "route_id": "stonewall", "direction": "forward", "source_start_index": 0, "source_end_index": 31},
+    {"id": "stonewall_reverse", "route_id": "stonewall", "direction": "reverse", "source_start_index": 31, "source_end_index": 0},
+    {"id": "entrance_reverse", "route_id": "entrance", "direction": "reverse", "source_start_index": 3, "source_end_index": 0}
+  ],
+  "scope": {
+    "game_access": "One continuous R1/R2/R3 engineering walk on the unchanged W03 scene and boundary",
+    "source_display_permissions": "unchanged/null",
+    "physical_terrain_verified": false,
+    "real_world_access_verified": false,
+    "building_interiors": "unresolved/excluded",
+    "npc_controller": "not implemented",
+    "vehicle_controller": "not implemented",
+    "human_operation_verified": false,
+    "m4_verified": false
+  }
+}
