@@ -48,6 +48,7 @@ var sources_close: Button
 var resume_action: Button
 var hud_panel: PanelContainer
 var attribution_label: Label
+var hud_height_fit_pending := false
 
 func _ready() -> void:
 	super._ready()
@@ -79,6 +80,7 @@ func _build_ui() -> void:
 	help.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	hud_panel=status.get_parent().get_parent() as PanelContainer
+	hud_panel.minimum_size_changed.connect(_queue_hud_height_fit)
 	var options:=menu.get_child(0) as VBoxContainer
 	options.add_theme_constant_override("separation",8)
 	var heading:=options.get_child(0) as Label
@@ -156,9 +158,23 @@ func _build_sources_popup(style: StyleBoxFlat) -> void:
 	sources_close.focus_previous=sources_close.get_path_to(sources_document)
 	_select_source_document(0)
 
+func _queue_hud_height_fit() -> void:
+	if hud_height_fit_pending:return
+	hud_height_fit_pending=true
+	_fit_hud_height.call_deferred()
+
+func _fit_hud_height() -> void:
+	hud_height_fit_pending=false
+	if not is_instance_valid(hud_panel):return
+	var minimum:=hud_panel.get_combined_minimum_size()
+	if not is_equal_approx(hud_panel.size.y,minimum.y):hud_panel.size=Vector2(hud_panel.size.x,minimum.y)
+
 func _layout_v0() -> void:
 	var view:=get_viewport().get_visible_rect().size
-	if is_instance_valid(hud_panel):hud_panel.size=Vector2(minf(560.,view.x-32.),0)
+	if is_instance_valid(hud_panel):
+		# Width establishes autowrap; its deferred minimum-height change then fits.
+		hud_panel.size=Vector2(minf(560.,view.x-32.),hud_panel.size.y)
+		_queue_hud_height_fit()
 	menu.size=Vector2(minf(440.,view.x-32.),menu.get_combined_minimum_size().y)
 	menu.position=Vector2(maxf(16.,(view.x-menu.size.x)/2.),maxf(16.,(view.y-menu.size.y)/2.))
 	if is_instance_valid(attribution_label):

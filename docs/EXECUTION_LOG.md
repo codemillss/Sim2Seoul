@@ -509,3 +509,23 @@ B의1184RSS표본·최대공백약1.042초로20분구간을덮었다. AC/lowpowe
 - 실제검증: 최종계약64/GPU68검사PASS. 실제GPU는standard5427tick/90.45물리초·90.423194실제초,low5426tick/90.433333물리초·90.425150실제초다. 각preset에서대한문6구간왕복·2m/6m회전·기존4actor의이동/동일instance·지지/step/5mm침투/카메라·중간실제품질설정·메뉴정지/재개를관측했다. 이후분리한재시작단계에서저장low·손상JSON·미지원ID의기본복구를시험했다. 기준완화는없다.
 - 화면/증거: 960×600메뉴와1152×720출처팝업/HUD3PNG를직접열어한글·두기관출처·버튼/스크롤/화면경계를확인했다. 프로듀서의미검토표시는원바이트로남기고별도views.json에직접검토를기록했다. [요약](../data/reports/r02/summary.json)·[채택/재현](../data/reports/performance_comparison.md). launcher의쉘문법검사도통과했다.
 - 한계/다음: 짧은설정/UI회귀이고새전체N04·성능개선·사람조작·M4·패키지판정이아니다. R03에서공식동일템플릿/ICU/라이선스·최종서명을갖춘개인용release앱을만들고ZIP을원본밖에풀어개발폴더접근/네트워크차단후일반기동·설정복원·전체여정을확인한다. 출처문서의과거‘R03공개배포’는R03개인용앱과구분하는정정/자료접근안내를다음패키지단계에반영한다.
+
+## 2026-10-16 · R03 착수·독립 실행 앱의 실제 포장 문제 수정
+
+R02 `2f0ce7720ef156b8a4cdcbd71d4ea273efeedfde`의원격일치를확인하고공식4.7.2템플릿으로개인용Universal2release앱을만들었다. 별도runtime-only사본의main만V0로정하고두CPU용텍스처·ICU와실제엔진API의MIT/추가고지를동봉했다. 라이선스파일은파생임시템플릿에미리넣어최종내보내기의서명을유지했다. 원본템플릿·기존production/N04/R01입력은보존했다. ATTRIBUTION의R03을개인용앱과공개배포로구분하고자료/변경접근안내를추가했다.
+
+첫export는서명/아키텍처/PCK JSON검사를통과했어도,개발폴더밖에ZIP을풀어원본접근/네트워크를막은실제기동에서W03의‘도심자료원천/경계’거부를발견했다. PCK에는play_boundary.tres원문대신binary .res의remap만있어FileAccess원문SHA가맞지않았다. 첫앱/manifest와full01의실패·로그·당시도구/프로브사본을보존했다. 검사나원본SHA를완화하지않았다.
+
+공식ProjectSettings근거에따라임시사본에만`editor/export/convert_text_resources_to_binary=false`를추가하고.tres/.tscn도실제PCK원문SHA/MD5대상에포함했다. project.godot는project.binary로남는공식동작을구분한다. 수정된새export의play_boundary.tres316bytes/SHA`e7fb7a385005a0dbf4cafc7d18394fed46b83ec54fd148d9f3571f22a5f4a06d`가원문과일치했고별도복원앱의일반기동에서V0_READY/2명2대까지통과했다. 현재full02의설정/UI·전체여정을실행중이므로R03완료판정은아직아니다. 새app192,824,533bytes/ZIP64,882,518bytes이며정식실행완료후해시/원시/한계를영구보고경로에연결한다.
+
+full02의설정시험은180.03초에timeout으로실패했고전체여정은시작하지않았다. 공식4.7.2의기본exporttemplate는`OVERRIDE_PATH_ENABLED`가없어`--script`를지우므로편집기와같은시험명령을그대로사용할수없었다. 실제release `--help`의옵션행에도해당명령이없다. stdout/로그가버퍼링되어0bytes인한계와처음단순substring검사의보정을함께보존했다. source/원app/ZIP/복원app/서명불변은통과했지만이를설정/전체여정성공으로쓰지않는다.
+
+대안은임시export사본의Autoload에서명시한두시험flag와내장된quality/urban허용목록만받는것이다. 일반기동은무동작이다. 현재씬을deferred해제하고2frame/실제삭제를확인한뒤기존script가없는같은SceneTree에기존QA스크립트를붙여_initialize를한번호출한다. Autoload자신은공식경고에따라해제하지않고입력/process가없는노드로남긴다. 별도tiny headless API진단에서일반실행유지·씬해제·초기화1회·Autoload유지/비활성을확인했다. 이진단은실제앱세계의통과가아니므로새export와실제release시험으로확인해야한다.
+
+## 2026-10-16 · R03 최초 HUD 가림 발견·재현·수정
+
+Autoload대안의실제release full03에서는일반기동과quality53검사를통과했지만전체여정의초기checkpoint화면에서왼쪽흰가림을발견했다. 비교결과고정x16..576이V0HUD폭과일치했고,정상quality화면은resize후low인차이가있었다. 원인을확인하지않고카메라/기하/성능문제로처리하지않았다. 해당시험PID에만TERM을보내중간5화면/맥락/로그·당시소스와중단사유를보존했다. 전체물리/화면검수는미완료이며source/앱/ZIP/서명불변만인정했다.
+
+새초기no_resize검사를추가한기존V0 GPU before01은67개중초기2개에서정확히거부됐다. 초기standard/1152×720·resize0회에서HUD실제rect[16,16,560,1471],combinedminimum[29,119]로player투영rect를덮었다. 따라서export/readback에한정된문제가아니라V0최초autowrap높이정착문제임을재현했다. 당시leaf/test/wrapper원바이트·원시·화면을보존했다.
+
+HUD는폭을먼저설정하고`minimum_size_changed`의중복없는deferred호출로현재minimum높이에맞추도록고쳤다. 전체menu를매frame재배치하지않는다. after01의같은초기화면은높이119px·player가림없음으로GPUshort67/67와headlesssmoke62/62진단을통과했고주에이전트가수정후startup/메뉴/팝업/HUD4PNG를직접열었다. 지도/축척/물리/카메라/2명2대와허용치는변경없다. [전후/검토](../data/reports/r03/development/hud_fix_summary.json). 수정을먼저공유한뒤새앱의실제전체R03시험을다시실행한다.

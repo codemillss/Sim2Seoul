@@ -60,6 +60,14 @@ def audit(record, smoke):
     inventory = record['initial_inventory']
     ck('static.exact_frozen_inventory', digest(inventory, inventory=True) == STATIC_INVENTORY_SHA256
        and inventory == record['final_motion_inventory'])
+    startup = record['startup_hud']
+    for name, observed in [('before_capture', startup), ('after_capture', startup['after_capture'])]:
+        x, y, width, height = observed['rect']; view_width, view_height = observed['viewport']
+        ck('ui.startup_no_resize.' + name, observed['resize_calls'] == 0 and observed['viewport'] == [1152, 720]
+           and quality(observed['quality'], 'standard') and width == 560 and 0 < height <= 200
+           and abs(height - observed['combined_minimum'][1]) <= 1.
+           and x >= 0 and y >= 0 and x + width <= view_width and y + height <= view_height
+           and observed['overlaps_player'] is False, observation=observed)
     profiles = record['profiles']
     ck('profiles.both_present', [p['id'] for p in profiles] == ['standard', 'low'])
     geometry = Geometry(*[read(ROOT / p) for p in ('game/data/generated/traffic.json', 'game/data/generated/public_walk.json',
@@ -175,7 +183,7 @@ def audit(record, smoke):
     return checks
 
 
-def main(output, mode, engine):
+def main(output, mode, engine, short=False):
     output = output.resolve()
     protected = [output / (mode + suffix) for suffix in ('.json.gz', '.log', '.stdio.log', '_check.json', '_failure.json')]
     if any(path.exists() for path in protected) or (output.exists() and any(output.glob(mode + '_view_*.png'))):
@@ -207,8 +215,9 @@ def main(output, mode, engine):
         result_path = Path(temporary) / 'quality.json'
         command = ['/usr/bin/sandbox-exec', '-f', str(ROOT / 'tests/game/offline.sb'), str(engine)]
         if mode != 'gpu':command += ['--headless', '--fixed-fps', '60']
+        diagnostic = mode == 'smoke' or short
         command += ['--path', str(game), '--script', 'res://test_support/check_quality.gd', '--log-file', str(log_path), '--',
-                    '--automatic-probe', '--result=' + str(result_path), '--suite=' + ('smoke' if mode == 'smoke' else 'full'), '--render-fps=60']
+                    '--automatic-probe', '--result=' + str(result_path), '--suite=' + ('smoke' if diagnostic else 'full'), '--render-fps=60']
         if mode == 'gpu':command += ['--capture-prefix=' + str(output / (mode + '_view'))]
         timed_out = False
         try:
@@ -227,7 +236,7 @@ def main(output, mode, engine):
             write(output / (mode + '_failure.json'), {'task': 'R02', 'returncode': returncode, 'timed_out': timed_out,
                   'fresh_raw_retained': record is not None, 'core_sha256': core, 'new_source_sha256': new_sources, 'proof_sha256': proof})
             raise RuntimeError('R02 engine failure; raw and logs preserved in ' + str(output))
-        checks = audit(record, mode == 'smoke')
+        checks = audit(record, diagnostic)
         for name, before, after in [('core_source_unchanged', core, {p: sha(ROOT / 'game' / p) for p in core}),
                                   ('runtime_unchanged', assets, {p: sha(ROOT / 'game' / p) for p in assets}),
                                   ('new_v0_source_unchanged', new_sources, {p: sha(ROOT / 'game' / p) for p in new_sources}),
@@ -243,10 +252,10 @@ def main(output, mode, engine):
                 size = struct.unpack('>II', image.read_bytes()[16:24]) if image.is_file() else None
                 captures[image.name] = {'sha256': sha(image) if image.is_file() else None, 'actual_png_size': size}
                 checks.append({'name': 'capture.' + observed['name'], 'passed': size == (observed['width'], observed['height'])})
-            checks.append({'name': 'capture.three_korean_ui_views', 'passed': [c['name'] for c in record['captures']] == ['menu_960', 'popup_1152', 'hud_1152']})
+            checks.append({'name': 'capture.four_korean_ui_views', 'passed': [c['name'] for c in record['captures']] == ['startup_1152', 'menu_960', 'popup_1152', 'hud_1152']})
     valid = all(c['passed'] for c in checks)
-    report = {'task': 'R02', 'mode': mode, 'diagnostic_only': mode == 'smoke', 'diagnostic_passed': valid,
-              'passed': mode != 'smoke' and valid, 'checks': checks, 'core_source_sha256': core,
+    report = {'task': 'R02', 'mode': mode, 'short_requested': short, 'diagnostic_only': diagnostic, 'diagnostic_passed': valid,
+              'passed': not diagnostic and valid, 'checks': checks, 'core_source_sha256': core,
               'runtime_sha256': assets, 'new_source_sha256': new_sources, 'proof_sha256': proof,
               'frozen_n04_snapshot_sha256': snapshot_sha, 'raw_sha256': sha(raw_path), 'captures': captures,
               'network': 'deny network*', 'visual_hangul_review_complete': False,
@@ -260,6 +269,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'data/cache/r02_contract')
     parser.add_argument('--mode', choices=['smoke', 'contract', 'gpu'], default='contract')
+    parser.add_argument('--short', action='store_true', help='Diagnostic three-second profiles with UI/startup checks; never full regression acceptance')
     parser.add_argument('--engine', type=Path, default=Path('/Applications/Godot.app/Contents/MacOS/Godot'))
     args = parser.parse_args()
-    raise SystemExit(main(args.output, args.mode, args.engine.resolve()))
+    raise SystemExit(main(args.output, args.mode, args.engine.resolve(), args.short))

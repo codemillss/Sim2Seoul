@@ -5,6 +5,8 @@ var quality_profiles := []
 var ui_events := {}
 var layout_rows := []
 var restart_rows := []
+var startup_hud := {}
+var resize_calls := 0
 
 func _retain_motion() -> void:
 	var count:=motion_samples.size()
@@ -90,10 +92,28 @@ func _profile(id: String) -> void:
 	print("R02_PROFILE ",id," ticks=",timeline.ticks," error=",run_error)
 
 func _resize(size: Vector2i) -> void:
+	resize_calls+=1
 	root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED
 	root.content_scale_size=Vector2i.ZERO;root.content_scale_factor=1.
 	root.size=size
 	for frame in range(4):await process_frame
+
+func _startup_hud_row() -> Dictionary:
+	var controls:=[]
+	_controls(scene.hud_panel,controls)
+	var rect: Rect2=scene.hud_panel.get_global_rect()
+	var minimum: Vector2=scene.hud_panel.get_combined_minimum_size()
+	var size:=root.get_visible_rect().size
+	var camera: Camera3D=scene.rig.camera
+	var right:=camera.global_basis.x*.3
+	var feet: Vector3=scene.player.global_position
+	var points:=[]
+	for point in [feet-right,feet+right,feet+Vector3.UP*1.7-right,feet+Vector3.UP*1.7+right]:points.append(camera.unproject_position(point))
+	var player_rect:=Rect2(points[0],Vector2.ZERO)
+	for point in points:player_rect=player_rect.expand(point)
+	return {"resize_calls":resize_calls,"viewport":[size.x,size.y],"quality":scene.quality_snapshot(),
+		"rect":[rect.position.x,rect.position.y,rect.size.x,rect.size.y],"combined_minimum":[minimum.x,minimum.y],"children":controls,
+		"player_screen_rect":[player_rect.position.x,player_rect.position.y,player_rect.size.x,player_rect.size.y],"overlaps_player":rect.intersects(player_rect)}
 
 func _controls(control: Control,rows: Array) -> void:
 	if control.is_visible_in_tree():
@@ -170,6 +190,9 @@ func _run() -> void:
 	settings_path=output_path+".quality_settings.json"
 	if FileAccess.file_exists(settings_path):push_error("R02 requires a fresh temporary settings file");quit(1);return
 	if not await _fresh_quality("fresh_standard"):push_error("R02 V0 scene rejected");quit(1);return
+	startup_hud=_startup_hud_row()
+	await _capture("startup_1152")
+	startup_hud["after_capture"]=_startup_hud_row()
 	await _resize(Vector2i(1152,720))
 	guidance=load("res://test_support/urban_motion_guidance.gd").new()
 	itinerary=JSON.parse_string(FileAccess.get_file_as_string("res://data/generated/walkable_itinerary.json"))
@@ -182,7 +205,7 @@ func _run() -> void:
 	var record:={"schema_version":1,"task":"R02","suite":suite,"error":run_error,
 		"engine":{"version":Engine.get_version_info().string,"display":DisplayServer.get_name(),"renderer":RenderingServer.get_current_rendering_method(),"physics_hz":Engine.physics_ticks_per_second},
 		"initial_inventory":initial_inventory,"final_motion_inventory":after_inventory,"profiles":quality_profiles,"ui":ui_events,
-		"layouts":layout_rows,"settings_restarts":restart_rows,"captures":capture_names,
+		"layouts":layout_rows,"startup_hud":startup_hud,"settings_restarts":restart_rows,"captures":capture_names,
 		"scope":"Two short V0 display-profile regression timelines, about 90 seconds each. Original entrance route in both directions, near/far camera orbits and dynamic actors; no player placement, actor reset or fixtures within either timeline. Menu/manual recovery and actor recreation for saved-settings restart cases are separate. No N04 full journey, performance improvement, twenty-minute endurance, human handling or another Mac acceptance."}
 	FileAccess.open(output_path,FileAccess.WRITE).store_string(JSON.stringify(record)+"\n")
 	_keys([]);paused=false;scene.queue_free();print("R02_DONE error=",run_error);quit(0)

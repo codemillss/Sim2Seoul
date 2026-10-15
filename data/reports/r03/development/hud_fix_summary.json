@@ -1,0 +1,656 @@
+{
+  "schema_version": 1,
+  "task": "R03 startup HUD regression fix",
+  "recorded_utc": "2026-10-15T18:20:12.572228+00:00",
+  "status": "FIXED_SHORT_DIAGNOSTIC_PASS; packaged full04 pending",
+  "cause": {
+    "observed": "Fresh standard 1152x720 with zero resize calls retained HUD height 1471px although settled combined minimum height was119px; the panel covered the projected player.",
+    "mechanism": "Initial width/autowrap layout raised the Control minimum height. The prior size=(width,0) was clamped by that initial minimum and was never fitted after the minimum shrank. Later resize invoked layout and hid this startup defect.",
+    "fix": "Set width while retaining height, then deduplicate a deferred height fit from layout/minimum_size_changed. Fit to actual settled combined minimum; no per-frame full-menu layout."
+  },
+  "scope": {
+    "changed_source_files": [
+      "game/scripts/v0_walk.gd",
+      "tests/game/check_quality.gd",
+      "tools/check_quality_contract.py"
+    ],
+    "physics_or_core_changes": false,
+    "original_tolerances_changed": false,
+    "full_n04_repeated": false,
+    "r01_performance_repeated": false,
+    "r02_two_90_second_profiles_repeated": false,
+    "diagnostic_meaning": "GPU --short and headless smoke use 3-second preset profiles plus existing UI/settings/restart checks. They are not full R02/N04 traversal, packaged release acceptance, performance, M4 or human-input evidence."
+  },
+  "source_snapshots": {
+    "before": {
+      "manifest": "data/cache/r03_development/hud_before01/source_before.json",
+      "sha256": {
+        "game/scripts/v0_walk.gd": "e074d376830dc37e56e589fd29e78b043fb858f3bada798949b3a5c54544406f",
+        "tests/game/check_quality.gd": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c",
+        "tools/check_quality_contract.py": "f5d558e853f67ce72c58465bb92ac31ae6578ef968fe09927d6655944ea1674e"
+      },
+      "producer_source_sha256": {
+        "data/cache/r03_development/hud_before01/producer_source/game/scripts/v0_walk.gd": "e074d376830dc37e56e589fd29e78b043fb858f3bada798949b3a5c54544406f",
+        "data/cache/r03_development/hud_before01/producer_source/tests/game/check_quality.gd": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c",
+        "data/cache/r03_development/hud_before01/producer_source/tools/check_quality_contract.py": "f5d558e853f67ce72c58465bb92ac31ae6578ef968fe09927d6655944ea1674e"
+      }
+    },
+    "after": {
+      "manifest": "data/cache/r03_development/hud_after01/source_after.json",
+      "sha256": {
+        "game/scripts/v0_walk.gd": "0265608762ab42c3838129602a168ffdbc432749d83685966366d62306fd085c",
+        "tests/game/check_quality.gd": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c",
+        "tools/check_quality_contract.py": "f5d558e853f67ce72c58465bb92ac31ae6578ef968fe09927d6655944ea1674e"
+      },
+      "producer_source_sha256": {
+        "data/cache/r03_development/hud_after01/producer_source/game/scripts/v0_walk.gd": "0265608762ab42c3838129602a168ffdbc432749d83685966366d62306fd085c",
+        "data/cache/r03_development/hud_after01/producer_source/tests/game/check_quality.gd": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c",
+        "data/cache/r03_development/hud_after01/producer_source/tools/check_quality_contract.py": "f5d558e853f67ce72c58465bb92ac31ae6578ef968fe09927d6655944ea1674e"
+      }
+    }
+  },
+  "current_matches_after_frozen_sources": true,
+  "before": {
+    "mode": "gpu",
+    "output_directory": "data/cache/r03_development/hud_before01",
+    "expected_observed_exit_code": 1,
+    "diagnostic_only": true,
+    "short_requested": true,
+    "diagnostic_passed": false,
+    "full_protocol_passed": false,
+    "checks_total": 67,
+    "checks_passed": 65,
+    "failed_checks": [
+      "ui.startup_no_resize.before_capture",
+      "ui.startup_no_resize.after_capture"
+    ],
+    "startup_hud_before_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            1471.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            1451.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": true,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-cix1pr_v/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        1471.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "startup_hud_after_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            1471.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            1451.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": true,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-cix1pr_v/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        1471.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "evidence_sha256": {
+      "data/cache/r03_development/hud_before01/gpu.json.gz": "7fb02c1d24012cd45183213356162b750f2e75a62892eb7f41ac1e561937bf87",
+      "data/cache/r03_development/hud_before01/gpu_check.json": "c6c0b733909c6be417e508762df00367c52b771dba281f01b087668768930ccb",
+      "data/cache/r03_development/hud_before01/gpu.log": "885286f3539c8979dc80351091466ccd0ba5845842f9fe1ee338ce917d9b154b",
+      "data/cache/r03_development/hud_before01/gpu.stdio.log": "885286f3539c8979dc80351091466ccd0ba5845842f9fe1ee338ce917d9b154b",
+      "data/cache/r03_development/hud_before01/gpu_view_startup_1152.png": "4b3a1cc877ef1415c711478cd8b80dd7896557f555dc781a4bd889be742cd14d",
+      "data/cache/r03_development/hud_before01/gpu_view_menu_960.png": "64c293a2d764069d444962f5afdfb5e19e46a6747c74bae52ffed80a355d66d6",
+      "data/cache/r03_development/hud_before01/gpu_view_popup_1152.png": "918e0a45919c53fa16ccfdab91b3e9b1c7e10c0b83b9b3463f05fe4aaae9fbee",
+      "data/cache/r03_development/hud_before01/gpu_view_hud_1152.png": "9b92d1859159875deac4759e491489f79269982d88fe3ccad768f142208b42c2"
+    },
+    "unchanged_checks": {
+      "static.exact_frozen_inventory": true,
+      "profile.standard.retained_actual_quality_unchanged": true,
+      "profile.low.retained_actual_quality_unchanged": true,
+      "core_source_unchanged": true,
+      "runtime_unchanged": true,
+      "new_v0_source_unchanged": true,
+      "proof_unchanged": true,
+      "frozen_n04_source_unchanged": true,
+      "frozen_n04_snapshot_unchanged": true
+    }
+  },
+  "after": {
+    "mode": "gpu",
+    "output_directory": "data/cache/r03_development/hud_after01",
+    "expected_observed_exit_code": 0,
+    "diagnostic_only": true,
+    "short_requested": true,
+    "diagnostic_passed": true,
+    "full_protocol_passed": false,
+    "checks_total": 67,
+    "checks_passed": 67,
+    "failed_checks": [],
+    "startup_hud_before_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            119.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            99.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": false,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-mqjq79x2/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        119.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "startup_hud_after_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            119.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            99.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": false,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-mqjq79x2/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        119.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "evidence_sha256": {
+      "data/cache/r03_development/hud_after01/gpu.json.gz": "52c86de8e56e68fbfd29d037465035b4e75ce18c6da88a5eb2f8921d4664bd5b",
+      "data/cache/r03_development/hud_after01/gpu_check.json": "505a659bee7a9063a28442abb6c308a71c133c6e0124b735dca86be74cac5856",
+      "data/cache/r03_development/hud_after01/gpu.log": "885286f3539c8979dc80351091466ccd0ba5845842f9fe1ee338ce917d9b154b",
+      "data/cache/r03_development/hud_after01/gpu.stdio.log": "885286f3539c8979dc80351091466ccd0ba5845842f9fe1ee338ce917d9b154b",
+      "data/cache/r03_development/hud_after01/gpu_view_startup_1152.png": "80fb9326b16b5cc58f5c443545f98d6d336ac914832687af703b4fea80d75616",
+      "data/cache/r03_development/hud_after01/gpu_view_menu_960.png": "64c293a2d764069d444962f5afdfb5e19e46a6747c74bae52ffed80a355d66d6",
+      "data/cache/r03_development/hud_after01/gpu_view_popup_1152.png": "918e0a45919c53fa16ccfdab91b3e9b1c7e10c0b83b9b3463f05fe4aaae9fbee",
+      "data/cache/r03_development/hud_after01/gpu_view_hud_1152.png": "9b92d1859159875deac4759e491489f79269982d88fe3ccad768f142208b42c2"
+    },
+    "unchanged_checks": {
+      "static.exact_frozen_inventory": true,
+      "profile.standard.retained_actual_quality_unchanged": true,
+      "profile.low.retained_actual_quality_unchanged": true,
+      "core_source_unchanged": true,
+      "runtime_unchanged": true,
+      "new_v0_source_unchanged": true,
+      "proof_unchanged": true,
+      "frozen_n04_source_unchanged": true,
+      "frozen_n04_snapshot_unchanged": true
+    }
+  },
+  "after_headless_smoke": {
+    "mode": "smoke",
+    "output_directory": "data/cache/r03_development/hud_after01",
+    "expected_observed_exit_code": 0,
+    "diagnostic_only": true,
+    "short_requested": false,
+    "diagnostic_passed": true,
+    "full_protocol_passed": false,
+    "checks_total": 62,
+    "checks_passed": 62,
+    "failed_checks": [],
+    "startup_hud_before_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            119.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            99.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": false,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-t6hz75ou/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        119.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "startup_hud_after_capture": {
+      "children": [
+        {
+          "class": "PanelContainer",
+          "path": "Interface/@PanelContainer@2",
+          "rect": [
+            16.0,
+            16.0,
+            560.0,
+            119.0
+          ]
+        },
+        {
+          "class": "VBoxContainer",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            99.0
+          ]
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@4",
+          "rect": [
+            30.0,
+            26.0,
+            532.0,
+            75.0
+          ],
+          "text": "덕수궁 · 시청 · 돌담길\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴 / 마우스 해제"
+        },
+        {
+          "class": "Label",
+          "path": "Interface/@PanelContainer@2/@VBoxContainer@3/@Label@5",
+          "rect": [
+            30.0,
+            105.0,
+            532.0,
+            20.0
+          ],
+          "text": "대한문 밖 부근 · 속도 0.00m/s"
+        }
+      ],
+      "combined_minimum": [
+        29.0,
+        119.0
+      ],
+      "overlaps_player": false,
+      "player_screen_rect": [
+        537.4404296875,
+        310.338989257812,
+        77.1192626953125,
+        196.3759765625
+      ],
+      "quality": {
+        "camera_far_m": 200.0,
+        "pedestrian_count": 2,
+        "preset_id": "standard",
+        "quality_settings_path": "/var/folders/8t/f0xkq9jn6tz3c741bc5lmmmc0000gn/T/sim2seoul-r02-t6hz75ou/quality.json.quality_settings.json",
+        "runtime_ok": true,
+        "scaling_3d_scale": 1.0,
+        "sun_shadow_enabled": true,
+        "vehicle_count": 2
+      },
+      "rect": [
+        16.0,
+        16.0,
+        560.0,
+        119.0
+      ],
+      "resize_calls": 0,
+      "viewport": [
+        1152.0,
+        720.0
+      ]
+    },
+    "evidence_sha256": {
+      "data/cache/r03_development/hud_after01/smoke.json.gz": "978090ac44e758227016f1fdabd6f586ff950663483b377226c4cca148416a19",
+      "data/cache/r03_development/hud_after01/smoke_check.json": "844174148e840685a289a2bc8682693bcc155b07a1a69b4ff0a3bdbc994ae388",
+      "data/cache/r03_development/hud_after01/smoke.log": "d5fad631e8ce3d66b3b7510ef6a94a5650c4c56834f4cc5a04e1b159495e4219",
+      "data/cache/r03_development/hud_after01/smoke.stdio.log": "d5fad631e8ce3d66b3b7510ef6a94a5650c4c56834f4cc5a04e1b159495e4219"
+    },
+    "unchanged_checks": {
+      "static.exact_frozen_inventory": true,
+      "profile.standard.retained_actual_quality_unchanged": true,
+      "profile.low.retained_actual_quality_unchanged": true,
+      "core_source_unchanged": true,
+      "runtime_unchanged": true,
+      "new_v0_source_unchanged": true,
+      "proof_unchanged": true,
+      "frozen_n04_source_unchanged": true,
+      "frozen_n04_snapshot_unchanged": true
+    }
+  },
+  "capture_schema": {
+    "order": [
+      "startup_1152",
+      "menu_960",
+      "popup_1152",
+      "hud_1152"
+    ],
+    "filename_template": "gpu_view_<name>.png",
+    "startup_condition": "fresh_standard, actual1152x720, resize_calls=0, before first _resize",
+    "startup_assertions": [
+      "HUD height >0 and <=200",
+      "height within1px of combined minimum",
+      "HUD inside actual viewport",
+      "projected player does not intersect HUD",
+      "actual standard scale1/shadowtrue/far200 and2NPC/2vehicles/runtime_ok"
+    ],
+    "raw_startup_fields": [
+      "rect",
+      "combined_minimum",
+      "children",
+      "viewport",
+      "quality",
+      "resize_calls",
+      "player_screen_rect",
+      "overlaps_player",
+      "after_capture"
+    ]
+  },
+  "visual_review": {
+    "before_startup_reviewed_by": "ground agent; white over-height panel reproduced",
+    "after_startup_reviewed_by": [
+      "ground agent",
+      "root agent"
+    ],
+    "root_confirmation": "Root reported directly viewing the after startup PNG and confirmed the compact HUD was normal."
+  },
+  "next_action": "Keep these three source files frozen. Root selects commit/push; vehicle rebuilds the app and performs packaged full04. No further engine run by ground agent."
+}
