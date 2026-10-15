@@ -1,0 +1,128 @@
+{
+  "task": "N01",
+  "passed": true,
+  "base_commit": "78c92281ac3c1843eff499f20414f1c82013d11a",
+  "checks": [
+    {
+      "name": "routes_check",
+      "passed": true,
+      "checks": 108
+    },
+    {
+      "name": "rejections",
+      "passed": true,
+      "checks": 15
+    },
+    {
+      "name": "portability",
+      "passed": true,
+      "checks": 16
+    },
+    {
+      "name": "baseline_preservation",
+      "passed": true,
+      "checks": 0
+    },
+    {
+      "name": "npc.all_current_source_hashes",
+      "passed": true
+    },
+    {
+      "name": "npc.snapshot_matches_local_output",
+      "passed": true
+    },
+    {
+      "name": "vehicle.all_current_source_hashes",
+      "passed": true
+    },
+    {
+      "name": "vehicle.snapshot_matches_local_output",
+      "passed": true
+    },
+    {
+      "name": "rejection_checker_and_runner_current",
+      "passed": true
+    },
+    {
+      "name": "portability_inputs_still_current",
+      "passed": true
+    },
+    {
+      "name": "local_document_links",
+      "passed": true,
+      "checked": 508,
+      "missing": []
+    },
+    {
+      "name": "current_status_N02",
+      "passed": true
+    },
+    {
+      "name": "SVG_parse_and_PNG_present",
+      "passed": true
+    },
+    {
+      "name": "all_retained_JSON_parse",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "npc_route_lengths_m": {
+      "palace_court": 47.011114104986184,
+      "plaza_front": 73.71389482211426
+    },
+    "vehicle_route_lengths_m": {
+      "sejong_south": 189.96260141416306,
+      "sejong_north": 255.07311661162063
+    },
+    "active_crossings": [
+      "sejong_marked"
+    ],
+    "proposed_actor_count": {
+      "pedestrians": 2,
+      "vehicles": 2
+    },
+    "stopping_distance_m": 7.666666666666667,
+    "actual_actors_spawned": 0,
+    "engine_runs": 0
+  },
+  "documents_sha256": {
+    "README.md": "f0e7f59c2e0df650121b26fcf210a52dcdff01eac33082da5d9e884cdf012351",
+    "docs/PROJECT_CONTEXT.md": "6fbc6fab99e8289f683c90de320c5e3715f0876ea2783f91fc1912229208bbb3",
+    "docs/WORK_STATUS.md": "3be87072c94d0dfdc41462306e4c4ede658e6722ab1e07f42a9961ee6fbb3721",
+    "docs/SOL_HANDOFF.md": "b0b666665ef06d290b332fa8ca0238e570258d909f17ad417953848787c4fde6",
+    "docs/IMPLEMENTATION_TASKS.md": "9f92c0595f93ae8dc71b1992157c79b93b98c793b8a1177db68750f921176571",
+    "docs/TECHNICAL_CONTRACTS.md": "0eeb2913636fd8bb14422fc9cdbbeba1089661f555fd37dbf35acbdca1ba064d",
+    "docs/VALIDATION_PLAN.md": "34d9ba3a010334bc3e14ae57c7ba3015447f31be347d8b30bba81ecd5f6a2f7b",
+    "docs/EXECUTION_LOG.md": "4bdaeca6f90f3ba663e1ff3d0edc4dd6dee4b051c5d4c84265ddce72d1f9ccb5",
+    "docs/CROSS_MAC.md": "5d759d4f4e48260dbe87445e74e28b85e8571f6e47cd347f6ccffdf9da80883f",
+    "docs/route_rules.md": "bae6962f193fb2d8bdb602c6a55c2fffb3eca9eec58f9bd5a2e9b230ac97f9a3",
+    "data/reports/route_review.md": "e9c37bbf7af0776dae3f690c617db97583db63553e88986854fcb44688165ce0"
+  },
+  "tools_and_manual_sha256": {
+    "tools/prepare_routes.py": "0590eb450b206d05981c5f9b7ec07cd90e9a2bb91b1fcb90d05b6d6ef48f2520",
+    "tools/check_routes.py": "71d625ce89c2fa7323466920908130325f034125bc367fedb4acd87efc5b61ca",
+    "tools/check_route_rejections.py": "f71e5fba6c424d7c9404668d790fa9595253d24f21cd0d198f06b12c53dd5652",
+    "tools/check_route_portability.py": "063232d43fa773732536f9270dbb7a6375ba5a4bf60e7793a974b8d443d4226d",
+    "tools/map_routes.py": "bd7bded0b0ac661ccc6effd83434b16e03b77c868ba37c796e19511f8b50daf1",
+    "data/manual/urban_routes.json": "10b38711fde0d7fe71db9eba644896668a1316fb37679b0b7d5f2497fe6344e4"
+  },
+  "evidence_sha256": {
+    "data/reports/n01/baseline_preservation.json": "452f9547e7859e32c018c77b2863adfbe618e175c83de3891b3c32537a288820",
+    "data/reports/n01/development/candidate_review.json": "23bf2df03cb9dd14526c6174761af65ea106903c6689a77256a1fb55c3b5fbee",
+    "data/reports/n01/development/diagram_review.json": "8d4141a85df790f1ac36f51d7e55af45b18c2f5d98de28d67db2ab3ad445ba0b",
+    "data/reports/n01/development/routes-cropped.png": "96741c89ebb96a6edb2a3364fa50a3528dc1e4aab87c90b8b8ef1c77eb4521f8",
+    "data/reports/n01/plans/npc_routes.json.gz": "f342fc48f8b40975763f472a54b82e90cdb759dc96c1f39b7504e6c2fa4717c1",
+    "data/reports/n01/plans/vehicle_routes.json.gz": "053d1201ba9d53028a21d16fc150f18ca1a925849a84236d570bd9f15c5d1626",
+    "data/reports/n01/portability.json": "1fd6a18a71122e5db9385faed634c3acadce80755c58f74cbf0236264cb8ae1a",
+    "data/reports/n01/rejections.json": "26be72485b700ee906f585883049974dd4f843bfc68dac8ef3c2afe0eec47160",
+    "data/reports/n01/routes.png": "34454be983e45dd44d2d043839c18050daf131f5d290dbd92d3f729da461fe65",
+    "data/reports/n01/routes.svg": "c97678d97a8b50553a4d31705f3062870af4efa0e7285d35a8ed4475f40b64fb",
+    "data/reports/n01/routes_check.json": "0d9782c88d66161b2cc7daca8c9be1bb5a4ca7a9902b1954ab474c98565306d0"
+  },
+  "generated_sha256": {
+    "data/processed/npc_routes.json": "ea2ec3d8e74f1fc90ad558c2af471162d9dfe08f602973f62b809af516ed4379",
+    "data/processed/vehicle_routes.json": "a642987d87428df81a388ffbcb8469ded5f028c01a56d91abc1833146e4f299e"
+  },
+  "scope": "Static/source-bound planning only; no runtime actor, physical stopping/contact/recycle, new support, field lane/access accuracy, full GIS/new-Mac/M4 or V0 acceptance."
+}

@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "task": "N01",
+  "passed": true,
+  "checker": "tools/check_routes.py",
+  "checker_sha256": "71d625ce89c2fa7323466920908130325f034125bc367fedb4acd87efc5b61ca",
+  "runner_sha256": "f71e5fba6c424d7c9404668d790fa9595253d24f21cd0d198f06b12c53dd5652",
+  "original_output_sha256": {
+    "data/processed/npc_routes.json": "ea2ec3d8e74f1fc90ad558c2af471162d9dfe08f602973f62b809af516ed4379",
+    "data/processed/vehicle_routes.json": "a642987d87428df81a388ffbcb8469ded5f028c01a56d91abc1833146e4f299e"
+  },
+  "baseline": {
+    "passed": true,
+    "check_count": 108
+  },
+  "source_provenance": {
+    "data/manual/urban_routes.json": "10b38711fde0d7fe71db9eba644896668a1316fb37679b0b7d5f2497fe6344e4",
+    "config/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "config/movement_rules.json": "f405642fdc95dfd8edeba2dee71edf351229d5fb2457417ca4b725e81f37e488",
+    "config/data_usage.json": "a6ab907db9772e9f8c70c94c9ecf25f9d1d40f5bc8b3a5301392d309a15f2abb",
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "data/processed/walkable_areas.json": "00b2a31b40fdd8c9248cf0bc22b1d449720901a202f12338aef63bea65e43b7b",
+    "data/processed/driveable_areas.json": "7a3cb92b240011052c3dcafe61ee41393a32e3507ec2da21c80c71e08c7938ac",
+    "data/processed/boundary_candidate.json": "54c8b9eb5d49a4952f742a934fed80c7f41a429826fffb5d0d99256fa4437171",
+    "game/data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/daehanmun.json": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa",
+    "game/resources/collision/rules.json": "949294fe9424994919d244b352c2f7444a1d4f6feec91f3562dfabfc80f10ae8",
+    "data/raw/deoksugung_cityhall-v2.osm.pbf": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+    "tools/prepare_routes.py": "0590eb450b206d05981c5f9b7ec07cd90e9a2bb91b1fcb90d05b6d6ef48f2520"
+  },
+  "snapshots": [
+    {
+      "source": "data/processed/npc_routes.json",
+      "snapshot": "data/reports/n01/plans/npc_routes.json.gz",
+      "source_sha256": "ea2ec3d8e74f1fc90ad558c2af471162d9dfe08f602973f62b809af516ed4379",
+      "snapshot_sha256": "f342fc48f8b40975763f472a54b82e90cdb759dc96c1f39b7504e6c2fa4717c1",
+      "uncompressed_bytes": 23052
+    },
+    {
+      "source": "data/processed/vehicle_routes.json",
+      "snapshot": "data/reports/n01/plans/vehicle_routes.json.gz",
+      "source_sha256": "a642987d87428df81a388ffbcb8469ded5f028c01a56d91abc1833146e4f299e",
+      "snapshot_sha256": "053d1201ba9d53028a21d16fc150f18ca1a925849a84236d570bd9f15c5d1626",
+      "uncompressed_bytes": 66130
+    }
+  ],
+  "source_outputs_and_checker_unchanged": true,
+  "cases": [
+    {
+      "name": "reversed_vehicle",
+      "description": "Reverse the southbound route's coordinate order.",
+      "operations": [
+        {
+          "op": "reverse",
+          "path": "/vehicle/routes/0/xz"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.independent_source_cut_and_right_offset"
+      ]
+    },
+    {
+      "name": "shifted_route",
+      "description": "Move an interior northbound point 0.1 m east.",
+      "operations": [
+        {
+          "op": "add_number",
+          "path": "/vehicle/routes/1/xz/3/0",
+          "value": 0.1
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_north.independent_source_cut_and_right_offset"
+      ]
+    },
+    {
+      "name": "nonfinite",
+      "description": "Replace a vehicle coordinate with nonfinite NaN.",
+      "operations": [
+        {
+          "op": "nonfinite",
+          "path": "/vehicle/routes/0/xz/0/0",
+          "value": "NaN"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "documents.finite_numbers"
+      ]
+    },
+    {
+      "name": "missing_source_hash",
+      "description": "Remove the retained G02 feature-file hash.",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/vehicle/provenance/data~1processed~1features.json"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.required_source_hashes"
+      ]
+    },
+    {
+      "name": "missing_crossing",
+      "description": "Omit all southbound route crossing conflicts.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/routes/0/conflicts",
+          "value": []
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.complete_crossing_conflicts"
+      ]
+    },
+    {
+      "name": "late_stop",
+      "description": "Place the stop station 0.1 m after body-contact entry.",
+      "operations": [
+        {
+          "op": "copy_plus",
+          "from": "/vehicle/routes/0/conflicts/0/enter_s_m",
+          "path": "/vehicle/routes/0/conflicts/0/stop_s_m",
+          "value": 0.1
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.sejong_marked.stop_before_body_contact",
+        "vehicle.sejong_south.sejong_marked.stop_position_and_room"
+      ]
+    },
+    {
+      "name": "wrong_stop_position",
+      "description": "Move the retained stop position to x=1000 m.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/routes/0/conflicts/0/stop_xz/0",
+          "value": 1000.0
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.sejong_marked.stop_position_and_room"
+      ]
+    },
+    {
+      "name": "wrong_lane",
+      "description": "Reverse the authored right-side lane offset sign.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/routes/0/source_binding/right_offset_m",
+          "value": -1.6
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.explicit_assumed_lane",
+        "vehicle.sejong_south.manual_binding"
+      ]
+    },
+    {
+      "name": "forged_road_domain",
+      "description": "Substitute the actor sweep for the source road domain.",
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/vehicle/routes/0/swept_geometry",
+          "path": "/vehicle/routes/0/road_domain"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.sejong_south.independent_estimated_road_domain"
+      ]
+    },
+    {
+      "name": "crossing_removed_common",
+      "description": "Remove one of the three retained W03 crossings.",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/vehicle/crossings/2"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "crossings.all_three_source_records"
+      ]
+    },
+    {
+      "name": "unsafe_unknown_policy",
+      "description": "Allow entry when occupancy is unknown.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/policy/unknown_occupancy",
+          "value": "go"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.actor_and_policy"
+      ]
+    },
+    {
+      "name": "controller_claim",
+      "description": "Claim that a runtime controller is implemented.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/scope/runtime_controller_implemented",
+          "value": true
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.planning_only_scope"
+      ]
+    },
+    {
+      "name": "npc_outside_support",
+      "description": "Move a palace pedestrian point to x=1000 m.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/npc/routes/0/xz/0/0",
+          "value": 1000.0
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "npc.palace_court.retained_W03_vertices",
+        "npc.palace_court.snapshot_envelope",
+        "npc.palace_court.name_and_repeat",
+        "npc.palace_court.center_in_movement",
+        "npc.palace_court.full_body_in_support",
+        "npc.palace_court.source_obstacle_clearance",
+        "envelopes.npc_vehicle_separation"
+      ]
+    },
+    {
+      "name": "npc_changed_repeat",
+      "description": "Replace the pedestrian ping-pong policy with teleportation.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/npc/routes/0/repeat",
+          "value": "teleport"
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "npc.palace_court.name_and_repeat"
+      ]
+    },
+    {
+      "name": "undersized_vehicle_sweep",
+      "description": "Shrink the actor sweep radius below the full body.",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/vehicle/actor/swept_radius_m",
+          "value": 0.1
+        }
+      ],
+      "rejected": true,
+      "rejected_by": [
+        "vehicle.actor_and_policy"
+      ]
+    }
+  ],
+  "scope": "Fifteen in-memory planning-snapshot corruptions only; no engine/controller acceptance, network, dependency reinstall, source-map acquisition or full predecessor regeneration"
+}

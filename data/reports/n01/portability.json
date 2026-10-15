@@ -1,0 +1,110 @@
+{
+  "task": "N01",
+  "passed": true,
+  "checks": [
+    {
+      "name": "prepared_inputs_only",
+      "passed": true
+    },
+    {
+      "name": "run_0.exit",
+      "passed": true,
+      "messages": "N01 prepared [('pedestrian', 2), ('vehicle', 2)]\n"
+    },
+    {
+      "name": "run_0.identical_outputs",
+      "passed": true
+    },
+    {
+      "name": "run_0.independent_audit",
+      "passed": true
+    },
+    {
+      "name": "run_1.exit",
+      "passed": true,
+      "messages": "N01 prepared [('pedestrian', 2), ('vehicle', 2)]\n"
+    },
+    {
+      "name": "run_1.identical_outputs",
+      "passed": true
+    },
+    {
+      "name": "run_1.independent_audit",
+      "passed": true
+    },
+    {
+      "name": "relocated_repeat_equal",
+      "passed": true
+    },
+    {
+      "name": "reject.stale_observation_allowed",
+      "passed": true,
+      "error": "ValueError: Unsafe human priority or observation guard"
+    },
+    {
+      "name": "reject.vehicles_before_humans",
+      "passed": true,
+      "error": "ValueError: Unsafe human priority or observation guard"
+    },
+    {
+      "name": "reject.visible_recycling_allowed",
+      "passed": true,
+      "error": "ValueError: Unsupported vehicle recycle guard"
+    },
+    {
+      "name": "reject.fractional_lane_index",
+      "passed": true,
+      "error": "ValueError: Lane index must be an integer"
+    },
+    {
+      "name": "reject.stale_source",
+      "passed": true,
+      "error": "ValueError: Stale W03 source/proof binding"
+    },
+    {
+      "name": "reject.stale_output",
+      "passed": true,
+      "error": "ValueError: Stale N01 output: data/processed/npc_routes.json"
+    },
+    {
+      "name": "copied_inputs_unchanged",
+      "passed": true
+    },
+    {
+      "name": "original_inputs_unchanged",
+      "passed": true
+    }
+  ],
+  "prepared_files": 23,
+  "prepared_bytes": 16234347,
+  "input_sha256": {
+    "config/data_usage.json": "a6ab907db9772e9f8c70c94c9ecf25f9d1d40f5bc8b3a5301392d309a15f2abb",
+    "config/movement_rules.json": "f405642fdc95dfd8edeba2dee71edf351229d5fb2457417ca4b725e81f37e488",
+    "config/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "data/manual/public_walk.json": "e046507e7541eafb57f187da5fb45bde7bf61e581d60f84e7789384b7185f73c",
+    "data/manual/urban_routes.json": "10b38711fde0d7fe71db9eba644896668a1316fb37679b0b7d5f2497fe6344e4",
+    "data/processed/boundary_candidate.json": "54c8b9eb5d49a4952f742a934fed80c7f41a429826fffb5d0d99256fa4437171",
+    "data/processed/driveable_areas.json": "7a3cb92b240011052c3dcafe61ee41393a32e3507ec2da21c80c71e08c7938ac",
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "data/processed/walkable_areas.json": "00b2a31b40fdd8c9248cf0bc22b1d449720901a202f12338aef63bea65e43b7b",
+    "data/raw/deoksugung_cityhall-v2.osm.pbf": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+    "game/data/generated/daehanmun.json": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa",
+    "game/data/generated/palace_manifest.json": "6ba29db1f13050ceddc7a54313885b155d3667179940feb01528299e4d529f13",
+    "game/data/generated/palace_walk.json": "13fe77192cd9824607cb2b723bfa896e6089e845cc71cf06cfbe8df805ca401a",
+    "game/data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "game/resources/collision/rules.json": "949294fe9424994919d244b352c2f7444a1d4f6feec91f3562dfabfc80f10ae8",
+    "game/resources/play_boundary.tres": "e7fb7a385005a0dbf4cafc7d18394fed46b83ec54fd148d9f3571f22a5f4a06d",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/scripts/public_boundary.gd": "45ba308463fac36fec2f344cb68ea3d5d225e28250649758bf436033de6a1294",
+    "tools/check_routes.py": "71d625ce89c2fa7323466920908130325f034125bc367fedb4acd87efc5b61ca",
+    "tools/prepare_palace_walk.py": "e85ac0a3560af5b592a14e33bdb5d7323de53d1098cd3059134530cc57ec074c",
+    "tools/prepare_public_walk.py": "dc28f18121db018494c44e75a28c65c5dbbb81e56c13906014175f716b4b79d3",
+    "tools/prepare_routes.py": "0590eb450b206d05981c5f9b7ec07cd90e9a2bb91b1fcb90d05b6d6ef48f2520",
+    "tools/prepare_world.py": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b"
+  },
+  "output_sha256": {
+    "data/processed/npc_routes.json": "ea2ec3d8e74f1fc90ad558c2af471162d9dfe08f602973f62b809af516ed4379",
+    "data/processed/vehicle_routes.json": "a642987d87428df81a388ffbcb8469ded5f028c01a56d91abc1833146e4f299e"
+  },
+  "scope": "Current M1 existing Python/Shapely; N01-only rebuild from prepared inputs, no install/full GIS/Godot/network/M4 test"
+}

@@ -1,0 +1,29 @@
+{
+  "task": "N01",
+  "attempts": [
+    {
+      "candidate": "sejong_south source_s5..235 +right1.6 radius2.6",
+      "result": "rejected",
+      "W03_movement_overlap_outside_crossing_m2": 12.347679461157153,
+      "resolution": "retain source direction/offset/body clearance; shorten to source_s195; overlap0"
+    },
+    {
+      "candidate": "initial negative Shapely offset trial",
+      "result": "discarded_coordinate_sign_error",
+      "resolution": "XZ east/south physical right=(-dz,+dx) requires positive Shapely offset; negative-side trial is not accepted evidence"
+    },
+    {
+      "candidate": "first generator G04/source comparison",
+      "result": "rejected valid input due to validator field selection",
+      "resolution": "Compare full identical source geometry including coordinate metadata and tags, not a two-field geometry dictionary; source bytes unchanged"
+    },
+    {
+      "candidate": "Require vehicle body inside G04 walking-review candidate_geometry",
+      "result": "wrong mode-domain assumption rejected valid road approach",
+      "south_outside_area_m2": 124.69625912753025,
+      "north_outside_area_m2": 148.0062680736332,
+      "resolution": "Use selected source-road candidate clipped to background bounds for vehicle domain, retain W03 player boundary and all original permissions; no new support/controller"
+    }
+  ],
+  "reference_review": "Independent short-context source-way/oneway/lanes/crossing review; no new data or physical lane validation"
+}

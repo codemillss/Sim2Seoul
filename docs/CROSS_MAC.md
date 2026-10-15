@@ -2,7 +2,7 @@
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, L04 결합 검수까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 현재 자동 보행 검수판은 W04 `W0-engineering-walk-v1`, N01 경로 계획까지의 최신 상태와 다음 작업은 WORK_STATUS를 따른다. 최신 진행은 [WORK_STATUS](WORK_STATUS.md), 보행판 실행/인수는 W04 절을 따른다. 사람 조작·M4·현실 지형/접근 검증은 별도로 남아 있다.
 
 ## 공유되는 것
 
@@ -362,3 +362,20 @@ CC0 동봉 라이선스는 원래 CRLF/공백까지 해시에 포함된다. 저�
 16시점80PNG와 국소 회전/문·광장 보행을 새로 기록한다. 소스/실행자산/입력/검사 또는 원관측 해시가 L03 합격본과 다르면 전체 회귀 재사용을 거부한다. 자료를 변경한 경우 해당 회귀와 인수 기록을 새 스냅샷으로 만든다. GPU 측정 중 다른 엔진/무거운 검사를 동시에 실행하지 않는다. 검수 도구는 `--engine`으로 동일 버전의 다른 설치 위치를 받으며 일반 게임은 기존 `run_city_landmarks.sh run`이다.
 
 [L04 화면·한계·실패·재현](../data/reports/landmark_review.md)와 [인수](../data/reports/l04_verification.json)를 읽고 다음 N01을 시작한다. 돈덕전·정관헌 가림/중화문 인지와 사람 조작·M4는 미검증이다. 정보 UI·실내·엘리베이터는 질의/제안 상태이므로 자동 착수하지 않는다.
+
+
+## N01 경로 계획 재생성과 N02 인수
+
+기존 G04/W03 및 L 준비가 끝난 현재 입력을 재사용한다. 새 국가 원본/모델/패키지나 Godot 실행은 N01 생성에 필요 없다. 기존 Python3.14/NumPy/Shapely 환경에서 다음을 실행한다.
+
+```sh
+.venv-data/bin/python tools/prepare_routes.py
+.venv-data/bin/python tools/prepare_routes.py --check
+.venv-data/bin/python tools/check_routes.py
+.venv-data/bin/python tools/check_route_rejections.py
+.venv-data/bin/python tools/check_route_portability.py
+```
+
+`data/processed/npc_routes.json`·`vehicle_routes.json`은 기기에서 다시 생성한다. Git에는 수동 원천·생성/독립 검사·정상2 gzip 스냅샷과 근거/인수를 공유한다. 별도폴더 prepared23입력2회 재생성은 현재 M1 설치를 사용한 N01-only 결과이며 새Mac설치/전체GIS/M4/실제controller 결과가 아니다. SVG 경로도는 `tools/map_routes.py`로 생성하고 공유 PNG는 실제 렌더로 확인했다.
+
+다음N02는 [규칙](route_rules.md)·[정적 검증과 한계](../data/reports/route_review.md)·[인수](../data/reports/n01_verification.json)를 읽고 NPC 실제 왕복/정지/접촉부터 구현한다. 최신 일반게임은 기존 run_city_landmarks.sh이며 아직 NPC/차량이 없다. 원문/가정·모드영역·반복 guard와 미검증 차량 지지면을 유지한다.

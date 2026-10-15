@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "task": "N01",
+  "contract_id": "N01-routes-v1",
+  "status": "source_based_game_plan_not_runtime_controller_or_survey",
+  "pedestrian": {
+    "height_m": 1.7,
+    "radius_m": 0.3,
+    "clearance_m": 0.05,
+    "speed_mps": 1.2
+  },
+  "vehicle": {
+    "length_m": 4.2,
+    "width_m": 1.8,
+    "height_m": 1.5,
+    "swept_radius_m": 2.6,
+    "speed_mps": 5.0
+  },
+  "npc_routes": [
+    {
+      "id": "palace_court",
+      "name": "중화전 열린 앞마당",
+      "parent_route": "court_approach",
+      "first_vertex": 0,
+      "last_vertex": 11,
+      "repeat": "ping_pong"
+    },
+    {
+      "id": "plaza_front",
+      "name": "시청·서울광장 전면 보행면",
+      "parent_route": "city_plaza",
+      "first_vertex": 97,
+      "last_vertex": 98,
+      "repeat": "ping_pong"
+    }
+  ],
+  "vehicle_routes": [
+    {
+      "id": "sejong_south",
+      "name": "세종대로 남행 직진",
+      "feature_id": "osm:way:1084408283:highway_line",
+      "from_s_m": 5.0,
+      "to_s_m": 195.0,
+      "assumed_lane_width_m": 3.2,
+      "lane_index_zero_based_from_left": 4,
+      "right_offset_m": 1.6,
+      "repeat": "guarded_oneway_stream"
+    },
+    {
+      "id": "sejong_north",
+      "name": "세종대로 북행 직진",
+      "feature_id": "osm:way:378453707:highway_line",
+      "from_s_m": 5.0,
+      "to_s_m": 260.0,
+      "assumed_lane_width_m": 3.2,
+      "lane_index_zero_based_from_left": 4,
+      "right_offset_m": 1.6,
+      "repeat": "guarded_oneway_stream"
+    }
+  ],
+  "policy": {
+    "priority": [
+      "player_and_pedestrian",
+      "vehicle_already_inside",
+      "fifo_waiting_vehicle"
+    ],
+    "brake_mps2": 3.0,
+    "reaction_s": 0.5,
+    "stop_margin_m": 1.0,
+    "crossing_clearance_m": 0.35,
+    "clear_hold_s": 1.0,
+    "max_observation_age_s": 0.1,
+    "unknown_occupancy": "stop",
+    "zone_vehicle_capacity": 1,
+    "timeout_forced_entry": false,
+    "player_contact": "stop_without_pushing; pedestrian may reverse only after checking free swept capsule",
+    "vehicle_contact": "stop for any player/pedestrian/vehicle on forward swept corridor; no push or forced reset",
+    "vehicle_end": "brake_to_stop_and_wait; no U-turn or reverse drive",
+    "vehicle_recycle": {
+      "both_portals_outside_actual_camera_frustum": true,
+      "minimum_human_distance_m": 30.0,
+      "dynamic_entry_envelope_empty": true,
+      "hold_until_eligible": true,
+      "spatial_connection_between_portals": false
+    },
+    "scope": "Planning guards and geometry only; N02/N03 implement and observe actual stopping, visibility and repeated motion"
+  },
+  "initial_profile": {
+    "status": "proposal_not_spawned_or_performance_result",
+    "pedestrians": 2,
+    "vehicles": 2,
+    "per_route": 1,
+    "pedestrian_initial_phase": 0.5,
+    "vehicle_initial_phase": 0.0,
+    "later_load_profiles_reference": "docs/VALIDATION_PLAN.md R01/R02; 12/4 and24/8 remain proposals"
+  },
+  "assumptions": {
+    "lane": "oneway and lanes from OSM; physical lane centres, permitted lane use and widths unverified. Lane index4/3.2m/right1.6m is an authored game assumption. XZ right=(-dz,+dx), Shapely positive offset.",
+    "ground": "y=0 technical support assumption retained; no surveyed road or terrain",
+    "repeat": "NPC ping-pong turns in place. Vehicle stream recycle is permitted only under future visibility/dynamic-clearance guards; if visible or occupied it remains stopped. No invented physical return link.",
+    "access": "Selected G04 road candidates are promoted only to these bounded game corridors; real-world access remains unverified; original permissions stay null.",
+    "mode_domains": "NPC centres: existing W03 movement, full capsules: existing support. Vehicle domain: selected G04 road candidate clipped to background extent; G04 candidate_geometry is the walking-review envelope, not a universal traffic boundary. No free access inferred from either bounding box."
+  }
+}
