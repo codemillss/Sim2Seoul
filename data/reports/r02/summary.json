@@ -1,0 +1,47 @@
+{
+  "task": "R02",
+  "passed": true,
+  "contract": {
+    "path": "data/reports/r02/contract_check.json",
+    "sha256": "2314fa752dcfd9e825f2e8214a517e07d4c0340e3e28e4bb2e5dd5b0ead7e101",
+    "checks": 64
+  },
+  "gpu": {
+    "path": "data/reports/r02/gpu_check.json",
+    "sha256": "c55a065931fe5d0edc0a0df7b43cadb6459bfd1a1da55f5309050b265488e700",
+    "checks": 68
+  },
+  "visual_review": {
+    "path": "data/reports/r02/views.json",
+    "sha256": "29f3d2ae75b6a3ad1a8823834c839a4a85ee258a9948d5de2a27e0aa1d8dab51",
+    "completed": true
+  },
+  "adopted_standard": {
+    "scaling_3d_scale": 1,
+    "sun_shadow_enabled": true,
+    "camera_far_m": 200,
+    "pedestrians": 2,
+    "vehicles": 2,
+    "p95_target_ms": 33.3,
+    "basis": "R01 current 2/2 measured p95=9.6133ms; no performance optimization needed, baseline renderer/physical geometry/actors preserved."
+  },
+  "optional_low": {
+    "scaling_3d_scale": 0.75,
+    "sun_shadow_enabled": false,
+    "camera_far_m": 200,
+    "performance_improvement_measured": false
+  },
+  "performance_before_after_rerun": false,
+  "performance_scope": "No baseline performance setting was changed; R01 remains the benchmark. New HUD and low preset are functionally tested, not a new measured FPS improvement. Release app performance is distinct.",
+  "launcher": {
+    "path": "tools/run_v0.sh",
+    "sha256": "6bb23d3f8f9bdd0a22375e72d56cb9a912593f8d35c41ba16bf5a9a7d51b483b",
+    "verification": "sh -n; same existing N03 version/input checks and validated V0 scene entry, no launcher performance claim"
+  },
+  "failure": "smoke01 signal-emitting camera_stepped scene.free() logged three engine errors; saved raw/source retained. queue_free()+two frames fixed helper lifecycle without changing production/physical thresholds.",
+  "limitations": [
+    "Original map/geometry/movement kept unchanged.",
+    "Same actor instances across each preset timeline, explicit later scene recreation for settings-only cases.",
+    "Not a new full N04 journey, exported package, M4 or human handling test."
+  ]
+}

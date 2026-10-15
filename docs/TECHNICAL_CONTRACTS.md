@@ -185,6 +185,7 @@ P04 selected635건물+49담장+temporary_support1만 StaticBody3D/ConcavePolygon
 - E01 현재 개발 기준: Godot **4.7.2 Standard / Forward+ / Metal**. 현재 M1의 편집기·실제 GPU 장면과 세 후보를 확인했다. [환경/기동 증거](environment.md). 내보내기 템플릿은 미설치이며 R03 전에 **4.7.2.stable**로 준비한다. 빈 장면 결과는 도시 성능·M4 기동 판정이 아니다.
 - 작은 지도를 한 장면에 다 넣을 수 있는지 먼저 측정한다. 처음부터 대규모 월드 스트리밍을 구현하지 않는다. 필요 시 구역 분할·표시 거리·LOD·그림자·반복 자산 인스턴싱 순으로 줄인다.
 - 실행 중 지도 API/네트워크가 없어도 돌아가야 한다. 원본 전국 PBF·Python 환경은 배포 앱에 넣지 않는다.
+- R02의`v0_walk`는기존traffic상속장면이다. 기본배율1/그림자ON/카메라far200m를유지하고low는0.75/그림자OFF/far200m만바꾼다. 실제배치/축척/지지/충돌/속도/2명2대는같다. 품질선택만`user://sim2seoul_quality.json`의`schema_version:1,preset_id:standard|low`로저장한다. 잘못된JSON/ID는기본복구·안내하며위치나생활진행저장을추가하지않는다. 메뉴/출처팝업은일시정지를유지하고출처창닫기→메뉴→계속하기순서다. [검증/한계](../data/reports/performance_comparison.md).
 - 저장 대상이 생기면 사용자 데이터 경로와 스키마 버전을 사용한다. V0 필수 저장은 마지막 위치/설정 정도로 제한하거나 재시작 기준을 명시한다.
 - 두 기기의 `.godot` 캐시·가상환경·빌드 결과를 동기화하지 않는다. 코드/설정/수동 자산과 생성 manifest를 공유하고 환경별로 재생성한다.
 - 현재 작은 지역 지도 v2와 이전 v1은 Git으로 함께 공유한다. 국가 전체 원본은 로컬에 유지하며 [CROSS_MAC.md](CROSS_MAC.md)를 따른다.
