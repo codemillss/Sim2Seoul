@@ -4,6 +4,12 @@
 
 기획의 맥락·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 전체 순서는 [MASTER_PLAN](MASTER_PLAN.md), 실제 자료 확보 상태는 [WORK_STATUS](WORK_STATUS.md)다. 좌표·속성·충돌·경로 계약은 [TECHNICAL_CONTRACTS](TECHNICAL_CONTRACTS.md), 시험 조건과 판정은 [VALIDATION_PLAN](VALIDATION_PLAN.md)을 따른다. 이 문서의 제안과 계약이 충돌하면 근거를 기록하고 계약을 먼저 정리한다. 미터 좌표로 저장하는 모든 중간 JSON은 CRS·지역 원점·축·단위를 명시하며 WGS84 GeoJSON 검사용 파일과 구분한다. 생성 자산은 `game/assets/generated/`, 수동 모델·장식은 `game/assets/authored/`, 재생성에 보존할 보정은 `data/manual/`에 둔다.
 
+## [x] EXP05 더 빠른 이동 선택 — 완료 (2026-10-16)
+
+- 기존 세 속도·저장 형식을 유지하고 쾌속5.6/14m/s·초고속8.4/21m/s를 메뉴에 추가했다. 물리 이동·충돌·경계·지도 축척은 변경하지 않았다.
+- headless 실제 입력27개와 기존51개 PASS. 최대속도·대각선·원본 벽/장벽·사유지/지도4면·실내/계단·메뉴 중립·저장 재시작을 확인했다. 계단은 중간 공중 표본이 있어 전 구간 접지로 기록하지 않는다.
+- 일반 실행기의 쾌속 로드와 실제 메뉴14m/s 표시를 확인하고 창을 열어둔다. [증거와 한계](../data/reports/fast_exploration/20261016/summary.json). 새 GPU/장시간 성능/export/다른 Mac 검수는 포함하지 않는다.
+
 ## 최신 후속 탐험 EXP04 — 여러 건물·층·수직 이동 (2026-10-16)
 
 선행은 EXP03의 사진 외형·첫 로비와 사용자의 실제 체험 피드백이다. “건물에 바짝 붙었을 때 E가 안 됨”을 수정하면서 건물 크기를 고려한 실내, 다른 건물, 위층, 계단·엘리베이터·사람을 추가한다. EXP03의 한 건물·약 16×12m·1층 한정과 아래 원래 계획의 “실내 미확정” 문장은 당시 이력이며 이번 직접 요청에 따라 이 범위가 확장됐다. V0와 원본 좌표·외부 건물/담장 충돌은 유지한다. [EXP04 상세 계약](TECHNICAL_CONTRACTS.md).

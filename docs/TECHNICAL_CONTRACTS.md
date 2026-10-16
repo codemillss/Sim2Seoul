@@ -4,6 +4,10 @@
 
 D04에서 원천 사용·보류·추정 정책을 [config/data_usage.json](../config/data_usage.json)에 정리했다. 좌표 수치는 기존 `config/region.json`이 기준이며 사용 정책이 좌표 계약을 대체하지 않는다. [data_gaps](data_gaps.md)와 [수동 검토 큐](../data/manual/review_queue.json)는 G02–G04/W 단계의 입력이다.
 
+## 후속 탐험 EXP05 — 쾌속·초고속 선택
+
+2026-10-16 “속도 더 빠르게 못 바꾸나?” 요청에 따라 최신 `explore_walk.gd`의 기존 세 속도 뒤에 `rapid`(쾌속, 걷기5.6/달리기14m/s), `turbo`(초고속, 8.4/21m/s)를 추가한다. 기존 최고 `fast`(2.8/7)의 각각 2배·3배이며 기존 ID·속도·schema_version1·저장 키·기본값은 유지한다. 메뉴의 같은 선택/저장 경로를 사용한다. 물리60Hz·실제 지도 축척·0.05m 간격의 경계 구간 검사·move_and_slide·점프·카메라·실내 구조를 변경하지 않는다. 검증 결과는 [현재 상태](WORK_STATUS.md)·[EXP05 보고](../data/reports/fast_exploration/20261016/summary.json)를 따른다.
+
 ## 후속 탐험 EXP04 — 건물 크기에 맞춘 여러 층과 출입 안정화
 
 2026-10-16, 사용자 체험에서 확인한 “건물에 바짝 붙었을 때 E 진입 실패”와 추가 건물·위층·계단·엘리베이터·사람 요청에 따른 최신 `explore_walk` 계약이다. 아래 EXP03의 **서울도서관 한 곳·16×12m·1층만**은 당시 범위이며 EXP04에 의해 확장된다. EXP03의 사진 참조·외형·기존 검증 기록과 원래 V0/P/W/L/N/R 장면은 보존한다.

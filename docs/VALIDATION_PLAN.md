@@ -1,5 +1,13 @@
 # 검증 계획과 완료 판정
 
+## 최신 속도 EXP05 — 최대21m/s
+
+[보고서](../data/reports/fast_exploration/20261016/summary.json) 기준으로 `check_fast_exploration.gd` headless27개, 기존 `check_exploration.gd` headless51개를 통과했다. 새 프로필 실제 거리와 대각선 정규화, 21m/s 원본 충돌·사유지/4면 경계·실내·계단, 메뉴/저장 호환을 검증한다. [원문](../data/reports/fast_exploration/20261016/speed.json)·[로그](../data/reports/fast_exploration/20261016/speed.log)·[기존 회귀](../data/reports/fast_exploration/20261016/regression.json)에 시험 배치와 관측값을 남긴다.
+
+최초 실행의 세 실패는 차량이 가로지른 측정 경로, 중첩 소스 벽의 contact ID, 사유지 후보 탐색의 과도한 ray 제외 조건이었다. [개발 원문](../data/reports/fast_exploration/20261016/development/speed_before_fixture_fix.json)을 보존했고 실제 충돌이나 사유지를 끄지 않고 배치/관측을 고쳤다. 계단45표본 중34접지, 복귀/경계이탈0·2층접지완료다. 일반 창의 메뉴에서 쾌속5.60/14.0m/s를 확인했으며 이 네이티브 관측을 실제 키보드 거리·새 GPU 물리/성능 검사로 확대하지 않는다.
+
+재현: `/Applications/Godot.app/Contents/MacOS/Godot --headless --fixed-fps 60 --path game --script ../tests/game/check_fast_exploration.gd -- --automatic-probe --report=/private/tmp/sim2seoul-fast.json`. 제한된 headless 실행의 macOS 시스템 CA 경고는 로그에 남겼고 물리/기능 실패와 구분한다. 아래 EXP04 GPU 수치는 이전 증거다.
+
 ## 최신 탐험 EXP04 — 실제 접촉 출입·다층·계단·승강기
 
 2026-10-16 Apple M5·Godot4.7.2·Metal4/Forward+의 [최종 증거](../data/reports/building_visits/20261016/summary.json)다. 기존 EXP03의 anchor 순간이동만으로 실제 벽 접촉의 안정성을 보장할 수 없었던 한계를 추가 검사로 보완했다.

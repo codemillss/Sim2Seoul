@@ -1,0 +1,71 @@
+{
+  "task": "EXP05",
+  "result": "PASS",
+  "generated_utc": "2026-10-16T04:42:15.379542+00:00",
+  "production_base": "b62687e",
+  "profiles": {
+    "rapid": {
+      "walk_mps": 5.6,
+      "run_mps": 14.0
+    },
+    "turbo": {
+      "walk_mps": 8.4,
+      "run_mps": 21.0
+    }
+  },
+  "headless": {
+    "focused": {
+      "checks": 27,
+      "failed": 0
+    },
+    "existing_exploration": {
+      "checks": 51,
+      "failed": 0
+    },
+    "total_checks": 78
+  },
+  "source_sha256": {
+    "res://../tests/game/check_fast_exploration.gd": "c084d3c7e58bbf5e449108fc1ebc15275486930a8b3981634925df0f7356c9f1",
+    "res://scenes/world/explore_walk.tscn": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+    "res://scripts/building_interior_space.gd": "7980896ace4cc9affaf6ab3b4b8673358c5505aa02049317878edbb468e087b8",
+    "res://scripts/explore_walk.gd": "dd58e4518c82e3d49c5ac0c6407fdcb3267b44de1285e5336d98dce80d762886",
+    "res://scripts/interior_visit.gd": "f8a663ec907860c80d78df633417bc4b9b7a870af6bcd2709add09cd796cfc0a",
+    "res://scripts/player/free_roam_player.gd": "1e8c4220496032149d7c099a850aa1ddeba133d8017bc5fe957f82d102008a64",
+    "res://scripts/player/palace_player.gd": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b",
+    "res://scripts/player/public_player.gd": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed"
+  },
+  "source_hashes_match": true,
+  "native_normal_launch": {
+    "pid": 29508,
+    "started_utc": "2026-10-16T04:39:55.594365+00:00",
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/cache/fast_exploration/20261016/rapid-launch.log",
+    "automatic_probe": false,
+    "selected_settings": {
+      "schema_version": 1,
+      "speed_id": "rapid",
+      "free_roam": true
+    },
+    "settings_path": "/Users/jmjeon/Library/Application Support/Godot/app_userdata/Sim2Seoul/sim2seoul_exploration.json",
+    "previous_settings_present": false,
+    "reason_for_relaunch": "Earlier native menu selection session ended; apply requested game speed in its saved JSON config and restart."
+  },
+  "native_observed": [
+    "Sim2Seoul(DEBUG) window left open",
+    "Menu displays 쾌속 (2배), 걷기 5.60 / 달리기 14.0 m/s",
+    "Saved schema_version1 rapid/free_roam=true and startup speed=rapid confirmed"
+  ],
+  "native_limit": "Earlier native menu interaction session ended. The requested setting was saved in the application JSON configuration and a fresh normal process loaded it; final native observation verifies displayed values, not measured human keyboard travel.",
+  "scope": "Only two speed presets were added; old IDs, values, default brisk, schema and persistence fields retained. Full production scene/controller runs used isolated test settings and explicit scenario-start placements.",
+  "stair_limit": "Turbo stair ascent completed with 45 samples, 34 grounded; no recovery or allowed-boundary exit. This was not continuously grounded for the entire stair climb.",
+  "development": "First focused run had 3 fixture failures: route met a moving vehicle, ray/capsule chose overlapping source walls, and a private-edge discovery filter was overly restrictive. Preserved in development/. Production was not changed to bypass collisions.",
+  "limitations": [
+    "Focused and regression suites are headless; no new synthetic GPU verification or performance benchmark.",
+    "Native menu values and runtime log were checked on M5; no export or other-Mac acceptance.",
+    "The separate EXP04 168 GPU checks remain historical and are not added to EXP05 check counts."
+  ]
+}

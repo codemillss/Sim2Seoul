@@ -1,10 +1,12 @@
 extends "res://scripts/v0_walk.gd"
 ## Optional exploration controls on a separate leaf; prior milestones stay fixed.
-const SPEED_IDS := ["realistic", "brisk", "fast"]
+const SPEED_IDS := ["realistic", "brisk", "fast", "rapid", "turbo"]
 const SPEED_PROFILES := {
 	"realistic": {"label": "현실 속도", "walk": 1.4, "run": 3.5},
 	"brisk": {"label": "빠르게", "walk": 2.24, "run": 5.6},
 	"fast": {"label": "아주 빠르게", "walk": 2.8, "run": 7.0},
+	"rapid": {"label": "쾌속 (2배)", "walk": 5.6, "run": 14.0},
+	"turbo": {"label": "초고속 (3배)", "walk": 8.4, "run": 21.0},
 }
 
 @export var exploration_settings_path := "user://sim2seoul_exploration.json"
