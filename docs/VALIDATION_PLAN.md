@@ -1,5 +1,41 @@
 # 검증 계획과 완료 판정
 
+## 최신 실내 EXP07 — 용도·층별 기하와 한국어 디테일
+
+2026-10-16 [최종 요약](../data/reports/interior_identity/20261016/summary.json)에 실행별 증거와 소스 SHA-256을 연결한다. 원본 평면 크기와 층수를 유지하면서 생긴 실내 가구 차이가 색상·문구만의 차이인지, 새 충돌 가구가 출입·계단·승강장·복귀와 중앙 통로를 막는지를 실제 엔진에서 검사한다. 아래 EXP06 이전 수치는 당시 결과로 유지한다.
+
+| 실행 | 결과와 범위 | 증거 |
+|---|---|---|
+| 실내 정체성 headless | **81/81 PASS**. 125동·1,205층 원본 너비/깊이·층간/층수 유지, 캡슐 질의32,660회·바닥 ray2,410회에서 오류0. 8개 프로필 분류, 실제 새 가구 충돌체16,606개, 대표5종의 형상·층별 차이·한글 표지, 교회/주거/은행의 실제 가구 형상, 물리 E5곳·도서관 승강기/계단 하강·사람4명 이동/정지·외부692개 동일성·촬영시점의 실제 가구 투영/카메라 공간/정상 줌 범위 | [headless.json](../data/reports/interior_identity/20261016/headless.json)·[로그](../data/reports/interior_identity/20261016/headless.log) |
+| 실내 정체성 GPU | **92/92 GPU PASS**. 대표5동·68층의 실제 MultiMesh 변환 읽기5회, production E·승강기·계단·보행자와 화면9장. 전체125동 검사는 반복하지 않고 같은 소스 해시의 위 headless 보고서를 검사기에 전달 | [identity.json](../data/reports/interior_identity/20261016/identity.json)·[로그](../data/reports/interior_identity/20261016/identity.log) |
+| 기존 방문 회귀 headless | **77/77 PASS**. 기존 `check_building_visits.gd`의 출입·계단 왕복·승강기 선택/차단/취소·복귀·메뉴·위층 카메라/보행자와 외부 충돌 보존. GPU 캡처 판정을 포함한 과거82개와 구분 | [visits_regression.json](../data/reports/interior_identity/20261016/visits_regression.json)·[로그](../data/reports/interior_identity/20261016/visits_regression.log) |
+
+### 검사 관측과 전수/대표 범위
+
+[check_interior_identity.gd](../tests/game/check_interior_identity.gd)는 headless에서 각 원본 레코드의 실제 방을 하나씩 만들고 제거한다. 모든 층의 스폰·승강장, 중앙 통로 양쪽의 깊이9점씩, 양 계단 접근점, 앞쪽 횡단 통로5점과 1층 출구에 반경0.30m·높이1.70m 캡슐로 실제 `intersect_shape`를 수행한다. 모든 층의 스폰/승강장 바닥은 별도 ray로 확인한다. 32,660회는 이 명시된 위치의 질의 수이며 전체 평면의 모든 위치나 모든 실내 경로 완주를 뜻하지 않는다. 보호 구간 밖 가구 사이의 모든 간격·모든 소품의 시각 겹침을 전수 판정한 것도 아니다.
+
+고정 카탈로그의 분류 기대값은 `bank3/chapel3/civic6/gallery5/hotel9/library1/office97/residential1`이다. 대표는 서울도서관4층·신청사12층·서울파이낸스센터28층·더플라자호텔22층·정동1928아트센터2층, 합계68층이다. 도서관의 실제 서가·반납기·독서 책상, 공공 로비의 접수/상담·대기석·번호표, 업무 공간의 안내 데스크와 업무층, 호텔의 라운지와 3층 침대/객실 번호, 원본 `kind=civic`인 아트센터의 전시 패널/전시대를 직접 관측한다. 교회 긴 의자·주거 우편함·은행 창구는 headless의 추가 실제 shape 관측이다. `detail_counts`나 `features`의 자기 보고만으로 차이를 인정하지 않으며 실제 충돌체의 shape 크기·XZ 위치를 층끼리 비교해 노드 이름만 바꾼 복제를 구분한다. 한국어 표지도 실제 새 Label3D 내용을 읽으며 기존 층수/엘리베이터 글자를 새 디테일로 합산하지 않는다.
+
+headless dummy renderer는 실제 GPU MultiMesh 변환을 읽을 수 없으므로 대표5곳의 읽기를 `deferred_checks`에 보류한다. native 실행은 각 배치의 실제 변환을 읽고 `placements`의 위치·크기·basis와 대조하며, 원통/구형 장식 배치도 포함한다. GPU의 `--catalog-evidence`는 headless PASS·125동/1,205층과 모든 검사 대상 소스 SHA-256 일치를 요구한다. 같은 항목을 headless/GPU에서 반복한 수를 별개의 새 기능 수나 전체 동선 수로 합산하지 않는다.
+
+### 실제 제어·화면과 한계
+
+초기 배치와 촬영을 위한 위치 이동은 보고서의 `scenario_starts`에 명시한 시험용 순간이동이다. 입퇴장은 production 물리 E 바인딩의 짧은 눌렀다 놓기 이벤트이고, 도서관 승강기 이동은 실제 전환 controller를 거친다. 도서관 계단 하강은 경유점 사이의 순간이동 없이 실제 이동 입력으로 수행한다. 사람4명의 이동과 메뉴에서의 정지, 외부 원본 body/shape692개의 동일성을 확인한다. 이 여정은 125개 건물의 모든 층에서 E·승강기·계단을 각각 완주한 결과가 아니다.
+
+최종 GPU 화면9장은 도서관 안내 로비·열람층·책/독서등 근접, 신청사 시민 로비, 업무 로비·실제 업무 프로그램층, 호텔 로비·객실층, 아트센터 로비다. 넓은 입장 시점은 유지하고 세부 촬영은 실제 접수대/책상/침대의 위치를 읽어 플레이어 옆에 놓이도록 조준한다. 일반 화면에서 선택할 수 있는 줌2m/4m만 사용하고 실제 카메라 overlap0·대상이 화면 안에 투영되면서 상단 안내 UI에 가리지 않는지를 검사한다. 실제 저장 이미지의 조도·천장/시야·가구 방향·한글 가독성은 파일을 열어 별도로 검토하며, 저장 성공만으로 외관 품질을 통과 처리하지 않는다. **92/92 GPU PASS** — 9장 모두 열어 검토했고 넓은 로비 코어·유리 파티션·열린 객실 베이의 차이를 확인했다. 실행 이력·최종 요약에 연결한다. 모든 카메라 각도에서의 가림·좁은 가구 옆 이동·사람의 전체 조작감·장시간 렌더 성능·export·M4/다른 Mac은 이번 판정에 포함하지 않는다. 책·반납기·번호표·커피 기기·게이트·객실 문 등 새 소품은 대부분 보기용이며, 표지가 존재한다는 이유로 실제 조작 기능을 제공한다고 보고하지 않는다.
+
+[참조 manifest](../data/manual/interior_identity_references.json)의 공식 사진 관찰·텍스트 안내·과거/현재 용도를 구분한다. 사진 픽셀은 게임에 수입하지 않았으며, 가구와 층별 용도·칸막이·재질·치수는 원본 안에 맞춘 게임 해석이다. 실측 복원·현장 출입 권한이나 실제 현재 입주사를 검증한 결과가 아니다. EXP04 이전 사진은 해당 소스 버전의 비교 자료이며 같은 코드의 단일 설정만 바꾼 대조군이 아니다.
+
+최초 [headless_01.json](../data/reports/interior_identity/20261016/development/headless_01.json)·[로그](../data/reports/interior_identity/20261016/development/headless_01.log)의 53개 중1개 실패는 같은 이름의 가구 sibling을 Godot이 자동 재명명해 2층 독서 책상을 세지 못한 관측 오류였다. 충돌을 끄거나 실제 가구를 옮기지 않고, 각 실제 body의 `geometry_id` 의미와 shape/위치를 함께 읽도록 검사기를 수정했다. 중간 `headless_02`의 53개 PASS는 캐시 개발 이력으로 남기고, 대표 전시관·특수3종·분류 기대값까지 추가한65개와 구분한다. 첫 [GPU01 보고서](../data/reports/interior_identity/20261016/development/gpu01/identity.json)·[로그](../data/reports/interior_identity/20261016/development/gpu01/identity.log)는 76/76 PASS였으나, 실제 화면9장을 열자 업무/호텔 가구가 멀리 벽에만 붙어 입구 중앙이 비어 보였고 가까운 촬영에서는 플레이어 외형이 디테일을 가렸다. [화면 검토 기록](../data/reports/interior_identity/20261016/development/review_notes.json)을 남기고 중앙 가까운 로비 구역·업무 파티션·호텔 객실 구획을 보강하며 촬영 방향도 실제 가구에 맞춰 수정한다. 첫GPU의 자동 판정 성공을 최종 시각 품질 통과로 대신하지 않는다. 새 충돌 가구가 생기므로 최종 headless/GPU를 다시 실행하고 위 결과행과 소스 해시를 갱신한다. headless의 기존 macOS 시스템 CA 조회 `Condition "ret != noErr"` 메시지는 기록하고 parse/runtime/physics 실패와 구분한다.
+
+재현은 저장소 루트에서 아래 순서로 실행한다. 각 보고서 경로에서 별도의 탐험/품질 설정 파일을 사용해 사용자 저장 설정을 변경하지 않는다. GPU 검사는 일반 게임과 동시에 조작하지 않고 순서대로 실행한다.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-identity-headless.log --script ../tests/game/check_interior_identity.gd -- --automatic-probe --report=/private/tmp/sim2seoul-identity-headless.json
+/Applications/Godot.app/Contents/MacOS/Godot --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-identity-gpu.log --script ../tests/game/check_interior_identity.gd -- --automatic-probe --report=/private/tmp/sim2seoul-identity-gpu.json --catalog-evidence=/private/tmp/sim2seoul-identity-headless.json
+/Applications/Godot.app/Contents/MacOS/Godot --headless --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-visits-regression.log --script ../tests/game/check_building_visits.gd -- --automatic-probe --report=/private/tmp/sim2seoul-visits-regression.json
+```
+
 ## 최신 출입구 안내 EXP06 — 원본 좌표·방향·물리 E
 
 2026-10-16 [최종 요약](../data/reports/entrance_wayfinding/20261016/summary.json) 기준이다. EXP04의 125개 게임 문 좌표에 청록 문틀·정문/입구 표지·바닥 E를 연결하고, 150m 화면 방향/직선거리 안내와 120m 벽 표지의 표시를 검증했다. 가까운 5m 입구 우선·실제 조준 건물 우선·8m 안의 즉시 가림 검사와 원래 E 출입을 함께 확인한다. 아래 EXP05·EXP04 수치는 이전 실행의 증거로 보존한다.

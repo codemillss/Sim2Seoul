@@ -1,0 +1,943 @@
+{
+  "schema_version": 1,
+  "task": "EXP07_INTERIOR_IDENTITY",
+  "result": "PASS",
+  "recorded_at": "2026-10-16T14:36:55.097150+09:00",
+  "base_commit": "4f90547c22faaf9e7270821a4f6e67b400cbfdfb",
+  "profile_counts": {
+    "bank": 3,
+    "chapel": 3,
+    "civic": 6,
+    "gallery": 5,
+    "hotel": 9,
+    "library": 1,
+    "office": 97,
+    "residential": 1
+  },
+  "changes": [
+    "Eight source-title/ID interpreted room profiles and floor programmes",
+    "Korean library shelves, spines, return terminal, individual reading lamps and stepped reading cushions; civic greenery, queue and service area",
+    "Human-scale office/hotel cores, office glass partitions and open hotel guest bays",
+    "Original metre-scale procedural tile, timber, plaster and fabric shader; shared mesh batches; bounded adjacent-floor labels"
+  ],
+  "references": "../../../manual/interior_identity_references.json",
+  "verification": {
+    "headless": {
+      "report": "headless.json",
+      "log": "headless.log",
+      "checks": 81,
+      "failed": 0,
+      "catalog": {
+        "buildings": 125,
+        "capsule_queries": 32660,
+        "detail_solid_bodies": 16606,
+        "errors": [],
+        "floors": 1205,
+        "people_bad_ids": [],
+        "profile_counts": {
+          "bank": 3,
+          "chapel": 3,
+          "civic": 6,
+          "gallery": 5,
+          "hotel": 9,
+          "library": 1,
+          "office": 97,
+          "residential": 1
+        },
+        "scope": "all_125_source_buildings",
+        "support_rays": 2410
+      }
+    },
+    "GPU": {
+      "report": "identity.json",
+      "log": "identity.log",
+      "checks": 92,
+      "failed": 0,
+      "captures": [
+        {
+          "actual_furniture_target": null,
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.990268111228943,
+                0.0,
+                0.139173120260239
+              ],
+              [
+                0.0193691551685333,
+                0.990268111228943,
+                -0.137818694114685
+              ],
+              [
+                -0.137818694114685,
+                0.139173120260239,
+                0.980630874633789
+              ]
+            ],
+            "origin": [
+              649.549133300781,
+              -98.2443695068359,
+              28.3591613769531
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": null,
+          "height": 720,
+          "level": 0,
+          "name": "library_lobby",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_library_lobby.png",
+          "player": [
+            650.0,
+            -99.9996871948242,
+            25.1509666442871
+          ],
+          "profile": "library",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 0,
+            "depth": 57.3019350103232,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              145.833786010742,
+              0.0799999982118607,
+              -114.841453552246
+            ],
+            "entry_count": 1,
+            "error": "",
+            "exit_count": 0,
+            "feature_id": "osm:relation:10757525:building",
+            "floor_count": 4,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              145.833786010742,
+              0.0800001174211502,
+              -114.841453552246
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 241,
+            "selected_floor": 0,
+            "width": 14.7491810869779
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            0.0,
+            0.0
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": null,
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.990268111228943,
+                0.0,
+                0.139173120260239
+              ],
+              [
+                0.0193691551685333,
+                0.990268111228943,
+                -0.137818694114685
+              ],
+              [
+                -0.137818709015846,
+                0.139173120260239,
+                0.980630874633789
+              ]
+            ],
+            "origin": [
+              649.549133300781,
+              -93.6193695068359,
+              28.3591613769531
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": null,
+          "height": 720,
+          "level": 1,
+          "name": "library_reading_floor",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_library_reading_floor.png",
+          "player": [
+            650.0,
+            -95.3746871948242,
+            25.1509666442871
+          ],
+          "profile": "library",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 1,
+            "depth": 57.3019350103232,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              145.833786010742,
+              0.0799999982118607,
+              -114.841453552246
+            ],
+            "entry_count": 1,
+            "error": "",
+            "exit_count": 0,
+            "feature_id": "osm:relation:10757525:building",
+            "floor_count": 4,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              145.833786010742,
+              0.0800001174211502,
+              -114.841453552246
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 241,
+            "selected_floor": 1,
+            "width": 14.7491810869779
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            0.0,
+            0.0
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            644.525390625,
+            -94.3150024414062,
+            15.6509675979614
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.238863125443459,
+                0.0,
+                -0.971053242683411
+              ],
+              [
+                -0.0726600140333176,
+                0.997196674346924,
+                -0.0178731679916382
+              ],
+              [
+                0.968331038951874,
+                0.0748259797692299,
+                0.238193511962891
+              ]
+            ],
+            "origin": [
+              648.762023925781,
+              -93.9250335693359,
+              17.9273548126221
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            643.715393066406,
+            -94.3150024414062,
+            16.685962677002
+          ],
+          "height": 720,
+          "level": 1,
+          "name": "library_books_and_reading_lamps_close",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_library_books_and_reading_lamps_close.png",
+          "player": [
+            646.825378417969,
+            -95.3746871948242,
+            17.4509677886963
+          ],
+          "profile": "library",
+          "requested_zoom_m": 2.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 1,
+            "depth": 57.3019350103232,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              145.833786010742,
+              0.0799999982118607,
+              -114.841453552246
+            ],
+            "entry_count": 1,
+            "error": "",
+            "exit_count": 0,
+            "feature_id": "osm:relation:10757525:building",
+            "floor_count": 4,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              145.833786010742,
+              0.0800001174211502,
+              -114.841453552246
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 241,
+            "selected_floor": 1,
+            "width": 14.7491810869779
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            729.637451171875,
+            365.173156738281
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            656.0,
+            -98.9400024414062,
+            45.9472160339355
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.636318385601044,
+                0.0,
+                0.771426558494568
+              ],
+              [
+                0.0269164144992828,
+                0.999391138553619,
+                -0.0222022533416748
+              ],
+              [
+                -0.770956873893738,
+                0.034891739487648,
+                0.635930955410004
+              ]
+            ],
+            "origin": [
+              646.916198730469,
+              -98.5601196289062,
+              51.4909400939941
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            655.309997558594,
+            -98.9400024414062,
+            44.5672149658203
+          ],
+          "height": 720,
+          "level": 0,
+          "name": "cityhall_citizen_lobby",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_cityhall_citizen_lobby.png",
+          "player": [
+            650.0,
+            -99.9996871948242,
+            48.9472160339355
+          ],
+          "profile": "civic",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 0,
+            "depth": 104.894433184516,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              196.180114746094,
+              0.0799999982118607,
+              -198.732177734375
+            ],
+            "entry_count": 2,
+            "error": "",
+            "exit_count": 1,
+            "feature_id": "osm:way:198561926:building",
+            "floor_count": 12,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              196.180114746094,
+              0.0800000205636024,
+              -198.732177734375
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 514,
+            "selected_floor": 0,
+            "width": 47.056366296468
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            661.456726074219,
+            360.685699462891
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            655.599975585938,
+            -98.9400024414062,
+            29.9481010437012
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.706590890884399,
+                0.0,
+                0.707622289657593
+              ],
+              [
+                0.0250801313668489,
+                0.999371707439423,
+                -0.0250435750931501
+              ],
+              [
+                -0.707177698612213,
+                0.0354428216814995,
+                0.706146955490112
+              ]
+            ],
+            "origin": [
+              647.171264648438,
+              -98.5579147338867,
+              36.2726898193359
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            654.794982910156,
+            -98.9400024414062,
+            28.6601066589355
+          ],
+          "height": 720,
+          "level": 0,
+          "name": "office_lobby",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_office_lobby.png",
+          "player": [
+            650.0,
+            -99.9996871948242,
+            33.4481010437012
+          ],
+          "profile": "office",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 0,
+            "depth": 73.8962037615366,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              167.12629699707,
+              0.0799999982118607,
+              -350.413848876953
+            ],
+            "entry_count": 3,
+            "error": "",
+            "exit_count": 2,
+            "feature_id": "osm:way:332565592:building",
+            "floor_count": 28,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              167.12629699707,
+              0.0800000205636024,
+              -350.413848876953
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 1657,
+            "selected_floor": 0,
+            "width": 25.01452361023
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            660.947021484375,
+            360.692321777344
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            655.599975585938,
+            -90.0828628540039,
+            29.9481010437012
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.706590890884399,
+                0.0,
+                0.707622289657593
+              ],
+              [
+                0.0250801313668489,
+                0.999371707439423,
+                -0.0250435750931501
+              ],
+              [
+                -0.707177698612213,
+                0.0354428216814995,
+                0.706146955490112
+              ]
+            ],
+            "origin": [
+              647.171264648438,
+              -89.7007751464844,
+              36.2726898193359
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            654.794982910156,
+            -90.0828628540039,
+            28.6601066589355
+          ],
+          "height": 720,
+          "level": 2,
+          "name": "office_work_floor",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_office_work_floor.png",
+          "player": [
+            650.0,
+            -91.1425476074219,
+            33.4481010437012
+          ],
+          "profile": "office",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 2,
+            "depth": 73.8962037615366,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              167.12629699707,
+              0.0799999982118607,
+              -350.413848876953
+            ],
+            "entry_count": 3,
+            "error": "",
+            "exit_count": 2,
+            "feature_id": "osm:way:332565592:building",
+            "floor_count": 28,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              167.12629699707,
+              0.0800000205636024,
+              -350.413848876953
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 1657,
+            "selected_floor": 0,
+            "width": 25.01452361023
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            660.947021484375,
+            360.692321777344
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            655.599975585938,
+            -98.9400024414062,
+            4.18802690505981
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.687885284423828,
+                0.0,
+                0.725819408893585
+              ],
+              [
+                0.0261352621018887,
+                0.999351501464844,
+                -0.0247693322598934
+              ],
+              [
+                -0.725348711013794,
+                0.0360079407691956,
+                0.687439203262329
+              ]
+            ],
+            "origin": [
+              647.0986328125,
+              -98.5556488037109,
+              10.2377834320068
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            654.841003417969,
+            -98.9400024414062,
+            2.90003252029419
+          ],
+          "height": 720,
+          "level": 0,
+          "name": "hotel_lobby",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_hotel_lobby.png",
+          "player": [
+            650.0,
+            -99.9996871948242,
+            7.48802661895752
+          ],
+          "profile": "hotel",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 0,
+            "depth": 21.9760535474472,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              166.891464233398,
+              0.0799999982118607,
+              40.2531433105469
+            ],
+            "entry_count": 4,
+            "error": "",
+            "exit_count": 3,
+            "feature_id": "osm:way:233593619:building",
+            "floor_count": 22,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              166.891464233398,
+              0.0800000205636024,
+              40.2531433105469
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 1444,
+            "selected_floor": 0,
+            "width": 53.8464744473465
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            660.426818847656,
+            360.699493408203
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            655.599975585938,
+            -91.1109161376953,
+            3.88802695274353
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.706590890884399,
+                0.0,
+                0.707622289657593
+              ],
+              [
+                0.0334130004048347,
+                0.998884618282318,
+                -0.0333642959594727
+              ],
+              [
+                -0.706833004951477,
+                0.0472186915576458,
+                0.705802738666534
+              ]
+            ],
+            "origin": [
+              647.172668457031,
+              -90.6017227172852,
+              10.2112379074097
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            654.794982910156,
+            -91.1109161376953,
+            2.60003256797791
+          ],
+          "height": 720,
+          "level": 2,
+          "name": "hotel_guest_floor",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_hotel_guest_floor.png",
+          "player": [
+            650.0,
+            -92.0905990600586,
+            7.38802719116211
+          ],
+          "profile": "hotel",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 2,
+            "depth": 21.9760535474472,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              166.891464233398,
+              0.0799999982118607,
+              40.2531433105469
+            ],
+            "entry_count": 4,
+            "error": "",
+            "exit_count": 3,
+            "feature_id": "osm:way:233593619:building",
+            "floor_count": 22,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              166.891464233398,
+              0.0800000205636024,
+              40.2531433105469
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 1444,
+            "selected_floor": 0,
+            "width": 53.8464744473465
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            660.91796875,
+            360.922180175781
+          ],
+          "width": 1152
+        },
+        {
+          "actual_furniture_target": [
+            656.390380859375,
+            -98.9400024414062,
+            11.4892635345459
+          ],
+          "avatar_visible": true,
+          "camera": {
+            "basis": [
+              [
+                0.64631724357605,
+                0.0,
+                0.763068854808807
+              ],
+              [
+                0.024835167452693,
+                0.999470233917236,
+                -0.0210353191941977
+              ],
+              [
+                -0.762664616107941,
+                0.0325464308261871,
+                0.645974814891815
+              ]
+            ],
+            "origin": [
+              646.949340820312,
+              -98.5694961547852,
+              17.3731632232666
+            ]
+          },
+          "camera_overlap_count": 0,
+          "captured": true,
+          "framed_look_at_point": [
+            655.631408691406,
+            -98.9400024414062,
+            10.0194759368896
+          ],
+          "height": 720,
+          "level": 0,
+          "name": "gallery_lobby",
+          "normal_UI_zoom_range": true,
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/interior_identity/20261016/identity_gallery_lobby.png",
+          "player": [
+            650.0,
+            -99.9996871948242,
+            14.7892637252808
+          ],
+          "profile": "gallery",
+          "requested_zoom_m": 4.0,
+          "state": {
+            "active": true,
+            "authored_not_surveyed": true,
+            "catalog_count": 125,
+            "current_floor": 0,
+            "depth": 36.5785265820233,
+            "e_requires_release": false,
+            "elevator_open": false,
+            "entrance": [
+              -215.848831176758,
+              0.0799999982118607,
+              -323.364776611328
+            ],
+            "entry_count": 5,
+            "error": "",
+            "exit_count": 4,
+            "feature_id": "osm:way:1217684974:building",
+            "floor_count": 2,
+            "in_elevator": false,
+            "loaded": true,
+            "notice": "",
+            "outside_return": [
+              -215.848831176758,
+              0.0800000205636024,
+              -323.364776611328
+            ],
+            "rejected_entries": 0,
+            "rejected_exits": 0,
+            "room_origin": [
+              650.0,
+              -100.0,
+              0.0
+            ],
+            "room_static_bodies": 57,
+            "selected_floor": 0,
+            "width": 16.7807451734677
+          },
+          "target_clear_of_top_UI": true,
+          "target_pixel": [
+            663.700317382812,
+            360.656646728516
+          ],
+          "width": 1152
+        }
+      ],
+      "actual_MultiMesh_readback_representatives": 5,
+      "representative_floors": 68,
+      "all_nine_images_opened_and_reviewed": true
+    },
+    "visit_regression_headless": {
+      "report": "visits_regression.json",
+      "log": "visits_regression.log",
+      "checks": 77,
+      "failed": 0,
+      "additional_dependency_sha256_at_start": {
+        "game/scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+        "game/scripts/interior_detail_kit.gd": "9cdfe47a6a5f69d8a056678f5e50bc2dc962470f44815face6d533a1ae0a08cc",
+        "game/scripts/interior_surface.gdshader": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b"
+      }
+    },
+    "total_check_executions": 250,
+    "same_checks_repeated_on_GPU_and_headless_are_not_unique_features": true,
+    "headless_environment_note": "Existing macOS CA-query warning only; GPU/normal launch have no script/parse/runtime errors."
+  },
+  "source_sha256": {
+    "res://../tests/game/check_interior_identity.gd": "4f0f565cc871ae19825610af9f37a3af3f33f7a9bea3cb55e24649491aa5566b",
+    "res://assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "res://scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+    "res://scripts/building_visit_catalog.gd": "67f0dba564e954b9a84fea8a2044cc270866a6f58ce2bf25c9c37bedb89b1ab8",
+    "res://scripts/interior_detail_kit.gd": "9cdfe47a6a5f69d8a056678f5e50bc2dc962470f44815face6d533a1ae0a08cc",
+    "res://scripts/interior_surface.gdshader": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b",
+    "res://scripts/interior_visit.gd": "731acc6d337e310acf6d7902fa260c0c122530c47c2f5971c27e863ab0284a39",
+    "res://scripts/player/free_roam_player.gd": "1e8c4220496032149d7c099a850aa1ddeba133d8017bc5fe957f82d102008a64"
+  },
+  "native_launch": {
+    "pid": 66235,
+    "launched_at": "2026-10-16T14:34:07.560302+09:00",
+    "speed_id": "turbo",
+    "free_roam": true,
+    "log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/cache/interior_identity/20261016/normal-launch.log",
+    "launcher": "sh tools/run_exploration.sh run",
+    "native_observation": "CUA observed normal game at Daehanmun, HUD 초고속(3배), entrance card. Escape follow-up timed out; no claim of OS-controlled interior visit."
+  },
+  "development": {
+    "initial_fixture_failure": "development/headless_01.json",
+    "first_GPU_functional_PASS_but_visual_rework": "development/gpu01/identity.json",
+    "visual_review": "development/review_notes.json",
+    "before_images": [
+      "../../building_visits/20261016/buildings_library_lobby.png",
+      "../../building_visits/20261016/buildings_cityhall_lobby.png"
+    ],
+    "same_floor_guard": "Restored original early return after noticing that interior_visit calls set_active_floor each frame; detail initialization already selects floor 0."
+  },
+  "limits": [
+    "Source-sized partial floor plates and floor counts are retained; layouts and floor programmes are authored game interpretations, not surveyed plans or current tenant directories.",
+    "New service machines, books, gates and room furnishings are predominantly visual props; real lending/check-in/banking services and interactive room doors are not implemented.",
+    "Capsule queries cover reserved spawn/lift/central/front/stair approach samples, not all points of all furniture aisles.",
+    "Physical visits cover five representative buildings; complete journeys through every floor of all 125 buildings are not verified.",
+    "No long-running performance, new export or cross-Mac validation."
+  ]
+}

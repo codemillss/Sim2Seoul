@@ -22,6 +22,7 @@ var _batches: Dictionary = {}
 var _people_state: Array[Dictionary] = []
 var _time := 0.0
 var _ready_space := false
+var detail_kit: RefCounted
 
 func setup(building: Dictionary, origin: Vector3) -> bool:
 	if _ready_space or not origin.is_finite():return false
@@ -43,6 +44,8 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 	stair_front = stair_mid_back+stair_run
 	interior_bounds = AABB(origin+Vector3(-width*.5+.32,-.35,-depth*.5+.32),Vector3(width-.64,floor_height*floor_count+.65,depth-.64))
 	_make_materials()
+	detail_kit = preload("res://scripts/interior_detail_kit.gd").new()
+	detail_kit.setup(self)
 	_build_shell()
 	for level in range(floor_count):
 		_build_floor(level)
@@ -50,6 +53,7 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 		_build_elevator(level)
 		_build_furniture(level)
 		_build_lighting(level)
+	detail_kit.finish()
 	_flush_batches()
 	_make_people()
 	_ready_space = true
@@ -66,6 +70,12 @@ func _make_materials() -> void:
 			material.emission = Color(.97,.91,.73)
 			material.emission_energy_multiplier = .8
 		_materials[key] = material
+		if key in ["floor","wood","wall","seat"]:
+			var surface := ShaderMaterial.new()
+			surface.shader = preload("res://scripts/interior_surface.gdshader")
+			surface.set_shader_parameter("base_color",colors[key])
+			surface.set_shader_parameter("surface_kind",{"floor":0,"wood":1,"wall":2,"seat":3}[key])
+			_materials[key] = surface
 
 func _box(title: String, size: Vector3, point: Vector3, material: String, solid := false, basis := Basis.IDENTITY) -> StaticBody3D:
 	if not _batches.has(material):_batches[material] = []
@@ -212,37 +222,7 @@ func _build_elevator(level: int) -> void:
 	_box("ElevatorWaitingPad",Vector3(2.1,.005,1.55),Vector3(x,y+.003,z-1.40),"stripe")
 
 func _build_furniture(level: int) -> void:
-	var y := level*floor_height
-	var library := String(spec.get("kind","office"))=="library"
-	var table_x := maxf(2.7,width*.28)
-	var table_count := mini(5,maxi(2,int(depth/8.0)))
-	var columns: Array[float] = [-table_x,table_x]
-	if width>=32.0:columns = [-width*.25,width*.18,width*.36]
-	for column_x in columns:
-		for index in range(table_count):
-			var z := -depth*.5+3.0+float(index)*maxf(3.2,(depth-8.0)/float(table_count))
-			# Do not put furniture on or beside the western stair approach.
-			if column_x<0.0 and z<stair_front+2.4:continue
-			_box("ReadingTable" if library else "WorkTable",Vector3(2.4,.14,1.25),Vector3(column_x,y+.79,z),"wood",true)
-			for dx in [-.95,.95]:
-				for dz in [-.43,.43]:_box("TableLeg",Vector3(.07,.72,.07),Vector3(column_x+dx,y+.36,z+dz),"dark")
-			for dz in [-1.05,1.05]:
-				_box("Seat",Vector3(1.65,.14,.48),Vector3(column_x,y+.47,z+dz),"seat",true)
-				_box("SeatSupport",Vector3(1.35,.40,.30),Vector3(column_x,y+.20,z+dz),"wood")
-			if not library:
-				_box("WorkMonitor",Vector3(.70,.43,.065),Vector3(column_x,y+1.15,z-.25),"dark")
-				_box("WorkMonitorScreen",Vector3(.60,.33,.02),Vector3(column_x,y+1.15,z-.20),"glass")
-	if library:
-		var shelf_count := mini(10,maxi(2,int(depth/3.8)))
-		for index in range(shelf_count):_shelf(Vector3(width*.5-.48,y,-depth*.5+2.0+float(index)*3.0))
-		_sign("LibrarySection%d"%level,"안내 · 일반자료" if level==0 else "열람 · 자료 %d층"%(level+1),Vector3(width*.25,y+2.5,-depth*.5+.17),30)
-	else:
-		_sign("OfficeSection%d"%level,"안내 · 공용 로비" if level==0 else "공용 업무 공간",Vector3(width*.25,y+2.5,-depth*.5+.17),30)
-	if level==0:
-		var desk_x := minf(width*.5-2.2,5.6)
-		_box("ReceptionDesk",Vector3(3.2,1.05,1.1),Vector3(desk_x,.525,depth*.5-3.0),"wood",true)
-		_box("ReceptionDeskTop",Vector3(3.35,.10,1.2),Vector3(desk_x,1.10,depth*.5-3.0),"floor")
-		_sign("ReceptionSign","안내",Vector3(desk_x,.78,depth*.5-2.42),27)
+	detail_kit.build_level(level)
 
 func _shelf(point: Vector3) -> void:
 	_box("ShelfBack",Vector3(.12,1.95,2.25),point+Vector3(0,.975,0),"wood",true)
@@ -328,11 +308,15 @@ func set_active_floor(level: int) -> void:
 	var next := clampi(level,0,floor_count-1)
 	if next==active_floor:return
 	active_floor = next
+	if detail_kit:detail_kit.set_active_floor(next)
 	for child in get_children():
 		if child is OmniLight3D:
 			var light: OmniLight3D = child
 			light.visible = absi(int(light.get_meta("floor_index",-10))-active_floor)<=1
 	_update_people(0.0)
+
+func interior_snapshot() -> Dictionary:
+	return detail_kit.snapshot() if detail_kit else {}
 
 func _process(delta: float) -> void:
 	if not _ready_space or not visible:return
