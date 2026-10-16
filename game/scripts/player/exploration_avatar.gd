@@ -156,15 +156,10 @@ func _activity_pose() -> void:
 			position.y=-.055
 			var phase := fmod(elapsed*1.45*TAU,TAU)
 			_upper_body.rotation.x=-.035
-			_upper_body.position.y+=absf(sin(phase*2.0))*.012
 			for side_name: String in ["Left","Right"]:
 				var side := -1.0 if side_name=="Left" else 1.0
 				var cycle := fmod(phase+(PI if side_name=="Right" else 0.0),TAU)
-				var foot := Vector3(side*.105,STANDING_ANKLE_Y,0)
-				if cycle<PI:foot.z=-.16+.32*cycle/PI
-				else:
-					var swing := (cycle-PI)/PI
-					foot.z=.16-.32*swing;foot.y+=sin(swing*PI)*.09
+				var foot := _gait_foot(side,cycle,.16,.09)
 				_feet[side_name]=foot;_leg_pose(side_name,foot)
 				(_joints[side_name+"UpperArm"] as Node3D).rotation.x=-cos(cycle)*.35-.04
 				(_joints[side_name+"Forearm"] as Node3D).rotation.x=.28
@@ -180,6 +175,15 @@ func _leg_pose(side_name: String,foot: Vector3) -> void:
 	(_joints[side_name+"Thigh"] as Node3D).rotation.x=upper
 	(_joints[side_name+"Shin"] as Node3D).rotation.x=lower-upper
 	(_joints[side_name+"Foot"] as Node3D).rotation.x=-lower
+
+func _gait_foot(side: float,phase: float,reach: float,lift: float) -> Vector3:
+	# Continuous turnarounds and a zero-speed toe-off/landing avoid the
+	# abrupt foot reversals of a triangular stride, without lifting stance.
+	var foot := Vector3(side*.105,STANDING_ANKLE_Y,-cos(phase)*reach)
+	if phase>=PI:
+		var arch := sin(phase-PI)
+		foot.y+=arch*arch*lift
+	return foot
 
 func _physics_process(delta: float) -> void:
 	if not _ready_avatar or not is_instance_valid(player) or delta<=0.0:return
@@ -213,19 +217,16 @@ func _physics_process(delta: float) -> void:
 	state="air" if not grounded else ("run" if _run_weight>.45 and moving else ("walk" if moving else "idle"))
 	var reach := lerpf(.17,.25,_run_weight)*walk_weight
 	var lift := lerpf(.09,.17,_run_weight)*walk_weight
-	var body_bob := absf(sin(stride_phase*2.0))*.018*walk_weight*(1.0-_air_weight)
-	_upper_body.position.y=.85+body_bob
+	# The limbs carry the gait. A steady head/torso removes the former
+	# four-pulses-per-stride bob (8.8Hz at turbo cadence) and lateral sway.
+	_upper_body.position=Vector3(0,.85,0)
 	_upper_body.rotation.x=-.075*_run_weight*walk_weight-.035*_air_weight
-	_upper_body.rotation.z=sin(stride_phase)*.020*walk_weight*(1.0-_air_weight)
+	_upper_body.rotation.z=0.0
 	for side_name: String in ["Left","Right"]:
 		var side := -1.0 if side_name=="Left" else 1.0
 		var phase := fmod(stride_phase+(PI if side_name=="Right" else 0.0),TAU)
-		var foot := Vector3(side*.105,STANDING_ANKLE_Y,-.025)
-		if phase<PI:foot.z=-reach+2.0*reach*phase/PI
-		else:
-			var swing := (phase-PI)/PI
-			foot.z=reach-2.0*reach*swing;foot.y+=sin(swing*PI)*lift
-		if walk_weight==0.0:foot=Vector3(side*.105,STANDING_ANKLE_Y,-.025)
+		var foot := _gait_foot(side,phase,reach,lift)
+		foot.z-=.025*(1.0-walk_weight)
 		var air_foot := Vector3(side*.105,.22+(.06 if side_name=="Left" else 0.0),-.11 if side_name=="Left" else .10)
 		foot=foot.lerp(air_foot,_air_weight)
 		# IK retains flat shoe soles through stance; only the swing foot lifts.

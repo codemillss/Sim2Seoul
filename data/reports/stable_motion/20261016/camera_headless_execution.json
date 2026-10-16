@@ -1,0 +1,47 @@
+{
+  "task": "stable_camera_headless_execution",
+  "argv": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--log-file",
+    "/private/tmp/sim2seoul_stable_camera_final_engine.log",
+    "--script",
+    "res://../tests/game/check_exploration_camera.gd",
+    "--",
+    "--result=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/stable_motion/20261016/camera_headless.json"
+  ],
+  "command": "/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --log-file /private/tmp/sim2seoul_stable_camera_final_engine.log --script res://../tests/game/check_exploration_camera.gd -- '--result=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/stable_motion/20261016/camera_headless.json'",
+  "working_directory": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul",
+  "exit_code": 0,
+  "execution_start_time": "2026-10-16T17:38:47.081506+09:00",
+  "execution_end_time": "2026-10-16T17:39:16.656708+09:00",
+  "source_sha256_before": {
+    "game/scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+    "game/scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "game/scenes/player/camera_rig.tscn": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_exploration_camera.gd": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70"
+  },
+  "source_sha256_after": {
+    "game/scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+    "game/scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "game/scenes/player/camera_rig.tscn": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_exploration_camera.gd": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70"
+  },
+  "source_changes": [],
+  "result": "PASS",
+  "scenarios": 7,
+  "fractional_eye_samples": 8450,
+  "overlaps": 0,
+  "invalid": 0,
+  "inversions": 0,
+  "assertion_count": null,
+  "assertion_count_limitation": "Existing fixture reports named scenarios, per-scenario sample counts and failures, rather than an executed assertion total.",
+  "failures": [],
+  "report_sha256": "ea6bbd491a255a564196d45df239d09244e8abed3979ebe57315b98631fb0bf9",
+  "log_sha256": "541d607fbab3fed516a95d9b35242ed8e11a1c50fdbba9c12509343ed6f0b275",
+  "scope": "Headless static-camera collision/interpolation regression only. No articulated avatar in this fixture; shared body/camera interpolation is checked separately by check_stable_motion.gd. Native appearance and human comfort are not established here."
+}

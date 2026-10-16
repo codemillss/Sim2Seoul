@@ -1,0 +1,32 @@
+{
+  "task": "stable_camera_headless_execution",
+  "command": "/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --log-file /private/tmp/sim2seoul_stable_camera_engine.log --script res://../tests/game/check_exploration_camera.gd -- --result=/private/tmp/sim2seoul_stable_camera.json > /private/tmp/sim2seoul_stable_camera.log 2>&1",
+  "working_directory": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul",
+  "exit_code": 0,
+  "execution_start_time": null,
+  "execution_end_time": null,
+  "execution_time_limitation": "Exact process start/end timestamps were not captured. Filesystem capture timestamps below are separate observations, not claimed execution boundaries.",
+  "output_capture_file_created_at": "2026-10-16T17:33:56.325111+09:00",
+  "output_capture_file_last_written_at": "2026-10-16T17:34:25.629009+09:00",
+  "source_hashes_observed_at": "2026-10-16T17:35:58.507469+09:00",
+  "source_hash_observation": "Observed after the completed run. No source hashes were captured at process launch; the camera owner made no further edits after the launch.",
+  "source_sha256_observed_after_run": {
+    "game/scripts/player/exploration_camera.gd": "c9cab2110e3a940faf66e8f0cca29345e9309a04c32c1be8862a006fa3c5b36d",
+    "game/scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "game/scenes/player/camera_rig.tscn": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_exploration_camera.gd": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70"
+  },
+  "result": "PASS",
+  "scenarios": 7,
+  "fractional_eye_samples": 8450,
+  "overlaps": 0,
+  "invalid": 0,
+  "inversions": 0,
+  "assertion_count": null,
+  "assertion_count_limitation": "Existing fixture reports seven named scenarios, per-scenario sample counts and failures, rather than an executed assertion total.",
+  "failures": [],
+  "report_sha256": "41b6f49b357ce694551bfa65066744f8c114e55f1dc51f12a0481331583eab74",
+  "log_sha256": "25c4ec1a0953e93fd899729055fdae0b261a8dd22d7704994ccc7d0425cc9934",
+  "scope": "Headless static-camera collision/interpolation regression only. This fixture has no articulated avatar, so body/camera synchronisation is checked separately by check_stable_motion.gd; native appearance and human comfort are not established here."
+}

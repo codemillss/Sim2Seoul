@@ -4,6 +4,14 @@
 
 기획의 맥락·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 전체 순서는 [MASTER_PLAN](MASTER_PLAN.md), 실제 자료 확보 상태는 [WORK_STATUS](WORK_STATUS.md)다. 좌표·속성·충돌·경로 계약은 [TECHNICAL_CONTRACTS](TECHNICAL_CONTRACTS.md), 시험 조건과 판정은 [VALIDATION_PLAN](VALIDATION_PLAN.md)을 따른다. 이 문서의 제안과 계약이 충돌하면 근거를 기록하고 계약을 먼저 정리한다. 미터 좌표로 저장하는 모든 중간 JSON은 CRS·지역 원점·축·단위를 명시하며 WGS84 GeoJSON 검사용 파일과 구분한다. 생성 자산은 `game/assets/generated/`, 수동 모델·장식은 `game/assets/authored/`, 재생성에 보존할 보정은 `data/manual/`에 둔다.
 
+## [x] EXP13 움직임 안정화 — 완료 (2026-10-16)
+
+- [x] 상체의 상하 bob/좌우 roll과 발 전환의 갑작스러운 변화를 줄인다.
+- [x] 물리 위치를 보존하면서 화면의 카메라와 캐릭터 표시 시점을 일치시키고 복귀 첫 게시·메뉴·시설/승강기 전환을 확인한다.
+- [x] 30·60·144fps 제한/60Hz 물리, 기존 카메라/옥상/시설 회귀와 최종 GPU 화면을 검증하고 일반 실행·기록·Git 공유를 마친다.
+
+[증거](../data/reports/stable_motion/20261016/summary.json): GPU236/headless207 실행 판정, 별도 카메라8,450표본·충돌0, 최종24소스 해시 불일치0·12장 검토. 다음 EXP14는 사용자 후속 거리 생활감/게임용 미술관 경사 요청이다.
+
 ## [x] EXP12 연속 점프·옥상 점프·걷기/달리기 — 완료 (2026-10-16)
 
 - 입력: EXP11 시설 사용 작업 중 실제 사용자 플레이 피드백.

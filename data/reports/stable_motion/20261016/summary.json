@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "task": "EXP13_STABLE_MOTION",
+  "base_commit": "9759ebc89ae3890b4782ca54f6461ccde9f24640",
+  "recorded_at": "2026-10-16T17:46:21.060063+09:00",
+  "result": "PASS",
+  "source_sha256": {
+    "tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+    "tests/game/check_stable_motion.gd": "211f4fa68df4fb537b0c06595d4733a77bde4ec8deabc8c6764e72815d4ab463",
+    "game/scenes/player/camera_rig.tscn": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6",
+    "game/scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "game/scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "game/scripts/player/exploration_avatar.gd": "7ed8375df49706f7dec467383311e16487fa34c1ee73f99fd1684dac1144fc8b",
+    "game/scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+    "game/scripts/player/free_roam_player.gd": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+    "tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+    "tests/game/check_exploration_motion.gd": "4d60ebec9371a950cb3e27dd63369032a8e1346a1f401680f5a2762303850655",
+    "tests/game/check_facility_interactions.gd": "80f364a07ccbcacb7edf8c8f8f864f05aa9362a9601bcc7453febed4be83c706",
+    "game/scripts/explore_walk.gd": "e21f50d35f4c2e7772954520d55637f00cda715ae5f8bc5c92d11d9314aeff69",
+    "game/scripts/facility_activity_visuals.gd": "36b3415065cc64cf39916cf12523f97d97b0d2925c77b6b68133993ad6c11fa9",
+    "game/scripts/facility_interaction.gd": "ee8731307ad8bd9ee66a6c4012f76e3772a59a14d159b3ff45f73ea74a56e1a6",
+    "game/scripts/interior_facility_kit.gd": "ac33f1633b4048d0fde8e5f901f87371831364cc14b6890c5ae48e1e71e1a15a",
+    "game/scripts/interior_visit.gd": "1d486138e194a397481f1f3ebee0444b28049d0a564f675ce7f8e0587ebd2c01",
+    "game/scripts/rooftop_space.gd": "27f9c109d5d171e36cc369dd0bd743b28f9a9d69bc04fba2853989465e5192ca",
+    "game/scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+    "game/scripts/elevator_cabin.gd": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad",
+    "game/scripts/interior_detail_kit.gd": "73c8b14c807ad95d7714cc95dd24a142aad3e433909478c9c1e70bfe05bdc6b4",
+    "game/scripts/water_effect.gd": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_exploration_camera.gd": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70",
+    "data/manual/stable_motion_design.json": "37349318e991d6971efcfc552d1e53d116cce4cfe4f7e369e57b48625d5a31e5"
+  },
+  "verification": [
+    {
+      "name": "headless",
+      "report": "data/reports/stable_motion/20261016/headless.json",
+      "report_sha256": "8c24c2ba96e9ebabe0673e6460dc034d39c1aa6cbee0fb4967877ad0deacad7e",
+      "display": "headless",
+      "checks": 44,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 0
+    },
+    {
+      "name": "stable_gpu",
+      "report": "data/reports/stable_motion/20261016/stable_gpu.json",
+      "report_sha256": "7fa5ad0636d19e9a4c8e4599450dd4d90b02c534fd52de684ad411c90bbb28b4",
+      "display": "macOS",
+      "checks": 44,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 0
+    },
+    {
+      "name": "motion_headless_final",
+      "report": "data/reports/stable_motion/20261016/motion_headless_final.json",
+      "report_sha256": "78954e156e63af728a673f14908fcf54f3ab0b9826bf0fdebe261c3a47b31f55",
+      "display": "headless",
+      "checks": 54,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 0
+    },
+    {
+      "name": "motion_gpu_final",
+      "report": "data/reports/stable_motion/20261016/motion_gpu_final.json",
+      "report_sha256": "9c2e4014d208477c1fef7bf3fc75929a843b8e7ec908c06760c097df5bc2bbdb",
+      "display": "macOS",
+      "checks": 60,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 6
+    },
+    {
+      "name": "facilities_headless_final",
+      "report": "data/reports/stable_motion/20261016/facilities_headless_final.json",
+      "report_sha256": "ca7f4e606d08c0e2ea944b02a519b46a67920c68cfadce6860bd04cc8c1e2a51",
+      "display": "headless",
+      "checks": 109,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 0
+    },
+    {
+      "name": "facilities_gpu",
+      "report": "data/reports/stable_motion/20261016/facilities_gpu.json",
+      "report_sha256": "3110881466b73c26c5c7e186829bffd4a453390d04b6ac77fb31f08f5299b1cc",
+      "display": "macOS",
+      "checks": 132,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 6
+    }
+  ],
+  "source_audit_errors": [],
+  "camera_fixture": {
+    "report": "data/reports/stable_motion/20261016/camera_headless.json",
+    "execution": "data/reports/stable_motion/20261016/camera_headless_execution.json",
+    "scenarios": 7,
+    "fractional_eye_samples": 8450,
+    "overlaps": 0,
+    "invalid": 0,
+    "inversions": 0
+  },
+  "stable_render": {
+    "caps_fps": [
+      30,
+      60,
+      144
+    ],
+    "physics_hz": 60,
+    "native_render_samples": 652,
+    "headless_render_samples": 583,
+    "maximum_native_camera_avatar_relative_error_m": 7.15255737304688e-07,
+    "torso_local_height_m": 0.85,
+    "torso_lateral_roll_radians": 0
+  },
+  "before_avatar_observation": "data/reports/stable_motion/20261016/before_avatar.json",
+  "reviewed_captures": [
+    "data/reports/stable_motion/20261016/motion_gpu_final_garden_human_airborne.png",
+    "data/reports/stable_motion/20261016/motion_gpu_final_garden_human_roof.png",
+    "data/reports/stable_motion/20261016/motion_gpu_final_garden_human_running.png",
+    "data/reports/stable_motion/20261016/motion_gpu_final_garden_human_walking.png",
+    "data/reports/stable_motion/20261016/motion_gpu_final_outdoor_pool_human_roof.png",
+    "data/reports/stable_motion/20261016/motion_gpu_final_penthouse_human_roof.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_hotel_buffet_meal_in_progress.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_hotel_buffet_meal_small_HUD.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_hotel_running_shower.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_hotel_treadmill_in_use.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_hotel_weights_in_use.png",
+    "data/reports/stable_motion/20261016/facilities_gpu_office_meal_in_progress.png"
+  ],
+  "failures_and_fixes": [
+    "development/stable_01: late recovery observer included legitimate settling; corrected to first camera publication with unchanged1mm tolerance.",
+    "development/stable_02: first-publication recovery exposed stale follow pivot; solve now reads latest physical player before collision and shared-pose capture.",
+    "Intermediate successful pre-recovery-hardening motion/facility reports remain historical; final named reports above match current source."
+  ],
+  "limits": [
+    "Authored procedural gait, not captured biomechanics.",
+    "No blanket all-angle/human comfort/performance/other Mac/export acceptance.",
+    "Avatar render-only linear interpolation may shortcut a sharp physics-slide corner; physical capsule unchanged.",
+    "Normal launch and city-life follow-up are tracked separately in execution log."
+  ],
+  "normal_launch": {
+    "pid": 78149,
+    "launched_at": "2026-10-16T17:46:34.435672+09:00",
+    "log": "data/reports/stable_motion/20261016/launch.log",
+    "kind": "normal exploration launch, no automatic probe",
+    "observed": "CUA raised actual normal window at Daehanmun; turbo3x, continuous-jump HUD and avatar visible, menu closed. No human comfort acceptance."
+  }
+}

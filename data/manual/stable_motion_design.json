@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "task": "EXP13_STABLE_MOTION",
+  "date": "2026-10-16",
+  "request": "Reduce visual vibration while walking, running and jumping",
+  "basis": "Authored avatar and latest exploration camera presentation only; original city, physical capsule, speed and jump controls retained",
+  "avatar": {
+    "torso": "Fixed local position (0,0.85,0) and zero lateral roll during locomotion; keep smoothly blended forward lean",
+    "removed": "Former abs(sin(2*phase)) vertical pulses: up to8.8Hz in turbo gait,5.8Hz on treadmill",
+    "feet": "Cosine fore-aft path and sine-squared swing lift with continuous turnarounds; same stance height, IK reach and cadence cap",
+    "scope": "Procedural game gait, not motion capture; limb movement remains"
+  },
+  "camera": {
+    "contract": "Physics owns player collision and obstruction-tested camera endpoints; stable presentation must preserve collision-safe paths, immediate blocked-path snaps and explicit portal/relocation resets",
+    "presentation": "One drawable-only RenderProxy under ExplorationAvatar; camera and visible avatar root use the same previous/current physics endpoints and render fraction",
+    "ownership": "Player, Visual and ExplorationAvatar roots, capsule and local limb joints remain physics-owned. Proxy restores identity before movement/facility/animation physics; no project-wide interpolation change.",
+    "snaps": "Collision-blocked transitions, explicit relocation and recovery collapse both camera and visible root histories; pause keeps last displayed pose."
+  },
+  "limits": [
+    "No performance or human comfort acceptance from automated fixture checks.",
+    "Existing historical scenes and source-world dimensions retained."
+  ]
+}
