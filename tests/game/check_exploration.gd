@@ -1,6 +1,6 @@
 extends SceneTree
 ## Targeted actual-input checks. Every scenario placement is an explicit test fixture.
-const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast"]
+const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump"]
 var report_path := ""
 var settings_path := ""
 var quality_path := ""
@@ -22,6 +22,7 @@ func _initialize() -> void:
 	quality_path=report_path+".quality.json"
 	# Isolate only this test process from physical keys; production bindings stay intact.
 	for action in ACTIONS:
+		if not InputMap.has_action(action):InputMap.add_action(action)
 		InputMap.action_erase_events(action)
 		Input.action_release(action)
 	Engine.physics_ticks_per_second=60
@@ -258,7 +259,7 @@ func _run() -> void:
 	await _obstacle_case("barrier")
 	await _ticks(240)
 	var actors_after:=_actor_state()
-	_check("actors.inventory_and_support_isolation",scene.pedestrians.size()==2 and scene.vehicles.size()==2 and actors_after.size()==4 and actors_before.size()==4 and actors_after.all(func(row):return (int(row.mask)&32)==0),{"before":actors_before,"after":actors_after})
+	_check("actors.inventory_and_support_isolation",scene.pedestrians.size()==2 and scene.vehicles.size()==6 and actors_after.size()==8 and actors_before.size()==8 and actors_after.all(func(row):return (int(row.mask)&32)==0),{"before":actors_before,"after":actors_after})
 	for ending in actors_after:
 		var initial: Dictionary={}
 		for row in actors_before:

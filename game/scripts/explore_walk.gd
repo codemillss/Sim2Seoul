@@ -20,8 +20,16 @@ var exploration_notice: Label
 var exploration_menu_scroll: ScrollContainer
 var exploration_menu_content: VBoxContainer
 var menu_layout_pending := false
+var seoul_identity: Node3D
+var building_names: Node
+var exploration_traffic: Node
 
 func _ready() -> void:
+	# Runtime binding belongs to this scene; historical project input stays fixed.
+	if not InputMap.has_action("jump"):
+		InputMap.add_action("jump")
+		var key:=InputEventKey.new();key.physical_keycode=KEY_SPACE
+		InputMap.action_add_event("jump",key)
 	super._ready()
 	if not runtime_ok:return
 	exploration_overlay=preload("res://scripts/exploration_overlay.gd").new()
@@ -40,13 +48,28 @@ func _ready() -> void:
 	if exploration_settings_recovered:
 		exploration_notice.text="저장된 탐험 설정을 읽지 못해 기본으로 시작했습니다."
 		_save_exploration_settings()
+	seoul_identity=preload("res://scripts/seoul_identity.gd").new()
+	seoul_identity.name="SeoulIdentity";add_child(seoul_identity)
+	if not seoul_identity.setup(city,self):
+		_exploration_failure("덕수궁과 시청 외형을 준비하지 못했습니다.")
+		return
+	building_names=preload("res://scripts/building_names.gd").new()
+	building_names.name="BuildingNames";add_child(building_names)
+	if not building_names.setup(self):
+		_exploration_failure("건물 이름을 준비하지 못했습니다.")
+		return
+	exploration_traffic=preload("res://scripts/exploration_traffic.gd").new()
+	exploration_traffic.name="ExplorationTraffic";add_child(exploration_traffic)
+	if not exploration_traffic.setup(self):
+		_exploration_failure("도로 위 차량을 준비하지 못했습니다.")
+		return
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled)
 
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴에서 탐험 범위 / 속도 조절"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · Esc 메뉴 / 속도 조절"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():
@@ -120,6 +143,11 @@ func _exploration_failure(message: String) -> void:
 	status.text=message;exploration_notice.text=message
 	free_roam_switch.disabled=true;speed_option.disabled=true
 	push_error(message)
+
+func apply_quality(id: String) -> bool:
+	if not super.apply_quality(id):return false
+	if rig.has_method("apply_exploration_view_distance"):rig.apply_exploration_view_distance()
+	return true
 
 func _read_exploration_settings() -> Dictionary:
 	var defaults:={"schema_version":1,"speed_id":"brisk","free_roam":true}

@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "task": "EXP02_SEOUL_DETAIL",
+  "local_date": "2026-10-16",
+  "branch": "codex/seoul-exploration-detail",
+  "base_commit": "def7b9a",
+  "user_request": [
+    "덕수궁과 시청 주변을 알아볼 수 있는 외형",
+    "석재 돌담",
+    "높은 점프",
+    "건물 이름",
+    "자동차 주행",
+    "시야를 돌릴 때 건물/지붕 일부가 사라지거나 잘려 보이는 증상 개선"
+  ],
+  "environment": {
+    "hardware": "Apple M5",
+    "ram_bytes": 17179869184,
+    "macos": "26.6.2 (25G83)",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "gpu": "Metal 4.0 / Forward+ / Apple M5 (Apple9)"
+  },
+  "features": {
+    "landmarks": 9,
+    "stone_walls": 3,
+    "ornaments": 267,
+    "merged_detail_meshes": 6,
+    "cached_identity_materials": 16,
+    "source_named_buildings": 149,
+    "visible_name_markers_max": 8,
+    "vehicles": 6,
+    "jump_target_m": 3.0,
+    "camera_far_m": 1400.0,
+    "camera_near_m": 0.08,
+    "double_sided_roof_surfaces": 17,
+    "removed_coincident_wall_triangles": 122,
+    "retained_wall_triangles_after_clipping": 203,
+    "collision_bodies_changed_by_identity": 0
+  },
+  "validation": {
+    "gpu_detail": {
+      "passed": true,
+      "checks": 49,
+      "physics_seconds": 10.2500000000001,
+      "report": "detail.json",
+      "log": "detail.log"
+    },
+    "gpu_regression": {
+      "passed": true,
+      "checks": 51,
+      "physics_seconds": 23.7166666666666,
+      "report": "regression.json",
+      "log": "regression.log"
+    },
+    "synthetic_jump": {
+      "passed": true,
+      "checks": 22,
+      "report": "jump.json",
+      "log": "jump.log"
+    },
+    "synthetic_camera": {
+      "passed": true,
+      "scenarios": 7,
+      "interpolated_samples": 8450,
+      "overlaps": 0,
+      "report": "camera.json",
+      "log": "camera.log"
+    },
+    "identity_collision_comparison": {
+      "passed": true,
+      "report": "identity_probe.json",
+      "log": "identity_probe.log",
+      "note": "Raw sandbox helper log contains a macOS system CA certificate lookup warning; helper setup and collision comparison passed. Final GPU startup logs have no errors."
+    }
+  },
+  "visual_review": {
+    "gate_front.png": "대한문 기와/단청/창살/석재 경계와 이름 표시 확인",
+    "stone_wall_close.png": "불규칙 석재 줄눈과 기와 캡, 덕수궁 돌담 표시 확인",
+    "city_hall_library.png": "곡면 유리 시청과 석조 서울도서관을 함께 확인",
+    "gate_roof_underside.png": "역사적 테스트 이름. 수정된 가까운 시점에서 기와 경사면과 처마 확인. 사진 자체가 지붕 뒷면 가시성의 단독 증거는 아님.",
+    "capture_scope": "Explicit test-only camera/player placement; HUD distances are player-to-target, not test-camera-to-target."
+  },
+  "development_evidence": {
+    "first_jump_fixture": "development/jump_fixture_type_error.log",
+    "first_occluded_roof_capture": "development/occluded_roof_test_view.png",
+    "first_detail_report": "development/detail01.json",
+    "resolution": "Typed Array fixture issue fixed. Capture pose moved outside the red wall occlusion and waits 18 physics ticks for the 10Hz name display; final source was rerun in detail02 and regression02."
+  },
+  "preserved": [
+    "Original V0 scripts/scenes and public launcher behavior",
+    "World source geometry coordinates, meter scale and collision shapes/resources",
+    "Historical EXP01/R03 evidence and unrun M4 acceptance status"
+  ],
+  "limits": [
+    "Landmarks are procedural approximations based on official references; no surveyed or photograph-identical reconstruction. No external image assets imported.",
+    "Traffic is six simulated cars on the two existing road polylines, not live traffic.",
+    "Fixed test placements and actual physics inputs do not establish continuous full-route human acceptance.",
+    "No long-run performance, packaged export or M4 validation in this change.",
+    "Tight corners still retract the camera immediately when required to avoid penetration."
+  ],
+  "sources": [
+    {
+      "url": "https://royal.khs.go.kr/ROYAL/contents/R104030000.do?bdProgramCode=storyCtg6&pageType=story&schBdcode=dsg",
+      "accessed": "2026-10-16"
+    },
+    {
+      "url": "https://mediahub.seoul.go.kr/archives/2017332",
+      "accessed": "2026-10-16"
+    },
+    {
+      "url": "https://news.seoul.go.kr/citybuild/archives/205773",
+      "accessed": "2026-10-16"
+    },
+    {
+      "url": "https://world.seoul.go.kr/city-hall/overview-city-hall/3-seoul-metropolitan-library/",
+      "accessed": "2026-10-16"
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.7/tutorials/3d/spring_arm.html",
+      "accessed": "2026-10-16"
+    },
+    {
+      "url": "https://docs.godotengine.org/en/4.7/tutorials/physics/interpolation/advanced_physics_interpolation.html",
+      "accessed": "2026-10-16"
+    }
+  ],
+  "source_sha256": {
+    "game/scenes/world/explore_walk.tscn": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+    "game/scripts/explore_walk.gd": "f16f67b0f4f05015b121e32db60b8c704a67ba4db54c7894cfbf78b162fbf6da",
+    "game/scripts/player/free_roam_player.gd": "ad1d157cd7955d00089f4f0dbff1c13efd5ec9d2987d9d0326eaff537bbd06d3",
+    "game/scripts/player/exploration_camera.gd": "115a7d7a5a0a6b7121e3dc930365d7f9a8498ae0a48f3f49ae4604d648c4f66c",
+    "game/scripts/building_names.gd": "bdc704eb529831ca121d785dd7b7dcfbe59140dcf0ca3cced43e61dfc37f6008",
+    "game/scripts/exploration_traffic.gd": "3cd3ac55a35127c3e538da5f8874c5bf9c0dd25a4dbb3f728af53cd1e6989f2c",
+    "game/scripts/traffic/exploration_vehicle.gd": "c79954bdd2e95da51ea353297102b323a1c778ddf194118f02a5c4b0352eff08",
+    "game/scripts/seoul_identity.gd": "33e5b20ffc3a35c694515872f07b09a5afb20ec75426a78de218f70aea743736",
+    "game/shaders/stone_wall.gdshader": "395b3d4313b673ae9f9c17658f078864ebaff08cf759d12666d5172583756040",
+    "game/shaders/seoul_surface.gdshader": "232325f7bfe14ce4d6b688f6903811342c40a20a3c0b113c299168837ce98f83",
+    "tests/game/check_exploration.gd": "5b8667164d44c2f3aaf9315d39e7dc99abe12f6e62db73f690dceae4ee87ac47",
+    "tests/game/check_jump.gd": "05dc29a7dd4ed598ee6b68cb64333ffc31316a84714b6ca2bdb78b9616a5d5bb",
+    "tests/game/check_exploration_camera.gd": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70",
+    "tests/game/check_seoul_detail.gd": "be4c703bf6d6587fb588c7764a4a09bceaf2dd8f2ad9b83027e8f4d9950400f8"
+  },
+  "evidence_sha256": {
+    "camera.json": "e506eda1e7b5e7231c3511a8918c260ed160d0bd1de7f0b8275e71188822ac4f",
+    "camera.log": "1514a77f77dc9b57c8160526b61e1ab61ceb904f0db13cf8f73b79d5c17e5e27",
+    "city_hall_library.png": "04457a708ed9ea4f633d02ab8534240e5e9f914fb03df4d3b7e7a7007533cafd",
+    "detail.json": "8a4b5338148671014a3abf68a7e5b8f9f57167f4d4705037646e096db692e52e",
+    "detail.log": "ccd8cfc89111b2aa579bc5d941765044b745e4258b059ce8e8cabad666b12bff",
+    "development/detail01.json": "d94e9ed8d168d92ea2fe46ab534f3b96330deda550c1a032fda421ae4ab8c8f8",
+    "development/detail01.log": "434ee31977486827eb557d122ad56de901cfc8089b5ac0fe837370cf98694c10",
+    "development/jump_fixture_type_error.log": "4ccf16d97681eafb221620be0e2ecec418e56078a8ef82730eda4fedfac72a31",
+    "development/occluded_roof_test_view.png": "dc1999b6bbeec7f50e4d3a31e68bd403d7a1b5f520e780b1fb0f53e59ad998c9",
+    "gate_front.png": "573704b2c2d1bda1fe81ab2a46adb0ee90b0a1236ebb06018b97997a201261fd",
+    "gate_roof_underside.png": "f46046fc4bd77812d094c87929aeea25be79f5da5365196f6d0afa3d1734664a",
+    "identity_probe.gd": "0ef3dee5adba74d2183079993ea48c4bbd9d8d5b67a9229c4314227e1640c1be",
+    "identity_probe.json": "88a12f16b62798fe4fc938bacd954724659e85bcc8ac0445b19fe5a5779163a3",
+    "identity_probe.log": "34d705fad11113e3d843fc73743b4e024e3f5e5baeeb3e17c701af6061ee2376",
+    "jump.json": "848d698473f88866ef8c91737a4b48c69710058060537c1f4b00782ad35c43aa",
+    "jump.log": "2ca272aca574878984a422a142848990dfbb9589ceabb1cdf524c654939fd407",
+    "regression.json": "f22dac6923f2338a9d928e7511a456991bb30fb9e6992614b43b516550857f79",
+    "regression.log": "c42f3246b323d3514b79579e15f00988d9bc581b4545ed438beb028bd1ace763",
+    "stone_wall_close.png": "3156f2b4ab2b9951e2195f9abd57e653d07111e4f5af3a251ce02c3f24babf50",
+    "launch.log": "df68d0bfcc14bc88bf4146643ac939c52f07188ec718cc5bc4bcd27632d66879"
+  },
+  "normal_launch": {
+    "pid": 12228,
+    "launched_at_utc": "2026-10-16T01:03:15.739057+00:00",
+    "scene": "res://scenes/world/explore_walk.tscn",
+    "launcher": "sh tools/run_exploration.sh run",
+    "log": "launch.log",
+    "status": "native_window_verified_open",
+    "native_window_observed": "Sim2Seoul (DEBUG)",
+    "native_controls": "Esc pause/resume and physical Space input sent through native app; not a measured native-input height test.",
+    "startup_errors": 0,
+    "handoff_state": "Window remains open. Latest native observation showed the pause menu; Esc returns to exploration."
+  },
+  "independent_review": {
+    "findings": 0,
+    "scope": "Read-only latest leaf movement, jump, camera/menu/quality integration, names, traffic, landmark helper, scene overrides and shaders against parent contracts; no additional GPU run."
+  }
+}

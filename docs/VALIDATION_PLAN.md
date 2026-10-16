@@ -1,5 +1,31 @@
 # 검증 계획과 완료 판정
 
+## 후속 탐험 EXP02 — 2026-10-16 M5 실제 실행
+
+사용자의 외형·높은 점프·건물 이름·차량 요청과 “시야를 돌리면 건물이나 지붕 일부가 사라지거나 잘려 보임” 설명을 대상으로 검사했다. 기기는 Apple M5/16GB, Godot4.7.2 Standard/Metal4.0/Forward+다. [요약과 원시 증거](../data/reports/seoul_detail/20261016/summary.json)는 이 탐험 개발판의 결과이며 아래 E–R의 과거 기기/장면/패키지 실행을 덮어쓰지 않는다.
+
+| 검사 | 실제 결과와 판정 범위 | 증거 |
+|---|---|---|
+| 최신 도시 통합 | `check_seoul_detail.gd` GPU 49/49 PASS, 615tick/10.25물리초. 외형 9곳/돌담 3표시/장식 267개→6메시/재질16개, 지붕17surface의 양면 shader, 이름149개/실제 시청 ray, 최신 mask/지원면, 양 품질 far1400m를 대조 | [detail.json](../data/reports/seoul_detail/20261016/detail.json), [엔진 로그](../data/reports/seoul_detail/20261016/detail.log) |
+| 기존 탐험 회귀 | `check_exploration.gd` GPU 51/51 PASS, 23.716667물리초. EXP01의 속도·대각선·야외3곳·네 경계·건물/담장 접촉·메뉴/중립·1152×720/960×600·설정 재시작/손상 복구와 2보행자/6차량 실제 이동 | [regression.json](../data/reports/seoul_detail/20261016/regression.json), [엔진 로그](../data/reports/seoul_detail/20261016/regression.log) |
+| 점프 제어 | `check_jump.gd` 별도 headless 물리 fixture 22/22 PASS. 기본 3m의 실제 최고점3.000829m, 설정4m에서4.000314m. 접지 착지·누른 채 반복 없음·공중 추가/예약 없음·천장 접촉·공중 수평 속도·경계·메뉴/복귀 뒤 해제 latch 확인. 실제 도시의 입력/물리 점프는 별도 GPU 통합에서3.002864m/착지/반복 없음 확인 | [jump.json](../data/reports/seoul_detail/20261016/jump.json), [도시 점프 관측](../data/reports/seoul_detail/20261016/detail.json) |
+| 카메라 충돌/보간 | `check_exploration_camera.gd` 별도 정적 fixture 7상황/보간 표본8,450개에서 overlap·비유한값·축 반전0. 열린공간/벽/모서리 회전·최저/최고 pitch·공중 추적/문 상부를 확인. 최저 눈높이0.2154m, 열린공간 점프 최대 추적 step0.1311m. 모서리 최대3.1564m 즉시 축소는 충돌 회피 동작으로 보존. 실제 도시는 별도 GPU12고정 yaw의 sphere 겹침0/유한값/지면 위와 단일 변환 게시/렌더 갱신 확인 | [camera.json](../data/reports/seoul_detail/20261016/camera.json), [도시 카메라 관측](../data/reports/seoul_detail/20261016/detail.json) |
+| 충돌 보존 | 외형 helper 적용 전후 모든 충돌 객체·shape instance/resource ID·layer/mask·활성 상태의 동일성 확인. 실제 도시 GPU에서는 원천685개(활성682)+활성 조각5개=기존687을 별도로 검사하고 원천 shape 형식과 backface collision 유지 확인. EXP01 바닥과 N03 도로 지원체는 별도 집계 | [identity_probe.json](../data/reports/seoul_detail/20261016/identity_probe.json), [detail.json](../data/reports/seoul_detail/20261016/detail.json) |
+| 차량 | 총6대의 고유 route key·layer8/mask31·실제 누적거리 증가·메뉴 정지/재개 확인. 두 원래 도로선과 사람 우선/FIFO 제어를 사용하며 신규차4대의 초기 배치를 명시 | [detail.json](../data/reports/seoul_detail/20261016/detail.json), [8actor 이동 회귀](../data/reports/seoul_detail/20261016/regression.json) |
+
+GPU 검사는 합계100개이며 합성 점프22개·카메라7상황은 별도다. 모든 검사는 물리 입력을 격리하고 시험용 초기 위치/카메라 배치를 기록한다. 실제 도시 한곳의 점프나 12고정 yaw를 연속 전체 동선 완주로 설명하지 않는다. 충돌 fixture 통과를 모든 도시 가림/주관적 조작감 개선의 보장으로 확대하지 않는다. 같은 개발판의 장시간 성능·내보낸 앱·M4·사진 일치도와 사용자의 최종 외형 만족도는 이번 판정에 포함하지 않는다.
+
+실제1152×720 viewport PNG를 열어 [대한문 정면](../data/reports/seoul_detail/20261016/gate_front.png), [석재 돌담 근접](../data/reports/seoul_detail/20261016/stone_wall_close.png), [시청/서울도서관 대비](../data/reports/seoul_detail/20261016/city_hall_library.png), [가까운 기와 경사면·처마](../data/reports/seoul_detail/20261016/gate_roof_underside.png)를 확인했다. 마지막 파일의 이름은 검사 fixture ID이며 그 사진만으로 지붕 뒷면 가시성을 판정하지 않는다. 지붕 양면 적용은 위 코드/GPU 검사의 근거다. 캡처용 카메라와 플레이어는 분리 배치되어 HUD 거리가 캡처 카메라와 대상의 거리는 아니다. 최초 지붕 캡처의 가려진 위치와 이름 갱신 대기 부족은 fixture 위치/대기를 고쳐 재촬영한 개발 이력으로 구분한다.
+
+같은 버전 엔진과 준비된 최신 도시 입력이 있는 저장소 루트에서 아래처럼 별도 출력으로 재검사한다. GUI 검사 두 개는 각각 종료 후 다음 것을 실행한다. 기존 증거 파일을 덮어쓰지 않는다.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_seoul_detail.gd -- --automatic-probe --report=/private/tmp/sim2seoul-detail-recheck.json
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_exploration.gd -- --automatic-probe --report=/private/tmp/sim2seoul-exploration-recheck.json
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --script ../tests/game/check_jump.gd -- --report=/private/tmp/sim2seoul-jump-recheck.json
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --script ../tests/game/check_exploration_camera.gd -- --result=/private/tmp/sim2seoul-camera-recheck.json
+```
+
 ## 후속 탐험 EXP01
 
 `tests/game/check_exploration.gd`는 새 장면의 실제 입력/물리로 속도·대각선 거리, 길 밖 도로·광장/잔디 세 장소의 접지·복귀 없음, 최대 속도 네 경계 정지, 원본 건물·담장 접촉, 동적 개체 이동/지원면 격리, 메뉴 입력 정지/중립 복귀, UI 신호·저장/재시작·손상 복구, 1152×720/960×600 메뉴 범위를 검사한다. 초기 배치는 시험용 순간이동으로 명시한다. [M5 실제 Metal GPU 결과](../data/reports/exploration/20261016/summary.json)는 연속 전체 동선·사진 수준 외관·성능/패키지·사람의 최종 만족도 판정과 구분한다. 원래 V0/W04의 고정 속도 검사는 유지한다.
