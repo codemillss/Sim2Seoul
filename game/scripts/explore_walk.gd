@@ -30,6 +30,7 @@ var photo_palace_detail: Node3D
 var photo_wall_detail: Node3D
 var photo_atmosphere: Node3D
 var interior_visit: Node3D
+var exploration_avatar: Node3D
 
 func _ready() -> void:
 	# Runtime binding belongs to this scene; historical project input stays fixed.
@@ -52,6 +53,11 @@ func _ready() -> void:
 		return
 	set_free_roam(saved.free_roam)
 	if not exploration_error.is_empty():return
+	exploration_avatar=preload("res://scripts/player/exploration_avatar.gd").new()
+	exploration_avatar.name="ExplorationAvatar"
+	player.get_node("Visual").add_child(exploration_avatar)
+	if not exploration_avatar.setup(player):
+		_exploration_failure("탐험 캐릭터와 걷기 동작을 준비하지 못했습니다.");return
 	if exploration_settings_recovered:
 		exploration_notice.text="저장된 탐험 설정을 읽지 못해 기본으로 시작했습니다."
 		_save_exploration_settings()
@@ -101,7 +107,7 @@ func _ready() -> void:
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 점프 · 공중에서 한 번 더\n마우스 회전 · 휠 거리 조절 · E 건물 출입 / 엘리베이터 · Esc 메뉴"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 점프 · 공중에서도 연속 점프\n마우스 회전 · 휠 거리 조절 · E 출입 / 엘리베이터 / 시설 사용 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():

@@ -145,7 +145,7 @@ func _flight(title: String, actions: Array, count := 130) -> Dictionary:
 func _run() -> void:
 	_build()
 	await _pose()
-	_check("defaults.3m_and_9_8",player.jump_height_m==3.0 and player.gravity_mps2==9.8)
+	_check("defaults.3m_and_9_8_unlimited_fresh_air_edges",player.jump_height_m==3.0 and player.gravity_mps2==9.8 and player.has_unlimited_air_jumps() and player.air_jumps_remaining()==-1)
 	var row:=await _flight("space_held",["jump"])
 	_check("jump.apex_3m",absf(float(row.apex_rise_m)-3.0)<0.12,row)
 	_check("jump.grounded_landing",row.ending_grounded and row.recoveries==0,row)
@@ -157,11 +157,11 @@ func _run() -> void:
 	await _ticks(3)
 	_keys(["jump"])
 	await _ticks(1)
-	_check("jump.one_airborne_reboost",player.air_jumps_remaining()==0 and player.velocity.y>7.4,{"vertical_speed":player.velocity.y,"air_jumps_remaining":player.air_jumps_remaining()})
+	_check("jump.fresh_airborne_reboost",player.air_jumps_remaining()==-1 and player.air_jump_count()==1 and player.velocity.y>7.4,{"vertical_speed":player.velocity.y,"air_jumps_remaining":player.air_jumps_remaining(),"air_jump_count":player.air_jump_count()})
 	_keys([]);await _ticks(2)
 	var before_third: float=player.velocity.y
 	_keys(["jump"]);await _ticks(1)
-	_check("jump.third_press_rejected",player.air_jumps_remaining()==0 and player.velocity.y<before_third-.1,{"before":before_third,"after":player.velocity.y})
+	_check("jump.third_fresh_press_replaces_vertical_speed",player.air_jumps_remaining()==-1 and player.air_jump_count()==2 and player.velocity.y>7.4,{"before":before_third,"after":player.velocity.y,"air_jump_count":player.air_jump_count()})
 	row=await _flight("airborne_third_held",["jump"])
 	_check("jump.airborne_hold_does_not_repeat_after_landing",row.ascending_episodes==1 and row.ending_grounded and row.floor_ticks>20,row)
 	await _pose()
@@ -223,7 +223,9 @@ func _finish() -> void:
 	var failures:=0
 	for check in checks:
 		if not check.passed:failures+=1
-	var result:={"schema_version":1,"task":"EXPLORATION_JUMP","passed":failures==0,"failed_checks":failures,
+	var hashes:={}
+	for path in ["res://scripts/player/free_roam_player.gd","res://../tests/game/check_jump.gd"]:hashes[path]=FileAccess.get_sha256(path)
+	var result:={"schema_version":1,"task":"EXPLORATION_JUMP","result":"PASS" if failures==0 else "FAIL","summary":{"checks":checks.size(),"failed":failures},"source_sha256":hashes,"passed":failures==0,"failed_checks":failures,
 		"checks":checks,"trials":trials,"engine":{"version":Engine.get_version_info().string,"display":DisplayServer.get_name(),"physics_hz":Engine.physics_ticks_per_second},
 		"scope":"Actual latest-player Input.action_press and move_and_slide in a synthetic floor/ceiling fixture with isolated physical input; no city route, camera, native human-input or performance acceptance."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)

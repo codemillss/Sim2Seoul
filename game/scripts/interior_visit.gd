@@ -59,6 +59,7 @@ var _recovery_floor := -1
 var wayfinding: Node3D
 var cabin: Node3D
 var rooftop: Node3D
+var facility_interaction: Node3D
 var on_roof := false
 var _roof_ready_tick := 0
 var _ride_phase := "idle"
@@ -108,6 +109,9 @@ func setup(root_scene: Node3D) -> bool:
 	wayfinding=preload("res://scripts/entrance_wayfinding.gd").new()
 	wayfinding.name="EntranceWayfinding";add_child(wayfinding)
 	if not wayfinding.setup(host,self):return _fail("건물 입구 안내를 준비하지 못했습니다.")
+	facility_interaction=preload("res://scripts/facility_interaction.gd").new()
+	facility_interaction.name="FacilityInteraction";add_child(facility_interaction)
+	facility_interaction.setup(host,self)
 	loaded = true
 	print("INTERIOR_VISIT_READY buildings=",catalog.size()," source_scaled=true authored_not_surveyed=true")
 	return true
@@ -128,6 +132,7 @@ func _set_entry(spec: Dictionary) -> void:
 
 func _prepare_room() -> bool:
 	if prepared_id==String(current_spec.get("id","")) and is_instance_valid(room):return true
+	if is_instance_valid(facility_interaction) and not facility_interaction.cancel():return false
 	if is_instance_valid(room):
 		for body in room_bodies:body.collision_layer = 0
 		remove_child(room);room.queue_free()
@@ -254,6 +259,7 @@ func _physics_process(delta: float) -> void:
 	var edge := _e_press_pending or (held and not _e_was_pressed)
 	_e_press_pending = false
 	_e_was_pressed = held
+	if is_instance_valid(facility_interaction):facility_interaction.step(delta,_menu_open() or in_elevator or elevator_open)
 	if _menu_open():
 		e_requires_release = true
 		_entry_requested = false
@@ -273,6 +279,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if not edge:return
 	if elevator_open:_close_elevator()
+	elif is_instance_valid(facility_interaction) and facility_interaction.handle_interact():e_requires_release=true
 	elif active and _elevator_near():_open_elevator()
 	elif active:exit_visit()
 	else:enter_visit()
@@ -307,12 +314,18 @@ func _process(_delta: float) -> void:
 			if host.player.is_swimming():indoor_text.text+="\n수영 중 · WASD / 방향키 이동 · Space 물 밖으로 점프"
 		else:
 			indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
+			indoor_text.text=indoor_text.text.replace("건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다.","음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기")
+	var facility_hint: String=facility_interaction.prompt_text() if is_instance_valid(facility_interaction) and active and not on_roof else ""
 	prompt_text.text = "%s · %s · %d층"%[entry_action_text(),current_spec.get("title","건물"),int(current_spec.get("floor_count",1))] if not active else ("E · 엘리베이터 층 선택" if _elevator_near() else "E · 건물 밖으로 나가기")
-	if not _notice.is_empty():prompt_text.text = _notice
-	prompt.visible = not menu_open and not elevator_open and not in_elevator and ((active and (_exit_near() or _elevator_near())) or (not active and _entry_near() and _entry_visible()) or not _notice.is_empty())
+	if not facility_hint.is_empty():prompt_text.text=facility_hint
+	elif not _notice.is_empty():prompt_text.text = _notice
+	prompt.visible = not menu_open and not elevator_open and not in_elevator and (not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))
 	prompt.size = Vector2(prompt.custom_minimum_size.x,prompt.get_combined_minimum_size().y)
 	prompt.position = Vector2(maxf(16.,(view.x-prompt.size.x)*.5),view.y-148.)
+	if active and is_instance_valid(facility_interaction):
+		var activity_rect: Rect2=facility_interaction.status_rect()
+		if activity_rect.has_area():prompt.position.y=minf(prompt.position.y,activity_rect.position.y-prompt.size.y-10.)
 	elevator_panel.visible = elevator_open and not menu_open
 	_layout_elevator_picker(view)
 	ride_panel.visible = in_elevator
@@ -339,6 +352,7 @@ func _orient(yaw: float, pitch: float, distance: float) -> void:
 	host.rig.snap_to_target_pose()
 
 func _open_elevator() -> void:
+	if is_instance_valid(facility_interaction) and facility_interaction.is_using():return
 	if not _elevator_near() or not host.player.is_on_floor() or host.player.input_latched:return
 	selected_floor = _current_destination()
 	for child in elevator_floors.get_children():
@@ -396,6 +410,7 @@ func _close_elevator(capture := true) -> void:
 	host.player.require_neutral_input()
 
 func request_floor(index: int) -> bool:
+	if is_instance_valid(facility_interaction) and facility_interaction.is_using():return false
 	if not active or in_elevator or _menu_open() or not _elevator_near() or not host.player.is_on_floor():return false
 	var from_index: int = _current_destination()
 	if index<0 or index>=destination_count() or index==from_index:return false
@@ -566,7 +581,7 @@ func _update_cabin() -> void:
 
 func _release_landing(point: Vector3,index: int) -> bool:
 	if not _landing_target_clear(index,point):return false
-	if not host.player.relocate_interior_region(point,_landing_bounds(index),_landing_frame(index),_landing_rect(index)):return false
+	if not host.player.relocate_interior_region(point,_landing_bounds(index),_landing_frame(index),_landing_rect(index),index==int(current_spec.floor_count)):return false
 	on_roof=index==int(current_spec.floor_count)
 	# Water follows the successfully committed destination region. The closed
 	# car never carries buoyancy state from the departure roof into another room.
@@ -662,7 +677,9 @@ func _safe_external_point(requested: Vector3) -> Dictionary:
 func _leave_at(requested: Vector3) -> bool:
 	if in_elevator:return false
 	var safe := _safe_external_point(requested)
-	if safe.is_empty() or not host.player.end_interior(safe.point):return false
+	if safe.is_empty():return false
+	if is_instance_valid(facility_interaction) and not facility_interaction.cancel():return false
+	if not host.player.end_interior(safe.point):return false
 	if elevator_open:_close_elevator(false)
 	active = false;room.visible = false;room.set_process(false);exit_count += 1;_notice = "";e_requires_release = true
 	on_roof=false
@@ -715,4 +732,4 @@ func snapshot() -> Dictionary:
 		"room_origin":[ROOM_ORIGIN.x,ROOM_ORIGIN.y,ROOM_ORIGIN.z],"entrance":[entrance_world_position.x,entrance_world_position.y,entrance_world_position.z],
 		"outside_return":[_outside_position.x,_outside_position.y,_outside_position.z],"authored_not_surveyed":true,"notice":_notice,
 		"catalog_count":catalog.size(),"floor_count":current_spec.get("floor_count",0),"current_floor":_current_destination() if active else 0,"width":current_spec.get("width",0.),"depth":current_spec.get("depth",0.),
-		"in_elevator":in_elevator,"elevator_open":elevator_open,"selected_floor":selected_floor,"elevator":elevator_snapshot(),"on_roof":on_roof,"rooftop":rooftop.snapshot() if is_instance_valid(rooftop) else {},"roof_ready_tick":_roof_ready_tick}
+		"in_elevator":in_elevator,"elevator_open":elevator_open,"selected_floor":selected_floor,"elevator":elevator_snapshot(),"on_roof":on_roof,"rooftop":rooftop.snapshot() if is_instance_valid(rooftop) else {},"roof_ready_tick":_roof_ready_tick,"facility_activity":facility_interaction.snapshot() if is_instance_valid(facility_interaction) else {}}

@@ -80,6 +80,8 @@ func setup(host: Node3D, building: Dictionary) -> bool:
 	deck_height_y = maxf(source_height_y,observed_top_y)+DECK_CLEARANCE_M
 	frame = Transform3D(axes,Vector3(centre.x,deck_height_y,centre.y))
 	global_transform = frame
+	# Finite validation for supported landings and water registration. The
+	# player keeps this footprint/lower plane but can jump into the open sky.
 	world_bounds = frame*AABB(Vector3(-width*.5,-.35,-depth*.5),Vector3(width,9.35,depth))
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	_select_profile()
@@ -358,6 +360,7 @@ func snapshot() -> Dictionary:
 		"width":width,"depth":depth,"frame_origin":_v(frame.origin),"frame_axes":[_v(frame.basis.x),_v(frame.basis.y),_v(frame.basis.z)],"frame_determinant":frame.basis.determinant(),
 		"walkable_rect_position":[walkable_rect.position.x,walkable_rect.position.y],"walkable_rect_size":[walkable_rect.size.x,walkable_rect.size.y],
 		"world_bounds_position":_v(world_bounds.position),"world_bounds_size":_v(world_bounds.size),"spawn":_v(spawn_point()),"lift_point":_v(lift_point()),
+		"ceiling_unbounded":true,"open_sky_jump_space":true,"landing_validation_height_m":9.35,
 		"features":features.duplicate(),"collision_bodies":bodies.size(),"height_observations":observations.duplicate(true),
 		"water_region":pool_water_region(),"water_effects":water_effects.snapshot() if water_effects!=null else {},"pool_entry":_v(pool_entry_point()) if profile_id=="outdoor_pool" else [],"pool_rim":_v(pool_rim_point()) if profile_id=="outdoor_pool" else [],
 		"basis":"Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Raised pool retains the original roof/deck and adds finite buoyancy, bounded swim speed, Space exit and code-native splash/ripple effects; no full fluid simulation."}

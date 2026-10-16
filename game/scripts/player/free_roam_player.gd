@@ -7,7 +7,8 @@ var free_roam_bounds := Rect2(-450.0,-460.0,900.0,920.0)
 const EDGE_MARGIN_M := 0.4
 const SEGMENT_SAMPLE_M := 0.05
 const JUMP_ACTION := &"jump"
-const MAX_AIR_JUMPS := 1
+## Negative means unlimited fresh-press air jumps in this exploration sandbox.
+const MAX_AIR_JUMPS := -1
 const SWIM_SPEED_MPS := 3.0
 const FLOAT_DEPTH_M := 1.0
 const WATER_EXIT_HEIGHT_M := 2.4
@@ -19,6 +20,7 @@ var interior_active := false
 var interior_bounds := AABB()
 var interior_frame := Transform3D.IDENTITY
 var interior_walkable_rect := Rect2()
+var interior_ceiling_unbounded := false
 var _outdoor_recovery := {}
 var _water_region: Dictionary = {}
 var _water_contacting := false
@@ -27,6 +29,15 @@ var _water_jump_locked := false
 var _water_entries := 0
 var _water_exits := 0
 var _water_jumps := 0
+var facility_control := false
+
+func set_facility_control(enabled: bool) -> void:
+	if facility_control==enabled:return
+	facility_control=enabled
+	velocity=Vector3.ZERO;last_direction=Vector3.ZERO
+	# Activities retain the physical capsule and the airborne jump count.
+	# Releasing an activity never converts a held movement/Space key to input.
+	require_neutral_input()
 
 func begin_interior(point: Vector3, bounds: AABB) -> bool:
 	if interior_active or not configured or not point.is_finite() or not bounds.has_point(point):return false
@@ -35,6 +46,7 @@ func begin_interior(point: Vector3, bounds: AABB) -> bool:
 	interior_bounds = bounds
 	interior_frame = Transform3D.IDENTITY
 	interior_walkable_rect = Rect2()
+	interior_ceiling_unbounded = false
 	fall_limit_y = bounds.position.y - 2.0
 	spawn_transform = Transform3D(Basis.IDENTITY,point)
 	spawn_valid = _valid_spawn()
@@ -46,6 +58,7 @@ func begin_interior(point: Vector3, bounds: AABB) -> bool:
 		return false
 	_outdoor_recovery = before
 	global_transform = spawn_transform
+	set_facility_control(false)
 	visual.rotation = Vector3.ZERO
 	_air_jumps_used = 0
 	clear_water_region()
@@ -63,6 +76,7 @@ func end_interior(point: Vector3) -> bool:
 		spawn_transform = indoor_spawn
 		return false
 	global_transform = spawn_transform
+	set_facility_control(false)
 	spawn_transform = _outdoor_recovery.spawn
 	fall_limit_y = _outdoor_recovery.fall_limit
 	configured = _outdoor_recovery.configured
@@ -70,6 +84,7 @@ func end_interior(point: Vector3) -> bool:
 	_outdoor_recovery = {}
 	interior_frame = Transform3D.IDENTITY
 	interior_walkable_rect = Rect2()
+	interior_ceiling_unbounded = false
 	visual.rotation = Vector3.ZERO
 	_air_jumps_used = 0
 	clear_water_region()
@@ -87,6 +102,7 @@ func relocate_interior(point: Vector3) -> bool:
 		spawn_transform = previous
 		return false
 	global_transform = spawn_transform
+	set_facility_control(false)
 	spawn_valid = true
 	_air_jumps_used = 0
 	require_neutral_input();reset_physics_interpolation()
@@ -133,7 +149,7 @@ func water_snapshot() -> Dictionary:
 		"horizontal_speed_mps":Vector2(velocity.x,velocity.z).length(),"vertical_speed_mps":velocity.y,"swim_speed_limit_mps":SWIM_SPEED_MPS,
 		"entry_count":_water_entries,"exit_count":_water_exits,"water_jump_count":_water_jumps,"exit_jump_locked":_water_jump_locked}
 
-func relocate_interior_region(point: Vector3, bounds: AABB, frame := Transform3D.IDENTITY, rect := Rect2()) -> bool:
+func relocate_interior_region(point: Vector3, bounds: AABB, frame := Transform3D.IDENTITY, rect := Rect2(),ceiling_unbounded := false) -> bool:
 	# A lift may connect the detached room with a source-positioned rooftop.
 	# Validate the complete candidate region before replacing the recovery state.
 	if not interior_active or not point.is_finite() or not bounds.position.is_finite() or not bounds.size.is_finite():return false
@@ -141,15 +157,18 @@ func relocate_interior_region(point: Vector3, bounds: AABB, frame := Transform3D
 	if absf(frame.basis.determinant()-1.0)>.001 or not frame.basis.is_equal_approx(frame.basis.orthonormalized()):return false
 	if not rect.position.is_finite() or not rect.size.is_finite():return false
 	if rect!=Rect2() and (rect.size.x<=EDGE_MARGIN_M*2.0 or rect.size.y<=EDGE_MARGIN_M*2.0):return false
-	var previous := {"bounds":interior_bounds,"frame":interior_frame,"rect":interior_walkable_rect,"spawn":spawn_transform,"fall_limit":fall_limit_y,"spawn_valid":spawn_valid}
-	interior_bounds = bounds;interior_frame = frame;interior_walkable_rect = rect
+	if not bounds.has_point(point):return false
+	if ceiling_unbounded and (not rect.has_area() or not frame.basis.y.is_equal_approx(Vector3.UP)):return false
+	var previous := {"bounds":interior_bounds,"frame":interior_frame,"rect":interior_walkable_rect,"ceiling_unbounded":interior_ceiling_unbounded,"spawn":spawn_transform,"fall_limit":fall_limit_y,"spawn_valid":spawn_valid}
+	interior_bounds = bounds;interior_frame = frame;interior_walkable_rect = rect;interior_ceiling_unbounded=ceiling_unbounded
 	spawn_transform = Transform3D(Basis.IDENTITY,point)
 	fall_limit_y = bounds.position.y-2.0
 	if not _valid_spawn():
-		interior_bounds = previous.bounds;interior_frame = previous.frame;interior_walkable_rect = previous.rect
+		interior_bounds = previous.bounds;interior_frame = previous.frame;interior_walkable_rect = previous.rect;interior_ceiling_unbounded=previous.ceiling_unbounded
 		spawn_transform = previous.spawn;fall_limit_y = previous.fall_limit;spawn_valid = previous.spawn_valid
 		return false
 	global_transform = spawn_transform
+	set_facility_control(false)
 	spawn_valid = true
 	_air_jumps_used = 0
 	clear_water_region()
@@ -164,11 +183,21 @@ func _jump_pressed() -> bool:
 	return InputMap.has_action(JUMP_ACTION) and Input.is_action_pressed(JUMP_ACTION)
 
 func air_jumps_remaining() -> int:
-	return MAX_AIR_JUMPS - _air_jumps_used
+	return MAX_AIR_JUMPS if has_unlimited_air_jumps() else maxi(0,MAX_AIR_JUMPS-_air_jumps_used)
+
+func has_unlimited_air_jumps() -> bool:return MAX_AIR_JUMPS<0
+
+func air_jump_count() -> int:return _air_jumps_used
+
+func has_open_sky() -> bool:
+	# Source-positioned roofs explicitly opt in after region validation.
+	# Detached interiors retain their complete finite volume and physical ceilings.
+	return interior_active and interior_ceiling_unbounded
 
 func recover(reason: String) -> bool:
 	var recovered := super.recover(reason)
 	if recovered:
+		set_facility_control(false)
 		_air_jumps_used = 0
 		if _water_contacting:_water_exits += 1
 		_water_contacting = false;_swimming = false;_water_jump_locked = false
@@ -177,7 +206,7 @@ func recover(reason: String) -> bool:
 func require_neutral_input() -> void:
 	super.require_neutral_input()
 	# No buffered takeoff may survive a menu, settings change, reset or recovery.
-	# Keep spent air jumps: opening a menu in flight must not recharge them.
+	# Preserve the airborne count; menus never create a new Space press.
 	_jump_was_pressed = false
 	_jump_requires_release = true
 
@@ -208,14 +237,19 @@ func _physics_process(delta: float) -> void:
 		recover("outside_test_area")
 		physics_stepped.emit(delta)
 		return
+	if facility_control:
+		velocity=Vector3.ZERO;last_direction=Vector3.ZERO
+		physics_stepped.emit(delta)
+		return
 	var intent: Vector2 = router.movement_intent().limit_length(1.0)
 	var fast: bool = router.fast_intent()
 	if input_latched:
 		if intent.length_squared()<0.000001 and not fast and not jump_held:input_latched = false
 		intent = Vector2.ZERO
 		fast = false
-		jump_edge = false
-	elif not router.gameplay_enabled:
+		# Old movement keys may remain held after a lift/menu. A separate
+		# Space-release gate permits a deliberate fresh jump without walking.
+	if not router.gameplay_enabled:
 		jump_edge = false
 	last_direction = _direction(intent)
 	var submerged := _submerged(global_position)
@@ -238,13 +272,13 @@ func _physics_process(delta: float) -> void:
 		_air_jumps_used = 0
 		velocity.y = 0.0
 	if submerged and jump_edge and not _water_jump_locked:
-		# A deliberate water exit replaces vertical speed without spending or
-		# refilling the separate outdoor air-jump budget.
+		# A deliberate water exit replaces vertical speed independently of the
+		# separate fresh-press air-jump count.
 		velocity.y = sqrt(2.0*gravity_mps2*WATER_EXIT_HEIGHT_M)+.5*gravity_mps2*delta
 		_water_jump_locked = true;_swimming = false;_water_jumps += 1
-	elif not submerged and jump_edge and (grounded or _air_jumps_used < MAX_AIR_JUMPS):
-		# Walking off a ledge also leaves one air jump. Replace vertical speed
-		# rather than stacking impulses, including during a late downward fall.
+	elif not submerged and jump_edge and (grounded or has_unlimited_air_jumps() or _air_jumps_used<MAX_AIR_JUMPS):
+		# Every fresh press can redirect a fall or continue climbing. Replace
+		# vertical speed instead of stacking impulses; held Space never repeats.
 		if not grounded:_air_jumps_used += 1
 		# Compensate half a gravity step so the discrete apex stays near the
 		# exported metre height at the configured physics tick rate.
@@ -264,8 +298,15 @@ func _physics_process(delta: float) -> void:
 
 func _inside(point: Vector3) -> bool:
 	if interior_active:
-		if not point.is_finite() or not interior_bounds.has_point(point):return false
-		if interior_walkable_rect==Rect2():return true
+		if not point.is_finite():return false
+		if has_open_sky():
+			# The roof AABB validates landings/water, not an invisible ceiling.
+			# Keep its lower recovery plane and world/source XZ footprints.
+			if point.y<interior_bounds.position.y:return false
+			var world_xz := Rect2(Vector2(interior_bounds.position.x,interior_bounds.position.z),Vector2(interior_bounds.size.x,interior_bounds.size.z))
+			if not world_xz.has_point(Vector2(point.x,point.z)):return false
+		elif not interior_bounds.has_point(point):return false
+		if not interior_walkable_rect.has_area():return true
 		var local: Vector3 = interior_frame.affine_inverse()*point
 		return interior_walkable_rect.grow(-EDGE_MARGIN_M).has_point(Vector2(local.x,local.z))
 	return _inside_outdoors(point)

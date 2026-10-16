@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "task": "EXP12_EXPLORATION_MOTION",
+  "date": "2026-10-16",
+  "request": "More than two jumps, fix strange walking motion and rooftop jump failure",
+  "basis": "Original authored lightweight avatar and input/region fixes; retained source-world roof footprints and physical capsule",
+  "jump": {
+    "mode": "unlimited new Space presses in air",
+    "air_jumps_remaining_sentinel": -1,
+    "base_jump_height_m": 3,
+    "held_space": "no automatic reboost",
+    "transition": "Space release gate is independent from movement-neutral gate; holding W after elevator no longer rejects a fresh Space",
+    "roof_ceiling": "explicit ceiling_unbounded region only; retained lower fall and source XZ limits",
+    "indoor_ceiling": "retained actual solid ceiling"
+  },
+  "avatar": {
+    "node": "Visual/ExplorationAvatar",
+    "physics": "Original radius0.30m/height1.70m capsule retained",
+    "style": "navy jacket, light shirt, slate trousers and trainers; original game geometry",
+    "motion": "actual horizontal displacement and grounded velocity; smooth rest/walk/run/air transitions, opposite arm/leg phase, flat stance soles",
+    "cadence_cap_cycles_per_second": 2.2,
+    "walking_cap_cycles_per_second": 1.65,
+    "facility": "actual activity arm grips and treadmill stride; pause/transport/stop cleanup",
+    "historical_scenes": "base Body mesh only hidden by latest-scene module; no changes to earlier scene resources"
+  },
+  "reproduced_before": [
+    "Only two fresh jumps under MAX_AIR_JUMPS=1",
+    "Actual roof elevator arrival while W held caused fresh Space to be ignored by shared input_latched gate",
+    "A diagnostic that isolated the jump cap showed incorrect recovery above the roughly9m roof region ceiling"
+  ],
+  "scope": [
+    "Authored procedural gait, not motion capture or measured real human walking.",
+    "Turbo movement uses bounded animation cadence; no claim of physically exact strides at21m/s.",
+    "Representative actual roof travel and input checks; not every source roof or camera angle."
+  ]
+}

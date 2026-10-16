@@ -1,5 +1,21 @@
 # 검증 계획과 완료 판정
 
+## EXP12 — 연속 점프·옥상 도착 입력과 실제 이동 동작
+
+[최종 요약](../data/reports/exploration_motion/20261016/summary.json): M5 Metal/Forward+ GPU60/60·headless54/54, 기본 점프24/24·공중42/42·옥상44/44·방문77/77·수영27/27 PASS. 최종 동작6장을 열어 확인했다. W 유지 도착/새 Space 거절의 전후 재현과 높이 제한 분리 진단은 development에 보존한다.
+
+`check_exploration_motion.gd`에서 실제 E/승강기로 정원·풀·펜트하우스 옥상에 도착한 뒤 첫 점프와 6회 이상 연속 새 Space 입력을 확인한다. 기존 높이 상한을 넘겨도 잘못 복귀하지 않고 XZ·하단 낙하 복귀·물리 천장을 보존하는지 분리한다. 승강기 도착 때 유지된 이동키와 새 Space, 홀드 자동 점프 거절·메뉴/시설 사용 중립을 검사한다. 관절형 모델의 실제 노드 변환, 걸음/달리기의 반대 팔다리와 주기, 정지/벽/공중 자세·메뉴 정지, 물리 캡슐과 외부 충돌 보존을 관측한다. 최종 GPU/물리 판정과 소스 해시를 기록하며 과거 2회 점프 검사 결과로 현재 무제한 동작을 대체하지 않는다.
+
+## EXP11 — 시설 사용의 실제 입력·진행·효과·안전 복귀
+
+[최종 요약](../data/reports/facility_interactions/20261016/summary.json): GPU132/132·headless109/109·전수 지점10/10·안전 복귀/외부 이동17/17 PASS. 125동/1,205층의 사용 지점1,083개에서 캡슐/바닥 검사 각각7,479회, 대표 호텔/업무 건물의 실제 E·보행/승강기와 음식 감소·물줄기·기구/팔 변환·수치/메뉴/종료를 확인했다. 최종6장을 열어 검토했다. 전수 지점의 동작 완주나 실제 업장 서비스 판정은 아니다.
+
+새 `check_facility_interactions.gd`로 실제 E 짧은 입력/홀드, 메뉴 정지, 식사 완료/포만감, 물줄기/청결 진행/정지, 운동 기구/소품의 시간별 변환과 기록, 사용 중 이동·점프 및 종료 후 중립을 확인한다. 너무 멀거나 다른 층/벽 뒤 설비의 거절, 안전 위치와 외부 충돌 보존, 리셋/건물 교체 정리를 검사한다. 대표 호텔과 다른 용도 건물의 실제 물리 입력/층 이동 및 GPU 화면을 분리해 기록한다. 모든 시설의 전 여정이나 장시간 성능으로 확대하지 않는다. 최종 실행 결과와 소스 해시·실패/수정 기록은 위 보고서에 보존했다. 합계 GPU192/headless404는 중복 회귀를 포함하며 11개 최종 보고서의 현재 소스 해시 불일치는0이다.
+
+재현은 저장소 루트에서 기존 Godot 실행 형식의 `--script ../tests/game/check_facility_interactions.gd`와 `check_exploration_motion.gd`, `-- --automatic-probe --report=<절대 JSON 경로>`를 사용한다. 먼저 `--headless`로 검사하고 실제 Metal 검수에서는 뺀다. `check_facility_targets.gd`·`check_facility_faults.gd`는 별도 전수/고장 검사다. 검사별 임시 settings/quality JSON은 ignored cache로 옮겨 실행 증거와 분리한다.
+
+작은 창 검사에는 실제 `RenderingServer.frame_post_draw` 뒤의 화면/UI 상태를 사용한다. resize 직후 물리 catch-up과 process_frame 시작 신호 사이에는 한 프레임 이전 prompt가 남을 수 있어, 렌더 전 표본을 실제 겹침으로 잘못 판정했던132개 중1건을 수정했다. 동일한 겹침 거절 기준은 유지했다. 일반 실행에서는 자동 검사 옵션을 붙이지 않아 창 전환 시 기존 일시정지를 유지한다. headless의 기존 macOS CA 경고는 스크립트/기능 실패와 구분한다.
+
 ## EXP10 — 용도별 시설의 실제 기하·동선·화면
 
 [최종 요약](../data/reports/interior_facilities/20261016/summary.json)에 현재 소스·보고서 해시와 실행별 결과를 연결한다. **시설 GPU150/150·headless129/129**, 새 층 안내/승강기 **GPU78/78·headless71/71**, 기존 방문77/77·옥상 수영27/27 headless PASS다. 합계 GPU228/headless304는 중복 회귀를 포함한 실행 판정 수다.

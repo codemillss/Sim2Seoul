@@ -6,6 +6,9 @@ var kit: RefCounted:
 	get:return _kit_ref.get_ref() as RefCounted if _kit_ref!=null else null
 var room: Node3D
 var facilities: Array[Dictionary] = []
+## Room-local, source-sized equipment targets. Each registration belongs to
+## geometry that was actually accepted by the protected circulation layout.
+var interactions: Array[Dictionary] = []
 var _active_facility_id := ""
 var _active_facility_type := ""
 
@@ -108,6 +111,14 @@ func _label(title: String,text: String,p: Vector3,width := 2.4,font_size := 25) 
 	label.set_meta("facility_id",_active_facility_id);label.set_meta("facility_type",_active_facility_type);label.set_meta("facility_level",kit._level)
 	return label
 
+func _interaction(kind: String,title: String,equipment_id: String,use_point: Vector3,approach_point: Vector3,anchor_point: Vector3,data: Dictionary = {}) -> void:
+	# Input coordinates are relative to this floor; exported coordinates include
+	# its full Y offset, exactly like facility entry and shower points.
+	if not kit._safe(use_point,Vector3(.62,1.70,.62)) or not kit._safe(approach_point,Vector3(.62,1.70,.62)):return
+	var floor_offset: Vector3=Vector3.UP*(kit._level*room.floor_height)
+	var row := {"id":"%s/%s/%s"%[String(room.spec.get("id","building")),_active_facility_id,equipment_id],"kind":kind,"title":title,"level":kit._level,"facility_id":_active_facility_id,"use_point":use_point+floor_offset,"approach_point":approach_point+floor_offset,"anchor_point":anchor_point+floor_offset,"coordinate_space":"room_local","data":data.duplicate(true)}
+	interactions.append(row)
+
 func _zone(kind: String,title: String,side := 1.0,length := 7.8) -> Dictionary:
 	var x: float=kit._core_right(2.0) if side>0 else kit._core_left(2.0)
 	var width := minf(4.8,(room.width*.5-.55-absf(x))*2.0)
@@ -148,7 +159,7 @@ func _dining(programme_id: String) -> void:
 		_b("FacilityBuffetSteelTop",Vector3(1.08,.07,5.0),Vector3(counter_x,.915,z),"steel")
 		for i in range(4):
 			var at := Vector3(counter_x,.985,z+1.75-i*1.16)
-			_b("FacilityFoodTray",Vector3(.76,.065,.80),at,"steel")
+			var tray_built := _b("FacilityFoodTray",Vector3(.76,.065,.80),at,"steel")
 			_b("FacilityTrayInset",Vector3(.65,.025,.68),at+Vector3.UP*.042,"paper")
 			if i==0:
 				for dx in [-.20,.20]:_r("FacilityRiceMound","foliage",Vector3(.30,.13,.42),at+Vector3(dx,.12,0),"food_rice")
@@ -158,6 +169,10 @@ func _dining(programme_id: String) -> void:
 			else:
 				for n in range(6):_b("FacilityKoreanSideDish",Vector3(.16,.055,.20),at+Vector3(-.20+float(n%3)*.20,.10,-.16+float(n/3)*.30),"food_kimchi" if i==2 else "food_green")
 			_label("FacilityBuffetMenu",["따뜻한 밥","국 · 수프","김치 · 반찬","채소 · 샐러드"][i],at+Vector3(-.05,.22,.49),.90,18)
+			if tray_built:
+				var food_title: String=["따뜻한 밥","국 · 수프","김치 · 반찬","채소 · 샐러드"][i]
+				var use_point := Vector3(counter_x-1.03,.08,at.z)
+				_interaction("eat",food_title,"food_%d"%i,use_point,use_point+Vector3(0,0,.55),at+Vector3.UP*.12,{"facing_yaw":-PI*.5,"duration_seconds":3.6,"food_material":["food_rice","food_soup","food_kimchi","food_green"][i],"equipment_title":"Detail_FacilityFoodTray","food_index":i})
 		_b("FacilityTrayRail",Vector3(.25,.045,4.9),Vector3(counter_x-.65,.76,z),"steel")
 		kit._feature("korean_buffet_food_trays")
 	var kitchen := _zone("kitchen","다이닝 · 오픈 키친",-1.0,7.2)
@@ -188,7 +203,7 @@ func _kitchen_counter(point: Vector3) -> void:
 func _fitness() -> void:
 	var zone := _zone("fitness","피트니스 · 유산소 / 근력",1.0,7.8)
 	if zone.is_empty():return
-	for i in range(2):_treadmill(Vector3(zone.outer-.85,0,zone.front-2.8-i*2.6))
+	for i in range(2):_treadmill(Vector3(zone.outer-.85,0,zone.front-2.8-i*2.6),i)
 	var left := _zone("strength","스트레칭 · 웨이트",-1.0,6.8)
 	if not left.is_empty():
 		var x: float=left.center.x
@@ -203,15 +218,19 @@ func _fitness() -> void:
 		var rack_z: float=left.front-minf(3.0,float(left.length)*.55)
 		if _b("FacilityDumbbellRack",Vector3(.45,.78,1.8),Vector3(rack_x,.39,rack_z),"steel",true):
 			for i in range(4):_dumbbell(Vector3(rack_x,.85,rack_z-.60+i*.40))
+			var use_point := Vector3(x,.08,left.front-1.10)
+			_interaction("weights","덤벨 운동","dumbbells",use_point,use_point+Vector3(0,0,.50),Vector3(rack_x,.85,rack_z+.60),{"facing_yaw":0.0,"duration_seconds":8.0,"equipment_title":"Detail_FacilityDumbbellRack","weight_kg":5.0})
 		_b("FacilityExerciseMat",Vector3(1.25,.018,1.8),Vector3(x,.025,left.front-1.6),"sage")
 	kit._feature("fitness_equipment")
 
-func _treadmill(point: Vector3) -> void:
+func _treadmill(point: Vector3,index: int) -> void:
 	if not _b("FacilityTreadmill",Vector3(1.0,.10,1.95),point+Vector3.UP*.05,"steel",true):return
 	_b("FacilityRunningBelt",Vector3(.75,.025,1.65),point+Vector3(0,.115,0),"gym_rubber")
 	for side in [-1.0,1.0]:_b("FacilityTreadmillHandle",Vector3(.045,1.08,.045),point+Vector3(side*.46,.64,-.58),"steel")
 	_b("FacilityTreadmillConsole",Vector3(.82,.37,.12),point+Vector3(0,1.21,-.61),"ink")
 	_b("FacilityFitnessDisplay",Vector3(.55,.19,.025),point+Vector3(0,1.22,-.53),"screen")
+	var floor_offset: Vector3=Vector3.UP*(kit._level*room.floor_height)
+	_interaction("treadmill","러닝머신 %d"%(index+1),"treadmill_%d"%index,point+Vector3(0,.18,.12),point+Vector3(0,.08,1.30),point+Vector3(0,.13,0),{"facing_yaw":0.0,"duration_seconds":8.0,"equipment_title":"Detail_FacilityTreadmill","belt_center":point+Vector3(0,.13,0)+floor_offset,"belt_size":Vector3(.75,.025,1.65),"speed_kmh":6.0})
 
 func _dumbbell(point: Vector3) -> void:
 	_b("FacilityDumbbellBar",Vector3(.26,.035,.035),point,"steel")
@@ -246,8 +265,11 @@ func _spa() -> void:
 	kit._feature("walk_in_shower_and_shallow_bath")
 
 func _shower(point: Vector3) -> void:
-	for side in [-1.0,1.0]:_b("FacilityShowerPartition",Vector3(.055,2.10,1.4),point+Vector3(side*.62,1.05,0),"clear_glass",true)
-	_b("FacilityShowerBack",Vector3(1.25,2.10,.055),point+Vector3(0,1.05,-.69),"facility_tile",true)
+	var enclosure_built := true
+	for side in [-1.0,1.0]:
+		var side_built := _b("FacilityShowerPartition",Vector3(.055,2.10,1.4),point+Vector3(side*.62,1.05,0),"clear_glass",true)
+		enclosure_built=enclosure_built and side_built
+	var back_built := _b("FacilityShowerBack",Vector3(1.25,2.10,.055),point+Vector3(0,1.05,-.69),"facility_tile",true)
 	_b("FacilityShowerRail",Vector3(.035,1.20,.035),point+Vector3(0,1.39,-.62),"steel")
 	_r("FacilityShowerHead","cylinder",Vector3(.23,.045,.23),point+Vector3(0,2.06,-.35),"steel")
 	_b("FacilityShowerArm",Vector3(.035,.035,.30),point+Vector3(0,2.09,-.49),"steel")
@@ -257,6 +279,8 @@ func _shower(point: Vector3) -> void:
 	_b("FacilityBathStoolSupport",Vector3(.25,.25,.25),point+Vector3(.32,.125,-.31),"oak_light",true)
 	var y: float=kit._level*room.floor_height+.08
 	facilities.back()["shower_point"]=Vector3(point.x,y,point.z+.20)
+	if enclosure_built and back_built:
+		_interaction("shower","샤워","shower",point+Vector3(0,.08,.20),point+Vector3(0,.08,1.35),point+Vector3(0,2.06,-.35),{"facing_yaw":0.0,"duration_seconds":7.0,"equipment_title":"Detail_FacilityShowerHead","water_radius":.28})
 
 func _lockers(point: Vector3) -> void:
 	if not _b("FacilityLockerBank",Vector3(2.25,1.85,.48),point+Vector3.UP*.925,"oak",true):return

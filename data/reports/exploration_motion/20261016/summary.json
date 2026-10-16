@@ -1,0 +1,633 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    "EXP11_FACILITY_INTERACTIONS",
+    "EXP12_EXPLORATION_MOTION"
+  ],
+  "base_commit": "417349111152eb44e6c3cd4884b836d91e0e4bde",
+  "recorded_at": "2026-10-16T17:17:59.919312+09:00",
+  "result": "PASS",
+  "source_sha256": {
+    "tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+    "tests/game/check_facility_interactions.gd": "80f364a07ccbcacb7edf8c8f8f864f05aa9362a9601bcc7453febed4be83c706",
+    "game/scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+    "game/scripts/elevator_cabin.gd": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad",
+    "game/scripts/explore_walk.gd": "e21f50d35f4c2e7772954520d55637f00cda715ae5f8bc5c92d11d9314aeff69",
+    "game/scripts/facility_activity_visuals.gd": "36b3415065cc64cf39916cf12523f97d97b0d2925c77b6b68133993ad6c11fa9",
+    "game/scripts/facility_interaction.gd": "ee8731307ad8bd9ee66a6c4012f76e3772a59a14d159b3ff45f73ea74a56e1a6",
+    "game/scripts/interior_detail_kit.gd": "73c8b14c807ad95d7714cc95dd24a142aad3e433909478c9c1e70bfe05bdc6b4",
+    "game/scripts/interior_facility_kit.gd": "ac33f1633b4048d0fde8e5f901f87371831364cc14b6890c5ae48e1e71e1a15a",
+    "game/scripts/interior_visit.gd": "1d486138e194a397481f1f3ebee0444b28049d0a564f675ce7f8e0587ebd2c01",
+    "game/scripts/player/exploration_avatar.gd": "0aeeec7e98401b837b8b75d57e7a080d1c2b0027fe289bb30d9c17c6e7ab2b6e",
+    "game/scripts/player/free_roam_player.gd": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+    "game/scripts/rooftop_space.gd": "27f9c109d5d171e36cc369dd0bd743b28f9a9d69bc04fba2853989465e5192ca",
+    "game/scripts/water_effect.gd": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420",
+    "tests/game/check_facility_targets.gd": "1fc1393ed6bdb5b2949c4dcd326b037039466d2ac8d474881825e5377612ad00",
+    "game/assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "tests/game/check_facility_faults.gd": "b2c7a67aec39b3a25f8b1d630c707e16880a66a60bb9d5bbaadc54a73a354954",
+    "tests/game/check_exploration_motion.gd": "4d60ebec9371a950cb3e27dd63369032a8e1346a1f401680f5a2762303850655",
+    "tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+    "tests/game/check_double_jump.gd": "eff07dabf90b524738ca97afe5233c361381fc86d1f6c35adc3e700e1affcf42",
+    "tests/game/check_rooftops.gd": "dd782d8791287f21b140847206a7fde4af022f93ae42e41e18c9509f5db31df0",
+    "game/scripts/building_visit_catalog.gd": "67f0dba564e954b9a84fea8a2044cc270866a6f58ce2bf25c9c37bedb89b1ab8",
+    "game/scripts/interior_surface.gdshader": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b",
+    "tests/game/check_rooftop_swimming.gd": "ccdde78c7792536b4f6a006ce95ff3c44b82dddb3bcb7c59f861e66299d7a1b1",
+    "data/manual/facility_interactions_design.json": "3ad77c10b4ee022e1b717c9b9faf30f720794ddd8bf194e16196e1704119f7af",
+    "data/manual/exploration_motion_design.json": "d6cf0d2150361ba640cc169f93ec8b0f5c6ebc8d2cd3dad4973c01fdc40f0425"
+  },
+  "verification": [
+    {
+      "name": "facilities_gpu",
+      "report": "data/reports/facility_interactions/20261016/gpu.json",
+      "log": "data/reports/facility_interactions/20261016/gpu.log",
+      "result": "PASS",
+      "display": "macOS",
+      "checks": 132,
+      "failed": 0,
+      "captures": 6,
+      "sha256": "6774bec2c8f157e098b953c244c8d1dfba1ee2f356e0c899f8efe7a993b762bd",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "facilities_headless",
+      "report": "data/reports/facility_interactions/20261016/headless.json",
+      "log": "data/reports/facility_interactions/20261016/headless.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 109,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "bbd4d838ae63545743bac7082f5ef968d6d1b45e753ceeca683534c999491b85",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "target_catalog",
+      "report": "data/reports/facility_interactions/20261016/target_audit.json",
+      "log": "data/reports/facility_interactions/20261016/target_audit.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 10,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "8a5a12ca3d12f7df23e30749cd0822adb332b3cec72014e5c503a1fb67ceecef",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "facility_faults",
+      "report": "data/reports/facility_interactions/20261016/faults.json",
+      "log": "data/reports/facility_interactions/20261016/faults.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 17,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "415a57517d9d07a6f31799a31fbf13ee21673231b1d40be40e3ebbd03fd3a847",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "motion_gpu",
+      "report": "data/reports/exploration_motion/20261016/gpu.json",
+      "log": "data/reports/exploration_motion/20261016/gpu.log",
+      "result": "PASS",
+      "display": "macOS",
+      "checks": 60,
+      "failed": 0,
+      "captures": 6,
+      "sha256": "a072b7420dbe6d97cdf9ee86f069746f7ce4d06187ed4018b4330ebe84c3b695",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "motion_headless",
+      "report": "data/reports/exploration_motion/20261016/headless.json",
+      "log": "data/reports/exploration_motion/20261016/headless.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 54,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "7cb837d0292bcd317a0bb6ff7a079b6ab72ad094abaa9c419eb3cc182837c321",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "jump",
+      "report": "data/reports/exploration_motion/20261016/jump_regression.json",
+      "log": "data/reports/exploration_motion/20261016/jump_regression.log",
+      "result": "PASS",
+      "display": null,
+      "checks": 24,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "f6e2c9efd40fe95b6b79a62a6916f4742d4bb690ddd9a54fdb70361d57ef6892",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "air_jumps",
+      "report": "data/reports/exploration_motion/20261016/air_jumps_regression.json",
+      "log": "data/reports/exploration_motion/20261016/air_jumps_regression.log",
+      "result": "PASS",
+      "display": null,
+      "checks": 42,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "b5846386d945c3a31d291214616cb99af19bbab272c304077a01eb7176e64baa",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "rooftops",
+      "report": "data/reports/exploration_motion/20261016/rooftops_regression.json",
+      "log": "data/reports/exploration_motion/20261016/rooftops_regression.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 44,
+      "failed": 0,
+      "captures": 11,
+      "sha256": "3375c6374efb07102d022af12d774d7c1e2e6666df481a9c69193197c8fab32b",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "visits",
+      "report": "data/reports/exploration_motion/20261016/visits_regression.json",
+      "log": "data/reports/exploration_motion/20261016/visits_regression.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 77,
+      "failed": 0,
+      "captures": 5,
+      "sha256": "83b8308146b959a9fe8f699c1265506f38b6ae0d0d5839d17abfe8a1479b6878",
+      "source_audit": "PASS"
+    },
+    {
+      "name": "swimming",
+      "report": "data/reports/exploration_motion/20261016/swimming_regression.json",
+      "log": "data/reports/exploration_motion/20261016/swimming_regression.log",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 27,
+      "failed": 0,
+      "captures": 0,
+      "sha256": "342c0b344bd7c5455ae02aac82fb7cc0774a7191fb3c6efe5ba05e9205f0d6c2",
+      "source_audit": "PASS"
+    }
+  ],
+  "execution_counts": {
+    "gpu": 192,
+    "headless": 404,
+    "scope": "Execution assertions include overlapping regression checks; not unique features."
+  },
+  "visual_review": {
+    "opened_all_12": true,
+    "images": [
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_hotel_buffet_meal_in_progress.png",
+        "sha256": "15e18420fea489273f9ff3ad4dcfb3f05f0c41141164fe16cf9f22ed4fa659fb",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_hotel_buffet_meal_small_HUD.png",
+        "sha256": "ad089f4405813083a35822d1739009cfb7d224ea34a34f723fb09927dfeedd40",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_hotel_running_shower.png",
+        "sha256": "70ba649cdf4324bccca3601b04fb53a9fa027904e14d0c276212852e5af75fd0",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_hotel_treadmill_in_use.png",
+        "sha256": "441e4edd831b6638ccf808a5cbc0ca0b36c06d7756f23d723ca5179ec7ac0e63",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_hotel_weights_in_use.png",
+        "sha256": "adb95c753c48b23b63d3b32a7ab92480faae28a7829c9d53b16e21a7ad678bad",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/facility_interactions/20261016/gpu_office_meal_in_progress.png",
+        "sha256": "09cbd0efef42c1f61ef98c42088d08935292ab4d2d5821453fe468c0aeff0076",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_garden_human_airborne.png",
+        "sha256": "ef3a9db779dbafb0a1934c586cbf5be643a957338d147148e4c463f313d0b59a",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_garden_human_roof.png",
+        "sha256": "26ea200cc18cef55a2df385a8836709135fd3552c6a667f376df5f23216c71ce",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_garden_human_running.png",
+        "sha256": "6c8210350251716d194905b34f7ebd678fab2023ed29cf587da949a8edca1979",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_garden_human_walking.png",
+        "sha256": "7f64fba72c40fa9da12f411c86607242ba6b13f95d95bebb6559b173d4c17061",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_outdoor_pool_human_roof.png",
+        "sha256": "24428c694cf1c0061c921bc65c122f3bbb0c8ac2eea9dd9aa660a421de9e7861",
+        "opened_and_reviewed": true
+      },
+      {
+        "path": "data/reports/exploration_motion/20261016/gpu_penthouse_human_roof.png",
+        "sha256": "6061fffc13f4fa9ad7c5b9850d347a2c93dd8ab7c68841ec3303ea2e35217e96",
+        "opened_and_reviewed": true
+      }
+    ],
+    "observations": "Visible side plate/chopsticks and actual arm grips, angled shower streams onto the clothed character, moving treadmill belt and articulated feet, dumbbell curls, 640px separate prompt/status/attribution, walk/run/air and three roof avatars. Procedural stylized character; not all-angle camera or measured human gait acceptance."
+  },
+  "native_launch": {
+    "launched_at": "2026-10-16T17:11:03.057053+09:00",
+    "pid": 57554,
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/cache/exploration_motion/20261016/normal-launch.log",
+    "purpose": "Latest EXP11/EXP12 normal exploration after final physics and native GPU verification",
+    "actual_window_observed": true,
+    "observation": "CUA Raise and AX+screenshot: normal Sim2Seoul window at Daehanmun, articulated clothed character, HUD continuous aerial jump instruction, turbo3x and free roam. No menu visible at observation. No human OS facility/jump tour claimed.",
+    "recorded_log": "data/reports/exploration_motion/20261016/launch.log"
+  },
+  "limits": [
+    "Original game facility arrangements and procedural activities; not surveyed services or real tenant amenities.",
+    "Session-only fullness/cleanliness/workout records; no persistent save, cooking, indoor bath buoyancy, service NPCs, sound or physiological simulation.",
+    "Native and physics inputs are automated production events. CUA only observes the final normal window; no completed human OS facility tour is claimed.",
+    "No all-angle camera, every-roof full route, long-run performance, new app export or other-Mac validation."
+  ],
+  "task": "EXP12_EXPLORATION_MOTION",
+  "roof_trials": [
+    {
+      "air_jump_count_after_six": 5,
+      "maximum_XZ_drift_m": 0.0,
+      "maximum_height_above_deck_m": 12.5024401855469,
+      "method": "Six production Input.action_press/release edges, twenty real physics ticks between presses; no velocity or position assignment.",
+      "name": "garden",
+      "profile": "garden",
+      "recoveries_after": 0,
+      "recoveries_before": 0,
+      "roof_frame": {
+        "basis": [
+          [
+            0.00613489607349038,
+            0.0,
+            -0.999981224536896
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.999981224536896,
+            0.0,
+            0.00613489607349038
+          ]
+        ],
+        "origin": [
+          145.909622192383,
+          18.7800006866455,
+          -125.910957336426
+        ]
+      },
+      "six_press_records": [
+        {
+          "air_jump_count": 0,
+          "edge": 1,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            18.9073429107666,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 1,
+          "edge": 2,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            20.9909324645996,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 2,
+          "edge": 3,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            23.0745220184326,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 3,
+          "edge": 4,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            25.1581115722656,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 4,
+          "edge": 5,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            27.2417011260986,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 5,
+          "edge": 6,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            160.259353637695,
+            29.3252906799316,
+            -125.82292175293
+          ],
+          "velocity_y": 7.58644914627075
+        }
+      ],
+      "source_id": "osm:relation:10757525:building",
+      "source_rectangle_center": [
+        145.909622192383,
+        -125.910957336426
+      ],
+      "start": [
+        160.259353637695,
+        18.7805862426758,
+        -125.82292175293
+      ]
+    },
+    {
+      "air_jump_count_after_six": 5,
+      "maximum_XZ_drift_m": 0.0,
+      "maximum_height_above_deck_m": 12.502470703125,
+      "method": "Six production Input.action_press/release edges, twenty real physics ticks between presses; no velocity or position assignment.",
+      "name": "outdoor_pool",
+      "profile": "outdoor_pool",
+      "recoveries_after": 1,
+      "recoveries_before": 1,
+      "roof_frame": {
+        "basis": [
+          [
+            0.994412362575531,
+            0.0,
+            0.105565719306469
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            -0.105565719306469,
+            0.0,
+            0.994412362575531
+          ]
+        ],
+        "origin": [
+          165.488693237305,
+          87.2799987792969,
+          53.4669189453125
+        ]
+      },
+      "six_press_records": [
+        {
+          "air_jump_count": 0,
+          "edge": 1,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            87.407341003418,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 1,
+          "edge": 2,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            89.4909362792969,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 2,
+          "edge": 3,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            91.5745315551758,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 3,
+          "edge": 4,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            93.6581268310547,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 4,
+          "edge": 5,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            95.7417221069336,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 5,
+          "edge": 6,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            164.79850769043,
+            97.8253173828125,
+            59.9684143066406
+          ],
+          "velocity_y": 7.58644914627075
+        }
+      ],
+      "source_id": "osm:way:233593619:building",
+      "source_rectangle_center": [
+        165.488693237305,
+        53.4669189453125
+      ],
+      "start": [
+        164.79850769043,
+        87.2805786132812,
+        59.9684143066406
+      ]
+    },
+    {
+      "air_jump_count_after_six": 5,
+      "maximum_XZ_drift_m": 0.0,
+      "maximum_height_above_deck_m": 12.502470703125,
+      "method": "Six production Input.action_press/release edges, twenty real physics ticks between presses; no velocity or position assignment.",
+      "name": "penthouse",
+      "profile": "penthouse",
+      "recoveries_after": 2,
+      "recoveries_before": 2,
+      "roof_frame": {
+        "basis": [
+          [
+            0.299625515937805,
+            0.0,
+            0.954056918621063
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            -0.954056918621063,
+            0.0,
+            0.299625515937805
+          ]
+        ],
+        "origin": [
+          -367.590087890625,
+          66.2799987792969,
+          -406.321807861328
+        ]
+      },
+      "six_press_records": [
+        {
+          "air_jump_count": 0,
+          "edge": 1,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            66.407341003418,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 1,
+          "edge": 2,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            68.4909362792969,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 2,
+          "edge": 3,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            70.5745315551758,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 3,
+          "edge": 4,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            72.6581268310547,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 4,
+          "edge": 5,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            74.7417221069336,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        },
+        {
+          "air_jump_count": 5,
+          "edge": 6,
+          "expected_impulse_after_gravity": 7.58644913840566,
+          "grounded": false,
+          "position": [
+            -381.280792236328,
+            76.8253173828125,
+            -402.022186279297
+          ],
+          "velocity_y": 7.58644914627075
+        }
+      ],
+      "source_id": "osm:way:223158445:building",
+      "source_rectangle_center": [
+        -367.590087890625,
+        -406.321807861328
+      ],
+      "start": [
+        -381.280792236328,
+        66.2805786132812,
+        -402.022186279297
+      ]
+    }
+  ],
+  "behaviour": {
+    "jumps": "Unlimited fresh Space presses; held Space is not automatic. Sentinel -1 and air-jump count are separately exposed.",
+    "arrival_fix": "Fresh Space is independent from movement neutral; W held after actual roof elevator arrival no longer blocks a new jump.",
+    "roof_ceiling_fix": "Explicit ceiling_unbounded roof regions retain lower recovery and source-oriented XZ boundaries; indoor physical ceilings remain.",
+    "gait": "Articulated head/torso/arms/legs/shoes use actual horizontal movement, opposite hand/foot phase, flat stance and bounded cadence. Idle/wall/air, menu and facility poses are distinct; source capsule unchanged."
+  },
+  "development": [
+    "Actual initial single jump after releasing input worked; the reproducible blocked case was fresh Space while W remained held after a roof lift.",
+    "Pre-fix first2 boosts were allowed and presses3-6 ignored. A clearly labeled diagnostic isolated the additional roughly9m artificial roof-height recovery.",
+    "Actual post-fix E/lift visits on garden, pool and penthouse roofs performed6 fresh boosts, rose beyond10m and landed without incorrect recovery or XZ drift.",
+    "Initial gait test pressed movement immediately after set_speed_profile latched input, measuring zero actual movement. Explicit neutral ticks corrected the test fixture.",
+    "Historical jump/roof regression assertions were updated from a remaining-one budget to unlimited fresh inputs and actual air-jump counts; original test sources preserved."
+  ]
+}

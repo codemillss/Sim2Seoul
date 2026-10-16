@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "task": "EXP11_FACILITY_INTERACTIONS",
+  "recorded_date": "2026-10-16",
+  "basis": "original authored game interactions on EXP10 source-sized facility geometry",
+  "geometry_source": "data/manual/interior_facilities_design.json",
+  "catalog": "game/assets/authored/interiors/source_catalog.json",
+  "inputs": [
+    "User request: buffet eating, shower use and actual gym operation",
+    "Original food trays, shower heads/booths, treadmill decks and weight stations"
+  ],
+  "coordinates": {
+    "space": "room_local",
+    "units": "metres",
+    "floor_y": "level * source floor_height; use/approach points include physical support offset",
+    "registration": "only after required equipment geometry was accepted; original outdoor colliders retained"
+  },
+  "actions": {
+    "eat": {
+      "input": "fresh E close to food",
+      "food": [
+        "rice",
+        "soup",
+        "kimchi and side dishes",
+        "vegetables"
+      ],
+      "duration_seconds": 3.6,
+      "bites": 3,
+      "fullness_per_bite": 8,
+      "visuals": [
+        "side-held plate",
+        "food portions disappear per bite",
+        "chopsticks and moving bite toward mouth",
+        "articulated game avatar arms follow grips"
+      ]
+    },
+    "shower": {
+      "input": "fresh E in booth; fresh E stops",
+      "duration": "continuous until stop",
+      "cleanliness_per_second": 5,
+      "visuals": [
+        "streams angled from actual shower head toward player",
+        "falling drops",
+        "ripples"
+      ]
+    },
+    "treadmill": {
+      "input": "fresh E near deck; validated short placement; fresh E safe return",
+      "duration": "continuous until stop",
+      "speed_kmh": 6,
+      "visuals": [
+        "moving belt stripes",
+        "articulated feet on belt",
+        "live distance display"
+      ]
+    },
+    "weights": {
+      "input": "fresh E at mat/weight station; fresh E stops",
+      "duration": "continuous until stop",
+      "seconds_per_repetition": 2,
+      "visuals": [
+        "two moving dumbbells",
+        "articulated arm curls and action grips"
+      ]
+    }
+  },
+  "session": {
+    "initial_fullness": 35,
+    "initial_cleanliness": 30,
+    "vital_cap": 100,
+    "records": "game-process session; no disk persistence; earned progress survives stopping, menu reset and building changes"
+  },
+  "safety": [
+    "same-floor and grounded checks",
+    "standing capsule/support and full mount/return corridor",
+    "standing-point and actual-equipment line of sight",
+    "fresh E priority over doors/lift",
+    "movement/jump lock retains original physical capsule and spent air jumps",
+    "pause freezes time, pose, props and earned records",
+    "successful external relocation cleans effects without overwriting new position"
+  ],
+  "limits": [
+    "Authored game actions, not surveyed services or real tenant amenity claims.",
+    "Procedural articulated game avatar and authored action props; no motion-capture, body-needs simulation or real service reproduction.",
+    "No cooking, food inventory, indoor-bath buoyancy, sound, persistent save, service NPCs or body-needs simulation."
+  ]
+}

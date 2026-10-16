@@ -178,11 +178,11 @@ func _edge_trial(roof: Node3D) -> void:
 			_input_direction(direction)
 			if tick in [6,35]:Input.action_press("jump");jumped=true
 			await _ticks(1);samples+=1
-			if scene.player.air_jumps_remaining()==0:air_jump_observed=true
+			if scene.player.air_jump_count()>0 and scene.player.has_unlimited_air_jumps():air_jump_observed=true
 			var local: Vector3=roof.frame.affine_inverse()*scene.player.global_position
 			if not roof.walkable_rect.grow(-.30).has_point(Vector2(local.x,local.z)):errors.append({"tick":tick,"point":local})
 		_keys();await _ticks(70)
-	_check("roof.turbo_double_jump_four_edges_keep_footprint",errors.is_empty() and jumped and air_jump_observed and scene.player.recoveries==before,{"samples":samples,"errors":errors,"air_jump_observed":air_jump_observed,"recovery_delta":scene.player.recoveries-before,"speed":scene.player.run_speed_mps})
+	_check("roof.turbo_fresh_air_jumps_four_edges_keep_footprint",errors.is_empty() and jumped and air_jump_observed and scene.player.recoveries==before,{"samples":samples,"errors":errors,"air_jump_observed":air_jump_observed,"recovery_delta":scene.player.recoveries-before,"speed":scene.player.run_speed_mps})
 	var edge_cases := [
 		{"name":"east","start":Vector3(roof.width*.5-1.4,.08,0),"direction":Vector3.RIGHT,"axis":0,"sign":1.},
 		{"name":"west","start":Vector3(-roof.width*.5+1.4,.08,0),"direction":Vector3.LEFT,"axis":0,"sign":-1.},
@@ -190,7 +190,7 @@ func _edge_trial(roof: Node3D) -> void:
 		{"name":"south","start":Vector3(roof.width*.5-3.,.08,roof.depth*.5-1.4),"direction":Vector3.BACK,"axis":2,"sign":1.}]
 	for edge: Dictionary in edge_cases:
 		await _pose(roof.frame*edge.start)
-		var edge_errors:=[];var budget_spent:=false;var reached:=false;var high_over_rail:=false;var peak_speed:=0.
+		var edge_errors:=[];var air_boost_observed:=false;var reached:=false;var high_over_rail:=false;var peak_speed:=0.
 		var direction: Vector3=roof.frame.basis*edge.direction
 		var half: float=(roof.width if edge.axis==0 else roof.depth)*.5
 		for tick in range(90):
@@ -203,10 +203,10 @@ func _edge_trial(roof: Node3D) -> void:
 			peak_speed=maxf(peak_speed,travelled.length()*60.)
 			if float(local[int(edge.axis)])*float(edge.sign)>=half-.65:reached=true
 			if local.y>2. and float(local[int(edge.axis)])*float(edge.sign)>=half-.65:high_over_rail=true
-			if scene.player.air_jumps_remaining()==0:budget_spent=true
+			if scene.player.air_jump_count()>0 and scene.player.air_jumps_remaining()==-1:air_boost_observed=true
 			if not roof.walkable_rect.grow(-.30).has_point(Vector2(local.x,local.z)):edge_errors.append({"tick":tick,"local":local})
 		_keys();await _ticks(90)
-		_check("roof.near_edge_turbo_air_jump_guard."+String(edge.name),reached and high_over_rail and budget_spent and peak_speed>20.8 and edge_errors.is_empty() and scene.player.recoveries==before,{"samples":90,"reached_within_m":.65,"reached":reached,"above_rail_at_edge":high_over_rail,"air_jump_spent":budget_spent,"peak_actual_speed_mps":peak_speed,"errors":edge_errors,"recovery_delta":scene.player.recoveries-before})
+		_check("roof.near_edge_turbo_air_jump_guard."+String(edge.name),reached and high_over_rail and air_boost_observed and peak_speed>20.8 and edge_errors.is_empty() and scene.player.recoveries==before,{"samples":90,"reached_within_m":.65,"reached":reached,"above_rail_at_edge":high_over_rail,"actual_air_boost_observed":air_boost_observed,"peak_actual_speed_mps":peak_speed,"errors":edge_errors,"recovery_delta":scene.player.recoveries-before})
 	await _pose(roof.spawn_point())
 	scene.player.global_position=roof.spawn_point()-Vector3.UP*6.
 	await _ticks(10)
