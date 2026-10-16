@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "task": "EXP15 supplementary curb and historical dog-turn probe provenance",
+  "packaged_at_local": "2026-10-16T18:38:09.820879+09:00",
+  "packaging_only_no_tests_rerun": true,
+  "scope": "Archived headless evidence only. Native rendering, final actor movement and final combined integration are covered by separate current reports. See sibling provenance.json for the pedestrian probe package.",
+  "source_status": {
+    "curb_script_sha256": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+    "curb_design_sha256": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+    "current_actor_sha256": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595",
+    "curb_sources_match_both_passed_reports": true,
+    "city_probe_explore_integration_differs_from_current_EXP15": true,
+    "dog_probe_actor_sha256": "24e99c04df60ef5edcd30d51d9768d3ed093a4b3fe242021f50f36dd5d04d95b",
+    "dog_probe_current_difference": "24e99c04df60ef5edcd30d51d9768d3ed093a4b3fe242021f50f36dd5d04d95b was reviewed before the museum route fix. Current b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595 is not certified by the historical192query result."
+  },
+  "runs": [
+    {
+      "report": "street_curbs_isolated.json",
+      "log": "street_curbs_isolated.log",
+      "probe": "check_street_curbs.gd",
+      "result_at_execution": "PASS",
+      "checks_at_execution": 39,
+      "failed_at_execution": 0,
+      "started_at_local": "2026-10-16T18:17:47",
+      "finished_at_local": "2026-10-16T18:18:12",
+      "source_correspondence": [
+        {
+          "path_at_execution": "/private/tmp/check_street_curbs.gd",
+          "sha256_at_execution": "ffae6333e6e04dc82867aae67da60ebad7200b3e725f79e6f28b57c9583e7fcc",
+          "sha256_at_packaging": "ffae6333e6e04dc82867aae67da60ebad7200b3e725f79e6f28b57c9583e7fcc",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://../tests/game/check_jump.gd",
+          "sha256_at_execution": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+          "sha256_at_packaging": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://assets/authored/street_curbs.json",
+          "sha256_at_execution": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+          "sha256_at_packaging": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://scripts/player/free_roam_player.gd",
+          "sha256_at_execution": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+          "sha256_at_packaging": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://scripts/street_curbs.gd",
+          "sha256_at_execution": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+          "sha256_at_packaging": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+          "matches_current": true
+        }
+      ],
+      "historical_command_from_tool_history": {
+        "cwd": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul",
+        "argv": [
+          "/Applications/Godot.app/Contents/MacOS/Godot",
+          "--headless",
+          "--path",
+          "game",
+          "--log-file",
+          "/private/tmp/street_curbs_isolated.log",
+          "--script",
+          "/private/tmp/check_street_curbs.gd",
+          "--",
+          "--report=/private/tmp/street_curbs_isolated.json"
+        ]
+      }
+    },
+    {
+      "report": "street_curbs_city.json",
+      "log": "street_curbs_city.log",
+      "probe": "check_street_curbs_city.gd",
+      "result_at_execution": "PASS",
+      "checks_at_execution": 8,
+      "failed_at_execution": 0,
+      "started_at_local": "2026-10-16T18:20:06",
+      "finished_at_local": "2026-10-16T18:20:08",
+      "source_correspondence": [
+        {
+          "path_at_execution": "/private/tmp/check_street_curbs_city.gd",
+          "sha256_at_execution": "e7fbf8cc85822143b30d3958012a6a6f6b65174ddca3649a83c1c6ffda8fe25b",
+          "sha256_at_packaging": "e7fbf8cc85822143b30d3958012a6a6f6b65174ddca3649a83c1c6ffda8fe25b",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://../tests/game/check_street_scene.gd",
+          "sha256_at_execution": "92a58810be6a1754fb2d946d42c02d89ff103d1de3f63245f747b77f84ed89f9",
+          "sha256_at_packaging": "92a58810be6a1754fb2d946d42c02d89ff103d1de3f63245f747b77f84ed89f9",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://assets/authored/street_curbs.json",
+          "sha256_at_execution": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+          "sha256_at_packaging": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://scripts/explore_walk.gd",
+          "sha256_at_execution": "02a211c1a0c5a32014fea383c3cc6328ea7f2109fb75de049b6f6c92eb82c7a7",
+          "sha256_at_packaging": "911a9f19897eb92104d934eb21a9d3296c4158e6d7e644726305a16baeabc569",
+          "matches_current": false
+        },
+        {
+          "path_at_execution": "res://scripts/museum_approach.gd",
+          "sha256_at_execution": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b",
+          "sha256_at_packaging": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://scripts/street_curbs.gd",
+          "sha256_at_execution": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+          "sha256_at_packaging": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+          "matches_current": true
+        },
+        {
+          "path_at_execution": "res://scripts/street_life.gd",
+          "sha256_at_execution": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89",
+          "sha256_at_packaging": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89",
+          "matches_current": true
+        }
+      ],
+      "historical_command_from_tool_history": {
+        "cwd": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul",
+        "argv": [
+          "/Applications/Godot.app/Contents/MacOS/Godot",
+          "--headless",
+          "--path",
+          "game",
+          "--log-file",
+          "/private/tmp/street_curbs_city.log",
+          "--script",
+          "/private/tmp/check_street_curbs_city.gd",
+          "--",
+          "--report=/private/tmp/street_curbs_city.json"
+        ]
+      }
+    },
+    {
+      "report": "dog_turn_clearance.json",
+      "log": "dog_turn_clearance.log",
+      "probe": "check_dog_turn_clearance.gd",
+      "result_at_execution": "PASS",
+      "queries_at_execution": 192,
+      "source_correspondence": [
+        {
+          "path_at_execution": "res://scripts/street_pedestrians.gd",
+          "sha256_at_execution": "24e99c04df60ef5edcd30d51d9768d3ed093a4b3fe242021f50f36dd5d04d95b",
+          "sha256_at_packaging": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595",
+          "matches_current": false
+        }
+      ],
+      "classification": "historical before museum route fix; not current actor acceptance",
+      "timestamp_note": "No execution start/end timestamps were captured by this probe. File mtime is not asserted to be the run time.",
+      "historical_command_from_tool_history": {
+        "cwd": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul",
+        "argv": [
+          "/Applications/Godot.app/Contents/MacOS/Godot",
+          "--headless",
+          "--path",
+          "game",
+          "--log-file",
+          "/private/tmp/dog_turn_clearance.log",
+          "--script",
+          "/private/tmp/check_dog_turn_clearance.gd",
+          "--",
+          "--report=/private/tmp/dog_turn_clearance.json"
+        ]
+      }
+    }
+  ],
+  "source_plan": {
+    "artifact": "street_curbs_source_proof.json",
+    "planned_segment_count": 16,
+    "planned_length_m": 238.3732697464712,
+    "source_correspondence": [
+      {
+        "path_at_execution": "res://resources/world_geometry/world.json",
+        "sha256_at_execution": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+        "sha256_at_packaging": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+        "matches_current": true
+      },
+      {
+        "path_at_execution": "res://data/generated/public_walk.json",
+        "sha256_at_execution": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+        "sha256_at_packaging": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+        "matches_current": true
+      },
+      {
+        "path_at_execution": "res://data/generated/traffic.json",
+        "sha256_at_execution": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+        "sha256_at_packaging": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+        "matches_current": true
+      },
+      {
+        "path_at_execution": "res://data/generated/pedestrians.json",
+        "sha256_at_execution": "a31058bad3b48968cb0154e410bc7a2c904025eb6041ff69720916755be29d3e",
+        "sha256_at_packaging": "a31058bad3b48968cb0154e410bc7a2c904025eb6041ff69720916755be29d3e",
+        "matches_current": true
+      },
+      {
+        "path_at_execution": "res://assets/authored/interiors/source_catalog.json",
+        "sha256_at_execution": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+        "sha256_at_packaging": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+        "matches_current": true
+      },
+      {
+        "path_at_execution": "res://assets/authored/museum_approach.json",
+        "sha256_at_execution": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+        "sha256_at_packaging": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+        "matches_current": true
+      }
+    ],
+    "interpretation": "Historical geometry generation output, not a separate runtime test. Protects5public routes,2NPCtracks,2traffic sweeps,704entrance candidates,3named crossings, all275source-footpath/drive-edge crossing loci, source solids/private areas and SeMAhill. It does not assert every optional source footpath remains an unchanged Y0 corridor.",
+    "generator": "generate_street_curbs_plan.py",
+    "generator_provenance": "Standalone reconstruction of the two executed temporary helper scripts. Assembled after generation and not executed again. Requires repository data environment and Shapely; original absolute workspace/output paths are retained. Deliberate execution can overwrite the authored street_curbs.json. Archived generation evidence, not a test command."
+  },
+  "notes": [
+    "Exact executed probe GD bytes were copied; original temporary self-hash/report paths remain. Reproduction requires historical sources/original paths, or an explicitly adapted probe with new provenance.",
+    "Only small JSON/log/GD/Python artifacts were copied. No tests rerun, production/document edits, binaries, caches, staging or commits.",
+    "Logs contain the known macOS system CA warning; no script errors were observed during these passed executions."
+  ],
+  "artifacts": [
+    {
+      "file": "street_curbs_isolated.json",
+      "sha256": "a84552e4443a7d5d04d568d3f6dce53c5499d8f0e816d06e65b31e3e27d48475",
+      "bytes": 34528,
+      "copied_from": "/private/tmp/street_curbs_isolated.json"
+    },
+    {
+      "file": "street_curbs_isolated.log",
+      "sha256": "37901e410dd6cef1b432b54035c34870b58cf40808fc3d0edf9d32764f3689f0",
+      "bytes": 328,
+      "copied_from": "/private/tmp/street_curbs_isolated.log"
+    },
+    {
+      "file": "check_street_curbs.gd",
+      "sha256": "ffae6333e6e04dc82867aae67da60ebad7200b3e725f79e6f28b57c9583e7fcc",
+      "bytes": 6654,
+      "copied_from": "/private/tmp/check_street_curbs.gd"
+    },
+    {
+      "file": "street_curbs_city.json",
+      "sha256": "438e79bce0ff67753d99d22874dc4bac984e2c1822ed0b24e3ac512a1b2df5e1",
+      "bytes": 27145,
+      "copied_from": "/private/tmp/street_curbs_city.json"
+    },
+    {
+      "file": "street_curbs_city.log",
+      "sha256": "5e2de4b1d7f7f656dd59db4c93d8de81f8f3499d4d7ef8784a6c1e73c9dba1cb",
+      "bytes": 1359,
+      "copied_from": "/private/tmp/street_curbs_city.log"
+    },
+    {
+      "file": "check_street_curbs_city.gd",
+      "sha256": "e7fbf8cc85822143b30d3958012a6a6f6b65174ddca3649a83c1c6ffda8fe25b",
+      "bytes": 3987,
+      "copied_from": "/private/tmp/check_street_curbs_city.gd"
+    },
+    {
+      "file": "dog_turn_clearance.json",
+      "sha256": "3edc3cae650d7ecc08dcdb82d33e94127ac07d11d58679fffe708bc27f8f8a03",
+      "bytes": 367,
+      "copied_from": "/private/tmp/dog_turn_clearance.json"
+    },
+    {
+      "file": "dog_turn_clearance.log",
+      "sha256": "3deb4bdce6c124613b8d51e92bcbc10305b6c85dd0a6540523470379c869a311",
+      "bytes": 1354,
+      "copied_from": "/private/tmp/dog_turn_clearance.log"
+    },
+    {
+      "file": "check_dog_turn_clearance.gd",
+      "sha256": "316f84e5ec03d1ca27c796d866a381d9ac857b1e2d6eaa5df225a3100ef5620a",
+      "bytes": 2128,
+      "copied_from": "/private/tmp/check_dog_turn_clearance.gd"
+    },
+    {
+      "file": "street_curbs_source_proof.json",
+      "sha256": "55cb6cdb9fb748fbf719488f10e903a5c0d245c5b520de07d8bb421b1258081c",
+      "bytes": 12304,
+      "copied_from": "/private/tmp/street_curbs_source_proof.json"
+    },
+    {
+      "file": "generate_street_curbs_plan.py",
+      "sha256": "5fd00d91676d489c41e6777a1352ef9fd86825f369b3f06a41eb5231a938b758",
+      "bytes": 10258,
+      "copied_from": "/private/tmp/generate_street_curbs_standalone.py"
+    }
+  ]
+}

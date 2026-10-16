@@ -1,0 +1,550 @@
+{
+  "schema_version": 1,
+  "id": "central_authored_curbs_v1",
+  "title": "덕수궁·서울광장 게임용 입체 연석",
+  "scope": {
+    "placement": "0.9m outside the union boundary of current game drive meshes, near existing walk surfaces and within40m of stonewall/city_plaza routes",
+    "widths": "current game display widths; many are G04 estimates, not surveyed road or curb edges",
+    "height": "authored game geometry, not surveyed kerb heights",
+    "physical_terrain_verified": false,
+    "source_geometry_modified": false,
+    "city_sidewalks_raised": false,
+    "note": "Bounded beveled boundary bands; all existing Y0 ground, road support, NPC tracks and entrances remain unchanged."
+  },
+  "source_hashes": {
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://data/generated/pedestrians.json": "a31058bad3b48968cb0154e410bc7a2c904025eb6041ff69720916755be29d3e",
+    "res://assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "res://assets/authored/museum_approach.json": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745"
+  },
+  "source_features_sha256": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+  "design": {
+    "height_m": 0.12,
+    "width_m": 1.4,
+    "flat_top_width_m": 0.3,
+    "end_fade_length_m": 1.2,
+    "sample_spacing_m": 0.8,
+    "bottom_y_m": -0.15,
+    "drive_edge_offset_m": 0.9,
+    "proven_footprint_radius_m": 0.85,
+    "minimum_segment_length_m": 4.0,
+    "maximum_cross_grade": 0.21818181818181814,
+    "maximum_end_grade": 0.15
+  },
+  "protection": {
+    "source_drive_meshes": 180,
+    "source_walk_meshes": 190,
+    "existing_public_routes": 5,
+    "NPC_routes": 2,
+    "traffic_routes": 2,
+    "named_crossings": 3,
+    "source_footpath_crossing_inputs": 275,
+    "door_buildings": 125,
+    "entrance_candidates": 704,
+    "entrance_corridor": "Every source door to entrance plus5m outward, half-width max(1.2,door_width/2)+.3m; further .85m curb footprint guard.",
+    "walk_corridor_half_width_m": 1.5,
+    "crossing_radius_m": 1.8,
+    "source_solid_clearance_m": 0.35,
+    "protected_static_intersection_area_m2": {
+      "public_walking_routes": 0.0,
+      "NPC_routes": 0.0,
+      "traffic_swept": 0.0,
+      "all_704_entrance_candidates": 0.0,
+      "source_buildings_parts_barriers": 0.0,
+      "all_3_W03_crossings": 0.0,
+      "private_exclusions": 0.0,
+      "authored_SeMA_hill": 0.0,
+      "all_source_footpath_drive_crossings": 0.0
+    },
+    "live_props": "At setup, reject a whole segment if an above-ground volume sweep meets existing static props/buildings or NPC/car bodies; source actor routes are additionally excluded by the static plan."
+  },
+  "named_flat_cuts": [
+    {
+      "id": "sejong_marked",
+      "source_xz": [
+        [
+          66.10172428877559,
+          -195.00309929763898
+        ],
+        [
+          80.54150130483322,
+          -194.6255233627744
+        ],
+        [
+          91.63615756906802,
+          -195.66326384898275
+        ],
+        [
+          95.98417398874881,
+          -196.50214915629476
+        ],
+        [
+          98.43318525451468,
+          -196.97117776377127
+        ]
+      ],
+      "flat_y_m": 0.0
+    },
+    {
+      "id": "side_street",
+      "source_xz": [
+        [
+          65.42821248981636,
+          15.58565148897469
+        ],
+        [
+          67.45581494178623,
+          9.656803354155272
+        ],
+        [
+          68.91095785837388,
+          -19.341823266353458
+        ],
+        [
+          68.73469962191302,
+          -38.24007346574217
+        ],
+        [
+          68.33789954753593,
+          -80.95541670545936
+        ],
+        [
+          68.28246110118926,
+          -89.46022608364001
+        ],
+        [
+          68.19849092705408,
+          -103.20547590684146
+        ],
+        [
+          68.13447887415532,
+          -112.54306972539052
+        ],
+        [
+          68.05406958097592,
+          -125.22251608269289
+        ],
+        [
+          67.82187804672867,
+          -161.21801805589348
+        ],
+        [
+          63.24694377265405,
+          -165.8458864656277
+        ],
+        [
+          63.26015335827833,
+          -169.33141885325313
+        ],
+        [
+          63.12515904463362,
+          -174.55195019673556
+        ]
+      ],
+      "flat_y_m": 0.0
+    },
+    {
+      "id": "west_junction",
+      "source_xz": [
+        [
+          -240.8138266885653,
+          -31.112993377726525
+        ],
+        [
+          -243.21360032260418,
+          -32.92987660365179
+        ],
+        [
+          -247.4519437266281,
+          -35.95206558005884
+        ]
+      ],
+      "flat_y_m": 0.0
+    }
+  ],
+  "segments": [
+    {
+      "id": "curb_01",
+      "xz": [
+        [
+          -287.14,
+          -40.855
+        ],
+        [
+          -274.946,
+          -30.938
+        ],
+        [
+          -271.564,
+          -27.67
+        ]
+      ],
+      "length_m": 20.420473853099878,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:183272433:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8505654548592199
+    },
+    {
+      "id": "curb_02",
+      "xz": [
+        [
+          -265.115,
+          -32.284
+        ],
+        [
+          -269.765,
+          -36.779
+        ],
+        [
+          -285.139,
+          -49.282
+        ]
+      ],
+      "length_m": 26.283698557227815,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:183272433:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8499460287970175
+    },
+    {
+      "id": "curb_03",
+      "xz": [
+        [
+          -264.067,
+          -19.048
+        ],
+        [
+          -263.938,
+          -16.205
+        ],
+        [
+          -263.176,
+          -13.249
+        ],
+        [
+          -262.228,
+          -11.451
+        ]
+      ],
+      "length_m": 7.931171213108728,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:393513868:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8490712870487429
+    },
+    {
+      "id": "curb_04",
+      "xz": [
+        [
+          -247.755,
+          -31.108
+        ],
+        [
+          -251.183,
+          -31.488
+        ],
+        [
+          -255.043,
+          -30.764
+        ],
+        [
+          -258.313,
+          -29.033
+        ]
+      ],
+      "length_m": 11.076209217933725,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:393513868:highway_line"
+      ],
+      "static_protection_clearance_m": 2.120012719395321
+    },
+    {
+      "id": "curb_05",
+      "xz": [
+        [
+          -234.785,
+          -17.916
+        ],
+        [
+          -237.67,
+          -20.648
+        ],
+        [
+          -237.693,
+          -20.763
+        ]
+      ],
+      "length_m": 4.090569408888057,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:37400087:highway_line",
+        "osm:way:393513868:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8491778862485575
+    },
+    {
+      "id": "curb_06",
+      "xz": [
+        [
+          -167.136,
+          29.406
+        ],
+        [
+          -193.229,
+          31.405
+        ],
+        [
+          -199.537,
+          30.72
+        ],
+        [
+          -203.102,
+          28.577
+        ],
+        [
+          -205.95,
+          25.439
+        ],
+        [
+          -206.733,
+          23.872
+        ]
+      ],
+      "length_m": 42.66351341940171,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:37400087:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8499533252992898
+    },
+    {
+      "id": "curb_07",
+      "xz": [
+        [
+          60.311,
+          -173.121
+        ],
+        [
+          48.759,
+          -172.679
+        ]
+      ],
+      "length_m": 11.560452759299698,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:431903253:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8502083095345659
+    },
+    {
+      "id": "curb_08",
+      "xz": [
+        [
+          56.943,
+          47.174
+        ],
+        [
+          56.681,
+          49.387
+        ],
+        [
+          50.958,
+          66.77
+        ]
+      ],
+      "length_m": 20.529313689761338,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:619147732:highway_line"
+      ],
+      "static_protection_clearance_m": 0.849935126219096
+    },
+    {
+      "id": "curb_09",
+      "xz": [
+        [
+          53.273,
+          -165.047
+        ],
+        [
+          60.446,
+          -165.321
+        ]
+      ],
+      "length_m": 7.1782313281197565,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:431903253:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8502332694155507
+    },
+    {
+      "id": "curb_10",
+      "xz": [
+        [
+          57.239,
+          32.234
+        ],
+        [
+          58.554,
+          31.904
+        ],
+        [
+          57.995,
+          38.307
+        ],
+        [
+          57.53,
+          42.227
+        ]
+      ],
+      "length_m": 11.730612883201246,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:37400087:highway_line",
+        "osm:way:619147732:highway_line"
+      ],
+      "static_protection_clearance_m": 0.850296071206874
+    },
+    {
+      "id": "curb_11",
+      "xz": [
+        [
+          66.965,
+          -234.985
+        ],
+        [
+          67.014,
+          -228.531
+        ],
+        [
+          65.28,
+          -228.496
+        ],
+        [
+          61.912,
+          -228.592
+        ]
+      ],
+      "length_m": 11.55790709279354,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:183272488:highway_line",
+        "osm:way:620634303:highway_line"
+      ],
+      "static_protection_clearance_m": 5.099725069399868
+    },
+    {
+      "id": "curb_12",
+      "xz": [
+        [
+          99.062,
+          8.816
+        ],
+        [
+          99.444,
+          2.295
+        ],
+        [
+          99.903,
+          -6.738
+        ]
+      ],
+      "length_m": 15.576833414522152,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:378453707:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8491545212583902
+    },
+    {
+      "id": "curb_13",
+      "xz": [
+        [
+          100.227,
+          -13.132
+        ],
+        [
+          100.236,
+          -13.302
+        ],
+        [
+          100.742,
+          -31.065
+        ]
+      ],
+      "length_m": 17.940443610459425,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:378453707:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8490176455934376
+    },
+    {
+      "id": "curb_14",
+      "xz": [
+        [
+          104.942,
+          -186.969
+        ],
+        [
+          105.135,
+          -191.066
+        ]
+      ],
+      "length_m": 4.101543368050626,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:378453707:highway_line"
+      ],
+      "static_protection_clearance_m": 0.849488979815966
+    },
+    {
+      "id": "curb_15",
+      "xz": [
+        [
+          107.308,
+          -202.827
+        ],
+        [
+          121.295,
+          -202.617
+        ]
+      ],
+      "length_m": 13.988576375028298,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:184443139:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8499897719097693
+    },
+    {
+      "id": "curb_16",
+      "xz": [
+        [
+          126.279,
+          -202.552
+        ],
+        [
+          138.022,
+          -202.422
+        ]
+      ],
+      "length_m": 11.74371955557522,
+      "roadside_sign": 1,
+      "source_drive_features": [
+        "osm:way:184443139:highway_line"
+      ],
+      "static_protection_clearance_m": 0.8499413526433246
+    }
+  ],
+  "planned_segment_count": 16,
+  "planned_length_m": 238.3732697464712
+}

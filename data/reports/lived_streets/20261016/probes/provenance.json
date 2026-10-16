@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "task": "EXP15 focused pedestrian probe provenance",
+  "packaged_at_local": "2026-10-16T18:36:30.114528+09:00",
+  "packaging_reran_tests": false,
+  "final_production_sources": {
+    "game/scripts/street_pedestrians.gd": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595",
+    "game/assets/authored/street_pedestrians.json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d"
+  },
+  "historical_production_source": {
+    "path": "development/street_pedestrians_24e99_before_offset_fix.gd",
+    "sha256": "24e99c04df60ef5edcd30d51d9768d3ed093a4b3fe242021f50f36dd5d04d95b",
+    "bytes": 24926
+  },
+  "interpretation": {
+    "historical_short_pass": "The 11/11 short probe belongs only to 24e99. It predates the real museum stall found by the independent combined test.",
+    "final_focused_pass": "Only museum_full_patrol_final reports the corrected b48c093 source. Final combined headless/native reports are maintained by the root agent.",
+    "source_assets": "No generated cache, world mesh, external assets or duplicate final production source was added here. Harnesses refer to the normal res:// game sources.",
+    "earlier_missing_sources": "Exact production files for early revisions 983fd424/81f8845e/9e362b79 and first JSON 68290b10 were not retained. Their historical report hashes and matching test harnesses are kept without fabricating old source.",
+    "replay": "Copied harnesses are unchanged and retain their original /private/tmp settings/report paths. Replaying a historical harness against the final tree runs current production code; the archived prior source is not automatically loaded."
+  },
+  "probes": [
+    {
+      "id": "pedestrian_probe_01_setup_fail",
+      "classification": "historical_failure",
+      "files": [
+        {
+          "path": "development/pedestrian_probe_01_setup_fail.gd",
+          "sha256": "b15882e4845c59223a27fad6c978b49ba750ab5c9179e6b4d6f4f2b8c5cccc01",
+          "bytes": 3825
+        },
+        {
+          "path": "development/pedestrian_probe_01_setup_fail.json",
+          "sha256": "0c164b9e107dcab3addc41f3fe3f4c822c8a62ad065f2cbc45f560f644633761",
+          "bytes": 39000
+        },
+        {
+          "path": "development/pedestrian_probe_01_setup_fail.log",
+          "sha256": "13a2b07a8734e95708683d7644cf33eb10c687489f1a95711206d1ffe45a93a3",
+          "bytes": 1625
+        }
+      ],
+      "notes": "Northern plaza dog lane intersected existing physical geometry and setup rejected it. Historical harness is preserved. Exact production GDScript and design JSON for this failed revision were not retained; their self-reported SHA256 values are evidence, not reconstructed source.",
+      "result": "FAIL",
+      "summary": {
+        "checks": 1,
+        "failed": 1
+      },
+      "reported_production_source_sha256": {
+        "gd": "983fd424b6f64cbaafa2f0090c42484fb218e6298610b3d0304204b3aa0ead98",
+        "json": "68290b1011a4855d48261bb1f49b2b96ce2755ba19282f1dd187f487e8e3352b"
+      },
+      "failed_checks": [
+        "setup"
+      ]
+    },
+    {
+      "id": "pedestrian_probe_02_floor_query_fail",
+      "classification": "historical_failure",
+      "files": [
+        {
+          "path": "development/pedestrian_probe_02_floor_query_fail.gd",
+          "sha256": "b15882e4845c59223a27fad6c978b49ba750ab5c9179e6b4d6f4f2b8c5cccc01",
+          "bytes": 3825
+        },
+        {
+          "path": "development/pedestrian_probe_02_floor_query_fail.json",
+          "sha256": "a34875ccb83be760afb84086f8ac6a07d7a4d91166b7af63fae509afa194dff9",
+          "bytes": 100878
+        },
+        {
+          "path": "development/pedestrian_probe_02_floor_query_fail.log",
+          "sha256": "ffea4e70494f1fcff6ab8ae2b0bd9518798569b0d8fc372e1be70b3117010e1f",
+          "bytes": 1978
+        }
+      ],
+      "notes": "Both floor bodies could be observed as occupied by the predictive capsule at its contact margin; all actors waited. Fixed predictive query clearance and foot-aligned collider centers. Exact production GDScript for this failed revision was not retained; its recorded hash is preserved.",
+      "result": "FAIL",
+      "summary": {
+        "checks": 7,
+        "failed": 2
+      },
+      "reported_production_source_sha256": {
+        "gd": "81f8845ed282a934c69f818902bcd3070b95ade4a4ab996b89d5d1085316d127",
+        "json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d"
+      },
+      "failed_checks": [
+        "all8_actual_physical_walking",
+        "human_and_fourleg_dog_gaits_move"
+      ]
+    },
+    {
+      "id": "pedestrian_probe_03_partial_pass",
+      "classification": "historical_partial_pass",
+      "files": [
+        {
+          "path": "development/pedestrian_probe_03_partial_pass.gd",
+          "sha256": "b15882e4845c59223a27fad6c978b49ba750ab5c9179e6b4d6f4f2b8c5cccc01",
+          "bytes": 3825
+        },
+        {
+          "path": "development/pedestrian_probe_03_partial_pass.json",
+          "sha256": "fb09bb4d23d40f16d0b00312dea69d4360383eec3eff4488fff3956c3430d5bb",
+          "bytes": 102583
+        },
+        {
+          "path": "development/pedestrian_probe_03_partial_pass.log",
+          "sha256": "b4708264f18773a7ace354fb10a443abbd258f4facf35ea953d54fab28e672d4",
+          "bytes": 1266
+        }
+      ],
+      "notes": "Seven short checks passed before movement-toggle and radial-grip additions. This did not establish complete museum-route traversal. Exact production GDScript at this hash was not retained.",
+      "result": "PASS",
+      "summary": {
+        "checks": 7,
+        "failed": 0
+      },
+      "reported_production_source_sha256": {
+        "gd": "9e362b7968d867048fb72963d6a0c8dc4bcc9b5c4e5001aa572dc686cba7f6fc",
+        "json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d"
+      },
+      "failed_checks": []
+    },
+    {
+      "id": "pedestrian_short_11_before_offset_fix",
+      "classification": "historical_superseded_pass",
+      "files": [
+        {
+          "path": "probes/pedestrian_short_11_before_offset_fix.gd",
+          "sha256": "567f8c5860403aea7b24905d0db7f8aef51c9053308efc3b2a76bc6aeba03cef",
+          "bytes": 5534
+        },
+        {
+          "path": "probes/pedestrian_short_11_before_offset_fix.json",
+          "sha256": "3295b533ec989c219e49372dd5353e52c3260890494bd07e3e52d2f6473e25d0",
+          "bytes": 103179
+        },
+        {
+          "path": "probes/pedestrian_short_11_before_offset_fix.log",
+          "sha256": "08ca353014ea6d094b911ea5d06d172e96e852d08d1a785879e09e9ce6467e92",
+          "bytes": 1267
+        }
+      ],
+      "notes": "11/11 is historical source 24e99, before the museum continuous-offset fix. The short movement assertion required only 1m per actor; the manual-resume assertion checked module clock, not per-actor movement. It therefore did not expose the later museum stall. Do not treat it as verification of final b48c093. Matching historical production GDScript is in development/street_pedestrians_24e99_before_offset_fix.gd.",
+      "result": "PASS",
+      "summary": {
+        "checks": 11,
+        "failed": 0
+      },
+      "reported_production_source_sha256": {
+        "gd": "24e99c04df60ef5edcd30d51d9768d3ed093a4b3fe242021f50f36dd5d04d95b",
+        "json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d"
+      },
+      "failed_checks": []
+    },
+    {
+      "id": "pedestrian_source_ground_before_offset_fix",
+      "classification": "historical_support_audit",
+      "files": [
+        {
+          "path": "probes/pedestrian_source_ground_before_offset_fix.gd",
+          "sha256": "e20c373e7aec254b42319bc4f1bea4ddf5f075f441312fb91a279d7f45a603fd",
+          "bytes": 1384
+        },
+        {
+          "path": "probes/pedestrian_source_ground_before_offset_fix.log",
+          "sha256": "9dabb1e11cf09d44036036f3b7e8089c8c0812e24fc4588b0d026a593a57fa53",
+          "bytes": 1314
+        }
+      ],
+      "notes": "397 source-only layer-1 ground samples found support (348 original ground, 49 authored hill) and free-roam off retained 8 grounded actors. This small harness/log did not capture source hashes itself; association with pre-offset 24e99 is from the session sequence, not an in-log cryptographic assertion."
+    },
+    {
+      "id": "museum_full_patrol_final",
+      "classification": "final_focused_pass",
+      "files": [
+        {
+          "path": "probes/museum_full_patrol_final.gd",
+          "sha256": "3e067a47f3226df33b23d93571724f0acc537f0bb52445de3546ee2e7db17b6c",
+          "bytes": 4946
+        },
+        {
+          "path": "probes/museum_full_patrol_final.json",
+          "sha256": "b8372aa360176e5a0364b011bd2423d39393781470b1bd01cc52e94765894924",
+          "bytes": 52778
+        },
+        {
+          "path": "probes/museum_full_patrol_final.log",
+          "sha256": "d829df3ca96965a3d2640864721cf4573e06410929c66eabe81076cc85bf0a68",
+          "bytes": 2090
+        }
+      ],
+      "notes": "5/5 on b48c093 in the production-integrated city, including curbs. Continuous mitered side offsets and fractional source-XZ station projection fixed the bend stall. First 6s moved 6.141m; checkbox on 1.5s moved 1.262m. Full 23.991m route reached both ends with 3 endpoint reversals in 3037 additional 60Hz ticks; all 8 actors stayed grounded; max observed route error 0.000055m. --fixed-fps 60 accelerates scheduling while retaining 1/60s physics. No NPC teleports after setup. This is headless evidence, not image acceptance.",
+      "result": "PASS",
+      "summary": {
+        "checks": 5,
+        "failed": 0
+      },
+      "reported_production_source_sha256": {
+        "gd": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595",
+        "json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d"
+      },
+      "failed_checks": []
+    }
+  ]
+}

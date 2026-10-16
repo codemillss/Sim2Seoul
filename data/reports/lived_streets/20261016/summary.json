@@ -1,0 +1,172 @@
+{
+  "task": "EXP15 lived streets",
+  "result": "PASS",
+  "generated_at": "2026-10-16T18:48:55.858218+09:00",
+  "baseline_commit": "7de773570c75abc3293d5054f690e093f057995d",
+  "user_choice": "Detail the current Deoksugung and City Hall area before expanding to Changgyeonggung.",
+  "environment": {
+    "device": "M5 Mac, 16GB",
+    "os": "macOS26.6.2",
+    "engine": "4.7.2-stable (official)",
+    "renderer": "Metal4 Forward+"
+  },
+  "features": {
+    "curbs": {
+      "segments": 16,
+      "length_m": 238.373278699815,
+      "height_m": 0.12,
+      "width_m": 1.4,
+      "owned_closed_convex_shapes": 1938,
+      "scope": "selected game road edges, not a complete or surveyed pavement reconstruction"
+    },
+    "population": {
+      "new_walkers": 6,
+      "new_dogs": 2,
+      "legacy_walkers": 2,
+      "patrol_groups": 6,
+      "placement": "three stonewall, two plaza, one museum slope groups",
+      "walking_speed_mps": 1.05,
+      "leash_max_m": 1.4
+    }
+  },
+  "runs": {
+    "headless": {
+      "report": "headless.json",
+      "log": "headless.log",
+      "execution": "execution.json",
+      "checks": 47,
+      "wall_elapsed_s": 19.527,
+      "report_sha256": "694a2130f7c933125c67e25287777e902ebec785e96c1652037d3890453bf77b",
+      "log_sha256": "39347f3b6558dc393cce0bcd224f764f30ee22ec74d80cd2daa1155a81e5f6db",
+      "execution_sha256": "9e554f8f90306cedfa0f1b0d825596e9f3625d8eb3d2ec91f4acb6dafe030e95"
+    },
+    "gpu": {
+      "report": "gpu.json",
+      "log": "gpu.log",
+      "execution": "gpu.execution.json",
+      "checks": 53,
+      "wall_elapsed_s": 22.021,
+      "report_sha256": "f515f93759d2b0d554087bfdef6f4e0284b8fbb8cc19581deb4238c4a9ab2d1d",
+      "log_sha256": "53b7dd4d208a515d7c1ac03f5b1231218bce32e666b7ae7d6941ab03346bb33e",
+      "execution_sha256": "77aa69297b5511868a9611a6ba30171fb520cd715d30f774fd92c3f9bf3985d5"
+    }
+  },
+  "source_sha256": {
+    "tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+    "tests/game/check_lived_streets.gd": "51b3b343400c42eb3aa63286de59a53e71bffbf7c651fabff024059201e556e7",
+    "tests/game/check_street_scene.gd": "92a58810be6a1754fb2d946d42c02d89ff103d1de3f63245f747b77f84ed89f9",
+    "game/assets/authored/museum_approach.json": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+    "game/assets/authored/street_businesses.json": "c4b04fdd21b5c5b61f61351ef02ec13fd028df9821444750c8930caf1735aea2",
+    "game/assets/authored/street_curbs.json": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+    "game/assets/authored/street_life.json": "6d6b34d895707c21aef639a134a6194590bf36fcc73d84f5ab04268240cff0b9",
+    "game/assets/authored/street_pedestrians.json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d",
+    "game/scripts/explore_walk.gd": "911a9f19897eb92104d934eb21a9d3296c4158e6d7e644726305a16baeabc569",
+    "game/scripts/museum_approach.gd": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b",
+    "game/scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff",
+    "game/scripts/player/exploration_avatar.gd": "7ed8375df49706f7dec467383311e16487fa34c1ee73f99fd1684dac1144fc8b",
+    "game/scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+    "game/scripts/player/free_roam_player.gd": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+    "game/scripts/street_businesses.gd": "4e5db46e9b83ea23b62bec0506a2756f11d748325b78207ff4010a05985996ce",
+    "game/scripts/street_curbs.gd": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+    "game/scripts/street_life.gd": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89",
+    "game/scripts/street_pedestrians.gd": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595",
+    "game/scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "game/scripts/interior_visit.gd": "1d486138e194a397481f1f3ebee0444b28049d0a564f675ce7f8e0587ebd2c01",
+    "game/scripts/facility_interaction.gd": "ee8731307ad8bd9ee66a6c4012f76e3772a59a14d159b3ff45f73ea74a56e1a6",
+    "game/scripts/facility_activity_visuals.gd": "36b3415065cc64cf39916cf12523f97d97b0d2925c77b6b68133993ad6c11fa9",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "game/data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+  },
+  "source_mismatch_count": 0,
+  "source_unchanged_during_runs": true,
+  "observed_scope": {
+    "entrance_candidates": 704,
+    "entrance_capsule_queries": 12672,
+    "source_buildings": 125,
+    "source_collision_inventory_unchanged": 692,
+    "new_actor_motion_ticks": 360,
+    "controller_crossings": "two representative curb locations, both directions, real Input at2.24/21mps",
+    "regressions": "actual menu pause, old checkbox OFF/ON, near-player wait and walk-away release, safe dog shortcut and physical E library entry/exit"
+  },
+  "focused_evidence": {
+    "curbs": "probes/curbs_and_dog_provenance.json",
+    "pedestrians": "probes/provenance.json",
+    "museum_final_patrol": "probes/museum_full_patrol_final.json",
+    "scope_notes": "Focused curb39/39+integrated8/8 at current curb SHA. Short pedestrian11/11 and dog192-query turn probe use historical24e99 actor SHA; final full hill patrol5/5 uses current b48c093 actor SHA. Do not sum repeated assertions as unique journeys."
+  },
+  "fix_history": [
+    "Initial headless fixture counted a deliberately held leash arm as a failed arm swing and assumed a single stop reason; updated actual joint and blocked-contact expectations while retaining real motion/support criteria. Initial dictionary crossing read error fixed.",
+    "Headless02 exposed actual hill station stalling at a source bend. Source XZ arc was already correct; segment-constant side normals created a discontinuity and inverse station projection used offset-distance units. Continuous mitered vertex offsets and source-fraction projection fixed it. Actual23.991m patrol reached both ends and reversed3times across3037additional60Hz ticks; checkbox resumed1.262m in1.5s. No actor teleport after spawn.",
+    "First native GPU run50/51 preserved in development/gpu01. At the identical shared convex-triangle edge, the exact centre ray misses but four XZ rays1mm away all hit. A fresh independent capsule settles on actual GroundedHill contact with correct floor normal; downward capsule cast also finds support. For a direct ray miss, final acceptance requires all four neighboring rays plus actual floor contact/normal and downward capsule cast, keeping the original height threshold; an exact-seam regression is added. Production terrain is unchanged and the original failure is retained.",
+    "First dog photographs partly hid dog and keeper behind the player. GPU02 passed53/53 numerically but the next observer angle selected a physically safe point on the wrong side of the stone wall; its6images/source are preserved separately. Final observer selection additionally requires static line of sight to the subject and looks aside along the route; normal camera and visible avatar are retained. All final6images were opened."
+  ],
+  "visual_review": {
+    "all_six_opened": true,
+    "captures": [
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_curb_crossing.png",
+        "sha256": "352d9d556b783c24efee743f38d04ddf7daa167f781ec62cc1ac4f15d83845f8",
+        "reviewed": true,
+        "name": "curb_crossing"
+      },
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_curb_wide.png",
+        "sha256": "b941eae626ff5bcbfebfdd04a453a7ea42d0bb65f7a90843638d99facb564a70",
+        "reviewed": true,
+        "name": "curb_wide"
+      },
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_stonewall_dog.png",
+        "sha256": "9de1c4250f78aa9e8516964ac74b19f2a5606f6310f6c0e328684ca2e7e0089e",
+        "reviewed": true,
+        "name": "stonewall_dog"
+      },
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_evening_street.png",
+        "sha256": "866d98f832ab5a451d482473a371e9b7228bc6ba009b97fab2b7e06c1ba7a106",
+        "reviewed": true,
+        "name": "evening_street"
+      },
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_plaza_dog.png",
+        "sha256": "d999890db7ec49a80144ead4a0807042268d6233b3da28345332394c161d1db4",
+        "reviewed": true,
+        "name": "plaza_dog"
+      },
+      {
+        "path": "data/reports/lived_streets/20261016/gpu_museum_slope.png",
+        "sha256": "e5ba0ac96df09eaef3e298aca48117a3db779790571ef593098258bf119bd69f",
+        "reviewed": true,
+        "name": "museum_slope"
+      }
+    ],
+    "notes": "Actual normal third-person camera;12cm bevelled curb edge and flat cuts, dogs/keepers/leashes, sparse plaza/slope population and evening light checked. Game-styled assets, not photogrammetry."
+  },
+  "normal_launch": {
+    "pid": 13796,
+    "launched_at": "2026-10-16T18:47:42.615017+09:00",
+    "log": "launch.log",
+    "kind": "normal exploration launch, no automatic probe",
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "ready": true,
+    "process_running": true,
+    "process_verified_at": "2026-10-16T18:48:55.766389+09:00",
+    "cua_observed": false,
+    "menu_closed": null,
+    "dog_shortcut_clicked": false,
+    "cua_observation_blocker": "CUA returned: The Mac is locked and automatic unlock could not unlock it. User asked to unlock; no attempt to bypass.",
+    "actual_ready_line": "EXPLORATION_READY speed=turbo free_roam=true time=evening"
+  },
+  "limits": [
+    "Raised strips cover selected238m, not every road/whole sidewalk. Dimensions and activity are authored game detail.",
+    "Actual visitor density, animal behaviour/access rules, leash physics and surveyed kerb/elevation not reproduced.",
+    "No dog petting/dialogue/audio, new shop interior or purchasing.",
+    "No long-duration performance, all-camera-angle, export or another-Mac acceptance. Earlier EXP14/EXP13 evidence remains historical to its own source versions."
+  ],
+  "next_first_action": "Unlock Mac, then Esc → 반려견 산책 구간으로 이동; inspect raised curb, moving keeper/dog, and pause with the existing pedestrian checkbox."
+}

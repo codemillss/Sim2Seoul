@@ -1,0 +1,2590 @@
+{
+	"captures": [
+		{
+			"captured": false,
+			"name": "curb_crossing",
+			"reason": "headless"
+		},
+		{
+			"captured": false,
+			"name": "curb_wide",
+			"reason": "headless"
+		},
+		{
+			"captured": false,
+			"name": "stonewall_dog",
+			"reason": "headless"
+		},
+		{
+			"captured": false,
+			"name": "evening_street",
+			"reason": "headless"
+		},
+		{
+			"captured": false,
+			"name": "plaza_dog",
+			"reason": "headless"
+		},
+		{
+			"captured": false,
+			"name": "museum_slope",
+			"reason": "headless"
+		}
+	],
+	"checks": [
+		{
+			"evidence": {
+				"error": ""
+			},
+			"name": "startup.production_city_and_both_new_modules_loaded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"birds": 6,
+				"lamps": 10,
+				"source_bodies": 692,
+				"stores": 4
+			},
+			"name": "regression.original_city_inventory_and_EXP14_features_loaded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"bodies": 16,
+				"closed_convex_shapes": 1938,
+				"length_m": 238.373278699815,
+				"shape_errors": 0,
+				"skipped": []
+			},
+			"name": "curbs.actual_16_owned_closed_bodies_exceed_150_source_metres",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actual_mesh_vertices": 5814,
+				"end_error_m": 0.0000000223517417907715,
+				"mesh_top_y_m": 0.119999997317791,
+				"side_error_m": 0.0000188922882080056,
+				"top_error_m": 0.0000000643730163618628,
+				"wrong_top_bodies": []
+			},
+			"name": "curbs.actual_mesh_and_ray_tops_12cm_sides_6cm_ends_flat",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actual_capsule_queries": 12672,
+				"blocked_examples": [],
+				"buildings": 125,
+				"candidates": 704,
+				"sampling": "every candidate: outward 0..5m at 1m, centre and both full protected half-width edges; contacts filtered to actual new curb RIDs"
+			},
+			"name": "curbs.all_704_source_entrance_corridors_have_no_new_curb_capsule_contacts",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"crossings": [
+					{
+						"actual_support_queries": 5,
+						"flat": true,
+						"id": "sejong_marked"
+					},
+					{
+						"actual_support_queries": 13,
+						"flat": true,
+						"id": "side_street"
+					},
+					{
+						"actual_support_queries": 3,
+						"flat": true,
+						"id": "west_junction"
+					}
+				]
+			},
+			"name": "curbs.three_actual_marked_crossing_centres_remain_flat",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"dogs": 2,
+				"errors": [],
+				"humans": 6,
+				"legacy_people": 2
+			},
+			"name": "population.six_articulated_walkers_two_four_leg_dogs_and_two_legacy_people",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"registered": 8,
+				"traffic_humans": 11
+			},
+			"name": "population.all_eight_real_character_bodies_registered_with_existing_traffic",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"animated": 8,
+				"moving": 8,
+				"observation_seconds": 6.0
+			},
+			"name": "population.real_physics_moves_all_eight_with_animated_limbs",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"overlap_examples": [],
+				"slope_actual_rise_m": 0.663422226905823,
+				"support_errors": []
+			},
+			"name": "population.actual_floor_support_including_sloped_walker_without_overlaps",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"maximum_actual_leash_length_m": 0.839450716972351,
+				"maximum_hand_collar_midpoint_error_m": 0.0,
+				"paw_center_gap_range_m": [
+					0.0279999002814293,
+					0.0829988643527031
+				]
+			},
+			"name": "dogs.four_paws_animate_near_floor_and_actual_leashes_follow_hands",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"maximum_actual_step_m": 0.0175147261470556,
+				"maximum_eight_actor_density_within_10m": 2,
+				"route_traffic_clearance_m": [
+					118.60090637207,
+					136.98014831543,
+					172.268905639648,
+					33.0353546142578,
+					72.1161499023438,
+					311.254150390625
+				]
+			},
+			"name": "population.modest_dispersion_and_bounded_step_traffic_separation",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actual_standing_position": [
+					-235.609191894531,
+					2.56412482261658,
+					14.4173154830933
+				],
+				"diagnostic": "seam_diagnostic.json: exact diagonal ray miss; actual shared vertices, +/-1mm rays, fresh capsule and floor contacts independently verified",
+				"explicit_diagnostic_start": [
+					-235.609191894531,
+					2.62493872642517,
+					14.4173154830933
+				],
+				"support": {
+					"at": [
+						-235.609191894531,
+						2.56412482261658,
+						14.4173154830933
+					],
+					"capsule_down_10cm_fractions": [
+						0.25,
+						0.25390625
+					],
+					"current_floor_contacts": [
+						{
+							"body": "GroundedHill",
+							"normal": [
+								-0.0453329905867577,
+								0.995542228221893,
+								-0.0827078819274902
+							],
+							"point": [
+								-235.597885131836,
+								2.56519269943237,
+								14.4379291534424
+							],
+							"shape_index": 171
+						}
+					],
+					"floor_normal": [
+						-0.0453329905867577,
+						0.995542228221893,
+						-0.0827078819274902
+					],
+					"four_1mm_rays": [
+						{
+							"offset": [
+								0.00100000004749745,
+								0.0,
+								0.0
+							],
+							"supported": true,
+							"surface": [
+								-235.608184814453,
+								2.56301116943359,
+								14.4173154830933
+							]
+						},
+						{
+							"offset": [
+								-0.00100000004749745,
+								0.0,
+								0.0
+							],
+							"supported": true,
+							"surface": [
+								-235.610198974609,
+								2.5629243850708,
+								14.4173154830933
+							]
+						},
+						{
+							"offset": [
+								0.0,
+								0.0,
+								0.00100000004749745
+							],
+							"supported": true,
+							"surface": [
+								-235.609191894531,
+								2.56304836273193,
+								14.4183158874512
+							]
+						},
+						{
+							"offset": [
+								0.0,
+								0.0,
+								-0.00100000004749745
+							],
+							"supported": true,
+							"surface": [
+								-235.609191894531,
+								2.56288719177246,
+								14.4163150787354
+							]
+						}
+					],
+					"method": "shared_triangle_ray_seam",
+					"supported": true
+				}
+			},
+			"name": "support.known_diagonal_has_current_capsule_and_floor_contact_support",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"explicit_diagnostic_fault": "fresh stand probe raised20cm with its physics disabled; no gameplay actor moved",
+				"stale_is_on_floor": true,
+				"support": {
+					"at": [
+						-235.609191894531,
+						2.76412487030029,
+						14.4173154830933
+					],
+					"capsule_down_10cm_fractions": [
+						1.0,
+						1.0
+					],
+					"current_floor_contacts": [],
+					"floor_normal": [
+						-0.0453329905867577,
+						0.995542228221893,
+						-0.0827078819274902
+					],
+					"four_1mm_rays": [
+						{
+							"offset": [
+								0.00100000004749745,
+								0.0,
+								0.0
+							],
+							"supported": false,
+							"surface": [
+								-235.608184814453,
+								2.56301116943359,
+								14.4173154830933
+							]
+						},
+						{
+							"offset": [
+								-0.00100000004749745,
+								0.0,
+								0.0
+							],
+							"supported": false,
+							"surface": [
+								-235.610198974609,
+								2.5629243850708,
+								14.4173154830933
+							]
+						},
+						{
+							"offset": [
+								0.0,
+								0.0,
+								0.00100000004749745
+							],
+							"supported": false,
+							"surface": [
+								-235.609191894531,
+								2.56304860115051,
+								14.4183158874512
+							]
+						},
+						{
+							"offset": [
+								0.0,
+								0.0,
+								-0.00100000004749745
+							],
+							"supported": false,
+							"surface": [
+								-235.609191894531,
+								2.56288719177246,
+								14.4163150787354
+							]
+						}
+					],
+					"method": "shared_triangle_ray_seam",
+					"supported": false
+				}
+			},
+			"name": "support.rejects_unsupported_capsule_even_with_stale_grounded_flag",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "menu.real_toggle_freezes_actor_bodies_joints_leashes_and_clock",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"checkbox_text": "보행자 이동",
+				"legacy_bodies": 2,
+				"new_bodies": 8
+			},
+			"name": "menu.legacy_pedestrian_checkbox_pauses_all_ten_actual_people_and_dogs",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"legacy_resumed": 2,
+				"new_resumed": 8,
+				"observed_bodies": [
+					{
+						"displacement_m": 1.27741479873657,
+						"end": [
+							-46.4346008300781,
+							-0.000105569779407233,
+							17.0031051635742
+						],
+						"id": "stonewall_east_walker",
+						"slide_contacts": [
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							-45.1613311767578,
+							-0.000231624348089099,
+							16.9002799987793
+						],
+						"velocity": [
+							-1.04659819602966,
+							0.0,
+							0.0844510719180107
+						]
+					},
+					{
+						"displacement_m": 1.27732336521149,
+						"end": [
+							-72.1758270263672,
+							-0.000199002621229738,
+							18.8310737609863
+						],
+						"id": "stonewall_dog_walker",
+						"slide_contacts": [
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							-70.9026489257812,
+							-0.00108376343268901,
+							18.7282562255859
+						],
+						"velocity": [
+							-1.04659056663513,
+							0.0,
+							0.0845463871955872
+						]
+					},
+					{
+						"displacement_m": 1.27731513977051,
+						"end": [
+							-72.1114273071289,
+							0.000941146514378488,
+							19.6284770965576
+						],
+						"id": "stonewall_dog_dog",
+						"slide_contacts": [
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							-70.8382568359375,
+							0.000941079575568438,
+							19.5256614685059
+						],
+						"velocity": [
+							-1.04690551757812,
+							0.0,
+							0.0843429490923882
+						]
+					},
+					{
+						"displacement_m": 1.27730917930603,
+						"end": [
+							-98.1823196411133,
+							0.000934630748815835,
+							21.1820888519287
+						],
+						"id": "stonewall_west_walker",
+						"slide_contacts": [
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "ExplorationGround",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							-99.4554824829102,
+							-0.00105677801184356,
+							21.2849044799805
+						],
+						"velocity": [
+							1.04644775390625,
+							0.0,
+							-0.0844573900103569
+						]
+					},
+					{
+						"displacement_m": 1.27728688716888,
+						"end": [
+							139.351959228516,
+							0.000934272888116539,
+							-111.08097076416
+						],
+						"id": "plaza_dog_walker",
+						"slide_contacts": [
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							138.109970092773,
+							0.000935107236728072,
+							-111.379173278809
+						],
+						"velocity": [
+							1.02081298828125,
+							0.0,
+							0.244903549551964
+						]
+					},
+					{
+						"displacement_m": 1.27728688716888,
+						"end": [
+							139.165191650391,
+							0.00094143784372136,
+							-110.303085327148
+						],
+						"id": "plaza_dog_dog",
+						"slide_contacts": [
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							137.923202514648,
+							0.00094143464230001,
+							-110.601287841797
+						],
+						"velocity": [
+							1.02081298828125,
+							0.0,
+							0.244903549551964
+						]
+					},
+					{
+						"displacement_m": 1.27718460559845,
+						"end": [
+							166.331359863281,
+							0.000932018796447664,
+							-104.60311126709
+						],
+						"id": "plaza_west_walker",
+						"slide_contacts": [
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							},
+							{
+								"collider": "StaticCollision",
+								"normal": [
+									0.0,
+									1.0,
+									0.0
+								]
+							}
+						],
+						"start": [
+							167.5732421875,
+							-0.00105868699029088,
+							-104.304908752441
+						],
+						"velocity": [
+							-1.02081298828125,
+							0.0,
+							-0.244903549551964
+						]
+					},
+					{
+						"displacement_m": 1.26324355602264,
+						"end": [
+							-234.327911376953,
+							2.78469729423523,
+							16.7552604675293
+						],
+						"id": "museum_slope_walker",
+						"slide_contacts": [
+							{
+								"collider": "GroundedHill",
+								"normal": [
+									-0.0326733328402042,
+									0.997687160968781,
+									-0.0596061088144779
+								]
+							},
+							{
+								"collider": "GroundedHill",
+								"normal": [
+									-0.0326733328402042,
+									0.997687160968781,
+									-0.0596061088144779
+								]
+							},
+							{
+								"collider": "GroundedHill",
+								"normal": [
+									-0.0326733328402042,
+									0.997687160968781,
+									-0.0596061088144779
+								]
+							}
+						],
+						"start": [
+							-234.933319091797,
+							2.68963837623596,
+							15.6506204605103
+						],
+						"velocity": [
+							0.5035400390625,
+							0.0,
+							0.921249330043793
+						]
+					}
+				],
+				"routes": [
+					{
+						"id": "stonewall_east",
+						"reason": "",
+						"state": "walking"
+					},
+					{
+						"id": "stonewall_dog",
+						"reason": "",
+						"state": "walking"
+					},
+					{
+						"id": "stonewall_west",
+						"reason": "",
+						"state": "walking"
+					},
+					{
+						"id": "plaza_dog",
+						"reason": "",
+						"state": "walking"
+					},
+					{
+						"id": "plaza_west",
+						"reason": "",
+						"state": "walking"
+					},
+					{
+						"id": "museum_slope",
+						"reason": "",
+						"state": "walking"
+					}
+				]
+			},
+			"name": "menu.legacy_checkbox_resumes_new_population_and_original_walkers",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-97.1357269287109,
+					-0.000468738377094269,
+					21.0975704193115
+				],
+				"requested": [
+					-97.1357269287109,
+					0.0800000205636024,
+					21.0975704193115
+				]
+			},
+			"name": "placement.actual_player_ahead_of_walker.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"player_center_distance_m": 1.05000078678131,
+				"reason": "swept_body",
+				"state": "waiting",
+				"stopped_displacement_m": 0.0
+			},
+			"name": "population.actual_player_blocks_approach_without_body_overlap",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"player_end": [
+					-96.9824600219727,
+					0.000932877184823155,
+					22.995397567749
+				],
+				"player_start": [
+					-97.1357269287109,
+					-0.000468738377094269,
+					21.0975704193115
+				],
+				"player_walk_reached": true,
+				"state": "walking",
+				"target": [
+					-96.974739074707,
+					-0.000468738377094269,
+					23.0910797119141
+				],
+				"walker_displacement_after_release_m": 0.857375860214233
+			},
+			"name": "population.walking_player_away_releases_actual_waiting_walker",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "curbs.two_representative_crossings_have_clear_actual_capsule_starts",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-279.944305419922,
+					-0.00257776863873005,
+					-33.5206604003906
+				],
+				"requested": [
+					-279.944305419922,
+					0.0799999982118607,
+					-33.5206604003906
+				]
+			},
+			"name": "placement.curb_01_walk_out.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"end": [
+					-278.523712158203,
+					-0.00217098649591208,
+					-35.2673645019531
+				],
+				"grounded": 61,
+				"id": "curb_01_walk_out",
+				"maximum_foot_y_m": 0.121901787817478,
+				"maximum_horizontal_speed_mps": 2.24000024795532,
+				"maximum_step_m": 0.0377499647438526,
+				"reached": true,
+				"recoveries_delta": 0,
+				"start": [
+					-279.944305419922,
+					0.0799999982118607,
+					-33.5206604003906
+				],
+				"target": [
+					-278.493072509766,
+					0.0799999982118607,
+					-35.3049926757812
+				],
+				"ticks": 61
+			},
+			"name": "controller.curb_01_walk_out.physically_crosses_both_bevels",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-278.493072509766,
+					-0.00331670604646206,
+					-35.3049926757812
+				],
+				"requested": [
+					-278.493072509766,
+					0.0799999982118607,
+					-35.3049926757812
+				]
+			},
+			"name": "placement.curb_01_walk_back.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"end": [
+					-279.913665771484,
+					-0.00193920242600143,
+					-33.5583038330078
+				],
+				"grounded": 61,
+				"id": "curb_01_walk_back",
+				"maximum_foot_y_m": 0.121899485588074,
+				"maximum_horizontal_speed_mps": 2.24000000953674,
+				"maximum_step_m": 0.0377458818256855,
+				"reached": true,
+				"recoveries_delta": 0,
+				"start": [
+					-278.493072509766,
+					0.0799999982118607,
+					-35.3049926757812
+				],
+				"target": [
+					-279.944305419922,
+					0.0799999982118607,
+					-33.5206604003906
+				],
+				"ticks": 61
+			},
+			"name": "controller.curb_01_walk_back.physically_crosses_both_bevels",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 4.49999856948853,
+				"player": [
+					-279.913665771484,
+					-0.00193920242600143,
+					-33.5583038330078
+				]
+			},
+			"name": "view.curb_crossing.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-274.217926025391,
+					-0.00239407038316131,
+					-41.882640838623
+				],
+				"requested": [
+					-274.217926025391,
+					0.0799999982118607,
+					-41.882640838623
+				]
+			},
+			"name": "placement.curb_02_turbo_out.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"end": [
+					-275.650939941406,
+					-0.0019853999838233,
+					-40.1193237304688
+				],
+				"grounded": 7,
+				"id": "curb_02_turbo_out",
+				"maximum_foot_y_m": 0.135624378919601,
+				"maximum_horizontal_speed_mps": 21.0,
+				"maximum_step_m": 0.350000560283661,
+				"reached": true,
+				"recoveries_delta": 0,
+				"start": [
+					-274.217926025391,
+					0.0799999982118607,
+					-41.882640838623
+				],
+				"target": [
+					-275.668487548828,
+					0.0799999982118607,
+					-40.0977516174316
+				],
+				"ticks": 7
+			},
+			"name": "controller.curb_02_turbo_out.physically_crosses_both_bevels",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-275.668487548828,
+					0.000102294143289328,
+					-40.0977516174316
+				],
+				"requested": [
+					-275.668487548828,
+					0.0799999982118607,
+					-40.0977516174316
+				]
+			},
+			"name": "placement.curb_02_turbo_back.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"end": [
+					-274.235504150391,
+					-0.00180555670522153,
+					-41.8610382080078
+				],
+				"grounded": 7,
+				"id": "curb_02_turbo_back",
+				"maximum_foot_y_m": 0.135720446705818,
+				"maximum_horizontal_speed_mps": 21.0000019073486,
+				"maximum_step_m": 0.350005298852921,
+				"reached": true,
+				"recoveries_delta": 0,
+				"start": [
+					-275.668487548828,
+					0.0799999982118607,
+					-40.0977516174316
+				],
+				"target": [
+					-274.217926025391,
+					0.0799999982118607,
+					-41.882640838623
+				],
+				"ticks": 7
+			},
+			"name": "controller.curb_02_turbo_back.physically_crosses_both_bevels",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-186.405426025391,
+					-0.00257777608931065,
+					32.7354621887207
+				],
+				"requested": [
+					-186.405426025391,
+					0.0800000205636024,
+					32.7354621887207
+				]
+			},
+			"name": "placement.curb_wide_observer.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 2.79999756813049,
+				"player": [
+					-186.405426025391,
+					-0.00257777608931065,
+					32.7354621887207
+				]
+			},
+			"name": "view.curb_wide.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-81.208122253418,
+					0.000119808129966259,
+					16.952075958252
+				],
+				"requested": [
+					-81.208122253418,
+					0.0800000205636024,
+					16.952075958252
+				]
+			},
+			"name": "placement.stonewall_dog_observer.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 0.569414556026459,
+				"player": [
+					-81.208122253418,
+					0.000119808129966259,
+					16.952075958252
+				]
+			},
+			"name": "view.stonewall_dog.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 1.86941194534302,
+				"player": [
+					-81.208122253418,
+					0.000119808129966259,
+					16.952075958252
+				]
+			},
+			"name": "view.evening_street.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					147.743133544922,
+					-0.000468738377094269,
+					-105.56957244873
+				],
+				"requested": [
+					147.743133544922,
+					0.0800000205636024,
+					-105.56957244873
+				]
+			},
+			"name": "placement.plaza_dog_observer.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 4.49999809265137,
+				"player": [
+					147.743133544922,
+					-0.000468738377094269,
+					-105.56957244873
+				]
+			},
+			"name": "view.plaza_dog.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					-234.909225463867,
+					2.896315574646,
+					19.1945705413818
+				],
+				"requested": [
+					-234.909225463867,
+					2.97600317001343,
+					19.1945705413818
+				]
+			},
+			"name": "placement.museum_slope_observer.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"distance_m": 4.49999856948853,
+				"player": [
+					-234.909225463867,
+					2.896315574646,
+					19.1945705413818
+				]
+			},
+			"name": "view.museum_slope.normal_camera_is_clear",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"id": "osm:relation:10757525:building"
+			},
+			"name": "regression_library.selected",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					145.833786010742,
+					0.000312499701976776,
+					-114.841453552246
+				],
+				"requested": [
+					145.833786010742,
+					0.0799999982118607,
+					-114.841453552246
+				]
+			},
+			"name": "placement.regression_library_outside.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"active": true,
+				"authored_not_surveyed": true,
+				"catalog_count": 125,
+				"current_floor": 0,
+				"depth": 57.3019350103232,
+				"e_requires_release": false,
+				"elevator": {
+					"acceleration_mps2": 0.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": false,
+					"cabin_visible": false,
+					"current_floor_value": 0.0,
+					"destination_count": 5,
+					"door_open_fraction": 1.0,
+					"duration": 0.0,
+					"elapsed": 0.0,
+					"from_floor": 0,
+					"max_speed_mps": 0.0,
+					"motion_duration": 0.0,
+					"motion_elapsed": 0.0,
+					"motion_start_floor": 0.0,
+					"on_roof": false,
+					"passenger_position": [
+						650.0,
+						-99.9996871948242,
+						25.1509666442871
+					],
+					"phase": "idle",
+					"phase_elapsed": 0.0,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": false,
+					"speed_mps": 0.0,
+					"target_floor": 0
+				},
+				"elevator_open": false,
+				"entrance": [
+					145.833786010742,
+					0.0799999982118607,
+					-114.841453552246
+				],
+				"entry_count": 1,
+				"error": "",
+				"exit_count": 0,
+				"facility_activity": {
+					"active": false,
+					"cancelled_counts": {
+						"eat": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"cleanliness": 30.0,
+					"completed_counts": {
+						"eat": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"control_locked": false,
+					"duration": 0.0,
+					"elapsed": 0.0,
+					"external_cleanup_count": 0,
+					"fullness": 35.0,
+					"kind": "",
+					"last_session": {},
+					"notice": "",
+					"paused": false,
+					"prompt": "",
+					"rejected_count": 0,
+					"return_pending": false,
+					"return_position": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"selected_target_id": "",
+					"session": {},
+					"started_counts": {
+						"eat": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"status_rect": {
+						"position": [
+							16.0,
+							619.0
+						],
+						"size": [
+							480.0,
+							36.0
+						]
+					},
+					"status_text": "포만감 35 · 청결 30  |  운동 0.0 m · 근력 0회",
+					"target_id": "",
+					"targets": [],
+					"use_position": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"visual": {},
+					"workout_distance_m": 0.0,
+					"workout_repetitions": 0
+				},
+				"feature_id": "osm:relation:10757525:building",
+				"floor_count": 4,
+				"in_elevator": false,
+				"loaded": true,
+				"notice": "",
+				"on_roof": false,
+				"outside_return": [
+					145.833786010742,
+					0.0800001174211502,
+					-114.841453552246
+				],
+				"rejected_entries": 0,
+				"rejected_exits": 0,
+				"roof_ready_tick": 4,
+				"rooftop": {
+					"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Raised pool retains the original roof/deck and adds finite buoyancy, bounded swim speed, Space exit and code-native splash/ripple effects; no full fluid simulation.",
+					"building_id": "osm:relation:10757525:building",
+					"building_title": "서울도서관",
+					"ceiling_unbounded": true,
+					"clearance_above_observed_m": 0.28,
+					"collision_bodies": 23,
+					"deck_height_y": 18.78,
+					"depth": 36.0,
+					"features": [
+						"four_sided_physical_rails_and_rotated_player_footprint_guard",
+						"clear_central_lift_landing",
+						"planted_garden",
+						"benches",
+						"open_pergola"
+					],
+					"frame_axes": [
+						[
+							0.00613489607349038,
+							0.0,
+							-0.999981224536896
+						],
+						[
+							0.0,
+							1.0,
+							0.0
+						],
+						[
+							0.999981224536896,
+							0.0,
+							0.00613489607349038
+						]
+					],
+					"frame_determinant": 1.00000011920929,
+					"frame_origin": [
+						145.909622192383,
+						18.7800006866455,
+						-125.910957336426
+					],
+					"height_observations": [
+						{
+							"bounds_position": [
+								106.572761535645,
+								0.0,
+								-158.903457641602
+							],
+							"bounds_size": [
+								80.3576736450195,
+								18.5,
+								43.0448989868164
+							],
+							"kind": "retained_source_mesh",
+							"path": "/root/ExploreWalk/World/Buildings/osm_relation_10757525_building",
+							"top_y": 18.5
+						},
+						{
+							"bounds_position": [
+								106.572761535645,
+								0.0,
+								-158.903457641602
+							],
+							"bounds_size": [
+								80.3576736450195,
+								1.38750004768372,
+								43.0448989868164
+							],
+							"kind": "same_feature_visible_landmark_json",
+							"path": "osm:relation:10757525:building/library_stone_base",
+							"top_y": 1.38750004768372
+						},
+						{
+							"bounds_position": [
+								106.85319519043,
+								1.38750004768372,
+								-158.618576049805
+							],
+							"bounds_size": [
+								79.6759796142578,
+								14.8925008773804,
+								42.4775085449219
+							],
+							"kind": "same_feature_visible_landmark_json",
+							"path": "osm:relation:10757525:building/library_stone_low_stone_mass",
+							"top_y": 16.2800006866455
+						},
+						{
+							"bounds_position": [
+								106.733009338379,
+								16.2800006866455,
+								-158.740676879883
+							],
+							"bounds_size": [
+								79.968132019043,
+								0.739999771118164,
+								42.7206878662109
+							],
+							"kind": "same_feature_visible_landmark_json",
+							"path": "osm:relation:10757525:building/library_roof_roof",
+							"top_y": 17.0200004577637
+						},
+						{
+							"bounds_position": [
+								106.572761535645,
+								1.38750004768372,
+								-158.903457641602
+							],
+							"bounds_size": [
+								80.3576736450195,
+								14.3725004196167,
+								43.0448989868164
+							],
+							"kind": "same_feature_visible_landmark_json",
+							"path": "osm:relation:10757525:building/library_stone_stone_bands",
+							"top_y": 15.7600002288818
+						}
+					],
+					"landing_validation_height_m": 9.35,
+					"lift_point": [
+						160.259353637695,
+						18.8600006103516,
+						-125.82292175293
+					],
+					"loaded": true,
+					"observed_top_y": 18.5,
+					"open_sky_jump_space": true,
+					"pool_entry": [],
+					"pool_rim": [],
+					"profile_id": "garden",
+					"profile_title": "옥상 정원",
+					"source_height_offset_m": 0.280000000000001,
+					"source_height_y": 18.5,
+					"source_inset_m": 0.8,
+					"source_rectangle_depth": 57.3019350103232,
+					"source_rectangle_width": 14.7491810869779,
+					"spawn": [
+						160.259353637695,
+						18.8600006103516,
+						-125.82292175293
+					],
+					"walkable_rect_position": [
+						-6.5745906829834,
+						-18.0
+					],
+					"walkable_rect_size": [
+						13.1491813659668,
+						36.0
+					],
+					"water_effects": {},
+					"water_region": {},
+					"width": 13.1491810869779,
+					"world_bounds_position": [
+						127.86962890625,
+						18.4300003051758,
+						-132.595855712891
+					],
+					"world_bounds_size": [
+						36.0799865722656,
+						9.35000038146973,
+						13.3697967529297
+					]
+				},
+				"room_origin": [
+					650.0,
+					-100.0,
+					0.0
+				],
+				"room_static_bodies": 255,
+				"selected_floor": 0,
+				"width": 14.7491810869779
+			},
+			"name": "regression_library.physical_E_enters",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					650.0,
+					-99.9996871948242,
+					27.800968170166
+				],
+				"requested": [
+					650.0,
+					-99.9199981689453,
+					27.800968170166
+				]
+			},
+			"name": "placement.regression_library_exit.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					145.833786010742,
+					0.00031251460313797,
+					-114.841453552246
+				],
+				"state": {
+					"active": false,
+					"authored_not_surveyed": true,
+					"catalog_count": 125,
+					"current_floor": 0,
+					"depth": 57.3019350103232,
+					"e_requires_release": true,
+					"elevator": {
+						"acceleration_mps2": 0.0,
+						"cabin_bounds": {
+							"position": [
+								1097.94995117188,
+								-140.25,
+								-2.20000004768372
+							],
+							"size": [
+								4.09999990463257,
+								3.09999990463257,
+								4.40000009536743
+							]
+						},
+						"cabin_camera_current": false,
+						"cabin_visible": false,
+						"current_floor_value": 0.0,
+						"destination_count": 5,
+						"door_open_fraction": 1.0,
+						"duration": 0.0,
+						"elapsed": 0.0,
+						"from_floor": 0,
+						"max_speed_mps": 0.0,
+						"motion_duration": 0.0,
+						"motion_elapsed": 0.0,
+						"motion_start_floor": 0.0,
+						"on_roof": false,
+						"passenger_position": [
+							145.833786010742,
+							0.00031251460313797,
+							-114.841453552246
+						],
+						"phase": "idle",
+						"phase_elapsed": 0.0,
+						"render_mode": "detached_3d_cabin",
+						"returning_to_safe_floor": false,
+						"safe_release_pending": false,
+						"speed_mps": 0.0,
+						"target_floor": 0
+					},
+					"elevator_open": false,
+					"entrance": [
+						145.833786010742,
+						0.0799999982118607,
+						-114.841453552246
+					],
+					"entry_count": 1,
+					"error": "",
+					"exit_count": 1,
+					"facility_activity": {
+						"active": false,
+						"cancelled_counts": {
+							"eat": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"cleanliness": 30.0,
+						"completed_counts": {
+							"eat": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"control_locked": false,
+						"duration": 0.0,
+						"elapsed": 0.0,
+						"external_cleanup_count": 0,
+						"fullness": 35.0,
+						"kind": "",
+						"last_session": {},
+						"notice": "",
+						"paused": false,
+						"prompt": "",
+						"rejected_count": 0,
+						"return_pending": false,
+						"return_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"selected_target_id": "",
+						"session": {},
+						"started_counts": {
+							"eat": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"status_rect": {
+							"position": [
+								0.0,
+								0.0
+							],
+							"size": [
+								0.0,
+								0.0
+							]
+						},
+						"status_text": "포만감 35 · 청결 30  |  운동 0.0 m · 근력 0회",
+						"target_id": "",
+						"targets": [],
+						"use_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"visual": {},
+						"workout_distance_m": 0.0,
+						"workout_repetitions": 0
+					},
+					"feature_id": "osm:relation:10757525:building",
+					"floor_count": 4,
+					"in_elevator": false,
+					"loaded": true,
+					"notice": "",
+					"on_roof": false,
+					"outside_return": [
+						145.833786010742,
+						0.0800001174211502,
+						-114.841453552246
+					],
+					"rejected_entries": 0,
+					"rejected_exits": 0,
+					"roof_ready_tick": 4,
+					"rooftop": {
+						"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Raised pool retains the original roof/deck and adds finite buoyancy, bounded swim speed, Space exit and code-native splash/ripple effects; no full fluid simulation.",
+						"building_id": "osm:relation:10757525:building",
+						"building_title": "서울도서관",
+						"ceiling_unbounded": true,
+						"clearance_above_observed_m": 0.28,
+						"collision_bodies": 23,
+						"deck_height_y": 18.78,
+						"depth": 36.0,
+						"features": [
+							"four_sided_physical_rails_and_rotated_player_footprint_guard",
+							"clear_central_lift_landing",
+							"planted_garden",
+							"benches",
+							"open_pergola"
+						],
+						"frame_axes": [
+							[
+								0.00613489607349038,
+								0.0,
+								-0.999981224536896
+							],
+							[
+								0.0,
+								1.0,
+								0.0
+							],
+							[
+								0.999981224536896,
+								0.0,
+								0.00613489607349038
+							]
+						],
+						"frame_determinant": 1.00000011920929,
+						"frame_origin": [
+							145.909622192383,
+							18.7800006866455,
+							-125.910957336426
+						],
+						"height_observations": [
+							{
+								"bounds_position": [
+									106.572761535645,
+									0.0,
+									-158.903457641602
+								],
+								"bounds_size": [
+									80.3576736450195,
+									18.5,
+									43.0448989868164
+								],
+								"kind": "retained_source_mesh",
+								"path": "/root/ExploreWalk/World/Buildings/osm_relation_10757525_building",
+								"top_y": 18.5
+							},
+							{
+								"bounds_position": [
+									106.572761535645,
+									0.0,
+									-158.903457641602
+								],
+								"bounds_size": [
+									80.3576736450195,
+									1.38750004768372,
+									43.0448989868164
+								],
+								"kind": "same_feature_visible_landmark_json",
+								"path": "osm:relation:10757525:building/library_stone_base",
+								"top_y": 1.38750004768372
+							},
+							{
+								"bounds_position": [
+									106.85319519043,
+									1.38750004768372,
+									-158.618576049805
+								],
+								"bounds_size": [
+									79.6759796142578,
+									14.8925008773804,
+									42.4775085449219
+								],
+								"kind": "same_feature_visible_landmark_json",
+								"path": "osm:relation:10757525:building/library_stone_low_stone_mass",
+								"top_y": 16.2800006866455
+							},
+							{
+								"bounds_position": [
+									106.733009338379,
+									16.2800006866455,
+									-158.740676879883
+								],
+								"bounds_size": [
+									79.968132019043,
+									0.739999771118164,
+									42.7206878662109
+								],
+								"kind": "same_feature_visible_landmark_json",
+								"path": "osm:relation:10757525:building/library_roof_roof",
+								"top_y": 17.0200004577637
+							},
+							{
+								"bounds_position": [
+									106.572761535645,
+									1.38750004768372,
+									-158.903457641602
+								],
+								"bounds_size": [
+									80.3576736450195,
+									14.3725004196167,
+									43.0448989868164
+								],
+								"kind": "same_feature_visible_landmark_json",
+								"path": "osm:relation:10757525:building/library_stone_stone_bands",
+								"top_y": 15.7600002288818
+							}
+						],
+						"landing_validation_height_m": 9.35,
+						"lift_point": [
+							160.259353637695,
+							18.8600006103516,
+							-125.82292175293
+						],
+						"loaded": true,
+						"observed_top_y": 18.5,
+						"open_sky_jump_space": true,
+						"pool_entry": [],
+						"pool_rim": [],
+						"profile_id": "garden",
+						"profile_title": "옥상 정원",
+						"source_height_offset_m": 0.280000000000001,
+						"source_height_y": 18.5,
+						"source_inset_m": 0.8,
+						"source_rectangle_depth": 57.3019350103232,
+						"source_rectangle_width": 14.7491810869779,
+						"spawn": [
+							160.259353637695,
+							18.8600006103516,
+							-125.82292175293
+						],
+						"walkable_rect_position": [
+							-6.5745906829834,
+							-18.0
+						],
+						"walkable_rect_size": [
+							13.1491813659668,
+							36.0
+						],
+						"water_effects": {},
+						"water_region": {},
+						"width": 13.1491810869779,
+						"world_bounds_position": [
+							127.86962890625,
+							18.4300003051758,
+							-132.595855712891
+						],
+						"world_bounds_size": [
+							36.0799865722656,
+							9.35000038146973,
+							13.3697967529297
+						]
+					},
+					"room_origin": [
+						650.0,
+						-100.0,
+						0.0
+					],
+					"room_static_bodies": 255,
+					"selected_floor": 0,
+					"width": 14.7491810869779
+				}
+			},
+			"name": "regression_library.safe_physical_E_exit",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "regression_library.held_E_no_auto_reentry",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"source_body_count": 692
+			},
+			"name": "regression.all_source_shapes_capsule_and_outdoor_controller_retained",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"changed": []
+			},
+			"name": "regression.all_source_hashes_frozen_during_probe",
+			"passed": true
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"finished_at_local": "2026-10-16T18:43:10",
+	"observations": {
+		"actor_motion": {
+			"actors": [
+				{
+					"actual_joint_excursions_rad": [
+						0.669832710176706,
+						0.66984424367547,
+						0.759957253932953,
+						0.75995722413063
+					],
+					"foot_y_range_m": [
+						-0.00108417973387986,
+						0.000942626735195518
+					],
+					"id": "stonewall_east_walker",
+					"observed_displacement_m": 6.29987716674805
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.669869598001242,
+						0.669837709516287,
+						0.00000533461570739746,
+						0.759979724884033
+					],
+					"foot_y_range_m": [
+						-0.00108417472802103,
+						0.000943493098020554
+					],
+					"id": "stonewall_dog_walker",
+					"observed_displacement_m": 6.29898929595947
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.679993778467178,
+						0.679993778467178,
+						0.679993778467178,
+						0.679993778467178
+					],
+					"foot_y_range_m": [
+						-0.00105975277256221,
+						0.000941483420319855
+					],
+					"id": "stonewall_dog_dog",
+					"observed_displacement_m": 6.29899263381958
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.669867355376482,
+						0.669833417981863,
+						0.759977996349335,
+						0.759977996349335
+					],
+					"foot_y_range_m": [
+						-0.00106952397618443,
+						0.000935672665946186
+					],
+					"id": "stonewall_west_walker",
+					"observed_displacement_m": 6.29911184310913
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.669860910624266,
+						0.669827971607447,
+						0.759974271059036,
+						0.00000897049903869629
+					],
+					"foot_y_range_m": [
+						0.0000534066930413246,
+						0.000935651361942291
+					],
+					"id": "plaza_dog_walker",
+					"observed_displacement_m": 6.29926729202271
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.679995030164719,
+						0.679995030164719,
+						0.679995030164719,
+						0.679995030164719
+					],
+					"foot_y_range_m": [
+						-0.000105222163256258,
+						0.000941477133892477
+					],
+					"id": "plaza_dog_dog",
+					"observed_displacement_m": 6.29926729202271
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.669876508414745,
+						0.669854156672955,
+						0.759983777999878,
+						0.759983777999878
+					],
+					"foot_y_range_m": [
+						-0.00108416960574687,
+						0.000943746534176171
+					],
+					"id": "plaza_west_walker",
+					"observed_displacement_m": 6.29868793487549
+				},
+				{
+					"actual_joint_excursions_rad": [
+						0.66984211653471,
+						0.66978021338582,
+						0.759898871183395,
+						0.759898871183395
+					],
+					"foot_y_range_m": [
+						1.96957004070282,
+						2.63299226760864
+					],
+					"id": "museum_slope_walker",
+					"observed_displacement_m": 6.14101028442383
+				}
+			],
+			"independently_confirmed_ray_seams": [],
+			"initial_counts": {
+				"dog": 2,
+				"walker": 6
+			},
+			"samples": 360,
+			"traffic_registered": 8
+		},
+		"curbs": {
+			"authored_not_surveyed": true,
+			"end_fade_m": 1.2,
+			"height_m": 0.12,
+			"protected_source_plan": {
+				"NPC_routes": 2.0,
+				"crossing_radius_m": 1.8,
+				"door_buildings": 125.0,
+				"entrance_candidates": 704.0,
+				"entrance_corridor": "Every source door to entrance plus5m outward, half-width max(1.2,door_width/2)+.3m; further .85m curb footprint guard.",
+				"existing_public_routes": 5.0,
+				"live_props": "At setup, reject a whole segment if an above-ground volume sweep meets existing static props/buildings or NPC/car bodies; source actor routes are additionally excluded by the static plan.",
+				"named_crossings": 3.0,
+				"protected_static_intersection_area_m2": {
+					"NPC_routes": 0.0,
+					"all_3_W03_crossings": 0.0,
+					"all_704_entrance_candidates": 0.0,
+					"all_source_footpath_drive_crossings": 0.0,
+					"authored_SeMA_hill": 0.0,
+					"private_exclusions": 0.0,
+					"public_walking_routes": 0.0,
+					"source_buildings_parts_barriers": 0.0,
+					"traffic_swept": 0.0
+				},
+				"source_drive_meshes": 180.0,
+				"source_footpath_crossing_inputs": 275.0,
+				"source_solid_clearance_m": 0.35,
+				"source_walk_meshes": 190.0,
+				"traffic_routes": 2.0,
+				"walk_corridor_half_width_m": 1.5
+			},
+			"segments": [
+				{
+					"cuts": [
+						[
+							-287.140014648438,
+							0.0,
+							-40.8549995422363
+						],
+						[
+							-271.563995361328,
+							0.0,
+							-27.6700000762939
+						]
+					],
+					"id": "curb_01",
+					"length_m": 20.4204869270325,
+					"source_drive_features": [
+						"osm:way:183272433:highway_line"
+					],
+					"top": [
+						-279.218688964844,
+						0.119999997317791,
+						-34.4128265380859
+					]
+				},
+				{
+					"cuts": [
+						[
+							-265.114990234375,
+							0.0,
+							-32.2840003967285
+						],
+						[
+							-285.139007568359,
+							0.0,
+							-49.2820014953613
+						]
+					],
+					"id": "curb_02",
+					"length_m": 26.2837119102478,
+					"source_drive_features": [
+						"osm:way:183272433:highway_line"
+					],
+					"top": [
+						-274.943206787109,
+						0.119999997317791,
+						-40.9901962280273
+					]
+				},
+				{
+					"cuts": [
+						[
+							-264.066986083984,
+							0.0,
+							-19.0480003356934
+						],
+						[
+							-262.227996826172,
+							0.0,
+							-11.451000213623
+						]
+					],
+					"id": "curb_03",
+					"length_m": 7.93116879463196,
+					"source_drive_features": [
+						"osm:way:393513868:highway_line"
+					],
+					"top": [
+						-263.658508300781,
+						0.119999997317791,
+						-15.1207847595215
+					]
+				},
+				{
+					"cuts": [
+						[
+							-247.755004882812,
+							0.0,
+							-31.1079998016357
+						],
+						[
+							-258.31298828125,
+							0.0,
+							-29.0330009460449
+						]
+					],
+					"id": "curb_04",
+					"length_m": 11.0761938095093,
+					"source_drive_features": [
+						"osm:way:393513868:highway_line"
+					],
+					"top": [
+						-253.236297607422,
+						0.119999997317791,
+						-31.1028747558594
+					]
+				},
+				{
+					"cuts": [
+						[
+							-234.785003662109,
+							0.0,
+							-17.9160003662109
+						],
+						[
+							-237.692993164062,
+							0.0,
+							-20.7630004882812
+						]
+					],
+					"id": "curb_05",
+					"length_m": 4.09056454151869,
+					"source_drive_features": [
+						"osm:way:37400087:highway_line",
+						"osm:way:393513868:highway_line"
+					],
+					"top": [
+						-236.270080566406,
+						0.119999997317791,
+						-19.3223190307617
+					]
+				},
+				{
+					"cuts": [
+						[
+							-167.136001586914,
+							0.0,
+							29.4060001373291
+						],
+						[
+							-206.733001708984,
+							0.0,
+							23.8719997406006
+						]
+					],
+					"id": "curb_06",
+					"length_m": 42.6635143756866,
+					"source_drive_features": [
+						"osm:way:37400087:highway_line"
+					],
+					"top": [
+						-188.405426025391,
+						0.119999997317791,
+						31.0354633331299
+					]
+				},
+				{
+					"cuts": [
+						[
+							60.3110008239746,
+							0.0,
+							-173.121002197266
+						],
+						[
+							48.7589988708496,
+							0.0,
+							-172.679000854492
+						]
+					],
+					"id": "curb_07",
+					"length_m": 11.5604543685913,
+					"source_drive_features": [
+						"osm:way:431903253:highway_line"
+					],
+					"top": [
+						54.5349998474121,
+						0.119999997317791,
+						-172.899993896484
+					]
+				},
+				{
+					"cuts": [
+						[
+							56.943000793457,
+							0.0,
+							47.173999786377
+						],
+						[
+							50.9580001831055,
+							0.0,
+							66.7699966430664
+						]
+					],
+					"id": "curb_08",
+					"length_m": 20.529310464859,
+					"source_drive_features": [
+						"osm:way:619147732:highway_line"
+					],
+					"top": [
+						54.1679382324219,
+						0.119999997317791,
+						57.0201530456543
+					]
+				},
+				{
+					"cuts": [
+						[
+							53.2729988098145,
+							0.0,
+							-165.046997070312
+						],
+						[
+							60.4459991455078,
+							0.0,
+							-165.320999145508
+						]
+					],
+					"id": "curb_09",
+					"length_m": 7.17823171615601,
+					"source_drive_features": [
+						"osm:way:431903253:highway_line"
+					],
+					"top": [
+						56.8594970703125,
+						0.119999997317791,
+						-165.183990478516
+					]
+				},
+				{
+					"cuts": [
+						[
+							57.2389984130859,
+							0.0,
+							32.234001159668
+						],
+						[
+							57.5299987792969,
+							0.0,
+							42.2270011901855
+						]
+					],
+					"id": "curb_10",
+					"length_m": 11.7306182384491,
+					"source_drive_features": [
+						"osm:way:37400087:highway_line",
+						"osm:way:619147732:highway_line"
+					],
+					"top": [
+						58.1617965698242,
+						0.119999997317791,
+						36.3964424133301
+					]
+				},
+				{
+					"cuts": [
+						[
+							66.9649963378906,
+							0.0,
+							-234.985000610352
+						],
+						[
+							61.9119987487793,
+							0.0,
+							-228.591995239258
+						]
+					],
+					"id": "curb_11",
+					"length_m": 11.5579032897949,
+					"source_drive_features": [
+						"osm:way:183272488:highway_line",
+						"osm:way:620634303:highway_line"
+					],
+					"top": [
+						67.0088729858398,
+						0.119999997317791,
+						-229.20622253418
+					]
+				},
+				{
+					"cuts": [
+						[
+							99.0619964599609,
+							0.0,
+							8.81599998474121
+						],
+						[
+							99.9029998779297,
+							0.0,
+							-6.73799991607666
+						]
+					],
+					"id": "curb_12",
+					"length_m": 15.5768332481384,
+					"source_drive_features": [
+						"osm:way:378453707:highway_line"
+					],
+					"top": [
+						99.5077514648438,
+						0.119999997317791,
+						1.04038143157959
+					]
+				},
+				{
+					"cuts": [
+						[
+							100.226997375488,
+							0.0,
+							-13.1319999694824
+						],
+						[
+							100.741996765137,
+							0.0,
+							-31.0650005340576
+						]
+					],
+					"id": "curb_13",
+					"length_m": 17.9404447376728,
+					"source_drive_features": [
+						"osm:way:378453707:highway_line"
+					],
+					"top": [
+						100.486572265625,
+						0.119999997317791,
+						-22.0984153747559
+					]
+				},
+				{
+					"cuts": [
+						[
+							104.942001342773,
+							0.0,
+							-186.968994140625
+						],
+						[
+							105.13500213623,
+							0.0,
+							-191.065994262695
+						]
+					],
+					"id": "curb_14",
+					"length_m": 4.10154342651367,
+					"source_drive_features": [
+						"osm:way:378453707:highway_line"
+					],
+					"top": [
+						105.038497924805,
+						0.119999997317791,
+						-189.017486572266
+					]
+				},
+				{
+					"cuts": [
+						[
+							107.307998657227,
+							0.0,
+							-202.826995849609
+						],
+						[
+							121.294998168945,
+							0.0,
+							-202.617004394531
+						]
+					],
+					"id": "curb_15",
+					"length_m": 13.9885759353638,
+					"source_drive_features": [
+						"osm:way:184443139:highway_line"
+					],
+					"top": [
+						114.301498413086,
+						0.119999997317791,
+						-202.72200012207
+					]
+				},
+				{
+					"cuts": [
+						[
+							126.278999328613,
+							0.0,
+							-202.552001953125
+						],
+						[
+							138.022003173828,
+							0.0,
+							-202.421997070312
+						]
+					],
+					"id": "curb_16",
+					"length_m": 11.7437229156494,
+					"source_drive_features": [
+						"osm:way:184443139:highway_line"
+					],
+					"top": [
+						132.150497436523,
+						0.119999997317791,
+						-202.486999511719
+					]
+				}
+			],
+			"width_m": 1.4
+		}
+	},
+	"result": "PASS",
+	"scenario_starts": [
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "actual_player_ahead_of_walker",
+			"point": [
+				-97.1357269287109,
+				0.0800000205636024,
+				21.0975704193115
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "curb_01_walk_out",
+			"point": [
+				-279.944305419922,
+				0.0799999982118607,
+				-33.5206604003906
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "curb_01_walk_back",
+			"point": [
+				-278.493072509766,
+				0.0799999982118607,
+				-35.3049926757812
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "curb_02_turbo_out",
+			"point": [
+				-274.217926025391,
+				0.0799999982118607,
+				-41.882640838623
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "curb_02_turbo_back",
+			"point": [
+				-275.668487548828,
+				0.0799999982118607,
+				-40.0977516174316
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "curb_wide_observer",
+			"point": [
+				-186.405426025391,
+				0.0800000205636024,
+				32.7354621887207
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "stonewall_dog_observer",
+			"point": [
+				-81.208122253418,
+				0.0800000205636024,
+				16.952075958252
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "plaza_dog_observer",
+			"point": [
+				147.743133544922,
+				0.0800000205636024,
+				-105.56957244873
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "museum_slope_observer",
+			"point": [
+				-234.909225463867,
+				2.97600317001343,
+				19.1945705413818
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "regression_library_outside",
+			"point": [
+				145.833786010742,
+				0.0799999982118607,
+				-114.841453552246
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "regression_library_exit",
+			"point": [
+				650.0,
+				-99.9199981689453,
+				27.800968170166
+			]
+		}
+	],
+	"scope": "Actual production exploration scene with owned curb terrain and eight extra CharacterBody3D actors. Source entrances sampled by actual capsule contacts against new curb RIDs; every top/end and both bevels independently ray-tested. Four real Input controller crossings, actual motion/joints/paws/leashes/support and dynamic actor contacts, real menu pause and legacy checkbox signals, physical E library entry/exit. Explicit scenario starts only; no actor teleport or per-step player teleport. Native images require actual frame_post_draw on the regular third-person camera; headless makes no rendered-image acceptance. Curbs, population and hill heights are bounded game-authored detail, not surveyed pavement, crowd realism or human OS-input/performance acceptance.",
+	"source_sha256": {
+		"res://../tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+		"res://../tests/game/check_lived_streets.gd": "a14677894b23ea3d61a65185a840e343a4d7cee23b10ea57f7c8c54f98a209fc",
+		"res://../tests/game/check_street_scene.gd": "92a58810be6a1754fb2d946d42c02d89ff103d1de3f63245f747b77f84ed89f9",
+		"res://assets/authored/museum_approach.json": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+		"res://assets/authored/street_businesses.json": "c4b04fdd21b5c5b61f61351ef02ec13fd028df9821444750c8930caf1735aea2",
+		"res://assets/authored/street_curbs.json": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+		"res://assets/authored/street_life.json": "6d6b34d895707c21aef639a134a6194590bf36fcc73d84f5ab04268240cff0b9",
+		"res://assets/authored/street_pedestrians.json": "059fb58c080c1415e2a27363e2679262e2258216c8504ae6900b4105eae9de1d",
+		"res://scripts/explore_walk.gd": "911a9f19897eb92104d934eb21a9d3296c4158e6d7e644726305a16baeabc569",
+		"res://scripts/museum_approach.gd": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b",
+		"res://scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff",
+		"res://scripts/player/exploration_avatar.gd": "7ed8375df49706f7dec467383311e16487fa34c1ee73f99fd1684dac1144fc8b",
+		"res://scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+		"res://scripts/player/free_roam_player.gd": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+		"res://scripts/street_businesses.gd": "4e5db46e9b83ea23b62bec0506a2756f11d748325b78207ff4010a05985996ce",
+		"res://scripts/street_curbs.gd": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63",
+		"res://scripts/street_life.gd": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89",
+		"res://scripts/street_pedestrians.gd": "b48c093949771150a6b2b1a1ff568fb0816dbfd45dfd18a42152154261e71595"
+	},
+	"started_at_local": "2026-10-16T18:42:51",
+	"summary": {
+		"checks": 47,
+		"failed": 0
+	},
+	"task": "lived_streets",
+	"walks": [
+		{
+			"end": [
+				-278.523712158203,
+				-0.00217098649591208,
+				-35.2673645019531
+			],
+			"grounded": 61,
+			"id": "curb_01_walk_out",
+			"maximum_foot_y_m": 0.121901787817478,
+			"maximum_horizontal_speed_mps": 2.24000024795532,
+			"maximum_step_m": 0.0377499647438526,
+			"reached": true,
+			"recoveries_delta": 0,
+			"start": [
+				-279.944305419922,
+				0.0799999982118607,
+				-33.5206604003906
+			],
+			"target": [
+				-278.493072509766,
+				0.0799999982118607,
+				-35.3049926757812
+			],
+			"ticks": 61
+		},
+		{
+			"end": [
+				-279.913665771484,
+				-0.00193920242600143,
+				-33.5583038330078
+			],
+			"grounded": 61,
+			"id": "curb_01_walk_back",
+			"maximum_foot_y_m": 0.121899485588074,
+			"maximum_horizontal_speed_mps": 2.24000000953674,
+			"maximum_step_m": 0.0377458818256855,
+			"reached": true,
+			"recoveries_delta": 0,
+			"start": [
+				-278.493072509766,
+				0.0799999982118607,
+				-35.3049926757812
+			],
+			"target": [
+				-279.944305419922,
+				0.0799999982118607,
+				-33.5206604003906
+			],
+			"ticks": 61
+		},
+		{
+			"end": [
+				-275.650939941406,
+				-0.0019853999838233,
+				-40.1193237304688
+			],
+			"grounded": 7,
+			"id": "curb_02_turbo_out",
+			"maximum_foot_y_m": 0.135624378919601,
+			"maximum_horizontal_speed_mps": 21.0,
+			"maximum_step_m": 0.350000560283661,
+			"reached": true,
+			"recoveries_delta": 0,
+			"start": [
+				-274.217926025391,
+				0.0799999982118607,
+				-41.882640838623
+			],
+			"target": [
+				-275.668487548828,
+				0.0799999982118607,
+				-40.0977516174316
+			],
+			"ticks": 7
+		},
+		{
+			"end": [
+				-274.235504150391,
+				-0.00180555670522153,
+				-41.8610382080078
+			],
+			"grounded": 7,
+			"id": "curb_02_turbo_back",
+			"maximum_foot_y_m": 0.135720446705818,
+			"maximum_horizontal_speed_mps": 21.0000019073486,
+			"maximum_step_m": 0.350005298852921,
+			"reached": true,
+			"recoveries_delta": 0,
+			"start": [
+				-275.668487548828,
+				0.0799999982118607,
+				-40.0977516174316
+			],
+			"target": [
+				-274.217926025391,
+				0.0799999982118607,
+				-41.882640838623
+			],
+			"ticks": 7
+		}
+	],
+	"wall_elapsed_seconds": 19.654
+}
