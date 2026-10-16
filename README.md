@@ -26,7 +26,7 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 
 ## 현재 상태
 
-최신 개발 탐험판 **EXP04**는 출입 표지가 있는 125개 건물과 여러 층, 걸어서 오르내리는 계단·층 선택 엘리베이터·실내 사람을 제공한다. 도서관 벽에 붙었을 때의 E 진입 실패도 수정했다. **`Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`**으로 열고, Esc 메뉴의 ‘서울도서관 정문으로 이동’으로 바로 체험할 수 있다. 실내 크기·층수는 원본 외곽/높이/OSM 층수에 맞춘 게임 표현이며 실제 방 배치는 재구성했다. [실행 안내](docs/RUN_GUIDE.md)·[현재 검증과 한계](docs/WORK_STATUS.md). 아래 V0·R03은 원래 버전의 기록이다.
+최신 개발 탐험판 **EXP06**는 125개 건물에 청록색 문틀·입구 표지·바닥 E와 화면의 방향/직선거리 안내를 제공한다. 걷기8.4/달리기21m/s의 초고속을 선택할 수 있으며, 여러 층·걸어서 오르내리는 계단·층 선택 엘리베이터·실내 사람도 유지한다. 도서관 벽에 붙었을 때의 E 진입 실패도 수정했다. **`Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`**으로 열고, Esc 메뉴의 ‘서울도서관 정문으로 이동’으로 바로 체험할 수 있다. 실내 크기·층수는 원본 외곽/높이/OSM 층수에 맞춘 게임 표현이며 실제 방 배치는 재구성했다. [실행 안내](docs/RUN_GUIDE.md)·[현재 검증과 한계](docs/WORK_STATUS.md). 아래 V0·R03은 원래 버전의 기록이다.
 
 2026-10-16: **M1 Pro에서 첫 탐험 V0의 로컬 앱 검수를 완료했다.** [앱 실행 안내](docs/RUN_GUIDE.md)·[실제 패키지 검증](data/reports/package_check.md)·[기기별 인수 판정](data/reports/first_version_acceptance.md). M4는 접근 불가 대안으로 UNRUN이며 OS 입력/사람 조작감·전송 Gatekeeper도 미실행이다. 다음 행동은 [WORK_STATUS](docs/WORK_STATUS.md)를 기준으로 한다. 과거 단계의 ‘다음 작업’은 해당 시점의 기록이다.
 

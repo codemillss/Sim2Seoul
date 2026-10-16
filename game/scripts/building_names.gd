@@ -10,6 +10,7 @@ var crosshair: Label
 var ticks := 0
 var current_id := ""
 var current_name := ""
+var current_is_targeted := false
 
 func setup(root_scene: Node3D) -> bool:
 	host=root_scene
@@ -57,13 +58,14 @@ func _physics_process(_delta: float) -> void:
 	var origin:=camera.global_position
 	var query:=PhysicsRayQueryParameters3D.create(origin,origin-camera.global_basis.z*220.,1,[host.player.get_rid()])
 	var hit: Dictionary=host.get_world_3d().direct_space_state.intersect_ray(query)
-	current_id="";current_name=""
+	current_id="";current_name="";current_is_targeted=false
 	var distance:=0.
 	var prefix:=""
 	if not hit.is_empty():
 		current_id=String(hit.collider.get_meta("geometry_id",""));current_name=identify(current_id)
 		distance=host.player.global_position.distance_to(hit.position)
 		if current_name.is_empty() and records.has(current_id):current_name="이름 정보가 없는 건물"
+		current_is_targeted=records.has(current_id)
 	if current_name.is_empty():
 		var point:=Vector2(host.player.position.x,host.player.position.z)
 		var nearest:=55.

@@ -53,6 +53,7 @@ var _ride_elapsed := 0.
 var _ride_duration := 0.
 var _notice_until := 0
 var _recovery_floor := -1
+var wayfinding: Node3D
 
 func setup(root_scene: Node3D) -> bool:
 	if loaded or not root_scene.runtime_ok:return false
@@ -72,6 +73,9 @@ func setup(root_scene: Node3D) -> bool:
 	_build_interface()
 	_build_markers()
 	if not select_building(LIBRARY_ID):return _fail("도서관 내부를 준비하지 못했습니다.")
+	wayfinding=preload("res://scripts/entrance_wayfinding.gd").new()
+	wayfinding.name="EntranceWayfinding";add_child(wayfinding)
+	if not wayfinding.setup(host,self):return _fail("건물 입구 안내를 준비하지 못했습니다.")
 	loaded = true
 	print("INTERIOR_VISIT_READY buildings=",catalog.size()," source_scaled=true authored_not_surveyed=true")
 	return true
@@ -187,6 +191,12 @@ func _entry_visible() -> bool:
 	var query := PhysicsRayQueryParameters3D.create(from,to,1,[host.player.get_rid()])
 	return host.get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 
+func entry_action_text() -> String:
+	if _entry_requested:return "입구를 준비하고 있습니다"
+	if host.player.input_latched:return "이동키를 놓고 E · 들어가기"
+	if not host.player.is_on_floor():return "착지한 뒤 E · 들어가기"
+	return "E · 들어가기"
+
 func _input(event: InputEvent) -> void:
 	# A physical tap may begin and end between physics ticks. Retain its edge,
 	# but never buffer a rejected press until the player later approaches a door.
@@ -227,11 +237,11 @@ func _process(_delta: float) -> void:
 	var menu_open := _menu_open()
 	var view := host.get_viewport().get_visible_rect().size
 	if _notice_until>0 and Time.get_ticks_msec()>_notice_until:_notice = "";_notice_until = 0
-	var closest: Dictionary = {};var nearest := 45.*45.
-	for marker in markers:
-		var distance_squared: float = host.player.global_position.distance_squared_to(marker.spec.entrance)
-		marker.node.visible = not active and not menu_open and distance_squared<35.*35.
-		if distance_squared<nearest:nearest = distance_squared;closest = marker.spec
+	wayfinding.update_guidance(_delta,active or menu_open)
+	var closest: Dictionary = wayfinding.target_spec
+	var nearest := INF
+	if not closest.is_empty():nearest=host.player.global_position.distance_squared_to(closest.entrance)
+	for marker in markers:marker.node.visible=false
 	if not active and not closest.is_empty() and not _entry_requested:
 		_set_entry(closest)
 		if nearest<10.*10.:_prepare_room()
@@ -248,7 +258,7 @@ func _process(_delta: float) -> void:
 				host.player.spawn_transform = Transform3D(Basis.IDENTITY,recovery_point)
 				_recovery_floor = index
 		indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
-	prompt_text.text = "E · %s 들어가기 · %d층"%[current_spec.get("title","건물"),int(current_spec.get("floor_count",1))] if not active else ("E · 엘리베이터 층 선택" if _elevator_near() else "E · 건물 밖으로 나가기")
+	prompt_text.text = "%s · %s · %d층"%[entry_action_text(),current_spec.get("title","건물"),int(current_spec.get("floor_count",1))] if not active else ("E · 엘리베이터 층 선택" if _elevator_near() else "E · 건물 밖으로 나가기")
 	if not _notice.is_empty():prompt_text.text = _notice
 	prompt.visible = not menu_open and not elevator_open and not in_elevator and ((active and (_exit_near() or _elevator_near())) or (not active and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))

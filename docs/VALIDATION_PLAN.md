@@ -1,5 +1,33 @@
 # 검증 계획과 완료 판정
 
+## 최신 출입구 안내 EXP06 — 원본 좌표·방향·물리 E
+
+2026-10-16 [최종 요약](../data/reports/entrance_wayfinding/20261016/summary.json) 기준이다. EXP04의 125개 게임 문 좌표에 청록 문틀·정문/입구 표지·바닥 E를 연결하고, 150m 화면 방향/직선거리 안내와 120m 벽 표지의 표시를 검증했다. 가까운 5m 입구 우선·실제 조준 건물 우선·8m 안의 즉시 가림 검사와 원래 E 출입을 함께 확인한다. 아래 EXP05·EXP04 수치는 이전 실행의 증거로 보존한다.
+
+| 실행 | 결과와 검증 범위 | 증거 |
+|---|---|---|
+| 안내 headless | 31/31. 125개 원본 외곽/지면 anchor·CPU에 준비해 renderer로 제출한 문틀/패드 좌표, 실제 100m 카메라 조준·거리·방향·후면/화면 밖·640×480 배치, 벽/바닥 글자 각 최대3개, 메뉴/실내 숨김, 도서관/일반 건물의 짧은 물리 E·먼 곳/가림벽 거절·안전 퇴장·원래 사람4명·외부692개/이름149개 보존 | [guidance_headless.json](../data/reports/entrance_wayfinding/20261016/guidance_headless.json)·[로그](../data/reports/entrance_wayfinding/20261016/guidance_headless.log) |
+| 안내 GPU | 34/34. 위 31개와 실제 PNG3장 저장. 125개 문틀과 바닥 패드는 실제 GPU MultiMesh transform을 읽어 대조하며, 높은 카메라의 뒤쪽 화살표 방향과 내려다볼 때의 바닥 E도 확인 | [guidance.json](../data/reports/entrance_wayfinding/20261016/guidance.json)·[로그](../data/reports/entrance_wayfinding/20261016/guidance.log) |
+| 벽 접촉 회귀 headless | 35/35. 실제 W 이동으로 문 중앙·좌우±1.8/±2.2m 벽 접촉 후 E, 짧은 물리 E 탭·유지 입력·먼 곳/가림벽/공중 거절·안전 복귀 | [contact.json](../data/reports/entrance_wayfinding/20261016/contact.json)·[로그](../data/reports/entrance_wayfinding/20261016/contact.log) |
+
+실행별 판정 합계 **100건(GPU34·headless66)**이다. headless와 GPU의 공통 검사항목을 별개의 새 기능으로 세지 않는다. Godot headless dummy renderer의 `MultiMesh.get_instance_transform()`은 identity를 반환하므로 이 실행은 CPU 제출 좌표까지만 검사하고 실제 읽기를 `deferred_checks`에 남겼다. 최종 GPU 실행은 실제 MultiMesh 읽기까지 통과했다. 최종 보고서의 소스 해시는 현재 파일과 대조했다.
+
+GPU와 [일반 실행 로그](../data/reports/entrance_wayfinding/20261016/launch.log)의 ERROR는0건이다. headless 안내/접촉 로그에는 기존 macOS 시스템 CA 조회의 `Condition "ret != noErr"` 메시지가 남았으며 script/runtime/parse 오류와 구분한다. 일반 창도 다시 띄워 실제 화면의 ‘초고속(3배)’ HUD와 새 입구 방향 카드를 확인했다. 이 화면 확인을 사람의 전체 출입·연속 보행 검증으로 확대하지 않는다.
+
+[도서관100m](../data/reports/entrance_wayfinding/20261016/guidance_library_far_100m.png)·[정문 근접](../data/reports/entrance_wayfinding/20261016/guidance_library_near_door.png)·[일반 건물에서 화면 밖 입구 안내](../data/reports/entrance_wayfinding/20261016/guidance_generic_offscreen_near_door.png)를 실제 GPU로 저장하고 열어 검토했다. 화면 카드는 실제 카메라 투영을 사용하고 640×480에서도 화면 안에 들어오며, 뒤쪽 화살표가 아래를 가리키는지 확인했다. 높은 벽 표지가 화면 밖일 때 바닥 E가 별도로 남는지도 검사했다. 캡처는 `force_draw` 뒤 저장하며 과거 `frame_post_draw` 대기 문제를 반복하지 않는다.
+
+초기 [headless_01.json](../data/reports/entrance_wayfinding/20261016/development/headless_01.json)의 30개 중6개 실패는 dummy MultiMesh 읽기와 카메라를 돌릴 때의 정상 대상 변경·근접 표식 투영을 잘못 가정한 시험 조건이었다. ID를 강제하거나 충돌을 끄지 않고 실제 ray·투영을 관측하도록 고쳤다. 이어 [headless_03.json](../data/reports/entrance_wayfinding/20261016/development/headless_03.json)은 31개 중1개 실패로, HBoxContainer가 직접 자식 화살표의 회전을 정렬 때 초기화하는 실제 표시 문제를 검출했다. 별도 Control 안에 화살표를 넣어 수정한 `headless_04`가 최종31개를 통과했다. 실패 JSON/로그와 최종 증거를 함께 보존한다.
+
+재현은 저장소 루트에서 아래처럼 실행한다. 각 실행의 설정·품질 저장 경로는 `--report`에서 분리하며 사용자 설정을 바꾸지 않는다. GPU 실행은 일반 게임과 동시에 조작하지 않고 순서대로 수행한다.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-guidance-headless.log --script ../tests/game/check_entrance_guidance.gd -- --automatic-probe --report=/private/tmp/sim2seoul-guidance-headless.json
+/Applications/Godot.app/Contents/MacOS/Godot --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-guidance-gpu.log --script ../tests/game/check_entrance_guidance.gd -- --automatic-probe --report=/private/tmp/sim2seoul-guidance-gpu.json
+/Applications/Godot.app/Contents/MacOS/Godot --headless --fixed-fps 60 --path game --log-file /private/tmp/sim2seoul-contact.log --script ../tests/game/check_library_entry_contact.gd -- --automatic-probe --report=/private/tmp/sim2seoul-contact.json
+```
+
+시작 위치와 퇴장 위치는 명시적인 시험 배치이며 연속 야외 이동 경로가 아니다. 가림벽은 시야 차단을 재현하는 시험 물체이고, 물리 E는 production 키 바인딩의 실제 짧은 눌렀다 놓기 이벤트다. 실제 정문 측량·현장 출입·경로 탐색·125곳 모든 방문·사람의 전체 조작감·장시간 성능·export·M4 검수는 이번 판정에 포함하지 않는다.
+
 ## 최신 속도 EXP05 — 최대21m/s
 
 [보고서](../data/reports/fast_exploration/20261016/summary.json) 기준으로 `check_fast_exploration.gd` headless27개, 기존 `check_exploration.gd` headless51개를 통과했다. 새 프로필 실제 거리와 대각선 정규화, 21m/s 원본 충돌·사유지/4면 경계·실내·계단, 메뉴/저장 호환을 검증한다. [원문](../data/reports/fast_exploration/20261016/speed.json)·[로그](../data/reports/fast_exploration/20261016/speed.log)·[기존 회귀](../data/reports/fast_exploration/20261016/regression.json)에 시험 배치와 관측값을 남긴다.

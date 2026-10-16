@@ -4,6 +4,16 @@
 
 기획의 맥락·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 전체 순서는 [MASTER_PLAN](MASTER_PLAN.md), 실제 자료 확보 상태는 [WORK_STATUS](WORK_STATUS.md)다. 좌표·속성·충돌·경로 계약은 [TECHNICAL_CONTRACTS](TECHNICAL_CONTRACTS.md), 시험 조건과 판정은 [VALIDATION_PLAN](VALIDATION_PLAN.md)을 따른다. 이 문서의 제안과 계약이 충돌하면 근거를 기록하고 계약을 먼저 정리한다. 미터 좌표로 저장하는 모든 중간 JSON은 CRS·지역 원점·축·단위를 명시하며 WGS84 GeoJSON 검사용 파일과 구분한다. 생성 자산은 `game/assets/generated/`, 수동 모델·장식은 `game/assets/authored/`, 재생성에 보존할 보정은 `data/manual/`에 둔다.
 
+## [x] EXP06 입구 위치·방향 안내 — 완료 (2026-10-16)
+
+- 선행/입력: EXP04의 125개 방문 카탈로그와 기존 게임 문·지면 접근 좌표, 실제 카메라 ray의 건물 식별, 사용자의 입구 안내 개선 요청. 원본 건물·지도·실내를 재생성하지 않는다.
+- 산출: [entrance_wayfinding.gd](../game/scripts/entrance_wayfinding.gd), 같은 대상을 사용하는 출입 안내 연결, [전용 검사](../tests/game/check_entrance_guidance.gd), [최종 결과](../data/reports/entrance_wayfinding/20261016/summary.json)와 GPU PNG3장. [상세 계약](TECHNICAL_CONTRACTS.md)·[검증 범위/재현](VALIDATION_PLAN.md)을 함께 갱신한다.
+- [x] 125개 원본 외벽의 게임 문에 청록색 3D 문틀·정문/입구 표지를, 기존 E 접근점에는 바닥 패드/E를 배치한다. 실제 GPU에서 문틀·패드 MultiMesh transform을 읽어 원본 외곽/지면 좌표와 대조한다. 새 충돌을 추가하지 않고 원래 외부 body/shape 692개와 건물 이름표149개를 유지한다.
+- [x] 150m 안에서 대상 하나의 건물 이름·입구 방향·직선거리를 보여준다. 5m 안의 가까운 입구를 먼저 고르고, 그 밖에서는 실제 조준한 방문 건물·가장 가까운 입구 순으로 고른다. 8m 안의 가림 검사는 즉시 갱신해 안내와 E 판정의 지연을 막는다. 먼 곳/가림벽에서 E 거절과 가까운 문에서 시선을 돌린 뒤의 짧은 물리 E 진입을 확인한다.
+- [x] 벽 표지는120m/최대3개, 바닥 E는16m/최대3개로 별도로 투영하고 깊이 검사를 유지한다. 실제 후면·화면 밖·높은 카메라의 뒤쪽 화살표·내려다본 바닥 E·640×480의 카드 배치와 메뉴/실내 전체 숨김을 검증한다. 안내 방향을 실제 보행 경로로 표시하지 않는다.
+- [x] 안내 headless31/31·GPU34/34(실제 캡처3장 포함), 실제 벽 접촉 회귀 headless35/35를 기록한다. 실행별 합계100건 중 GPU34·headless66을 구분하고, headless dummy의 CPU 제출 좌표 검사와 실제 GPU 읽기를 혼동하지 않는다. 초기 `headless_01`의 시험 조건6개 실패와 `headless_03`의 화살표1개 실패, 수정 후 `headless_04`의31개 통과를 보존한다.
+- 완료 범위: 125개 표시 좌표와 대표 도서관/일반 건물의 실제 물리 E 출입, 원래 충돌·이름 보존 및 실제 화면 검토다. 측량한 실제 정문·현장 출입·경로 탐색·125곳 전체 방문·연속 동선·성능 보장·새 export·다른 Mac 검수는 포함하지 않는다. 아래 EXP05와 EXP04의 완료 이력은 당시 범위로 보존한다.
+
 ## [x] EXP05 더 빠른 이동 선택 — 완료 (2026-10-16)
 
 - 기존 세 속도·저장 형식을 유지하고 쾌속5.6/14m/s·초고속8.4/21m/s를 메뉴에 추가했다. 물리 이동·충돌·경계·지도 축척은 변경하지 않았다.
