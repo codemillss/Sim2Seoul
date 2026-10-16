@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "task": "street_life",
+  "status": "authored_game_street_details_not_surveyed_parking_or_event_positions",
+  "coordinate_space": "existing_source_world_metres",
+  "source_route": {"file": "res://data/generated/public_walk.json", "id": "stonewall", "first_vertex": 11, "last_vertex": 31},
+  "source_wall": "W01_palace_wall",
+  "references": [
+    {"id": "seoul_2026_busking", "url": "https://www.seoul.go.kr/news/news_report.do?nttNo=456970&srchCtgry=466", "supports": "Deoksugung stonewall is a named busking venue; no exact game performer position or present event is verified."},
+    {"id": "seoul_night_spot", "url": "https://culture.seoul.go.kr/night/sub/viewSpot/view.do?viewId=38", "supports": "Night-place context only; individual lamp positions, fixtures and lighting measurements are authored."}
+  ],
+  "assumptions": {
+    "parking": "All parked vehicles and parking positions are game additions. They do not identify legal or actual parking bays.",
+    "birds": "Bounded decorative bird behaviour, without collision or wildlife simulation.",
+    "performance": "One authored guitar performer and a small audience. No actual performer, event schedule or recorded music is represented.",
+    "lighting": "Warm authored street fixtures controlled by the user's day/evening/night choice; no surveyed illumination or automatic local clock.",
+    "ground": "Use existing supporting geometry at each anchor. Skip unsupported or occupied placements rather than modifying source collision or a walking route."
+  },
+  "protection": {"walking_corridor_width_m": 2.0, "extra_margin_m": 0.15, "door_clearance_m": 3.0, "moving_vehicle_radius_margin_m": 2.8},
+  "parked_cars": {"fractions": [0.22, 0.48, 0.78], "roadside_offset_m": 5.5, "size_m": [1.8, 1.5, 4.2]},
+  "motorcycles": {"fractions": [0.32, 0.58, 0.88], "roadside_offset_m": 4.4, "size_m": [0.65, 1.1, 1.9]},
+  "busker": {"fraction": 0.56, "roadside_offset_m": 2.2, "audience_offsets_m": [[-1.15, 1.45], [0.0, 1.85], [1.15, 1.45]]},
+  "ground_birds": {"fractions": [0.26, 0.45, 0.69], "roadside_offset_m": 2.0, "walk_radius_m": 0.3, "flight_radius_m": 0.8, "flight_height_m": 1.2},
+  "perched_birds": {"count": 3, "maximum_source_route_distance_m": 4.5},
+  "lamps": {"spacing_m": 29.0, "first_station_m": 14.0, "roadside_offset_m": 1.65, "maximum_count": 11, "height_m": 4.3, "range_m": 12.0, "maximum_active_standard": 8, "maximum_active_light": 4, "busker_station_offset_m": 2.5, "busker_lighting_note": "Replace the nearest regular fixture with a guarded source-route station 2.5m past the authored busker, so the stage is inside a warm fixture's light range. No additional fixture or global brightness change."}
+}

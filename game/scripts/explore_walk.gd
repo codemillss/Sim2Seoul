@@ -1,6 +1,8 @@
 extends "res://scripts/v0_walk.gd"
 ## Optional exploration controls on a separate leaf; prior milestones stay fixed.
 const SPEED_IDS := ["realistic", "brisk", "fast", "rapid", "turbo"]
+const TIME_IDS := ["day", "evening", "night"]
+const TIME_LABELS := ["낮", "해질녘", "밤"]
 const SPEED_PROFILES := {
 	"realistic": {"label": "현실 속도", "walk": 1.4, "run": 3.5},
 	"brisk": {"label": "빠르게", "walk": 2.24, "run": 5.6},
@@ -31,6 +33,11 @@ var photo_wall_detail: Node3D
 var photo_atmosphere: Node3D
 var interior_visit: Node3D
 var exploration_avatar: Node3D
+var street_businesses: Node3D
+var street_life: Node3D
+var museum_approach: Node3D
+var time_id := "day"
+var time_option: OptionButton
 
 func _ready() -> void:
 	# Runtime binding belongs to this scene; historical project input stays fixed.
@@ -101,6 +108,20 @@ func _ready() -> void:
 	add_child(interior_visit)
 	if not interior_visit.setup(self):
 		_exploration_failure("건물 내부와 출입구를 준비하지 못했습니다.");return
+	street_businesses=preload("res://scripts/street_businesses.gd").new()
+	add_child(street_businesses)
+	if not street_businesses.setup(city,player,rig):
+		_exploration_failure("거리의 음식점과 편의점을 준비하지 못했습니다.");return
+	museum_approach=preload("res://scripts/museum_approach.gd").new()
+	add_child(museum_approach)
+	if not museum_approach.setup(city,player,rig):
+		_exploration_failure("미술관 언덕 진입로를 준비하지 못했습니다.");return
+	street_life=preload("res://scripts/street_life.gd").new()
+	add_child(street_life)
+	if not street_life.setup(city,player,rig):
+		_exploration_failure("돌담길의 사람과 새, 가로등을 준비하지 못했습니다.");return
+	street_life.apply_quality(quality_id)
+	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled)
 
@@ -133,6 +154,16 @@ func _build_ui() -> void:
 	speed_option.custom_minimum_size=Vector2(150,32)
 	speed_option.item_selected.connect(_speed_selected)
 	speed_row.add_child(speed_option);options.add_child(speed_row)
+	var time_row:=HBoxContainer.new()
+	var time_caption:=Label.new();time_caption.text="시간대"
+	time_caption.add_theme_color_override("font_color",Color(.08,.12,.16))
+	time_caption.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	time_row.add_child(time_caption)
+	time_option=OptionButton.new();time_option.name="StreetTime"
+	for title in TIME_LABELS:time_option.add_item(title)
+	time_option.custom_minimum_size=Vector2(150,32)
+	time_option.item_selected.connect(_time_selected)
+	time_row.add_child(time_option);options.add_child(time_row)
 	exploration_description=Label.new()
 	exploration_description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	exploration_description.add_theme_font_size_override("font_size",13)
@@ -145,6 +176,9 @@ func _build_ui() -> void:
 	options.add_child(exploration_notice)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"]]:
+		var shortcut:=Button.new();shortcut.text=detail[0]
+		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
 	# Keep every control reachable when the game window is shorter than the menu.
 	exploration_menu_content=options
@@ -162,6 +196,56 @@ func _build_ui() -> void:
 func _visit_library_entrance() -> void:
 	if is_instance_valid(interior_visit) and interior_visit.go_to_library_entrance():
 		if menu.visible:toggle_menu()
+
+func set_time_profile(id: String) -> bool:
+	if id not in TIME_IDS:return false
+	if is_instance_valid(photo_atmosphere) and not photo_atmosphere.set_time_profile(id):return false
+	if is_instance_valid(street_life) and not street_life.set_time_profile(id):return false
+	time_id=id
+	if is_instance_valid(time_option):time_option.select(TIME_IDS.find(id))
+	return true
+
+func _read_street_time() -> String:
+	var path:=exploration_settings_path+".time.json"
+	if not FileAccess.file_exists(path):return "day"
+	var saved: Variant=JSON.parse_string(FileAccess.get_file_as_string(path))
+	if saved is Dictionary and saved.size()==2 and _number(saved.get("schema_version")) and saved.schema_version==1 and saved.get("time_id") is String and saved.time_id in TIME_IDS:return saved.time_id
+	return "day"
+
+func _time_selected(index: int) -> void:
+	if index<0 or index>=TIME_IDS.size() or not set_time_profile(TIME_IDS[index]):return
+	var file:=FileAccess.open(exploration_settings_path+".time.json",FileAccess.WRITE)
+	if file!=null:
+		file.store_string(JSON.stringify({"schema_version":1,"time_id":time_id})+"\n");file.close()
+	else:exploration_notice.text="시간대를 저장하지 못했습니다. 이번 실행에는 적용됩니다."
+
+func _visit_street_detail(kind: String) -> void:
+	if not is_instance_valid(interior_visit):return
+	if interior_visit.active and not interior_visit.return_to_world_spawn():return
+	var requested:=Vector3.ZERO;var toward:=Vector3.ZERO
+	if kind=="restaurant" and is_instance_valid(street_businesses):
+		for store: Dictionary in street_businesses.stores:
+			if String(store.record.style)!="restaurant":continue
+			var node: Node3D=store.node
+			toward=node.global_position;requested=toward+node.global_basis.z*3.8;break
+	elif kind=="busking" and is_instance_valid(street_life):
+		for person: Dictionary in street_life.performers:
+			if person.kind!="busker":continue
+			var node: Node3D=person.actor
+			toward=node.global_position;requested=toward-node.global_basis.z*3.0;break
+	elif kind=="hill" and is_instance_valid(museum_approach):
+		requested=museum_approach.point_at_station(2.0)+Vector3.UP*.08
+		toward=museum_approach.point_at_station(10.0)
+	if requested==Vector3.ZERO:return
+	if not free_roam_enabled:set_free_roam(true)
+	var safe: Dictionary=interior_visit._safe_external_point(requested)
+	if safe.is_empty():exploration_notice.text="이동할 곳이 막혀 있습니다. 주변에서 걸어서 접근해주세요.";return
+	player.global_transform=Transform3D(Basis.IDENTITY,safe.point)
+	player.require_neutral_input();player.reset_physics_interpolation()
+	var direction: Vector3=toward-safe.point;direction.y=0
+	rig.reset_orientation();rig.yaw=atan2(-direction.x,-direction.z);rig.pitch=deg_to_rad(-15.)
+	rig.requested_distance=4.5;rig.current_distance=4.5;rig.snap_to_target_pose()
+	if menu.visible:toggle_menu()
 
 func _queue_menu_layout() -> void:
 	if menu_layout_pending:return
@@ -192,6 +276,7 @@ func apply_quality(id: String) -> bool:
 	if not super.apply_quality(id):return false
 	if rig.has_method("apply_exploration_view_distance"):rig.apply_exploration_view_distance()
 	if is_instance_valid(photo_atmosphere):photo_atmosphere.apply_quality(id)
+	if is_instance_valid(street_life):street_life.apply_quality(id)
 	return true
 
 func _read_exploration_settings() -> Dictionary:
@@ -257,13 +342,14 @@ func _save_exploration_settings() -> void:
 func exploration_snapshot() -> Dictionary:
 	return {"speed_id":speed_id,"walk_speed_mps":player.walk_speed_mps,"run_speed_mps":player.run_speed_mps,
 		"free_roam":free_roam_enabled,"settings_recovered":exploration_settings_recovered,
-		"settings_path":exploration_settings_path,"runtime_ok":runtime_ok,"error":exploration_error}
+		"settings_path":exploration_settings_path,"runtime_ok":runtime_ok,"error":exploration_error,"time_id":time_id}
 
 func _select_source_document(index: int) -> void:
 	super._select_source_document(index)
 	if index==0:
 		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","출입 표지가 있는 건물은 실내·계단·엘리베이터로 여러 층을 탐험할 수 있습니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
 		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 출입 표지가 있는 건물 정문에서 E로 들어갑니다. 실내 크기는 원본 건물 외곽 안에 맞췄으며, 층수는 OSM 원문 또는 높이 추정에 따릅니다. 방 배치·계단·엘리베이터와 실내 보행자는 게임용 재구성입니다. 작은 건물·사유지·일부 역사 건축물의 실내는 제외합니다. 석재 텍스처는 AI로 새로 제작했으며 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
+		sources_text.text+="\n\n[b]거리와 언덕[/b]\n진주회관과 편의점 외관은 공식 장소 정보·OSM 스냅샷을 바탕으로 단순화했습니다. 현재 입점·정확한 점포 단위나 새 실내 출입을 확인한 표현은 아닙니다. 주차 차량·오토바이·새·버스킹·가로등 위치와 낮/해질녘/밤은 게임 창작입니다. 미술관 진입로는 실제 길의 수평 위치 위에 만든 높이3m의 게임용 경사이며 실측 지형이 아닙니다. 기존 도시 전체의 실제 고도를 복원하지 않았습니다."
 
 func _process(delta: float) -> void:
 	super._process(delta)

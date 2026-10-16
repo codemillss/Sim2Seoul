@@ -1,0 +1,83 @@
+{
+  "task": "museum_source_geometry",
+  "timestamp": "2026-10-16T18:00:56.253189",
+  "scope": "Source snapshot geometry comparison only; no surveyed horizontal accuracy, access, vertical datum or real grades asserted. Road widths are not surveyed by this check.",
+  "source_hashes": {
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/assets/authored/museum_approach.json": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+    "game/scripts/museum_approach.gd": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b"
+  },
+  "checks": [
+    {
+      "name": "all_nine_XZ_vertices_equal_current_source",
+      "passed": true
+    },
+    {
+      "name": "no_new_terrain_or_terrace_intersects_source_building_parts_or_barriers",
+      "passed": true
+    },
+    {
+      "name": "authored_90m_end_leaves_over_6m_source_footway_flat",
+      "passed": true
+    },
+    {
+      "name": "new_terrain_stays_over_6m_from_original_flat_door",
+      "passed": true
+    }
+  ],
+  "source_route_length_m": 97.07310770444714,
+  "flat_source_footway_after_authored_hill_m": 7.073107704447139,
+  "terrain_buffer_width_m": 7.2,
+  "terrace_corners": [
+    [
+      -233.9489890693922,
+      29.51373698649287
+    ],
+    [
+      -229.55462467870757,
+      25.4284509987213
+    ],
+    [
+      -225.469338690936,
+      29.82281538940595
+    ],
+    [
+      -229.86370308162066,
+      33.90810137717752
+    ],
+    [
+      -233.9489890693922,
+      29.51373698649287
+    ]
+  ],
+  "terrace_centre": [
+    -229.7091638801641,
+    3,
+    29.66827618794941
+  ],
+  "minimum_source_building_distance_m": [
+    6.654957762379445,
+    "osm:way:626112515:building"
+  ],
+  "original_flat_door_clearance_m": 16.444017324860294,
+  "source_building_barrier_intersections": [],
+  "nearest_road_to_terrace": [
+    [
+      "osm:way:37400087:highway_line",
+      15.52127579160829,
+      5.6827530562822
+    ],
+    [
+      "osm:way:393513868:highway_line",
+      38.968755179206894,
+      0.0
+    ],
+    [
+      "osm:way:176728956:highway_line",
+      43.61781724247783,
+      6.616694063636686
+    ]
+  ],
+  "result": "PASS"
+}

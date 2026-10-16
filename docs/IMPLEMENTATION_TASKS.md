@@ -4,6 +4,15 @@
 
 기획의 맥락·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 전체 순서는 [MASTER_PLAN](MASTER_PLAN.md), 실제 자료 확보 상태는 [WORK_STATUS](WORK_STATUS.md)다. 좌표·속성·충돌·경로 계약은 [TECHNICAL_CONTRACTS](TECHNICAL_CONTRACTS.md), 시험 조건과 판정은 [VALIDATION_PLAN](VALIDATION_PLAN.md)을 따른다. 이 문서의 제안과 계약이 충돌하면 근거를 기록하고 계약을 먼저 정리한다. 미터 좌표로 저장하는 모든 중간 JSON은 CRS·지역 원점·축·단위를 명시하며 WGS84 GeoJSON 검사용 파일과 구분한다. 생성 자산은 `game/assets/generated/`, 수동 모델·장식은 `game/assets/authored/`, 재생성에 보존할 보정은 `data/manual/`에 둔다.
 
+## [x] EXP14 거리 상점·생활 장면·미술관 게임용 언덕 — 완료 (2026-10-16)
+
+- [x] 공식/OSM 출처와 창작 외관·위치 차이를 구분한 음식점/편의점4곳, 별도 주차 차/오토바이·새·기타 연주/관객·가로등을 추가한다.
+- [x] 보행/입구/차량 경로·원본 body를 보존하고,3m 게임용 언덕/쉼터의 실제 충돌·보행/점프/평지 연결을 확인한다.
+- [x] 낮/해질녘/밤·분리 저장·작은 메뉴/장소 이동과 기존 E 출입을 검증하고 실제 GPU 화면의 어두운 공연 조명까지 보완한다.
+- [x] 최종 GPU59/headless50·12소스 해시 불일치0·9장 검토, 일반 실행/OS 메뉴 조작과 기록/Git 공유를 함께 남긴다.
+
+[최종 증거](../data/reports/street_scene/20261016/summary.json). 새 상점 실내/구매·버스킹 소리·실측 지형은 포함하지 않는다. 다음 EXP15는 현재 덕수궁의 보도 경계석·적당한 산책 인구/반려견 요청이다.
+
 ## [x] EXP13 움직임 안정화 — 완료 (2026-10-16)
 
 - [x] 상체의 상하 bob/좌우 roll과 발 전환의 갑작스러운 변화를 줄인다.

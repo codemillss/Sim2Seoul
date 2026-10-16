@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "sema_authored_approach_v1",
+  "world_sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+  "title": "서울시립미술관 언덕 산책로",
+  "scope": {
+    "placement": "source OSM footway XZ in the existing metre coordinate frame",
+    "height": "explicitly authored game interpretation; not measured terrain or a reconstruction of the real gradient",
+    "physical_terrain_verified": false,
+    "real_world_access_verified": false,
+    "source_buildings_and_entrances_modified": false,
+    "flat_museum_door_preserved": true
+  },
+  "source": {
+    "feature_id": "osm:way:183272668:highway_line",
+    "building_id": "osm:way:626112515:building",
+    "local_source": "data/processed/features.json",
+    "osm_url": "https://www.openstreetmap.org/way/183272668",
+    "official_hill_description": "https://sema.seoul.go.kr/kr/visit/seosomun",
+    "official_context": "The official museum introduction describes the uphill approach from Deoksugung-gil. It provides no numerical elevation or gradient.",
+    "coordinate_system": "existing EPSG:32652 local metre frame; X east, Y up, Z south; ground reference Y0, vertical datum unresolved",
+    "xz": [
+      [-245.30160513374722, -10.283763462211937],
+      [-241.41059532773215, 1.0569418724626303],
+      [-236.43081914272625, 13.542366907466203],
+      [-233.5740665611811, 18.755015562288463],
+      [-222.63160373829305, 30.525346726179123],
+      [-220.02641731034964, 35.11088820034638],
+      [-218.06161046994384, 41.93618948990479],
+      [-217.9963339769747, 48.74272217601538],
+      [-221.23845199757488, 79.0127693968825]
+    ]
+  },
+  "design": {
+    "used_length_m": 90.0,
+    "walk_width_m": 3.2,
+    "grounded_width_m": 7.2,
+    "bottom_y_m": -0.22,
+    "sample_spacing_m": 1.0,
+    "visual_surface_offset_m": 0.008,
+    "interpolation": "smoothstep between profile stations; all dimensions authored for this game",
+    "profile": [[0.0, 0.0], [35.0, 3.0], [50.0, 3.0], [90.0, 0.0]],
+    "terrace": {
+      "station_m": 42.0,
+      "side_offset_m": -4.6,
+      "width_m": 6.0,
+      "length_m": 6.0,
+      "height_m": 3.0,
+      "note": "Authored west lookout; the inner edge joins the plateau. It is not the museum's real entrance or measured terrace."
+    },
+    "museum_flat_door_xz": [-208.12536280699368, 86.26695003899646],
+    "museum_flat_entrance_xz": [-208.1565643957194, 84.26719343859205],
+    "museum_door_y_m": 0.08,
+    "door_clearance_m": 6.0,
+    "notes": [
+      "A 3 m rise, plateau and return to Y0 end about 7 m before the source facade.",
+      "Closed convex ground volumes extend below the existing Y0 support; there is no walkable undercroft beneath a thin ramp.",
+      "Existing source buildings, road and flat museum entrance remain in place.",
+      "The first 90 m and west terrace were checked against source building/barrier footprints; no footprint intersection was found. This is a source snapshot check, not surveyed clearance."
+    ]
+  }
+}

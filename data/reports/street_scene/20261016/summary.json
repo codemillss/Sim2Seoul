@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "task": "EXP14_STREET_SCENE",
+  "base_commit": "72da99e26bc9a00efbec655740d9fb837da87c82",
+  "recorded_at": "2026-10-16T18:15:33.876210+09:00",
+  "result": "PASS",
+  "source_sha256": {
+    "tests/game/check_street_scene.gd": "92a58810be6a1754fb2d946d42c02d89ff103d1de3f63245f747b77f84ed89f9",
+    "game/assets/authored/museum_approach.json": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745",
+    "game/assets/authored/street_businesses.json": "c4b04fdd21b5c5b61f61351ef02ec13fd028df9821444750c8930caf1735aea2",
+    "game/assets/authored/street_life.json": "6d6b34d895707c21aef639a134a6194590bf36fcc73d84f5ab04268240cff0b9",
+    "game/scripts/explore_walk.gd": "02a211c1a0c5a32014fea383c3cc6328ea7f2109fb75de049b6f6c92eb82c7a7",
+    "game/scripts/museum_approach.gd": "db3b39aab3fe8b84bc7029ce7f805af92b27041bce233f39e66bb7cf5963c60b",
+    "game/scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff",
+    "game/scripts/player/exploration_avatar.gd": "7ed8375df49706f7dec467383311e16487fa34c1ee73f99fd1684dac1144fc8b",
+    "game/scripts/player/exploration_camera.gd": "24e267d3276f9fe7066faefa972851396fd963f725473b32838d273f2ff643f8",
+    "game/scripts/player/free_roam_player.gd": "17c838dabaa947a6feb894d780d05abe5cb8a25dd19511a184e83cce2c80cf57",
+    "game/scripts/street_businesses.gd": "4e5db46e9b83ea23b62bec0506a2756f11d748325b78207ff4010a05985996ce",
+    "game/scripts/street_life.gd": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89"
+  },
+  "source_audit_errors": [],
+  "verification": [
+    {
+      "name": "headless",
+      "report": "data/reports/street_scene/20261016/headless.json",
+      "sha256": "e9072e7f367a3721ca727b18e45cb15c04ce27e27d154982d6cfdaa626094d21",
+      "result": "PASS",
+      "display": "headless",
+      "checks": 50,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 9
+    },
+    {
+      "name": "gpu_final",
+      "report": "data/reports/street_scene/20261016/gpu_final.json",
+      "sha256": "d723eedbb296922ccf88ca7bca94ba77d972c2a79cf3b487e9121e55390aec2a",
+      "result": "PASS",
+      "display": "macOS",
+      "checks": 59,
+      "failed": 0,
+      "source_audit": "PASS",
+      "captures": 9
+    }
+  ],
+  "targeted_diagnostics": [
+    {
+      "report": "data/reports/street_scene/20261016/probes/street-businesses-setup.json",
+      "result": "PASS",
+      "checks": 11,
+      "sha256": "61e7f1e7b0cec85da29f4ab314f4030af5cb915b359a302ace2ce20c03fccf98",
+      "scope": "Actual latest exploration city startup and 4-store setup, original source body/shape transforms/layers preserved, real capsule+support query at authored facade approaches. Headless only; no GPU visual acceptance or new shop entry claim."
+    },
+    {
+      "report": "data/reports/street_scene/20261016/probes/museum_authored_qa_final.json",
+      "result": "PASS",
+      "checks": 16,
+      "sha256": "51dd6f6fbdbccbd2aa08cf8d87db67c70280ffd1fea9d05165ae63af7a52766e",
+      "scope": "production controller on isolated metre floor and authored hill; combined source city remains separate root QA"
+    },
+    {
+      "report": "data/reports/street_scene/20261016/probes/museum_source_geometry.json",
+      "result": "PASS",
+      "checks": 4,
+      "sha256": "5d0b0e96ee076eca3f3be3ae24d3c5662120469509dd97e24b5357d6f82059cc",
+      "scope": "Source snapshot geometry comparison only; no surveyed horizontal accuracy, access, vertical datum or real grades asserted. Road widths are not surveyed by this check."
+    },
+    {
+      "report": "data/reports/street_scene/20261016/probes/sim2seoul_street_lamp_probe.json",
+      "result": "PASS",
+      "checks": null,
+      "sha256": "04541900a58b357d0e57818a23cc5f471aa0de2ea07a244d9df804fd5fec3ef1",
+      "scope": "Headless actual city counts, guarded lamp placement and active actual OmniLight range/energy. GPU performer visibility requires final native image review."
+    },
+    {
+      "report": "data/reports/street_scene/20261016/probes/sim2seoul_street_integration_review.json",
+      "result": "PASS",
+      "checks": null,
+      "sha256": "ede362a4e87b7dbdfecea7613391a970982a5aca5a855f2c81cc247a1598d809",
+      "scope": "Read-only production-source review with isolated temporary preferences. Actual headless nodes, collision queries, immediate camera snaps and paused UI callbacks; no GPU image acceptance."
+    }
+  ],
+  "observed": {
+    "animation": {
+      "actual_animated_birds": 6,
+      "actual_animated_people": 4,
+      "maximum_horizontal_excursion_m": 0.799980819225311,
+      "maximum_vertical_excursion_m": 1.19997084140778,
+      "minimum_vertical_excursion_m": 0.0,
+      "samples": 85,
+      "seconds": 8.5
+    },
+    "businesses": [
+      {
+        "actual_texts": [
+          "진주회관",
+          "콩국수 · 김치볶음밥",
+          "콩국수\n김치\n볶음밥"
+        ],
+        "authored_facade_bounds": {
+          "position": [
+            -3.67031478881836,
+            0.00750000029802322,
+            -0.475616455078125
+          ],
+          "size": [
+            7.34062194824219,
+            2.73249983787537,
+            1.93563842773438
+          ]
+        },
+        "box_instances": 76,
+        "center_on_source_edge": true,
+        "clear_approach": true,
+        "id": "jinjuhoegwan",
+        "new_colliders": 0,
+        "offers_new_entry": false,
+        "round_meshes": 8,
+        "source_feature_id": "osm:way:1229938280:building",
+        "style": "restaurant"
+      },
+      {
+        "actual_texts": [
+          "GS25",
+          "도시락 · 음료 · 간식",
+          "도시락\n삼각김밥",
+          "GS25"
+        ],
+        "authored_facade_bounds": {
+          "position": [
+            -3.28937530517578,
+            0.00750000029802322,
+            -3.1376838684082
+          ],
+          "size": [
+            6.5787467956543,
+            2.7425000667572,
+            6.53537368774414
+          ]
+        },
+        "box_instances": 56,
+        "center_on_source_edge": true,
+        "clear_approach": true,
+        "id": "shop_12072483362",
+        "new_colliders": 0,
+        "offers_new_entry": false,
+        "round_meshes": 20,
+        "source_feature_id": "osm:relation:7240724:building",
+        "style": "gs25"
+      },
+      {
+        "actual_texts": [
+          "emart24",
+          "도시락 · 음료 · 간식",
+          "도시락\n삼각김밥",
+          "이마트24"
+        ],
+        "authored_facade_bounds": {
+          "position": [
+            -3.27403259277344,
+            0.00750000029802322,
+            -2.59230804443359
+          ],
+          "size": [
+            6.54804992675781,
+            2.7425000667572,
+            5.44460296630859
+          ]
+        },
+        "box_instances": 56,
+        "center_on_source_edge": true,
+        "clear_approach": true,
+        "id": "shop_6414256222",
+        "new_colliders": 0,
+        "offers_new_entry": false,
+        "round_meshes": 20,
+        "source_feature_id": "osm:way:710169371:building",
+        "style": "emart24"
+      },
+      {
+        "actual_texts": [
+          "CU",
+          "도시락 · 음료 · 간식",
+          "도시락\n삼각김밥",
+          "CU 한국프레스센터점"
+        ],
+        "authored_facade_bounds": {
+          "position": [
+            -3.20198059082031,
+            0.00750000029802322,
+            -0.04105544090271
+          ],
+          "size": [
+            6.40394592285156,
+            2.7425000667572,
+            0.490247488021851
+          ]
+        },
+        "box_instances": 56,
+        "center_on_source_edge": true,
+        "clear_approach": true,
+        "id": "shop_13911616344",
+        "new_colliders": 0,
+        "offers_new_entry": false,
+        "round_meshes": 20,
+        "source_feature_id": "osm:way:233593617:building",
+        "style": "cu"
+      }
+    ],
+    "hill": {
+      "anchors": [
+        {
+          "authored_height_m": 0.0,
+          "foot_point": [
+            -245.301605224609,
+            0.0799999982118607,
+            -10.283763885498
+          ],
+          "id": "bottom",
+          "station_m": 0.0,
+          "surface_point": [
+            -245.301605224609,
+            0.0,
+            -10.283763885498
+          ],
+          "tangent": [
+            0.324415981769562,
+            0.0,
+            0.945914447307587
+          ]
+        },
+        {
+          "authored_height_m": 3.0,
+          "foot_point": [
+            -231.106323242188,
+            3.07999992370605,
+            21.4094657897949
+          ],
+          "id": "crest",
+          "station_m": 35.0,
+          "surface_point": [
+            -231.106323242188,
+            3.0,
+            21.4094657897949
+          ],
+          "tangent": [
+            0.680868029594421,
+            0.0,
+            0.732406139373779
+          ]
+        },
+        {
+          "authored_height_m": 3.0,
+          "foot_point": [
+            -226.340148925781,
+            3.07999992370605,
+            26.5362243652344
+          ],
+          "id": "plateau",
+          "station_m": 42.0,
+          "surface_point": [
+            -226.340148925781,
+            3.0,
+            26.5362243652344
+          ],
+          "tangent": [
+            0.680858492851257,
+            0.0,
+            0.732414960861206
+          ]
+        },
+        {
+          "authored_height_m": 0.0,
+          "foot_point": [
+            -220.48518371582,
+            0.0799999982118607,
+            71.9798889160156
+          ],
+          "id": "farflat",
+          "station_m": 90.0,
+          "surface_point": [
+            -220.48518371582,
+            0.0,
+            71.9798889160156
+          ],
+          "tangent": [
+            -0.106511570513248,
+            0.0,
+            0.994311451911926
+          ]
+        },
+        {
+          "authored_height_m": 3.0,
+          "foot_point": [
+            -229.709259033203,
+            3.07999992370605,
+            29.6681728363037
+          ],
+          "id": "terrace",
+          "station_m": 42.0,
+          "surface_point": [
+            -229.709259033203,
+            3.0,
+            29.6681728363037
+          ],
+          "tangent": [
+            0.680858492851257,
+            0.0,
+            0.732414960861206
+          ]
+        },
+        {
+          "authored_height_m": 0.0,
+          "foot_point": [
+            -208.15657043457,
+            0.0799999982118607,
+            84.2671966552734
+          ],
+          "id": "original_museum_entrance",
+          "source_entrance_preserved": true
+        }
+      ],
+      "closed_shapes": 588,
+      "collision_body_count": 2,
+      "original_museum_entrance_y_m": 0.08,
+      "profile": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          35.0,
+          3.0
+        ],
+        [
+          50.0,
+          3.0
+        ],
+        [
+          90.0,
+          0.0
+        ]
+      ],
+      "source": {
+        "building_id": "osm:way:626112515:building",
+        "coordinate_system": "existing EPSG:32652 local metre frame; X east, Y up, Z south; ground reference Y0, vertical datum unresolved",
+        "feature_id": "osm:way:183272668:highway_line",
+        "local_source": "data/processed/features.json",
+        "official_context": "The official museum introduction describes the uphill approach from Deoksugung-gil. It provides no numerical elevation or gradient.",
+        "official_hill_description": "https://sema.seoul.go.kr/kr/visit/seosomun",
+        "osm_url": "https://www.openstreetmap.org/way/183272668",
+        "xz": [
+          [
+            -245.301605133747,
+            -10.2837634622119
+          ],
+          [
+            -241.410595327732,
+            1.05694187246263
+          ],
+          [
+            -236.430819142726,
+            13.5423669074662
+          ],
+          [
+            -233.574066561181,
+            18.7550155622885
+          ],
+          [
+            -222.631603738293,
+            30.5253467261791
+          ],
+          [
+            -220.02641731035,
+            35.1108882003464
+          ],
+          [
+            -218.061610469944,
+            41.9361894899048
+          ],
+          [
+            -217.996333976975,
+            48.7427221760154
+          ],
+          [
+            -221.238451997575,
+            79.0127693968825
+          ]
+        ]
+      },
+      "support_failures": [],
+      "supported_stations": 91
+    },
+    "lighting_day": {
+      "ambient_energy": 0.479999989271164,
+      "emissive_lamps": 0,
+      "sky_top": [
+        0.219999998807907,
+        0.389999985694885,
+        0.589999973773956,
+        1.0
+      ],
+      "sun_energy": 1.25,
+      "visible_lights": 0
+    },
+    "lighting_evening": {
+      "ambient_energy": 0.649999976158142,
+      "emissive_lamps": 10,
+      "sky_top": [
+        0.100000001490116,
+        0.150000005960464,
+        0.300000011920929,
+        1.0
+      ],
+      "sun_energy": 0.46000000834465,
+      "visible_lights": 7
+    },
+    "lighting_night": {
+      "ambient_energy": 0.800000011920929,
+      "emissive_lamps": 10,
+      "sky_top": [
+        0.0120000001043081,
+        0.0199999995529652,
+        0.0549999997019768,
+        1.0
+      ],
+      "sun_energy": 0.230000004172325,
+      "visible_lights": 7
+    },
+    "street_inventory": {
+      "actual_kind_counts": {
+        "audience": 3,
+        "busker": 1,
+        "motorcycles": 3,
+        "parked_cars": 3,
+        "street_lamp": 10
+      },
+      "actual_lights": 10,
+      "actual_owned_solids": 16,
+      "errors": [],
+      "guarded_anchors": 23,
+      "skipped": []
+    }
+  },
+  "reviewed_captures": [
+    "data/reports/street_scene/20261016/gpu_final_busker_day.png",
+    "data/reports/street_scene/20261016/gpu_final_busker_evening.png",
+    "data/reports/street_scene/20261016/gpu_final_busker_night.png",
+    "data/reports/street_scene/20261016/gpu_final_hill_lower.png",
+    "data/reports/street_scene/20261016/gpu_final_hill_top.png",
+    "data/reports/street_scene/20261016/gpu_final_shop_jinjuhoegwan.png",
+    "data/reports/street_scene/20261016/gpu_final_shop_shop_12072483362.png",
+    "data/reports/street_scene/20261016/gpu_final_shop_shop_13911616344.png",
+    "data/reports/street_scene/20261016/gpu_final_shop_shop_6414256222.png"
+  ],
+  "normal_launch": {
+    "pid": 93809,
+    "launched_at": "2026-10-16T18:12:35.154141+09:00",
+    "log": "data/reports/street_scene/20261016/launch.log",
+    "kind": "normal exploration launch, no automatic probe",
+    "CUA_observed": "Raised actual normal window; selected evening via native menu; clicked stonewall busking shortcut; menu closed, turbo3x, warm lamp and performer/audience visible. Not an OS walking/comfort acceptance."
+  },
+  "failures_and_fixes": [
+    "Initial setup probes had duplicate name aggregation, duplicate StreetLife instantiation after root integration, and wrong low-quality fixture id. Raw probes remain historical.",
+    "Terrain probe detected a box-versus-convex seam into the lookout; same exact triangular convex ground construction fixed entry/return.",
+    "Native GPU59 passed but visual review found the performer unlit beyond the old12m lamp range. A guarded nearby fixture replaced one regular station, count10/caps8and4 unchanged. Final native59/headless50 and9images pass after this refinement.",
+    "Native capture observer moved sideways/aimed slightly aside using the production camera, avoiding player occlusion of the guitar."
+  ],
+  "limits": [
+    "Four authored storefront facades; no new restaurant/convenience interiors, portals or commerce.",
+    "Official Jinju point and matching-address OSM point differ10.84m; source-edge placement is a game interpretation. Convenience current tenants/units are unverified.",
+    "Vehicles/performers/birds/lamps are authored placements; busking has no audio.",
+    "Only the actual SeMA approach XZ is source-derived; the90m/3m profile and lookout are authored, not measured ground. Original museum door and last7.07m source path remain flat.",
+    "No all-angle, sustained performance, other Mac, export or real-world access acceptance.",
+    "Further curb and moving-pedestrian/dog request is the next EXP15 batch."
+  ]
+}
