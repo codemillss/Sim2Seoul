@@ -92,14 +92,14 @@ func _ready() -> void:
 	interior_visit.door_world_position=photo_civic_detail.door_world_position
 	add_child(interior_visit)
 	if not interior_visit.setup(self):
-		_exploration_failure("서울도서관 로비를 준비하지 못했습니다.");return
+		_exploration_failure("건물 내부와 출입구를 준비하지 못했습니다.");return
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled)
 
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · E 도서관 진입 · Esc 메뉴"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · E 건물 출입 / 엘리베이터 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():
@@ -135,6 +135,8 @@ func _build_ui() -> void:
 	exploration_notice.add_theme_font_size_override("font_size",13)
 	exploration_notice.add_theme_color_override("font_color",Color(.35,.15,.07))
 	options.add_child(exploration_notice)
+	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
+	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
 	# Keep every control reachable when the game window is shorter than the menu.
 	exploration_menu_content=options
@@ -148,6 +150,10 @@ func _build_ui() -> void:
 	exploration_menu_scroll.add_child(options)
 	options.minimum_size_changed.connect(_queue_menu_layout)
 	_update_exploration_description()
+
+func _visit_library_entrance() -> void:
+	if is_instance_valid(interior_visit) and interior_visit.go_to_library_entrance():
+		if menu.visible:toggle_menu()
 
 func _queue_menu_layout() -> void:
 	if menu_layout_pending:return
@@ -219,7 +225,7 @@ func set_free_roam(enabled: bool) -> void:
 func _update_exploration_description() -> void:
 	if not is_instance_valid(exploration_description):return
 	var profile: Dictionary=SPEED_PROFILES[speed_id]
-	exploration_description.text="걷기 %.2f · 달리기 %.1f m/s\n%s"%[profile.walk,profile.run,"잔디·도로를 자유롭게 탐험합니다. 서울도서관 입구에서는 E로 들어갑니다." if free_roam_enabled else "기존 산책길 안에서 이동합니다."]
+	exploration_description.text="걷기 %.2f · 달리기 %.1f m/s\n%s"%[profile.walk,profile.run,"잔디·도로를 자유롭게 탐험합니다. 출입 표지가 있는 건물 정문에서 E로 들어갑니다." if free_roam_enabled else "기존 산책길 안에서 이동합니다."]
 	_layout_v0.call_deferred()
 
 func _speed_selected(index: int) -> void:
@@ -248,8 +254,8 @@ func exploration_snapshot() -> Dictionary:
 func _select_source_document(index: int) -> void:
 	super._select_source_document(index)
 	if index==0:
-		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","서울도서관 1층 로비를 간략 재현했습니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
-		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 건물의 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 서울도서관 입구에서 E를 누르면 사진·안내도를 참고해 만든 로비 체험 공간으로 들어갑니다. 다른 건물의 실내와 상층·계단은 구현하지 않았습니다. 석재 텍스처는 AI로 새로 제작했으며, 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
+		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","출입 표지가 있는 건물은 실내·계단·엘리베이터로 여러 층을 탐험할 수 있습니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
+		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 출입 표지가 있는 건물 정문에서 E로 들어갑니다. 실내 크기는 원본 건물 외곽 안에 맞췄으며, 층수는 OSM 원문 또는 높이 추정에 따릅니다. 방 배치·계단·엘리베이터와 실내 보행자는 게임용 재구성입니다. 작은 건물·사유지·일부 역사 건축물의 실내는 제외합니다. 석재 텍스처는 AI로 새로 제작했으며 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
 
 func _process(delta: float) -> void:
 	super._process(delta)

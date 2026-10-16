@@ -54,6 +54,20 @@ func end_interior(point: Vector3) -> bool:
 	reset_physics_interpolation()
 	return true
 
+func relocate_interior(point: Vector3) -> bool:
+	# Lifts hand control back only on a verified landing. Its floor also becomes
+	# recovery's destination, so falling upstairs never returns to the lobby.
+	if not interior_active or not point.is_finite() or not interior_bounds.has_point(point):return false
+	var previous := spawn_transform
+	spawn_transform = Transform3D(Basis.IDENTITY,point)
+	if not _valid_spawn():
+		spawn_transform = previous
+		return false
+	global_transform = spawn_transform
+	spawn_valid = true
+	require_neutral_input();reset_physics_interpolation()
+	return true
+
 func exterior_contains(point: Vector3) -> bool:
 	# Portal return validation must use the selected outdoor boundary even indoors.
 	return _inside_outdoors(point)

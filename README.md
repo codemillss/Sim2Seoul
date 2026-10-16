@@ -26,6 +26,8 @@ Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 
 
 ## 현재 상태
 
+최신 개발 탐험판 **EXP04**는 출입 표지가 있는 125개 건물과 여러 층, 걸어서 오르내리는 계단·층 선택 엘리베이터·실내 사람을 제공한다. 도서관 벽에 붙었을 때의 E 진입 실패도 수정했다. **`Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`**으로 열고, Esc 메뉴의 ‘서울도서관 정문으로 이동’으로 바로 체험할 수 있다. 실내 크기·층수는 원본 외곽/높이/OSM 층수에 맞춘 게임 표현이며 실제 방 배치는 재구성했다. [실행 안내](docs/RUN_GUIDE.md)·[현재 검증과 한계](docs/WORK_STATUS.md). 아래 V0·R03은 원래 버전의 기록이다.
+
 2026-10-16: **M1 Pro에서 첫 탐험 V0의 로컬 앱 검수를 완료했다.** [앱 실행 안내](docs/RUN_GUIDE.md)·[실제 패키지 검증](data/reports/package_check.md)·[기기별 인수 판정](data/reports/first_version_acceptance.md). M4는 접근 불가 대안으로 UNRUN이며 OS 입력/사람 조작감·전송 Gatekeeper도 미실행이다. 다음 행동은 [WORK_STATUS](docs/WORK_STATUS.md)를 기준으로 한다. 과거 단계의 ‘다음 작업’은 해당 시점의 기록이다.
 
 현재 개발 장면은 다음으로 연다. 처음 준비하는 Mac은 [V0 자료 생성 순서](docs/CROSS_MAC.md#v0-개발-자료를-처음-만드는-mac의-추가-준비)를 먼저 따른다. 기본 Godot 프로젝트 main은 초기 E02 장면을 보존하므로 현재 V0와 구분한다.

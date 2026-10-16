@@ -1,0 +1,111 @@
+{
+  "task": "EXP04",
+  "generated_utc": "2026-10-16T03:13:58.349368+00:00",
+  "result": "PASS",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "machine": "Apple M5 / 16GB / macOS26.6.2 / Metal4 Forward+",
+  "gpu_checks": {
+    "buildings": {
+      "checks": 82,
+      "failed": 0
+    },
+    "contact": {
+      "checks": 35,
+      "failed": 0
+    },
+    "regression": {
+      "checks": 51,
+      "failed": 0
+    }
+  },
+  "gpu_total": 168,
+  "declared_runtime_source_hash_matches": {
+    "buildings": {
+      "res://../tests/game/check_building_visits.gd": true,
+      "res://assets/authored/interiors/source_catalog.json": true,
+      "res://scripts/building_interior_space.gd": true,
+      "res://scripts/building_visit_catalog.gd": true,
+      "res://scripts/interior_visit.gd": true,
+      "res://scripts/player/free_roam_player.gd": true
+    },
+    "contact": {
+      "res://../tests/game/check_library_entry_contact.gd": true,
+      "res://scripts/interior_visit.gd": true,
+      "res://scripts/player/free_roam_player.gd": true
+    },
+    "regression": {}
+  },
+  "source_files": {
+    "game/scripts/interior_visit.gd": "f8a663ec907860c80d78df633417bc4b9b7a870af6bcd2709add09cd796cfc0a",
+    "game/scripts/building_visit_catalog.gd": "67f0dba564e954b9a84fea8a2044cc270866a6f58ce2bf25c9c37bedb89b1ab8",
+    "game/scripts/building_interior_space.gd": "7980896ace4cc9affaf6ab3b4b8673358c5505aa02049317878edbb468e087b8",
+    "game/scripts/player/free_roam_player.gd": "1e8c4220496032149d7c099a850aa1ddeba133d8017bc5fe957f82d102008a64",
+    "game/scripts/explore_walk.gd": "24e5effebabd82271146ae379ae3e07139ea3f1e757b39e6e0b9b9dbeda750e8",
+    "game/assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "tools/prepare_building_visits.py": "f46706925e4bc9a531db2d6d787bd69fd18971cbceb1e83aa8fb9bdd1ba172fa",
+    "tests/game/check_building_visits.gd": "2ae3b5ac12d92f4feb0f70b1c726910e9581670d64df1925ef4c89380100750a",
+    "tests/game/check_library_entry_contact.gd": "e18837e9514fdd611a0ffe5520ceedf0d11bdf960d7982575654a1c3a31c71b6"
+  },
+  "catalog": {
+    "eligible_buildings": 125,
+    "source_buildings": 635,
+    "source_levels": 78,
+    "height_inferred_levels": 47,
+    "max_floors": 28,
+    "library_floors": 4,
+    "cityhall_floors": 12,
+    "all_portals_grounded_clear": 125
+  },
+  "geometry_report": "geometry.json",
+  "geometry": {
+    "buildings": 125,
+    "floors": 1205,
+    "standing_targets": 2410,
+    "failures": 0,
+    "synthetic_stair_floor_transitions": 14,
+    "max_generated_bodies_one_building": 2149
+  },
+  "normal_launch": {
+    "pid": 84402,
+    "started_utc": "2026-10-16T03:11:28.960339+00:00",
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/cache/building_visits/20261016/normal-launch.log",
+    "source_branch": "codex/building-interiors",
+    "automatic_probe": false,
+    "native_ui_verified": [
+      "Sim2Seoul DEBUG current window",
+      "Esc pause menu",
+      "Clicked 서울도서관 정문으로 이동: arrived at displayed library facade/entry prompt"
+    ],
+    "native_ui_limit": "Further native W/E/floor-button input was interrupted by changed app state; no completed native E/elevator journey claim. Production-mapped physical E events were used in GPU fixtures.",
+    "window_left_open": true
+  },
+  "captures": [
+    "buildings_cityhall_lobby.png",
+    "buildings_library_elevator_paused_menu.png",
+    "buildings_library_elevator_selector.png",
+    "buildings_library_lobby.png",
+    "buildings_library_second_floor_stairs.png"
+  ],
+  "historical_evidence": {
+    "before_fix": "development/contact_before.json",
+    "initial_hotfix": "development/contact_hotfix.json",
+    "first_expanded_gpu": "development/gpu01_buildings.json"
+  },
+  "geometry_fixture_repository_paths": {
+    "catalog": "tests/game/check_interior_geometry.gd",
+    "stairs": "tests/game/check_interior_stairs_geometry.gd"
+  },
+  "limits": [
+    "Interiors are authored partial rectangular floor plates contained by source footprints, not surveyed full building plans.",
+    "Doors on source perimeter are game positions except retained photo-informed library entry; real-world access unverified.",
+    "Eligible 125 buildings all have checked standing targets; production visit/stair/elevator paths are representative fixtures, not every full journey in all buildings.",
+    "Four visual indoor walkers follow the occupied floor without collision or interaction AI.",
+    "Lift travel uses a closed-car screen and controller-owned passenger transition, not a continuously simulated lift shaft/platform.",
+    "No new long-duration performance benchmark, export, M4 test or general human usability approval."
+  ]
+}

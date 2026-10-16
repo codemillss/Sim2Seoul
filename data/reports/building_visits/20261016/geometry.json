@@ -1,0 +1,116 @@
+{
+  "task": "EXP04 interior geometry focused headless verification",
+  "generated_at_utc": "2026-10-16T03:04:06.670000+00:00",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "headless; no GPU visual verification in this report",
+  "module": "game/scripts/building_interior_space.gd",
+  "module_sha256": "7980896ace4cc9affaf6ab3b4b8673358c5505aa02049317878edbb468e087b8",
+  "source_catalog": "game/assets/authored/interiors/source_catalog.json",
+  "source_catalog_sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+  "source_world_sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+  "fixtures": {
+    "catalog": {
+      "script": "/tmp/sim2seoul_floor_space_catalog.gd",
+      "sha256": "a34d50f14ecfda0499c3af19ba6657c7bdf936fd3770691b1a1fb794e433084b",
+      "log": "/tmp/sim2seoul-floor-space-catalog.log",
+      "log_sha256": "2963057c05b75aecf6d8528c28ef3fd8452e47493cfb8a6319187e7d124e43e0"
+    },
+    "stairs": {
+      "script": "/tmp/sim2seoul_floor_space_walk.gd",
+      "sha256": "c8dcb1ec9ef8d66d1c8f33bfdb9440dcadf1accdf459634612e7ead6c9fdb8bc",
+      "log": "/tmp/sim2seoul-floor-space-walk.log",
+      "log_sha256": "8614119e2bbeb361cf15d7c27880da6e3b73e4a427b4a711aafa8df69cc706c6"
+    }
+  },
+  "catalog_probe": {
+    "buildings": 125,
+    "failures": [],
+    "floors": 1205,
+    "max_bodies": 2149,
+    "max_shapes": 2149,
+    "standing_targets_checked": 2410,
+    "total_bodies_checked": 68349
+  },
+  "catalog_conditions": {
+    "setup": "Every one of 125 source records instantiated and freed sequentially; exact source width, depth, floor_height and floor_count used.",
+    "physics_registration": "Two physics frames after setup before querying.",
+    "targets": "floor_spawn and elevator_point on every floor; total 2410 targets.",
+    "checks_per_target": [
+      "point inside room bounds",
+      "ray finds floor at point.y minus 0.08m within 0.02m tolerance",
+      "1.7m tall / 0.30m radius standing capsule at point has no layer-1 overlap"
+    ],
+    "body_invariants": "Every generated StaticBody3D has collision_layer 1 and collision_mask 0."
+  },
+  "stair_probe": {
+    "cases": [
+      {
+        "case": 0,
+        "spec": {
+          "width": 12,
+          "depth": 16,
+          "floor_height": 5,
+          "floor_count": 3
+        },
+        "physics_ticks": 1221,
+        "final_ground_height_error_m": 0.00083160400391,
+        "bodies": 119,
+        "people": 4,
+        "floor_transitions": 4
+      },
+      {
+        "case": 1,
+        "spec": {
+          "width": 14.749181,
+          "depth": 57.301935,
+          "floor_height": 4.625,
+          "floor_count": 4
+        },
+        "physics_ticks": 1771,
+        "final_ground_height_error_m": 0.00079345703125,
+        "bodies": 244,
+        "people": 4,
+        "floor_transitions": 6
+      },
+      {
+        "case": 2,
+        "spec": {
+          "width": 12,
+          "depth": 16,
+          "floor_height": 3,
+          "floor_count": 3
+        },
+        "physics_ticks": 976,
+        "final_ground_height_error_m": 0.00083160400391,
+        "bodies": 101,
+        "people": 4,
+        "floor_transitions": 4
+      }
+    ],
+    "failures": 0,
+    "total_floor_transitions": 14,
+    "physics_hz": 60,
+    "speed_mps": 3.5,
+    "capsule_height_m": 1.7,
+    "capsule_radius_m": 0.3,
+    "safe_margin_m": 0.001,
+    "floor_snap_length_m": 0.1,
+    "gravity_mps2": 9.8,
+    "waypoint_xz_tolerance_m": 0.12,
+    "waypoint_height_tolerance_m": 0.3,
+    "final_ground_height_tolerance_m": 0.2,
+    "method": "CharacterBody3D moves via velocity and move_and_slide, following the complete generated stair_path up and down every level. Only initial placement is teleported. No midflight teleport."
+  },
+  "regression_fixed": "At 3m floor height, a wedge with horizontal underside on the next floor blocked the lower-flight headroom. Corrected the ConvexPolygonShape3D to a thin parallel ramp and thinned visual treads; repeated all 3 stair cases with zero failures.",
+  "limitations": [
+    "Focused geometry fixture uses a native CharacterBody3D, not the complete production input/router/recovery controller. The separate check_building_visits.gd covers production integration.",
+    "No GPU screenshots, camera wall sweeps, visual realism approval, manual keyboard operation, or performance benchmark is implied.",
+    "One macOS system CA certificate warning occurred in restricted headless startup; geometry checks completed with exit code zero.",
+    "Interior furniture, stairs, elevators and people routes are authored game layouts, not surveyed indoor plans."
+  ],
+  "commands": [
+    "/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --log-file /tmp/sim2seoul-floor-space-catalog.log --fixed-fps 60 --script /tmp/sim2seoul_floor_space_catalog.gd",
+    "/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --log-file /tmp/sim2seoul-floor-space-walk.log --fixed-fps 60 --script /tmp/sim2seoul_floor_space_walk.gd"
+  ],
+  "passed": true
+}

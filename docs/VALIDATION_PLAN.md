@@ -1,5 +1,31 @@
 # 검증 계획과 완료 판정
 
+## 최신 탐험 EXP04 — 실제 접촉 출입·다층·계단·승강기
+
+2026-10-16 Apple M5·Godot4.7.2·Metal4/Forward+의 [최종 증거](../data/reports/building_visits/20261016/summary.json)다. 기존 EXP03의 anchor 순간이동만으로 실제 벽 접촉의 안정성을 보장할 수 없었던 한계를 추가 검사로 보완했다.
+
+| 실행 | 실제 결과/범위 | 증거 |
+|---|---|---|
+| 건물 방문 | 82/82 GPU. 원본 크기/층수·125개 문·대표3곳 입퇴장, 도서관 실제 계단 왕복·사람4명·위층36카메라·층 선택·이동 중 메뉴/차단/복구·즉시 카메라·정문 바로가기·외부692개 동일, PNG5장 | [buildings.json](../data/reports/building_visits/20261016/buildings.json)·[로그](../data/reports/building_visits/20261016/buildings.log) |
+| 벽 밀착 E | 35/35 GPU. 중앙/±1.8/±2.2m에서 실제 W로 벽에 붙어 E, 짧은 물리 E 탭·유지 E·막힌 실외 복귀·먼 누름·가림벽·점프 중 거절 | [contact.json](../data/reports/building_visits/20261016/contact.json)·[로그](../data/reports/building_visits/20261016/contact.log) |
+| 기존 야외 회귀 | 51/51 GPU. 속도·바닥/경계·원래 충돌·개체 이동·정지/설정·작은 창·저장/복구 | [regression.json](../data/reports/building_visits/20261016/regression.json)·[로그](../data/reports/building_visits/20261016/regression.log) |
+| 전체 실내 기하 | headless 125건물/1,205층/2,410개 지원/캡슐 지점 실패0, 최대 한 건물 body2,149; 별도 최소12×16m/3m층고·5m층고·실제 도서관의 총14회 층간 보행 | [geometry.json](../data/reports/building_visits/20261016/geometry.json), `check_interior_geometry.gd`·`check_interior_stairs_geometry.gd` |
+
+GPU 합계168개이며 headless 기하 표본이나 이전 EXP03 수치를 중복 합산하지 않는다. 시작 배치/퇴장·승강장 시험 배치는 명시한 fixture 순간이동이며 계단 경유점 사이와 벽 접촉은 실제 이동이다. 실제 도면·현장 출입·125개 모든 경로 완주·장시간 성능·export·M4는 미검증이다.
+
+수정 전 접촉 24개 중4개 실패를 [contact_before.json](../data/reports/building_visits/20261016/development/contact_before.json)에 보존했다. 실내 기하에서 층고3m의 다음 경사판 아래면 막힘을 얇은 평행 경사판으로 고쳤다. 최초 확장 GPU79개 PASS 후 독립 검토로 승차 화면의 메뉴 가림과 실패 복귀 카메라 피벗 갱신 누락을 찾아 수정했고, 메뉴 캡처와 즉시 복귀 검사까지 최종82개로 확인했다. 모든 최종 신형 검사에 기록된 소스 해시를 현재 파일과 대조했다.
+
+재현은 저장소 루트에서 다음으로 실행한다. GPU는 headless 옵션을 빼며 실제 실행 시 현재 게임 창과 함께 중복 조작하지 않는다.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_building_visits.gd -- --automatic-probe --report=/private/tmp/sim2seoul-buildings.json
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_library_entry_contact.gd -- --automatic-probe --report=/private/tmp/sim2seoul-contact.json
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --fixed-fps 60 --script ../tests/game/check_interior_geometry.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path game --fixed-fps 60 --script ../tests/game/check_interior_stairs_geometry.gd
+```
+
+일반 실행은 별도 `sh tools/run_exploration.sh run`으로 재기동해 창·Esc 메뉴·정문 바로가기 클릭과 도착을 확인했다. 이후 네이티브 W/E/층 버튼 검수는 앱 상태 변경으로 중단되어 자동 물리 E 검사와 직접 OS 여정을 구분한다. 최신 창은 열린 상태다.
+
 ## 후속 탐험 EXP03 — 사진 외형과 첫 실내의 실제 검증
 
 2026-10-16 Apple M5·Godot 4.7.2·Metal 4.0/Forward+에서 [최종 결과](../data/reports/photo_realism/20261016/summary.json)를 기록했다. 원래 V0 및 EXP02의 과거 결과는 보존한다.
