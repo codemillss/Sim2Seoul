@@ -1,5 +1,17 @@
 # 검증 계획과 완료 판정
 
+## EXP10 — 용도별 시설의 실제 기하·동선·화면
+
+[최종 요약](../data/reports/interior_facilities/20261016/summary.json)에 현재 소스·보고서 해시와 실행별 결과를 연결한다. **시설 GPU150/150·headless129/129**, 새 층 안내/승강기 **GPU78/78·headless71/71**, 기존 방문77/77·옥상 수영27/27 headless PASS다. 합계 GPU228/headless304는 중복 회귀를 포함한 실행 판정 수다.
+
+전수 검사는 원본125동/1,205층의 기존32,660개 캡슐/2,410개 바닥 ray를 유지하고,860개 시설의 선언한 입구와 보행 구간을0.45m 이하 간격으로 표본화해21,372개 캡슐/21,372개 지지 ray를 추가한다. 시설 메타를 가진 실제 충돌 형상5,341개와 한글 glyph 표지1,615개를 관측한다. 노드 이름/자기보고만으로 장비 존재를 인정하지 않으며 시설별 필수 실제 형상·재질·한글판 가독성과 GPU MultiMesh의 위치/크기/세 회전축/primitive 종류를 대조한다. 대표5동68층의 GPU검사와 headless 전수 결과는 소스 해시가 일치해야 연결된다.
+
+대표12시설은 물리 E로 입장하고 실제 승강기8회·시설 내부 보행을 수행한다. 샤워실 앞문→안쪽→복귀→탕의10경유점553물리표본을 확인했다. 초기 건물/촬영 배치는 명시한 시험 fixture이며 모든 시설을 연속 완주한 결과가 아니다. 시설14장과 UI/객실7장을 열어 검토했다. 근접2장은 정상 줌2m를 쓰며 spa는 실제 보행 종점을 유지한다. 일부 근접 시야의 캐릭터 가림은 남아 있고 모든 각도의 시각 품질 판정이 아니다.
+
+초기 headless의8개 랙 누락은 실제 안전 배치와 생성 조건을 고쳤다. GPU01의4건 변환 누락은90도 회전의 IEEE `-0.000/+0.000` 문자열 차이였다. 정수 lookup 뒤 실제 위치0.2mm/세 scaled축0.02mm 이내와 메시 종류를 별도로 비교하며 회전 삭제·잘못된 크기·다른 primitive를 거절하는 순수 엔진 계약 검사도 보존했다. 실제 모델의 회전을 지우지 않았다. [실행 이력](EXECUTION_LOG.md)과 development의 초기 실패를 유지한다.
+
+재현은 기존 공통 실행 형식의 `--script ../tests/game/check_interior_facilities.gd`와 절대 `--report`로 headless 전수 검사부터 수행한다. native는 `--headless`를 빼고 `--catalog-evidence=<같은 소스의 headless JSON 절대경로>`를 추가한다. 층 선택은 `check_lift_experience.gd`, 회귀는 `check_building_visits.gd`·`check_rooftop_swimming.gd`다. 음식 섭취·샤워/탕 부력·기구 작동·실제 시설 현황·장시간 성능·export·다른Mac 판정은 포함하지 않는다.
+
 ## EXP08·EXP09 — 승강기·추가 점프·옥상과 입수
 
 2026-10-16 동결본의 [승차/점프 요약](../data/reports/lift_jump/20261016/summary.json)·[옥상/수영 요약](../data/reports/rooftops/20261016/summary.json). 실행별 **GPU162·headless439개 판정** PASS이며 중복 회귀를 포함한 합계다.601개 서로 다른 기능이나 여정으로 세지 않는다.

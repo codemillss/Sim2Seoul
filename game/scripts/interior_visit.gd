@@ -344,7 +344,12 @@ func _open_elevator() -> void:
 	for child in elevator_floors.get_children():
 		elevator_floors.remove_child(child);child.queue_free()
 	for index in range(destination_count()):
-		var button := Button.new();button.text = _landing_label(index);button.custom_minimum_size = Vector2(72,38)
+		var button := Button.new();button.text = _landing_label(index);button.custom_minimum_size = Vector2(152,58)
+		button.add_theme_font_size_override("font_size",15)
+		if index<int(current_spec.floor_count):
+			var programme_title: String=String(room.detail_kit.level_profiles[index].title)
+			button.text+="\n"+programme_title.get_slice(" · ",0)
+			button.tooltip_text=programme_title
 		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;button.focus_mode=Control.FOCUS_ALL
 		button.disabled = index==selected_floor or (index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick)
 		button.pressed.connect(request_floor.bind(index));elevator_floors.add_child(button)
@@ -364,7 +369,7 @@ func _layout_elevator_picker(view: Vector2) -> void:
 	# a one-frame horizontal overflow when a 28-floor grid is first populated.
 	var bar_width := maxf(16.,elevator_scroll.get_v_scroll_bar().get_combined_minimum_size().x)
 	var grid_width := maxf(1.,panel_width-padding.x-bar_width)
-	elevator_floors.columns=clampi(int(floor((grid_width+grid_separation)/(72.+grid_separation))),1,4)
+	elevator_floors.columns=clampi(int(floor((grid_width+grid_separation)/(152.+grid_separation))),1,2)
 	var fixed_height := padding.y+elevator_title.get_combined_minimum_size().y+elevator_close_button.get_combined_minimum_size().y+2.*float(elevator_content.get_theme_constant("separation"))
 	var available_height := maxf(1.,view.y-32.)
 	var list_height := maxf(1.,minf(320.,available_height-fixed_height))

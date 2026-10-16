@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "task": "EXP10_INTERIOR_FACILITIES",
+  "base_commit": "a5f6ffd",
+  "recorded_at": "2026-10-16T15:50:16.313617+09:00",
+  "result": "PASS",
+  "source_sha256": {
+    "game/scripts/interior_detail_kit.gd": "73c8b14c807ad95d7714cc95dd24a142aad3e433909478c9c1e70bfe05bdc6b4",
+    "game/scripts/interior_facility_kit.gd": "3b6935a4d4a2281167b6086f67c2be05381aded562aa7b8f3c28c9cedde3d209",
+    "game/scripts/interior_visit.gd": "c793bbf8ecec679672d0841d65428f0f095dd0c6eb09c810f3d7c82369705215",
+    "game/scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+    "game/scripts/interior_surface.gdshader": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b",
+    "game/scripts/player/free_roam_player.gd": "a78bf7fc57780b39c9374ec21c3cacad4964638f261f6213d5e9f0684ef15cb0",
+    "game/scripts/rooftop_space.gd": "e4d12a01ca7ffd0ec7b24dcb097fa13de0cd26e2d91364fa60c7dfa15e7e897d",
+    "game/scripts/water_effect.gd": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420",
+    "game/scripts/elevator_cabin.gd": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad",
+    "game/assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "tests/game/check_interior_identity.gd": "0d8d2d873e746d64b482657587a8d7dc690c509a4899efc2fb5b5237d2eb696e",
+    "tests/game/check_interior_facilities.gd": "670b514f4b19cc2cc981a5fa8cfe7fcc97382e110eabd29a94fb23ae632cf4d1",
+    "tests/game/check_lift_experience.gd": "4937a1ad98c95dd02b9b0f279402965bb88029ea861242830fe399d94a5d8ee7",
+    "data/manual/interior_facilities_design.json": "44ffc05579afcb0db37f799a7635cc5916bd478371511f44e7a1bffb8220b105"
+  },
+  "verification": [
+    {
+      "name": "facilities",
+      "report": "data/reports/interior_facilities/20261016/facilities.json",
+      "log": "data/reports/interior_facilities/20261016/facilities.log",
+      "display": "Metal/Forward+",
+      "checks": 150,
+      "failed": 0,
+      "captures": 14,
+      "report_sha256": "8ca52fbb7dc6c16e9ef10390974ee0b66330513bb0ea520852cc7de2af328399"
+    },
+    {
+      "name": "headless",
+      "report": "data/reports/interior_facilities/20261016/headless.json",
+      "log": "data/reports/interior_facilities/20261016/headless.log",
+      "display": "headless",
+      "checks": 129,
+      "failed": 0,
+      "captures": 14,
+      "report_sha256": "e40d4d7d812474f549ff141c90dafc3fb3e197c25e03b9ffeb17547cf8f53e9b"
+    },
+    {
+      "name": "lift",
+      "report": "data/reports/interior_facilities/20261016/lift.json",
+      "log": "data/reports/interior_facilities/20261016/lift.log",
+      "display": "Metal/Forward+",
+      "checks": 78,
+      "failed": 0,
+      "captures": 7,
+      "report_sha256": "bbd8068871e9759288e6b58577a355d6bee155a1d8fb39dee417fdf838ff1b3d"
+    },
+    {
+      "name": "lift_headless",
+      "report": "data/reports/interior_facilities/20261016/lift_headless.json",
+      "log": "data/reports/interior_facilities/20261016/lift_headless.log",
+      "display": "headless",
+      "checks": 71,
+      "failed": 0,
+      "captures": 0,
+      "report_sha256": "db9e6a7a97f792cd592cc4dacf67a0bd70d6c44c7cb30ef83ae9f0cb2a997f13"
+    },
+    {
+      "name": "visits_regression",
+      "report": "data/reports/interior_facilities/20261016/visits_regression.json",
+      "log": "data/reports/interior_facilities/20261016/visits_regression.log",
+      "display": "headless",
+      "checks": 77,
+      "failed": 0,
+      "captures": 5,
+      "report_sha256": "9384d2350e99f8cedae94c909bbb33dab898cafd8ea3ea37532156c18a177dbd"
+    },
+    {
+      "name": "swimming_regression",
+      "report": "data/reports/interior_facilities/20261016/swimming_regression.json",
+      "log": "data/reports/interior_facilities/20261016/swimming_regression.log",
+      "display": "headless",
+      "checks": 27,
+      "failed": 0,
+      "captures": 0,
+      "report_sha256": "83cf6a4bffc011289ce40f5c3d434cbab79798f9dc8266695c9911b4c2edee80"
+    }
+  ],
+  "source_catalog_scope": {
+    "buildings": 125,
+    "floors": 1205,
+    "original_capsule_queries": 32660,
+    "original_support_rays": 2410
+  },
+  "facilities": {
+    "counts": {
+      "art_lounge": 1,
+      "banquet": 25,
+      "buffet": 145,
+      "business_lounge": 25,
+      "children_reading": 1,
+      "classroom": 146,
+      "community_table": 2,
+      "fitness": 162,
+      "kitchen": 135,
+      "laundry": 1,
+      "library_study": 1,
+      "media_reading": 1,
+      "residents_table": 1,
+      "spa": 28,
+      "spa_lockers": 28,
+      "staff_lounge": 3,
+      "strength": 151,
+      "workshop": 4
+    },
+    "profiles": {
+      "bank": 3,
+      "chapel": 5,
+      "civic": 28,
+      "gallery": 5,
+      "hotel": 188,
+      "library": 3,
+      "office": 623,
+      "residential": 5
+    },
+    "capsule_queries": 21372,
+    "support_rays": 21372,
+    "actual_solids": 5341,
+    "actual_signs": 1615
+  },
+  "visual_review": {
+    "facility_images": 14,
+    "lift_images": 7,
+    "opened_all_21": true,
+    "observations": "Distinct buffet/food/kitchen, fitness/weights, shower/shallow bath/lockers, banquet/business and library/civic/office/gallery equipment visible. 640/1152 floor-use buttons remain inside scroll;28th/roof reachable. Some close views retain avatar occlusion; these are representative views, not all camera angles."
+  },
+  "native_launch": {
+    "launched_at": "2026-10-16T15:47:46.455407+09:00",
+    "pid": 11577,
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "log": "data/reports/interior_facilities/20261016/launch.log",
+    "observation": "Actual native Godot window/menu read with CUA: turbo3x, walk8.40/run21.0mps and free_roam; paused menu, Esc to resume. Raise attempt returned user-changed-app, then read-only re-query succeeded. This is not an OS E/facility journey."
+  },
+  "development": [
+    "headless01 detected8 missing racks in constrained strength zones; actual geometry and guarded attachments fixed",
+    "Strong RefCounted cycle replaced by WeakRef",
+    "GPU01 four missing-transform assertions: IEEE signed-zero string keys; actual numeric basis/position/mesh checks now verify and reject removed rotation/wrong scale/wrong primitive; production rotation retained"
+  ],
+  "limits": [
+    "Authored facility floor programmes may repeat; not unique real tenants or surveyed facility plans.",
+    "Facilities are walk-in spaces/equipment models; no consuming food, shower control, bathing buoyancy or gym operation. Rooftop pool swimming remains a separate working feature.",
+    "860 facilities and geometry counts are catalog observations; representative12 facility walks and14 views are not every building/floor itinerary.",
+    "Original source-sized partial plates are preserved; this is not a full building interior footprint reproduction.",
+    "No human OS facility tour, all-angle camera acceptance, long-run performance, new export or cross-Mac validation."
+  ]
+}

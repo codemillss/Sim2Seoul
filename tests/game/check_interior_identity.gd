@@ -215,7 +215,21 @@ func _catalog_physics() -> void:
 		deferred_checks.append({"name":"native.full_125_catalog_not_repeated","reason":"Full catalog physics and special-profile solids were performed headlessly; native execution inspects five representative profiles and uses hash-matched linked evidence","headless_report":catalog_evidence_path,"matching_sources_confirmed":linked_ok})
 
 func _transform_key(transform: Transform3D) -> String:
-	return "%.3f,%.3f,%.3f|%.3f,%.3f,%.3f|%.3f,%.3f,%.3f|%.3f,%.3f,%.3f"%[transform.origin.x,transform.origin.y,transform.origin.z,transform.basis.x.x,transform.basis.x.y,transform.basis.x.z,transform.basis.y.x,transform.basis.y.y,transform.basis.y.z,transform.basis.z.x,transform.basis.z.y,transform.basis.z.z]
+	# Identity multiplication can turn IEEE -0.0 into +0.0 (90-degree Z-axis
+	# rotations expose this). Integer buckets normalise that spelling only;
+	# the actual position and all scaled axes are compared below as numbers.
+	var fields: Array[String] = []
+	for value in [transform.origin.x,transform.origin.y,transform.origin.z,transform.basis.x.x,transform.basis.x.y,transform.basis.x.z,transform.basis.y.x,transform.basis.y.y,transform.basis.y.z,transform.basis.z.x,transform.basis.z.y,transform.basis.z.z]:fields.append(str(roundi(value*1000.)))
+	return ",".join(fields)
+
+func _transform_delta(expected: Transform3D, actual: Transform3D) -> Dictionary:
+	var axes := [expected.basis.x-actual.basis.x,expected.basis.y-actual.basis.y,expected.basis.z-actual.basis.z]
+	var maximum := 0.
+	for axis: Vector3 in axes:maximum = maxf(maximum,maxf(absf(axis.x),maxf(absf(axis.y),absf(axis.z))))
+	return {"position_m":expected.origin.distance_to(actual.origin),"scaled_axis_component_m":maximum}
+
+func _placement_mesh_matches(kind: String, mesh_class: String) -> bool:
+	return mesh_class==String({"box":"BoxMesh","cylinder":"CylinderMesh","pot":"CylinderMesh","shade":"CylinderMesh","foliage":"SphereMesh"}.get(kind,"unsupported"))
 
 func _verify_gpu_geometry(room: Node3D, identity: Dictionary) -> void:
 	if DisplayServer.get_name()=="headless":
@@ -225,14 +239,26 @@ func _verify_gpu_geometry(room: Node3D, identity: Dictionary) -> void:
 	for child in _descendants(room):
 		if child is MultiMeshInstance3D:
 			for index in range(child.multimesh.instance_count):
-				visible[_transform_key(child.transform*child.multimesh.get_instance_transform(index))] = true;total += 1
-	var observed := 0;var missing := []
+				var actual: Transform3D = child.transform*child.multimesh.get_instance_transform(index)
+				var key := _transform_key(actual)
+				if not visible.has(key):visible[key] = []
+				visible[key].append({"transform":actual,"mesh":child.multimesh.mesh.get_class()});total += 1
+	var observed := 0;var missing := [];var max_position_error := 0.;var max_axis_error := 0.;var rotated_samples := [];var dumbbell_samples := []
 	for row: Dictionary in identity.get("placements",[]):
 		var basis: Basis = row.get("basis",Basis.IDENTITY)
 		var transform := Transform3D(basis*Basis.from_scale(row.size),row.position)
-		if visible.has(_transform_key(transform)):observed += 1
-		elif missing.size()<12:missing.append({"title":row.title,"position":row.position,"size":row.size})
-	_check("gpu.detail_placements_have_actual_multimesh_geometry."+String(room.spec.id),observed>0 and missing.is_empty(),{"uploaded_instances":total,"expected_detail_instances":identity.get("placements",[]).size(),"observed":observed,"missing_first_12":missing})
+		var matched := false;var nearest := {}
+		for actual: Dictionary in visible.get(_transform_key(transform),[]):
+			var delta := _transform_delta(transform,actual.transform)
+			nearest = {"actual":actual.transform,"mesh":actual.mesh,"delta":delta}
+			if delta.position_m>.0002 or delta.scaled_axis_component_m>.00002 or not _placement_mesh_matches(String(row.get("mesh_kind","box")),actual.mesh):continue
+			matched = true;observed += 1
+			max_position_error = maxf(max_position_error,delta.position_m);max_axis_error = maxf(max_axis_error,delta.scaled_axis_component_m)
+			if not basis.is_equal_approx(Basis.IDENTITY) and rotated_samples.size()<3:rotated_samples.append({"title":row.title,"expected":transform,"actual":actual.transform,"delta":delta})
+			if String(row.title)=="Detail_FacilityDumbbellWeight" and dumbbell_samples.size()<2:dumbbell_samples.append({"title":row.title,"expected":transform,"actual":actual.transform,"delta":delta,"expected_size":row.size,"actual_axis_lengths":Vector3(actual.transform.basis.x.length(),actual.transform.basis.y.length(),actual.transform.basis.z.length())})
+			break
+		if not matched and missing.size()<12:missing.append({"title":row.title,"expected":transform,"position":row.position,"size":row.size,"nearest_same_bucket":nearest})
+	_check("gpu.detail_placements_have_actual_multimesh_geometry."+String(room.spec.id),observed>0 and missing.is_empty(),{"uploaded_instances":total,"expected_detail_instances":identity.get("placements",[]).size(),"observed":observed,"comparison":"normalised lookup then actual position + all three scaled orientation axes + primitive mesh class","position_tolerance_m":.0002,"scaled_axis_component_tolerance_m":.00002,"max_position_error_m":max_position_error,"max_scaled_axis_error_m":max_axis_error,"rotated_samples":rotated_samples,"dumbbell_axis_samples":dumbbell_samples,"missing_first_12":missing})
 
 func _identity_differences() -> void:
 	for id in [LIBRARY_ID,CITYHALL_ID,OFFICE_ID,HOTEL_ID,GALLERY_ID]:
@@ -330,9 +356,14 @@ func _capture_feature(title: String, level: int, family: String, close := false)
 	var target: Vector3 = body.global_position+Vector3.UP*.70
 	await _capture(title,level,0.,stand,2.0 if close else 4.,target)
 
-func _capture(title: String, level: int, yaw_degrees := -8., local_point := Vector3.INF, zoom := 4., aim_world := Vector3.INF) -> void:
+func _capture(title: String, level: int, yaw_degrees := -8., local_point := Vector3.INF, zoom := 4., aim_world := Vector3.INF, preserve_walk_endpoint := false) -> void:
 	var at: Vector3 = visit.room.floor_spawn(level) if not local_point.is_finite() else visit.room.to_global(local_point+Vector3.UP*(level*visit.room.floor_height+.08))
-	if not await _pose(title+"_view",at):return
+	if preserve_walk_endpoint:
+		_keys();_e(false);await _ticks(2)
+		var retained: bool = scene.player.is_on_floor() and scene.player.global_position.distance_to(at)<.2 and not scene.player.input_latched
+		_check("capture_pose."+title+".retains_actual_walk_endpoint",retained,{"walk_endpoint":scene.player.global_position,"requested_camera_stance":at,"position_writes":0})
+		if not retained:return
+	elif not await _pose(title+"_view",at):return
 	scene.rig.yaw = deg_to_rad(yaw_degrees);scene.rig.pitch = deg_to_rad(-8.);scene.rig.requested_distance = zoom
 	var framed_target := aim_world
 	if aim_world.is_finite():
@@ -355,7 +386,7 @@ func _capture(title: String, level: int, yaw_degrees := -8., local_point := Vect
 			projected = scene.rig.camera.unproject_position(aim_world)
 			target_in_view = Rect2(Vector2(16,115),scene.get_viewport().get_visible_rect().size-Vector2(32,145)).has_point(projected)
 	var allowed_zoom: bool = zoom>=scene.rig.distance_min_m and zoom<=scene.rig.distance_max_m
-	var evidence := {"name":title,"level":level,"profile":visit.room.interior_snapshot().profile_id,"player":scene.player.global_position,"camera":scene.rig.camera.global_transform,"state":visit.snapshot(),"requested_zoom_m":zoom,"normal_UI_zoom_range":allowed_zoom,"avatar_visible":scene.player.get_node("Visual").visible,"actual_furniture_target":aim_world if aim_world.is_finite() else null,"framed_look_at_point":framed_target if framed_target.is_finite() else null,"target_pixel":projected,"target_clear_of_top_UI":target_in_view,"camera_overlap_count":overlaps.size()}
+	var evidence := {"name":title,"level":level,"profile":visit.room.interior_snapshot().profile_id,"player":scene.player.global_position,"camera":scene.rig.camera.global_transform,"state":visit.snapshot(),"requested_zoom_m":zoom,"normal_UI_zoom_range":allowed_zoom,"preserved_actual_walk_endpoint":preserve_walk_endpoint,"avatar_visible":scene.player.get_node("Visual").visible,"actual_furniture_target":aim_world if aim_world.is_finite() else null,"framed_look_at_point":framed_target if framed_target.is_finite() else null,"target_pixel":projected,"target_clear_of_top_UI":target_in_view,"camera_overlap_count":overlaps.size()}
 	_check("capture_pose."+title+".camera_clear_and_actual_target_on_screen",overlaps.is_empty() and target_in_view and allowed_zoom,evidence)
 	if DisplayServer.get_name()=="headless":
 		evidence.captured = false;evidence.reason = "headless_has_no_rendered_viewport";captures.append(evidence);return

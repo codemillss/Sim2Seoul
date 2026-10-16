@@ -58,7 +58,13 @@ func _selector_layout_checks() -> void:
 		_check("selector."+str(size.x)+"x"+str(size.y)+".indoor_guide_hidden_behind_open_picker",not visit.indoor_panel.is_visible_in_tree(),{"picker_visible":visit.elevator_panel.is_visible_in_tree(),"indoor_guide_visible":visit.indoor_panel.is_visible_in_tree()})
 		var last_floor: Button=visit.elevator_floors.get_child(27)
 		var roof: Button=visit.elevator_floors.get_child(28)
-		_check("selector."+str(size.x)+"x"+str(size.y)+".last_floor_and_roof_enabled_and_named",last_floor.text=="28층" and roof.text=="옥상" and not last_floor.disabled and not roof.disabled)
+		_check("selector."+str(size.x)+"x"+str(size.y)+".last_floor_and_roof_enabled_and_named",last_floor.text.get_slice("\n",0)=="28층" and roof.text=="옥상" and not last_floor.disabled and not roof.disabled)
+		var programme_errors:=[]
+		for index in range(visit.room.floor_count):
+			var button: Button=visit.elevator_floors.get_child(index)
+			var title: String=String(visit.room.detail_kit.level_profiles[index].title)
+			if button.text.get_slice("\n",1)!=title.get_slice(" · ",0) or button.tooltip_text!=title:programme_errors.append(index)
+		_check("selector."+str(size.x)+"x"+str(size.y)+".actual_floor_uses_visible_on_all_buttons",programme_errors.is_empty(),{"floors":visit.room.floor_count,"errors":programme_errors})
 		# Real keyboard focus travels backwards from the close action into the
 		# last destinations. follow_focus must reveal the focused clipped row.
 		visit.elevator_close_button.grab_focus();await _ticks(2)

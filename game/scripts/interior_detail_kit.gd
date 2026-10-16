@@ -16,6 +16,7 @@ var _round_meshes: Dictionary = {}
 var _level := 0
 var _seed := 0
 var _rejected := 0
+var facility_kit: RefCounted
 
 func setup(owner_room: Node3D) -> void:
 	room = owner_room
@@ -64,6 +65,8 @@ func setup(owner_room: Node3D) -> void:
 	_round_meshes["foliage"] = foliage
 	var shade := CylinderMesh.new();shade.top_radius=.30;shade.bottom_radius=.5;shade.height=1.0;shade.radial_segments=12
 	_round_meshes["shade"] = shade
+	facility_kit=preload("res://scripts/interior_facility_kit.gd").new()
+	facility_kit.setup(self)
 
 func _classify() -> String:
 	var id := String(room.spec.get("id",""))
@@ -78,6 +81,9 @@ func _classify() -> String:
 	return "office"
 
 func _programme(level: int) -> Dictionary:
+	if facility_kit:
+		var facility_programme: Dictionary=facility_kit.programme(profile_id,level,_seed)
+		if not facility_programme.is_empty():return facility_programme
 	var index := level%3
 	match profile_id:
 		"library":
@@ -102,6 +108,7 @@ func build_level(level: int) -> void:
 	programme["features"] = []
 	level_profiles.append(programme)
 	_architecture(level)
+	if facility_kit.build(String(programme.profile_id)):return
 	match profile_id:
 		"library":_library(level)
 		"civic":_civic(level)
@@ -111,6 +118,7 @@ func build_level(level: int) -> void:
 		"residential":_residential(level)
 		"bank":_bank(level)
 		_:_office(level)
+	facility_kit.decorate(profile_id,level)
 
 func _feature(name: String) -> void:
 	if not features.has(name):features.append(name)
@@ -663,4 +671,4 @@ func set_active_floor(level: int) -> void:
 	for label in labels:label.visible=absi(int(label.get_meta("detail_level",-10))-level)<=1
 
 func snapshot() -> Dictionary:
-	return {"profile_id":profile_id,"profile_basis":"source kind and title; authored interpretation","layout_basis":"game_reconstruction","level_profiles":level_profiles.duplicate(true),"detail_counts":detail_counts.duplicate(),"features":features.duplicate(),"protected_zones":protected_zones.duplicate(),"placements":placements.duplicate(true),"rejected_unsafe_placements":_rejected,"visible_detail_labels":labels.filter(func(label: Label3D) -> bool:return label.visible).size(),"total_detail_labels":labels.size()}
+	return {"profile_id":profile_id,"profile_basis":"source kind and title; authored interpretation","layout_basis":"game_reconstruction","level_profiles":level_profiles.duplicate(true),"detail_counts":detail_counts.duplicate(),"features":features.duplicate(),"protected_zones":protected_zones.duplicate(),"placements":placements.duplicate(true),"facilities":facility_kit.snapshot() if facility_kit else [],"rejected_unsafe_placements":_rejected,"visible_detail_labels":labels.filter(func(label: Label3D) -> bool:return label.visible).size(),"total_detail_labels":labels.size()}
