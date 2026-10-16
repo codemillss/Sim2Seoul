@@ -1,0 +1,8 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://scenes/world/v0_walk.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/explore_walk.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/player/free_roam_player.gd" id="3"]
+[node name="ExploreWalk" instance=ExtResource("1")]
+script = ExtResource("2")
+[node name="Player" parent="Actors" index="0"]
+script = ExtResource("3")

@@ -1,0 +1,198 @@
+extends "res://scripts/v0_walk.gd"
+## Optional exploration controls on a separate leaf; prior milestones stay fixed.
+const SPEED_IDS := ["realistic", "brisk", "fast"]
+const SPEED_PROFILES := {
+	"realistic": {"label": "현실 속도", "walk": 1.4, "run": 3.5},
+	"brisk": {"label": "빠르게", "walk": 2.24, "run": 5.6},
+	"fast": {"label": "아주 빠르게", "walk": 2.8, "run": 7.0},
+}
+
+@export var exploration_settings_path := "user://sim2seoul_exploration.json"
+var speed_id := "brisk"
+var free_roam_enabled := true
+var exploration_settings_recovered := false
+var exploration_error := ""
+var exploration_overlay: Node3D
+var speed_option: OptionButton
+var free_roam_switch: CheckButton
+var exploration_description: Label
+var exploration_notice: Label
+var exploration_menu_scroll: ScrollContainer
+var exploration_menu_content: VBoxContainer
+var menu_layout_pending := false
+
+func _ready() -> void:
+	super._ready()
+	if not runtime_ok:return
+	exploration_overlay=preload("res://scripts/exploration_overlay.gd").new()
+	exploration_overlay.name="ExplorationOverlay"
+	add_child(exploration_overlay)
+	if not exploration_overlay.setup(city,player):
+		_exploration_failure("자유 탐험을 준비하지 못했습니다. 다시 실행해주세요.")
+		return
+	player.free_roam_bounds=exploration_overlay.bounds
+	var saved:=_read_exploration_settings()
+	if not set_speed_profile(saved.speed_id):
+		_exploration_failure("이동 속도를 준비하지 못했습니다.")
+		return
+	set_free_roam(saved.free_roam)
+	if not exploration_error.is_empty():return
+	if exploration_settings_recovered:
+		exploration_notice.text="저장된 탐험 설정을 읽지 못해 기본으로 시작했습니다."
+		_save_exploration_settings()
+	_layout_v0.call_deferred()
+	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled)
+
+func _build_ui() -> void:
+	super._build_ui()
+	var help: Label=status.get_parent().get_child(0)
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · 마우스 회전\n휠 거리 조절 · Esc 메뉴에서 탐험 범위 / 속도 조절"
+	var options:=menu.get_child(0) as VBoxContainer
+	var quit_action: Button
+	for child in options.get_children():
+		if child is Button and child.text=="종료":quit_action=child
+	options.add_child(HSeparator.new())
+	free_roam_switch=CheckButton.new()
+	free_roam_switch.name="FreeRoam"
+	free_roam_switch.text="자유 탐험 · 잔디와 도로까지"
+	free_roam_switch.tooltip_text="끄면 산책길 안에서 이동합니다. 길 밖에 있으면 대한문 밖으로 돌아갑니다."
+	free_roam_switch.set_pressed_no_signal(true)
+	for color_name in ["font_color","font_hover_color","font_pressed_color"]:
+		free_roam_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+	free_roam_switch.toggled.connect(_free_roam_selected)
+	options.add_child(free_roam_switch)
+	var speed_row:=HBoxContainer.new()
+	var caption:=Label.new();caption.text="이동 속도"
+	caption.add_theme_color_override("font_color",Color(.08,.12,.16))
+	caption.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	speed_row.add_child(caption)
+	speed_option=OptionButton.new();speed_option.name="ExplorationSpeed"
+	for id in SPEED_IDS:speed_option.add_item(SPEED_PROFILES[id].label)
+	speed_option.select(SPEED_IDS.find(speed_id))
+	speed_option.custom_minimum_size=Vector2(150,32)
+	speed_option.item_selected.connect(_speed_selected)
+	speed_row.add_child(speed_option);options.add_child(speed_row)
+	exploration_description=Label.new()
+	exploration_description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	exploration_description.add_theme_font_size_override("font_size",13)
+	exploration_description.add_theme_color_override("font_color",Color(.08,.12,.16))
+	options.add_child(exploration_description)
+	exploration_notice=Label.new()
+	exploration_notice.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	exploration_notice.add_theme_font_size_override("font_size",13)
+	exploration_notice.add_theme_color_override("font_color",Color(.35,.15,.07))
+	options.add_child(exploration_notice)
+	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
+	# Keep every control reachable when the game window is shorter than the menu.
+	exploration_menu_content=options
+	menu.remove_child(options)
+	exploration_menu_scroll=ScrollContainer.new()
+	exploration_menu_scroll.name="ExplorationOptionsScroll"
+	exploration_menu_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+	exploration_menu_scroll.follow_focus=true
+	options.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	menu.add_child(exploration_menu_scroll)
+	exploration_menu_scroll.add_child(options)
+	options.minimum_size_changed.connect(_queue_menu_layout)
+	_update_exploration_description()
+
+func _queue_menu_layout() -> void:
+	if menu_layout_pending:return
+	menu_layout_pending=true
+	_fit_menu.call_deferred()
+
+func _fit_menu() -> void:
+	menu_layout_pending=false
+	_layout_v0()
+
+func _layout_v0() -> void:
+	super._layout_v0()
+	if not is_instance_valid(exploration_menu_content):return
+	var view:=get_viewport().get_visible_rect().size
+	var padding:=menu.get_theme_stylebox("panel").get_minimum_size()
+	var wanted_height:=exploration_menu_content.get_combined_minimum_size().y+padding.y
+	menu.size=Vector2(minf(440.,view.x-32.),minf(wanted_height,view.y-32.))
+	menu.position=Vector2(maxf(16.,(view.x-menu.size.x)/2.),maxf(16.,(view.y-menu.size.y)/2.))
+
+func _exploration_failure(message: String) -> void:
+	exploration_error=message;runtime_ok=false
+	input_router.gameplay_enabled=false;rig.set_capture(false)
+	status.text=message;exploration_notice.text=message
+	free_roam_switch.disabled=true;speed_option.disabled=true
+	push_error(message)
+
+func _read_exploration_settings() -> Dictionary:
+	var defaults:={"schema_version":1,"speed_id":"brisk","free_roam":true}
+	if not FileAccess.file_exists(exploration_settings_path):return defaults
+	var saved=_json_object(exploration_settings_path)
+	if saved is Dictionary and saved.size()==3 and _number(saved.get("schema_version")) and saved.schema_version==1 and saved.get("speed_id") is String and saved.speed_id in SPEED_IDS and saved.get("free_roam") is bool:
+		return saved
+	exploration_settings_recovered=true
+	return defaults
+
+func set_speed_profile(id: String) -> bool:
+	if not SPEED_PROFILES.has(id):return false
+	var profile: Dictionary=SPEED_PROFILES[id]
+	player.walk_speed_mps=profile.walk;player.run_speed_mps=profile.run
+	speed_id=id
+	if is_instance_valid(speed_option):speed_option.select(SPEED_IDS.find(id))
+	player.require_neutral_input()
+	_update_exploration_description()
+	return true
+
+func set_free_roam(enabled: bool) -> void:
+	if not is_instance_valid(exploration_overlay):return
+	var previous:=free_roam_enabled
+	player.free_roam_enabled=enabled
+	exploration_overlay.set_enabled(enabled)
+	if not enabled and not city.movement_contains(Vector2(player.global_position.x,player.global_position.z)):
+		if not player.recover("free_roam_disabled"):
+			player.free_roam_enabled=previous
+			exploration_overlay.set_enabled(previous)
+			free_roam_switch.set_pressed_no_signal(previous)
+			exploration_notice.text="시작점으로 돌아갈 수 없어 현재 탐험 범위를 유지합니다."
+			return
+	free_roam_enabled=enabled
+	free_roam_switch.set_pressed_no_signal(enabled)
+	player.require_neutral_input()
+	_update_exploration_description()
+
+func _update_exploration_description() -> void:
+	if not is_instance_valid(exploration_description):return
+	var profile: Dictionary=SPEED_PROFILES[speed_id]
+	exploration_description.text="걷기 %.2f · 달리기 %.1f m/s\n%s"%[profile.walk,profile.run,"잔디·도로를 자유롭게 탐험합니다. 건물과 담장은 막혀 있습니다." if free_roam_enabled else "기존 산책길 안에서 이동합니다."]
+	_layout_v0.call_deferred()
+
+func _speed_selected(index: int) -> void:
+	if index<0 or index>=SPEED_IDS.size():return
+	exploration_notice.text=""
+	if set_speed_profile(SPEED_IDS[index]):_save_exploration_settings()
+
+func _free_roam_selected(enabled: bool) -> void:
+	exploration_notice.text=""
+	set_free_roam(enabled)
+	_save_exploration_settings()
+
+func _save_exploration_settings() -> void:
+	var file:=FileAccess.open(exploration_settings_path,FileAccess.WRITE)
+	if file==null:
+		exploration_notice.text="탐험 설정을 저장하지 못했습니다. 이번 실행에는 적용됩니다."
+		return
+	file.store_string(JSON.stringify({"schema_version":1,"speed_id":speed_id,"free_roam":free_roam_enabled})+"\n")
+	file.close()
+
+func exploration_snapshot() -> Dictionary:
+	return {"speed_id":speed_id,"walk_speed_mps":player.walk_speed_mps,"run_speed_mps":player.run_speed_mps,
+		"free_roam":free_roam_enabled,"settings_recovered":exploration_settings_recovered,
+		"settings_path":exploration_settings_path,"runtime_ok":runtime_ok,"error":exploration_error}
+
+func _select_source_document(index: int) -> void:
+	super._select_source_document(index)
+	if index==0:
+		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","건물 내부와 계단은 탐험 범위에서 제외합니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
+		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 건물의 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 건물 내부와 계단은 구현하지 않았습니다."
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if not runtime_ok:return
+	status.text+=" · %s · %s"%["자유 탐험" if free_roam_enabled else "산책길",SPEED_PROFILES[speed_id].label]

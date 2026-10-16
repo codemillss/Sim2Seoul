@@ -218,6 +218,12 @@ R01을근거로기본1.0/그림자ON/200m와현재2명2대의33.3ms목표를채�
 
 R04는 원래 접근 불가 대안으로 M4를 UNRUN·실제 RAM/OS/성능null로 기록했다. 원 manifest와 같은 ZIP·앱의 경로만 재결합하는 도구는29fixture검사와 실제 final 앱/ZIP·113source 바인딩을 M1에서 확인했다. 다른 Mac 실행이 아니다. [첫 버전 인수 판정](../data/reports/first_version_acceptance.md)·[M4 재개 조건](../data/reports/performance_m4pro.json)·[두 Mac의 마지막 절](CROSS_MAC.md).
 
+## 후속 체험 개선 EXP01 — 건물·야외 범위·속도
+
+2026-10-16 사용자의 직접 플레이 피드백을 반영했다. `explore_walk`는 V0를 상속하며 일반 건물 616개에 창문·층 구분·저층부·지붕 색 변화를 더한다(공유 재질 16개, 추가 창문 메시 0). 원본 배치·높이·충돌과 궁궐/시청 랜드마크는 유지한다. 넓힌 게임용 바닥 x[-450,450]/z[-460,460]은 원본 조사 범위 내부이며 플레이어/카메라 전용 layer32다. NPC/차량 지원면과 마스크, W03 자료·계약은 유지한다. 건물·담장·사유지·지도 끝은 계속 막힌다.
+
+기본 걷기/달리기는 2.24/5.6m/s이며 Esc에서 1.4/3.5·2.24/5.6·2.8/7과 탐험 범위를 선택·저장한다. 작은 창은 메뉴를 스크롤한다. M5 Metal GPU에서 속도/대각선·길 밖 세 장소·네 경계·건물/담장 충돌·개체 이동·메뉴 정지·저장/재시작·손상 설정·두 화면 크기를 **47/47 통과**했다. 시나리오 초기 배치는 명시한 시험용 순간이동이며 전체 동선 연속 재검수는 아니다. [요약/소스 식별](../data/reports/exploration/20261016/summary.json)·[원문 판정](../data/reports/exploration/20261016/gpu.json). 최신 기본 실행은 `Sim2Seoul.command` / `sh tools/run_exploration.sh run`이다. 사진 수준의 외형·실내·실측 지형·새 성능/패키지 검수는 이번 범위에 포함하지 않는다.
+
 ## 다음 행동
 
 **2026-10-16 새 Mac의 로컬 개발 실행:** 실제 확인한 기기는 Apple M5·RAM 16GB·macOS 26.6.2(25G83)다. `09e56d0`의 새 복제본에 공식 Godot 4.7.2(체크섬·서명·공증 확인)를 설치하고 CROSS_MAC의 V0 11단계 자료를 생성했다. `Sim2Seoul.command` 또는 `sh tools/run_v0.sh run`으로 실행하며, 실제 Metal 4.0/Forward+ GUI와 캐릭터·메뉴 및 `V0_READY quality=standard pedestrians=2 vehicles=2`, 런타임 오류 없음, OS Esc 메뉴 복귀를 확인했다. 게임 창은 열린 상태로 인계했다. [기동 증거](../data/reports/m5_startup_20261016.json)·[로그](../data/reports/m5_startup_20261016.log). 이번 확인은 M5의 소스 기반 개발 실행이며 R03 동일 ZIP 재검수·전체 보행·성능·전반적인 사람 조작감은 미실행이다. 기존 R04의 M4 UNRUN 기록은 유지한다.

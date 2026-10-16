@@ -1,0 +1,113 @@
+{
+  "task": "EXP01",
+  "date": "2026-10-16",
+  "source_base": "885ec5c",
+  "trigger": "User played on this Mac: bland exteriors / weak Seoul feel, restrictive outdoor movement, slow movement. Building intent clarified as exterior quality.",
+  "machine": {
+    "chip": "Apple M5",
+    "ram_bytes": 17179869184,
+    "os": "macOS 26.6.2",
+    "build": "25G83"
+  },
+  "engine": {
+    "version": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "Forward+",
+    "driver": "Metal 4.0"
+  },
+  "changes": {
+    "scene": "res://scenes/world/explore_walk.tscn",
+    "default_speed_mps": {
+      "walk": 2.24,
+      "run": 5.6
+    },
+    "speed_choices_mps": [
+      [
+        1.4,
+        3.5
+      ],
+      [
+        2.24,
+        5.6
+      ],
+      [
+        2.8,
+        7.0
+      ]
+    ],
+    "default_free_roam": true,
+    "authored_bounds_xz_m": [
+      -450,
+      -460,
+      900,
+      920
+    ],
+    "support_layer": 32,
+    "support_mask": 2,
+    "private_edge_clearance_m": 0.4,
+    "movement_segment_sampling_max_m": 0.05,
+    "ordinary_building_facades": 616,
+    "shared_facade_materials": 16,
+    "extra_window_meshes": 0,
+    "historical_tracked_runtime_config_manual_tools_unchanged": true
+  },
+  "validation": {
+    "gpu_passed": true,
+    "checks_passed": 47,
+    "checks_failed": 0,
+    "physics_seconds": 23.7166666666666,
+    "engine_display": "macOS",
+    "test_placements": "Explicit per-scenario test-only teleports recorded in gpu.json; actual input/move_and_slide after placement. Not a continuous whole-route replay.",
+    "native_gui_observed": true,
+    "native_facade_screenshot_observed": true,
+    "menu_observed": true,
+    "screenshot_retention": "CUA screenshots viewed in conversation, not retained as local images.",
+    "independent_review": "No actionable correctness issue; small-window menu addressed by bounded scroll and actual GPU geometry checks."
+  },
+  "evidence": {
+    "gpu.json": {
+      "file": "data/reports/exploration/20261016/gpu.json",
+      "bytes": 61693,
+      "sha256": "228ae94736fd708fd95cd19f0a0165870c99af91d1f0ff593041ec1f8ff99519"
+    },
+    "gpu.log": {
+      "file": "data/reports/exploration/20261016/gpu.log",
+      "bytes": 2109,
+      "sha256": "7c1448270196516e4bf077b0e468248fb332a3f99668209d791da651504d0da9"
+    }
+  },
+  "source_sha256": {
+    "game/scenes/world/explore_walk.tscn": "f76646ae03c9c1b42570040d210a5a169d04e2697cb407051aa9ec0e5ca3a362",
+    "game/scripts/explore_walk.gd": "3f1183e302860d56ee3e1b414ce8da90f6c62b53438d6482b80de4d5c571b0de",
+    "game/scripts/exploration_overlay.gd": "2873942612e0e3b9685fb24b385125a0bab5596f8be3493d8b5b51cf88ad4c2f",
+    "game/scripts/player/free_roam_player.gd": "8102e64c91e322aacc4cfcd15c78c66a5152f1538481e357589d6bff02806c2e",
+    "game/scripts/city_facades.gd": "a603e5f72ae3aa4171700a70e24d274734ce990e8030355bc9310d5ff13738ef",
+    "game/shaders/city_facade.gdshader": "6a7984270ab3ea0700c34d1cac50d3367b370b607b06572c5e31c66dc2753ac0",
+    "tests/game/check_exploration.gd": "1b73c51428e1a3f99cd27cab4191c36aa34f1b9fd059e96f85f45ec574ef6695",
+    "tools/run_exploration.sh": "315b5371c1220a1561b870ca7f938b002e1ff21a59288526e13de43715f20c6d",
+    "Sim2Seoul.command": "f880a4c7d7da72350ccefba9b70122ed38ed1b1b86b2dee34d51c90fa9b407c7"
+  },
+  "not_claimed": [
+    "photo-realistic Seoul exterior accuracy",
+    "building interiors",
+    "measured terrain / real-world access",
+    "continuous full-route acceptance",
+    "new performance benchmark",
+    "same R03 release ZIP verification",
+    "M4 execution",
+    "final human satisfaction"
+  ],
+  "final_launch": {
+    "scene": "res://scenes/world/explore_walk.tscn",
+    "launched_at_utc": "20261016T003707Z",
+    "default_speed_id": "brisk",
+    "default_free_roam": true,
+    "ready": true,
+    "script_parse_runtime_errors": 0,
+    "window_left_open": true,
+    "gui_observation": "Final normal game window visually confirmed with character, building facades, grass and 5.60m/s HUD while game remained active.",
+    "log": {
+      "file": "data/reports/exploration/20261016/launch.log",
+      "sha256": "614b87913238992d4b7f01beadb85f696698aacc8a6816c4b84a8dbbf61b3543"
+    }
+  }
+}
