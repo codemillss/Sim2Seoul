@@ -101,7 +101,7 @@ func _ready() -> void:
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · E 건물 출입 / 엘리베이터 · Esc 메뉴"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 점프 · 공중에서 한 번 더\n마우스 회전 · 휠 거리 조절 · E 건물 출입 / 엘리베이터 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():

@@ -386,13 +386,14 @@ func _people_motion() -> void:
 func _elevator() -> bool:
 	if not await _pose("library_lift_call",visit.room.elevator_point(0)):return false
 	_e(true);_e(false);await _ticks(4)
-	_check("elevator.physical_E_opens_existing_floor_selector",visit.elevator_open and visit.elevator_panel.visible and visit.elevator_floors.get_child_count()==visit.room.floor_count)
+	_check("elevator.physical_E_opens_existing_floor_selector",visit.elevator_open and visit.elevator_panel.visible and visit.elevator_floors.get_child_count()==visit.destination_count() and visit.destination_count()==visit.room.floor_count+1)
 	var accepted: bool = visit.request_floor(1)
 	_check("elevator.first_to_second_floor_request_accepted",accepted and visit.in_elevator)
 	if not accepted:return false
-	for index in range(360):
+	for index in range(1800):
 		await _ticks(1)
 		if not visit.in_elevator:break
+	await _ticks(2)
 	var arrived: bool = not visit.in_elevator and visit.selected_floor==1 and scene.player.is_on_floor() and absf(scene.player.global_position.y-visit.room.floor_spawn(1).y)<.2
 	_check("elevator.actual_controller_ride_arrives_second_floor",arrived,{"state":visit.snapshot(),"player":scene.player.global_position})
 	return arrived

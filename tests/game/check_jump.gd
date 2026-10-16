@@ -155,8 +155,15 @@ func _run() -> void:
 	await _ticks(8)
 	_keys([])
 	await _ticks(3)
-	row=await _flight("airborne_second_press",["jump"])
-	_check("jump.no_doublejump_or_buffer",row.ascending_episodes==1 and row.apex_rise_m<2.0 and row.ending_grounded,row)
+	_keys(["jump"])
+	await _ticks(1)
+	_check("jump.one_airborne_reboost",player.air_jumps_remaining()==0 and player.velocity.y>7.4,{"vertical_speed":player.velocity.y,"air_jumps_remaining":player.air_jumps_remaining()})
+	_keys([]);await _ticks(2)
+	var before_third: float=player.velocity.y
+	_keys(["jump"]);await _ticks(1)
+	_check("jump.third_press_rejected",player.air_jumps_remaining()==0 and player.velocity.y<before_third-.1,{"before":before_third,"after":player.velocity.y})
+	row=await _flight("airborne_third_held",["jump"])
+	_check("jump.airborne_hold_does_not_repeat_after_landing",row.ascending_episodes==1 and row.ending_grounded and row.floor_ticks>20,row)
 	await _pose()
 	_keys(["jump","move_right"])
 	var start: Vector3=player.global_position

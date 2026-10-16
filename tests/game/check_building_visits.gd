@@ -214,10 +214,10 @@ func _elevator_check() -> void:
 	var distance: float = far_before.distance_to(room.elevator_point(0))
 	_check("elevator.far_request_rejected",distance>2.5 and not visit.request_floor(1) and not visit.in_elevator and scene.player.global_position==far_before,{"distance_m":distance})
 	if not await _pose("elevator_call",room.elevator_point(0)):return
-	_check("elevator.invalid_floor_rejected",not visit.request_floor(-1) and not visit.request_floor(room.floor_count) and not visit.in_elevator)
+	_check("elevator.invalid_floor_rejected",not visit.request_floor(-1) and not visit.request_floor(visit.destination_count()) and not visit.in_elevator)
 	_e(true);_e(false);await _ticks(4)
 	_check("elevator.physical_E_opens_selector",visit.elevator_panel.visible and visit.active)
-	_check("elevator.selector_has_each_floor",visit.elevator_floors.get_child_count()==room.floor_count)
+	_check("elevator.selector_has_each_destination_including_roof",visit.elevator_floors.get_child_count()==visit.destination_count() and visit.elevator_floors.get_child(visit.destination_count()-1).text=="옥상")
 	await _capture("library_elevator_selector")
 	var blocked_at: Vector3 = scene.player.global_position
 	var obstruction := _blocker("BlockedUpperElevatorLanding",room.elevator_point(1))
@@ -238,22 +238,30 @@ func _elevator_check() -> void:
 	_check("elevator.paused_menu_visible_above_car_and_focused",scene.menu.is_visible_in_tree() and visit.ride_panel.is_visible_in_tree() and menu_above_ride and scene.get_viewport().gui_get_focus_owner()==scene.resume_action,{"menu_index":scene.menu.get_index(),"ride_index":visit.ride_panel.get_index(),"menu_z_index":scene.menu.z_index,"ride_z_index":visit.ride_panel.z_index,"resume_has_focus":scene.resume_action.has_focus()})
 	await _capture("library_elevator_paused_menu")
 	scene.toggle_menu();await _ticks(2)
-	var ys := [initial.y,paused_at.y,scene.player.global_position.y]
+	var ys := [float(visit.elevator_snapshot().current_floor_value)]
 	var max_step := 0.
 	var monotonic := true
-	var prior: Vector3 = scene.player.global_position
+	var prior_floor: float = visit.elevator_snapshot().current_floor_value
+	var cabin_pose: Vector3 = scene.player.global_position
+	var fixed_passenger := true;var safe_motion_doors := true;var cabin_view := true;var phases := {}
 	var motion_ticks := 0
-	for index in range(900):
+	for index in range(2400):
 		if not visit.in_elevator:break
 		await _ticks(1)
-		var current: Vector3 = scene.player.global_position
-		max_step = maxf(max_step,current.distance_to(prior))
-		if current.y<prior.y-.01:monotonic = false
-		prior = current;ys.append(current.y);motion_ticks += 1
+		if not visit.in_elevator:break
+		var state: Dictionary = visit.elevator_snapshot()
+		var current: float = state.current_floor_value
+		phases[String(state.phase)] = true
+		max_step = maxf(max_step,absf(current-prior_floor)*room.floor_height)
+		if current<prior_floor-.001:monotonic = false
+		if scene.player.global_position.distance_to(cabin_pose)>.001:fixed_passenger = false
+		if state.phase in ["accelerating","cruising","decelerating"] and float(state.door_open_fraction)>.001:safe_motion_doors = false
+		if not visit.cabin.camera.current or scene.get_viewport().get_camera_3d()!=visit.cabin.camera:cabin_view = false
+		prior_floor = current;ys.append(current);motion_ticks += 1
 	var arrived: bool = not visit.in_elevator and visit.selected_floor==1 and absf(scene.player.global_position.y-room.floor_spawn(1).y)<.2
-	var row := {"start":_v(initial),"end":_v(scene.player.global_position),"motion_ticks":motion_ticks,"max_step_m":max_step,"monotonic_up":monotonic,"sampled_y":ys,"selected_floor":visit.selected_floor}
+	var row := {"start":_v(initial),"end":_v(scene.player.global_position),"motion_ticks":motion_ticks,"max_logical_step_m":max_step,"monotonic_logical_floor":monotonic,"sampled_logical_floor":ys,"selected_floor":visit.selected_floor,"phases":phases.keys(),"fixed_cabin_passenger":fixed_passenger,"closed_motion_doors":safe_motion_doors,"real_cabin_camera":cabin_view}
 	rides.append(row)
-	_check("elevator.continuous_vertical_ride_arrives",arrived and motion_ticks>3 and max_step<.3 and monotonic,row)
+	_check("elevator.phased_3d_cabin_ride_arrives",arrived and motion_ticks>150 and max_step<.3 and monotonic and fixed_passenger and safe_motion_doors and cabin_view and phases.has("closing") and phases.has("accelerating") and phases.has("decelerating") and phases.has("opening"),row)
 	_check("elevator.held_inputs_neutral_on_arrival",arrived and scene.player.input_latched and visit.active,visit.snapshot())
 	_movement();_e(false);await _ticks(6)
 	_check("elevator.arrival_spawn_is_valid_upper_floor",scene.player.spawn_transform.origin.y>room.floor_spawn(0).y+1. and scene.player._valid_spawn(),{"spawn":_v(scene.player.spawn_transform.origin)})
@@ -265,12 +273,23 @@ func _elevator_check() -> void:
 	_check("recovery.elevator_floor_fall_stays_on_arrived_floor",visit.active and scene.player.recoveries==recoveries+1 and scene.player.is_on_floor() and absf(scene.player.global_position.y-room.floor_spawn(1).y)<.2,{"position":_v(scene.player.global_position),"recoveries":scene.player.recoveries})
 	if not await _pose("elevator_return",room.elevator_point(1)):return
 	_check("elevator.return_request",visit.request_floor(0))
-	for index in range(900):
-		if not visit.in_elevator:break
-		await _ticks(1)
+	await _wait_elevator_end()
 	_check("elevator.returns_to_ground_floor",not visit.in_elevator and visit.selected_floor==0 and absf(scene.player.global_position.y-room.floor_spawn(0).y)<.2)
 	_movement();_e(false);await _ticks(6)
 	await _elevator_faults(room)
+
+func _wait_elevator_end(max_ticks := 2400) -> bool:
+	for index in range(max_ticks):
+		if not visit.in_elevator:return true
+		await _ticks(1)
+	return not visit.in_elevator
+
+func _wait_elevator_phase(phase: String,max_ticks := 2400) -> bool:
+	for index in range(max_ticks):
+		if not visit.in_elevator:return false
+		if visit.elevator_snapshot().phase==phase:return true
+		await _ticks(1)
+	return visit.in_elevator and visit.elevator_snapshot().phase==phase
 
 func _elevator_faults(room) -> void:
 	if not await _pose("midride_obstruction_start",room.elevator_point(0)):return
@@ -279,7 +298,7 @@ func _elevator_faults(room) -> void:
 	if not started:return
 	await _ticks(5)
 	var destination := _blocker("LandingBlockedDuringRide",room.elevator_point(1))
-	await _ticks(140)
+	await _wait_elevator_end()
 	_check("elevator.midride_blocked_destination_rolls_back_safely",not visit.in_elevator and visit.selected_floor==0 and scene.player.is_on_floor() and scene.player.is_physics_processing() and scene.player._valid_spawn(),{"position":_v(scene.player.global_position),"state":visit.snapshot()})
 	_check("elevator.rollback_restores_capture_and_gameplay",scene.rig.input_enabled and scene.input_router.gameplay_enabled)
 	destination.queue_free();await _ticks(5)
@@ -296,7 +315,12 @@ func _elevator_faults(room) -> void:
 		var body := _blocker("BlockedFloorSpawn%d"%index,room.floor_spawn(index))
 		blockers.append(body)
 		if index==0:ground_spawn = body
-	await _ticks(140)
+	# The public destination list also includes a separately bounded rooftop.
+	# Blocking every fallback must include both of that destination's candidates.
+	if visit.destination_count()>room.floor_count:
+		blockers.append(_blocker("BlockedRoofLift",visit.landing_point(room.floor_count)))
+		blockers.append(_blocker("BlockedRoofSpawn",visit.rooftop.spawn_point()))
+	await _wait_elevator_phase("blocked")
 	_check("elevator.all_landings_blocked_keeps_passenger_guarded",visit.in_elevator and not scene.player.is_physics_processing() and not scene.input_router.gameplay_enabled and not scene.rig.input_enabled and visit.ride_panel.visible,visit.snapshot())
 	# Disable the fixture now, then invoke rollback before any player/camera tick
 	# can hide a stale rig pivot or a delayed interpolation reset.
@@ -350,7 +374,7 @@ func _library() -> void:
 	await _leave("library")
 
 func _run() -> void:
-	for path in ["res://scripts/interior_visit.gd","res://scripts/building_visit_catalog.gd","res://scripts/building_interior_space.gd","res://assets/authored/interiors/source_catalog.json","res://scripts/player/free_roam_player.gd","res://../tests/game/check_building_visits.gd"]:
+	for path in ["res://scripts/interior_visit.gd","res://scripts/elevator_cabin.gd","res://scripts/rooftop_space.gd","res://scripts/building_visit_catalog.gd","res://scripts/building_interior_space.gd","res://scripts/interior_detail_kit.gd","res://scripts/interior_surface.gdshader","res://assets/authored/interiors/source_catalog.json","res://scripts/player/free_roam_player.gd","res://../tests/game/check_building_visits.gd"]:
 		if FileAccess.file_exists(path):source_hashes[path] = FileAccess.get_sha256(path)
 	scene = load("res://scenes/world/explore_walk.tscn").instantiate()
 	scene.exploration_settings_path = report_path+".settings.json"

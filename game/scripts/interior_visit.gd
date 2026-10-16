@@ -43,6 +43,9 @@ var markers: Array[Dictionary] = []
 var elevator_panel: PanelContainer
 var elevator_title: Label
 var elevator_floors: GridContainer
+var elevator_scroll: ScrollContainer
+var elevator_content: VBoxContainer
+var elevator_close_button: Button
 var ride_panel: PanelContainer
 var ride_text: Label
 var elevator_open := false
@@ -54,6 +57,32 @@ var _ride_duration := 0.
 var _notice_until := 0
 var _recovery_floor := -1
 var wayfinding: Node3D
+var cabin: Node3D
+var rooftop: Node3D
+var on_roof := false
+var _roof_ready_tick := 0
+var _ride_phase := "idle"
+var _phase_elapsed := 0.0
+var _motion_elapsed := 0.0
+var _motion_duration := 0.0
+var _motion_start_floor := 0.0
+var _motion_distance := 0.0
+var _motion_acceleration := 0.0
+var _motion_accel_time := 0.0
+var _motion_cruise_time := 0.0
+var _motion_peak_speed := 0.0
+var _current_floor_value := 0.0
+var _ride_speed := 0.0
+var _door_fraction := 1.0
+var _ride_returning := false
+var _release_point := Vector3.ZERO
+var _blocked_retry_elapsed := 0.0
+var _ride_saved := {}
+const BOARDING_SECONDS := .45
+const CLOSING_SECONDS := .85
+const ARRIVING_SECONDS := .45
+const OPENING_SECONDS := .85
+const EXIT_HOLD_SECONDS := .30
 
 func setup(root_scene: Node3D) -> bool:
 	if loaded or not root_scene.runtime_ok:return false
@@ -71,6 +100,9 @@ func setup(root_scene: Node3D) -> bool:
 	catalog = preload("res://scripts/building_visit_catalog.gd").new().build(host)
 	if catalog.is_empty():return _fail("건물 출입 자료가 없습니다.")
 	_build_interface()
+	cabin=preload("res://scripts/elevator_cabin.gd").new()
+	add_child(cabin)
+	if not cabin.setup():return _fail("엘리베이터 객실을 준비하지 못했습니다.")
 	_build_markers()
 	if not select_building(LIBRARY_ID):return _fail("도서관 내부를 준비하지 못했습니다.")
 	wayfinding=preload("res://scripts/entrance_wayfinding.gd").new()
@@ -105,6 +137,16 @@ func _prepare_room() -> bool:
 	if not room.setup(current_spec,ROOM_ORIGIN):return false
 	room_bodies.assign(room.bodies)
 	room.visible = false;room.set_process(false)
+	if is_instance_valid(rooftop):
+		for body: StaticBody3D in rooftop.bodies:body.collision_layer=0
+		remove_child(rooftop);rooftop.queue_free()
+	var roof_script: Script=load("res://scripts/rooftop_space.gd")
+	if roof_script==null:return false
+	rooftop=roof_script.new();add_child(rooftop)
+	if not rooftop.setup(host,current_spec):return false
+	rooftop.visible=not active;rooftop.set_process(false)
+	on_roof=false
+	_roof_ready_tick=Engine.get_physics_frames()+3
 	prepared_id = current_spec.id
 	_room_ready_tick = Engine.get_physics_frames()+3
 	return true
@@ -131,18 +173,21 @@ func _build_interface() -> void:
 	indoor_panel = _panel("BuildingInteriorGuide",15);indoor_text = indoor_panel.get_child(0);indoor_panel.visible = false
 	elevator_panel = _panel("ElevatorFloorPicker",18)
 	elevator_panel.get_child(0).queue_free()
-	var content := VBoxContainer.new();elevator_panel.add_child(content)
-	elevator_title = Label.new();elevator_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;content.add_child(elevator_title)
-	var scroll := ScrollContainer.new();scroll.custom_minimum_size = Vector2(300,180);content.add_child(scroll)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	elevator_floors = GridContainer.new();elevator_floors.columns = 4;scroll.add_child(elevator_floors)
-	var close := Button.new();close.text = "닫기 · E";close.pressed.connect(_close_elevator);content.add_child(close)
+	elevator_content = VBoxContainer.new();elevator_content.name="ElevatorFloorContent";elevator_panel.add_child(elevator_content)
+	elevator_title = Label.new();elevator_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;elevator_content.add_child(elevator_title)
+	elevator_scroll = ScrollContainer.new();elevator_scroll.name="ElevatorFloorScroll";elevator_scroll.custom_minimum_size = Vector2(0,180);elevator_content.add_child(elevator_scroll)
+	elevator_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	elevator_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	elevator_scroll.clip_contents=true;elevator_scroll.follow_focus=true
+	elevator_scroll.size_flags_horizontal=Control.SIZE_EXPAND_FILL;elevator_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	elevator_floors = GridContainer.new();elevator_floors.name="ElevatorFloorGrid";elevator_floors.columns = 4;elevator_floors.size_flags_horizontal=Control.SIZE_EXPAND_FILL;elevator_scroll.add_child(elevator_floors)
+	elevator_close_button = Button.new();elevator_close_button.text = "닫기 · E";elevator_close_button.pressed.connect(_close_elevator);elevator_content.add_child(elevator_close_button)
 	elevator_panel.visible = false
-	ride_panel = _panel("ElevatorTravel",24);ride_text = ride_panel.get_child(0);ride_panel.visible = false
-	var black := StyleBoxFlat.new();black.bg_color = Color(.025,.035,.045,1.0)
-	black.content_margin_left = 32;black.content_margin_top = 32;black.content_margin_right = 32;black.content_margin_bottom = 32
+	ride_panel = _panel("ElevatorTravel",17);ride_text = ride_panel.get_child(0);ride_panel.visible = false
+	var black := StyleBoxFlat.new();black.bg_color = Color(.025,.045,.055,.86)
+	black.content_margin_left = 15;black.content_margin_top = 9;black.content_margin_right = 15;black.content_margin_bottom = 9
 	ride_panel.add_theme_stylebox_override("panel",black)
-	# The closed car covers the 3D view, while pause/source controls stay usable.
+	# Compact status leaves the actual 3D cabin in view, below pause/source UI.
 	host.get_node("Interface").move_child(ride_panel,0)
 
 func _build_markers() -> void:
@@ -178,12 +223,12 @@ func _entry_near() -> bool:
 	return absf(offset.dot(along))<=half_width and front>=.15 and front<=4.5 and absf(offset.y)<1.2
 
 func _exit_near() -> bool:
-	return active and room.floor_index_at(host.player.global_position)==0 and host.player.global_position.distance_to(room.exit_point())<=INTERACTION_RADIUS_M
+	return active and not on_roof and not in_elevator and room.floor_index_at(host.player.global_position)==0 and host.player.global_position.distance_to(room.exit_point())<=INTERACTION_RADIUS_M
 
 func _elevator_near() -> bool:
 	if not active or in_elevator:return false
-	var floor_index: int = room.floor_index_at(host.player.global_position)
-	return host.player.global_position.distance_to(room.elevator_point(floor_index))<=2.2
+	var floor_index: int = _current_destination()
+	return host.player.global_position.distance_to(_landing_point(floor_index))<=2.2
 
 func _entry_visible() -> bool:
 	var from: Vector3 = host.player.global_position+Vector3.UP
@@ -245,19 +290,23 @@ func _process(_delta: float) -> void:
 	if not active and not closest.is_empty() and not _entry_requested:
 		_set_entry(closest)
 		if nearest<10.*10.:_prepare_room()
-	indoor_panel.visible = active and not menu_open
+	indoor_panel.visible = active and not menu_open and not in_elevator and not elevator_open
 	indoor_panel.custom_minimum_size.x = minf(650.,maxf(1.,view.x-32.))
 	indoor_panel.size = Vector2(indoor_panel.custom_minimum_size.x,indoor_panel.get_combined_minimum_size().y)
 	indoor_panel.position = Vector2(16,16)
 	if active:
-		var index: int = room.floor_index_at(host.player.global_position)
-		room.set_active_floor(index)
-		if index!=_recovery_floor and not in_elevator and host.player.is_on_floor() and absf(host.player.global_position.y-(ROOM_ORIGIN.y+index*float(current_spec.floor_height)))<.2:
+		var index: int = _current_destination()
+		if not in_elevator and not on_roof:room.set_active_floor(index)
+		if index!=_recovery_floor and not in_elevator and not on_roof and host.player.is_on_floor() and absf(host.player.global_position.y-(ROOM_ORIGIN.y+index*float(current_spec.floor_height)))<.2:
 			var recovery_point: Vector3 = room.floor_spawn(index)
 			if _indoor_target_clear(recovery_point):
 				host.player.spawn_transform = Transform3D(Basis.IDENTITY,recovery_point)
 				_recovery_floor = index
-		indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
+		if on_roof:
+			indoor_text.text="%s · %s\n승강장 앞에서 E · 1층으로 내려가면 건물 밖으로 나갈 수 있습니다."%[current_spec.title,String(rooftop.profile_title)]
+			if host.player.is_swimming():indoor_text.text+="\n수영 중 · WASD / 방향키 이동 · Space 물 밖으로 점프"
+		else:
+			indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
 	prompt_text.text = "%s · %s · %d층"%[entry_action_text(),current_spec.get("title","건물"),int(current_spec.get("floor_count",1))] if not active else ("E · 엘리베이터 층 선택" if _elevator_near() else "E · 건물 밖으로 나가기")
 	if not _notice.is_empty():prompt_text.text = _notice
 	prompt.visible = not menu_open and not elevator_open and not in_elevator and ((active and (_exit_near() or _elevator_near())) or (not active and _entry_near() and _entry_visible()) or not _notice.is_empty())
@@ -265,11 +314,11 @@ func _process(_delta: float) -> void:
 	prompt.size = Vector2(prompt.custom_minimum_size.x,prompt.get_combined_minimum_size().y)
 	prompt.position = Vector2(maxf(16.,(view.x-prompt.size.x)*.5),view.y-148.)
 	elevator_panel.visible = elevator_open and not menu_open
-	elevator_panel.custom_minimum_size.x = minf(420.,maxf(1.,view.x-32.))
-	elevator_panel.size = Vector2(elevator_panel.custom_minimum_size.x,elevator_panel.get_combined_minimum_size().y)
-	elevator_panel.position = (view-elevator_panel.size)*.5
+	_layout_elevator_picker(view)
 	ride_panel.visible = in_elevator
-	ride_panel.position = Vector2.ZERO;ride_panel.size = view
+	ride_panel.custom_minimum_size.x=minf(430.,maxf(1.,view.x-32.))
+	ride_panel.size=Vector2(ride_panel.custom_minimum_size.x,ride_panel.get_combined_minimum_size().y)
+	ride_panel.position=Vector2(16.,16.)
 	if active:_hide_outdoor_labels()
 
 func _tell(message: String) -> void:
@@ -291,17 +340,48 @@ func _orient(yaw: float, pitch: float, distance: float) -> void:
 
 func _open_elevator() -> void:
 	if not _elevator_near() or not host.player.is_on_floor() or host.player.input_latched:return
-	selected_floor = room.floor_index_at(host.player.global_position)
+	selected_floor = _current_destination()
 	for child in elevator_floors.get_children():
 		elevator_floors.remove_child(child);child.queue_free()
-	for index in range(int(current_spec.floor_count)):
-		var button := Button.new();button.text = "%d층"%(index+1);button.custom_minimum_size = Vector2(72,38)
-		button.disabled = index==selected_floor
+	for index in range(destination_count()):
+		var button := Button.new();button.text = _landing_label(index);button.custom_minimum_size = Vector2(72,38)
+		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;button.focus_mode=Control.FOCUS_ALL
+		button.disabled = index==selected_floor or (index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick)
 		button.pressed.connect(request_floor.bind(index));elevator_floors.add_child(button)
-	elevator_title.text = "%s · 엘리베이터\n현재 %d층 · 목적층을 선택하세요"%[current_spec.title,selected_floor+1]
+	elevator_title.text = "%s · 엘리베이터\n현재 %s · 목적층을 선택하세요"%[current_spec.title,_landing_label(selected_floor)]
 	elevator_open = true;e_requires_release = true
 	host.input_router.gameplay_enabled = false;host.rig.set_capture(false)
 	host.player.require_neutral_input()
+	elevator_scroll.scroll_vertical=0
+	_layout_elevator_picker(host.get_viewport().get_visible_rect().size)
+	_focus_elevator_floor.call_deferred(mini(selected_floor+1,destination_count()-1) if selected_floor<destination_count()-1 else 0)
+
+func _layout_elevator_picker(view: Vector2) -> void:
+	var panel_width := minf(420.,maxf(1.,view.x-32.))
+	var padding: Vector2=elevator_panel.get_theme_stylebox("panel").get_minimum_size()
+	var grid_separation := float(elevator_floors.get_theme_constant("h_separation"))
+	# Reserve the vertical scrollbar's width even before it appears, avoiding
+	# a one-frame horizontal overflow when a 28-floor grid is first populated.
+	var bar_width := maxf(16.,elevator_scroll.get_v_scroll_bar().get_combined_minimum_size().x)
+	var grid_width := maxf(1.,panel_width-padding.x-bar_width)
+	elevator_floors.columns=clampi(int(floor((grid_width+grid_separation)/(72.+grid_separation))),1,4)
+	var fixed_height := padding.y+elevator_title.get_combined_minimum_size().y+elevator_close_button.get_combined_minimum_size().y+2.*float(elevator_content.get_theme_constant("separation"))
+	var available_height := maxf(1.,view.y-32.)
+	var list_height := maxf(1.,minf(320.,available_height-fixed_height))
+	elevator_scroll.custom_minimum_size=Vector2(0.,list_height)
+	elevator_panel.custom_minimum_size.x=panel_width
+	elevator_panel.size=Vector2(panel_width,fixed_height+list_height)
+	elevator_panel.position=Vector2(maxf(0.,(view.x-elevator_panel.size.x)*.5),maxf(0.,(view.y-elevator_panel.size.y)*.5))
+
+func _focus_elevator_floor(index: int) -> void:
+	if not elevator_open or host.menu.visible:return
+	if index<0 or index>=elevator_floors.get_child_count():return
+	var button := elevator_floors.get_child(index) as Button
+	if button==null or button.disabled:return
+	button.grab_focus()
+	# Container sorting is deferred; focus-follow handles keyboard navigation,
+	# and this deferred call also scrolls the initial focused row after layout.
+	elevator_scroll.ensure_control_visible.call_deferred(button)
 
 func _close_elevator(capture := true) -> void:
 	elevator_open = false;elevator_panel.visible = false;e_requires_release = true
@@ -312,20 +392,70 @@ func _close_elevator(capture := true) -> void:
 
 func request_floor(index: int) -> bool:
 	if not active or in_elevator or _menu_open() or not _elevator_near() or not host.player.is_on_floor():return false
-	var from_index: int = room.floor_index_at(host.player.global_position)
-	if index<0 or index>=int(current_spec.floor_count) or index==from_index:return false
-	var target: Vector3 = room.elevator_point(index)
-	if not _indoor_target_clear(target):_tell("목적층 승강장에 장애물이 있습니다.");return false
+	var from_index: int = _current_destination()
+	if index<0 or index>=destination_count() or index==from_index:return false
+	if index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick:_tell("옥상 승강장을 준비하고 있습니다.");return false
+	var target: Vector3 = _landing_point(index)
+	if not _landing_target_clear(index,target):_tell("목적층 승강장에 장애물이 있습니다.");return false
 	_ride_from = from_index;selected_floor = index;_ride_elapsed = 0.
-	_ride_duration = 1.5+minf(3.,absf(index-from_index)*.35)
+	_motion_start_floor=float(from_index);_current_floor_value=float(from_index)
+	_configure_motion()
+	_ride_duration=BOARDING_SECONDS+CLOSING_SECONDS+_motion_duration+ARRIVING_SECONDS+OPENING_SECONDS+EXIT_HOLD_SECONDS
+	_ride_returning=false;_release_point=target;_blocked_retry_elapsed=0.;_ride_speed=0.;_door_fraction=1.
 	_close_elevator(false)
 	in_elevator = true;e_requires_release = true
 	host.input_router.gameplay_enabled = false;host.rig.set_capture(false)
+	_ride_saved={"rig_process":host.rig.is_processing(),"rig_physics":host.rig.is_physics_processing(),"visual":host.player.get_node("Visual").visible,"player_physics":host.player.is_physics_processing(),"yaw":host.rig.yaw,"pitch":host.rig.pitch,"distance":host.rig.requested_distance}
+	host.rig.set_process(false);host.rig.set_physics_process(false)
+	room.visible=false;room.set_process(false)
+	if is_instance_valid(rooftop):rooftop.visible=false;rooftop.set_process(false)
 	host.player.velocity = Vector3.ZERO;host.player.set_physics_process(false)
+	host.player.clear_water_region()
+	host.player.global_position=cabin.passenger_point();host.player.reset_physics_interpolation()
+	host.player.get_node("Visual").visible=false
+	cabin.begin(from_index,index,destination_count())
+	_set_ride_phase("boarding")
+	_update_cabin()
 	return true
 
+func destination_count() -> int:
+	return int(current_spec.get("floor_count",0))+(1 if is_instance_valid(rooftop) else 0)
+
+func landing_point(index: int) -> Vector3:return _landing_point(index)
+
+func _current_destination() -> int:
+	if in_elevator:return clampi(int(round(_current_floor_value)),0,maxi(0,destination_count()-1))
+	if on_roof:return int(current_spec.floor_count)
+	return room.floor_index_at(host.player.global_position)
+
+func _landing_point(index: int) -> Vector3:
+	if index==int(current_spec.floor_count) and is_instance_valid(rooftop):return rooftop.lift_point()
+	return room.elevator_point(index)
+
+func _landing_label(index: int) -> String:
+	return "옥상" if index==int(current_spec.floor_count) else "%d층"%(index+1)
+
+func _landing_bounds(index: int) -> AABB:
+	return rooftop.world_bounds if index==int(current_spec.floor_count) and is_instance_valid(rooftop) else room.interior_bounds
+
+func _landing_frame(index: int) -> Transform3D:
+	return rooftop.frame if index==int(current_spec.floor_count) and is_instance_valid(rooftop) else Transform3D.IDENTITY
+
+func _landing_rect(index: int) -> Rect2:
+	return rooftop.walkable_rect if index==int(current_spec.floor_count) and is_instance_valid(rooftop) else Rect2()
+
+func _landing_target_clear(index: int,point: Vector3) -> bool:
+	if index<0 or index>=destination_count():return false
+	return _point_supported_clear(point,_landing_bounds(index),_landing_frame(index),_landing_rect(index))
+
 func _indoor_target_clear(point: Vector3) -> bool:
-	if not host.player.interior_bounds.has_point(point):return false
+	return _point_supported_clear(point,host.player.interior_bounds,_landing_frame(int(current_spec.floor_count)) if on_roof else Transform3D.IDENTITY,_landing_rect(int(current_spec.floor_count)) if on_roof else Rect2())
+
+func _point_supported_clear(point: Vector3,bounds: AABB,frame: Transform3D,rect: Rect2) -> bool:
+	if not point.is_finite() or not bounds.has_point(point):return false
+	if rect.has_area():
+		var local: Vector3=frame.affine_inverse()*point
+		if not rect.grow(-.4).has_point(Vector2(local.x,local.z)):return false
 	var space := host.get_world_3d().direct_space_state
 	var ray := PhysicsRayQueryParameters3D.create(point+Vector3.UP,point-Vector3.UP,host.player.collision_mask,[host.player.get_rid()])
 	var hit := space.intersect_ray(ray)
@@ -337,40 +467,136 @@ func _indoor_target_clear(point: Vector3) -> bool:
 	return space.intersect_shape(query,1).is_empty()
 
 func _step_elevator(delta: float) -> void:
-	# The closed-car transition owns the passenger pose. Intermediate floor
-	# slabs are hidden by the opaque car view; only safe landings regain input.
+	# A detached 3D car owns the view and a fixed safe passenger pose. Logical
+	# travel is distance-based; no passenger is swept through the source slabs.
 	host.input_router.gameplay_enabled = false
+	host.rig.set_capture(false)
 	_ride_elapsed += delta
-	var progress := clampf(_ride_elapsed/_ride_duration,0.,1.)
-	var floor_value := lerpf(float(_ride_from),float(selected_floor),smoothstep(0.,1.,progress))
-	var from: Vector3 = room.elevator_point(_ride_from)
-	var to: Vector3 = room.elevator_point(selected_floor)
-	host.player.global_position = from.lerp(to,smoothstep(0.,1.,progress))
-	ride_text.text = "엘리베이터\n\n%d층 %s %d층\n\n현재 %d층 · 이동 중"%[_ride_from+1,"↑" if selected_floor>_ride_from else "↓",selected_floor+1,int(round(floor_value))+1]
-	ride_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;ride_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	if progress<1.:return
-	if not _indoor_target_clear(to) or not host.player.relocate_interior(to):
-		if _cancel_ride():_tell("목적층이 막혀 있어 안전한 층으로 돌아왔습니다.")
-		else:ride_text.text = "엘리베이터 대기\n\n승강장에 장애물이 있습니다.\n안전한 도착 위치를 확인하고 있습니다."
+	_phase_elapsed += delta
+	match _ride_phase:
+		"boarding":
+			if _phase_elapsed>=BOARDING_SECONDS:_set_ride_phase("closing")
+		"closing":
+			_door_fraction=1.-smoothstep(0.,1.,clampf(_phase_elapsed/CLOSING_SECONDS,0.,1.))
+			if _phase_elapsed>=CLOSING_SECONDS:_door_fraction=0.;_motion_elapsed=0.;_set_ride_phase("accelerating")
+		"accelerating","cruising","decelerating":_step_motion(delta)
+		"arriving":
+			if _phase_elapsed>=ARRIVING_SECONDS:_prepare_release()
+		"opening":
+			_door_fraction=smoothstep(0.,1.,clampf(_phase_elapsed/OPENING_SECONDS,0.,1.))
+			if _phase_elapsed>=OPENING_SECONDS:_door_fraction=1.;_set_ride_phase("exit_hold")
+		"exit_hold":
+			if _phase_elapsed>=EXIT_HOLD_SECONDS:
+				if not _release_landing(_release_point,selected_floor):_door_fraction=0.;_set_ride_phase("blocked")
+		"blocked":
+			_door_fraction=0.;_ride_speed=0.;_blocked_retry_elapsed+=delta
+			if _blocked_retry_elapsed>=.30:_blocked_retry_elapsed=0.;_prepare_release()
+	if in_elevator:_update_cabin()
+
+func _set_ride_phase(phase: String) -> void:
+	_ride_phase=phase;_phase_elapsed=0.
+
+func _configure_motion() -> void:
+	_motion_distance=absf(float(selected_floor)-_motion_start_floor)*float(current_spec.floor_height)
+	var acceleration := 8.0
+	var maximum := 18.0
+	_motion_peak_speed=minf(maximum,sqrt(maxf(.0001,_motion_distance)*acceleration))
+	_motion_accel_time=_motion_peak_speed/acceleration
+	_motion_cruise_time=maxf(0.,(_motion_distance-_motion_peak_speed*_motion_peak_speed/acceleration)/_motion_peak_speed)
+	if _motion_accel_time*2.+_motion_cruise_time<2.8:
+		_motion_accel_time=1.4;_motion_cruise_time=0.;_motion_peak_speed=_motion_distance/_motion_accel_time
+	_motion_acceleration=_motion_peak_speed/_motion_accel_time
+	_motion_duration=_motion_accel_time*2.+_motion_cruise_time
+	_motion_elapsed=0.
+
+func _step_motion(delta: float) -> void:
+	_motion_elapsed=minf(_motion_duration,_motion_elapsed+delta)
+	var time := _motion_elapsed
+	var distance := 0.0
+	if time<_motion_accel_time:
+		_ride_phase="accelerating";_phase_elapsed=time
+		_ride_speed=_motion_acceleration*time;distance=.5*_motion_acceleration*time*time
+	elif time<_motion_accel_time+_motion_cruise_time:
+		_ride_phase="cruising";_phase_elapsed=time-_motion_accel_time
+		_ride_speed=_motion_peak_speed;distance=.5*_motion_peak_speed*_motion_accel_time+_motion_peak_speed*(time-_motion_accel_time)
+	else:
+		_ride_phase="decelerating";_phase_elapsed=time-_motion_accel_time-_motion_cruise_time
+		var remaining := _motion_duration-time
+		_ride_speed=_motion_acceleration*remaining;distance=_motion_distance-.5*_motion_acceleration*remaining*remaining
+	var progress := clampf(distance/maxf(.0001,_motion_distance),0.,1.)
+	_current_floor_value=lerpf(_motion_start_floor,float(selected_floor),progress)
+	if time>=_motion_duration:
+		_current_floor_value=float(selected_floor);_ride_speed=0.;_set_ride_phase("arriving")
+
+func _release_candidates() -> Array[Dictionary]:
+	var points: Array[Dictionary]=[{"index":_ride_from,"point":_landing_point(_ride_from)}]
+	if _ride_from<int(current_spec.floor_count):points.append({"index":_ride_from,"point":room.floor_spawn(_ride_from)})
+	for index in range(int(current_spec.floor_count)):points.append({"index":index,"point":room.floor_spawn(index)})
+	if is_instance_valid(rooftop):points.append({"index":int(current_spec.floor_count),"point":rooftop.spawn_point()})
+	return points
+
+func _prepare_release() -> void:
+	if _landing_target_clear(selected_floor,_release_point):
+		_set_ride_phase("opening")
 		return
-	in_elevator = false;ride_panel.visible = false
-	host.player.set_physics_process(true);host.input_router.gameplay_enabled = true
-	room.set_active_floor(selected_floor)
-	host.rig.set_capture(true);_orient(PI,deg_to_rad(-15.),3.6)
+	for candidate: Dictionary in _release_candidates():
+		if not _landing_target_clear(int(candidate.index),candidate.point):continue
+		_release_point=candidate.point
+		var next_floor := int(candidate.index)
+		_ride_returning=true
+		if absf(_current_floor_value-float(next_floor))>.001:
+			_motion_start_floor=_current_floor_value;selected_floor=next_floor;_configure_motion()
+			_ride_duration+=_motion_duration+ARRIVING_SECONDS+OPENING_SECONDS+EXIT_HOLD_SECONDS
+			_set_ride_phase("accelerating")
+		else:selected_floor=next_floor;_set_ride_phase("opening")
+		return
+	_set_ride_phase("blocked");_ride_speed=0.;_door_fraction=0.
+
+func _update_cabin() -> void:
+	var progress := clampf(_motion_elapsed/maxf(.001,_motion_duration),0.,1.)
+	var leg_from := int(round(_motion_start_floor))
+	cabin.update_state(_ride_phase,leg_from,selected_floor,_current_floor_value,progress,_ride_speed,_door_fraction,_ride_returning)
+	var phase_text: String={"boarding":"승차 중","closing":"문이 닫힙니다","accelerating":"출발합니다","cruising":"이동 중","decelerating":"도착합니다","arriving":"정차 중","opening":"문이 열립니다","exit_hold":"내리세요","blocked":"안전한 승강장을 확인하고 있습니다"}.get(_ride_phase,"엘리베이터")
+	ride_text.text="엘리베이터 · %s → %s\n%s%s"%[_landing_label(leg_from),_landing_label(selected_floor),phase_text," · 안전한 층으로 복귀" if _ride_returning else ""]
+
+func _release_landing(point: Vector3,index: int) -> bool:
+	if not _landing_target_clear(index,point):return false
+	if not host.player.relocate_interior_region(point,_landing_bounds(index),_landing_frame(index),_landing_rect(index)):return false
+	on_roof=index==int(current_spec.floor_count)
+	# Water follows the successfully committed destination region. The closed
+	# car never carries buoyancy state from the departure roof into another room.
+	host.player.clear_water_region()
+	if on_roof:
+		var water: Dictionary=rooftop.pool_water_region()
+		if not water.is_empty():host.player.set_water_region(water)
+	room.visible=not on_roof;room.set_process(not on_roof)
+	if is_instance_valid(rooftop):rooftop.visible=on_roof;rooftop.set_process(on_roof)
+	cabin.finish();in_elevator=false;ride_panel.visible=false;selected_floor=index;_current_floor_value=float(index);_ride_speed=0.;_ride_phase="idle"
+	host.rig.set_process(bool(_ride_saved.get("rig_process",true)));host.rig.set_physics_process(bool(_ride_saved.get("rig_physics",true)))
+	host.rig.camera.make_current()
+	host.player.get_node("Visual").visible=bool(_ride_saved.get("visual",true))
+	host.player.set_physics_process(bool(_ride_saved.get("player_physics",true)))
+	host.input_router.gameplay_enabled=not host.menu.visible
+	host.player.require_neutral_input();e_requires_release=true
+	if not on_roof:room.set_active_floor(index)
+	_recovery_floor=index
+	host.rig.set_capture(not host.menu.visible)
+	if on_roof:
+		var roof_frame: Transform3D=rooftop.frame
+		_orient(atan2(roof_frame.basis.z.x,roof_frame.basis.z.z),deg_to_rad(-15.),2.8)
+	else:_orient(float(_ride_saved.get("yaw",0.)),float(_ride_saved.get("pitch",deg_to_rad(-15.))),float(_ride_saved.get("distance",3.6)))
+	if _ride_returning:_tell("목적층이 막혀 안전한 층으로 돌아왔습니다.")
+	return true
 
 func _cancel_ride() -> bool:
 	if not in_elevator:return true
-	var candidates: Array[Vector3] = [room.elevator_point(_ride_from),room.floor_spawn(_ride_from)]
-	for index in range(int(current_spec.floor_count)):candidates.append(room.floor_spawn(index))
-	for point in candidates:
-		if not _indoor_target_clear(point) or not host.player.relocate_interior(point):continue
-		in_elevator = false;ride_panel.visible = false;selected_floor = room.floor_index_at(point)
-		host.player.set_physics_process(true);host.input_router.gameplay_enabled = not host.menu.visible
-		if not host.menu.visible:host.rig.set_capture(true)
-		_orient(host.rig.yaw,host.rig.pitch,host.rig.requested_distance)
-		return true
+	for candidate: Dictionary in _release_candidates():
+		if _release_landing(candidate.point,int(candidate.index)):return true
 	# Keep the passenger under the lift controller until a landing is safe.
 	return false
+
+func elevator_snapshot() -> Dictionary:
+	return {"phase":_ride_phase,"elapsed":_ride_elapsed,"phase_elapsed":_phase_elapsed,"duration":_ride_duration,"motion_elapsed":_motion_elapsed,"motion_duration":_motion_duration,"motion_start_floor":_motion_start_floor,"from_floor":_ride_from,"target_floor":selected_floor,"current_floor_value":_current_floor_value,"speed_mps":_ride_speed,"max_speed_mps":_motion_peak_speed,"acceleration_mps2":_motion_acceleration,"door_open_fraction":_door_fraction,"cabin_visible":cabin.visible if is_instance_valid(cabin) else false,"cabin_camera_current":cabin.camera.current if is_instance_valid(cabin) else false,"passenger_position":host.player.global_position,"cabin_bounds":cabin.cabin_bounds if is_instance_valid(cabin) else AABB(),"render_mode":"detached_3d_cabin","safe_release_pending":in_elevator,"returning_to_safe_floor":_ride_returning,"destination_count":destination_count(),"on_roof":on_roof}
 
 func enter_visit() -> bool:
 	if not loaded or active or _menu_open() or not _entry_near() or not _entry_visible() or not host.player.is_on_floor() or host.player.input_latched:
@@ -396,6 +622,9 @@ func enter_visit() -> bool:
 	_names_were_processing = host.building_names.is_physics_processing()
 	host.building_names.set_physics_process(false)
 	active = true;room.visible = true;room.set_process(true);entry_count += 1;_notice = "";e_requires_release = true
+	on_roof=false
+	host.player.clear_water_region()
+	if is_instance_valid(rooftop):rooftop.visible=false;rooftop.set_process(false)
 	selected_floor = 0;_recovery_floor = 0;room.set_active_floor(0)
 	_orient(0.,deg_to_rad(-15.),3.6)
 	_hide_outdoor_labels()
@@ -431,6 +660,9 @@ func _leave_at(requested: Vector3) -> bool:
 	if safe.is_empty() or not host.player.end_interior(safe.point):return false
 	if elevator_open:_close_elevator(false)
 	active = false;room.visible = false;room.set_process(false);exit_count += 1;_notice = "";e_requires_release = true
+	on_roof=false
+	host.player.clear_water_region()
+	if is_instance_valid(rooftop):rooftop.visible=true;rooftop.set_process(false)
 	host.starting_yaw = _outside_starting_yaw
 	_orient(_outside_view.yaw,_outside_view.pitch,_outside_view.distance)
 	host.hud_panel.visible = _hud_was_visible
@@ -469,12 +701,13 @@ func go_to_library_entrance() -> bool:
 	return true
 
 func status_text() -> String:
-	return "%s · %d층 · 속도 %.2fm/s%s"%[current_spec.title,room.floor_index_at(host.player.global_position)+1,Vector2(host.player.velocity.x,host.player.velocity.z).length()," · 이동키를 놓아주세요" if host.player.input_latched else ""]
+	if in_elevator:return "%s · 엘리베이터 · %s → %s"%[current_spec.title,_landing_label(_ride_from),_landing_label(selected_floor)]
+	return "%s · %s · 속도 %.2fm/s%s"%[current_spec.title,"옥상" if on_roof else "%d층"%(room.floor_index_at(host.player.global_position)+1),Vector2(host.player.velocity.x,host.player.velocity.z).length()," · 이동키를 놓아주세요" if host.player.input_latched else ""]
 
 func snapshot() -> Dictionary:
 	return {"loaded":loaded,"error":load_error,"active":active,"feature_id":current_spec.get("id",""),"entry_count":entry_count,"exit_count":exit_count,
 		"rejected_entries":rejected_entries,"rejected_exits":rejected_exits,"e_requires_release":e_requires_release,"room_static_bodies":room_bodies.size(),
 		"room_origin":[ROOM_ORIGIN.x,ROOM_ORIGIN.y,ROOM_ORIGIN.z],"entrance":[entrance_world_position.x,entrance_world_position.y,entrance_world_position.z],
 		"outside_return":[_outside_position.x,_outside_position.y,_outside_position.z],"authored_not_surveyed":true,"notice":_notice,
-		"catalog_count":catalog.size(),"floor_count":current_spec.get("floor_count",0),"current_floor":room.floor_index_at(host.player.global_position) if active else 0,"width":current_spec.get("width",0.),"depth":current_spec.get("depth",0.),
-		"in_elevator":in_elevator,"elevator_open":elevator_open,"selected_floor":selected_floor}
+		"catalog_count":catalog.size(),"floor_count":current_spec.get("floor_count",0),"current_floor":_current_destination() if active else 0,"width":current_spec.get("width",0.),"depth":current_spec.get("depth",0.),
+		"in_elevator":in_elevator,"elevator_open":elevator_open,"selected_floor":selected_floor,"elevator":elevator_snapshot(),"on_roof":on_roof,"rooftop":rooftop.snapshot() if is_instance_valid(rooftop) else {},"roof_ready_tick":_roof_ready_tick}

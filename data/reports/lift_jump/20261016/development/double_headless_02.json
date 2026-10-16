@@ -1,0 +1,799 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					-0.00000781076960265636,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "defaults.one_extra_air_jump_and_three_metre_impulse",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"apex_rise_m": 3.00082868593745,
+				"ascending_episodes": 1,
+				"boundary_stops": 0,
+				"ceiling_ticks": 0,
+				"end": [
+					0.0,
+					0.000543259084224701,
+					0.0
+				],
+				"ending_grounded": true,
+				"floor_ticks": 37,
+				"name": "held_single_jump",
+				"outside_ticks": 0,
+				"recoveries": 0,
+				"start": [
+					0.0,
+					-0.00000781076960265636,
+					0.0
+				],
+				"ticks": 130
+			},
+			"name": "ground.original_three_metre_apex_and_hold_safety",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2203106880188,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "double",
+				"remaining": 0
+			},
+			"name": "double.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"expected_gravity_step": 0.163333333333333,
+				"name": "double",
+				"remaining": 0,
+				"velocity_after": 7.09644889831543,
+				"velocity_before": 7.25978231430054
+			},
+			"name": "double.third_air_edge_cannot_add_impulse",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"apex_rise_m": 2.51056432723999,
+				"ascending_episodes": 1,
+				"boundary_stops": 0,
+				"ceiling_ticks": 0,
+				"end": [
+					0.0,
+					0.000627189874649048,
+					0.0
+				],
+				"ending_grounded": true,
+				"floor_ticks": 76,
+				"name": "third_held_to_landing",
+				"outside_ticks": 0,
+				"recoveries": 0,
+				"start": [
+					0.0,
+					2.70974063873291,
+					0.0
+				],
+				"ticks": 180
+			},
+			"name": "landing.restores_budget_without_held_auto_jump",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.3467652797699,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.22032451629639,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "repeated_after_landing",
+				"remaining": 0
+			},
+			"name": "repeated_after_landing.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2203106880188,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "menu_spent_setup",
+				"remaining": 0
+			},
+			"name": "menu_spent_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"remaining": 0
+			},
+			"name": "menu.spent.pause_preserves_pose_and_budget",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": -0.326666653156281,
+				"before": 0.0,
+				"remaining": 0
+			},
+			"name": "menu.spent.held_space_has_no_boost",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": -0.816666662693024,
+				"before": -0.653333306312561
+			},
+			"name": "menu.used_budget_is_not_recharged_by_release_or_menu",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					1.52334344387054,
+					0.0
+				],
+				"remaining": 1
+			},
+			"name": "menu.available.pause_preserves_pose_and_budget",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": -0.326666653156281,
+				"before": 0.0,
+				"remaining": 1
+			},
+			"name": "menu.available.held_space_has_no_boost",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": 7.58644914627075,
+				"before": -0.653333306312561
+			},
+			"name": "menu.available_air_jump_remains_usable_after_release",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					3.00051975250244,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					2.24123477935791,
+					2.89329075813293,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": -0.653333306312561
+			},
+			"name": "walkoff.one_air_jump_available_without_ground_takeoff",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": 7.58644914627075,
+				"before": -0.653333306312561
+			},
+			"name": "walkoff.fresh_air_edge_arrests_fall_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"expected_gravity_step": 0.163333333333333,
+				"name": "walkoff",
+				"remaining": 0,
+				"velocity_after": 7.09644889831543,
+				"velocity_before": 7.25978231430054
+			},
+			"name": "walkoff.third_air_edge_cannot_add_impulse",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"ceiling_contact": true,
+				"position": [
+					0.0,
+					0.599865615367889,
+					0.0
+				],
+				"remaining": 0
+			},
+			"name": "ceiling.air_attempt_consumes_budget_without_head_through_slab",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after": -0.326666653156281,
+				"before": -0.16333332657814
+			},
+			"name": "ceiling.contact_does_not_recharge_air_budget",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2203106880188,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "recovery_setup",
+				"remaining": 0
+			},
+			"name": "recovery_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "recovery.success_restores_one_air_jump_and_latches_held_space",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"apex_rise_m": 0.0,
+				"ascending_episodes": 0,
+				"boundary_stops": 0,
+				"ceiling_ticks": 0,
+				"end": [
+					0.0,
+					-0.00000781076960265636,
+					0.0
+				],
+				"ending_grounded": true,
+				"floor_ticks": 13,
+				"name": "recovery_held_space",
+				"outside_ticks": 0,
+				"recoveries": 0,
+				"start": [
+					0.0,
+					0.0799999982118607,
+					0.0
+				],
+				"ticks": 20
+			},
+			"name": "recovery.held_space_is_not_a_buffered_takeoff",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2203106880188,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "portal_setup",
+				"remaining": 0
+			},
+			"name": "portal_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "portal.valid_entry_restores_budget_and_requires_neutral",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34668302536011,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2202422618866,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "indoor_relocate_setup",
+				"remaining": 0
+			},
+			"name": "indoor_relocate_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "portal.rejected_transactions_preserve_spent_budget_and_pose",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "portal.valid_lift_landing_restores_budget_and_latches_input",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34668302536011,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2202422618866,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "indoor_exit_setup",
+				"remaining": 0
+			},
+			"name": "indoor_exit_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "portal.valid_exit_restores_budget_and_latches_input",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					0.0,
+					0.000519968569278717,
+					0.0
+				]
+			},
+			"name": "placement.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"after_position": [
+					0.0,
+					2.34675145149231,
+					0.0
+				],
+				"after_velocity_y": 7.58644914627075,
+				"before": {
+					"position": [
+						0.0,
+						2.2203106880188,
+						0.0
+					],
+					"remaining": 1,
+					"velocity_y": 3.99311399459839
+				},
+				"expected_replaced_velocity_y": 7.58644913840566,
+				"name": "turbo_air_control_setup",
+				"remaining": 0
+			},
+			"name": "turbo_air_control_setup.second_edge_replaces_vertical_speed_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"expected_m": 4.2,
+				"horizontal_distance_m": 4.19999933242798,
+				"position": [
+					2.96984815597534,
+					3.65170788764954,
+					-2.96984815597534
+				]
+			},
+			"name": "air_control.turbo_diagonal_keeps_normalised_horizontal_speed",
+			"passed": true
+		}
+	],
+	"engine": {
+		"display": "headless",
+		"physics_hz": 60,
+		"version": "4.7.2-stable (official)"
+	},
+	"input_trials": [
+		{
+			"after_position": [
+				0.0,
+				2.34675145149231,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2203106880188,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "double",
+			"remaining": 0
+		},
+		{
+			"expected_gravity_step": 0.163333333333333,
+			"name": "double",
+			"remaining": 0,
+			"velocity_after": 7.09644889831543,
+			"velocity_before": 7.25978231430054
+		},
+		{
+			"after_position": [
+				0.0,
+				2.3467652797699,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.22032451629639,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "repeated_after_landing",
+			"remaining": 0
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34675145149231,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2203106880188,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "menu_spent_setup",
+			"remaining": 0
+		},
+		{
+			"expected_gravity_step": 0.163333333333333,
+			"name": "walkoff",
+			"remaining": 0,
+			"velocity_after": 7.09644889831543,
+			"velocity_before": 7.25978231430054
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34675145149231,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2203106880188,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "recovery_setup",
+			"remaining": 0
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34675145149231,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2203106880188,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "portal_setup",
+			"remaining": 0
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34668302536011,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2202422618866,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "indoor_relocate_setup",
+			"remaining": 0
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34668302536011,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2202422618866,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "indoor_exit_setup",
+			"remaining": 0
+		},
+		{
+			"after_position": [
+				0.0,
+				2.34675145149231,
+				0.0
+			],
+			"after_velocity_y": 7.58644914627075,
+			"before": {
+				"position": [
+					0.0,
+					2.2203106880188,
+					0.0
+				],
+				"remaining": 1,
+				"velocity_y": 3.99311399459839
+			},
+			"expected_replaced_velocity_y": 7.58644913840566,
+			"name": "turbo_air_control_setup",
+			"remaining": 0
+		}
+	],
+	"result": "PASS",
+	"scope": "Actual production controller and Input.action_press/release in an isolated synthetic metre fixture. Scenario starts and one fall fault are explicit test-only teleports. No player velocity is assigned to fake an airborne boost. UI/user settings/native game remain untouched. Camera, full city routes, performance and rooftop transactions are separately tested.",
+	"source_sha256": {
+		"res://../tests/game/check_double_jump.gd": "694b8d6ebc8459ba4ab03bc34afcbdfcda98a57b88de7682290874a9f28e39e8",
+		"res://../tests/game/check_jump.gd": "b01895511ea6df524b31b726811bc900b7bc6e7a8b70743015cdcdfc725313cb",
+		"res://scripts/player/free_roam_player.gd": "15958f95e66a177fda0ba687630a08b5c9176ef5fc3f7025fb2307c1d2773014"
+	},
+	"summary": {
+		"checks": 39,
+		"failed": 0
+	},
+	"task": "DOUBLE_JUMP",
+	"trials": [
+		{
+			"apex_rise_m": 3.00082868593745,
+			"ascending_episodes": 1,
+			"boundary_stops": 0,
+			"ceiling_ticks": 0,
+			"end": [
+				0.0,
+				0.000543259084224701,
+				0.0
+			],
+			"ending_grounded": true,
+			"floor_ticks": 37,
+			"name": "held_single_jump",
+			"outside_ticks": 0,
+			"recoveries": 0,
+			"start": [
+				0.0,
+				-0.00000781076960265636,
+				0.0
+			],
+			"ticks": 130
+		},
+		{
+			"apex_rise_m": 2.51056432723999,
+			"ascending_episodes": 1,
+			"boundary_stops": 0,
+			"ceiling_ticks": 0,
+			"end": [
+				0.0,
+				0.000627189874649048,
+				0.0
+			],
+			"ending_grounded": true,
+			"floor_ticks": 76,
+			"name": "third_held_to_landing",
+			"outside_ticks": 0,
+			"recoveries": 0,
+			"start": [
+				0.0,
+				2.70974063873291,
+				0.0
+			],
+			"ticks": 180
+		},
+		{
+			"apex_rise_m": 0.0,
+			"ascending_episodes": 0,
+			"boundary_stops": 0,
+			"ceiling_ticks": 0,
+			"end": [
+				0.0,
+				-0.00000781076960265636,
+				0.0
+			],
+			"ending_grounded": true,
+			"floor_ticks": 13,
+			"name": "recovery_held_space",
+			"outside_ticks": 0,
+			"recoveries": 0,
+			"start": [
+				0.0,
+				0.0799999982118607,
+				0.0
+			],
+			"ticks": 20
+		}
+	]
+}

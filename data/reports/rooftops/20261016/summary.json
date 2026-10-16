@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "task": "EXP09_ROOFTOPS_AND_SWIMMING",
+  "recorded_at": "2026-10-16T15:25:10.201828+09:00",
+  "base_commit": "1b93d6e32dade66c4fa868cffb20a807c3c70ae6",
+  "result": "PASS",
+  "source_sha256": {
+    "game/scripts/explore_walk.gd": "301b282e1dd66fc2d86877ee22270564428c3ffd2490234a22b7a8e860b776d9",
+    "game/scripts/interior_visit.gd": "57890c86991a8b64b3c15b8d6dfdcd25c7f1839610f5f4d4e19fe22c0690e219",
+    "game/scripts/elevator_cabin.gd": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad",
+    "game/scripts/rooftop_space.gd": "e4d12a01ca7ffd0ec7b24dcb097fa13de0cd26e2d91364fa60c7dfa15e7e897d",
+    "game/scripts/water_effect.gd": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420",
+    "game/scripts/player/free_roam_player.gd": "a78bf7fc57780b39c9374ec21c3cacad4964638f261f6213d5e9f0684ef15cb0",
+    "game/scripts/interior_detail_kit.gd": "9cdfe47a6a5f69d8a056678f5e50bc2dc962470f44815face6d533a1ae0a08cc",
+    "game/scripts/building_interior_space.gd": "7df21c80b9af27dbbdb1464c4245c1f8008bbc8f4bc867ec304d952fa6291dc3",
+    "game/scripts/interior_surface.gdshader": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b",
+    "game/assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+    "tests/game/check_double_jump.gd": "694b8d6ebc8459ba4ab03bc34afcbdfcda98a57b88de7682290874a9f28e39e8",
+    "tests/game/check_jump.gd": "b01895511ea6df524b31b726811bc900b7bc6e7a8b70743015cdcdfc725313cb",
+    "tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+    "tests/game/check_interior_identity.gd": "4e5f4a32a3ebf66ea9293f6ec11e3d2bfd394aa97a535e2d21ffd07ab1473371",
+    "tests/game/check_lift_experience.gd": "b11441fb46e0d5d0d6ac8078d15f66751365eca888b0b83c063de4ec5e38c0f5",
+    "tests/game/check_rooftops.gd": "754c2ff00dcd628edfb2e3a7197107e1323c61c1274509ca43f8a7a7b0f980b6",
+    "tests/game/check_rooftop_swimming.gd": "ccdde78c7792536b4f6a006ce95ff3c44b82dddb3bcb7c59f861e66299d7a1b1",
+    "data/manual/rooftop_design.json": "7eec0b426cc14849210a918105b1eb5863f5a8ec26b075962ba3abb13ace76b4"
+  },
+  "native_launch": {
+    "launched_at": "2026-10-16T15:22:24.161408+09:00",
+    "pid": 94816,
+    "command": [
+      "sh",
+      "tools/run_exploration.sh",
+      "run"
+    ],
+    "log": "data/reports/lift_jump/20261016/launch.log",
+    "startup": "EXPLORATION_READY speed=turbo free_roam=true",
+    "native_observation": "CUA Raise and actual window/menu: turbo3x, walk8.40/run21.0mps, free_roam. No human E/swim journey claimed."
+  },
+  "limits": [
+    "All facilities are authored game settings, not surveyed roof layouts or factual hotel amenities.",
+    "One current roof is prepared on demand. All125 source placements differ from three representative complete E/lift visits; spawn/lift are the same125 unique points.",
+    "Passenger fixed in detached opaque car, logical floor progress, not moving-platform shaft physics.",
+    "Game buoyancy and mesh effects, without fluid simulation, diving, swimming-pose animation or audio.",
+    "Explicit scenario-start teleports are separate from real production movement/E/GUI keys/ramp/jump dynamics.",
+    "No whole-city human-input acceptance, all-room route coverage, long-run performance, new export or cross-Mac validation.",
+    "New EXP10 facility diversification is still in implementation and excluded from EXP08/09 completion."
+  ],
+  "verification": [
+    {
+      "report": "data/reports/rooftops/20261016/roof.json",
+      "log": "data/reports/rooftops/20261016/roof.log",
+      "display": "Metal/Forward+",
+      "checks": 55,
+      "failed": 0,
+      "result": "PASS",
+      "report_sha256": "27faa2ffc2169f8c4c0fd6301ff924cc5896074e16290077afdbf433b8500c5d",
+      "capture_count": 11
+    },
+    {
+      "report": "data/reports/rooftops/20261016/headless.json",
+      "log": "data/reports/rooftops/20261016/headless.log",
+      "display": "headless",
+      "checks": 44,
+      "failed": 0,
+      "result": "PASS",
+      "report_sha256": "eeb4fe69918d41398098acb31e937f8a7018d27eeb4686893ea34d19bca2ef86",
+      "capture_count": 11
+    },
+    {
+      "report": "data/reports/rooftops/20261016/swimming.json",
+      "log": "data/reports/rooftops/20261016/swimming.log",
+      "display": "Metal/Forward+",
+      "checks": 31,
+      "failed": 0,
+      "result": "PASS",
+      "report_sha256": "ff79e6291370d4cdb83626a55e2090e2089d07ff0139f1e40bf4aa60bf848c4b",
+      "capture_count": 4
+    },
+    {
+      "report": "data/reports/rooftops/20261016/swimming_headless.json",
+      "log": "data/reports/rooftops/20261016/swimming_headless.log",
+      "display": "headless",
+      "checks": 27,
+      "failed": 0,
+      "result": "PASS",
+      "report_sha256": "1f02f772f4179561e22e9932c2d4fa024b849d2bb1259c01dd8a0339ae7a61cc",
+      "capture_count": 0
+    }
+  ],
+  "profiles": {
+    "garden": 102,
+    "outdoor_pool": 7,
+    "penthouse": 16
+  },
+  "changes": [
+    "3D cabin/sliding doors/acceleration/arrival and blocked-landing safety",
+    "28-floor/roof selector focus scrolling and actual3D panel bounds/clear handrail sightline",
+    "One extra air jump with preserved neutral/menu budget",
+    "Source-world oriented roofs, enterable penthouse and raised pool",
+    "Actual walking pool steps, splash/ripples, buoyancy3mps and Space exit"
+  ]
+}

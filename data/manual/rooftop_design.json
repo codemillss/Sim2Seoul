@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task": "EXP09_ROOFTOPS",
+  "recorded_at": "2026-10-16",
+  "input_catalog": "game/assets/authored/interiors/source_catalog.json",
+  "input_catalog_sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+  "source_vs_authored": {
+    "source": "Retained source feature IDs, inscribed source rectangle, source height and actual same-feature source/rendered-landmark top observations. Original city coordinates, metre scale and collisions are preserved.",
+    "authored": "Deck inset 0.80m per side, maximum32x36m, height clearance0.28m, all facility choices, pool/penthouse/garden geometry, rails, furniture, signs and water behavior are game design. They are not surveyed roof layouts or factual venue amenities."
+  },
+  "profiles": {
+    "garden": {
+      "count": 102,
+      "features": [
+        "planters",
+        "trees",
+        "benches",
+        "pergola"
+      ]
+    },
+    "outdoor_pool": {
+      "count": 7,
+      "features": [
+        "raised pool basin",
+        "walkable access steps/ramp",
+        "sun loungers",
+        "parasol",
+        "game buoyancy",
+        "splash and ripple"
+      ]
+    },
+    "penthouse": {
+      "count": 16,
+      "features": [
+        "2.2m open doorway",
+        "glass lounge",
+        "sofa",
+        "table and book",
+        "terrace"
+      ]
+    }
+  },
+  "selection": "Deterministic title keywords and some highrise feature IDs; independent of EXP07 interior identity counts. This is not proof of a real hotel pool or real residential penthouse.",
+  "world_placement": "One on-demand roof for the current selected building at its actual source-world XZ. The deck is not below-world detached interior space. Original floor_count remains unchanged and the elevator adds a separate roof destination.",
+  "water_design": "The basin is raised above the retained deck and source roof. No source roof holes, disabled source collisions or real liquid simulation. Actual controls, depths and validation are recorded in the final technical contract and swimming report.",
+  "external_assets": "No new external model, photo pixels or licensed pool asset imported for EXP08/EXP09. The existing authored interior surface shader is reused."
+}

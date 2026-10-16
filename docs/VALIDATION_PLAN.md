@@ -1,6 +1,22 @@
 # 검증 계획과 완료 판정
 
-## 최신 실내 EXP07 — 용도·층별 기하와 한국어 디테일
+## EXP08·EXP09 — 승강기·추가 점프·옥상과 입수
+
+2026-10-16 동결본의 [승차/점프 요약](../data/reports/lift_jump/20261016/summary.json)·[옥상/수영 요약](../data/reports/rooftops/20261016/summary.json). 실행별 **GPU162·headless439개 판정** PASS이며 중복 회귀를 포함한 합계다.601개 서로 다른 기능이나 여정으로 세지 않는다.
+
+| 실행 | GPU / headless PASS | 실제 범위 |
+|---|---:|---|
+| 승강기 |76 /69|실제 문/카메라/승객·논리층 미분·메뉴·도착 차단/장거리,1152/640 선택창·키보드28층/옥상·3D29버튼/숫자/손잡이와7PNG|
+| 옥상 |55 /44|125개 source-XZ/회전basis/외곽·원본692보존,456개 캡슐/지지 관측,대표3곳E/lift왕복·별도4가장자리21m/s/추가점프/난간위체공·복귀/문왕복·입수와11PNG|
+| 수영 |31 /27|99접지표본계단→림→점프입수·실14이펙트메시/2파문·메뉴·부력깊이1m/안정구간변동약2mm·3m/s제한·Space탈출/기존deck착지·실내외해제와4PNG|
+| 더블점프·기존점프 |— /39·24|공중1회·세번째/홀드/메뉴재충전거절·낙하/천장/포탈/복귀·기존높이|
+| 기존방문·실내·속도·야외 |— /77·81·27·51|기존안전·계단·사람·입퇴장,125동/1,205층32,660캡슐/2,410지지ray,속도/외부벽/경계/설정|
+
+옥상456회는 스폰=승강장인 고유125곳을 두 번 검사한250회,풀 입구/림14회,펜트하우스16곳 열린문192회를 합친다.125개 전체 시설 여정이 아니다. 대표 장면의 초기 배치는 명시한 fixture이고 실제 이동/E/GUI키·점프는 production제어다. 객실은 분리된 고정승객의 논리운행, 풀은 게임 부력이다. 실제 시설 현황·유체·모든 카메라/가구 사이 이동·사람 조작감·장시간 성능·export·다른Mac 검수로 확대하지 않는다. 최종22PNG를 열어 확인했으며 초기 실패와 시각 수정은 [실행이력](EXECUTION_LOG.md)과 각 development에 보존한다. 모든 보고서의 소스해시를 현재와 대조했다. startup해시가 없는 기존jump/야외 형식은 최종동결뒤 재실행하고 summary의동결소스/로그에연결했다.
+
+저장소루트에서 `Godot --headless --fixed-fps 60 --path game --log-file /private/tmp/<name>.log --script ../tests/game/<script>.gd -- --automatic-probe --report=/private/tmp/<name>.json`으로 재현한다. script는 `check_lift_experience`, `check_rooftops`, `check_rooftop_swimming`, `check_double_jump`, `check_jump`, `check_building_visits`, `check_interior_identity`, `check_fast_exploration`, `check_exploration`이다. 실제GPU는`--headless`를빼고일반게임과동시에조작하지않는다. 사용자설정은격리한다. 아래EXP07은당시코드의이력이다.
+
+## 앞선 실내 EXP07 — 용도·층별 기하와 한국어 디테일
 
 2026-10-16 [최종 요약](../data/reports/interior_identity/20261016/summary.json)에 실행별 증거와 소스 SHA-256을 연결한다. 원본 평면 크기와 층수를 유지하면서 생긴 실내 가구 차이가 색상·문구만의 차이인지, 새 충돌 가구가 출입·계단·승강장·복귀와 중앙 통로를 막는지를 실제 엔진에서 검사한다. 아래 EXP06 이전 수치는 당시 결과로 유지한다.
 
