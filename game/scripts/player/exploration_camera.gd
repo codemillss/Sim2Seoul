@@ -43,6 +43,15 @@ func reset_orientation() -> void:
 	_reset_pending = true
 
 func _physics_process(delta: float) -> void:
+	_solve_pose(delta,true)
+
+func snap_to_target_pose() -> void:
+	# A menu can move the player while this pausable rig has no physics ticks.
+	# Resolve the same collision-safe pose now and collapse the render history.
+	_reset_pending=true
+	_solve_pose(0.0,false)
+
+func _solve_pose(delta: float, physics_step: bool) -> void:
 	if _query == null:return
 	var origin := global_position
 	var basis := global_basis.orthonormalized()
@@ -85,8 +94,9 @@ func _physics_process(delta: float) -> void:
 	camera.global_transform = next_pose
 	if current_distance < 1.5:target.get_node("Visual").visible = false
 	elif current_distance > 1.8:target.get_node("Visual").visible = true
-	observed_ticks += 1
-	camera_stepped.emit(delta)
+	if physics_step:
+		observed_ticks += 1
+		camera_stepped.emit(delta)
 
 func _process(_delta: float) -> void:
 	if not _pose_ready:return

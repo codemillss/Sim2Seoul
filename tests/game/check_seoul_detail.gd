@@ -1,7 +1,7 @@
 extends SceneTree
 ## Integrated latest-city physics/GPU probe; every camera/player placement is test-only.
 ## --report=/absolute/result.json --automatic-probe; PNGs use result_<view>.png.
-const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump","toggle_menu"]
+const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump","interact","toggle_menu"]
 const CITY_HALL := "osm:way:198561926:building"
 const LIBRARY := "osm:relation:10757525:building"
 var report_path := ""
@@ -98,7 +98,7 @@ func _physics_inventory() -> void:
 func _appearance_checks() -> void:
 	var identity=scene.seoul_identity
 	_check("appearance.loaded",identity.loaded and identity.load_error.is_empty(),{"error":identity.load_error})
-	_check("appearance.inventory",identity.wall_count==3 and identity.landmark_count==9 and identity.detail_mesh_count==6 and identity.ornament_count==267 and identity.material_count==16,{"walls":identity.wall_count,"landmarks":identity.landmark_count,"detail_meshes":identity.detail_mesh_count,"ornaments":identity.ornament_count,"materials":identity.material_count})
+	_check("appearance.inventory",identity.wall_count==3 and identity.landmark_count==9 and identity.detail_mesh_count==6 and identity.ornament_count==267 and identity.material_count==18,{"walls":identity.wall_count,"landmarks":identity.landmark_count,"detail_meshes":identity.detail_mesh_count,"ornaments":identity.ornament_count,"materials":identity.material_count})
 	var removed:=0
 	var retained:=0
 	var changed:=0

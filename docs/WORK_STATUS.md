@@ -1,6 +1,6 @@
 # 실제 작업 상태와 다음 행동
 
-갱신: 2026-10-16 · **M5 개발 탐험판 EXP02 구현·실제 GPU 100개 검사 통과** · 기존 첫 탐험 V0의 M1 로컬 앱 인수와 D01–R03 완료, R04의 M4 접근 불가 UNRUN 판정은 유지한다. 최신 기능의 전반적인 사람 조작감·장시간 성능·새 앱 export·M4 실행은 미검증.
+갱신: 2026-10-16 · **M5 개발 탐험판 EXP03 사진 참고 외형·서울도서관 로비 구현·실제 GPU 166개 검사 통과** · 기존 첫 탐험 V0의 M1 로컬 앱 인수와 D01–R03 완료, R04의 M4 접근 불가 UNRUN 판정은 유지한다. 최신 기능의 전반적인 사람 조작감·장시간 성능·새 앱 export·M4 실행은 미검증.
 
 이 파일이 진행 상태의 단일 기준이다. IMPLEMENTATION_TASKS의 완료 체크는 아래 증거와 연결하며, 이미 끝난 준비를 재사용한다. 결정 이유·확정/미정은 [PROJECT_CONTEXT](PROJECT_CONTEXT.md), 과거 시도와 변경은 [EXECUTION_LOG](EXECUTION_LOG.md)에 보존한다. 과거 보고서의 다음 작업은 작성 당시 기록이며 현재 재개 순서를 바꾸지 않는다.
 
@@ -218,6 +218,21 @@ R01을근거로기본1.0/그림자ON/200m와현재2명2대의33.3ms목표를채�
 
 R04는 원래 접근 불가 대안으로 M4를 UNRUN·실제 RAM/OS/성능null로 기록했다. 원 manifest와 같은 ZIP·앱의 경로만 재결합하는 도구는29fixture검사와 실제 final 앱/ZIP·113source 바인딩을 M1에서 확인했다. 다른 Mac 실행이 아니다. [첫 버전 인수 판정](../data/reports/first_version_acceptance.md)·[M4 재개 조건](../data/reports/performance_m4pro.json)·[두 Mac의 마지막 절](CROSS_MAC.md).
 
+## 최신 체험 개선 EXP03 — 실제 사진 참고 외형과 서울도서관 로비
+
+사용자는 실제 덕수궁·시청 주변 사진을 참고한 건물/돌담 개선과 건물 진입 검토를 요청했고, 첫 실내는 **“서울도서관 1층 로비부터”**로 선택했다. 기존 `5eac7d8` 위에서 공식 사진을 실제 화면으로 관찰하고 최신 `explore_walk`만 보강했다. [사진·생성 자산 기록](../data/manual/photo_realism_references.json)·[최종 실행 증거](../data/reports/photo_realism/20261016/summary.json).
+
+- 대한문은 격자창 위주의 앞면을 판문·철물·공포·밝은 현판과 둥근 기와/서까래 끝으로 보강했다. 돌담은 수평 사각 석재의 거친 AI 생성 albedo, 밝은 줄눈·약한 요철과 기와 끝을 사용한다. 원본 사진 픽셀은 게임에 넣지 않았다.
+- 서울도서관에는 창 200개와 창틀/창대·중앙 출입부/코니스, 신청사에는 곡면을 따르는 대각 골조 741개를 추가했다. 하늘·낮 조명·포장/잔디 재질을 조정하고 기본 품질은 SSAO/4x MSAA, 가벼운 품질은 둘을 끈다. 텍스처에는 mipmap을 사용한다.
+- 서울광장 쪽 도서관 정문 **2.5m 이내의 안내 위치에서 E**로 1층 로비에 들어간다. 안쪽 출입문 근처 E로 나가며 메뉴·키 유지·막힌 복귀·낙하를 처리한다. 로비는 공식 1층 안내의 공간 관계를 참고한 **16×12×4.8m 게임 공간**이다. 전체 평면·상층·계단/승강기·다른 건물 실내는 만들지 않았다.
+- 실제 M5 Metal 4.0/Forward+에서 외형/도시 **59/59**, 실내 **56/56**, 기존 탐험 회귀 **51/51**, 합계 **166개**를 통과했다. 실내 36각도 카메라 겹침 0, 메뉴 정지 중 실외 복귀 카메라 즉시 전환, 원래 외부 692개 body/shape/변환/마스크 동일성과 추가 실내 body47개를 구분했다. 별도 카메라 7상황/8,450 보간 표본도 겹침·반전·비유한값0을 확인했다.
+
+[대한문 근접](../data/reports/photo_realism/20261016/gate_close.png)·[돌담](../data/reports/photo_realism/20261016/stone_wall_close.png)·[시청과 도서관](../data/reports/photo_realism/20261016/city_hall_library.png)·[정문](../data/reports/photo_realism/20261016/library_entrance.png)·[로비](../data/reports/photo_realism/20261016/lobby.png)는 실제 GPU 화면이다. 사진/동작 검수의 초기 위치는 명시한 시험 배치이며 전체 동선을 연속 걸은 결과가 아니다.
+
+2026-10-16 **11:36:33 KST**에 일반 실행기로 다시 띄워 CUA에서 현재 Sim2Seoul(DEBUG) 창·개선된 외형/포장·읽히는 HUD와 E 안내를 확인했다. [일반 기동 로그](../data/reports/photo_realism/20261016/launch.log)에 오류 0과 사진 외형/로비 초기화를 남겼고 창을 열린 상태로 인계한다. 재실행은 기존 `Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`이다.
+
+외형은 사진의 특징을 참고한 자체 제작 표현이며 실측·사진 수준 복원은 아니다. 2012/2020 사진은 현재 현장 상태의 증거와 구분한다. 장시간 성능·새 앱 export·M4와 전체 동선의 직접 사람 검수는 이번에 수행하지 않았다. 다음에는 열린 게임에서 도서관 정문으로 이동해 E 입퇴장과 외형 인상을 확인할 수 있다. V0/EXP01/EXP02의 과거 증거와 M4 UNRUN은 보존한다.
+
 ## 최신 체험 개선 EXP02 — 덕수궁·시청 외형, 점프·이름·차량과 시야
 
 사용자가 실제 덕수궁·시청 주변 느낌, 돌담다운 외형, 높은 점프, 건물 식별과 주행 차량을 요청했다. 시야 이상은 “건물이나 지붕 일부가 사라지거나 잘려 보임”으로 확인했다. EXP01의 속도 선택·자유 탐험을 유지한 최신 `explore_walk` 장면에 다음을 적용했다. [최종 요약/소스 식별](../data/reports/seoul_detail/20261016/summary.json).
@@ -240,7 +255,7 @@ R04는 원래 접근 불가 대안으로 M4를 UNRUN·실제 RAM/OS/성능null�
 
 ## 다음 행동
 
-**이 Mac의 최신 일반 실행:** 2026-10-16 10:03:15 KST에 `sh tools/run_exploration.sh run`으로 EXP02를 띄웠다. 실제 Sim2Seoul(DEBUG) 창·새 HUD·대한문/돌담을 확인하고 OS Esc 메뉴 정지/재개와 Space 입력을 보냈으며 게임 창을 열린 상태로 인계했다. `BUILDING_NAMES_READY` 149개, `EXPLORATION_TRAFFIC_READY` 6대, `EXPLORATION_READY` brisk/free_roam=true와 M5 Metal 기동을 확인했고 로그 오류는 0이다. [일반 기동 기록](../data/reports/seoul_detail/20261016/summary.json)·[로그](../data/reports/seoul_detail/20261016/launch.log). 점프 높이는 앞선 GPU 물리 검사 수치로 확인했다. 다시 열 때는 `Sim2Seoul.command` 또는 같은 명령을 사용한다.
+**EXP02 당시 이 Mac의 일반 실행:** 2026-10-16 10:03:15 KST에 `sh tools/run_exploration.sh run`으로 EXP02를 띄웠다. 실제 Sim2Seoul(DEBUG) 창·새 HUD·대한문/돌담을 확인하고 OS Esc 메뉴 정지/재개와 Space 입력을 보냈으며 게임 창을 열린 상태로 인계했다. `BUILDING_NAMES_READY` 149개, `EXPLORATION_TRAFFIC_READY` 6대, `EXPLORATION_READY` brisk/free_roam=true와 M5 Metal 기동을 확인했고 로그 오류는 0이다. [일반 기동 기록](../data/reports/seoul_detail/20261016/summary.json)·[로그](../data/reports/seoul_detail/20261016/launch.log). 점프 높이는 앞선 GPU 물리 검사 수치로 확인했다. 다시 열 때는 `Sim2Seoul.command` 또는 같은 명령을 사용한다.
 
 **2026-10-16 새 Mac의 최초 V0 준비 이력:** 실제 기기는 Apple M5·RAM 16GB·macOS 26.6.2(25G83)다. `09e56d0`의 새 복제본에 공식 Godot 4.7.2(체크섬·서명·공증 확인)를 설치하고 CROSS_MAC의 V0 11단계 자료를 생성했다. 당시 `sh tools/run_v0.sh run`으로 실제 Metal 4.0/Forward+ GUI와 캐릭터·메뉴, `V0_READY quality=standard pedestrians=2 vehicles=2`, 오류 없는 기동과 OS Esc 메뉴 복귀를 확인해 창을 인계했다. [당시 기동 증거](../data/reports/m5_startup_20261016.json)·[로그](../data/reports/m5_startup_20261016.log). 이후 기본 실행은 EXP01/EXP02로 바뀌었다. 이 이력을 현재 일반 게임의 프로세스 상태나 R03 동일 ZIP·전체 보행·성능·전반적인 사람 조작감 검수로 확대하지 않는다.
 

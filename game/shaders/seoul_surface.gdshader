@@ -3,7 +3,7 @@ render_mode cull_back, diffuse_burley, specular_schlick_ggx;
 
 // A small shared procedural palette for authored landmarks. Details and
 // spacing are visual choices; source envelopes and heights are unchanged.
-uniform int surface_kind = 0; // 0 tile, 1 dancheong, 2 lattice, 3 ashlar, 4 brick, 5 glass
+uniform int surface_kind = 0; // 0 tile, 1 dancheong, 2 lattice, 3 ashlar, 4 brick, 5 glass, 6 painted timber, 7 plaster
 uniform vec4 tint : source_color = vec4(0.25, 0.28, 0.29, 1.0);
 uniform vec2 origin_xz = vec2(0.0);
 uniform vec2 u_axis = vec2(1.0, 0.0);
@@ -22,6 +22,9 @@ float line_pattern(float position, float pitch, float width) {
 	return 1.0 - smoothstep(width - aa, width + aa, distance_to_line);
 }
 
+float hash21(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float noise2(vec2 p) { vec2 i=floor(p); vec2 f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash21(i),hash21(i+vec2(1,0)),f.x),mix(hash21(i+vec2(0,1)),hash21(i+vec2(1,1)),f.x),f.y); }
+
 void fragment() {
 	vec3 normal = normalize(normal_world);
 	vec2 horizontal = position_world.xz - origin_xz;
@@ -34,12 +37,16 @@ void fragment() {
 	vec3 colour = tint.rgb;
 	float roughness = 0.86;
 	float metal = 0.0;
+	float relief = 0.0;
+	float grain = noise2(vec2(side*45.0,y*55.0));
 	if (surface_kind == 0) {
 		// Runoff tiles read as alternating concave/convex grey strips.
 		float ribs = cos(u * 26.0);
 		float seams = line_pattern(v + y * 0.35, 0.48, 0.018);
 		colour *= (0.86 + ribs * 0.15 * detail) * (1.0 - seams * 0.22 * detail);
-		roughness = 0.77;
+		colour *= 0.96 + noise2(vec2(u*7.0,v*11.0))*0.08;
+		relief = (ribs*0.008-seams*0.003)*detail;
+		roughness = 0.79;
 	} else if (surface_kind == 1) {
 		float red_band = line_pattern(y, 0.30, 0.045);
 		float ochre_band = line_pattern(y + 0.10, 0.30, 0.018);
@@ -69,11 +76,22 @@ void fragment() {
 		colour *= mix(0.87, 1.10, panes);
 		float frame = max(line_pattern(u, 1.38, 0.028), line_pattern(y, 2.4, 0.024));
 		colour = mix(colour, vec3(0.60, 0.66, 0.67), frame * detail * 0.85);
-		roughness = 0.30;
-		metal = 0.20;
-	}
+		roughness = 0.20;
+		metal = 0.32;
+	} else if (surface_kind == 6) {
+  float timber=noise2(vec2(side*18.0,y*0.75));
+  colour *= 0.84+timber*0.22;
+  relief=(noise2(vec2(side*90.0,y*3.0))-0.5)*0.0015*detail;
+  roughness=0.80;
+ } else if (surface_kind == 7) {
+  colour*=0.95+noise2(vec2(side*3.0,y*4.0))*0.08;
+ }
+ colour*=1.0+(grain-0.5)*0.045*detail*float(surface_kind!=5);
 	ALBEDO = colour;
 	ROUGHNESS = roughness;
 	METALLIC = metal;
+ vec3 dx=dFdx(VERTEX);vec3 dy=dFdy(VERTEX);
+ vec3 r1=cross(dy,NORMAL);vec3 r2=cross(NORMAL,dx);float det=dot(dx,r1);
+ NORMAL=normalize(max(abs(det),0.00001)*NORMAL-sign(det)*(dFdx(relief)*r1+dFdy(relief)*r2));
 	SPECULAR = surface_kind == 5 ? 0.58 : 0.28;
 }

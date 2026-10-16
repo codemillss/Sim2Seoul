@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "task": "EXP03_PHOTO_REALISM_LOBBY",
+  "local_date": "2026-10-16",
+  "branch": "codex/photo-realism-lobby",
+  "base_commit": "5eac7d8",
+  "user_scope": "Actual photographs inform more realistic exterior buildings and walls; user selected Seoul Library first-floor lobby as first interior.",
+  "environment": {
+    "hardware": "Apple M5",
+    "ram_bytes": 17179869184,
+    "macos": "26.6.2 (25G83)",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "graphics": "Metal 4.0 / Forward+ / Apple M5 (Apple9)"
+  },
+  "reference_manifest": "data/manual/photo_realism_references.json",
+  "features": {
+    "civic_windows": 200,
+    "city_hall_diagrid_segments": 741,
+    "civic_triangles": 33024,
+    "palace_ornaments": 1501,
+    "palace_triangles": 19960,
+    "palace_hidden_gate_windows": 14,
+    "wall_tile_ends": 8932,
+    "identity_materials": 18,
+    "ground_surfaces": 547,
+    "new_lobby_static_bodies": 47,
+    "original_city_bodies_and_fragments_compared": 692,
+    "lobby_dimensions_authored_m": [
+      16,
+      4.8,
+      12
+    ],
+    "entry_radius_m": 2.5,
+    "interact_key": "E",
+    "original_named_buildings": 149,
+    "vehicles": 6,
+    "production_jump_target_m": 3,
+    "camera_far_m": 1400,
+    "standard_msaa": "4x",
+    "standard_ssao": true,
+    "low_msaa_ssao": false
+  },
+  "validation": {
+    "gpu_total_checks": 166,
+    "photo": {
+      "passed": true,
+      "checks": 59,
+      "report": "photo.json",
+      "log": "photo.log"
+    },
+    "interior": {
+      "passed": true,
+      "checks": 56,
+      "report": "interior.json",
+      "log": "interior.log",
+      "scope": "Scenario placements are test-only. Indoor dimensions and decoration are authored assumptions, not surveyed reconstruction. The jump-ceiling scenario temporarily raises the requested jump from 3m to 4m only in this probe. Missing-floor, occluding-wall and blocked-return cases are explicit fault fixtures."
+    },
+    "regression": {
+      "passed": true,
+      "checks": 51,
+      "report": "regression.json",
+      "log": "regression.log"
+    },
+    "camera_synthetic": {
+      "passed": true,
+      "cases": 7,
+      "samples": 8450,
+      "overlaps": 0,
+      "report": "camera.json",
+      "log": "camera.log"
+    },
+    "interior_headless_development": "52/52 passed before final sign-facing and paused-camera/capture-fixture repairs; final GPU interior report validates the final runtime behavior.",
+    "interior_report_source_equivalence": {
+      "res://../tests/game/check_interior_visit.gd": "exact SHA256 match",
+      "res://resources/world_geometry/world.json": "exact SHA256 match",
+      "res://scripts/explore_walk.gd": "Only one trailing blank line removed after this report; final photo04 and normal launch use normalized file.",
+      "res://scripts/interior_visit.gd": "exact SHA256 match",
+      "res://scripts/player/free_roam_player.gd": "exact SHA256 match"
+    },
+    "post_interior_changes": "After interior02, two display-only helpers moved the nameboard and window reveals; photo04 rechecked59 and refreshed exterior captures. One trailing blank line was removed from explore_walk.gd. Interior logic, test source, player and camera remain the GPU-tested versions."
+  },
+  "visual_review": {
+    "gate_close.png": "Rounded tile ends and complete 大漢門 label visible after moving name board ahead of backing.",
+    "stone_wall_close.png": "Horizontal courses, rough individual stone surfaces and pale joints; mipmaps reduce grain aliasing.",
+    "library_entrance.png": "Window glazing and mullions visible after placing reveal behind glass; entrance/stone frames visible.",
+    "city_hall_library.png": "Civic volume and old/new contrast, diagonal lattice and dense window bays.",
+    "lobby.png": "Small first-floor lobby/reading area, seating, shelving and public-entry guidance.",
+    "scope": "Viewports include explicit test-only placements; production scale and original exterior collision resources retained. Not continuous natural human traversal.",
+    "interior_entry.png": "E prompt and returned player position verified in the final interior physics run, before the later visual-only window-reveal depth correction. Current door glazing is shown in library_entrance.png from photo04.",
+    "interior_exit.png": "Same exterior return/E prompt from interior02; glazing appearance precedes final photo04 cosmetic depth correction. Runtime portal/player/camera logic is unchanged."
+  },
+  "repairs": {
+    "compile": "Initial bad Environment enum and inferred Variant types fixed; original initial log retained.",
+    "material_aliasing": "Enabled actual texture mipmap generation, retained anisotropic filtering and reduced derivative bump from 0.012 to 0.0015m multiplier.",
+    "occluded_relief": "Moved nameboard in front of backing, reveal behind glazing; final photo04 rerun59PASS.",
+    "paused_camera": "Added collision-safe snap_to_target_pose using same solver without fake physics step; paused menu return test verifies actual top-level camera and render history outdoors immediately.",
+    "gpu_capture_timeout": "First interior GPU probe stalled awaiting conditional frame_post_draw after native resize/menu changes. Physical checks passed to exit; test capture now forces draw; final 56PASS.",
+    "sign": "Information desk label faces entering visitors."
+  },
+  "preserved": [
+    "Original map/raw/manual geometry and metre coordinate/height contracts",
+    "Original V0 scripts/scenes and launcher",
+    "Original exterior bodies, shapes, transforms and masks; new room bodies listed separately",
+    "EXP01/EXP02 historical evidence and M4 UNRUN status"
+  ],
+  "limits": [
+    "Exterior remains an authored game reconstruction, not a photogrammetric or surveyed photo-identical model.",
+    "Reference photographs are from2020 and2012, not a claim of current site appearance; no reference-photo pixels imported.",
+    "Albedo is original AI-generated image, not a scanned material.",
+    "Lobby is a compact source-informed prototype. No upper floors, lifts/stairs travel or all-building interiors.",
+    "No long-run performance/export/M4 acceptance or continuous full-route human walkthrough in this change."
+  ],
+  "source_sha256": {
+    "data/manual/photo_realism_references.json": "a275a6cfcd22c4eddd2344d717471a6651dc105ef3ddf09c8195e7193a0f16c3",
+    "game/assets/textures/seoul/palace_granite_albedo.png": "57784a5b3843a63e0e822b3e10cf63707e39b49d1c1e604fb56b8f67545c025d",
+    "game/assets/textures/seoul/palace_granite_albedo.png.import": "1b587b0dcef239a7ca332c0275d0413ceaa7d2a2c79555dd5697916924c7fe0b",
+    "game/scripts/explore_walk.gd": "5562fe8457e72445cc56613a93e70b9d6dda8f2dbe39a7b9840748020571965c",
+    "game/scripts/interior_visit.gd": "e29bb3d0093e3ed0a7608bb097ea4dcfcfe76dbc14863a7f6f6fa4167321ac16",
+    "game/scripts/photo_atmosphere.gd": "b58b664e4f2fe288f18dc40568e5ec0327b9e7db649c4b9454db845c71602874",
+    "game/scripts/photo_civic_detail.gd": "d40b345831b743e537f20cc0077fc0eacd6f25b419bf7a3b04eb76da45512a3b",
+    "game/scripts/photo_palace_detail.gd": "60807a6c3e5cc445a8a34fb6dc3c60bb0bc5457a1abac7ca752f8c6e5d0357bc",
+    "game/scripts/photo_wall_detail.gd": "d768f0aeefab5cf95350e1389d77a874cc23ccd7c1618f6fc1c9790b3976f925",
+    "game/scripts/player/exploration_camera.gd": "bc5fae9218c6fe70045b4f1bd432309cbc866a934b68b87ac587bc9d3a112880",
+    "game/scripts/player/free_roam_player.gd": "79a820be1b5068aa0a693a501b40bd62f39135da7ba3789d28b676117eb94feb",
+    "game/scripts/seoul_identity.gd": "a1aa7c3009a89002cc3054db9e189b1ef32a31693199ef4a45655336d15906fd",
+    "game/shaders/seoul_surface.gdshader": "c9e171ad0964e7a2df133abda80504765cd71df23cf0ff37431447efabafd553",
+    "game/shaders/stone_wall.gdshader": "51b38e5d667edf7667e88656e12f7b63a6ac93d5a4b362204f3d370daaa04d02",
+    "game/shaders/street_surface.gdshader": "d035296de1ae622d05cae97db8532d21c6155ea07ff53f68dae2413e3bb041c0",
+    "tests/game/check_exploration.gd": "23202ef79504b792539cc6e9f2485750ee9268177a4dd5d91700d2787bc76ddf",
+    "tests/game/check_interior_visit.gd": "f6087e7920c17f1c9d97f0e31ff2e5fd8c5aeb7caa9bf26ba5a14bc7f7121b50",
+    "tests/game/check_photo_realism.gd": "b968a50e220c5d128240ae82a86a342769a83a11a46583e63f234368b31078d5",
+    "tests/game/check_seoul_detail.gd": "c3125d5ea9569cef7501ad7f3aec35fdd577fb3c5832d5fa1d464c7172635128"
+  },
+  "evidence_sha256": {
+    "camera.json": "e506eda1e7b5e7231c3511a8918c260ed160d0bd1de7f0b8275e71188822ac4f",
+    "camera.log": "12c06748f8ba801d4a672521b6fbd574e9f218a0f5e20542c8f675a4d2352f5f",
+    "city_hall_library.png": "17b54bea7f66be2c74b5170cdf616a7b9eafae79e806e9c6eb036799409f0652",
+    "development/glazing_occluded_before_depth_fix.png": "041cb50ba6355e530507f56c2c268fc5d654cb8ce5a5d520e2a0033700e6bc6b",
+    "development/gpu-batch-before-final-visual-fix.json": "f66fc8a24d2f5c8ac8110c329b471b3f627b491fd57f29b959109a32522f46a6",
+    "development/initial_compile_errors.log": "f119ed52fc675aa9a0d43f079115d6db37cc198e563e2d463461ac15bfc16049",
+    "development/interior01_timeout.json": "535de9f9e1351b09972fc9731bc828bff47694e88d380e72a4dc72ab0b4eb0ab",
+    "development/interior01_timeout.log": "cb1fbf68cbc34e814fdb453b38d4e8b31913bd82251a732e93e02e56e8d6b55c",
+    "development/nameboard_occluded_before_depth_fix.png": "37190173ab0f0abed5e00496418e54ab0509350b37758653853609bace57914e",
+    "development/stone_before_mipmaps.png": "ff1eb4f0ebadffb9a1e96a08aa3399e86433d2c6a683130c4649fa34e86a4d4d",
+    "gate_close.png": "0798a7817e6a3a87d106dd18c13cdb6b75487503aab03b4bdde5d9069ec63514",
+    "gate_front.png": "9c90f86bc9c43186ce4d943f08c731986cb3475a4297fd94ef75b99f22a732fb",
+    "gate_roof_underside.png": "96800dba0d36b0f312bf5054bbeb9a35ce249d2e693e19f38f0a6778985fe32e",
+    "gpu-runs.json": "459530d6c65851fd696d996c0d79fc693a72331ea21fd20409024d6276b1d434",
+    "interior.json": "bad7eed4ba73d734c03f43390c7808ce61ba67f9f98e6c2e6cc493c6d17d64c0",
+    "interior.log": "48c9e66222c8f1f344ebf8c5a15a293500e10b890e7fcb7c8b6ccbd754bd6be8",
+    "interior_entry.png": "c0a5583bc863ad36334095c149757bedf424c14c3a0768ab4dadfc7a1c6cb276",
+    "interior_exit.png": "c0a5583bc863ad36334095c149757bedf424c14c3a0768ab4dadfc7a1c6cb276",
+    "interior_headless.json": "ccb1ee2db5131b57093cbcc8549d62ff77dc506f48fa4a3b92bafc56825a3d98",
+    "interior_headless.log": "07724d058f49dea46a3b275b581e0bf2d3e3948e43838db110e1f878d0b3bff1",
+    "launch.log": "4d75520d824157a27f40d4c30c76af90e84452ec662ff2623e17df10a03b21b9",
+    "library_entrance.png": "fe93543b9fda3a34f737522b2d5881ac3b51608db0ee3871366b27ee0e202b5a",
+    "lobby.png": "ec4e90408999e63ed885b92d8c160d96d323513327ffe3fef5000d9b16b358a4",
+    "photo.json": "860964a9bb333d1ae8a26b54882327dff076c239007daed66992045e77fd64c7",
+    "photo.log": "27f82e552bd5f90ba28464cb3a205f4bfd2af46fe7c7d136df1a598a151c28e7",
+    "regression.json": "7cb0ce930fd5ae0042f74fd35cd488f9e3f2fa064039479ba56f7e4d8f3a1079",
+    "regression.log": "aca4d571b8c5e66393e6f62cc722b64d60f22f4297dc78c1a5a3d04e7462f25a",
+    "stone_wall_close.png": "f2ff5811504c64fd64180bded8d803785879ca1fbc2d7602bfb6b58c9bc116a4"
+  },
+  "normal_launch": {
+    "pid": 63558,
+    "launched_at_utc": "2026-10-16T02:36:33.300219+00:00",
+    "scene": "res://scenes/world/explore_walk.tscn",
+    "launcher": "sh tools/run_exploration.sh run",
+    "log": "launch.log",
+    "status": "native_window_verified_open",
+    "observed": "CUA observed current Sim2Seoul DEBUG native window with new paving, stone, roof/tile details, character, E hint and readable full HUD.",
+    "startup_errors": 0
+  }
+}

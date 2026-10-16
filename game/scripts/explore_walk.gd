@@ -23,6 +23,11 @@ var menu_layout_pending := false
 var seoul_identity: Node3D
 var building_names: Node
 var exploration_traffic: Node
+var photo_civic_detail: Node3D
+var photo_palace_detail: Node3D
+var photo_wall_detail: Node3D
+var photo_atmosphere: Node3D
+var interior_visit: Node3D
 
 func _ready() -> void:
 	# Runtime binding belongs to this scene; historical project input stays fixed.
@@ -53,6 +58,22 @@ func _ready() -> void:
 	if not seoul_identity.setup(city,self):
 		_exploration_failure("덕수궁과 시청 외형을 준비하지 못했습니다.")
 		return
+	photo_civic_detail=preload("res://scripts/photo_civic_detail.gd").new()
+	photo_civic_detail.name="PhotoCivicDetail";add_child(photo_civic_detail)
+	if not photo_civic_detail.setup(self):
+		_exploration_failure("시청과 서울도서관의 사진 참고 외형을 준비하지 못했습니다.");return
+	photo_palace_detail=preload("res://scripts/photo_palace_detail.gd").new()
+	photo_palace_detail.name="PhotoPalaceDetail";add_child(photo_palace_detail)
+	if not photo_palace_detail.setup(self):
+		_exploration_failure("덕수궁의 사진 참고 외형을 준비하지 못했습니다.");return
+	photo_wall_detail=preload("res://scripts/photo_wall_detail.gd").new()
+	photo_wall_detail.name="PhotoWallDetail";add_child(photo_wall_detail)
+	if not photo_wall_detail.setup(self):
+		_exploration_failure("돌담 기와 표현을 준비하지 못했습니다.");return
+	photo_atmosphere=preload("res://scripts/photo_atmosphere.gd").new()
+	photo_atmosphere.name="PhotoAtmosphere";add_child(photo_atmosphere)
+	if not photo_atmosphere.setup(self):
+		_exploration_failure("야외 조명과 바닥 재질을 준비하지 못했습니다.");return
 	building_names=preload("res://scripts/building_names.gd").new()
 	building_names.name="BuildingNames";add_child(building_names)
 	if not building_names.setup(self):
@@ -63,13 +84,22 @@ func _ready() -> void:
 	if not exploration_traffic.setup(self):
 		_exploration_failure("도로 위 차량을 준비하지 못했습니다.")
 		return
+	interior_visit=preload("res://scripts/interior_visit.gd").new()
+	interior_visit.name="InteriorVisit"
+	interior_visit.entrance_world_position=photo_civic_detail.entrance_world_position
+	interior_visit.entrance_world_position.y=0.08
+	interior_visit.entrance_outward_direction=photo_civic_detail.entrance_outward_direction
+	interior_visit.door_world_position=photo_civic_detail.door_world_position
+	add_child(interior_visit)
+	if not interior_visit.setup(self):
+		_exploration_failure("서울도서관 로비를 준비하지 못했습니다.");return
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled)
 
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · Esc 메뉴 / 속도 조절"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD / 방향키 이동 · Shift 달리기 · Space 높은 점프\n마우스 회전 · 휠 거리 조절 · E 도서관 진입 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():
@@ -147,6 +177,7 @@ func _exploration_failure(message: String) -> void:
 func apply_quality(id: String) -> bool:
 	if not super.apply_quality(id):return false
 	if rig.has_method("apply_exploration_view_distance"):rig.apply_exploration_view_distance()
+	if is_instance_valid(photo_atmosphere):photo_atmosphere.apply_quality(id)
 	return true
 
 func _read_exploration_settings() -> Dictionary:
@@ -173,7 +204,7 @@ func set_free_roam(enabled: bool) -> void:
 	var previous:=free_roam_enabled
 	player.free_roam_enabled=enabled
 	exploration_overlay.set_enabled(enabled)
-	if not enabled and not city.movement_contains(Vector2(player.global_position.x,player.global_position.z)):
+	if not enabled and (interior_visit==null or not interior_visit.active) and not city.movement_contains(Vector2(player.global_position.x,player.global_position.z)):
 		if not player.recover("free_roam_disabled"):
 			player.free_roam_enabled=previous
 			exploration_overlay.set_enabled(previous)
@@ -188,7 +219,7 @@ func set_free_roam(enabled: bool) -> void:
 func _update_exploration_description() -> void:
 	if not is_instance_valid(exploration_description):return
 	var profile: Dictionary=SPEED_PROFILES[speed_id]
-	exploration_description.text="걷기 %.2f · 달리기 %.1f m/s\n%s"%[profile.walk,profile.run,"잔디·도로를 자유롭게 탐험합니다. 건물과 담장은 막혀 있습니다." if free_roam_enabled else "기존 산책길 안에서 이동합니다."]
+	exploration_description.text="걷기 %.2f · 달리기 %.1f m/s\n%s"%[profile.walk,profile.run,"잔디·도로를 자유롭게 탐험합니다. 서울도서관 입구에서는 E로 들어갑니다." if free_roam_enabled else "기존 산책길 안에서 이동합니다."]
 	_layout_v0.call_deferred()
 
 func _speed_selected(index: int) -> void:
@@ -217,10 +248,19 @@ func exploration_snapshot() -> Dictionary:
 func _select_source_document(index: int) -> void:
 	super._select_source_document(index)
 	if index==0:
-		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","건물 내부와 계단은 탐험 범위에서 제외합니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
-		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 건물의 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 건물 내부와 계단은 구현하지 않았습니다."
+		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","서울도서관 1층 로비를 간략 재현했습니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
+		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 건물의 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 서울도서관 입구에서 E를 누르면 사진·안내도를 참고해 만든 로비 체험 공간으로 들어갑니다. 다른 건물의 실내와 상층·계단은 구현하지 않았습니다. 석재 텍스처는 AI로 새로 제작했으며, 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
 
 func _process(delta: float) -> void:
 	super._process(delta)
 	if not runtime_ok:return
-	status.text+=" · %s · %s"%["자유 탐험" if free_roam_enabled else "산책길",SPEED_PROFILES[speed_id].label]
+	if is_instance_valid(interior_visit) and interior_visit.active:
+		status.text=interior_visit.status_text()
+	else:
+		status.text+=" · %s · %s"%["자유 탐험" if free_roam_enabled else "산책길",SPEED_PROFILES[speed_id].label]
+
+func reset_player() -> void:
+	if is_instance_valid(interior_visit) and interior_visit.active:
+		interior_visit.return_to_world_spawn()
+	else:
+		super.reset_player()

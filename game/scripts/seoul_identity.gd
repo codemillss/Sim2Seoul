@@ -3,6 +3,7 @@ extends Node3D
 ## The dimensions of ornament, stone courses and glazing are visual choices.
 const STONE_SHADER: Shader = preload("res://shaders/stone_wall.gdshader")
 const SURFACE_SHADER: Shader = preload("res://shaders/seoul_surface.gdshader")
+const GRANITE_ALBEDO: Texture2D = preload("res://assets/textures/seoul/palace_granite_albedo.png")
 const DUPLICATE_WALL_IDS := ["osm:way:381941848:barrier", "osm:way:381941854:barrier"]
 const PALACE_WALL_ID := "osm:way:26658458:barrier"
 const EPS := 0.00005
@@ -74,6 +75,7 @@ func _stone_material(coping: bool) -> ShaderMaterial:
 	var material := ShaderMaterial.new()
 	material.shader = STONE_SHADER
 	material.set_shader_parameter("coping_only", coping)
+	material.set_shader_parameter("granite_albedo", GRANITE_ALBEDO)
 	_materials[key] = material
 	return material
 
@@ -104,12 +106,18 @@ func _apply_palace(item: Dictionary, components: Dictionary) -> void:
 	var paint := _surface("dancheong", 1, Color(0.16, 0.39, 0.31))
 	var lattice := _surface("wood_lattice", 2, Color(0.36, 0.24, 0.15))
 	var white_stone := _surface("palace_ashlar", 3, Color(0.83, 0.82, 0.75))
+	var timber := _surface("painted_timber", 6, Color(0.42, 0.105, 0.073))
+	var plaster := _surface("palace_plaster", 7, Color(0.74, 0.72, 0.65))
 	var brick := _surface("dondeokjeon_brick", 4, Color(0.49, 0.22, 0.17))
 	for entry: Dictionary in item.components:
 		var visual := components.get(entry.id) as MeshInstance3D
 		if visual == null: continue
 		if entry.material in ["tile", "tile_edge"]:
 			visual.material_override = roof
+		elif entry.material == "red_column":
+			visual.material_override = timber
+		elif entry.material == "cream_wall":
+			visual.material_override = plaster
 		elif entry.material == "green_beam":
 			visual.material_override = paint
 		elif entry.material == "wood_panel" and entry.feature_role == "window":

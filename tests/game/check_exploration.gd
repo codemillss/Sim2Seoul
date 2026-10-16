@@ -1,6 +1,6 @@
 extends SceneTree
 ## Targeted actual-input checks. Every scenario placement is an explicit test fixture.
-const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump"]
+const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump","interact"]
 var report_path := ""
 var settings_path := ""
 var quality_path := ""

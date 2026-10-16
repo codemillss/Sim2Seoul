@@ -1,5 +1,29 @@
 # 검증 계획과 완료 판정
 
+## 후속 탐험 EXP03 — 사진 외형과 첫 실내의 실제 검증
+
+2026-10-16 Apple M5·Godot 4.7.2·Metal 4.0/Forward+에서 [최종 결과](../data/reports/photo_realism/20261016/summary.json)를 기록했다. 원래 V0 및 EXP02의 과거 결과는 보존한다.
+
+| 실행 | 결과와 범위 | 증거 |
+|---|---|---|
+| 사진 외형·도시 통합 | `check_photo_realism.gd` 59/59. 기존 실제 도시 점프/카메라/충돌/6차량과 200창·741대각부재·신규 텍스처·8932기와 끝·주광/품질·로비 초기화, 여섯 외형 PNG | [photo.json](../data/reports/photo_realism/20261016/photo.json)·[photo.log](../data/reports/photo_realism/20261016/photo.log) |
+| 실제 실내 제어 | `check_interior_visit.gd` 56/56. 실제 E 입퇴장/키 유지·벽/원거리 거부·바닥 결손 rollback·걷기·천장 충돌·36카메라 각도·낙하 복귀·640×480 안내·정지/재개·실내 설정·모든 귀환 후보 막힘·메뉴 대한문 복귀와 즉시 카메라, 외부692동일/47실내body, PNG3장 | [interior.json](../data/reports/photo_realism/20261016/interior.json)·[interior.log](../data/reports/photo_realism/20261016/interior.log) |
+| 기존 자유 탐험 회귀 | `check_exploration.gd` 51/51. 속도·영역·사유지/외부 충돌·설정/재기동·작은 메뉴·2보행자6차량 유지 | [regression.json](../data/reports/photo_realism/20261016/regression.json)·[regression.log](../data/reports/photo_realism/20261016/regression.log) |
+| 별도 카메라 fixture | 7상황·8,450 보간 표본, 겹침·반전·비유한 좌표0. 메뉴 즉시 스냅 API 추가 후 재실행 | [camera.json](../data/reports/photo_realism/20261016/camera.json)·[camera.log](../data/reports/photo_realism/20261016/camera.log) |
+
+GPU 합계166개다. Headless 실내52개 통과는 최종 표지 방향·정지 카메라 수정 전의 개발 이력이며 최종56개 GPU와 구분한다. 실내 천장 시험에서만 점프 목표를 잠깐4m로 올려 천장 접촉을 만들고 생산3m로 복원했다. 순간이동·가림벽·결손 바닥·귀환점 차단은 기록한 시험 fixture다. 실제 위치/치수 정확도·전체 연속 여정·장시간 성능·새 패키지·M4 인수를 뜻하지 않는다.
+
+최초 실내 GPU 검수는 물리 판정32개 뒤 퇴장 사진의 조건부 `frame_post_draw` 대기에서 timeout됐다. 원문 [실패 보고](../data/reports/photo_realism/20261016/development/interior01_timeout.json)를 유지하고 검사기에서 명시 draw로 바꾼 뒤 최종56개를 통과했다. 텍스처 mipmap/약한 bump, 유리 앞뒤 깊이와 현판 위치를 실제 근접 사진으로 고쳤고 최종 `photo04`를 채택했다. [돌담](../data/reports/photo_realism/20261016/stone_wall_close.png)·[대한문](../data/reports/photo_realism/20261016/gate_close.png)·[정문](../data/reports/photo_realism/20261016/library_entrance.png)·[로비](../data/reports/photo_realism/20261016/lobby.png)를 직접 열어 확인했다.
+
+별도 출력 경로로 재검사한다. 실제 GUI 검사는 하나씩 끝낸 뒤 다음을 실행하며 기존 증거를 덮어쓰지 않는다.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_photo_realism.gd -- --automatic-probe --report=/private/tmp/sim2seoul-photo-recheck.json
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_interior_visit.gd -- --automatic-probe --report=/private/tmp/sim2seoul-interior-recheck.json
+/Applications/Godot.app/Contents/MacOS/Godot --path game --script ../tests/game/check_exploration.gd -- --automatic-probe --report=/private/tmp/sim2seoul-explore-recheck.json
+```
+
+
 ## 후속 탐험 EXP02 — 2026-10-16 M5 실제 실행
 
 사용자의 외형·높은 점프·건물 이름·차량 요청과 “시야를 돌리면 건물이나 지붕 일부가 사라지거나 잘려 보임” 설명을 대상으로 검사했다. 기기는 Apple M5/16GB, Godot4.7.2 Standard/Metal4.0/Forward+다. [요약과 원시 증거](../data/reports/seoul_detail/20261016/summary.json)는 이 탐험 개발판의 결과이며 아래 E–R의 과거 기기/장면/패키지 실행을 덮어쓰지 않는다.

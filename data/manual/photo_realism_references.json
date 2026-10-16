@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "task": "EXP03_PHOTO_REALISM_LOBBY",
+  "reference_accessed_kst_date": "2026-10-16",
+  "basis_commit": "5eac7d8",
+  "references": [
+    {
+      "id": "PALACE_2020",
+      "page_url": "https://mediahub.seoul.go.kr/archives/1504168",
+      "published": "2020-10-29",
+      "photographer": "오세훈",
+      "images": [
+        {
+          "url": "https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000507/P1050874-%ED%8E%B8%EC%A7%91.jpg",
+          "observed": "Actual photo viewed in CUA browser screenshot; open gate bays, dark red columns and timber doors, pale name board, detailed green brackets and rounded tile ends."
+        },
+        {
+          "url": "https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050892-%ED%8E%B8%EC%A7%91.jpg",
+          "observed": "Actual photo viewed in CUA browser screenshot; horizontal courses of small rough rectangular granite blocks and deep dark tiled coping."
+        },
+        {
+          "url": "https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050928-%ED%8E%B8%EC%A7%91.jpg",
+          "observed": "Actual photo viewed in CUA browser screenshot; square and rectangular coarse stone blocks, pale mortar, rounded tile and pale rafter ends."
+        }
+      ],
+      "use": "Visual study only. Photographs not downloaded, edited or embedded in game."
+    },
+    {
+      "id": "CIVIC_2012",
+      "page_url": "https://news.seoul.go.kr/citybuild/archives/205773",
+      "event_year": 2012,
+      "image_url": "https://news.seoul.go.kr/citybuild/files/2012/09/newcityhall_09_07.jpg",
+      "observed": "Actual photo viewed in CUA browser screenshot; dense narrow vertical library bays and central pavilion/entry, curved darker glass City Hall with diagonal lattice. Old construction-period photograph, not proof of present site conditions.",
+      "use": "Visual study only; no original pixels imported."
+    },
+    {
+      "id": "LIBRARY_FLOOR",
+      "page_url": "https://lib.seoul.go.kr/rwww/html/ko/floorInfo1F.jsp",
+      "observed": "Official first-floor plan image actually viewed in CUA browser screenshot as well as alternative text. Central main-entry vestibule, paired stair/lift circulation, left general/children reading area and right book-culture/disability reading area are identifiable; dimensions absent.",
+      "use": "Topological inspiration for compact lobby prototype, not a measured floor-plan reconstruction.",
+      "image_url": "https://lib.seoul.go.kr/image/ko/local/guide/floorInfo1.png"
+    }
+  ],
+  "generated_asset": {
+    "path": "game/assets/textures/seoul/palace_granite_albedo.png",
+    "sha256": "57784a5b3843a63e0e822b3e10cf63707e39b49d1c1e604fb56b8f67545c025d",
+    "bytes": 4409390,
+    "method": "Built-in image_gen imagegen tool, new original generation; no input reference images supplied",
+    "skill": "/Users/jmjeon/.codex/skills/.system/imagegen/SKILL.md",
+    "prompt": "Use case: game-texture. Asset type: seamless repeatable physically based ALBEDO texture for a Korean palace perimeter stone wall in a realtime 3D game. Primary request: one square high resolution orthographic close-up texture of hand dressed rough gray granite masonry laid in horizontal courses of small rectangular and approximately square blocks, as seen in Seoul palace boundary walls. Rows straight and staggered, mixed block widths roughly 1.0 to 1.7 times their height, subtle imperfect chipped rectangular edges, pale gray-beige narrow recessed lime mortar. Real coarse crystalline granite surfaces with tiny pits, tool marks, granular quartz/mineral flecks, modest stone-to-stone warm-gray, cool-gray and taupe variation, occasional muted weathering. Clearly photographic material quality, not a stylized illustration, not polygonal honeycomb, not river pebbles, not bricks. Composition: full-bleed flat masonry only, about 7 to 9 courses visible across the square, uniform texel density, no border, seamless tiling along both edges. Lighting: neutral diffuse flat overcast material-scan lighting with minimal directional illumination, no cast shadows or baked bright highlights. No perspective, no ground, no sky, no vegetation, no roof, no people, no signage, no text, no watermark. Output must be usable as repeating albedo in a game shader. Create an original texture, not a replica of a particular photograph.",
+    "scope": "Colour/albedo only; metre projection and small derivative bump are authored in shader. No claim of measured stone sizes, captured normal/roughness maps or perfect seamless scan."
+  },
+  "authored_assumptions": [
+    "Stone texture repeat size 1.8m is a visual choice.",
+    "Palace timber, roof rolls, library window spacing, City Hall diagrid and daylight are authored approximations within retained source envelopes.",
+    "Library compact 16x12m lobby/reading area is a game interior; upstairs and full building interior are not recreated."
+  ]
+}

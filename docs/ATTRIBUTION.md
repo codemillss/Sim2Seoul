@@ -75,3 +75,31 @@ Godot과 새 자산은 실제 사용하는 버전·파일에 따라 출처를 �
 동일 버전의 `data/reports/source_manifest.json`, `extract_manifest.json`과 `data/raw/deoksugung_cityhall-v2.osm.pbf`에서 OSM 입력을 확인한다. `config/region.json`, `data/manual/`의 수동 보정과 외형/동선 결정, `tools/prepare_*.py` 및 각 단계 보고서가 좌표 변환·높이 추정·단순화·문과 지지면 보정·표시 자산의 변경 방법이다. Overture 지역 원본은 `data/raw/supplemental/overture/2026-09-23.1/buildings.geojson`이며 게임 윤곽을 독립 측량 자료로 교체했다는 뜻이 아니다.
 
 앱의 `resources/legal/`과 앱 번들의 `Contents/Resources/`에 출처, Godot MIT/추가 고지, Kenney CC0, 자료·변경 안내를 동봉한다. Godot 고지는 실제 사용한 엔진 API에서 추출하며 파일 포함 여부·해시·실행 성공은 별도 R03 결과에 기록한다. 준비용 Copernicus TIFF·전국 지도·개발 환경·자격 증명은 앱에 넣지 않는다. 개인용 앱 제작이 미확인 외부 자료나 이후 공개 배포를 일괄 허가하는 것은 아니다.
+
+## EXP03 사진 참고·AI 석재 자산·서울도서관 로비
+
+2026-10-16, 기준 커밋 `5eac7d8` 이후의 최신 탐험 장면 추가분이다. 앞선 L01/L02/EXP02의 ‘외부 텍스처 미수입’ 기록과 기존 V0/R03의 실내 제외 설명은 당시 범위를 보존한다. 이번에 포함한 새로운 bitmap은 아래 **AI 신규 생성 albedo 1개**이며 외부 공식 사진 원본을 게임 자산으로 가져온 수는 0이다. OSM/Overture·Kenney·Godot의 기존 표시와 조건은 계속 유지한다.
+
+### 관찰에 사용한 공식 자료
+
+- `PALACE_2020`: [서울시 내 손안에 서울 기사](https://mediahub.seoul.go.kr/archives/1504168), 게시 2020-10-29, 사진 오세훈. [대한문](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000507/P1050874-%ED%8E%B8%EC%A7%91.jpg), [돌담](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050892-%ED%8E%B8%EC%A7%91.jpg), [석재/기와](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050928-%ED%8E%B8%EC%A7%91.jpg)를 브라우저 화면에서 관찰했다. 사진의 붉은 목재·공포·기와 끝·사각 화강석 줄과 색 대비를 참고했으며 파일 다운로드·편집·게임 포함은 하지 않았다.
+- `CIVIC_2012`: [서울 신청사 준공·입주 설명](https://news.seoul.go.kr/citybuild/archives/205773)과 [2012년 준공 시기 청사 사진](https://news.seoul.go.kr/citybuild/files/2012/09/newcityhall_09_07.jpg). 도서관의 가는 세로 창/중앙부, 신청사의 곡면 유리/대각 격자를 실제 화면에서 관찰했다. 2012년 사건·페이지 수정일 2018-11-08·현재 열람 시점을 구분하며 현재 현장 상태의 증거로 사용하지 않는다. 원본 사진 픽셀을 수입하거나 추적하지 않았다.
+- `LIBRARY_FLOOR`: [서울도서관 공식 1층 안내](https://lib.seoul.go.kr/rwww/html/ko/floorInfo1F.jsp)의 대체 텍스트와 [공식 도면 PNG](https://lib.seoul.go.kr/image/ko/local/guide/floorInfo1.png)를 브라우저 화면에서 실제 확인했다. 중앙 출입구 전실·양옆 계단/승강기·좌우 열람 공간의 관계를 참고했다. 도면 이미지와 로고를 게임에 넣거나 정확한 치수/가구 배치를 복제하지 않았다. 16×12×4.8m 로비는 별도 제작한 게임 공간이며 실제 1층 평면도 재현이 아니다.
+
+열람일은 모두 2026-10-16이며 개별 촬영일·1층 안내도 작성일은 미확인이다. 위 관찰은 무료 열람을 재사용 허가로 해석한 것이 아니다. URL·관찰 범위·날짜와 생성 자산 정보는 [photo_realism_references.json](../data/manual/photo_realism_references.json), 특징별 제작 판단은 [landmark_reference](landmark_reference.md)에 남긴다.
+
+### 포함한 신규 AI 생성 파일
+
+| 항목 | 기록 |
+|---|---|
+| 파일 | [game/assets/textures/seoul/palace_granite_albedo.png](../game/assets/textures/seoul/palace_granite_albedo.png) |
+| 제작 | built-in `image_gen` imagegen tool로 새로 생성한 원본. 입력 참조 이미지 0장. 공식 사진의 편집본·사진측량·현장 scan이 아님 |
+| 생성 요청 | 사각 화강석을 수평으로 쌓은 거친 회색 석재·옅은 모르타르·평평한 확산광·반복 가능한 albedo. 전체 원문 prompt와 사용 범위는 위 manifest에 보존 |
+| 크기 | 4,409,390 bytes |
+| SHA-256 | `57784a5b3843a63e0e822b3e10cf63707e39b49d1c1e604fb56b8f67545c025d` |
+| 게임에서의 처리 | 원본 PNG는 보존하고 import의 mipmap 생성과 shader의 anisotropic filtering·월드 미터 투영·1.8m 반복·색/풍화 조정·미분 bump 계수 0.0015m를 적용. 반복 크기와 요철은 제작 가정 |
+| 한계 | colour/albedo 1장. 촬영한 normal/roughness map이나 완전한 seamless scan을 제공했다는 뜻이 아님. 이 AI 생성 파일을 공식 사진의 이용조건이나 Kenney CC0 자산으로 분류하지 않음 |
+
+궁궐·시청 세부 부재, 지면 shader·절차형 하늘과 로비/가구는 자체 제작 코드/기본 형상이다. 사진·도면·로고의 원본 미디어 파일을 새로 포함하지 않았다. 게임 ‘자료 출처’의 최신 탐험 설명에는 석재 텍스처가 AI로 새로 제작되었다는 점, 공식 사진 미포함, 로비의 단순화와 상층/다른 건물 실내 제외를 표시한다.
+
+최종 실행 판정은 [EXP03 요약](../data/reports/photo_realism/20261016/summary.json)에 연결한다. M5/Metal에서 외형 59개·실내 56개·탐험 회귀 51개, 총 166개 GPU 검사가 통과했다. PNG/shader 실제 실행·실내 입출입과 기존 외부 body/fragment 692개의 shape·변환 등 보존, 추가 로비 body 47개를 확인한 결과이며 사진 수준의 복제나 원천 기관의 승인·보증은 아니다. [일반 GUI 시작 로그](../data/reports/photo_realism/20261016/launch.log)의 준비 완료·시작 오류 0과 실제 네이티브 창도 확인했다. 출처/생성 기록과 실행 검사 결과를 각각 보존하며, 이 문서 자체가 포함하지 않은 외부 자산의 이용권을 확정하지 않는다.

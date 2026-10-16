@@ -9,6 +9,54 @@ const SEGMENT_SAMPLE_M := 0.05
 const JUMP_ACTION := &"jump"
 var _jump_was_pressed := false
 var _jump_requires_release := false
+var interior_active := false
+var interior_bounds := AABB()
+var _outdoor_recovery := {}
+
+func begin_interior(point: Vector3, bounds: AABB) -> bool:
+	if interior_active or not configured or not point.is_finite() or not bounds.has_point(point):return false
+	var before := {"spawn":spawn_transform,"fall_limit":fall_limit_y,"spawn_valid":spawn_valid,"configured":configured}
+	interior_active = true
+	interior_bounds = bounds
+	fall_limit_y = bounds.position.y - 2.0
+	spawn_transform = Transform3D(Basis.IDENTITY,point)
+	spawn_valid = _valid_spawn()
+	if not spawn_valid:
+		interior_active = false
+		spawn_transform = before.spawn
+		fall_limit_y = before.fall_limit
+		spawn_valid = before.spawn_valid
+		return false
+	_outdoor_recovery = before
+	global_transform = spawn_transform
+	visual.rotation = Vector3.ZERO
+	require_neutral_input()
+	reset_physics_interpolation()
+	return true
+
+func end_interior(point: Vector3) -> bool:
+	if not interior_active or _outdoor_recovery.is_empty() or not point.is_finite():return false
+	var indoor_spawn := spawn_transform
+	interior_active = false
+	spawn_transform = Transform3D(Basis.IDENTITY,point)
+	if not _valid_spawn():
+		interior_active = true
+		spawn_transform = indoor_spawn
+		return false
+	global_transform = spawn_transform
+	spawn_transform = _outdoor_recovery.spawn
+	fall_limit_y = _outdoor_recovery.fall_limit
+	configured = _outdoor_recovery.configured
+	spawn_valid = _outdoor_recovery.spawn_valid
+	_outdoor_recovery = {}
+	visual.rotation = Vector3.ZERO
+	require_neutral_input()
+	reset_physics_interpolation()
+	return true
+
+func exterior_contains(point: Vector3) -> bool:
+	# Portal return validation must use the selected outdoor boundary even indoors.
+	return _inside_outdoors(point)
 
 func _jump_pressed() -> bool:
 	return InputMap.has_action(JUMP_ACTION) and Input.is_action_pressed(JUMP_ACTION)
@@ -72,6 +120,10 @@ func _physics_process(delta: float) -> void:
 	physics_stepped.emit(delta)
 
 func _inside(point: Vector3) -> bool:
+	if interior_active:return point.is_finite() and interior_bounds.has_point(point)
+	return _inside_outdoors(point)
+
+func _inside_outdoors(point: Vector3) -> bool:
 	if not free_roam_enabled:return super._inside(point)
 	if not point.is_finite():return false
 	var p:=Vector2(point.x,point.z)

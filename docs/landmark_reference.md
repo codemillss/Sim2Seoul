@@ -2,7 +2,7 @@
 
 기준일: 2026-10-15. W04 커밋 `1922c70c6e1a569b0f980beaaf5742906b7de340`의 보행 공간을 유지한다. **이번 결과는 참조·제작 명세이며 새 외형을 구현한 결과가 아니다.** L02는 궁궐, L03은 시청·광장·주변 빌딩을 만들고 L04에서 장소 인지와 보행을 함께 확인한다.
 
-위 기준일과 본문의 L01 표현은 당시 명세 기록이다. 후속 L02/L03 구현과 2026-10-16 EXP02 외형 보완은 아래 별도 절에 누적하며, 현재 실행/검증은 [WORK_STATUS](WORK_STATUS.md)를 따른다.
+위 기준일과 본문의 L01 표현은 당시 명세 기록이다. 후속 L02/L03 구현과 2026-10-16 EXP02 외형 보완·EXP03 사진 참고 외형/로비는 아래 별도 절에 누적하며, 현재 실행/검증은 [WORK_STATUS](WORK_STATUS.md)를 따른다.
 
 사용자가 원한 전통과 현대 서울의 공존을 위해 궁궐만 따로 꾸미지 않는다. 큰 지붕·기둥·기단과 유리·석재·빌딩 실루엣의 차이를 먼저 만들고, 작은 문양과 창문 수는 이후로 둔다. 이름표만 바꾼 상자는 랜드마크 완료로 보지 않는다.
 
@@ -138,3 +138,42 @@ L01 명세와 입력 해시는 보존하고, 후속 판단은 [l03_city_decision
 [대한문 정면](../data/reports/seoul_detail/20261016/gate_front.png), [돌담 근접](../data/reports/seoul_detail/20261016/stone_wall_close.png), [시청·서울도서관](../data/reports/seoul_detail/20261016/city_hall_library.png), [가까운 기와·처마](../data/reports/seoul_detail/20261016/gate_roof_underside.png)는 M5/Metal 실제 viewport 캡처다. 파일명 `gate_roof_underside`는 fixture ID이며 마지막 화면은 기와 경사면/처마 확인용이다. 지붕 뒷면 가시성은 사진만으로 완료 처리하지 않고17surface의 양면 shader를 GPU 검사에서 확인했다. 캡처는 검토용 카메라/플레이어 배치를 명시하며 연속 보행에서 얻은 시점으로 설명하지 않는다.
 
 [EXP02 검증](VALIDATION_PLAN.md)에서 도시 GPU49개와 탐험 회귀51개를 통과했다. 이 외형은 공식 자료의 특징을 참고한 단순화이며 현장 측량·사진 수준 일치·사용자의 장소 인지/만족도 검증은 아니다. 색·석재/기와 간격·부조 세부 비례를 실제값으로 승격하지 않는다.
+
+## EXP03 — 실제 사진 관찰을 반영한 외형과 서울도서관 로비
+
+2026-10-16, 기준 커밋 `5eac7d8`의 EXP02 위에 사진 참고 외형과 로비 방문을 추가했다. 이전 절의 절차형 외형·재질 16개·실내 미구현과 EXP02 통과 수치는 당시 결과다. EXP03의 최종 외형/실내/탐험 GPU 검사 166개와 일반 GUI 시작을 확인했으며, 과거 결과와 별도로 아래 증거를 연결한다.
+
+### 실제로 관찰한 자료와 날짜
+
+[사진 참고 manifest](../data/manual/photo_realism_references.json)에 URL·열람일·관찰 방식·생성 자산을 함께 기록했다. 궁궐과 시청의 아래 사진, 서울도서관 공식 1층 도면 PNG를 브라우저 화면으로 실제 관찰했다. 도서관 안내의 대체 텍스트도 함께 확인했으며, 치수가 있는 실측 평면도를 읽은 것으로 설명하지 않는다.
+
+| ID | 공식 자료와 시점 | 확인한 특징과 제작 사용 범위 |
+|---|---|---|
+| `PALACE_2020` | [서울시 내 손안에 서울 기사](https://mediahub.seoul.go.kr/archives/1504168), 게시 2020-10-29, 사진 오세훈. [대한문 사진](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000507/P1050874-%ED%8E%B8%EC%A7%91.jpg), [돌담 사진](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050892-%ED%8E%B8%EC%A7%91.jpg), [석재·기와 사진](https://mediahub.seoul.go.kr/wp-content/uploads/editor/images/000506/P1050928-%ED%8E%B8%EC%A7%91.jpg) | 대한문의 붉고 어두운 기둥/나무 문, 밝은 현판, 녹색 공포, 둥근 기와 끝과 밝은 서까래 끝. 돌담은 큰 다각형 돌보다 수평 줄을 이루는 작은 사각 화강석·옅은 모르타르·짙은 기와 덮개가 두드러짐. 부재·색·재질 대비를 새로 제작하는 참고로 사용 |
+| `CIVIC_2012` | [서울 신청사 준공·입주 설명](https://news.seoul.go.kr/citybuild/archives/205773)과 [청사 사진](https://news.seoul.go.kr/citybuild/files/2012/09/newcityhall_09_07.jpg). 2012년 준공 시기의 사진이며 페이지 수정일 2018-11-08과 구분 | 옛 청사의 촘촘하고 가는 세로 창·벽기둥·중앙 입구/높은 중앙부·수평 코니스, 신청사의 짙은 청록/청회색 곡면 유리와 대각 격자를 관찰. 현재 현장 모습의 증거로 확대하지 않음 |
+| `LIBRARY_FLOOR` | [서울도서관 공식 1층 안내](https://lib.seoul.go.kr/rwww/html/ko/floorInfo1F.jsp)와 [원본 안내도](https://lib.seoul.go.kr/image/ko/local/guide/floorInfo1.png)를 실제 화면으로 확인. 페이지/도면 작성일·미터 치수 미확인 | 중앙 주출입구의 전실·양옆 계단/승강기, 왼쪽 일반/어린이 열람 공간과 오른쪽 책문화/장애인 열람 공간의 관계를 참고. 실제 도면의 외곽·방 크기·가구 수/위치를 추적하지 않고 작은 로비의 구성에만 사용 |
+
+열람일은 모두 2026-10-16이다. 기사 게시일·페이지 수정일·준공 사건 연도와 개별 촬영일을 혼합하지 않는다. 개별 촬영일은 미확인이다. 공식 사진은 외형 관찰용이며 게임에 원본 픽셀을 가져오지 않았다. 앞선 EXP02의 2026년 기사 참조와 이번 2020/2012년 사진 관찰은 별도 기록이다.
+
+### 관찰에서 만든 표시와 공간
+
+| 대상 | EXP03 구현 | 제작 가정과 보존 범위 |
+|---|---|---|
+| 돌담 | [AI 신규 석재 albedo](../game/assets/textures/seoul/palace_granite_albedo.png), 수평 사각 화강석 줄·작은 입자 차이·옅은 줄눈·하단 풍화, 실제 메시 안의 작은 기와 끝 | 반복 1.8m와 bump·돌 규격·덮개 간격은 제작값. 사진 scan/normal map이나 개별 돌 복제 아님. 기존 2m 담장 외곽·충돌 보존 대상 |
+| 대한문과 궁궐 지붕 | [궁궐 helper](../game/scripts/photo_palace_detail.gd)의 둥근 기와/용마루·서까래 끝, 대한문의 나무 문판·철물·공포 층·현판. [공유 shader](../game/shaders/seoul_surface.gdshader)에 붉은 목재·회벽 재질 추가 | 기존 지붕 면과 원천 footprint/높이에 맞춘 부조. 부재 크기·반복·색은 수작업 가정. 원래 3×3m 임시 통로와 닫힌 중화문을 유지하며 새 포치/계단 보행을 뜻하지 않음 |
+| 서울도서관 | [시청 helper](../game/scripts/photo_civic_detail.gd)의 가는 어두운 창과 창 깊이·창대/창틀, 연속 벽기둥·코니스, 중앙 입구·발코니 형태의 부조·높은 중앙부의 석재 띠 | 성긴 정사각 창/큰 빈 벽 인상을 줄이기 위한 반복 구성. 창 수·간격·발코니/장식 치수는 실측 아님. 기존 외벽의 닫힌 충돌에 새 구멍을 만들지 않음 |
+| 신청사 | 원래 곡면의 삼각형 표면 깊이를 따라가는 대각 격자와 지붕 끝 띠, 짙은 유리/금속 대비 | 실제 이중 외피의 구조·유리 투과·실내 재현 아님. 원래 40.2m 층수 추정과 지도 footprint 유지 |
+| 야외 환경 | [하늘/조명 helper](../game/scripts/photo_atmosphere.gd)의 절차형 하늘·주변광/반사·고정 낮빛·약한 안개·가까운 그림자. `standard`는 SSAO/4×MSAA, `low`는 둘 다 OFF. [바닥 shader](../game/shaders/street_surface.gdshader)의 보도·아스팔트·잔디·흙 | 조명 방향·색·230m 그림자 범위와 포장 치수는 게임 표현. 특정 촬영 시각/날씨나 현장 포장 실측을 재현하지 않음. 표시 재질의 변경이며 길 폭·지지면·원천 지형의 수정 아님 |
+| 서울도서관 로비 | [실내 방문 helper](../game/scripts/interior_visit.gd)의 16×12×4.8m 로비/작은 열람 공간. 책장·책·열람 가구와 출입문 안내를 두고 외부 입구 근처 E로 진입, 내부 출입문 근처 E로 복귀 | 공식 안내의 공간 관계만 참고한 게임 실내. 별도 `(650,-100,0)` 공간이며 실제 1층 평면도 복원 아님. 로비용 독립 충돌을 추가하되 기존 외부 건물·담장 body/shape는 보존. 상층·계단·다른 건물 실내는 구현 범위 밖 |
+
+외형 helper는 기존 외부 표시 일부만 숨기고 원본 resource와 충돌을 유지한다. 로비의 위치 전환은 새 방문 기능이므로 이전 L02/L03의 외형 전용/새 충돌 0 범위와 구분한다. 실제 현장의 출입 가능성이나 측량 출입구를 승인한 것이 아니다. 진입·퇴장 시 경계/접지/캡슐 여유를 검사하고 입력 해제를 요구하는 계약은 [TECHNICAL_CONTRACTS](TECHNICAL_CONTRACTS.md)의 EXP03 절에 있다.
+
+### AI albedo와 확인할 증거
+
+신규 PNG는 built-in `image_gen`에서 입력 참조 이미지 0장으로 생성했다. 사진 원본을 재가공하거나 게임 텍스처로 사용하지 않았다. 4,409,390 bytes와 SHA-256 `57784a5b3843a63e0e822b3e10cf63707e39b49d1c1e604fb56b8f67545c025d`를 [생성 prompt/manifest](../data/manual/photo_realism_references.json)에 연결한다. 원본 PNG는 그대로 두고 mipmap 생성·anisotropic filtering과 최종 미분 bump 계수 0.0015m를 적용한다. 반복 가능성을 목표로 만든 albedo이지만 완전한 seamless 재질 scan이나 촬영한 normal/roughness 세트로 주장하지 않는다. 현재 공유 identity 재질은 18개이며 별도 helper 재질/메시는 그 수에 포함하지 않는다. 파일 출처와 AI 생성 UI 표시는 [ATTRIBUTION](ATTRIBUTION.md)에 누적한다.
+
+M5/Metal의 최종 [외형 `photo04`](../data/reports/photo_realism/20261016/photo.json) 59개, [실내 `interior02`](../data/reports/photo_realism/20261016/interior.json) 56개, [탐험 회귀 `regression02`](../data/reports/photo_realism/20261016/regression.json) 51개가 통과했다. [요약](../data/reports/photo_realism/20261016/summary.json)의 GPU 합계는 166개다. 원래 외부 body/fragment 692개의 shape·변환 등 전후 동일성과 로비용 body 47개 추가를 분리해 확인했다. 실내 카메라 36각도의 겹침 0, 일시정지 메뉴에서 야외 복귀 직후 카메라 전환 검사를 포함하며, 별도 [최종 카메라 시험](../data/reports/photo_realism/20261016/camera.json)은 합성 정적 물리 fixture의 7시나리오·8,450표본에서 겹침/잘못된 위치 0이다.
+
+[대한문](../data/reports/photo_realism/20261016/gate_front.png)·[대한문 근접](../data/reports/photo_realism/20261016/gate_close.png)·[돌담 근접](../data/reports/photo_realism/20261016/stone_wall_close.png)·[시청/도서관](../data/reports/photo_realism/20261016/city_hall_library.png)·[도서관 입구](../data/reports/photo_realism/20261016/library_entrance.png)·[로비](../data/reports/photo_realism/20261016/lobby.png)와 `interior_entry.png`/`interior_exit.png`는 최종 GPU 캡처다. 현판 위치와 창 reveal 깊이를 수정한 뒤의 최종 사진을 직접 확인했다. 검토용 고정 시점과 입출입 배치는 연속 야외 보행의 화면으로 설명하지 않는다.
+
+개발 중 실내 `interior01`은 물리 검사 32개 통과 후 캡처 대기 정지로 timeout이 났고, 검사용 강제 draw로 수정했다. 메뉴에서 복귀한 직후 카메라가 실내에 남던 결함은 즉시 pose 전환 API와 추가 검사로 고쳤다. 미세 수정 전 headless 실내 52개 통과는 개발 기록이며 최종 GPU 56개와 구분한다. `photo.log`/`interior.log`에 최종 실행을 연결한다. [일반 실행 로그](../data/reports/photo_realism/20261016/launch.log)의 준비 완료·시작 오류 0과 실제 Metal 네이티브 창의 표시도 확인했다. 장시간 성능·내보내기·M4·사람의 전체 동선 연속 보행은 미검증이며, 이번 결과는 사진 수준 일치·현재 현장 일치·사용자 만족도 검증은 아니다.
