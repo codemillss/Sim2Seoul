@@ -551,3 +551,11 @@ HUD는폭을먼저설정하고`minimum_size_changed`의중복없는deferred호�
 - 다음 첫 행동: 실제 M4 접근이 생기면 같은 ZIP SHA/원 manifest·기기 사양·고정된 재개 명령으로 raw/check/log/PNG를 새 경로에 남긴다. 현재 원래 계획 안에서 사용자의 단계 승인을 기다리는 구현은 없으며 새 제품 범위를 자동 추가하지 않는다. 최종 공유는 의도한 서울 파일만 선택하고 원격 SHA를 대조한다.
 
 R03/R04 종료 검수에서는 과거 ‘다음N04/패키지미완료/목표프레임미정’ 문구를 현재 상태와 구분해 정정했다. 원시 stdout의 마지막 빈 줄과 unified diff의 문맥 공백은 원문 증거이므로 해당 R03 로그/추출 diff에만 줄끝 정규화·관련 공백 검사를 제한했다. 코드/문서는 일반 검사를 유지한다. 선택한 Git index의 실제 bytes, JSON/Python 구문, 문서 링크, 원시 보존 SHA와141source 불변·32작업 기기별 판정을 함께 확인하며 결과는 `data/reports/r03_r04_completion_check.json`에 기록한다. 원격 main은 완료 전 fetch에서 base `fc348ad45c71177203c733bc36f42d56061c3358`와 일치했다.
+
+## 2026-10-16 · 새 Mac(M5) 개발 실행 준비·실제 기동
+
+- 요청/입력: 사용자가 이 Mac에서 Sim2Seoul을 준비하고 띄우도록 요청했다. 새 복제본의 소스는 `09e56d0`이며 앞선 `setup_mac.sh`의 Python 3.14.7·고정 의존성·E03/E04 준비를 재사용했다. 실제 기기 확인은 Apple M5·RAM 16GB·macOS 26.6.2(25G83)이며, 문서의 기존 M1/M4와 구분한다.
+- 설치/생성: 공식 Godot 4.7.2 Universal ZIP의 공급자 SHA-512와 기존 SHA-256을 대조했다. 제한된 실행 환경에서의 서명 검사 오류는 macOS 보안 서비스 접근이 가능한 실행으로 재확인하여 valid/satisfies Designated Requirement·Notarized Developer ID accepted를 확인했고 `/Applications/Godot.app`에 설치했다. 보안 설정·격리 속성은 변경하지 않았다. CROSS_MAC의 충돌→대한문→경내→공개 보행→여정→명세→궁궐→도시→경로→보행자→차량 11개 생성기를 모두 통과했다.
+- 실제 확인: `tools/run_v0.sh run`의 사전 검사 후 Apple M5 Metal 4.0/Forward+ 게임 창을 열었다. W03/L02/L03/N02/N03 및 `V0_READY quality=standard pedestrians=2 vehicles=2`를 확인했으며 로그에 ERROR/SCRIPT ERROR/Parse Error는 없었다. CUA에서 실제 게임 창·캐릭터·메뉴를 보고 OS Esc 입력으로 메뉴를 닫은 탐험 화면을 확인했다. 프로세스를 유지해 사용자에게 인계했다.
+- 재실행/기록: 저장소 루트에 `Sim2Seoul.command`를 추가했고 실행 안내·현재 상태를 갱신했다. [기기별 기동 기록](../data/reports/m5_startup_20261016.json)과 [준비/기동 로그](../data/reports/m5_startup_20261016.log)에 이번 실행 범위를 남겼다.
+- 한계/다음: 소스 기반 개발 실행이다. R03 ZIP은 이 사본에 없으며 동일 release 앱·전체 동선·성능·M4·전반적인 사람 조작감 검수는 수행하지 않았다. 기존 역사적 M1 검수와 M4 UNRUN 판정은 수정하지 않는다. 다음에는 열린 게임에서 사용자가 직접 조작·장소 인상을 확인할 수 있다.

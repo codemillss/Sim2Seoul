@@ -1,0 +1,67 @@
+{
+  "date_local": "2026-10-16",
+  "timezone": "Asia/Seoul",
+  "source_commit": "09e56d0",
+  "machine": {
+    "chip": "Apple M5",
+    "ram_bytes": 17179869184,
+    "os": "macOS 26.6.2",
+    "build": "25G83"
+  },
+  "environment": {
+    "python": "3.14.7",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "godot_path": "/Applications/Godot.app",
+    "renderer": "Forward+",
+    "driver": "Metal 4.0"
+  },
+  "installation": {
+    "official_download": "https://godotengine.org/download/archive/4.7.2-stable/",
+    "archive_bytes": 170622178,
+    "sha256": "c58a24e31d720be9d62f60cb5627c4e695fb72f21b0cfe1bc9ccaa9a3b3ba63e",
+    "official_sha512_match": true,
+    "codesign_valid": true,
+    "gatekeeper_assessment": "accepted; Notarized Developer ID",
+    "security_settings_changed": false
+  },
+  "preparation": {
+    "setup_mac_previously_passed": true,
+    "v0_generators_passed": [
+      "prepare_collision",
+      "prepare_daehanmun",
+      "prepare_palace_walk",
+      "prepare_public_walk",
+      "prepare_walkable_itinerary",
+      "prepare_landmark_spec",
+      "prepare_palace_landmarks",
+      "prepare_city_landmarks",
+      "prepare_routes",
+      "prepare_pedestrians",
+      "prepare_traffic"
+    ]
+  },
+  "launch": {
+    "command": "sh tools/run_v0.sh run",
+    "scene": "res://scenes/world/v0_walk.tscn",
+    "mode": "source-based development DEBUG",
+    "ready": "V0_READY quality=standard pedestrians=2 vehicles=2",
+    "runtime_errors": [],
+    "gui_observed": true,
+    "character_observed": true,
+    "os_escape_menu_return_observed": true,
+    "window_left_open": true,
+    "observations": "CUA native window and screenshots viewed in this session; no screenshot file retained"
+  },
+  "log": {
+    "file": "data/reports/m5_startup_20261016.log",
+    "sha256": "1f5a93c0f2b928a732fac782d5a7d117fc900359b5b7f7a2244a44bcb1337093"
+  },
+  "not_run": [
+    "same R03 release ZIP verification",
+    "full route regression",
+    "performance measurement",
+    "M4 execution",
+    "comprehensive human controls and feel"
+  ],
+  "historical_reports_modified": false
+}

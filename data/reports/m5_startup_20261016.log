@@ -1,0 +1,238 @@
+[prepare_collision]
+{
+  "file": "game/resources/collision/generated.json",
+  "sha256": "cbf5b563573252cc9a1011ae0003da1179bd2df4c0300232edf8709d5f4c96eb",
+  "counts": {
+    "colliders": 685,
+    "roles": {
+      "Ground": 1,
+      "Buildings": 635,
+      "Barriers": 49
+    },
+    "triangles": 20302,
+    "excluded": 548
+  },
+  "surface_probes": 44,
+  "capsule_moves": 8,
+  "hole_probes": 24,
+  "gates_pending": [
+    {
+      "mesh_id": "osm:way:181574580:building",
+      "name": "중화문",
+      "opening": "not_created_W01_pending"
+    },
+    {
+      "mesh_id": "osm:way:377289797:building",
+      "name": "대한문",
+      "opening": "not_created_W01_pending"
+    }
+  ],
+  "scope": {
+    "runtime_permission": null,
+    "walkability_verified": false,
+    "physical_terrain_verified": false,
+    "playable_boundary": null,
+    "spawn": null,
+    "gate_openings": "W01_pending",
+    "support_plane": "G03 temporary engineering plane only"
+  }
+}
+
+[prepare_daehanmun]
+{
+  "task": "W01",
+  "passed": true,
+  "counts": {
+    "preserved_active_bodies": 682,
+    "replacement_bodies": 5,
+    "active_bodies": 687,
+    "fragment_triangles": 500
+  },
+  "passage_length_m": 11.340945714726297,
+  "route_length_m": 65.60825624838442,
+  "connection_sha256": "eda95fe4af07fd93ca6cb3512efb90e30afa0bf372d62f081949b940c92bc1aa",
+  "inputs": {
+    "data/manual/daehanmun_connection.json": "f30d7702b187b2670959d9bae90132e5ebc28bb9bbff93c5ce4876f08cd44b05",
+    "config/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "data/processed/terrain.json": "875e14459f2e6835f1c9ce8a1e24d73b2ba474d42ab7cd7afaf9ca98764ca249",
+    "data/processed/walkable_areas.json": "00b2a31b40fdd8c9248cf0bc22b1d449720901a202f12338aef63bea65e43b7b",
+    "data/manual/movement_review.json": "5c0034c82d3b238f68490e7b9ce29a0e67d897803e06d272abd6b9a696a47758",
+    "data/reports/g04_official_route_evidence.json": "981465ed026fa393592965a79304a4c2ac83018adfdab90d97e9f5e77ff4fe76",
+    "docs/evidence/D03_PALACE_ROUTE_SOURCES.md": "2b853a74e14af3bd7e384169f2b1a06a1aeaf7606ee556d050ea56ab7caf5fd8",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/resources/collision/generated.json": "cbf5b563573252cc9a1011ae0003da1179bd2df4c0300232edf8709d5f4c96eb",
+    "tools/prepare_daehanmun.py": "52e3640880533358f6544b9e135ec0ab4dcb48669260ec8629eafaa2c4e4ce6d",
+    "tools/prepare_world.py": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b"
+  }
+}
+
+[prepare_palace_walk]
+{
+  "task": "W02",
+  "passed": true,
+  "connection_sha256": "13fe77192cd9824607cb2b723bfa896e6089e845cc71cf06cfbe8df805ca401a",
+  "routes": [
+    {
+      "id": "entrance",
+      "name": "대한문 밖↔경내 입구",
+      "source_length_m": 65.60825624838442,
+      "length_m": 65.60825624838442
+    },
+    {
+      "id": "palace_loop",
+      "name": "경내 순환",
+      "source_length_m": 564.4121074158762,
+      "length_m": 564.4463031376771
+    },
+    {
+      "id": "court_approach",
+      "name": "중화전 앞마당 외부",
+      "length_m": 47.011114104986184,
+      "basis": "route within source pedestrian area excluding its holes/restricted steps"
+    }
+  ],
+  "counts": {
+    "source_bodies": 685,
+    "active_source_bodies": 682,
+    "retained_gate_wall_fragments": 4,
+    "active_bodies": 687,
+    "created_bodies": 691,
+    "support_triangles": 1068
+  },
+  "diagnostics": {
+    "support_area_m2": 4265.422856659816,
+    "support_holes": 2,
+    "maximum_loop_adjustment_m": 0.3002153331744771
+  }
+}
+
+[prepare_public_walk]
+{
+  "task": "W03",
+  "passed": true,
+  "connection_sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+  "counts": {
+    "source_bodies": 685,
+    "active_source_bodies": 682,
+    "retained_gate_wall_fragments": 4,
+    "active_bodies": 687,
+    "created_bodies": 692,
+    "support_triangles": 3028
+  },
+  "diagnostics": {
+    "support_area_m2": 18014.395276877556,
+    "support_holes": 4,
+    "movement_components": 1,
+    "routing_components": 1,
+    "unrepaired_movement_components": 2,
+    "repair_area_m2": 13.757727402624798,
+    "numeric_cleanup_tolerance_m": 1e-06,
+    "numeric_cleanup_deviation_m": 4.31397215186206e-07
+  },
+  "routes": [
+    {
+      "id": "city_plaza",
+      "name": "경내 입구→북측 횡단→시청 전면→서울광장 외곽",
+      "length_m": 572.9486705830304,
+      "city_checkpoint_index": 46,
+      "source_sections": [
+        "osm:way:1530764334:highway_line",
+        "osm:way:1415923127:highway_line",
+        "osm:way:1415923126:highway_line",
+        "osm:way:1230789306:highway_line",
+        "osm:way:1498257483:highway_line"
+      ],
+      "area_links": [
+        0
+      ],
+      "viewpoints": [
+        [
+          130.0,
+          -140.0
+        ],
+        [
+          190.0,
+          -100.0
+        ]
+      ]
+    },
+    {
+      "id": "stonewall",
+      "name": "경내 입구→대한문 밖→남측 돌담길→서측 끝",
+      "length_m": 413.5097092059465,
+      "source_sections": [
+        "osm:way:1530764334:highway_line",
+        "osm:way:1415923123:highway_line"
+      ],
+      "area_links": [
+        1
+      ]
+    }
+  ]
+}
+
+[prepare_walkable_itinerary]
+{
+  "task": "W04",
+  "passed": true,
+  "milestone_id": "W0-engineering-walk-v1",
+  "plan_sha256": "934af50f65ce115c41bc1adc1aa6606921dfc6fc31c7ecd293295b2249aabc0f",
+  "counts": {
+    "stages": 11,
+    "points": 335,
+    "segments": 334,
+    "source_routes": 5,
+    "checkpoints": 8,
+    "checkpoint_events": 21,
+    "teleport_links": 0,
+    "new_coordinate_points": 0
+  },
+  "total_length_m": 3327.0481065600493,
+  "elapsed_seconds": 0.210156
+}
+
+[prepare_landmark_spec]
+{"task": "L01", "passed": true, "output": "data/processed/landmark_spec.json", "sha256": "1f701106fea9c267499ccf7adaa02ed67dc730caa141f87eeecb59904b90d29f", "counts": {"landmarks": 10, "sources": 11, "claims": 18, "new_meshes": 0, "new_collision_bodies": 0, "imported_media_files": 0, "new_routes": 0}}
+
+[prepare_palace_landmarks]
+{"task": "L02", "passed": true, "output": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game/data/generated/palace_landmarks.json", "sha256": "346e3fac6f7244e25c96e3b5031a1da008d0b19f05f4f3638835b1bc4d342e18", "counts": {"landmarks": 6, "components": 401, "triangles": 10766, "new_collision_bodies": 0, "new_routes": 0, "imported_media_files": 0}}
+
+[prepare_city_landmarks]
+L03 PREPARED {'landmarks': 4, 'components': 18, 'triangles': 10024, 'new_collision_bodies': 0, 'new_routes': 0, 'imported_media_files': 2}
+
+[prepare_routes]
+N01 prepared [('pedestrian', 2), ('vehicle', 2)]
+
+[prepare_pedestrians]
+N02 prepared 2 pedestrians; vehicles0
+
+[prepare_traffic]
+N03 prepared supports= 2 vehicles= 2
+
+[run_v0]
+{
+  "task": "W03",
+  "passed": true,
+  "connection_sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+  "counts": {
+    "source_bodies": 685,
+    "active_source_bodies": 682,
+    "retained_gate_wall_fragments": 4,
+    "active_bodies": 687,
+    "created_bodies": 692,
+    "support_triangles": 3028
+  }
+}
+L03 CHECK {'landmarks': 4, 'components': 18, 'triangles': 10024, 'new_collision_bodies': 0, 'new_routes': 0, 'imported_media_files': 2}
+N02 checked 2 pedestrians; vehicles0
+N03 checked supports= 2 vehicles= 2
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Metal 4.0 - Forward+ - Using Device #0: Apple - Apple M5 (Apple9)
+
+W03_READY active=687 city=572.949m wall=413.510m boundary=W03-play-boundary-v1
+L02_READY landmarks=6 components=401 new_collision=0
+L03_READY landmarks=4 components=18 new_collision=0
+N02_READY pedestrians=2 vehicles=0 inherited_static=687
+N03_READY pedestrians=2 vehicles=2 original_active=687 new_vehicle_supports=2 total_active=689
+V0_READY quality=standard pedestrians=2 vehicles=2

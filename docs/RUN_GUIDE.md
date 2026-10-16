@@ -42,6 +42,8 @@ SHA-256 feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb
 
 ## 다른 Mac에서
 
+2026-10-16 새로 준비한 **Apple M5·RAM 16GB·macOS 26.6.2**에서는 저장소 루트의 [Sim2Seoul.command](../Sim2Seoul.command)를 더블클릭하면 개발용 V0가 열린다. 공식 Godot 4.7.2는 `/Applications/Godot.app`에 설치했고, Python 환경과 V0 실행 자료도 이 사본에 생성했다. 터미널에서는 저장소 루트에서 `sh tools/run_v0.sh run`을 실행한다. [이번 Mac 기동 기록](../data/reports/m5_startup_20261016.json)은 실제 GUI·준비 로그·Esc 메뉴 복귀 확인 범위이며, 기존 R03 ZIP의 동일 패키지 검수나 전체 동선·성능 재측정은 포함하지 않는다.
+
 동일한 ZIP의 SHA-256을 비교한 뒤 옮긴다. 앱은 로컬 ad-hoc 서명 검사를 통과했으며 배포용 Developer ID 서명·공증은 하지 않았다. 다른 Mac으로 옮긴 뒤 Gatekeeper의 최초 실행과 M4 실행은 아직 미검증이다. macOS가 실행을 막으면 표시한 앱 이름과 사유를 확인한다. 시스템 전체 보안 설정을 끄지 않는다.
 
 M1 Pro에서의 검증을 M4 Pro 실행 결과로 보지 않는다. M4에서는 먼저 칩·RAM·OS를 확인하고 같은 앱의 기동·조작·동선·보행자·차량을 별도로 기록한다. 개발을 이어갈 때는 [다른 Mac 준비](CROSS_MAC.md)와 [현재 상태](WORK_STATUS.md)를 따른다.
