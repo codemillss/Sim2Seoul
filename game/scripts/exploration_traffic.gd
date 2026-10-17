@@ -3,8 +3,10 @@ extends Node
 const COLORS := [Color(.17,.37,.56),Color(.88,.86,.78),Color(.62,.65,.68),Color(.86,.63,.18),Color(.23,.43,.35),Color(.51,.25,.23)]
 var vehicle_count := 0
 var extra_vehicles := []
+var _host: Node3D
 
 func setup(host: Node3D) -> bool:
+	_host=host
 	if host.vehicles.size()!=2 or not is_instance_valid(host.traffic):return false
 	var packed: PackedScene=load("res://scenes/npc/vehicle.tscn")
 	for index in range(2):
@@ -27,6 +29,11 @@ func setup(host: Node3D) -> bool:
 	vehicle_count=host.vehicles.size()
 	print("EXPLORATION_TRAFFIC_READY vehicles=",vehicle_count)
 	return true
+
+func refresh_terrain() -> void:
+	if not is_instance_valid(_host):return
+	for body: CharacterBody3D in _host.vehicles:body.refresh_terrain()
+	if is_instance_valid(_host.traffic):_host.traffic.refresh_terrain()
 
 func _material(color: Color,roughness: float=.65) -> StandardMaterial3D:
 	var result:=StandardMaterial3D.new();result.albedo_color=color;result.roughness=roughness

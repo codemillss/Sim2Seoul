@@ -1,12 +1,61 @@
 # 검증 계획과 완료 판정
 
-## EXP20 현재 수용 범위
+## EXP21 지형 연결 검증과 인수 기준
+
+완료 여부·최종 실행 수·현재 소스와 다음 작업은 [WORK_STATUS](WORK_STATUS.md)와 [EXP21 summary](../data/reports/terrain_integration/20261018/summary.json)를 단일 기준으로 삼는다. 이 절은 구현/재현 절차와 수용 범위를 정하며, 진행 중인 검사를 미리 통과 처리하지 않는다. 원천·보간·게임 기초의 차이는 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md)과 [원천 품질 기록](../data/reports/terrain_integration/20261018/source_quality.json)을 읽는다.
+
+### 원천 검사와 실행 수용을 구분한다
+
+`prepare_runtime_terrain.py --check`는 공유 높이장과 원천 품질 보고서의 결정적 재생성을 대조한다. 원본 등고선41개·표고점96개·고정 좌표, controls hull 안의 현재 영역, 중복/결측/권역 밖 거절·기초/유한 격자를 확인한다. 원천 함수의 contour/spot 재현과 표고점5분할 보류 RMSE2.315m/최대8.739m는 같은 지도 안의 보간 일관성 검사다. 실측5m DEM·독립 위치/표고 정확도나 보행 가능 판정이 아니다. 실패한 무제약 TIN의 최대4.836m contour 오차와 채택하지 않은 이유를 보존한다.
+
+실행 면 준비는 `prepare_terrain_surface.py`가 담당한다. 격자/기초 경계의 면적·연속 연결·유한Y와 수치 보정 전후를 기록하며, 실제 조회/표시/충돌은 동일 물리 TIN을 써야 한다. 원본 XZ와 건물 자체 높이, 투영 전 지지체 두께/수직 여유를 유지하는지 확인한다. 좁은 건물 틈의 높은 최대 경사만으로 전체 보행 합격/실패를 대신하지 않고 실제 공공 동선의 경사·접지·막힘을 검사한다.
+
+### 실제30Hz·60Hz 스트레스와 짧은 부하 관측
+
+최신 탐험의 기본은30Hz 물리/독립 렌더이며, 기존 milestone60Hz 결과는 당시 이력으로 유지한다. 원인 분리와 최적화 후 전체 배우 step 약19ms가60Hz 예산16.7ms를 넘긴 관측을 바탕으로 실행 기본값을 정했다. 최신 소스로 **M1 native30Hz 실제 여정**과 **headless60Hz 스트레스**를 각각 검사한다. 최종 판정/수치는 WORK_STATUS와 summary에서만 확정한다.
+
+`run_terrain_validation.py`의 `--physics-hz=30|60`은 명시한 값을 각 suite에 전달하고, 생략 시 GPU30/headless60을 쓴다. 시험 driver·대기/관측 tick은 실제 Hz에 비례해 같은 시간 구간을 관측하며 m/s·1m·초 기준 중력·원본 XZ/충돌·속도 판정 기준은 유지한다. 결과에는 실제 선택 Hz와 물리 tick/경과 시간의 관계를 남긴다.30Hz와60Hz의 raw tick 수를 동등한 시간이나 고유 검사항목 수로 합치지 않는다.
+
+현재 step 접지/보호 경계·동적 상대·sweep/실제 이동은 매 물리 step 수행한다. 미래0.9m 정적 미리보기만0.15초까지 재사용하고 실패/방향 변경/계획 종료 때 즉시 갱신하는지 확인한다. 원본 다각형/holes 및 문 strict 거리 판정의 공간 색인 동등성·실제 guard 사용, 단일 choose 안의 동일 바닥 조회 재사용도 구분해 관측한다. 현재 물리 상태를 여러 tick 재사용해 통과시키지 않는다.
+
+고정45 render frame의 짧은 부하 프로필은 실제 기본30Hz 장면에서 다시 관측하고 실제 물리 tick 수·벽시계 시간·렌더 간격을 함께 기록한다. 이 짧은 표본이나60Hz 스트레스 성공을 R01 고정 성능 비교·원천 표고 정확도·사람 체감·장시간/M4 성능 합격으로 확대하지 않는다.
+
+### 순차 엔진 검증
+
+먼저 [CROSS_MAC](CROSS_MAC.md)의 Python/GIS·기존11개 V0 생성기와 고정 Godot 준비를 마친다. 입력/허용치를 바꾸지 않는 재시험은 과거 raw·로그를 덮어쓰지 않는 새 출력 위치를 쓴다. 아래 runner는 `main`·`entries`·`actors`를 순차 실행하며, 각 프로세스 종료 코드 외에도 실제 JSON의 result/failed와 parse/runtime 오류 로그를 확인한다. `--only main|entries|actors`로 변경에 관련된 검사를 고를 수 있다. 일반 게임과 native 검사를 동시에 조작하지 않는다.
+
+```sh
+.venv-data/bin/python tools/prepare_local_terrain.py
+.venv-data/bin/python tools/run_terrain_validation.py --mode headless --physics-hz=60 --output /private/tmp/sim2seoul-exp21-headless-new
+.venv-data/bin/python tools/run_terrain_validation.py --mode gpu --physics-hz=30 --output /private/tmp/sim2seoul-exp21-gpu-new --full-journey
+```
+
+| 실행 영역 | 실제 확인할 범위 | 확대하지 않을 주장 |
+|---|---|---|
+| `check_terrain_integration.gd` | 전체 권역 높이 조회/native 바닥, 원래 공공 경로·대한문 양방향·미술관 원래 길의 경사/접지, 실제 입력 여정·연속 점프/중력/복귀·경계 모드/HUD·카메라 | 표고 샘플 수를 전체 동선 완주 수로 세지 않음. `--full-journey` 없는 짧은 시험을 전체 여정으로 세지 않음 |
+| `check_terrain_entries.gd` | 현재126동 출입 후보의 새 지면/기초 연결과 대표 호텔 E·승강기·풀·퇴장 왕복 | 후보 전수 검사와126동 모든 방/층/문턱의 연속 실제 방문을 구분 |
+| `check_terrain_actors.gd` | 원래/추가 보행 객체·차량의 실제 이동/접지·경로·차체 경사/사람 감지·메뉴 정지, native 수목/기하와 거리 화면 | 실제 현장 인구/교통 밀도·AI 생활·버스/열차·장시간 부하 검증 아님 |
+
+초기 위치 배치와 고장 주입·낙하 복귀 fixture를 보고서에 남긴다. 그 뒤 입력/물리로 이동한 구간과 검사 중 순간이동을 분리한다. source 해시를 실행 전후 대조하고 실패와 변경 이유를 development 기록에 보존한다. headless 물리 판정·GPU 실제 기하 읽기·저장 이미지를 열어 검토한 기록은 서로 다른 증거다. 스크린샷 저장 성공이나 노드 자기 보고만으로 시각 수용하지 않는다.
+
+### 별도 캐시 동등성 검사
+
+기하 캐시의 cold/warm 비교는 위3개 runner suite와 별도인 `check_terrain_projection_cache.gd`로 실행한다. 일반 게임을 닫고 전용 ignored 투영 캐시를 보존 이동한 뒤 cold, 이어 같은 소스/엔진으로 warm을 순차 실행한다. 각 실행은 격리된 사용자 설정을 쓰고 production 준비 후 배우 이동을 끈다. 경로순으로 정렬한 실제 global transform·모든 메시 surface 배열·충돌 도형의 SHA와 `observations.aggregate_geometry_sha256`이 정확히 같아야 하며, 실제 캐시 키·hit/miss/write 수와 입력 해시도 함께 확인한다. 재질/RID/instance ID·일반 배우·MultiMesh는 이 지문에서 제외하므로 이 성공만으로 GPU 표시·행동·부하 동등성을 주장하지 않는다. 손상 캐시의 재계산과 현재 재질 재적용은 별도 관측으로 남긴다.
+
+### 최종 인수 검사와 한계
+
+현재 공유 파일과 수용 보고서는 `python3 tools/check_terrain_handoff.py`로 대조한다. `--prepared`는 Git 제외 실행 입력까지 검사한다. 최종 summary가 없으면 인수 미기록으로 거절하며, checker는 새 엔진 실행·실측 정확도·다른 Mac 수용을 수행하지 않는다. 같은 기능을 여러 엔진 모드/회귀로 반복한 판정 수를 고유 요구사항 수로 합산하지 않는다.
+
+실제 문턱·계단/옹벽·지하/교량의 분리 높이, 원천 간 시점 차이와 추정 기초/보간, 모든 카메라 각도·사람 직접 조작감·새 export·M4/다른 Mac·장시간 성능은 별도다. M1 Pro16GB에서 관측한 짧은 frame/메모리 표본은 R01 고정 성능 비교나 M4의 결과로 대체하지 않는다. 아래 EXP20과 이전 수치는 해당 소스의 이력으로 남긴다.
+
+
+## EXP20 동결본 수용 이력
 
 최종 [17보고서/해시/시각 검토](../data/reports/realism_rework/20261017/summary.json)에 headless323·Metal435와46 PNG를 연결한다. 실제 이동/지지·E/문/승강기·계단/물·원본 보존과 native 모양/카메라/머리 가림을 나눠 관찰한다. source counts만 바뀐125→126·기존4인→역할별2~3인 조건은 원본125불변/추가1동 계약·서로 다른 실제 역할까지 확인한다. dummy renderer의 identity transform은 native와 같은 증거로 세지 않는다. 마지막 메뉴 바로가기 카메라 수정 뒤 관련5개 검사도 다시 실행했다.
 
 46개 현재 PNG는 모두 실제로 열어 검토하고 각 검토JSON에 source/사진SHA와 수용한계·초기 잘못된 구도를 보존한다. frame 안의 target/LOS·카메라 구체·아바타 실제 머리 투영/안내 카드 겹침0을 확인한다. 단순 node 가시성·sphere clear·그림 개수만으로 시각 수용하지 않는다. M1 Pro16GB 관측이며 장시간 성능·M4·새 export·직접 사람/청취는 미검증이다.
 
-서울시 공식 등고선/표고점 취득/변환·약1.4MB 공유는 source 입력 검증이다. 현재 전체 게임 지면의 실측 높이 구현이나 보간 정확도 검증은 아니며 EXP21에서 별도 완료해야 한다.
+서울시 공식 등고선/표고점 취득/변환·약1.4MB 공유는 source 입력 검증이다. EXP20 당시 전체 게임 지면의 높이 연결이나 보간 수용 증거는 아니었으며, 현행 지형은 위 EXP21 별도 증거를 따른다.
 
 
 ## EXP16–19 통합 검증
@@ -456,3 +505,9 @@ N04는같은2NPC/2차량·원문11단계/334구간의 실제도착·4회측면�
 R03은 M1 실제 release 앱에서 package58·quality55·motion398·city58·palace76검사를 통과했고, 압축 raw 독립 재검산398검사와13PNG 직접 검토를 별도로 보존했다. [최종 패키지 증거](../data/reports/package_check.md). OS 입력/초점·사람 조작감과 전송 Gatekeeper는 미실행이다.
 
 R04는 원래 미접근 대안으로 M4를 UNRUN 처리한다. 경로 adapter의29fixture검사와 실제 final ZIP/app·113source 검수는 M1에서의 바인딩 증거이며 다른 Mac 실행/성능 증거가 아니다. 원 manifest와 source/runtime SHA를 유지하고 실제 기기 사양·동일 품질/출력/전원·동일 시나리오로 재개한다. [M4 사양null/재개 조건](../data/reports/performance_m4pro.json)·[첫 버전 판정](../data/reports/first_version_acceptance.md).
+
+EXP21 후속 부하 검증: `profile_terrain_runtime.gd`는 사람/차량 OFF·사람만·차량만·모두 ON을 각각45 process frame 관찰한다. headless와 실제 GPU frame 시간을 구분하고 일반 성능 합격으로 해석하지 않는다. `source_polygon_index_checks.gd`는 실제 사유지/차도 원본과 구멍·셀 경계·문 엄격 거리 경계를 대조하며, 보수적 차량 앞길 검사의 진단은 기존 모든 스윕 범위가 실제로 포함되는지 별도 검사한다. 최종 수치·화면과 최적화 전 기록은 EXP21 요약에서 연결한다.
+
+### EXP21 지형 여정과 동적 배우의 검증 분리
+
+전체3.3km 연속 입력 여정은 지형·건물·카메라 전용이다. 정지한 원래 NPC가 동선 위에 서 있으면 검사 자체를 막으므로, 이 fixture 안에서만44개 동적 CharacterBody layer를 임시 해제하고 모두 원래 값으로 복원한다. 플레이어 mask·원본 건물·지면·카메라 충돌은 유지한다. 별도 생산 장면의 actors 검사는30개 보행 몸체(사람28/개2)·14차량을20초간 실제 이동시키며, 이동 전과 fixture 뒤에 각각 layer·mask·활성 충돌 shape를 직접 확인한다. 이 두 결과를 살아 있는 배우와 함께3.3km를 완주한 증거나 모든 실제 교통 상황의 검증으로 확대하지 않는다.

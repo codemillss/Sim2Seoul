@@ -12,6 +12,9 @@ const SPEED_PROFILES := {
 }
 
 @export var exploration_settings_path := "user://sim2seoul_exploration.json"
+# This growing exploration scene uses30Hz fixed physics on the M1 baseline.
+# Rendering remains independent; validation may explicitly request60Hz stress.
+@export var exploration_physics_hz: int=30
 var speed_id := "brisk"
 var free_roam_enabled := true
 var exploration_settings_recovered := false
@@ -48,8 +51,12 @@ var interior_room_access: Node3D
 var building_exterior_identity: Node3D
 var neighborhood_greenery: Node3D
 var neighborhood_population: Node3D
+var terrain_surface: Node3D
+var terrain_binding: RefCounted
 
 func _ready() -> void:
+	assert(exploration_physics_hz in [30,60])
+	Engine.physics_ticks_per_second=exploration_physics_hz
 	# Runtime binding belongs to this scene; historical project input stays fixed.
 	if not InputMap.has_action("jump"):
 		InputMap.add_action("jump")
@@ -168,6 +175,12 @@ func _ready() -> void:
 	if not neighborhood_population.setup(self):
 		_exploration_failure("거리 전반의 보행과 차량을 준비하지 못했습니다.");return
 	neighborhood_population.set_people_running(pedestrians_running)
+	terrain_surface=preload("res://scripts/terrain_surface.gd").new();terrain_surface.name="TerrainSurface";add_child(terrain_surface)
+	if not terrain_surface.prepare():
+		_exploration_failure("권역 지형을 준비하지 못했습니다. 지형 준비 도구를 확인해주세요.");return
+	terrain_binding=preload("res://scripts/terrain_scene_binding.gd").new()
+	if not terrain_binding.apply(self,terrain_surface):
+		_exploration_failure("도로·건물·출입구 지형 연결을 완료하지 못했습니다.");return
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -457,15 +470,21 @@ func _select_source_document(index: int) -> void:
 	if index==0:
 		sources_text.text=sources_text.text.replace("실내·계단·잔디는 탐험 범위에서 제외합니다.","출입 표지가 있는 건물은 실내·계단·엘리베이터로 여러 층을 탐험할 수 있습니다. 자유 탐험을 켜면 잔디와 도로에서도 이동할 수 있습니다.")
 		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 출입 표지가 있는 건물 정문에서 E로 들어갑니다. 실내 크기는 원본 건물 외곽 안에 맞췄으며, 층수는 OSM 원문 또는 높이 추정에 따릅니다. 방 배치·계단·엘리베이터와 실내 보행자는 게임용 재구성입니다. 작은 건물·사유지·일부 역사 건축물의 실내는 제외합니다. 석재 텍스처는 AI로 새로 제작했으며 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
-		sources_text.text+="\n\n[b]거리와 언덕[/b]\n진주회관과 편의점 외관은 공식 장소 정보·OSM 스냅샷을 바탕으로 단순화했습니다. 현재 입점·정확한 점포 단위나 새 실내 출입을 확인한 표현은 아닙니다. 주차 차량·오토바이·새·버스킹·가로등 위치와 낮/해질녘/밤은 게임 창작입니다. 미술관 진입로는 실제 길의 수평 위치 위에 만든 높이3m의 게임용 경사이며 실측 지형이 아닙니다. 기존 도시 전체의 실제 고도를 복원하지 않았습니다."
+		sources_text.text+="\n\n[b]거리와 지형[/b]\n진주회관과 편의점 외관은 공식 장소 정보·OSM 스냅샷을 바탕으로 단순화했습니다. 현재 입점·정확한 점포 단위나 새 실내 출입을 확인한 표현은 아닙니다. 주차 차량·오토바이·새·버스킹·가로등 위치와 낮/해질녘/밤은 게임 창작입니다. 권역 지형은 서울시 공개 등고선·표고점을 보간하고 건물 기초를 게임용으로 평탄화했습니다. 도로·출입구·보행자·차량은 같은 지면에 연결했습니다. 실측 DEM·정문 높이·절대 해발고도의 정확도를 보증하지 않으며, 미술관의 이전 임의3m 경사는 제거했습니다."
 		sources_text.text+="\n낮은 경계석/보도 띠와 산책하는 사람6명·반려견2마리는 기존 게임 도로/보행 공간에 더한 창작입니다. 실제 연석 위치·유동 인구나 동물 행동을 조사한 재현은 아닙니다. 기존 보행·횡단·입구를 비워 두며 보행자 이동 설정으로 산책을 멈출 수 있습니다."
+
+func _height_above_terrain(point: Vector3) -> float:
+	if is_instance_valid(terrain_surface) and terrain_surface.loaded:
+		var floor_y: float=terrain_surface.ground_y_world(point)
+		if is_finite(floor_y):return point.y-floor_y
+	return point.y
 
 func _process(delta: float) -> void:
 	super._process(delta)
 	if not runtime_ok:return
 	if is_instance_valid(interior_visit) and interior_visit.active:
 		status.text=interior_visit.status_text()
-	elif not player.interior_active and player.global_position.y>6.0:
+	elif not player.interior_active and _height_above_terrain(player.global_position)>6.0:
 		var roof: Node3D=exploration_rooftop_access.active_outdoor_roof if is_instance_valid(exploration_rooftop_access) else null
 		if is_instance_valid(roof):
 			status.text=String(roof.spec.title)+" · 옥상 야외 수영장\nWASD 이동 / 수영 · Space 점프 / 물 밖으로 · 옥상 승강장 E"

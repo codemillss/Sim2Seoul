@@ -31,6 +31,49 @@ var _water_entries := 0
 var _water_exits := 0
 var _water_jumps := 0
 var facility_control := false
+var terrain_surface: Node
+var _terrain_recovery_rebased := false
+
+func bind_terrain_surface(service: Node) -> bool:
+	# Root warps the live actor separately. Rebase only the outdoor recovery
+	# anchor here, once, so falling on a low street never returns underground.
+	if not is_instance_valid(service) or not service.has_method("ground_y_world") or interior_active:return false
+	if _terrain_recovery_rebased:return terrain_surface==service
+	var base: float=service.ground_y_world(spawn_transform.origin)
+	if not is_finite(base):return false
+	terrain_surface=service
+	spawn_transform.origin.y+=base
+	fall_limit_y=spawn_transform.origin.y-3.0
+	spawn_valid=false
+	_terrain_recovery_rebased=true
+	return true
+
+func terrain_ground_y(point: Vector3) -> float:
+	return terrain_surface.ground_y_world(point) if is_instance_valid(terrain_surface) else NAN
+
+func _valid_spawn() -> bool:
+	if not is_instance_valid(terrain_surface):return super._valid_spawn()
+	# Retain the selected exterior/private boundary and the complete capsule.
+	# A legacy analytic obstacle interval has flat Y and is unsuitable for a
+	# rebased source building; its unchanged native body remains authoritative.
+	var point := spawn_transform.origin
+	if not _inside(point) or not spawn_transform.basis.is_finite():return false
+	var space := get_world_3d().direct_space_state
+	var ray := PhysicsRayQueryParameters3D.create(point+Vector3.UP,point-Vector3.UP*.25,collision_mask,[get_rid()])
+	var ground := space.intersect_ray(ray)
+	if ground.is_empty() or ground.normal.dot(Vector3.UP)<cos(floor_max_angle):return false
+	var gap: float=point.y-ground.position.y
+	if gap<.005 or gap>.20:return false
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape=$CollisionShape.shape
+	query.transform=spawn_transform*$CollisionShape.transform
+	query.collision_mask=collision_mask;query.exclude=[get_rid()]
+	return space.intersect_shape(query,1).is_empty()
+
+func _current_fall_limit_y() -> float:
+	if interior_active:return fall_limit_y
+	var ground_y := terrain_ground_y(global_position)
+	return ground_y-3.0 if is_finite(ground_y) else fall_limit_y
 
 func set_facility_control(enabled: bool) -> void:
 	if facility_control==enabled:return
@@ -265,7 +308,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		physics_stepped.emit(delta)
 		return
-	if not global_position.is_finite() or global_position.y<fall_limit_y:
+	if not global_position.is_finite() or global_position.y<_current_fall_limit_y():
 		recover("fall")
 		physics_stepped.emit(delta)
 		return

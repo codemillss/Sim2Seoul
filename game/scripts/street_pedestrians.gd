@@ -5,6 +5,7 @@ const DESIGN_PATH := "res://assets/authored/street_pedestrians.json"
 const WORLD_PATH := "res://resources/world_geometry/world.json"
 const AVATAR := preload("res://scripts/player/exploration_avatar.gd")
 const AVOIDANCE := preload("res://scripts/pedestrian_corridor_avoidance.gd")
+const SOURCE_POLYGON_INDEX := preload("res://scripts/source_polygon_index.gd")
 class StreetActor extends CharacterBody3D:
 	var facility_control := false
 	func _physics_process(_delta: float) -> void:pass
@@ -35,6 +36,10 @@ var _maximum_leash := 0.0
 var _leash_blocked_ticks := 0
 var _maximum_local_density := 0
 var avoidance: RefCounted
+var private_polygon_index: RefCounted
+var road_polygon_index: RefCounted
+var _door_guard_index: RefCounted
+var _terrain_provider: Node
 
 func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: Node3D) -> bool:
 	if loaded or not is_instance_valid(source_city) or not is_instance_valid(controlled_player) or not is_instance_valid(camera_rig):return false
@@ -52,6 +57,7 @@ func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: No
 	if is_instance_valid(visit):
 		for row: Dictionary in visit.catalog:
 			for entry: Dictionary in row.entry_candidates:_doors.append(entry.entrance)
+	_prepare_polygon_indices()
 	avoidance=AVOIDANCE.new();avoidance.setup(self,_at,_ground,_allowed,_neighbors)
 	for record: Dictionary in _design.routes:_make_group(record)
 	if groups.size()!=6 or actors.size()!=8:return _fail("안전한 거리 보행 공간을 확보하지 못했습니다.")
@@ -86,17 +92,85 @@ func _at(group: Dictionary,station: float,side_extra := 0.0) -> Vector3:
 		var a: Vector3=group.points[index-1];var b: Vector3=group.points[index]
 		var offset: float=float(group.record.side_offset_m)+side_extra
 		a+=group.sides[index-1]*offset;b+=group.sides[index]*offset
-		return a.lerp(b,(s-group.arc[index-1])/(group.arc[index]-group.arc[index-1]))
-	return group.points.back()
+		return _terrain_point(a.lerp(b,(s-group.arc[index-1])/(group.arc[index]-group.arc[index-1])))
+	return _terrain_point(group.points.back())
 
 func _tangent(group: Dictionary,station: float) -> Vector3:
 	var offset:=_at(group,minf(station+.05,group.length))-_at(group,maxf(station-.05,0.));offset.y=0.;return offset.normalized()
 
+func _terrain_service() -> Node:
+	if is_instance_valid(_terrain_provider):return _terrain_provider
+	if not is_instance_valid(city):return null
+	var candidate: Variant=city.get_parent().get("terrain_surface")
+	return candidate as Node if is_instance_valid(candidate) and bool(candidate.get("loaded")) else null
+
+func _terrain_point(at: Vector3) -> Vector3:
+	# Bound once by refresh_terrain after the shared terrain commits loaded.
+	# Route points need only Y; avoid rebuilding a normal/result dictionary.
+	if not is_instance_valid(_terrain_provider):return at
+	var height: float=_terrain_provider.ground_y_world(at)
+	return Vector3(at.x,height,at.z) if is_finite(height) else at
+
+func refresh_terrain() -> void:
+	# Initialization only. Ordinary patrols still move exclusively through physics;
+	# source XZ vertices and station distances are never rewritten by elevation.
+	var provider: Node=_terrain_service()
+	if provider==null:return
+	_terrain_provider=provider
+	for group: Dictionary in groups:
+		for index: int in range(group.points.size()):group.points[index]=_terrain_point(group.points[index])
+		group.erase("avoidance_plan")
+		for row: Dictionary in group.members:
+			var at: Vector3=_terrain_point(_at(group,group.station,float(row.side)))+Vector3.UP*.025
+			row.body.global_position=at;row.body.velocity=Vector3.ZERO
+			row.previous_pose=row.visual.global_transform;row.current_pose=row.visual.global_transform
+			var sample: Dictionary=_terrain_service().sample_ground_world(at)
+			row.floor_normal=sample.get("normal",Vector3.UP)
+			row.minimum_ground_gap_m=INF;row.maximum_ground_gap_m=-INF
+
 func _ground(at: Vector3,height := 2.0) -> Dictionary:
+	at=_terrain_point(at)
 	var ray:=PhysicsRayQueryParameters3D.create(at+Vector3.UP*height,at-Vector3.UP*height,1|32)
 	var hit: Dictionary=get_world_3d().direct_space_state.intersect_ray(ray)
 	if hit.is_empty() or hit.normal.y<.75:return {}
 	return {"point":Vector3(at.x,hit.position.y+.025,at.z),"normal":hit.normal,"rid":hit.rid,"collider":hit.collider}
+
+func _prepare_polygon_indices() -> void:
+	if not is_instance_valid(city) or not city.has_method("_contains"):return
+	private_polygon_index=SOURCE_POLYGON_INDEX.new()
+	if not private_polygon_index.setup(city.private_cache,Callable(city,"_contains")):private_polygon_index=null
+	# road_cache is a collection of multipart polygons. Flatten exactly one
+	# level, retaining each outer ring and its holes. The original loop is OR
+	# across those collections, which equals _contains on this combined list.
+	var road_parts: Array=[]
+	for parts: Array in city.road_cache:road_parts.append_array(parts)
+	road_polygon_index=SOURCE_POLYGON_INDEX.new()
+	if not road_polygon_index.setup(road_parts,Callable(city,"_contains")):road_polygon_index=null
+	var door_points: Array[Vector2]=[]
+	for door: Vector3 in _doors:door_points.append(Vector2(door.x,door.z))
+	_door_guard_index=SOURCE_POLYGON_INDEX.new()
+	if not _door_guard_index.setup_points(door_points):_door_guard_index=null
+
+func _source_private_contains(point: Vector2) -> bool:
+	if is_instance_valid(private_polygon_index):return private_polygon_index.contains(point)
+	return city._contains(point,city.private_cache) if city.has_method("_contains") else false
+
+func _source_road_contains(point: Vector2) -> bool:
+	if is_instance_valid(road_polygon_index):return road_polygon_index.contains(point)
+	if not city.has_method("_contains"):return false
+	for parts: Array in city.road_cache:
+		if city._contains(point,parts):return true
+	return false
+
+func _source_door_near(point: Vector3,radius: float) -> bool:
+	var flat: Vector2=Vector2(point.x,point.z)
+	if is_instance_valid(_door_guard_index):return _door_guard_index.within_distance(flat,1.0+radius)
+	for door: Vector3 in _doors:
+		if flat.distance_to(Vector2(door.x,door.z))<1.0+radius:return true
+	return false
+
+func _source_polygon_index_snapshot() -> Dictionary:
+	return {"private":private_polygon_index.snapshot() if is_instance_valid(private_polygon_index) else {},"roads":road_polygon_index.snapshot() if is_instance_valid(road_polygon_index) else {},"doors":_door_guard_index.snapshot() if is_instance_valid(_door_guard_index) else {},"scope":"Static source rings only; exact original membership callback, no changes to road/drive/private permissions, physical sweeps, actors or source arrays."}
 
 func _allowed(point: Vector3,radius: float) -> bool:
 	# Source roads/private rings remain protected even when the player's
@@ -104,13 +178,10 @@ func _allowed(point: Vector3,radius: float) -> bool:
 	for offset: Vector3 in [Vector3.ZERO,Vector3.RIGHT*radius,Vector3.LEFT*radius,Vector3.FORWARD*radius,Vector3.BACK*radius]:
 		var sample:=point+offset;var local:=city.to_local(sample);var flat:=Vector2(local.x,local.z)
 		if not player.free_roam_bounds.grow(-.15).has_point(Vector2(sample.x,sample.z)):return false
-		if city.has_method("_contains"):
-			if city._contains(flat,city.private_cache):return false
-			for road: Array in city.road_cache:
-				if city._contains(flat,road):return false
+		if _source_private_contains(flat):return false
+		if _source_road_contains(flat):return false
 	if _traffic_distance(point)<float(_design.policy.traffic_route_clearance_m)+radius:return false
-	for door: Vector3 in _doors:
-		if Vector2(point.x-door.x,point.z-door.z).length()<1.0+radius:return false
+	if _source_door_near(point,radius):return false
 	return true
 
 func _neighbors(group: Dictionary) -> Array:
@@ -272,8 +343,9 @@ func _block(group: Dictionary,direction: int,distance: float) -> String:
 
 func _step_member(row: Dictionary,target: Vector3,speed: float,delta: float,direction: Vector3) -> void:
 	var body: CharacterBody3D=row.body;var before:=body.global_position
+	row["physical_step_blocked"]=false
 	var support:=_ground(target)
-	if support.is_empty():body.velocity=Vector3.ZERO;return
+	if support.is_empty():row.physical_step_blocked=true;body.velocity=Vector3.ZERO;return
 	row.floor_rid=support.rid;row.floor_normal=support.normal
 	var flat:=Vector3(target.x-before.x,0,target.z-before.z)
 	var desired:=flat.limit_length(speed*delta)/delta
@@ -281,6 +353,7 @@ func _step_member(row: Dictionary,target: Vector3,speed: float,delta: float,dire
 	body.velocity.y=-.12 if body.is_on_floor() else maxf(body.velocity.y-9.8*delta,-8.)
 	body.move_and_slide()
 	var achieved:=body.global_position-before;var distance:=Vector2(achieved.x,achieved.z).length()
+	row["physical_step_blocked"]=flat.length()>.001 and distance<minf(flat.length(),speed*delta)*.5
 	row.distance_m+=distance;row.moves+=1 if distance>.0001 else 0;row.phase=fmod(row.phase+distance/.65*TAU,TAU)
 	_maximum_step=maxf(_maximum_step,distance)
 	var yaw:=atan2(-direction.x,-direction.z)
@@ -332,6 +405,7 @@ func _physics_process(delta: float) -> void:
 			var row: Dictionary=group.members[index];var target: Vector3=chosen.targets[index] if speed>0. else row.body.global_position
 			var motion_direction: Vector3=target-row.body.global_position;motion_direction.y=0.
 			_step_member(row,target,float(_design.policy.maximum_dog_speed_mps) if row.kind=="dog" and speed>0. else speed,delta,motion_direction.normalized() if motion_direction.length()>.0001 else direction)
+			if row.get("physical_step_blocked",false):group["avoidance_preview_wait_s"]=0.0
 		var human: Dictionary=group.members[0];var closest:=INF;var station: float=group.station
 		for index in range(1,group.points.size()):
 			var a:=_at(group,group.arc[index-1]);var b:=_at(group,group.arc[index]);var p: Vector3=human.body.global_position
@@ -392,6 +466,10 @@ func _process(_delta: float) -> void:
 	for row: Dictionary in actors:row.proxy.global_transform=row.previous_pose.interpolate_with(row.current_pose,fraction)
 	_update_leashes(true)
 
+func _avoidance_query_snapshot() -> Dictionary:
+	if not is_instance_valid(avoidance):return {}
+	return {"choose_ground_calls":avoidance.choose_ground_calls,"choose_ground_cache_hits":avoidance.choose_ground_cache_hits,"static_preview_calls":avoidance.static_preview_calls,"static_preview_skipped":avoidance.static_preview_skipped,"static_preview_interval_s":.15,"native_floor_cache_scope":"One choose call, exact Vector3 keys, no physics mutation inside call."}
+
 func snapshot() -> Dictionary:
 	var rows:=[];var routes:=[]
 	for row: Dictionary in actors:
@@ -404,4 +482,4 @@ func snapshot() -> Dictionary:
 			item["feet"]=feet;item["tail_rotation"]=row.tail.rotation;item["collar"]=row.collar.global_position
 		rows.append(item)
 	for group: Dictionary in groups:routes.append({"id":group.id,"source":group.source,"source_points":group.points,"side_offset_m":group.record.side_offset_m,"dog":group.record.dog,"station_m":group.station,"length_m":group.length,"state":group.state if running else "paused","blocked_reason":group.blocked_reason,"direction":group.direction,"turns":group.turns,"actual_distance_m":group.actual_distance_m,"minimum_traffic_route_distance_m":group.minimum_traffic_distance_m,"leash_visible":group.leash.visible if group.record.dog else false,"authored_height":group.authored_height,"avoidance_offset_m":group.get("avoidance_offset_m",0.),"avoidance_lane_m":group.get("avoidance_lane_m",0.),"avoidance_count":group.get("avoidance_count",0)})
-	return {"loaded":loaded,"error":load_error,"authored_population":true,"source_geometry_modified":false,"running":running,"elapsed":elapsed,"walker_count":groups.size(),"dog_count":actors.size()-groups.size(),"actor_count":actors.size(),"actors":rows,"routes":routes,"skipped":skipped,"maximum_step_m":_maximum_step,"minimum_player_distance_m":_minimum_player_distance,"minimum_neighbor_distance_m":_minimum_neighbor_distance,"maximum_leash_length_m":_maximum_leash,"leash_blocked_ticks":_leash_blocked_ticks,"maximum_observed_actors_within_10m":_maximum_local_density,"maximum_authored_actors":8,"traffic_registration_count":actors.filter(func(row: Dictionary)->bool:return row.registered_traffic).size()}
+	return {"avoidance_query_reuse":_avoidance_query_snapshot(),"source_polygon_indices":_source_polygon_index_snapshot(),"loaded":loaded,"error":load_error,"authored_population":true,"source_geometry_modified":false,"running":running,"elapsed":elapsed,"walker_count":groups.size(),"dog_count":actors.size()-groups.size(),"actor_count":actors.size(),"actors":rows,"routes":routes,"skipped":skipped,"maximum_step_m":_maximum_step,"minimum_player_distance_m":_minimum_player_distance,"minimum_neighbor_distance_m":_minimum_neighbor_distance,"maximum_leash_length_m":_maximum_leash,"leash_blocked_ticks":_leash_blocked_ticks,"maximum_observed_actors_within_10m":_maximum_local_density,"maximum_authored_actors":8,"traffic_registration_count":actors.filter(func(row: Dictionary)->bool:return row.registered_traffic).size()}

@@ -1,13 +1,32 @@
 # 두 Mac에서 이어서 개발하기
 
-## 2026-10-18 지형 지역 원천 인수
+## 2026-10-18 EXP21 지형과 다른 Mac의 실행 준비
 
-`data/raw/supplemental/seoul_terrain/20261018/`의7파일은 약1.4MB의 서울시 공식 source 지역본이다. Git에서 함께 받아 쓰며 원본 서울 전체 ZIP은 받지 않아도 된다. EPSG5174 원본/변환·source 높이·datum 미상·공공누리1유형은 manifest와source_license를 읽는다. 로컬 좌표 JSON은 WGS84 GeoJSON과 구분한다. 이 자료는 아직 게임 높이에 연결하지 않았다.
+최신 구현 설명은 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md), 실제 완료 여부·다음 행동은 [WORK_STATUS](WORK_STATUS.md)와 [EXP21 최종 인수 요약](../data/reports/terrain_integration/20261018/summary.json)을 따른다. 최종 요약이 아직 없으면 인수 기록이 확정되지 않은 상태다. 아래 EXP20·V0/R03의 판정과 성능은 당시 버전의 이력이며 새 지형 검증을 대신하지 않는다.
 
-정확한 원본 재현이 필요한 경우만 `.venv-data/bin/python tools/prepare_seoul_terrain_sources.py --download` 후 `--check`를 사용한다. 공식 익명 다운로드이며 서울 ZIP은 `/private/tmp`에만 둔다. 약45.85MB ZIP/국가 지도·캐시를 Git에 넣지 않는다. FABDEM/Mapzen은 비교 참고이며 기본 실행 의존성이 아니다.
+공유 입력은 `data/raw/supplemental/seoul_terrain/20261018/`의 공식 지역 원천7파일과 `game/assets/authored/terrain_heightfield.json`이다. 등고선41개·표고점96개, EPSG5174→기존32652/local XZ, 원래 HEIGHT·현재 영역과 주변200m halo·공공누리1유형·수직 datum 미상을 보존한다. 원천을 보간한 상대Y와 추정한 건물 기초는 별도 층이며, 전체 서울 실측 DEM을 공유하는 것이 아니다. 서울 전체 ZIP·국가 지도·FABDEM/Mapzen 자료는 일반 실행에 필요하지 않다.
 
+새 Mac의 **선행 준비**는 기존과 같다. Python3.14와 고정 Godot4.7.2를 설치하고 `bash tools/setup_mac.sh`로 기기별 `.venv-data`와 `requirements-data.txt` 의존성(NumPy/Shapely 포함)을 준비한다. 이어 아래 [V0 개발 자료를 처음 만드는 Mac의 추가 준비](#v0-개발-자료를-처음-만드는-mac의-추가-준비)의11개 생성기를 순서대로 실행한다. 실행기가 이 Python 환경이나 이전 단계 자료까지 자동 설치한다고 가정하지 않는다. 이미 준비된 Mac에서는 같은 초기 준비를 반복하지 않는다.
 
-## 2026-10-17 최신 개발 장면 인수
+그 뒤 `Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`으로 최신 탐험 장면을 연다. 실행기는 `.venv-data/bin/python`(변경 시 `SIM2SEOUL_PYTHON`)으로 `prepare_local_terrain.py`를 호출해 Git 제외 물리 TIN/공간 색인 `game/data/generated/terrain_surface.json`을 준비·대조하고 Godot import 후 실행한다. 원천·생성기·수치 보정 도구가 같고 출력 SHA도 맞으면 기존 TIN을 재사용한다. 장면의 첫 지형 투영은 `game/data/generated/terrain_projection_cache/`의 기하 리소스를 로컬에 만들며 다음 기동에서 정확한 의존성 키가 맞는 것만 재사용한다. 두 생성물과 `.godot`·가상환경은 다른 Mac에서 복사하거나 Git에 넣지 않는다. 첫 계산과 캐시 재사용의 기동 시간을 구분한다.
+
+최신 `explore_walk`는 `exploration_physics_hz=30`을 기본으로 사용하고 렌더 프레임은 별도로 동작한다. 분리 부하 관측과 최적화 후에도 배우를 모두 켠 물리 step이 약19ms로60Hz의16.7ms 예산을 넘었기 때문에 정한 실행 기본안이다. 과거 milestone 장면의60Hz는 바꾸지 않는다.1m 축척·m/s·초 기준 중력/타이머·원본 경로/충돌은 유지하고, 검증의 구동/관측 tick만 선택한 Hz에 맞춰 환산한다. M1의 실제 native30Hz 여정과 headless60Hz 스트레스를 분리해 검사하며 최종 수용은 WORK_STATUS/summary를 따른다. 새 Mac의 속도·M4 성능을 보증하는 설정은 아니다.
+
+`prepare_local_terrain.py`는 공유 `mesh_preparation.json`을 보존하고, 이 Mac의 재생성 기록이 달라지면 Git 제외 `terrain_local_preparation.json`에 남긴다. 실제 TIN SHA가 공유 기준과 다르면 자동 수용하지 않고 검증을 요구한다. 새 Mac의 실행으로 기존 수용 증거를 덮어쓰지 않는다.
+
+현재 인수 무결성 검사는 다음 도구를 쓴다. 기본 검사는 표준 Python만 사용하며 다운로드나 Godot를 실행하지 않는다. `--prepared`는 위 로컬 실행 입력까지 대조한다. 이 검사 성공은 해당 Mac의 실제 물리·렌더·조작·성능 수용이 아니다.
+
+```sh
+python3 tools/check_terrain_handoff.py
+# 해당 Mac의 실행 자료 준비 뒤
+python3 tools/check_terrain_handoff.py --prepared
+```
+
+기존 `check_realism_handoff.py`와 EXP20 요약은 당시 고정 소스/증거를 재대조하는 역사 자료다. EXP21로 변경한 현행 소스의 인수 기준으로 쓰거나 과거 해시를 현재 값으로 덮어쓰지 않는다. 실제 재시험은 [VALIDATION_PLAN의 EXP21 절](VALIDATION_PLAN.md#exp21-지형-연결-검증과-인수-기준)을 따른다. M1 Pro16GB 결과를 M4 Pro/다른 Mac이나 새 export의 결과로 복사하지 않는다.
+
+원본 ZIP까지 다시 대조해야 할 때만 `.venv-data/bin/python tools/prepare_seoul_terrain_sources.py --download` 후 `--check`를 사용한다. 공식 익명 다운로드이며 약45.85MB 서울 ZIP은 `/private/tmp`에만 둔다. 공유 높이장을 다시 만들거나 검사할 때는 기존 GIS/world 준비 뒤 `prepare_runtime_terrain.py`/`--check`를 사용한다. 일반 실행과 인수에 원천 다운로드를 반복할 필요는 없다.
+
+## 2026-10-17 EXP16–20 개발 장면 인수 이력
 
 현재 후속 기능은 `explore_walk`이며 `Sim2Seoul.command` / `sh tools/run_exploration.sh run`으로 연다. 아래 V0/R03의 앱/성능/검수는 당시 고정 버전이다. EXP16–19는 큰 호텔 야외 풀·직접 옥상 접근/이탈·보행 우회·SFC 에스컬레이터/새 운동기구·거리 생활/안내/음악을 포함한다. 출처·선택 이유·미구현 교통 계획까지 `PROJECT_CONTEXT`와 `WORK_STATUS`에 함께 공유한다.
 
@@ -15,7 +34,7 @@ Git으로 새로 받은 WAV/PNG/GLB의 import 캐시는 각 Mac에서 필요하�
 
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
-각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 최신 개발 실행은 아래 R02의 `v0_walk`이며, N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 현재 M1의고정1920×1080성능은R01로측정했고품질/메뉴회귀는R02로확인했다. R03은 같은 V0의 M1 로컬 앱 검수를 완료했고 R04는 M4 UNRUN 대안으로 판정했다. 진행 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. M4·사람조작감·현실지형/접근은별도다.
+각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 아래 R02의 `v0_walk`는 당시 고정판이며 현재 EXP21 개발 실행은 위 `explore_walk` 안내를 따른다.  N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 현재 M1의고정1920×1080성능은R01로측정했고품질/메뉴회귀는R02로확인했다. R03은 같은 V0의 M1 로컬 앱 검수를 완료했고 R04는 M4 UNRUN 대안으로 판정했다. 진행 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. M4·사람조작감·현실지형/접근은별도다.
 
 ## 공유되는 것
 
@@ -479,3 +498,5 @@ ditto -x -k /delivery/Sim2Seoul.zip /delivery/unpacked
 기존 package checker가 같은 source/runtime SHA, 실제 기기/release/설정·오프라인 기동·전체 여정·서명을 검사한다. 새 clone의 원천/생성 SHA가 다르면 원인을 확인하며 원 manifest/PASS 증거를 덮어쓰지 않는다. 과거 N04 인수 snapshot의 문서 SHA는 이후 기록 갱신과 다를 수 있으므로 현재 문서를 과거 값으로 되돌리지 않는다. 최신 앱 인수는 위 R03 manifest와 checker로 수행한다.
 
 [작은 입력29검사](../data/reports/r04/manifest_relocation_checks.json)는 과거 시점의 fixture 기록이다. [최종 실제 앱/ZIP·113source 경로 검수](../data/reports/r04/final_path_binding/source_check.json)는 현재 M1에서 수행했다. 다른 clone/M4/앱 재실행 결과가 아니며 M4 기록은 계속 UNRUN이다. 실제 M4에서는 칩/RAM/OS·전원/품질/출력 크기를 기록하고 같은 검수의 raw/check/log/PNG를 별도 보존한다. OS 입력/초점과 사람 조작감, R01과 같은 성능 측정은 서로 구분한다.
+
+새 Mac의 일반 실행은 `prepare_local_terrain.py`가 실제 지면 생성기를 호출한다. 재생성으로 달라진 준비 보고서는 Git 제외 `terrain_local_preparation.json`에 보존하고 공유된 수용 보고서는 복원한다. 실제 출력 SHA가 공유 기준과 다르면 자동 기동을 멈춰 그 Mac의 검증 없이 수용 기록을 덮어쓰지 않는다. 개발 중 원천/생성기 변경의 새 판정은 별도 작업·증거로 갱신한다.

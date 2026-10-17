@@ -21,6 +21,16 @@ var _surfaces := {}
 var _collision_shapes := 0
 var _maximum_mesh_grade := 0.0
 var _terrace_frame := Transform3D.IDENTITY
+var _terrain_surface: Node3D
+
+func adopt_terrain(surface: Node3D) -> void:
+	_terrain_surface=surface
+	# The invented 3m profile and lookout are superseded, not added to source terrain.
+	for child in get_children():
+		remove_child(child);child.queue_free()
+	bodies.clear();anchors.clear()
+	set_meta("authored_terrain",false)
+	set_meta("source_interpolated_terrain",true)
 
 func setup(source_city: Node3D, controlled_player: CharacterBody3D, camera_rig: Node3D) -> bool:
 	if loaded or not is_instance_valid(source_city) or not is_instance_valid(controlled_player):return false
@@ -86,13 +96,23 @@ func path_point(station_m: float) -> Vector3:
 	var s:=clampf(station_m,0.,float(_design.design.used_length_m))
 	for index in range(1,_line.size()):
 		if s>_arc[index] and index<_line.size()-1:continue
-		return _line[index-1].lerp(_line[index],(s-_arc[index-1])/(_arc[index]-_arc[index-1]))+Vector3.UP*height_at_station(s)
+		var point: Vector3=_line[index-1].lerp(_line[index],(s-_arc[index-1])/(_arc[index]-_arc[index-1]))
+		if is_instance_valid(_terrain_surface):
+			var sample: Dictionary=_terrain_surface.sample_ground_world(to_global(point))
+			if bool(sample.get("ok",false)):return to_local(sample.point)
+		return point+Vector3.UP*height_at_station(s)
 	return _line.back()
 
 ## Public convenience for navigation/tests; the source-local helper stays local.
 func point_at_station(station_m: float) -> Vector3:return to_global(path_point(station_m))
 
 func height_at_station(station_m: float) -> float:
+	if is_instance_valid(_terrain_surface):
+		var s:=clampf(station_m,0.,90.)
+		for index in range(1,_line.size()):
+			if s>_arc[index] and index<_line.size()-1:continue
+			var point: Vector3=_line[index-1].lerp(_line[index],(s-_arc[index-1])/(_arc[index]-_arc[index-1]))
+			return _terrain_surface.ground_y_world(to_global(point))-global_position.y
 	var profile: Array=_design.design.profile
 	var s:=clampf(station_m,0.,float(_design.design.used_length_m))
 	for index in range(1,profile.size()):

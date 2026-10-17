@@ -33,6 +33,7 @@ class CoverageWalkers extends "res://scripts/street_pedestrians.gd":
 						var key: Vector2i=Vector2i(x,z)
 						if not drive_grid.has(key):drive_grid[key]=[]
 						drive_grid[key].append(triangle)
+		_prepare_polygon_indices()
 		avoidance=AVOIDANCE.new();avoidance.setup(self,_at,_ground,_allowed,_neighbors)
 		for record: Dictionary in design.routes:_make_group(record)
 		var finish: CoveragePoseFinisher=CoveragePoseFinisher.new();finish.controller=self;finish.process_physics_priority=3;add_child(finish)
@@ -55,13 +56,11 @@ class CoverageWalkers extends "res://scripts/street_pedestrians.gd":
 		for offset: Vector3 in [Vector3.ZERO,Vector3.RIGHT*radius,Vector3.LEFT*radius,Vector3.FORWARD*radius,Vector3.BACK*radius]:
 			var sample: Vector3=point+offset;var local: Vector3=city.to_local(sample);var flat: Vector2=Vector2(local.x,local.z)
 			if not player.free_roam_bounds.grow(-.15).has_point(Vector2(sample.x,sample.z)):last_guard_reason="outside_game_bounds";return false
-			if city._contains(flat,city.private_cache):last_guard_reason="source_private_ground";return false
-			for road: Array in city.road_cache:
-				if city._contains(flat,road):last_guard_reason="existing_source_road_exclusion";return false
+			if _source_private_contains(flat):last_guard_reason="source_private_ground";return false
+			if _source_road_contains(flat):last_guard_reason="existing_source_road_exclusion";return false
 			if _inside_drive(flat):last_guard_reason="actual_source_drive_mesh";return false
 		if _traffic_distance(point)<float(_design.policy.traffic_route_clearance_m)+radius:last_guard_reason="moving_vehicle_corridor";return false
-		for door: Vector3 in _doors:
-			if Vector2(point.x-door.x,point.z-door.z).length()<1.0+radius:last_guard_reason="source_entry_clearance";return false
+		if _source_door_near(point,radius):last_guard_reason="source_entry_clearance";return false
 		return true
 	func _make_group(record: Dictionary) -> void:
 		var route: Dictionary=_route(record)
@@ -120,6 +119,10 @@ func setup(root_scene: Node3D) -> bool:
 	print("NEIGHBORHOOD_POPULATION_READY walkers=",walkers.actors.size()," source_corridors=",walkers.groups.size())
 	return true
 
+func refresh_terrain() -> void:
+	if is_instance_valid(walkers):walkers.refresh_terrain()
+	if is_instance_valid(traffic):traffic.refresh_terrain()
+
 func set_people_running(enabled: bool) -> void:
 	running=enabled
 	if is_instance_valid(walkers):walkers.set_running(enabled)
@@ -140,7 +143,9 @@ func actor_positions() -> Array[Vector3]:
 func coverage_viewpoints() -> Array:
 	var result: Array=[]
 	for row: Dictionary in design.get("coverage_viewpoints",[]):
-		result.append({"id":row.id,"point":Vector3(row.point_xz[0],.08,row.point_xz[1]),"toward":Vector3(row.toward_xz[0],1.0,row.toward_xz[1])})
+		var point: Vector3=host.city.to_global(Vector3(row.point_xz[0],0.,row.point_xz[1]));var toward: Vector3=host.city.to_global(Vector3(row.toward_xz[0],0.,row.toward_xz[1]))
+		if is_instance_valid(walkers):point=walkers._terrain_point(point);toward=walkers._terrain_point(toward)
+		result.append({"id":row.id,"point":point+Vector3.UP*.08,"toward":toward+Vector3.UP*1.0})
 	return result
 
 func snapshot() -> Dictionary:

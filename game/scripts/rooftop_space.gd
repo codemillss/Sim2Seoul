@@ -45,9 +45,9 @@ func setup(host: Node3D, building: Dictionary) -> bool:
 	if not centre.is_finite() or not along.is_finite() or not outward.is_finite():return false
 	width = minf(float(building.get("width",0.0))-SOURCE_INSET_M*2.0,MAX_DECK_SIZE.x)
 	depth = minf(float(building.get("depth",0.0))-SOURCE_INSET_M*2.0,MAX_DECK_SIZE.y)
-	source_height_y = float(building.get("source_height",0.0))
+	source_height_y = float(building.get("source_roof_world_y",building.get("source_height",0.0)))
 	if not is_finite(width) or not is_finite(depth) or not is_finite(source_height_y):return false
-	if width<10.0 or depth<14.0 or source_height_y<=0.0:return false
+	if width<10.0 or depth<14.0 or float(building.get("source_height",0.0))<=0.0:return false
 	var axis := Vector3(along.x,0.0,along.z).normalized()
 	if axis.length_squared()<.99 or absf(axis.dot(outward.normalized()))>.001:return false
 	# The source rectangle may use a reflected outward axis. A symmetric deck
@@ -472,7 +472,7 @@ func _v(point: Vector3) -> Array:return [point.x,point.y,point.z]
 
 func snapshot() -> Dictionary:
 	return {"building_id":String(spec.get("id","")),"building_title":String(spec.get("title","")),"profile_id":profile_id,"profile_title":profile_title,"loaded":_loaded,
-		"source_height_y":source_height_y,"observed_top_y":observed_top_y,"deck_height_y":deck_height_y,"source_height_offset_m":deck_height_y-source_height_y,
+		"source_height_y":source_height_y,"source_height_m":spec.get("source_height",0.0),"base_offset_m":spec.get("base_offset_m",0.0),"terrain_elevation_applied":spec.get("terrain_elevation_applied",false),"observed_top_y":observed_top_y,"deck_height_y":deck_height_y,"source_height_offset_m":deck_height_y-source_height_y,
 		"clearance_above_observed_m":deck_height_y-observed_top_y,"base_source_clearance_m":DECK_CLEARANCE_M,"authored_pool_deck_raise_m":POOL_DECK_RAISE_M if profile_id=="outdoor_pool" else 0.0,"source_inset_m":SOURCE_INSET_M,"source_rectangle_width":spec.get("width",0.0),"source_rectangle_depth":spec.get("depth",0.0),
 		"width":width,"depth":depth,"frame_origin":_v(frame.origin),"frame_axes":[_v(frame.basis.x),_v(frame.basis.y),_v(frame.basis.z)],"frame_determinant":frame.basis.determinant(),
 		"walkable_rect_position":[walkable_rect.position.x,walkable_rect.position.y],"walkable_rect_size":[walkable_rect.size.x,walkable_rect.size.y],

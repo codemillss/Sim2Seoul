@@ -10,6 +10,7 @@ if [ "$("$task_engine" --version)" != "4.7.2.stable.official.ed1daf0bf" ]; then 
 "$task_python" "$task_root/tools/prepare_city_landmarks.py" --check
 "$task_python" "$task_root/tools/prepare_pedestrians.py" --check
 "$task_python" "$task_root/tools/prepare_traffic.py" --check
+"$task_python" "$task_root/tools/prepare_local_terrain.py"
 case "$task_mode" in
  run)
   # Imported resource caches are machine-local and deliberately absent in Git.

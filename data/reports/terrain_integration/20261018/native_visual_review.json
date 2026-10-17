@@ -1,0 +1,124 @@
+{
+  "task": "EXP21_NATIVE_VISUAL_REVIEW",
+  "result": "REVIEWED_WITH_LIMITATIONS",
+  "reviewed_at": "2026-10-18T05:00:13.159788+09:00",
+  "reviewer": "Assistant direct inspection using local image viewer; not human user acceptance",
+  "native_backend": "M1 Pro / Metal / Forward+ / 960x640 / day / production default30Hz",
+  "images_reviewed": 16,
+  "functional_acceptance_is_separate": true,
+  "scope": "16 real engine PNGs inspected individually. Confirms the displayed prototype scene and records visible limitations; no surveyed terrain accuracy, photorealism, every street/threshold, M4/export/long performance or subjective usability acceptance.",
+  "images": [
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu_sloped_street_walkers.png",
+      "bytes": 608265,
+      "sha256": "8f30286796555e566353816f29baa219ac1755e5831681910f99a8222d603826",
+      "reviewed": true,
+      "observation": "플레이어 뒤 NPC가 일부 가려짐. 건물 기초 주변 지면/보도 경사 면이 인공적으로 꺾여 보이는 부분이 남아 향후 국소 보정 대상. 현장 자연 경사의 시각 수용으로 처리하지 않음."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu_source_road_vehicle_slope.png",
+      "bytes": 513987,
+      "sha256": "4c605a8a87fdb84ac7f59a90284b96d36a4b2ce2e195d41cb5eed254fd01471a",
+      "reviewed": true,
+      "observation": "경사진 도로와 차량·아바타를 확인. 아바타가 차량 일부를 가리며 기존 회색 단순 차량 모델을 유지. 차체 아래 정밀 지지는 dense native ray 보고서로 별도 확인."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_ground_entrance.png",
+      "bytes": 387619,
+      "sha256": "1c7adf579b2e4906670f47d325816eab5535ffce7e433bda595b0733c49c47c5",
+      "reviewed": true,
+      "observation": "롯데 게임 입구의 E 표시와 외부 발 위치/복귀를 확인. 선택 후보는 잔디 재질 지면에 놓이며 실제 정문/현장 접근로를 조사한 결과가 아님."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_ground_return.png",
+      "bytes": 387619,
+      "sha256": "1c7adf579b2e4906670f47d325816eab5535ffce7e433bda595b0733c49c47c5",
+      "reviewed": true,
+      "observation": "롯데 게임 입구의 E 표시와 외부 발 위치/복귀를 확인. 선택 후보는 잔디 재질 지면에 놓이며 실제 정문/현장 접근로를 조사한 결과가 아님."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_lobby_lift.png",
+      "bytes": 269869,
+      "sha256": "390ef1e67f58b4d24ef280e7b6fd45db0cce02aac0a34cbe5088e7069f91f1a0",
+      "reviewed": true,
+      "observation": "로비의 계단과 E 층 선택 안내가 보이나 승강장 근접 카메라가 짧아져 아바타가 보이지 않는 시점. 전체 로비 조망/카메라 사용성 수용은 아님."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_rebased_roof_lift.png",
+      "bytes": 287636,
+      "sha256": "dc2745b7218937273d52576f3231376e4c3947cef26844aacce59fdd6ed911a6",
+      "reviewed": true,
+      "observation": "옥상 승강장 앞 아바타·풀/데크·주변 빌딩이 같은 높이 기준으로 연결됨. 출입구 기둥이 양옆 시야 일부를 가림."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_actual_pool_exit_on_rebased_deck.png",
+      "bytes": 383289,
+      "sha256": "229414cf68d43d05888658c111a7483702d1f9f458baf35a2fcb884a328c322d",
+      "reviewed": true,
+      "observation": "물 밖 데크 착지와 풀·계단/승강기를 확인. 카메라 쪽 난간이 아바타 허리 일부를 가림."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_actual_swimming_rebased_pool.png",
+      "bytes": 192922,
+      "sha256": "22d6d62f69abea62359730a86182987ae23ba3b9eeb1066e381ad2e6d7eea849",
+      "reviewed": true,
+      "observation": "데크 안으로 내려간 큰 수면과 수영 중 몸의 잠김을 확인. 실제 호텔 수영장 현황의 복원이 아닌 게임 시설."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_ground_entrance.png",
+      "bytes": 431940,
+      "sha256": "6bb799c762611251175d6c43cb45b72407ddce67df002136fde488cc146322d4",
+      "reviewed": true,
+      "observation": "플라자 외부 E 문틀·발판·아바타와 도로를 확인. 입장 전/실제 승강기 하차 후 복귀 화면을 구분함."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_ground_return.png",
+      "bytes": 431651,
+      "sha256": "880f2e6fa87493b1249ac372f5bb9c89b95f0639d0f75a86c831c2fe53e57cde",
+      "reviewed": true,
+      "observation": "플라자 외부 E 문틀·발판·아바타와 도로를 확인. 입장 전/실제 승강기 하차 후 복귀 화면을 구분함."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_lobby_lift.png",
+      "bytes": 272020,
+      "sha256": "ac8eeed39346849c5f15fcf00d7dcc3bc18b3d3b23aa01df39b48207a26d33cc",
+      "reviewed": true,
+      "observation": "로비의 계단과 E 층 선택 안내가 보이나 승강장 근접 카메라가 짧아져 아바타가 보이지 않는 시점. 전체 로비 조망/카메라 사용성 수용은 아님."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_rebased_roof_lift.png",
+      "bytes": 299651,
+      "sha256": "251d4038f0f91f47ff41fef0ee7c4df5a0a25f3bfd77deca7648eb443ca2f913",
+      "reviewed": true,
+      "observation": "옥상 승강장 앞 아바타·풀/데크·주변 빌딩이 같은 높이 기준으로 연결됨. 출입구 기둥이 양옆 시야 일부를 가림."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_daehanmun_source_grade.png",
+      "bytes": 576763,
+      "sha256": "f7a4044fd1ae8387d85e5854cc974e85487e6a961299e2e1314838eb09942391",
+      "reviewed": true,
+      "observation": "도로·보도와 수목 줄기·플레이어가 함께 보임. 기초와 도로는 연결되지만 단순 외관/수형과 낮은 생활 밀도는 남음."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_museum_source_high_ground.png",
+      "bytes": 538310,
+      "sha256": "58547270267127744cb5c4b4d67d30962acbd510ecf9d3c56ee475a815689bd9",
+      "reviewed": true,
+      "observation": "미술관 진입로 높은 쪽에서 내려다보는 경사와 나무/주변 건물의 배치를 확인. 현장 경사 정확도를 판정한 것은 아님."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_source_ground_repeated_jump.png",
+      "bytes": 621570,
+      "sha256": "e79ac10cac74a5f3371e9deca1f20648e109b1f0d435121adace4640c9f7a0fb",
+      "reviewed": true,
+      "observation": "공중 캐릭터와 대한문 주변 지형/수목·빌딩을 확인. 점프 물리 수용은 해당 실행 보고서의 입력/접지 자료를 따름."
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_terrain_recovery_ground.png",
+      "bytes": 567747,
+      "sha256": "b938264dbd9518eeae97fefc3fc7b03dedc75a9e80c7bee31694606613ba11d7",
+      "reviewed": true,
+      "observation": "복귀 뒤 대한문 개구부와 지면·아바타 발/그림자가 보임. source 바탕의 단순 임시 전각 외형 유지."
+    }
+  ]
+}

@@ -39,7 +39,38 @@ func setup(root_scene: Node3D) -> bool:
 
 func _fail(message: String) -> bool:load_error=message;return false
 
+func _terrain_point(point: Vector3) -> Vector3:
+	var terrain: Variant=host.get("terrain_surface")
+	if is_instance_valid(terrain) and bool(terrain.get("loaded")):
+		var result: Dictionary=terrain.sample_ground_world(point)
+		if bool(result.get("ok",false)):return result.point
+	return point
+
+func refresh_terrain() -> void:
+	# Rebuild each instance from its tree's source XZ. A rigid batch translation
+	# would leave the trees at the ends of a sloped 100m cell floating/buried.
+	if not loaded:return
+	for batch: MultiMeshInstance3D in batches:remove_child(batch);batch.queue_free()
+	batches.clear();_batch_rows.clear();_maximum_slope_degrees=0.0
+	for row: Dictionary in trees:
+		var point: Vector3=_terrain_point(host.city.to_global(Vector3(row.record.xz[0],0.,row.record.xz[1])))
+		var query:=PhysicsRayQueryParameters3D.create(point+Vector3.UP*.4,point-Vector3.UP*.4,1|32,[row.body.get_rid(),host.player.get_rid()])
+		var native: Dictionary=get_world_3d().direct_space_state.intersect_ray(query)
+		if not native.is_empty():
+			point.y=native.position.y;row.floor_collider=String(native.collider.get_path())
+		row.point=point+Vector3.UP*.02;row.floor_y=point.y;row.body.global_position=row.point
+		var terrain: Variant=host.get("terrain_surface")
+		if is_instance_valid(terrain) and bool(terrain.get("loaded")):
+			var result: Dictionary=terrain.sample_ground_world(point)
+			row.normal=result.get("normal",Vector3.UP);row.slope_degrees=rad_to_deg(acos(clampf(row.normal.y,-1.,1.)))
+			_maximum_slope_degrees=maxf(_maximum_slope_degrees,row.slope_degrees)
+		var cell: String=str(floori(point.x/100.))+"_"+str(floori(point.z/100.))
+		if not _batch_rows.has(cell):_batch_rows[cell]=[]
+		_batch_rows[cell].append(row)
+	_publish_batches();_update_collisions()
+
 func _ground(point: Vector3) -> Dictionary:
+	point=_terrain_point(point)
 	var query: PhysicsRayQueryParameters3D=PhysicsRayQueryParameters3D.create(point+Vector3.UP*8.0,point-Vector3.UP*3.0,1|32,[host.player.get_rid()])
 	var hit: Dictionary=get_world_3d().direct_space_state.intersect_ray(query)
 	if hit.is_empty() or hit.normal.y<.80:return {}

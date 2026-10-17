@@ -18,6 +18,28 @@ var guards: Dictionary={}
 var human_rows: Array[Dictionary]=[]
 var human_polygons: Array[PackedVector2Array]=[]
 
+func _terrain_service() -> Node:
+	if not is_instance_valid(city):return null
+	var candidate: Variant=city.get_parent().get("terrain_surface")
+	return candidate as Node if is_instance_valid(candidate) and bool(candidate.get("loaded")) else null
+
+func _terrain_point(point: Vector3) -> Vector3:
+	var terrain: Node=_terrain_service()
+	if terrain==null:return point
+	var sample: Dictionary=terrain.sample_ground_world(point)
+	return sample.point if bool(sample.get("ok",false)) else point
+
+func _portal_pose(point: Vector3,direction: Vector3) -> Transform3D:
+	for body: CharacterBody3D in vehicles:
+		if body.get("_terrain_enabled"):return body._terrain_pose(point,atan2(-direction.x,-direction.z))
+	return Transform3D(Basis(Vector3.UP,atan2(-direction.x,-direction.z)),point)
+
+func refresh_terrain() -> void:
+	# Invalidate pre-height observations. The next physics tick observes humans
+	# at their refreshed poses before issuing any crossing/recycling grant.
+	last_observation_tick=-999999;refreshed_tick=-1;observations_valid=false
+	clear_s=0.0;human_present=true;guards.clear()
+
 func configure(data: Dictionary, people: Array, view: Camera3D, world: Node3D) -> void:
 	for r in data.routes:routes[r.id]=r
 	for p in people:humans.append(p)
@@ -55,7 +77,9 @@ func _refresh() -> void:
 		if not is_instance_valid(h) or not h.global_position.is_finite():
 			observations_valid=false;human_present=true;continue
 		var p: Vector3=h.global_position
-		var inside:=_human_inside(Vector2(p.x,p.z))
+		var local: Vector3=city.to_local(p)
+		var inside:=_human_inside(Vector2(local.x,local.z))
+		if _terrain_service()!=null:inside=inside and absf(p.y-_terrain_point(p).y)<2.8
 		human_present=human_present or inside
 		human_rows.append({"id":str(h.get_path()),"position":[p.x,p.y,p.z],"layer":h.collision_layer,"inside_crossing":inside})
 	last_observation_tick=tick
@@ -94,8 +118,10 @@ func _corners(route: Dictionary,ending: bool) -> Array[Vector3]:
 	var b: Array=points[-1] if ending else points[1]
 	var d:=Vector3(b[0]-a[0],0,b[1]-a[1]).normalized()
 	var centre: Array=points[-1] if ending else points[0]
-	var origin: Vector3=city.to_global(Vector3(centre[0],0,centre[1]))
-	var basis:=Basis(Vector3.UP,atan2(-d.x,-d.z))
+	var origin: Vector3=_terrain_point(city.to_global(Vector3(centre[0],0,centre[1])))
+	var pose: Transform3D=_portal_pose(origin,d)
+	origin=pose.origin
+	var basis: Basis=pose.basis
 	var points3: Array[Vector3]=[]
 	for x in [-.9,.9]:
 		for y in [0.,1.5]:
@@ -131,7 +157,9 @@ func recycle_guard(body: CharacterBody3D) -> Dictionary:
 	var direction:=Vector3(b[0]-a[0],0,b[1]-a[1]).normalized()
 	var query:=PhysicsShapeQueryParameters3D.new()
 	query.shape=body.get_node("CollisionShape").shape
-	query.transform=Transform3D(Basis(Vector3.UP,atan2(-direction.x,-direction.z)),city.to_global(Vector3(a[0],.75,a[1])))
+	var feet: Vector3=_terrain_point(city.to_global(Vector3(a[0],0.,a[1])))
+	var pose: Transform3D=_portal_pose(feet,direction)
+	query.transform=Transform3D(pose.basis,pose.origin+pose.basis*Vector3.UP*.75)
 	query.collision_mask=14;query.exclude=[body.get_rid()];query.margin=.05
 	var contacts: Array[Dictionary]=body.get_world_3d().direct_space_state.intersect_shape(query,16)
 	var entry_clear:=contacts.is_empty()

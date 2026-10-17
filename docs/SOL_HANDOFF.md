@@ -1,12 +1,20 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: EXP20 기능 보완 / 다음 EXP21 공식 지형 연결
+## 현재 인수: EXP21 지형 연결의 구현과 검증 기록
 
-최신 단일 상태는 [WORK_STATUS](WORK_STATUS.md), 실제 피드백으로 바뀐 판단은 [REALISM_REWORK](REALISM_REWORK.md), 재개 순서는 [EXP21 상세 계획](IMPLEMENTATION_TASKS.md)이다.17개 최종 보고서·46 native PNG와 실패/수정·시각 한계, 작은 서울 공식 지형 입력을 함께 공유한다. `python3 tools/check_realism_handoff.py`는 다운로드/엔진 없이 공유 파일·증거를 대조하며, `--prepared`는 기존 실행 자료까지 확인한다. 이것은 이 Mac의 엔진 재검사나 M4 성능 합격이 아니다.
+최신 단일 상태는 [WORK_STATUS](WORK_STATUS.md), 최종 인수 파일·실행 결과는 [EXP21 summary](../data/reports/terrain_integration/20261018/summary.json), 구현 이유와 한계는 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md)이다. 이 문서에 최종 검사 수나 완료·커밋을 중복 확정하지 않는다. 요약이 없으면 최종 인수 기록이 아직 없는 것이며, 과거 EXP20의 평면판 결과로 새 지형을 완료 처리하지 않는다.
 
-사용자는 NGII 로그인을 못해 다른 경로를 요청했고 공식 서울시 원천의 익명 다운로드에 성공했다. `data/raw/supplemental/seoul_terrain/20261018`의7파일만 있으면 다음 보간을 시작할 수 있으며 서울 전체 ZIP은 필요하지 않다. 원본EPSG5174/원래높이·200m halo·수직datum미상을 보존하고, 현재 전체 평면판에서 실제 높이 연결로 넘어간다. 기존30m DSM/SRTM을 보행 지면으로 대체하지 않는다. 게임 전체 지형은 아직 미완료다.
+로그인 없이 확보한 서울시 공식 등고선41개·표고점96개와 공유 높이장을 재사용한다. source EPSG5174/기존32652 좌표와 원래 HEIGHT를 보존하고, 고정 원점의 보간 높이를 뺀 상대Y와 추정한525개 기초를 탐험 장면에 연결한다. 원본635개 건물의 XZ·자체 높이·층수와 source/world bytes는 그대로다. 도로·마당·지원체는 동일 지형 삼각형에 맞춰 나누고 원래 면의 높이·두께를 더한다. 분리 실내 셀은 자체 좌표를 유지하며 문·옥상·풀·승강기·밖 복귀는 새 기초/지면 기준을 쓴다. 수직 datum 미상, 표고점 보류 검사 RMSE2.315m/최대8.739m, 실측이 아닌 기초 평탄화는 계속 명시한다.
 
-`Sim2Seoul.command`는 최신 개발 장면이고 이전 V0/R03 앱 ZIP은 이번 변경을 포함하지 않는다. Esc에 관리자 객실 접근/기타 음악·호텔 풀/피크닉/교회/거리 산책 지점 이동이 있다. 원본125동·작은 지도와 별도 롯데1동·PCM/외관/수목/인구 JSON/helper를 함께 받는다. 실행기는 Godot import 후 기동해 새 Mac의 미생성 캐시를 준비한다. 기존 사용자 속도/시간/자유탐험 설정은 유지한다. 대중교통 T01은 미착수다.
+현재 파일·증거 무결성은 `python3 tools/check_terrain_handoff.py`로 확인한다. 실행 자료 준비 뒤 `--prepared`를 추가한다. 이 도구는 엔진을 재실행하거나 새 Mac을 수용하는 검사가 아니다. 실제 재시험은 `tools/run_terrain_validation.py`와 [검증 계획의 EXP21 절](VALIDATION_PLAN.md#exp21-지형-연결-검증과-인수-기준)을 따르며, 이전 실패·원시 결과를 덮어쓰지 않는 새 출력 경로를 쓴다. EXP20 [요약](../data/reports/realism_rework/20261017/summary.json)/`check_realism_handoff.py`는 당시 소스의 이력으로 보존한다.
+
+다른 Mac에서는 [CROSS_MAC](CROSS_MAC.md)의 Python 환경과 기존11개 V0 생성기 준비를 먼저 마친다. 이후 `Sim2Seoul.command`/`sh tools/run_exploration.sh run`이 `prepare_local_terrain.py`로 공유 준비 증거를 보존하면서 Git 제외 물리 TIN/색인을 준비하고 Godot import 후 실행한다. 첫 장면 투영의 기하 캐시도 그 Mac에서 생성한다. 캐시는 엔진 버전·원본 기하/변환·전체 지형 SHA·투영·높이 조회 코드 SHA가 맞을 때만 재사용하며 없거나 손상되면 실제 투영으로 돌아간다. 준비 도구가 Python 의존성 설치까지 대신하지 않는다. 서울 전체 ZIP이나 NGII 로그인은 기본 인수의 선행 조건이 아니다.
+
+최신 탐험 leaf의 기본 물리는30Hz(`exploration_physics_hz=30`)이고 화면 주기는 독립적이다. 전체 배우의 개선 후 물리 step 약19ms 관측이60Hz 예산16.7ms를 넘겨 기본값을 바꿨으며, 기존 milestone60Hz는 유지한다. m/s·1m·초 기준 중력/타이머·source XZ/충돌·속도 판정 기준을 바꾸지 않는다. 실제 충돌/현재 step 검사와 동적 상대 검사는 매 물리 step 수행하고, 미래0.9m의 정적 미리보기만0.15초 간격으로 재사용한다. 실패·방향 전환·우회 계획 종료 시에는 즉시 갱신한다. 원래 다각형/문 거리의 공간 색인과 단일 choose 안의 동일 바닥 조회 재사용은 최종 원본 판정을 유지한다. 재현 runner는 `--physics-hz=30|60`을 받으며 GPU 기본30/headless 기본60이다.30Hz 실제 여정과60Hz 스트레스, 짧은 부하 관측을 구분해 이어받고 과거60Hz 보고서를 지우지 않는다.
+
+기존 옥상/야외 풀·관리자 객실 문·장소별 인물·외관/가로수·분산 인구 기능을 유지하며, 원래 사용자 속도/시간/자유탐험 설정도 유지한다. `Sim2Seoul.command`는 개발 장면이고 이전 V0/R03 앱 ZIP은 이번 변경을 포함하지 않는다. 사람 직접 체감·모든 실측 문턱/옹벽·지하/교량 구조·장시간 성능·새 export·M4 검증은 별도다. 대중교통 T01의 착수 여부와 다음 첫 행동도 WORK_STATUS에서 읽는다.
+
+아래 단계별 설명은 각 작업 당시의 인수 이력이다. 과거 문장의 ‘현재’나 ‘다음 작업’을 최신 상태보다 우선하지 않는다.
 
 이 문서는 사용자가 비용을 고려해 Sol로 이어서 개발할 때 필요한 짧은 진입점이다. 현재 채팅 모델을 자동으로 변경하거나 더 비싼 모델을 호출하는 지시가 아니다.
 
@@ -29,7 +37,7 @@
 - 첫 중간 결과 W0는 보행 검증이다. 사용자 합의 첫 버전 V0는 랜드마크·간단한 보행자·차량을 포함한다.
 - M1 Pro 16GB 기준으로 개발하고 M4 Pro에서도 확인한다. M4의 1TB는 저장공간이며 RAM은 아직 모른다.
 - 데이터에 없는 높이·도로폭·지형은 출처와 추정을 구분한다. 핵심 동선을 임의의 길로 연결하지 않는다.
-- 개발 기준은 Godot 4.7.2 Standard·Forward+/Metal이다. E02 정식 `game/`은 [실행 도구와 구조](GAME_PROJECT.md)로 로컬 기동된다. 원천 region→G01 해시 대조→Git 제외 실행 사본을 준비하며 입력은 의도만 전달한다. E03 서울 배치·E04 외곽점 거리/10m 기준물/화면 비례 검증을 완료했다. [E04 화면/재현](../data/reports/scale_view/README.md)을 유지하고 P01 사람 크기 캐릭터/독립 시험장·60초 안정 정지 검증도 완료했다. P02에서 [시험장 이동/복귀·증거](../data/reports/movement.md)도 완료했다. P03의 [카메라 조작/가림·문 회전·잠금 검증](../data/reports/camera.md)도 완료했다. P04의 [충돌 계층·도시 배치 검증](../data/reports/collision.md)도 완료했다. W01의 [대한문 밖↔경내 입구 연결](../data/reports/daehanmun_walk.md)도 완료했고 W02의 [경내 순환·앞마당](../data/reports/palace_walk.md)도 완료했다. W03의 [도심·돌담길 연결/장면 경계](../data/reports/public_walk.md)도 완료했다. W04의 [자동 연속 여정·중간 버전 보존](../data/reports/walkable_milestone.md)도 완료했다. `W0-engineering-walk-v1` 스냅샷/인수는 기존 W03 게임·원천/경계를 유지한 자동 엔진 판정이며 직접 사람/OS·현실 접근/지형·M4는 미검증이다. L01의 참조·제작 명세도 완료했으며 현재 재개는 WORK_STATUS의 N03 차량 이동이다. 기존 W01/W02/W03 원문·실패·검증을 재사용한다. 시험장 이동은 실제 서울 보행과 구분하며 직접 키 조작감은 미검증이다. E02 화면 잠금 이력과 GPU/엔진 자동 검증을 직접 사용성 검사와 구분한다.
+- 개발 기준은 Godot 4.7.2 Standard·Forward+/Metal이다. E02 정식 `game/`은 [실행 도구와 구조](GAME_PROJECT.md)로 로컬 기동된다. 원천 region→G01 해시 대조→Git 제외 실행 사본을 준비하며 입력은 의도만 전달한다. E03 서울 배치·E04 외곽점 거리/10m 기준물/화면 비례 검증을 완료했다. [E04 화면/재현](../data/reports/scale_view/README.md)을 유지하고 P01 사람 크기 캐릭터/독립 시험장·60초 안정 정지 검증도 완료했다. P02에서 [시험장 이동/복귀·증거](../data/reports/movement.md)도 완료했다. P03의 [카메라 조작/가림·문 회전·잠금 검증](../data/reports/camera.md)도 완료했다. P04의 [충돌 계층·도시 배치 검증](../data/reports/collision.md)도 완료했다. W01의 [대한문 밖↔경내 입구 연결](../data/reports/daehanmun_walk.md)도 완료했고 W02의 [경내 순환·앞마당](../data/reports/palace_walk.md)도 완료했다. W03의 [도심·돌담길 연결/장면 경계](../data/reports/public_walk.md)도 완료했다. W04의 [자동 연속 여정·중간 버전 보존](../data/reports/walkable_milestone.md)도 완료했다. `W0-engineering-walk-v1` 스냅샷/인수는 기존 W03 게임·원천/경계를 유지한 자동 엔진 판정이며 직접 사람/OS·현실 접근/지형·M4는 미검증이다. L01의 참조·제작 명세도 완료했으며 해당 단계 당시의 재개는 N03 차량 이동이었으며 현재 재개는 WORK_STATUS를 따른다. 기존 W01/W02/W03 원문·실패·검증을 재사용한다. 시험장 이동은 실제 서울 보행과 구분하며 직접 키 조작감은 미검증이다. E02 화면 잠금 이력과 GPU/엔진 자동 검증을 직접 사용성 검사와 구분한다.
 
 ## 작업을 작게 수행하는 규칙
 
@@ -108,3 +116,5 @@ R02의[채택/검증](../data/reports/performance_comparison.md)을완료했다.
 최종 ZIP은64,884,999bytes/SHA `feb939b72ecd9d077b563e77aeacf0b2b8d4892dc0a00800eadc68cd65d8facb`이며 Git 제외다. 코드·작은 지도·도구·계획/실패/검수 증거는 Git으로 공유하고 앱은 별도로 옮긴다. `.tres` 변환/템플릿 `--script` 제약/최초 HUD 가림의 실패와 수정된 full04 PASS를 구분해 보존했다. 앱을 재검수하려면 원 export manifest를 바꾸지 않고 [두 Mac 안내의 마지막 절](CROSS_MAC.md)을 따른다.
 
 M4는 접근 불가 대안의 UNRUN·실제 사양/성능null이다. 실제 final 앱/ZIP 경로 바인딩 검수는 M1에서만 수행했다. Mac 잠금으로 OS 입력/초점도 미실행이며 합성 입력 PASS와 사람 조작감을 혼동하지 않는다. 현재 원래 계획 내에서 승인을 기다리는 다음 구현은 없다. M4 접근이 생기면 같은 앱으로 미실행 항목을 재개하고, 별도 실내/생활AI·외형 개선은 새 우선순위가 정해질 때 진행한다.
+
+새 Mac의 일반 실행은 `prepare_local_terrain.py`가 실제 지면 생성기를 호출한다. 재생성으로 달라진 준비 보고서는 Git 제외 `terrain_local_preparation.json`에 보존하고 공유된 수용 보고서는 복원한다. 실제 출력 SHA가 공유 기준과 다르면 자동 기동을 멈춰 그 Mac의 검증 없이 수용 기록을 덮어쓰지 않는다. 개발 중 원천/생성기 변경의 새 판정은 별도 작업·증거로 갱신한다.

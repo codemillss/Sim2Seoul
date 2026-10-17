@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tools/prepare_terrain_surface.py", line 100, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tools/prepare_terrain_surface.py", line 91, in main
+    faces,offsets,conditioning=condition_triangles(faces,offsets,exterior_y)
+                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/tools/terrain_mesh_conditioning.py", line 118, in condition_triangles
+    raise ValueError('Reference edge projection created a degenerate face')
+ValueError: Reference edge projection created a degenerate face

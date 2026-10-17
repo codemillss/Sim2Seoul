@@ -40,6 +40,8 @@ var prepared_id := ""
 var _room_ready_tick := 0
 var _entry_requested := false
 var markers: Array[Dictionary] = []
+var _entry_visuals: Array[Node3D] = []
+var terrain_rebase_count := 0
 var elevator_panel: PanelContainer
 var elevator_title: Label
 var elevator_floors: GridContainer
@@ -208,14 +210,16 @@ func _build_markers() -> void:
 		marker.position = spec.entrance+Vector3.UP*2.2
 		marker.billboard = BaseMaterial3D.BILLBOARD_ENABLED;marker.font_size = 34;marker.pixel_size = .006
 		marker.modulate = Color(.98,.95,.80);marker.outline_modulate = Color(.06,.10,.13);marker.outline_size = 10
-		add_child(marker);marker.visible = false
+		add_child(marker);marker.visible = false;_entry_visuals.append(marker)
 		# An authored doorway sits on the actual source perimeter. It is visual;
 		# entry never opens or removes the retained exterior collision body.
 		var door := MeshInstance3D.new();var mesh := BoxMesh.new();mesh.size = Vector3(2.2,2.6,.09)
 		door.mesh = mesh;door.material_override = material
-		door.position = spec.door+spec.outward*.08;door.position.y = spec.entrance.y+1.3
+		door.position = spec.door+spec.outward*.08
+		var facade_floor_y: float=float(spec.get("base_offset_m",0.0))+(spec.flat_source_entrance.y if spec.has("flat_source_entrance") else spec.entrance.y)
+		door.position.y = facade_floor_y+1.3
 		door.rotation.y = atan2(spec.outward.x,spec.outward.z)
-		add_child(door)
+		add_child(door);_entry_visuals.append(door)
 		if spec.id==LIBRARY_ID:door.visible = false;door_marker = marker
 		markers.append({"spec":spec,"node":marker})
 
@@ -789,7 +793,14 @@ func _entry_return_point() -> Dictionary:
 func _safe_external_point(requested: Vector3) -> Dictionary:
 	if not requested.is_finite() or not host.player.exterior_contains(requested):return {}
 	var space := host.get_world_3d().direct_space_state
-	var ray := PhysicsRayQueryParameters3D.create(requested+Vector3.UP,requested-Vector3.UP,host.player.collision_mask,[host.player.get_rid()])
+	var terrain := host.get_node_or_null("TerrainSurface")
+	var terrain_enabled := is_instance_valid(terrain) and terrain.has_method("ground_y_world")
+	var anchor := requested
+	if terrain_enabled:
+		var ground_y: float=terrain.ground_y_world(requested)
+		if not is_finite(ground_y):return {}
+		anchor.y=ground_y+.08
+	var ray := PhysicsRayQueryParameters3D.create(anchor+Vector3.UP,anchor-Vector3.UP,host.player.collision_mask,[host.player.get_rid()])
 	var hit := space.intersect_ray(ray)
 	if hit.is_empty() or hit.normal.dot(Vector3.UP)<cos(host.player.floor_max_angle):return {}
 	var point := Vector3(requested.x,hit.position.y+.08,requested.z)
@@ -799,7 +810,9 @@ func _safe_external_point(requested: Vector3) -> Dictionary:
 	query.transform = Transform3D(Basis.IDENTITY,point)*node.transform
 	query.collision_mask = host.player.collision_mask;query.exclude = [host.player.get_rid()]
 	if not space.intersect_shape(query,1).is_empty():return {}
-	if not host.city.volume_clear(point,node.shape.height,node.shape.radius):return {}
+	# Flat 2.5D obstacle heights belong to historical scenes. EXP21 keeps all
+	# actual source colliders and verifies the full native capsule above.
+	if not terrain_enabled and not host.city.volume_clear(point,node.shape.height,node.shape.radius):return {}
 	return {"point":point}
 
 func _leave_at(requested: Vector3) -> bool:
@@ -884,5 +897,53 @@ func snapshot() -> Dictionary:
 		"rejected_entries":rejected_entries,"rejected_exits":rejected_exits,"e_requires_release":e_requires_release,"room_static_bodies":room_bodies.size(),
 		"room_origin":[ROOM_ORIGIN.x,ROOM_ORIGIN.y,ROOM_ORIGIN.z],"entrance":[entrance_world_position.x,entrance_world_position.y,entrance_world_position.z],
 		"outside_return":[_outside_position.x,_outside_position.y,_outside_position.z],"authored_not_surveyed":true,"notice":_notice,
+		"terrain_rebase_count":terrain_rebase_count,"current_base_offset_m":current_spec.get("base_offset_m",0.0),
 		"catalog_count":catalog.size(),"floor_count":current_spec.get("floor_count",0),"current_floor":_current_destination() if active else 0,"width":current_spec.get("width",0.),"depth":current_spec.get("depth",0.),
 		"in_elevator":in_elevator,"elevator_open":elevator_open,"selected_floor":selected_floor,"elevator":elevator_snapshot(),"on_roof":on_roof,"rooftop":rooftop.snapshot() if is_instance_valid(rooftop) else {},"roof_ready_tick":_roof_ready_tick,"facility_activity":facility_interaction.snapshot() if is_instance_valid(facility_interaction) else {}}
+
+func apply_terrain_elevation() -> bool:
+	# Called once at startup, after source meshes/colliders receive their
+	# foundation offset. Detached rooms and cabins deliberately keep their
+	# independent coordinates; entry and roof links resolve to rebased copies.
+	if not loaded or active or in_elevator or terrain_rebase_count>0:return false
+	var terrain := host.get_node_or_null("TerrainSurface")
+	if not is_instance_valid(terrain) or not terrain.has_method("ground_y_world"):return false
+	var next_catalog: Array[Dictionary]=preload("res://scripts/building_visit_catalog.gd").new().build(host)
+	if next_catalog.size()!=catalog.size():return false
+	for spec: Dictionary in next_catalog:
+		if not bool(spec.get("terrain_elevation_applied",false)):return false
+	var selected_id := String(current_spec.get("id",LIBRARY_ID))
+	catalog=next_catalog
+	for spec: Dictionary in catalog:
+		if String(spec.id)==selected_id:_set_entry(spec);break
+	var spawn_base: float=terrain.ground_y_world(_world_spawn)
+	if not is_finite(spawn_base):return false
+	_world_spawn.y+=spawn_base
+	for visual: Node3D in _entry_visuals:
+		if is_instance_valid(visual):
+			remove_child(visual);visual.queue_free()
+	_entry_visuals.clear();markers.clear();door_marker=null
+	_build_markers()
+	if is_instance_valid(wayfinding):
+		if is_instance_valid(wayfinding.panel):
+			wayfinding.panel.get_parent().remove_child(wayfinding.panel)
+			wayfinding.panel.queue_free()
+		remove_child(wayfinding);wayfinding.queue_free()
+	wayfinding=preload("res://scripts/entrance_wayfinding.gd").new()
+	wayfinding.name="EntranceWayfinding";add_child(wayfinding)
+	if not wayfinding.setup(host,self):return false
+	var access := host.get_node_or_null("ExplorationRooftopAccess")
+	if is_instance_valid(access):
+		if not access.apply_terrain_elevation():return false
+		rooftop=access.borrow_rooftop(selected_id)
+	else:
+		if is_instance_valid(rooftop):
+			for body: StaticBody3D in rooftop.bodies:body.collision_layer=0
+			rooftop.get_parent().remove_child(rooftop);rooftop.queue_free()
+		rooftop=preload("res://scripts/rooftop_space.gd").new();add_child(rooftop)
+		if not rooftop.setup(host,current_spec):return false
+	if not is_instance_valid(rooftop):return false
+	rooftop.visible=true;rooftop.set_process(false)
+	_roof_ready_tick=Engine.get_physics_frames()+3
+	terrain_rebase_count+=1
+	return true

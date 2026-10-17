@@ -80,7 +80,7 @@ func _prepare_nearby_roofs(point: Vector3) -> void:
 		if roofs.has(id):continue
 		var building: Dictionary=_specs[id]
 		var distance:=_footprint_distance(point,building)
-		if distance<=PREPARE_DISTANCE_M and point.y>=float(building.source_height)-PREPARE_BELOW_ROOF_M:
+		if distance<=PREPARE_DISTANCE_M and point.y>=float(building.get("source_roof_world_y",building.source_height))-PREPARE_BELOW_ROOF_M:
 			candidates.append({"id":id,"distance":distance})
 	candidates.sort_custom(func(first: Dictionary,last: Dictionary)->bool:return float(first.distance)<float(last.distance))
 	# Construction is amortized while approaching in the air. The nearest
@@ -147,3 +147,20 @@ func snapshot() -> Dictionary:
 	return {"loaded":_loaded,"cached_roofs":prepared,"created":creations,"removed":removals,"outdoor_water_building_id":_outdoor_water_id,
 		"persistent_hotels":PERSISTENT_HOTEL_IDS,"prepare_distance_m":PREPARE_DISTANCE_M,"prepare_below_roof_m":PREPARE_BELOW_ROOF_M,"retain_distance_m":RETAIN_DISTANCE_M,
 		"source_geometry_preserved":true,"outdoor_visit_state_required":false,"basis":"Source-positioned authored amenities. Outdoor jumping/swimming retains the exterior player region; elevator visits borrow the same roof."}
+
+func apply_terrain_elevation() -> bool:
+	# Startup-only rebuild. No actor can be borrowing a roof during a rebase;
+	# keep detached interior content and the source building thickness intact.
+	if not _loaded or visit.active or visit.in_elevator:return false
+	for id: String in roofs:
+		var roof: Node3D=roofs[id]
+		for body: StaticBody3D in roof.bodies:body.collision_layer=0
+		remove_child(roof)
+		roof.queue_free()
+	roofs.clear();_borrowed.clear();_specs.clear()
+	visit.rooftop=null
+	clear_outdoor_water()
+	for building: Dictionary in visit.catalog:_specs[String(building.id)]=building
+	for id: String in PERSISTENT_HOTEL_IDS:
+		if not is_instance_valid(ensure_rooftop(id)):return false
+	return true

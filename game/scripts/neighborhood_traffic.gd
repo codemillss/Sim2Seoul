@@ -59,8 +59,13 @@ class CoverageManager extends "res://scripts/traffic/traffic_manager.gd":
 		for human: CharacterBody3D in humans:
 			if not is_instance_valid(human) or not human.global_position.is_finite():observations_valid=false;continue
 			var point: Vector3=city.to_local(human.global_position);var inside: Array=[]
+			var ground_observed: bool=false;var near_ground: bool=false
 			for zone: Dictionary in zones.values():
-				if absf(point.y)<2.8 and Vector2(point.x,point.z).distance_to(zone.center)<float(zone.radius_m):zone.human_present=true;inside.append(zone.id)
+				if Vector2(point.x,point.z).distance_to(zone.center)>=float(zone.radius_m):continue
+				if not ground_observed:
+					var ground: Vector3=_terrain_point(human.global_position)
+					near_ground=absf(human.global_position.y-ground.y)<2.8;ground_observed=true
+				if near_ground:zone.human_present=true;inside.append(zone.id)
 			human_rows.append({"id":str(human.get_path()),"position":[human.global_position.x,human.global_position.y,human.global_position.z],"layer":human.collision_layer,"crossings":inside})
 		last_observation_tick=tick
 		for zone: Dictionary in zones.values():
@@ -222,6 +227,12 @@ func setup(root_scene: Node3D,population_design: Dictionary) -> bool:
 	host.rig.camera_stepped.connect(manager.after_camera_step)
 	loaded=vehicles.size()==8;return loaded
 
+func refresh_terrain() -> void:
+	for body: CharacterBody3D in vehicles:body.refresh_terrain()
+	if is_instance_valid(manager):
+		manager.refresh_terrain()
+		for zone: Dictionary in manager.zones.values():zone.clear_s=0.0;zone.human_present=true
+
 func set_running(enabled: bool) -> void:
 	running=enabled
 	for body: CharacterBody3D in vehicles:body.set_running(enabled)
@@ -235,10 +246,12 @@ func coverage_viewpoints() -> Array:
 	var result: Array=[]
 	for route: Dictionary in design.get("vehicle_routes",[]):
 		var frame: Dictionary=_at(route,float(route.length_m)*.40);var side := Vector3(frame.direction.z,0,-frame.direction.x)
-		result.append({"id":String(route.id),"point":host.city.to_global(frame.point+side*7.0+Vector3.UP*.08),"toward":host.city.to_global(frame.point+Vector3.UP*.9),"route_id":route.id})
+		var point: Vector3=host.city.to_global(frame.point+side*7.0);var toward: Vector3=host.city.to_global(frame.point)
+		if is_instance_valid(manager):point=manager._terrain_point(point);toward=manager._terrain_point(toward)
+		result.append({"id":String(route.id),"point":point+Vector3.UP*.08,"toward":toward+Vector3.UP*.9,"route_id":route.id})
 	return result
 
 func snapshot() -> Dictionary:
 	var rows: Array=[]
 	for body: CharacterBody3D in vehicles:rows.append(body.snapshot())
-	return {"loaded":loaded,"error":load_error,"running":running,"vehicle_count":vehicles.size(),"vehicles":rows,"route_certificates":route_audits.duplicate(true),"limited_vehicle_support_count":supports.size(),"manager":manager.snapshot() if is_instance_valid(manager) else {},"original_vehicle_count":_initial_old_count,"original_array_unchanged":is_instance_valid(host) and host.vehicles.size()==_initial_old_count,"source_geometry_changed":false,"old_route_arrays_changed":false,"coverage_viewpoints":coverage_viewpoints(),"scope":"Eight authored source-forward vehicles on four source-derived display road corridors; limited flat vehicle-only supports, inherited physical braking and full-box sweeps. Multi-crossing human priority/FIFO and existing camera/human/entry-guarded recycling. No real lane survey, routing/density claim, outside-source road or source-body changes."}
+	return {"loaded":loaded,"error":load_error,"running":running,"vehicle_count":vehicles.size(),"vehicles":rows,"route_certificates":route_audits.duplicate(true),"limited_vehicle_support_count":supports.size(),"manager":manager.snapshot() if is_instance_valid(manager) else {},"original_vehicle_count":_initial_old_count,"original_array_unchanged":is_instance_valid(host) and host.vehicles.size()==_initial_old_count,"source_geometry_changed":false,"old_route_arrays_changed":false,"coverage_viewpoints":coverage_viewpoints(),"scope":"Eight authored source-forward vehicles on four source-derived display road corridors; limited vehicle-only supports (height-conformed when terrain is enabled), inherited physical braking and full-box sweeps. Multi-crossing human priority/FIFO and existing camera/human/entry-guarded recycling. No real lane survey, routing/density claim, outside-source road or source-body changes."}

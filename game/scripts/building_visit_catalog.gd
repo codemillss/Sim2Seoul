@@ -105,6 +105,7 @@ func build(host: Node3D) -> Array[Dictionary]:
 			"catalog_origin": String(source.get("catalog_origin","EXP04_base")),
 			"game_layout_basis": "원본 외곽 안에 맞춘 게임 실내 · 실제 평면도 미확인",
 		}
+		_apply_runtime_terrain(host, record)
 		records.append(record)
 	records.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		if a.id == LIBRARY_ID: return true
@@ -116,3 +117,43 @@ func build(host: Node3D) -> Array[Dictionary]:
 
 func _xz(value: Array, y := 0.0) -> Vector3:
 	return Vector3(float(value[0]), y, float(value[1]))
+
+func _apply_runtime_terrain(host: Node3D, record: Dictionary) -> void:
+	# Authored JSON and source_height remain unchanged. Only the runtime copy
+	# receives a local foundation elevation; source height still means thickness.
+	var base_y := 0.0
+	var terrain := host.get_node_or_null("TerrainSurface")
+	var applied := false
+	if is_instance_valid(terrain):
+		if terrain.has_method("building_base_y_world"):
+			base_y = float(terrain.building_base_y_world(String(record.id)))
+		elif terrain.has_method("ground_y_world"):
+			base_y = float(terrain.ground_y_world(Vector3(record.rectangle_center.x,0.0,record.rectangle_center.y)))
+		applied = is_finite(base_y)
+	if not applied:base_y = 0.0
+	record["base_offset_m"] = base_y
+	record["source_roof_world_y"] = base_y+float(record.source_height)
+	record["terrain_elevation_applied"] = applied
+	record["flat_source_entrance"] = record.entrance
+	record["flat_source_door"] = record.door
+	# An outdoor foot anchor is two metres beyond the facade. It follows
+	# that exact pavement triangle; a level building foundation is separate.
+	var entry_ground_y: float = terrain.ground_y_world(record.flat_source_entrance) if applied else 0.0
+	if not is_finite(entry_ground_y):
+		record.terrain_elevation_applied=false
+		entry_ground_y=base_y
+	record["entry_surface_adjustment_m"] = entry_ground_y-base_y
+	record["entrance_ground_y_m"] = entry_ground_y
+	record.entrance += Vector3.UP*entry_ground_y
+	record.door += Vector3.UP*base_y
+	for candidate: Dictionary in record.entry_candidates:
+		candidate["flat_source_entrance"] = candidate.entrance
+		candidate["flat_source_door"] = candidate.door
+		var candidate_ground_y: float = terrain.ground_y_world(candidate.flat_source_entrance) if applied else 0.0
+		if not is_finite(candidate_ground_y):
+			record.terrain_elevation_applied=false
+			candidate_ground_y=base_y
+		candidate["entry_surface_adjustment_m"] = candidate_ground_y-base_y
+		candidate["entrance_ground_y_m"] = candidate_ground_y
+		candidate.entrance += Vector3.UP*candidate_ground_y
+		candidate.door += Vector3.UP*base_y

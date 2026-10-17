@@ -1,0 +1,38 @@
+{
+  "task": "EXP21_HANDOFF_CHECKER_ISOLATED_PAYLOAD",
+  "result": "PASS",
+  "scope": "Copied only shared manifest files to an isolated temporary directory; no Godot/runtime cache/virtualenv used for default check. Generated accepted bytes copied later, not regenerated on another Mac. Negative missing-input and changed-byte controls, then restoration. Not clean-machine GIS/engine/second-Mac acceptance.",
+  "checker_sha256": "59ce43db10b4157e2e9af41e06261656b6f6293a9c0a9637fb69be3f5eb707bd",
+  "checks": [
+    {
+      "name": "shared_only_default",
+      "passed": true,
+      "deferred_inputs": [
+        "data/processed/features.json",
+        "game/data/generated/pedestrians.json",
+        "game/data/generated/public_walk.json",
+        "game/data/generated/terrain_surface.json",
+        "game/data/generated/traffic.json",
+        "game/data/generated/walkable_itinerary.json",
+        "game/resources/world_geometry/world.json"
+      ]
+    },
+    {
+      "name": "missing_runtime_prepared_rejected",
+      "passed": true,
+      "failure_count": 19
+    },
+    {
+      "name": "with_accepted_runtime_copies_prepared",
+      "passed": true
+    },
+    {
+      "name": "changed_shared_heightfield_rejected",
+      "passed": true
+    },
+    {
+      "name": "restored_shared_heightfield_passes",
+      "passed": true
+    }
+  ]
+}

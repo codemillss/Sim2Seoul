@@ -13,9 +13,29 @@ var neighbors: Callable
 var plans_started := 0
 var plans_completed := 0
 var rejected_plans := 0
+const STATIC_PREVIEW_INTERVAL_S: float=.15
+var _choose_ground_cache: Dictionary={}
+var _choose_queries_active: bool=false
+var choose_ground_calls: int=0
+var choose_ground_cache_hits: int=0
+var static_preview_calls: int=0
+var static_preview_skipped: int=0
 
 func setup(owner_node: Node3D, route_point: Callable, floor_point: Callable, allowed: Callable, bodies: Callable) -> void:
 	host=owner_node;point_at=route_point;ground_at=floor_point;allowed_at=allowed;neighbors=bodies
+
+func _floor_query(point: Vector3) -> Dictionary:
+	if not _choose_queries_active:return ground_at.call(point)
+	choose_ground_calls+=1
+	if _choose_ground_cache.has(point):choose_ground_cache_hits+=1;return _choose_ground_cache[point]
+	var result: Dictionary=ground_at.call(point)
+	_choose_ground_cache[point]=result
+	return result
+
+func _choice_result(result: Dictionary,failed: bool=false,group: Dictionary={}) -> Dictionary:
+	_choose_queries_active=false
+	if failed and not group.is_empty():group["avoidance_preview_wait_s"]=0.0
+	return result
 
 func _flat(value: Vector3) -> Vector2:return Vector2(value.x,value.z)
 
@@ -35,12 +55,12 @@ func _excluded(group: Dictionary) -> Array[RID]:
 func _feet(group: Dictionary, station: float, lateral: float, row: Dictionary) -> Dictionary:
 	var at: Vector3=point_at.call(group,station,float(row.side)+lateral)
 	if not allowed_at.call(at,radius(row)):return {}
-	var support: Dictionary=ground_at.call(at)
+	var support: Dictionary=_floor_query(at)
 	if support.is_empty() or absf(support.point.y-at.y)>.45:return {}
 	# Centre-only rays can allow a foot to leave a ledge. Probe the footprint
 	# too, and reject a surface step greater than an ordinary shallow curb.
 	for side: Vector3 in [Vector3.RIGHT,Vector3.LEFT,Vector3.FORWARD,Vector3.BACK]:
-		var edge: Dictionary=ground_at.call(at+side*radius(row))
+		var edge: Dictionary=_floor_query(at+side*radius(row))
 		if edge.is_empty() or absf(edge.point.y-support.point.y)>.19:return {}
 	return support
 
@@ -73,7 +93,7 @@ func segment_clear(group: Dictionary, starts: Array, ends: Array, supports: Arra
 		if is_instance_valid(other):sweep_excluded.append(other.get_rid())
 	for index in range(group.members.size()):
 		var row: Dictionary=group.members[index];var a: Vector3=starts[index];var b: Vector3=ends[index]
-		var floor_a: Dictionary=ground_at.call(a)
+		var floor_a: Dictionary=_floor_query(a)
 		if floor_a.is_empty() or absf(a.y-b.y)>.24:return false
 		var direction:=b-a;direction.y=0.
 		if direction.is_zero_approx():direction=-row.visual.global_basis.z
@@ -143,6 +163,9 @@ func _build_plan(group: Dictionary, lane: float, obstacle_distance: float) -> Ar
 func _obstacle_distance(group: Dictionary) -> float:
 	var start: Vector3=point_at.call(group,group.station,0.)
 	var ahead: Vector3=point_at.call(group,clampf(group.station+group.direction*.2,0.,group.length),0.)-start
+	# Personal clearance and route stations are measured in horizontal metres;
+	# a hill's rise must not shorten the forward lookahead footprint.
+	ahead.y=0.0
 	if ahead.is_zero_approx():return 1.0
 	ahead=ahead.normalized();var result:=LOOK_AHEAD_M;var excluded:=_excluded(group)
 	for row: Dictionary in group.members:
@@ -165,7 +188,15 @@ func _new_plan(group: Dictionary, distance: float) -> bool:
 	rejected_plans+=1;return false
 
 func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
-	if not group.has("avoidance_plan"):group.avoidance_plan=[];group.avoidance_retry_s=0.;group.avoidance_lane_m=0.;group.avoidance_count=0
+	# No body/physics mutation occurs inside this call. Reuse only an exact
+	# Vector3 floor query within this one call; never carry native hits to the
+	# next actor move or physics tick.
+	_choose_ground_cache.clear();_choose_queries_active=true
+	if not group.has("avoidance_plan"):group.avoidance_plan=[];group.avoidance_retry_s=0.;group.avoidance_lane_m=0.;group.avoidance_count=0;group.avoidance_preview_wait_s=0.0
+	if not group.has("avoidance_preview_wait_s"):group.avoidance_preview_wait_s=0.0
+	if int(group.get("avoidance_preview_direction",group.direction))!=int(group.direction):group.avoidance_preview_wait_s=0.0
+	group.avoidance_preview_direction=group.direction
+	group.avoidance_preview_wait_s=maxf(0.0,float(group.avoidance_preview_wait_s)-maxf(0.0,delta))
 	group.avoidance_retry_s=maxf(0.,float(group.avoidance_retry_s)-delta)
 	group.avoidance_offset_m=_offset(group)
 	var actual: Vector3=group.members[0].body.global_position
@@ -174,22 +205,32 @@ func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
 		var target: Vector3=point_at.call(group,waypoint.station,waypoint.offset)
 		if _flat(actual).distance_to(_flat(target))>.045:break
 		group.avoidance_plan.pop_front()
-		if group.avoidance_plan.is_empty():plans_completed+=1;group.avoidance_lane_m=0.
+		if group.avoidance_plan.is_empty():plans_completed+=1;group.avoidance_lane_m=0.;group.avoidance_preview_wait_s=0.0
 	var distance:=_obstacle_distance(group)
-	if group.avoidance_plan.is_empty() and group.avoidance_retry_s<=0.:
+	if group.avoidance_plan.is_empty():
 		var obstructed:=distance<LOOK_AHEAD_M
 		if not obstructed:
-			var look_s: float=clampf(group.station+group.direction*.9,0.,group.length)
-			var look_supports:=_supports(group,look_s,0.)
-			obstructed=look_supports.is_empty() or not segment_clear(group,_positions(group),_centres(look_supports),look_supports,neighbors.call(group))
-			if obstructed:distance=.9
-		if obstructed and not _new_plan(group,distance):group.avoidance_retry_s=.35
+			if float(group.avoidance_preview_wait_s)<=.0000001:
+				# Only the static0.9m preview is paced. At the maximum1.35m/s,
+				# 0.15s spans0.2025m, shorter than that preview. Dynamic humans,
+				# full current-step supports/protected boundaries and every native
+				# current-step sweep below remain checked on EVERY physics tick.
+				var look_s: float=clampf(group.station+group.direction*.9,0.,group.length)
+				var look_supports:=_supports(group,look_s,0.)
+				obstructed=look_supports.is_empty() or not segment_clear(group,_positions(group),_centres(look_supports),look_supports,neighbors.call(group))
+				static_preview_calls+=1
+				# Reserve one step so30Hz quantization cannot postpone the
+				# preview beyond the stated0.15s maximum.
+				group.avoidance_preview_wait_s=0.0 if obstructed else maxf(0.0,STATIC_PREVIEW_INTERVAL_S-delta)
+				if obstructed:distance=.9
+			else:static_preview_skipped+=1
+		if obstructed and group.avoidance_retry_s<=0.0 and not _new_plan(group,distance):group.avoidance_retry_s=.35
 	var station: float=clampf(group.station+group.direction*speed*delta,0.,group.length)
 	var offset:=0.
 	if not group.avoidance_plan.is_empty():
 		station=group.avoidance_plan[0].station;offset=group.avoidance_plan[0].offset
 	var supports:=_supports(group,station,offset)
-	if supports.is_empty():return {"clear":false,"reason":"floor_or_protected_boundary","targets":_positions(group)}
+	if supports.is_empty():return _choice_result({"clear":false,"reason":"floor_or_protected_boundary","targets":_positions(group)},true,group)
 	var ends:=_centres(supports);var starts:=_positions(group)
 	# Validate precisely this physical tick, not a sweep to a distant goal.
 	# Planning observes a snapshot; a moving player can enter it afterwards.
@@ -197,17 +238,17 @@ func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
 		var difference: Vector3=ends[index]-starts[index];difference.y=0.
 		var capped:=difference.limit_length(speed*delta)
 		var point: Vector3=starts[index]+capped
-		var support: Dictionary=ground_at.call(point)
-		if support.is_empty():return {"clear":false,"reason":"missing_step_support","targets":starts}
+		var support: Dictionary=_floor_query(point)
+		if support.is_empty():return _choice_result({"clear":false,"reason":"missing_step_support","targets":starts},true,group)
 		ends[index]=support.point;supports[index]=support
 	if not segment_clear(group,starts,ends,supports,neighbors.call(group)):
 		group.avoidance_stuck_s=float(group.get("avoidance_stuck_s",0.))+delta
 		if group.avoidance_stuck_s>.45 and group.avoidance_retry_s<=0.:
 			# Replan from the current physical offset if the old lane changed.
 			group.avoidance_plan=[];group.avoidance_retry_s=.25;group.avoidance_stuck_s=0.
-		return {"clear":false,"reason":"occupied_passing_corridor","targets":starts}
+		return _choice_result({"clear":false,"reason":"occupied_passing_corridor","targets":starts},true,group)
 	group.avoidance_stuck_s=0.
-	return {"clear":true,"reason":"","targets":ends,"passing":not group.avoidance_plan.is_empty()}
+	return _choice_result({"clear":true,"reason":"","targets":ends,"passing":not group.avoidance_plan.is_empty()})
 
 func can_reverse(group: Dictionary, distance: float) -> bool:
 	var target:=clampf(float(group.station)-float(group.direction)*distance,0.,float(group.length))

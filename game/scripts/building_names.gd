@@ -77,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 			var gap:=point.distance_to(closest)
 			if gap<nearest:nearest=gap;current_name=record.name;current_id=id;distance=gap;prefix="가까운 건물 · "
 	caption.text=prefix+current_name+"  ·  %.0fm"%distance
-	panel.visible=not current_name.is_empty() and not host.menu.visible and not (not host.player.interior_active and host.player.global_position.y>6.0)
+	panel.visible=not current_name.is_empty() and not host.menu.visible and not (not host.player.interior_active and host._height_above_terrain(host.player.global_position)>6.0)
 	var view:=host.get_viewport().get_visible_rect().size
 	panel.reset_size();panel.position=Vector2(maxf(16.,(view.x-panel.size.x)/2.),view.y-100.)
 	crosshair.visible=not host.menu.visible;crosshair.position=view*.5-Vector2(5,20)

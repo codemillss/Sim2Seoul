@@ -31,6 +31,17 @@ func setup(_city: Node3D,_player: CharacterBody3D,original_people: Array[Charact
 	loaded=true;print("EXPLORATION_PEDESTRIAN_AVOIDANCE_READY people=2 original_core_unchanged=true")
 	return true
 
+func refresh_terrain() -> void:
+	if not loaded or street._terrain_service()==null:return
+	for group: Dictionary in groups:
+		for index: int in range(group.points.size()):
+			group.points[index]=street._terrain_point(group.points[index])
+			group.members[0].body._points[index]=group.points[index]
+		group.erase("avoidance_plan")
+		var actor: CharacterBody3D=group.members[0].body
+		actor.global_position=street._terrain_point(street._at(group,group.station))+Vector3.UP*.025
+		actor.velocity=Vector3.ZERO
+
 func set_running(enabled: bool) -> void:
 	running=enabled
 	for actor: CharacterBody3D in _original:actor.velocity=Vector3.ZERO
@@ -71,6 +82,7 @@ func _physics_process(delta: float) -> void:
 		actor.velocity=Vector3(velocity.x,-.12 if actor.is_on_floor() else maxf(actor.velocity.y-9.8*delta,-8.),velocity.z)
 		actor.move_and_slide()
 		var achieved:=actor.global_position-before;achieved.y=0.
+		if velocity.length()*delta>.001 and achieved.length()<velocity.length()*delta*.5:group["avoidance_preview_wait_s"]=0.0
 		actor._distance_m+=achieved.length();actor._max_step_m=maxf(actor._max_step_m,achieved.length())
 		if achieved.length()>.000001:actor._moves+=1;actor._rotate_visual(actor._heading(achieved),delta)
 		elif group.state=="turning":

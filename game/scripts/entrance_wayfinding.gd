@@ -29,6 +29,8 @@ var _visible_ground_labels := 0
 var _last_los_id := ""
 var _los_elapsed := 1.0
 var _viewport_size := Vector2.ZERO
+var _height_above_ground_m := 0.0
+var _ground_height_known := false
 
 func setup(root_scene: Node3D, visit_controller: Node3D) -> bool:
 	if loaded or not is_instance_valid(root_scene) or not is_instance_valid(visit_controller): return false
@@ -56,7 +58,9 @@ func _build_entrance(spec: Dictionary) -> void:
 	outward.y = 0.0
 	outward = outward.normalized()
 	var basis := Basis(Vector3(outward.z, 0.0, -outward.x), Vector3.UP, outward)
-	var ground: float = spec.entrance.y
+	var ground: float = float(spec.get("base_offset_m",0.0))+(spec.flat_source_entrance.y if spec.has("flat_source_entrance") else spec.entrance.y)
+	# The facade frame follows the level foundation. Its separate E pad follows
+	# the actual outdoor pavement triangle at the source foot anchor.
 	# Source door Y denotes its facade centre, not the pavement elevation.
 	var door_anchor := Vector3(spec.door.x, ground, spec.door.z)
 	var width := 4.79 if spec.id == LIBRARY_ID else 2.44
@@ -185,7 +189,18 @@ func _pin_label(parent: Node, font_size: int, color: Color) -> Label:
 
 func update_guidance(delta: float, hidden: bool) -> void:
 	if not loaded or not is_instance_valid(host) or not is_instance_valid(visit): return
-	var elevated: bool=not host.player.interior_active and host.player.global_position.y>6.0
+	# EXP21's absolute height can be tens of metres on an ordinary street.
+	# Compare against the same local terrain that carries the pavement.
+	var ground_y := 0.0
+	var terrain := host.get_node_or_null("TerrainSurface")
+	_ground_height_known = false
+	if is_instance_valid(terrain) and terrain.has_method("ground_y_world"):
+		var sampled: float = terrain.ground_y_world(host.player.global_position)
+		if is_finite(sampled):
+			ground_y = sampled
+			_ground_height_known = true
+	_height_above_ground_m = host.player.global_position.y-ground_y
+	var elevated: bool=not host.player.interior_active and _height_above_ground_m>6.0
 	_hidden = hidden or bool(visit.active) or elevated
 	if elevated:target_spec={}
 	world_frames.visible = not _hidden
@@ -358,4 +373,5 @@ func snapshot() -> Dictionary:
 		"panel_visible": is_instance_valid(panel) and panel.visible,
 		"panel_rect": panel.get_rect() if is_instance_valid(panel) else Rect2(),
 		"panel_text": caption.text + "\n" + target_label.text + "\n" + direction_label.text if loaded else "",
-		"viewport_size": _viewport_size, "geometry_body_count": 0, "anchors": anchors.duplicate(true)}
+		"viewport_size": _viewport_size, "geometry_body_count": 0, "anchors": anchors.duplicate(true),
+		"height_above_ground_m":_height_above_ground_m,"ground_height_known":_ground_height_known}

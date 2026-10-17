@@ -1,0 +1,1289 @@
+{
+  "schema_version": 1,
+  "task": "EXP21",
+  "result": "PASS",
+  "recorded_at": "2026-10-18T05:04:49.437036+09:00",
+  "base_commit": "2789dc9ff56e27318b45e499e404932903514e1b",
+  "repository": "https://github.com/codemillss/Sim2Seoul",
+  "branch": "main",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "machine": "Apple M1 Pro / 16GB / macOS27.0 / Metal / Forward+",
+  "scope": "Source-interpolated local terrain integration in the latest development ExploreWalk. Stored sources, game foundation estimates and physical/native checks remain separate. Counts are overlapping execution assertions, not unique requirements.",
+  "engine_totals": {
+    "gpu30hz": 106,
+    "headless60hz": 47,
+    "failed": 0
+  },
+  "acceptance_reports": [
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_headless.json",
+      "mode": "headless",
+      "checks": 26,
+      "physics_hz": 60
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_headless.json",
+      "mode": "headless",
+      "checks": 21,
+      "physics_hz": 60
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu.json",
+      "mode": "gpu",
+      "checks": 26,
+      "physics_hz": 30
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu.json",
+      "mode": "gpu",
+      "checks": 53,
+      "physics_hz": 30
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu.json",
+      "mode": "gpu",
+      "checks": 27,
+      "physics_hz": 30
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_equivalence.json",
+      "mode": "cache_geometry",
+      "checks": 3
+    }
+  ],
+  "source": {
+    "official_contour_parts": 41,
+    "spot_points": 96,
+    "grid_interval_m": 5,
+    "grid_is_surveyed_dem": false,
+    "vertical_datum": "unknown",
+    "relative_origin_source_height_m": 31.362231,
+    "internal_held_out_spot_rmse_m": 2.315,
+    "internal_held_out_spot_max_m": 8.739,
+    "independent_survey_accuracy_verified": false,
+    "source_code_policy_and_conflicts_report": "data/reports/terrain_integration/20261018/source_quality.json"
+  },
+  "surface": {
+    "triangles": 146882,
+    "source_buildings": 635,
+    "game_foundation_groups": 525,
+    "maximum_game_foundation_leveling_m": 6.523,
+    "source_XZ_building_height_and_original_file_bytes_preserved": true,
+    "game_height_range_m": [
+      -6.3622,
+      18.6347
+    ],
+    "runtime_sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+  },
+  "walking": {
+    "source_itinerary_length_m": 3327.0481065600493,
+    "segments": 334,
+    "whole_journey": {
+      "camera_overlap_samples": 0,
+      "end": [
+        48.9963493347168,
+        -0.632225036621094,
+        13.5676069259644
+      ],
+      "failed_index": -1,
+      "grounded_ticks": 4809,
+      "height_range_m": [
+        -1.35602867603302,
+        5.2857518196106
+      ],
+      "kind": "Production Input action movement, no mid-walk pose assignment",
+      "maximum_step_m": 0.707803785800934,
+      "physics_hz": 30,
+      "points": 334,
+      "reached": true,
+      "recoveries": 0,
+      "scenario_pose_calls_during_walk": 0,
+      "start": [
+        49.0525360107422,
+        -0.629204034805298,
+        13.5788879394531
+      ],
+      "ticks": 4814,
+      "title": "source_3_3km_continuous"
+    },
+    "static_fixture": "44 paused dynamic bodies layer0 only inside geometry walk; all restored, player/static/camera masks unchanged. Independent actor suites retain actual layer/mask/shape checks. No live-actor 3.3km completion claim.",
+    "museum_original_route_m": 90
+  },
+  "entries": {
+    "source_buildings_native_entry_support_and_capsule_checked": 126,
+    "complete_hotels": [
+      "plaza",
+      "lotte"
+    ],
+    "native_lift_rides": 4,
+    "actual_plaza_swimming_and_physical_pool_exit_roundtrips": 1,
+    "not_all_126_building_journeys": true
+  },
+  "actors": {
+    "people": 28,
+    "dogs": 2,
+    "cars": 14,
+    "native_simulated_seconds": 20,
+    "headless_simulated_seconds": 20,
+    "dense_car_floor_rays_per_suite": 4032,
+    "coarse_bounds_containment_violations": 0,
+    "source_guard_equivalence_comparisons": 18165,
+    "terrain_tree_native_trunks": 369,
+    "terrain_tree_native_crowns": 1107
+  },
+  "visual_review": {
+    "path": "data/reports/terrain_integration/20261018/native_visual_review.json",
+    "native_test_images_reviewed": 16,
+    "status": "REVIEWED_WITH_LIMITATIONS",
+    "normal_launch_menu_is_additional": true
+  },
+  "observations": {
+    "cache_static_geometry_equivalence_report": "data/reports/terrain_integration/20261018/final/cache_equivalence.json",
+    "cold_start_s": 22.848149,
+    "warm_start_s": 7.296201,
+    "cacheable_geometry_nodes": 2630,
+    "native_120_process_frame_median_ms": 7.0335,
+    "short_observations_not_performance_acceptance": true,
+    "headless_separated_load_report": "data/reports/terrain_integration/20261018/final/load_headless.json"
+  },
+  "normal_launch": "data/reports/terrain_integration/20261018/normal_launch.json",
+  "development_history": "data/reports/terrain_integration/20261018/development",
+  "limitations": [
+    "Official contours/spot heights interpolated; no surveyed5mDEM or known vertical datum.",
+    "Maximum6.523m foundation leveling and source building/terrain date differences remain game reconstruction.",
+    "Some foundation/pavement banks look artificially faceted; actual thresholds/retaining walls/subways/stairs and every approach are not surveyed.",
+    "Near-lift cameras can contract and some actor/pool views are partly occluded; simple models and sparse street life remain.",
+    "No manual whole journey, subjective handling, all126 interior journeys, M4, new export or long-running performance acceptance."
+  ],
+  "next_first_action": "Inspect the reopened exploration at the museum route for grade/distance impression. Retain local foundation/entrance visual correction queue; next feature plan T01 starts with one bus stop/boarding loop, not implemented here.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 5169,
+      "sha256": "fe501fed6cc7cc1d3d2bb235fd857f74afa4f55db364cf043584cb4fef137679",
+      "kind": "shared"
+    },
+    {
+      "path": "README.md",
+      "bytes": 18800,
+      "sha256": "86ff3ade83f582b6ca19090f00261fb3b42f98b1aca405ccc4eee57a86c82173",
+      "kind": "shared"
+    },
+    {
+      "path": "config/region.json",
+      "bytes": 949,
+      "sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+      "kind": "shared"
+    },
+    {
+      "path": "data/processed/features.json",
+      "bytes": 6643663,
+      "sha256": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/contours_wgs84.geojson",
+      "bytes": 600825,
+      "sha256": "4f7bfc7fb008312dde8e825267fdd8099956fff8cc025baa11578ae7ff5572dc",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/manifest.json",
+      "bytes": 6975,
+      "sha256": "0fa3873f3e12e39222ed8b570b8acfb7d6e927c70ed6bbdcd58e5a1ad4e69136",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/source_license.json",
+      "bytes": 1934,
+      "sha256": "07af8dda880ea509e440f21c4cfff756e9af09e546153fa3f7eccf5f30099895",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/source_original.prj",
+      "bytes": 456,
+      "sha256": "1bd00dd7403a1863ccba284d562776bb5639229c9d35b93d08fda1ed05a74830",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/source_original_field_notes.txt",
+      "bytes": 552,
+      "sha256": "1e2a6c8ab385ac112a68006e2ba932361ed98432bafc6e198b0b9d5cbdf73e86",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/spot_heights_wgs84.geojson",
+      "bytes": 104483,
+      "sha256": "426f3e42d8a6a73e5e236116d73417dc97622a9363b718038d25ad6185274815",
+      "kind": "shared"
+    },
+    {
+      "path": "data/raw/supplemental/seoul_terrain/20261018/terrain_source_controls_local.json",
+      "bytes": 701173,
+      "sha256": "61ba9af516bf52704440a58c2e9beb9a806e93a955d2ea79bdac27602f8a8f4c",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/conditioning_validation.json",
+      "bytes": 12606,
+      "sha256": "0f4533d0015c06c65c8eec035a11a6b7cbfc54eea96eff9133390a23555508cb",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_explicit_layer_assertions/actors_headless.json",
+      "bytes": 348496,
+      "sha256": "7dc6992ecc61be0345d0b7129553bbf9b4e87bd70d5f7bd94f47c28ed15353a9",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_explicit_layer_assertions/actors_headless.log",
+      "bytes": 4596,
+      "sha256": "40dd3d6ca203d46fb9bd2a4fc5ba05cb41dd1f081a0de24208739c7e8592c1c1",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_full_footprint_envelope.json",
+      "bytes": 329643,
+      "sha256": "18308330b54fff19f7f6c218f0d8a294a46af032c93fb7e0991ceba7b34f9b0b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_full_footprint_envelope.log",
+      "bytes": 5750,
+      "sha256": "d7aeb6754ea640ba2cd19af3a4548a2e6f74772f4923f18d69896df510693422",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_rigid_fit_fix.json",
+      "bytes": 361308,
+      "sha256": "cdbf3d8e3052d70225d2e2ffe7eb0127aba4a14fb28a3fbedfe21e66d0e65cf2",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_before_rigid_fit_fix.log",
+      "bytes": 6564,
+      "sha256": "1d0871378c9c0ac2fc56ea300f83245df02bd2cab8ea7e26a917188bc337179f",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_headless_before_early_broadphase.json",
+      "bytes": 339087,
+      "sha256": "5b39632376498d35261c9d0ac60026182910561d9047544495e5728b1e8a7a74",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_headless_before_early_broadphase.log",
+      "bytes": 4596,
+      "sha256": "5f319401961812705e3889107f001373fc334230982d17206e45a0cd54e1af6d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_source_freeze_violation.json",
+      "bytes": 336516,
+      "sha256": "17b516f63ddfebd630bdd26cdfaaa06fb7f69cb391f624d78400125bd0a2b9f5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/actors_source_freeze_violation.log",
+      "bytes": 5211,
+      "sha256": "d48370acecab3559ff29f993d7ac96604623afab3973eef77f5416aed7d90ea8",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_bird_fix_cache_cold.json",
+      "bytes": 976835,
+      "sha256": "9632dc154d9752bbf66c535ffa841b1b5dd25f5196a08b258592f21b5c5523f5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_bird_fix_cache_cold.log",
+      "bytes": 4834,
+      "sha256": "16cca9ad1c08de221e07c60f4772d5d14177b550392afa5e9c765076ddd0cd6c",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_bird_fix_cache_equivalence.json",
+      "bytes": 665,
+      "sha256": "1c6e3f2fd894ff0c1c8c73f81462cd6171ca27dcd564c7b64a3bf375e528c2ae",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_bird_fix_cache_warm.json",
+      "bytes": 974201,
+      "sha256": "23a3b6cd5516fbbc076b14ce69563e467ac4d36de778b5a33aacfadeae8a01a2",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_bird_fix_cache_warm.log",
+      "bytes": 4589,
+      "sha256": "b9d2f247196e5f617b6ef515f185b6bb6020e9ef7340ec1741359a1b8e8de1a1",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_query_reuse_cache_cold.json",
+      "bytes": 976835,
+      "sha256": "e3f3c7aa04ee8197e2733b612db77a6f3043c3dc0ad5bdd5c4d5148ca5a03955",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_query_reuse_cache_cold.log",
+      "bytes": 4589,
+      "sha256": "390231c8d188dfcc0c283f7b37c73ce031d87266178a288b749863e5dc9c11e5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_query_reuse_cache_equivalence.json",
+      "bytes": 665,
+      "sha256": "8bc237467f20ec753a043a3c4991058eed77b09145108be47f699d265ef32d7b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_query_reuse_cache_warm.json",
+      "bytes": 974201,
+      "sha256": "3d61a4b902ee23a6cfbf480c50c301e2b7d578ad4a74f0dc20deb94336a2d999",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/cache_before_query_reuse_cache_warm.log",
+      "bytes": 4834,
+      "sha256": "2a2ac351f4e1c8469ee8de8beb2172d509a3148c985d8124f5c3b96e70df73fa",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_final_query_and_hz.json",
+      "bytes": 1234666,
+      "sha256": "ec5c2bc2f9787dddd016f069fdca30d51a1e9349c4acf1963c41a297c4789cd5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_final_query_and_hz.log",
+      "bytes": 4608,
+      "sha256": "a30c1410f780001ef36fddfaabed8d5cb8f63dca4a4b0411cae550f24a7d5563",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_foot_anchor_fix.json",
+      "bytes": 1170680,
+      "sha256": "9540344156600ca44e3ebfef9fb8f07a3329686904e063ab6149ac24ee27646c",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_foot_anchor_fix.log",
+      "bytes": 6722,
+      "sha256": "2968e70505a8e88f983c5286b4e460235676204ccfeb132b9c2c64810bc1c078",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_source_notice_update.json",
+      "bytes": 1184223,
+      "sha256": "0651d22331b838414f08d9d42b7801e8c76964b1b7efb739bf609435f54610e5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_before_source_notice_update.log",
+      "bytes": 4853,
+      "sha256": "b115b59f037ad051f617e4959d3f33b0028fcaa2a66db6c89619785fcc34a5bd",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/entries_test_type_inference_failure.log",
+      "bytes": 433,
+      "sha256": "3b9683551679ef188b66a73c904bd6657bf9743c8f6e8f3dcda1fd947e0b6bc7",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/first_linked_walk_pass.json",
+      "bytes": 1504727,
+      "sha256": "5524e01744f98754157327f4d55365559a976ca85f036450cb1f371c1976e31a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/first_linked_walk_pass.log",
+      "bytes": 4594,
+      "sha256": "e05829ab3bc70a1d351b81a0447041037c3d2406f3ec27f59436a10db50f2976",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/capture_relocation.json",
+      "bytes": 2362,
+      "sha256": "f6902404b0d5a61daaa81e155722d91291af17a061ad2b024e3241c8cebdb155",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu.json",
+      "bytes": 3196963,
+      "sha256": "7159248f34558bf3600c5b16f1ec13b87d039691de780f15b44a9f4d4dbd0d60",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu.log",
+      "bytes": 5347,
+      "sha256": "e097d9f4d719e0e3e9df9be13203a3e825757ca7048ff3beb33b1bada092ce93",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu_daehanmun_source_grade.png",
+      "bytes": 432488,
+      "sha256": "dcc87622526a79553618b7d59fb44d6c8b9d83dc61dc3855ce05eb72ef0fbc32",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu_museum_source_high_ground.png",
+      "bytes": 538280,
+      "sha256": "70debf251f55e6c6416f2dd965aecb38eebcec71b99aa0c7eaeb4b139a02057d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu_source_ground_repeated_jump.png",
+      "bytes": 621364,
+      "sha256": "a719e0aee29c7df36efcedb6f746ed4a56a3554656c6441a14b3a2ad51269d98",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/full_native_before_actor_fixture_isolation/main_gpu_terrain_recovery_ground.png",
+      "bytes": 567747,
+      "sha256": "b938264dbd9518eeae97fefc3fc7b03dedc75a9e80c7bee31694606613ba11d7",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/initial_conditioning_degenerate_failure.log",
+      "bytes": 1124,
+      "sha256": "bb68d3ff155ae417038bab18889a029500705dc3a34ef19cd96048d0c68c934e",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/initial_mesh_overlay_failure.txt",
+      "bytes": 897,
+      "sha256": "382ca3486201219362cf7082bcd10134d7b78ac145b5d04c59ed793430561dfb",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_60hz_after_query_reuse.json",
+      "bytes": 50292,
+      "sha256": "af4799f5d3ac23503eb896937433c9e7bb145198f8b10c2370b363a8805f4ef5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_60hz_after_query_reuse.log",
+      "bytes": 4817,
+      "sha256": "fa425142af91e56ef724921441ab42de61b0d77a6e5165f9b8e2940f77b9643a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_after_guard_before_query_reuse.json",
+      "bytes": 50204,
+      "sha256": "a64398060a36e4494f43eaa5712e4b284d7e01076bd5fb4989e332245359e995",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_after_guard_before_query_reuse.log",
+      "bytes": 4817,
+      "sha256": "fa425142af91e56ef724921441ab42de61b0d77a6e5165f9b8e2940f77b9643a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_after_vehicle_before_guard_index.json",
+      "bytes": 49715,
+      "sha256": "2ecaf5e62175516b8b7ff1e38af0618e224eb284184c407b1b29797745ef287d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/load_after_vehicle_before_guard_index.log",
+      "bytes": 4572,
+      "sha256": "6c72c0a364cf9b2035e9a54807e1dc19749b6520c8178ac088793ad0c4c5acd3",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/main_before_bird_root_fix.json",
+      "bytes": 2738096,
+      "sha256": "4a9dcacc22ca4f6a10d2f9f61b713fd3121e5be0d291788e7d6f478405a3e271",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/main_before_bird_root_fix.log",
+      "bytes": 4594,
+      "sha256": "c1b5066e265dd5d43462ce8b741aa2cbe5de9770c914a6321ee076b8eb221359",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/main_headless_before_early_broadphase.json",
+      "bytes": 2738287,
+      "sha256": "c17e38d83414623692fa2a9e05b64e3f8f4236dce1d4691ed060545c42e4b6bd",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/main_headless_before_early_broadphase.log",
+      "bytes": 4594,
+      "sha256": "607dbc5e3d2d2dff2733ebc985534711f80a1171b0256867f683b4759dd27b37",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/mesh_before_boundary_transition.json",
+      "bytes": 822,
+      "sha256": "09a3f048605ba603281c8c3552c5efe008d73f3963a87b6c21c7d780922e01cb",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/mesh_before_conditioning.json",
+      "bytes": 1029,
+      "sha256": "1b0784dcf1a5bd576703cab0cf8e60e8073d6634abaa0978846ab52f10677763",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/path_diagnosis_signal_arity_failure/capture_relocation.json",
+      "bytes": 1386,
+      "sha256": "a0c0a06763caeabe98f08e4bf2cc469ce8e0674cd344e740078c626c7656bdc7",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/path_diagnosis_signal_arity_failure/paused_npc_diagnosis.json",
+      "bytes": 4358,
+      "sha256": "11e658e5bed2ae0e5364647fec58fe3e65a9b03be0037e5dc716b8ed75ef6d59",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/path_diagnosis_signal_arity_failure/paused_npc_diagnosis.log",
+      "bytes": 155797,
+      "sha256": "5d0b301ddf8b5d677bd0ec3f497f6aeae91153c9d2c2d35f98dba840ae2f7398",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/path_diagnosis_signal_arity_failure/paused_npc_diagnosis_paused_original_blocks_source_route.png",
+      "bytes": 433292,
+      "sha256": "1a11a2f1945aec3e1c0cc1358938864df442162837f7fc319d157da09212d254",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/path_diagnosis_signal_arity_failure/paused_npc_diagnosis_same_pose_continued_after_layer_only.png",
+      "bytes": 432637,
+      "sha256": "3f06638c896fef1b96b7ffff8fdab614eedc9a0d6ef9822ddd9f517fc18fd561",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/paused_npc_diagnosis.json",
+      "bytes": 15091,
+      "sha256": "601276e3c81cd09eef5ff69e8558df0ae5714b9cb8742f1f962f0c5d60fa382f",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/paused_npc_diagnosis.log",
+      "bytes": 5159,
+      "sha256": "a7cc70c348db0014b63d9fe46370e451ff79f6628b7f6c7738fd781156be2def",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/paused_npc_diagnosis_paused_original_blocks_source_route.png",
+      "bytes": 433365,
+      "sha256": "5b3a138a3823827ea7d2682c985cf62341a32b842e293d1d9843b40e67c8c5da",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/paused_npc_diagnosis_same_pose_continued_after_layer_only.png",
+      "bytes": 488479,
+      "sha256": "9ac3a2bfc57ccfd4c72d787bdad5b6d24b5efbe82b6f3b44301e721d84ca5a5b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/quick_headless_before_actor_fixture_isolation/main_headless.json",
+      "bytes": 2743374,
+      "sha256": "c0832e8be4898c023740b3c25bc67aa05597423f08120cafc275808a35bcd814",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/quick_headless_before_actor_fixture_isolation/main_headless.log",
+      "bytes": 4962,
+      "sha256": "6dd8c0a04240c84aa806c95ca4f908bf28cf647258b61573076ab982e8826c41",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/startup_avoidance_state_failure.log",
+      "bytes": 15725,
+      "sha256": "9872a2b27b20abdb9add3ae0586d6139ae52b6b2017479fc0eb3a783dc1c44d4",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/startup_stale_mesh_rejected.log",
+      "bytes": 3234,
+      "sha256": "fcbcb4c20735c59901d1259f1c031f33a5ca3501ba4790b7ce0139cc72238bca",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/subsystem_callbacks.json",
+      "bytes": 2911,
+      "sha256": "8ed95b34e01bb3ba158a19eb7eed1222b5694b70244cb10957e16c691f962f89",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/subsystem_callbacks.log",
+      "bytes": 174599,
+      "sha256": "46eb4f637f1df503d2b19a2b6338704e8011af24a146f604baf9cce03398b4d6",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/subsystem_timing.json",
+      "bytes": 2083,
+      "sha256": "65c854c3425f2b06640562d0e7d8c4400458482d5cbe9236a9fa80642c5a61f0",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/subsystem_timing.log",
+      "bytes": 4584,
+      "sha256": "048328f13d349cb771c76496d02ae233aafb6ddb2d706edfce8ca144750855a9",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/development/triangle_conditioning_diagnostic.json",
+      "bytes": 19109,
+      "sha256": "6184102b349e3a55bf9c48485c8b8c195a27a551ca95314754333d5abf9ec458",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu.json",
+      "bytes": 365507,
+      "sha256": "f36dbf2b8114b5caf38fef7c03b29e670a5e2062903eeccf648c772ff8dd12ac",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu.log",
+      "bytes": 4666,
+      "sha256": "1b91e07a12bd1282ad692dac50ab835e34fc97916f728ca84bbcaaca7c5a2a9b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu_sloped_street_walkers.png",
+      "bytes": 608265,
+      "sha256": "8f30286796555e566353816f29baa219ac1755e5831681910f99a8222d603826",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_gpu_source_road_vehicle_slope.png",
+      "bytes": 513987,
+      "sha256": "4c605a8a87fdb84ac7f59a90284b96d36a4b2ce2e195d41cb5eed254fd01471a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_headless.json",
+      "bytes": 359681,
+      "sha256": "6e24a38558b4ded0f02084a740331df31e535c7f3ea0c592cbd6385d0bca8877",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/actors_headless.log",
+      "bytes": 4841,
+      "sha256": "56d0ad4fa5dc5cec002254c5f9daf8c932cc7922411c589ca532fd038fdb8249",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_cold.json",
+      "bytes": 976943,
+      "sha256": "438d801f66eb23b1fe0c409f289c838e8fa9b233977cbf144e1d15da13f603b5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_cold.log",
+      "bytes": 4834,
+      "sha256": "2a2ac351f4e1c8469ee8de8beb2172d509a3148c985d8124f5c3b96e70df73fa",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_equivalence.json",
+      "bytes": 665,
+      "sha256": "37a4ae4ede1a72dd32303bb7f33125684081c58e13f8765f8a87a0a74a6f808d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_warm.json",
+      "bytes": 974309,
+      "sha256": "c27e591e5d57ade8d83106e0a25d951635c5c506e3f181b761f7e1ac9827c385",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/cache_warm.log",
+      "bytes": 4589,
+      "sha256": "390231c8d188dfcc0c283f7b37c73ce031d87266178a288b749863e5dc9c11e5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu.json",
+      "bytes": 1999815,
+      "sha256": "84db759ac253dc30ae50b11a048a465ca17ee1b436fc5ed58b34252d42b4ff89",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu.log",
+      "bytes": 4678,
+      "sha256": "05d3d6b9884a4500cae6ca6e5ea8706acd9663eb4173f9033c371c3f7c3e32df",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_ground_entrance.png",
+      "bytes": 387619,
+      "sha256": "1c7adf579b2e4906670f47d325816eab5535ffce7e433bda595b0733c49c47c5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_ground_return.png",
+      "bytes": 387619,
+      "sha256": "1c7adf579b2e4906670f47d325816eab5535ffce7e433bda595b0733c49c47c5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_lobby_lift.png",
+      "bytes": 269869,
+      "sha256": "390ef1e67f58b4d24ef280e7b6fd45db0cce02aac0a34cbe5088e7069f91f1a0",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_lotte_rebased_roof_lift.png",
+      "bytes": 287636,
+      "sha256": "dc2745b7218937273d52576f3231376e4c3947cef26844aacce59fdd6ed911a6",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_actual_pool_exit_on_rebased_deck.png",
+      "bytes": 383289,
+      "sha256": "229414cf68d43d05888658c111a7483702d1f9f458baf35a2fcb884a328c322d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_actual_swimming_rebased_pool.png",
+      "bytes": 192922,
+      "sha256": "22d6d62f69abea62359730a86182987ae23ba3b9eeb1066e381ad2e6d7eea849",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_ground_entrance.png",
+      "bytes": 431940,
+      "sha256": "6bb799c762611251175d6c43cb45b72407ddce67df002136fde488cc146322d4",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_ground_return.png",
+      "bytes": 431651,
+      "sha256": "880f2e6fa87493b1249ac372f5bb9c89b95f0639d0f75a86c831c2fe53e57cde",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_lobby_lift.png",
+      "bytes": 272020,
+      "sha256": "ac8eeed39346849c5f15fcf00d7dcc3bc18b3d3b23aa01df39b48207a26d33cc",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/entries_gpu_plaza_rebased_roof_lift.png",
+      "bytes": 299651,
+      "sha256": "251d4038f0f91f47ff41fef0ee7c4df5a0a25f3bfd77deca7648eb443ca2f913",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/load_headless.json",
+      "bytes": 50104,
+      "sha256": "6ac3e77b5ce5b270671e5a86517cfc9c3e05ddf198bed07869d0b235032b0144",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/load_headless.log",
+      "bytes": 4817,
+      "sha256": "fa425142af91e56ef724921441ab42de61b0d77a6e5165f9b8e2940f77b9643a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu.json",
+      "bytes": 3229431,
+      "sha256": "bb5ba4ff1b7ef19a236a3040ef6e8afd81f56fbd7adb69e80b0fc373a380ff8f",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu.log",
+      "bytes": 5522,
+      "sha256": "60e371431c9260c0c1df56b46be7cea1cb6151fa8871e1d8413150bc08f87f64",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_daehanmun_source_grade.png",
+      "bytes": 576763,
+      "sha256": "f7a4044fd1ae8387d85e5854cc974e85487e6a961299e2e1314838eb09942391",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_museum_source_high_ground.png",
+      "bytes": 538310,
+      "sha256": "58547270267127744cb5c4b4d67d30962acbd510ecf9d3c56ee475a815689bd9",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_source_ground_repeated_jump.png",
+      "bytes": 621570,
+      "sha256": "e79ac10cac74a5f3371e9deca1f20648e109b1f0d435121adace4640c9f7a0fb",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_gpu_terrain_recovery_ground.png",
+      "bytes": 567747,
+      "sha256": "b938264dbd9518eeae97fefc3fc7b03dedc75a9e80c7bee31694606613ba11d7",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_headless.json",
+      "bytes": 2744018,
+      "sha256": "1057e10670934507494ad72c8638a9d11a5634eee761cfa6e9a5fa7041bb79f8",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/final/main_headless.log",
+      "bytes": 5206,
+      "sha256": "f7c09cc34f8d6487a7b7f42e0aa6909a6178fdf821765104ea692093fc8f3b5f",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/handoff_portability_check.json",
+      "bytes": 1333,
+      "sha256": "123aadcb3e5ba550334e3ae8496deea4f7be5aaa2cb6c8ea22b0edf9a9a4d579",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/mesh_preparation.json",
+      "bytes": 10963,
+      "sha256": "589bf638fa8da8578b0ebc458d2a4b78032f45c2648ab7a02890950152e14d7e",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/native_visual_review.json",
+      "bytes": 7636,
+      "sha256": "f675434a866a485dd9b4761e0ccb22283e07ca8854c9991da1d1b2c108e6485f",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/normal_launch.json",
+      "bytes": 759,
+      "sha256": "268da0a66ccf116985428d737b55b97a6c1ee336ec99547383829efb1408483c",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/normal_launch.log",
+      "bytes": 7488,
+      "sha256": "434ce70dc6dc97af634c93823310b773b1b3c88d9bd2084fb109d011cb729c9e",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/normal_launch_menu.png",
+      "bytes": 168669,
+      "sha256": "a55f89d27a66f4fc0dda4c873a5fe36f38c0b8a3460e6e8766da942f7ed949a7",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/publication_payload_check.json",
+      "bytes": 532,
+      "sha256": "3c70e3cbd38009f3b7d3ade65653aaba069fa350b08bd5521aaa5bec1ba24949",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/source_quality.json",
+      "bytes": 166352,
+      "sha256": "dae46fabce8d442ba1d1f0fd549ab8a1c877a337a64d443326ec349128d1d079",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/ATTRIBUTION.md",
+      "bytes": 17772,
+      "sha256": "50a2df5135d0f9538872ac1151e4afaa1f03382597fc8d782f88f320f536b5bd",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/CROSS_MAC.md",
+      "bytes": 48645,
+      "sha256": "91af714c253cd1c2e41cc6947558a58b2daa2f194ebc1b2211ae7b5ae578cb8b",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/EXECUTION_LOG.md",
+      "bytes": 262418,
+      "sha256": "8e24fa661885da0cbe80708b4bc04b0b06ed6f2e223347cc9c8945ad03d15d99",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_TASKS.md",
+      "bytes": 71402,
+      "sha256": "7d3ba5f4e1531285421d4b04af8b6fdc760a73630ff7d9e5ca7bbae610922342",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "bytes": 46013,
+      "sha256": "7ef4ac068eb232a85e198994a8b64f095192aa29dfdc29fd4445455802e37c93",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/REALISM_REWORK.md",
+      "bytes": 7536,
+      "sha256": "014c6605f5227d208daaaf3c07e297d468b4172904f986b6c96595a07137d8d1",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/RUN_GUIDE.md",
+      "bytes": 27844,
+      "sha256": "a4f37a1bd7c4353bd4ee0f7f7fe205dda1d7c530c23ddea61e2722a1fdb2d091",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/SOL_HANDOFF.md",
+      "bytes": 22662,
+      "sha256": "6ba3484e24ff12d8d091a3ef8bde11fd0405886c69a3386e99793040fa511a50",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "bytes": 125442,
+      "sha256": "8b8cefd94186b734c53f9a1539f61510a5dc2862facd0a453cd025e9b433d1f0",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/TERRAIN_INTEGRATION.md",
+      "bytes": 8932,
+      "sha256": "9cc02ef856d409f03138307aa8ff5dfeb6f1047f5eac45ced377a3bc0b815adb",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/VALIDATION_PLAN.md",
+      "bytes": 92099,
+      "sha256": "e60a66d135382c1e835c8cdc0a6c311dbb40b9dfe2771ee2024d3a95000d8d3f",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "bytes": 91331,
+      "sha256": "f01fd6989f089fcb435163f8bd287b51a04abf355cb1268989de3563563378c0",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/interiors/source_catalog.json",
+      "bytes": 358090,
+      "sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/interiors/supplemental_catalog.json",
+      "bytes": 9510,
+      "sha256": "d6749acae2093912e2465691d7c11082fb1fabceadc7ccfbf7fffb64bebd0d6d",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_population.json",
+      "bytes": 79247,
+      "sha256": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/terrain_heightfield.json",
+      "bytes": 1045434,
+      "sha256": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e",
+      "kind": "shared"
+    },
+    {
+      "path": "game/data/generated/pedestrians.json",
+      "bytes": 3736,
+      "sha256": "a31058bad3b48968cb0154e410bc7a2c904025eb6041ff69720916755be29d3e",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/data/generated/public_walk.json",
+      "bytes": 657998,
+      "sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/data/generated/terrain_surface.json",
+      "bytes": 10509215,
+      "sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/data/generated/traffic.json",
+      "bytes": 277933,
+      "sha256": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/data/generated/walkable_itinerary.json",
+      "bytes": 154249,
+      "sha256": "934af50f65ce115c41bc1adc1aa6606921dfc6fc31c7ecd293295b2249aabc0f",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/project.godot",
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+      "kind": "shared"
+    },
+    {
+      "path": "game/resources/world_geometry/world.json",
+      "bytes": 5037995,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/scenes/world/explore_walk.tscn",
+      "bytes": 589,
+      "sha256": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/building_names.gd",
+      "bytes": 5162,
+      "sha256": "926118855ec1b9eccd9f8fbef9ca3e947ebc7f81bb394d86ffb373bf5cfebde7",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/building_visit_catalog.gd",
+      "bytes": 8981,
+      "sha256": "6e78922df14418b89daa4b9434228f981d5771be34069969b27a453c89e99043",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/entrance_wayfinding.gd",
+      "bytes": 18512,
+      "sha256": "e94e6542d70bd810f629d87d3c57176e56d4f8c215f3b9dac7a9243ece802a4b",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/exploration_pedestrian_avoidance.gd",
+      "bytes": 6880,
+      "sha256": "df8b0f3f5be8b34feb46486b349ab0cfea9a32c71dbbf840c5731f29198950b2",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/exploration_rooftop_access.gd",
+      "bytes": 8351,
+      "sha256": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/exploration_traffic.gd",
+      "bytes": 3268,
+      "sha256": "4a91a4a0d153ef4a325b34db555e8f998065a52d3f301fbbb6a14c0ff88ce24d",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/explore_walk.gd",
+      "bytes": 29814,
+      "sha256": "4a1ce0cc440794a3e1a922739de7ca613297369416932914b73666d401671430",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/interior_visit.gd",
+      "bytes": 55303,
+      "sha256": "7d283d7df29913e1e82d15127086fea3ad50d5036c74a97989cc604bca2d5cb9",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/museum_approach.gd",
+      "bytes": 19426,
+      "sha256": "58516b9919a3d3fcabe81e5f5e4a6b0703459db8ca99da1e5e6368b36be7f070",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/neighborhood_greenery.gd",
+      "bytes": 12748,
+      "sha256": "18928fa9c33cb946e2c5491655323e52a4554fbdbc0a4d8f5fae957be43e8a0c",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/neighborhood_population.gd",
+      "bytes": 10592,
+      "sha256": "f627c04ae8a8ef38de5d7f63377acbfd3e481450bd261ead308dc17ee284fd0f",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/neighborhood_traffic.gd",
+      "bytes": 19188,
+      "sha256": "cac483f38cf7ff1b08e0518f0b5220de4cef81d12b2f60e352684388d049d653",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/pedestrian_corridor_avoidance.gd",
+      "bytes": 14274,
+      "sha256": "69085e7ffd2640712f5bae45b202fe989bb5fc5ae3984f5e951d2555453dbfa4",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/player/free_roam_player.gd",
+      "bytes": 21361,
+      "sha256": "e4e6a652276510fdcb3f2c5b3c9d3aca5c95cda6a83751d9636393a20e71d129",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/rooftop_space.gd",
+      "bytes": 31168,
+      "sha256": "15ac509da903f58b9f0b5700e5baea057876e4837f6d379606a0fb05939955cd",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/source_polygon_index.gd",
+      "bytes": 5095,
+      "sha256": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/street_pedestrians.gd",
+      "bytes": 32679,
+      "sha256": "54c59ae7ef07b0f0cd38ea59e4e8013449dbebc284cfe7748a2f3946e8123448",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/terrain_geometry_warp.gd",
+      "bytes": 23521,
+      "sha256": "115f1330e2b39dcbaafec14349be4efe4ef630b986e637e1b8e0766e3b38ef68",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/terrain_scene_binding.gd",
+      "bytes": 6079,
+      "sha256": "92f6bb276ac75794c327ee1fc9d9660c2c416a8b9a94e9bc9f7c002fe4b42c8b",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/terrain_surface.gd",
+      "bytes": 7948,
+      "sha256": "edeb1449d77921548766bc5085fa2933895a144099dc7e4fce8ec2deda38c886",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/traffic/traffic_manager.gd",
+      "bytes": 9647,
+      "sha256": "d0e1782e067b189714d76dd518147a6e58be7cd0adb18e23df5d92a981e323ce",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/traffic/vehicle.gd",
+      "bytes": 39151,
+      "sha256": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/water_effect.gd",
+      "bytes": 3299,
+      "sha256": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420",
+      "kind": "shared"
+    },
+    {
+      "path": "requirements-data.txt",
+      "bytes": 144,
+      "sha256": "956fddf105aebac97777210bca8665cf7d79383f8d32d4841bac15afccc15585",
+      "kind": "shared"
+    },
+    {
+      "path": "requirements-supplemental.txt",
+      "bytes": 195,
+      "sha256": "95fa21d6554e2bfc78327e733f2698d8196df4fcc3f1f25c4b3e81f7ccbf4ee4",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/check_terrain_actors.gd",
+      "bytes": 34799,
+      "sha256": "a50f9492aa2009c64487d473e954907bd028da038d666a818117bace6c2dc016",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/check_terrain_entries.gd",
+      "bytes": 30789,
+      "sha256": "06d1e491d82d358dab6dcf634f3e12040615d1c2e61ad76aafe992f342749d18",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/check_terrain_integration.gd",
+      "bytes": 18333,
+      "sha256": "dd4e909ae574843dfcd6d9484b0a90ac09399f0f001359217e56e82c2b2e6e75",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/check_terrain_projection_cache.gd",
+      "bytes": 7865,
+      "sha256": "5293c38b8873b631411bced5473857df716eeee76ec40480db15e7e514575e26",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/probe_terrain_path_block.gd",
+      "bytes": 3339,
+      "sha256": "3dc2d1ad20fec16821e5cadfac4d63569c1e33c95c03ec9d6f0bcebca3492de2",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/probe_terrain_startup.gd",
+      "bytes": 771,
+      "sha256": "42dd57dab4d86c8045851ca32b27e495040d1aac392eb7307556f0fd61e63eb3",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/profile_terrain_runtime.gd",
+      "bytes": 3225,
+      "sha256": "dc7f530cd4fe90c899d96a82cce1f47b6daae6af86a59c839f77c1ef3f5d7b9d",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/profile_terrain_subsystems.gd",
+      "bytes": 4121,
+      "sha256": "9861c6551679842f4cba8ef1d2cedd6529d0ac86fbdca96ae3ed563e47cc4ddf",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/source_polygon_index_checks.gd",
+      "bytes": 8398,
+      "sha256": "e3b276a7770c3b684e7d431387023efe43fa7aca688b135fc5df49e0e1e5203a",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/terrain_greenery_checks.gd",
+      "bytes": 12874,
+      "sha256": "463a056fda9bd05d92d6592589bf01b28a1c727e9097a475974fbd9a8063658a",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/check_terrain_handoff.py",
+      "bytes": 2478,
+      "sha256": "59ce43db10b4157e2e9af41e06261656b6f6293a9c0a9637fb69be3f5eb707bd",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/prepare_local_terrain.py",
+      "bytes": 1453,
+      "sha256": "74442a6dba6535371957e408559d2a45cac2ca356a36bc3683abfb0a52924d1f",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/prepare_runtime_terrain.py",
+      "bytes": 31310,
+      "sha256": "cdc75eff13db186f0cd41b246b144de88c2651f1420cb9878982ffde2a48c98c",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/prepare_terrain_surface.py",
+      "bytes": 7233,
+      "sha256": "c02ca20940ae42dac65636991c01c790126e1b42659d890a94ec8ba19ac1f8b0",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/run_exploration.sh",
+      "bytes": 1248,
+      "sha256": "17b253c241a2eb6eea177c976b6470f27e11d1d49ef9ce63c6d9ac45a4281682",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/run_terrain_validation.py",
+      "bytes": 3219,
+      "sha256": "95535bfe74041719d312a7f3e1b4199df89305e239df6da62e0af593677a4bd0",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/setup_mac.sh",
+      "bytes": 1765,
+      "sha256": "5b1b4cea17f6cf7f40b5df0eca32249ee071fec21f88ef45197c3674fed8ef21",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/terrain_mesh_conditioning.py",
+      "bytes": 8933,
+      "sha256": "dbf9e59311238aa821525900a8e0f361afa0c5a7e96eb71faf9e4449e270dd3e",
+      "kind": "shared"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 출처: 서울특별시 도시공간본부 도시계획상임기획과, [서울시 경사도 제공 페이지의 서울시 등고선.zip](https://data.seoul.go.kr/dataList/OA-22241/F/1/datasetView.do), 2025-03-20 갱신/제공 설명은 국토지리정보원2023년 기준 수치지형도. 공공누리1유형: 출처표시 조건으로 상업 이용·변경 가능, 제3저작권자 없음. 정확한 제공 파일/원문·취득 SHA는 [지역 manifest](../data/raw/supplemental/seoul_terrain/20261018/manifest.json)와 [이용 조건](../data/raw/supplemental/seoul_terrain/20261018/source_license.json)에 보존했다.
 
-변경: 현재 bbox+주변200m만 자르고 EPSG5174→EPSG32652/고정 원점 XZ로 변환했으며 원본 HEIGHT/CONT/NUME 등 속성을 보존했다. WGS84 GeoJSON도 별도로 제공한다. 원본 전체 ZIP은 공유하지 않는다. 보간·수직 datum 확정·게임 적용은 아직 하지 않았다. FABDEM/Mapzen은 별도 취득 비교 참고이고 현재 게임이 이들을 지면으로 사용하지 않는다.
+변경: 현재 bbox+주변200m만 자르고 EPSG5174→EPSG32652/고정 원점 XZ로 변환했으며 원본 HEIGHT/CONT/NUME 등 속성을 보존했다. WGS84 GeoJSON도 별도로 제공한다. 원본 전체 ZIP은 공유하지 않는다. EXP21은 이 지역 등고선·표고점의 연속 역거리 보간을5m 간격으로 표본화하고, 건물별 수평 기초와 주변 연결을 추정해 게임 지면에 적용했다. 원본 HEIGHT와 고정 원점31.362231m를 뺀 게임 상대Y를 분리한다. 수직 datum은 확정하지 않았으며5m 실측 DEM·건축 기초·도로 단면의 측량 정확도를 주장하지 않는다. [변경 방법·교차검증·한계](TERRAIN_INTEGRATION.md). FABDEM/Mapzen은 별도 취득 비교 참고이고 현재 게임이 이들을 지면으로 사용하지 않는다.
 
 
 2026-10-17 추가: `game/assets/audio/stonewall_guitar.wav`는 외부 음원/노래 입력 없이 `tools/make_busking_music.py`로 직접 만든 기타 PCM이며 해당 원본 생성 자산은 CC0-1.0으로 제공한다. 코드/지도 전체의 조건을 이 음원 조건으로 대체하지 않는다. 추가 편의점은 기존 소지역 OSM 스냅샷을 사용하므로 기존 OSM 표시/제공 조건을 유지한다. 교회/호텔 표지·대기 줄·피크닉·이정표·풀은 출처 위치 위의 게임용 시각/시설 표현이다.
