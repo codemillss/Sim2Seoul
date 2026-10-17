@@ -511,3 +511,9 @@ EXP21 후속 부하 검증: `profile_terrain_runtime.gd`는 사람/차량 OFF·�
 ### EXP21 지형 여정과 동적 배우의 검증 분리
 
 전체3.3km 연속 입력 여정은 지형·건물·카메라 전용이다. 정지한 원래 NPC가 동선 위에 서 있으면 검사 자체를 막으므로, 이 fixture 안에서만44개 동적 CharacterBody layer를 임시 해제하고 모두 원래 값으로 복원한다. 플레이어 mask·원본 건물·지면·카메라 충돌은 유지한다. 별도 생산 장면의 actors 검사는30개 보행 몸체(사람28/개2)·14차량을20초간 실제 이동시키며, 이동 전과 fixture 뒤에 각각 layer·mask·활성 충돌 shape를 직접 확인한다. 이 두 결과를 살아 있는 배우와 함께3.3km를 완주한 증거나 모든 실제 교통 상황의 검증으로 확대하지 않는다.
+
+## EXP22 가로수 외형의 현행 검증
+
+최신 가로수는 bark/leaf/detail 각1개/나무와 grate4개인 base-origin 모델이다. EXP21의 수관3개/고정5.3~6m offset helper는 당시 모델 전용이며 현재 검사의 대체가 아니다. `tests/game/check_tree_detail.gd`가369개 원래 좌표/실제 바닥·원래 줄기 충돌/활성128상한, 실제 native행렬·높이/보수적 회전AABB·수관 머리 여유와 카메라mask33을 검사한다. 네 시점의 명시적 플레이어 배치 후 일반3인칭 카메라, 같은 렌더 설정/배우ON으로 전후 비교한다. 실제 입력으로 줄기 접촉→옆 보행→근처 정문 E입장을 확인한다.
+
+재시험에는 기존 fixture `data/reports/tree_detail/20261018/view_fixture.json`을 사용하고 `--phase=after --fixture=<현재Mac 절대fixture경로> --report=<새 절대출력경로>`를 넘긴다. 원래 출력이 있으면 덮어쓰지 않는다. 고정 Godot에 `--resolution 1152x720 --path game --script res://../tests/game/check_tree_detail.gd -- --automatic-probe`를 앞에 둔다. 현재 모델은 실제GPU29/29와8개 전후 PNG 시각 검토를 분리해 기록한다. 셰이더 X바람0.025m까지 정적AABB가 읽는 것은 아니며 Y는 바꾸지 않는다. 네 시점 각120frame의 p95/도형 수는 짧은 부하 관측으로, 지속 FPS·M4·export·직접 조작감 수용이 아니다.

@@ -1,5 +1,9 @@
 # 두 Mac에서 이어서 개발하기
 
+## 현재 EXP22 가로수 외형 인수
+
+`git pull --ff-only` 뒤 표준 Python으로 `tools/check_tree_detail_handoff.py`를 실행한다. 아래 EXP21의 Python/V0 최초 준비 후에는 같은 실행기 `sh tools/run_exploration.sh run`이 새 원작 나무 모델/셰이더를 import한다. 추가 asset 다운로드·새 GIS 준비는 없다. 자료 준비 뒤 `--prepared`는 로컬 실행 입력까지 대조하며 그 Mac의 실제 게임/성능 수용과는 별개다. 이전 EXP21/EXP20 검사기는 당시 고정 모델과 소스의 이력으로 남긴다. 현재 화면/검증/한계는 [EXP22 summary](../data/reports/tree_detail/20261018/summary.json)와 WORK_STATUS를 따른다.
+
 ## 2026-10-18 EXP21 지형과 다른 Mac의 실행 준비
 
 최신 구현 설명은 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md), 실제 완료 여부·다음 행동은 [WORK_STATUS](WORK_STATUS.md)와 [EXP21 최종 인수 요약](../data/reports/terrain_integration/20261018/summary.json)을 따른다. 최종 요약이 아직 없으면 인수 기록이 확정되지 않은 상태다. 아래 EXP20·V0/R03의 판정과 성능은 당시 버전의 이력이며 새 지형 검증을 대신하지 않는다.

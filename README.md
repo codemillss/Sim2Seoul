@@ -1,5 +1,7 @@
 # 덕수궁과 시청 서울 시뮬레이션
 
+현재 EXP22에서는 가로수를 약9.6~11.5m 성목 비례와 가지·수피·근거리 잎 모델로 보완했습니다. 최신 상태/전후 화면은 [WORK_STATUS](docs/WORK_STATUS.md), 다른 Mac 인수 검사는 `python3 tools/check_tree_detail_handoff.py`를 따릅니다. 이전 EXP21 증거는 당시 소스의 보존 기록입니다.
+
 최신 개발판 **EXP21**: 서울시 공식 지역 등고선·표고점을 보간한 지형에 도로·건물 기초·출입구·옥상과 사람·차량·나무를 연결했습니다. 실제 배치와 미터 축척을 유지하며, 건물 주변 평탄화와 실내·시설은 게임용 구성입니다. 실측 DEM이나 모든 현장 문턱의 정확도를 뜻하지 않습니다. [현재 결과/다음 행동](docs/WORK_STATUS.md) · [지형 선택·한계](docs/TERRAIN_INTEGRATION.md) · [공유 파일 대조](tools/check_terrain_handoff.py).
 
 

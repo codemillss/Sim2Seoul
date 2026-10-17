@@ -594,3 +594,9 @@ N03 일반 게임의 장면·지도·충돌·속도·2NPC/2차량을 바꾸지 �
 다른 clone에서 원 manifest의 옛 절대경로를 수동 수정하지 않는다. 같은 ZIP·app inventory/PCK·catalog bytes가 맞을 때만 세 경로와 preservation catalog key 두 개의 파생 바인딩을 허용한다. 모든 다른 JSON 값과 key 순서·역적용 원본 복원을 확인하고 원 manifest를 그대로 보존한다. 상대 source SHA와 실제 앱 실행은 기존 package checker에 남긴다. [도구/실제 M1 검수](../data/reports/r04/final_path_binding/source_check.json).
 
 M4에 접근할 수 없으면 원래 계획의 대안으로 실제 사양/성능을 null, 시나리오를 UNRUN으로 기록한다. M1의 실행 성공이나 경로 바인딩 검사를 M4 성공으로 바꾸지 않는다. SSD1TB는 RAM 근거가 아니며, 같은 ZIP의 SHA·실제 기기 사양과 동일 검수 조건이 있어야 재개한다. [기기별 인수](../data/reports/first_version_acceptance.md).
+
+## EXP22 가로수 세부 외형
+
+원래 식재 JSON의 source ID/XZ·source/게임 보완 구분과 EXP21 지면을 유지한다. 원래5.3~6m `height_m`는 이전 제작 기준이며 새 표시 수고와 분리한다. 새 약10m 안팎의 크기·수형·색은 성목 느낌을 위한 게임 아트이며 실측 수고/수종 동정이 아니다. 줄기 충돌은 반경0.17m·높이3.1m/최대128개 활성 상태를 유지하고 수관/세부 가지·잎은 비충돌이다. 수관 머리 여유는 최소2.65m를 유지한다.
+
+표시 모델은 source 바닥 원점에서 수직 성장하며, per-tree 안정적 회전/높이·폭과 색 변이를 쓴다. 공용 가지/줄기 메시·비정형 잎 무리와 별도 근거리 잎 메시를 공간 MultiMesh로 재사용한다. 근거리 잎은 거리 제한을 두고 원래 지면 지원/문/나무 위치/도로/사유지/배우 컨트롤러를 수정하지 않는다. 바람 변위는 잎의 작은 표시 이동뿐이며 새로운 물리 경계가 아니다.

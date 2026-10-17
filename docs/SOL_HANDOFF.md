@@ -1,6 +1,10 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: EXP21 지형 연결의 구현과 검증 기록
+## 현재 인수: EXP22 가로수 성목 비례와 세부 외형
+
+최신 상태는 WORK_STATUS와 [EXP22 요약](../data/reports/tree_detail/20261018/summary.json)이다.369개 원래 식재/전체 지면과 줄기 충돌은 유지하고 표시 모델/셰이더만 개선했다. 현재 공유 무결성은 `python3 tools/check_tree_detail_handoff.py [--prepared]`로 확인한다. 실제 재검사는 VALIDATION_PLAN의 EXP22 절을 따른다. 아래 EXP21의 고정 수관3개 검사·과거 소스 해시는 당시 이력이며 현재 모델 수용에 재사용하지 않는다. 새 모델/셰이더는 Git으로 공유되고 별도 다운로드나 유료 asset/Python 의존성을 추가하지 않는다.
+
+## 이전 인수: EXP21 지형 연결의 구현과 검증 기록
 
 최신 단일 상태는 [WORK_STATUS](WORK_STATUS.md), 최종 인수 파일·실행 결과는 [EXP21 summary](../data/reports/terrain_integration/20261018/summary.json), 구현 이유와 한계는 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md)이다. 이 문서에 최종 검사 수나 완료·커밋을 중복 확정하지 않는다. 요약이 없으면 최종 인수 기록이 아직 없는 것이며, 과거 EXP20의 평면판 결과로 새 지형을 완료 처리하지 않는다.
 

@@ -1,0 +1,598 @@
+{
+  "schema_version": 1,
+  "task": "EXP22",
+  "result": "PASS",
+  "recorded_at": "2026-10-18T05:58:01.244836+09:00",
+  "base_commit": "205373ef610f52c13c874ed8c642afba7c958347",
+  "repository": "https://github.com/codemillss/Sim2Seoul",
+  "branch": "main",
+  "machine": "Apple M1 Pro16GB / Metal / Forward+",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "current_acceptance_report": "data/reports/tree_detail/20261018/after.json",
+  "current_engine_checks": 29,
+  "baseline_report": "data/reports/tree_detail/20261018/before.json",
+  "baseline_engine_checks": 28,
+  "baseline_is_historical_not_current_source_acceptance": true,
+  "tree_count": 369,
+  "model_sizes": {
+    "before": {
+      "height_range_m": [
+        5.44999885559082,
+        6.00000029802322
+      ],
+      "conservative_rotated_world_AABB_width_m": [
+        3.73741912841797,
+        3.73744201660156
+      ]
+    },
+    "after": {
+      "height_range_m": [
+        9.62528896331787,
+        11.5169172286987
+      ],
+      "conservative_rotated_world_AABB_width_m": [
+        6.54177856445312,
+        10.2386474609375
+      ]
+    }
+  },
+  "art": {
+    "source": "Original procedural 3D art and shaders, no new external asset/download or paid tool",
+    "branch_segments": 45,
+    "foliage_clusters_per_shared_model": 37,
+    "near_leaf_blades_per_shared_model": 999,
+    "detail_visibility_distance_m": 85,
+    "core_visibility_distance_m": 230,
+    "detail_shadows": false,
+    "game_dimensions_not_surveyed_height_or_species": true
+  },
+  "preserved": {
+    "source_tree_positions_and_provenance": true,
+    "source_world_heightfield_and_TIN": true,
+    "tree_cylinder_radius_m": 0.17,
+    "tree_cylinder_height_m": 3.1,
+    "nearby_collision_budget": 128,
+    "doors_private_bounds_roads_and_actor_controllers": true
+  },
+  "acceptance_scope": "All369 source-XZ/native support/trunk contracts and native model frames/bounds/headroom. Same four normal third-person camera fixtures, live30 pedestrian bodies and14cars/day/standard/30Hz. Actual Input trunk contact, side traversal and a nearby E entry. No all-city journey replay, botanical/survey or human handling acceptance.",
+  "visual_review": "data/reports/tree_detail/20261018/visual_review.json",
+  "native_comparison_images_reviewed": 8,
+  "performance_observations": [
+    {
+      "view": "daehanmun_tree_row",
+      "before": {
+        "actual_physics_frames": 61,
+        "draw_calls_median": 2049.0,
+        "frame_interval_usec_max": 41658,
+        "frame_interval_usec_median": 22641,
+        "frame_interval_usec_p95": 33340,
+        "frames": 120,
+        "physics_monitor_usec_median": 22727.0,
+        "process_monitor_usec_median": 13229.0,
+        "rendered_objects_median": 2285.0,
+        "rendered_primitives_median": 2166898.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      },
+      "after": {
+        "actual_physics_frames": 60,
+        "draw_calls_median": 2050.0,
+        "frame_interval_usec_max": 41245,
+        "frame_interval_usec_median": 23375,
+        "frame_interval_usec_p95": 33503,
+        "frames": 120,
+        "physics_monitor_usec_median": 25474.0,
+        "process_monitor_usec_median": 7817.0,
+        "rendered_objects_median": 2286.0,
+        "rendered_primitives_median": 2850526.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      }
+    },
+    {
+      "view": "near_trunk_and_branches",
+      "before": {
+        "actual_physics_frames": 59,
+        "draw_calls_median": 2013.0,
+        "frame_interval_usec_max": 35293,
+        "frame_interval_usec_median": 4860,
+        "frame_interval_usec_p95": 33099,
+        "frames": 120,
+        "physics_monitor_usec_median": 23714.0,
+        "process_monitor_usec_median": 12893.0,
+        "rendered_objects_median": 2249.0,
+        "rendered_primitives_median": 2175095.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      },
+      "after": {
+        "actual_physics_frames": 59,
+        "draw_calls_median": 2016.0,
+        "frame_interval_usec_max": 33749,
+        "frame_interval_usec_median": 4909,
+        "frame_interval_usec_p95": 33177,
+        "frames": 120,
+        "physics_monitor_usec_median": 24363.0,
+        "process_monitor_usec_median": 9266.0,
+        "rendered_objects_median": 2252.0,
+        "rendered_primitives_median": 2965823.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      }
+    },
+    {
+      "view": "under_canopy",
+      "before": {
+        "actual_physics_frames": 59,
+        "draw_calls_median": 1986.0,
+        "frame_interval_usec_max": 37024,
+        "frame_interval_usec_median": 11475,
+        "frame_interval_usec_p95": 33038,
+        "frames": 120,
+        "physics_monitor_usec_median": 25589.0,
+        "process_monitor_usec_median": 9528.0,
+        "rendered_objects_median": 2229.0,
+        "rendered_primitives_median": 2163072.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      },
+      "after": {
+        "actual_physics_frames": 59,
+        "draw_calls_median": 1987.0,
+        "frame_interval_usec_max": 36898,
+        "frame_interval_usec_median": 9775,
+        "frame_interval_usec_p95": 32617,
+        "frames": 120,
+        "physics_monitor_usec_median": 27691.0,
+        "process_monitor_usec_median": 8029.0,
+        "rendered_objects_median": 2230.0,
+        "rendered_primitives_median": 2905572.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      }
+    },
+    {
+      "view": "entrance_side_tree",
+      "before": {
+        "actual_physics_frames": 61,
+        "draw_calls_median": 2577.0,
+        "frame_interval_usec_max": 54912,
+        "frame_interval_usec_median": 23577,
+        "frame_interval_usec_p95": 31821,
+        "frames": 120,
+        "physics_monitor_usec_median": 22498.0,
+        "process_monitor_usec_median": 13708.0,
+        "rendered_objects_median": 2822.0,
+        "rendered_primitives_median": 2216408.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      },
+      "after": {
+        "actual_physics_frames": 59,
+        "draw_calls_median": 2578.0,
+        "frame_interval_usec_max": 38497,
+        "frame_interval_usec_median": 7156,
+        "frame_interval_usec_p95": 31205,
+        "frames": 120,
+        "physics_monitor_usec_median": 23558.0,
+        "process_monitor_usec_median": 10848.0,
+        "rendered_objects_median": 2823.0,
+        "rendered_primitives_median": 3250592.0,
+        "scope": "Short same-fixture native observation with 60fps render cap; not a sustained performance or GPU-only timing claim."
+      }
+    }
+  ],
+  "performance_scope": "Four short120-process-frame observations with60fps cap and live actors; increased geometry and frame intervals are recorded, not a sustained FPS improvement or long-running performance acceptance.",
+  "normal_launch": "data/reports/tree_detail/20261018/normal_launch.json",
+  "development_history": "data/reports/tree_detail/20261018/development",
+  "limitations": [
+    "Crown/branch/leaf surfaces remain stylized procedural game art.",
+    "Close/under/entrance compositions crop or obscure some upper canopy; wide checks whole crown top.",
+    "Native bounds are static conservative AABBs; shader X sway up to.025m is not read back, Y is unchanged.",
+    "No M4/new export, long-running performance, exact species or field-measured tree heights."
+  ],
+  "next_first_action": "Inspect the reopened larger street trees. T01 bus stop/boarding remains planned and unimplemented.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 19147,
+      "sha256": "33013efe3b7bd602f24192330905461084b0a22b4f972983022e47c7d235ec8d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/terrain_integration/20261018/summary.json",
+      "bytes": 48752,
+      "sha256": "11601c7fe6385914e0192ab5b6a8eef9a0c63ab8ec7159f10c6670763f013030",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after.json",
+      "bytes": 547717,
+      "sha256": "b6305a5e088a60f406075db563fd69cdbcc6998b4fc11e23f5b90887b9177545",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after.log",
+      "bytes": 4669,
+      "sha256": "39644527f17ad4a6739cb5172e22bb0e7ea29c422f5c091449bbfbef6087dc2d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after_daehanmun_tree_row.png",
+      "bytes": 537823,
+      "sha256": "2a09766b88016d67ab80f14337ea9037cb4f3d91145ccc3a7a11c589a5e39792",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after_entrance_side_tree.png",
+      "bytes": 456250,
+      "sha256": "08d3cc20368cd4eaa389c8f8a78b4550907f2bd287f0d02390d91e531aa204ac",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after_near_trunk_and_branches.png",
+      "bytes": 658210,
+      "sha256": "1af0d4415938cc001646fc4a7b3758d749d7f2b38a12f67fb689527982086cbe",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/after_under_canopy.png",
+      "bytes": 574825,
+      "sha256": "721ddc6e9cbdbda4ae962b34bfd2a82ec19b533a48c75506b90fe244137fb3f0",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/baseline_sources.json",
+      "bytes": 708,
+      "sha256": "4c2c20d88d9292c145792800f54fb3a5fa6b73c6008dfb8479af5607850591b9",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before.json",
+      "bytes": 513739,
+      "sha256": "ab5e089e49ddd350293701e0bf66d940c5cb897a9112a9b7ea98cf93ba5792f0",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before.log",
+      "bytes": 4670,
+      "sha256": "080c49bec89f12361abdd824244245d6831bd8f9391b56aeed13c757a57a10f4",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before_daehanmun_tree_row.png",
+      "bytes": 459835,
+      "sha256": "c2c7af6abcd43602acbb859a86c8f2dcc2496487418f0f32985b81ec68b4d293",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before_entrance_side_tree.png",
+      "bytes": 410289,
+      "sha256": "95d55487efd60584c3043f81cb9574604deb5f13fd9c5f3412c64d3b2564319b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before_near_trunk_and_branches.png",
+      "bytes": 603097,
+      "sha256": "d9708228845c6912b0c330a4529c2b5bcb335dde309d632e19e2e232872a2669",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/before_under_canopy.png",
+      "bytes": 487251,
+      "sha256": "1c3b95ea3b2c3fc80c889602dc44ded612d55351f752342d06fcf823f4ce7712",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before.json",
+      "bytes": 509945,
+      "sha256": "dac460503f72d1c72ce2ae8cdb85f6a6a2a2a5317b2f74cef9aa94688707fc36",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before.log",
+      "bytes": 6909,
+      "sha256": "ad97c859feb1dc80f6800fdb6de97b62b04dc42a600bc37bb182c340cd99a820",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before_daehanmun_tree_row.png",
+      "bytes": 470594,
+      "sha256": "079b28bdc4a6a0571a6f88cd22ce07eb6dbb11fa7820579fa3f76169b22db883",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before_entrance_side_tree.png",
+      "bytes": 488065,
+      "sha256": "056021a3c605ebf39ca90ec7d6529efa27c8cc38a848dd17610c29f33ead8e7b",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before_near_trunk_and_branches.png",
+      "bytes": 618472,
+      "sha256": "03fc2e2eede39d9cc73b224d8f49e3dee216a5340068a28d0078a3877bbbe664",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/before_under_canopy.png",
+      "bytes": 467044,
+      "sha256": "0401e0addb144ba12996e47ba7428d8e90081d7e501255667f027fb40107fc42",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/capture_relocation.json",
+      "bytes": 2166,
+      "sha256": "66508dce77bb32d068c6bf8ac8ce9e591794eedf51e2c7a1a84128a63b97a7d1",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/baseline_camera_contract_failure/view_fixture.json",
+      "bytes": 40057,
+      "sha256": "8d079e214a746cec1e8adb036130317e21d98ead4677f4a5f0e3fb880f3d2da5",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/check_tree_detail_before.gd",
+      "bytes": 34364,
+      "sha256": "b9d831300cb89e7d31e0dce6a0fb7c9557430a7b9680e4dab577029c0e07b2ca",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after.json",
+      "bytes": 547438,
+      "sha256": "0fa3f90345553acb0b65edd97a0d817169f10fa54de6ac57764cdc8c768d3cc0",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after.log",
+      "bytes": 4669,
+      "sha256": "39644527f17ad4a6739cb5172e22bb0e7ea29c422f5c091449bbfbef6087dc2d",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after_daehanmun_tree_row.png",
+      "bytes": 549451,
+      "sha256": "4bb9b70f2343e64c40d034bda15a6125b84bd94c40bfcc388a93f781eb56a422",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after_entrance_side_tree.png",
+      "bytes": 467605,
+      "sha256": "774038f04722c4485aa37eea1efbc57e71648798142ffe6233b6212ca8424904",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after_near_trunk_and_branches.png",
+      "bytes": 658826,
+      "sha256": "252962ff7cc1c8b069751ec0d8310d6acb5df433d8682cc4f9743b46f60b6242",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/after_under_canopy.png",
+      "bytes": 592881,
+      "sha256": "f59d57c1ab5e83b53053fe07365ac5ffbbff3dcf9cb9bf5c11ccfe25bee4473a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/capture_relocation.json",
+      "bytes": 2171,
+      "sha256": "448694091c0ac7083bc4606723605ead55c4aac51e452cd6fb0cc9b47da02115",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/check_tree_detail.gd",
+      "bytes": 34566,
+      "sha256": "58fb027e55600ca88ff6ed313aabce92e835c4ffde5397552309dd1886d8bf39",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/neighborhood_greenery.gd",
+      "bytes": 13922,
+      "sha256": "fbd2415c1dba4c45bc5eb2420a93ee9bda893e91afe3ede5c9aee25cdcf9e754",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/street_tree_model.gd",
+      "bytes": 6759,
+      "sha256": "e558cb8d88529c578a53d3e5472d37534f67393490300cbd7e5d570830c231ba",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/tree_bark.gdshader",
+      "bytes": 376,
+      "sha256": "dc915e475fe77c5dd024a14d3e0ced5c69e23d57c113aba932921ecab7b06e72",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/first_model_periodic_foliage/tree_foliage.gdshader",
+      "bytes": 913,
+      "sha256": "ab274b35f02ee48c6ce959b64520792d545e237e8801f329863660e34a1c8b99",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/development/neighborhood_greenery_before.gd",
+      "bytes": 12748,
+      "sha256": "18928fa9c33cb946e2c5491655323e52a4554fbdbc0a4d8f5fae957be43e8a0c",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/handoff_check.json",
+      "bytes": 527,
+      "sha256": "50ae5f5b6415acce513310a1b7ce7a96edce20c9e1caab4d3d618891ea1d2934",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/normal_launch.json",
+      "bytes": 470,
+      "sha256": "dd218be4f61f4d9274a15af59600b93a33c6226c86263983ee060b5d5ced1191",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/normal_launch.log",
+      "bytes": 6675,
+      "sha256": "994539001cf5fd5b74ad245ac9dd18c85de6cbf96a2676cd5e5268dd8573b250",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/normal_launch_menu.png",
+      "bytes": 155243,
+      "sha256": "0c3e8d109946cc9bbb2c82bcaaf52fc2477b0b93fbc9ae4bb7d7a30da2aa2ba2",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/view_fixture.json",
+      "bytes": 40546,
+      "sha256": "27d7d49d65f22fa5fd5176766dfcfc44e9168333b942906abc5a896c2fb87d5a",
+      "kind": "shared"
+    },
+    {
+      "path": "data/reports/tree_detail/20261018/visual_review.json",
+      "bytes": 4329,
+      "sha256": "fb0f7ccdd300f9894ebe1541d4e68434fde5bba626d68707b2713fddf128a03d",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/CROSS_MAC.md",
+      "bytes": 49342,
+      "sha256": "8b84e781e857992b9792175c12f0f3746d08c83b80621df2b408d76cb7af0f3e",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/EXECUTION_LOG.md",
+      "bytes": 266749,
+      "sha256": "30b313c9c6a743735f04a67697920ea812b29e935317b49683e621362fe49049",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_TASKS.md",
+      "bytes": 72687,
+      "sha256": "455688081f931bc05b929c64019d0018513c483174448a372fdbfe2ae0441107",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "bytes": 46679,
+      "sha256": "d1f0a9e247616f3c240833e15cfed6aac9db76feace11a5bd5a45bcda7629161",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/SOL_HANDOFF.md",
+      "bytes": 23371,
+      "sha256": "1075a66e736564c28d93b5e0807f6b4a516a17eb9660661e3c8ec7042797ad99",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "bytes": 126462,
+      "sha256": "a90e95eca9e95798caeb09609dfc60b98629f6f153da3d143041b15a1f974993",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/VALIDATION_PLAN.md",
+      "bytes": 93507,
+      "sha256": "e8d31e7c0d020609b90659f84a68d4003f1fa228c1fa169115a89288f95c86b5",
+      "kind": "shared"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "bytes": 93885,
+      "sha256": "638be68a259b43a25fe97a87a14e1a893176cb9f12bb0c6b5ab72b09316f0276",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_greenery.json",
+      "bytes": 165253,
+      "sha256": "cc2d16801bbc97eb5c70641250c590f02416530a9910373b038b8db91cd8ade6",
+      "kind": "shared"
+    },
+    {
+      "path": "game/assets/authored/terrain_heightfield.json",
+      "bytes": 1045434,
+      "sha256": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e",
+      "kind": "shared"
+    },
+    {
+      "path": "game/data/generated/terrain_surface.json",
+      "bytes": 10509215,
+      "sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/project.godot",
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+      "kind": "shared"
+    },
+    {
+      "path": "game/resources/world_geometry/world.json",
+      "bytes": 5037995,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+      "kind": "generated_runtime_input"
+    },
+    {
+      "path": "game/scripts/explore_walk.gd",
+      "bytes": 29814,
+      "sha256": "4a1ce0cc440794a3e1a922739de7ca613297369416932914b73666d401671430",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/neighborhood_greenery.gd",
+      "bytes": 13983,
+      "sha256": "dd9294f3a3f9efba77296df4faa13ffcd4197273f8ed6477ec60193bd6b1cb1d",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/player/exploration_camera.gd",
+      "bytes": 13807,
+      "sha256": "0ab167d1ea3f690e80b51b8af55b8bbd5aedbec52d2805ff1e951deb8f40ecd0",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/player/free_roam_player.gd",
+      "bytes": 21361,
+      "sha256": "e4e6a652276510fdcb3f2c5b3c9d3aca5c95cda6a83751d9636393a20e71d129",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/street_tree_model.gd",
+      "bytes": 6877,
+      "sha256": "c16f15150c0a75f99ede0620dadeac90560a0a99533133dd57e3feeeae800620",
+      "kind": "shared"
+    },
+    {
+      "path": "game/scripts/terrain_surface.gd",
+      "bytes": 7948,
+      "sha256": "edeb1449d77921548766bc5085fa2933895a144099dc7e4fce8ec2deda38c886",
+      "kind": "shared"
+    },
+    {
+      "path": "game/shaders/tree_bark.gdshader",
+      "bytes": 376,
+      "sha256": "dc915e475fe77c5dd024a14d3e0ced5c69e23d57c113aba932921ecab7b06e72",
+      "kind": "shared"
+    },
+    {
+      "path": "game/shaders/tree_foliage.gdshader",
+      "bytes": 1289,
+      "sha256": "5dc8a0c1b0cd8ece4d05f33f35a060a3c01bb70c48b489399238251aadc353e7",
+      "kind": "shared"
+    },
+    {
+      "path": "game/shaders/tree_leaves.gdshader",
+      "bytes": 1292,
+      "sha256": "e4d29d5797948a25582d2c51f0e465675223cea7869a956430de7c88667474a0",
+      "kind": "shared"
+    },
+    {
+      "path": "tests/game/check_tree_detail.gd",
+      "bytes": 34603,
+      "sha256": "0771f4d9f26a5eecbc18c5fc7f0df3002f04d577c009088c42c5f200f90b67c6",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/check_tree_detail_handoff.py",
+      "bytes": 2219,
+      "sha256": "c0d126093dc49bf3fe67251210602cddba89b7a2ac2ab843dc75fab6065365f5",
+      "kind": "shared"
+    },
+    {
+      "path": "tools/run_exploration.sh",
+      "bytes": 1248,
+      "sha256": "17b253c241a2eb6eea177c976b6470f27e11d1d49ef9ce63c6d9ac45a4281682",
+      "kind": "shared"
+    }
+  ]
+}

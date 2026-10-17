@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Isolated shared-only payload passes default stdlib checker without runtime files",
+    "Missing runtime rejected by --prepared",
+    "Accepted generated input copies pass --prepared",
+    "Changed model byte rejected",
+    "Restored model passes"
+  ],
+  "deferred_before_preparation": [
+    "game/data/generated/terrain_surface.json",
+    "game/resources/world_geometry/world.json"
+  ],
+  "scope": "Isolated file-copy/checker test, not GIS generation or actual game on a second Mac."
+}

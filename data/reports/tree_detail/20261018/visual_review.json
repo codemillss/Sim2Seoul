@@ -1,0 +1,78 @@
+{
+  "task": "EXP22_VISUAL_REVIEW",
+  "result": "REVIEWED_WITH_LIMITATIONS",
+  "images_reviewed": 8,
+  "reviewer": "Assistant viewed each native before/after PNG individually; not human user acceptance",
+  "scope": "Same normal third-person fixture positions, day/standard quality/30Hz; live actor positions are not fixed pixel identities. Original procedural tree art, no botanical/survey or photorealistic claim.",
+  "images": [
+    {
+      "phase": "before",
+      "view": "daehanmun_tree_row",
+      "path": "data/reports/tree_detail/20261018/before_daehanmun_tree_row.png",
+      "sha256": "c2c7af6abcd43602acbb859a86c8f2dcc2496487418f0f32985b81ec68b4d293",
+      "reviewed": true,
+      "observation": "기존의 짧은 단순 줄기와 둥근 수관3개가 보이는 원래 화면. 같은 카메라의 after와 크기·가지·잎 표현을 비교하는 기준이다."
+    },
+    {
+      "phase": "before",
+      "view": "near_trunk_and_branches",
+      "path": "data/reports/tree_detail/20261018/before_near_trunk_and_branches.png",
+      "sha256": "d9708228845c6912b0c330a4529c2b5bcb335dde309d632e19e2e232872a2669",
+      "reviewed": true,
+      "observation": "기존의 짧은 단순 줄기와 둥근 수관3개가 보이는 원래 화면. 같은 카메라의 after와 크기·가지·잎 표현을 비교하는 기준이다."
+    },
+    {
+      "phase": "before",
+      "view": "under_canopy",
+      "path": "data/reports/tree_detail/20261018/before_under_canopy.png",
+      "sha256": "1c3b95ea3b2c3fc80c889602dc44ded612d55351f752342d06fcf823f4ce7712",
+      "reviewed": true,
+      "observation": "기존의 짧은 단순 줄기와 둥근 수관3개가 보이는 원래 화면. 같은 카메라의 after와 크기·가지·잎 표현을 비교하는 기준이다."
+    },
+    {
+      "phase": "before",
+      "view": "entrance_side_tree",
+      "path": "data/reports/tree_detail/20261018/before_entrance_side_tree.png",
+      "sha256": "95d55487efd60584c3043f81cb9574604deb5f13fd9c5f3412c64d3b2564319b",
+      "reviewed": true,
+      "observation": "기존의 짧은 단순 줄기와 둥근 수관3개가 보이는 원래 화면. 같은 카메라의 after와 크기·가지·잎 표현을 비교하는 기준이다."
+    },
+    {
+      "phase": "after",
+      "view": "daehanmun_tree_row",
+      "path": "data/reports/tree_detail/20261018/after_daehanmun_tree_row.png",
+      "sha256": "2a09766b88016d67ab80f14337ea9037cb4f3d91145ccc3a7a11c589a5e39792",
+      "reviewed": true,
+      "observation": "같은 사람·도로·카메라에서 성목 높이/폭의 증가와 분기한 가지를 확인. wide에서는 전체 수관 꼭대기가 화면 안에 있다."
+    },
+    {
+      "phase": "after",
+      "view": "near_trunk_and_branches",
+      "path": "data/reports/tree_detail/20261018/after_near_trunk_and_branches.png",
+      "sha256": "1af0d4415938cc001646fc4a7b3758d749d7f2b38a12f67fb689527982086cbe",
+      "reviewed": true,
+      "observation": "줄기의 수피/가지 분기를 확인. 근접 화면이어서 수관 전체는 화면 밖이며 전체 실루엣 검사는 wide와 구분한다."
+    },
+    {
+      "phase": "after",
+      "view": "under_canopy",
+      "path": "data/reports/tree_detail/20261018/after_under_canopy.png",
+      "sha256": "721ddc6e9cbdbda4ae962b34bfd2a82ec19b533a48c75506b90fe244137fb3f0",
+      "reviewed": true,
+      "observation": "수관 아래 가지와 그늘·보행자 머리 여유를 확인. 가까운 시점의 수관 위쪽은 화면 밖이다."
+    },
+    {
+      "phase": "after",
+      "view": "entrance_side_tree",
+      "path": "data/reports/tree_detail/20261018/after_entrance_side_tree.png",
+      "sha256": "08d3cc20368cd4eaa389c8f8a78b4550907f2bd287f0d02390d91e531aa204ac",
+      "reviewed": true,
+      "observation": "입구 앞 보행 공간과 커진 주변 수관을 확인. UI와 근접 구도에서 수관 일부가 가려진다."
+    }
+  ],
+  "remaining_limits": [
+    "수관은 비정형 메시 무리로 단순화되어 있으며 투명한 실제 잎 전체의 식물학적 복원이 아니다.",
+    "근거리 잎은85m batch거리 제한이 있고 수종·수고는 게임 제작값이다.",
+    "native bounds 검사는 정적 메시의 보수적 AABB이며 셰이더 X바람최대0.025m는 포함하지 않는다. Y변화는 없다."
+  ]
+}
