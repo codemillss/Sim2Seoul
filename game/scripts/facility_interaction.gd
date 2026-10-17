@@ -4,16 +4,20 @@ extends Node3D
 const RANGE_M := 1.7
 const USE_RANGE_M := .95
 const SHOWER_RANGE_M := .55
-const DEFAULT_DURATION := {"eat":6.0,"shower":12.0,"treadmill":16.0,"weights":12.0}
+const DEFAULT_DURATION := {"eat":6.0,"shower":12.0,"treadmill":16.0,"weights":12.0,"cycle":12.0,"rowing":12.0}
 var host: Node3D
 var visit: Node3D
 var fullness := 35.0
 var cleanliness := 30.0
 var workout_distance_m := 0.0
 var workout_repetitions := 0
-var completed_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0}
-var started_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0}
-var cancelled_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0}
+var cycling_distance_m := 0.0
+var cycling_revolutions := 0
+var rowing_distance_m := 0.0
+var rowing_strokes := 0
+var completed_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0,"cycle":0,"rowing":0}
+var started_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0,"cycle":0,"rowing":0}
+var cancelled_counts := {"eat":0,"shower":0,"treadmill":0,"weights":0,"cycle":0,"rowing":0}
 var rejected_count := 0
 var external_cleanup_count := 0
 var _active: Dictionary = {}
@@ -156,6 +160,7 @@ func handle_interact() -> bool:
 	if _selected.is_empty():return false
 	var point: Vector3=_world(_selected.use_point)
 	var treadmill: bool=String(_selected.kind)=="treadmill"
+	var seated: bool=String(_selected.kind) in ["cycle","rowing"]
 	var offset: Vector3=point-host.player.global_position
 	var use_range := SHOWER_RANGE_M if String(_selected.kind)=="shower" else USE_RANGE_M
 	if (not treadmill and Vector2(offset.x,offset.z).length()>use_range) or not _walk_segment_clear(host.player.global_position,point,treadmill):
@@ -166,9 +171,9 @@ func handle_interact() -> bool:
 	_active=_selected.duplicate(true);_selected={};_elapsed=0.0
 	var kind := String(_active.kind)
 	_duration=clampf(float(_active.get("data",{}).get("duration_seconds",DEFAULT_DURATION[kind])),2.0,60.0)
-	_session={"id":String(_active.id),"kind":kind,"bites":0,"repetitions":0,"distance_m":0.0,"fullness_gain":0.0,"cleanliness_gain":0.0,"completed":false,"cancelled":false}
+	_session={"id":String(_active.id),"kind":kind,"bites":0,"repetitions":0,"distance_m":0.0,"fullness_gain":0.0,"cleanliness_gain":0.0,"revolutions":0,"strokes":0,"completed":false,"cancelled":false}
 	_source_id=String(visit.current_spec.get("id",""));_room_id=visit.room.get_instance_id()
-	if treadmill:
+	if treadmill or seated:
 		host.player.global_position=point;host.player.reset_physics_interpolation()
 	_use_position=host.player.global_position;_return_pending=false;_finish_requested=false
 	host.player.set_facility_control(true)
@@ -192,6 +197,14 @@ func _update_activity(delta: float) -> void:
 			var gain := minf(delta*5.0,100.0-cleanliness);cleanliness+=gain;_session.cleanliness_gain=float(_session.cleanliness_gain)+gain
 		"treadmill":
 			var distance := delta*(6.0/3.6);workout_distance_m+=distance;_session.distance_m=float(_session.distance_m)+distance
+		"cycle":
+			var distance := delta*(18.0/3.6);cycling_distance_m+=distance;_session.distance_m=float(_session.distance_m)+distance
+			var revolutions := int(floor(_elapsed));var gained := revolutions-int(_session.revolutions)
+			cycling_revolutions+=maxi(0,gained);_session.revolutions=revolutions
+		"rowing":
+			var strokes := int(floor(_elapsed/2.4));var gained := maxi(0,strokes-int(_session.strokes))
+			rowing_strokes+=gained;rowing_distance_m+=float(gained)*8.0
+			_session.strokes=strokes;_session.distance_m=float(_session.distance_m)+float(gained)*8.0
 		"weights":
 			var repetitions := int(floor(_elapsed/2.0))
 			var gained := repetitions-int(_session.repetitions)
@@ -224,8 +237,8 @@ func cancel() -> bool:
 func _end(completed: bool,return_to_start: bool) -> bool:
 	if not is_using():return true
 	var kind := String(_active.kind)
-	if return_to_start and kind=="treadmill":
-		if not _walk_segment_clear(host.player.global_position,_return_position,true):return false
+	if return_to_start and kind in ["treadmill","cycle","rowing"]:
+		if not _walk_segment_clear(host.player.global_position,_return_position,kind=="treadmill"):return false
 		host.player.global_position=_return_position;host.player.reset_physics_interpolation()
 	if is_instance_valid(_visuals):
 		remove_child(_visuals);_visuals.queue_free()
@@ -237,7 +250,7 @@ func _end(completed: bool,return_to_start: bool) -> bool:
 	_last_session=_session.duplicate(true)
 	if completed:completed_counts[kind]=int(completed_counts[kind])+1
 	else:cancelled_counts[kind]=int(cancelled_counts[kind])+1
-	var outcome := {"eat":"식사를 마쳤습니다 · 포만감 +%.0f"%float(_session.fullness_gain),"shower":"샤워를 마쳤습니다 · 청결 +%.0f"%float(_session.cleanliness_gain),"treadmill":"운동을 마쳤습니다 · %.1f m"%float(_session.distance_m),"weights":"근력 운동 완료 · %d회"%int(_session.repetitions)}
+	var outcome := {"eat":"식사를 마쳤습니다 · 포만감 +%.0f"%float(_session.fullness_gain),"shower":"샤워를 마쳤습니다 · 청결 +%.0f"%float(_session.cleanliness_gain),"treadmill":"운동을 마쳤습니다 · %.1f m"%float(_session.distance_m),"weights":"근력 운동 완료 · %d회"%int(_session.repetitions),"cycle":"사이클 완료 · %.1f m / %d회전"%[float(_session.distance_m),int(_session.revolutions)],"rowing":"로잉 완료 · %.1f m / %d스트로크"%[float(_session.distance_m),int(_session.strokes)]}
 	if completed:_tell(String(outcome[kind]))
 	else:_tell("이용을 멈췄습니다. 얻은 활동 기록은 유지됩니다.")
 	_active={};_session={};_return_pending=false;_finish_requested=false;_selected={}
@@ -264,8 +277,9 @@ func _layout() -> void:
 		_marker.text=prompt_text()
 	if not show:return
 	var line := "포만감 %.0f · 청결 %.0f  |  운동 %.1f m · 근력 %d회"%[fullness,cleanliness,workout_distance_m,workout_repetitions]
+	line+="\n사이클 %.1f m · %d회전  |  로잉 %.0f m · %d스트로크"%[cycling_distance_m,cycling_revolutions,rowing_distance_m,rowing_strokes]
 	if is_using():
-		var activity := {"eat":"식사","shower":"샤워","treadmill":"러닝머신","weights":"덤벨 운동"}
+		var activity := {"eat":"식사","shower":"샤워","treadmill":"러닝머신","weights":"덤벨 운동","cycle":"실내 사이클","rowing":"로잉머신"}
 		var count := " · %d / 3 입"%int(_session.bites) if String(_active.kind)=="eat" else (" · %d회"%int(_session.repetitions) if String(_active.kind)=="weights" else "")
 		var timing := "%.1f / %.1f초"%[_elapsed,_duration] if String(_active.kind)=="eat" else "%.1f초 이용 중 · E로 종료"%_elapsed
 		line="%s · %s%s\n%s"%[String(activity[String(_active.kind)]),timing,count,line]
@@ -285,7 +299,7 @@ func status_rect() -> Rect2:
 
 func snapshot() -> Dictionary:
 	return {"active":is_using(),"kind":String(_active.get("kind","")),"target_id":String(_active.get("id","")),"elapsed":_elapsed,"duration":_duration,"fullness":fullness,"cleanliness":cleanliness,"workout_distance_m":workout_distance_m,"workout_repetitions":workout_repetitions,
-		"completed_counts":completed_counts.duplicate(),"started_counts":started_counts.duplicate(),"cancelled_counts":cancelled_counts.duplicate(),"rejected_count":rejected_count,"external_cleanup_count":external_cleanup_count,"session":_session.duplicate(true),"last_session":_last_session.duplicate(true),
+		"cycling_distance_m":cycling_distance_m,"cycling_revolutions":cycling_revolutions,"rowing_distance_m":rowing_distance_m,"rowing_strokes":rowing_strokes,"completed_counts":completed_counts.duplicate(),"started_counts":started_counts.duplicate(),"cancelled_counts":cancelled_counts.duplicate(),"rejected_count":rejected_count,"external_cleanup_count":external_cleanup_count,"session":_session.duplicate(true),"last_session":_last_session.duplicate(true),
 		"selected_target_id":String(_selected.get("id","")),"targets":_targets().duplicate(true),"visual":_visuals.snapshot() if is_instance_valid(_visuals) else {},"control_locked":host.player.facility_control if is_instance_valid(host) else false,"return_pending":_return_pending,"paused":_paused,"use_position":_use_position,"return_position":_return_position,"prompt":prompt_text(),"status_text":_status.text if is_instance_valid(_status) else "","status_rect":status_rect(),"notice":_notice}
 
 func _exit_tree() -> void:

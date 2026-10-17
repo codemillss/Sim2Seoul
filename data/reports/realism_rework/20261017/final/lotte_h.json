@@ -1,0 +1,6238 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"base_records": 125,
+				"lotte_records": 1,
+				"merged_floors": 1242,
+				"merged_records": 126,
+				"retail_records": 0,
+				"supplemental_records": 1
+			},
+			"name": "catalog.base_125_unchanged_plus_exactly_one_Lotte_126_and_1242_floors",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"door_apron_capsule_radius_m": 0.4,
+				"floor_outside_actual_source_m2": 0.0,
+				"hotel_capsule_inset_bbox_outside_m2": 0.0,
+				"hotel_source_bbox_outside_m2": 0.0,
+				"result": "PASS",
+				"retail_not_added": "osm:way:233592424:building",
+				"source_data_or_world_modified": false,
+				"source_door_candidates": 9.0,
+				"source_private_overlap_m2": 0.0
+			},
+			"name": "source.generator_exact_footprint_floor_private_and_door_validations_pass",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"bounds": {
+					"position": [
+						-474.024963378906,
+						-487.13916015625
+					],
+					"size": [
+						947.997192382812,
+						974.251220703125
+					]
+				},
+				"edge_errors": [],
+				"polygon": [
+					[
+						-474.024963378906,
+						467.133087158203
+					],
+					[
+						453.467712402344,
+						487.112091064453
+					],
+					[
+						473.972198486328,
+						-467.158538818359
+					],
+					[
+						-453.413696289062,
+						-487.13916015625
+					]
+				],
+				"scope": "Game-only floor and player limit inside the already acquired source bbox. The AABB support is clipped logically by the player polygon. Private exclusions remain enforced. No new geographic data, surveyed terrain or public-access authorization."
+			},
+			"name": "extent.actual_projected_four_corner_polygon_and_capsule_edge_margin",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"invalid_old_points": []
+			},
+			"name": "extent.previous_rectangle_play_space_remains_inside_new_polygon",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"mask_after": 13,
+				"mask_before": 45,
+				"npc_support": "ExplorationGround:<StaticBody3D#163225541894>",
+				"player_support": "<null>",
+				"support_layer": 32
+			},
+			"name": "support.OFF_keeps_actual_NPC_floor_and_excludes_it_from_player_queries",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "support.ON_restores_player_floor_bit_without_changing_other_bits",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"depth": 25.0259999112452,
+				"floor_errors": [],
+				"footprint_errors": [],
+				"source_rings": [
+					[
+						[
+							[
+								320.675413122051,
+								1.04061346501112
+							],
+							[
+								321.233005536022,
+								-5.57487475965172
+							],
+							[
+								321.51776893565,
+								-8.95464905397967
+							],
+							[
+								321.804918367066,
+								-12.445385101717
+							],
+							[
+								345.972458339937,
+								-11.9812208167277
+							],
+							[
+								346.184777013841,
+								-23.4998081787489
+							],
+							[
+								371.442529291962,
+								-22.7791477912106
+							],
+							[
+								451.178088141605,
+								-20.7767112492584
+							],
+							[
+								453.776802434935,
+								6.74373409105465
+							],
+							[
+								447.659525458876,
+								6.43466143729165
+							],
+							[
+								427.109296256094,
+								5.41576455486938
+							],
+							[
+								427.065032725222,
+								11.5871339868754
+							],
+							[
+								421.528567252972,
+								11.3904363857582
+							],
+							[
+								343.765484732285,
+								8.46433101501316
+							],
+							[
+								332.145402163267,
+								8.03685271553695
+							],
+							[
+								332.777712684416,
+								2.05574526358396
+							],
+							[
+								324.556570936227,
+								1.36830299254507
+							],
+							[
+								323.753984293377,
+								1.29553771251813
+							],
+							[
+								320.675413122051,
+								1.04061346501112
+							]
+						]
+					]
+				],
+				"width": 103.196755848134
+			},
+			"name": "source.full_Lotte_footprint_fits_real_source_polygon_and_floor_stays_inscribed",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"basis": "osm_building_levels",
+				"floor_height": 4.05405405405405,
+				"reference_ids": [
+					"w/117914845"
+				],
+				"source_height": 150.0,
+				"source_levels": 37.0
+			},
+			"name": "source.height_levels_and_reference_are_actual_retained_source",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"id": "osm:way:117914845:building"
+			},
+			"name": "lotte_source_door.selected",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					398.80908203125,
+					-0.00257776863873005,
+					-24.09250831604
+				],
+				"requested": [
+					398.80908203125,
+					0.0799999982118607,
+					-24.09250831604
+				]
+			},
+			"name": "placement.lotte_source_door_outside.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"active": true,
+				"authored_not_surveyed": true,
+				"catalog_count": 126,
+				"current_floor": 0,
+				"depth": 25.0259999112452,
+				"e_requires_release": false,
+				"elevator": {
+					"acceleration_mps2": 0.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": false,
+					"cabin_visible": false,
+					"current_floor_value": 0.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 0.0,
+					"elapsed": 0.0,
+					"from_floor": 0,
+					"max_speed_mps": 0.0,
+					"motion_duration": 0.0,
+					"motion_elapsed": 0.0,
+					"motion_start_floor": 0.0,
+					"on_roof": false,
+					"passenger_position": [
+						650.0,
+						-99.9996871948242,
+						9.01299953460693
+					],
+					"phase": "idle",
+					"phase_elapsed": 0.0,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": false,
+					"speed_mps": 0.0,
+					"target_floor": 0
+				},
+				"elevator_open": false,
+				"entrance": [
+					398.80908203125,
+					0.0799999982118607,
+					-24.09250831604
+				],
+				"entry_count": 1,
+				"error": "",
+				"exit_count": 0,
+				"facility_activity": {
+					"active": false,
+					"cancelled_counts": {
+						"cycle": 0,
+						"eat": 0,
+						"rowing": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"cleanliness": 30.0,
+					"completed_counts": {
+						"cycle": 0,
+						"eat": 0,
+						"rowing": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"control_locked": false,
+					"cycling_distance_m": 0.0,
+					"cycling_revolutions": 0,
+					"duration": 0.0,
+					"elapsed": 0.0,
+					"external_cleanup_count": 0,
+					"fullness": 35.0,
+					"kind": "",
+					"last_session": {},
+					"notice": "",
+					"paused": false,
+					"prompt": "",
+					"rejected_count": 0,
+					"return_pending": false,
+					"return_position": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"rowing_distance_m": 0.0,
+					"rowing_strokes": 0,
+					"selected_target_id": "",
+					"session": {},
+					"started_counts": {
+						"cycle": 0,
+						"eat": 0,
+						"rowing": 0,
+						"shower": 0,
+						"treadmill": 0,
+						"weights": 0
+					},
+					"status_rect": {
+						"position": [
+							16.0,
+							594.0
+						],
+						"size": [
+							480.0,
+							61.0
+						]
+					},
+					"status_text": "포만감 35 · 청결 30  |  운동 0.0 m · 근력 0회\n사이클 0.0 m · 0회전  |  로잉 0 m · 0스트로크",
+					"target_id": "",
+					"targets": [
+						{
+							"anchor_point": [
+								7.3600001335144,
+								5.15905427932739,
+								4.66300010681152
+							],
+							"approach_point": [
+								6.32999992370605,
+								4.13405418395996,
+								5.21300029754639
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 3.6,
+								"equipment_title": "Detail_FacilityFoodTray",
+								"facing_yaw": -1.5707963267949,
+								"food_index": 0,
+								"food_material": "food_rice"
+							},
+							"facility_id": "buffet_1_0",
+							"id": "osm:way:117914845:building/buffet_1_0/food_0",
+							"kind": "eat",
+							"level": 1,
+							"title": "따뜻한 밥",
+							"use_point": [
+								6.32999992370605,
+								4.13405418395996,
+								4.66300010681152
+							]
+						},
+						{
+							"anchor_point": [
+								7.3600001335144,
+								5.15905427932739,
+								3.50300002098083
+							],
+							"approach_point": [
+								6.32999992370605,
+								4.13405418395996,
+								4.05299997329712
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 3.6,
+								"equipment_title": "Detail_FacilityFoodTray",
+								"facing_yaw": -1.5707963267949,
+								"food_index": 1,
+								"food_material": "food_soup"
+							},
+							"facility_id": "buffet_1_0",
+							"id": "osm:way:117914845:building/buffet_1_0/food_1",
+							"kind": "eat",
+							"level": 1,
+							"title": "국 · 수프",
+							"use_point": [
+								6.32999992370605,
+								4.13405418395996,
+								3.50300002098083
+							]
+						},
+						{
+							"anchor_point": [
+								7.3600001335144,
+								5.15905427932739,
+								2.34299993515015
+							],
+							"approach_point": [
+								6.32999992370605,
+								4.13405418395996,
+								2.89299988746643
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 3.6,
+								"equipment_title": "Detail_FacilityFoodTray",
+								"facing_yaw": -1.5707963267949,
+								"food_index": 2,
+								"food_material": "food_kimchi"
+							},
+							"facility_id": "buffet_1_0",
+							"id": "osm:way:117914845:building/buffet_1_0/food_2",
+							"kind": "eat",
+							"level": 1,
+							"title": "김치 · 반찬",
+							"use_point": [
+								6.32999992370605,
+								4.13405418395996,
+								2.34299993515015
+							]
+						},
+						{
+							"anchor_point": [
+								7.3600001335144,
+								5.15905427932739,
+								1.18299996852875
+							],
+							"approach_point": [
+								6.32999992370605,
+								4.13405418395996,
+								1.73300004005432
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 3.6,
+								"equipment_title": "Detail_FacilityFoodTray",
+								"facing_yaw": -1.5707963267949,
+								"food_index": 3,
+								"food_material": "food_green"
+							},
+							"facility_id": "buffet_1_0",
+							"id": "osm:way:117914845:building/buffet_1_0/food_3",
+							"kind": "eat",
+							"level": 1,
+							"title": "채소 · 샐러드",
+							"use_point": [
+								6.32999992370605,
+								4.13405418395996,
+								1.18299996852875
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								12.2921619415283,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								12.2421617507935,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									12.2921619415283,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_3_2",
+							"id": "osm:way:117914845:building/fitness_3_2/treadmill_0",
+							"kind": "treadmill",
+							"level": 3,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								12.3421621322632,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								12.2921619415283,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								12.2421617507935,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									12.2921619415283,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_3_2",
+							"id": "osm:way:117914845:building/fitness_3_2/treadmill_1",
+							"kind": "treadmill",
+							"level": 3,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								12.3421621322632,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								12.4621620178223,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								12.2421617507935,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									12.1621618270874,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_3_2",
+							"id": "osm:way:117914845:building/fitness_3_2/stationary_cycle",
+							"kind": "cycle",
+							"level": 3,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								12.2421617507935,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								12.6421613693237,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								12.2421617507935,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									12.1621618270874,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_3_2",
+							"id": "osm:way:117914845:building/fitness_3_2/rowing_machine",
+							"kind": "rowing",
+							"level": 3,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								12.2421617507935,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								13.0121622085571,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								12.2421617507935,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_3_3",
+							"id": "osm:way:117914845:building/strength_3_3/dumbbells",
+							"kind": "weights",
+							"level": 3,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								12.2421617507935,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								18.276216506958,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								16.2962169647217,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_4_4",
+							"id": "osm:way:117914845:building/spa_4_4/shower",
+							"kind": "shower",
+							"level": 4,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								16.2962169647217,
+								4.8129997253418
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								36.6164894104004,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								36.5664901733398,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									36.6164894104004,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_9_8",
+							"id": "osm:way:117914845:building/fitness_9_8/treadmill_0",
+							"kind": "treadmill",
+							"level": 9,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								36.6664886474609,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								36.6164894104004,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								36.5664901733398,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									36.6164894104004,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_9_8",
+							"id": "osm:way:117914845:building/fitness_9_8/treadmill_1",
+							"kind": "treadmill",
+							"level": 9,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								36.6664886474609,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								36.7864875793457,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								36.5664901733398,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									36.4864883422852,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_9_8",
+							"id": "osm:way:117914845:building/fitness_9_8/stationary_cycle",
+							"kind": "cycle",
+							"level": 9,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								36.5664901733398,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								36.9664878845215,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								36.5664901733398,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									36.4864883422852,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_9_8",
+							"id": "osm:way:117914845:building/fitness_9_8/rowing_machine",
+							"kind": "rowing",
+							"level": 9,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								36.5664901733398,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								37.3364868164062,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								36.5664901733398,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_9_9",
+							"id": "osm:way:117914845:building/strength_9_9/dumbbells",
+							"kind": "weights",
+							"level": 9,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								36.5664901733398,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								42.6005401611328,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								40.6205406188965,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_10_10",
+							"id": "osm:way:117914845:building/spa_10_10/shower",
+							"kind": "shower",
+							"level": 10,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								40.6205406188965,
+								4.8129997253418
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								60.9408111572266,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								60.890811920166,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									60.9408111572266,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_15_14",
+							"id": "osm:way:117914845:building/fitness_15_14/treadmill_0",
+							"kind": "treadmill",
+							"level": 15,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								60.9908103942871,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								60.9408111572266,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								60.890811920166,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									60.9408111572266,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_15_14",
+							"id": "osm:way:117914845:building/fitness_15_14/treadmill_1",
+							"kind": "treadmill",
+							"level": 15,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								60.9908103942871,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								61.1108093261719,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								60.890811920166,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									60.8108100891113,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_15_14",
+							"id": "osm:way:117914845:building/fitness_15_14/stationary_cycle",
+							"kind": "cycle",
+							"level": 15,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								60.890811920166,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								61.2908096313477,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								60.890811920166,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									60.8108100891113,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_15_14",
+							"id": "osm:way:117914845:building/fitness_15_14/rowing_machine",
+							"kind": "rowing",
+							"level": 15,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								60.890811920166,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								61.6608085632324,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								60.890811920166,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_15_15",
+							"id": "osm:way:117914845:building/strength_15_15/dumbbells",
+							"kind": "weights",
+							"level": 15,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								60.890811920166,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								66.9248657226562,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								64.9448699951172,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_16_16",
+							"id": "osm:way:117914845:building/spa_16_16/shower",
+							"kind": "shower",
+							"level": 16,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								64.9448699951172,
+								4.8129997253418
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								85.2651290893555,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								85.2151336669922,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									85.2651290893555,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_21_20",
+							"id": "osm:way:117914845:building/fitness_21_20/treadmill_0",
+							"kind": "treadmill",
+							"level": 21,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								85.3151321411133,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								85.2651290893555,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								85.2151336669922,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									85.2651290893555,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_21_20",
+							"id": "osm:way:117914845:building/fitness_21_20/treadmill_1",
+							"kind": "treadmill",
+							"level": 21,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								85.3151321411133,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								85.4351348876953,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								85.2151336669922,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									85.1351318359375,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_21_20",
+							"id": "osm:way:117914845:building/fitness_21_20/stationary_cycle",
+							"kind": "cycle",
+							"level": 21,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								85.2151336669922,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								85.6151351928711,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								85.2151336669922,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									85.1351318359375,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_21_20",
+							"id": "osm:way:117914845:building/fitness_21_20/rowing_machine",
+							"kind": "rowing",
+							"level": 21,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								85.2151336669922,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								85.9851303100586,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								85.2151336669922,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_21_21",
+							"id": "osm:way:117914845:building/strength_21_21/dumbbells",
+							"kind": "weights",
+							"level": 21,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								85.2151336669922,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								91.2491836547852,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								89.2691879272461,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_22_22",
+							"id": "osm:way:117914845:building/spa_22_22/shower",
+							"kind": "shower",
+							"level": 22,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								89.2691879272461,
+								4.8129997253418
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								109.589454650879,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								109.539459228516,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									109.589454650879,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_27_26",
+							"id": "osm:way:117914845:building/fitness_27_26/treadmill_0",
+							"kind": "treadmill",
+							"level": 27,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								109.639457702637,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								109.589454650879,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								109.539459228516,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									109.589454650879,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_27_26",
+							"id": "osm:way:117914845:building/fitness_27_26/treadmill_1",
+							"kind": "treadmill",
+							"level": 27,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								109.639457702637,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								109.759460449219,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								109.539459228516,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									109.459457397461,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_27_26",
+							"id": "osm:way:117914845:building/fitness_27_26/stationary_cycle",
+							"kind": "cycle",
+							"level": 27,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								109.539459228516,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								109.939460754395,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								109.539459228516,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									109.459457397461,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_27_26",
+							"id": "osm:way:117914845:building/fitness_27_26/rowing_machine",
+							"kind": "rowing",
+							"level": 27,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								109.539459228516,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								110.309455871582,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								109.539459228516,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_27_27",
+							"id": "osm:way:117914845:building/strength_27_27/dumbbells",
+							"kind": "weights",
+							"level": 27,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								109.539459228516,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								115.573509216309,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								113.59351348877,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_28_28",
+							"id": "osm:way:117914845:building/spa_28_28/shower",
+							"kind": "shower",
+							"level": 28,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								113.59351348877,
+								4.8129997253418
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								133.913787841797,
+								4.3129997253418
+							],
+							"approach_point": [
+								7.15000009536743,
+								133.863784790039,
+								5.61299991607666
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									133.913787841797,
+									4.3129997253418
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_33_32",
+							"id": "osm:way:117914845:building/fitness_33_32/treadmill_0",
+							"kind": "treadmill",
+							"level": 33,
+							"title": "러닝머신 1",
+							"use_point": [
+								7.15000009536743,
+								133.963775634766,
+								4.43299961090088
+							]
+						},
+						{
+							"anchor_point": [
+								7.15000009536743,
+								133.913787841797,
+								1.71299993991852
+							],
+							"approach_point": [
+								7.15000009536743,
+								133.863784790039,
+								3.01300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"belt_center": [
+									7.15000009536743,
+									133.913787841797,
+									1.71299993991852
+								],
+								"belt_size": [
+									0.75,
+									0.025000000372529,
+									1.64999997615814
+								],
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityTreadmill",
+								"facing_yaw": 0.0,
+								"speed_kmh": 6.0
+							},
+							"facility_id": "fitness_33_32",
+							"id": "osm:way:117914845:building/fitness_33_32/treadmill_1",
+							"kind": "treadmill",
+							"level": 33,
+							"title": "러닝머신 2",
+							"use_point": [
+								7.15000009536743,
+								133.963775634766,
+								1.83299994468689
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								134.083786010742,
+								3.96299982070923
+							],
+							"approach_point": [
+								4.13000011444092,
+								133.863784790039,
+								4.95300006866455
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"cadence_rpm": 60.0,
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityStationaryCycle",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									133.783782958984,
+									4.21299982070923
+								],
+								"speed_kmh": 18.0
+							},
+							"facility_id": "fitness_33_32",
+							"id": "osm:way:117914845:building/fitness_33_32/stationary_cycle",
+							"kind": "cycle",
+							"level": 33,
+							"title": "실내 사이클",
+							"use_point": [
+								4.13000011444092,
+								133.863784790039,
+								4.23299980163574
+							]
+						},
+						{
+							"anchor_point": [
+								4.13000011444092,
+								134.263778686523,
+								1.06299996376038
+							],
+							"approach_point": [
+								4.13000011444092,
+								133.863784790039,
+								2.21299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityRowingMachine",
+								"facing_yaw": 0.0,
+								"machine_origin": [
+									4.13000011444092,
+									133.783782958984,
+									1.41299998760223
+								],
+								"metres_per_stroke": 8.0,
+								"stroke_seconds": 2.4
+							},
+							"facility_id": "fitness_33_32",
+							"id": "osm:way:117914845:building/fitness_33_32/rowing_machine",
+							"kind": "rowing",
+							"level": 33,
+							"title": "로잉머신",
+							"use_point": [
+								4.13000011444092,
+								133.863784790039,
+								1.46299993991852
+							]
+						},
+						{
+							"anchor_point": [
+								-7.61999988555908,
+								134.6337890625,
+								4.71299982070923
+							],
+							"approach_point": [
+								-5.59999990463257,
+								133.863784790039,
+								6.51300001144409
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 8.0,
+								"equipment_title": "Detail_FacilityDumbbellRack",
+								"facing_yaw": 0.0,
+								"weight_kg": 5.0
+							},
+							"facility_id": "strength_33_33",
+							"id": "osm:way:117914845:building/strength_33_33/dumbbells",
+							"kind": "weights",
+							"level": 33,
+							"title": "덤벨 운동",
+							"use_point": [
+								-5.59999990463257,
+								133.863784790039,
+								6.01300001144409
+							]
+						},
+						{
+							"anchor_point": [
+								7.28000020980835,
+								139.897842407227,
+								4.26300001144409
+							],
+							"approach_point": [
+								7.28000020980835,
+								137.917846679688,
+								5.96299982070923
+							],
+							"coordinate_space": "room_local",
+							"data": {
+								"duration_seconds": 7.0,
+								"equipment_title": "Detail_FacilityShowerHead",
+								"facing_yaw": 0.0,
+								"water_radius": 0.28
+							},
+							"facility_id": "spa_34_34",
+							"id": "osm:way:117914845:building/spa_34_34/shower",
+							"kind": "shower",
+							"level": 34,
+							"title": "샤워",
+							"use_point": [
+								7.28000020980835,
+								137.917846679688,
+								4.8129997253418
+							]
+						}
+					],
+					"use_position": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"visual": {},
+					"workout_distance_m": 0.0,
+					"workout_repetitions": 0
+				},
+				"feature_id": "osm:way:117914845:building",
+				"floor_count": 37,
+				"in_elevator": false,
+				"loaded": true,
+				"notice": "",
+				"on_roof": false,
+				"outside_return": [
+					398.80908203125,
+					0.0800000205636024,
+					-24.09250831604
+				],
+				"rejected_entries": 0,
+				"rejected_exits": 0,
+				"roof_ready_tick": 36,
+				"rooftop": {
+					"authored_pool_deck_raise_m": 1.55,
+					"base_source_clearance_m": 0.28,
+					"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Pool deck is authored 1.55m above the normal source-clearance deck, with four solid surround panels and a real water opening. The basin floor remains above the intact source roof; water is 0.18m below deck and 1.22m deep. No source height correction, surveyed venue amenity or full fluid simulation.",
+					"building_id": "osm:way:117914845:building",
+					"building_title": "롯데호텔서울",
+					"ceiling_unbounded": true,
+					"clearance_above_observed_m": 1.83000000000001,
+					"collision_bodies": 30,
+					"deck_height_y": 151.83,
+					"depth": 23.4259999112452,
+					"features": [
+						"four_sided_physical_rails_and_rotated_player_footprint_guard",
+						"clear_central_lift_landing",
+						"flush_sunken_pool_in_raised_authored_deck",
+						"real_open_deck_cutout",
+						"large_outdoor_swimming_pool",
+						"buoyant_water_region",
+						"walk_down_pool_entry",
+						"submerged_entry_steps",
+						"continuous_access_handrails",
+						"visible_splash_and_ripples",
+						"solid_safe_pool_floor",
+						"sun_loungers",
+						"parasol",
+						"towels_and_outdoor_shower",
+						"hotel_pool_entrance",
+						"open_sky_and_city_views",
+						"human_scale_lane_tiles"
+					],
+					"frame_axes": [
+						[
+							0.999684810638428,
+							0.0,
+							0.0251055546104908
+						],
+						[
+							0.0,
+							1.0,
+							0.0
+						],
+						[
+							-0.0251055546104908,
+							0.0,
+							0.999684810638428
+						]
+					],
+					"frame_determinant": 1.0,
+					"frame_origin": [
+						398.416076660156,
+						151.830001831055,
+						-8.44284439086914
+					],
+					"height_observations": [
+						{
+							"bounds_position": [
+								320.675415039062,
+								0.0,
+								-23.4998073577881
+							],
+							"bounds_size": [
+								133.101379394531,
+								150.0,
+								35.0869407653809
+							],
+							"kind": "retained_source_mesh",
+							"path": "/root/ExploreWalk/World/Buildings/osm_way_117914845_building",
+							"top_y": 150.0
+						}
+					],
+					"landing_validation_height_m": 9.35,
+					"lift_point": [
+						398.213653564453,
+						151.910003662109,
+						-0.382386207580566
+					],
+					"loaded": true,
+					"observed_top_y": 150.0,
+					"open_sky_jump_space": true,
+					"pool_camera_point": [
+						384.574798583984,
+						156.029998779297,
+						-6.9728741645813
+					],
+					"pool_dimensions": {
+						"clear_water_area_m2": 240.0,
+						"clear_water_depth_m": 10.0,
+						"clear_water_width_m": 24.0,
+						"deck_opening_rect": {
+							"position": [
+								-10.5900001525879,
+								-10.3730001449585
+							],
+							"size": [
+								24.5,
+								10.5
+							]
+						},
+						"deck_raise_m": 1.55,
+						"floor_below_deck_m": 1.4,
+						"long_dimension_m": 24.0,
+						"minimum_long_m": 12.0,
+						"minimum_short_m": 6.0,
+						"open_sky": true,
+						"rim_above_deck_m": 0.0,
+						"roof_canopy_over_water": false,
+						"short_dimension_m": 10.0,
+						"submerged_steps_rect": {
+							"position": [
+								11.8299999237061,
+								-3.03300023078918
+							],
+							"size": [
+								1.46000003814697,
+								2.79999995231628
+							]
+						},
+						"surface_below_deck_m": 0.18,
+						"water_depth_m": 1.22
+					},
+					"pool_entry": [
+						410.936553955078,
+						151.910003662109,
+						-6.71096563339233
+					],
+					"pool_rim": [
+						410.961639404297,
+						151.910003662109,
+						-7.71065044403076
+					],
+					"profile_id": "outdoor_pool",
+					"profile_title": "야외 수영장 · 루프톱 테라스",
+					"source_height_offset_m": 1.83000000000001,
+					"source_height_y": 150.0,
+					"source_inset_m": 0.8,
+					"source_rectangle_depth": 25.0259999112452,
+					"source_rectangle_width": 103.196755848134,
+					"spawn": [
+						398.213653564453,
+						151.910003662109,
+						-0.382386207580566
+					],
+					"walkable_rect_position": [
+						-16.0,
+						-11.7130002975464
+					],
+					"walkable_rect_size": [
+						32.0,
+						23.4260005950928
+					],
+					"water_effects": {
+						"active_splashes": 0,
+						"elapsed": 0.4,
+						"mesh_nodes": 0,
+						"ripple_count": 0,
+						"splash_count": 0,
+						"visual_kind": "finite_mesh_droplets_and_expanding_surface_rings"
+					},
+					"water_region": {
+						"floor_y": -1.4,
+						"frame": {
+							"basis": [
+								[
+									0.999684810638428,
+									0.0,
+									0.0251055546104908
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									-0.0251055546104908,
+									0.0,
+									0.999684810638428
+								]
+							],
+							"origin": [
+								398.416076660156,
+								151.830001831055,
+								-8.44284439086914
+							]
+						},
+						"id": "osm:way:117914845:building:roof_pool",
+						"rect": {
+							"position": [
+								-10.3400001525879,
+								-10.1230001449585
+							],
+							"size": [
+								24.0,
+								10.0
+							]
+						},
+						"surface_y": -0.18
+					},
+					"width": 32.0,
+					"world_bounds_position": [
+						382.127044677734,
+						150.18000793457,
+						-20.553840637207
+					],
+					"world_bounds_size": [
+						32.5780639648438,
+						10.6499938964844,
+						24.2219924926758
+					]
+				},
+				"room_origin": [
+					650.0,
+					-100.0,
+					0.0
+				],
+				"room_static_bodies": 2455,
+				"selected_floor": 0,
+				"width": 103.196755848134
+			},
+			"name": "lotte_source_door.physical_E_enters",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"room_profile": "hotel",
+				"visit": {
+					"active": true,
+					"authored_not_surveyed": true,
+					"catalog_count": 126,
+					"current_floor": 0,
+					"depth": 25.0259999112452,
+					"e_requires_release": false,
+					"elevator": {
+						"acceleration_mps2": 0.0,
+						"cabin_bounds": {
+							"position": [
+								1097.94995117188,
+								-140.25,
+								-2.20000004768372
+							],
+							"size": [
+								4.09999990463257,
+								3.09999990463257,
+								4.40000009536743
+							]
+						},
+						"cabin_camera_current": false,
+						"cabin_visible": false,
+						"current_floor_value": 0.0,
+						"destination_count": 38,
+						"door_open_fraction": 1.0,
+						"duration": 0.0,
+						"elapsed": 0.0,
+						"from_floor": 0,
+						"max_speed_mps": 0.0,
+						"motion_duration": 0.0,
+						"motion_elapsed": 0.0,
+						"motion_start_floor": 0.0,
+						"on_roof": false,
+						"passenger_position": [
+							650.0,
+							-99.9996871948242,
+							9.01299953460693
+						],
+						"phase": "idle",
+						"phase_elapsed": 0.0,
+						"render_mode": "detached_3d_cabin",
+						"returning_to_safe_floor": false,
+						"safe_release_pending": false,
+						"speed_mps": 0.0,
+						"target_floor": 0
+					},
+					"elevator_open": false,
+					"entrance": [
+						398.80908203125,
+						0.0799999982118607,
+						-24.09250831604
+					],
+					"entry_count": 1,
+					"error": "",
+					"exit_count": 0,
+					"facility_activity": {
+						"active": false,
+						"cancelled_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"cleanliness": 30.0,
+						"completed_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"control_locked": false,
+						"cycling_distance_m": 0.0,
+						"cycling_revolutions": 0,
+						"duration": 0.0,
+						"elapsed": 0.0,
+						"external_cleanup_count": 0,
+						"fullness": 35.0,
+						"kind": "",
+						"last_session": {},
+						"notice": "",
+						"paused": false,
+						"prompt": "",
+						"rejected_count": 0,
+						"return_pending": false,
+						"return_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"rowing_distance_m": 0.0,
+						"rowing_strokes": 0,
+						"selected_target_id": "",
+						"session": {},
+						"started_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"status_rect": {
+							"position": [
+								16.0,
+								594.0
+							],
+							"size": [
+								480.0,
+								61.0
+							]
+						},
+						"status_text": "포만감 35 · 청결 30  |  운동 0.0 m · 근력 0회\n사이클 0.0 m · 0회전  |  로잉 0 m · 0스트로크",
+						"target_id": "",
+						"targets": [
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									4.66300010681152
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									5.21300029754639
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 0,
+									"food_material": "food_rice"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_0",
+								"kind": "eat",
+								"level": 1,
+								"title": "따뜻한 밥",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									4.66300010681152
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									3.50300002098083
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									4.05299997329712
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 1,
+									"food_material": "food_soup"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_1",
+								"kind": "eat",
+								"level": 1,
+								"title": "국 · 수프",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									3.50300002098083
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									2.34299993515015
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									2.89299988746643
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 2,
+									"food_material": "food_kimchi"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_2",
+								"kind": "eat",
+								"level": 1,
+								"title": "김치 · 반찬",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									2.34299993515015
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									1.18299996852875
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									1.73300004005432
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 3,
+									"food_material": "food_green"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_3",
+								"kind": "eat",
+								"level": 1,
+								"title": "채소 · 샐러드",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									1.18299996852875
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									12.2921619415283,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									12.2421617507935,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										12.2921619415283,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/treadmill_0",
+								"kind": "treadmill",
+								"level": 3,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									12.3421621322632,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									12.2921619415283,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									12.2421617507935,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										12.2921619415283,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/treadmill_1",
+								"kind": "treadmill",
+								"level": 3,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									12.3421621322632,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									12.4621620178223,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									12.2421617507935,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										12.1621618270874,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/stationary_cycle",
+								"kind": "cycle",
+								"level": 3,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									12.2421617507935,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									12.6421613693237,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									12.2421617507935,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										12.1621618270874,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/rowing_machine",
+								"kind": "rowing",
+								"level": 3,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									12.2421617507935,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									13.0121622085571,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									12.2421617507935,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_3_3",
+								"id": "osm:way:117914845:building/strength_3_3/dumbbells",
+								"kind": "weights",
+								"level": 3,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									12.2421617507935,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									18.276216506958,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									16.2962169647217,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_4_4",
+								"id": "osm:way:117914845:building/spa_4_4/shower",
+								"kind": "shower",
+								"level": 4,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									16.2962169647217,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									36.6164894104004,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									36.5664901733398,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										36.6164894104004,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/treadmill_0",
+								"kind": "treadmill",
+								"level": 9,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									36.6664886474609,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									36.6164894104004,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									36.5664901733398,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										36.6164894104004,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/treadmill_1",
+								"kind": "treadmill",
+								"level": 9,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									36.6664886474609,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									36.7864875793457,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									36.5664901733398,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										36.4864883422852,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/stationary_cycle",
+								"kind": "cycle",
+								"level": 9,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									36.5664901733398,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									36.9664878845215,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									36.5664901733398,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										36.4864883422852,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/rowing_machine",
+								"kind": "rowing",
+								"level": 9,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									36.5664901733398,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									37.3364868164062,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									36.5664901733398,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_9_9",
+								"id": "osm:way:117914845:building/strength_9_9/dumbbells",
+								"kind": "weights",
+								"level": 9,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									36.5664901733398,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									42.6005401611328,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									40.6205406188965,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_10_10",
+								"id": "osm:way:117914845:building/spa_10_10/shower",
+								"kind": "shower",
+								"level": 10,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									40.6205406188965,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									60.9408111572266,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									60.890811920166,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										60.9408111572266,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/treadmill_0",
+								"kind": "treadmill",
+								"level": 15,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									60.9908103942871,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									60.9408111572266,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									60.890811920166,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										60.9408111572266,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/treadmill_1",
+								"kind": "treadmill",
+								"level": 15,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									60.9908103942871,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									61.1108093261719,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									60.890811920166,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										60.8108100891113,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/stationary_cycle",
+								"kind": "cycle",
+								"level": 15,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									60.890811920166,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									61.2908096313477,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									60.890811920166,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										60.8108100891113,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/rowing_machine",
+								"kind": "rowing",
+								"level": 15,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									60.890811920166,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									61.6608085632324,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									60.890811920166,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_15_15",
+								"id": "osm:way:117914845:building/strength_15_15/dumbbells",
+								"kind": "weights",
+								"level": 15,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									60.890811920166,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									66.9248657226562,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									64.9448699951172,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_16_16",
+								"id": "osm:way:117914845:building/spa_16_16/shower",
+								"kind": "shower",
+								"level": 16,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									64.9448699951172,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									85.2651290893555,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									85.2151336669922,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										85.2651290893555,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/treadmill_0",
+								"kind": "treadmill",
+								"level": 21,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									85.3151321411133,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									85.2651290893555,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									85.2151336669922,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										85.2651290893555,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/treadmill_1",
+								"kind": "treadmill",
+								"level": 21,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									85.3151321411133,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									85.4351348876953,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									85.2151336669922,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										85.1351318359375,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/stationary_cycle",
+								"kind": "cycle",
+								"level": 21,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									85.2151336669922,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									85.6151351928711,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									85.2151336669922,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										85.1351318359375,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/rowing_machine",
+								"kind": "rowing",
+								"level": 21,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									85.2151336669922,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									85.9851303100586,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									85.2151336669922,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_21_21",
+								"id": "osm:way:117914845:building/strength_21_21/dumbbells",
+								"kind": "weights",
+								"level": 21,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									85.2151336669922,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									91.2491836547852,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									89.2691879272461,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_22_22",
+								"id": "osm:way:117914845:building/spa_22_22/shower",
+								"kind": "shower",
+								"level": 22,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									89.2691879272461,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									109.589454650879,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									109.539459228516,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										109.589454650879,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/treadmill_0",
+								"kind": "treadmill",
+								"level": 27,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									109.639457702637,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									109.589454650879,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									109.539459228516,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										109.589454650879,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/treadmill_1",
+								"kind": "treadmill",
+								"level": 27,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									109.639457702637,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									109.759460449219,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									109.539459228516,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										109.459457397461,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/stationary_cycle",
+								"kind": "cycle",
+								"level": 27,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									109.539459228516,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									109.939460754395,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									109.539459228516,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										109.459457397461,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/rowing_machine",
+								"kind": "rowing",
+								"level": 27,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									109.539459228516,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									110.309455871582,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									109.539459228516,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_27_27",
+								"id": "osm:way:117914845:building/strength_27_27/dumbbells",
+								"kind": "weights",
+								"level": 27,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									109.539459228516,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									115.573509216309,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									113.59351348877,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_28_28",
+								"id": "osm:way:117914845:building/spa_28_28/shower",
+								"kind": "shower",
+								"level": 28,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									113.59351348877,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									133.913787841797,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									133.863784790039,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										133.913787841797,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/treadmill_0",
+								"kind": "treadmill",
+								"level": 33,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									133.963775634766,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									133.913787841797,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									133.863784790039,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										133.913787841797,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/treadmill_1",
+								"kind": "treadmill",
+								"level": 33,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									133.963775634766,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									134.083786010742,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									133.863784790039,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										133.783782958984,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/stationary_cycle",
+								"kind": "cycle",
+								"level": 33,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									133.863784790039,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									134.263778686523,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									133.863784790039,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										133.783782958984,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/rowing_machine",
+								"kind": "rowing",
+								"level": 33,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									133.863784790039,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									134.6337890625,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									133.863784790039,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_33_33",
+								"id": "osm:way:117914845:building/strength_33_33/dumbbells",
+								"kind": "weights",
+								"level": 33,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									133.863784790039,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									139.897842407227,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									137.917846679688,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_34_34",
+								"id": "osm:way:117914845:building/spa_34_34/shower",
+								"kind": "shower",
+								"level": 34,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									137.917846679688,
+									4.8129997253418
+								]
+							}
+						],
+						"use_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"visual": {},
+						"workout_distance_m": 0.0,
+						"workout_repetitions": 0
+					},
+					"feature_id": "osm:way:117914845:building",
+					"floor_count": 37,
+					"in_elevator": false,
+					"loaded": true,
+					"notice": "",
+					"on_roof": false,
+					"outside_return": [
+						398.80908203125,
+						0.0800000205636024,
+						-24.09250831604
+					],
+					"rejected_entries": 0,
+					"rejected_exits": 0,
+					"roof_ready_tick": 36,
+					"rooftop": {
+						"authored_pool_deck_raise_m": 1.55,
+						"base_source_clearance_m": 0.28,
+						"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Pool deck is authored 1.55m above the normal source-clearance deck, with four solid surround panels and a real water opening. The basin floor remains above the intact source roof; water is 0.18m below deck and 1.22m deep. No source height correction, surveyed venue amenity or full fluid simulation.",
+						"building_id": "osm:way:117914845:building",
+						"building_title": "롯데호텔서울",
+						"ceiling_unbounded": true,
+						"clearance_above_observed_m": 1.83000000000001,
+						"collision_bodies": 30,
+						"deck_height_y": 151.83,
+						"depth": 23.4259999112452,
+						"features": [
+							"four_sided_physical_rails_and_rotated_player_footprint_guard",
+							"clear_central_lift_landing",
+							"flush_sunken_pool_in_raised_authored_deck",
+							"real_open_deck_cutout",
+							"large_outdoor_swimming_pool",
+							"buoyant_water_region",
+							"walk_down_pool_entry",
+							"submerged_entry_steps",
+							"continuous_access_handrails",
+							"visible_splash_and_ripples",
+							"solid_safe_pool_floor",
+							"sun_loungers",
+							"parasol",
+							"towels_and_outdoor_shower",
+							"hotel_pool_entrance",
+							"open_sky_and_city_views",
+							"human_scale_lane_tiles"
+						],
+						"frame_axes": [
+							[
+								0.999684810638428,
+								0.0,
+								0.0251055546104908
+							],
+							[
+								0.0,
+								1.0,
+								0.0
+							],
+							[
+								-0.0251055546104908,
+								0.0,
+								0.999684810638428
+							]
+						],
+						"frame_determinant": 1.0,
+						"frame_origin": [
+							398.416076660156,
+							151.830001831055,
+							-8.44284439086914
+						],
+						"height_observations": [
+							{
+								"bounds_position": [
+									320.675415039062,
+									0.0,
+									-23.4998073577881
+								],
+								"bounds_size": [
+									133.101379394531,
+									150.0,
+									35.0869407653809
+								],
+								"kind": "retained_source_mesh",
+								"path": "/root/ExploreWalk/World/Buildings/osm_way_117914845_building",
+								"top_y": 150.0
+							}
+						],
+						"landing_validation_height_m": 9.35,
+						"lift_point": [
+							398.213653564453,
+							151.910003662109,
+							-0.382386207580566
+						],
+						"loaded": true,
+						"observed_top_y": 150.0,
+						"open_sky_jump_space": true,
+						"pool_camera_point": [
+							384.574798583984,
+							156.029998779297,
+							-6.9728741645813
+						],
+						"pool_dimensions": {
+							"clear_water_area_m2": 240.0,
+							"clear_water_depth_m": 10.0,
+							"clear_water_width_m": 24.0,
+							"deck_opening_rect": {
+								"position": [
+									-10.5900001525879,
+									-10.3730001449585
+								],
+								"size": [
+									24.5,
+									10.5
+								]
+							},
+							"deck_raise_m": 1.55,
+							"floor_below_deck_m": 1.4,
+							"long_dimension_m": 24.0,
+							"minimum_long_m": 12.0,
+							"minimum_short_m": 6.0,
+							"open_sky": true,
+							"rim_above_deck_m": 0.0,
+							"roof_canopy_over_water": false,
+							"short_dimension_m": 10.0,
+							"submerged_steps_rect": {
+								"position": [
+									11.8299999237061,
+									-3.03300023078918
+								],
+								"size": [
+									1.46000003814697,
+									2.79999995231628
+								]
+							},
+							"surface_below_deck_m": 0.18,
+							"water_depth_m": 1.22
+						},
+						"pool_entry": [
+							410.936553955078,
+							151.910003662109,
+							-6.71096563339233
+						],
+						"pool_rim": [
+							410.961639404297,
+							151.910003662109,
+							-7.71065044403076
+						],
+						"profile_id": "outdoor_pool",
+						"profile_title": "야외 수영장 · 루프톱 테라스",
+						"source_height_offset_m": 1.83000000000001,
+						"source_height_y": 150.0,
+						"source_inset_m": 0.8,
+						"source_rectangle_depth": 25.0259999112452,
+						"source_rectangle_width": 103.196755848134,
+						"spawn": [
+							398.213653564453,
+							151.910003662109,
+							-0.382386207580566
+						],
+						"walkable_rect_position": [
+							-16.0,
+							-11.7130002975464
+						],
+						"walkable_rect_size": [
+							32.0,
+							23.4260005950928
+						],
+						"water_effects": {
+							"active_splashes": 0,
+							"elapsed": 0.4,
+							"mesh_nodes": 0,
+							"ripple_count": 0,
+							"splash_count": 0,
+							"visual_kind": "finite_mesh_droplets_and_expanding_surface_rings"
+						},
+						"water_region": {
+							"floor_y": -1.4,
+							"frame": {
+								"basis": [
+									[
+										0.999684810638428,
+										0.0,
+										0.0251055546104908
+									],
+									[
+										0.0,
+										1.0,
+										0.0
+									],
+									[
+										-0.0251055546104908,
+										0.0,
+										0.999684810638428
+									]
+								],
+								"origin": [
+									398.416076660156,
+									151.830001831055,
+									-8.44284439086914
+								]
+							},
+							"id": "osm:way:117914845:building:roof_pool",
+							"rect": {
+								"position": [
+									-10.3400001525879,
+									-10.1230001449585
+								],
+								"size": [
+									24.0,
+									10.0
+								]
+							},
+							"surface_y": -0.18
+						},
+						"width": 32.0,
+						"world_bounds_position": [
+							382.127044677734,
+							150.18000793457,
+							-20.553840637207
+						],
+						"world_bounds_size": [
+							32.5780639648438,
+							10.6499938964844,
+							24.2219924926758
+						]
+					},
+					"room_origin": [
+						650.0,
+						-100.0,
+						0.0
+					],
+					"room_static_bodies": 2455,
+					"selected_floor": 0,
+					"width": 103.196755848134
+				}
+			},
+			"name": "interior.actual_source_door_E_enters_37_floor_hotel_profile",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					600.601623535156,
+					-100.001861572266,
+					10.8629999160767
+				],
+				"requested": [
+					600.601623535156,
+					-99.9199981689453,
+					10.8629999160767
+				]
+			},
+			"name": "placement.lotte_second_floor_explicit_supported_landing_fixture.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"destinations": 38,
+				"from_floor": 0
+			},
+			"name": "lotte_second_floor.fresh_E_opens_real_floor_picker",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 2.06839492553778,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": true,
+					"cabin_visible": true,
+					"current_floor_value": 0.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 5.7,
+					"elapsed": 0.0,
+					"from_floor": 0,
+					"max_speed_mps": 2.8957528957529,
+					"motion_duration": 2.8,
+					"motion_elapsed": 0.0,
+					"motion_start_floor": 0.0,
+					"on_roof": false,
+					"passenger_position": [
+						1099.30004882812,
+						-139.919998168945,
+						0.25
+					],
+					"phase": "boarding",
+					"phase_elapsed": 0.0,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": true,
+					"speed_mps": 0.0,
+					"target_floor": 1
+				}
+			},
+			"name": "lotte_second_floor.actual_destination_button_starts_cabin",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 2.06839492553778,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": false,
+					"cabin_visible": false,
+					"current_floor_value": 1.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 5.7,
+					"elapsed": 5.74999999999998,
+					"from_floor": 0,
+					"max_speed_mps": 2.8957528957529,
+					"motion_duration": 2.8,
+					"motion_elapsed": 2.8,
+					"motion_start_floor": 0.0,
+					"on_roof": false,
+					"passenger_position": [
+						600.601623535156,
+						-95.9456329345703,
+						10.8629999160767
+					],
+					"phase": "idle",
+					"phase_elapsed": 0.3,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": false,
+					"speed_mps": 0.0,
+					"target_floor": 1
+				},
+				"player": [
+					600.601623535156,
+					-95.9456329345703,
+					10.8629999160767
+				]
+			},
+			"name": "lotte_second_floor.real_cabin_finishes_on_selected_supported_floor",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"programme": {
+					"features": [
+						"human_scale_arrival_core",
+						"walk_in_buffet",
+						"korean_buffet_food_trays",
+						"walk_in_kitchen",
+						"open_kitchen_hob_sink_hood",
+						"communal_dining"
+					],
+					"layout_basis": "game_reconstruction",
+					"level": 1,
+					"profile_id": "hotel_buffet",
+					"title": "뷔페 · 한식 다이닝"
+				}
+			},
+			"name": "interior.second_floor_has_hotel_buffet_programme",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					600.601623535156,
+					-95.9456329345703,
+					10.8629999160767
+				],
+				"requested": [
+					600.601623535156,
+					-95.8659439086914,
+					10.8629999160767
+				]
+			},
+			"name": "placement.lotte_roof_explicit_supported_landing_fixture.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"destinations": 38,
+				"from_floor": 1
+			},
+			"name": "lotte_roof.fresh_E_opens_real_floor_picker",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 8.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": true,
+					"cabin_visible": true,
+					"current_floor_value": 1.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 13.2581081081081,
+					"elapsed": 0.0,
+					"from_floor": 1,
+					"max_speed_mps": 18.0,
+					"motion_duration": 10.3581081081081,
+					"motion_elapsed": 0.0,
+					"motion_start_floor": 1.0,
+					"on_roof": false,
+					"passenger_position": [
+						1099.30004882812,
+						-139.919998168945,
+						0.25
+					],
+					"phase": "boarding",
+					"phase_elapsed": 0.0,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": true,
+					"speed_mps": 0.0,
+					"target_floor": 37
+				}
+			},
+			"name": "lotte_roof.actual_destination_button_starts_cabin",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 8.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": false,
+					"cabin_visible": false,
+					"current_floor_value": 37.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 13.2581081081081,
+					"elapsed": 13.3000000000002,
+					"from_floor": 1,
+					"max_speed_mps": 18.0,
+					"motion_duration": 10.3581081081081,
+					"motion_elapsed": 10.3581081081081,
+					"motion_start_floor": 1.0,
+					"on_roof": true,
+					"passenger_position": [
+						398.213653564453,
+						151.830322265625,
+						-0.382386207580566
+					],
+					"phase": "idle",
+					"phase_elapsed": 0.3,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": false,
+					"speed_mps": 0.0,
+					"target_floor": 37
+				},
+				"player": [
+					398.213653564453,
+					151.830322265625,
+					-0.382386207580566
+				]
+			},
+			"name": "lotte_roof.real_cabin_finishes_on_selected_supported_floor",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"player": [
+					398.213653564453,
+					151.830322265625,
+					-0.382386207580566
+				],
+				"roof": {
+					"authored_pool_deck_raise_m": 1.55,
+					"base_source_clearance_m": 0.28,
+					"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Pool deck is authored 1.55m above the normal source-clearance deck, with four solid surround panels and a real water opening. The basin floor remains above the intact source roof; water is 0.18m below deck and 1.22m deep. No source height correction, surveyed venue amenity or full fluid simulation.",
+					"building_id": "osm:way:117914845:building",
+					"building_title": "롯데호텔서울",
+					"ceiling_unbounded": true,
+					"clearance_above_observed_m": 1.83000000000001,
+					"collision_bodies": 30,
+					"deck_height_y": 151.83,
+					"depth": 23.4259999112452,
+					"features": [
+						"four_sided_physical_rails_and_rotated_player_footprint_guard",
+						"clear_central_lift_landing",
+						"flush_sunken_pool_in_raised_authored_deck",
+						"real_open_deck_cutout",
+						"large_outdoor_swimming_pool",
+						"buoyant_water_region",
+						"walk_down_pool_entry",
+						"submerged_entry_steps",
+						"continuous_access_handrails",
+						"visible_splash_and_ripples",
+						"solid_safe_pool_floor",
+						"sun_loungers",
+						"parasol",
+						"towels_and_outdoor_shower",
+						"hotel_pool_entrance",
+						"open_sky_and_city_views",
+						"human_scale_lane_tiles"
+					],
+					"frame_axes": [
+						[
+							0.999684810638428,
+							0.0,
+							0.0251055546104908
+						],
+						[
+							0.0,
+							1.0,
+							0.0
+						],
+						[
+							-0.0251055546104908,
+							0.0,
+							0.999684810638428
+						]
+					],
+					"frame_determinant": 1.0,
+					"frame_origin": [
+						398.416076660156,
+						151.830001831055,
+						-8.44284439086914
+					],
+					"height_observations": [
+						{
+							"bounds_position": [
+								320.675415039062,
+								0.0,
+								-23.4998073577881
+							],
+							"bounds_size": [
+								133.101379394531,
+								150.0,
+								35.0869407653809
+							],
+							"kind": "retained_source_mesh",
+							"path": "/root/ExploreWalk/World/Buildings/osm_way_117914845_building",
+							"top_y": 150.0
+						}
+					],
+					"landing_validation_height_m": 9.35,
+					"lift_point": [
+						398.213653564453,
+						151.910003662109,
+						-0.382386207580566
+					],
+					"loaded": true,
+					"observed_top_y": 150.0,
+					"open_sky_jump_space": true,
+					"pool_camera_point": [
+						384.574798583984,
+						156.029998779297,
+						-6.9728741645813
+					],
+					"pool_dimensions": {
+						"clear_water_area_m2": 240.0,
+						"clear_water_depth_m": 10.0,
+						"clear_water_width_m": 24.0,
+						"deck_opening_rect": {
+							"position": [
+								-10.5900001525879,
+								-10.3730001449585
+							],
+							"size": [
+								24.5,
+								10.5
+							]
+						},
+						"deck_raise_m": 1.55,
+						"floor_below_deck_m": 1.4,
+						"long_dimension_m": 24.0,
+						"minimum_long_m": 12.0,
+						"minimum_short_m": 6.0,
+						"open_sky": true,
+						"rim_above_deck_m": 0.0,
+						"roof_canopy_over_water": false,
+						"short_dimension_m": 10.0,
+						"submerged_steps_rect": {
+							"position": [
+								11.8299999237061,
+								-3.03300023078918
+							],
+							"size": [
+								1.46000003814697,
+								2.79999995231628
+							]
+						},
+						"surface_below_deck_m": 0.18,
+						"water_depth_m": 1.22
+					},
+					"pool_entry": [
+						410.936553955078,
+						151.910003662109,
+						-6.71096563339233
+					],
+					"pool_rim": [
+						410.961639404297,
+						151.910003662109,
+						-7.71065044403076
+					],
+					"profile_id": "outdoor_pool",
+					"profile_title": "야외 수영장 · 루프톱 테라스",
+					"source_height_offset_m": 1.83000000000001,
+					"source_height_y": 150.0,
+					"source_inset_m": 0.8,
+					"source_rectangle_depth": 25.0259999112452,
+					"source_rectangle_width": 103.196755848134,
+					"spawn": [
+						398.213653564453,
+						151.910003662109,
+						-0.382386207580566
+					],
+					"walkable_rect_position": [
+						-16.0,
+						-11.7130002975464
+					],
+					"walkable_rect_size": [
+						32.0,
+						23.4260005950928
+					],
+					"water_effects": {
+						"active_splashes": 0,
+						"elapsed": 20.6833333333334,
+						"mesh_nodes": 0,
+						"ripple_count": 0,
+						"splash_count": 0,
+						"visual_kind": "finite_mesh_droplets_and_expanding_surface_rings"
+					},
+					"water_region": {
+						"floor_y": -1.4,
+						"frame": {
+							"basis": [
+								[
+									0.999684810638428,
+									0.0,
+									0.0251055546104908
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									-0.0251055546104908,
+									0.0,
+									0.999684810638428
+								]
+							],
+							"origin": [
+								398.416076660156,
+								151.830001831055,
+								-8.44284439086914
+							]
+						},
+						"id": "osm:way:117914845:building:roof_pool",
+						"rect": {
+							"position": [
+								-10.3400001525879,
+								-10.1230001449585
+							],
+							"size": [
+								24.0,
+								10.0
+							]
+						},
+						"surface_y": -0.18
+					},
+					"width": 32.0,
+					"world_bounds_position": [
+						382.127044677734,
+						150.18000793457,
+						-20.553840637207
+					],
+					"world_bounds_size": [
+						32.5780639648438,
+						10.6499938964844,
+						24.2219924926758
+					]
+				},
+				"water": {
+					"depth_m": 0.0,
+					"entry_count": 0,
+					"exit_count": 0,
+					"exit_jump_locked": false,
+					"float_target_foot_y_world": 150.650001831055,
+					"horizontal_speed_mps": 0.0,
+					"id": "osm:way:117914845:building:roof_pool",
+					"registered": true,
+					"surface_y_world": 151.650001831055,
+					"swim_speed_limit_mps": 3.0,
+					"swimming": false,
+					"under_surface": false,
+					"vertical_speed_mps": 0.0,
+					"water_jump_count": 0
+				}
+			},
+			"name": "roof.actual_37_floor_ride_reaches_same_source_roof_with_outdoor_pool",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": [],
+				"hotels": [
+					{
+						"id": "osm:way:1007482029:building",
+						"pool_rect": {
+							"position": [
+								-2.26493287086487,
+								-12.0471744537354
+							],
+							"size": [
+								6.1298656463623,
+								18.2743492126465
+							]
+						},
+						"title": "소테츠호텔즈 더 스프라지르 서울 명동"
+					},
+					{
+						"id": "osm:way:117914845:building",
+						"pool_rect": {
+							"position": [
+								-10.3400001525879,
+								-10.1230001449585
+							],
+							"size": [
+								24.0,
+								10.0
+							]
+						},
+						"title": "롯데호텔서울"
+					},
+					{
+						"id": "osm:way:233593619:building",
+						"pool_rect": {
+							"position": [
+								-10.3400001525879,
+								-8.59802722930908
+							],
+							"size": [
+								24.0,
+								10.0
+							]
+						},
+						"title": "더플라자호텔"
+					},
+					{
+						"id": "osm:way:233593635:building",
+						"pool_rect": {
+							"position": [
+								-2.49672341346741,
+								-10.2205848693848
+							],
+							"size": [
+								6.59344673156738,
+								14.621169090271
+							]
+						},
+						"title": "뉴서울호텔"
+					},
+					{
+						"id": "osm:way:233593644:building",
+						"pool_rect": {
+							"position": [
+								-10.3400001525879,
+								-10.7062530517578
+							],
+							"size": [
+								24.0,
+								10.0
+							]
+						},
+						"title": "프레지던트호텔"
+					},
+					{
+						"id": "osm:way:377289798:building",
+						"pool_rect": {
+							"position": [
+								-4.13931322097778,
+								-16.4099998474121
+							],
+							"size": [
+								9.87862682342529,
+								24.0
+							]
+						},
+						"title": "호텔코리아나"
+					},
+					{
+						"id": "osm:way:844505571:building",
+						"pool_rect": {
+							"position": [
+								-5.64116096496582,
+								-7.04702663421631
+							],
+							"size": [
+								12.8823223114014,
+								8.27405261993408
+							]
+						},
+						"title": "ENA Suite Hotel"
+					},
+					{
+						"id": "osm:way:856393272:building",
+						"pool_rect": {
+							"position": [
+								-9.4299259185791,
+								-7.6185736656189
+							],
+							"size": [
+								20.4598522186279,
+								9.41714668273926
+							]
+						},
+						"title": "호텔 그레이스리 서울"
+					}
+				]
+			},
+			"name": "roof.Lotte_is_eighth_real_source_hotel_pool",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					398.213653564453,
+					151.830322265625,
+					-0.382386207580566
+				],
+				"requested": [
+					398.213653564453,
+					151.910003662109,
+					-0.382386207580566
+				]
+			},
+			"name": "placement.lotte_return_to_lobby_explicit_supported_landing_fixture.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"destinations": 38,
+				"from_floor": 37
+			},
+			"name": "lotte_return_to_lobby.fresh_E_opens_real_floor_picker",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 8.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": true,
+					"cabin_visible": true,
+					"current_floor_value": 37.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 13.4833333333333,
+					"elapsed": 0.0,
+					"from_floor": 37,
+					"max_speed_mps": 18.0,
+					"motion_duration": 10.5833333333333,
+					"motion_elapsed": 0.0,
+					"motion_start_floor": 37.0,
+					"on_roof": true,
+					"passenger_position": [
+						1099.30004882812,
+						-139.919998168945,
+						0.25
+					],
+					"phase": "boarding",
+					"phase_elapsed": 0.0,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": true,
+					"speed_mps": 0.0,
+					"target_floor": 0
+				}
+			},
+			"name": "lotte_return_to_lobby.actual_destination_button_starts_cabin",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"elevator": {
+					"acceleration_mps2": 8.0,
+					"cabin_bounds": {
+						"position": [
+							1097.94995117188,
+							-140.25,
+							-2.20000004768372
+						],
+						"size": [
+							4.09999990463257,
+							3.09999990463257,
+							4.40000009536743
+						]
+					},
+					"cabin_camera_current": false,
+					"cabin_visible": false,
+					"current_floor_value": 0.0,
+					"destination_count": 38,
+					"door_open_fraction": 1.0,
+					"duration": 13.4833333333333,
+					"elapsed": 13.5166666666669,
+					"from_floor": 37,
+					"max_speed_mps": 18.0,
+					"motion_duration": 10.5833333333333,
+					"motion_elapsed": 10.5833333333333,
+					"motion_start_floor": 37.0,
+					"on_roof": false,
+					"passenger_position": [
+						600.601623535156,
+						-100.001861572266,
+						10.8629999160767
+					],
+					"phase": "idle",
+					"phase_elapsed": 0.3,
+					"render_mode": "detached_3d_cabin",
+					"returning_to_safe_floor": false,
+					"safe_release_pending": false,
+					"speed_mps": 0.0,
+					"target_floor": 0
+				},
+				"player": [
+					600.601623535156,
+					-100.001861572266,
+					10.8629999160767
+				]
+			},
+			"name": "lotte_return_to_lobby.real_cabin_finishes_on_selected_supported_floor",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					650.0,
+					-99.9996871948242,
+					11.6630001068115
+				],
+				"requested": [
+					650.0,
+					-99.9199981689453,
+					11.6630001068115
+				]
+			},
+			"name": "placement.lotte_source_door_exit.grounded",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"position": [
+					398.80908203125,
+					-0.00257777608931065,
+					-24.09250831604
+				],
+				"state": {
+					"active": false,
+					"authored_not_surveyed": true,
+					"catalog_count": 126,
+					"current_floor": 0,
+					"depth": 25.0259999112452,
+					"e_requires_release": true,
+					"elevator": {
+						"acceleration_mps2": 8.0,
+						"cabin_bounds": {
+							"position": [
+								1097.94995117188,
+								-140.25,
+								-2.20000004768372
+							],
+							"size": [
+								4.09999990463257,
+								3.09999990463257,
+								4.40000009536743
+							]
+						},
+						"cabin_camera_current": false,
+						"cabin_visible": false,
+						"current_floor_value": 0.0,
+						"destination_count": 38,
+						"door_open_fraction": 1.0,
+						"duration": 13.4833333333333,
+						"elapsed": 13.5166666666669,
+						"from_floor": 37,
+						"max_speed_mps": 18.0,
+						"motion_duration": 10.5833333333333,
+						"motion_elapsed": 10.5833333333333,
+						"motion_start_floor": 37.0,
+						"on_roof": false,
+						"passenger_position": [
+							398.80908203125,
+							-0.00257777608931065,
+							-24.09250831604
+						],
+						"phase": "idle",
+						"phase_elapsed": 0.3,
+						"render_mode": "detached_3d_cabin",
+						"returning_to_safe_floor": false,
+						"safe_release_pending": false,
+						"speed_mps": 0.0,
+						"target_floor": 0
+					},
+					"elevator_open": false,
+					"entrance": [
+						398.80908203125,
+						0.0799999982118607,
+						-24.09250831604
+					],
+					"entry_count": 1,
+					"error": "",
+					"exit_count": 1,
+					"facility_activity": {
+						"active": false,
+						"cancelled_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"cleanliness": 30.0,
+						"completed_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"control_locked": false,
+						"cycling_distance_m": 0.0,
+						"cycling_revolutions": 0,
+						"duration": 0.0,
+						"elapsed": 0.0,
+						"external_cleanup_count": 0,
+						"fullness": 35.0,
+						"kind": "",
+						"last_session": {},
+						"notice": "",
+						"paused": false,
+						"prompt": "",
+						"rejected_count": 0,
+						"return_pending": false,
+						"return_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"rowing_distance_m": 0.0,
+						"rowing_strokes": 0,
+						"selected_target_id": "",
+						"session": {},
+						"started_counts": {
+							"cycle": 0,
+							"eat": 0,
+							"rowing": 0,
+							"shower": 0,
+							"treadmill": 0,
+							"weights": 0
+						},
+						"status_rect": {
+							"position": [
+								0.0,
+								0.0
+							],
+							"size": [
+								0.0,
+								0.0
+							]
+						},
+						"status_text": "포만감 35 · 청결 30  |  운동 0.0 m · 근력 0회\n사이클 0.0 m · 0회전  |  로잉 0 m · 0스트로크",
+						"target_id": "",
+						"targets": [
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									4.66300010681152
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									5.21300029754639
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 0,
+									"food_material": "food_rice"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_0",
+								"kind": "eat",
+								"level": 1,
+								"title": "따뜻한 밥",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									4.66300010681152
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									3.50300002098083
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									4.05299997329712
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 1,
+									"food_material": "food_soup"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_1",
+								"kind": "eat",
+								"level": 1,
+								"title": "국 · 수프",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									3.50300002098083
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									2.34299993515015
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									2.89299988746643
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 2,
+									"food_material": "food_kimchi"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_2",
+								"kind": "eat",
+								"level": 1,
+								"title": "김치 · 반찬",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									2.34299993515015
+								]
+							},
+							{
+								"anchor_point": [
+									7.3600001335144,
+									5.15905427932739,
+									1.18299996852875
+								],
+								"approach_point": [
+									6.32999992370605,
+									4.13405418395996,
+									1.73300004005432
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 3.6,
+									"equipment_title": "Detail_FacilityFoodTray",
+									"facing_yaw": -1.5707963267949,
+									"food_index": 3,
+									"food_material": "food_green"
+								},
+								"facility_id": "buffet_1_0",
+								"id": "osm:way:117914845:building/buffet_1_0/food_3",
+								"kind": "eat",
+								"level": 1,
+								"title": "채소 · 샐러드",
+								"use_point": [
+									6.32999992370605,
+									4.13405418395996,
+									1.18299996852875
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									12.2921619415283,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									12.2421617507935,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										12.2921619415283,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/treadmill_0",
+								"kind": "treadmill",
+								"level": 3,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									12.3421621322632,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									12.2921619415283,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									12.2421617507935,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										12.2921619415283,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/treadmill_1",
+								"kind": "treadmill",
+								"level": 3,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									12.3421621322632,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									12.4621620178223,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									12.2421617507935,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										12.1621618270874,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/stationary_cycle",
+								"kind": "cycle",
+								"level": 3,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									12.2421617507935,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									12.6421613693237,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									12.2421617507935,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										12.1621618270874,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_3_2",
+								"id": "osm:way:117914845:building/fitness_3_2/rowing_machine",
+								"kind": "rowing",
+								"level": 3,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									12.2421617507935,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									13.0121622085571,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									12.2421617507935,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_3_3",
+								"id": "osm:way:117914845:building/strength_3_3/dumbbells",
+								"kind": "weights",
+								"level": 3,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									12.2421617507935,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									18.276216506958,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									16.2962169647217,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_4_4",
+								"id": "osm:way:117914845:building/spa_4_4/shower",
+								"kind": "shower",
+								"level": 4,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									16.2962169647217,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									36.6164894104004,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									36.5664901733398,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										36.6164894104004,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/treadmill_0",
+								"kind": "treadmill",
+								"level": 9,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									36.6664886474609,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									36.6164894104004,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									36.5664901733398,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										36.6164894104004,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/treadmill_1",
+								"kind": "treadmill",
+								"level": 9,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									36.6664886474609,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									36.7864875793457,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									36.5664901733398,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										36.4864883422852,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/stationary_cycle",
+								"kind": "cycle",
+								"level": 9,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									36.5664901733398,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									36.9664878845215,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									36.5664901733398,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										36.4864883422852,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_9_8",
+								"id": "osm:way:117914845:building/fitness_9_8/rowing_machine",
+								"kind": "rowing",
+								"level": 9,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									36.5664901733398,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									37.3364868164062,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									36.5664901733398,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_9_9",
+								"id": "osm:way:117914845:building/strength_9_9/dumbbells",
+								"kind": "weights",
+								"level": 9,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									36.5664901733398,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									42.6005401611328,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									40.6205406188965,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_10_10",
+								"id": "osm:way:117914845:building/spa_10_10/shower",
+								"kind": "shower",
+								"level": 10,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									40.6205406188965,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									60.9408111572266,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									60.890811920166,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										60.9408111572266,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/treadmill_0",
+								"kind": "treadmill",
+								"level": 15,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									60.9908103942871,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									60.9408111572266,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									60.890811920166,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										60.9408111572266,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/treadmill_1",
+								"kind": "treadmill",
+								"level": 15,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									60.9908103942871,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									61.1108093261719,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									60.890811920166,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										60.8108100891113,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/stationary_cycle",
+								"kind": "cycle",
+								"level": 15,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									60.890811920166,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									61.2908096313477,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									60.890811920166,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										60.8108100891113,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_15_14",
+								"id": "osm:way:117914845:building/fitness_15_14/rowing_machine",
+								"kind": "rowing",
+								"level": 15,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									60.890811920166,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									61.6608085632324,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									60.890811920166,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_15_15",
+								"id": "osm:way:117914845:building/strength_15_15/dumbbells",
+								"kind": "weights",
+								"level": 15,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									60.890811920166,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									66.9248657226562,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									64.9448699951172,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_16_16",
+								"id": "osm:way:117914845:building/spa_16_16/shower",
+								"kind": "shower",
+								"level": 16,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									64.9448699951172,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									85.2651290893555,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									85.2151336669922,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										85.2651290893555,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/treadmill_0",
+								"kind": "treadmill",
+								"level": 21,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									85.3151321411133,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									85.2651290893555,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									85.2151336669922,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										85.2651290893555,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/treadmill_1",
+								"kind": "treadmill",
+								"level": 21,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									85.3151321411133,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									85.4351348876953,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									85.2151336669922,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										85.1351318359375,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/stationary_cycle",
+								"kind": "cycle",
+								"level": 21,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									85.2151336669922,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									85.6151351928711,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									85.2151336669922,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										85.1351318359375,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_21_20",
+								"id": "osm:way:117914845:building/fitness_21_20/rowing_machine",
+								"kind": "rowing",
+								"level": 21,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									85.2151336669922,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									85.9851303100586,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									85.2151336669922,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_21_21",
+								"id": "osm:way:117914845:building/strength_21_21/dumbbells",
+								"kind": "weights",
+								"level": 21,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									85.2151336669922,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									91.2491836547852,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									89.2691879272461,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_22_22",
+								"id": "osm:way:117914845:building/spa_22_22/shower",
+								"kind": "shower",
+								"level": 22,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									89.2691879272461,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									109.589454650879,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									109.539459228516,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										109.589454650879,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/treadmill_0",
+								"kind": "treadmill",
+								"level": 27,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									109.639457702637,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									109.589454650879,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									109.539459228516,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										109.589454650879,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/treadmill_1",
+								"kind": "treadmill",
+								"level": 27,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									109.639457702637,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									109.759460449219,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									109.539459228516,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										109.459457397461,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/stationary_cycle",
+								"kind": "cycle",
+								"level": 27,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									109.539459228516,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									109.939460754395,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									109.539459228516,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										109.459457397461,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_27_26",
+								"id": "osm:way:117914845:building/fitness_27_26/rowing_machine",
+								"kind": "rowing",
+								"level": 27,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									109.539459228516,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									110.309455871582,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									109.539459228516,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_27_27",
+								"id": "osm:way:117914845:building/strength_27_27/dumbbells",
+								"kind": "weights",
+								"level": 27,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									109.539459228516,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									115.573509216309,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									113.59351348877,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_28_28",
+								"id": "osm:way:117914845:building/spa_28_28/shower",
+								"kind": "shower",
+								"level": 28,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									113.59351348877,
+									4.8129997253418
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									133.913787841797,
+									4.3129997253418
+								],
+								"approach_point": [
+									7.15000009536743,
+									133.863784790039,
+									5.61299991607666
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										133.913787841797,
+										4.3129997253418
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/treadmill_0",
+								"kind": "treadmill",
+								"level": 33,
+								"title": "러닝머신 1",
+								"use_point": [
+									7.15000009536743,
+									133.963775634766,
+									4.43299961090088
+								]
+							},
+							{
+								"anchor_point": [
+									7.15000009536743,
+									133.913787841797,
+									1.71299993991852
+								],
+								"approach_point": [
+									7.15000009536743,
+									133.863784790039,
+									3.01300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"belt_center": [
+										7.15000009536743,
+										133.913787841797,
+										1.71299993991852
+									],
+									"belt_size": [
+										0.75,
+										0.025000000372529,
+										1.64999997615814
+									],
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityTreadmill",
+									"facing_yaw": 0.0,
+									"speed_kmh": 6.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/treadmill_1",
+								"kind": "treadmill",
+								"level": 33,
+								"title": "러닝머신 2",
+								"use_point": [
+									7.15000009536743,
+									133.963775634766,
+									1.83299994468689
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									134.083786010742,
+									3.96299982070923
+								],
+								"approach_point": [
+									4.13000011444092,
+									133.863784790039,
+									4.95300006866455
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"cadence_rpm": 60.0,
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityStationaryCycle",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										133.783782958984,
+										4.21299982070923
+									],
+									"speed_kmh": 18.0
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/stationary_cycle",
+								"kind": "cycle",
+								"level": 33,
+								"title": "실내 사이클",
+								"use_point": [
+									4.13000011444092,
+									133.863784790039,
+									4.23299980163574
+								]
+							},
+							{
+								"anchor_point": [
+									4.13000011444092,
+									134.263778686523,
+									1.06299996376038
+								],
+								"approach_point": [
+									4.13000011444092,
+									133.863784790039,
+									2.21299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityRowingMachine",
+									"facing_yaw": 0.0,
+									"machine_origin": [
+										4.13000011444092,
+										133.783782958984,
+										1.41299998760223
+									],
+									"metres_per_stroke": 8.0,
+									"stroke_seconds": 2.4
+								},
+								"facility_id": "fitness_33_32",
+								"id": "osm:way:117914845:building/fitness_33_32/rowing_machine",
+								"kind": "rowing",
+								"level": 33,
+								"title": "로잉머신",
+								"use_point": [
+									4.13000011444092,
+									133.863784790039,
+									1.46299993991852
+								]
+							},
+							{
+								"anchor_point": [
+									-7.61999988555908,
+									134.6337890625,
+									4.71299982070923
+								],
+								"approach_point": [
+									-5.59999990463257,
+									133.863784790039,
+									6.51300001144409
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 8.0,
+									"equipment_title": "Detail_FacilityDumbbellRack",
+									"facing_yaw": 0.0,
+									"weight_kg": 5.0
+								},
+								"facility_id": "strength_33_33",
+								"id": "osm:way:117914845:building/strength_33_33/dumbbells",
+								"kind": "weights",
+								"level": 33,
+								"title": "덤벨 운동",
+								"use_point": [
+									-5.59999990463257,
+									133.863784790039,
+									6.01300001144409
+								]
+							},
+							{
+								"anchor_point": [
+									7.28000020980835,
+									139.897842407227,
+									4.26300001144409
+								],
+								"approach_point": [
+									7.28000020980835,
+									137.917846679688,
+									5.96299982070923
+								],
+								"coordinate_space": "room_local",
+								"data": {
+									"duration_seconds": 7.0,
+									"equipment_title": "Detail_FacilityShowerHead",
+									"facing_yaw": 0.0,
+									"water_radius": 0.28
+								},
+								"facility_id": "spa_34_34",
+								"id": "osm:way:117914845:building/spa_34_34/shower",
+								"kind": "shower",
+								"level": 34,
+								"title": "샤워",
+								"use_point": [
+									7.28000020980835,
+									137.917846679688,
+									4.8129997253418
+								]
+							}
+						],
+						"use_position": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"visual": {},
+						"workout_distance_m": 0.0,
+						"workout_repetitions": 0
+					},
+					"feature_id": "osm:way:117914845:building",
+					"floor_count": 37,
+					"in_elevator": false,
+					"loaded": true,
+					"notice": "",
+					"on_roof": false,
+					"outside_return": [
+						398.80908203125,
+						0.0800000205636024,
+						-24.09250831604
+					],
+					"rejected_entries": 0,
+					"rejected_exits": 0,
+					"roof_ready_tick": 36,
+					"rooftop": {
+						"authored_pool_deck_raise_m": 1.55,
+						"base_source_clearance_m": 0.28,
+						"basis": "Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Pool deck is authored 1.55m above the normal source-clearance deck, with four solid surround panels and a real water opening. The basin floor remains above the intact source roof; water is 0.18m below deck and 1.22m deep. No source height correction, surveyed venue amenity or full fluid simulation.",
+						"building_id": "osm:way:117914845:building",
+						"building_title": "롯데호텔서울",
+						"ceiling_unbounded": true,
+						"clearance_above_observed_m": 1.83000000000001,
+						"collision_bodies": 30,
+						"deck_height_y": 151.83,
+						"depth": 23.4259999112452,
+						"features": [
+							"four_sided_physical_rails_and_rotated_player_footprint_guard",
+							"clear_central_lift_landing",
+							"flush_sunken_pool_in_raised_authored_deck",
+							"real_open_deck_cutout",
+							"large_outdoor_swimming_pool",
+							"buoyant_water_region",
+							"walk_down_pool_entry",
+							"submerged_entry_steps",
+							"continuous_access_handrails",
+							"visible_splash_and_ripples",
+							"solid_safe_pool_floor",
+							"sun_loungers",
+							"parasol",
+							"towels_and_outdoor_shower",
+							"hotel_pool_entrance",
+							"open_sky_and_city_views",
+							"human_scale_lane_tiles"
+						],
+						"frame_axes": [
+							[
+								0.999684810638428,
+								0.0,
+								0.0251055546104908
+							],
+							[
+								0.0,
+								1.0,
+								0.0
+							],
+							[
+								-0.0251055546104908,
+								0.0,
+								0.999684810638428
+							]
+						],
+						"frame_determinant": 1.0,
+						"frame_origin": [
+							398.416076660156,
+							151.830001831055,
+							-8.44284439086914
+						],
+						"height_observations": [
+							{
+								"bounds_position": [
+									320.675415039062,
+									0.0,
+									-23.4998073577881
+								],
+								"bounds_size": [
+									133.101379394531,
+									150.0,
+									35.0869407653809
+								],
+								"kind": "retained_source_mesh",
+								"path": "/root/ExploreWalk/World/Buildings/osm_way_117914845_building",
+								"top_y": 150.0
+							}
+						],
+						"landing_validation_height_m": 9.35,
+						"lift_point": [
+							398.213653564453,
+							151.910003662109,
+							-0.382386207580566
+						],
+						"loaded": true,
+						"observed_top_y": 150.0,
+						"open_sky_jump_space": true,
+						"pool_camera_point": [
+							384.574798583984,
+							156.029998779297,
+							-6.9728741645813
+						],
+						"pool_dimensions": {
+							"clear_water_area_m2": 240.0,
+							"clear_water_depth_m": 10.0,
+							"clear_water_width_m": 24.0,
+							"deck_opening_rect": {
+								"position": [
+									-10.5900001525879,
+									-10.3730001449585
+								],
+								"size": [
+									24.5,
+									10.5
+								]
+							},
+							"deck_raise_m": 1.55,
+							"floor_below_deck_m": 1.4,
+							"long_dimension_m": 24.0,
+							"minimum_long_m": 12.0,
+							"minimum_short_m": 6.0,
+							"open_sky": true,
+							"rim_above_deck_m": 0.0,
+							"roof_canopy_over_water": false,
+							"short_dimension_m": 10.0,
+							"submerged_steps_rect": {
+								"position": [
+									11.8299999237061,
+									-3.03300023078918
+								],
+								"size": [
+									1.46000003814697,
+									2.79999995231628
+								]
+							},
+							"surface_below_deck_m": 0.18,
+							"water_depth_m": 1.22
+						},
+						"pool_entry": [
+							410.936553955078,
+							151.910003662109,
+							-6.71096563339233
+						],
+						"pool_rim": [
+							410.961639404297,
+							151.910003662109,
+							-7.71065044403076
+						],
+						"profile_id": "outdoor_pool",
+						"profile_title": "야외 수영장 · 루프톱 테라스",
+						"source_height_offset_m": 1.83000000000001,
+						"source_height_y": 150.0,
+						"source_inset_m": 0.8,
+						"source_rectangle_depth": 25.0259999112452,
+						"source_rectangle_width": 103.196755848134,
+						"spawn": [
+							398.213653564453,
+							151.910003662109,
+							-0.382386207580566
+						],
+						"walkable_rect_position": [
+							-16.0,
+							-11.7130002975464
+						],
+						"walkable_rect_size": [
+							32.0,
+							23.4260005950928
+						],
+						"water_effects": {
+							"active_splashes": 0,
+							"elapsed": 35.4999999999993,
+							"mesh_nodes": 0,
+							"ripple_count": 0,
+							"splash_count": 0,
+							"visual_kind": "finite_mesh_droplets_and_expanding_surface_rings"
+						},
+						"water_region": {
+							"floor_y": -1.4,
+							"frame": {
+								"basis": [
+									[
+										0.999684810638428,
+										0.0,
+										0.0251055546104908
+									],
+									[
+										0.0,
+										1.0,
+										0.0
+									],
+									[
+										-0.0251055546104908,
+										0.0,
+										0.999684810638428
+									]
+								],
+								"origin": [
+									398.416076660156,
+									151.830001831055,
+									-8.44284439086914
+								]
+							},
+							"id": "osm:way:117914845:building:roof_pool",
+							"rect": {
+								"position": [
+									-10.3400001525879,
+									-10.1230001449585
+								],
+								"size": [
+									24.0,
+									10.0
+								]
+							},
+							"surface_y": -0.18
+						},
+						"width": 32.0,
+						"world_bounds_position": [
+							382.127044677734,
+							150.18000793457,
+							-20.553840637207
+						],
+						"world_bounds_size": [
+							32.5780639648438,
+							10.6499938964844,
+							24.2219924926758
+						]
+					},
+					"room_origin": [
+						650.0,
+						-100.0,
+						0.0
+					],
+					"room_static_bodies": 2455,
+					"selected_floor": 0,
+					"width": 103.196755848134
+				}
+			},
+			"name": "lotte_source_door.safe_physical_E_exit",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "lotte_source_door.held_E_no_auto_reentry",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"source_bodies": 692
+			},
+			"name": "source.original_city_collision_and_base_catalog_are_preserved",
+			"passed": true
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"generator_source_validation": {
+		"door_apron_capsule_radius_m": 0.4,
+		"floor_outside_actual_source_m2": 0.0,
+		"hotel_capsule_inset_bbox_outside_m2": 0.0,
+		"hotel_source_bbox_outside_m2": 0.0,
+		"result": "PASS",
+		"retail_not_added": "osm:way:233592424:building",
+		"source_data_or_world_modified": false,
+		"source_door_candidates": 9.0,
+		"source_private_overlap_m2": 0.0
+	},
+	"placements": [
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "lotte_source_door_outside",
+			"point": [
+				398.80908203125,
+				0.0799999982118607,
+				-24.09250831604
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "lotte_second_floor_explicit_supported_landing_fixture",
+			"point": [
+				600.601623535156,
+				-99.9199981689453,
+				10.8629999160767
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "lotte_roof_explicit_supported_landing_fixture",
+			"point": [
+				600.601623535156,
+				-95.8659439086914,
+				10.8629999160767
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "lotte_return_to_lobby_explicit_supported_landing_fixture",
+			"point": [
+				398.213653564453,
+				151.910003662109,
+				-0.382386207580566
+			]
+		},
+		{
+			"kind": "explicit_test_only_scenario_start",
+			"name": "lotte_source_door_exit",
+			"point": [
+				650.0,
+				-99.9199981689453,
+				11.6630001068115
+			]
+		}
+	],
+	"result": "PASS",
+	"scope": "The EXP04 125-building base remains byte-identical. A checksum-linked one-building supplemental catalog adds the retained Lotte Hotel source, 150m/37 source levels, source-inscribed game floor and clear source-perimeter candidate doors. Projected region-bbox polygon/capsule margins, independent NPC support versus player OFF mask, actual fresh E entry and floor-picker cabin trips to 2F/roof/1F are observed. Pool is an authored amenity, not a factual venue. Explicit supported landing placements are test fixtures; not continuous navigation, human usability or performance acceptance.",
+	"source_sha256": {
+		"res://../tests/game/check_lotte_visit.gd": "62f025dde50250d1c0a810fb25dd9050cb174904702fac226a82427e094e9e46",
+		"res://../tools/prepare_lotte_visit.py": "35d9332e30a28820f9286ab84eff9ccce78f0be71dcc676d226046fa40a666a1",
+		"res://assets/authored/exploration_extent.json": "7add4fef0bea3950241d840498aa044ba01d564c2da3c48f8d88f5e16f30155a",
+		"res://assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+		"res://assets/authored/interiors/supplemental_catalog.json": "d6749acae2093912e2465691d7c11082fb1fabceadc7ccfbf7fffb64bebd0d6d",
+		"res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+		"res://scripts/building_visit_catalog.gd": "f244d3d6d2218267c3b38fe26c494c1e298055fb0b1a283f63e9a563eae1e95f",
+		"res://scripts/exploration_overlay.gd": "dc61b47691e62b212c629e15e2947d40fef05b5306960852df0af887720dcf35",
+		"res://scripts/player/free_roam_player.gd": "b2a1d1ca9365637c38519b5af114078e8f5d537cd16b1d86022abf765d819e86",
+		"res://scripts/rooftop_space.gd": "531dbb00ca24205e1ccee2cfa492fd1da05ced78a3c9d0801b80e071896c3bbe"
+	},
+	"summary": {
+		"checks": 31,
+		"failed": 0
+	},
+	"task": "LOTTE_SOURCE_BBOX_SUPPLEMENTAL_VISIT"
+}

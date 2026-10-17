@@ -185,7 +185,9 @@ func _pin_label(parent: Node, font_size: int, color: Color) -> Label:
 
 func update_guidance(delta: float, hidden: bool) -> void:
 	if not loaded or not is_instance_valid(host) or not is_instance_valid(visit): return
-	_hidden = hidden or bool(visit.active)
+	var elevated: bool=not host.player.interior_active and host.player.global_position.y>6.0
+	_hidden = hidden or bool(visit.active) or elevated
+	if elevated:target_spec={}
 	world_frames.visible = not _hidden
 	panel.visible = false
 	_visible_labels = 0
@@ -273,6 +275,20 @@ func _direction_word(camera: Camera3D, entrance: Vector3) -> String:
 	if absf(angle) > 2.45: return "뒤쪽 입구"
 	return "오른쪽 입구" if angle > 0.0 else "왼쪽 입구"
 
+func _avatar_screen_rect(camera: Camera3D) -> Rect2:
+	if not host.player.get_node("Visual").is_visible_in_tree():return Rect2()
+	var result:=Rect2();var first:=true
+	for x: float in [-.45,.45]:
+		for y: float in [0.,1.85]:
+			for z: float in [-.45,.45]:
+				var point: Vector3=host.player.global_position+Vector3(x,y,z)
+				if camera.is_position_behind(point):continue
+				var pixel:=camera.unproject_position(point)
+				if not pixel.is_finite():continue
+				result=Rect2(pixel,Vector2.ZERO) if first else result.expand(pixel)
+				first=false
+	return result.grow(10.) if not first else Rect2()
+
 func _update_pin(camera: Camera3D, player_position: Vector3) -> void:
 	if _viewport_size.x < 100.0 or _viewport_size.y < 100.0: return
 	var entrance: Vector3 = target_spec.entrance
@@ -314,6 +330,20 @@ func _update_pin(camera: Camera3D, player_position: Vector3) -> void:
 		desired = center + unit * factor
 	desired.x = clampf(desired.x, half.x + margin.x, _viewport_size.x - half.x - margin.x)
 	desired.y = clampf(desired.y, half.y + margin.y, _viewport_size.y - half.y - margin.y)
+	var avatar_rect: Rect2=_avatar_screen_rect(camera)
+	if avatar_rect.has_area() and Rect2(desired-half,panel_size).intersects(avatar_rect):
+		var status_rect: Rect2=host.status.get_global_rect().grow(12.)
+		var choices: Array[Vector2]=[
+			Vector2(desired.x,avatar_rect.position.y-half.y-12.),
+			Vector2(avatar_rect.position.x-half.x-12.,desired.y),
+			Vector2(avatar_rect.end.x+half.x+12.,desired.y),
+			Vector2(desired.x,avatar_rect.end.y+half.y+12.)]
+		for candidate: Vector2 in choices:
+			candidate.x=clampf(candidate.x,half.x+margin.x,_viewport_size.x-half.x-margin.x)
+			candidate.y=clampf(candidate.y,half.y+margin.y,_viewport_size.y-half.y-margin.y)
+			var rect:=Rect2(candidate-half,panel_size)
+			if rect.intersects(avatar_rect) or rect.intersects(status_rect):continue
+			desired=candidate;break
 	panel.position = desired - half
 	bearing_arrow.pivot_offset = bearing_arrow.size * 0.5
 	bearing_arrow.rotation = bearing.angle() + PI * 0.5

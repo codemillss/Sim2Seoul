@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "task": "EXP19",
+  "date": "2026-10-17",
+  "status": "authored game presentation, runtime acceptance in reports",
+  "coordinate_space": "existing EPSG:32652 local X-east Y-up Z-south metres",
+  "inputs": [
+    "game/resources/world_geometry/world.json",
+    "game/data/generated/public_walk.json",
+    "game/data/generated/traffic.json",
+    "game/assets/authored/street_businesses.json"
+  ],
+  "decisions": [
+    "Jinju identity and official-map/source disagreement retained exactly; queue is a fictional daytime scene around the existing authored facade",
+    "Three picnic groups on physically supported plaza spaces, with protected paths/traffic/doors; night hides groups and disables owned colliders",
+    "Eight bilingual directional posts; directions and horizontal straight-line distances use existing source coordinates; labels explicitly state straight line, not walking route distances",
+    "Church/office/hotel type details are authored geometry, never a surveyed architectural restoration",
+    "Skin/hair/clothing variants do not encode nationality or ethnic identity",
+    "No new convenience-store portals or verified present-day tenancy claims"
+  ],
+  "audio": {
+    "path": "game/assets/audio/stonewall_guitar.wav",
+    "sha256": "612e03522960d842ec7a77b4aa4b03a9a9f58647ceda03d8690ddcb260c01775",
+    "generator": "tools/make_busking_music.py",
+    "provenance": "Original algorithmically authored plucked-string arpeggio; no samples, recordings, lyrics, external compositions or purchased assets used",
+    "license": "CC0-1.0 for this original generated PCM asset",
+    "seconds": 20,
+    "channels": 1,
+    "sample_rate": 32000,
+    "bits": 16,
+    "spatial_max_distance_m": 32,
+    "volume_db": -9,
+    "pause": "inherits world pause",
+    "mute": "Esc BuskingMusic switch; current session only"
+  },
+  "limits": [
+    "No actual concert, restaurant waiting time, picnic permission, shop stock or current tenant verification",
+    "Not a surveyed digital twin; actual source footprints/scale are retained",
+    "Public transport is the separately recorded future roadmap"
+  ]
+}

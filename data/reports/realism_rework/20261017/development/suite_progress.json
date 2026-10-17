@@ -1,0 +1,102 @@
+[
+  {
+    "id": "exterior_h",
+    "returncode": 0,
+    "wall_s": 6.966,
+    "report": "data/reports/realism_rework/20261017/final/exterior_h.json",
+    "log": "data/reports/realism_rework/20261017/final/exterior_h.log",
+    "result": "PASS",
+    "summary": {
+      "checks": 16,
+      "failed": 0
+    },
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--headless",
+      "--fixed-fps",
+      "60",
+      "--path",
+      "game",
+      "--script",
+      "../tests/game/check_building_exterior_identity.gd",
+      "--",
+      "--automatic-probe",
+      "--report=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/realism_rework/20261017/final/exterior_h.json"
+    ]
+  },
+  {
+    "id": "coverage_h",
+    "returncode": 0,
+    "wall_s": 44.866,
+    "report": "data/reports/realism_rework/20261017/final/coverage_h.json",
+    "log": "data/reports/realism_rework/20261017/final/coverage_h.log",
+    "result": "PASS",
+    "summary": {
+      "checks": 27,
+      "failed": 0
+    },
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--headless",
+      "--fixed-fps",
+      "60",
+      "--path",
+      "game",
+      "--script",
+      "../tests/game/check_neighborhood_coverage.gd",
+      "--",
+      "--automatic-probe",
+      "--report=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/realism_rework/20261017/final/coverage_h.json"
+    ]
+  },
+  {
+    "id": "bounded_h",
+    "returncode": 0,
+    "wall_s": 131.184,
+    "report": "data/reports/realism_rework/20261017/final/bounded_h.json",
+    "log": "data/reports/realism_rework/20261017/final/bounded_h.log",
+    "result": "PASS",
+    "summary": {
+      "checks": 53,
+      "failed": 0
+    },
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--headless",
+      "--fixed-fps",
+      "60",
+      "--path",
+      "game",
+      "--script",
+      "../tests/game/check_bounded_roof_lift.gd",
+      "--",
+      "--automatic-probe",
+      "--report=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/realism_rework/20261017/final/bounded_h.json"
+    ]
+  },
+  {
+    "id": "roof_catalog_h",
+    "returncode": 1,
+    "wall_s": 151.215,
+    "report": "data/reports/realism_rework/20261017/final/roof_catalog_h.json",
+    "log": "data/reports/realism_rework/20261017/final/roof_catalog_h.log",
+    "result": "FAIL",
+    "summary": {
+      "checks": 44,
+      "failed": 1
+    },
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--headless",
+      "--fixed-fps",
+      "60",
+      "--path",
+      "game",
+      "--script",
+      "../tests/game/check_rooftops_bounded_regression.gd",
+      "--",
+      "--automatic-probe",
+      "--report=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/realism_rework/20261017/final/roof_catalog_h.json"
+    ]
+  }
+]

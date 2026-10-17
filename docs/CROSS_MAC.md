@@ -1,5 +1,18 @@
 # 두 Mac에서 이어서 개발하기
 
+## 2026-10-18 지형 지역 원천 인수
+
+`data/raw/supplemental/seoul_terrain/20261018/`의7파일은 약1.4MB의 서울시 공식 source 지역본이다. Git에서 함께 받아 쓰며 원본 서울 전체 ZIP은 받지 않아도 된다. EPSG5174 원본/변환·source 높이·datum 미상·공공누리1유형은 manifest와source_license를 읽는다. 로컬 좌표 JSON은 WGS84 GeoJSON과 구분한다. 이 자료는 아직 게임 높이에 연결하지 않았다.
+
+정확한 원본 재현이 필요한 경우만 `.venv-data/bin/python tools/prepare_seoul_terrain_sources.py --download` 후 `--check`를 사용한다. 공식 익명 다운로드이며 서울 ZIP은 `/private/tmp`에만 둔다. 약45.85MB ZIP/국가 지도·캐시를 Git에 넣지 않는다. FABDEM/Mapzen은 비교 참고이며 기본 실행 의존성이 아니다.
+
+
+## 2026-10-17 최신 개발 장면 인수
+
+현재 후속 기능은 `explore_walk`이며 `Sim2Seoul.command` / `sh tools/run_exploration.sh run`으로 연다. 아래 V0/R03의 앱/성능/검수는 당시 고정 버전이다. EXP16–19는 큰 호텔 야외 풀·직접 옥상 접근/이탈·보행 우회·SFC 에스컬레이터/새 운동기구·거리 생활/안내/음악을 포함한다. 출처·선택 이유·미구현 교통 계획까지 `PROJECT_CONTEXT`와 `WORK_STATUS`에 함께 공유한다.
+
+Git으로 새로 받은 WAV/PNG/GLB의 import 캐시는 각 Mac에서 필요하다. 실행기가 정식 Godot의 headless import를 먼저 마친 뒤 게임을 연다. 캐시는 저장소에 넣지 않는다. 기존 준비대로 지역 데이터/가상환경을 준비하면 국가 전체 자료를 다시 받을 필요가 없다. 현재 기능 검증은 M1 Pro16GB/macOS27.0이며 M4 Pro/추가 Mac 검증이나 새 앱 export를 대체하지 않는다.
+
 전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
 
 각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 최신 개발 실행은 아래 R02의 `v0_walk`이며, N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 현재 M1의고정1920×1080성능은R01로측정했고품질/메뉴회귀는R02로확인했다. R03은 같은 V0의 M1 로컬 앱 검수를 완료했고 R04는 M4 UNRUN 대안으로 판정했다. 진행 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. M4·사람조작감·현실지형/접근은별도다.

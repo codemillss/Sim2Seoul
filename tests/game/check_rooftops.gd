@@ -1,6 +1,7 @@
 extends SceneTree
 ## Roof regions are authored at source-world XZ; scenario starts are test-only.
 const IDS := ["osm:relation:10757525:building","osm:way:233593619:building","osm:way:223158445:building"]
+const BASE_CATALOG_SHA256 := "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848"
 const ACTIONS := ["move_left","move_right","move_forward","move_backward","move_fast","jump","toggle_menu"]
 var report_path := ""
 var scene
@@ -88,7 +89,22 @@ func _in_source(point: Vector3, spec: Dictionary) -> bool:
 
 func _catalog() -> void:
 	var errors:=[];var profiles:={};var count:=0;var shape_queries:=0;var observed_features:={}
+	var base_path: String="res://assets/authored/interiors/source_catalog.json"
+	var extra_path: String="res://assets/authored/interiors/supplemental_catalog.json"
+	var base: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(base_path))
+	var extra: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(extra_path))
+	var world_metadata: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/world_geometry/world.json"))
+	var expected_ids: Dictionary={};var observed_ids: Dictionary={}
+	for row: Dictionary in base.get("records",[]):expected_ids[String(row.id)]="EXP04_base"
+	var base_unchanged: bool=FileAccess.get_sha256(base_path)==BASE_CATALOG_SHA256 and base.get("records",[]).size()==125 and expected_ids.size()==125
+	var supplemental_valid: bool=extra.get("task")=="supplemental_lotte_visit" and extra.get("records",[]).size()==1 and extra.get("base_catalog_sha256")==BASE_CATALOG_SHA256 and extra.get("world_sha256")==FileAccess.get_sha256("res://resources/world_geometry/world.json") and extra.get("exploration_extent_sha256")==FileAccess.get_sha256("res://assets/authored/exploration_extent.json") and extra.get("coordinate_contract_sha256")==world_metadata.get("coordinate_contract_sha256")
+	if supplemental_valid:
+		var added: Dictionary=extra.records[0]
+		supplemental_valid=added.get("id")=="osm:way:117914845:building" and not expected_ids.has(String(added.id)) and added.get("catalog_origin")=="supplemental_lotte_source_bbox"
+		if supplemental_valid:expected_ids[String(added.id)]="supplemental_lotte_source_bbox"
 	for spec: Dictionary in visit.catalog:
+		if observed_ids.has(String(spec.id)) or not expected_ids.has(String(spec.id)) or spec.get("catalog_origin")!=expected_ids.get(String(spec.id)):errors.append({"id":spec.id,"kind":"missing_duplicate_or_unapproved_catalog_record"})
+		observed_ids[String(spec.id)]=true
 		var roof: Node3D=load("res://scripts/rooftop_space.gd").new();scene.add_child(roof)
 		if not roof.setup(scene,spec):errors.append({"id":spec.id,"kind":"setup"});roof.free();continue
 		await _ticks(3);count+=1
@@ -129,7 +145,7 @@ func _catalog() -> void:
 			if body.collision_layer!=1 or body.collision_mask!=0:errors.append({"id":spec.id,"kind":"collision_layer","body":body.name})
 		catalog_rows.append({"id":spec.id,"profile":roof.profile_id,"frame":frame,"walkable_rect":rect,"source_height":spec.source_height,"new_bodies":roof.bodies.size()})
 		roof.free()
-	_check("catalog.all_125_roofs_source_world_safe_landings",count==125 and errors.is_empty(),{"buildings":count,"landing_queries":shape_queries,"profiles":profiles,"errors":errors})
+	_check("catalog.unchanged_base125_plus_verified_supplement1_roofs_source_world_safe_landings",base_unchanged and supplemental_valid and count==126 and observed_ids.size()==126 and expected_ids.size()==126 and errors.is_empty(),{"buildings":count,"base_records":base.get("records",[]).size(),"base_catalog_unchanged":base_unchanged,"base_catalog_sha256":FileAccess.get_sha256(base_path),"supplemental_records":extra.get("records",[]).size(),"supplemental_valid":supplemental_valid,"supplemental_catalog_sha256":FileAccess.get_sha256(extra_path),"landing_queries":shape_queries,"profiles":profiles,"errors":errors})
 	_check("catalog.garden_pool_penthouse_all_present",profiles.size()>=3 and profiles.has("garden") and profiles.has("outdoor_pool") and profiles.has("penthouse"),profiles)
 	_check("catalog.actual_profile_meshes_and_open_penthouse_paths",observed_features.size()==3 and errors.filter(func(row):return row.kind in ["missing_actual_profile_mesh","penthouse_open_door_corridor"]).is_empty(),{"observed_meshes":observed_features,"penthouse_path_samples":12*int(profiles.get("penthouse",0))})
 	_check("catalog.original_692_shapes_unchanged",_inventory()==original_inventory and original_inventory.size()==692,{"count":original_inventory.size()})
@@ -297,7 +313,7 @@ func _visits() -> void:
 		_check("visit.physical_E_returns_original_street."+id,not visit.active and not scene.player.interior_active,{"player":scene.player.global_position})
 
 func _run() -> void:
-	for path in ["res://scripts/rooftop_space.gd","res://scripts/water_effect.gd","res://scripts/elevator_cabin.gd","res://scripts/interior_visit.gd","res://scripts/player/free_roam_player.gd","res://../tests/game/check_rooftops.gd"]:source_hashes[path]=FileAccess.get_sha256(path)
+	for path in ["res://scripts/rooftop_space.gd","res://scripts/water_effect.gd","res://scripts/elevator_cabin.gd","res://scripts/interior_visit.gd","res://scripts/player/free_roam_player.gd","res://../tests/game/check_rooftops.gd","res://assets/authored/interiors/source_catalog.json","res://assets/authored/interiors/supplemental_catalog.json"]:source_hashes[path]=FileAccess.get_sha256(path)
 	scene=load("res://scenes/world/explore_walk.tscn").instantiate()
 	scene.exploration_settings_path=report_path+".settings.json";scene.quality_settings_path=report_path+".quality.json";root.add_child(scene)
 	if not scene.runtime_ok:_check("startup",false);_finish();return
@@ -320,7 +336,7 @@ func _finish() -> void:
 	var failed:=0
 	for row in checks:
 		if not row.passed:failed+=1
-	var report:={"schema_version":1,"task":"EXP09_ROOFTOPS","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"catalog":catalog_rows,"captures":captures,"source_sha256":source_hashes,"scope":"Source-world, source-inscribed authored roof decks, not surveyed roofs. All125 spawn/lift and geometry observations are separate from three representative physical E/lift visits. Explicit scenario-start teleports are not a continuous route. Pool buoyancy is a game controller in a raised basin above retained source slabs; detailed water entry/exit/effects are separate swimming-test evidence. Physical shaft travel, fluid simulation, real venue roof facilities, long-run performance, export and cross-Mac validation are not claimed."}
+	var report:={"schema_version":1,"task":"EXP09_ROOFTOPS","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"catalog":catalog_rows,"captures":captures,"source_sha256":source_hashes,"scope":"Source-world, source-inscribed authored roof decks, not surveyed roofs. The unchanged base125 plus source-verified supplemental Lotte roof spawn/lift and geometry observations are separate from three representative physical E/lift visits. Explicit scenario-start teleports are not a continuous route. The pool is an authored sunken basin within an elevated game deck above retained source slabs; detailed water entry/exit/effects are separate swimming-test evidence. Physical shaft travel, fluid simulation, real venue roof facilities, long-run performance, export and cross-Mac validation are not claimed."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file!=null:file.store_string(JSON.stringify(_json(report),"\t")+"\n");file.close()
 	print("ROOFTOP_TEST ","PASS" if failed==0 else "FAIL"," checks=",checks.size()," failed=",failed)

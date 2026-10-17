@@ -1,0 +1,571 @@
+{
+  "schema_version": 1,
+  "task": "INTERIOR_ROLE_AND_ESCALATOR_GYM_VISUAL_REVIEW",
+  "reviewed_at_local": "2026-10-18T01:26:17.952350+09:00",
+  "reviewer": "interior_escalator_gym implementation contributor; separate direct inspection of all final rendered captures, not a blinded external reviewer",
+  "result": "ACCEPTED_WITH_RECORDED_LIMITATIONS",
+  "review_method": "All twelve current PNGs were individually opened through view_image. The four regenerated interior photographs were opened again after targeted capture-only checks, and all four were directly reopened once more after root’s final source-consistency rerun (20 direct open operations including the initial set). No image edits, NPC/avatar pose edits or reviewer engine execution. Initial rejected role captures/report remain preserved. Current acceptance/limitations remain unchanged; still-image judgments are separate from production automated observations.",
+  "source_reports": [
+    {
+      "name": "interior_gpu",
+      "path": "data/reports/realism_rework/20261017/final/interior_gpu.json",
+      "sha256": "e3be3484fa08a7e19474941e59d7f0449d8629b41f7151be7dbbbbe6763c31ef",
+      "result": "PASS",
+      "checks": {
+        "checks": 62,
+        "failed": 0
+      }
+    },
+    {
+      "name": "escalator_gym_gpu",
+      "path": "data/reports/realism_rework/20261017/final/escalator_gym_gpu.json",
+      "sha256": "d7d81f8d8b9162e12d1c133daa0221aa397fc75a448705cadcd37670aeb42255",
+      "result": "PASS",
+      "checks": {
+        "checks": 114,
+        "failed": 0
+      }
+    }
+  ],
+  "visual_scope": {
+    "images_opened": 12,
+    "normal_images": 10,
+    "small_640x480_images": 2,
+    "source_buildings": [
+      "osm:way:233593619:building",
+      "osm:way:332565592:building",
+      "osm:relation:10757525:building"
+    ],
+    "all_catalog_visual_acceptance_claimed": false,
+    "direct_open_operations_including_initial_captures": 20
+  },
+  "acceptance": {
+    "hotel_guest_actual_door_opening_and_housekeeping_props_visible": true,
+    "library_context_and_role_models_visible": true,
+    "gym_role_title_capture_adequate": true,
+    "office_role_title_capture_adequate": true,
+    "two_escalator_directions_and_guards_visible": true,
+    "normal_resolution_cycle_and_rowing_visually_distinct": true,
+    "original_treadmill_and_weights_visually_retained": true,
+    "small_resolution_HUD_text_readable": true,
+    "small_resolution_complete_device_shape_acceptance": false
+  },
+  "images": [
+    {
+      "name": "admin_open_hotel_guest_room",
+      "place": "hotel_guest_room",
+      "image": "data/reports/realism_rework/20261017/final/interior_gpu_admin_open_hotel_guest_room.png",
+      "sha256": "787c0be1dee2c0e73b70cb31148beda3457552e55e9e350b5af1e51f1eb0da10",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "열린 문틀 안쪽의 객실 바닥과 침대가 실제로 보이며 문짝은 옆으로 이동해 통과 개구부가 드러난다.",
+        "201 객실 표지, 열림·E 표지, 관리자 마스터키 사용 안내가 읽힌다.",
+        "왼쪽 청소 직원의 청록색 복장, 청소 카트와 접은 수건이 방문객/업무 인물과 다른 소품으로 보인다.",
+        "원래 플레이어 머리·몸통·다리와 하단 안내/상태창은 보인다."
+      ],
+      "limitations": [
+        "플레이어가 침대 일부를 가리고 청소 직원은 왼쪽 프레임에서 일부 잘린다. 이 사진만으로 방 전체 배치와 투숙객 역할을 모두 수용하지 않는다.",
+        "HUD는 3층, 객실 표지는 201호다. 기존 0기반 객실 번호 표기 규칙은 남아 있다.",
+        "문을 닫았을 때 충돌·끼임 방지·잠금/탈출은 정지 사진이 아니라 자동 검증 기록으로 확인한다."
+      ]
+    },
+    {
+      "name": "gym_population_roles",
+      "place": "hotel_fitness",
+      "image": "data/reports/realism_rework/20261017/final/interior_gpu_gym_population_roles.png",
+      "sha256": "21ffe6d8bcb989538f5a53265c12772ce105508fae1aff4258ba90205ac7b61a",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "실제 스트레칭 인물이 플레이어 왼쪽에 보이며 팔을 벌린 자세, 흰 수건, 주황색 운동복, 반바지와 맨종아리·운동화가 구분된다.",
+        "왼쪽 배경에 로잉 레일·팬, 사이클·러닝머신이 보여 운동 공간의 맥락을 식별할 수 있다.",
+        "원래 플레이어 전신과 해당 역할의 머리/몸통은 보이며 HUD가 역할의 머리와 수건을 덮지 않는다.",
+        "NPC 위치나 플레이어의 별도 시각모델 변형 없이, 충돌 없는 바닥의 명시적 플레이어 stance와 정상 카메라 yaw/pitch/줌으로 촬영했다."
+      ],
+      "limitations": [
+        "플레이어가 가까워 스트레칭 인물의 오른팔 일부를 가린다. 휴식 역할은 이 각도 밖이며 별도 덤벨 회귀 사진과 실제 역할/자리 검증으로 구분한다.",
+        "하단 관리자 알림은 인물의 발 부근/기구 바닥 일부를 가린다.",
+        "수건/종아리·기구 등의 저해상도 단순 형상은 실제 체육 시설과 인체 동작의 사실성을 주장하지 않는다."
+      ]
+    },
+    {
+      "name": "library_population_roles",
+      "place": "library_reading",
+      "image": "data/reports/realism_rework/20261017/final/interior_gpu_library_population_roles.png",
+      "sha256": "884851d4f7fb1c8590338f2e8fbce9c9c4b2c543c47041e0950c684eddc69690",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "다채로운 책등의 긴 서가와 독서용 가구가 보여 도서관 공간을 식별할 수 있다.",
+        "왼쪽 앉은 인물과 중앙/오른쪽 서 있는 인물이 서로 다른 자세와 복장으로 보인다.",
+        "중앙 통로는 비어 있고 상단 안내/하단 E 안내와 출처 문구가 겹치지 않는다."
+      ],
+      "limitations": [
+        "카메라가 멀어 책·손·독서 자세의 세부를 모두 선명하게 판별할 수 없다. 실제 OpenBook/BookPages 및 좌석 배치는 자동 검증과 함께 해석한다.",
+        "역할별 얼굴·손가락·표정·군중 밀도는 단순 게임 표현이며 실제 이용자 조사 결과가 아니다."
+      ]
+    },
+    {
+      "name": "office_population_roles",
+      "place": "office_work",
+      "image": "data/reports/realism_rework/20261017/final/interior_gpu_office_population_roles.png",
+      "sha256": "9c8b0829407bb18ca470ff443976407b4f9ce1337fa38269d909bd5290cafd5f",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "책상·모니터·목재 칸막이 뒤에 앉은 업무 인물이 보이고, 오른쪽에는 서 있는 업무 확인 직원이 별도 복장/자세로 보인다.",
+        "노트북을 든 역할의 머리와 상체가 실제 책상 배치와 함께 프레임에 들어와, 이전의 빈 통로 사진보다 업무 공간의 역할 구분이 가능하다.",
+        "원래 플레이어 전신과 상단/하단 HUD 및 출처 문구가 보이며 목표 NPC의 머리를 안내창이 가리지 않는다.",
+        "실제 NPC 위치를 바꾸지 않은 채 주변의 물리적으로 안전한 명시적 플레이어 stance와 정상 카메라만 사용했다."
+      ],
+      "limitations": [
+        "가까운 업무 확인 인물이 오른쪽 프레임에서 크게 잘린다. 목표 업무 인물의 머리·책상은 가리지 않지만 가장자리 시각 밀도가 높다.",
+        "앉은 인물의 노트북 전체 키보드/화면은 책상·모니터·플레이어와 겹쳐 이 한 장에서 모두 선명하게 분리되지는 않는다. LaptopScreen의 실제 투영/프레임 존재는 수치 검사와 함께 해석한다.",
+        "동료의 서류가방 이동 역할은 이 각도 밖이며 전체 역할/소품 존재와 보행은 자동 검증 근거다."
+      ]
+    },
+    {
+      "name": "commercial_escalator_up_landing",
+      "place": "SFC_escalator_1F",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_commercial_escalator_up_landing.png",
+      "sha256": "161443b90b1bf018b44b1f77827061d2f06ef6b9f1afeb72df5d40849340d4e7",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "나란한 두 에스컬레이터의 개별 디딤판·밝은 단차 끝·어두운 손잡이와 투명 측면이 구분된다.",
+        "상층으로 이어지는 실제 경사와 위층 바닥 개구부가 보이고 하단 접근 바닥이 이어진다.",
+        "접수대·직원과 주변 통로가 함께 보여 상업/업무 로비의 맥락이 있다.",
+        "새 안내 3D 글씨가 계단 전체를 덮지 않는다."
+      ],
+      "limitations": [
+        "앞쪽 접수대가 하단 착지 공간 일부를 가리고 상단 HUD가 최상부 일부를 덮는다. 계단·난간·연결 방향은 여전히 구분된다.",
+        "원거리 3D 안내의 작은 글씨 가독성은 제한된다.",
+        "이 사진은 정지 상태이며 디딤판·손잡이의 운동과 실제 탑승은 자동 검증을 따른다."
+      ]
+    },
+    {
+      "name": "commercial_escalator_down_landing",
+      "place": "SFC_escalator_2F",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_commercial_escalator_down_landing.png",
+      "sha256": "6d2856d6b200b76f6598d3908655d3ca7cbd06d74e1905e51c1573ca8755d971",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "위층 착지부의 콤 형태 바닥, 아래로 내려가는 두 통로와 실제 바닥 구멍이 보인다.",
+        "개구부 주변 투명 가드와 손잡이가 이어져 개방 가장자리를 시각적으로 구분한다.",
+        "플레이어 전신과 옆쪽 인물·소파, 비어 있는 접근 통로가 보인다."
+      ],
+      "limitations": [
+        "낮은 시선과 상층 바닥 때문에 아래층의 계단 전체는 가려진다. 하단 사진과 짝지어 해석한다.",
+        "가드 충돌/도착 후 carrier 해제는 자동 검증 근거이며 이 사진만으로 확인하지 않는다."
+      ]
+    },
+    {
+      "name": "new_cycle_in_use",
+      "place": "hotel_cycle_720p",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_new_cycle_in_use.png",
+      "sha256": "83f37d83502aeb33febd871a2794867debb8937d41f5a5e3ef40f33753c54864",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "사이클의 지지 프레임·좌석 위치·손잡이와 앉아서 잡는 플레이어 자세가 보이며 러닝머신과 구분된다.",
+        "사이클 14.0m·2회전과 이용 시간, E 이용 멈추기 안내가 읽힌다.",
+        "옆 인물의 팔을 벌린 스트레칭, 반바지/맨종아리·운동화가 실제 모델로 보인다.",
+        "뒤쪽의 로잉 팬/콘솔과 우측 러닝머신이 다른 기구 형태로 함께 보인다."
+      ],
+      "limitations": [
+        "플레이어와 하단 HUD가 사이클 페달/휠의 일부를 가려 이 구도만으로 크랭크 세부와 회전축을 모두 판별하지 않는다.",
+        "설비의 상시 3D E 탑승 표지와 이용 중 E 멈추기 HUD가 동시에 보인다.",
+        "프레임 간 페달 회전·진행량·정지/안전 하차는 자동 검증을 따른다."
+      ]
+    },
+    {
+      "name": "new_cycle_small",
+      "place": "hotel_cycle_640x480",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_new_cycle_small.png",
+      "sha256": "d4f98e7183225c7912e22c3381bc423f1347fba4f0098a8f4435eaa9193d27fd",
+      "dimensions_px": [
+        640,
+        480
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "LIMITED_DEVICE_VISIBILITY",
+      "visible": [
+        "640×480에서도 사이클 이용 시간·진행 수치와 E 멈추기, 출처 문구가 화면 안에서 읽힌다.",
+        "상단 안내/중앙 행동/하단 상태/출처의 각 패널이 서로 겹치지 않는다.",
+        "플레이어 상체와 옆 스트레칭 인물은 보인다."
+      ],
+      "limitations": [
+        "중앙 E 안내와 하단 상태창이 기구 하부와 플레이어 하체를 많이 가려, 이 저해상도 사진만으로 사이클 형상을 충분히 식별하기 어렵다.",
+        "패널끼리 비겹침은 3D 기구 가시성 수용과 별개다. 저해상도 기구 식별 수용은 제한한다."
+      ]
+    },
+    {
+      "name": "new_rowing_in_use",
+      "place": "hotel_rowing_720p",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_new_rowing_in_use.png",
+      "sha256": "c21b18f957662788cf568877bb5fc1b74772f875d51773a093c70d85f094abf6",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "긴 좌석 레일·앞쪽 큰 팬/플라이휠 하우징·콘솔과 앉아서 당기는 자세가 사이클과 다르게 보인다.",
+        "로잉머신 이용 시간, 8m·1스트로크와 E 멈추기 안내가 읽힌다.",
+        "플레이어 머리·몸통, 좌석/레일 끝과 바닥 지지대가 프레임 안에 있다."
+      ],
+      "limitations": [
+        "몸과 E 안내가 손잡이/케이블 및 무릎 부분을 일부 가린다.",
+        "스트레칭 인물은 왼쪽 프레임에서 일부만 보인다.",
+        "좌석 이동·줄 당김·스트로크 진행·안전 하차는 정지 사진 외 자동 검증 근거다."
+      ]
+    },
+    {
+      "name": "new_rowing_small",
+      "place": "hotel_rowing_640x480",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_new_rowing_small.png",
+      "sha256": "6e43657c4920e825eec339e919f20e41ad3525bb6e166c4fe38d9c564d58f3f0",
+      "dimensions_px": [
+        640,
+        480
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "LIMITED_DEVICE_VISIBILITY",
+      "visible": [
+        "640×480에서 로잉 이용 시간과 8m·1스트로크, E 멈추기 수치/안내가 읽힌다.",
+        "상단/행동/상태/출처 패널끼리 직접 겹치지 않는다."
+      ],
+      "limitations": [
+        "중앙과 하단 HUD가 좌석·핸들·레일의 상당 부분을 덮어 로잉 기구의 독립적인 형상 판별이 약하다.",
+        "플레이어 머리·기기 상단 콘솔은 보이지만 저해상도 기구 시각 수용은 제한한다."
+      ]
+    },
+    {
+      "name": "hotel_treadmill_in_use",
+      "place": "hotel_treadmill_regression",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_hotel_treadmill_in_use.png",
+      "sha256": "6babf7c2f37aa7df228ecc731a5cc8b71464eaaae7cbab099acd37cd7a91a5d7",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "실제 줄무늬 벨트, 콘솔·지지대와 달리는 플레이어의 엇갈린 다리 자세가 보인다.",
+        "두 러닝머신의 형태가 구별되고 6.0km/h·운동거리와 E 멈추기 안내가 읽힌다.",
+        "원래 플레이어가 숨지 않고 머리·몸통·다리가 보인다."
+      ],
+      "limitations": [
+        "E 안내와 상태창이 무릎/벨트 일부를 가리지만 벨트와 주행 자세의 구분은 가능하다.",
+        "실제 벨트/보행 애니메이션과 pause/exit 회귀는 자동 검증을 따른다."
+      ]
+    },
+    {
+      "name": "hotel_weights_in_use",
+      "place": "hotel_weights_regression",
+      "image": "data/reports/realism_rework/20261017/final/escalator_gym_gpu_hotel_weights_in_use.png",
+      "sha256": "b710e10c360c90a222f9af400d6fa64786e09c40d8c8f427980de46de80c4133",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "result": "ACCEPTED_WITH_LIMITATIONS",
+      "visible": [
+        "손에 든 두 덤벨과 팔을 굽힌 자세, 뒤쪽 덤벨 랙이 보여 기존 근력 활동을 식별할 수 있다.",
+        "옆의 청록색 휴식 인물이 실제 벤치에 앉아 있으며 운동 중인 플레이어와 자세·복장이 구분된다.",
+        "머리와 덤벨이 HUD 위로 보여 동작 식별을 돕는다."
+      ],
+      "limitations": [
+        "휴식 인물의 물병은 이 각도에서 선명하지 않다. 실제 WaterBottle mesh 존재는 역할 검증에 근거한다.",
+        "하단 E 안내가 벤치 일부와 플레이어 다리 위를 지나간다.",
+        "덤벨 반복 횟수·pause·안전 하차는 자동 검증 근거이며 이 1초 시점 사진에서 반복 완료를 주장하지 않는다."
+      ]
+    }
+  ],
+  "remaining_limits": [
+    "The one hotel, SFC and library representative views do not establish all 126 interiors, every floor, all camera angles or human OS-input acceptance.",
+    "Screenshot observations do not establish animation, physical collision, pause, safe exits or performance; those remain associated automated-test claims.",
+    "640x480 E/status panels occupy a substantial portion of cycle/rowing geometry even though the panels are mutually disjoint.",
+    "NPC faces, bodies, equipment and lighting remain simple authored game models, with unmeasured occupancy and authored floor programmes rather than surveyed hotel/company layouts.",
+    "Room number 201 appears on a HUD-labelled 3F due to the retained 0-based room-number authoring convention."
+  ],
+  "superseded_initial_role_captures": {
+    "source_report": {
+      "name": "interior_gpu",
+      "path": "data/reports/realism_rework/20261017/visual_review_initial_capture/interior_gpu.json",
+      "sha256": "8ba3dd832efb8a5e28a6faadd306436f6e77d58957f7c7127bfb692537b78126",
+      "result": "PASS",
+      "checks": {
+        "checks": 54,
+        "failed": 0
+      }
+    },
+    "images": [
+      {
+        "name": "admin_open_hotel_guest_room",
+        "place": "hotel_guest_room",
+        "image": "data/reports/realism_rework/20261017/visual_review_initial_capture/interior_gpu_admin_open_hotel_guest_room.png",
+        "sha256": "787c0be1dee2c0e73b70cb31148beda3457552e55e9e350b5af1e51f1eb0da10",
+        "dimensions_px": [
+          1152,
+          720
+        ],
+        "directly_opened_with_view_image": true,
+        "result": "ACCEPTED_WITH_LIMITATIONS",
+        "visible": [
+          "열린 문틀 안쪽의 객실 바닥과 침대가 실제로 보이며 문짝은 옆으로 이동해 통과 개구부가 드러난다.",
+          "201 객실 표지, 열림·E 표지, 관리자 마스터키 사용 안내가 읽힌다.",
+          "왼쪽 청소 직원의 청록색 복장, 청소 카트와 접은 수건이 방문객/업무 인물과 다른 소품으로 보인다.",
+          "원래 플레이어 머리·몸통·다리와 하단 안내/상태창은 보인다."
+        ],
+        "limitations": [
+          "플레이어가 침대 일부를 가리고 청소 직원은 왼쪽 프레임에서 일부 잘린다. 이 사진만으로 방 전체 배치와 투숙객 역할을 모두 수용하지 않는다.",
+          "HUD는 3층, 객실 표지는 201호다. 기존 0기반 객실 번호 표기 규칙은 남아 있다.",
+          "문을 닫았을 때 충돌·끼임 방지·잠금/탈출은 정지 사진이 아니라 자동 검증 기록으로 확인한다."
+        ]
+      },
+      {
+        "name": "gym_population_roles",
+        "place": "hotel_fitness",
+        "image": "data/reports/realism_rework/20261017/visual_review_initial_capture/interior_gpu_gym_population_roles.png",
+        "sha256": "da4459142735727edbf0d0f4c5650124ca02111aa42e87364599348d0183acec",
+        "dimensions_px": [
+          1152,
+          720
+        ],
+        "directly_opened_with_view_image": true,
+        "result": "CAPTURE_COVERAGE_INSUFFICIENT",
+        "visible": [
+          "더플라자호텔 4층 HUD와 빈 계단·통로만 보인다."
+        ],
+        "limitations": [
+          "실제 운동 인물과 운동기구가 프레임 밖이므로 이 초기 사진을 역할 시각 수용 증거로 사용할 수 없다. 새 대상 인물 촬영으로 대체했다."
+        ]
+      },
+      {
+        "name": "library_population_roles",
+        "place": "library_reading",
+        "image": "data/reports/realism_rework/20261017/visual_review_initial_capture/interior_gpu_library_population_roles.png",
+        "sha256": "884851d4f7fb1c8590338f2e8fbce9c9c4b2c543c47041e0950c684eddc69690",
+        "dimensions_px": [
+          1152,
+          720
+        ],
+        "directly_opened_with_view_image": true,
+        "result": "ACCEPTED_WITH_LIMITATIONS",
+        "visible": [
+          "다채로운 책등의 긴 서가와 독서용 가구가 보여 도서관 공간을 식별할 수 있다.",
+          "왼쪽 앉은 인물과 중앙/오른쪽 서 있는 인물이 서로 다른 자세와 복장으로 보인다.",
+          "중앙 통로는 비어 있고 상단 안내/하단 E 안내와 출처 문구가 겹치지 않는다."
+        ],
+        "limitations": [
+          "카메라가 멀어 책·손·독서 자세의 세부를 모두 선명하게 판별할 수 없다. 실제 OpenBook/BookPages 및 좌석 배치는 자동 검증과 함께 해석한다.",
+          "역할별 얼굴·손가락·표정·군중 밀도는 단순 게임 표현이며 실제 이용자 조사 결과가 아니다."
+        ]
+      },
+      {
+        "name": "office_population_roles",
+        "place": "office_work",
+        "image": "data/reports/realism_rework/20261017/visual_review_initial_capture/interior_gpu_office_population_roles.png",
+        "sha256": "dcb7b307c289cd4edcf660b26dae12f7698778a85fb650f8ab00802bdd764aed",
+        "dimensions_px": [
+          1152,
+          720
+        ],
+        "directly_opened_with_view_image": true,
+        "result": "CAPTURE_COVERAGE_INSUFFICIENT",
+        "visible": [
+          "유리 회의실·가구와 빈 통로가 보인다."
+        ],
+        "limitations": [
+          "업무 인물·노트북·서류가방 역할이 프레임 밖이므로 이 초기 사진만으로 업무 역할을 수용할 수 없다. 새 대상 인물 촬영으로 대체했다."
+        ]
+      }
+    ],
+    "reason": "The initial gym/office title photographs missed target roles. All four initial PNGs and the 54-check report were preserved before the new test-only targeted capture. This records the rejected capture coverage rather than deleting it."
+  },
+  "targeted_role_camera_evidence": [
+    {
+      "name": "gym_population_roles",
+      "accepted": true,
+      "NPC_position_unchanged": true,
+      "stance": [
+        650.5,
+        -88.1360549926758,
+        -0.311973214149475
+      ],
+      "head_world": [
+        652.299987792969,
+        -86.6063613891602,
+        1.18802678585052
+      ],
+      "head_pixel": [
+        486.372497558594,
+        358.615112304688
+      ],
+      "head_projected_rect": {
+        "position": [
+          465.155731201172,
+          339.409545898438
+        ],
+        "size": [
+          42.0306091308594,
+          37.2766418457031
+        ]
+      },
+      "head_static_ray_clear": true,
+      "head_clear_of_UI": true,
+      "prop_name": "SportsTowel",
+      "prop_projected_rect": {
+        "position": [
+          456.517242431641,
+          382.259918212891
+        ],
+        "size": [
+          34.0545043945312,
+          10.2702026367188
+        ]
+      },
+      "prop_clear_of_UI": true,
+      "avatar_projected_rect": {
+        "position": [
+          516.748840332031,
+          267.006195068359
+        ],
+        "size": [
+          130.12841796875,
+          437.138702392578
+        ]
+      },
+      "actual_role_mesh_centres_in_frame": 14,
+      "normal_camera_distance_m": 2.60000705718994,
+      "camera_clear": true,
+      "original_avatar_visible": true,
+      "scope": "Projection/static LOS are numeric geometry observations; final material/self-occlusion judgment comes from the PNG and retains the limits above."
+    },
+    {
+      "name": "office_population_roles",
+      "accepted": true,
+      "NPC_position_unchanged": true,
+      "stance": [
+        653.799987792969,
+        -77.8568344116211,
+        29.4481010437012
+      ],
+      "head_world": [
+        655.599975585938,
+        -76.5971450805664,
+        30.9481010437012
+      ],
+      "head_pixel": [
+        486.160217285156,
+        360.245178222656
+      ],
+      "head_projected_rect": {
+        "position": [
+          465.138671875,
+          343.274627685547
+        ],
+        "size": [
+          41.7344970703125,
+          34.6529235839844
+        ]
+      },
+      "head_static_ray_clear": true,
+      "head_clear_of_UI": true,
+      "prop_name": "LaptopScreen",
+      "prop_projected_rect": {
+        "position": [
+          427.241149902344,
+          394.496948242188
+        ],
+        "size": [
+          36.9800720214844,
+          33.8262023925781
+        ]
+      },
+      "prop_clear_of_UI": true,
+      "avatar_projected_rect": {
+        "position": [
+          509.200805664062,
+          269.601287841797
+        ],
+        "size": [
+          141.181213378906,
+          425.071075439453
+        ]
+      },
+      "actual_role_mesh_centres_in_frame": 15,
+      "normal_camera_distance_m": 2.60001087188721,
+      "camera_clear": true,
+      "original_avatar_visible": true,
+      "scope": "Projection/static LOS are numeric geometry observations; final material/self-occlusion judgment comes from the PNG and retains the limits above."
+    }
+  ],
+  "recapture_resolution": {
+    "result": "COMPLETE",
+    "source_test_result": "PASS",
+    "source_test_checks": {
+      "checks": 62,
+      "failed": 0
+    },
+    "targets": [
+      "gym_stretch/SportsTowel",
+      "office_worker/LaptopScreen"
+    ],
+    "runtime_sources_changed": false,
+    "test_only_source": "tests/game/check_interior_access_population.gd",
+    "preserved_initial_evidence": "data/reports/realism_rework/20261017/visual_review_initial_capture",
+    "engine_run_owner": "root",
+    "new_images_individually_opened": true,
+    "evidence_boundary": "Screenshot acceptance is limited to the listed views. All role models/props and physical room access/pausing are associated automated-test observations, not proven by photographs alone."
+  },
+  "final_source_consistency_rerun": {
+    "result": "PASS",
+    "checks": {
+      "checks": 62,
+      "failed": 0
+    },
+    "current_interior_images_directly_reopened": 4,
+    "root_script_path": "res://scripts/explore_walk.gd",
+    "root_script_sha256_in_report": "769087bc8e59433826e86d5f629cb04e399b51352aee4615fec28622823add1d",
+    "root_script_sha256_current": "769087bc8e59433826e86d5f629cb04e399b51352aee4615fec28622823add1d",
+    "root_script_matches_current": true,
+    "visual_acceptance_changed": false,
+    "remaining_limits_changed": false,
+    "other_eight_equipment_images_and_combined_ten_view_review_changed": false
+  }
+}

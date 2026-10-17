@@ -1,0 +1,19 @@
+--- before_menu_palette/explore_walk.gd
++++ game/scripts/explore_walk.gd
+@@ -222,12 +222,14 @@
+ 	exploration_notice.add_theme_color_override("font_color",Color(.35,.15,.07))
+ 	options.add_child(exploration_notice)
+ 	var admin_switch:=CheckButton.new();admin_switch.name="AdministratorAccess";admin_switch.text="관리자 모드 · 객실 마스터키";admin_switch.set_pressed_no_signal(true)
+-	admin_switch.add_theme_color_override("font_color",Color(.08,.12,.16))
++	for color_name in ["font_color","font_hover_color","font_pressed_color","font_hover_pressed_color"]:
++		admin_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+ 	admin_switch.toggled.connect(func(enabled: bool):
+ 		if is_instance_valid(interior_room_access):interior_room_access.set_admin_access(enabled))
+ 	options.add_child(admin_switch)
+ 	var music_switch:=CheckButton.new();music_switch.name="BuskingMusic";music_switch.text="버스킹 기타 음악";music_switch.set_pressed_no_signal(true)
+-	music_switch.add_theme_color_override("font_color",Color(.08,.12,.16))
++	for color_name in ["font_color","font_hover_color","font_pressed_color","font_hover_pressed_color"]:
++		music_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+ 	music_switch.toggled.connect(func(enabled: bool):
+ 		if is_instance_valid(neighborhood_life):neighborhood_life.set_music_enabled(enabled))
+ 	options.add_child(music_switch)

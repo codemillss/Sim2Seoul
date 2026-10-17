@@ -142,13 +142,18 @@ func _prepare_room() -> bool:
 	if not room.setup(current_spec,ROOM_ORIGIN):return false
 	room_bodies.assign(room.bodies)
 	room.visible = false;room.set_process(false)
+	var roof_access: Node3D=host.get_node_or_null("ExplorationRooftopAccess") as Node3D
 	if is_instance_valid(rooftop):
-		for body: StaticBody3D in rooftop.bodies:body.collision_layer=0
-		remove_child(rooftop);rooftop.queue_free()
-	var roof_script: Script=load("res://scripts/rooftop_space.gd")
-	if roof_script==null:return false
-	rooftop=roof_script.new();add_child(rooftop)
-	if not rooftop.setup(host,current_spec):return false
+		if is_instance_valid(roof_access) and roof_access.owns_rooftop(rooftop):roof_access.release_rooftop(rooftop)
+		else:
+			for body: StaticBody3D in rooftop.bodies:body.collision_layer=0
+			rooftop.get_parent().remove_child(rooftop);rooftop.queue_free()
+	rooftop=roof_access.borrow_rooftop(String(current_spec.id)) if is_instance_valid(roof_access) else null
+	if not is_instance_valid(rooftop):
+		var roof_script: Script=load("res://scripts/rooftop_space.gd")
+		if roof_script==null:return false
+		rooftop=roof_script.new();add_child(rooftop)
+		if not rooftop.setup(host,current_spec):return false
 	rooftop.visible=not active;rooftop.set_process(false)
 	on_roof=false
 	_roof_ready_tick=Engine.get_physics_frames()+3
@@ -235,6 +240,93 @@ func _elevator_near() -> bool:
 	var floor_index: int = _current_destination()
 	return host.player.global_position.distance_to(_landing_point(floor_index))<=2.2
 
+func _outdoor_roof_at_player() -> Node3D:
+	if active or in_elevator or host.player.interior_active:return null
+	var access: Node3D=host.get_node_or_null("ExplorationRooftopAccess") as Node3D
+	if not is_instance_valid(access):return null
+	var point: Vector3=host.player.global_position
+	if not point.is_finite():return null
+	var closest: Node3D
+	var nearest_height: float=INF
+	for id: String in access.roofs:
+		var roof: Node3D=access.roofs[id]
+		if not is_instance_valid(roof) or not roof.frame.is_finite() or absf(roof.frame.basis.determinant())<.001:continue
+		var local: Vector3=roof.frame.affine_inverse()*point
+		var lower: float=roof.world_bounds.position.y-roof.frame.origin.y-.35
+		# Hide ground-door guidance above an existing roof, including a jump.
+		# Merely walking/swimming here never selects or adopts its building.
+		if roof.walkable_rect.grow(.5).has_point(Vector2(local.x,local.z)) and local.y>=lower and absf(local.y)<nearest_height:
+			closest=roof;nearest_height=absf(local.y)
+	return closest
+
+func outdoor_roof_lift_candidate() -> Node3D:
+	# Roof entry belongs to the physical landing, irrespective of whether the
+	# player arrived by a shortcut, a fresh outdoor jump or a previous lift.
+	if not loaded or active or in_elevator or host.player.interior_active or not host.player.is_on_floor() or host.player.is_swimming():return null
+	var roof: Node3D=_outdoor_roof_at_player()
+	if not is_instance_valid(roof):return null
+	var frame: Transform3D=roof.frame
+	if not frame.basis.y.is_equal_approx(Vector3.UP) or absf(frame.basis.determinant()-1.0)>.001 or not frame.basis.is_equal_approx(frame.basis.orthonormalized()):return null
+	var point: Vector3=host.player.global_position
+	var local: Vector3=frame.affine_inverse()*point
+	if absf(local.y)>.35 or point.distance_to(roof.lift_point())>2.2:return null
+	if not _point_supported_clear(point+Vector3.UP*.08,roof.world_bounds,frame,roof.walkable_rect):return null
+	var support: Dictionary=host.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(point+Vector3.UP*.35,point-Vector3.UP*.35,host.player.collision_mask,[host.player.get_rid()]))
+	if support.is_empty() or not roof.bodies.has(support.get("collider")):return null
+	return roof
+
+func _adopt_outdoor_roof(roof: Node3D) -> bool:
+	if not is_instance_valid(roof) or _menu_open() or host.player.input_latched or roof!=outdoor_roof_lift_candidate():return false
+	if is_instance_valid(facility_interaction) and facility_interaction.is_using():return false
+	var spec: Dictionary={}
+	for building: Dictionary in catalog:
+		if String(building.id)==String(roof.spec.get("id","")):spec=building;break
+	if spec.is_empty():return false
+	# A roof-arriving visitor leaves the lobby through this same building's
+	# real source entrance. Never use the last ground door or the roof as exit.
+	var outside: Dictionary={}
+	for point: Vector3 in [spec.entrance,spec.entrance+spec.outward*.6,_world_spawn]:
+		outside=_safe_external_point(point)
+		if not outside.is_empty():break
+	if outside.is_empty():return false
+	var access: Node3D=host.get_node_or_null("ExplorationRooftopAccess") as Node3D
+	if not is_instance_valid(access) or not access.owns_rooftop(roof):return false
+	# Stage a new room without replacing any previous selection. Failed
+	# validation leaves the player's physical pose, mode and controls intact.
+	var next_room: Node3D=room
+	var replaces_room: bool=prepared_id!=String(spec.id) or not is_instance_valid(room)
+	if replaces_room:
+		next_room=preload("res://scripts/building_interior_space.gd").new();add_child(next_room)
+		if not next_room.setup(spec,ROOM_ORIGIN):
+			for body: StaticBody3D in next_room.bodies:body.collision_layer=0
+			remove_child(next_room);next_room.queue_free()
+			return false
+		next_room.visible=false;next_room.set_process(false)
+	var previous_roof: Node3D=rooftop
+	if replaces_room:
+		if is_instance_valid(room):
+			for body: StaticBody3D in room_bodies:body.collision_layer=0
+			remove_child(room);room.queue_free()
+		room=next_room;room_bodies.assign(room.bodies)
+		_room_ready_tick=Engine.get_physics_frames()+3
+	if is_instance_valid(previous_roof) and previous_roof!=roof:
+		if access.owns_rooftop(previous_roof):access.release_rooftop(previous_roof)
+		else:
+			for body: StaticBody3D in previous_roof.bodies:body.collision_layer=0
+			previous_roof.get_parent().remove_child(previous_roof);previous_roof.queue_free()
+	_set_entry(spec);prepared_id=String(spec.id)
+	rooftop=access.borrow_rooftop(String(spec.id));_roof_ready_tick=Engine.get_physics_frames()
+	_outside_position=outside.point
+	_outside_view={"yaw":host.rig.yaw,"pitch":host.rig.pitch,"distance":host.rig.requested_distance}
+	_outside_starting_yaw=host.starting_yaw;host.starting_yaw=0.
+	_hud_was_visible=host.hud_panel.visible;_names_were_processing=host.building_names.is_physics_processing()
+	host.building_names.set_physics_process(false)
+	active=true;on_roof=true;entry_count+=1;_entry_requested=false;_notice="";e_requires_release=true
+	selected_floor=int(spec.floor_count);_current_floor_value=float(selected_floor);_recovery_floor=selected_floor
+	room.visible=false;room.set_process(false);rooftop.visible=true;rooftop.set_process(true)
+	_hide_outdoor_labels()
+	return true
+
 func _entry_visible() -> bool:
 	var from: Vector3 = host.player.global_position+Vector3.UP
 	var to := entrance_world_position+Vector3.UP
@@ -259,6 +351,7 @@ func _physics_process(delta: float) -> void:
 	var edge := _e_press_pending or (held and not _e_was_pressed)
 	_e_press_pending = false
 	_e_was_pressed = held
+	if active and on_roof and not in_elevator and not _menu_open():_observe_roof_departure()
 	if is_instance_valid(facility_interaction):facility_interaction.step(delta,_menu_open() or in_elevator or elevator_open)
 	if _menu_open():
 		e_requires_release = true
@@ -279,22 +372,29 @@ func _physics_process(delta: float) -> void:
 		return
 	if not edge:return
 	if elevator_open:_close_elevator()
+	elif is_instance_valid(host.get("interior_room_access")) and host.interior_room_access.handle_interact():e_requires_release=true
 	elif is_instance_valid(facility_interaction) and facility_interaction.handle_interact():e_requires_release=true
 	elif active and _elevator_near():_open_elevator()
 	elif active:exit_visit()
-	else:enter_visit()
+	else:
+		var roof: Node3D=outdoor_roof_lift_candidate()
+		if is_instance_valid(roof):
+			if _adopt_outdoor_roof(roof):_open_elevator()
+		else:enter_visit()
 
 func _process(_delta: float) -> void:
 	if not loaded or not is_instance_valid(host):return
 	var menu_open := _menu_open()
 	var view := host.get_viewport().get_visible_rect().size
 	if _notice_until>0 and Time.get_ticks_msec()>_notice_until:_notice = "";_notice_until = 0
-	wayfinding.update_guidance(_delta,active or menu_open)
+	var outdoor_roof: Node3D=_outdoor_roof_at_player()
+	var outdoor_lift: Node3D=outdoor_roof_lift_candidate() if not menu_open else null
+	wayfinding.update_guidance(_delta,active or menu_open or is_instance_valid(outdoor_roof))
 	var closest: Dictionary = wayfinding.target_spec
 	var nearest := INF
 	if not closest.is_empty():nearest=host.player.global_position.distance_squared_to(closest.entrance)
 	for marker in markers:marker.node.visible=false
-	if not active and not closest.is_empty() and not _entry_requested:
+	if not active and not is_instance_valid(outdoor_roof) and not closest.is_empty() and not _entry_requested:
 		_set_entry(closest)
 		if nearest<10.*10.:_prepare_room()
 	indoor_panel.visible = active and not menu_open and not in_elevator and not elevator_open
@@ -310,16 +410,21 @@ func _process(_delta: float) -> void:
 				host.player.spawn_transform = Transform3D(Basis.IDENTITY,recovery_point)
 				_recovery_floor = index
 		if on_roof:
-			indoor_text.text="%s · %s\n승강장 앞에서 E · 1층으로 내려가면 건물 밖으로 나갈 수 있습니다."%[current_spec.title,String(rooftop.profile_title)]
+			indoor_text.text="%s · %s\n승강장 앞에서 E · 층 선택 / 옥상에서 점프해 밖으로 이동할 수 있습니다."%[current_spec.title,String(rooftop.profile_title)]
 			if host.player.is_swimming():indoor_text.text+="\n수영 중 · WASD / 방향키 이동 · Space 물 밖으로 점프"
 		else:
 			indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
+			if is_instance_valid(room.escalator) and index in [0,1]:indoor_text.text+="\n오른쪽 상업 라운지 · 1–2층 왕복 에스컬레이터 · 걸어서 탑승"
 			indoor_text.text=indoor_text.text.replace("건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다.","음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기")
 	var facility_hint: String=facility_interaction.prompt_text() if is_instance_valid(facility_interaction) and active and not on_roof else ""
+	if is_instance_valid(host.get("interior_room_access")):
+		var guest_hint: String=host.interior_room_access.status_hint()
+		if not guest_hint.is_empty():facility_hint=guest_hint
 	prompt_text.text = "%s · %s · %d층"%[entry_action_text(),current_spec.get("title","건물"),int(current_spec.get("floor_count",1))] if not active else ("E · 엘리베이터 층 선택" if _elevator_near() else "E · 건물 밖으로 나가기")
-	if not facility_hint.is_empty():prompt_text.text=facility_hint
+	if is_instance_valid(outdoor_lift):prompt_text.text="E · %s 옥상 엘리베이터 · 층 선택"%String(outdoor_lift.spec.title)
+	elif not facility_hint.is_empty():prompt_text.text=facility_hint
 	elif not _notice.is_empty():prompt_text.text = _notice
-	prompt.visible = not menu_open and not elevator_open and not in_elevator and (not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and _entry_near() and _entry_visible()) or not _notice.is_empty())
+	prompt.visible = not menu_open and not elevator_open and not in_elevator and (is_instance_valid(outdoor_lift) or not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and not is_instance_valid(outdoor_roof) and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))
 	prompt.size = Vector2(prompt.custom_minimum_size.x,prompt.get_combined_minimum_size().y)
 	prompt.position = Vector2(maxf(16.,(view.x-prompt.size.x)*.5),view.y-148.)
@@ -414,9 +519,22 @@ func request_floor(index: int) -> bool:
 	if not active or in_elevator or _menu_open() or not _elevator_near() or not host.player.is_on_floor():return false
 	var from_index: int = _current_destination()
 	if index<0 or index>=destination_count() or index==from_index:return false
+	if index<int(current_spec.floor_count) and Engine.get_physics_frames()<_room_ready_tick:_tell("실내 승강장을 준비하고 있습니다.");return false
 	if index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick:_tell("옥상 승강장을 준비하고 있습니다.");return false
 	var target: Vector3 = _landing_point(index)
 	if not _landing_target_clear(index,target):_tell("목적층 승강장에 장애물이 있습니다.");return false
+	# A freely reached/visited roof uses the outdoor region. Re-enter a
+	# validated temporary region only when an actual lift ride begins.
+	if on_roof and not host.player.interior_active:
+		var boarding: Vector3=host.player.global_position+Vector3.UP*.08
+		if not _point_supported_clear(boarding,rooftop.world_bounds,rooftop.frame,rooftop.walkable_rect):_tell("승강장 앞의 안전한 바닥에서 다시 눌러주세요.");return false
+		var previous_region: Dictionary={"bounds":host.player.interior_bounds,"frame":host.player.interior_frame,"rect":host.player.interior_walkable_rect,"ceiling_unbounded":host.player.interior_ceiling_unbounded}
+		if not host.player.begin_interior(boarding,rooftop.world_bounds):
+			# begin_interior already preserves exterior pose/recovery on failure;
+			# also restore its inactive-region fields as one failed transaction.
+			host.player.interior_bounds=previous_region.bounds;host.player.interior_frame=previous_region.frame
+			host.player.interior_walkable_rect=previous_region.rect;host.player.interior_ceiling_unbounded=previous_region.ceiling_unbounded
+			_tell("승강장 앞의 안전한 바닥에서 다시 눌러주세요.");return false
 	_ride_from = from_index;selected_floor = index;_ride_elapsed = 0.
 	_motion_start_floor=float(from_index);_current_floor_value=float(from_index)
 	_configure_motion()
@@ -472,6 +590,9 @@ func _indoor_target_clear(point: Vector3) -> bool:
 	return _point_supported_clear(point,host.player.interior_bounds,_landing_frame(int(current_spec.floor_count)) if on_roof else Transform3D.IDENTITY,_landing_rect(int(current_spec.floor_count)) if on_roof else Rect2())
 
 func _point_supported_clear(point: Vector3,bounds: AABB,frame: Transform3D,rect: Rect2) -> bool:
+	if not frame.is_finite() or absf(frame.basis.determinant()-1.0)>.001 or not frame.basis.is_equal_approx(frame.basis.orthonormalized()):return false
+	if not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x<=0.0 or bounds.size.y<=0.0 or bounds.size.z<=0.0:return false
+	if not rect.position.is_finite() or not rect.size.is_finite():return false
 	if not point.is_finite() or not bounds.has_point(point):return false
 	if rect.has_area():
 		var local: Vector3=frame.affine_inverse()*point
@@ -587,8 +708,15 @@ func _release_landing(point: Vector3,index: int) -> bool:
 	# car never carries buoyancy state from the departure roof into another room.
 	host.player.clear_water_region()
 	if on_roof:
-		var water: Dictionary=rooftop.pool_water_region()
-		if not water.is_empty():host.player.set_water_region(water)
+		# Free-roam roofs join the outdoor world. The bounded walking mode
+		# retains its already validated roof region and normal water/lift use.
+		# Failure to release is never a partially committed blocked lift ride.
+		var released := false
+		if host.player.free_roam_enabled and host.player.has_method("release_rooftop_to_exterior"):
+			released=host.player.release_rooftop_to_exterior()
+		if not released:
+			var water: Dictionary=rooftop.pool_water_region()
+			if not water.is_empty():host.player.set_water_region(water)
 	room.visible=not on_roof;room.set_process(not on_roof)
 	if is_instance_valid(rooftop):rooftop.visible=on_roof;rooftop.set_process(on_roof)
 	cabin.finish();in_elevator=false;ride_panel.visible=false;selected_floor=index;_current_floor_value=float(index);_ride_speed=0.;_ride_phase="idle"
@@ -679,7 +807,11 @@ func _leave_at(requested: Vector3) -> bool:
 	var safe := _safe_external_point(requested)
 	if safe.is_empty():return false
 	if is_instance_valid(facility_interaction) and not facility_interaction.cancel():return false
-	if not host.player.end_interior(safe.point):return false
+	if host.player.interior_active:
+		if not host.player.end_interior(safe.point):return false
+	elif on_roof:
+		host.player.global_position=safe.point;host.player.require_neutral_input();host.player.reset_physics_interpolation()
+	else:return false
 	if elevator_open:_close_elevator(false)
 	active = false;room.visible = false;room.set_process(false);exit_count += 1;_notice = "";e_requires_release = true
 	on_roof=false
@@ -690,6 +822,27 @@ func _leave_at(requested: Vector3) -> bool:
 	host.hud_panel.visible = _hud_was_visible
 	host.building_names.set_physics_process(_names_were_processing)
 	return true
+
+func _observe_roof_departure() -> void:
+	if not is_instance_valid(rooftop):return
+	if host.player.interior_active:
+		# Turning free roam on while visiting a bounded roof takes effect at
+		# the same physical position, without requiring another lift trip.
+		if not host.player.free_roam_enabled or not host.player.has_method("release_rooftop_to_exterior"):return
+		if not host.player.release_rooftop_to_exterior():return
+	var local: Vector3=rooftop.frame.affine_inverse()*host.player.global_position
+	var lower: float=rooftop.world_bounds.position.y-rooftop.frame.origin.y-.35
+	if rooftop.walkable_rect.grow(1.0).has_point(Vector2(local.x,local.z)) and local.y>=lower:return
+	# Walking/jumping away from the deck is ordinary outdoor travel. Preserve
+	# the current body, momentum and camera; the cache keeps the roof visible.
+	if elevator_open:_close_elevator(false)
+	active=false;on_roof=false;exit_count+=1;e_requires_release=true
+	room.visible=false;room.set_process(false)
+	host.starting_yaw=_outside_starting_yaw
+	host.hud_panel.visible=_hud_was_visible
+	host.building_names.set_physics_process(_names_were_processing)
+	var access: Node3D=host.get_node_or_null("ExplorationRooftopAccess") as Node3D
+	if is_instance_valid(access):access.release_rooftop(rooftop)
 
 func exit_visit() -> bool:
 	if not loaded or not active or in_elevator or _menu_open() or not _exit_near() or not host.player.is_on_floor() or host.player.input_latched:

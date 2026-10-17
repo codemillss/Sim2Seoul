@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "task": "SEOUL_OFFICIAL_LOCAL_TERRAIN_SOURCE_CONTROLS",
+  "result": "SOURCE_INPUTS_READY_NO_DEM_INTERPOLATION",
+  "generator": {
+    "path": "tools/prepare_seoul_terrain_sources.py",
+    "sha256": "74b0102422860ee650e0673d750b66fdd63b1a693e031842089e1640d0cfa0d8",
+    "dependencies": {
+      "pyproj": "3.8.0",
+      "shapely": "2.2.0"
+    }
+  },
+  "region_config_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+  "archive": {
+    "filename": "서울시 등고선.zip",
+    "bytes": 45852601,
+    "sha256": "4fbe3c7e061b5974e7403ec116855304ed8ae321eebcc0d12c31ca8fb7be30bf",
+    "download_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false",
+    "method": "POST",
+    "form": {
+      "infId": "OA-22241",
+      "seqNo": "",
+      "seq": "2",
+      "infSeq": "1"
+    },
+    "anonymous_access_observed": true,
+    "not_a_repository_asset": true
+  },
+  "source_files": {
+    "등고선 5000/N3L_F001.dbf": {
+      "bytes": 985808,
+      "sha256": "4ce0aaad08aec92df061a473c592a343a9aec0729ff4d50c802b2d4e6147e2f8"
+    },
+    "등고선 5000/N3L_F001.shp": {
+      "bytes": 71109024,
+      "sha256": "8d92099f4e7b8cb5de3237166927cc23903be173f2c56485d12f307f81cb0048"
+    },
+    "등고선 5000/N3L_F001.shx": {
+      "bytes": 68660,
+      "sha256": "ebfce125b2319764eacf93793a2c1ee5ca07afc11ea5c5b5e4229a22c8001845"
+    },
+    "등고선 5000/N3L_F001.prj": {
+      "bytes": 456,
+      "sha256": "1bd00dd7403a1863ccba284d562776bb5639229c9d35b93d08fda1ed05a74830"
+    },
+    "등고선 5000/N3L_F001.shp.xml": {
+      "bytes": 7498,
+      "sha256": "4e570c6e05cb37a6620a76dec240900323ea879a56c29be1868101c67697e52d"
+    },
+    "표고 5000/N3P_F002.dbf": {
+      "bytes": 4128494,
+      "sha256": "12a23862f2602ea4d8b10fcf848ba3a6ceb0dd4ab472a1b553ee84ad43ac81e0"
+    },
+    "표고 5000/N3P_F002.shp": {
+      "bytes": 1284460,
+      "sha256": "a6410c83002ac26a0a726a1530c54fd89dad0af58211270b731d7e1adf2a5c90"
+    },
+    "표고 5000/N3P_F002.shx": {
+      "bytes": 367060,
+      "sha256": "fc739028818a214e384b2a7671850ccd53a274d77c1136a590a4043773c0a3aa"
+    },
+    "표고 5000/N3P_F002.prj": {
+      "bytes": 456,
+      "sha256": "1bd00dd7403a1863ccba284d562776bb5639229c9d35b93d08fda1ed05a74830"
+    },
+    "표고 5000/N3P_F002.shp.xml": {
+      "bytes": 7025,
+      "sha256": "0f10f84162d4cd901d6930f4fa62c1fbe1d349b78184d512c2def68cbba9a5ff"
+    }
+  },
+  "source_crs_epsg": 5174,
+  "source_prj_sha256": "1bd00dd7403a1863ccba284d562776bb5639229c9d35b93d08fda1ed05a74830",
+  "horizontal_transform": {
+    "description": "Inverse of unnamed + axis order change (2D) + Korean 1985 to WGS 84 (1) + UTM zone 52N",
+    "stated_operation_accuracy_m": 1.0,
+    "best_available": true,
+    "unavailable_operations": [],
+    "scope": "Coordinate-operation metadata, not an independent survey accuracy claim."
+  },
+  "vertical_datum": null,
+  "halo_m": 200.0,
+  "statistics": {
+    "contours": {
+      "source_records_scanned_and_shx_validated": 8570,
+      "local_parts_including_halo": 41,
+      "parts_touching_exact_region": 15,
+      "height_min_m": 25.0,
+      "height_max_m": 50.0,
+      "distinct_heights": [
+        25.0,
+        30.0,
+        35.0,
+        40.0,
+        45.0,
+        50.0
+      ],
+      "source_SCLS_counts": {
+        "F0017114": 5,
+        "F0017111": 32,
+        "F0017121": 4
+      }
+    },
+    "spot_heights": {
+      "source_records_scanned_and_shx_validated": 45870,
+      "local_parts_including_halo": 96,
+      "parts_touching_exact_region": 43,
+      "height_min_m": 26.33,
+      "height_max_m": 50.89,
+      "distinct_heights": [
+        26.33,
+        27.06,
+        27.26,
+        27.4,
+        27.9,
+        28.06,
+        28.16,
+        28.27,
+        28.29,
+        28.33,
+        28.63,
+        29.05,
+        29.08,
+        29.09,
+        29.23,
+        29.45,
+        30.12,
+        30.23,
+        30.26,
+        30.28,
+        30.46,
+        30.48,
+        30.51,
+        30.66,
+        30.79,
+        31.37,
+        31.43,
+        31.52,
+        31.67,
+        32.08,
+        32.1,
+        32.32,
+        32.65,
+        32.74,
+        32.88,
+        32.9,
+        33.04,
+        33.15,
+        33.31,
+        33.5,
+        33.58,
+        33.59,
+        33.7,
+        33.78,
+        33.84,
+        33.89,
+        33.9,
+        34.3,
+        34.4,
+        34.57,
+        34.65,
+        35.23,
+        35.28,
+        35.44,
+        35.5,
+        35.6,
+        35.61,
+        35.79,
+        35.85,
+        36.37,
+        36.55,
+        36.6,
+        36.88,
+        37.5,
+        37.57,
+        37.66,
+        37.67,
+        37.81,
+        38.53,
+        38.74,
+        38.78,
+        38.94,
+        39.07,
+        39.2,
+        39.22,
+        39.6,
+        40.08,
+        40.12,
+        40.37,
+        40.54,
+        40.57,
+        41.16,
+        41.32,
+        41.35,
+        41.46,
+        41.49,
+        41.7,
+        41.77,
+        43.15,
+        43.28,
+        44.76,
+        45.85,
+        45.86,
+        47.5,
+        50.1,
+        50.89
+      ],
+      "source_SCLS_counts": {
+        "F0027217": 96
+      }
+    }
+  },
+  "validation": {
+    "all_source_shx_offsets_and_dbf_counts_match": true,
+    "HEIGHT_matches_CONT_or_NUME": true,
+    "all_clipped_geometry_inside_metric_region_plus_halo": true,
+    "exact_region_area_m2": 885439.577230084,
+    "clip_area_m2": 1763760.453305119,
+    "region_outside_controls_convex_hull_m2": 0.0
+  },
+  "limitations": [
+    "A 5m contour interval is not a measured 5m DEM grid.",
+    "No interpolation has been applied; spaces between controls are unsampled.",
+    "Spot-height semantic code F0027217 is retained; no additional classification or accuracy is invented.",
+    "Vertical datum and source survey accuracy are not explicitly documented in the downloaded PRJ/field notes.",
+    "Do not recover curbs, stairs, roof heights or tunnel/bridge levels from these sparse controls alone.",
+    "Original source heights, generated terrain and authored corrections must remain distinguishable."
+  ],
+  "outputs": {
+    "source_original.prj": {
+      "bytes": 456,
+      "sha256": "1bd00dd7403a1863ccba284d562776bb5639229c9d35b93d08fda1ed05a74830"
+    },
+    "source_original_field_notes.txt": {
+      "bytes": 552,
+      "sha256": "1e2a6c8ab385ac112a68006e2ba932361ed98432bafc6e198b0b9d5cbdf73e86"
+    },
+    "contours_wgs84.geojson": {
+      "bytes": 600825,
+      "sha256": "4f7bfc7fb008312dde8e825267fdd8099956fff8cc025baa11578ae7ff5572dc"
+    },
+    "spot_heights_wgs84.geojson": {
+      "bytes": 104483,
+      "sha256": "426f3e42d8a6a73e5e236116d73417dc97622a9363b718038d25ad6185274815"
+    },
+    "terrain_source_controls_local.json": {
+      "bytes": 701173,
+      "sha256": "61ba9af516bf52704440a58c2e9beb9a806e93a955d2ea79bdac27602f8a8f4c"
+    },
+    "source_license.json": {
+      "bytes": 1934,
+      "sha256": "07af8dda880ea509e440f21c4cfff756e9af09e546153fa3f7eccf5f30099895"
+    }
+  }
+}

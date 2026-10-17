@@ -4,6 +4,7 @@ extends "res://scripts/player/public_player.gd"
 @export_range(0.25, 8.0, 0.25) var jump_height_m := 3.0
 var free_roam_enabled := true
 var free_roam_bounds := Rect2(-450.0,-460.0,900.0,920.0)
+var free_roam_polygon := PackedVector2Array()
 const EDGE_MARGIN_M := 0.4
 const SEGMENT_SAMPLE_M := 0.05
 const JUMP_ACTION := &"jump"
@@ -92,6 +93,18 @@ func end_interior(point: Vector3) -> bool:
 	reset_physics_interpolation()
 	return true
 
+func release_rooftop_to_exterior() -> bool:
+	# No relocation: preserve the current physical pose and momentum when a
+	# source-positioned roof rejoins the outdoor world, including mid-jump.
+	if not interior_active or not interior_ceiling_unbounded or _outdoor_recovery.is_empty():return false
+	if not global_position.is_finite() or not _inside_outdoors(global_position):return false
+	interior_active=false
+	spawn_transform=_outdoor_recovery.spawn;fall_limit_y=_outdoor_recovery.fall_limit
+	configured=_outdoor_recovery.configured;spawn_valid=_outdoor_recovery.spawn_valid
+	_outdoor_recovery={};interior_frame=Transform3D.IDENTITY;interior_walkable_rect=Rect2();interior_ceiling_unbounded=false
+	clear_water_region()
+	return true
+
 func relocate_interior(point: Vector3) -> bool:
 	# Lifts hand control back only on a verified landing. Its floor also becomes
 	# recovery's destination, so falling upstairs never returns to the lobby.
@@ -131,6 +144,29 @@ func set_water_region(region: Dictionary) -> bool:
 func clear_water_region() -> void:
 	if _water_contacting:_water_exits += 1
 	_water_region = {};_water_contacting = false;_swimming = false;_water_jump_locked = false
+
+func set_outdoor_water_region(region: Dictionary, bounds: AABB, walkable_rect: Rect2) -> bool:
+	# Roof helpers register bounded source-positioned water without converting
+	# the whole outdoor world into a detached interior or moving the player.
+	if interior_active or not configured or not region.get("id") is String or region.id.is_empty():return false
+	var frame: Variant=region.get("frame")
+	var rect: Variant=region.get("rect")
+	var bottom: Variant=region.get("floor_y")
+	var surface: Variant=region.get("surface_y")
+	if not frame is Transform3D or not rect is Rect2:return false
+	if not (bottom is float or bottom is int) or not (surface is float or surface is int):return false
+	if not frame.is_finite() or not frame.basis.is_equal_approx(frame.basis.orthonormalized()) or absf(frame.basis.determinant()-1.0)>.001 or not frame.basis.y.is_equal_approx(Vector3.UP):return false
+	if not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x<=0.0 or bounds.size.y<=0.0 or bounds.size.z<=0.0:return false
+	if not walkable_rect.position.is_finite() or not walkable_rect.size.is_finite() or not walkable_rect.has_area():return false
+	if not rect.position.is_finite() or not rect.size.is_finite() or rect.size.x<1.0 or rect.size.y<1.0 or not walkable_rect.encloses(rect.grow(.2)):return false
+	if not is_finite(float(bottom)) or not is_finite(float(surface)) or float(surface)-float(bottom)<.5 or float(surface)-float(bottom)>3.0:return false
+	for corner in [rect.position,rect.end,Vector2(rect.position.x,rect.end.y),Vector2(rect.end.x,rect.position.y)]:
+		for y in [float(bottom),float(surface)+2.0]:
+			var point: Vector3=frame*Vector3(corner.x,y,corner.y)
+			if not bounds.has_point(point) or not _inside_outdoors(point):return false
+	if _water_region.get("id","")==region.id and _water_region.get("frame")==frame:return true
+	clear_water_region();_water_region=region.duplicate(true);_water_region["outdoor"]=true
+	return true
 
 func is_swimming() -> bool:return _swimming
 
@@ -315,7 +351,13 @@ func _inside_outdoors(point: Vector3) -> bool:
 	if not free_roam_enabled:return super._inside(point)
 	if not point.is_finite():return false
 	var p:=Vector2(point.x,point.z)
-	if not free_roam_bounds.grow(-EDGE_MARGIN_M).has_point(p):return false
+	if free_roam_polygon.size()>=3:
+		if not free_roam_bounds.has_point(p) or not Geometry2D.is_point_in_polygon(p,free_roam_polygon):return false
+		for index in range(free_roam_polygon.size()):
+			var first: Vector2=free_roam_polygon[index]
+			var second: Vector2=free_roam_polygon[(index+1)%free_roam_polygon.size()]
+			if not first.is_finite() or not second.is_finite() or p.distance_squared_to(Geometry2D.get_closest_point_to_segment(p,first,second))<EDGE_MARGIN_M*EDGE_MARGIN_M:return false
+	elif not free_roam_bounds.grow(-EDGE_MARGIN_M).has_point(p):return false
 	# Preserve the authored private exclusion, including the capsule's footprint.
 	if connection_world._contains(p,connection_world.private_cache):return false
 	for polygon in connection_world.private_cache:

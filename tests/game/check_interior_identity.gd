@@ -147,9 +147,21 @@ func _capsule_failures(room: Node3D, point: Vector3) -> Array:
 
 func _catalog_physics() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/authored/interiors/source_catalog.json"))
+	var supplemental: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/authored/interiors/supplemental_catalog.json"))
+	var records: Array=data.records.duplicate(true)
+	var raw_floors: int=0
+	for record: Dictionary in data.records:raw_floors+=int(record.floor_count)
+	var supplement_valid: bool=supplemental.get("schema_version")==1 and supplemental.get("task")=="supplemental_lotte_visit" and supplemental.get("records",[]).size()==1 and supplemental.get("world_sha256")==FileAccess.get_sha256("res://resources/world_geometry/world.json") and supplemental.get("base_catalog_sha256")==FileAccess.get_sha256("res://assets/authored/interiors/source_catalog.json") and supplemental.get("exploration_extent_sha256")==FileAccess.get_sha256("res://assets/authored/exploration_extent.json")
+	if supplement_valid:
+		var added: Dictionary=supplemental.records[0]
+		supplement_valid=added.id=="osm:way:117914845:building" and int(added.floor_count)==37
+		for record: Dictionary in records:
+			if record.id==added.id:supplement_valid=false
+		if supplement_valid:records.append(added)
+	_check("catalog.original_125_base_and_1205_floors_preserved_plus_one_37_floor_supplement",data.records.size()==125 and raw_floors==1205 and supplement_valid and records.size()==126,{"base_buildings":data.records.size(),"base_floors":raw_floors,"supplemental_buildings":supplemental.get("records",[]).size(),"supplemental_floors":37,"merged_buildings":records.size(),"basis":"The original source_catalog stays at 125/1205; one separately hash-bound source-sized Lotte hotel adds 37 floors."})
 	var errors := [];var buildings := 0;var floors := 0;var capsule_queries := 0;var floor_queries := 0;var total_detail_solids := 0;var profiles := {};var people_bad := [];var representative_ids := [LIBRARY_ID,CITYHALL_ID,OFFICE_ID,HOTEL_ID,GALLERY_ID]
 	var native := DisplayServer.get_name()!="headless"
-	for record: Dictionary in data.records:
+	for record: Dictionary in records:
 		if native and record.id not in representative_ids:continue
 		var room: Node3D = load(ROOM_SCRIPT).new();root.add_child(room)
 		if not room.setup(_source_spec(record),Vector3(650,-100,0)):
@@ -158,7 +170,9 @@ func _catalog_physics() -> void:
 		buildings += 1;floors += room.floor_count
 		if not is_equal_approx(room.width,float(record.floor.width)) or not is_equal_approx(room.depth,float(record.floor.depth)) or room.floor_count!=int(record.floor_count) or not is_equal_approx(room.floor_height,float(record.floor_height)):
 			errors.append({"id":record.id,"kind":"source_dimensions_changed"})
-		if room.people.size()!=4:people_bad.append(record.id)
+		if room.people.is_empty() or room.people.size()>5:people_bad.append(record.id)
+		for person: Node3D in room.people:
+			if String(person.get_meta("interior_role","")).is_empty():people_bad.append(record.id)
 		if not room.has_method("interior_snapshot"):
 			errors.append({"id":record.id,"kind":"missing_identity_API"});room.free();continue
 		var identity: Dictionary = room.interior_snapshot()
@@ -198,21 +212,21 @@ func _catalog_physics() -> void:
 			special_observations[identity.profile_id] = observation
 		room.free()
 		if buildings%25==0:print("INTERIOR_CATALOG_PROGRESS buildings=",buildings," floors=",floors)
-	catalog_summary = {"scope":"five_native_representatives" if native else "all_125_source_buildings","buildings":buildings,"floors":floors,"capsule_queries":capsule_queries,"support_rays":floor_queries,"detail_solid_bodies":total_detail_solids,"profile_counts":profiles,"errors":errors,"people_bad_ids":people_bad}
-	_check("catalog.source_dimensions_"+("five_native_representatives" if native else "all_125_buildings"),buildings==(5 if native else 125) and floors==(68 if native else 1205) and errors.filter(func(e):return e.kind=="source_dimensions_changed" or e.kind=="setup_failed").is_empty(),catalog_summary)
+	catalog_summary = {"scope":"five_native_representatives" if native else "all_126_merged_source_buildings","buildings":buildings,"floors":floors,"base_buildings":data.records.size(),"base_floors":raw_floors,"supplemental_buildings":records.size()-data.records.size(),"supplemental_floors":37,"capsule_queries":capsule_queries,"support_rays":floor_queries,"detail_solid_bodies":total_detail_solids,"profile_counts":profiles,"errors":errors,"people_bad_ids":people_bad}
+	_check("catalog.source_dimensions_"+("five_native_representatives" if native else "all_126_merged_buildings"),buildings==(5 if native else 126) and floors==(68 if native else 1242) and errors.filter(func(e):return e.kind=="source_dimensions_changed" or e.kind=="setup_failed").is_empty(),catalog_summary)
 	_check("catalog.all_floor_spawns_lifts_stair_approaches_and_corridors_capsule_clear",errors.is_empty(),{"buildings":buildings,"floors":floors,"capsule_queries":capsule_queries,"support_rays":floor_queries,"errors":errors})
-	_check("catalog.identity_profiles_and_four_people_for_every_room",profiles.size()>=4 and not profiles.has("") and people_bad.is_empty(),{"profiles":profiles,"people_bad_ids":people_bad})
+	_check("catalog.identity_profiles_and_role_population_for_every_room",profiles.size()>=4 and not profiles.has("") and people_bad.is_empty(),{"profiles":profiles,"people_bad_ids":people_bad})
 	if not native:
-		var expected := {"bank":3,"chapel":3,"civic":6,"gallery":5,"hotel":9,"library":1,"office":97,"residential":1}
-		_check("catalog.eight_profile_mapping_counts_for_fixed_source",profiles==expected,{"observed":profiles,"expected":expected})
+		var expected := {"bank":3,"chapel":3,"civic":6,"gallery":5,"hotel":10,"library":1,"office":97,"residential":1}
+		_check("catalog.eight_profile_mapping_counts_for_merged_source",profiles==expected,{"observed":profiles,"expected":expected,"base_hotel_count":9,"supplemental_hotel_count":1})
 	if native:
 		var linked: Variant = JSON.parse_string(FileAccess.get_file_as_string(catalog_evidence_path)) if FileAccess.file_exists(catalog_evidence_path) else null
-		var linked_ok: bool = linked is Dictionary and linked.get("result")=="PASS" and linked.get("display")=="headless" and linked.get("catalog_physics",{}).get("buildings")==125 and linked.get("catalog_physics",{}).get("floors")==1205
+		var linked_ok: bool = linked is Dictionary and linked.get("result")=="PASS" and linked.get("display")=="headless" and linked.get("catalog_physics",{}).get("buildings")==126 and linked.get("catalog_physics",{}).get("floors")==1242 and linked.get("catalog_physics",{}).get("base_buildings")==125 and linked.get("catalog_physics",{}).get("base_floors")==1205
 		if linked_ok:
 			for path in source_hashes:
 				if linked.get("source_sha256",{}).get(path)!=source_hashes[path]:linked_ok = false
-		_check("catalog.full_125_headless_evidence_matches_current_sources",linked_ok,{"path":catalog_evidence_path,"expected_buildings":125,"expected_floors":1205})
-		deferred_checks.append({"name":"native.full_125_catalog_not_repeated","reason":"Full catalog physics and special-profile solids were performed headlessly; native execution inspects five representative profiles and uses hash-matched linked evidence","headless_report":catalog_evidence_path,"matching_sources_confirmed":linked_ok})
+		_check("catalog.full_126_merged_headless_evidence_matches_current_sources",linked_ok,{"path":catalog_evidence_path,"expected_buildings":126,"expected_floors":1242,"preserved_base_buildings":125,"preserved_base_floors":1205})
+		deferred_checks.append({"name":"native.full_126_merged_catalog_not_repeated","reason":"Full merged catalog physics (125 original + 1 supplemental building) and special-profile solids were performed headlessly; native execution inspects the same five representative profiles and uses hash-matched linked evidence","headless_report":catalog_evidence_path,"matching_sources_confirmed":linked_ok})
 
 func _transform_key(transform: Transform3D) -> String:
 	# Identity multiplication can turn IEEE -0.0 into +0.0 (90-degree Z-axis
@@ -405,7 +419,7 @@ func _people_motion() -> void:
 	var moved := 0
 	for index in range(people.size()):
 		if people[index].global_position.distance_to(before[index])>.15:moved += 1
-	_check("people.four_real_walkers_still_animate",people.size()==4 and moved==4,{"count":people.size(),"moved":moved})
+	_check("people.role_population_includes_real_motion",people.size()>=2 and moved>0,{"count":people.size(),"moved":moved})
 	before.clear()
 	for person in people:before.append(person.global_position)
 	scene.toggle_menu();await _ticks(12)
@@ -468,7 +482,7 @@ func _functional() -> void:
 	if not scene.runtime_ok:_check("startup.production_exploration",false);return
 	visit = scene.interior_visit;await _ticks(25)
 	original_inventory = _inventory()
-	_check("startup.production_exploration_and_source_catalog",visit.loaded and visit.catalog.size()==125)
+	_check("startup.production_exploration_and_merged_source_catalog",visit.loaded and visit.catalog.size()==126,{"merged_buildings":visit.catalog.size(),"preserved_base_buildings":125,"supplemental_buildings":1})
 	if await _enter(LIBRARY_ID,"library"):
 		await _capture("library_lobby",0)
 		await _people_motion()
@@ -492,7 +506,7 @@ func _functional() -> void:
 	_check("exterior.original_692_collision_bodies_and_shapes_unchanged",original_inventory.size()==692 and _inventory()==original_inventory,{"original_body_count":original_inventory.size()})
 
 func _run() -> void:
-	for path in [ROOM_SCRIPT,"res://scripts/interior_detail_kit.gd","res://scripts/interior_surface.gdshader","res://scripts/interior_visit.gd","res://scripts/building_visit_catalog.gd","res://assets/authored/interiors/source_catalog.json","res://scripts/player/free_roam_player.gd","res://../tests/game/check_interior_identity.gd"]:
+	for path in [ROOM_SCRIPT,"res://scripts/interior_detail_kit.gd","res://scripts/interior_population.gd","res://scripts/interior_surface.gdshader","res://scripts/interior_visit.gd","res://scripts/building_visit_catalog.gd","res://assets/authored/interiors/source_catalog.json","res://assets/authored/interiors/supplemental_catalog.json","res://scripts/player/free_roam_player.gd","res://../tests/game/check_interior_identity.gd"]:
 		if FileAccess.file_exists(path):source_hashes[path] = FileAccess.get_sha256(path)
 	await _catalog_physics();_identity_differences()
 	await _functional();_finish()

@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "task": "supplemental_lotte_visit",
+  "coordinate_space": "source_local_xz_metres",
+  "world_sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+  "base_catalog_sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+  "coordinate_contract_sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+  "exploration_extent_sha256": "7add4fef0bea3950241d840498aa044ba01d564c2da3c48f8d88f5e16f30155a",
+  "provenance": {
+    "config/region.json": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+    "data/processed/features.json": "8a1f69309425ca4a800096c8c2d3eb2b4f201ad79409826afbb76c7cf1a48399",
+    "data/processed/heights.json": "b926b2f490b26016b5bee7bf2f86ba1f44edaf87485b47f3d574a0a1f237f92c",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "game/assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848"
+  },
+  "generator_sha256": "35d9332e30a28820f9286ab84eff9ccce78f0be71dcc676d226046fa40a666a1",
+  "counts": {
+    "base_records_unchanged": 125,
+    "supplemental_records": 1,
+    "merged_records": 126,
+    "base_floor_count": 1205,
+    "supplemental_floor_count": 37,
+    "merged_floor_count": 1242
+  },
+  "validation": {
+    "result": "PASS",
+    "hotel_source_bbox_outside_m2": 0.0,
+    "hotel_capsule_inset_bbox_outside_m2": 0.0,
+    "source_private_overlap_m2": 0.0,
+    "floor_outside_actual_source_m2": 0.0,
+    "source_door_candidates": 9,
+    "door_apron_capsule_radius_m": 0.4,
+    "retail_not_added": "osm:way:233592424:building",
+    "source_data_or_world_modified": false
+  },
+  "assumptions": {
+    "floor_layout": "Source-inscribed game floor, no surveyed indoor plan.",
+    "door": "Clear candidate on actual source perimeter, not a measured real hotel doorway.",
+    "hotel_roof_pool": "Authored game amenity; factual hotel pool location/access unverified."
+  },
+  "records": [
+    {
+      "id": "osm:way:117914845:building",
+      "title": "롯데호텔서울",
+      "kind": "hotel",
+      "catalog_origin": "supplemental_lotte_source_bbox",
+      "source_rings": [
+        [
+          [
+            [
+              320.6754131220514,
+              1.0406134650111198
+            ],
+            [
+              321.23300553602166,
+              -5.5748747596517205
+            ],
+            [
+              321.51776893564966,
+              -8.954649053979665
+            ],
+            [
+              321.8049183670664,
+              -12.445385101716965
+            ],
+            [
+              345.97245833993657,
+              -11.981220816727728
+            ],
+            [
+              346.1847770138411,
+              -23.499808178748935
+            ],
+            [
+              371.4425292919623,
+              -22.779147791210562
+            ],
+            [
+              451.17808814160526,
+              -20.77671124925837
+            ],
+            [
+              453.77680243493523,
+              6.743734091054648
+            ],
+            [
+              447.6595254588756,
+              6.434661437291652
+            ],
+            [
+              427.10929625609424,
+              5.415764554869384
+            ],
+            [
+              427.0650327252224,
+              11.587133986875415
+            ],
+            [
+              421.5285672529717,
+              11.390436385758221
+            ],
+            [
+              343.7654847322847,
+              8.464331015013158
+            ],
+            [
+              332.14540216326714,
+              8.036852715536952
+            ],
+            [
+              332.77771268441575,
+              2.055745263583958
+            ],
+            [
+              324.5565709362272,
+              1.3683029925450683
+            ],
+            [
+              323.75398429337656,
+              1.2955377125181258
+            ],
+            [
+              320.6754131220514,
+              1.0406134650111198
+            ]
+          ]
+        ]
+      ],
+      "source_part_index": 0,
+      "source_height": 150.0,
+      "source_levels": 37,
+      "source_height_class": "source_tag",
+      "floor_count": 37,
+      "floor_height": 4.054054054054054,
+      "height_basis": "source_tag",
+      "floors_basis": "osm_building_levels",
+      "floor": {
+        "width": 103.19675584813382,
+        "depth": 25.025999911245158,
+        "rectangle_center": [
+          398.41606887609345,
+          -8.442844408876276
+        ],
+        "along": [
+          0.9996848059032014,
+          0.025105554092243233
+        ],
+        "outward": [
+          0.025105554092243233,
+          -0.9996848059032014
+        ],
+        "rectangle_area_m2": 2582.602002696186,
+        "rectangle_outside_source_m2": 0.0
+      },
+      "entry_candidates": [
+        {
+          "door": [
+            398.7588751500728,
+            -22.093139566924695
+          ],
+          "entrance": [
+            398.8090862582573,
+            -24.0925091787311
+          ],
+          "along": [
+            0.9996848059032014,
+            0.025105554092243233
+          ],
+          "outward": [
+            0.025105554092243233,
+            -0.9996848059032014
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 79.7606989511089,
+          "street_distance": 13.950003682129783
+        },
+        {
+          "door": [
+            341.9667015112316,
+            8.398157578818108
+          ],
+          "entrance": [
+            341.89317547101484,
+            10.396805602210433
+          ],
+          "along": [
+            -0.9993240116961627,
+            -0.036763020108361785
+          ],
+          "outward": [
+            -0.036763020108361785,
+            0.9993240116961627
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 11.627942922430792,
+          "street_distance": 23.887569731782534
+        },
+        {
+          "door": [
+            330.9839727732246,
+            1.9057548272222398
+          ],
+          "entrance": [
+            330.8173167328227,
+            3.8987991729901803
+          ],
+          "along": [
+            -0.9965221728839703,
+            -0.0833280202009547
+          ],
+          "outward": [
+            -0.0833280202009547,
+            0.9965221728839703
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 8.249833241940072,
+          "street_distance": 28.849389959268855
+        },
+        {
+          "door": [
+            332.5884748933195,
+            3.8457701400650155
+          ],
+          "entrance": [
+            330.5995583638961,
+            3.635505927735884
+          ],
+          "along": [
+            0.10513210616456571,
+            -0.9944582647116984
+          ],
+          "outward": [
+            -0.9944582647116984,
+            -0.10513210616456571
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 6.01443787456175,
+          "street_distance": 29.130468675348254
+        },
+        {
+          "door": [
+            321.08182695108695,
+            -3.7812345963365894
+          ],
+          "entrance": [
+            319.0888934362924,
+            -3.9492108018196252
+          ],
+          "along": [
+            0.08398810274151791,
+            -0.9964667573972954
+          ],
+          "outward": [
+            -0.9964667573972954,
+            -0.08398810274151791
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 6.638945228782196,
+          "street_distance": 31.073072495398385
+        },
+        {
+          "door": [
+            423.32743233479187,
+            11.45434583269706
+          ],
+          "entrance": [
+            423.25642183819315,
+            13.453084812497275
+          ],
+          "along": [
+            -0.9993694899001075,
+            -0.03550524829935454
+          ],
+          "outward": [
+            -0.03550524829935454,
+            0.9993694899001075
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 5.539958472020305,
+          "street_distance": 34.0095304821274
+        },
+        {
+          "door": [
+            428.90708789630054,
+            5.504900509479715
+          ],
+          "entrance": [
+            428.8080479467335,
+            7.502446776375619
+          ],
+          "along": [
+            -0.9987731334479516,
+            -0.049519974783517565
+          ],
+          "outward": [
+            -0.049519974783517565,
+            0.9987731334479516
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 20.575472561860074,
+          "street_distance": 41.16570098756427
+        },
+        {
+          "door": [
+            427.0963862679353,
+            7.215718257664468
+          ],
+          "entrance": [
+            429.09633482659655,
+            7.23006268895216
+          ],
+          "along": [
+            -0.00717221564384605,
+            0.9999742793306027
+          ],
+          "outward": [
+            0.9999742793306027,
+            0.00717221564384605
+          ],
+          "door_width": 3.6,
+          "source_edge_length": 6.171528167841712,
+          "street_distance": 41.50186491491033
+        }
+      ],
+      "source_footprint_area_m2": 3753.959406397037,
+      "source_building_tag": "yes",
+      "source_reference_ids": [
+        "w/117914845"
+      ]
+    }
+  ]
+}

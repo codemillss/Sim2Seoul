@@ -11,7 +11,8 @@
     "real_crowd_density_verified": false,
     "real_pet_access_verified": false,
     "route_basis": "Short authored, source-linked pedestrian patrols. Side offsets, people, pets, clothing and behaviour are game additions; no real visitor, animal access rule or measured sidewalk width is asserted.",
-    "height_basis": "Ray-observed existing physical ground, including the explicitly authored museum slope. No source elevation or collision is changed."
+    "height_basis": "Ray-observed existing physical ground, including the explicitly authored museum slope. No source elevation or collision is changed.",
+    "appearance_basis": "Authored skin, hair and clothing colour variation; no nationality or ethnicity is inferred or assigned."
   },
   "policy": {
     "speed_mps": 1.05,
@@ -24,7 +25,9 @@
     "dog_side_m": 0.8,
     "maximum_leash_m": 1.4,
     "sample_spacing_m": 0.5,
-    "traffic_route_clearance_m": 3.5
+    "traffic_route_clearance_m": 3.5,
+    "avoidance_maximum_offset_m": 1.25,
+    "avoidance_basis": "Exploration-only physically swept local passing with a committed lane, original route rejoin, supported footprint, private/road/traffic/entrance protection; no global crowd navigation."
   },
   "routes": [
     {
@@ -46,7 +49,24 @@
         0.47,
         0.29,
         0.2
-      ]
+      ],
+      "appearance": {
+        "skin": [
+          0.91,
+          0.72,
+          0.55
+        ],
+        "hair": [
+          0.1,
+          0.075,
+          0.06
+        ],
+        "trousers": [
+          0.18,
+          0.23,
+          0.28
+        ]
+      }
     },
     {
       "id": "stonewall_dog",
@@ -72,7 +92,24 @@
         0.28,
         0.4,
         0.25
-      ]
+      ],
+      "appearance": {
+        "skin": [
+          0.39,
+          0.23,
+          0.14
+        ],
+        "hair": [
+          0.045,
+          0.035,
+          0.028
+        ],
+        "trousers": [
+          0.19,
+          0.23,
+          0.17
+        ]
+      }
     },
     {
       "id": "stonewall_west",
@@ -93,7 +130,24 @@
         0.48,
         0.37,
         0.51
-      ]
+      ],
+      "appearance": {
+        "skin": [
+          0.76,
+          0.51,
+          0.34
+        ],
+        "hair": [
+          0.28,
+          0.12,
+          0.055
+        ],
+        "trousers": [
+          0.25,
+          0.2,
+          0.27
+        ]
+      }
     },
     {
       "id": "plaza_dog",
@@ -120,7 +174,24 @@
         0.38,
         0.55
       ],
-      "dog_side_m": -0.8
+      "dog_side_m": -0.8,
+      "appearance": {
+        "skin": [
+          0.53,
+          0.33,
+          0.21
+        ],
+        "hair": [
+          0.065,
+          0.045,
+          0.035
+        ],
+        "trousers": [
+          0.16,
+          0.22,
+          0.28
+        ]
+      }
     },
     {
       "id": "plaza_west",
@@ -141,7 +212,24 @@
         0.56,
         0.44,
         0.24
-      ]
+      ],
+      "appearance": {
+        "skin": [
+          0.95,
+          0.8,
+          0.68
+        ],
+        "hair": [
+          0.63,
+          0.49,
+          0.28
+        ],
+        "trousers": [
+          0.24,
+          0.21,
+          0.18
+        ]
+      }
     },
     {
       "id": "museum_slope",
@@ -158,7 +246,24 @@
         0.3,
         0.44,
         0.45
-      ]
+      ],
+      "appearance": {
+        "skin": [
+          0.66,
+          0.44,
+          0.28
+        ],
+        "hair": [
+          0.36,
+          0.34,
+          0.31
+        ],
+        "trousers": [
+          0.2,
+          0.25,
+          0.24
+        ]
+      }
     }
   ]
 }

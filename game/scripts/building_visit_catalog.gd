@@ -3,6 +3,8 @@ extends RefCounted
 ## preserved in the authored snapshot; the prepared floor rectangle fits inside
 ## that source envelope. Doors and indoor layouts are game assumptions.
 const SOURCE_PATH := "res://assets/authored/interiors/source_catalog.json"
+const SUPPLEMENTAL_PATH := "res://assets/authored/interiors/supplemental_catalog.json"
+const EXTENT_PATH := "res://assets/authored/exploration_extent.json"
 const WORLD_PATH := "res://resources/world_geometry/world.json"
 const LIBRARY_ID := "osm:relation:10757525:building"
 
@@ -25,7 +27,28 @@ func build(host: Node3D) -> Array[Dictionary]:
 		return records
 	counts = raw.get("counts", {}).duplicate(true)
 	provenance = raw.get("provenance", {}).duplicate(true)
-	for source: Dictionary in raw.records:
+	var sources: Array=raw.records.duplicate(true)
+	if FileAccess.file_exists(SUPPLEMENTAL_PATH):
+		var extra: Variant=JSON.parse_string(FileAccess.get_file_as_string(SUPPLEMENTAL_PATH))
+		if not extra is Dictionary or extra.get("schema_version")!=1 or extra.get("task")!="supplemental_lotte_visit" or not extra.get("records") is Array:
+			load_error="추가 건물 실내 자료 형식이 다릅니다.";return records
+		if extra.records.size()!=1:
+			load_error="추가 실내 자료는 검증된 롯데호텔 한 동이어야 합니다.";return records
+		if extra.get("world_sha256")!=FileAccess.get_sha256(WORLD_PATH) or extra.get("base_catalog_sha256")!=FileAccess.get_sha256(SOURCE_PATH) or extra.get("exploration_extent_sha256")!=FileAccess.get_sha256(EXTENT_PATH):
+			load_error="추가 실내 자료와 도시·기존 카탈로그·탐험 경계가 다릅니다.";return records
+		var world: Variant=JSON.parse_string(FileAccess.get_file_as_string(WORLD_PATH))
+		if not world is Dictionary or extra.get("coordinate_contract_sha256")!=world.get("coordinate_contract_sha256"):
+			load_error="추가 실내 자료의 좌표 계약이 다릅니다.";return records
+		var found: Dictionary={}
+		for source: Dictionary in sources:found[String(source.get("id",""))]=true
+		for source: Dictionary in extra.records:
+			var extra_id: String=String(source.get("id",""))
+			if extra_id!="osm:way:117914845:building" or found.has(extra_id) or extra.records.size()!=1:
+				load_error="추가 실내 자료에 중복되거나 승인되지 않은 건물이 있습니다.";return records
+			found[extra_id]=true;sources.append(source)
+		counts["base_records"]=raw.records.size();counts["supplemental_records"]=extra.records.size();counts["records"]=sources.size()
+		provenance["supplemental_catalog"]={"path":SUPPLEMENTAL_PATH,"sha256":FileAccess.get_sha256(SUPPLEMENTAL_PATH),"generator_sha256":extra.get("generator_sha256","")}
+	for source: Dictionary in sources:
 		var id := String(source.get("id", ""))
 		if not host.city.source_nodes.has(id): continue
 		var floor: Dictionary = source.get("floor", {})
@@ -79,6 +102,7 @@ func build(host: Node3D) -> Array[Dictionary]:
 			"rectangle_area_m2": float(floor.rectangle_area_m2),
 			"rectangle_outside_source_m2": float(floor.rectangle_outside_source_m2),
 			"source_reference_ids": source.source_reference_ids,
+			"catalog_origin": String(source.get("catalog_origin","EXP04_base")),
 			"game_layout_basis": "원본 외곽 안에 맞춘 게임 실내 · 실제 평면도 미확인",
 		}
 		records.append(record)

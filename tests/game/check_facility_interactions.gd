@@ -9,6 +9,8 @@ var target_observations: Array = []
 var deferred_checks: Array = []
 var started_at := ""
 var player_shape_before := {}
+var capture_progress: Dictionary={}
+var capture_stage_trace: Array=[]
 
 func _initialize() -> void:
 	started_at = Time.get_datetime_string_from_system()
@@ -191,6 +193,30 @@ func _cancel_by_E(title: String) -> void:
 	_e(false);_movement();await _ticks(6)
 	_check("control."+title+".neutral_releases_without_ghost_visuals",not scene.player.input_latched and not scene.player.facility_control and _mesh_observation().visible_mesh_count==0,{"state":_state(),"meshes":_mesh_observation()})
 
+func _capture_mark(title: String,phase: String) -> void:
+	capture_progress={"title":title,"phase":phase,"wall_ticks_msec":Time.get_ticks_msec(),"process_frames":Engine.get_process_frames(),"physics_frames":Engine.get_physics_frames()}
+	capture_stage_trace.append(capture_progress.duplicate())
+	print("FACILITY_CAPTURE_STAGE title=",title," phase=",phase," wall_ms=",capture_progress.wall_ticks_msec," process=",capture_progress.process_frames," physics=",capture_progress.physics_frames)
+
+func _draw_activity_frame(title: String) -> bool:
+	# One complete process cycle publishes the resized UI. Subscribe before
+	# forcing a real draw so an obscured window cannot leave an unbounded
+	# frame_post_draw await ahead of the first force_draw call.
+	_capture_mark(title,"await_process_layout")
+	await process_frame
+	var observation := {"drawn":false}
+	var on_draw: Callable=func():observation["drawn"]=true
+	RenderingServer.frame_post_draw.connect(on_draw,CONNECT_ONE_SHOT)
+	_capture_mark(title,"force_draw_begin")
+	RenderingServer.force_draw(false,0.0)
+	_capture_mark(title,"force_draw_returned")
+	for index in range(30):
+		if observation.drawn:break
+		await process_frame
+	if RenderingServer.frame_post_draw.is_connected(on_draw):RenderingServer.frame_post_draw.disconnect(on_draw)
+	_capture_mark(title,"frame_observed" if observation.drawn else "frame_missing_after_30_process_frames")
+	return bool(observation.drawn)
+
 func _capture_activity(title: String,target: Dictionary,small := false) -> void:
 	if DisplayServer.get_name()=="headless":
 		deferred_checks.append({"name":"capture."+title,"reason":"headless_has_no_rendered_viewport"});return
@@ -204,10 +230,13 @@ func _capture_activity(title: String,target: Dictionary,small := false) -> void:
 	elif Vector2(direction.x,direction.z).length()>.01:scene.rig.yaw=atan2(-direction.x,-direction.z)+deg_to_rad(-40. if String(target.kind)=="treadmill" else 24.)
 	scene.rig.pitch=deg_to_rad(-8.);scene.rig.requested_distance=2.6;scene.rig.snap_to_target_pose()
 	await _ticks(6)
-	# Resizing may run several physics ticks before the first Node._process.
-	# Observe the rendered layout after both physics status and process prompt
-	# have been published; process_frame itself fires before Node._process.
-	await RenderingServer.frame_post_draw
+	var drawn: bool=await _draw_activity_frame(title)
+	_check("capture_frame."+title+".actual_forced_frame_post_draw_observed",drawn,capture_progress.duplicate())
+	if not drawn:
+		captures.append({"name":title,"captured":false,"reason":"No actual forced draw observed within 30 process frames","render_progress":capture_progress.duplicate()})
+		if small:
+			root.size=size_before;root.content_scale_size=scale_before;root.content_scale_mode=mode_before;await _ticks(5)
+		return
 	var view:=Rect2(Vector2.ZERO,scene.get_viewport().get_visible_rect().size)
 	var prompt: Rect2=visit.prompt.get_global_rect();var indoor: Rect2=visit.indoor_panel.get_global_rect()
 	var panel: Control=scene.get_node("Interface/FacilityActivityStatus")
@@ -220,12 +249,14 @@ func _capture_activity(title: String,target: Dictionary,small := false) -> void:
 	if String(target.kind) in ["treadmill","shower"]:
 		_check("capture_pose."+title+".open_aisle_view_keeps_normal_avatar_visible",distance>1.0 and scene.player.get_node("Visual").is_visible_in_tree(),{"normal_camera_distance_m":distance,"normal_yaw_degrees":rad_to_deg(scene.rig.yaw),"avatar_visible":scene.player.get_node("Visual").is_visible_in_tree(),"method":"Normal spring-arm solver from the unchanged activity position; no avatar hide or player relocation."})
 	if String(target.kind)=="eat":_meal_screen_visibility(title,view)
-	await process_frame;RenderingServer.force_draw(false,0.)
+	_capture_mark(title,"image_readback_begin")
 	var picture: Image=scene.get_viewport().get_texture().get_image()
+	_capture_mark(title,"image_readback_returned")
 	var path:=report_path.trim_suffix(".json")+"_"+title+".png"
 	var saved: bool=not picture.is_empty() and picture.save_png(path)==OK
 	var evidence:={"name":title,"captured":saved,"path":path,"width":picture.get_width(),"height":picture.get_height(),"player":scene.player.global_position,"camera":scene.rig.camera.global_transform,"actual_camera_distance_m":distance,"requested_zoom_m":scene.rig.requested_distance,"state":_state(),"actual_meshes":_mesh_observation()}
 	captures.append(evidence);_check("capture."+title,saved,evidence)
+	_capture_mark(title,"saved" if saved else "save_failed")
 	if small:
 		root.size=size_before;root.content_scale_size=scale_before;root.content_scale_mode=mode_before;await _ticks(5)
 
@@ -438,7 +469,7 @@ func _finish() -> void:
 	var failed:=0
 	for check in checks:
 		if not check.passed:failed+=1
-	var report:={"task":"facility_interactions","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"source_sha256":source_hashes,"checks":checks,"summary":{"checks":checks.size(),"failed":failed},"scenario_starts":placements,"walks":walks,"targets":target_observations,"activity_observations":activity_observations,"captures":captures,"deferred_checks":deferred_checks,"final_state":_state() if is_instance_valid(activity) else {},"scope":"Representative actual hotel buffet2F, gym4F, spa5F and office cafeteria. Production physical E edges start/stop every happy-path action; floor navigation uses physical E picker plus production request_floor. Recorded scenario starts position only before controller walks; no handle_interact call or counter injection. Independent actual MeshInstance3D role/transform observations, real stats and physics lock, pause exactness, solid LOS rejection, reset cleanup and source collision inventory. Native normal-camera PNGs and HUD bounds only when display is not headless. Authored game facilities; no real hotel service, nutrition/health claim, full catalog action audit, human OS keyboard input, performance or fluid simulation acceptance."}
+	var report:={"task":"facility_interactions","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"source_sha256":source_hashes,"checks":checks,"summary":{"checks":checks.size(),"failed":failed},"scenario_starts":placements,"walks":walks,"targets":target_observations,"activity_observations":activity_observations,"captures":captures,"capture_progress":capture_progress,"capture_stage_trace":capture_stage_trace,"deferred_checks":deferred_checks,"final_state":_state() if is_instance_valid(activity) else {},"scope":"Representative actual hotel buffet2F, gym4F, spa5F and office cafeteria. Production physical E edges start/stop every happy-path action; floor navigation uses physical E picker plus production request_floor. Recorded scenario starts position only before controller walks; no handle_interact call or counter injection. Independent actual MeshInstance3D role/transform observations, real stats and physics lock, pause exactness, solid LOS rejection, reset cleanup and source collision inventory. Native normal-camera PNGs and HUD bounds only when display is not headless. Authored game facilities; no real hotel service, nutrition/health claim, full catalog action audit, human OS keyboard input, performance or fluid simulation acceptance."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file!=null:file.store_string(JSON.stringify(_json(report),"\t")+"\n");file.close()
 	else:failed+=1;push_error("Could not save facility interactions report")

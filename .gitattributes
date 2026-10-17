@@ -15,3 +15,8 @@ game/assets/vendor/kenney_city_kit_commercial/License.txt -text -eol whitespace=
 # R03 command output and unified-diff context are exact-byte evidence.
 data/reports/r03/**/*.log -text -eol whitespace=-blank-at-eof
 data/reports/r03/exports/**/temporary_project.diff -text -eol whitespace=-blank-at-eol
+# EXP20 source and review evidence retain upstream bytes, including CRLF.
+data/raw/supplemental/seoul_terrain/20261018/* -text -eol whitespace=cr-at-eol
+data/reports/realism_rework/20261017/terrain_sources/kogl-type1-original.html -text -eol whitespace=-blank-at-eol
+# A unified diff's context prefix precedes the original GDScript tabs.
+data/reports/realism_rework/20261017/development/menu_palette_only.patch -text -eol whitespace=-space-before-tab

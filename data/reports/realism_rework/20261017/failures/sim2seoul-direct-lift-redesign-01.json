@@ -1,0 +1,30 @@
+{
+	"checks": [
+		{
+			"evidence": {},
+			"name": "startup",
+			"passed": false
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"entry_paths": [],
+	"placements": [],
+	"result": "FAIL",
+	"rides": [],
+	"scope": "One entry uses the actual hotel menu button signal. The other explicitly fixtures only a direct-jump arrival on the same existing source-positioned roof; full physical ascent is covered by check_outdoor_roof_jumping.gd. Every subsequent roof approach and lobby exit uses production Input/move_and_slide, fresh E opens the actual floor picker, and its actual first-floor button starts the full phased cabin ride. Far/air, malformed-frame, missing-roof-support, invalid-floor and blocked-destination failures preserve physical/mode/control/selection state. No native human usability, performance or real-venue access claim.",
+	"source_sha256": {
+		"res://../tests/game/check_direct_roof_lift.gd": "7d2342e9661bb4deb0ae245b0e928ca13c846f2c16d4ccb833aeed68462d2ab1",
+		"res://scripts/exploration_rooftop_access.gd": "aad9b1d15ee489320012e8c66db2eefb4b698d44713ec46db939efaed771d686",
+		"res://scripts/explore_walk.gd": "d4e6f0a1d9dfce07807ce12712da20fd3d8522e7689b547308a4c3df9957781c",
+		"res://scripts/interior_visit.gd": "33f6da6fb9cf30fd8a8b175268c30dd8c3ea94f9499b174c8b892aaed8d03d1a",
+		"res://scripts/player/free_roam_player.gd": "b2a1d1ca9365637c38519b5af114078e8f5d537cd16b1d86022abf765d819e86",
+		"res://scripts/rooftop_space.gd": "531dbb00ca24205e1ccee2cfa492fd1da05ced78a3c9d0801b80e071896c3bbe"
+	},
+	"summary": {
+		"checks": 1,
+		"failed": 1
+	},
+	"task": "DIRECT_OUTDOOR_ROOF_LIFT_REENTRY",
+	"walks": []
+}

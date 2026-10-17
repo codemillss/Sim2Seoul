@@ -4,6 +4,7 @@ extends Node3D
 const DESIGN_PATH := "res://assets/authored/street_pedestrians.json"
 const WORLD_PATH := "res://resources/world_geometry/world.json"
 const AVATAR := preload("res://scripts/player/exploration_avatar.gd")
+const AVOIDANCE := preload("res://scripts/pedestrian_corridor_avoidance.gd")
 class StreetActor extends CharacterBody3D:
 	var facility_control := false
 	func _physics_process(_delta: float) -> void:pass
@@ -33,6 +34,7 @@ var _minimum_neighbor_distance := INF
 var _maximum_leash := 0.0
 var _leash_blocked_ticks := 0
 var _maximum_local_density := 0
+var avoidance: RefCounted
 
 func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: Node3D) -> bool:
 	if loaded or not is_instance_valid(source_city) or not is_instance_valid(controlled_player) or not is_instance_valid(camera_rig):return false
@@ -50,6 +52,7 @@ func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: No
 	if is_instance_valid(visit):
 		for row: Dictionary in visit.catalog:
 			for entry: Dictionary in row.entry_candidates:_doors.append(entry.entrance)
+	avoidance=AVOIDANCE.new();avoidance.setup(self,_at,_ground,_allowed,_neighbors)
 	for record: Dictionary in _design.routes:_make_group(record)
 	if groups.size()!=6 or actors.size()!=8:return _fail("안전한 거리 보행 공간을 확보하지 못했습니다.")
 	var finish:=FinishPose.new();finish.host=self;finish.process_physics_priority=3;add_child(finish)
@@ -95,6 +98,27 @@ func _ground(at: Vector3,height := 2.0) -> Dictionary:
 	if hit.is_empty() or hit.normal.y<.75:return {}
 	return {"point":Vector3(at.x,hit.position.y+.025,at.z),"normal":hit.normal,"rid":hit.rid,"collider":hit.collider}
 
+func _allowed(point: Vector3,radius: float) -> bool:
+	# Source roads/private rings remain protected even when the player's
+	# optional free-exploration setting permits the player onto a road.
+	for offset: Vector3 in [Vector3.ZERO,Vector3.RIGHT*radius,Vector3.LEFT*radius,Vector3.FORWARD*radius,Vector3.BACK*radius]:
+		var sample:=point+offset;var local:=city.to_local(sample);var flat:=Vector2(local.x,local.z)
+		if not player.free_roam_bounds.grow(-.15).has_point(Vector2(sample.x,sample.z)):return false
+		if city.has_method("_contains"):
+			if city._contains(flat,city.private_cache):return false
+			for road: Array in city.road_cache:
+				if city._contains(flat,road):return false
+	if _traffic_distance(point)<float(_design.policy.traffic_route_clearance_m)+radius:return false
+	for door: Vector3 in _doors:
+		if Vector2(point.x-door.x,point.z-door.z).length()<1.0+radius:return false
+	return true
+
+func _neighbors(group: Dictionary) -> Array:
+	var result: Array=[player];result.append_array(_old_people)
+	for row: Dictionary in actors:
+		if row.group!=group.id:result.append(row.body)
+	return result
+
 func _clear_static(point: Vector3,kind: String,yaw := 0.) -> bool:
 	var shape: Shape3D
 	if kind=="dog":var box:=BoxShape3D.new();box.size=Vector3(.42,.52,.84);shape=box
@@ -104,11 +128,11 @@ func _clear_static(point: Vector3,kind: String,yaw := 0.) -> bool:
 	return get_world_3d().direct_space_state.intersect_shape(query,1).is_empty()
 
 func _traffic_distance(point: Vector3) -> float:
-	var best:=INF
+	var best:=INF;var local:=city.to_local(point);var flat:=Vector2(local.x,local.z)
 	for route: Dictionary in _traffic_routes:
 		for index in range(1,route.xz.size()):
 			var a:=Vector2(route.xz[index-1][0],route.xz[index-1][1]);var b:=Vector2(route.xz[index][0],route.xz[index][1])
-			var local:=city.to_local(point);best=minf(best,Vector2(local.x,local.z).distance_to(Geometry2D.get_closest_point_to_segment(Vector2(local.x,local.z),a,b)))
+			best=minf(best,flat.distance_to(Geometry2D.get_closest_point_to_segment(flat,a,b)))
 	return best
 
 func _make_group(record: Dictionary) -> void:
@@ -181,6 +205,10 @@ func _make_actor(group: Dictionary,kind: String,side: float) -> Dictionary:
 		var avatar:=AVATAR.new();avatar.setup(body);row["avatar"]=avatar
 		var color:=Color(group.record.clothing[0],group.record.clothing[1],group.record.clothing[2])
 		for key in ["jacket","jacket_trim"]:avatar._materials[key].albedo_color=color.lightened(.12 if key=="jacket_trim" else 0.)
+		var appearance: Dictionary=group.record.get("appearance",{})
+		for key in ["skin","hair","trousers"]:
+			if not appearance.has(key) or not avatar._materials.has(key):continue
+			var rgb: Array=appearance[key];avatar._materials[key].albedo_color=Color(rgb[0],rgb[1],rgb[2])
 	else:_make_dog(row,group.record)
 	var proxy:=RenderProxy.new();proxy.name="RenderProxy";proxy.process_physics_priority=-100;proxy.process_mode=Node.PROCESS_MODE_PAUSABLE;visual.add_child(proxy)
 	for child in visual.get_children():
@@ -286,20 +314,24 @@ func _physics_process(delta: float) -> void:
 		return
 	elapsed+=delta
 	for group: Dictionary in groups:
-		var reason:=_block(group,group.direction,.55)
-		var stopped: bool=not reason.is_empty() or group.get("leash_blocked",false)
+		var speed: float=float(_design.policy.speed_mps)
+		var chosen: Dictionary=avoidance.choose(group,delta,speed)
+		var reason: String=chosen.reason
+		var stopped: bool=not chosen.clear
 		if stopped:
 			group.state="waiting";group.blocked_reason=reason if not reason.is_empty() else "leash_corridor";group.blocked_s+=delta;group.clear_s=0.
-			if group.blocked_s>=float(_design.policy.blocked_reverse_s) and _block(group,-group.direction,.8).is_empty():group.direction=-group.direction;group.blocked_s=0.;group.dwell_s=.7;group.turns+=1
+			if group.blocked_s>=float(_design.policy.blocked_reverse_s) and avoidance.can_reverse(group,.8):
+				group.direction=-group.direction;group.blocked_s=0.;group.dwell_s=.7;group.turns+=1;group.avoidance_plan=[]
 		else:
 			group.clear_s+=delta
-			if group.clear_s>=float(_design.policy.clear_hold_s):group.state="walking";group.blocked_reason="";group.blocked_s=0.
+			if group.clear_s>=float(_design.policy.clear_hold_s):group.state="passing" if chosen.get("passing",false) else "walking";group.blocked_reason="";group.blocked_s=0.
 		if group.dwell_s>0.:group.dwell_s=maxf(0.,group.dwell_s-delta);stopped=true;group.state="turning"
-		var speed: float=0. if stopped or group.clear_s<float(_design.policy.clear_hold_s) else float(_design.policy.speed_mps)
-		var next:=clampf(group.station+group.direction*speed*delta,0.,group.length)
+		speed=0. if stopped or group.clear_s<float(_design.policy.clear_hold_s) else speed
 		var direction:=_tangent(group,group.station)*float(group.direction)
-		for row: Dictionary in group.members:
-			_step_member(row,_at(group,next,row.side),float(_design.policy.maximum_dog_speed_mps) if row.kind=="dog" and speed>0. else speed,delta,direction)
+		for index in range(group.members.size()):
+			var row: Dictionary=group.members[index];var target: Vector3=chosen.targets[index] if speed>0. else row.body.global_position
+			var motion_direction: Vector3=target-row.body.global_position;motion_direction.y=0.
+			_step_member(row,target,float(_design.policy.maximum_dog_speed_mps) if row.kind=="dog" and speed>0. else speed,delta,motion_direction.normalized() if motion_direction.length()>.0001 else direction)
 		var human: Dictionary=group.members[0];var closest:=INF;var station: float=group.station
 		for index in range(1,group.points.size()):
 			var a:=_at(group,group.arc[index-1]);var b:=_at(group,group.arc[index]);var p: Vector3=human.body.global_position
@@ -311,7 +343,7 @@ func _physics_process(delta: float) -> void:
 				station=lerpf(group.arc[index-1],group.arc[index],clampf(fraction,0.,1.))
 		group.actual_distance_m+=absf(station-group.station);group.station=station
 		if speed>0. and ((group.direction>0 and group.station>group.length-.04) or (group.direction<0 and group.station<.04)):
-			group.direction=-group.direction;group.dwell_s=float(_design.policy.end_dwell_s);group.turns+=1;group.clear_s=0.
+			group.direction=-group.direction;group.dwell_s=float(_design.policy.end_dwell_s);group.turns+=1;group.clear_s=0.;group.avoidance_plan=[]
 	for row: Dictionary in actors:
 		var p: Vector3=row.body.global_position;var local_density:=0
 		_minimum_player_distance=minf(_minimum_player_distance,Vector2(p.x-player.global_position.x,p.z-player.global_position.z).length())
@@ -371,5 +403,5 @@ func snapshot() -> Dictionary:
 			for leg: Dictionary in row.legs:feet.append({"position":leg.paw.global_position,"joint_rotation":leg.joint.rotation})
 			item["feet"]=feet;item["tail_rotation"]=row.tail.rotation;item["collar"]=row.collar.global_position
 		rows.append(item)
-	for group: Dictionary in groups:routes.append({"id":group.id,"source":group.source,"source_points":group.points,"side_offset_m":group.record.side_offset_m,"dog":group.record.dog,"station_m":group.station,"length_m":group.length,"state":group.state if running else "paused","blocked_reason":group.blocked_reason,"direction":group.direction,"turns":group.turns,"actual_distance_m":group.actual_distance_m,"minimum_traffic_route_distance_m":group.minimum_traffic_distance_m,"leash_visible":group.leash.visible if group.record.dog else false,"authored_height":group.authored_height})
+	for group: Dictionary in groups:routes.append({"id":group.id,"source":group.source,"source_points":group.points,"side_offset_m":group.record.side_offset_m,"dog":group.record.dog,"station_m":group.station,"length_m":group.length,"state":group.state if running else "paused","blocked_reason":group.blocked_reason,"direction":group.direction,"turns":group.turns,"actual_distance_m":group.actual_distance_m,"minimum_traffic_route_distance_m":group.minimum_traffic_distance_m,"leash_visible":group.leash.visible if group.record.dog else false,"authored_height":group.authored_height,"avoidance_offset_m":group.get("avoidance_offset_m",0.),"avoidance_lane_m":group.get("avoidance_lane_m",0.),"avoidance_count":group.get("avoidance_count",0)})
 	return {"loaded":loaded,"error":load_error,"authored_population":true,"source_geometry_modified":false,"running":running,"elapsed":elapsed,"walker_count":groups.size(),"dog_count":actors.size()-groups.size(),"actor_count":actors.size(),"actors":rows,"routes":routes,"skipped":skipped,"maximum_step_m":_maximum_step,"minimum_player_distance_m":_minimum_player_distance,"minimum_neighbor_distance_m":_minimum_neighbor_distance,"maximum_leash_length_m":_maximum_leash,"leash_blocked_ticks":_leash_blocked_ticks,"maximum_observed_actors_within_10m":_maximum_local_density,"maximum_authored_actors":8,"traffic_registration_count":actors.filter(func(row: Dictionary)->bool:return row.registered_traffic).size()}

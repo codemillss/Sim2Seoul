@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "task": "POOL_FLUSH_VISUAL_REVIEW",
+  "reviewed_at_local": "2026-10-18T00:13:11.497815+09:00",
+  "reviewer": "outdoor_pool assistant subagent; pool implementation contributor, performing a separate direct inspection of these final rendered captures. This is not blinded external validation.",
+  "result": "ACCEPTED_WITH_RECORDED_LIMITATIONS",
+  "review_method": "All seven original 1152x720 PNGs opened directly with view_image. No image editing, avatar hiding, camera change, runtime source change or engine execution during review. Screenshot impressions are separated from numeric production test observations.",
+  "source_report": "data/reports/realism_rework/20261017/final/pool_gpu.json",
+  "source_report_sha256": "14bda9f809542f43517906ba3c272174adc02da4854d74643f036a4d6dd99b4e",
+  "source_report_result": "PASS",
+  "source_report_checks": {
+    "checks": 52,
+    "failed": 0
+  },
+  "visual_scope": {
+    "hotel": "더플라자호텔",
+    "source_building_id": "osm:way:233593619:building",
+    "visually_inspected_hotels": 1,
+    "images_opened": 7,
+    "all_hotels_visual_acceptance_claimed": false,
+    "production_report_hotel_geometry_count": 8
+  },
+  "acceptance": {
+    "large_outdoor_pool_impression": true,
+    "flush_water_deck_relation_visible": true,
+    "sunbeds_parasols_shower_and_skyline_visible": true,
+    "entry_splash_and_buoyant_avatar_visible": true,
+    "both_Space_exit_views_keep_full_original_avatar_visible": true,
+    "normal_lift_arrival_shows_water_without_camera_override": true,
+    "roof_HUD_readable_and_unrelated_street_cards_absent": true,
+    "new_blocking_visual_defects": []
+  },
+  "automated_evidence_not_inferred_from_stills": {
+    "clear_water_dimensions_m": [
+      24.0,
+      10.0
+    ],
+    "area_m2": 240.0,
+    "water_depth_m": 1.22,
+    "surface_below_game_deck_m": 0.18,
+    "authored_game_deck_raise_m": 1.55,
+    "actual_single_long_swim_distance_m": 21.6994934082031,
+    "open_sky_queries": 9,
+    "clear_camera_orbits": 36,
+    "camera_orbit_overlaps": 0,
+    "normal_arrival_camera_distance_m": 2.8,
+    "both_exit_camera_distance_m": 4.0,
+    "arrival_and_exit_visible_avatar_meshes": 29,
+    "all_8_hotel_rectangles_match_minimum": true
+  },
+  "images": [
+    {
+      "name": "hotel_pool_normal_arrival",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_hotel_pool_normal_arrival.png",
+      "sha256": "64128427eea692c6f4bff191dd2f20ebb7a64e2fa2ecdcdf8d5af290c56ab139",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "Wide flush water surface is immediately ahead of the actual lift landing.",
+        "Deck, coping, glass roof edge and surrounding skyline read as an outdoor rooftop pool.",
+        "Original avatar remains in the central opening; the lift doorway posts frame the sides.",
+        "Compact roof HUD states E floor selection and roof jump exit; no unrelated street entrance card overlays the pool."
+      ],
+      "limitations": [
+        "The near lift prompt overlaps part of the lower legs in this arrival frame.",
+        "Loungers, parasols and shower are best seen after turning toward the long axis, rather than all appearing in the initial forward view."
+      ],
+      "reported_camera_evidence": {
+        "distance_m": 2.8,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visual_visible": true,
+        "visible_avatar_meshes": 29,
+        "hidden_ticks_during_settle": 0,
+        "production_view_before": [
+          -0.105762779712677,
+          -0.261799395084381,
+          2.79999995231628
+        ],
+        "production_view_after": [
+          -0.105762779712677,
+          -0.261799395084381,
+          2.79999995231628
+        ],
+        "roof_camera_fallback": false
+      }
+    },
+    {
+      "name": "jump_above_flush_pool",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_jump_above_flush_pool.png",
+      "sha256": "0bb2a38328004a4de8a539dd45d5198139811c7a2d019f54e9245f866802f1c7",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "The long swimming rectangle and lane strips are legible at the deck edge, with no raised tank wall blocking the water.",
+        "Sun loungers, parasols, shower/towel props, planting, lift enclosure and the open skyline are visible together.",
+        "The avatar remains visible above the coping and water during the jump."
+      ],
+      "limitations": [
+        "The construction and water shading remain deliberately simple low-poly game assets."
+      ]
+    },
+    {
+      "name": "splash_on_physical_entry",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_splash_on_physical_entry.png",
+      "sha256": "985c981aa658916323dab1446dca7d0193bc0e45a8d35edf0f07eb03f12dfca0",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "Finite droplets and a surface ring surround the visible torso on physical water entry.",
+        "The pool edge is flush with the walkable deck and the far leisure zone remains visible.",
+        "Swimming HUD explicitly shows movement controls and Space water exit."
+      ],
+      "limitations": [
+        "The entry handrail crosses the lower foreground; it does not obscure the avatar head/torso but occupies a noticeable part of this view."
+      ]
+    },
+    {
+      "name": "buoyant_swimming_in_sunken_basin",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_buoyant_swimming_in_sunken_basin.png",
+      "sha256": "d391a21fdf090ee5c05720e6f3ccb80f0f729af7ebcdfd4c4174283bcdd1e478",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "Head and upper torso stay above the surface while the legs remain visible through the water.",
+        "Large water area, lane strips, coping and outdoor leisure furniture stay legible."
+      ],
+      "limitations": [
+        "The entry handrail still crosses the lower foreground in this near-entry view.",
+        "The existing clothed upright avatar conveys game buoyancy rather than a finished horizontal swim stroke or swimwear system."
+      ]
+    },
+    {
+      "name": "large_open_sky_swimming_pool",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_large_open_sky_swimming_pool.png",
+      "sha256": "86c0f5bf9ccce85602d64818e1e732d0e93a330a05f44d103a662ae7459a2230",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "The normal swimming view has an unobstructed central avatar, substantial water area and clear long-axis depth.",
+        "Parasol/lounger zone and skyline establish the outdoor hotel-roof setting.",
+        "The entry rail no longer dominates the frame from this position."
+      ],
+      "limitations": [
+        "Water is a simple translucent game surface with lane lines; it is not a simulated fluid or a measured hotel interior/exterior recreation."
+      ]
+    },
+    {
+      "name": "Space_exit_back_on_deck",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_Space_exit_back_on_deck.png",
+      "sha256": "d269380733a1b5277838585653472ad5fffbf3a995769be66c0d6499f19a7312",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "Original avatar is fully visible and standing on the deck after the actual Space exit.",
+        "The clear strip between coping and loungers remains usable and visually open.",
+        "Loungers, side tables, parasols and the city view provide a readable leisure deck.",
+        "The roof HUD is compact and does not cover the avatar or pool exit strip."
+      ],
+      "limitations": [
+        "Nearby flat neighbouring roofs remain simplified source-envelope scenery."
+      ],
+      "reported_camera_evidence": {
+        "distance_m": 4.0,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visual_visible": true,
+        "visible_avatar_meshes": 29,
+        "hidden_ticks_during_settle": 0,
+        "production_view_before": [
+          1.46503353118896,
+          -0.349065840244293,
+          4.0
+        ],
+        "production_view_after": [
+          1.46503353118896,
+          -0.349065840244293,
+          4.0
+        ],
+        "roof_camera_fallback": false
+      }
+    },
+    {
+      "name": "Space_exit_right_back_on_deck",
+      "image": "data/reports/realism_rework/20261017/final/pool_gpu_Space_exit_right_back_on_deck.png",
+      "sha256": "24bcb0ba2645862d88ce3f7919e7cba278e86864cc51c6306a12fdd06a9944c3",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "visible": [
+        "Original avatar is fully visible and standing on the opposite clear deck strip after Space exit.",
+        "Pool coping, clear walking strip, glass edge and skyline are visible without camera collapse.",
+        "No street wayfinding card or facility prop blocks the central avatar."
+      ],
+      "limitations": [
+        "This opposite edge primarily looks outward over the skyline, so the leisure furniture is outside this particular view."
+      ],
+      "reported_camera_evidence": {
+        "distance_m": 4.0,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visual_visible": true,
+        "visible_avatar_meshes": 29,
+        "hidden_ticks_during_settle": 0,
+        "production_view_before": [
+          -1.67655909061432,
+          -0.349065840244293,
+          4.0
+        ],
+        "production_view_after": [
+          -1.67655909061432,
+          -0.349065840244293,
+          4.0
+        ],
+        "roof_camera_fallback": false
+      }
+    }
+  ],
+  "remaining_limits": [
+    "Near-entry swimming frames include an unobstructive foreground handrail.",
+    "The arrival E prompt covers part of the lower legs while the avatar head/body and water remain clear.",
+    "Character remains the original clothed upright low-poly avatar; a complete swim animation, swimwear, fluid interaction and realistic wet materials are not established.",
+    "This reviews one representative authored pool and seven selected views, not every possible camera angle, every hotel roof or a human OS-input journey.",
+    "Source footprint/height retention and physically supported floor opening/steps/entry/exit are supported by the referenced automated test, not proven solely by screenshots.",
+    "The +1.55m game deck and sunken basin are authored accommodations above source slabs, not a claim of measured hotel roof/pool construction."
+  ]
+}

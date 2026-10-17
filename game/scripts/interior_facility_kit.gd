@@ -204,6 +204,11 @@ func _fitness() -> void:
 	var zone := _zone("fitness","피트니스 · 유산소 / 근력",1.0,7.8)
 	if zone.is_empty():return
 	for i in range(2):_treadmill(Vector3(zone.outer-.85,0,zone.front-2.8-i*2.6),i)
+	# Keep a continuous aisle between the new stations and the original belts.
+	# Very narrow accepted rooms retain their original treadmill programme.
+	if float(zone.width)>=4.1:
+		_stationary_cycle(Vector3(zone.inner+.93,0,zone.front-2.9))
+		_rower(Vector3(zone.inner+.93,0,zone.front-5.70))
 	var left := _zone("strength","스트레칭 · 웨이트",-1.0,6.8)
 	if not left.is_empty():
 		var x: float=left.center.x
@@ -231,6 +236,36 @@ func _treadmill(point: Vector3,index: int) -> void:
 	_b("FacilityFitnessDisplay",Vector3(.55,.19,.025),point+Vector3(0,1.22,-.53),"screen")
 	var floor_offset: Vector3=Vector3.UP*(kit._level*room.floor_height)
 	_interaction("treadmill","러닝머신 %d"%(index+1),"treadmill_%d"%index,point+Vector3(0,.18,.12),point+Vector3(0,.08,1.30),point+Vector3(0,.13,0),{"facing_yaw":0.0,"duration_seconds":8.0,"equipment_title":"Detail_FacilityTreadmill","belt_center":point+Vector3(0,.13,0)+floor_offset,"belt_size":Vector3(.75,.025,1.65),"speed_kmh":6.0})
+
+func _stationary_cycle(point: Vector3) -> void:
+	# The low physical mat supports the retained standing capsule. Saddle,
+	# crank and frame are visible equipment; the seated pose is display-only.
+	if not _b("FacilityStationaryCycle",Vector3(.83,.035,1.55),point+Vector3(0,-.0175,-.18),"gym_rubber",true):return
+	for z in [-.75,.38]:_b("FacilityCycleFoot",Vector3(.74,.06,.10),point+Vector3(0,.07,z),"steel")
+	_b("FacilityCycleFrame",Vector3(.09,.48,.09),point+Vector3(0,.32,-.14),"steel",false,Basis(Vector3.RIGHT,-.50))
+	_r("FacilityCycleFlywheel","cylinder",Vector3(.45,.12,.45),point+Vector3(0,.29,-.63),"ink",Basis(Vector3.FORWARD,PI*.5))
+	_b("FacilityCycleSaddlePost",Vector3(.07,.47,.07),point+Vector3(0,.37,.06),"steel")
+	_b("FacilityCycleSaddle",Vector3(.29,.09,.29),point+Vector3(0,.65,.06),"gym_rubber")
+	_b("FacilityCycleHandlePost",Vector3(.065,.80,.065),point+Vector3(0,.49,-.62),"steel")
+	_b("FacilityCycleHandle",Vector3(.59,.055,.07),point+Vector3(0,.96,-.53),"ink")
+	_b("FacilityCycleConsole",Vector3(.30,.20,.045),point+Vector3(0,1.08,-.65),"screen")
+	_label("FacilityCycleLabel","사이클 · E 탑승",point+Vector3(0,1.41,-.65),.94,17)
+	var use_point := point+Vector3(0,.08,.02)
+	_interaction("cycle","실내 사이클","stationary_cycle",use_point,use_point+Vector3(0,0,.72),point+Vector3(0,.30,-.25),{"facing_yaw":0.0,"duration_seconds":8.0,"equipment_title":"Detail_FacilityStationaryCycle","cadence_rpm":60.0,"speed_kmh":18.0,"machine_origin":point+Vector3.UP*(kit._level*room.floor_height)})
+
+func _rower(point: Vector3) -> void:
+	if not _b("FacilityRowingMachine",Vector3(.81,.035,2.12),point+Vector3(0,-.0175,-.32),"gym_rubber",true):return
+	_b("FacilityRowerRail",Vector3(.16,.15,1.72),point+Vector3(0,.22,-.03),"steel")
+	for z in [-1.20,.56]:_b("FacilityRowerFoot",Vector3(.75,.075,.12),point+Vector3(0,.075,z),"steel")
+	_r("FacilityRowerFan","cylinder",Vector3(.58,.26,.58),point+Vector3(0,.39,-1.08),"ink",Basis(Vector3.FORWARD,PI*.5))
+	for side in [-1.0,1.0]:
+		_b("FacilityRowerFootPlate",Vector3(.21,.05,.35),point+Vector3(side*.22,.26,-.47),"ink",false,Basis(Vector3.RIGHT,-.35))
+		_b("FacilityRowerFootStrap",Vector3(.24,.04,.07),point+Vector3(side*.22,.31,-.47),"steel")
+	_b("FacilityRowerConsolePost",Vector3(.04,.47,.05),point+Vector3(0,.72,-1.11),"steel")
+	_b("FacilityRowerConsole",Vector3(.28,.20,.045),point+Vector3(0,.95,-1.08),"screen")
+	_label("FacilityRowerLabel","로잉 · E 탑승",point+Vector3(0,1.28,-1.11),.92,17)
+	var use_point := point+Vector3(0,.08,.05)
+	_interaction("rowing","로잉머신","rowing_machine",use_point,use_point+Vector3(0,0,.75),point+Vector3(0,.48,-.35),{"facing_yaw":0.0,"duration_seconds":8.0,"equipment_title":"Detail_FacilityRowingMachine","stroke_seconds":2.4,"metres_per_stroke":8.0,"machine_origin":point+Vector3.UP*(kit._level*room.floor_height)})
 
 func _dumbbell(point: Vector3) -> void:
 	_b("FacilityDumbbellBar",Vector3(.26,.035,.035),point,"steel")

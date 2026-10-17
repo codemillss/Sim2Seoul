@@ -18,6 +18,15 @@ var _previous_avatar_pose := Transform3D.IDENTITY
 var _physics_avatar_pose := Transform3D.IDENTITY
 var _render_fraction := 1.0
 var _facility_mode := false
+var _roof_camera_hint: Dictionary={}
+var _roof_hint_physics_frame := -100
+var _roof_camera_fallback := false
+var _roof_pivot_offset_m := 0.0
+var _roof_fallback_count := 0
+var _roof_fallback_reason := "no_hint"
+const ROOF_MAX_PIVOT_RAISE_M := 1.2
+const ROOF_MIN_RETRY_DISTANCE_M := 1.8
+const ROOF_RESTORE_DISTANCE_M := 1.9
 
 class AvatarRenderProxy extends Node3D:
 	# Restore simulation-space joint globals before the player, gait and
@@ -50,6 +59,49 @@ func _ready() -> void:
 func apply_exploration_view_distance() -> void:
 	# The inherited quality preset has a 200m cutoff; call after apply_quality too.
 	if is_instance_valid(camera):camera.far = exploration_far_m
+
+func set_roof_camera_hint(hint: Dictionary) -> void:
+	# A live roof helper refreshes or clears this every physics tick. Never
+	# retain a recommendation across an unrelated room, recovery or street.
+	_roof_camera_hint={};_roof_hint_physics_frame=Engine.get_physics_frames()
+	if hint.is_empty():return
+	var minimum: Variant=hint.get("minimum_pivot_y_world")
+	var maximum: Variant=hint.get("maximum_raise_m",ROOF_MAX_PIVOT_RAISE_M)
+	if not (minimum is float or minimum is int) or not (maximum is float or maximum is int):return
+	if not is_finite(float(minimum)) or not is_finite(float(maximum)):return
+	if float(maximum)<=0.0 or float(maximum)>ROOF_MAX_PIVOT_RAISE_M:return
+	_roof_camera_hint={"minimum_pivot_y_world":float(minimum),"maximum_raise_m":float(maximum),"building_id":String(hint.get("building_id","")),"basis":String(hint.get("basis",""))}
+
+func _sphere_clear_world(point: Vector3) -> bool:
+	_query.transform=Transform3D(Basis.IDENTITY,point);_query.motion=Vector3.ZERO
+	return get_world_3d().direct_space_state.intersect_shape(_query,1).is_empty()
+
+func _roof_retry(origin: Vector3,axis: Vector3) -> Dictionary:
+	if _roof_camera_hint.is_empty():_roof_fallback_reason="no_hint";return {}
+	if Engine.get_physics_frames()-_roof_hint_physics_frame>2:_roof_fallback_reason="stale_hint";return {}
+	if target.get("interior_active")==true and target.get("interior_ceiling_unbounded")!=true:
+		_roof_fallback_reason="ordinary_interior";return {}
+	var offset: float=float(_roof_camera_hint.minimum_pivot_y_world)-origin.y
+	if offset<=.001 or offset>minf(ROOF_MAX_PIVOT_RAISE_M,float(_roof_camera_hint.maximum_raise_m))+.001:
+		_roof_fallback_reason="hint_height_outside_raise_limit";return {}
+	var raised := origin+Vector3.UP*offset
+	# cast_motion ignores starting penetration. Inspect both endpoints and
+	# the complete vertical corridor before trying a raised camera cast.
+	if not _sphere_clear_world(origin) or not _sphere_clear_world(raised):
+		_roof_fallback_reason="pivot_sphere_blocked";return {}
+	_query.transform=Transform3D(Basis.IDENTITY,origin);_query.motion=raised-origin
+	if get_world_3d().direct_space_state.cast_motion(_query)[0]<.99999:
+		_roof_fallback_reason="vertical_corridor_blocked";return {}
+	_query.transform=Transform3D(Basis.IDENTITY,raised);_query.motion=axis*requested_distance
+	var fractions: PackedFloat32Array=get_world_3d().direct_space_state.cast_motion(_query)
+	var distance := maxf(0.0,requested_distance*fractions[0]-arm.margin)
+	if fractions[0]>=.99999:distance=requested_distance
+	if distance<ROOF_MIN_RETRY_DISTANCE_M:
+		_roof_fallback_reason="raised_cast_still_too_close";return {}
+	if not _sphere_clear_world(raised+axis*distance):
+		_roof_fallback_reason="raised_eye_sphere_blocked";return {}
+	_roof_fallback_reason="accepted"
+	return {"origin":raised,"offset_m":offset,"safe_distance_m":distance}
 
 func reset_orientation() -> void:
 	super.reset_orientation()
@@ -134,6 +186,15 @@ func _solve_pose(delta: float, physics_step: bool) -> void:
 	safe_distance = maxf(0.0, requested_distance * fractions[0] - arm.margin)
 	# A margin applies only on contact; open space retains the requested zoom.
 	if fractions[0] >= 0.99999:safe_distance = requested_distance
+	_roof_camera_fallback=false;_roof_pivot_offset_m=0.0;_roof_fallback_reason="normal_cast_clear"
+	if safe_distance<ROOF_MIN_RETRY_DISTANCE_M and requested_distance>=2.0:
+		var retry := _roof_retry(origin,axis)
+		if not retry.is_empty():
+			origin=retry.origin;global_position=origin;safe_distance=float(retry.safe_distance_m)
+			_roof_camera_fallback=true;_roof_pivot_offset_m=float(retry.offset_m);_roof_fallback_count+=1
+			# Expansion from a former 0.35m wall contact must not leave a
+			# validated wide view hidden behind the slow expansion rate.
+			current_distance=minf(safe_distance,maxf(current_distance,ROOF_RESTORE_DISTANCE_M))
 	current_distance = minf(safe_distance, current_distance + expansion_mps * delta)
 	if _overlaps_at(current_distance):
 		var low := 0.0
@@ -173,7 +234,7 @@ func _solve_pose(delta: float, physics_step: bool) -> void:
 	# also restore the presentation immediately, without waiting for a tick.
 	_publish_avatar_pose(_physics_avatar_pose)
 	if current_distance < 1.5:target.get_node("Visual").visible = false
-	elif current_distance > 1.8:target.get_node("Visual").visible = true
+	elif current_distance > 1.8 or (_roof_camera_fallback and current_distance>=ROOF_MIN_RETRY_DISTANCE_M):target.get_node("Visual").visible = true
 	if physics_step:
 		observed_ticks += 1
 		camera_stepped.emit(delta)
@@ -206,6 +267,11 @@ func snapshot() -> Dictionary:
 	result["previous_visual_anchor"]=[_previous_avatar_pose.origin.x,_previous_avatar_pose.origin.y,_previous_avatar_pose.origin.z]
 	result["visual_root_physics_owned"]=true
 	result["avatar_activity_pose_current"]=_facility_mode
+	result["roof_camera_fallback"]=_roof_camera_fallback
+	result["roof_pivot_offset_m"]=_roof_pivot_offset_m
+	result["roof_fallback_count"]=_roof_fallback_count
+	result["roof_fallback_reason"]=_roof_fallback_reason
+	result["roof_camera_hint"]=_roof_camera_hint.duplicate()
 	return result
 
 func _exit_tree() -> void:_release_avatar_proxy()

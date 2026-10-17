@@ -11,6 +11,10 @@ if [ "$("$task_engine" --version)" != "4.7.2.stable.official.ed1daf0bf" ]; then 
 "$task_python" "$task_root/tools/prepare_pedestrians.py" --check
 "$task_python" "$task_root/tools/prepare_traffic.py" --check
 case "$task_mode" in
- run) exec "$task_engine" --path "$task_root/game" res://scenes/world/explore_walk.tscn ;;
+ run)
+  # Imported resource caches are machine-local and deliberately absent in Git.
+  # Refresh them after a pull, before runtime loads textures/models/audio.
+  "$task_engine" --headless --editor --path "$task_root/game" --import --quit
+  exec "$task_engine" --path "$task_root/game" res://scenes/world/explore_walk.tscn ;;
  editor) exec "$task_engine" --editor --path "$task_root/game" --scene res://scenes/world/explore_walk.tscn ;;
 esac

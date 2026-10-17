@@ -232,8 +232,8 @@ func _geometry() -> void:
 		var ground_letter: Label3D = marker_nodes[id].ground
 		var letter_gap := Vector2(ground_letter.global_position.x,ground_letter.global_position.z).distance_to(Vector2(spec.entrance.x,spec.entrance.z))
 		if pad_gap>.002 or pad.origin.y<spec.entrance.y or pad.origin.y>spec.entrance.y+.10 or pad.basis.x.length()<1.0 or pad.basis.z.length()<1.0 or letter_gap>.002 or ground_letter.text!="E" or ground_letter.global_position.y<spec.entrance.y or ground_letter.global_position.y>spec.entrance.y+.2:invalid_pads.append(id)
-	_check("geometry.all_125_distinct_source_facade_anchors",anchors.size()==125 and ids.size()==125 and invalid_doors.is_empty(),{"anchors":anchors.size(),"distinct_ids":ids.size(),"max_source_perimeter_gap_m":max_source_gap,"invalid_ids":invalid_doors})
-	_check("geometry.3D_frames_straddle_authored_doors",invalid_frames.is_empty() and cyan.multimesh.instance_count>=125*3,{"transform_source":transform_source,"invalid_ids":invalid_frames,"mesh_instances":cyan.multimesh.instance_count,"generic_clear_width_m":2.2,"library_clear_width_m":4.55})
+	_check("geometry.all_126_distinct_source_facade_anchors",anchors.size()==126 and ids.size()==126 and invalid_doors.is_empty(),{"anchors":anchors.size(),"distinct_ids":ids.size(),"max_source_perimeter_gap_m":max_source_gap,"invalid_ids":invalid_doors})
+	_check("geometry.3D_frames_straddle_authored_doors",invalid_frames.is_empty() and cyan.multimesh.instance_count>=126*3,{"transform_source":transform_source,"invalid_ids":invalid_frames,"mesh_instances":cyan.multimesh.instance_count,"generic_clear_width_m":2.2,"library_clear_width_m":4.55})
 	_check("geometry.ground_E_pads_match_entry_anchors",invalid_pads.is_empty(),{"transform_source":transform_source,"invalid_ids":invalid_pads,"max_XZ_gap_m":max_pad_gap})
 	var collisions := 0
 	for node in _descendants(way):
@@ -326,7 +326,10 @@ func _entry_trials(spec: Dictionary, title: String, capture_near := false) -> bo
 	var inside := _observe(title+"_inside")
 	_check(title+".indoors_hides_all_outdoor_guidance",inside.hidden and not way.panel.is_visible_in_tree() and not way.world_frames.is_visible_in_tree() and _visible_signs()==0 and not scene.building_names.panel.visible and not scene.building_names.crosshair.visible,inside)
 	if title=="library":
-		_check("people.existing_interior_population_preserved",visit.room.people.size()==4,{"people":visit.room.people.size()})
+		var population: Dictionary=visit.room.population.snapshot()
+		var distinct: Dictionary={}
+		for role: Dictionary in population.roles:distinct[String(role.role)]=true
+		_check("people.contextual_library_population_and_multiple_roles_preserved",visit.room.people.size()>=2 and population.count==visit.room.people.size() and distinct.size()>=2,{"population":population})
 	return await _leave(title)
 
 func _scenarios() -> void:
@@ -371,7 +374,7 @@ func _run() -> void:
 	visit = scene.interior_visit
 	way = visit.get("wayfinding")
 	var api: bool = is_instance_valid(way) and way.has_method("snapshot")
-	_check("startup.catalog_125_and_wayfinding_API",api and visit.loaded and visit.catalog.size()==125,{"catalog_count":visit.catalog.size()})
+	_check("startup.catalog_126_and_wayfinding_API",api and visit.loaded and visit.catalog.size()==126,{"catalog_count":visit.catalog.size()})
 	if not api:_finish();return
 	await _ticks(25)
 	original_inventory = _inventory();original_names = _name_inventory()
@@ -392,7 +395,7 @@ func _finish() -> void:
 	var failed := 0
 	for check in checks:
 		if not check.passed:failed += 1
-	var report := {"schema_version":1,"task":"entrance_guidance","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"source_sha256_at_startup":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"placements":placements,"observations":observations,"captures":captures,"deferred_checks":deferred_checks,"isolated_files":{"exploration_settings":report_path+".settings.json","quality_settings":report_path+".quality.json"},"scope":"Production exploration scene. Explicit scenario-start teleports are fixtures, not a continuous route. Source facade/ground anchors, real camera ray/projection, viewport bounds, hidden states and physical E taps are checked. Native GPU geometry checks read actual uploaded MultiMesh transforms; headless dummy checks only CPU submissions and defers native readback. Synthetic occluder is a line-of-sight fault fixture. Headless output has no GPU capture or human-input acceptance; native captures use force_draw. No surveyed entrance, entire 125-building visit, performance, packaging or cross-Mac claim."}
+	var report := {"schema_version":1,"task":"entrance_guidance","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"source_sha256_at_startup":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"placements":placements,"observations":observations,"captures":captures,"deferred_checks":deferred_checks,"isolated_files":{"exploration_settings":report_path+".settings.json","quality_settings":report_path+".quality.json"},"scope":"Production exploration scene. Explicit scenario-start teleports are fixtures, not a continuous route. Source facade/ground anchors, real camera ray/projection, viewport bounds, hidden states and physical E taps are checked. Native GPU geometry checks read actual uploaded MultiMesh transforms; headless dummy checks only CPU submissions and defers native readback. Synthetic occluder is a line-of-sight fault fixture. Headless output has no GPU capture or human-input acceptance; native captures use force_draw. No surveyed entrance, entire 126-building visit, performance, packaging or cross-Mac claim."}
 	var file := FileAccess.open(report_path,FileAccess.WRITE)
 	if file!=null:file.store_string(JSON.stringify(_json_value(report),"\t")+"\n");file.close()
 	else:failed += 1;push_error("Could not save entrance guidance report")

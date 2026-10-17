@@ -23,6 +23,12 @@ var _belt_offset := 0.0
 var _dumbbell_height := 0.0
 var _bite_phase := 0.0
 var _human_avatar := false
+var _cycle_crank: Node3D
+var _cycle_flywheel: MeshInstance3D
+var _rowing_seat: MeshInstance3D
+var _rowing_handle: MeshInstance3D
+var _rowing_cable: MeshInstance3D
+var _stroke_fraction := 0.0
 
 func build(activity: String, player: CharacterBody3D, room: Node3D, target: Dictionary) -> void:
 	kind=activity;_player=player;_room=room;_target=target.duplicate(true)
@@ -37,6 +43,8 @@ func build(activity: String, player: CharacterBody3D, room: Node3D, target: Dict
 		"shower":_build_shower()
 		"treadmill":_build_treadmill()
 		"weights":_build_weights()
+		"cycle":_build_cycle()
+		"rowing":_build_rowing()
 	animate(0.0,0.0,{})
 
 func _material(color: Color, transparent := false) -> StandardMaterial3D:
@@ -111,6 +119,55 @@ func _build_weights() -> void:
 			var weight := _cylinder(bell,"activity_dumbbell",.10,.07,Vector3(end*.15,0,0),Color(.12,.19,.22));weight.rotation.z=PI*.5
 		_hands.append(_sphere(_avatar_root,"activity_hand",Vector3(.10,.11,.10),Vector3(side*.43,.80,-.12),Color(.80,.56,.34)))
 
+func _machine_origin() -> void:
+	var origin: Variant=_target.get("data",{}).get("machine_origin")
+	if origin is Vector3:_equipment_root.position=_room.to_global(origin)
+
+func _workout_display(point: Vector3) -> void:
+	_display=Label3D.new();_display.name="LiveWorkoutDisplay";_display.font_size=20;_display.pixel_size=.003
+	_display.position=point;_display.modulate=Color(.73,1.0,.81);_display.outline_modulate=Color(.02,.08,.08);_display.outline_size=3
+	_equipment_root.add_child(_display)
+
+func _build_cycle() -> void:
+	_machine_origin()
+	_cycle_crank=Node3D.new();_cycle_crank.name="RotatingCycleCrank";_cycle_crank.position=Vector3(0,.31,-.25);_equipment_root.add_child(_cycle_crank)
+	var crank := _cylinder(_cycle_crank,"cycle_crank",.05,.42,Vector3.ZERO,Color(.68,.73,.74));crank.rotation.z=PI*.5
+	for side in [-1.0,1.0]:
+		var phase := 0.0 if side<0 else PI
+		_box(_cycle_crank,"cycle_crank_arm",Vector3(.035,.035,.17),Vector3(side*.22,0,cos(phase)*.085),Color(.68,.73,.74))
+		var pedal := _box(_equipment_root,"cycle_pedal",Vector3(.20,.045,.12),Vector3.ZERO,Color(.12,.24,.26));_shoes.append(pedal)
+	_cycle_flywheel=_cylinder(_equipment_root,"cycle_flywheel_motion",.23,.13,Vector3(0,.29,-.63),Color(.36,.57,.59));_cycle_flywheel.rotation.z=PI*.5
+	for index in range(4):_box(_cycle_flywheel,"cycle_flywheel_spoke",Vector3(.36,.018,.035),Vector3.ZERO,Color(.76,.81,.79)).rotation.y=index*PI*.25
+	_workout_display(Vector3(0,1.08,-.62))
+
+func _build_rowing() -> void:
+	_machine_origin()
+	_rowing_seat=_box(_equipment_root,"rowing_sliding_seat",Vector3(.38,.10,.33),Vector3(0,.35,.05),Color(.12,.24,.26))
+	_rowing_handle=_box(_equipment_root,"rowing_handle",Vector3(.59,.045,.045),Vector3(0,.72,-.45),Color(.25,.35,.36))
+	_rowing_cable=_box(_equipment_root,"rowing_cable",Vector3(.014,.014,.65),Vector3(0,.55,-.70),Color(.73,.76,.73))
+	_workout_display(Vector3(0,.96,-1.045))
+
+func _animate_cycle() -> void:
+	var phase := time*TAU
+	_cycle_crank.rotation.x=-phase
+	# Keep the flywheel's physical axle fixed across its width. Only the
+	# spokes spin in the wheel's own XZ plane after the cylinder is turned.
+	for index in range(_cycle_flywheel.get_child_count()):
+		var spoke := _cycle_flywheel.get_child(index) as Node3D
+		spoke.rotation.y=phase*3.0+float(index)*PI*.25
+	for index in range(_shoes.size()):
+		var angle := phase+float(index)*PI
+		_shoes[index].position=Vector3(-.22 if index==0 else .22,.31+sin(angle)*.17,-.25+cos(angle)*.17)
+	_display.text="60 rpm · %.0f m"%float(_target.get("live_distance",0.0))
+
+func _animate_rowing() -> void:
+	_stroke_fraction=(1.0-cos(time*TAU/2.4))*.5
+	_rowing_seat.position.z=.05+_stroke_fraction*.38
+	_rowing_handle.position=Vector3(0,.66+_stroke_fraction*.16,-.47+_stroke_fraction*.42)
+	var origin := Vector3(0,.47,-.92);var difference := _rowing_handle.position-origin
+	_rowing_cable.position=(origin+_rowing_handle.position)*.5
+	_rowing_cable.basis=Basis.looking_at(difference.normalized(),Vector3.UP)*Basis.from_scale(Vector3(1,1,difference.length()/.65))
+
 func animate(elapsed: float, progress: float, session: Dictionary) -> void:
 	time=elapsed
 	if not is_instance_valid(_player) or not is_instance_valid(_avatar_root):return
@@ -138,6 +195,10 @@ func animate(elapsed: float, progress: float, session: Dictionary) -> void:
 			for index in range(_stripes.size()):_stripes[index].position.z=-.76+fmod(float(index)*.20+time*1.65,1.56)
 			for index in range(_shoes.size()):_shoes[index].position.y=maxf(0.,sin(time*10.+index*PI))*.18;_shoes[index].position.z=sin(time*10.+index*PI)*.24
 			_display.text="6.0 km/h · %.0f m"%float(session.get("distance_m",0.0))
+		"cycle":
+			_target["live_distance"]=float(session.get("distance_m",0.0));_animate_cycle()
+		"rowing":
+			_animate_rowing();_display.text="%d 회 · %.0f m"%[int(session.get("strokes",0)),float(session.get("distance_m",0.0))]
 		"weights":
 			var curl := (1.-cos(time*TAU/2.0))*.5
 			_dumbbell_height=.76+curl*.60
@@ -155,8 +216,8 @@ func snapshot() -> Dictionary:
 	for node: MeshInstance3D in _meshes:
 		if not is_instance_valid(node):continue
 		if node.visible:visible_count+=1
-		if String(node.get_meta("role","")) in ["chopstick","food_bite","shower_drop","shower_stream","shower_ripple","belt_stripe","activity_dumbbell","activity_hand","activity_shoe"]:moving_count+=1
+		if String(node.get_meta("role","")) in ["chopstick","food_bite","shower_drop","shower_stream","shower_ripple","belt_stripe","activity_dumbbell","activity_hand","activity_shoe","cycle_crank","cycle_crank_arm","cycle_pedal","cycle_flywheel_motion","cycle_flywheel_spoke","rowing_sliding_seat","rowing_handle","rowing_cable"]:moving_count+=1
 		var actual: AABB=node.global_transform*node.get_aabb()
 		if not initialized:bounds=actual;initialized=true
 		else:bounds=bounds.merge(actual)
-	return {"kind":kind,"time":time,"mesh_count":_meshes.size(),"visible_mesh_count":visible_count,"moving_mesh_count":moving_count,"effect_bounds":bounds,"water_on":kind=="shower" and is_visible_in_tree(),"belt_offset":_belt_offset,"dumbbell_height":_dumbbell_height,"bite_phase":_bite_phase}
+	return {"kind":kind,"time":time,"mesh_count":_meshes.size(),"visible_mesh_count":visible_count,"moving_mesh_count":moving_count,"effect_bounds":bounds,"water_on":kind=="shower" and is_visible_in_tree(),"belt_offset":_belt_offset,"dumbbell_height":_dumbbell_height,"bite_phase":_bite_phase,"cycle_crank_rotation":_cycle_crank.rotation.x if is_instance_valid(_cycle_crank) else 0.0,"rowing_stroke_fraction":_stroke_fraction}

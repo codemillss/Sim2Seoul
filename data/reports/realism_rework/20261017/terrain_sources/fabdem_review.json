@@ -1,0 +1,89 @@
+{
+  "checked_at_utc": "2026-10-17T14:58:17.603639+00:00",
+  "decision": "Keep as comparison-only coarse DTM. Prefer the separately discovered Seoul official contours/spot heights for proposed terrain work. No runtime terrain changed.",
+  "acquisition_status": "ACQUIRED_MIRROR_NATIVE_WINDOW",
+  "raw_assets": [
+    {
+      "path": "data/raw/supplemental/fabdem/20261017/N37E126_FABDEM_V1-2_deoksugung_native_window.tif",
+      "bytes": 4448,
+      "sha256": "b4c33ab6f20424b9fa232437fa011a3af168a616d1467462ed0843b3be44ce11",
+      "role": "native_extracted_crop"
+    },
+    {
+      "path": "data/raw/supplemental/fabdem/20261017/upstream_readme_reproduced_by_LINKS.txt",
+      "bytes": 18866,
+      "sha256": "5035c8bc614af0de7ae78f7ef16d19191039e55ff1129a778582c4395c68454e",
+      "role": "mirror_published_metadata_or_reproduced_upstream_document"
+    },
+    {
+      "path": "data/raw/supplemental/fabdem/20261017/upstream_license_CC-BY-NC-SA-4.0.txt",
+      "bytes": 21286,
+      "sha256": "047d2259741a3ebb30d8c8a43d4ba79b5b229a069acd1d2bea49f22b297d8e98",
+      "role": "mirror_published_metadata_or_reproduced_upstream_document"
+    },
+    {
+      "path": "data/raw/supplemental/fabdem/20261017/LINKS_mirror_README.md",
+      "bytes": 1999,
+      "sha256": "46ac6062cdf93c357784d92f0fa251e24b7d24f11e9f725097a61f6fa64d1661",
+      "role": "mirror_published_metadata_or_reproduced_upstream_document"
+    },
+    {
+      "path": "data/raw/supplemental/fabdem/20261017/LINKS_N37E126_STAC.json",
+      "bytes": 1327,
+      "sha256": "c2b5e7aa5ab8fae1a8c0723c0cd6c7945dbfa83332de3192acbd0beb3f9bf542",
+      "role": "mirror_published_metadata_or_reproduced_upstream_document"
+    }
+  ],
+  "source_identity_boundary": "LINKS says pixels equal original Bristol V1-2; only crop-to-mirror equality verified. Bristol original ZIP Range probe failed with connection reset and 0 bytes. No independently published per-tile checksum found in accessed official metadata; mirror STAC contains no file checksum.",
+  "license_conflict": {
+    "official_Bristol_record": "CC BY-NC-SA 4.0",
+    "actual_GeoTIFF_LICENCE_tag": "The FABDEM dataset is freely available for non-commercial use under a Creative Commons \"CC BY-NC-SA 4.0\" licence. For commercial use queries, please contact fabdem@fathom.global",
+    "reproduced_upstream_readme_and_license": "CC BY-NC-SA 4.0; matching actual file tag and official Bristol record",
+    "LINKS_README_and_dataset_card": "Incorrectly labels Non-Commercial Government Licence v2.0. Do not substitute this metadata label for the actual author license."
+  },
+  "license_application": {
+    "personal_free_private_prototype": "Fits the intended noncommercial category if the actual purpose is personal experimentation and not primarily commercial advantage or monetary compensation. Free price alone does not define noncommercial use. This is an interpretation of CC terms, not a separate provider approval.",
+    "private_Git_small_crop": "CC FAQ permits password-protected sharing and does not require making private work public. Preserve the author/license/notice beside the crop and derived terrain; do not prohibit recipients from rights the license grants. Small geographic size alone is not a license exemption.",
+    "public_redistribution": "Keep attribution, author/DOI/source link, CC BY-NC-SA4 license link, modification/extraction description and supplied Copernicus notices; public adapted terrain contributions must retain the same or compatible BY-NC-SA terms.",
+    "commercial_use": "The public noncommercial grant does not authorise primarily commercial use; Bristol directs commercial enquiries to fabdem@fathom.global.",
+    "software_scope": "CC addresses licensed data/material and adaptations. It does not by itself impose software-source distribution rules; isolate data/derived terrain provenance from independent code rather than claim the complete game has a blanket license clearance."
+  },
+  "coordinate_contract": {
+    "horizontal": "EPSG4326 native samples; project horizontal metric EPSG32652 remains unchanged.",
+    "vertical": "EGM2008 orthometric metres EPSG3855, as stated by author readme reproduced by LINKS. Not WGS84 ellipsoidal heights.",
+    "grid": "PixelIsPoint; affine edge offset is half a native 1-arcsecond sample. Preserve pixel centres and transform rather than shifting to integer bbox edges.",
+    "local_origin": "Project origin126.97625,37.5651; game y currently local authored height, not sea level. Nearest source sample32.01m is at126.9761111111,37.5650 and is not a surveyed anchor or exact value at the origin. Future conversion needs an explicit origin sampling/interpolation rule and any required datum reconciliation.",
+    "fine_detail_limit": "Native spacing at origin24.54m EW and30.83m NS. Resampling will not recover measured curbs, steps, walls, level plazas, road breaklines or recent excavation."
+  },
+  "source_cooperative_result": "Official Source Cooperative product search/catalog index exposed Fiji FABDEM contour PMTiles, not an authenticated Korea FABDEM COG provider. No Korea COG endpoint established there; the acquired source is explicitly LINKS mirror, not source.coop or Bristol direct.",
+  "primary_sources": [
+    {
+      "url": "https://research-information.bris.ac.uk/en/datasets/fabdem-v1-2/",
+      "supports": "Author dataset definition/version and CC BY-NC-SA4 license."
+    },
+    {
+      "url": "https://data.bris.ac.uk/datasets/s5hqmjcdj8yo2ibzi9b4ew3sn/readme.txt",
+      "supports": "Author CRS/license/Copernicus statements, reproduced by LINKS copy; original host not directly retrievable in this run."
+    },
+    {
+      "url": "https://huggingface.co/buckets/links-ads/fabdem",
+      "supports": "Converter-publisher mirror description; its unchanged-pixels claim remains unverified against Bristol."
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "supports": "Noncommercial grant, attribution, ShareAlike and no additional downstream restrictions."
+    },
+    {
+      "url": "https://creativecommons.org/faq/",
+      "supports": "NC is purpose-based; private work need not be published; password-protected distribution allowed."
+    },
+    {
+      "url": "https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf",
+      "supports": "Parent DEM WGS84, EGM2008 metres and PixelIsPoint definitions."
+    },
+    {
+      "url": "https://source.coop/smartmaps/foil4gr1",
+      "supports": "Identified FABDEM Fiji contour PMTiles only, not Korean DTM raster."
+    }
+  ]
+}

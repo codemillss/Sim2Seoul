@@ -23,6 +23,9 @@ var _people_state: Array[Dictionary] = []
 var _time := 0.0
 var _ready_space := false
 var detail_kit: RefCounted
+var escalator: Node3D
+var guest_doors: Array[Dictionary]=[]
+var population: Node3D
 
 func setup(building: Dictionary, origin: Vector3) -> bool:
 	if _ready_space or not origin.is_finite():return false
@@ -46,6 +49,10 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 	_make_materials()
 	detail_kit = preload("res://scripts/interior_detail_kit.gd").new()
 	detail_kit.setup(self)
+	var candidate := preload("res://scripts/interior_escalator.gd").new()
+	add_child(candidate)
+	if candidate.configure(self):escalator=candidate
+	else:remove_child(candidate);candidate.queue_free()
 	_build_shell()
 	for level in range(floor_count):
 		_build_floor(level)
@@ -53,6 +60,7 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 		_build_elevator(level)
 		_build_furniture(level)
 		_build_lighting(level)
+	if is_instance_valid(escalator):escalator.build()
 	detail_kit.finish()
 	_flush_batches()
 	_make_people()
@@ -98,6 +106,26 @@ func _box(title: String, size: Vector3, point: Vector3, material: String, solid 
 	bodies.append(body)
 	return body
 
+func make_guest_door(level: int,number: int,plane_x: float,z: float,height: float,side: float) -> void:
+	var body := AnimatableBody3D.new();body.name="GuestDoor_%d_%03d"%[level,number]
+	body.collision_layer=1;body.collision_mask=0;body.sync_to_physics=false
+	var closed := Vector3(plane_x,float(level)*floor_height+height*.5,z)
+	body.position=closed;body.set_meta("geometry_id","EXP20_interior_guest_door_%d_%03d"%[level,number]);body.set_meta("guest_room_number",number);body.set_meta("detail_level",level)
+	var shape_node := CollisionShape3D.new();var shape := BoxShape3D.new();shape.size=Vector3(.10,height,1.02);shape_node.shape=shape;body.add_child(shape_node)
+	var leaf := MeshInstance3D.new();leaf.name="GuestDoorLeaf";var mesh := BoxMesh.new();mesh.size=shape.size;leaf.mesh=mesh;leaf.material_override=_materials.walnut;body.add_child(leaf)
+	for handle_side in [-1.0,1.0]:
+		var handle := MeshInstance3D.new();handle.name="MasterKeyDoorHandle";var handle_mesh := BoxMesh.new();handle_mesh.size=Vector3(.045,.13,.035);handle.mesh=handle_mesh;handle.position=Vector3(handle_side*.075,-height*.5+1.05,.33);handle.material_override=_materials.brass;body.add_child(handle)
+	var label := Label3D.new();label.name="GuestDoorLockStatus";label.text="%03d\n잠김 · E"%number;label.font_size=23;label.pixel_size=.0038;label.outline_size=2;label.modulate=Color(.97,.91,.69);label.position=Vector3(-side*.07,-height*.5+1.55,0);label.rotation.y=-side*PI*.5;body.add_child(label)
+	add_child(body);bodies.append(body)
+	var y := float(level)*floor_height+.08
+	guest_doors.append({"id":"%s/guest/%d/%03d"%[String(spec.get("id","building")),level,number],"level":level,"number":number,"side":side,"body":body,"shape":shape,"label":label,"closed_position":closed,"slide_offset":Vector3(0,0,-1.12),"height":height,"fraction":0.0,"target_fraction":0.0,"locked":true,"outside_point":Vector3(plane_x-side*.80,y,z),"inside_point":Vector3(plane_x+side*.80,y,z),"door_point":Vector3(plane_x,y,z)})
+
+func guest_door_snapshot() -> Array:
+	var rows: Array=[]
+	for door: Dictionary in guest_doors:
+		rows.append({"id":door.id,"level":door.level,"number":door.number,"fraction":door.fraction,"target_fraction":door.target_fraction,"locked":door.locked,"body_position":door.body.position,"body_layer":door.body.collision_layer,"outside_point":door.outside_point,"inside_point":door.inside_point,"door_point":door.door_point})
+	return rows
+
 func _sign(title: String, text: String, point: Vector3, font_size := 42, face_front := true) -> Label3D:
 	var sign := Label3D.new()
 	sign.name = title
@@ -138,7 +166,15 @@ func _build_floor(level: int) -> void:
 		var hole_back := stair_back
 		var hole_front := stair_front+.12
 		var east_size := width*.5-hole_right
-		floor_body = _box("Floor%dEast"%level,Vector3(east_size,.20,depth),Vector3(hole_right+east_size*.5,y-.1,0),"floor",true)
+		if level==1 and is_instance_valid(escalator):
+			# A real slab opening, with the original stairwell still cut separately.
+			var hole: Rect2=escalator.opening
+			var sections := [Rect2(hole_right,-depth*.5,hole.position.x-hole_right,depth),Rect2(hole.end.x,-depth*.5,width*.5-hole.end.x,depth),Rect2(hole.position.x,-depth*.5,hole.size.x,hole.position.y+depth*.5),Rect2(hole.position.x,hole.end.y,hole.size.x,depth*.5-hole.end.y)]
+			for section_index in range(sections.size()):
+				var section: Rect2=sections[section_index]
+				var part := _box("Floor%dEastSection%d"%[level,section_index],Vector3(section.size.x,.20,section.size.y),Vector3(section.get_center().x,y-.1,section.get_center().y),"floor",true)
+				if floor_body==null:floor_body=part
+		else:floor_body = _box("Floor%dEast"%level,Vector3(east_size,.20,depth),Vector3(hole_right+east_size*.5,y-.1,0),"floor",true)
 		var west_size := hole_left+width*.5
 		_box("Floor%dWest"%level,Vector3(west_size,.20,depth),Vector3(-width*.5+west_size*.5,y-.1,0),"floor",true)
 		var rear_depth := hole_back+depth*.5
@@ -222,7 +258,12 @@ func _build_elevator(level: int) -> void:
 	_box("ElevatorWaitingPad",Vector3(2.1,.005,1.55),Vector3(x,y+.003,z-1.40),"stripe")
 
 func _build_furniture(level: int) -> void:
+	# Reserve only the connecting floors. All other source-sized programmes keep
+	# their previous layout; solid furnishings cannot enter a ride or landing.
+	var reserved := is_instance_valid(escalator) and level in [0,1]
+	if reserved:detail_kit.protected_zones.append(escalator.reservation)
 	detail_kit.build_level(level)
+	if reserved:detail_kit.protected_zones.pop_back()
 
 func _shelf(point: Vector3) -> void:
 	_box("ShelfBack",Vector3(.12,1.95,2.25),point+Vector3(0,.975,0),"wood",true)
@@ -282,27 +323,7 @@ func _person_part(parent: Node3D, title: String, size: Vector3, point: Vector3, 
 	return visual
 
 func _make_people() -> void:
-	for index in range(4):
-		var person := Node3D.new()
-		person.name = "InteriorWalker%d"%index
-		person.set_meta("purpose","authored_indoor_walker")
-		add_child(person)
-		_person_part(person,"Torso",Vector3(.40,.57,.24),Vector3(0,1.05,0),"coat%d"%index)
-		_person_part(person,"Head",Vector3(.25,.27,.24),Vector3(0,1.49,0),"skin")
-		_person_part(person,"Hair",Vector3(.27,.09,.26),Vector3(0,1.64,0),"hair")
-		var legs: Array[Node3D] = []
-		var arms: Array[Node3D] = []
-		for side in [-1.0,1.0]:
-			var leg := Node3D.new();leg.position = Vector3(side*.115,.76,0);person.add_child(leg)
-			_person_part(leg,"Leg",Vector3(.14,.68,.17),Vector3(0,-.34,0),"dark")
-			_person_part(leg,"Shoe",Vector3(.16,.10,.27),Vector3(0,-.70,-.035),"hair")
-			legs.append(leg)
-			var arm := Node3D.new();arm.position = Vector3(side*.26,1.28,0);person.add_child(arm)
-			_person_part(arm,"Arm",Vector3(.13,.55,.15),Vector3(0,-.275,0),"coat%d"%index)
-			arms.append(arm)
-		people.append(person)
-		_people_state.append({"legs":legs,"arms":arms,"distance":float(index)*4.3,"speed":.72+float(index)*.06})
-	_update_people(0.0)
+	population=preload("res://scripts/interior_population.gd").new();add_child(population);population.setup(self)
 
 func set_active_floor(level: int) -> void:
 	var next := clampi(level,0,floor_count-1)
@@ -316,7 +337,11 @@ func set_active_floor(level: int) -> void:
 	_update_people(0.0)
 
 func interior_snapshot() -> Dictionary:
-	return detail_kit.snapshot() if detail_kit else {}
+	var result: Dictionary=detail_kit.snapshot() if detail_kit else {}
+	result["escalator"]=escalator.snapshot() if is_instance_valid(escalator) else {}
+	result["population"]=population.snapshot() if is_instance_valid(population) else {}
+	result["guest_room_doors"]=guest_door_snapshot()
+	return result
 
 func _process(delta: float) -> void:
 	if not _ready_space or not visible:return
@@ -324,27 +349,8 @@ func _process(delta: float) -> void:
 	_update_people(delta)
 
 func _update_people(delta: float) -> void:
-	var route := [Vector3(.30,0,depth*.26),Vector3(.30,0,-depth*.22),Vector3(1.00,0,-depth*.22),Vector3(1.00,0,depth*.26)]
-	var total := (depth*.48+.70)*2.0
-	for index in range(people.size()):
-		var state: Dictionary = _people_state[index]
-		state.distance = fposmod(float(state.distance)+float(state.speed)*delta,total)
-		var remaining := float(state.distance)
-		for segment in range(route.size()):
-			var start: Vector3 = route[segment]
-			var finish: Vector3 = route[(segment+1)%route.size()]
-			var length := start.distance_to(finish)
-			if remaining<=length:
-				people[index].position = start.lerp(finish,remaining/length)+Vector3.UP*(active_floor*floor_height+.02)
-				var direction := finish-start
-				people[index].rotation.y = atan2(-direction.x,-direction.z)
-				break
-			remaining -= length
-		var swing := sin(_time*6.0+float(index))*0.40
-		var legs: Array = state.legs
-		var arms: Array = state.arms
-		legs[0].rotation.x = swing;legs[1].rotation.x = -swing
-		arms[0].rotation.x = -swing*.7;arms[1].rotation.x = swing*.7
+	if is_instance_valid(population):
+		population.activate_floor(active_floor);population.step(delta)
 
 func floor_spawn(level: int) -> Vector3:
 	return to_global(Vector3(0,float(clampi(level,0,floor_count-1))*floor_height+.08,depth*.5-3.5))

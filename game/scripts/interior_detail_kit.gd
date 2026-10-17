@@ -550,31 +550,34 @@ func _floor_lamp(point: Vector3) -> void:
 	_round("FloorLampGlow","cylinder",Vector3(.56,.015,.56),point+Vector3.UP*1.405,"light")
 
 func _guest_suite(point: Vector3, number: int) -> void:
-	if not _box("Bed",Vector3(1.55,.48,2.2),point+Vector3(0,.28,-.30),"linen",true):return
-	_box("BedDuvet",Vector3(1.55,.12,1.64),point+Vector3(0,.57,-.03),"paper")
-	_box("BedRunner",Vector3(1.56,.025,.36),point+Vector3(0,.65,.47),"navy")
-	_box("BedHeadboard",Vector3(1.65,1.10,.12),point+Vector3(0,.65,-1.40),"walnut")
-	for side in [-1.0,1.0]:
-		_box("BedPillow",Vector3(.58,.13,.38),point+Vector3(side*.40,.62,-.96),"paper")
 	var side := 1.0 if point.x>0 else -1.0
 	var inner := maxf(2.55,absf(point.x)-2.25)
 	var outer := minf(room.width*.5-.45,absf(point.x)+2.25)
 	var bay_width := outer-inner
 	var center_x := side*(inner+bay_width*.5)
-	var height := minf(2.45,room.floor_height-.30)
-	# The side-facing 1.05m opening is physically open to the central corridor.
-	# A short wall beyond it and the full rear wall make an actual room bay.
+	var height: float=room.floor_height-.15
+	# Only register a room when its complete enclosure fits the protected plan.
+	# Full-height transoms prevent jumping through the top of a locked doorway.
+	if not _safe(Vector3(center_x,0,point.z+.025),Vector3(bay_width,height,4.5)):return
+	if not _box("Bed",Vector3(1.55,.48,2.2),point+Vector3(0,.28,-.30),"linen",true):return
+	_box("BedDuvet",Vector3(1.55,.12,1.64),point+Vector3(0,.57,-.03),"paper")
+	_box("BedRunner",Vector3(1.56,.025,.36),point+Vector3(0,.65,.47),"navy")
+	_box("BedHeadboard",Vector3(1.65,1.10,.12),point+Vector3(0,.65,-1.40),"walnut")
+	for pillow_side in [-1.0,1.0]:_box("BedPillow",Vector3(.58,.13,.38),point+Vector3(pillow_side*.40,.62,-.96),"paper")
 	_box("GuestRoomRearWall",Vector3(bay_width,height,.12),Vector3(center_x,height*.5,point.z-2.2),"wall",true)
 	_box("GuestRoomOuterWall",Vector3(.12,height,4.5),Vector3(side*outer,height*.5,point.z),"wall",true)
 	_box("GuestRoomFrontWall",Vector3(bay_width,height,.12),Vector3(center_x,height*.5,point.z+2.25),"oak_light",true)
 	_box("GuestRoomEntryWall",Vector3(.12,height,2.75),Vector3(side*inner,height*.5,point.z-.825),"wall",true)
-	_box("GuestRoomDoor",Vector3(.12,height,.55),Vector3(side*inner,height*.5,point.z+1.98),"walnut",true)
-	_box("GuestDoorHeader",Vector3(.16,.20,1.15),Vector3(side*inner,height-.10,point.z+1.175),"walnut")
-	for z in [.60,1.75]:_box("GuestDoorJamb",Vector3(.16,height,.07),Vector3(side*inner,height*.5,point.z+z),"walnut")
+	_box("GuestRoomDoorPocket",Vector3(.12,height,.55),Vector3(side*inner,height*.5,point.z+1.98),"walnut",true)
+	var leaf_height := 2.20
+	_box("GuestDoorTransom",Vector3(.12,height-leaf_height,1.15),Vector3(side*inner,(height+leaf_height)*.5,point.z+1.175),"wall",true)
+	room.make_guest_door(_level,number,side*inner,point.z+1.175,leaf_height,side)
+	_box("GuestDoorHeader",Vector3(.16,.12,1.15),Vector3(side*inner,leaf_height+.06,point.z+1.175),"walnut")
+	for z in [.60,1.75]:_box("GuestDoorJamb",Vector3(.16,leaf_height+.12,.07),Vector3(side*inner,(leaf_height+.12)*.5,point.z+z),"walnut")
 	_label("GuestRoomNumber","%03d\n객실"%number,Vector3(side*(inner-.09),1.65,point.z+1.98),22,true,-side*PI*.5)
 	_box("GuestRoomFloorInset",Vector3(bay_width-.10,.009,4.3),Vector3(center_x,.007,point.z),"linen")
 	_feature("beds_and_room_numbers")
-	_feature("open_guest_room_enclosures")
+	_feature("master_key_guest_room_doors")
 
 func _display_case(point: Vector3, title: String, variation: int) -> void:
 	if not _box("GalleryDisplay",Vector3(1.75,.92,.72),point+Vector3.UP*.46,"paper",true):return

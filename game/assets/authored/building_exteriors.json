@@ -1,0 +1,2495 @@
+{
+  "schema_version": 1,
+  "task": "source_bound_exterior_identity",
+  "world_sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+  "checked_date": "2026-10-17",
+  "scope": {
+    "source_vertices_changed": false,
+    "source_height_changed": false,
+    "source_collision_changed": false,
+    "new_collision_bodies": 0,
+    "imported_images_or_models": false,
+    "surveyed_reconstruction": false,
+    "style": "Authored shallow native geometry over the retained source shell. Photo observation informs a small number of facade cues; dimensions and unobserved faces are authored. The single extruded source footprint can combine real volumes, so podium/tower massing is not invented or corrected."
+  },
+  "references": [
+    {
+      "id": "lotte_official_gallery",
+      "page_url": "https://www.lottehotel.com/prerendered/seoul-hotel/ja/about/gallery/index.html",
+      "image_url": "https://img.lottehotel.com/cms/asset/2025/02/06/7386/181023-1-2000-mai-LTSE%20(1).webp",
+      "observed": [
+        "Silver vertical ribs divide dark repeated window strips.",
+        "Pale stone lower surfaces and a dark upper crown contrast with the window field."
+      ],
+      "not_observed": [
+        "Exact rib spacing, all rear elevations and measured tower/podium heights."
+      ],
+      "used_as": "Visual observation only; no photo, logo, drawing or third party model imported."
+    },
+    {
+      "id": "plaza_official_main",
+      "page_url": "https://www.hoteltheplaza.com/en/",
+      "image_url": "https://www.hoteltheplaza.com/_resource/images/main/close_main_bg.jpg",
+      "observed": [
+        "Repeated faceted/hexagonal surrounds frame the main room-window field.",
+        "A broad light upper fascia and several dark horizontal podium ribbons are visible."
+      ],
+      "not_observed": [
+        "Exact window dimensions, rear geometry and complete surveyed envelope."
+      ],
+      "used_as": "Authored shallow faceted surrounds and fascia proportions only."
+    },
+    {
+      "id": "koreana_official_main",
+      "page_url": "https://www.koreanahotel.com/",
+      "image_urls": [
+        "https://www.koreanahotel.com/kr/images/main/visual_img2026_01.jpg",
+        "https://www.koreanahotel.com/kr/images/main/visual_img2025_02.jpg"
+      ],
+      "observed": [
+        "Dark rectangular glazing, a light stone side/end wall and thin horizontal window divisions.",
+        "Street-level pale stone piers and red-brown fabric awnings."
+      ],
+      "not_observed": [
+        "Complete tower elevation and measured canopy dimensions."
+      ],
+      "used_as": "Authored glass grid, pale edge piers and short ground awnings."
+    },
+    {
+      "id": "sfc_official_gallery",
+      "page_url": "https://www.sfckorea.co.kr/about.do",
+      "image_url": "https://www.sfckorea.co.kr/webapps/gallery/2625a5c3-c6e7-4d0a-a103-d0ba9e31974d",
+      "observed": [
+        "Pale vertical piers group regular square window fields.",
+        "The upper crown has separately framed light/dark portions."
+      ],
+      "not_observed": [
+        "Exact grouping counts, heights and all entry elevations."
+      ],
+      "used_as": "Authored grouped piers and crown bands entirely below retained source top."
+    }
+  ],
+  "profiles": {
+    "lotte_vertical": {
+      "wall": [
+        0.63,
+        0.62,
+        0.57
+      ],
+      "trim": [
+        0.77,
+        0.79,
+        0.77
+      ],
+      "glass": [
+        0.105,
+        0.18,
+        0.21
+      ],
+      "accent": [
+        0.55,
+        0.45,
+        0.28
+      ],
+      "bay_m": 3.1,
+      "floor_m": 4.05,
+      "pier_m": 0.32,
+      "band_m": 0.12,
+      "podium_m": 8.2,
+      "ingredients": [
+        "continuous_silver_vertical_ribs",
+        "dark_window_ribbons",
+        "light_stone_podium",
+        "dark_crown_louvres",
+        "entrance_marquee"
+      ]
+    },
+    "plaza_faceted": {
+      "wall": [
+        0.73,
+        0.7,
+        0.59
+      ],
+      "trim": [
+        0.8,
+        0.76,
+        0.64
+      ],
+      "glass": [
+        0.12,
+        0.26,
+        0.28
+      ],
+      "accent": [
+        0.32,
+        0.27,
+        0.17
+      ],
+      "bay_m": 3.2,
+      "floor_m": 3.95,
+      "pier_m": 0.2,
+      "band_m": 0.2,
+      "podium_m": 10.8,
+      "ingredients": [
+        "repeated_shallow_hexagonal_bay_frames",
+        "horizontal_dark_podium_ribbons",
+        "broad_stone_crown",
+        "corner_piers",
+        "hotel_entrance_canopy"
+      ]
+    },
+    "koreana_glass": {
+      "wall": [
+        0.66,
+        0.67,
+        0.65
+      ],
+      "trim": [
+        0.74,
+        0.76,
+        0.74
+      ],
+      "glass": [
+        0.085,
+        0.17,
+        0.22
+      ],
+      "accent": [
+        0.42,
+        0.18,
+        0.1
+      ],
+      "bay_m": 2.9,
+      "floor_m": 3.65,
+      "pier_m": 0.17,
+      "band_m": 0.1,
+      "podium_m": 5.8,
+      "ingredients": [
+        "dark_rectangular_glass_bays",
+        "pale_stone_edge_piers",
+        "thin_horizontal_sills",
+        "red_brown_ground_awnings",
+        "rectangular_crown_panel"
+      ]
+    },
+    "sfc_grouped_piers": {
+      "wall": [
+        0.68,
+        0.67,
+        0.62
+      ],
+      "trim": [
+        0.76,
+        0.74,
+        0.68
+      ],
+      "glass": [
+        0.12,
+        0.21,
+        0.24
+      ],
+      "accent": [
+        0.34,
+        0.33,
+        0.29
+      ],
+      "bay_m": 3.0,
+      "floor_m": 4.4,
+      "pier_m": 0.72,
+      "band_m": 0.19,
+      "podium_m": 7.8,
+      "ingredients": [
+        "grouped_stone_vertical_piers",
+        "square_glass_window_fields",
+        "crown_frame_below_source_top",
+        "tall_lobby_columns",
+        "stone_entrance_canopy"
+      ]
+    },
+    "lotte_retail_stone": {
+      "wall": [
+        0.7,
+        0.66,
+        0.58
+      ],
+      "trim": [
+        0.8,
+        0.76,
+        0.67
+      ],
+      "glass": [
+        0.14,
+        0.2,
+        0.23
+      ],
+      "accent": [
+        0.42,
+        0.3,
+        0.19
+      ],
+      "bay_m": 5.4,
+      "floor_m": 4.2,
+      "pier_m": 0.7,
+      "band_m": 0.32,
+      "podium_m": 12.4,
+      "ingredients": [
+        "broad_stone_pilasters",
+        "large_podium_display_bays",
+        "strong_retail_cornices",
+        "layered_marquee",
+        "source_name_sign"
+      ]
+    },
+    "glass_office": {
+      "wall": [
+        0.46,
+        0.55,
+        0.56
+      ],
+      "trim": [
+        0.67,
+        0.7,
+        0.69
+      ],
+      "glass": [
+        0.16,
+        0.29,
+        0.32
+      ],
+      "accent": [
+        0.24,
+        0.3,
+        0.29
+      ],
+      "bay_m": 3.4,
+      "floor_m": 3.7,
+      "pier_m": 0.14,
+      "band_m": 0.085,
+      "podium_m": 5.4,
+      "ingredients": [
+        "slender_full_height_mullions",
+        "thin_floor_edges",
+        "double_height_lobby_portal",
+        "metal_crown_band"
+      ]
+    },
+    "stone_office": {
+      "wall": [
+        0.71,
+        0.69,
+        0.63
+      ],
+      "trim": [
+        0.78,
+        0.75,
+        0.68
+      ],
+      "glass": [
+        0.19,
+        0.26,
+        0.27
+      ],
+      "accent": [
+        0.38,
+        0.36,
+        0.31
+      ],
+      "bay_m": 5.6,
+      "floor_m": 3.7,
+      "pier_m": 0.65,
+      "band_m": 0.25,
+      "podium_m": 5.2,
+      "ingredients": [
+        "wide_stone_pilasters",
+        "deep_floor_cornices",
+        "stone_base_course",
+        "flat_entry_lintel"
+      ]
+    },
+    "brick_shopfront": {
+      "wall": [
+        0.52,
+        0.32,
+        0.24
+      ],
+      "trim": [
+        0.67,
+        0.52,
+        0.4
+      ],
+      "glass": [
+        0.17,
+        0.23,
+        0.23
+      ],
+      "accent": [
+        0.29,
+        0.2,
+        0.14
+      ],
+      "bay_m": 3.7,
+      "floor_m": 3.2,
+      "pier_m": 0.4,
+      "band_m": 0.2,
+      "podium_m": 3.4,
+      "ingredients": [
+        "masonry_party_piers",
+        "ground_shopfront_lintels",
+        "repeated_short_awnings",
+        "projecting_top_cornice"
+      ]
+    },
+    "hotel_ribbon": {
+      "wall": [
+        0.69,
+        0.66,
+        0.58
+      ],
+      "trim": [
+        0.78,
+        0.73,
+        0.6
+      ],
+      "glass": [
+        0.19,
+        0.25,
+        0.27
+      ],
+      "accent": [
+        0.35,
+        0.25,
+        0.16
+      ],
+      "bay_m": 2.8,
+      "floor_m": 3.4,
+      "pier_m": 0.23,
+      "band_m": 0.17,
+      "podium_m": 4.6,
+      "ingredients": [
+        "narrow_room_rhythm",
+        "horizontal_room_ribbons",
+        "broad_lobby_canopy",
+        "crown_fascia"
+      ]
+    },
+    "plaster_balcony": {
+      "wall": [
+        0.76,
+        0.73,
+        0.65
+      ],
+      "trim": [
+        0.84,
+        0.8,
+        0.71
+      ],
+      "glass": [
+        0.21,
+        0.27,
+        0.28
+      ],
+      "accent": [
+        0.48,
+        0.44,
+        0.36
+      ],
+      "bay_m": 4.4,
+      "floor_m": 3.1,
+      "pier_m": 0.27,
+      "band_m": 0.14,
+      "podium_m": 3.1,
+      "ingredients": [
+        "paired_vertical_bays",
+        "shallow_balcony_sills",
+        "plaster_end_piers",
+        "roof_parapet_course"
+      ]
+    },
+    "service_hall": {
+      "wall": [
+        0.6,
+        0.61,
+        0.57
+      ],
+      "trim": [
+        0.72,
+        0.7,
+        0.62
+      ],
+      "glass": [
+        0.2,
+        0.25,
+        0.25
+      ],
+      "accent": [
+        0.34,
+        0.36,
+        0.32
+      ],
+      "bay_m": 6.6,
+      "floor_m": 4.2,
+      "pier_m": 0.48,
+      "band_m": 0.28,
+      "podium_m": 2.4,
+      "ingredients": [
+        "wide_structural_bays",
+        "high_clerestory_strip",
+        "large_loading_lintel",
+        "deep_eaves_below_source_top"
+      ]
+    }
+  },
+  "named_buildings": [
+    {
+      "id": "osm:way:117914845:building",
+      "profile": "lotte_vertical",
+      "reference_ids": [
+        "lotte_official_gallery"
+      ]
+    },
+    {
+      "id": "osm:way:233593619:building",
+      "profile": "plaza_faceted",
+      "reference_ids": [
+        "plaza_official_main"
+      ]
+    },
+    {
+      "id": "osm:way:377289798:building",
+      "profile": "koreana_glass",
+      "reference_ids": [
+        "koreana_official_main"
+      ]
+    },
+    {
+      "id": "osm:way:332565592:building",
+      "profile": "sfc_grouped_piers",
+      "reference_ids": [
+        "sfc_official_gallery"
+      ]
+    },
+    {
+      "id": "osm:way:233592424:building",
+      "profile": "lotte_retail_stone",
+      "reference_ids": [],
+      "observation_limit": "Retail identity comes from source name/shop tag. This profile is authored, without a verified facade-photo reconstruction."
+    }
+  ],
+  "source_kind_tags": {
+    "osm:relation:10650821:building": {
+      "building": "yes"
+    },
+    "osm:relation:10658334:building": {
+      "building": "yes"
+    },
+    "osm:relation:10658335:building": {
+      "building": "yes"
+    },
+    "osm:relation:10658336:building": {
+      "building": "yes"
+    },
+    "osm:relation:10718537:building": {
+      "building": "yes"
+    },
+    "osm:relation:10718568:building": {
+      "building": "yes"
+    },
+    "osm:relation:10718798:building": {
+      "building": "yes",
+      "tourism": "museum"
+    },
+    "osm:relation:10754645:building": {
+      "building": "yes"
+    },
+    "osm:relation:10755129:building": {
+      "building": "yes"
+    },
+    "osm:relation:7240724:building": {
+      "building": "commercial"
+    },
+    "osm:relation:8885007:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205229:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205230:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205236:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205237:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205238:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205239:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205240:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205241:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205242:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205243:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205244:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205245:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205246:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205247:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205248:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205249:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205250:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205251:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205252:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205253:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205254:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205255:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205256:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205257:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205258:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205259:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205260:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205261:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205262:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205263:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205264:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205266:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205267:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205268:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205269:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205270:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205271:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205272:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205275:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205282:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205304:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205305:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205306:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205307:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205308:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205315:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205316:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205317:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205318:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205319:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205320:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205321:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205322:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205323:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205324:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205326:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205327:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205329:building": {
+      "building": "yes"
+    },
+    "osm:way:1002205330:building": {
+      "building": "yes"
+    },
+    "osm:way:1007482029:building": {
+      "building": "yes"
+    },
+    "osm:way:1007482030:building": {
+      "building": "yes"
+    },
+    "osm:way:1007482031:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537139:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537140:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537141:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537142:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537143:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537144:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537145:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537146:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537147:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537148:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537149:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537150:building": {
+      "building": "yes",
+      "shop": "kiosk"
+    },
+    "osm:way:1029537151:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537152:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537153:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537154:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537155:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537156:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537157:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537158:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537159:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537160:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537161:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537162:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537163:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537164:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537165:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537166:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537167:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537168:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537169:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537170:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537171:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537172:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537173:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537174:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537175:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537176:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537177:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537178:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537179:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537180:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537181:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537182:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537183:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537184:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537185:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537186:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537187:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537188:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537189:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537190:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537191:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537192:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537193:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537194:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537195:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537196:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537197:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537198:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537199:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537200:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537201:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537202:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537203:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537204:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537205:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537206:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537207:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537208:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537209:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537210:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537211:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537212:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537213:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537214:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537215:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537216:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537217:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537218:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537219:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537220:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537221:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537222:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537223:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537224:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537225:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537226:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537227:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537228:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537229:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537230:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537231:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537232:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537233:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537234:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537235:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537236:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537237:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537238:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537239:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537240:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537241:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537242:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537243:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537244:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537245:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537246:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537247:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537248:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537249:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537250:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537251:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537252:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537253:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537254:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537255:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537256:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537257:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537258:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537259:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537260:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537261:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537262:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537263:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537264:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537265:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537266:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537267:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537268:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537269:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537270:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537271:building": {
+      "building": "yes",
+      "shop": "laundry"
+    },
+    "osm:way:1029537272:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537273:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537274:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537275:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537276:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537277:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537278:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537279:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537280:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537281:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537282:building": {
+      "building": "yes"
+    },
+    "osm:way:1029537283:building": {
+      "building": "yes"
+    },
+    "osm:way:1041586966:building": {
+      "building": "hotel"
+    },
+    "osm:way:1128365135:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365136:building": {
+      "building": "yes",
+      "amenity": "cafe"
+    },
+    "osm:way:1128365137:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365145:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365147:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365148:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365149:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365155:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365156:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365159:building": {
+      "building": "yes"
+    },
+    "osm:way:1128365160:building": {
+      "building": "yes"
+    },
+    "osm:way:117914845:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:1207660401:building": {
+      "building": "yes"
+    },
+    "osm:way:1215689854:building": {
+      "building": "yes",
+      "amenity": "police"
+    },
+    "osm:way:1215689858:building": {
+      "building": "yes"
+    },
+    "osm:way:1215689859:building": {
+      "building": "yes"
+    },
+    "osm:way:1216135924:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135926:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135927:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135933:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135934:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135935:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135937:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135938:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216135939:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:1216135940:building": {
+      "building": "commercial"
+    },
+    "osm:way:1216346300:building": {
+      "building": "yes"
+    },
+    "osm:way:1216346301:building": {
+      "building": "yes"
+    },
+    "osm:way:1216346303:building": {
+      "building": "yes"
+    },
+    "osm:way:1216346304:building": {
+      "building": "yes"
+    },
+    "osm:way:1216346305:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351370:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351371:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351372:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351373:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351375:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351376:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351377:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351378:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351385:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351386:building": {
+      "building": "yes"
+    },
+    "osm:way:1216351390:building": {
+      "building": "yes"
+    },
+    "osm:way:1216356182:building": {
+      "building": "yes"
+    },
+    "osm:way:1216356183:building": {
+      "building": "yes"
+    },
+    "osm:way:1216356189:building": {
+      "building": "yes",
+      "amenity": "place_of_worship"
+    },
+    "osm:way:1216356190:building": {
+      "building": "yes"
+    },
+    "osm:way:1216356191:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911415:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911416:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911417:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911418:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911419:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911420:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911422:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911423:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911424:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911425:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911426:building": {
+      "building": "yes"
+    },
+    "osm:way:1216911427:building": {
+      "building": "yes"
+    },
+    "osm:way:1217450316:building": {
+      "building": "yes"
+    },
+    "osm:way:1217450317:building": {
+      "building": "yes"
+    },
+    "osm:way:1217450318:building": {
+      "building": "yes"
+    },
+    "osm:way:1217450319:building": {
+      "building": "yes"
+    },
+    "osm:way:1217450320:building": {
+      "building": "yes"
+    },
+    "osm:way:1217684974:building": {
+      "building": "yes",
+      "amenity": "arts_centre"
+    },
+    "osm:way:1222690578:building": {
+      "building": "yes"
+    },
+    "osm:way:1222690579:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862121:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862122:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862123:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862124:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862125:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862126:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862127:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862128:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862129:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862130:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862131:building": {
+      "building": "yes"
+    },
+    "osm:way:1224862132:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735499:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735500:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735501:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735502:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735503:building": {
+      "building": "yes"
+    },
+    "osm:way:1226735504:building": {
+      "building": "yes"
+    },
+    "osm:way:1228407236:building": {
+      "building": "yes"
+    },
+    "osm:way:1228407237:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938276:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938277:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938278:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938279:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938280:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938281:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938282:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938284:building": {
+      "building": "yes"
+    },
+    "osm:way:1229938285:building": {
+      "building": "yes"
+    },
+    "osm:way:1303594037:building": {
+      "building": "yes"
+    },
+    "osm:way:1415324506:building": {
+      "building": "yes"
+    },
+    "osm:way:1415584182:building": {
+      "building": "yes"
+    },
+    "osm:way:1415584183:building": {
+      "building": "yes"
+    },
+    "osm:way:1415584184:building": {
+      "building": "yes"
+    },
+    "osm:way:142096705:building": {
+      "building": "yes"
+    },
+    "osm:way:142096706:building": {
+      "building": "yes"
+    },
+    "osm:way:1423610871:building": {
+      "building": "yes"
+    },
+    "osm:way:1551642466:building": {
+      "building": "yes"
+    },
+    "osm:way:181574570:building": {
+      "building": "yes"
+    },
+    "osm:way:181574580:building": {
+      "building": "gatehouse"
+    },
+    "osm:way:223158445:building": {
+      "building": "apartments"
+    },
+    "osm:way:223158447:building": {
+      "building": "yes",
+      "tourism": "gallery"
+    },
+    "osm:way:223165014:building": {
+      "building": "yes"
+    },
+    "osm:way:223418026:building": {
+      "building": "yes"
+    },
+    "osm:way:223418027:building": {
+      "building": "yes"
+    },
+    "osm:way:223418200:building": {
+      "building": "yes"
+    },
+    "osm:way:223418691:building": {
+      "building": "church"
+    },
+    "osm:way:223418692:building": {
+      "building": "public"
+    },
+    "osm:way:233592423:building": {
+      "building": "yes",
+      "shop": "department_store"
+    },
+    "osm:way:233592424:building": {
+      "building": "yes",
+      "shop": "department_store"
+    },
+    "osm:way:233593617:building": {
+      "building": "yes"
+    },
+    "osm:way:233593618:building": {
+      "building": "yes"
+    },
+    "osm:way:233593619:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:233593620:building": {
+      "building": "yes"
+    },
+    "osm:way:233593621:building": {
+      "building": "yes"
+    },
+    "osm:way:233593622:building": {
+      "building": "office"
+    },
+    "osm:way:233593623:building": {
+      "building": "yes"
+    },
+    "osm:way:233593625:building": {
+      "building": "yes"
+    },
+    "osm:way:233593627:building": {
+      "building": "yes"
+    },
+    "osm:way:233593628:building": {
+      "building": "yes"
+    },
+    "osm:way:233593629:building": {
+      "building": "yes"
+    },
+    "osm:way:233593632:building": {
+      "building": "yes"
+    },
+    "osm:way:233593633:building": {
+      "building": "yes"
+    },
+    "osm:way:233593634:building": {
+      "building": "yes"
+    },
+    "osm:way:233593635:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:233593636:building": {
+      "building": "yes"
+    },
+    "osm:way:233593638:building": {
+      "building": "yes"
+    },
+    "osm:way:233593639:building": {
+      "building": "yes"
+    },
+    "osm:way:233593640:building": {
+      "building": "yes"
+    },
+    "osm:way:233593641:building": {
+      "building": "yes"
+    },
+    "osm:way:233593642:building": {
+      "building": "yes"
+    },
+    "osm:way:233593644:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:233593646:building": {
+      "building": "yes"
+    },
+    "osm:way:256815224:building": {
+      "building": "commercial"
+    },
+    "osm:way:263587835:building": {
+      "building": "yes",
+      "amenity": "studio"
+    },
+    "osm:way:263587971:building": {
+      "building": "yes"
+    },
+    "osm:way:263588265:building": {
+      "building": "commercial"
+    },
+    "osm:way:301284814:building": {
+      "building": "yes"
+    },
+    "osm:way:301284818:building": {
+      "building": "yes",
+      "shop": "department_store"
+    },
+    "osm:way:332565589:building": {
+      "building": "yes"
+    },
+    "osm:way:332565592:building": {
+      "building": "yes"
+    },
+    "osm:way:332565595:building": {
+      "building": "yes"
+    },
+    "osm:way:332565598:building": {
+      "building": "yes"
+    },
+    "osm:way:332565599:building": {
+      "building": "yes"
+    },
+    "osm:way:332565601:building": {
+      "building": "yes"
+    },
+    "osm:way:332565604:building": {
+      "building": "yes"
+    },
+    "osm:way:332565607:building": {
+      "building": "yes"
+    },
+    "osm:way:332565609:building": {
+      "building": "yes"
+    },
+    "osm:way:332565611:building": {
+      "building": "commercial"
+    },
+    "osm:way:332565614:building": {
+      "building": "yes"
+    },
+    "osm:way:332565616:building": {
+      "building": "yes"
+    },
+    "osm:way:332565618:building": {
+      "building": "yes"
+    },
+    "osm:way:332565620:building": {
+      "building": "yes"
+    },
+    "osm:way:344644290:building": {
+      "building": "yes"
+    },
+    "osm:way:344644338:building": {
+      "building": "office"
+    },
+    "osm:way:344644495:building": {
+      "building": "commercial"
+    },
+    "osm:way:344645394:building": {
+      "building": "commercial"
+    },
+    "osm:way:344645395:building": {
+      "building": "commercial"
+    },
+    "osm:way:348488138:building": {
+      "building": "commercial"
+    },
+    "osm:way:348488378:building": {
+      "building": "commercial"
+    },
+    "osm:way:348489095:building": {
+      "building": "yes",
+      "tourism": "museum"
+    },
+    "osm:way:348490554:building": {
+      "building": "yes"
+    },
+    "osm:way:348490622:building": {
+      "building": "commercial"
+    },
+    "osm:way:377289798:building": {
+      "building": "hotel",
+      "tourism": "hotel"
+    },
+    "osm:way:377289803:building": {
+      "building": "gatehouse"
+    },
+    "osm:way:381755270:building": {
+      "building": "yes"
+    },
+    "osm:way:381941864:building": {
+      "building": "yes"
+    },
+    "osm:way:381941866:building": {
+      "building": "yes"
+    },
+    "osm:way:381941867:building": {
+      "building": "yes"
+    },
+    "osm:way:381941868:building": {
+      "building": "yes"
+    },
+    "osm:way:381941869:building": {
+      "building": "yes"
+    },
+    "osm:way:381941870:building": {
+      "building": "yes"
+    },
+    "osm:way:381941871:building": {
+      "building": "yes"
+    },
+    "osm:way:400532319:building": {
+      "building": "yes"
+    },
+    "osm:way:400821749:building": {
+      "building": "yes"
+    },
+    "osm:way:400821751:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:400821755:building": {
+      "building": "yes"
+    },
+    "osm:way:415006130:building": {
+      "building": "commercial"
+    },
+    "osm:way:431428099:building": {
+      "building": "yes"
+    },
+    "osm:way:431428100:building": {
+      "building": "yes"
+    },
+    "osm:way:431428102:building": {
+      "building": "yes"
+    },
+    "osm:way:431428103:building": {
+      "building": "yes"
+    },
+    "osm:way:431428108:building": {
+      "building": "yes"
+    },
+    "osm:way:458971769:building": {
+      "building": "yes"
+    },
+    "osm:way:463188593:building": {
+      "building": "yes"
+    },
+    "osm:way:463188594:building": {
+      "building": "yes"
+    },
+    "osm:way:487584793:building": {
+      "building": "yes",
+      "tourism": "museum"
+    },
+    "osm:way:488367366:building": {
+      "building": "yes"
+    },
+    "osm:way:493183990:building": {
+      "building": "commercial"
+    },
+    "osm:way:493183991:building": {
+      "building": "commercial"
+    },
+    "osm:way:493183995:building": {
+      "building": "commercial"
+    },
+    "osm:way:493189704:building": {
+      "building": "commercial"
+    },
+    "osm:way:502810169:building": {
+      "building": "commercial"
+    },
+    "osm:way:502810170:building": {
+      "building": "yes"
+    },
+    "osm:way:502810171:building": {
+      "building": "yes"
+    },
+    "osm:way:506252753:building": {
+      "building": "yes"
+    },
+    "osm:way:517072305:building": {
+      "building": "yes"
+    },
+    "osm:way:517072307:building": {
+      "building": "yes"
+    },
+    "osm:way:517072310:building": {
+      "building": "yes"
+    },
+    "osm:way:517072317:building": {
+      "building": "yes"
+    },
+    "osm:way:518561384:building": {
+      "building": "yes"
+    },
+    "osm:way:518561385:building": {
+      "building": "yes"
+    },
+    "osm:way:518561386:building": {
+      "building": "yes"
+    },
+    "osm:way:518561387:building": {
+      "building": "school"
+    },
+    "osm:way:518561390:building": {
+      "building": "yes",
+      "amenity": "theatre"
+    },
+    "osm:way:518561399:building": {
+      "building": "yes"
+    },
+    "osm:way:518561400:building": {
+      "building": "commercial"
+    },
+    "osm:way:518561401:building": {
+      "building": "school"
+    },
+    "osm:way:518561402:building": {
+      "building": "yes"
+    },
+    "osm:way:518561404:building": {
+      "building": "school"
+    },
+    "osm:way:518561405:building": {
+      "building": "yes"
+    },
+    "osm:way:518561406:building": {
+      "building": "yes"
+    },
+    "osm:way:518561407:building": {
+      "building": "yes"
+    },
+    "osm:way:518561408:building": {
+      "building": "yes"
+    },
+    "osm:way:518561409:building": {
+      "building": "yes"
+    },
+    "osm:way:518561410:building": {
+      "building": "yes"
+    },
+    "osm:way:518561411:building": {
+      "building": "yes"
+    },
+    "osm:way:544015940:building": {
+      "building": "yes"
+    },
+    "osm:way:544020565:building": {
+      "building": "yes"
+    },
+    "osm:way:544020566:building": {
+      "building": "yes"
+    },
+    "osm:way:544020567:building": {
+      "building": "yes"
+    },
+    "osm:way:544020571:building": {
+      "building": "yes"
+    },
+    "osm:way:544020572:building": {
+      "building": "yes"
+    },
+    "osm:way:544020573:building": {
+      "building": "yes"
+    },
+    "osm:way:544020574:building": {
+      "building": "yes"
+    },
+    "osm:way:544020575:building": {
+      "building": "yes"
+    },
+    "osm:way:544020576:building": {
+      "building": "yes"
+    },
+    "osm:way:544020577:building": {
+      "building": "yes"
+    },
+    "osm:way:544020578:building": {
+      "building": "yes"
+    },
+    "osm:way:544020579:building": {
+      "building": "yes"
+    },
+    "osm:way:544020582:building": {
+      "building": "yes"
+    },
+    "osm:way:544020583:building": {
+      "building": "yes"
+    },
+    "osm:way:544020585:building": {
+      "building": "yes"
+    },
+    "osm:way:544020586:building": {
+      "building": "yes"
+    },
+    "osm:way:544020587:building": {
+      "building": "yes"
+    },
+    "osm:way:544020588:building": {
+      "building": "yes"
+    },
+    "osm:way:544020589:building": {
+      "building": "yes"
+    },
+    "osm:way:544020590:building": {
+      "building": "yes"
+    },
+    "osm:way:544020591:building": {
+      "building": "yes"
+    },
+    "osm:way:544020592:building": {
+      "building": "yes"
+    },
+    "osm:way:544020593:building": {
+      "building": "yes"
+    },
+    "osm:way:544020594:building": {
+      "building": "yes"
+    },
+    "osm:way:544020595:building": {
+      "building": "yes"
+    },
+    "osm:way:544020596:building": {
+      "building": "yes"
+    },
+    "osm:way:551917143:building": {
+      "building": "yes"
+    },
+    "osm:way:553495819:building": {
+      "building": "yes",
+      "tourism": "museum"
+    },
+    "osm:way:577594782:building": {
+      "building": "yes",
+      "shop": "department_store"
+    },
+    "osm:way:626112515:building": {
+      "building": "public",
+      "tourism": "gallery"
+    },
+    "osm:way:640456624:building": {
+      "building": "school"
+    },
+    "osm:way:640456626:building": {
+      "building": "yes"
+    },
+    "osm:way:646147125:building": {
+      "building": "yes",
+      "tourism": "museum"
+    },
+    "osm:way:646147128:building": {
+      "building": "gatehouse"
+    },
+    "osm:way:708669831:building": {
+      "building": "parking",
+      "amenity": "parking"
+    },
+    "osm:way:708669836:building": {
+      "building": "yes"
+    },
+    "osm:way:708669837:building": {
+      "building": "yes"
+    },
+    "osm:way:708669841:building": {
+      "building": "yes"
+    },
+    "osm:way:710081789:building": {
+      "building": "yes"
+    },
+    "osm:way:710169361:building": {
+      "building": "yes"
+    },
+    "osm:way:710169362:building": {
+      "building": "yes"
+    },
+    "osm:way:710169363:building": {
+      "building": "yes"
+    },
+    "osm:way:710169364:building": {
+      "building": "yes"
+    },
+    "osm:way:710169365:building": {
+      "building": "yes"
+    },
+    "osm:way:710169366:building": {
+      "building": "yes"
+    },
+    "osm:way:710169367:building": {
+      "building": "yes"
+    },
+    "osm:way:710169369:building": {
+      "building": "yes"
+    },
+    "osm:way:710169370:building": {
+      "building": "yes"
+    },
+    "osm:way:710169371:building": {
+      "building": "yes"
+    },
+    "osm:way:710169372:building": {
+      "building": "yes"
+    },
+    "osm:way:710169373:building": {
+      "building": "yes"
+    },
+    "osm:way:710255387:building": {
+      "building": "yes"
+    },
+    "osm:way:710255388:building": {
+      "building": "yes"
+    },
+    "osm:way:710255402:building": {
+      "building": "yes"
+    },
+    "osm:way:711239224:building": {
+      "building": "yes"
+    },
+    "osm:way:711239225:building": {
+      "building": "yes"
+    },
+    "osm:way:766091914:building": {
+      "building": "yes"
+    },
+    "osm:way:766091915:building": {
+      "building": "yes"
+    },
+    "osm:way:766091923:building": {
+      "building": "yes",
+      "amenity": "place_of_worship"
+    },
+    "osm:way:766091924:building": {
+      "building": "yes",
+      "amenity": "place_of_worship"
+    },
+    "osm:way:767685465:building": {
+      "building": "yes"
+    },
+    "osm:way:767686437:building": {
+      "building": "yes"
+    },
+    "osm:way:767871943:building": {
+      "building": "yes"
+    },
+    "osm:way:767889288:building": {
+      "building": "yes"
+    },
+    "osm:way:767889289:building": {
+      "building": "yes"
+    },
+    "osm:way:767889292:building": {
+      "building": "yes",
+      "amenity": "place_of_worship"
+    },
+    "osm:way:767889294:building": {
+      "building": "yes"
+    },
+    "osm:way:767889295:building": {
+      "building": "yes"
+    },
+    "osm:way:767889296:building": {
+      "building": "yes"
+    },
+    "osm:way:767889297:building": {
+      "building": "yes"
+    },
+    "osm:way:768393718:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:768393720:building": {
+      "building": "parking",
+      "amenity": "parking"
+    },
+    "osm:way:768396109:building": {
+      "building": "office"
+    },
+    "osm:way:768482852:building": {
+      "building": "hotel"
+    },
+    "osm:way:768711313:building": {
+      "building": "hotel"
+    },
+    "osm:way:768717383:building": {
+      "building": "apartments"
+    },
+    "osm:way:768725783:building": {
+      "building": "yes"
+    },
+    "osm:way:769023589:building": {
+      "building": "pavilion"
+    },
+    "osm:way:769025805:building": {
+      "building": "yes",
+      "amenity": "conference_centre"
+    },
+    "osm:way:769025806:building": {
+      "building": "hotel"
+    },
+    "osm:way:772402652:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:772402653:building": {
+      "building": "yes"
+    },
+    "osm:way:772539757:building": {
+      "building": "yes"
+    },
+    "osm:way:772987882:building": {
+      "building": "yes"
+    },
+    "osm:way:772987883:building": {
+      "building": "yes"
+    },
+    "osm:way:772987884:building": {
+      "building": "yes"
+    },
+    "osm:way:772987891:building": {
+      "building": "yes"
+    },
+    "osm:way:772987896:building": {
+      "building": "yes"
+    },
+    "osm:way:772987897:building": {
+      "building": "yes"
+    },
+    "osm:way:772987898:building": {
+      "building": "yes"
+    },
+    "osm:way:772987899:building": {
+      "building": "yes"
+    },
+    "osm:way:772987900:building": {
+      "building": "yes"
+    },
+    "osm:way:772987901:building": {
+      "building": "yes"
+    },
+    "osm:way:772987902:building": {
+      "building": "yes"
+    },
+    "osm:way:772987903:building": {
+      "building": "yes"
+    },
+    "osm:way:772989539:building": {
+      "building": "yes"
+    },
+    "osm:way:772990739:building": {
+      "building": "yes",
+      "amenity": "shelter"
+    },
+    "osm:way:775237063:building": {
+      "building": "yes"
+    },
+    "osm:way:776584308:building": {
+      "building": "yes"
+    },
+    "osm:way:776584312:building": {
+      "building": "yes"
+    },
+    "osm:way:776616816:building": {
+      "building": "parking",
+      "amenity": "parking"
+    },
+    "osm:way:776616819:building": {
+      "building": "yes"
+    },
+    "osm:way:776616820:building": {
+      "building": "yes"
+    },
+    "osm:way:777624706:building": {
+      "building": "yes"
+    },
+    "osm:way:781661625:building": {
+      "building": "yes"
+    },
+    "osm:way:781662004:building": {
+      "building": "yes",
+      "shop": "mall"
+    },
+    "osm:way:781662005:building": {
+      "building": "yes"
+    },
+    "osm:way:782906486:building": {
+      "building": "yes"
+    },
+    "osm:way:821108000:building": {
+      "building": "yes"
+    },
+    "osm:way:821108003:building": {
+      "building": "yes"
+    },
+    "osm:way:821108008:building": {
+      "building": "yes"
+    },
+    "osm:way:821108009:building": {
+      "building": "yes"
+    },
+    "osm:way:821108011:building": {
+      "building": "yes"
+    },
+    "osm:way:821108012:building": {
+      "building": "yes"
+    },
+    "osm:way:822255510:building": {
+      "building": "yes"
+    },
+    "osm:way:822255511:building": {
+      "building": "yes"
+    },
+    "osm:way:822255512:building": {
+      "building": "yes"
+    },
+    "osm:way:822255513:building": {
+      "building": "yes"
+    },
+    "osm:way:822255514:building": {
+      "building": "yes"
+    },
+    "osm:way:822255515:building": {
+      "building": "yes"
+    },
+    "osm:way:822255516:building": {
+      "building": "yes"
+    },
+    "osm:way:836895121:building": {
+      "building": "yes"
+    },
+    "osm:way:843570524:building": {
+      "building": "yes"
+    },
+    "osm:way:843570525:building": {
+      "building": "commercial"
+    },
+    "osm:way:843570526:building": {
+      "building": "commercial"
+    },
+    "osm:way:844505570:building": {
+      "building": "commercial"
+    },
+    "osm:way:844505571:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:844505572:building": {
+      "building": "commercial"
+    },
+    "osm:way:844505573:building": {
+      "building": "yes"
+    },
+    "osm:way:844505574:building": {
+      "building": "commercial"
+    },
+    "osm:way:844505575:building": {
+      "building": "commercial"
+    },
+    "osm:way:847208225:building": {
+      "building": "commercial"
+    },
+    "osm:way:847208226:building": {
+      "building": "yes",
+      "amenity": "restaurant"
+    },
+    "osm:way:847208227:building": {
+      "building": "yes"
+    },
+    "osm:way:847208228:building": {
+      "building": "yes"
+    },
+    "osm:way:847208229:building": {
+      "building": "yes"
+    },
+    "osm:way:847208230:building": {
+      "building": "yes"
+    },
+    "osm:way:847214796:building": {
+      "building": "commercial"
+    },
+    "osm:way:847214797:building": {
+      "building": "yes"
+    },
+    "osm:way:847214799:building": {
+      "building": "yes"
+    },
+    "osm:way:847214800:building": {
+      "building": "yes",
+      "amenity": "police"
+    },
+    "osm:way:847214801:building": {
+      "building": "commercial"
+    },
+    "osm:way:847214802:building": {
+      "building": "commercial"
+    },
+    "osm:way:847217148:building": {
+      "building": "commercial"
+    },
+    "osm:way:847217149:building": {
+      "building": "yes",
+      "amenity": "place_of_worship"
+    },
+    "osm:way:847217151:building": {
+      "building": "commercial"
+    },
+    "osm:way:847217152:building": {
+      "building": "commercial"
+    },
+    "osm:way:847217153:building": {
+      "building": "commercial"
+    },
+    "osm:way:847217154:building": {
+      "building": "commercial"
+    },
+    "osm:way:849821065:building": {
+      "building": "yes"
+    },
+    "osm:way:849821066:building": {
+      "building": "yes",
+      "amenity": "restaurant"
+    },
+    "osm:way:849821067:building": {
+      "building": "yes"
+    },
+    "osm:way:849821068:building": {
+      "building": "yes",
+      "amenity": "restaurant"
+    },
+    "osm:way:849821069:building": {
+      "building": "yes"
+    },
+    "osm:way:849821070:building": {
+      "building": "yes"
+    },
+    "osm:way:849821071:building": {
+      "building": "yes",
+      "amenity": "restaurant"
+    },
+    "osm:way:849821072:building": {
+      "building": "yes"
+    },
+    "osm:way:851749497:building": {
+      "building": "commercial"
+    },
+    "osm:way:851749498:building": {
+      "building": "commercial"
+    },
+    "osm:way:851749499:building": {
+      "building": "commercial"
+    },
+    "osm:way:851749500:building": {
+      "building": "yes"
+    },
+    "osm:way:856393262:building": {
+      "building": "yes"
+    },
+    "osm:way:856393263:building": {
+      "building": "yes",
+      "amenity": "post_office"
+    },
+    "osm:way:856393265:building": {
+      "building": "yes"
+    },
+    "osm:way:856393266:building": {
+      "building": "yes"
+    },
+    "osm:way:856393267:building": {
+      "building": "office"
+    },
+    "osm:way:856393268:building": {
+      "building": "yes"
+    },
+    "osm:way:856393269:building": {
+      "building": "yes"
+    },
+    "osm:way:856393270:building": {
+      "building": "yes"
+    },
+    "osm:way:856393271:building": {
+      "building": "yes"
+    },
+    "osm:way:856393272:building": {
+      "building": "yes",
+      "tourism": "hotel"
+    },
+    "osm:way:928230400:building": {
+      "building": "yes"
+    },
+    "osm:way:928230401:building": {
+      "building": "yes"
+    },
+    "osm:way:998625023:building": {
+      "building": "yes"
+    }
+  },
+  "source_extent_analysis": [
+    {
+      "id": "osm:way:117914845:building",
+      "source_title": "롯데호텔서울",
+      "source_height_m": 150.0,
+      "source_xz_bounds": [
+        320.6754131220514,
+        -23.499808178748935,
+        453.77680243493523,
+        11.587133986875415
+      ],
+      "source_area_m2": 3753.959406397038,
+      "free_roam_bounds": [
+        -450,
+        -460,
+        450,
+        460
+      ],
+      "overlap_area_m2": 3686.121928423576,
+      "overlap_percent": 98.1929085898515,
+      "outside_area_m2": 67.83747797346223,
+      "interior_catalog_present": false
+    },
+    {
+      "id": "osm:way:233593619:building",
+      "source_title": "더플라자호텔",
+      "source_height_m": 87.0,
+      "source_xz_bounds": [
+        111.83432059653569,
+        39.348072113934904,
+        205.74779168487294,
+        68.51417579315603
+      ],
+      "source_area_m2": 1910.541819831681,
+      "free_roam_bounds": [
+        -450,
+        -460,
+        450,
+        460
+      ],
+      "overlap_area_m2": 1910.541819831681,
+      "overlap_percent": 100.0,
+      "outside_area_m2": 0.0,
+      "interior_catalog_present": true
+    },
+    {
+      "id": "osm:way:377289798:building",
+      "source_title": "호텔코리아나",
+      "source_height_m": 84.0,
+      "source_xz_bounds": [
+        32.769345930661075,
+        -377.0671410905197,
+        53.34305224637501,
+        -316.154027487617
+      ],
+      "source_area_m2": 1202.7662708174275,
+      "free_roam_bounds": [
+        -450,
+        -460,
+        450,
+        460
+      ],
+      "overlap_area_m2": 1202.7662708174275,
+      "overlap_percent": 100.0,
+      "outside_area_m2": 0.0,
+      "interior_catalog_present": true
+    },
+    {
+      "id": "osm:way:332565592:building",
+      "source_title": "서울파이낸스센터",
+      "source_height_m": 124.0,
+      "source_xz_bounds": [
+        145.85550964041613,
+        -379.399795348756,
+        230.50545563182095,
+        -347.6815789169632
+      ],
+      "source_area_m2": 2297.347380810872,
+      "free_roam_bounds": [
+        -450,
+        -460,
+        450,
+        460
+      ],
+      "overlap_area_m2": 2297.347380810872,
+      "overlap_percent": 100.0,
+      "outside_area_m2": 0.0,
+      "interior_catalog_present": true
+    },
+    {
+      "id": "osm:way:233592424:building",
+      "source_title": "롯데백화점",
+      "source_height_m": 147.0,
+      "source_xz_bounds": [
+        441.1840293308487,
+        -28.843058267608285,
+        526.3631394335534,
+        87.37774881022051
+      ],
+      "source_area_m2": 7207.996884996071,
+      "free_roam_bounds": [
+        -450,
+        -460,
+        450,
+        460
+      ],
+      "overlap_area_m2": 143.45855478539306,
+      "overlap_percent": 1.9902693782236736,
+      "outside_area_m2": 7064.5383302106775,
+      "interior_catalog_present": false
+    }
+  ],
+  "generic_profile_rule": "Named overrides first; source tourism/building/shop tags next; otherwise source height, footprint area and aspect ratio determine one of six structural archetypes. These are game display types, not verified tenancies.",
+  "maximum_outward_ornament_m": 0.28,
+  "geometry_height_policy": "Every ornament remains between source bottom+0.05 and source top-0.05. No collision, new roof floor, moved source node or adjusted source height."
+}

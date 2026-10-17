@@ -1,5 +1,25 @@
 # 검증 계획과 완료 판정
 
+## EXP20 현재 수용 범위
+
+최종 [17보고서/해시/시각 검토](../data/reports/realism_rework/20261017/summary.json)에 headless323·Metal435와46 PNG를 연결한다. 실제 이동/지지·E/문/승강기·계단/물·원본 보존과 native 모양/카메라/머리 가림을 나눠 관찰한다. source counts만 바뀐125→126·기존4인→역할별2~3인 조건은 원본125불변/추가1동 계약·서로 다른 실제 역할까지 확인한다. dummy renderer의 identity transform은 native와 같은 증거로 세지 않는다. 마지막 메뉴 바로가기 카메라 수정 뒤 관련5개 검사도 다시 실행했다.
+
+46개 현재 PNG는 모두 실제로 열어 검토하고 각 검토JSON에 source/사진SHA와 수용한계·초기 잘못된 구도를 보존한다. frame 안의 target/LOS·카메라 구체·아바타 실제 머리 투영/안내 카드 겹침0을 확인한다. 단순 node 가시성·sphere clear·그림 개수만으로 시각 수용하지 않는다. M1 Pro16GB 관측이며 장시간 성능·M4·새 export·직접 사람/청취는 미검증이다.
+
+서울시 공식 등고선/표고점 취득/변환·약1.4MB 공유는 source 입력 검증이다. 현재 전체 게임 지면의 실측 높이 구현이나 보간 정확도 검증은 아니며 EXP21에서 별도 완료해야 한다.
+
+
+## EXP16–19 통합 검증
+
+- `check_pedestrian_avoidance.gd`: production 사람·개/원래 NPC의 연속 우회→추월→복귀, 좁은 물리 장애물, 겹침·접지·관절/목줄, 메뉴/이동 체크.
+- `check_escalator_gym.gd` / `check_facility_targets.gd`: 양방향 실제 승하차/중립 운반/층 개구부·난간·캡슐/지지, E·활동 기록/관절·안전 복귀와 기존 기구 회귀.
+- `check_outdoor_roof_jumping.gd`: 정문 앞 테스트 시작1회 뒤 좌표/속도 강제 변경 없이 fresh Space와 이동만으로 옥상·풀·22m 수영·탈출·지상 복귀.
+- `check_bounded_roof_lift.gd` / `check_rooftops_bounded_regression.gd`: 자유 탐험 OFF 왕복/수영, ON 전환/방문 중 OFF 요청의 안전한 거절,125옥상 구조·대표 경계 회귀.
+- `check_large_outdoor_pool.gd`: 실측 게임 수조24×10m,7호텔 최소12×6m,9곳 상공 ray/실제 수면·지지, 연속 수영·카메라·엘리베이터·산책길 모드.
+- `check_neighborhood_life.gd`: queue/피크닉/한영 표지·상점 원본 edge와 바닥/접근·야간 숨김+충돌 해제·실제 menu mute/pause/20초 공간 stream·교회 관찰/원본 보존·호텔 메뉴 바로가기.
+
+Headless의 기능 판정과 Metal 이미지 검토를 별도 저장한다. 테스트 시작 fixture/임시 장애물과 연속 플레이 동작을 구분하며 실패 파일도 보존한다. 현재 source hashes를 대조하고 장시간 성능·사람의 OS 조작감/청감·실측/현재 시설 현황·다른 Mac/export 미실행은 별도로 둔다.
+
 ## EXP15 — 입체 보도 경계·산책하는 사람과 반려견
 
 최종 **GPU53/53·headless47/47**, 최종 소스 해시 불일치0·6장 검토를 완료했다. [원시 결과/소스/실패·수정](../data/reports/lived_streets/20261016/summary.json). 704개 입구 후보12,672캡슐 관측, 대표2곳 양방향2.24/21m/s 실제 입력·기존692충돌 보존과 E 출입을 확인한다. 별도 최종 언덕5/5는 약24m 전체 구간과3037추가tick/3회 방향전환·OFF/ON 재개를 확인한 현재 보행 소스 증거다. 이전 단기11/11·개 회전192검사는 수정 전 소스 이력으로 분리하며 합계 고유 여정으로 세지 않는다.

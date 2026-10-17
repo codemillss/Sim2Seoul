@@ -1,0 +1,27 @@
+[
+  {
+    "id": "exterior_gpu",
+    "returncode": 1,
+    "wall_s": 18.09,
+    "report": "data/reports/realism_rework/20261017/final/exterior_gpu.json",
+    "log": "data/reports/realism_rework/20261017/final/exterior_gpu.log",
+    "result": "FAIL",
+    "summary": {
+      "checks": 32,
+      "failed": 2,
+      "native_exterior_views": 5
+    },
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--fixed-fps",
+      "60",
+      "--path",
+      "game",
+      "--script",
+      "../tests/game/check_building_exterior_identity.gd",
+      "--",
+      "--automatic-probe",
+      "--report=/Users/jin10000/Desktop/취업준비/원서_제출/02_핵심프로젝트_마스터풀/서울시뮬레이션/data/reports/realism_rework/20261017/final/exterior_gpu.json"
+    ]
+  }
+]

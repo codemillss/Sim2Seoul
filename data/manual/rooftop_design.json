@@ -1,12 +1,12 @@
 {
-  "schema_version": 1,
-  "task": "EXP09_ROOFTOPS",
-  "recorded_at": "2026-10-16",
+  "schema_version": 3,
+  "task": "EXP17_SUNKEN_HOTEL_OUTDOOR_POOLS",
+  "recorded_at": "2026-10-17",
   "input_catalog": "game/assets/authored/interiors/source_catalog.json",
   "input_catalog_sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
   "source_vs_authored": {
     "source": "Retained source feature IDs, inscribed source rectangle, source height and actual same-feature source/rendered-landmark top observations. Original city coordinates, metre scale and collisions are preserved.",
-    "authored": "Deck inset 0.80m per side, maximum32x36m, height clearance0.28m, all facility choices, pool/penthouse/garden geometry, rails, furniture, signs and water behavior are game design. They are not surveyed roof layouts or factual venue amenities."
+    "authored": "The source building geometry, source heights, source footprint and floor_count are unchanged. Pool roofs add a fictional deck 1.55m above the normal observed-source-top +0.28m clearance deck. Four surrounding deck panels leave a genuine collision and visual opening for a sunken pool. Water is 0.18m below deck and the basin floor 1.40m below deck, still 0.43m above observed source roof. Other roof profiles keep their previous clearance deck. All facilities, proportions and amenities are authored, not factual venue amenities or surveyed roof heights."
   },
   "profiles": {
     "garden": {
@@ -21,12 +21,23 @@
     "outdoor_pool": {
       "count": 7,
       "features": [
-        "raised pool basin",
-        "walkable access steps/ramp",
-        "sun loungers",
-        "parasol",
+        "actual >=12x6m water rectangle",
+        "open sky and city views",
+        "sunken basin inside a raised authored deck",
+        "four solid deck panels with a real water cutout",
+        "flush deck entry and descending submerged stairs",
+        "long continuous handrails",
+        "underwater lane tiles",
+        "cream coping",
+        "sun loungers with towels and side tables",
+        "parasols and wooden lounge deck",
+        "hotel pool entrance sign",
+        "outdoor shower and towel stand",
+        "planters and life ring",
         "game buoyancy",
-        "splash and ripple"
+        "splash and ripple",
+        "Space water exit",
+        "normal camera on both dry sides"
       ]
     },
     "penthouse": {
@@ -41,7 +52,130 @@
     }
   },
   "selection": "Deterministic title keywords and some highrise feature IDs; independent of EXP07 interior identity counts. This is not proof of a real hotel pool or real residential penthouse.",
-  "world_placement": "One on-demand roof for the current selected building at its actual source-world XZ. The deck is not below-world detached interior space. Original floor_count remains unchanged and the elevator adds a separate roof destination.",
-  "water_design": "The basin is raised above the retained deck and source roof. No source roof holes, disabled source collisions or real liquid simulation. Actual controls, depths and validation are recorded in the final technical contract and swimming report.",
-  "external_assets": "No new external model, photo pixels or licensed pool asset imported for EXP08/EXP09. The existing authored interior surface shader is reused."
+  "world_placement": "Source-positioned on-demand roof cache for outdoor exploration and elevator visits. The same building roof is borrowed by the interior visit to prevent duplicate geometry. Original floor_count remains unchanged. The developer-created pool is an outdoor roof amenity, distinct from an indoor shallow spa tub.",
+  "water_design": "The water is 0.18m below the authored pool deck, with floor -1.40m and actual water depth 1.22m. The source roof is retained below the basin floor. No deck floor collision covers the water rectangle. Actual deck-hole rays, descending-step entry, swim and exit validation are recorded separately from these design dimensions.",
+  "external_assets": "No new external model, photo pixels or licensed pool asset imported for EXP08/EXP09. The existing authored interior surface shader is reused.",
+  "pool_layout_contract": {
+    "minimum_water_long_m": 12.0,
+    "minimum_water_short_m": 6.0,
+    "maximum_water_long_m": 24.0,
+    "maximum_water_short_m": 10.0,
+    "layout_available_water_x_m": "inset_deck_width - 6.28",
+    "layout_available_water_z_m": "inset_deck_depth - 9.0",
+    "narrow_roof_rule": "Rotate the long water direction to local Z; roofs with neither valid orientation remain roof gardens. Never enlarge source footprint or increase original floor_count.",
+    "support": "Four separate solid deck panels surround a genuine open water cutout. The pool floor and walls sit below this authored deck but above the unchanged source roof. The entry is flush with the deck and descends on a real walkable support slope with visible steps and long handrails; there is no exterior tank staircase.",
+    "outdoor_identity": "Flush cream coping and water 0.18m below the surrounding deck, open sky/city views, underwater lane tiles, wooden lounge deck with towels and tables, parasols, planters, branded hotel pool entrance, outdoor shower, towel stand and life ring. Shower/towel props are game visual amenities, not new service interactions.",
+    "source_observed_roof_clearance_m": 0.28,
+    "additional_authored_pool_deck_raise_m": 1.55,
+    "net_pool_deck_above_observed_source_top_m": 1.83,
+    "pool_floor_relative_to_deck_m": -1.4,
+    "water_relative_to_deck_m": -0.18,
+    "water_depth_m": 1.22,
+    "physical_pool_wall_top_relative_to_deck_m": 0.0,
+    "visual_coping_top_relative_to_deck_m": 0.06,
+    "pool_floor_above_observed_source_roof_m": 0.43,
+    "deck_hole": "The actual water rectangle is expanded by 0.25m on each side to form the deck opening. The four solid panels never overlap the water rectangle. A narrow flush bridge only connects the submerged entry steps at one corner."
+  },
+  "pool_design_dimensions": [
+    {
+      "id": "osm:way:1007482029:building",
+      "title": "소테츠호텔즈 더 스프라지르 서울 명동",
+      "inset_deck_m": [
+        12.409865757219302,
+        27.27434844065629
+      ],
+      "clear_water_m": [
+        6.129865757219302,
+        18.27434844065629
+      ],
+      "water_area_m2": 112.01930274187293,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:233593619:building",
+      "title": "더플라자호텔",
+      "inset_deck_m": [
+        32,
+        20.37605354744722
+      ],
+      "clear_water_m": [
+        24,
+        10
+      ],
+      "water_area_m2": 240,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:233593635:building",
+      "title": "뉴서울호텔",
+      "inset_deck_m": [
+        12.873446819731408,
+        23.621169026136975
+      ],
+      "clear_water_m": [
+        6.593446819731407,
+        14.621169026136975
+      ],
+      "water_area_m2": 96.4039004161382,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:233593644:building",
+      "title": "프레지던트호텔",
+      "inset_deck_m": [
+        32,
+        24.592505228068966
+      ],
+      "clear_water_m": [
+        24,
+        10
+      ],
+      "water_area_m2": 240,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:377289798:building",
+      "title": "호텔코리아나",
+      "inset_deck_m": [
+        16.1586265749174,
+        36
+      ],
+      "clear_water_m": [
+        9.878626574917398,
+        24
+      ],
+      "water_area_m2": 237.08703779801755,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:844505571:building",
+      "title": "ENA Suite Hotel",
+      "inset_deck_m": [
+        19.162322760372454,
+        17.274052573375364
+      ],
+      "clear_water_m": [
+        12.882322760372453,
+        8.274052573375364
+      ],
+      "water_area_m2": 106.58901578651172,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    },
+    {
+      "id": "osm:way:856393272:building",
+      "title": "호텔 그레이스리 서울",
+      "inset_deck_m": [
+        26.739852509333655,
+        18.4171468744835
+      ],
+      "clear_water_m": [
+        20.459852509333654,
+        9.4171468744835
+      ],
+      "water_area_m2": 192.6734361106648,
+      "verification": "design dimensions derived from the unchanged source rectangle; engine physics/UI verification recorded separately"
+    }
+  ],
+  "representative_pool_id": "osm:way:233593619:building",
+  "camera_design": "The former 1.55m raised tank wall caused camera retraction. The new physical wall is flush with the deck so the real pool profile publishes no elevated camera-pivot hint. Both real Space exits retain the normal pre-exit yaw/pitch/zoom and require visible character, camera distance over 1m, head in frame, clear head line of sight and collision-free camera."
 }

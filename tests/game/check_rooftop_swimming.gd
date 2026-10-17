@@ -54,23 +54,48 @@ func _body_bounds(body: StaticBody3D) -> AABB:
 	return AABB()
 
 func _observe_raised_basin() -> void:
-	var deck: StaticBody3D=roof.get_node("DeckFloorBody")
+	# Historical helper name retained for inheriting probes. Observe the new
+	# sunken basin's actual collision floor, four deck panels and open hole.
 	var floor: StaticBody3D=roof.get_node("PoolSafetyFloorBody")
-	var deck_bounds:=_body_bounds(deck);var floor_bounds:=_body_bounds(floor)
-	var region: Dictionary=roof.pool_water_region()
-	var rim_top:=-INF
+	var floor_bounds: AABB=_body_bounds(floor)
+	var deck_bounds: AABB=AABB()
+	var deck_ids: Array=[]
+	var first_panel: bool=true
+	var rim_top: float=-INF
 	for body: StaticBody3D in roof.bodies:
-		if "PoolRim" in String(body.get_meta("geometry_id","")):rim_top=maxf(rim_top,_body_bounds(body).end.y)
+		var geometry: String=String(body.get_meta("geometry_id",""))
+		if "DeckFloor" in geometry:
+			var box: AABB=_body_bounds(body)
+			deck_bounds=box if first_panel else deck_bounds.merge(box)
+			first_panel=false;deck_ids.append(body.get_instance_id())
+		if "PoolRim" in geometry:rim_top=maxf(rim_top,_body_bounds(body).end.y)
+	var region: Dictionary=roof.pool_water_region()
 	var surface: float=(region.frame*Vector3(0.,float(region.surface_y),0.)).y
-	basin_observation={"deck_body":deck.get_instance_id(),"deck_shape":deck.get_child(0).shape.get_instance_id(),"deck_bounds":deck_bounds,"pool_floor_body":floor.get_instance_id(),"pool_floor_bounds":floor_bounds,"rim_top_world_y":rim_top,"surface_world_y":surface,"region":region,"entry":roof.pool_entry_point(),"rim":roof.pool_rim_point(),"float":roof.pool_float_point()}
-	_check("basin.real_floor_is_raised_above_retained_roof_deck",floor_bounds.end.y>=deck_bounds.end.y+.001 and floor_bounds.end.y<surface-.8 and rim_top>surface+.08,basin_observation)
-	_check("basin.actual_water_region_has_depth_inside_original_footprint",region.rect.has_area() and float(region.surface_y)-float(region.floor_y)>.8 and roof.walkable_rect.encloses(region.rect) and roof.world_bounds.has_point(roof.pool_float_point()),basin_observation)
+	var observations: Array=[]
+	var hole_errors: Array=[]
+	var rect: Rect2=region.rect
+	for ix: int in range(17):
+		for iz: int in range(9):
+			var x: float=lerpf(rect.position.x,rect.end.x,(float(ix)+.5)/17.0)
+			var z: float=lerpf(rect.position.y,rect.end.y,(float(iz)+.5)/9.0)
+			var start: Vector3=region.frame*Vector3(x,.12,z)
+			var finish: Vector3=region.frame*Vector3(x,float(region.floor_y)-.20,z)
+			var hit: Dictionary=scene.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(start,finish,1,[scene.player.get_rid()]))
+			var collider: Object=hit.get("collider")
+			var geometry: String=String(collider.get_meta("geometry_id","")) if is_instance_valid(collider) else ""
+			var row: Dictionary={"x":x,"z":z,"hit_geometry":geometry,"hit_world_y":hit.position.y if not hit.is_empty() else null}
+			observations.append(row)
+			if not ("PoolSafetyFloor" in geometry or "PoolSubmergedRamp" in geometry):hole_errors.append(row)
+	basin_observation={"deck_bodies":deck_ids,"deck_bounds":deck_bounds,"pool_floor_body":floor.get_instance_id(),"pool_floor_bounds":floor_bounds,"rim_top_world_y":rim_top,"surface_world_y":surface,"region":region,"entry":roof.pool_entry_point(),"rim":roof.pool_rim_point(),"float":roof.pool_float_point(),"opening_rays":observations,"source_top_world_y":roof.observed_top_y,"deck_authored_raise_m":roof.pool_dimensions().get("deck_raise_m")}
+	_check("basin.sunken_water_and_floor_below_flush_deck_above_unchanged_source",deck_ids.size()==4 and floor_bounds.end.y<deck_bounds.end.y-1.35 and surface<deck_bounds.end.y-.15 and surface>deck_bounds.end.y-.21 and absf(rim_top-deck_bounds.end.y)<.02 and floor_bounds.end.y>float(roof.observed_top_y)+.30,basin_observation)
+	_check("basin.real_deck_hole_153_rays_reach_pool_floor_or_steps_without_deck_cover",hole_errors.is_empty(),{"rays":observations.size(),"errors":hole_errors})
+	_check("basin.actual_water_depth_1_22_inside_original_XZ_footprint",region.rect.has_area() and absf(float(region.surface_y)-float(region.floor_y)-1.22)<.001 and roof.walkable_rect.encloses(region.rect) and roof.world_bounds.has_point(roof.pool_float_point()),basin_observation)
 
 func _jump_into_pool() -> bool:
 	if not await _pose("pool_external_ramp_start",roof.pool_entry_point()):return false
 	var ramp_start: Vector3=scene.player.global_position
-	var walked: bool=await _walk_path("pool.real_walk_up_external_ramp",[roof.pool_rim_point()])
-	_check("pool.rim_reached_on_actual_support_without_teleport",walked and scene.player.is_on_floor() and scene.player.global_position.y>ramp_start.y+1.0,{"start":ramp_start,"end":scene.player.global_position})
+	var walked: bool=await _walk_path("pool.real_walk_on_deck_to_flush_entry",[roof.pool_rim_point()])
+	_check("pool.flush_edge_reached_on_supported_deck_without_external_staircase",walked and scene.player.is_on_floor() and absf(scene.player.global_position.y-ramp_start.y)<.15,{"start":ramp_start,"end":scene.player.global_position})
 	if not walked:return false
 	var region: Dictionary=roof.pool_water_region()
 	var center: Vector3=region.frame*Vector3(region.rect.get_center().x,0.,region.rect.get_center().y)
@@ -88,7 +113,7 @@ func _jump_into_pool() -> bool:
 		if remaining.length()>.16:_world_keys(remaining.normalized())
 		else:_movement()
 		if not scene.player.is_swimming():descending_before=minf(descending_before,scene.player.velocity.y)
-		if not captured_fall and scene.player.velocity.y<-.8 and point.y>float(basin_observation.surface_world_y)+.5:captured_fall=true;await _capture_pool("jump_above_raised_pool")
+		if not captured_fall and scene.player.velocity.y<-.8 and point.y>float(basin_observation.surface_world_y)+.5:captured_fall=true;await _capture_pool("jump_above_flush_pool")
 		if scene.player.is_swimming():
 			minimum=minf(minimum,point.y)
 			first_wet={"tick":tick,"position":point,"velocity":scene.player.velocity,"state":scene.player.water_snapshot(),"effects":roof.water_effects.snapshot(),"effect_geometry":_effect_geometry()}
@@ -102,9 +127,9 @@ func _jump_into_pool() -> bool:
 	var active_meshes:=0
 	for mesh: Dictionary in _effect_geometry():
 		if mesh.visible:active_meshes+=1
-	var row:={"start":start,"peak_world_y":peak,"descent_speed_before_entry":descending_before,"first_wet":first_wet,"entry_state_before":before,"entry_state_after":after,"recovery_delta":scene.player.recoveries-recoveries,"samples":observed,"active_effect_meshes":active_meshes,"effects":effects,"kind":"actual_move_and_slide_ramp_and_single_jump_no_midflight_teleports"}
+	var row:={"start":start,"peak_world_y":peak,"descent_speed_before_entry":descending_before,"first_wet":first_wet,"entry_state_before":before,"entry_state_after":after,"recovery_delta":scene.player.recoveries-recoveries,"samples":observed,"active_effect_meshes":active_meshes,"effects":effects,"kind":"actual_move_and_slide_flush_deck_and_single_jump_no_midflight_teleports"}
 	swim_trials.append(row)
-	_check("pool.physical_jump_descends_into_water_and_emits_splash",entered and peak>start.y+2.8 and descending_before<-1. and int(after.entry_count)>int(before.entry_count) and int(effects.splash_count)>0 and active_meshes>0 and scene.player.recoveries==recoveries,row)
+	_check("pool.physical_jump_descends_below_flush_deck_and_emits_splash",entered and peak>start.y+2.8 and descending_before<-1. and int(after.entry_count)>int(before.entry_count) and int(effects.splash_count)>0 and active_meshes>0 and scene.player.recoveries==recoveries,row)
 	return entered
 
 func _float_and_swim() -> void:
@@ -121,8 +146,8 @@ func _float_and_swim() -> void:
 	var spread: float=float(ys.max())-float(ys.min())
 	var row:={"settled_depth_m":depth,"minimum_foot_world_y":minimum,"retained_floor_world_y":floor_top,"last_50_tick_height_range_m":spread,"position":scene.player.global_position,"velocity":scene.player.velocity,"water":scene.player.water_snapshot(),"recoveries":scene.player.recoveries-recoveries}
 	swim_trials.append(row)
-	_check("water.real_buoyancy_settles_below_surface_without_roof_fall",scene.player.is_swimming() and depth>.35 and depth<1.3 and minimum>=floor_top-.03 and spread<.12 and scene.player.recoveries==recoveries,row)
-	await _capture_pool("buoyant_swimming_in_raised_basin")
+	_check("water.real_buoyancy_settles_in_sunken_basin_without_source_roof_fall",scene.player.is_swimming() and depth>.35 and depth<1.3 and minimum>=floor_top-.03 and spread<.12 and scene.player.recoveries==recoveries,row)
+	await _capture_pool("buoyant_swimming_in_sunken_basin")
 	scene.set_speed_profile("turbo");_movement();await _ticks(3)
 	var start: Vector3=scene.player.global_position
 	var direction: Vector3=roof.frame.basis.z.normalized()
@@ -215,7 +240,7 @@ func _finish() -> void:
 	var failed:=0
 	for check in checks:
 		if not check.passed:failed+=1
-	var result:={"task":"ROOFTOP_SWIMMING","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"source_sha256":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"basin":basin_observation,"trials":swim_trials,"walks":walks,"placements":placements,"captures":captures,"deferred_checks":deferred_checks,"scope":"A real source-positioned fictional hotel roof uses a raised basin above retained deck collision. Entry ramp walking, jump descent, buoyancy, swimming and Space exit use production Input actions/move_and_slide, without per-step teleports or assigned flight velocity. Explicit scenario starts and invalid-transaction probes are labelled. Actual floor/rim shapes and effect meshes are observed; native images remain deferred in headless. Lift transactions and original692-body inventory are preserved. No real pool, public venue access, realistic fluid simulation, whole-map swimming or performance/export acceptance."}
+	var result:={"task":"ROOFTOP_SWIMMING","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"source_sha256":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"basin":basin_observation,"trials":swim_trials,"walks":walks,"placements":placements,"captures":captures,"deferred_checks":deferred_checks,"scope":"A fictional source-positioned hotel pool sits in a real opening between four authored deck panels. The authored deck is 1.55m higher than the normal clearance deck, water is 0.18m below it, and the 1.22m-deep basin floor remains above the retained source roof. Deck entry walking, jump descent, buoyancy, swimming and Space exit use production actions/move_and_slide, without per-step teleports or assigned flight velocity. Explicit scenario starts and invalid-transaction probes are labelled. Actual floor/rim shapes and effect meshes are observed; native images remain deferred in headless. Lift transactions and original692-body inventory are preserved. No real pool, public venue access, realistic fluid simulation, whole-map swimming or performance/export acceptance."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file!=null:file.store_string(JSON.stringify(_json(result),"\t")+"\n");file.close()
 	else:failed+=1;push_error("Cannot save swimming report")

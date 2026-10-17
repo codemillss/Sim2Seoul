@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "task": "NEIGHBORHOOD_COVERAGE_VISUAL_REVIEW",
+  "reviewed_at_local": "2026-10-18T01:22:33.311970+09:00",
+  "reviewer": "outdoor_pool assistant subagent; contributor to greenery/population implementation, separate direct final-image inspection, not blinded external validation.",
+  "result": "ACCEPTED_WITH_RECORDED_LIMITATIONS",
+  "source_report": "data/reports/realism_rework/20261017/final/coverage_gpu.json",
+  "source_report_sha256": "d65f888072ef66ff5779ebf267ed02347406d9381ed7df7c3daf2ab229bd6f49",
+  "source_report_result": "PASS",
+  "source_report_checks": {
+    "checks": 33,
+    "failed": 0
+  },
+  "source_freshness": {
+    "listed_hashes": {
+      "res://../tests/game/check_neighborhood_coverage.gd": "dfc7864ed819452b9b43255b23a0af127731ce8707945c0f190e11b84cd4516c",
+      "res://assets/authored/neighborhood_greenery.json": "cc2d16801bbc97eb5c70641250c590f02416530a9910373b038b8db91cd8ade6",
+      "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+      "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+      "res://scripts/explore_walk.gd": "769087bc8e59433826e86d5f629cb04e399b51352aee4615fec28622823add1d",
+      "res://scripts/neighborhood_greenery.gd": "5cd204a0bc47bf0689181ce3bd1c09aebf0696e32500eab5d413d1a4e6b0d264",
+      "res://scripts/neighborhood_population.gd": "37dd1ebee1e416aed8d36028a2c94f294bd0ffe24093bb4a8c23cc09a036244f",
+      "res://scripts/neighborhood_traffic.gd": "e582b5bdbf87018c0bf0b0903cca54fdd7dcb55c62a77c3974f87b3a13a0320e",
+      "res://scripts/pedestrian_corridor_avoidance.gd": "402bab6b6a1811897fa43d527d183629805cb748bbe1428c678ddd6f1d23c2c4",
+      "res://scripts/street_pedestrians.gd": "5603c92e8fc9e515fd306c3648ef6f25679773759ee949316a9d127ed28cf939"
+    },
+    "compared_to_current_worktree": true,
+    "mismatches": []
+  },
+  "review_method": "Opened all five current PNGs directly with view_image after the final rerun including the current traffic-hold code and pool-shortcut camera UI branch. No image/runtime edits or engine execution during review. Current PNG hashes below identify the exact reviewed images.",
+  "comparison_to_prior_visual_assessment": "Same acceptance and limitations as the earlier five-image review. Tree/people coverage remains visible, and sparse sectors 4/6 remain explicitly unaddressed visual-density limitations.",
+  "traffic_revision_present": {
+    "source": "res://scripts/neighborhood_traffic.gd",
+    "sha256": "e582b5bdbf87018c0bf0b0903cca54fdd7dcb55c62a77c3974f87b3a13a0320e",
+    "meaning": "The rerun includes current traffic code. Five still images independently review trees, people and cameras; they do not establish traffic braking, release/hold or FIFO behaviour."
+  },
+  "reported_numeric_observations_not_inferred_from_images": {
+    "source_trees": 322,
+    "authored_fill": 47,
+    "visible_total": 369,
+    "native_batches": 171,
+    "collision_budget": 128,
+    "actual_native_minimum_crown_bottom_m": 2.65000009164214,
+    "walker_target": 20,
+    "corridors": 10,
+    "physical_walk_observation_ticks": 1200
+  },
+  "images": [
+    {
+      "name": "coverage_sector_0",
+      "image": "data/reports/realism_rework/20261017/final/coverage_gpu_coverage_sector_0.png",
+      "sha256": "9691f123ac578f3186b281770a70028c62f2038f054de78c87dbea96bca9ac9f",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "Several original-style articulated people are visible on the foreground public paths, with a continuous row of mapped trees beyond the stone wall.",
+        "The original player is fully visible in a normal third-person frame; the present Lotte/high-rise exterior is also visible."
+      ],
+      "limitations": [
+        "The broad open foreground remains deliberately sparse. A single still does not establish moving-car behaviour."
+      ]
+    },
+    {
+      "name": "coverage_sector_2",
+      "image": "data/reports/realism_rework/20261017/final/coverage_gpu_coverage_sector_2.png",
+      "sha256": "b3f6e29144b6f2417945fdc54808a6a8a0f63360e1233301c4b29c2179b2ff68",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "Dense visible tree rows, thin trunks, tree grates and clearance under the crowns create a legible planted street/plaza edge.",
+        "The full player and other people are visible near the path and lawn."
+      ],
+      "limitations": [
+        "The large lawn is still simple flat game terrain, not surveyed terrain."
+      ]
+    },
+    {
+      "name": "coverage_sector_4",
+      "image": "data/reports/realism_rework/20261017/final/coverage_gpu_coverage_sector_4.png",
+      "sha256": "a3b0d450154da2a2ba004c32af3352a893e9e4ac0397b2a74bf275658875b709",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The player and dispersed walkers are visible without geometry hiding the central avatar.",
+        "Facade and path edges are legible."
+      ],
+      "limitations": [
+        "This broad grey area remains visually empty with very little planting in this view. It is an accepted remaining density/detail limitation."
+      ]
+    },
+    {
+      "name": "coverage_sector_6",
+      "image": "data/reports/realism_rework/20261017/final/coverage_gpu_coverage_sector_6.png",
+      "sha256": "f167f54e4b3b3039b4c658e9d495307fcb3d0e404fa1d1e1f3c95e4a16ac3cf8",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The original player and two nearby people remain visible on supported outdoor ground.",
+        "Nearby building scale and the entry indication remain readable."
+      ],
+      "limitations": [
+        "The large grass surface still feels empty; the source footway is not visually distinct from the grass surface here. This does not establish a finished paved pedestrian street."
+      ]
+    },
+    {
+      "name": "coverage_sector_8",
+      "image": "data/reports/realism_rework/20261017/final/coverage_gpu_coverage_sector_8.png",
+      "sha256": "a204fa097a9eb5f979f4671e2010bab189e570772b79d78e48b15eddd47659a3",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "Tree rows, open space below crowns, grates, path surface and the church facade make the street more recognisable.",
+        "The player remains fully visible with other people in the courtyard/street setting."
+      ],
+      "limitations": [
+        "Close source walls fill portions of the left and right frame edges. They do not hide the central avatar or route but make this particular composition less open."
+      ]
+    }
+  ],
+  "acceptance": {
+    "all_five_original_player_views_visible": true,
+    "source_tree_rows_and_ground_clearance_visually_legible": true,
+    "dispersed_people_visible": true,
+    "prior_acceptance_unchanged": true,
+    "blocking_camera_defect_found": false
+  },
+  "remaining_limits": [
+    "Sectors4/6 remain broad, flat and sparsely detailed; 6 lacks a visually distinct footpath surface.",
+    "Native crowns and humans retain simple low-poly forms, rather than surveyed species/visitor density or photoreal assets.",
+    "Selected view fixtures and twenty-second controller observations do not establish every street view, long-duration performance, whole-city crowd realism, or a human keyboard journey.",
+    "Traffic correctness is supported by its separate controller tests, not claimed from these five stills."
+  ],
+  "final_rerun_context": "Current final reports and images include the final pool-shortcut camera UI branch. All current captures were reopened directly after that rerun; the previous acceptance and recorded limitations remain unchanged."
+}

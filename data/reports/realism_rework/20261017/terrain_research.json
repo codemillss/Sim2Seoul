@@ -1,0 +1,526 @@
+{
+  "task": "LOCAL_TERRAIN_DATA_ACCESS_RESEARCH",
+  "record_date": "2026-10-17",
+  "status": "OFFICIAL_SEOUL_CONTOURS_AND_SPOT_HEIGHTS_ACQUIRED_NO_INTERPOLATED_DEM_YET",
+  "scope": "Read/research only. No runtime/source geometry, height, support plane, or walking code changed by this research. No login, terms acceptance, application, contacts, national data download, or software installation performed.",
+  "region": {
+    "id": "deoksugung_cityhall",
+    "bbox_west_south_east_north": [
+      126.971,
+      37.5608,
+      126.9815,
+      37.5694
+    ],
+    "horizontal_metric_crs": "EPSG:32652",
+    "origin_lon_lat": [
+      126.97625,
+      37.5651
+    ],
+    "vertical_datum": "not_yet_resolved"
+  },
+  "ngii_official_route": {
+    "catalogue_url": "https://www.data.go.kr/data/15059920/fileData.do",
+    "machine_metadata_url": "https://www.data.go.kr/catalog/15059920/fileData.json",
+    "catalogue_modified": "2025-06-17",
+    "listed_format": "IMG",
+    "listed_price": "무료",
+    "listed_reuse": "이용허락범위 제한 없음",
+    "official_instructions": "포털접속 → 간편지도 검색 선택 → 항목 선택(인덱스/영역/반경) → 영역 지정 및 선택 → 공개DEM 선택 → 항목 선택. 다운로드에는 로그인 필요.",
+    "map_url": "https://map.ngii.go.kr/ms/map/NlipMap.do?tabGb=total",
+    "browser_observed_route": [
+      "통합검색에 덕수궁 입력",
+      "A 덕수궁(서울 중구 정동 5-1 / 세종대로 99) 선택",
+      "공개DEM(6) 선택",
+      "2025 서울 37608 선택",
+      "다운로드 클릭",
+      "공식 로그인 필요 팝업 표시"
+    ],
+    "observed_tile_name": "서울",
+    "observed_tile_id": "37608",
+    "observed_available_years": [
+      2025,
+      2024,
+      2023,
+      2022,
+      2021,
+      2014
+    ],
+    "minimum_candidate": "One currently visible Seoul 37608 edition, preferring newest only after checking resolution, source date and vertical metadata. This is a candidate tile observed at Deoksugung, not a verified whole-bbox raster coverage assertion.",
+    "required_after_authenticated_download": "Verify the selected IMG grid resolution, CRS, vertical datum, NoData, actual coverage of the full 126.971/37.5608/126.9815/37.5694 bbox plus a small interpolation halo. Preserve original checksum and licence metadata; create only the local approximately 1km crop for game experiments.",
+    "login_url": "https://map.ngii.go.kr/mn/loginPopup.do",
+    "observed_login_message": "해당 서비스는 로그인 후 이용하실 수 있습니다.",
+    "browser_result": "Official page and public catalogue were accessible in ordinary Chrome. Static web fetch alone returned HTTP 400; this is not evidence that the site is unavailable.",
+    "download_result": "NO_RASTER_DOWNLOADED: stopped at explicit login-required screen.",
+    "not_verified": [
+      "The actual 2025 file grid/vertical datum/source acquisition date before authenticated download.",
+      "Whether transfer software is mandatory for this specific single tile on this Mac.",
+      "Complete region coverage and quality of a downloaded tile, since no tile was downloaded."
+    ],
+    "screen_evidence": [
+      {
+        "path": "data/reports/realism_rework/20261017/terrain_sources/ngii-public-dem-seoul-37608.png",
+        "sha256": "dbc0cc277c46d462dd6a43ca3702254fa8a1677cf5e6611dc2a0e7e41d8a5e23",
+        "scope": "Observed official public search or login-required UI, not a downloaded elevation asset."
+      },
+      {
+        "path": "data/reports/realism_rework/20261017/terrain_sources/ngii-public-dem-login-required.png",
+        "sha256": "4ffa566bcf52bcd45d1c851f510bf3976471f1a057e622c09307b181c930eb87",
+        "scope": "Observed official public search or login-required UI, not a downloaded elevation asset."
+      }
+    ],
+    "login_handoff": {
+      "url": "https://map.ngii.go.kr/mn/loginPopup.do",
+      "status": "Official login-required page reopened and retained as one Chrome handoff tab at parent request; no login performed by agent."
+    }
+  },
+  "public_five_metre_evidence": [
+    {
+      "url": "https://climate.gg.go.kr/ols/open-request/read?pstSeCd=BBS005&pstSn=558",
+      "scope": "Official 2026-09 reply directs users to public NGII 5m DEM; distinguishes 0.5m source DEM not directly supplied and 1m by separate application."
+    },
+    {
+      "url": "https://webgis.neins.go.kr/map.do",
+      "scope": "Current visible analysis notice identifies NGII 2022 5m DEM, warns of errors and security-excluded areas. Older 2020 notices in HTML are commented and are not the current basis."
+    }
+  ],
+  "neins_public_capability_test": {
+    "point_query": {
+      "request_url": "https://webgis.neins.go.kr/proxy/proxy.do?url=/proxy/raster/ghFeature",
+      "method": "POST",
+      "lon_lat": [
+        126.97625,
+        37.5651
+      ],
+      "params": {
+        "featureType": "Point",
+        "coordinate": "POINT(14134931.492839 4518169.895385)",
+        "epsgCd": "EPSG:3857",
+        "scaleValue": "5000",
+        "layerAnalysisGroupCd": "AG007",
+        "analysisType": "height"
+      },
+      "scope": "One public-map-equivalent point query for source/capability verification only; not game-asset reuse permission.",
+      "status": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 1552,
+      "response_sha256": "80a72ef6d26c2f50835ae5bf1947270be24794c6491450fe24705144a3b16e7e",
+      "parsed_response": {
+        "info": {
+          "layerAnalysisGroupCd": "AG007",
+          "featureType": "Point",
+          "resultTotal": 1.0,
+          "epsgCd": "EPSG:3857",
+          "mapDataList": [
+            {
+              "grade": 2,
+              "name": "10~50m 미만",
+              "value": 0
+            }
+          ],
+          "scaleValue": "5000",
+          "resultList": [
+            {
+              "resultListCount": 14,
+              "resultList": [
+                {
+                  "valueHa": "0",
+                  "grade": "합계",
+                  "valueM2": "1",
+                  "valueKm2": "0",
+                  "valuePer": "100"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "10m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "10~50m 미만",
+                  "valueM2": "1",
+                  "valueKm2": "0",
+                  "valuePer": "100"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "50~100m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "100~200m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "200~300m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "300~400m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "400~500m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "500~600m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "600~700m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "700~800m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "800~900m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "900~1000m 미만",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                },
+                {
+                  "valueHa": "0",
+                  "grade": "1000m 이상",
+                  "valueM2": "0",
+                  "valueKm2": "0",
+                  "valuePer": "0"
+                }
+              ],
+              "layerNm": "height"
+            }
+          ],
+          "coordinateList": [
+            "POINT(14134931.492839 4518169.895385)"
+          ],
+          "featureCount": 1,
+          "nowTime": "2026-10-18 07:50:29"
+        }
+      }
+    },
+    "interpretation": "Observed grade=2 and name=10~50m 미만. Response value=0 is not precise terrain height; no exact anchor obtained.",
+    "request_count": {
+      "public_point_analysis": 1,
+      "standard_public_wcs_capabilities": 1,
+      "coverage_download": 0
+    },
+    "wcs_capabilities": {
+      "url": "https://webgis.neins.go.kr/proxy/geoserver/wcs?service=WCS&request=GetCapabilities&version=1.1.1",
+      "purpose": "One standard public WCS capabilities metadata request; no coverage, authentication or internal-service access attempted.",
+      "status": 404,
+      "error": "",
+      "prefix": ""
+    },
+    "wcs_interpretation": "The standard public proxy WCS metadata route returned 404. Internal WCS references in public WPS JavaScript do not establish a publicly supported or authorised raw-DEM endpoint; no internal host, keys, alternate endpoint guessing, or access restriction bypass attempted.",
+    "copyright_url": "https://data.neins.go.kr/copyright",
+    "reuse_boundary": "The general site policy permits free reuse for explicitly KOGL Type1 marked works with attribution; no explicit raw 5m DEM redistribution grant was found for the analysis endpoint. Do not infer raw asset reuse permission from HTTP 200.",
+    "published_limit": "Polygon analysis maximum 50 square kilometres; no area sweep or elevation sampling grid attempted.",
+    "raw_evidence_files": [
+      "data/reports/realism_rework/20261017/terrain_sources/neins-height-point-response.json",
+      "data/reports/realism_rework/20261017/terrain_sources/neins-height-point-test.json",
+      "data/reports/realism_rework/20261017/terrain_sources/neins-wcs-capabilities-test.json"
+    ]
+  },
+  "existing_dsm_reference": {
+    "path": "data/raw/supplemental/copernicus/20261012/deoksugung_cityhall-dsm-reference.tif",
+    "sha256": "2ae132838bfb1d756e3f2ed289a92b903519c14510f2ccfa9830565e8d2d0269",
+    "width": 38,
+    "height": 32,
+    "horizontal_crs": "EPSG:4326",
+    "min_m": 19.488664627075195,
+    "max_m": 62.072410583496094,
+    "vertical_datum": "EGM2008 (EPSG:3855), per existing acquisition report",
+    "ground_use": "REJECTED: DSM includes buildings and vegetation, nominal 30m is insufficient for street steps/curbs."
+  },
+  "adaptation_needed_before_runtime_change": [
+    {
+      "stage": "Data and vertical contract",
+      "work": "Validate small bare-earth raster, horizontal transform, vertical datum and a stable ground reference. Set local ground_y=source_ground_height-reference_height; retain both measured height and relative building height separately."
+    },
+    {
+      "stage": "Layered walking surfaces",
+      "work": "Build terrain separately from roads/sidewalk breaklines, level building bases/courtyards and stairs/bridges/tunnels. A 5m grid cannot by itself resolve curbs or multi-level pedestrian structures."
+    },
+    {
+      "stage": "Aligned buildings and access",
+      "work": "Move exterior visual/collider pairs with their verified ground base while preserving source XZ and relative building heights. Adapt entrances, return points, source roof deck elevation and attached facades/labels consistently; avoid adding source building height twice."
+    },
+    {
+      "stage": "Dependent systems",
+      "work": "Adapt Y=0 support planes, movement/spawn/fall boundaries, NPC/traffic route support, curbs and authored museum rise. Keep existing horizontal boundaries/source geometry and old W03 evidence intact; do not claim its flat-ground tests validate a new terrain."
+    },
+    {
+      "stage": "Verification",
+      "work": "Measure support continuity, capsule/head clearance, camera contact, doorway transitions and NPC/vehicle grounding, then repeat affected actual walking and lift/roof regressions on the same integrated scene."
+    }
+  ],
+  "minimum_decisive_experiment": {
+    "precondition": "Licensed local vector source controls are now available. Inspect their unknown vertical reference, interpolate with held-out source-spot checks and retain all interpolation uncertainty before adapting any runtime support.",
+    "candidate_extent": "A roughly 250m local slice containing a known hillside approach and a level plaza/entrance; 5-10 open-ground reference samples, a walking profile, one doorway and one physical NPC.",
+    "comparison": "Keep the current flat scene baseline; compare sampled terrain profile and physical walk over the same source XZ route. Record source uncertainty separately from engine support/capsule errors.",
+    "engine_checks": [
+      "No unsupported gaps, stuck capsules or fall recovery during an actual walk.",
+      "Visual and physical support agree, doorway/return points remain clear.",
+      "Buildings keep their relative height and vertical walls; roof deck/lift remains aligned with the new ground base.",
+      "NPC remains physically supported across the profile."
+    ],
+    "decision_rule": "Only expand after the slice establishes source fidelity and physical continuity. Numerical terrain accuracy tolerances must follow the acquired DEM metadata and independent reference quality, not invented metre-level claims."
+  },
+  "unresolved": [
+    "Vertical datum and independent source survey accuracy remain unknown.",
+    "A terrain grid, curbs/roads/building bases and layered bridge/tunnel surfaces have not been generated or integrated by this research.",
+    "The original official contours and spot heights are sparse controls; original 5m measured raster was not acquired.",
+    "Current manually authored museum rise and all Y=0 physics have not been validated against the new ground source."
+  ],
+  "followup_date": "2026-10-18",
+  "initial_decision_before_anonymous_alternative_search": [
+    "Public 5m NGII DEM is a plausible bare-earth source, but this session acquired no exact terrain raster or exact ground anchors.",
+    "The official DEM catalogue is free and lists unrestricted reuse; file download requires NGII login and may require its transfer software. Do not equate anonymous catalogue visibility with anonymous raster availability.",
+    "NEINS public height analysis returned a height class only. Its value=0 is not ground elevation zero; do not use it as terrain or an anchor.",
+    "Keep the current local Y=0 explicitly temporary until licensed exact data and its vertical datum are inspected. Do not substitute the existing Copernicus DSM."
+  ],
+  "decision": [
+    "The official Seoul data portal anonymously provided licensed 2023-source contour and spot-height vectors. These are the preferred new ground-shape controls for the project, with original heights and unknown vertical datum retained.",
+    "Exact region plus a maximum 200m metric interpolation halo is preserved in local EPSG32652/origin XZ JSON and WGS84 GeoJSON. The city archive remains temporary only.",
+    "No 5m raster was downloaded or generated: 5m contour spacing does not imply 5m measured terrain grid. Runtime interpolation, layered road/entrance/roof adaptation and physical verification remain separate work.",
+    "Mapzen AWS Terrain Tiles were anonymously acquired as an alternative, but SRTM surface bias and coarse/old coverage prevent treating them as measured city ground. NASADEM and FABDEM also have the access or reuse limitations recorded below."
+  ],
+  "anonymous_alternatives_followup": {
+    "preferred_official_source": {
+      "catalogue_url": "https://data.seoul.go.kr/dataList/OA-22241/F/1/datasetView.do",
+      "native_type": "1:5000 contour and spot-height vector layers, described by provider as NGII 2023 topographic map",
+      "source_archive_bytes": 45852601,
+      "source_archive_sha256": "4fbe3c7e061b5974e7403ec116855304ed8ae321eebcc0d12c31ca8fb7be30bf",
+      "anonymous_official_POST_observed": true,
+      "license": "KOGL Type1: attribution, commercial use and modification permitted",
+      "license_primary_url": "https://www.kogl.or.kr/info/licenseType1.do",
+      "retained_source_directory": "data/raw/supplemental/seoul_terrain/20261018",
+      "manifest": "data/raw/supplemental/seoul_terrain/20261018/manifest.json",
+      "local_input": "data/raw/supplemental/seoul_terrain/20261018/terrain_source_controls_local.json",
+      "statistics": {
+        "contours": {
+          "source_records_scanned_and_shx_validated": 8570,
+          "local_parts_including_halo": 41,
+          "parts_touching_exact_region": 15,
+          "height_min_m": 25.0,
+          "height_max_m": 50.0,
+          "distinct_heights": [
+            25.0,
+            30.0,
+            35.0,
+            40.0,
+            45.0,
+            50.0
+          ],
+          "source_SCLS_counts": {
+            "F0017114": 5,
+            "F0017111": 32,
+            "F0017121": 4
+          }
+        },
+        "spot_heights": {
+          "source_records_scanned_and_shx_validated": 45870,
+          "local_parts_including_halo": 96,
+          "parts_touching_exact_region": 43,
+          "height_min_m": 26.33,
+          "height_max_m": 50.89,
+          "distinct_heights": [
+            26.33,
+            27.06,
+            27.26,
+            27.4,
+            27.9,
+            28.06,
+            28.16,
+            28.27,
+            28.29,
+            28.33,
+            28.63,
+            29.05,
+            29.08,
+            29.09,
+            29.23,
+            29.45,
+            30.12,
+            30.23,
+            30.26,
+            30.28,
+            30.46,
+            30.48,
+            30.51,
+            30.66,
+            30.79,
+            31.37,
+            31.43,
+            31.52,
+            31.67,
+            32.08,
+            32.1,
+            32.32,
+            32.65,
+            32.74,
+            32.88,
+            32.9,
+            33.04,
+            33.15,
+            33.31,
+            33.5,
+            33.58,
+            33.59,
+            33.7,
+            33.78,
+            33.84,
+            33.89,
+            33.9,
+            34.3,
+            34.4,
+            34.57,
+            34.65,
+            35.23,
+            35.28,
+            35.44,
+            35.5,
+            35.6,
+            35.61,
+            35.79,
+            35.85,
+            36.37,
+            36.55,
+            36.6,
+            36.88,
+            37.5,
+            37.57,
+            37.66,
+            37.67,
+            37.81,
+            38.53,
+            38.74,
+            38.78,
+            38.94,
+            39.07,
+            39.2,
+            39.22,
+            39.6,
+            40.08,
+            40.12,
+            40.37,
+            40.54,
+            40.57,
+            41.16,
+            41.32,
+            41.35,
+            41.46,
+            41.49,
+            41.7,
+            41.77,
+            43.15,
+            43.28,
+            44.76,
+            45.85,
+            45.86,
+            47.5,
+            50.1,
+            50.89
+          ],
+          "source_SCLS_counts": {
+            "F0027217": 96
+          }
+        }
+      },
+      "vertical_datum": null,
+      "original_source_epsg": 5174,
+      "metric_output_epsg": 32652,
+      "halo_m": 200,
+      "all_source_index_records_validated": true,
+      "interpolated_grid": null
+    },
+    "mapzen_aws_srtm": {
+      "official_registry": "https://registry.opendata.aws/terrain-tiles/",
+      "provider_sources": "https://github.com/tilezen/joerd/blob/master/docs/data-sources.md",
+      "provider_license": "https://github.com/tilezen/joerd/blob/master/docs/attribution.md",
+      "access": "Anonymous small GeoTIFF tile HTTP200; no AWS account or keys used",
+      "source_tile_url": "https://s3.amazonaws.com/elevation-tiles-prod/geotiff/11/1746/793.tif",
+      "source_tile_bytes": 150669,
+      "current_bbox_crop": "/private/tmp/sim2seoul-terrain-alternatives/deoksugung_cityhall-mapzen-srtm-reference.tif",
+      "crop_bytes": 1837,
+      "crop_dimensions": [
+        32,
+        33
+      ],
+      "crop_min_max_m": [
+        33,
+        96
+      ],
+      "effective_ground_pixel_spacing_m": [
+        30.33209129397215,
+        30.204137035427202
+      ],
+      "vertical_reference": "Provider formats document EGM96; includes SRTM/GMTED/ETOPO mixed-source fallbacks. No datum alignment to Korean source heights performed.",
+      "SRTM_epoch": "February 2000 original radar acquisition; later processing/void fills do not imply current-city survey",
+      "ground_fidelity_primary": "https://www.usgs.gov/special-topics/significant-topographic-changes-in-the-united-states/science/accuracy-assessment",
+      "ground_limit": "USGS explicitly states SRTM in built areas includes rooftop/structure effects and vegetation. AWS registry bare-earth description is not independent Seoul ground verification. Provider warns oversampling does not improve original SRTM resolution, listed as 30m (90m nominal quality).",
+      "decision": "REFERENCE_ONLY_NOT_CITY_WALKABLE_GROUND"
+    },
+    "nasadem": {
+      "primary": "https://lpdaac.usgs.gov/documents/1273/NASADEM_User_Guide_V11.pdf",
+      "access_primary": "https://urs.earthdata.nasa.gov/documentation/what_do_i_need_to_know",
+      "type": "SRTM reprocessing at approximately 30m, original 2000 radar observations; improved calibration and void handling",
+      "access": "Normal DAAC raster download requires Earthdata Login; no protected download attempted",
+      "vertical_reference": "Merged integer HGT=EGM96; SRTM-only floating product=WGS84 ellipsoid. Do not mix these.",
+      "limit": "Not a new bare-earth Seoul survey; guide discusses phase-center vegetation bias."
+    },
+    "fabdem": {
+      "primary": "https://research-information.bris.ac.uk/en/datasets/fabdem-v1-2/",
+      "type": "Approximately 30m Copernicus heights with building/tree bias removal by model",
+      "license": "CC BY-NC-SA 4.0; commercial use requires separate permission, so not selected for unrestricted game use",
+      "downloaded": false
+    },
+    "domestic_metadata_not_dem": {
+      "primary": "https://www.data.go.kr/data/15067637/fileData.do",
+      "limit": "DEM achievement metadata is not the actual elevation raster; searchable format/vertical fields cannot be substituted for terrain samples."
+    },
+    "independent_local_checks": {
+      "generator_byte_identical_check": "PASS",
+      "coordinates_compared": 6526,
+      "local_XZ_vs_WGS84_reprojection_max_error_m": 2.796391991308032e-09,
+      "original_source_spot_XY_vs_local_max_error_m": 0,
+      "maximum_vertex_distance_from_exact_region_m": 200.00000000003686,
+      "region_outside_control_convex_hull_m2": 0,
+      "scope": "Internal source consistency/coordinate checks only; not independent field survey or runtime walking evidence."
+    }
+  }
+}

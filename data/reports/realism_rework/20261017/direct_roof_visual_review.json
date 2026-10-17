@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "task": "DIRECT_ROOF_VISUAL_REVIEW",
+  "reviewed_at_local": "2026-10-18T01:22:33.342593+09:00",
+  "reviewer": "outdoor_pool assistant subagent; rooftop implementation contributor performing separate current-image inspection, not blinded external validation.",
+  "result": "ACCEPTED_WITH_RECORDED_LIMITATIONS",
+  "source_report": "data/reports/realism_rework/20261017/final/direct_roof_gpu.json",
+  "source_report_sha256": "0be22c5b6694781a53145c3fdb39978b22d8c8992a682410f284281d6fe18ccd",
+  "source_report_result": "PASS",
+  "source_report_checks": {
+    "checks": 42,
+    "failed": 0
+  },
+  "source_freshness": {
+    "listed_hashes": {
+      "res://../tests/game/check_large_outdoor_pool.gd": "64d9b0a6cf8e484c8d9873e3642bbb87f5cc9a4b490cd9573ac25c86efd8ce18",
+      "res://../tests/game/check_outdoor_roof_jumping.gd": "5fe51b3b6fec08c17075ce0cfeb8645af0477b5ec1b2bd2ec220c6109bd30bee",
+      "res://scripts/exploration_rooftop_access.gd": "aad9b1d15ee489320012e8c66db2eefb4b698d44713ec46db939efaed771d686",
+      "res://scripts/explore_walk.gd": "769087bc8e59433826e86d5f629cb04e399b51352aee4615fec28622823add1d",
+      "res://scripts/interior_visit.gd": "33f6da6fb9cf30fd8a8b175268c30dd8c3ea94f9499b174c8b892aaed8d03d1a",
+      "res://scripts/player/free_roam_player.gd": "b2a1d1ca9365637c38519b5af114078e8f5d537cd16b1d86022abf765d819e86",
+      "res://scripts/rooftop_space.gd": "531dbb00ca24205e1ccee2cfa492fd1da05ced78a3c9d0801b80e071896c3bbe"
+    },
+    "compared_to_current_worktree": true,
+    "mismatches": []
+  },
+  "review_method": "Opened every capture listed by the current 42-PASS direct_roof_gpu report: 7 PNGs, including both deck exits and direct arrival, after the final pool-shortcut camera UI branch rerun. No runtime source edits, avatar/camera overrides, image edits or engine execution during this review.",
+  "distinguished_evidence": {
+    "direct_jump_access": "The automated report observes71 fresh Space presses, original-street ascent to94.972m and actual landing on the shared roof with visit_active=false and player_interior_active=false; stills show the resulting rendered facility, not the full ascent by themselves.",
+    "water_and_both_exits": "Current stills show splash, visible buoyant avatar and clear post-exit bodies; physical movement/support/entry/exit comes from the referenced automated observations.",
+    "outside_departure": "The report records leaving the actual source footprint and landing outside with no recovery or lift and with water unregistered. No separate final street-departure still is present, so that conclusion is report-derived rather than visually certified here.",
+    "bounded_mode": "This direct-jump journey uses exterior mode. It does not validate free-roam-OFF roof bounds, cabin rollback or catalog-wide landings; separate reports below carry those regressions.",
+    "lift_reentry": "The E prompt is visible in the direct-arrival frame. Actual E adoption/reboarding behaviour belongs to the separate direct_lift_h regression, not this still."
+  },
+  "automated_continuous_journey_evidence": [
+    {
+      "name": "direct_roof.real_fresh_Space_ascent_from_original_street",
+      "passed": true,
+      "evidence": {
+        "fresh_jump_presses": 71,
+        "recoveries": 0,
+        "start": [
+          166.891464233398,
+          0.00010380195453763,
+          40.2531433105469
+        ],
+        "summit": [
+          166.891464233398,
+          94.9720916748047,
+          40.2531433105469
+        ]
+      }
+    },
+    {
+      "name": "direct_roof.outdoor_landing_without_E_lift_or_region_teleport",
+      "passed": true,
+      "evidence": {
+        "actual": [
+          164.818450927734,
+          88.8305969238281,
+          59.7807006835938
+        ],
+        "destination": [
+          164.79850769043,
+          88.9100036621094,
+          59.9684143066406
+        ],
+        "movement_ticks": 526,
+        "player_interior_active": false,
+        "roof_visible": true,
+        "visit_active": false,
+        "water": {
+          "depth_m": 0.0,
+          "entry_count": 0,
+          "exit_count": 0,
+          "exit_jump_locked": false,
+          "float_target_foot_y_world": 87.6500018310547,
+          "horizontal_speed_mps": 0.0,
+          "id": "osm:way:233593619:building:roof_pool",
+          "registered": true,
+          "surface_y_world": 88.6500018310547,
+          "swim_speed_limit_mps": 3.0,
+          "swimming": false,
+          "under_surface": false,
+          "vertical_speed_mps": 0.0,
+          "water_jump_count": 0
+        }
+      }
+    },
+    {
+      "name": "direct_roof.walk_arrival_deck_to_pool_steps",
+      "passed": true,
+      "evidence": {
+        "completed": true,
+        "end": [
+          177.498596191406,
+          88.8308410644531,
+          57.745532989502
+        ],
+        "failed_target": -1,
+        "grounded_samples": 344,
+        "kind": "real_controller_Input.action_press_movement_no_midflight_teleports",
+        "max_height_y": 88.8308410644531,
+        "max_step_m": 0.0374425575137138,
+        "name": "direct_roof.walk_arrival_deck_to_pool_steps",
+        "recoveries_after": 0,
+        "recoveries_before": 0,
+        "samples": 344,
+        "start": [
+          164.818450927734,
+          88.8294067382812,
+          59.7807006835938
+        ],
+        "waypoints": 1
+      }
+    },
+    {
+      "name": "direct_roof.walk_open_side_deck_to_edge",
+      "passed": true,
+      "evidence": {
+        "completed": true,
+        "end": [
+          181.151885986328,
+          88.830810546875,
+          46.0681228637695
+        ],
+        "failed_target": -1,
+        "grounded_samples": 152,
+        "kind": "real_controller_Input.action_press_movement_no_midflight_teleports",
+        "max_height_y": 88.8308410644531,
+        "max_step_m": 0.0373978950083256,
+        "name": "direct_roof.walk_open_side_deck_to_edge",
+        "recoveries_after": 0,
+        "recoveries_before": 0,
+        "samples": 152,
+        "start": [
+          180.285018920898,
+          88.829460144043,
+          51.5674324035645
+        ],
+        "waypoints": 2
+      }
+    },
+    {
+      "name": "direct_roof.single_jump_crosses_actual_source_edge_and_lands_outside_without_lift",
+      "passed": true,
+      "evidence": {
+        "end": [
+          181.58332824707,
+          -0.0295494794845581,
+          42.0058059692383
+        ],
+        "grounded": true,
+        "peak_world_y": 90.9838943481445,
+        "recoveries": 0,
+        "source_footprint_left": true,
+        "start": [
+          181.151885986328,
+          88.830810546875,
+          46.0681228637695
+        ],
+        "water": {
+          "depth_m": 0.0,
+          "entry_count": 2,
+          "exit_count": 2,
+          "exit_jump_locked": false,
+          "float_target_foot_y_world": -1.0,
+          "horizontal_speed_mps": 0.0,
+          "id": "",
+          "registered": false,
+          "surface_y_world": 0.0,
+          "swim_speed_limit_mps": 3.0,
+          "swimming": false,
+          "under_surface": false,
+          "vertical_speed_mps": 0.0,
+          "water_jump_count": 2
+        }
+      }
+    },
+    {
+      "name": "direct_roof.outdoor_departure_clears_only_pool_water",
+      "passed": true,
+      "evidence": {
+        "original_source_bodies": 692,
+        "water": {
+          "depth_m": 0.0,
+          "entry_count": 2,
+          "exit_count": 2,
+          "exit_jump_locked": false,
+          "float_target_foot_y_world": -1.0,
+          "horizontal_speed_mps": 0.0,
+          "id": "",
+          "registered": false,
+          "surface_y_world": 0.0,
+          "swim_speed_limit_mps": 3.0,
+          "swimming": false,
+          "under_surface": false,
+          "vertical_speed_mps": 0.0,
+          "water_jump_count": 2
+        }
+      }
+    }
+  ],
+  "images": [
+    {
+      "name": "hotel_pool_normal_arrival",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_hotel_pool_normal_arrival.png",
+      "sha256": "1995cabcd318efa1544340b2723a69b97b675af9043eca3af1c4cf22d5081651",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The visible original avatar stands on the shared roof with a broad flush pool ahead after direct street-to-roof jumping.",
+        "The lift enclosure is present and its E floor-selection prompt is visible even though no elevator was used to arrive.",
+        "Skyline, coping and open water establish the outdoor roof location."
+      ],
+      "limitations": [
+        "This capture name is inherited: in this report it is direct-jump arrival, not an elevator-arrival screenshot.",
+        "The general outdoor controls panel plus rooftop hint is taller than the compact lift-session HUD.",
+        "A source building label intrudes at the left water edge and the E prompt covers part of the lower legs.",
+        "The recorded 30-tick settle includes 2 initial hidden-avatar ticks near LiftRear; the inspected capture is clear with 29 meshes and settled distance 3.049m."
+      ],
+      "reported_camera_evidence": {
+        "first_distance_m": 1.56042968928814,
+        "settled_distance_m": 3.04890625178814,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visible_avatar_meshes": 29,
+        "visual_visible": true,
+        "hidden_ticks_during_settle": 2,
+        "settle_physics_ticks": 30,
+        "unraised_pivot_obstruction_geometry_id": "EXP08_rooftop_LiftRear",
+        "normal_view_before": [
+          0.0,
+          -0.261799395084381,
+          4.5
+        ],
+        "normal_view_after": [
+          0.0,
+          -0.261799395084381,
+          4.5
+        ],
+        "roof_camera_fallback": false
+      }
+    },
+    {
+      "name": "jump_above_flush_pool",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_jump_above_flush_pool.png",
+      "sha256": "ab7d49fea46909e184bd9e3ac1a2c366a5f4647b3eff7a4db26f94f1da920b33",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The existing avatar is fully visible above the coping; a large long-axis water surface, lane markings and outdoor leisure furniture are visible.",
+        "The roof facility is rendered without first entering a lift-only region."
+      ],
+      "limitations": [
+        "Simple low-poly furniture and water remain game-authored."
+      ]
+    },
+    {
+      "name": "splash_on_physical_entry",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_splash_on_physical_entry.png",
+      "sha256": "832503c3ec459fcd29dbbb5f2e3521d21efe434d59be8fa18785bbc1c893d8f8",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "A droplet cluster and ring appear around the visible torso while entering the real water area.",
+        "The pool edge and distant loungers/parasols remain visible."
+      ],
+      "limitations": [
+        "An entry handrail crosses the lower foreground without hiding the head/torso.",
+        "A building name label floats over part of the far water/deck edge in this exterior mode."
+      ]
+    },
+    {
+      "name": "buoyant_swimming_in_sunken_basin",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_buoyant_swimming_in_sunken_basin.png",
+      "sha256": "56618941307fd750f81838de647ae341e0a6a6241a6c59f84fb5278970efaa37",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The original head and upper torso stay above water, with the legs visible below the translucent surface.",
+        "Open sky and the leisure deck remain visible during the swim."
+      ],
+      "limitations": [
+        "Near-entry rail foreground and a floating source building label remain noticeable.",
+        "The clothed upright avatar indicates game buoyancy rather than a finished swim stroke."
+      ]
+    },
+    {
+      "name": "large_open_sky_swimming_pool",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_large_open_sky_swimming_pool.png",
+      "sha256": "23631628fa6c7193501ed49cd006910bdb077423907a180ec6d1725a749033cc",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The avatar is centred and unobstructed in a wide water rectangle with visible lane strips, open sky and far leisure deck.",
+        "No foreground rail dominates the central swimming view."
+      ],
+      "limitations": [
+        "The panel still combines general exploration and roof instructions; detailed swim/material realism is outside this review."
+      ]
+    },
+    {
+      "name": "Space_exit_back_on_deck",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_Space_exit_back_on_deck.png",
+      "sha256": "de77eefeca5009944b925b52cf368c3b072b4f0274fe3f81457aacc05954ab7c",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The original avatar is fully visible on the clear deck strip after the actual Space exit.",
+        "Loungers and parasols no longer force the camera to collapse or hide the body."
+      ],
+      "limitations": [
+        "This frame looks toward furniture and adjacent simplified roof envelopes, not a surveyed hotel panorama."
+      ],
+      "reported_camera_evidence": {
+        "first_distance_m": 4.0,
+        "settled_distance_m": 4.0,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visible_avatar_meshes": 29,
+        "visual_visible": true,
+        "hidden_ticks_during_settle": 0,
+        "settle_physics_ticks": 30,
+        "unraised_pivot_obstruction_geometry_id": "",
+        "normal_view_before": [
+          1.46503353118896,
+          -0.349065840244293,
+          4.0
+        ],
+        "normal_view_after": [
+          1.46503353118896,
+          -0.349065840244293,
+          4.0
+        ],
+        "roof_camera_fallback": false
+      }
+    },
+    {
+      "name": "Space_exit_right_back_on_deck",
+      "image": "data/reports/realism_rework/20261017/final/direct_roof_gpu_Space_exit_right_back_on_deck.png",
+      "sha256": "749f7dc06feda68624bae9938f87710ea195234785aea85fd943ea7ccfa89b92",
+      "dimensions_px": [
+        1152,
+        720
+      ],
+      "directly_opened_with_view_image": true,
+      "accepted": true,
+      "observed": [
+        "The original avatar is fully visible on the opposite deck strip after Space exit, with the skyline beyond the glass edge.",
+        "The pool coping and walking strip remain legible without facility props hiding the player."
+      ],
+      "limitations": [
+        "This outward view does not show the leisure furniture; it is a second exit/camera view, not a full facilities overview."
+      ],
+      "reported_camera_evidence": {
+        "first_distance_m": 4.0,
+        "settled_distance_m": 4.0,
+        "head_in_frame": true,
+        "head_ray_clear": true,
+        "camera_overlap_clear": true,
+        "visible_avatar_meshes": 29,
+        "visual_visible": true,
+        "hidden_ticks_during_settle": 0,
+        "settle_physics_ticks": 30,
+        "unraised_pivot_obstruction_geometry_id": "",
+        "normal_view_before": [
+          -1.67655909061432,
+          -0.349065840244293,
+          4.0
+        ],
+        "normal_view_after": [
+          -1.67655909061432,
+          -0.349065840244293,
+          4.0
+        ],
+        "roof_camera_fallback": false
+      }
+    }
+  ],
+  "acceptance": {
+    "roof_facility_visible_after_direct_jump": true,
+    "open_water_and_outdoor_deck_visible": true,
+    "original_avatar_visible_in_all_final_captures": true,
+    "both_post_Space_exit_views_clear_at4m": true,
+    "persistent_camera_collapse_found": false,
+    "transient_arrival_hidden_avatar_ticks_recorded": 2
+  },
+  "separate_regression_reports": [
+    {
+      "report": "data/reports/realism_rework/20261017/final/bounded_h.json",
+      "sha256": "2980993f93476b8e40bd864c3010a9a917aa5e8cc6e967182b4d63229dc79e04",
+      "result": "PASS",
+      "summary": {
+        "checks": 53,
+        "failed": 0
+      },
+      "role": "Separate bounded-mode/lift or full-roof-catalog regression; not inferred from the direct-jump stills."
+    },
+    {
+      "report": "data/reports/realism_rework/20261017/final/roof_catalog_h.json",
+      "sha256": "196da8c5fee538a886e7f9765c8ed0ac5b47423602c88e8168492881bf89717e",
+      "result": "PASS",
+      "summary": {
+        "checks": 44,
+        "failed": 0
+      },
+      "role": "Separate bounded-mode/lift or full-roof-catalog regression; not inferred from the direct-jump stills."
+    },
+    {
+      "report": "data/reports/realism_rework/20261017/final/direct_lift_h.json",
+      "sha256": "705b05a42f36733c1519c863bbe6e05d6663971796a8e16826e3fceb18d8186b",
+      "result": "PASS",
+      "summary": {
+        "checks": 31,
+        "failed": 0
+      },
+      "role": "Separate bounded-mode/lift or full-roof-catalog regression; not inferred from the direct-jump stills."
+    }
+  ],
+  "remaining_limits": [
+    "Direct arrival reports 2 initially hidden-avatar ticks near LiftRear during a 30-tick settle. Final frame has 29 visible avatar meshes, first camera distance 1.560m and settled 3.049m; do not describe this as zero transient occlusion.",
+    "Exterior mode keeps the taller general-help-plus-roof HUD and source building labels; these are less clean than the compact elevator-session HUD.",
+    "The near-entry handrail occupies the lower foreground in two water frames without hiding the head/torso.",
+    "The original clothed upright low-poly avatar and simple water remain; finished strokes, swimwear, wet materials and fluid simulation are unverified.",
+    "The selected representative Plaza images do not validate every source roof, every camera orientation or a human OS-input journey.",
+    "The elevated game deck and sunken water geometry remain authored facilities above unchanged source slabs, not a real hotel-roof/pool survey."
+  ],
+  "final_rerun_context": "Current final reports and images include the final pool-shortcut camera UI branch. All current captures were reopened directly after that rerun; the previous acceptance and recorded limitations remain unchanged."
+}

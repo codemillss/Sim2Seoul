@@ -48,7 +48,7 @@ func setup(world: Node3D,player: CharacterBody3D,rig: Node3D) -> bool:
 func _fail(message: String) -> bool:load_error=message;return false
 
 func _make_materials() -> void:
-	var colors := {"frame":Color(.14,.18,.19),"metal":Color(.62,.66,.65),"glass_back":Color(.08,.15,.17),"glass":Color(.32,.58,.61,.20),"white":Color(.94,.94,.86),"paper":Color(.88,.86,.73),"oak":Color(.43,.29,.17),"red":Color(.50,.10,.075),"awning":Color(.31,.16,.11),"rice":Color(.93,.89,.70),"kimchi":Color(.66,.20,.08),"green":Color(.26,.44,.17),"blue":Color(.06,.28,.54),"gs_cyan":Color(.07,.64,.77),"gs_navy":Color(.07,.20,.38),"cu_purple":Color(.40,.18,.58),"cu_lime":Color(.64,.80,.16),"emart_navy":Color(.12,.20,.38),"emart_yellow":Color(.98,.77,.07),"yellow":Color(.91,.65,.13)}
+	var colors := {"frame":Color(.14,.18,.19),"metal":Color(.62,.66,.65),"glass_back":Color(.08,.15,.17),"glass":Color(.32,.58,.61,.20),"white":Color(.94,.94,.86),"paper":Color(.88,.86,.73),"oak":Color(.43,.29,.17),"red":Color(.50,.10,.075),"awning":Color(.31,.16,.11),"rice":Color(.93,.89,.70),"kimchi":Color(.66,.20,.08),"green":Color(.26,.44,.17),"blue":Color(.06,.28,.54),"gs_cyan":Color(.07,.64,.77),"gs_navy":Color(.07,.20,.38),"cu_purple":Color(.40,.18,.58),"cu_lime":Color(.64,.80,.16),"emart_navy":Color(.12,.20,.38),"emart_yellow":Color(.98,.77,.07),"seven_green":Color(.04,.39,.26),"seven_red":Color(.77,.12,.12),"seven_orange":Color(.95,.40,.10),"yellow":Color(.91,.65,.13)}
 	for key: String in colors:
 		var material := StandardMaterial3D.new();material.albedo_color=colors[key];material.roughness=.72
 		if key=="glass":material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;material.roughness=.15;material.cull_mode=BaseMaterial3D.CULL_DISABLED
@@ -114,13 +114,16 @@ func _restaurant(width: float) -> void:
 	_label("KoreanMenu","콩국수\n김치\n볶음밥",Vector3(board_x,1.18,.17),.46,Color(.26,.14,.10),21)
 
 func _convenience(width: float,style: String,title: String) -> void:
-	var main := {"gs25":"gs_navy","cu":"cu_purple","emart24":"emart_navy"}.get(style,"blue") as String
-	var accent := {"gs25":"gs_cyan","cu":"cu_lime","emart24":"emart_yellow"}.get(style,"yellow") as String
+	var main := {"gs25":"gs_navy","cu":"cu_purple","emart24":"emart_navy","seven_eleven":"seven_green"}.get(style,"blue") as String
+	var accent := {"gs25":"gs_cyan","cu":"cu_lime","emart24":"emart_yellow","seven_eleven":"seven_orange"}.get(style,"yellow") as String
 	_box("ConvenienceFascia",Vector3(width,.52,.16),Vector3(0,2.49,.12),main)
 	_box("ConvenienceAccent",Vector3(width,.075,.18),Vector3(0,2.20,.13),accent)
-	var name_text := "CU" if style=="cu" else ("emart24" if style=="emart24" else "GS25")
+	var name_text: String={"cu":"CU","emart24":"emart24","gs25":"GS25","seven_eleven":"7-ELEVEN"}.get(style,"편의점")
 	_label("ConvenienceName",name_text,Vector3(-width*.26,2.50,.22),width*.40,Color(.98,.99,.94),56)
-	_label("ConvenienceCategories","도시락 · 음료 · 간식",Vector3(width*.19,2.49,.22),width*.42,Color(.98,.99,.94),24)
+	_label("ConvenienceCategories","도시락 · 음료 · 간식",Vector3(width*.19,2.54,.22),width*.42,Color(.98,.99,.94),24)
+	_label("EnglishConvenience","CONVENIENCE STORE",Vector3(width*.19,2.34,.225),width*.42,Color(.98,.99,.94),18)
+	if style=="seven_eleven":
+		for stripe in range(3):_box("SevenElevenColourStripe",Vector3(width,.035,.018),Vector3(0,2.72-stripe*.038,.218),["seven_orange","seven_green","seven_red"][stripe])
 	_door(-width*.31)
 	var left := -width*.21
 	var right := width*.44

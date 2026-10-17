@@ -14,12 +14,15 @@ var material_count := 0
 var load_error := ""
 var loaded := false
 var _materials := {}
+var _city: Node3D
+var identity_profiles: Dictionary={}
 
 func setup(city: Node3D) -> bool:
 	if loaded:
 		return _fail("일반 건물 외형은 이미 적용됐습니다.")
 	if not is_instance_valid(city):
 		return _fail("일반 건물 외형의 도시 노드를 찾지 못했습니다.")
+	_city=city
 	var sources: Variant = city.get("source_nodes")
 	if not sources is Dictionary:
 		return _fail("일반 건물 외형의 원본 목록이 없습니다.")
@@ -52,36 +55,51 @@ func setup(city: Node3D) -> bool:
 	if targets.is_empty():
 		return _fail("일반 건물 외형을 적용할 표시 원본이 없습니다.")
 	# Validate everything before changing any display material. A shared shader
-	# and at most 16 cached materials avoid creating geometry for every window.
+	# and shared cached materials avoid creating geometry for every window.
 	for target: Dictionary in targets:
 		var source: MeshInstance3D = target.node
 		var seed: int = posmod(String(target.id).hash(), 1000003)
 		var palette_index: int = posmod(seed, WALL_COLORS.size())
-		var tall := float(target.top) - float(target.bottom) >= 28.0
-		var style: int = 1 if tall else 0
-		var cache_key := palette_index * 2 + style
+		var height: float=float(target.top)-float(target.bottom)
+		var area: float=float((source.get_aabb().size.x*source.get_aabb().size.z))
+		var style: int=3 if height>=65. else (2 if height>=28. else (1 if area>=300. else 0))
+		var cache_key := palette_index * 4 + style
 		if not _materials.has(cache_key):
-			_materials[cache_key] = _make_material(palette_index, tall)
+			_materials[cache_key] = _make_material(palette_index, style)
 		source.material_override = _materials[cache_key]
 		var base_y: float = source.to_global(Vector3(0.0, target.bottom, 0.0)).y
 		var top_y: float = source.to_global(Vector3(0.0, target.top, 0.0)).y
 		source.set_instance_shader_parameter("height_limits_m", Vector2(base_y, top_y))
 		source.set_instance_shader_parameter("facade_seed", float(seed % 997))
 		source.set_meta("v0_stylized_facade", true)
+		source.set_meta("v0_facade_structural_style",style)
 		building_count += 1
 	material_count = _materials.size()
 	loaded = true
 	return true
 
-func _make_material(palette_index: int, tall: bool) -> ShaderMaterial:
+func _make_material(palette_index: int, style: int) -> ShaderMaterial:
 	var material := ShaderMaterial.new()
 	material.shader = FACADE_SHADER
 	material.set_shader_parameter("wall_tint", WALL_COLORS[palette_index])
-	material.set_shader_parameter("glass_tint", Color(0.19, 0.29, 0.33) if tall else Color(0.21, 0.28, 0.30))
-	material.set_shader_parameter("floor_height_m", 3.45 if tall else 3.0 + float(palette_index % 3) * 0.15)
-	material.set_shader_parameter("bay_width_m", 2.2 if tall else 2.5 + float(palette_index % 3) * 0.25)
-	material.set_shader_parameter("curtain_wall", 1.0 if tall else 0.0)
+	material.set_shader_parameter("glass_tint", Color(0.16,0.27,0.31) if style>=2 else Color(0.21,0.27,0.28))
+	material.set_shader_parameter("floor_height_m", [3.0,3.25,3.7,4.05][style])
+	material.set_shader_parameter("bay_width_m", [2.55,4.4,3.2,2.35][style])
+	material.set_shader_parameter("curtain_wall", [0.0,.18,.62,.95][style])
 	return material
+
+func set_identity_profile(id: String,profile: String,wall_color: Color) -> bool:
+	if not loaded or not is_instance_valid(_city):return false
+	var source: MeshInstance3D=_city.source_nodes.get(id) as MeshInstance3D
+	if not is_instance_valid(source) or source.mesh==null:return false
+	var key: String="identity_"+profile
+	if not _materials.has(key):
+		var material:=StandardMaterial3D.new();material.albedo_color=wall_color;material.roughness=.84
+		_materials[key]=material
+	source.material_override=_materials[key]
+	source.set_meta("v0_facade_identity_profile",profile);identity_profiles[id]=profile
+	material_count=_materials.size()
+	return true
 
 func _number(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(value)

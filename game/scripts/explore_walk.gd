@@ -40,6 +40,14 @@ var time_id := "day"
 var time_option: OptionButton
 var street_curbs: Node3D
 var street_pedestrians: Node3D
+var exploration_pedestrians: Node3D
+var exploration_rooftop_access: Node3D
+var neighborhood_life: Node3D
+var building_type_identity: Node3D
+var interior_room_access: Node3D
+var building_exterior_identity: Node3D
+var neighborhood_greenery: Node3D
+var neighborhood_population: Node3D
 
 func _ready() -> void:
 	# Runtime binding belongs to this scene; historical project input stays fixed.
@@ -110,6 +118,13 @@ func _ready() -> void:
 	add_child(interior_visit)
 	if not interior_visit.setup(self):
 		_exploration_failure("건물 내부와 출입구를 준비하지 못했습니다.");return
+	interior_room_access=preload("res://scripts/interior_room_access.gd").new();add_child(interior_room_access)
+	if not interior_room_access.setup(self,interior_visit):
+		_exploration_failure("객실 출입을 준비하지 못했습니다.");return
+	exploration_rooftop_access=preload("res://scripts/exploration_rooftop_access.gd").new()
+	exploration_rooftop_access.name="ExplorationRooftopAccess";add_child(exploration_rooftop_access)
+	if not exploration_rooftop_access.setup(self,interior_visit):
+		_exploration_failure("직접 접근할 수 있는 옥상을 준비하지 못했습니다.");return
 	street_businesses=preload("res://scripts/street_businesses.gd").new()
 	add_child(street_businesses)
 	if not street_businesses.setup(city,player,rig):
@@ -132,6 +147,27 @@ func _ready() -> void:
 	if not street_pedestrians.setup(city,player,rig):
 		_exploration_failure("산책하는 사람과 반려견을 준비하지 못했습니다.");return
 	street_pedestrians.set_running(pedestrians_running)
+	exploration_pedestrians=preload("res://scripts/exploration_pedestrian_avoidance.gd").new()
+	add_child(exploration_pedestrians)
+	if not exploration_pedestrians.setup(city,player,pedestrians,street_pedestrians):
+		_exploration_failure("보행자의 비켜 지나가기를 준비하지 못했습니다.");return
+	exploration_pedestrians.set_running(pedestrians_running)
+	neighborhood_life=preload("res://scripts/neighborhood_life.gd").new();add_child(neighborhood_life)
+	if not neighborhood_life.setup(self):
+		_exploration_failure("대기 줄·피크닉·거리 안내를 준비하지 못했습니다.");return
+	building_type_identity=preload("res://scripts/building_type_identity.gd").new();add_child(building_type_identity)
+	if not building_type_identity.setup(self):
+		_exploration_failure("교회와 호텔의 특징을 준비하지 못했습니다.");return
+	building_exterior_identity=preload("res://scripts/building_exterior_identity.gd").new();add_child(building_exterior_identity)
+	if not building_exterior_identity.setup(self):
+		_exploration_failure("건물별 외관을 준비하지 못했습니다.");return
+	neighborhood_greenery=preload("res://scripts/neighborhood_greenery.gd").new();add_child(neighborhood_greenery)
+	if not neighborhood_greenery.setup(self):
+		_exploration_failure("거리의 가로수를 준비하지 못했습니다.");return
+	neighborhood_population=preload("res://scripts/neighborhood_population.gd").new();add_child(neighborhood_population)
+	if not neighborhood_population.setup(self):
+		_exploration_failure("거리 전반의 보행과 차량을 준비하지 못했습니다.");return
+	neighborhood_population.set_people_running(pedestrians_running)
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -185,9 +221,21 @@ func _build_ui() -> void:
 	exploration_notice.add_theme_font_size_override("font_size",13)
 	exploration_notice.add_theme_color_override("font_color",Color(.35,.15,.07))
 	options.add_child(exploration_notice)
+	var admin_switch:=CheckButton.new();admin_switch.name="AdministratorAccess";admin_switch.text="관리자 모드 · 객실 마스터키";admin_switch.set_pressed_no_signal(true)
+	for color_name in ["font_color","font_hover_color","font_pressed_color","font_hover_pressed_color"]:
+		admin_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+	admin_switch.toggled.connect(func(enabled: bool):
+		if is_instance_valid(interior_room_access):interior_room_access.set_admin_access(enabled))
+	options.add_child(admin_switch)
+	var music_switch:=CheckButton.new();music_switch.name="BuskingMusic";music_switch.text="버스킹 기타 음악";music_switch.set_pressed_no_signal(true)
+	for color_name in ["font_color","font_hover_color","font_pressed_color","font_hover_pressed_color"]:
+		music_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+	music_switch.toggled.connect(func(enabled: bool):
+		if is_instance_valid(neighborhood_life):neighborhood_life.set_music_enabled(enabled))
+	options.add_child(music_switch)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
-	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"]]:
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"]]:
 		var shortcut:=Button.new();shortcut.text=detail[0]
 		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
@@ -212,6 +260,7 @@ func set_time_profile(id: String) -> bool:
 	if id not in TIME_IDS:return false
 	if is_instance_valid(photo_atmosphere) and not photo_atmosphere.set_time_profile(id):return false
 	if is_instance_valid(street_life) and not street_life.set_time_profile(id):return false
+	if is_instance_valid(neighborhood_life) and not neighborhood_life.set_time_profile(id):return false
 	time_id=id
 	if is_instance_valid(time_option):time_option.select(TIME_IDS.find(id))
 	return true
@@ -230,12 +279,36 @@ func _time_selected(index: int) -> void:
 		file.store_string(JSON.stringify({"schema_version":1,"time_id":time_id})+"\n");file.close()
 	else:exploration_notice.text="시간대를 저장하지 못했습니다. 이번 실행에는 적용됩니다."
 
+var street_walk_index: int=0
+
 func _visit_street_detail(kind: String) -> void:
-	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk"]:return
+	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk"]:return
 	if interior_visit.active and not interior_visit.return_to_world_spawn():return
 	if not free_roam_enabled:set_free_roam(true)
+	if kind=="hotel_pool":
+		var destination: Dictionary=exploration_rooftop_access.representative_pool_destination()
+		if destination.is_empty():return
+		player.global_position=destination.pool_entry;player.velocity=Vector3.ZERO;player.require_neutral_input();player.reset_physics_interpolation()
+		# Look straight through the gate. An eight-metre diagonal orbit crossed
+		# its upright and collapsed the camera into the player's hidden range.
+		var forward: Vector3=-destination.roof.frame.basis.z
+		rig.yaw=atan2(-forward.x,-forward.z);rig.pitch=deg_to_rad(-18.);rig.requested_distance=4.;rig.current_distance=4.;rig.snap_to_target_pose()
+		if menu.visible:toggle_menu()
+		return
 	var requested:=Vector3.ZERO;var toward:=Vector3.ZERO
-	if kind=="restaurant" and is_instance_valid(street_businesses):
+	if kind=="street_walk" and is_instance_valid(neighborhood_population):
+		var points: Array=neighborhood_population.coverage_viewpoints()
+		if points.is_empty():return
+		var destination: Dictionary=points[street_walk_index%points.size()]
+		street_walk_index+=1
+		requested=destination.point;toward=destination.toward
+	elif kind=="church":
+		var destination: Dictionary=building_type_identity.destination()
+		if destination.is_empty():return
+		requested=destination.point;toward=destination.toward
+	elif kind=="picnic" and not neighborhood_life.picnics.is_empty():
+		toward=neighborhood_life.picnics[0].global_position;requested=toward+Vector3(0,0,4)
+	elif kind=="restaurant" and is_instance_valid(street_businesses):
 		for store: Dictionary in street_businesses.stores:
 			if String(store.record.style)!="restaurant":continue
 			var node: Node3D=store.node
@@ -269,6 +342,12 @@ func _visit_street_detail(kind: String) -> void:
 func set_pedestrians_running(enabled: bool) -> void:
 	super.set_pedestrians_running(enabled)
 	if is_instance_valid(street_pedestrians):street_pedestrians.set_running(enabled)
+	if is_instance_valid(exploration_pedestrians):exploration_pedestrians.set_running(enabled)
+	if is_instance_valid(neighborhood_population):neighborhood_population.set_people_running(enabled)
+
+func set_vehicles_running(enabled: bool) -> void:
+	super.set_vehicles_running(enabled)
+	if is_instance_valid(neighborhood_population):neighborhood_population.set_vehicles_running(enabled)
 
 func _queue_menu_layout() -> void:
 	if menu_layout_pending:return
@@ -323,6 +402,12 @@ func set_speed_profile(id: String) -> bool:
 
 func set_free_roam(enabled: bool) -> void:
 	if not is_instance_valid(exploration_overlay):return
+	if not enabled and is_instance_valid(interior_visit) and interior_visit.active and interior_visit.on_roof and not player.interior_active:
+		# A roof visitor has already rejoined the outdoor world. Do not switch
+		# its boundary underneath an active lift session or an airborne player.
+		if is_instance_valid(free_roam_switch):free_roam_switch.set_pressed_no_signal(true)
+		if is_instance_valid(exploration_notice):exploration_notice.text="옥상에서는 자유 탐험을 유지합니다. 승강기로 내려온 뒤 산책길 모드로 바꿀 수 있습니다."
+		return
 	var previous:=free_roam_enabled
 	player.free_roam_enabled=enabled
 	exploration_overlay.set_enabled(enabled)
@@ -380,6 +465,11 @@ func _process(delta: float) -> void:
 	if not runtime_ok:return
 	if is_instance_valid(interior_visit) and interior_visit.active:
 		status.text=interior_visit.status_text()
+	elif not player.interior_active and player.global_position.y>6.0:
+		var roof: Node3D=exploration_rooftop_access.active_outdoor_roof if is_instance_valid(exploration_rooftop_access) else null
+		if is_instance_valid(roof):
+			status.text=String(roof.spec.title)+" · 옥상 야외 수영장\nWASD 이동 / 수영 · Space 점프 / 물 밖으로 · 옥상 승강장 E"
+		else:status.text="공중 · 옥상 탐험 · Space 연속 점프 · WASD 이동"
 	else:
 		status.text+=" · %s · %s"%["자유 탐험" if free_roam_enabled else "산책길",SPEED_PROFILES[speed_id].label]
 

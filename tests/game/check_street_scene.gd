@@ -95,7 +95,7 @@ func _business_geometry() -> void:
 		if not safe or not on_edge or colliders!=0 or boxes<20 or texts.size()<3:errors.append(record.id)
 		rows.append({"id":record.id,"style":record.style,"source_feature_id":record.source_feature_id,"authored_facade_bounds":bound,"box_instances":boxes,"round_meshes":round_meshes,"actual_texts":texts,"clear_approach":safe,"center_on_source_edge":on_edge,"new_colliders":colliders,"offers_new_entry":record.offers_new_entry})
 	observations["businesses"]=rows
-	_check("shops.four_distinct_source_fitted_models_and_actual_clear_approaches",rows.size()==4 and styles.size()==4 and errors.is_empty(),{"errors":errors,"styles":styles.keys()})
+	_check("shops.expanded_distinct_source_fitted_models_and_actual_clear_approaches",rows.size()==raw.records.size() and rows.size()>=12 and styles.size()>=5 and errors.is_empty(),{"errors":errors,"styles":styles.keys()})
 	_check("shops.actual_signs_distinguish_Jinju_GS25_emart24_CU",names.has_all(["진주회관","GS25","emart24","CU"]))
 	var jinju: Dictionary=raw.records[0]
 	_check("shops.Jinju_official_address_and_OSM_disagreement_remain_explicit",String(jinju.official_address).contains("세종대로11길 26") and jinju.source_poi=="n/12062206099" and jinju.has("position_note") and String(jinju.position_note).contains("10.84") and not jinju.offers_new_entry)

@@ -66,6 +66,8 @@ func _inspect_equipment(room: Node3D,row: Dictionary) -> void:
 		"eat":expected-=Vector3.UP*.12
 		"treadmill":expected-=Vector3.UP*.08
 		"weights":expected-=Vector3(0,.46,.60)
+		"cycle":expected=row.data.machine_origin+Vector3(0,-.0175,-.18)
+		"rowing":expected=row.data.machine_origin+Vector3(0,-.0175,-.32)
 	var anchor_placement_found := false
 	for placement: Dictionary in room.detail_kit.placements:
 		if String(placement.title)!=title or int(placement.level)!=int(row.level) or String(placement.get("facility_id",""))!=String(row.facility_id):continue
@@ -87,6 +89,8 @@ func _inspect_equipment(room: Node3D,row: Dictionary) -> void:
 			parent_title="Detail_FacilityShowerBack";parent_point=row.anchor_point+Vector3(0,-1.01,-.34);parent_size=Vector3(1.25,2.10,.055)
 		"treadmill":parent_size=Vector3(1.0,.10,1.95)
 		"weights":parent_size=Vector3(.45,.78,1.8)
+		"cycle":parent_size=Vector3(.83,.035,1.55)
+		"rowing":parent_size=Vector3(.81,.035,2.12)
 	var parent_found := false
 	for body: StaticBody3D in room.bodies:
 		if String(body.get_meta("geometry_id","")).trim_prefix("EXP04_interior_")!=parent_title or int(body.get_meta("detail_level",-1))!=int(row.level) or String(body.get_meta("facility_id",""))!=String(row.facility_id):continue
@@ -111,7 +115,7 @@ func _inspect_targets(room: Node3D) -> void:
 		all_ids[row.id]=true
 		if not String(row.id).begins_with(String(room.spec.id)+"/"+String(row.facility_id)+"/"):_error(row,"unstable_source_facility_id_structure")
 		if int(facility_links.get(String(row.facility_id),-1))!=int(row.level):_error(row,"missing_parent_facility_link")
-		if String(row.kind) not in ["eat","shower","treadmill","weights"]:_error(row,"unsupported_kind");continue
+		if String(row.kind) not in ["eat","shower","treadmill","weights","cycle","rowing"]:_error(row,"unsupported_kind");continue
 		counts[row.kind]=int(counts.get(row.kind,0))+1
 		var key: String=room.detail_kit.profile_id+"/"+String(row.kind)
 		profiles[key]=int(profiles.get(key,0))+1
@@ -159,10 +163,10 @@ func _run() -> void:
 	_check("targets.globally_unique_source_floor_equipment_ids",all_ids.size()==target_count and errors.filter(func(e):return e.kind in ["duplicate_global_id","unstable_source_facility_id_structure"]).is_empty(),{"unique_ids":all_ids.size(),"targets":target_count})
 	_check("targets.rebuilt_hotel_and_office_metadata_is_exactly_stable",stable and repeat_specs.size()==2,{"profiles":repeat_specs.map(func(item):return item.profile)})
 	_check("targets.all_registered_anchors_have_actual_equipment_parents",equipment_queries==target_count and errors.filter(func(e):return e.kind in ["missing_actual_equipment_parent","missing_equipment_anchor_placement"]).is_empty(),{"actual_parent_queries":equipment_queries})
-	_check("targets.capsule_clear_use_approach_and_non_treadmill_segments",point_queries==7479 and errors.filter(func(e):return String(e.kind).begins_with("blocked_")).is_empty(),{"capsule_queries":point_queries,"radius_m":shape.radius,"height_m":shape.height})
-	_check("targets.every_sample_has_actual_floor_or_treadmill_support",point_queries==7479 and errors.filter(func(e):return String(e.kind).begins_with("unsupported_")).is_empty(),{"support_rays":point_queries})
-	_check("targets.fixed_catalog_equipment_counts_cover_four_action_kinds",target_count==1083 and counts=={"eat":580,"shower":28,"treadmill":324,"weights":151},{"targets":target_count,"counts":counts})
-	_check("targets.hotel_office_civic_residential_use_their_actual_facilities",profiles.has_all(["hotel/eat","hotel/shower","hotel/treadmill","hotel/weights","office/eat","office/treadmill","office/weights","civic/eat","residential/treadmill","residential/weights"]),{"profiles":profiles})
+	_check("targets.capsule_clear_use_approach_and_non_treadmill_segments",(point_queries==7479+9*(int(counts.get("cycle",0))+int(counts.get("rowing",0)) )) and errors.filter(func(e):return String(e.kind).begins_with("blocked_")).is_empty(),{"capsule_queries":point_queries,"radius_m":shape.radius,"height_m":shape.height})
+	_check("targets.every_sample_has_actual_floor_or_treadmill_support",(point_queries==7479+9*(int(counts.get("cycle",0))+int(counts.get("rowing",0)) )) and errors.filter(func(e):return String(e.kind).begins_with("unsupported_")).is_empty(),{"support_rays":point_queries})
+	_check("targets.original_four_action_counts_retained_and_new_stations_present",int(counts.get("eat",0))==580 and int(counts.get("shower",0))==28 and int(counts.get("treadmill",0))==324 and int(counts.get("weights",0))==151 and int(counts.get("cycle",0))>0 and int(counts.get("cycle",0))==int(counts.get("rowing",0)) and target_count==1083+int(counts.get("cycle",0))+int(counts.get("rowing",0)),{"targets":target_count,"counts":counts})
+	_check("targets.hotel_office_civic_residential_use_their_actual_facilities",profiles.has_all(["hotel/eat","hotel/shower","hotel/treadmill","hotel/weights","office/eat","office/treadmill","office/weights","civic/eat","residential/treadmill","residential/weights","hotel/cycle","hotel/rowing","office/cycle","office/rowing","residential/cycle","residential/rowing"]),{"profiles":profiles})
 	_check("targets.no_unclassified_catalog_errors",errors.is_empty(),{"error_count":errors.size()})
 	_finish()
 

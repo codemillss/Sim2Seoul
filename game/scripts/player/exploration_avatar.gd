@@ -102,7 +102,7 @@ func _build_body() -> void:
 
 func _rest_pose() -> void:
 	walk_weight=0.0;_air_weight=0.0;_run_weight=0.0;cadence_hz=0.0
-	position.y=0.0
+	position=Vector3.ZERO
 	_upper_body.position=Vector3(0,.85,0);_upper_body.rotation=Vector3.ZERO
 	for side_name: String in ["Left","Right"]:
 		var side := -1.0 if side_name=="Left" else 1.0
@@ -163,6 +163,26 @@ func _activity_pose() -> void:
 				_feet[side_name]=foot;_leg_pose(side_name,foot)
 				(_joints[side_name+"UpperArm"] as Node3D).rotation.x=-cos(cycle)*.35-.04
 				(_joints[side_name+"Forearm"] as Node3D).rotation.x=.28
+		"cycle":
+			# Display-only seated pelvis; the original physical capsule stays clear
+			# at the machine's validated floor marker throughout the session.
+			position.y=-.14;_upper_body.rotation.x=-.13
+			for side_name: String in ["Left","Right"]:
+				var side := -1.0 if side_name=="Left" else 1.0
+				var phase := elapsed*TAU+(0.0 if side<0 else PI)
+				var foot := Vector3(side*.22,.31+sin(phase)*.17+.06,-.25+cos(phase)*.17-.02)
+				_feet[side_name]=foot;_leg_pose(side_name,foot)
+				_arm_to(side_name,Vector3(side*.25,1.02,-.49))
+		"rowing":
+			var stroke := (1.0-cos(elapsed*TAU/2.4))*.5
+			position=Vector3(0,-.44,.38*stroke)
+			_upper_body.rotation.x=lerpf(-.20,.15,stroke)
+			for side_name: String in ["Left","Right"]:
+				var side := -1.0 if side_name=="Left" else 1.0
+				var foot := Vector3(side*.22,.75,-.52-.38*stroke)
+				_feet[side_name]=foot;_leg_pose(side_name,foot)
+				_arm_to(side_name,Vector3(side*.245,1.02+.16*stroke,-.52+.04*stroke))
+
 		"shower":_upper_body.rotation.z=sin(elapsed*2.1)*.025
 
 func _leg_pose(side_name: String,foot: Vector3) -> void:

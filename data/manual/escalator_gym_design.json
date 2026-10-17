@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task": "EXP16",
+  "authored_not_surveyed": true,
+  "source_basis": "Existing source_catalog.json building rectangle, floor count and floor height are retained. No real escalator or gym facility location was surveyed.",
+  "escalator": {
+    "building_id": "osm:way:332565592:building",
+    "building_title": "서울파이낸스센터",
+    "floors": [
+      1,
+      2
+    ],
+    "layout": "One adjacent up/down pair at the east-side commercial lounge; actual upper-floor slab opening, continuous sloped support, guard rails and supported landings.",
+    "carrier": "The unchanged player capsule rides StaticBody3D constant_linear_velocity conveyor surfaces. No teleport or collision mask bypass.",
+    "tread_visuals": "Bounded loop of moving tread/nosing meshes and handrail seams above the smooth support; risers supply no collision.",
+    "speed_mps": 0.7,
+    "pause": "Room and conveyor animation obey scene pause; player physics is also paused.",
+    "scope": "One game interior; original exterior source geometry and existing U stairs/lifts remain."
+  },
+  "gym": {
+    "profiles": [
+      "hotel_fitness",
+      "office_fitness",
+      "residential_fitness"
+    ],
+    "accepted_room_min_width_m": 4.1,
+    "new_devices": [
+      "stationary cycle",
+      "rowing machine"
+    ],
+    "existing_devices_retained": [
+      "two treadmills",
+      "weight bench",
+      "dumbbell rack"
+    ],
+    "mount": "Production E validates same-level floor support, original capsule corridor, range and equipment line of sight. The 0.7–0.75m floor approach and use point are retained and checked for safe exit.",
+    "seated_pose": "Display-only seated avatar with original standing capsule maintained at the clear marker; visual machine saddle/frame is not a solid seat.",
+    "cycle_stats": {
+      "cadence_rpm": 60,
+      "speed_kmh": 18,
+      "distance": "per-second game distance",
+      "revolutions": "complete one-second turns"
+    },
+    "rowing_stats": {
+      "stroke_seconds": 2.4,
+      "metres_per_stroke": 8,
+      "distance": "only complete game strokes"
+    },
+    "exit": "Fresh E; if original standing position/corridor is blocked, hold the safe seat, freeze time/work and retry on a fresh E after clearance.",
+    "limits": "Game activity measures only; no exercise physiology, actual hotel service or surveyed equipment inventory."
+  }
+}

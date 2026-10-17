@@ -1,0 +1,158 @@
+{
+	"buildings": 125,
+	"checks": [
+		{
+			"evidence": {
+				"buildings": 125,
+				"floors": 1205
+			},
+			"name": "catalog.original_125_buildings_1205_floors_retained",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "targets.schema_finite_coordinates_and_floor_facility_links",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"targets": 1351,
+				"unique_ids": 1351
+			},
+			"name": "targets.globally_unique_source_floor_equipment_ids",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"profiles": [
+					"office",
+					"hotel"
+				]
+			},
+			"name": "targets.rebuilt_hotel_and_office_metadata_is_exactly_stable",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actual_parent_queries": 1351
+			},
+			"name": "targets.all_registered_anchors_have_actual_equipment_parents",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"capsule_queries": 9891,
+				"height_m": 1.70000004768372,
+				"radius_m": 0.300000011920929
+			},
+			"name": "targets.capsule_clear_use_approach_and_non_treadmill_segments",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"support_rays": 9891
+			},
+			"name": "targets.every_sample_has_actual_floor_or_treadmill_support",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"counts": {
+					"cycle": 134,
+					"eat": 580,
+					"rowing": 134,
+					"shower": 28,
+					"treadmill": 324,
+					"weights": 151
+				},
+				"targets": 1351
+			},
+			"name": "targets.original_four_action_counts_retained_and_new_stations_present",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"profiles": {
+					"civic/eat": 36,
+					"hotel/cycle": 26,
+					"hotel/eat": 36,
+					"hotel/rowing": 26,
+					"hotel/shower": 28,
+					"hotel/treadmill": 64,
+					"hotel/weights": 32,
+					"office/cycle": 107,
+					"office/eat": 508,
+					"office/rowing": 107,
+					"office/treadmill": 258,
+					"office/weights": 118,
+					"residential/cycle": 1,
+					"residential/rowing": 1,
+					"residential/treadmill": 2,
+					"residential/weights": 1
+				}
+			},
+			"name": "targets.hotel_office_civic_residential_use_their_actual_facilities",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"error_count": 0
+			},
+			"name": "targets.no_unclassified_catalog_errors",
+			"passed": true
+		}
+	],
+	"counts": {
+		"cycle": 134,
+		"eat": 580,
+		"rowing": 134,
+		"shower": 28,
+		"treadmill": 324,
+		"weights": 151
+	},
+	"deferred_checks": [
+		{
+			"name": "native.decorative_food_tray_and_shower_head_mesh_readback",
+			"reason": "Headless RenderingServer returns identity for MultiMesh readback. This report checks registered decorative anchor placements plus actual solid counter/deck/rack/enclosure parents; native activity tests cover rendered equipment and effects."
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"equipment_parent_queries": 1351,
+	"errors": [],
+	"floors": 1205,
+	"point_queries": 9891,
+	"profiles": {
+		"civic/eat": 36,
+		"hotel/cycle": 26,
+		"hotel/eat": 36,
+		"hotel/rowing": 26,
+		"hotel/shower": 28,
+		"hotel/treadmill": 64,
+		"hotel/weights": 32,
+		"office/cycle": 107,
+		"office/eat": 508,
+		"office/rowing": 107,
+		"office/treadmill": 258,
+		"office/weights": 118,
+		"residential/cycle": 1,
+		"residential/rowing": 1,
+		"residential/treadmill": 2,
+		"residential/weights": 1
+	},
+	"result": "PASS",
+	"scope": "All 125 source-sized room layouts, with actual 0.30m-radius 1.70m-height capsule queries and floor support at use/approach plus 7 points per non-treadmill segment. Real accepted StaticBody/BoxShape counter, treadmill, weight-rack and shower-enclosure geometry is matched by facility, floor, position, size and active collision. Decorative food/head anchor placements are checked separately. Hotel and office rebuilds verify deterministic metadata. Actual E activities, raised treadmill mount/dismount, animation and GPU imagery require separate production-controller tests.",
+	"source_sha256": {
+		"res://../tests/game/check_facility_targets.gd": "06355abb8a78820f49e504d508ea8a169752bc0a1b6c2fa7f010173c2968056a",
+		"res://assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848",
+		"res://scripts/building_interior_space.gd": "449228bbca7cbf0fb17a69ff005d4deeeed0eb9e553a514ed3d5ee026545cb0b",
+		"res://scripts/interior_detail_kit.gd": "73c8b14c807ad95d7714cc95dd24a142aad3e433909478c9c1e70bfe05bdc6b4",
+		"res://scripts/interior_facility_kit.gd": "eb5d88789c23d2335ed450a8455ef9ff2fe71fa1d9c9d75de7f8cc48aed25b6d"
+	},
+	"summary": {
+		"checks": 10,
+		"failed": 0
+	},
+	"targets": 1351,
+	"task": "facility_targets"
+}
