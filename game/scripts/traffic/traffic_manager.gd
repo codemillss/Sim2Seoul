@@ -17,6 +17,22 @@ var events: Array[Dictionary]=[]
 var guards: Dictionary={}
 var human_rows: Array[Dictionary]=[]
 var human_polygons: Array[PackedVector2Array]=[]
+# Optional latest-exploration service. Historical N03 scenes retain their
+# exact human-priority/FIFO behavior while no provider is attached.
+var signal_provider: Node
+
+func attach_signal_provider(provider: Node) -> void:
+	signal_provider=provider if is_instance_valid(provider) and provider.has_method("allows_vehicle") else null
+
+func _signal_allows(route_id: String,crossing_id: String) -> bool:
+	return not is_instance_valid(signal_provider) or bool(signal_provider.allows_vehicle(route_id,crossing_id))
+
+func _signal_permission(body: CharacterBody3D,conflict: Dictionary) -> bool:
+	if not is_instance_valid(signal_provider) or conflict.is_empty():return true
+	# A vehicle already committed beyond the old hold point clears normally.
+	# Revoking a green grant mid-crossing must not strand it in the zebra.
+	if body.get_station_m()>float(conflict.stop_s_m)+.05:return true
+	return _signal_allows(body.get_route_id(),String(conflict.crossing_id))
 
 func _terrain_service() -> Node:
 	if not is_instance_valid(city):return null
@@ -97,7 +113,7 @@ func _refresh() -> void:
 		if station>=float(conflict.stop_s_m)-.25 and station<=float(conflict.exit_s_m)+.005 and zone_owner!=id and not queue.has(id):
 			queue.append(id)
 			events.append({"type":"queued","tick":tick,"route_id":id,"station_m":station})
-	if zone_owner.is_empty() and not queue.is_empty() and observations_valid and not human_present and clear_s>=1.:
+	if zone_owner.is_empty() and not queue.is_empty() and observations_valid and not human_present and clear_s>=1. and _signal_allows(queue.front(),String(routes[queue.front()].conflicts[0].crossing_id)):
 		zone_owner=queue.pop_front()
 		events.append({"type":"grant","tick":tick,"route_id":zone_owner,"clear_s":clear_s,"human_present":human_present})
 
@@ -105,12 +121,14 @@ func permission(body: CharacterBody3D) -> Dictionary:
 	_refresh()
 	var fresh:=observations_valid and float(Engine.get_physics_frames()-last_observation_tick)/Engine.physics_ticks_per_second<=.1
 	var id: String=body.get_route_id()
-	var allowed: bool=fresh and not human_present and zone_owner==id
+	var signal_clear: bool=_signal_permission(body,routes[id].conflicts[0])
+	var allowed: bool=fresh and not human_present and zone_owner==id and signal_clear
 	var reason:="reserved" if allowed else "human_present" if human_present else "fifo_or_clear_hold"
+	if not signal_clear:reason="signal_red_or_amber"
 	if not fresh:reason="stale_or_unknown_observation"
 	return {"fresh":fresh,"allow_crossing":allowed,"human_present":human_present,"occupied_by":zone_owner,"reason":reason,
 		"tick":Engine.get_physics_frames(),"observation_tick":last_observation_tick,"observation_age_s":float(Engine.get_physics_frames()-last_observation_tick)/Engine.physics_ticks_per_second,
-		"clear_s":clear_s,"queue":queue.duplicate()}
+		"clear_s":clear_s,"queue":queue.duplicate(),"signal_attached":is_instance_valid(signal_provider),"signal_clear":signal_clear}
 
 func _corners(route: Dictionary,ending: bool) -> Array[Vector3]:
 	var points: Array=route.xz
@@ -185,4 +203,4 @@ func after_camera_step(_delta: float) -> void:
 
 func snapshot() -> Dictionary:
 	return {"tick":Engine.get_physics_frames(),"last_observation_tick":last_observation_tick,"observation_age_s":float(Engine.get_physics_frames()-last_observation_tick)/Engine.physics_ticks_per_second,
-		"observations_enabled":observations_enabled,"valid":observations_valid,"human_present":human_present,"clear_s":clear_s,"owner":zone_owner,"queue":queue.duplicate(),"humans":human_rows.duplicate(true),"guards":guards.duplicate(true)}
+		"observations_enabled":observations_enabled,"valid":observations_valid,"human_present":human_present,"clear_s":clear_s,"owner":zone_owner,"queue":queue.duplicate(),"humans":human_rows.duplicate(true),"guards":guards.duplicate(true),"signal_attached":is_instance_valid(signal_provider)}

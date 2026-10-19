@@ -53,6 +53,9 @@ var neighborhood_greenery: Node3D
 var neighborhood_population: Node3D
 var terrain_surface: Node3D
 var terrain_binding: RefCounted
+var street_network_detail: Node3D
+var city_bus_service: Node3D
+var city_bike_service: Node3D
 
 func _ready() -> void:
 	assert(exploration_physics_hz in [30,60])
@@ -181,6 +184,18 @@ func _ready() -> void:
 	terrain_binding=preload("res://scripts/terrain_scene_binding.gd").new()
 	if not terrain_binding.apply(self,terrain_surface):
 		_exploration_failure("도로·건물·출입구 지형 연결을 완료하지 못했습니다.");return
+	# New street props use the already-committed physical terrain once.
+	street_network_detail=preload("res://scripts/street_network_detail.gd").new();add_child(street_network_detail)
+	if not street_network_detail.setup(self):
+		_exploration_failure("차선·횡단보도·신호등과 가로등을 준비하지 못했습니다.");return
+	street_network_detail.apply_quality(quality_id)
+	city_bus_service=preload("res://scripts/city_bus_service.gd").new();add_child(city_bus_service)
+	if not city_bus_service.setup(self):
+		_exploration_failure("버스와 정류장을 준비하지 못했습니다.");return
+	city_bus_service.set_running(traffic_switch.button_pressed if is_instance_valid(traffic_switch) else true)
+	city_bike_service=preload("res://scripts/city_bike_service.gd").new();add_child(city_bike_service)
+	if not city_bike_service.setup(self):
+		_exploration_failure("자전거와 대여소를 준비하지 못했습니다.");return
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -248,7 +263,7 @@ func _build_ui() -> void:
 	options.add_child(music_switch)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
-	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"]]:
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"]]:
 		var shortcut:=Button.new();shortcut.text=detail[0]
 		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
@@ -266,13 +281,17 @@ func _build_ui() -> void:
 	_update_exploration_description()
 
 func _visit_library_entrance() -> void:
+	var was_riding: bool=_street_transport_riding()
 	if is_instance_valid(interior_visit) and interior_visit.go_to_library_entrance():
+		_cancel_bus_after_teleport()
+		if was_riding:interior_visit._orient(atan2(interior_visit.entrance_outward_direction.x,interior_visit.entrance_outward_direction.z),deg_to_rad(-15.),4.5)
 		if menu.visible:toggle_menu()
 
 func set_time_profile(id: String) -> bool:
 	if id not in TIME_IDS:return false
 	if is_instance_valid(photo_atmosphere) and not photo_atmosphere.set_time_profile(id):return false
 	if is_instance_valid(street_life) and not street_life.set_time_profile(id):return false
+	if is_instance_valid(street_network_detail):street_network_detail.set_time_profile(id)
 	if is_instance_valid(neighborhood_life) and not neighborhood_life.set_time_profile(id):return false
 	time_id=id
 	if is_instance_valid(time_option):time_option.select(TIME_IDS.find(id))
@@ -295,13 +314,14 @@ func _time_selected(index: int) -> void:
 var street_walk_index: int=0
 
 func _visit_street_detail(kind: String) -> void:
-	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk"]:return
+	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk","bus_stop","crossing","street_lamps","bike_station"]:return
 	if interior_visit.active and not interior_visit.return_to_world_spawn():return
-	if not free_roam_enabled:set_free_roam(true)
 	if kind=="hotel_pool":
 		var destination: Dictionary=exploration_rooftop_access.representative_pool_destination()
-		if destination.is_empty():return
-		player.global_position=destination.pool_entry;player.velocity=Vector3.ZERO;player.require_neutral_input();player.reset_physics_interpolation()
+		if destination.is_empty() or not _roof_destination_clear(destination):
+			exploration_notice.text="수영장 입구가 잠시 막혀 있습니다. 조금 뒤 다시 찾아주세요.";return
+		_commit_exploration_teleport(destination.pool_entry)
+		player.velocity=Vector3.ZERO;player.require_neutral_input();player.reset_physics_interpolation()
 		# Look straight through the gate. An eight-metre diagonal orbit crossed
 		# its upright and collapsed the camera into the player's hidden range.
 		var forward: Vector3=-destination.roof.frame.basis.z
@@ -309,7 +329,19 @@ func _visit_street_detail(kind: String) -> void:
 		if menu.visible:toggle_menu()
 		return
 	var requested:=Vector3.ZERO;var toward:=Vector3.ZERO
-	if kind=="street_walk" and is_instance_valid(neighborhood_population):
+	if kind=="bike_station" and is_instance_valid(city_bike_service):
+		var destination: Dictionary=city_bike_service.viewpoint()
+		if destination.is_empty():return
+		requested=destination.point;toward=destination.toward
+	elif kind=="bus_stop" and is_instance_valid(city_bus_service):
+		var destination: Dictionary=city_bus_service.viewpoint()
+		if destination.is_empty():return
+		requested=destination.point;toward=destination.toward
+	elif kind in ["crossing","street_lamps"] and is_instance_valid(street_network_detail):
+		var destination: Dictionary=street_network_detail.destination("crossing" if kind=="crossing" else "lamps")
+		if destination.is_empty():return
+		requested=destination.point;toward=destination.toward
+	elif kind=="street_walk" and is_instance_valid(neighborhood_population):
 		var points: Array=neighborhood_population.coverage_viewpoints()
 		if points.is_empty():return
 		var destination: Dictionary=points[street_walk_index%points.size()]
@@ -335,22 +367,104 @@ func _visit_street_detail(kind: String) -> void:
 		requested=museum_approach.point_at_station(2.0)+Vector3.UP*.08
 		toward=museum_approach.point_at_station(10.0)
 	elif kind=="dog_walk" and is_instance_valid(street_pedestrians):
-		for actor: Dictionary in street_pedestrians.actors:
-			if actor.kind!="dog":continue
-			var node: CharacterBody3D=actor.body
-			for offset in [Vector3(0,0,3.),Vector3(3.,0,0),Vector3(-3.,0,0),Vector3(0,0,-3.)]:
-				var candidate: Vector3=node.global_position+offset
-				if not interior_visit._safe_external_point(candidate).is_empty():requested=candidate;toward=node.global_position;break
-			if requested!=Vector3.ZERO:break
+		var destination: Dictionary=_dog_walk_viewpoint()
+		if destination.is_empty():
+			exploration_notice.text="산책 구간의 자리가 잠시 막혀 있습니다. 조금 뒤 다시 찾아주세요.";return
+		requested=destination.point;toward=destination.toward
+		street_pedestrians.pause_for_view(destination.group_id,5.5)
 	if requested==Vector3.ZERO:return
-	var safe: Dictionary=interior_visit._safe_external_point(requested)
+	var safe: Dictionary=_exploration_destination(requested)
 	if safe.is_empty():exploration_notice.text="이동할 곳이 막혀 있습니다. 주변에서 걸어서 접근해주세요.";return
-	player.global_transform=Transform3D(Basis.IDENTITY,safe.point)
+	_commit_exploration_teleport(safe.point)
 	player.require_neutral_input();player.reset_physics_interpolation()
 	var direction: Vector3=toward-safe.point;direction.y=0
+	player.get_node("Visual").rotation.y=atan2(-direction.x,-direction.z)
 	rig.reset_orientation();rig.yaw=atan2(-direction.x,-direction.z);rig.pitch=deg_to_rad(-15.)
 	rig.requested_distance=4.5;rig.current_distance=4.5;rig.snap_to_target_pose()
 	if menu.visible:toggle_menu()
+
+func _dog_walk_viewpoint() -> Dictionary:
+	for group: Dictionary in street_pedestrians.groups:
+		if not group.record.dog:continue
+		var keeper: CharacterBody3D=group.members[0].body
+		var dog: CharacterBody3D=group.members[1].body
+		var center: Vector3=keeper.global_position.lerp(dog.global_position,.5)
+		var forward: Vector3=street_pedestrians._tangent(group,group.station)*float(group.direction)
+		var side:=Vector3(forward.z,0,-forward.x)
+		for offset: Vector3 in [-forward*2.4+side*2.8,-forward*2.4-side*2.8,forward*2.4+side*2.8,forward*2.4-side*2.8]:
+			var safe: Dictionary=_exploration_destination(center+offset)
+			if safe.is_empty():continue
+			var blocked:=false
+			for subject: Vector3 in [keeper.global_position+Vector3.UP*1.0,dog.global_position+Vector3.UP*.4]:
+				var ray:=PhysicsRayQueryParameters3D.create(safe.point+Vector3.UP*1.3,subject,1|32,[player.get_rid()])
+				if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():blocked=true
+			if blocked:continue
+			# Keep both actors beside the player's shoulder in the regular camera.
+			var toward: Vector3=center+forward*2.6
+			var direction: Vector3=toward-safe.point;direction.y=0.;direction=direction.normalized()
+			var query:=PhysicsShapeQueryParameters3D.new();query.shape=rig.arm.shape;query.collision_mask=rig.arm.collision_mask;query.exclude=[player.get_rid()]
+			query.transform=Transform3D(Basis.IDENTITY,safe.point+Vector3.UP*rig.pivot_height_m)
+			query.motion=-direction*4.1+Vector3.UP*1.1
+			if get_world_3d().direct_space_state.cast_motion(query)[0]<.68:continue
+			return {"point":safe.point,"toward":toward,"group_id":group.id,"keeper":keeper.global_position,"dog":dog.global_position}
+	return {}
+
+func _exploration_destination(requested: Vector3) -> Dictionary:
+	# Synchronous prospective query: no actor tick advances with these flags.
+	# Failed menu destinations leave both the passenger and original mode intact.
+	var old_mode: bool=player.free_roam_enabled
+	var old_mask: int=player.collision_mask
+	player.free_roam_enabled=true;player.collision_mask=old_mask|32
+	var safe: Dictionary=interior_visit._safe_external_point(requested)
+	player.free_roam_enabled=old_mode;player.collision_mask=old_mask
+	return safe
+
+func _roof_destination_clear(destination: Dictionary) -> bool:
+	var roof: Node3D=destination.get("roof")
+	var point: Vector3=destination.get("pool_entry",Vector3(INF,INF,INF))
+	if not is_instance_valid(roof) or not point.is_finite():return false
+	var local: Vector3=roof.frame.affine_inverse()*point
+	if not roof.walkable_rect.grow(-.3).has_point(Vector2(local.x,local.z)):return false
+	if not Geometry2D.is_point_in_polygon(Vector2(point.x,point.z),exploration_overlay.polygon):return false
+	var capsule: CollisionShape3D=player.get_node("CollisionShape")
+	var query:=PhysicsShapeQueryParameters3D.new();query.shape=capsule.shape;query.collision_mask=player.collision_mask|32;query.exclude=[player.get_rid()]
+	query.transform=Transform3D(Basis.IDENTITY,point)*capsule.transform;query.margin=.001
+	var space:=get_world_3d().direct_space_state
+	if not space.intersect_shape(query,1).is_empty():return false
+	var hit:=space.intersect_ray(PhysicsRayQueryParameters3D.create(point+Vector3.UP*.35,point-Vector3.UP*.4,query.collision_mask,[player.get_rid()]))
+	return not hit.is_empty() and hit.normal.y>.7 and absf(point.y-hit.position.y)<.2
+
+func _commit_exploration_teleport(point: Vector3) -> void:
+	player.global_transform=Transform3D(Basis.IDENTITY,point)
+	_cancel_bus_after_teleport()
+	if not free_roam_enabled:set_free_roam(true)
+
+
+func _street_transport_riding() -> bool:
+	return (is_instance_valid(city_bus_service) and city_bus_service.riding) or (is_instance_valid(city_bike_service) and city_bike_service.riding)
+
+func _cancel_bus_after_teleport() -> void:
+	# Shared transport cleanup runs only after a validated destination is applied.
+	if is_instance_valid(city_bike_service) and city_bike_service.riding:city_bike_service.cancel_ride_for_teleport()
+	if is_instance_valid(city_bus_service) and city_bus_service.riding:city_bus_service.cancel_ride_for_teleport()
+
+func try_street_interact() -> bool:
+	# Existing fresh-E dispatcher remains the sole owner of street interactions.
+	for service: Node3D in [city_bike_service,city_bus_service]:
+		if is_instance_valid(service) and service.loaded and service.riding:
+			service.handle_interact();return true
+	for service: Node3D in [city_bike_service,city_bus_service]:
+		if is_instance_valid(service) and service.loaded and service.can_interact():return service.handle_interact()
+	return false
+
+func street_interaction_hint() -> String:
+	for service: Node3D in [city_bike_service,city_bus_service]:
+		if is_instance_valid(service) and service.loaded and service.riding:return service.prompt_text()
+	for service: Node3D in [city_bike_service,city_bus_service]:
+		if is_instance_valid(service) and service.loaded:
+			var hint: String=service.prompt_text()
+			if not hint.is_empty():return hint
+	return ""
 
 func set_pedestrians_running(enabled: bool) -> void:
 	super.set_pedestrians_running(enabled)
@@ -361,6 +475,7 @@ func set_pedestrians_running(enabled: bool) -> void:
 func set_vehicles_running(enabled: bool) -> void:
 	super.set_vehicles_running(enabled)
 	if is_instance_valid(neighborhood_population):neighborhood_population.set_vehicles_running(enabled)
+	if is_instance_valid(city_bus_service):city_bus_service.set_running(enabled)
 
 func _queue_menu_layout() -> void:
 	if menu_layout_pending:return
@@ -392,6 +507,7 @@ func apply_quality(id: String) -> bool:
 	if rig.has_method("apply_exploration_view_distance"):rig.apply_exploration_view_distance()
 	if is_instance_valid(photo_atmosphere):photo_atmosphere.apply_quality(id)
 	if is_instance_valid(street_life):street_life.apply_quality(id)
+	if is_instance_valid(street_network_detail):street_network_detail.apply_quality(id)
 	return true
 
 func _read_exploration_settings() -> Dictionary:
@@ -414,6 +530,9 @@ func set_speed_profile(id: String) -> bool:
 	return true
 
 func set_free_roam(enabled: bool) -> void:
+	if _street_transport_riding():
+		free_roam_switch.set_pressed_no_signal(free_roam_enabled)
+		exploration_notice.text="버스나 자전거에서 내린 뒤 탐험 범위를 바꿀 수 있습니다.";return
 	if not is_instance_valid(exploration_overlay):return
 	if not enabled and is_instance_valid(interior_visit) and interior_visit.active and interior_visit.on_roof and not player.interior_active:
 		# A roof visitor has already rejoined the outdoor world. Do not switch
@@ -472,6 +591,7 @@ func _select_source_document(index: int) -> void:
 		sources_text.text+="\n\n[b]이번 자유 탐험[/b]\n자유 탐험을 켜면 잔디와 도로까지 이동할 수 있습니다. 넓힌 바닥과 세부 외형은 탐험을 위한 표현이며 실제 현장의 지형·출입 가능 여부를 뜻하지 않습니다. 출입 표지가 있는 건물 정문에서 E로 들어갑니다. 실내 크기는 원본 건물 외곽 안에 맞췄으며, 층수는 OSM 원문 또는 높이 추정에 따릅니다. 방 배치·계단·엘리베이터와 실내 보행자는 게임용 재구성입니다. 작은 건물·사유지·일부 역사 건축물의 실내는 제외합니다. 석재 텍스처는 AI로 새로 제작했으며 공식 참조 사진 자체는 게임에 포함하지 않았습니다."
 		sources_text.text+="\n\n[b]거리와 지형[/b]\n진주회관과 편의점 외관은 공식 장소 정보·OSM 스냅샷을 바탕으로 단순화했습니다. 현재 입점·정확한 점포 단위나 새 실내 출입을 확인한 표현은 아닙니다. 주차 차량·오토바이·새·버스킹·가로등 위치와 낮/해질녘/밤은 게임 창작입니다. 권역 지형은 서울시 공개 등고선·표고점을 보간하고 건물 기초를 게임용으로 평탄화했습니다. 도로·출입구·보행자·차량은 같은 지면에 연결했습니다. 실측 DEM·정문 높이·절대 해발고도의 정확도를 보증하지 않으며, 미술관의 이전 임의3m 경사는 제거했습니다."
 		sources_text.text+="\n낮은 경계석/보도 띠와 산책하는 사람6명·반려견2마리는 기존 게임 도로/보행 공간에 더한 창작입니다. 실제 연석 위치·유동 인구나 동물 행동을 조사한 재현은 아닙니다. 기존 보행·횡단·입구를 비워 두며 보행자 이동 설정으로 산책을 멈출 수 있습니다."
+		sources_text.text+="\n\n[b]거리 교통과 산책 보강[/b]\n차선·횡단보도·정지선은 기존 도로 안의 게임 표현입니다. 차량/보행 신호의 주기는 게임용이며 실제 서울 신호 운영이 아닙니다. 가로등 외형은 서울시 시설 사진을 참고했습니다. 도심01 버스의 두 정류장·짧은 운행과 도착 예상은 게임 구성으로 실제 버스 노선·실시간 도착을 복원하지 않습니다. 버스는 정차한 열린 문에서 E로 타고, 탑승 중 E로 다음 정류장 하차를 예약합니다. 반려견의 관절·발 디딤·주변 보기·냄새 맡기는 게임 동작이며 실제 동물 행동을 측정한 모델은 아닙니다. 녹색 공공자전거와 대여소는 따릉이 외형을 참고한 게임 체험이며 실제 대여·결제·실시간 재고와 연결되지 않습니다."
 
 func _height_above_terrain(point: Vector3) -> float:
 	if is_instance_valid(terrain_surface) and terrain_surface.loaded:
@@ -482,7 +602,11 @@ func _height_above_terrain(point: Vector3) -> float:
 func _process(delta: float) -> void:
 	super._process(delta)
 	if not runtime_ok:return
-	if is_instance_valid(interior_visit) and interior_visit.active:
+	if is_instance_valid(city_bike_service) and city_bike_service.riding:
+		status.text="자전거 탑승 중 · W 가속 · S/Space 제동 · A/D 조향 · E 내리기/반납"
+	elif is_instance_valid(city_bus_service) and city_bus_service.riding:
+		status.text="버스 탑승 중 · E · 다음 정류장 하차 예약"
+	elif is_instance_valid(interior_visit) and interior_visit.active:
 		status.text=interior_visit.status_text()
 	elif not player.interior_active and _height_above_terrain(player.global_position)>6.0:
 		var roof: Node3D=exploration_rooftop_access.active_outdoor_roof if is_instance_valid(exploration_rooftop_access) else null
@@ -496,4 +620,6 @@ func reset_player() -> void:
 	if is_instance_valid(interior_visit) and interior_visit.active:
 		interior_visit.return_to_world_spawn()
 	else:
+		var before: Vector3=player.global_position
 		super.reset_player()
+		if player.global_position.distance_to(before)>.05:_cancel_bus_after_teleport()

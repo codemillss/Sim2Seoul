@@ -1,0 +1,157 @@
+{
+  "task": "street_dog_detail",
+  "result": "PASS",
+  "summary": {
+    "checks": 6,
+    "failed": 0
+  },
+  "final_report": "patrol08.json",
+  "source_match": {
+    "res://assets/authored/street_pedestrians.json": {
+      "recorded_sha256": "4f48536000261a66b3ae46e7b9a44e8aff3c69f705e600cdf56e7cc4d49bd07f",
+      "current_sha256": "4f48536000261a66b3ae46e7b9a44e8aff3c69f705e600cdf56e7cc4d49bd07f",
+      "matches": true
+    },
+    "res://scripts/street_dog_model.gd": {
+      "recorded_sha256": "933f14f3e346e9df36f48670ce5d6a326819c84cfbf9253abf10fd7ebd733373",
+      "current_sha256": "933f14f3e346e9df36f48670ce5d6a326819c84cfbf9253abf10fd7ebd733373",
+      "matches": true
+    },
+    "res://scripts/street_pedestrians.gd": {
+      "recorded_sha256": "db9174ff48d9e8cbaeb1c36d263aca0d62351652a424957f7077d980847f5db7",
+      "current_sha256": "db9174ff48d9e8cbaeb1c36d263aca0d62351652a424957f7077d980847f5db7",
+      "matches": true
+    }
+  },
+  "all_recorded_sources_match": true,
+  "physical": {
+    "errors": [],
+    "maximum_step_m": 0.0353839956223965,
+    "support_samples": 322
+  },
+  "patrols": [
+    {
+      "id": "stonewall_dog",
+      "length": 28.3580894470215,
+      "points": [
+        [
+          -53.9796752929688,
+          1.58711969852448,
+          18.4651908874512
+        ],
+        [
+          -82.2457427978516,
+          1.82076346874237,
+          20.7478694915771
+        ]
+      ],
+      "side": 0.8,
+      "start": [
+        -64.0361709594727,
+        1.83830785751343,
+        18.9763126373291
+      ],
+      "start_station": 10.0650046254628,
+      "station_range_m": [
+        0.0115271994541532,
+        28.3391227734925
+      ]
+    },
+    {
+      "id": "plaza_dog",
+      "length": 25.7998733520508,
+      "points": [
+        [
+          124.05738067627,
+          -0.237873896956444,
+          -115.833106994629
+        ],
+        [
+          149.144256591797,
+          -0.345599770545959,
+          -109.809646606445
+        ]
+      ],
+      "side": -0.8,
+      "start": [
+        131.287796020508,
+        -0.37016573548317,
+        -112.194389343262
+      ],
+      "start_station": 7.88012785288095,
+      "station_range_m": [
+        0.0241746694557031,
+        25.7938938123187
+      ]
+    }
+  ],
+  "independent_feet": {
+    "head_pitch_range_rad": [
+      -0.949999988079071,
+      0.0350000001490116
+    ],
+    "independent_planted_frame_pairs": 18509,
+    "maximum_world_paw_step_while_planted_m": 0.000144757592352107
+  },
+  "dog_models": [
+    {
+      "id": "stonewall_dog",
+      "model": {
+        "body_bob_m": 0.0,
+        "distance_phase": 0.326470432453789,
+        "head_pitch": -0.0338000155432832,
+        "head_yaw": -0.0589771419954112,
+        "maximum_planted_target_error_m": 1.573020745127e-05,
+        "mesh_count": 55,
+        "model": "authored_articulated_medium_dog",
+        "paw_center_ground_gap_range_m": [
+          0.0339903440475464,
+          0.0979331340789795
+        ],
+        "planted_samples": 13216,
+        "scope": "Articulated visual dog; retained host physics/corridor safety. Grounded stance and lifted swing, no mesh-driven body movement.",
+        "stance_fraction": 0.63,
+        "stride_m": 0.64,
+        "swing_samples": 6040
+      }
+    },
+    {
+      "id": "plaza_dog",
+      "model": {
+        "body_bob_m": 0.0,
+        "distance_phase": 0.828371630050242,
+        "head_pitch": -0.0338000155432832,
+        "head_yaw": -0.0589771419954112,
+        "maximum_planted_target_error_m": 3.4119701012969e-05,
+        "mesh_count": 55,
+        "model": "authored_articulated_medium_dog",
+        "paw_center_ground_gap_range_m": [
+          0.0319717135429382,
+          0.0993751492500305
+        ],
+        "planted_samples": 13197,
+        "scope": "Articulated visual dog; retained host physics/corridor safety. Grounded stance and lifted swing, no mesh-driven body movement.",
+        "stance_fraction": 0.63,
+        "stride_m": 0.64,
+        "swing_samples": 6059
+      }
+    }
+  ],
+  "population": {
+    "walkers": 6,
+    "dogs": 2,
+    "actors": 8
+  },
+  "leash": {
+    "maximum_length_m": 0.845842897891998,
+    "blocked_ticks": 0
+  },
+  "native_visual_acceptance": "Root owns actual native appearance and shortcut review; headless and synthetic stress do not accept appearance.",
+  "physics_mode_note": {
+    "mode": "production_default_30Hz",
+    "basis": "ExploreWalk exploration_physics_hz=30 overrides the inherited probe initializer in _ready; final snapshot elapsed164.4666667s includes startup and4s resume. The4802-step observed patrol is about160.067 simulated seconds. Do not label this probe as60Hz because --fixed-fps60 controls fixed render delta rather than the scene exported physics rate.",
+    "observed_patrol_camera_steps_from_probe_control_flow": 4802,
+    "snapshot_elapsed_s": 164.46666666666,
+    "host_maximum_single_physics_step_m": 0.0358993373811245
+  }
+}

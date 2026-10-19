@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "task": "T01_BUS_PILOT",
+  "coordinate_system": {
+    "projected_crs": "EPSG:32652",
+    "origin_lon_lat": [
+      126.97625,
+      37.5651
+    ],
+    "origin_projected_east_north_m": [
+      321266.3692172853,
+      4159488.62345062
+    ],
+    "geometry_axis_order": [
+      "x",
+      "z"
+    ],
+    "world_axes": {
+      "x": "east",
+      "y": "up",
+      "z": "south"
+    },
+    "unit": "metre",
+    "vertical_assignment": "absent; not synthetic ground or sea level"
+  },
+  "source_hashes": {
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://assets/authored/terrain_heightfield.json": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+  },
+  "scope": {
+    "bus_count": 1,
+    "stop_count": 2,
+    "authored_game_route": true,
+    "official_route_or_stop_ids": false,
+    "live_arrivals": false,
+    "source_geometry_changed": false,
+    "original_vehicles_replaced": false,
+    "repeat": "Only original inherited current-tick camera/human/entry guard permits a one-way recycle. Never recycle while occupied.",
+    "boardable_stops": [
+      "GAME-01"
+    ],
+    "last_stop": "Disembark only; no fake reverse route."
+  },
+  "art": {
+    "style": "Seoul-inspired blue trunk-bus game model; no manufacturer or exact surveyed bus/shelter claim",
+    "dimensions_m": [
+      2.45,
+      3.05,
+      9.0
+    ],
+    "shelter_dimensions_m": [
+      1.4,
+      2.65,
+      4.8
+    ],
+    "route_display": "도심01  덕수궁 · 시청",
+    "stop_id_prefix": "GAME",
+    "arrival_display_basis": "Actual local vehicle station and state, seconds estimate; not Seoul live service"
+  },
+  "sources": [
+    {
+      "kind": "existing_source",
+      "path": "game/resources/world_geometry/world.json",
+      "purpose": "source road/walk triangle footprint, original feature/source references"
+    },
+    {
+      "kind": "existing_source",
+      "path": "game/data/generated/traffic.json",
+      "purpose": "source-forward southbound centerline, authored curb-side lane9m west"
+    },
+    {
+      "kind": "terrain",
+      "path": "game/data/generated/terrain_surface.json",
+      "purpose": "EXP21 physical source-interpolated terrain; no new flat bus support"
+    },
+    {
+      "kind": "official_reference",
+      "url": "https://news.seoul.go.kr/traffic/archives/1706",
+      "observation": "Seoul bus system blue trunk-bus category; used only as color/type reference, no exact fleet reproduction",
+      "verified_by": "parent agent 2026-10-19"
+    },
+    {
+      "kind": "official_photo_reference",
+      "url": "https://mediahub.seoul.go.kr/archives/2014231",
+      "observation": "Seoul city published shelter photographs: glazing, seats and information screen; authored geometry, no image assets imported",
+      "verified_by": "parent agent 2026-10-19"
+    }
+  ],
+  "policy": {
+    "door_animation_s": 0.8,
+    "dwell_s": 12.0,
+    "ride_exit": "Fresh E at dock, or E queued while moving; final stop holds doors while occupied until a safe requested exit.",
+    "passenger_attachment": "Game seated ride, original capsule retained and physics suspended; no free walking inside bus",
+    "minimum_source_edge_margin_m": 0.05,
+    "route_sample_m": 0.5,
+    "signal_clearance": "Red/amber stops before the full bus nose. Moving green nose entry, or amber insufficient2m/s2 braking room, latches source crossing clearance until the rear passes source exit+0.5m; native full-box human/obstacle sweeps remain active.",
+    "boarding": "Both actual right-side doors; native supported same-side approach, 1.43–3.95m right of bus centre and1.95m either side of each door; head/torso line of sight. Fresh E works while walking or after a menu shortcut; movement is neutralized only after boarding.",
+    "boarding_hold": "At first stop, hold/reopen while a prospective passenger occupies either valid door zone. Boarding reserves at least3seconds to settle before departure. An E accepted during current door opening/closing completes when fully open if the passenger remains safely at the door; no automatic boarding from a prior wait request.",
+    "wait_request": "E at the first stop while approaching toggles waiting, never teleports or instantly respawns the bus; user boards with E after arrival. Last stop is explicitly alight-only and ended-run buses explain the first boarding stop.",
+    "boarding_zone_m": {
+      "right_side_min": 1.43,
+      "right_side_max": 3.95,
+      "along_either_door_half_span": 1.95,
+      "door_centres_z": [
+        -2.95,
+        0.55
+      ]
+    },
+    "native_release": "Normal E exits hold player movement for two physics ticks, then restore native player/bus collision only after a native full-bus query confirms the outside player RID is no longer overlapping. Validated external teleports restore the caller controls immediately but use the same delayed collision-pair cleanup."
+  },
+  "route": {
+    "id": "T01_blue_pilot",
+    "name": "덕수궁 짧은 버스 체험",
+    "xz": [
+      [
+        70.10968596934397,
+        -219.91635905293953
+      ],
+      [
+        69.94156649667933,
+        -194.64064562985047
+      ],
+      [
+        69.6268630707322,
+        -168.95545310817963
+      ],
+      [
+        65.69374899313661,
+        -38.0
+      ]
+    ],
+    "ground_y_m": 0.0,
+    "length_m": 181.97789624687678,
+    "source_binding": {
+      "feature_id": "osm:way:1084408283:highway_line",
+      "from_s_m": 5.0,
+      "to_s_m": 195.0,
+      "assumed_lane_width_m": 3.2,
+      "lane_index_zero_based_from_left": null,
+      "right_offset_m": null,
+      "source_direction": "source_forward",
+      "oneway": "yes",
+      "lanes": 8,
+      "source_node_ids": [
+        5851251267,
+        5194567167,
+        5851251266,
+        5851251274,
+        5851251277
+      ],
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1084408283",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "authored_lateral_shift_from_original_lane_m": -9.0
+    },
+    "repeat": "guarded_oneway_stream",
+    "speed_mps": 5.0,
+    "road_domain": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            67.42892306249578,
+            -169.19219420430113
+          ],
+          [
+            62.786793122894196,
+            -14.629621740294862
+          ],
+          [
+            60.47217485113711,
+            20.29156384304346
+          ],
+          [
+            86.01612652055277,
+            21.984647748394
+          ],
+          [
+            88.36135861031984,
+            -13.398415645720195
+          ],
+          [
+            93.02421450989331,
+            -168.6510716988812
+          ],
+          [
+            93.34097977006425,
+            -194.50454522615826
+          ],
+          [
+            93.54262382313124,
+            -224.82047007418637
+          ],
+          [
+            67.94319009469376,
+            -224.99074274767722
+          ],
+          [
+            67.74202283960219,
+            -194.74650149939055
+          ],
+          [
+            67.42892306249578,
+            -169.19219420430113
+          ]
+        ]
+      ]
+    },
+    "conflicts": [],
+    "end_stop_s_m": 169.97789624687678
+  },
+  "stops": [
+    {
+      "id": "GAME-01",
+      "name": "덕수궁 돌담 정류장",
+      "station_m": 65.0,
+      "route_id": "T01",
+      "door_side": "right",
+      "shelter_xz": [
+        64.32358401700269,
+        -152.27053268144303
+      ],
+      "wait_xz": [
+        66.17275019384657,
+        -152.21499485274376
+      ],
+      "source_walk_feature_id": "osm:way:776588359:highway_area",
+      "authored_game_placement": true
+    },
+    {
+      "id": "GAME-02",
+      "name": "시청 앞 하차 정류장",
+      "station_m": 155.0,
+      "route_id": "T01",
+      "door_side": "right",
+      "shelter_xz": [
+        61.62174370190275,
+        -62.31109705120075
+      ],
+      "wait_xz": [
+        63.47090987874662,
+        -62.255559222501475
+      ],
+      "source_walk_feature_id": "osm:way:776588359:highway_area",
+      "authored_game_placement": true
+    }
+  ]
+}

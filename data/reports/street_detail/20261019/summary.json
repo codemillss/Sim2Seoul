@@ -1,0 +1,1336 @@
+{
+  "schema_version": 1,
+  "task": "EXP23_STREET_TRANSIT_AND_BIKES",
+  "result": "PASS_WITH_DOCUMENTED_LIMITS",
+  "date": "2026-10-19",
+  "baseline_commit": "036d4313aeb87a645a137984b3393f30b68e2bd6",
+  "environment": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "hardware": "Apple M5 16GB",
+    "os": "macOS 26.6.2",
+    "renderer": "Metal 4 / Forward+",
+    "default_exploration_physics_hz": 30,
+    "native_accelerated_fixed_fps": false
+  },
+  "current_engine_reports": [
+    "data/reports/street_detail/20261019/native.json",
+    "data/reports/street_detail/20261019/headless.json",
+    "data/reports/street_detail/20261019/bikes/native.json",
+    "data/reports/street_detail/20261019/bikes/headless.json",
+    "data/reports/street_detail/20261019/bus/headless.json",
+    "data/reports/street_detail/20261019/infra/headless.json"
+  ],
+  "verification": [
+    {
+      "report": "data/reports/street_detail/20261019/native.json",
+      "passed": 53,
+      "total": 53,
+      "display": "macOS",
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/street_detail/20261019/headless.json",
+      "passed": 32,
+      "total": 32,
+      "display": "headless",
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/street_detail/20261019/bikes/native.json",
+      "passed": 26,
+      "total": 26,
+      "display": "Metal",
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/street_detail/20261019/bikes/headless.json",
+      "passed": 23,
+      "total": 23,
+      "display": "headless",
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/street_detail/20261019/bus/headless.json",
+      "passed": 32,
+      "total": 32,
+      "display": "headless",
+      "physics_hz": null
+    },
+    {
+      "report": "data/reports/street_detail/20261019/infra/headless.json",
+      "passed": 18,
+      "total": 18,
+      "display": "headless",
+      "physics_hz": null
+    }
+  ],
+  "unchanged_dog_module_patrol": {
+    "report": "dogs/patrol08.json",
+    "passed": 6,
+    "total": 6,
+    "scope": "Full original patrol with final dog module source unchanged since that run. Later parent camera/transport changes are covered by current integrated native/headless; this older report is not claimed to match every parent source."
+  },
+  "visual_review": "visual_review.json",
+  "bicycle_visual_review": "bikes/visual_review.json",
+  "normal_launch": "normal_launch.json",
+  "counts": {
+    "main_road_corridors": 42,
+    "paint_polygons": 1174,
+    "actual_paint_TIN_faces": 29534,
+    "paint_batches": 2,
+    "vehicle_signal_heads": 5,
+    "pedestrian_signal_heads": 8,
+    "new_lamp_models": 64,
+    "max_active_spots_standard": 12,
+    "max_active_spots_low": 6,
+    "new_buses": 1,
+    "authored_bus_stops": 2,
+    "new_bikes": 2,
+    "authored_bike_docks": 2,
+    "retained_source_records": 692,
+    "retained_original_cars": 14,
+    "retained_people": 28,
+    "retained_dogs": 2,
+    "retained_terrain_triangles": 146882
+  },
+  "source_geometry_changed": false,
+  "historical_results_not_added": [
+    "EXP21 and EXP22 engine reports",
+    "Development attempts and earlier numeric passes before visual fixes"
+  ],
+  "failure_evidence": [
+    "infra/development",
+    "bus/failures",
+    "bus/development",
+    "dogs/development_notes.json",
+    "bikes/development_notes.json",
+    "bikes/development",
+    "development/native_before_handoff_assert"
+  ],
+  "limits": [
+    "Game-authored roads/furniture/signals, one-way two-stop bus pilot and bike docks; no surveyed signal timing, live routes/rental/accounts/payments.",
+    "No new traffic-light compliance AI for all pedestrians; existing human-priority vehicle safety retained.",
+    "0.9224 square metres of tiny unsupported outer paint slivers omitted and audited.",
+    "Some retained capsule people and small/oblique signs remain; ordinary HUD may cover parts of the view.",
+    "No sustained FPS, different Mac, export or subjective comfort acceptance.",
+    "Headless accelerated waits use --fixed-fps60 with explicit physics frequency; native final runs omit that flag.",
+    "Some fixture-process exits log ObjectDB/resource cleanup warnings; preserved separately from runtime script errors."
+  ],
+  "handoff_command": "python3 tools/check_street_detail_handoff.py [--prepared]",
+  "files": [
+    {
+      "path": "README.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 19594,
+      "sha256": "9b6be2d429ce285bc2c3b98bbea9d4762d6a439bd5eb762d9277d62305fc1588"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/check_city_bike_service_run01.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 11279,
+      "sha256": "8f3c12de771b16ef92a8418741cae29abfe6a5ac7161b64ccb68ad0dd1e0699a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/check_city_bike_service_run02.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 14658,
+      "sha256": "d42de4b7c40706e845fb70cd44dd4075438b29c71dc7c57f0c3be59c20b86234"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/city_bike_service_run01.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 27753,
+      "sha256": "29338373ca690e73373a15a918ded2b7966c884c850b7e4a976dce2a7d5166d4"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/city_bike_service_run02.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 28936,
+      "sha256": "f65881d6495d9ebd0bfb6c02faf10daa2778baca64ad2383a2f7d4ab596d1d62"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile01.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 375,
+      "sha256": "d0013149e7cb599c10ba8f4b813e26c8c27dc7352120b2f8f8d9ed74254b925e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile02.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1156,
+      "sha256": "0e3a1c9f67732dbc97f997f4cfe7537945c536aec68721c88bd1a876010f9f3f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile03.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile04.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile05.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile06.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile07.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile08.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/compile09.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/camera_facing_draft_not_accepted.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 31115,
+      "sha256": "064335eba670a8e99b4a82901788e65b15eff107865f46d81dda34049ad0dd33"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/city_bike_service.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 30594,
+      "sha256": "26539153c38d8ed24706c30c0799427c655183d119ccb251136ed7627089d298"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/native.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 42548,
+      "sha256": "2ba4e6756eebf6029a2902672b9dab79ad0c2d2f99787f348f2750d754297873"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/native.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6471,
+      "sha256": "c8349e2ba70846134b93b4189740ca10a56b00cc83720afd2e997a36dc660ab3"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/native_returned_after_dismount.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 866314,
+      "sha256": "3ac33074dee7d2a97c1846ffba0c052e14ee0a9305d787ab14f128090e6f0f76"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/native_riding_posture.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 844695,
+      "sha256": "77111e8534f08dbef656197e21aa76d3041a1d56f13028db8f372db49bdf19a4"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/native_station_full_bike.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 872463,
+      "sha256": "bf80f3661f7dcd3ed4589d7a804428acd939c76792a5b4b71bc6a1b6b238d662"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/native_first/visual_review.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1548,
+      "sha256": "e824c1b498ba3e77cb7cddf6f7180725be2a1ba542c0ff37ce6ec45c011878ab"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/native.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 42874,
+      "sha256": "3f595a9a5d1c2e94354f6ae389c56b51134f7c6cb3aafbba9b5adb02eb7e41f8"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/native.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6559,
+      "sha256": "91390660e3333b7be8a2287c66a9e40f5ec7477584023b95cf23d7ccf647d856"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/native_returned_after_dismount.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 863356,
+      "sha256": "fc1bff4182999fe28227ddf862b72b9ef4a8ae58e80ddd1a32541ecf2162e9e2"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/native_riding_posture.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 841688,
+      "sha256": "9ac1bcad4912636fdb8682c45f5b9a099e83ab2f37dc40d9ff76d4198babf2db"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/native_station_full_bike.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 872306,
+      "sha256": "24fe0e4c99b27f8b749d3759aae14af71222d6cf286f41b96be68f641e597f24"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/pre_final_dog_view/visual_review.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6258,
+      "sha256": "ca720406bd9ef98c0a6c6ff4a477c1495b303f309eb6b6beac77fabc004ebd3f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development/visual_review_root_fa5438a_superseded.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6662,
+      "sha256": "431c1ee9e3ef709f261169ff5e5c7a98ac9809ae39afdf5e411aafa268c4752b"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/development_notes.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4110,
+      "sha256": "0b63ea1fb873c04e312226b0df5e80211589f6f39b639895d3e26ec1fd8e6c66"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12834,
+      "sha256": "53644d6d3d18731656dcb565f0e3f829a0efda3816e6a7cd900d372710a63945"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6588,
+      "sha256": "1fc68a634513ee7a8bb374498a5c8adc84d8dd349cccbf3604142ebbfb3b41e6"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/native.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 42825,
+      "sha256": "5c573b19cdcf84930199cbafb9de406e4c342dd16c5ec1d7cf5b724792db6cd4"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/native.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6559,
+      "sha256": "91390660e3333b7be8a2287c66a9e40f5ec7477584023b95cf23d7ccf647d856"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/native_returned_after_dismount.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 863253,
+      "sha256": "b893f1e3d6dab76d2e53c632f709c7ee229c41441d1ca6b985f985b2ef786a66"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/native_riding_posture.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 841834,
+      "sha256": "e735c992f23713bc3a2ac72572f80ea47b0ede8b7f7806a21c805efe80f0cd31"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/native_station_full_bike.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 872334,
+      "sha256": "1d35cc175348903c32ffca39b914a13a91586a3ca304074053ea14b6336abfb9"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run01.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 9075,
+      "sha256": "3b9dcedc96c9a6805c1c088d18f28d81c5d70269ed96e30a41201eeaaf5a9017"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run01.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6651,
+      "sha256": "f0d340fdd0a4f8f1bf682df45d520287f182703a6f984b13b9bde443e43e1025"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run02.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 11655,
+      "sha256": "8b6f6d6b7588e6273e0b6cc205f0b04d81d9df091ac7fc77d25c8a80c7069da9"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run02.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6305,
+      "sha256": "b68d215c8d23d0b445d62eeabe6a2ba0cbda7ec9abdf4fa30054ccf91c177a15"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run03.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12492,
+      "sha256": "e1371f0b617e292b16bab7e0d3dc30d2d2b417254408b26dfda9aa1a00440a4e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run03.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6623,
+      "sha256": "b1037460fe8b5f27d731ed3076e058a7072c99dcc535cfb15e46169f540120f4"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run04.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12834,
+      "sha256": "884b020436dc1618f2f5dd66ceeda02321fcb31ded63716d8981f88c80a7716a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run04.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6466,
+      "sha256": "f6031889c7d683f6a4248b2f9d95e2926ec4e34a8fc636239075e4036836e8de"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run05.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12834,
+      "sha256": "50d9d45c65859fa8b90fa1dcf762a53d93b5d8d241b1d29176634fcaab011b0e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/run05.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6711,
+      "sha256": "b0f08a5d8af02476668643f249fb8d3948ff1e20b70afb665882e09d98efc0f3"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/summary.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 3983,
+      "sha256": "f392604ab1c1e87d8e98f6bd7928fc6c2db03680b46e282ee3843a19d1f8dc87"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/test_compile01.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/test_compile02.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bikes/visual_review.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7025,
+      "sha256": "29363f3ca1806a71de42b9458badd84c2741f89b814048cd4fabfff4b856d9b8"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/development/pre_signal_commit_12of12.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 122945,
+      "sha256": "7ddf884f75faf853cc1e6b73b13117d822180a7ba5ec65130261630bfa07f3e0"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/development/pre_usability_13of13.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 128348,
+      "sha256": "493f0cbd05f67e0946d4090368be2e3d50acedcbd8fb64a72fed1ec854715c94"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/development/pre_usability_13of13.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6099,
+      "sha256": "3fdd5a0a4b270d2027d36d6e5066afb30cdb77477453fe8a634bcb1befda7ca8"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/development/pre_usability_summary.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4214,
+      "sha256": "edf08ff05997bef82ecf3ebcd25c4f077e6d5e252b67fefd9be81465feebffc6"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/failures/boarding_positions_pass_but_native_exit_shift_22of24.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 199321,
+      "sha256": "87722010f26db6d5477cfc77219ff4bad158d29329524f47a0fb871e51ccba2c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/failures/boarding_positions_pass_but_native_exit_shift_22of24.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7746,
+      "sha256": "d67353381f907efd72ffc49b33c6ae84189bbde14fb62023537ceadcc1419669"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/failures/menu_clock_inherited_always_10of11.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 101518,
+      "sha256": "5a135109e01126f832d8cfb79f4231e701a0d8bddc7ef6102fac9f529852ba1a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/failures/road_paint_startup.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 907,
+      "sha256": "c238234bfa63d2b4fa1a3f21363c529edd5e6e74bc41d231729adcc4673ed848"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/failures/terrain_support_obstacle_and_skipped_ticks.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 95998,
+      "sha256": "0492cdd0141fc00841a81e65f6fb6ce6a40a406e77a3ebd3fa3d4ff41b8fe0f9"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 274376,
+      "sha256": "0080d352a116871ca35520e086d933076f03da9fe457f1db15854498ff2795df"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7716,
+      "sha256": "6b8ba44f2e400dc1611928b8550fcf68be7da195439e684605e440b72fe7f3af"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/bus/summary.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 9806,
+      "sha256": "20db848a1a8c89930806fb616bc59e5c1190c5179edc7b03eafac1758629a955"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/before_ped_glyph_and_night/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 28491,
+      "sha256": "da95e7ed98cb8d622f8a137aae84379a70720ada32d382a519214d1c0bfdd5a3"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/before_ped_glyph_and_night/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7459,
+      "sha256": "eb69ba9cb9fb0512398e933554fc224a6b6b53f6f0fde1fa40a07e9e837bcaff"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/before_ped_glyph_and_night/infra_headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 364048,
+      "sha256": "6d6c5a129f3ed7f020aa3949bafe1695e6958a310631c2adb2ed84d5e9264df2"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/before_ped_glyph_and_night/infra_headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5665,
+      "sha256": "dedc1dfd132f6d3495d4eb37eb3a58b507535ee741280e6f322a4540e67b644e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/check_street_transit.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 29071,
+      "sha256": "fa40ab1eb7794faff3529a927c287ff159c263be3d3e0dde812fe6cb06ec1cf2"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 28491,
+      "sha256": "486cac9371cf6f5c9816c88fe90545e52c1b2e1564da9115a024a2c3383d1f13"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7459,
+      "sha256": "eb69ba9cb9fb0512398e933554fc224a6b6b53f6f0fde1fa40a07e9e837bcaff"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 52269,
+      "sha256": "ffdcb74d14d54da1a7da0d314cae543c2eac4c9aec5bd9f451d39f64b56e2e1e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 9122,
+      "sha256": "b1b6fc13735dd79f6d9165228367fb00e7e98b81fbf8a7197dcd653e178ba464"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_bus_moving_ride.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 813838,
+      "sha256": "b0319681ffc21c7b6fd8c07dff02dc566a190a7d9d8dd7ddf2316be7ced0bbce"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_bus_safe_exit.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 653339,
+      "sha256": "49ca1c7699a87c86a6a910ee61d5267e93185d8aa64ac7822266beb2f7ed5ff2"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_bus_stop_open_doors.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 692079,
+      "sha256": "129a57617ba6c39291a748b698b136f4d327b320f01829b4628dcca4144eacce"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_crossing_far_head_from_bank_0.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 723636,
+      "sha256": "67e7a308fde7198e9dadba1c813748f9047fa3d871cc1445f71f1918ccf4ec4d"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_crossing_far_head_from_bank_1.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 716413,
+      "sha256": "c7659a01247e3cbb0f7f6b6f7dcc0c541c3f8c2ce83a5ade8dc50472551633b2"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_crossing_pedestrian_green.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 776557,
+      "sha256": "cabfe185e04a9a40a54af13c9c87cd4ba392908c3078c51a178199297208ed10"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_crossing_wide.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 783852,
+      "sha256": "5364a2ab4ccf2935737e0dd7ce3b8585d472b86618033c1d0547356758f19613"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_dog_keeper_close.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 843681,
+      "sha256": "c46caa0a6bf148e56ec0fb286e1a3ca9bbf6275dbcfae30bbf794fb90e0eaea5"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_small_menu_640.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 241988,
+      "sha256": "491194b45d27e132a7900fb435b82c7e7f106e88502a4fcde105fc88fbc7729d"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/development/native_before_handoff_assert/native_warm_lamp_street_evening.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 693661,
+      "sha256": "3fa17c1e5910234f9b73c584f867e498da6db728a549983896ac1e8915d7bcb5"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/check_dogs.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7398,
+      "sha256": "e0ca3f2b5eba73d57949668aef934eba3e7ffeb2bbc9668a109d428ecd3f0f14"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/check_dogs_probe01_fail.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5277,
+      "sha256": "eb21e2bb10ae4fa8d2464949f4eaf92582b0220133e10e8556a228d158da64f3"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/compile03.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/compile05.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/compile06.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/compile08.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/development_notes.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 2539,
+      "sha256": "ad91ae768ca30672f67dcc2cf77e6ae4228503ae1f67107336acf9ad21619b5e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/gait_stress08.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1227,
+      "sha256": "db6ba3e3b7e704cebede41cc8ffac6516e33d2c0d39c0ed976139c8d22520f8a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/import01.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1851,
+      "sha256": "dfa87266bedcc5399b95b5ac3df4fb24f822ad352b87bcb68f9952d1da60108f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol01.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 853,
+      "sha256": "863b522ae656d9c4c7fe4aea8b1b3e5867344e9db04ade046cd7f30e3fb2c831"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol02.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6588,
+      "sha256": "06e766dfc333ec65fe320521bd6f623298ee9d0f1a0a09b3b5c731b1b08191cc"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol03.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4799,
+      "sha256": "bb19ea84330c7b5d3f0472ffafe1c5c0a38b5c3d0f32018b79af6c106a9a77c5"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol04.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5610,
+      "sha256": "37ab87665da0616a5c69e7dd993c816d86c65cdbc5345de53c9183da01af5aad"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol05.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1126,
+      "sha256": "e851f4f2723a563d233bd652d5bf22410f0c0b3340b18f84dc7490bb5b9cb5b1"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol05.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4285,
+      "sha256": "4e18183e3973c80aca70a1c6ea14a928e9e726b6a3a9fc68cafb44cf31a5eaa8"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol06.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 163063,
+      "sha256": "9c5d2c26576c829fabbb2b99b51e34c26da19a818494cc3c6d465687efe4a803"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol06.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7117,
+      "sha256": "4e543661658072e08b2594e22b1e78e2ab2daa3806b7956452f24b9ca4290432"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol07.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5125,
+      "sha256": "45124459509a3e3471b7bce5ddc5725ca1eb5b87171c1a92c4d22716188bee01"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol08.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 163726,
+      "sha256": "7ea51a2f1b21dabd5787c49c4ff71f341dd6aa6ab1b23b8749545218a7a33fb7"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/patrol08.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5287,
+      "sha256": "490be78e472d078b71056fd794ca3e1c3e2b436cbc9a62de2c583478cb7e078e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/probe_compile06.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/probe_compile07.log.gz",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 88,
+      "sha256": "b0381916627269e62db97927ea4feca5dc664b714c96af411de8697fccf47167"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/probe_dog_gait_stress.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1962,
+      "sha256": "a6e9a6764e9ef9193f5bd1491e22392f3bca1ebb5998b1e14a03ca12a571c586"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/street_dog_model03_short_leg.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 11617,
+      "sha256": "cf5b677811ecb6a7bb1173c90fa0e50687611f523ac6f828e00bc0e4da7bdff6"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/street_dog_model06_before_ankle_init.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12031,
+      "sha256": "15769c39cb4e44c43c396349f8abf0e7a05abcac0ee04ff53d70cab5330637f3"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/street_dog_model07_before_turn_replant.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12043,
+      "sha256": "69eeb8ef47d414ad99c7bee0742a582b57ef319225db0c0ead5b9ee67a34055f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/street_pedestrians_before.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 32679,
+      "sha256": "54c59ae7ef07b0f0cd38ea59e4e8013449dbebc284cfe7748a2f3946e8123448"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/street_pedestrians_before.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5401,
+      "sha256": "34090d17541f3a194ece4097fccf1e4bb66de08c4c29c561c9029cd4ab854e62"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/dogs/summary.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4889,
+      "sha256": "4586d6dec02a279a651002b1d557615943d144abb23d77dc4141ac6e71f05cea"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 38060,
+      "sha256": "5ccd69f9f2d75ecc5ad22943d9dd5141f29856445be920f29d1a15044a7be0c9"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7546,
+      "sha256": "e072ebb05a4e70cb57de324b44be1b65a429ec6105c06443044b02db72ab807c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/first_success_4_vehicle_heads.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 325313,
+      "sha256": "a05ee76e8383168817fd199a1ac9cd6032bdea60cc34d9e41c69dda8d02b77c5"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/first_success_4_vehicle_heads.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5588,
+      "sha256": "3090341432dfc2fce5cdf4e8d065b56adba1c7baf9bc77c9f065a828564906ed"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/initial_outside_TIN.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 271,
+      "sha256": "98ba6793708b7a3f8c521eea3e76e62f4acd0f77a6ccf1d6b2d5dd0b5eed0b87"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/initial_outside_TIN.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5495,
+      "sha256": "f36cfb2b2b2c0a6cab5d4770f815b328f7cb6d2e16e2da8e9bd79192ee36d548"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/integrated_pre_calm_pre_bike.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 13335,
+      "sha256": "1640a74c692a592f15c23b92a478bab04a87ff1c93ebc55fbfea048fd5009a83"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/integrated_pre_calm_pre_bike.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7014,
+      "sha256": "72e5866d5054d9557035b1d13251d670c6daa9a2ed7b2b1d94912a4bb243d52a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/outside_TIN_cache_diagnosis.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7936,
+      "sha256": "15b6ffa38a54e7e8e10ccd94547b05f27f8b733a7d92aed961b28f4f22e6acab"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/outside_TIN_cache_diagnosis.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5495,
+      "sha256": "f36cfb2b2b2c0a6cab5d4770f815b328f7cb6d2e16e2da8e9bd79192ee36d548"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/pre_calm_focused/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 328949,
+      "sha256": "935c8da7183a88ba76c087a9a302f9a5e70714a408c05e1ddf371297507b739f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/pre_calm_focused/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5588,
+      "sha256": "5f10bcec0af7950422bf85ed00b41d268fa028832ff6b3dccc89bbec19652141"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/pre_native_visual_fix/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 28490,
+      "sha256": "b319ee0a47427175a23599708075d3c3760e4db40fd90b08bba7afd4cf3890e7"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/pre_native_visual_fix/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7459,
+      "sha256": "eb69ba9cb9fb0512398e933554fc224a6b6b53f6f0fde1fa40a07e9e837bcaff"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/street-transit-calm-development.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 19828,
+      "sha256": "acf6ad431abf14c5f69317e059b247cbc54b347a1d704a6f0d5fe95cd8a7ea73"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/street-transit-calm-development.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7960,
+      "sha256": "b308df58e94da4924c13bf489572926bdbebd80ed161e14fdc8092c198e1eb1a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/street-transit-calm-development2.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 28492,
+      "sha256": "d8fe9fb8d943536adf98a9c48bab3ea238d082a67edba6e11a4b29f75bd5d37f"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/development/street-transit-calm-development2.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7839,
+      "sha256": "11c13d405cd650576fff86896b798d185b1f92d8ea3791f1d8cd2e9a11a4cab1"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/final/calm_road_paint_topdown.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1495,
+      "sha256": "ebf612412709e9c01ef6623823eb0234389dbcc8472b7891d60cde7221a3f3d6"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/final/calm_road_paint_topdown.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 9288,
+      "sha256": "a710f80a8bbaae1e0709d0ebb7e9385eb9b253ac76fce0803dcf694f8c32497d"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/headless.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 366539,
+      "sha256": "f4eabd761751bbff477ea3313ac3499f07d95977cc33f32321c5477c21278513"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/headless.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5665,
+      "sha256": "dedc1dfd132f6d3495d4eb37eb3a58b507535ee741280e6f322a4540e67b644e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/original14_bus_detection_review.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4971,
+      "sha256": "cfa010be48b6fd90bf995aecb0fe4c3566d509f29140111e4ad0e81f882a6aa0"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/original14_bus_detection_review.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 4902,
+      "sha256": "b55e65f6f019593873029f8470376a0051ea01143fefc3a45ce193c001cb5064"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/probe_bus_seen_by_cars.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 2377,
+      "sha256": "13af8e3dfc565d4a8936f03baee475ebfcb7b51b0459464341faa8c31832cc9c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/infra/probe_street_infra.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6357,
+      "sha256": "7b55b26f953947170e14b684d660d1ee655cf0e7c023cc79567c394b1765341a"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 64766,
+      "sha256": "991e1c82d90d9d178b7b5d84cb3f0f6b08a82226385f4001ab0f601c49c08d0c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 8873,
+      "sha256": "3e76283de97dc458340b88ccc0987881080818cbae8724c247e469c4a8a2235b"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_bus_moving_ride.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 813779,
+      "sha256": "8921b35f6944bfdc2ae07a7532e36114956007b794308368da07ddd182fe2304"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_bus_safe_exit.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 653357,
+      "sha256": "4d8deaa252601e48a65e10b17ebcf29ca62957bbc0734c8c6b91bad51b56598e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_bus_stop_open_doors.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 692071,
+      "sha256": "f4a2657324616b866e7688b679e3a57400ce315a3f55605b85d62e0855714acd"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_crossing_far_head_from_bank_0.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 698971,
+      "sha256": "7078fa40944e1ff1066e15be4ceb596bcd05900ac9bd0850460f6af2f5c3ca1c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_crossing_far_head_from_bank_1.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 712471,
+      "sha256": "f259082f8f996048e7b9e5dcd226ddbfda5b5613304c16a40ec6d098a85e7f76"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_crossing_pedestrian_green.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 776417,
+      "sha256": "e72c30346c961c17d32d397cc9de8afbf922fc1fac1926f26db5876efcc3dffb"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_crossing_wide.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 783543,
+      "sha256": "09fb616ae65a169fbdff762dea393ded89fe8352bc4740c95bacbec27aef9049"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_dog_keeper_close.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 836780,
+      "sha256": "4514b7a591bb705cd9feaa97b6fe76bd104892f243173a1c98d2acbe60a59d09"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_small_menu_640.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 244201,
+      "sha256": "986223f99f9789ed4148428a2a612ceaa19f5cc4f49fcb4fad32d86f6305174c"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_warm_lamp_street_evening.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 679682,
+      "sha256": "09d8276ef7b815420fd8e631799476e2ca916604f6536dab6e7e58356d227055"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/native_warm_lamp_street_night.png",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 641318,
+      "sha256": "fc82ca23f4b670e2bd29ccca9828f9747b4eea8cdbf68a31cfe35b6de9390b56"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/normal_launch.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 965,
+      "sha256": "453ef3f72a942481e20d307f50a23404f6b08ffef695770397feb6465100e37e"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/normal_launch.log",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 7121,
+      "sha256": "52207cb073645e98594e781865f051eb46d89398429808b9bc46910ec3e46bd0"
+    },
+    {
+      "path": "data/reports/street_detail/20261019/visual_review.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 6255,
+      "sha256": "92cc15f0d431772452cce4a77437a69f7c5c5d15f57814b4dee49cde118709c3"
+    },
+    {
+      "path": "docs/EXECUTION_LOG.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 272869,
+      "sha256": "b6e1553efe6baaf57aea1fbc147f9a70259d399b9774899d6f8ad973afc11f36"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_TASKS.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 74196,
+      "sha256": "62b836d27c850986a3dce1c79338ca1b5881eb18b0561657418cc484aa11b160"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 48630,
+      "sha256": "c75b04dde63fc513f2ae530e411d21b4c486b365a35948b77488c6e7416dbed5"
+    },
+    {
+      "path": "docs/RUN_GUIDE.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 29947,
+      "sha256": "593c8872722280669f18a6b25b08722150f1b019ad4009ec0b6957f8229b7c88"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 130620,
+      "sha256": "36a56abe8e2076d5de740849c1723c682125c33221ab409d30ada2d66a585f80"
+    },
+    {
+      "path": "docs/VALIDATION_PLAN.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 96684,
+      "sha256": "f7cf88018b9ed62fd3a7761f1eb8a3f21eb64e9d31cc83ba8fa57d10cab36cc0"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 98060,
+      "sha256": "7f94c0c52e3b605c2aeaaae65598de28e2f2f47c586dae37286f16dd133c8bbd"
+    },
+    {
+      "path": "game/assets/authored/bike_service.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 2561,
+      "sha256": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8"
+    },
+    {
+      "path": "game/assets/authored/bus_service.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 8506,
+      "sha256": "f9cb2f6cfb4009ec39b7ba21d6ed4d0e1fd3b7f00092f423354adde2042c8718"
+    },
+    {
+      "path": "game/assets/authored/road_furniture.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 392335,
+      "sha256": "b3f69fa353fb97be5866df61334c31d73b25496036db70729e76458075fc1c4b"
+    },
+    {
+      "path": "game/assets/authored/street_pedestrians.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 5872,
+      "sha256": "4f48536000261a66b3ae46e7b9a44e8aff3c69f705e600cdf56e7cc4d49bd07f"
+    },
+    {
+      "path": "game/assets/authored/terrain_heightfield.json",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 1045434,
+      "sha256": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e"
+    },
+    {
+      "path": "game/data/generated/public_walk.json",
+      "kind": "generated_runtime_input",
+      "bytes": 657998,
+      "sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+    },
+    {
+      "path": "game/data/generated/terrain_surface.json",
+      "kind": "generated_runtime_input",
+      "bytes": 10509215,
+      "sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+    },
+    {
+      "path": "game/data/generated/traffic.json",
+      "kind": "generated_runtime_input",
+      "bytes": 277933,
+      "sha256": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+    },
+    {
+      "path": "game/resources/world_geometry/world.json",
+      "kind": "generated_runtime_input",
+      "bytes": 5037995,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "path": "game/scripts/city_bike_service.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 31360,
+      "sha256": "b342442099f721ff673d01cb6628b51f9f13c60c3ed7be1a969296aa3a61828a"
+    },
+    {
+      "path": "game/scripts/city_bus_service.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 42992,
+      "sha256": "492de25ce42bf90932f6359f4bfeee08685858a55e5168a4f6328b628325452f"
+    },
+    {
+      "path": "game/scripts/explore_walk.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 38861,
+      "sha256": "4a11fb6c65c21ebad30a529df378a201fd6347e72d06d7b39973a50386f34559"
+    },
+    {
+      "path": "game/scripts/interior_visit.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 55891,
+      "sha256": "ba504f516d07334f4767a0605e0d2fccc4db7359337b5f65e3f093316b81cc44"
+    },
+    {
+      "path": "game/scripts/neighborhood_traffic.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 19459,
+      "sha256": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369"
+    },
+    {
+      "path": "game/scripts/street_dog_model.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 12535,
+      "sha256": "933f14f3e346e9df36f48670ce5d6a326819c84cfbf9253abf10fd7ebd733373"
+    },
+    {
+      "path": "game/scripts/street_network_detail.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 23437,
+      "sha256": "0b861c9257961b87eb9690e7ea72583f1879730169702ca1b003e51f9a6b0291"
+    },
+    {
+      "path": "game/scripts/street_pedestrians.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 33351,
+      "sha256": "db9174ff48d9e8cbaeb1c36d263aca0d62351652a424957f7077d980847f5db7"
+    },
+    {
+      "path": "game/scripts/traffic/traffic_manager.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 10959,
+      "sha256": "813b06b33e1b84dda55ff586dfda517a145b51e7f8476c5661fc5bf75a3dae6f"
+    },
+    {
+      "path": "game/scripts/traffic/vehicle.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 39151,
+      "sha256": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045"
+    },
+    {
+      "path": "tests/game/check_city_bike_service.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 15789,
+      "sha256": "839c1ca4c551857faf00599c9222022cd4f498d268f0e1e56f0ccecd3c29b332"
+    },
+    {
+      "path": "tests/game/check_city_bus_service.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 16384,
+      "sha256": "cb07868c29173ecc8aa0e93b8c01fca7155499cd1d70363d4bd24a0bbc9d6d48"
+    },
+    {
+      "path": "tests/game/check_street_transit.gd",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 33701,
+      "sha256": "9bea6c6155874053656719c5b3c4bead7ed19d6391fceac9e0d1ea396c168496"
+    },
+    {
+      "path": "tools/check_street_detail_handoff.py",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 2874,
+      "sha256": "21d6706a6e44001680841c82146573435e80585bcf6a0e6b0c1cffa523a2b659"
+    },
+    {
+      "path": "tools/prepare_road_furniture.py",
+      "kind": "shared_code_input_or_evidence",
+      "bytes": 20172,
+      "sha256": "2302ff07cf0f5ad5f23b41eab7bc544318597e588c9794f31e835af78d4033ae"
+    }
+  ],
+  "raw_log_compression": {
+    "reason": "Preserve exact engine banner/blank EOF bytes in gzip rather than editing raw diagnostic output for Git whitespace checks.",
+    "files": [
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile03.log.gz",
+        "original_name": "compile03.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile04.log.gz",
+        "original_name": "compile04.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile05.log.gz",
+        "original_name": "compile05.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile06.log.gz",
+        "original_name": "compile06.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile07.log.gz",
+        "original_name": "compile07.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile08.log.gz",
+        "original_name": "compile08.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/compile09.log.gz",
+        "original_name": "compile09.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/test_compile01.log.gz",
+        "original_name": "test_compile01.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/bikes/test_compile02.log.gz",
+        "original_name": "test_compile02.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/compile03.log.gz",
+        "original_name": "compile03.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/compile05.log.gz",
+        "original_name": "compile05.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/compile06.log.gz",
+        "original_name": "compile06.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/compile08.log.gz",
+        "original_name": "compile08.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/probe_compile06.log.gz",
+        "original_name": "probe_compile06.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      },
+      {
+        "path": "data/reports/street_detail/20261019/dogs/probe_compile07.log.gz",
+        "original_name": "probe_compile07.log",
+        "original_sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+        "original_bytes": 73,
+        "decompressed_byte_equal": true
+      }
+    ]
+  }
+}

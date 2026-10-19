@@ -1,6 +1,8 @@
 # 덕수궁과 시청 서울 시뮬레이션
 
-현재 EXP22에서는 가로수를 약9.6~11.5m 성목 비례와 가지·수피·근거리 잎 모델로 보완했습니다. 최신 상태/전후 화면은 [WORK_STATUS](docs/WORK_STATUS.md), 다른 Mac 인수 검사는 `python3 tools/check_tree_detail_handoff.py`를 따릅니다. 이전 EXP21 증거는 당시 소스의 보존 기록입니다.
+EXP23: 중앙선 기준의 정돈된 차선·양방향 보행 신호·가로등, 두 문에서 안정적으로 타는 도심01 버스, 세밀한 반려견 산책과 **E로 빌려 직접 타는 자전거2대/대여소2곳**을 추가했습니다. 실제 화면/주행·실패와 현재 한계는 [WORK_STATUS](docs/WORK_STATUS.md)를 따릅니다. 다른 Mac은 `python3 tools/check_street_detail_handoff.py` 후 일반 실행기를 사용합니다.
+
+EXP22 당시에는 가로수를 약9.6~11.5m 성목 비례와 가지·수피·근거리 잎 모델로 보완했습니다. 최신 상태/전후 화면은 [WORK_STATUS](docs/WORK_STATUS.md), 다른 Mac 인수 검사는 `python3 tools/check_tree_detail_handoff.py`를 따릅니다. 이전 EXP21 증거는 당시 소스의 보존 기록입니다.
 
 최신 개발판 **EXP21**: 서울시 공식 지역 등고선·표고점을 보간한 지형에 도로·건물 기초·출입구·옥상과 사람·차량·나무를 연결했습니다. 실제 배치와 미터 축척을 유지하며, 건물 주변 평탄화와 실내·시설은 게임용 구성입니다. 실측 DEM이나 모든 현장 문턱의 정확도를 뜻하지 않습니다. [현재 결과/다음 행동](docs/WORK_STATUS.md) · [지형 선택·한계](docs/TERRAIN_INTEGRATION.md) · [공유 파일 대조](tools/check_terrain_handoff.py).
 

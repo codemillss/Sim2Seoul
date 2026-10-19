@@ -375,7 +375,8 @@ func _physics_process(delta: float) -> void:
 			enter_visit()
 		return
 	if not edge:return
-	if elevator_open:_close_elevator()
+	if not active and host.has_method("try_street_interact") and host.try_street_interact():e_requires_release=true
+	elif elevator_open:_close_elevator()
 	elif is_instance_valid(host.get("interior_room_access")) and host.interior_room_access.handle_interact():e_requires_release=true
 	elif is_instance_valid(facility_interaction) and facility_interaction.handle_interact():e_requires_release=true
 	elif active and _elevator_near():_open_elevator()
@@ -428,10 +429,15 @@ func _process(_delta: float) -> void:
 	if is_instance_valid(outdoor_lift):prompt_text.text="E · %s 옥상 엘리베이터 · 층 선택"%String(outdoor_lift.spec.title)
 	elif not facility_hint.is_empty():prompt_text.text=facility_hint
 	elif not _notice.is_empty():prompt_text.text = _notice
-	prompt.visible = not menu_open and not elevator_open and not in_elevator and (is_instance_valid(outdoor_lift) or not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and not is_instance_valid(outdoor_roof) and _entry_near() and _entry_visible()) or not _notice.is_empty())
+	var street_hint: String=host.street_interaction_hint() if not active and host.has_method("street_interaction_hint") else ""
+	if not street_hint.is_empty():prompt_text.text=street_hint
+	prompt.visible = not menu_open and not elevator_open and not in_elevator and (not street_hint.is_empty() or is_instance_valid(outdoor_lift) or not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and not is_instance_valid(outdoor_roof) and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))
 	prompt.size = Vector2(prompt.custom_minimum_size.x,prompt.get_combined_minimum_size().y)
 	prompt.position = Vector2(maxf(16.,(view.x-prompt.size.x)*.5),view.y-148.)
+	# Street transport instructions may span two lines; reserve the building
+	# name pill at view.y-100 instead of overlapping it with a taller prompt.
+	if not street_hint.is_empty():prompt.position.y=minf(prompt.position.y,maxf(16.,view.y-108.-prompt.size.y))
 	if active and is_instance_valid(facility_interaction):
 		var activity_rect: Rect2=facility_interaction.status_rect()
 		if activity_rect.has_area():prompt.position.y=minf(prompt.position.y,activity_rect.position.y-prompt.size.y-10.)

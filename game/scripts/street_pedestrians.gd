@@ -2,6 +2,7 @@ extends Node3D
 ## Small authored outdoor population. Original N02 controllers/routes stay fixed.
 ## Only spawn assigns a position; every subsequent actor move uses move_and_slide.
 const DESIGN_PATH := "res://assets/authored/street_pedestrians.json"
+const DOG_MODEL := preload("res://scripts/street_dog_model.gd")
 const WORLD_PATH := "res://resources/world_geometry/world.json"
 const AVATAR := preload("res://scripts/player/exploration_avatar.gd")
 const AVOIDANCE := preload("res://scripts/pedestrian_corridor_avoidance.gd")
@@ -127,6 +128,7 @@ func refresh_terrain() -> void:
 			var sample: Dictionary=_terrain_service().sample_ground_world(at)
 			row.floor_normal=sample.get("normal",Vector3.UP)
 			row.minimum_ground_gap_m=INF;row.maximum_ground_gap_m=-INF
+			if row.kind=="dog":row.dog_model.reset_support()
 
 func _ground(at: Vector3,height := 2.0) -> Dictionary:
 	at=_terrain_point(at)
@@ -241,7 +243,8 @@ func _make_group(record: Dictionary) -> void:
 	var human:=_make_actor(group,"walker",0.);group.members.append(human);actors.append(human)
 	if record.dog:
 		var dog:=_make_actor(group,"dog",extra);group.members.append(dog);actors.append(dog)
-		var leash:=MeshInstance3D.new();leash.name="Leash";var mesh:=CylinderMesh.new();mesh.top_radius=.009;mesh.bottom_radius=.009;mesh.height=1.;mesh.radial_segments=8;leash.mesh=mesh;leash.material_override=_material(Color(.26,.17,.12));add_child(leash);group["leash"]=leash;group["leash_blocked"]=false
+		var leash:=MeshInstance3D.new();leash.name="Leash";var mesh:=CylinderMesh.new();mesh.top_radius=.009;mesh.bottom_radius=.009;mesh.height=1.;mesh.radial_segments=8;leash.mesh=mesh;leash.material_override=_material(Color(.38,.055,.035));add_child(leash);group["leash"]=leash;group["leash_blocked"]=false
+		var grip:=MeshInstance3D.new();grip.name="HeldLeashLoop";var loop:=TorusMesh.new();loop.inner_radius=.031;loop.outer_radius=.041;loop.rings=16;loop.ring_segments=8;grip.mesh=loop;grip.material_override=leash.material_override;add_child(grip);group["leash_grip"]=grip
 	groups.append(group)
 
 func _material(color: Color) -> StandardMaterial3D:
@@ -276,6 +279,11 @@ func _make_actor(group: Dictionary,kind: String,side: float) -> Dictionary:
 		var avatar:=AVATAR.new();avatar.setup(body);row["avatar"]=avatar
 		var color:=Color(group.record.clothing[0],group.record.clothing[1],group.record.clothing[2])
 		for key in ["jacket","jacket_trim"]:avatar._materials[key].albedo_color=color.lightened(.12 if key=="jacket_trim" else 0.)
+		if group.record.dog:
+			var head_pivot:=Node3D.new();head_pivot.name="KeeperHead";head_pivot.position=Vector3(0,.65,-.005);avatar._upper_body.add_child(head_pivot)
+			for part: Node3D in avatar._upper_body.get_children():
+				if String(part.name).begins_with("Eye") or String(part.name) in ["Head","Hair","HairBack","Nose"]:part.reparent(head_pivot,true)
+			row["keeper_head"]=head_pivot
 		var appearance: Dictionary=group.record.get("appearance",{})
 		for key in ["skin","hair","trousers"]:
 			if not appearance.has(key) or not avatar._materials.has(key):continue
@@ -291,27 +299,14 @@ func _make_actor(group: Dictionary,kind: String,side: float) -> Dictionary:
 	return row
 
 func _make_dog(row: Dictionary,record: Dictionary) -> void:
-	var visual: Node3D=row.visual;var color:=Color(record.dog_color[0],record.dog_color[1],record.dog_color[2]);var coat:=_material(color);var dark:=_material(color.darkened(.32));var nose:=_material(Color(.045,.04,.035));var collar_mat:=_material(Color(.66,.18,.16))
-	_round(visual,"DogTorso",Vector3(.31,.32,.57),Vector3(0,.37,.015),coat)
-	_round(visual,"DogChest",Vector3(.28,.34,.27),Vector3(0,.38,-.20),coat)
-	var head:=Node3D.new();head.name="DogHead";head.position=Vector3(0,.49,-.32);visual.add_child(head)
-	_round(head,"DogSkull",Vector3(.25,.24,.25),Vector3.ZERO,coat)
-	_round(head,"DogMuzzle",Vector3(.16,.11,.20),Vector3(0,-.04,-.16),coat)
-	_round(head,"DogNose",Vector3(.09,.065,.045),Vector3(0,-.025,-.26),nose)
-	for side in [-1.,1.]:
-		var ear:=_round(head,"DogEar",Vector3(.095,.20,.12),Vector3(side*.115,-.02,.01),dark);ear.rotation.z=side*.22
-		_round(head,"DogEye",Vector3(.028,.028,.018),Vector3(side*.065,.055,-.105),nose)
-	var collar:=_box(visual,"DogCollar",Vector3(.30,.055,.12),Vector3(0,.47,-.22),collar_mat);row["collar"]=collar
-	var tail:=Node3D.new();tail.name="DogTail";tail.position=Vector3(0,.45,.29);tail.rotation.x=.65;visual.add_child(tail)
-	_round(tail,"DogTailCoat",Vector3(.07,.08,.31),Vector3(0,0,.12),dark);row["tail"]=tail
-	var legs:=[]
-	for front in [true,false]:
-		for side in [-1.,1.]:
-			var leg:=Node3D.new();leg.name=("Front" if front else "Back")+("LeftLeg" if side<0 else "RightLeg");leg.position=Vector3(side*.105,.25,-.18 if front else .20);visual.add_child(leg)
-			_box(leg,"DogLowerLeg",Vector3(.065,.22,.07),Vector3(0,-.11,0),coat)
-			var paw:=_round(leg,"DogPaw",Vector3(.09,.065,.13),Vector3(0,-.22,-.025),dark)
-			legs.append({"joint":leg,"paw":paw,"phase_offset":0. if (front and side<0) or (not front and side>0) else PI,"rest":leg.position})
-	row["legs"]=legs;row["head"]=head
+	var model:=DOG_MODEL.new();model.build(self,row.visual,record)
+	row["dog_model"]=model;row["legs"]=model.legs;row["head"]=model.head;row["tail"]=model.tail;row["collar"]=model.collar
+
+## Short, bounded observation pause for a menu arrival; no actor relocation.
+func pause_for_view(group_id: String,seconds := 4.0) -> void:
+	for group: Dictionary in groups:
+		if group.id!=group_id or not group.record.dog:continue
+		group["dog_pause_s"]=clampf(seconds,0.,6.);group["dog_behaviour"]="looking";group.clear_s=0.
 
 func _members_excluded(group: Dictionary) -> Array[RID]:
 	var result: Array[RID]=[]
@@ -364,14 +359,11 @@ func _step_member(row: Dictionary,target: Vector3,speed: float,delta: float,dire
 		row.minimum_ground_gap_m=minf(row.minimum_ground_gap_m,gap);row.maximum_ground_gap_m=maxf(row.maximum_ground_gap_m,gap)
 	if row.kind=="dog":
 		row.collider.rotation.y=row.visual.rotation.y
-		for leg: Dictionary in row.legs:
-			var phase: float=row.phase+leg.phase_offset;var lift:=maxf(0.,sin(phase))*.055 if distance>.0001 else 0.
-			leg.joint.rotation.x=sin(phase)*.34 if distance>.0001 else 0.
-			leg.joint.position=leg.rest+Vector3.UP*lift
-			var foot_at: Vector3=leg.paw.global_position
-			var floor_at:=_ground(foot_at,.75)
-			if not floor_at.is_empty():leg.joint.position.y+=floor_at.point.y-.025+.028+lift-foot_at.y
-		row.tail.rotation.y=sin(elapsed*3.2)*.20 if distance>.0001 else 0.
+		if running:
+			var behaviour: String="walking"
+			for group: Dictionary in groups:
+				if group.id==row.group:behaviour=group.get("dog_behaviour","walking");break
+			row.dog_model.pose(distance,delta,behaviour,elapsed,player.global_position)
 
 func set_running(enabled: bool) -> void:
 	running=enabled
@@ -388,6 +380,16 @@ func _physics_process(delta: float) -> void:
 	elapsed+=delta
 	for group: Dictionary in groups:
 		var speed: float=float(_design.policy.speed_mps)
+		if group.record.dog:
+			var pause: float=group.get("dog_pause_s",0.)
+			if pause>0.:
+				group["dog_pause_s"]=maxf(0.,pause-delta)
+			elif group.actual_distance_m>=float(group.get("next_dog_pause_m",7.0)):
+				group["dog_pause_count"]=int(group.get("dog_pause_count",0))+1
+				group["dog_behaviour"]="sniffing" if group.dog_pause_count%2==1 else "looking"
+				group["dog_pause_s"]=1.65 if group.dog_behaviour=="sniffing" else 1.15
+				group["next_dog_pause_m"]=group.actual_distance_m+8.0
+			else:group["dog_behaviour"]="walking"
 		var chosen: Dictionary=avoidance.choose(group,delta,speed)
 		var reason: String=chosen.reason
 		var stopped: bool=not chosen.clear
@@ -400,6 +402,8 @@ func _physics_process(delta: float) -> void:
 			if group.clear_s>=float(_design.policy.clear_hold_s):group.state="passing" if chosen.get("passing",false) else "walking";group.blocked_reason="";group.blocked_s=0.
 		if group.dwell_s>0.:group.dwell_s=maxf(0.,group.dwell_s-delta);stopped=true;group.state="turning"
 		speed=0. if stopped or group.clear_s<float(_design.policy.clear_hold_s) else speed
+		if group.record.dog and float(group.get("dog_pause_s",0.))>0. and not stopped:
+			speed=0.;group.state=group.get("dog_behaviour","looking")
 		var direction:=_tangent(group,group.station)*float(group.direction)
 		for index in range(group.members.size()):
 			var row: Dictionary=group.members[index];var target: Vector3=chosen.targets[index] if speed>0. else row.body.global_position
@@ -437,7 +441,14 @@ func _finish_poses(_delta: float) -> void:
 		var side: String="Right" if local_dog.x>0 else "Left"
 		var radial:=Vector3(local_dog.x,0,local_dog.z).normalized()*.40
 		# The grip stays outside the torso even as the owner turns around.
-		human.avatar._arm_to(side,Vector3(radial.x,.98,radial.z))
+		human.avatar._arm_to(side,Vector3(radial.x,1.03,radial.z))
+		# A keeper briefly looks toward the stopped companion without moving
+		# the torso or changing the physical walking direction.
+		if running:
+			var head: Node3D=human.keeper_head
+			var observing: bool=group.get("dog_behaviour","walking")!="walking"
+			head.rotation.y=move_toward(head.rotation.y,clampf(atan2(-local_dog.x,-local_dog.z),-.50,.50) if observing else 0.,_delta*.9)
+			head.rotation.x=move_toward(head.rotation.x,-.18 if observing else 0.,_delta*.5)
 	for row: Dictionary in actors:
 		row.previous_pose=row.current_pose;row.current_pose=row.visual.global_transform
 		if row.previous_pose.origin.distance_to(row.current_pose.origin)>2.:row.previous_pose=row.current_pose
@@ -458,6 +469,8 @@ func _update_leashes(render: bool) -> void:
 			group.leash_blocked=not get_world_3d().direct_space_state.intersect_ray(ray).is_empty() or length>float(_design.policy.maximum_leash_m)
 			if group.leash_blocked:_leash_blocked_ticks+=1
 		leash.visible=not group.leash_blocked
+		group.leash_grip.visible=leash.visible
+		if length>.001:group.leash_grip.global_transform=Transform3D(Basis(Quaternion(Vector3.UP,difference.normalized())),start+difference.normalized()*.020)
 		if length>.001:leash.global_transform=Transform3D(Basis(Quaternion(Vector3.UP,difference.normalized())).scaled(Vector3(1,length,1)),(start+end)*.5)
 
 func _process(_delta: float) -> void:
@@ -479,7 +492,7 @@ func snapshot() -> Dictionary:
 		else:
 			var feet:=[]
 			for leg: Dictionary in row.legs:feet.append({"position":leg.paw.global_position,"joint_rotation":leg.joint.rotation})
-			item["feet"]=feet;item["tail_rotation"]=row.tail.rotation;item["collar"]=row.collar.global_position
+			item["dog_model"]=row.dog_model.snapshot();item["feet"]=feet;item["tail_rotation"]=row.tail.rotation;item["collar"]=row.collar.global_position
 		rows.append(item)
-	for group: Dictionary in groups:routes.append({"id":group.id,"source":group.source,"source_points":group.points,"side_offset_m":group.record.side_offset_m,"dog":group.record.dog,"station_m":group.station,"length_m":group.length,"state":group.state if running else "paused","blocked_reason":group.blocked_reason,"direction":group.direction,"turns":group.turns,"actual_distance_m":group.actual_distance_m,"minimum_traffic_route_distance_m":group.minimum_traffic_distance_m,"leash_visible":group.leash.visible if group.record.dog else false,"authored_height":group.authored_height,"avoidance_offset_m":group.get("avoidance_offset_m",0.),"avoidance_lane_m":group.get("avoidance_lane_m",0.),"avoidance_count":group.get("avoidance_count",0)})
+	for group: Dictionary in groups:routes.append({"id":group.id,"source":group.source,"source_points":group.points,"side_offset_m":group.record.side_offset_m,"dog":group.record.dog,"station_m":group.station,"length_m":group.length,"state":group.state if running else "paused","blocked_reason":group.blocked_reason,"direction":group.direction,"turns":group.turns,"actual_distance_m":group.actual_distance_m,"minimum_traffic_route_distance_m":group.minimum_traffic_distance_m,"leash_visible":group.leash.visible if group.record.dog else false,"dog_behaviour":group.get("dog_behaviour","walking"),"dog_pause_count":group.get("dog_pause_count",0),"authored_height":group.authored_height,"avoidance_offset_m":group.get("avoidance_offset_m",0.),"avoidance_lane_m":group.get("avoidance_lane_m",0.),"avoidance_count":group.get("avoidance_count",0)})
 	return {"avoidance_query_reuse":_avoidance_query_snapshot(),"source_polygon_indices":_source_polygon_index_snapshot(),"loaded":loaded,"error":load_error,"authored_population":true,"source_geometry_modified":false,"running":running,"elapsed":elapsed,"walker_count":groups.size(),"dog_count":actors.size()-groups.size(),"actor_count":actors.size(),"actors":rows,"routes":routes,"skipped":skipped,"maximum_step_m":_maximum_step,"minimum_player_distance_m":_minimum_player_distance,"minimum_neighbor_distance_m":_minimum_neighbor_distance,"maximum_leash_length_m":_maximum_leash,"leash_blocked_ticks":_leash_blocked_ticks,"maximum_observed_actors_within_10m":_maximum_local_density,"maximum_authored_actors":8,"traffic_registration_count":actors.filter(func(row: Dictionary)->bool:return row.registered_traffic).size()}

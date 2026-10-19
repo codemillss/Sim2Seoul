@@ -1,0 +1,77 @@
+{
+  "task": "city_bike_service",
+  "sources": [
+    {
+      "url": "https://mediahub.seoul.go.kr/archives/1301257",
+      "published": "2020-11-05",
+      "used": "Official historical QR bike photo/description, green accents, white frame, basket, green lock. Recreated geometry; no photo imported."
+    },
+    {
+      "url": "https://sisul.or.kr/open_content/traffic/bikeseoul.jsp",
+      "verified": "2026-10-19",
+      "used": "Official rental/lock-return workflow reference; E-only game interaction, authored docks and no external rental account."
+    }
+  ],
+  "development_trials": [
+    {
+      "file": "compile01.log",
+      "result": "parse failure",
+      "cause": "One extra parenthesis in support-normal check; corrected."
+    },
+    {
+      "file": "compile02.log",
+      "result": "parse failure",
+      "cause": "Five inferred Vector3 locals from dynamic city property; declared types."
+    },
+    {
+      "file": "run01.json",
+      "result": "16/17",
+      "cause": "Actual controls/support/collision/ride/restore passed. Private-source fixture assumed more than10 valid private interiors, but current retained source contains1; replaced arbitrary count with all observed valid interior membership checks."
+    },
+    {
+      "file": "run02.json",
+      "result": "20/20 development",
+      "cause": "Complete out-and-back and return, hand/pedal contacts, wall sweep, all prior failures passed. Superseded after root/bus agent found native old seated-capsule publication race."
+    },
+    {
+      "file": "run03.json",
+      "result": "21/21 final headless",
+      "cause": "Deferred mutual pair release for2ticks and native full bike box confirmation. Normal dismount holds control until published; external teleport restores once immediately and only pair cleanup is deferred. First6post-exit steps zero, no pending cleanup."
+    },
+    {
+      "file": "development/native_first/native.json",
+      "result": "24/24 native function checks, actual3images reviewed",
+      "cause": "Recognizable bike/rider and no major hand/foot gap, but deployed kickstand while riding, billboard text clipping fixed board, and long prompt orphan wrap. Preserved before visual fixes."
+    },
+    {
+      "file": "run04.json",
+      "result": "23/23 development",
+      "cause": "Kickstand and prompt corrected; camera-facing sign draft superseded by root direction for fixed physical front/back sign faces. Draft source preserved as development/native_first/camera_facing_draft_not_accepted.gd."
+    },
+    {
+      "file": "run05.json",
+      "result": "23/23 final headless",
+      "cause": "Hidden mounted kickstand, parked deployment, fixed two-sided board and compact2line prompt. Native recapture still required."
+    }
+  ],
+  "controls": {
+    "W": "accelerate up to5m/s",
+    "S": "brake then hold0.55s to back up at1.1m/s",
+    "Space": "brake",
+    "AD": "steer",
+    "E": "rent/mount, request safe stop+dismount; return if near an authored dock; cancel blocked dismount request on next E"
+  },
+  "safety_notes": [
+    "Full rider-height native bike box, retained original player capsule/masks, dynamic body sweeps, support and private/door footprint guards.",
+    "Free exploration OFF keeps bike footprint inside selected source walking region; dismount never broadens this mode.",
+    "Temporary dismount retains game rental for E remount; menu validated teleport cancels game rental and leaves physical bike parked.",
+    "Mutual rider ownership prevents simultaneous bike/bus/interior activity.",
+    "No physical torso bob; wheel phase and pedal/sole/handle contacts follow actual bike travel."
+  ],
+  "limits": [
+    "Latest native visuals pending root recapture/review after fixes. First native frames preserved and actually reviewed.",
+    "No official station positions, real inventory, account, fee or current legal bicycle access claimed.",
+    "Temporary terrain/other actor obstructions can require waiting, braking or backing out.",
+    "Two native-exit shutdown ObjectDB/resource messages remain in run03 log; no runtime script error occurred and controls/safety checks passed."
+  ]
+}

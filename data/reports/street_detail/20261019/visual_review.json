@@ -1,0 +1,105 @@
+{
+  "task": "EXP23",
+  "result": "PASS_WITH_DOCUMENTED_LIMITS",
+  "review_basis": "Root opened each of the 11 final frame_post_draw PNG files at original production camera views. Independent bicycle reviewer also opened all 3 final bicycle PNGs. Numeric PASS alone was not used as image acceptance.",
+  "native_report": "native.json",
+  "source_hashes_current_match": true,
+  "captures": [
+    {
+      "name": "bus_stop_open_doors",
+      "path": "data/reports/street_detail/20261019/native_bus_stop_open_doors.png",
+      "sha256": "f4a2657324616b866e7688b679e3a57400ce315a3f55605b85d62e0855714acd",
+      "reviewed_opened_pixels": true,
+      "finding": "Blue body, both physical door openings/rails and the two-door E prompt are visible. Bench/shelter framing is partial."
+    },
+    {
+      "name": "bus_moving_ride",
+      "path": "data/reports/street_detail/20261019/native_bus_moving_ride.png",
+      "sha256": "8921b35f6944bfdc2ae07a7532e36114956007b794308368da07ddd182fe2304",
+      "reviewed_opened_pixels": true,
+      "finding": "Normal external ride camera shows the blue bus, authored shelter and a clean shared double-yellow median/white lanes. The seated model is largely occluded by the roof/windows; attachment is verified numerically, not inferred from this frame."
+    },
+    {
+      "name": "bus_safe_exit",
+      "path": "data/reports/street_detail/20261019/native_bus_safe_exit.png",
+      "sha256": "4d8deaa252601e48a65e10b17ebcf29ca62957bbc0734c8c6b91bad51b56598e",
+      "reviewed_opened_pixels": true,
+      "finding": "Player is on the supported second-stop pavement with the alighting-only prompt; the bus remains beside the curb."
+    },
+    {
+      "name": "crossing_far_head_from_bank_1",
+      "path": "data/reports/street_detail/20261019/native_crossing_far_head_from_bank_1.png",
+      "sha256": "f259082f8f996048e7b9e5dcd226ddbfda5b5613304c16a40ec6d098a85e7f76",
+      "reviewed_opened_pixels": true,
+      "finding": "Near-bank black back has no floating/reversed digits. Far-bank front shows green across the crossing; distant digits are small and the entrance HUD occupies part of the horizon."
+    },
+    {
+      "name": "crossing_far_head_from_bank_0",
+      "path": "data/reports/street_detail/20261019/native_crossing_far_head_from_bank_0.png",
+      "sha256": "7078fa40944e1ff1066e15be4ceb596bcd05900ac9bd0850460f6af2f5c3ca1c",
+      "reviewed_opened_pixels": true,
+      "finding": "Opposite bank has a readable green front direction; the near-bank opaque back stays dark. No mirrored countdown floats outside the case."
+    },
+    {
+      "name": "dog_keeper_close",
+      "path": "data/reports/street_detail/20261019/native_dog_keeper_close.png",
+      "sha256": "4514b7a591bb705cd9feaa97b6fe76bd104892f243173a1c98d2acbe60a59d09",
+      "reviewed_opened_pixels": true,
+      "finding": "Dog head, torso, paws, tail and keeper/leash are now beside the player rather than behind the avatar. The ordinary view is still a few metres away, not a close anatomical inspection."
+    },
+    {
+      "name": "crossing_wide",
+      "path": "data/reports/street_detail/20261019/native_crossing_wide.png",
+      "sha256": "09fb616ae65a169fbdff762dea393ded89fe8352bc4740c95bacbec27aef9049",
+      "reviewed_opened_pixels": true,
+      "finding": "White zebra/stop lines and the single yellow central pair are separated, with no independent competing solid corridor edge through the visible lanes."
+    },
+    {
+      "name": "crossing_pedestrian_green",
+      "path": "data/reports/street_detail/20261019/native_crossing_pedestrian_green.png",
+      "sha256": "e72c30346c961c17d32d397cc9de8afbf922fc1fac1926f26db5876efcc3dffb",
+      "reviewed_opened_pixels": true,
+      "finding": "Same crossing shows green walking signals on both bank orientations; small figures at distance are a remaining readability limit."
+    },
+    {
+      "name": "warm_lamp_street_evening",
+      "path": "data/reports/street_detail/20261019/native_warm_lamp_street_evening.png",
+      "sha256": "09d8276ef7b815420fd8e631799476e2ca916604f6536dab6e7e58356d227055",
+      "reviewed_opened_pixels": true,
+      "finding": "The actual lamp-street location shows pole heads and a warm illuminated paving patch under evening light."
+    },
+    {
+      "name": "warm_lamp_street_night",
+      "path": "data/reports/street_detail/20261019/native_warm_lamp_street_night.png",
+      "sha256": "fc82ca23f4b670e2bd29ccca9828f9747b4eea8cdbf68a31cfe35b6de9390b56",
+      "reviewed_opened_pixels": true,
+      "finding": "At the same location in night mode a warm paving pool is visible against cool darker pavement, with lamps/signals and cars in context. The avatar remains dark outside the spot centre."
+    },
+    {
+      "name": "small_menu_640",
+      "path": "data/reports/street_detail/20261019/native_small_menu_640.png",
+      "sha256": "986223f99f9789ed4148428a2a612ceaa19f5cc4f49fcb4fad32d86f6305174c",
+      "reviewed_opened_pixels": true,
+      "finding": "The scroll container stays within the 640x480 viewport; later destinations are reached by scrolling. Text is naturally smaller at this size."
+    }
+  ],
+  "bicycle_review": "bikes/visual_review.json",
+  "earlier_defects_preserved": [
+    "development/native_before_handoff_assert",
+    "bikes/development/native_first",
+    "bikes/development/pre_final_dog_view"
+  ],
+  "resolved": [
+    "Competing road edges replaced by one paired central divider and owned directional markings",
+    "Reverse-facing pedestrian bank heads corrected; mirrored back-face floating countdown removed",
+    "Dog arrival look direction moved pair clear of avatar shoulder",
+    "Bike kickstand, fixed front/back station board and wrapped transport hint overlap fixed"
+  ],
+  "limits": [
+    "Far-head countdown text is small at cross-road distance; some entrance/name HUD panels cover parts of the view.",
+    "Bus external riding camera does not expose every interior or seated-body detail.",
+    "Some retained pedestrians are still simplified capsules; no crowd or appearance overhaul is claimed.",
+    "Still images do not establish temporal comfort or every animation contact frame.",
+    "Authored road furniture, signal timing, bus pilot and bike docks are not a surveyed/live traffic service."
+  ]
+}

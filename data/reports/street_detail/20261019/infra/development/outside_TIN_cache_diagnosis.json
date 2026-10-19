@@ -1,0 +1,251 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"error": "차선·횡단보도·신호등과 가로등을 준비하지 못했습니다."
+			},
+			"id": "production_ready",
+			"passed": false
+		}
+	],
+	"headless": true,
+	"observations": {
+		"failed_snapshot": {
+			"active_lights": 0,
+			"counts": {
+				"crossings": 4.0,
+				"lamps_planned": 64.0,
+				"paint_polygons": 4136.0,
+				"road_corridors": 78.0,
+				"signal_poles": 4.0
+			},
+			"cycle": {
+				"duration_s": 46.0,
+				"pedestrian_green_end_s": 43.0,
+				"pedestrian_green_start_s": 29.0,
+				"timing_basis": "game_authored_coordinated_not_real_signal_timing",
+				"vehicle_amber_end_s": 27.0,
+				"vehicle_green_end_s": 24.0
+			},
+			"design_sha256": "b391d04376552b657e251ec298f9b032d21cac89b262e8e56e853d4f231ac14d",
+			"elapsed_s": 0.0,
+			"error": "도로 표시 지형 투영에 빈 면이 있습니다.",
+			"lamps": [],
+			"light_budget": 12,
+			"loaded": false,
+			"new_collision_count": 0,
+			"old_route_arrays_changed": false,
+			"paint_clearance_TIN_max_m": -1e99999,
+			"paint_clearance_TIN_min_m": 1e99999,
+			"paint_faces": 0,
+			"paint_mesh_count": 0,
+			"paint_polygons": 4136,
+			"paint_projection": [
+				{
+					"cache": {
+						"geometry_processing_performed": false,
+						"geometry_statistics_basis": "Exact keyed cold projection statistics, not newly processed faces.",
+						"hit": true,
+						"key": "662e3b1eeb207946d3c704af48bde029bf94a8844a2d17b6bbe8fc9fe0771237",
+						"source_faces_processed_this_call": 0
+					},
+					"clipped_source_faces": 2820,
+					"color": "white",
+					"covered_xz_area_m2": 6802.30917250141,
+					"dropped_leaf_faces": 0,
+					"kind": "mesh",
+					"maximum_height_delta_m": 14.7461525982933,
+					"ok": true,
+					"output_faces": 68329,
+					"source_faces": 8709,
+					"source_xz_area_m2": 7144.98440281919,
+					"uncovered_source_faces": 367,
+					"vertical_subdivisions": 0
+				}
+			],
+			"pedestrian_state": "red",
+			"preflight": {
+				"all_entrance_corridors_lamp_overlap_m2": 0.0,
+				"source_road_outside_paint_m2": 0.0,
+				"source_solid_private_paint_overlap_m2": 0.000014396
+			},
+			"provenance": {
+				"external_references": [
+					{
+						"checked": "2026-10-19",
+						"observation": "Official Seoul description separates signal, streetlight and combined S-Pole models and LED lighting. Used as functional integration reference, not placement/dimensions.",
+						"url": "https://news.seoul.go.kr/gov/archives/539324"
+					},
+					{
+						"checked": "2026-10-19",
+						"observation": "Official Seoul article describes red/green pedestrian information coordinated at crossings. Text reviewed; no claim to reconstruct the photographed location.",
+						"url": "https://mediahub.seoul.go.kr/news/article/newsArticlePrintPopup.do?articleNo=2001844"
+					}
+				],
+				"lamp": "Authored dark slim tapered poles, short horizontal LED heads, base flange/service door; no imported photograph texture",
+				"paint": "Authored widths, stripes, dashes and placement clipped to exact source drive triangles minus source solids/private; not surveyed lane markings",
+				"schedules": "46 second coordinated game cycle; never a live Seoul signal plan",
+				"source": "Existing OpenStreetMap-derived road/display triangles, existing traffic conflicts and all original entry candidates",
+				"terrain": "After EXP21 terrain.loaded; exact triangle-split runtime projection once, .052m relative paint offset above base TIN, road display .035m"
+			},
+			"quality_id": "standard",
+			"setup_usec": 0,
+			"signals": [],
+			"skipped": [],
+			"source_geometry_changed": false,
+			"stop_lines": [
+				{
+					"controller_stop_xz": [
+						79.0203453065695,
+						-206.484548010918
+					],
+					"crossing_id": "sejong_marked",
+					"direction_xz": [
+						-0.00665127630824669,
+						0.999977880017089
+					],
+					"enter_s_m": 21.0987748266909,
+					"exit_s_m": 29.3999661457414,
+					"id": "sejong_south_sejong_marked",
+					"paint_stop_xz": [
+						79.0030519881681,
+						-203.884605522874
+					],
+					"route_id": "sejong_south",
+					"source_feature_id": "osm:way:1084408283:highway_line",
+					"source_refs": [
+						{
+							"file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+							"object_id": "w/1084408283",
+							"provider": "OpenStreetMap via Geofabrik",
+							"snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+						}
+					],
+					"stop_s_m": 13.4321081600243
+				},
+				{
+					"controller_stop_xz": [
+						92.6915359921911,
+						-184.051683185997
+					],
+					"crossing_id": "sejong_marked",
+					"direction_xz": [
+						0.0470037706222145,
+						-0.998894711942802
+					],
+					"enter_s_m": 207.847384033344,
+					"exit_s_m": 216.36893800793,
+					"id": "sejong_north_sejong_marked",
+					"paint_stop_xz": [
+						92.8137457958089,
+						-186.648809437048
+					],
+					"route_id": "sejong_north",
+					"source_feature_id": "osm:way:378453707:highway_line",
+					"source_refs": [
+						{
+							"file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+							"object_id": "w/378453707",
+							"provider": "OpenStreetMap via Geofabrik",
+							"snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+						}
+					],
+					"stop_s_m": 200.180717366678
+				},
+				{
+					"controller_stop_xz": [
+						45.9774080478057,
+						131.263608781385
+					],
+					"crossing_id": "coverage_11277565406",
+					"direction_xz": [
+						-0.31007717439428,
+						0.950711389391996
+					],
+					"enter_s_m": 6.82776903342525,
+					"exit_s_m": 13.6277690334252,
+					"id": "coverage_drive_1_coverage_11277565406",
+					"paint_stop_xz": [
+						45.1712073943805,
+						133.735458393804
+					],
+					"route_id": "coverage_drive_1",
+					"source_feature_id": "osm:way:899373686:highway_line",
+					"source_refs": [
+						{
+							"file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+							"object_id": "w/899373686",
+							"provider": "OpenStreetMap via Geofabrik",
+							"snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+						}
+					],
+					"stop_s_m": 0.0
+				},
+				{
+					"controller_stop_xz": [
+						-4.15614924801584,
+						285.538370062318
+					],
+					"crossing_id": "coverage_11414286323",
+					"direction_xz": [
+						-0.283981078463307,
+						0.958829884325065
+					],
+					"enter_s_m": 169.92255754029,
+					"exit_s_m": 176.72255754029,
+					"id": "coverage_drive_1_coverage_11414286323",
+					"paint_stop_xz": [
+						-4.89450005202044,
+						288.031327761563
+					],
+					"route_id": "coverage_drive_1",
+					"source_feature_id": "osm:way:899373686:highway_line",
+					"source_refs": [
+						{
+							"file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+							"object_id": "w/899373686",
+							"provider": "OpenStreetMap via Geofabrik",
+							"snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+						}
+					],
+					"stop_s_m": 162.22255754029
+				},
+				{
+					"controller_stop_xz": [
+						252.625421764829,
+						-112.126702474327
+					],
+					"crossing_id": "coverage_4636374654",
+					"direction_xz": [
+						0.61079097193939,
+						-0.791791884649834
+					],
+					"enter_s_m": 18.6999329060222,
+					"exit_s_m": 25.4999329060222,
+					"id": "coverage_drive_2_coverage_4636374654",
+					"paint_stop_xz": [
+						254.213478291871,
+						-114.185361374417
+					],
+					"route_id": "coverage_drive_2",
+					"source_feature_id": "osm:way:469260694:highway_line",
+					"source_refs": [
+						{
+							"file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+							"object_id": "w/469260694",
+							"provider": "OpenStreetMap via Geofabrik",
+							"snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+						}
+					],
+					"stop_s_m": 10.9999329060222
+				}
+			],
+			"terrain_bound_after_loaded": true,
+			"time_id": "day",
+			"timing_basis": "game_authored_coordinated_not_real_signal_timing",
+			"vehicle_state": "green"
+		}
+	},
+	"passed": false,
+	"schema_version": 1
+}

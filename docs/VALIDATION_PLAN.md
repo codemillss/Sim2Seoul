@@ -1,5 +1,18 @@
 # 검증 계획과 완료 판정
 
+## EXP23 도로·교통과 반려견 보강 검증
+
+현재 production 지형에서 표시 메시가 source 도로와 native 바닥을 따르는지, 차량/보행 신호의 상충 상태가 없는지, 실제 차량이 빨간불의 기존 정지선 전에 멈추고 허가 후 재개하는지 관측한다. 버스의 전체 차체 지지/제동·정차/문·한 번의 E 승하차·움직이는 좌석/도착·안전한 외부 복귀, 메뉴/스위치·잘못된/막힌 진입 거절을 확인한다. 기존 출입/지형·원래 actor/차량의 상태를 보존한다.
+
+반려견 전 구간/양끝 회전·실제 접지와 발의 stance/swing·머리/목줄·주인 동작·짧은 행동 정지/기존 스위치를 검사한다. 실제 그래픽에서는 도로 표시/신호 시인성·버스 정류장/열린 문·승차 시야·개의 실루엣/발·밤의 노면 조명을 일반3인칭 카메라로 확인하고 numerical PASS와 별도로 기록한다. 초기 실패·소스 해시·실행 조건은 `data/reports/street_detail/20261019`에 보존한다. 과거 EXP21/22 보고서를 새 기능 통과로 재사용하지 않는다.
+
+
+추가 사용자 피드백 수용은 양방향 차도의 겹친 경계선/정지선 제거와 중앙 기준, 양쪽 보도에서 건너편 보행 신호의 앞면/시선, 두 버스 문 근처·문에 바짝 접근·대기 시간 이후의 새 E 탑승을 확인한다. 자전거는 실제 W/A/D/S/Space 입력, 가감속/바퀴·페달·탑승 자세, 벽/사람·경계 거절, 막힌 하차 대기/정상 복원과 메뉴 정지를 별도 검증한다.
+
+EXP23 최종 실행 결과: 실제 M5/Metal/Forward+·기본30Hz 통합 그래픽 53/53, headless30Hz 32/32를 통과했다. 별도 자전거 native 26/26·headless 23/23, 버스 headless60Hz 32/32, 도로 집중 18/18, 반려견 순찰 6/6도 기록했다. 서로 겹치는 실행 판정이며 고유 요구사항 수로 합산하지 않는다. [집계/원시 경로](../data/reports/street_detail/20261019/summary.json), [native 화면 검토](../data/reports/street_detail/20261019/visual_review.json)를 따른다. 각 검사는 고정된 소스 해시와 실제 30/60Hz를 남기고 실패 시도·최초 시각 결함을 덮어쓰지 않는다. headless의 `--fixed-fps 60`은 대기를 빨리 진행하기 위한 도구 설정이며 성능 판정이 아니다. 최종 native 통합과 자전거는 해당 가속 옵션 없이 실행했다.
+
+재현할 때 출력은 기존 증거를 덮어쓰지 않는 새 절대 경로를 쓴다. 준비 후 `Godot --headless --path game --fixed-fps 60 --script res://../tests/game/check_street_transit.gd -- --automatic-probe --report=<새 절대경로>/headless.json --physics-hz=30`으로 통합 검사한다. 실제 화면은 `--headless`와 `--fixed-fps`를 빼고 별도 출력 경로를 쓴다. 자전거 전용은 `res://../tests/game/check_city_bike_service.gd`, 버스 전용은 `res://../tests/game/check_city_bus_service.gd`다. 일반 실행에는 `--automatic-probe`를 붙이지 않는다. `tools/prepare_road_furniture.py --check`는 도로 표시의 결정적 재생성과 원본/사유지·입구 여유를 비교한다.
+
 ## EXP21 지형 연결 검증과 인수 기준
 
 완료 여부·최종 실행 수·현재 소스와 다음 작업은 [WORK_STATUS](WORK_STATUS.md)와 [EXP21 summary](../data/reports/terrain_integration/20261018/summary.json)를 단일 기준으로 삼는다. 이 절은 구현/재현 절차와 수용 범위를 정하며, 진행 중인 검사를 미리 통과 처리하지 않는다. 원천·보간·게임 기초의 차이는 [TERRAIN_INTEGRATION](TERRAIN_INTEGRATION.md)과 [원천 품질 기록](../data/reports/terrain_integration/20261018/source_quality.json)을 읽는다.

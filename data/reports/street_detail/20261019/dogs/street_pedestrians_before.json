@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "task": "street_pedestrians",
+  "world_sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+  "source_walk": "res://data/generated/public_walk.json",
+  "scope": {
+    "authored_population": true,
+    "walkers": 6,
+    "dogs": 2,
+    "source_geometry_modified": false,
+    "real_crowd_density_verified": false,
+    "real_pet_access_verified": false,
+    "route_basis": "Short authored, source-linked pedestrian patrols. Side offsets, people, pets, clothing and behaviour are game additions; no real visitor, animal access rule or measured sidewalk width is asserted.",
+    "height_basis": "Ray-observed existing physical ground, including the explicitly authored museum slope. No source elevation or collision is changed.",
+    "appearance_basis": "Authored skin, hair and clothing colour variation; no nationality or ethnicity is inferred or assigned."
+  },
+  "policy": {
+    "speed_mps": 1.05,
+    "maximum_dog_speed_mps": 1.35,
+    "player_clearance_m": 0.2,
+    "clear_hold_s": 0.3,
+    "blocked_reverse_s": 2.0,
+    "end_dwell_s": 0.65,
+    "maximum_actors": 8,
+    "dog_side_m": 0.8,
+    "maximum_leash_m": 1.4,
+    "sample_spacing_m": 0.5,
+    "traffic_route_clearance_m": 3.5,
+    "avoidance_maximum_offset_m": 1.25,
+    "avoidance_basis": "Exploration-only physically swept local passing with a committed lane, original route rejoin, supported footprint, private/road/traffic/entrance protection; no global crowd navigation."
+  },
+  "routes": [
+    {
+      "id": "stonewall_east",
+      "source_route": "stonewall",
+      "source_segment": [
+        13,
+        14
+      ],
+      "fractions": [
+        0.01,
+        0.13
+      ],
+      "side_offset_m": -0.85,
+      "initial_fraction": 0.25,
+      "direction": 1,
+      "dog": false,
+      "clothing": [
+        0.47,
+        0.29,
+        0.2
+      ],
+      "appearance": {
+        "skin": [
+          0.91,
+          0.72,
+          0.55
+        ],
+        "hair": [
+          0.1,
+          0.075,
+          0.06
+        ],
+        "trousers": [
+          0.18,
+          0.23,
+          0.28
+        ]
+      }
+    },
+    {
+      "id": "stonewall_dog",
+      "source_route": "stonewall",
+      "source_segment": [
+        13,
+        14
+      ],
+      "fractions": [
+        0.18,
+        0.43
+      ],
+      "side_offset_m": -1.1,
+      "initial_fraction": 0.35,
+      "direction": 1,
+      "dog": true,
+      "dog_color": [
+        0.72,
+        0.49,
+        0.27
+      ],
+      "clothing": [
+        0.28,
+        0.4,
+        0.25
+      ],
+      "appearance": {
+        "skin": [
+          0.39,
+          0.23,
+          0.14
+        ],
+        "hair": [
+          0.045,
+          0.035,
+          0.028
+        ],
+        "trousers": [
+          0.19,
+          0.23,
+          0.17
+        ]
+      }
+    },
+    {
+      "id": "stonewall_west",
+      "source_route": "stonewall",
+      "source_segment": [
+        13,
+        14
+      ],
+      "fractions": [
+        0.5,
+        0.72
+      ],
+      "side_offset_m": -0.85,
+      "initial_fraction": 0.65,
+      "direction": -1,
+      "dog": false,
+      "clothing": [
+        0.48,
+        0.37,
+        0.51
+      ],
+      "appearance": {
+        "skin": [
+          0.76,
+          0.51,
+          0.34
+        ],
+        "hair": [
+          0.28,
+          0.12,
+          0.055
+        ],
+        "trousers": [
+          0.25,
+          0.2,
+          0.27
+        ]
+      }
+    },
+    {
+      "id": "plaza_dog",
+      "source_route": "city_plaza",
+      "source_segment": [
+        97,
+        98
+      ],
+      "fractions": [
+        0.08,
+        0.43
+      ],
+      "side_offset_m": -1.05,
+      "initial_fraction": 0.3,
+      "direction": 1,
+      "dog": true,
+      "dog_color": [
+        0.84,
+        0.82,
+        0.73
+      ],
+      "clothing": [
+        0.27,
+        0.38,
+        0.55
+      ],
+      "dog_side_m": -0.8,
+      "appearance": {
+        "skin": [
+          0.53,
+          0.33,
+          0.21
+        ],
+        "hair": [
+          0.065,
+          0.045,
+          0.035
+        ],
+        "trousers": [
+          0.16,
+          0.22,
+          0.28
+        ]
+      }
+    },
+    {
+      "id": "plaza_west",
+      "source_route": "city_plaza",
+      "source_segment": [
+        97,
+        98
+      ],
+      "fractions": [
+        0.62,
+        0.92
+      ],
+      "side_offset_m": -1.05,
+      "initial_fraction": 0.55,
+      "direction": -1,
+      "dog": false,
+      "clothing": [
+        0.56,
+        0.44,
+        0.24
+      ],
+      "appearance": {
+        "skin": [
+          0.95,
+          0.8,
+          0.68
+        ],
+        "hair": [
+          0.63,
+          0.49,
+          0.28
+        ],
+        "trousers": [
+          0.24,
+          0.21,
+          0.18
+        ]
+      }
+    },
+    {
+      "id": "museum_slope",
+      "source_route": "osm:way:183272668:highway_line",
+      "museum_stations_m": [
+        8.0,
+        32.0
+      ],
+      "side_offset_m": 0.3,
+      "initial_fraction": 0.55,
+      "direction": 1,
+      "dog": false,
+      "clothing": [
+        0.3,
+        0.44,
+        0.45
+      ],
+      "appearance": {
+        "skin": [
+          0.66,
+          0.44,
+          0.28
+        ],
+        "hair": [
+          0.36,
+          0.34,
+          0.31
+        ],
+        "trousers": [
+          0.2,
+          0.25,
+          0.24
+        ]
+      }
+    }
+  ]
+}

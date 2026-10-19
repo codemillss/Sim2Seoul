@@ -1,0 +1,3143 @@
+{
+  "checks": [
+    {
+      "evidence": {},
+      "name": "production_runtime_and_current_terrain_ready",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bus": {
+          "accel_mps2": 1.5,
+          "actual_distance_m": 0.0271944098349195,
+          "at_end": false,
+          "blocked_reason": "signal_red",
+          "body_yaw_rad": 3.1348991394043,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "command_speed_mps": 0.272199172154069,
+          "completed_cycles": 0,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 0,
+          "cycle_distance_m": 0.0271944098349195,
+          "decel_mps2": 3.0,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 11,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 0.183333333333333,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.0673859491944313,
+                0.997719168663025,
+                0.00395095720887184
+              ],
+              "point": [
+                70.0,
+                1.2608847618103,
+                -224.389999389648
+              ]
+            },
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.0721707344055176,
+                0.997384488582611,
+                0.00394963193684816
+              ],
+              "point": [
+                70.0,
+                1.26088511943817,
+                -224.389999389648
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00006103515625,
+          "max_speed_limit_mps": 5.0,
+          "max_speed_mps": 0.27191779576242,
+          "max_step_m": 0.004531963262707,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "pause_ticks": 0,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 12
+          },
+          "physics_priority": 1,
+          "physics_steps": 11,
+          "position": [
+            70.1095657348633,
+            1.24941730499268,
+            -219.889175415039
+          ],
+          "reaction_s": 0.5,
+          "recycle_history": [],
+          "route_id": "T01_blue_pilot",
+          "route_length_m": 181.977905273438,
+          "running": true,
+          "segment": 0,
+          "speed_mps": 0.27191779576242,
+          "state": "bus_braking",
+          "station_m": 0.0271913725882769,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 11,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0691033533602037,
+          "terrain_normal": [
+            0.0689311474561691,
+            0.99762088060379,
+            0.00107155181467533
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 1,
+            "early_empty": 1,
+            "envelope_triangles": 0,
+            "ground": 13,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 12,
+          "velocity": [
+            -0.00180861947592348,
+            0.0,
+            0.271911770105362
+          ],
+          "visual_yaw_rad": 3.1348991394043
+        },
+        "docked_stop": -1,
+        "door_fraction": 0.0,
+        "error": "",
+        "events": [
+          {
+            "station_m": 0.0,
+            "tick": 1,
+            "type": "service_ready"
+          }
+        ],
+        "exit_requested": false,
+        "loaded": true,
+        "original_vehicle_ids_unchanged": true,
+        "riding": false,
+        "route_certificate": {
+          "accepted": true,
+          "box_m": [
+            2.45,
+            3.0,
+            9.0
+          ],
+          "reason": "all_bus_corners_inside_source_drive_triangles",
+          "samples": 365,
+          "source_feature_id": "osm:way:1084408283:highway_line",
+          "source_refs": [
+            {
+              "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+              "object_id": "w/1084408283",
+              "provider": "OpenStreetMap via Geofabrik",
+              "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+            }
+          ],
+          "spacing_m": 0.5,
+          "terrain_support": "EXP21 existing physical TIN; no bus-only plane"
+        },
+        "running": true,
+        "scope": "One authored blue bus, two source-walk shelters, actual inherited physical drive/brake/full-box sweeps, EXP21 terrain and signal stops. E seated ride; final exit needs positive native support/full capsule clearance. T01/GAME IDs and arrival estimates are game-authored, never real schedules.",
+        "source_geometry_changed": false,
+        "state": "approaching",
+        "state_elapsed_s": 0.183333333333333,
+        "stop_certificates": [
+          {
+            "authored_id": true,
+            "id": "GAME-01",
+            "source_wait_inside": true,
+            "source_walk_feature_id": "osm:way:776588359:highway_area",
+            "terrain_y_m": 1.10968399047852
+          },
+          {
+            "authored_id": true,
+            "id": "GAME-02",
+            "source_wait_inside": true,
+            "source_walk_feature_id": "osm:way:776588359:highway_area",
+            "terrain_y_m": -0.93171900510788
+          }
+        ],
+        "stop_count": 2,
+        "stop_index": 0
+      },
+      "name": "one_bus_two_stops_source_full_box_and_old14_preserved",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "mask": 63,
+        "size": [
+          2.45000004768372,
+          3.0,
+          9.0
+        ]
+      },
+      "name": "bus_full_collision_and_detailed_art",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_nose_clearance_m": 0.349685192108154,
+        "bus": {
+          "accel_mps2": 1.5,
+          "actual_distance_m": 11.1225874752563,
+          "at_end": false,
+          "blocked_reason": "signal_red",
+          "body_yaw_rad": 3.135178565979,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 0,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 0,
+          "cycle_distance_m": 11.1225874752563,
+          "decel_mps2": 3.0,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 371,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 6.18333333333332,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.0614225119352341,
+                0.998091101646423,
+                -0.00642770249396563
+              ],
+              "point": [
+                68.8204956054688,
+                1.35648703575134,
+                -210.0
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00009918212890625,
+          "max_speed_limit_mps": 5.0,
+          "max_speed_mps": 4.33877974748611,
+          "max_step_m": 0.0723129957914352,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "pause_ticks": 0,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 372
+          },
+          "physics_priority": 1,
+          "physics_steps": 371,
+          "position": [
+            70.0356063842773,
+            1.28857183456421,
+            -208.794052124023
+          ],
+          "reaction_s": 0.5,
+          "recycle_history": [],
+          "route_id": "T01_blue_pilot",
+          "route_length_m": 181.977905273438,
+          "running": true,
+          "segment": 0,
+          "speed_mps": 0.0,
+          "state": "bus_waiting",
+          "station_m": 11.1225614547729,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 371,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0598813333478203,
+          "terrain_normal": [
+            0.0596673786640167,
+            0.998211920261383,
+            -0.00358234695158899
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 1,
+            "early_empty": 1,
+            "envelope_triangles": 0,
+            "ground": 7,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 372,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": 3.135178565979
+        },
+        "maximum_speed_mps": 4.33877974748611,
+        "maximum_station_m": 11.1225614547729,
+        "signal": {
+          "active_lights": 0,
+          "counts": {
+            "crossings": 4.0,
+            "lamps_planned": 64.0,
+            "paint_polygons": 3492.0,
+            "road_corridors": 78.0,
+            "signal_poles": 5.0
+          },
+          "cycle": {
+            "duration_s": 46.0,
+            "pedestrian_green_end_s": 43.0,
+            "pedestrian_green_start_s": 29.0,
+            "timing_basis": "game_authored_coordinated_not_real_signal_timing",
+            "vehicle_amber_end_s": 27.0,
+            "vehicle_green_end_s": 24.0
+          },
+          "design_sha256": "65e626d5f17df67244724d98288f1859491482de0acb15dc3fa2165e36bfe36e",
+          "elapsed_s": 35.0999999999997,
+          "error": "",
+          "lamps": [
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                68.2867660522461,
+                8.61726760864258,
+                -208.98811340332
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_00",
+              "point": [
+                66.6867980957031,
+                1.49726748466492,
+                -208.998748779297
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                67.9508361816406,
+                8.34355163574219,
+                -175.059051513672
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_01",
+              "point": [
+                66.350959777832,
+                1.22355222702026,
+                -175.078659057617
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                67.0411605834961,
+                7.72351884841919,
+                -141.291580200195
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_02",
+              "point": [
+                65.4418792724609,
+                0.603518962860107,
+                -141.339614868164
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                66.0204696655273,
+                5.78471374511719,
+                -107.306907653809
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_03",
+              "point": [
+                64.4211883544922,
+                -1.3352860212326,
+                -107.354942321777
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                64.9997711181641,
+                6.04491901397705,
+                -73.3222274780273
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_04",
+              "point": [
+                63.4004898071289,
+                -1.07508063316345,
+                -73.3702621459961
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                63.9790725708008,
+                6.41627073287964,
+                -39.3375587463379
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_05",
+              "point": [
+                62.3797950744629,
+                -0.703729331493378,
+                -39.3855895996094
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                62.6535110473633,
+                6.52381992340088,
+                -5.81462001800537
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_06",
+              "point": [
+                61.057014465332,
+                -0.596179962158203,
+                -5.92043781280518
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                62.6033630371094,
+                5.47636842727661,
+                -434.601470947266
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_07",
+              "point": [
+                62.5554428100586,
+                0.556368350982666,
+                -433.702758789062
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:37403012:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                97.893928527832,
+                6.61698579788208,
+                5.66541576385498
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_08",
+              "point": [
+                99.4911956787109,
+                -0.503014206886292,
+                5.75883483886719
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                99.322509765625,
+                5.94209289550781,
+                -28.6727485656738
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_09",
+              "point": [
+                100.921859741211,
+                -1.17790699005127,
+                -28.6272602081299
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                100.133293151855,
+                5.83096599578857,
+                -62.725269317627
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_10",
+              "point": [
+                101.732856750488,
+                -1.28903412818909,
+                -62.6878356933594
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                100.928733825684,
+                5.83152151107788,
+                -96.7159576416016
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_11",
+              "point": [
+                102.528297424316,
+                -1.28847825527191,
+                -96.6785278320312
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                102.528945922852,
+                6.19330501556396,
+                -164.40510559082
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_12",
+              "point": [
+                104.127174377441,
+                -0.926695048809052,
+                -164.329895019531
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                104.079231262207,
+                6.73628854751587,
+                -198.579742431641
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_13",
+              "point": [
+                105.678512573242,
+                -0.383711159229279,
+                -198.531753540039
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                104.69556427002,
+                6.43762540817261,
+                -232.785552978516
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_14",
+              "point": [
+                106.295433044434,
+                -0.682374536991119,
+                -232.765075683594
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                106.144622802734,
+                7.1419825553894,
+                -334.796295166016
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_15",
+              "point": [
+                107.744529724121,
+                0.0219827555119991,
+                -334.778686523438
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                106.518829345703,
+                6.97360324859619,
+                -368.794219970703
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_16",
+              "point": [
+                108.118728637695,
+                -0.146396681666374,
+                -368.776611328125
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                106.893020629883,
+                6.15750217437744,
+                -402.792175292969
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_17",
+              "point": [
+                108.49292755127,
+                -0.962497889995575,
+                -402.774566650391
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                59.5509033203125,
+                6.35674285888672,
+                36.0047607421875
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_18",
+              "point": [
+                57.9569511413574,
+                -0.763257265090942,
+                35.8657684326172
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:619147732:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                65.7552261352539,
+                8.63992404937744,
+                -383.768890380859
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_19",
+              "point": [
+                64.1553421020508,
+                1.51992452144623,
+                -383.788360595703
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:620634303:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                65.8940353393555,
+                9.45287704467773,
+                -349.341644287109
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_20",
+              "point": [
+                64.2944564819336,
+                2.33287692070007,
+                -349.305053710938
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:620634303:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                66.6716690063477,
+                9.81924247741699,
+                -315.350555419922
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_21",
+              "point": [
+                65.0720901489258,
+                2.69924306869507,
+                -315.31396484375
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:620634303:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                68.2197494506836,
+                9.01545238494873,
+                -247.556518554688
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_22",
+              "point": [
+                66.6197967529297,
+                1.89545273780823,
+                -247.544311523438
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:620634303:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                77.1837844848633,
+                5.81224918365479,
+                115.663116455078
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_23",
+              "point": [
+                78.7273559570312,
+                -1.30775046348572,
+                116.084281921387
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:908622900:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                86.0368728637695,
+                5.89341402053833,
+                82.7793045043945
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_24",
+              "point": [
+                87.5822982788086,
+                -1.22658586502075,
+                83.1936187744141
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:908622900:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -273.33447265625,
+                9.67434310913086,
+                -30.2850551605225
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_25",
+              "point": [
+                -273.959930419922,
+                4.75434255599976,
+                -29.6378955841064
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:183272433:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -295.302062988281,
+                9.71333885192871,
+                -56.709903717041
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_26",
+              "point": [
+                -294.734191894531,
+                4.79333829879761,
+                -57.4081344604492
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:183272433:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                318.958618164062,
+                7.66989803314209,
+                -84.378173828125
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_27",
+              "point": [
+                318.94140625,
+                2.74989819526672,
+                -83.4783401489258
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:218923160:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                352.952392578125,
+                7.60982418060303,
+                -83.7274322509766
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_28",
+              "point": [
+                352.935180664062,
+                2.68982434272766,
+                -82.8275985717773
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:218923160:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                386.91357421875,
+                6.17732906341553,
+                -83.0301666259766
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_29",
+              "point": [
+                386.890716552734,
+                1.25732910633087,
+                -82.1304550170898
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:218923160:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                420.902587890625,
+                3.89234495162964,
+                -82.1669540405273
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_30",
+              "point": [
+                420.879730224609,
+                -1.0276552438736,
+                -81.2672424316406
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:218923160:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                454.891632080078,
+                4.20432329177856,
+                -81.3037490844727
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_31",
+              "point": [
+                454.868774414062,
+                -0.715676724910736,
+                -80.4040374755859
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:218923160:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -246.509643554688,
+                9.95320510864258,
+                -40.3787231445312
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_32",
+              "point": [
+                -247.409622192383,
+                5.03320503234863,
+                -40.3731689453125
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:37400088:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -246.929397583008,
+                8.65027332305908,
+                -108.377426147461
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_33",
+              "point": [
+                -247.829376220703,
+                3.73027348518372,
+                -108.371871948242
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:37400088:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                263.865447998047,
+                3.97375011444092,
+                -243.450653076172
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_34",
+              "point": [
+                262.967254638672,
+                -0.946249902248383,
+                -243.507415771484
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                266.177215576172,
+                4.76179885864258,
+                -277.415863037109
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_35",
+              "point": [
+                265.279815673828,
+                -0.158201187849045,
+                -277.484191894531
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                268.416107177734,
+                4.76708793640137,
+                -311.195434570312
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_36",
+              "point": [
+                267.516662597656,
+                -0.152912244200706,
+                -311.226989746094
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                269.670806884766,
+                4.30910539627075,
+                -345.185974121094
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_37",
+              "point": [
+                268.771484375,
+                -0.610894620418549,
+                -345.221130371094
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                270.875396728516,
+                3.09746503829956,
+                -379.149353027344
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_38",
+              "point": [
+                269.975952148438,
+                -1.82253515720367,
+                -379.180541992188
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -331.535461425781,
+                14.8382110595703,
+                265.703857421875
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_39",
+              "point": [
+                -331.113189697266,
+                7.71821165084839,
+                267.247131347656
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:480233462:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                453.480926513672,
+                10.2035331726074,
+                392.261260986328
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_40",
+              "point": [
+                455.021789550781,
+                3.08353304862976,
+                391.830261230469
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1499619438:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                400.599456787109,
+                9.73833847045898,
+                397.619415283203
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_41",
+              "point": [
+                401.326354980469,
+                2.61833810806274,
+                399.044769287109
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1499619446:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                197.713760375977,
+                8.52319145202637,
+                451.414855957031
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_42",
+              "point": [
+                197.904830932617,
+                3.60319185256958,
+                452.294342041016
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1499619449:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                230.938339233398,
+                8.88271236419678,
+                444.229400634766
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_43",
+              "point": [
+                231.128143310547,
+                3.96271252632141,
+                445.109161376953
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:1499619449:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -412.308685302734,
+                12.7148017883301,
+                306.109039306641
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_44",
+              "point": [
+                -411.542816162109,
+                7.79480171203613,
+                305.636322021484
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728951:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -394.450561523438,
+                12.5279712677002,
+                335.04150390625
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_45",
+              "point": [
+                -393.684692382812,
+                7.60797166824341,
+                334.568786621094
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728951:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -359.701843261719,
+                12.501880645752,
+                393.663787841797
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_46",
+              "point": [
+                -358.918853759766,
+                7.58188009262085,
+                393.220001220703
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728951:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -324.334503173828,
+                13.2427520751953,
+                451.528289794922
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_47",
+              "point": [
+                -323.570190429688,
+                8.32275199890137,
+                451.053070068359
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728951:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -257.226013183594,
+                12.6941413879395,
+                410.902893066406
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_48",
+              "point": [
+                -258.0361328125,
+                7.77414131164551,
+                411.294952392578
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728955:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -272.037750244141,
+                12.8890724182129,
+                380.298767089844
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_49",
+              "point": [
+                -272.847869873047,
+                7.9690728187561,
+                380.690826416016
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728955:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -286.853149414062,
+                13.5159931182861,
+                349.697998046875
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_50",
+              "point": [
+                -287.6630859375,
+                8.59599304199219,
+                350.090423583984
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728955:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                -299.001678466797,
+                12.7027111053467,
+                316.854278564453
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_51",
+              "point": [
+                -299.896911621094,
+                7.78271102905273,
+                316.761810302734
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:176728955:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                368.309234619141,
+                6.41135454177856,
+                388.017547607422
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_52",
+              "point": [
+                367.947631835938,
+                1.49135434627533,
+                387.193389892578
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:183272462:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                336.960601806641,
+                7.40313243865967,
+                400.423980712891
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_53",
+              "point": [
+                336.644897460938,
+                2.48313236236572,
+                399.581176757812
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:183272462:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                305.199859619141,
+                8.47007656097412,
+                409.480987548828
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_54",
+              "point": [
+                305.037750244141,
+                3.55007672309875,
+                408.595703125
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:183272462:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                122.641265869141,
+                6.67716979980469,
+                27.7719287872314
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_55",
+              "point": [
+                122.58650970459,
+                -0.442830115556717,
+                29.3709907531738
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:198564935:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                208.121612548828,
+                5.9822473526001,
+                48.7886543273926
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_56",
+              "point": [
+                206.809295654297,
+                -1.13775277137756,
+                49.703987121582
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:198691067:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                257.182708740234,
+                10.4785175323486,
+                96.9388427734375
+              ],
+              "height_m": 7.4,
+              "id": "road_lamp_57",
+              "point": [
+                258.428405761719,
+                3.35851788520813,
+                95.9347305297852
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:198691067:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                5.98459720611572,
+                8.1978874206543,
+                356.952087402344
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_58",
+              "point": [
+                6.20563507080078,
+                3.27788686752319,
+                356.079650878906
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:228797635:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                465.744812011719,
+                2.74538373947144,
+                -223.136444091797
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_59",
+              "point": [
+                464.845428466797,
+                -2.17461633682251,
+                -223.16960144043
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:233651327:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                245.123733520508,
+                8.63647079467773,
+                421.931427001953
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_60",
+              "point": [
+                244.951278686523,
+                3.71647047996521,
+                421.048095703125
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:333972428:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                211.757308959961,
+                8.54894828796387,
+                428.844940185547
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_61",
+              "point": [
+                211.57160949707,
+                3.62894868850708,
+                427.964294433594
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:333972428:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                178.497268676758,
+                8.70075511932373,
+                436.169128417969
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_62",
+              "point": [
+                178.301605224609,
+                3.78075528144836,
+                435.290649414062
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:333972428:highway_line",
+              "visible": false
+            },
+            {
+              "active": false,
+              "actual_light_class": "SpotLight3D",
+              "energy": 0.899999976158142,
+              "head": [
+                145.343368530273,
+                8.83244514465332,
+                443.513153076172
+              ],
+              "height_m": 5.2,
+              "id": "road_lamp_63",
+              "point": [
+                145.155075073242,
+                3.91244554519653,
+                442.633056640625
+              ],
+              "range_m": 16.0,
+              "source_feature_id": "osm:way:333972428:highway_line",
+              "visible": false
+            }
+          ],
+          "light_budget": 12,
+          "loaded": true,
+          "new_collision_count": 0,
+          "old_route_arrays_changed": false,
+          "paint_clearance_TIN_max_m": 0.0520516410124383,
+          "paint_clearance_TIN_min_m": 0.0519667366457286,
+          "paint_faces": 85673,
+          "paint_mesh_count": 2,
+          "paint_polygons": 3492,
+          "paint_projection": [
+            {
+              "cache": {
+                "geometry_processing_performed": false,
+                "geometry_statistics_basis": "Exact keyed cold projection statistics, not newly processed faces.",
+                "hit": true,
+                "key": "aa8d168c78eba247020f09459b301c8df863c1424b029dab187ddb189313ab9c",
+                "source_faces_processed_this_call": 0
+              },
+              "clipped_source_faces": 2403,
+              "color": "white",
+              "covered_xz_area_m2": 5851.57157209169,
+              "dropped_leaf_faces": 0,
+              "kind": "mesh",
+              "maximum_height_delta_m": 14.7461525982933,
+              "ok": true,
+              "output_faces": 59656,
+              "source_faces": 7508,
+              "source_xz_area_m2": 5853.76525542274,
+              "uncovered_source_faces": 297,
+              "vertical_subdivisions": 32
+            },
+            {
+              "cache": {
+                "geometry_processing_performed": false,
+                "geometry_statistics_basis": "Exact keyed cold projection statistics, not newly processed faces.",
+                "hit": true,
+                "key": "f8dea018dafd753ad7a8921f8c42b9cf867e35e6944f7a69242b30e77cae2680",
+                "source_faces_processed_this_call": 0
+              },
+              "clipped_source_faces": 1032,
+              "color": "yellow",
+              "covered_xz_area_m2": 2477.05455817078,
+              "dropped_leaf_faces": 0,
+              "kind": "mesh",
+              "maximum_height_delta_m": 14.7271529387217,
+              "ok": true,
+              "output_faces": 26017,
+              "source_faces": 1885,
+              "source_xz_area_m2": 2478.26414413564,
+              "uncovered_source_faces": 6,
+              "vertical_subdivisions": 0
+            }
+          ],
+          "pedestrian_state": "green",
+          "preflight": {
+            "all_entrance_corridors_lamp_overlap_m2": 0.0,
+            "source_road_outside_paint_m2": 0.0,
+            "source_solid_private_paint_overlap_m2": 0.0
+          },
+          "provenance": {
+            "external_references": [
+              {
+                "checked": "2026-10-19",
+                "observation": "Official Seoul description separates signal, streetlight and combined S-Pole models and LED lighting. Used as functional integration reference, not placement/dimensions.",
+                "url": "https://news.seoul.go.kr/gov/archives/539324"
+              },
+              {
+                "checked": "2026-10-19",
+                "observation": "Official Seoul article describes red/green pedestrian information coordinated at crossings. Text reviewed; no claim to reconstruct the photographed location.",
+                "url": "https://mediahub.seoul.go.kr/news/article/newsArticlePrintPopup.do?articleNo=2001844"
+              }
+            ],
+            "lamp": "Authored dark slim tapered poles, short horizontal LED heads, base flange/service door; no imported photograph texture",
+            "paint": "Authored widths, stripes, dashes and placement clipped to exact source drive triangles minus source solids/private; not surveyed lane markings",
+            "schedules": "46 second coordinated game cycle; never a live Seoul signal plan",
+            "source": "Existing OpenStreetMap-derived road/display triangles, existing traffic conflicts and all original entry candidates",
+            "terrain": "After EXP21 terrain.loaded; exact triangle-split runtime projection once, .052m relative paint offset above base TIN, road display .035m"
+          },
+          "quality_id": "standard",
+          "setup_usec": 145440,
+          "signals": [
+            {
+              "crossing_id": "sejong_marked",
+              "head_point": [
+                71.2032241821289,
+                6.8218936920166,
+                -203.936492919922
+              ],
+              "id": "sejong_south_sejong_marked_signal",
+              "kind": "vehicle",
+              "point": [
+                65.2033538818359,
+                1.56189370155334,
+                -203.97639465332
+              ],
+              "state": "red"
+            },
+            {
+              "crossing_id": "sejong_marked",
+              "head_point": [
+                100.605125427246,
+                4.87761211395264,
+                -186.282180786133
+              ],
+              "id": "sejong_north_sejong_marked_signal",
+              "kind": "vehicle",
+              "point": [
+                106.598495483398,
+                -0.382388353347778,
+                -186.000152587891
+              ],
+              "state": "red"
+            },
+            {
+              "crossing_id": "coverage_11277565406",
+              "head_point": [
+                36.8254280090332,
+                5.96022939682007,
+                134.168991088867
+              ],
+              "id": "coverage_drive_1_coverage_11277565406_signal",
+              "kind": "vehicle",
+              "point": [
+                31.1211585998535,
+                0.700228989124298,
+                132.308532714844
+              ],
+              "state": "red"
+            },
+            {
+              "crossing_id": "coverage_11414286323",
+              "head_point": [
+                -12.3733730316162,
+                8.56984901428223,
+                285.816284179688
+              ],
+              "id": "coverage_drive_1_coverage_11414286323_signal",
+              "kind": "vehicle",
+              "point": [
+                -18.1263523101807,
+                3.30984830856323,
+                284.112396240234
+              ],
+              "state": "red"
+            },
+            {
+              "crossing_id": "coverage_4636374654",
+              "head_point": [
+                253.168319702148,
+                5.6061224937439,
+                -114.991607666016
+              ],
+              "id": "coverage_drive_2_coverage_4636374654_signal",
+              "kind": "vehicle",
+              "point": [
+                250.887954711914,
+                0.346122115850449,
+                -116.750686645508
+              ],
+              "state": "red"
+            },
+            {
+              "crossing_id": "sejong_marked",
+              "head_point": [
+                65.2520141601562,
+                3.75003528594971,
+                -195.025314331055
+              ],
+              "id": "PedestrianSignal_sejong_marked_0",
+              "kind": "pedestrian",
+              "point": [
+                65.2520141601562,
+                1.50003516674042,
+                -195.025314331055
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "sejong_marked",
+              "head_point": [
+                99.2680130004883,
+                2.15863561630249,
+                -197.131057739258
+              ],
+              "id": "PedestrianSignal_sejong_marked_1",
+              "kind": "pedestrian",
+              "point": [
+                99.2680130004883,
+                -0.0913645029067993,
+                -197.131057739258
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_11277565406",
+              "head_point": [
+                56.4643058776855,
+                1.79400169849396,
+                145.441635131836
+              ],
+              "id": "PedestrianSignal_coverage_11277565406_0",
+              "kind": "pedestrian",
+              "point": [
+                56.4643058776855,
+                -0.45599827170372,
+                145.441635131836
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_11277565406",
+              "head_point": [
+                29.2241230010986,
+                3.07332229614258,
+                136.557159423828
+              ],
+              "id": "PedestrianSignal_coverage_11277565406_1",
+              "kind": "pedestrian",
+              "point": [
+                29.2241230010986,
+                0.823322296142578,
+                136.557159423828
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_11414286323",
+              "head_point": [
+                6.42805957794189,
+                5.39336919784546,
+                300.249755859375
+              ],
+              "id": "PedestrianSignal_coverage_11414286323_0",
+              "kind": "pedestrian",
+              "point": [
+                6.42805957794189,
+                3.14336919784546,
+                300.249755859375
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_11414286323",
+              "head_point": [
+                -21.0447387695312,
+                5.65597152709961,
+                292.113006591797
+              ],
+              "id": "PedestrianSignal_coverage_11414286323_1",
+              "kind": "pedestrian",
+              "point": [
+                -21.0447387695312,
+                3.40597176551819,
+                292.113006591797
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_4636374654",
+              "head_point": [
+                254.871429443359,
+                2.4785623550415,
+                -124.268119812012
+              ],
+              "id": "PedestrianSignal_coverage_4636374654_0",
+              "kind": "pedestrian",
+              "point": [
+                254.871429443359,
+                0.228562444448471,
+                -124.268119812012
+              ],
+              "state": "green"
+            },
+            {
+              "crossing_id": "coverage_4636374654",
+              "head_point": [
+                261.540588378906,
+                2.47858810424805,
+                -119.123512268066
+              ],
+              "id": "PedestrianSignal_coverage_4636374654_1",
+              "kind": "pedestrian",
+              "point": [
+                261.540588378906,
+                0.228588193655014,
+                -119.123512268066
+              ],
+              "state": "green"
+            }
+          ],
+          "skipped": [
+            {
+              "id": "uncovered_road_paint_white",
+              "kind": "paint",
+              "omitted_xz_area_m2": 2.19368333104649,
+              "reason": "uncovered_source_slivers_omitted_by_exact_terrain_clip",
+              "source_faces": 297
+            },
+            {
+              "id": "uncovered_road_paint_yellow",
+              "kind": "paint",
+              "omitted_xz_area_m2": 1.20958596485434,
+              "reason": "uncovered_source_slivers_omitted_by_exact_terrain_clip",
+              "source_faces": 6
+            }
+          ],
+          "source_geometry_changed": false,
+          "stop_lines": [
+            {
+              "controller_stop_xz": [
+                79.0203453065695,
+                -206.484548010918
+              ],
+              "crossing_id": "sejong_marked",
+              "direction_xz": [
+                -0.00665127630824669,
+                0.999977880017089
+              ],
+              "enter_s_m": 21.0987748266909,
+              "exit_s_m": 29.3999661457414,
+              "id": "sejong_south_sejong_marked",
+              "paint_stop_xz": [
+                79.0030519881681,
+                -203.884605522874
+              ],
+              "route_id": "sejong_south",
+              "source_feature_id": "osm:way:1084408283:highway_line",
+              "source_refs": [
+                {
+                  "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                  "object_id": "w/1084408283",
+                  "provider": "OpenStreetMap via Geofabrik",
+                  "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+                }
+              ],
+              "stop_s_m": 13.4321081600243
+            },
+            {
+              "controller_stop_xz": [
+                92.6915359921911,
+                -184.051683185997
+              ],
+              "crossing_id": "sejong_marked",
+              "direction_xz": [
+                0.0470037706222145,
+                -0.998894711942802
+              ],
+              "enter_s_m": 207.847384033344,
+              "exit_s_m": 216.36893800793,
+              "id": "sejong_north_sejong_marked",
+              "paint_stop_xz": [
+                92.8137457958089,
+                -186.648809437048
+              ],
+              "route_id": "sejong_north",
+              "source_feature_id": "osm:way:378453707:highway_line",
+              "source_refs": [
+                {
+                  "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                  "object_id": "w/378453707",
+                  "provider": "OpenStreetMap via Geofabrik",
+                  "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+                }
+              ],
+              "stop_s_m": 200.180717366678
+            },
+            {
+              "controller_stop_xz": [
+                45.9774080478057,
+                131.263608781385
+              ],
+              "crossing_id": "coverage_11277565406",
+              "direction_xz": [
+                -0.31007717439428,
+                0.950711389391996
+              ],
+              "enter_s_m": 6.82776903342525,
+              "exit_s_m": 13.6277690334252,
+              "id": "coverage_drive_1_coverage_11277565406",
+              "paint_stop_xz": [
+                45.1712073943805,
+                133.735458393804
+              ],
+              "route_id": "coverage_drive_1",
+              "source_feature_id": "osm:way:899373686:highway_line",
+              "source_refs": [
+                {
+                  "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                  "object_id": "w/899373686",
+                  "provider": "OpenStreetMap via Geofabrik",
+                  "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+                }
+              ],
+              "stop_s_m": 0.0
+            },
+            {
+              "controller_stop_xz": [
+                -4.15614924801584,
+                285.538370062318
+              ],
+              "crossing_id": "coverage_11414286323",
+              "direction_xz": [
+                -0.283981078463307,
+                0.958829884325065
+              ],
+              "enter_s_m": 169.92255754029,
+              "exit_s_m": 176.72255754029,
+              "id": "coverage_drive_1_coverage_11414286323",
+              "paint_stop_xz": [
+                -4.89450005202044,
+                288.031327761563
+              ],
+              "route_id": "coverage_drive_1",
+              "source_feature_id": "osm:way:899373686:highway_line",
+              "source_refs": [
+                {
+                  "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                  "object_id": "w/899373686",
+                  "provider": "OpenStreetMap via Geofabrik",
+                  "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+                }
+              ],
+              "stop_s_m": 162.22255754029
+            },
+            {
+              "controller_stop_xz": [
+                252.625421764829,
+                -112.126702474327
+              ],
+              "crossing_id": "coverage_4636374654",
+              "direction_xz": [
+                0.61079097193939,
+                -0.791791884649834
+              ],
+              "enter_s_m": 18.6999329060222,
+              "exit_s_m": 25.4999329060222,
+              "id": "coverage_drive_2_coverage_4636374654",
+              "paint_stop_xz": [
+                254.213478291871,
+                -114.185361374417
+              ],
+              "route_id": "coverage_drive_2",
+              "source_feature_id": "osm:way:469260694:highway_line",
+              "source_refs": [
+                {
+                  "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                  "object_id": "w/469260694",
+                  "provider": "OpenStreetMap via Geofabrik",
+                  "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+                }
+              ],
+              "stop_s_m": 10.9999329060222
+            }
+          ],
+          "terrain_bound_after_loaded": true,
+          "time_id": "day",
+          "timing_basis": "game_authored_coordinated_not_real_signal_timing",
+          "vehicle_state": "red"
+        }
+      },
+      "name": "actual_red_signal_braking_before_full_bus_nose_crosses_stopline",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bus": {
+          "accel_mps2": 1.5,
+          "actual_distance_m": 65.000011749813,
+          "at_end": false,
+          "blocked_reason": "scheduled_stop_GAME-01",
+          "body_yaw_rad": 3.11138463020325,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 0,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 0,
+          "cycle_distance_m": 65.000011749813,
+          "decel_mps2": 3.0,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 956,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 20.7333333333334,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "StaticCollision",
+          "floor_collider_path": "/root/ExploreWalk/World/W03_support/StaticCollision",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/World/W03_support/StaticCollision",
+              "geometry_id": "W03_support",
+              "normal": [
+                0.0548229105770588,
+                0.998232126235962,
+                0.0229593124240637
+              ],
+              "point": [
+                67.983642578125,
+                0.999238848686218,
+                -155.000015258789
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.0001068115234375,
+          "max_speed_limit_mps": 5.0,
+          "max_speed_mps": 5.00182762742043,
+          "max_step_m": 0.0833637937903404,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "pause_ticks": 0,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 1245
+          },
+          "physics_priority": 1,
+          "physics_steps": 1244,
+          "position": [
+            69.2055206298828,
+            0.940291345119476,
+            -154.925216674805
+          ],
+          "reaction_s": 0.5,
+          "recycle_history": [],
+          "route_id": "T01_blue_pilot",
+          "route_length_m": 181.977905273438,
+          "running": true,
+          "segment": 2,
+          "speed_mps": 0.0,
+          "state": "bus_opening_doors",
+          "station_m": 64.9999618530273,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 1246,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0482931566740347,
+          "terrain_normal": [
+            0.0479509644210339,
+            0.998835921287537,
+            0.00524874264374375
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 0,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 7,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 1245,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": 3.11138463020325
+        },
+        "maximum_step_m": 0.0833637937903404,
+        "speed_path": [
+          {
+            "reason": "",
+            "s": 11.1229724884033,
+            "speed": 0.0260563648771495,
+            "state": "accelerating",
+            "tick": 0
+          },
+          {
+            "reason": "",
+            "s": 11.3273677825928,
+            "speed": 0.767228454351425,
+            "state": "accelerating",
+            "tick": 30
+          },
+          {
+            "reason": "",
+            "s": 11.9023170471191,
+            "speed": 1.50790717452765,
+            "state": "accelerating",
+            "tick": 60
+          },
+          {
+            "reason": "",
+            "s": 12.8478488922119,
+            "speed": 2.24950142204762,
+            "state": "accelerating",
+            "tick": 90
+          },
+          {
+            "reason": "",
+            "s": 14.1641778945923,
+            "speed": 2.99109265208244,
+            "state": "accelerating",
+            "tick": 120
+          },
+          {
+            "reason": "",
+            "s": 15.8513021469116,
+            "speed": 3.7326867878437,
+            "state": "accelerating",
+            "tick": 150
+          },
+          {
+            "reason": "",
+            "s": 17.9092235565186,
+            "speed": 4.47428092360497,
+            "state": "accelerating",
+            "tick": 180
+          },
+          {
+            "reason": "",
+            "s": 20.3203639984131,
+            "speed": 4.99980345368385,
+            "state": "driving",
+            "tick": 210
+          },
+          {
+            "reason": "",
+            "s": 22.8202667236328,
+            "speed": 4.9998065829277,
+            "state": "driving",
+            "tick": 240
+          },
+          {
+            "reason": "",
+            "s": 25.3201574385166,
+            "speed": 4.99902538955212,
+            "state": "driving",
+            "tick": 270
+          },
+          {
+            "reason": "",
+            "s": 27.8197348117828,
+            "speed": 4.99914988875389,
+            "state": "driving",
+            "tick": 300
+          },
+          {
+            "reason": "",
+            "s": 30.3193726539612,
+            "speed": 4.99914988875389,
+            "state": "driving",
+            "tick": 330
+          },
+          {
+            "reason": "",
+            "s": 32.8190107345581,
+            "speed": 5.00095367431641,
+            "state": "driving",
+            "tick": 360
+          },
+          {
+            "reason": "",
+            "s": 35.3189554214478,
+            "speed": 4.99918431043625,
+            "state": "driving",
+            "tick": 390
+          },
+          {
+            "reason": "",
+            "s": 37.8189897537231,
+            "speed": 5.00006541609764,
+            "state": "driving",
+            "tick": 420
+          },
+          {
+            "reason": "",
+            "s": 40.3190402984619,
+            "speed": 5.00010564923286,
+            "state": "driving",
+            "tick": 450
+          },
+          {
+            "reason": "",
+            "s": 42.8191223144531,
+            "speed": 5.00007078051567,
+            "state": "driving",
+            "tick": 480
+          },
+          {
+            "reason": "",
+            "s": 45.3191547393799,
+            "speed": 5.00006541609764,
+            "state": "driving",
+            "tick": 510
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 47.8188858032227,
+            "speed": 5.00006541609764,
+            "state": "bus_braking",
+            "tick": 540
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 50.3187847137451,
+            "speed": 4.99915570020676,
+            "state": "bus_braking",
+            "tick": 570
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 52.8187988996506,
+            "speed": 5.0001186132431,
+            "state": "bus_braking",
+            "tick": 600
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 55.3188576698303,
+            "speed": 5.0001186132431,
+            "state": "bus_braking",
+            "tick": 630
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 57.8189163208008,
+            "speed": 5.0001186132431,
+            "state": "bus_braking",
+            "tick": 660
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 60.2154884338379,
+            "speed": 4.37453180551529,
+            "state": "bus_braking",
+            "tick": 690
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 62.1455574035645,
+            "speed": 3.37890900671482,
+            "state": "bus_braking",
+            "tick": 720
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 63.5779972076416,
+            "speed": 2.38418743014336,
+            "state": "bus_braking",
+            "tick": 750
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 64.513858795166,
+            "speed": 1.39314003288746,
+            "state": "bus_braking",
+            "tick": 780
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 64.9569578170776,
+            "speed": 0.414918009191751,
+            "state": "bus_braking",
+            "tick": 810
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 64.9999618530273,
+            "speed": 0.0,
+            "state": "bus_opening_doors",
+            "tick": 840
+          },
+          {
+            "reason": "scheduled_stop_GAME-01",
+            "s": 64.9999618530273,
+            "speed": 0.0,
+            "state": "bus_opening_doors",
+            "tick": 870
+          }
+        ]
+      },
+      "name": "physical_approach_brake_and_first_dock",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_y": 1.29678797721863,
+        "minimum_y": 0.93913471698761,
+        "samples": 30,
+        "unsupported": 0
+      },
+      "name": "current_terrain_support_during_motion",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "running_switch_freezes_bus_doors_clock",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "paused": true,
+        "state": "doors_open"
+      },
+      "name": "actual_menu_freezes_bus_and_door_state",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "safe": {
+          "point": [
+            66.1727523803711,
+            1.11463749408722,
+            -152.214996337891
+          ]
+        },
+        "wait": [
+          66.1727523803711,
+          1.11463737487793,
+          -152.214996337891
+        ]
+      },
+      "name": "first_stop_positive_support_and_native_capsule_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bus": {
+          "accel_mps2": 1.5,
+          "actual_distance_m": 65.000011749813,
+          "at_end": false,
+          "blocked_reason": "scheduled_stop_GAME-01",
+          "body_yaw_rad": 3.11138463020325,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 0,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 0,
+          "cycle_distance_m": 65.000011749813,
+          "decel_mps2": 3.0,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 956,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 20.8000000000001,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "StaticCollision",
+          "floor_collider_path": "/root/ExploreWalk/World/W03_support/StaticCollision",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/World/W03_support/StaticCollision",
+              "geometry_id": "W03_support",
+              "normal": [
+                0.0548229105770588,
+                0.998232126235962,
+                0.0229593124240637
+              ],
+              "point": [
+                67.983642578125,
+                0.999238848686218,
+                -155.000015258789
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.0001068115234375,
+          "max_speed_limit_mps": 5.0,
+          "max_speed_mps": 5.00182762742043,
+          "max_step_m": 0.0833637937903404,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "pause_ticks": 35,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 1314
+          },
+          "physics_priority": 1,
+          "physics_steps": 1283,
+          "position": [
+            69.2055206298828,
+            0.940291345119476,
+            -154.925216674805
+          ],
+          "reaction_s": 0.5,
+          "recycle_history": [],
+          "route_id": "T01_blue_pilot",
+          "route_length_m": 181.977905273438,
+          "running": true,
+          "segment": 2,
+          "speed_mps": 0.0,
+          "state": "bus_doors_open",
+          "station_m": 64.9999618530273,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 1250,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0482931566740347,
+          "terrain_normal": [
+            0.0479509644210339,
+            0.998835921287537,
+            0.00524874264374375
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 0,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 7,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 1314,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": 3.11138463020325
+        },
+        "docked_stop": 0,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "station_m": 0.0,
+            "tick": 1,
+            "type": "service_ready"
+          },
+          {
+            "speed_mps": 0.00916671036975458,
+            "station_m": 64.9999618530273,
+            "stop_id": "GAME-01",
+            "tick": 1197,
+            "type": "docked"
+          },
+          {
+            "station_m": 64.9999618530273,
+            "stop_id": "GAME-01",
+            "tick": 1245,
+            "type": "doors_open"
+          },
+          {
+            "capsule_layer": 2,
+            "capsule_mask": 45,
+            "station_m": 64.9999618530273,
+            "stop_id": "GAME-01",
+            "tick": 1315,
+            "type": "boarded"
+          }
+        ],
+        "exit_requested": false,
+        "loaded": true,
+        "original_vehicle_ids_unchanged": true,
+        "riding": true,
+        "route_certificate": {
+          "accepted": true,
+          "box_m": [
+            2.45,
+            3.0,
+            9.0
+          ],
+          "reason": "all_bus_corners_inside_source_drive_triangles",
+          "samples": 365,
+          "source_feature_id": "osm:way:1084408283:highway_line",
+          "source_refs": [
+            {
+              "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+              "object_id": "w/1084408283",
+              "provider": "OpenStreetMap via Geofabrik",
+              "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+            }
+          ],
+          "spacing_m": 0.5,
+          "terrain_support": "EXP21 existing physical TIN; no bus-only plane"
+        },
+        "running": true,
+        "scope": "One authored blue bus, two source-walk shelters, actual inherited physical drive/brake/full-box sweeps, EXP21 terrain and signal stops. E seated ride; final exit needs positive native support/full capsule clearance. T01/GAME IDs and arrival estimates are game-authored, never real schedules.",
+        "source_geometry_changed": false,
+        "state": "doors_open",
+        "state_elapsed_s": 0.566666666666667,
+        "stop_certificates": [
+          {
+            "authored_id": true,
+            "id": "GAME-01",
+            "source_wait_inside": true,
+            "source_walk_feature_id": "osm:way:776588359:highway_area",
+            "terrain_y_m": 1.10968399047852
+          },
+          {
+            "authored_id": true,
+            "id": "GAME-02",
+            "source_wait_inside": true,
+            "source_walk_feature_id": "osm:way:776588359:highway_area",
+            "terrain_y_m": -0.93171900510788
+          }
+        ],
+        "stop_count": 2,
+        "stop_index": 0
+      },
+      "name": "board_docked_bus_keeps_original_capsule_and_masks",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "attachment_max_m": 0.0,
+        "player": [
+          63.4709091186523,
+          -0.799220502376556,
+          -62.255558013916
+        ],
+        "state": {
+          "bus": {
+            "accel_mps2": 1.5,
+            "actual_distance_m": 154.9999127263,
+            "at_end": false,
+            "blocked_reason": "scheduled_stop_GAME-02",
+            "body_yaw_rad": 3.11248350143433,
+            "can_recycle": false,
+            "clearance_m": 1.0,
+            "command_speed_mps": 0.0,
+            "completed_cycles": 0,
+            "crossing_speed_limit_mps": 2.0,
+            "cycle_count": 0,
+            "cycle_distance_m": 154.9999127263,
+            "decel_mps2": 3.0,
+            "direction": 1,
+            "early_bounds": {
+              "available": true,
+              "checks": 0,
+              "diagnostic_enabled": false,
+              "empty_returns": 1748,
+              "last_violation": {},
+              "verified": 0,
+              "verified_empty": 0,
+              "violations": 0
+            },
+            "elapsed_s": 54.8166666666648,
+            "end_events": 0,
+            "endpoint_history": [],
+            "floor_collider": "StaticCollision",
+            "floor_collider_path": "/root/ExploreWalk/World/W03_support/StaticCollision",
+            "floor_reason": "up_floor_ray",
+            "gravity_mps2": 9.8,
+            "last_motion_contacts": [
+              {
+                "collider": "/root/ExploreWalk/World/W03_support/StaticCollision",
+                "geometry_id": "W03_support",
+                "normal": [
+                  0.0571622289717197,
+                  0.998292028903961,
+                  -0.0120593598112464
+                ],
+                "point": [
+                  67.8101196289062,
+                  -1.08385336399078,
+                  -67.8101119995117
+                ]
+              }
+            ],
+            "last_recycle_tick": -1,
+            "layer": 8,
+            "mask": 63,
+            "max_route_offset_m": 0.0001068115234375,
+            "max_speed_limit_mps": 5.0,
+            "max_speed_mps": 5.02392545342445,
+            "max_step_m": 0.0837320908904076,
+            "motion_parts": 1,
+            "obstacle": {},
+            "on_floor": true,
+            "pause_ticks": 35,
+            "permission": {
+              "allow_crossing": true,
+              "fresh": true,
+              "human_present": false,
+              "reason": "pilot_full_box_observation_and_source_signal",
+              "tick": 3355
+            },
+            "physics_priority": 1,
+            "physics_steps": 3324,
+            "position": [
+              66.5036849975586,
+              -0.968108952045441,
+              -64.9658813476562
+            ],
+            "reaction_s": 0.5,
+            "recycle_history": [],
+            "route_id": "T01_blue_pilot",
+            "route_length_m": 181.977905273438,
+            "running": true,
+            "segment": 2,
+            "speed_mps": 0.0,
+            "state": "bus_doors_open",
+            "station_m": 154.999855041504,
+            "terrain_clearance_XZ_this_tick_m": 0.0,
+            "terrain_clearance_moves": 3239,
+            "terrain_enabled": true,
+            "terrain_grade": 0.058199745385378,
+            "terrain_normal": [
+              0.0561994016170502,
+              0.998310685157776,
+              -0.014748509041965
+            ],
+            "terrain_orientation_blocked": false,
+            "terrain_queries": {
+              "broadphase": 0,
+              "early_broadphase": 0,
+              "early_empty": 0,
+              "envelope_triangles": 0,
+              "ground": 7,
+              "ground_envelopes": 0,
+              "narrow_intersections": 0,
+              "narrow_sweeps": 0,
+              "pose_cache_hits": 0
+            },
+            "terrain_query_tick": 3355,
+            "velocity": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "visual_yaw_rad": 3.11248350143433
+          },
+          "docked_stop": 1,
+          "door_fraction": 1.0,
+          "error": "",
+          "events": [
+            {
+              "station_m": 0.0,
+              "tick": 1,
+              "type": "service_ready"
+            },
+            {
+              "speed_mps": 0.00916671036975458,
+              "station_m": 64.9999618530273,
+              "stop_id": "GAME-01",
+              "tick": 1197,
+              "type": "docked"
+            },
+            {
+              "station_m": 64.9999618530273,
+              "stop_id": "GAME-01",
+              "tick": 1245,
+              "type": "doors_open"
+            },
+            {
+              "capsule_layer": 2,
+              "capsule_mask": 45,
+              "station_m": 64.9999618530273,
+              "stop_id": "GAME-01",
+              "tick": 1315,
+              "type": "boarded"
+            },
+            {
+              "station_m": 64.9999618530273,
+              "tick": 2000,
+              "type": "closing_doors"
+            },
+            {
+              "station_m": 64.9999618530273,
+              "tick": 2048,
+              "type": "departed"
+            },
+            {
+              "station_m": 65.0951738357544,
+              "tick": 2070,
+              "type": "exit_requested"
+            },
+            {
+              "speed_mps": 0.0210770219564438,
+              "station_m": 154.999855041504,
+              "stop_id": "GAME-02",
+              "tick": 3306,
+              "type": "docked"
+            },
+            {
+              "station_m": 154.999855041504,
+              "stop_id": "GAME-02",
+              "tick": 3354,
+              "type": "doors_open"
+            },
+            {
+              "point": [
+                63.4709091186523,
+                -0.799220502376556,
+                -62.255558013916
+              ],
+              "station_m": 154.999855041504,
+              "stop_id": "GAME-02",
+              "tick": 3355,
+              "type": "disembarked"
+            }
+          ],
+          "exit_requested": false,
+          "loaded": true,
+          "original_vehicle_ids_unchanged": true,
+          "riding": false,
+          "route_certificate": {
+            "accepted": true,
+            "box_m": [
+              2.45,
+              3.0,
+              9.0
+            ],
+            "reason": "all_bus_corners_inside_source_drive_triangles",
+            "samples": 365,
+            "source_feature_id": "osm:way:1084408283:highway_line",
+            "source_refs": [
+              {
+                "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                "object_id": "w/1084408283",
+                "provider": "OpenStreetMap via Geofabrik",
+                "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+              }
+            ],
+            "spacing_m": 0.5,
+            "terrain_support": "EXP21 existing physical TIN; no bus-only plane"
+          },
+          "running": true,
+          "scope": "One authored blue bus, two source-walk shelters, actual inherited physical drive/brake/full-box sweeps, EXP21 terrain and signal stops. E seated ride; final exit needs positive native support/full capsule clearance. T01/GAME IDs and arrival estimates are game-authored, never real schedules.",
+          "source_geometry_changed": false,
+          "state": "doors_open",
+          "state_elapsed_s": 0.0166666666666667,
+          "stop_certificates": [
+            {
+              "authored_id": true,
+              "id": "GAME-01",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:776588359:highway_area",
+              "terrain_y_m": 1.10968399047852
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-02",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:776588359:highway_area",
+              "terrain_y_m": -0.93171900510788
+            }
+          ],
+          "stop_count": 2,
+          "stop_index": 1
+        }
+      },
+      "name": "moving_ride_closed_doors_and_supported_next_stop_exit",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 55458,
+  "passed": 10,
+  "snapshot": {
+    "bus": {
+      "accel_mps2": 1.5,
+      "actual_distance_m": 154.9999127263,
+      "at_end": false,
+      "blocked_reason": "scheduled_stop_GAME-02",
+      "body_yaw_rad": 3.11248350143433,
+      "can_recycle": false,
+      "clearance_m": 1.0,
+      "command_speed_mps": 0.0,
+      "completed_cycles": 0,
+      "crossing_speed_limit_mps": 2.0,
+      "cycle_count": 0,
+      "cycle_distance_m": 154.9999127263,
+      "decel_mps2": 3.0,
+      "direction": 1,
+      "early_bounds": {
+        "available": true,
+        "checks": 0,
+        "diagnostic_enabled": false,
+        "empty_returns": 1748,
+        "last_violation": {},
+        "verified": 0,
+        "verified_empty": 0,
+        "violations": 0
+      },
+      "elapsed_s": 54.8166666666648,
+      "end_events": 0,
+      "endpoint_history": [],
+      "floor_collider": "StaticCollision",
+      "floor_collider_path": "/root/ExploreWalk/World/W03_support/StaticCollision",
+      "floor_reason": "up_floor_ray",
+      "gravity_mps2": 9.8,
+      "last_motion_contacts": [
+        {
+          "collider": "/root/ExploreWalk/World/W03_support/StaticCollision",
+          "geometry_id": "W03_support",
+          "normal": [
+            0.0571622289717197,
+            0.998292028903961,
+            -0.0120593598112464
+          ],
+          "point": [
+            67.8101196289062,
+            -1.08385336399078,
+            -67.8101119995117
+          ]
+        }
+      ],
+      "last_recycle_tick": -1,
+      "layer": 8,
+      "mask": 63,
+      "max_route_offset_m": 0.0001068115234375,
+      "max_speed_limit_mps": 5.0,
+      "max_speed_mps": 5.02392545342445,
+      "max_step_m": 0.0837320908904076,
+      "motion_parts": 1,
+      "obstacle": {},
+      "on_floor": true,
+      "pause_ticks": 35,
+      "permission": {
+        "allow_crossing": true,
+        "fresh": true,
+        "human_present": false,
+        "reason": "pilot_full_box_observation_and_source_signal",
+        "tick": 3355
+      },
+      "physics_priority": 1,
+      "physics_steps": 3324,
+      "position": [
+        66.5036849975586,
+        -0.968108952045441,
+        -64.9658813476562
+      ],
+      "reaction_s": 0.5,
+      "recycle_history": [],
+      "route_id": "T01_blue_pilot",
+      "route_length_m": 181.977905273438,
+      "running": true,
+      "segment": 2,
+      "speed_mps": 0.0,
+      "state": "bus_doors_open",
+      "station_m": 154.999855041504,
+      "terrain_clearance_XZ_this_tick_m": 0.0,
+      "terrain_clearance_moves": 3239,
+      "terrain_enabled": true,
+      "terrain_grade": 0.058199745385378,
+      "terrain_normal": [
+        0.0561994016170502,
+        0.998310685157776,
+        -0.014748509041965
+      ],
+      "terrain_orientation_blocked": false,
+      "terrain_queries": {
+        "broadphase": 0,
+        "early_broadphase": 0,
+        "early_empty": 0,
+        "envelope_triangles": 0,
+        "ground": 7,
+        "ground_envelopes": 0,
+        "narrow_intersections": 0,
+        "narrow_sweeps": 0,
+        "pose_cache_hits": 0
+      },
+      "terrain_query_tick": 3355,
+      "velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visual_yaw_rad": 3.11248350143433
+    },
+    "docked_stop": 1,
+    "door_fraction": 1.0,
+    "error": "",
+    "events": [
+      {
+        "station_m": 0.0,
+        "tick": 1,
+        "type": "service_ready"
+      },
+      {
+        "speed_mps": 0.00916671036975458,
+        "station_m": 64.9999618530273,
+        "stop_id": "GAME-01",
+        "tick": 1197,
+        "type": "docked"
+      },
+      {
+        "station_m": 64.9999618530273,
+        "stop_id": "GAME-01",
+        "tick": 1245,
+        "type": "doors_open"
+      },
+      {
+        "capsule_layer": 2,
+        "capsule_mask": 45,
+        "station_m": 64.9999618530273,
+        "stop_id": "GAME-01",
+        "tick": 1315,
+        "type": "boarded"
+      },
+      {
+        "station_m": 64.9999618530273,
+        "tick": 2000,
+        "type": "closing_doors"
+      },
+      {
+        "station_m": 64.9999618530273,
+        "tick": 2048,
+        "type": "departed"
+      },
+      {
+        "station_m": 65.0951738357544,
+        "tick": 2070,
+        "type": "exit_requested"
+      },
+      {
+        "speed_mps": 0.0210770219564438,
+        "station_m": 154.999855041504,
+        "stop_id": "GAME-02",
+        "tick": 3306,
+        "type": "docked"
+      },
+      {
+        "station_m": 154.999855041504,
+        "stop_id": "GAME-02",
+        "tick": 3354,
+        "type": "doors_open"
+      },
+      {
+        "point": [
+          63.4709091186523,
+          -0.799220502376556,
+          -62.255558013916
+        ],
+        "station_m": 154.999855041504,
+        "stop_id": "GAME-02",
+        "tick": 3355,
+        "type": "disembarked"
+      }
+    ],
+    "exit_requested": false,
+    "loaded": true,
+    "original_vehicle_ids_unchanged": true,
+    "riding": false,
+    "route_certificate": {
+      "accepted": true,
+      "box_m": [
+        2.45,
+        3.0,
+        9.0
+      ],
+      "reason": "all_bus_corners_inside_source_drive_triangles",
+      "samples": 365,
+      "source_feature_id": "osm:way:1084408283:highway_line",
+      "source_refs": [
+        {
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "object_id": "w/1084408283",
+          "provider": "OpenStreetMap via Geofabrik",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "spacing_m": 0.5,
+      "terrain_support": "EXP21 existing physical TIN; no bus-only plane"
+    },
+    "running": true,
+    "scope": "One authored blue bus, two source-walk shelters, actual inherited physical drive/brake/full-box sweeps, EXP21 terrain and signal stops. E seated ride; final exit needs positive native support/full capsule clearance. T01/GAME IDs and arrival estimates are game-authored, never real schedules.",
+    "source_geometry_changed": false,
+    "state": "doors_open",
+    "state_elapsed_s": 0.0166666666666667,
+    "stop_certificates": [
+      {
+        "authored_id": true,
+        "id": "GAME-01",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:776588359:highway_area",
+        "terrain_y_m": 1.10968399047852
+      },
+      {
+        "authored_id": true,
+        "id": "GAME-02",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:776588359:highway_area",
+        "terrain_y_m": -0.93171900510788
+      }
+    ],
+    "stop_count": 2,
+    "stop_index": 1
+  },
+  "source_hashes": {
+    "res://assets/authored/bus_service.json": "765844b02b96dfd78da59066660ff6e4d47324973884e8204c312760815d783a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bus_service.gd": "e153647f5f86925b2bc96f82f24fb22582142aa2c8e01fbd961029390e00dcb8",
+    "res://scripts/traffic/vehicle.gd": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045"
+  },
+  "total": 11
+}

@@ -1,0 +1,82 @@
+{
+  "task": "T01_BUS_PILOT",
+  "verification": "Actual Godot4.7.2 headless fixed-fps60 / physics60Hz production scene; no native window opened by this subtask",
+  "passed": 13,
+  "total": 13,
+  "runtime_source_hash_mismatch_count": 0,
+  "runtime_hash_checks": [
+    {
+      "path": "res://assets/authored/bus_service.json",
+      "match": true,
+      "expected": "9cdded5580d5e140c50aa3dfc6db31a8665a65e538b875c8999300113e8c8080",
+      "actual": "9cdded5580d5e140c50aa3dfc6db31a8665a65e538b875c8999300113e8c8080"
+    },
+    {
+      "path": "res://data/generated/terrain_surface.json",
+      "match": true,
+      "expected": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+      "actual": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+    },
+    {
+      "path": "res://data/generated/traffic.json",
+      "match": true,
+      "expected": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+      "actual": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+    },
+    {
+      "path": "res://resources/world_geometry/world.json",
+      "match": true,
+      "expected": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+      "actual": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "path": "res://scripts/city_bus_service.gd",
+      "match": true,
+      "expected": "3beb4433583312f48affb28cbfdddede1e8e51704931b3d6e46dbd6dd2c5fe09",
+      "actual": "3beb4433583312f48affb28cbfdddede1e8e51704931b3d6e46dbd6dd2c5fe09"
+    },
+    {
+      "path": "res://scripts/traffic/vehicle.gd",
+      "match": true,
+      "expected": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045",
+      "actual": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045"
+    }
+  ],
+  "owned_hashes": {
+    "game/scripts/city_bus_service.gd": "3beb4433583312f48affb28cbfdddede1e8e51704931b3d6e46dbd6dd2c5fe09",
+    "game/assets/authored/bus_service.json": "9cdded5580d5e140c50aa3dfc6db31a8665a65e538b875c8999300113e8c8080",
+    "tests/game/check_city_bus_service.gd": "12657ba6495a5cbd28a1e027928ffde5d66b17fc0d241a7c83e346b7a88417b1"
+  },
+  "native_visual_review": "Root-owned; not claimed by this report",
+  "route_scope": "One authored 도심01 (internalT01) blue bus, GAME-01→GAME-02 source-road/walk stops; no surveyed real route/live schedule claim",
+  "safety_scope": [
+    "365 sampled full2.45x9m bus road footprint corners inside source triangles",
+    "EXP21 terrain actual native support, no extra bus plane",
+    "physical inherited move_and_slide/brake/full-box sweeps retained",
+    "red front nose clearance; committed green-front entry remains physically moving across amber/red",
+    "12-second dwell; physical door-side human hold/reopen",
+    "actual fresh E board and moving E exit reservation routed by production dispatcher",
+    "original player capsule/masks retained; only native bus collision exception during seated ride",
+    "all5supported native capsule exit candidates blocked by explicit fixture: passenger remains aboard, then exits after fixture removal",
+    "original14 vehicle instance IDs remain unchanged",
+    "original camera/human/entry recycle guard uses full-bus corners; never recycles occupied"
+  ],
+  "historical_attempts": [
+    {
+      "path": "failures/road_paint_startup.json",
+      "meaning": "Other module aborted production setup; preserved as failure, not bus implementation acceptance"
+    },
+    {
+      "path": "failures/terrain_support_obstacle_and_skipped_ticks.json",
+      "meaning": "Actual TIN wrongly sensed as obstacle because overlapping W03 support won first ray; fixed explicit known-ground exclusion for obstacle-only probes. Test render wait also skipped physical ticks; now exact physics_frame awaits"
+    },
+    {
+      "path": "failures/menu_clock_inherited_always_10of11.json",
+      "meaning": "Service inherited always-processing root, so door clock advanced in menu; now explicitly pausable"
+    },
+    {
+      "path": "development/pre_signal_commit_12of12.json",
+      "meaning": "Passing prior source before independent green/amber commitment review; not counted as final-source acceptance"
+    }
+  ]
+}

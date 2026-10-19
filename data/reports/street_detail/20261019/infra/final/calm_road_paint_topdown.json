@@ -1,0 +1,40 @@
+{
+  "kind": "geometry_diagnostic_not_native_game_screenshot",
+  "projection": "Source local XZ top-down, x east/right and z south/down",
+  "bounds_xz_m": [
+    50,
+    -230,
+    112,
+    25
+  ],
+  "pixels_per_metre": 6,
+  "legend": {
+    "dark_gray": "Unchanged source drive triangles",
+    "white": "Current authored edge, lane, zebra and stop paint polygons",
+    "yellow": "Current shared double-yellow median",
+    "cyan": "Original two car route centres for diagnostic comparison only; cyan guides are NOT in the game",
+    "green": "Physical pedestrian-head bank anchors"
+  },
+  "source_hashes": {
+    "game/assets/authored/road_furniture.json": "b3f69fa353fb97be5866df61334c31d73b25496036db70729e76458075fc1c4b",
+    "game/resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "game/data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "tools/prepare_road_furniture.py": "2302ff07cf0f5ad5f23b41eab7bc544318597e588c9794f31e835af78d4033ae"
+  },
+  "counts": {
+    "road_corridors": 42,
+    "paint_polygons": 1174,
+    "crossings": 4,
+    "signal_poles": 5,
+    "pedestrian_heads": 8,
+    "lamps_planned": 64
+  },
+  "preflight": {
+    "source_solid_private_paint_overlap_m2": 0.0,
+    "source_road_outside_paint_m2": 0.0,
+    "all_entrance_corridors_lamp_overlap_m2": 0.0,
+    "white_lane_area_m2": 341.153,
+    "white_edge_area_m2": 1297.964,
+    "paired_yellow_area_m2": 171.509
+  }
+}

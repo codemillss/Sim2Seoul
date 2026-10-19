@@ -85,7 +85,7 @@ class CoverageManager extends "res://scripts/traffic/traffic_manager.gd":
 					if String(conflict.crossing_id)!=String(zone.id):continue
 					if station>=float(conflict.stop_s_m)-.25 and station<=float(conflict.exit_s_m)+.005 and zone.owner!=id and not zone.queue.has(id):
 						zone.queue.append(id);events.append({"type":"queued","tick":tick,"route_id":id,"crossing":zone.id})
-			if String(zone.owner).is_empty() and not zone.queue.is_empty() and observations_valid and not zone.human_present and float(zone.clear_s)>=1.0:
+			if String(zone.owner).is_empty() and not zone.queue.is_empty() and observations_valid and not zone.human_present and float(zone.clear_s)>=1.0 and _signal_allows(String(zone.queue.front()),String(zone.id)):
 				zone.owner=zone.queue.pop_front();grants+=1;events.append({"type":"grant","tick":tick,"route_id":zone.owner,"crossing":zone.id,"clear_s":zone.clear_s,"human_present":false})
 		while events.size()>256:events.pop_front()
 	func permission(body: CharacterBody3D) -> Dictionary:
@@ -96,11 +96,13 @@ class CoverageManager extends "res://scripts/traffic/traffic_manager.gd":
 			if body.get_station_m()<=float(row.exit_s_m)+.0001:conflict=row;break
 		var zone: Dictionary={} if conflict.is_empty() else zones[String(conflict.crossing_id)]
 		var human: bool=bool(zone.get("human_present",false))
-		var allowed: bool=fresh and (zone.is_empty() or (not human and String(zone.owner)==body.get_route_id()))
+		var signal_clear: bool=_signal_permission(body,conflict)
+		var allowed: bool=fresh and signal_clear and (zone.is_empty() or (not human and String(zone.owner)==body.get_route_id()))
 		var reason: String="source_forward_clear" if allowed else "human_present" if human else "fifo_or_clear_hold"
+		if not signal_clear:reason="signal_red_or_amber"
 		if not fresh:reason="stale_or_unknown_observation"
 		if not allowed:yields+=1
-		return {"fresh":fresh,"allow_crossing":allowed,"human_present":human,"occupied_by":zone.get("owner",""),"reason":reason,"crossing":zone.get("id",""),"tick":tick,"observation_tick":last_observation_tick,"observation_age_s":float(tick-last_observation_tick)/Engine.physics_ticks_per_second,"clear_s":zone.get("clear_s",0.0),"queue":zone.get("queue",[]).duplicate()}
+		return {"fresh":fresh,"allow_crossing":allowed,"human_present":human,"occupied_by":zone.get("owner",""),"reason":reason,"crossing":zone.get("id",""),"tick":tick,"observation_tick":last_observation_tick,"observation_age_s":float(tick-last_observation_tick)/Engine.physics_ticks_per_second,"clear_s":zone.get("clear_s",0.0),"queue":zone.get("queue",[]).duplicate(),"signal_attached":is_instance_valid(signal_provider),"signal_clear":signal_clear}
 	func snapshot() -> Dictionary:
 		var result: Dictionary=super.snapshot();var rows: Array=[]
 		for zone: Dictionary in zones.values():rows.append({"id":zone.id,"center":zone.center,"radius_m":zone.radius_m,"owner":zone.owner,"queue":zone.queue.duplicate(),"clear_s":zone.clear_s,"human_present":zone.human_present})

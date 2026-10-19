@@ -1,0 +1,127 @@
+{
+  "task": "city_bikes_final_native_visual_review",
+  "reviewed_at_utc": "2026-10-19T14:38:28.358014+00:00",
+  "reviewer": "independent bike-service agent; parent also reviews the saved frames",
+  "production_edits_during_review": false,
+  "result": "PASS_WITH_LIMITS",
+  "new_critical_bicycle_visual_defects": [],
+  "resolved_defects": [
+    {
+      "defect": "Kickstand remained deployed while riding",
+      "evidence": "Final riding image shows the retracted state; return image shows the deployed parked state. Native checks mounted_kickstand_retracted and returned_kickstand_deployed pass."
+    },
+    {
+      "defect": "Billboard station text intersected the physical board",
+      "evidence": "Final station and return images show fixed board-aligned labels."
+    },
+    {
+      "defect": "Riding prompt wrapped an orphan final character and overlapped the building pill",
+      "evidence": "Final riding image shows two complete lines and clear vertical separation from the building pill."
+    }
+  ],
+  "images": [
+    {
+      "file": "data/reports/street_detail/20261019/bikes/native_station_full_bike.png",
+      "sha256": "1d35cc175348903c32ffca39b914a13a91586a3ca304074053ea14b6336abfb9",
+      "pixels_opened_and_reviewed": true,
+      "review_method": "Latest saved PNG reopened through view_image after the final parent integration change; regular third-person camera after frame_post_draw.",
+      "size_px": [
+        1152,
+        720
+      ],
+      "observations": [
+        "White low step-through frame, green wheels and chain case, basket, saddle and spokes form a recognizable rental bicycle silhouette.",
+        "The physical station board and its fixed labels share the same orientation; text does not float through the board.",
+        "The player stands beside the parked bicycle; the nearby interaction prompt is legible."
+      ],
+      "limitations": [
+        "Oblique viewing angle and small projected lettering limit full station-board text readability.",
+        "The standing player occludes part of the front assembly."
+      ]
+    },
+    {
+      "file": "data/reports/street_detail/20261019/bikes/native_riding_posture.png",
+      "sha256": "e735c992f23713bc3a2ac72572f80ea47b0ede8b7f7806a21c805efe80f0cd31",
+      "pixels_opened_and_reviewed": true,
+      "review_method": "Latest saved PNG reopened through view_image after the final parent integration change; regular third-person camera after frame_post_draw.",
+      "size_px": [
+        1152,
+        720
+      ],
+      "observations": [
+        "Rider is visibly seated with bent knees and arms extending toward the handlebar. The visible near-side hand and foot do not show a major detached gap.",
+        "The deployed kickstand no longer protrudes under the moving bicycle.",
+        "The complete two-line riding prompt has no orphan final character and is separated from the nearest-building pill.",
+        "The bicycle frame, green rear rim, saddle and basket remain identifiable."
+      ],
+      "limitations": [
+        "The rider and camera angle obscure the far hand, far foot and portions of the front wheel.",
+        "The prompt covers a small part of the rear-wheel lower edge.",
+        "A passing pedestrian enters the bottom of the frame without obscuring the main rider or frame."
+      ]
+    },
+    {
+      "file": "data/reports/street_detail/20261019/bikes/native_returned_after_dismount.png",
+      "sha256": "b893f1e3d6dab76d2e53c632f709c7ee229c41441d1ca6b985f985b2ef786a66",
+      "pixels_opened_and_reviewed": true,
+      "review_method": "Latest saved PNG reopened through view_image after the final parent integration change; regular third-person camera after frame_post_draw.",
+      "size_px": [
+        1152,
+        720
+      ],
+      "observations": [
+        "The player stands beside the bicycle after dismount, with the parked kickstand visibly deployed.",
+        "The return-complete message is legible and separated from the building pill.",
+        "The station board remains aligned with its fixed front/back text."
+      ],
+      "limitations": [
+        "A retained cyan capsule pedestrian is visible in the background; this is outside the bicycle visual change.",
+        "The standing player and camera angle hide part of the bicycle front assembly."
+      ]
+    }
+  ],
+  "native_report": {
+    "file": "data/reports/street_detail/20261019/bikes/native.json",
+    "sha256": "5c573b19cdcf84930199cbafb9de406e4c342dd16c5ec1d7cf5b724792db6cd4",
+    "result": "PASS",
+    "passed": 26,
+    "total": 26,
+    "physics_hz": 30,
+    "capture_hashes_match": true
+  },
+  "production_source_hashes_at_review": {
+    "res://../tests/game/check_city_bike_service.gd": "839c1ca4c551857faf00599c9222022cd4f498d268f0e1e56f0ccecd3c29b332",
+    "res://assets/authored/bike_service.json": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "b342442099f721ff673d01cb6628b51f9f13c60c3ed7be1a969296aa3a61828a",
+    "res://scripts/explore_walk.gd": "4a11fb6c65c21ebad30a529df378a201fd6347e72d06d7b39973a50386f34559",
+    "res://scripts/interior_visit.gd": "ba504f516d07334f4767a0605e0d2fccc4db7359337b5f65e3f093316b81cc44"
+  },
+  "production_hashes_match_native_report": true,
+  "acceptance_scope": [
+    "Recognizable parked/ridden/returned bicycle and coherent visible rider pose in these three saved third-person frames.",
+    "Previously reported kickstand, station text and prompt-layout defects are resolved in these frames."
+  ],
+  "remaining_limits": [
+    "These still images do not establish continuous animation quality, absence of temporal bob/jitter, or performance.",
+    "Occluded far-side limbs prevent all-angle or complete full-body contact acceptance from image evidence alone.",
+    "Hands/grips and pedal-sole geometric checks are separate runtime evidence in native.json, not a substitute for visible contact review.",
+    "This is an authored in-game rental experience; the two docks do not represent live official rental availability."
+  ],
+  "canonical_headless_report": {
+    "file": "data/reports/street_detail/20261019/bikes/headless.json",
+    "sha256": "53644d6d3d18731656dcb565f0e3f829a0efda3816e6a7cd900d372710a63945",
+    "result": "PASS",
+    "passed": 23,
+    "total": 23,
+    "physics_hz": 30,
+    "source_hashes_match_current_and_native": true
+  },
+  "proof_history": {
+    "superseded_review_manifest": "data/reports/street_detail/20261019/bikes/development/visual_review_root_fa5438a_superseded.json",
+    "run05_role": "Earlier development headless run; canonical final headless acceptance is headless.json.",
+    "canonical_capture_paths_reopened": true
+  }
+}

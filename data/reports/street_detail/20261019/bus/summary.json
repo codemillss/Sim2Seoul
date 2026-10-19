@@ -1,0 +1,246 @@
+{
+  "task": "T01_BUS_PILOT_BUSFIX",
+  "trigger": "Actual user ordinary preview reported intermittent boarding: 버스가 타지기도 안 타지기도",
+  "verification": "Godot4.7.2 headless fixed-fps60 / physics60Hz production scene; actual fresh E through current root dispatcher; bus never repositioned by tests",
+  "passed": 32,
+  "total": 32,
+  "runtime_source_hash_mismatch_count": 0,
+  "runtime_hash_checks": [
+    {
+      "path": "res://assets/authored/bus_service.json",
+      "match": true,
+      "expected": "f9cb2f6cfb4009ec39b7ba21d6ed4d0e1fd3b7f00092f423354adde2042c8718",
+      "actual": "f9cb2f6cfb4009ec39b7ba21d6ed4d0e1fd3b7f00092f423354adde2042c8718"
+    },
+    {
+      "path": "res://data/generated/terrain_surface.json",
+      "match": true,
+      "expected": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+      "actual": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+    },
+    {
+      "path": "res://data/generated/traffic.json",
+      "match": true,
+      "expected": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+      "actual": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+    },
+    {
+      "path": "res://resources/world_geometry/world.json",
+      "match": true,
+      "expected": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+      "actual": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "path": "res://scripts/city_bus_service.gd",
+      "match": true,
+      "expected": "492de25ce42bf90932f6359f4bfeee08685858a55e5168a4f6328b628325452f",
+      "actual": "492de25ce42bf90932f6359f4bfeee08685858a55e5168a4f6328b628325452f"
+    },
+    {
+      "path": "res://scripts/traffic/vehicle.gd",
+      "match": true,
+      "expected": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045",
+      "actual": "1e722235b2f0dacc9a4bf233aa34202b43f1c91bc67603641a2b8efe1a32f045"
+    }
+  ],
+  "owned_hashes": {
+    "game/scripts/city_bus_service.gd": "492de25ce42bf90932f6359f4bfeee08685858a55e5168a4f6328b628325452f",
+    "game/assets/authored/bus_service.json": "f9cb2f6cfb4009ec39b7ba21d6ed4d0e1fd3b7f00092f423354adde2042c8718",
+    "tests/game/check_city_bus_service.gd": "cb07868c29173ecc8aa0e93b8c01fca7155499cd1d70363d4bd24a0bbc9d6d48"
+  },
+  "boarding_poses": [
+    {
+      "id": "boarding_position.front_very_close",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 0.0180878099054098,
+        "door_index": 0,
+        "door_world": [
+          67.5389633178711,
+          1.00504815578461,
+          -152.023956298828
+        ],
+        "local_feet": [
+          1.59808731079102,
+          -0.0397965908050537,
+          -2.95013427734375
+        ]
+      }
+    },
+    {
+      "id": "boarding_position.front_corner_approach",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 1.80894911289215,
+        "door_index": 0,
+        "door_world": [
+          67.5389633178711,
+          1.00504815578461,
+          -152.023956298828
+        ],
+        "local_feet": [
+          2.19781494140625,
+          -0.0452525615692139,
+          -4.65017700195312
+        ]
+      }
+    },
+    {
+      "id": "boarding_position.front_outer_wait",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 1.63761723041534,
+        "door_index": 0,
+        "door_world": [
+          67.5389633178711,
+          1.00504815578461,
+          -152.023956298828
+        ],
+        "local_feet": [
+          3.19844055175781,
+          -0.0322799682617188,
+          -2.70011901855469
+        ]
+      }
+    },
+    {
+      "id": "boarding_position.middle_very_close",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 0.0200976561754942,
+        "door_index": 1,
+        "door_world": [
+          67.6446685791016,
+          1.01835680007935,
+          -155.522338867188
+        ],
+        "local_feet": [
+          1.60009765625,
+          0.00212550163269043,
+          0.550003051757812
+        ]
+      }
+    },
+    {
+      "id": "boarding_position.middle_outer_approach",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 1.81822907924652,
+        "door_index": 1,
+        "door_world": [
+          67.6446685791016,
+          1.01835680007935,
+          -155.522338867188
+        ],
+        "local_feet": [
+          2.90038299560547,
+          0.00797772407531738,
+          1.80001831054688
+        ]
+      }
+    },
+    {
+      "id": "boarding_position.between_visible_doors",
+      "passed": true,
+      "native_candidate": {
+        "distance_m": 1.87360692024231,
+        "door_index": 0,
+        "door_world": [
+          67.5389633178711,
+          1.00504815578461,
+          -152.023956298828
+        ],
+        "local_feet": [
+          2.24936676025391,
+          -0.0130724906921387,
+          -1.20004272460938
+        ]
+      }
+    }
+  ],
+  "native_exit_return_checks": [
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.front_very_close",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    },
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.front_corner_approach",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    },
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.front_outer_wait",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    },
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.middle_very_close",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    },
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.middle_outer_approach",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    },
+    {
+      "id": "native_exit_keeps_docked_bus_on_source_route.between_visible_doors",
+      "passed": true,
+      "maximum_bus_step_m": 0.0833637937903404,
+      "route_offset_m": 0.0001068115234375
+    }
+  ],
+  "native_visual_review": "Root-owned, not claimed by this subtask",
+  "route_scope": "One authored 도심01/internalT01 blue bus, GAME-01→GAME-02 source-road/walk stops; no real route/live schedule claim",
+  "fixes": [
+    "Both visible right-side doors use supported same-side native approach areas and clear head/torso line of sight, replacing the single front wait-point distance test",
+    "Fresh E accepted while movement remains latched after a shortcut: boarding itself neutralizes movement",
+    "Standing at either valid door holds/reopens the current stopped bus after the12s minimum; boarding reserves at least3s to settle",
+    "Fresh E during the present bus door animation completes after full opening only if the passenger remains safely at that door",
+    "First-stop E wait request is explicit; no pre-arrival automatic boarding or instant bus respawn. Ended service and alight-only stop have distinct hints",
+    "Native exit publishes the outside capsule before mutual bus/player collision is restored: at least2physics ticks plus native full-bus overlap query. Normal exit movement is held briefly; validated external teleports keep caller control immediately and later cleanup does not overwrite another controller",
+    "Bus refuses a current bike rider or another facility controller; delayed release cleanup runs even when vehicle movement is unchecked"
+  ],
+  "safety_tests": [
+    "Actual red nose stop, green-front entry continues through forced amber/red, physical terrain support and bounded steps",
+    "6legal board positions: very close front, front corner, front outer, very close middle, middle outer, between doors; all use actual E boarding and exiting",
+    "Each native exit keeps the docked bus on source route with XZ shift<.002m and max physical step<.1m",
+    "Opposite-side, airborne despite stale floor flag, real wall and actual moving-bus boarding denied",
+    "First-stop wait request does not board a moving bus; E during actual opening completes once doors are fully open",
+    "15seconds beyond minimum dwell remains boardable; actual fresh E with held W still boards safely",
+    "Menu/vehicle checkbox freezes, original14vehicle IDs and player capsule/masks preserved",
+    "All5exit candidates physically blocked: rider remains aboard; fixture removal permits supported requested exit"
+  ],
+  "historical_attempts": [
+    {
+      "path": "failures/road_paint_startup.json",
+      "meaning": "Other module setup failure retained"
+    },
+    {
+      "path": "failures/terrain_support_obstacle_and_skipped_ticks.json",
+      "meaning": "Overlapping W03/TIN support wrongly sensed as obstacle, fixed known-ground RID obstacle-query exclusion; physics tick helper fixed"
+    },
+    {
+      "path": "failures/menu_clock_inherited_always_10of11.json",
+      "meaning": "Door service clock inherited always-processing root; fixed explicit pausable mode"
+    },
+    {
+      "path": "development/pre_signal_commit_12of12.json",
+      "meaning": "Prior source before green/amber commitment review; not final acceptance"
+    },
+    {
+      "path": "development/pre_usability_13of13.json",
+      "meaning": "Earlier passing perfect-spot protocol before real user intermittent-boarding feedback; does not prove broad usability"
+    },
+    {
+      "path": "failures/boarding_positions_pass_but_native_exit_shift_22of24.json",
+      "meaning": "6positions all boarded, but early first-stop exit restored native collisions before seated capsule publication; bus moved1.16m sideways and became off_route. Fixed native two-tick/query handoff; failure not waived."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "task": "street_dog_detail",
+  "scope": "Authored dog visual articulation and bounded behaviour; retained street route/terrain/physical-body safety.",
+  "preserved_trials": [
+    {
+      "file": "patrol01.log",
+      "result": "probe_parse_failure",
+      "cause": "Unused _ray call unavailable in inherited probe; removed."
+    },
+    {
+      "file": "patrol02.log.gz",
+      "result": "runtime_load_failure",
+      "cause": "Two inferred helper local types could not compile; made Vector3/float explicit. Full repetitive log retained compressed."
+    },
+    {
+      "file": "patrol03.log",
+      "result": "interrupted_development",
+      "cause": "Dog initialized; interrupted to correct leg reach before full patrol."
+    },
+    {
+      "file": "patrol04.log",
+      "result": "partial_patrol",
+      "cause": "Both dogs reached four reversals and walking/sniff states without script errors. Inherited wait also awaited process frames, so superseded by exact camera physics-step observation. Source was revised for low sniff/held loop/keeper head while that older process retained its loaded scripts."
+    },
+    {
+      "file": "patrol05.log",
+      "result": "unrelated_integration_parse_failure",
+      "cause": "Transient explore_walk vehicles_running identifier during bus integration. Root replaced it with current traffic switch state before final rerun."
+    },
+    {
+      "file": "patrol06.json",
+      "result": "FAIL 2 of 6",
+      "cause": "Physical corridor endpoints, support/safety/leash, pauses and toggle passed; strict foot measurements exposed overextended old stance anchors during turns. Replaced sliding correction with a short lifted replant before reach exhausted."
+    },
+    {
+      "file": "patrol07.log",
+      "result": "interrupted_development",
+      "cause": "Clean integrated roads/bus startup, interrupted for the turn replant correction before final acceptance."
+    }
+  ],
+  "source_preservation": [
+    "street_pedestrians_before.gd",
+    "street_pedestrians_before.json",
+    "street_dog_model03_short_leg.gd"
+  ],
+  "not_claimed": [
+    "real dog behaviour or breed reconstruction",
+    "physical leash simulation",
+    "dog ownership or E interaction",
+    "headless visual quality acceptance",
+    "general performance or other Mac acceptance"
+  ],
+  "final_result": "patrol08.json PASS 6/6; summary.json current own-source SHA match true",
+  "supplemental_stress": "gait_stress08.log PASS: 6000 synthetic visual frames, 9 fast yaw reversals, clear scope excluding physical acceptance."
+}
