@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
-"""Check the shared EXP23 manifest; this does not rerun Godot on this Mac."""
+"""Check a shared street-detail manifest; this does not rerun Godot."""
 import argparse
 import hashlib
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = ROOT / 'data/reports/street_detail/20261019/summary.json'
+SUMMARY = ROOT / 'data/reports/street_detail/20261020/summary.json'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepared', action='store_true')
+    parser.add_argument('--summary', type=Path, default=SUMMARY,
+                        help='Manifest to check; defaults to the latest street revision.')
     args = parser.parse_args()
-    data = json.loads(SUMMARY.read_text())
+    summary = args.summary.resolve()
+    if not summary.is_relative_to(ROOT) or not summary.is_file():
+        parser.error('summary must be an existing project manifest')
+    data = json.loads(summary.read_text())
     generated = {row['path'] for row in data['files'] if row['kind'] == 'generated_runtime_input'}
     failures, deferred = [], set()
     for row in data['files']:
@@ -44,7 +49,7 @@ def main():
                 deferred.add(source_relative)
             elif not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 failures.append({'path': source_relative, 'reason': 'acceptance_source_changed'})
-    print(json.dumps({'result': 'FAIL' if failures else 'PASS', 'files': len(data['files']), 'deferred': sorted(deferred), 'failures': failures, 'scope': 'Stored EXP23 code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance.'}, ensure_ascii=False))
+    print(json.dumps({'result': 'FAIL' if failures else 'PASS', 'files': len(data['files']), 'deferred': sorted(deferred), 'failures': failures, 'scope': 'Stored street code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance.'}, ensure_ascii=False))
     raise SystemExit(1 if failures else 0)
 
 

@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-20",
+  "baseline": "738b14d569f56988fede6367072cb474b00fabd1",
+  "scope": "Failures and fixture corrections retained, excluded from current acceptance report list. Raw attempts and images are not deleted.",
+  "failures": [
+    {
+      "report": "bike_entry_native.json",
+      "result": "53/55",
+      "resolution": "Immediate menu/lift press latch and release edge, native final60/60."
+    },
+    {
+      "report": "library_entry_headless.json",
+      "result": "34/35",
+      "resolution": "Airborne-nearby observation wait .10s, expressed using actual physics frequency; gameplay entry guard unchanged."
+    },
+    {
+      "report": "development/bike-before-scooter-lateral-clearance-headless.json",
+      "result": "22/23",
+      "resolution": "Actual parked scooter blocked departure; moved source-valid scooter dock 2.15m laterally. Final23/23."
+    },
+    {
+      "report": "scooter_native_final01.json",
+      "result": "35/36",
+      "resolution": "Injected held W lost after native focus/capture; not a gameplay movement defect."
+    },
+    {
+      "report": "scooter_native_final02.json",
+      "result": "35/36",
+      "resolution": "Diagnostics measured action/intent0/90 despite clear space; maintain explicit test-held movement."
+    },
+    {
+      "report": "scooter_native_final03.json",
+      "result": "35/37",
+      "resolution": "W moved8.927m but strict action89/90 failed; test-priority -200 node ensures90/90. Late S blocked by real plaza pedestrian: unchanged bounded reverse criteria measured on earlier clear straight physical roundtrip."
+    },
+    {
+      "report": "bike_visibility_native_final.log.gz",
+      "result": "Sandbox default native launch exited -6 with zero output, no engine checks",
+      "resolution": "Repeated in normal macOS graphics environment with approved process access; native final02 14/14."
+    }
+  ],
+  "final_source_frozen": true,
+  "movement_fixture_limit": "Native automated movement uses explicit synthetic Input actions refreshed by test-only Node; production focus guards stay unchanged. Physical KEY_E events remain event-driven. Actual OS keyboard E/W/Space smoke documented separately in normal_launch.json.",
+  "test_exit_warnings": "Some automated exits retain ObjectDB/resource cleanup warnings; current source report list and ordinary snapshot have no gameplay script errors."
+}

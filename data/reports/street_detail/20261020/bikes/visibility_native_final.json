@@ -1,0 +1,183 @@
+{
+  "captures": [
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/street_detail/20261020/bikes/visibility_native_final_production_shortcut.png",
+      "frame": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.2,
+        "camera_yaw": 0.361756517129627,
+        "front_wheel": [
+          749.978149414062,
+          410.056274414062
+        ],
+        "rear_wheel": [
+          640.11572265625,
+          385.965423583984
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.0953666898939345
+      },
+      "scope": "Actual production shortcut or mount camera. Image opening/review is required separately.",
+      "sha256": "9f948fe6f3f7f1ba6345444f22c8e020be51654dd72d4a8cab9002530b3a403a"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/street_detail/20261020/bikes/visibility_native_final_production_mount.png",
+      "frame": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.4,
+        "camera_yaw": -1.20643994760025,
+        "front_wheel": [
+          620.239807128906,
+          457.092987060547
+        ],
+        "rear_wheel": [
+          539.329895019531,
+          518.593994140625
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.0702342987060547
+      },
+      "scope": "Actual production shortcut or mount camera. Image opening/review is required separately.",
+      "sha256": "692763b346767d763db68174f39eae70c7f6435d2d7ca7ca5e8de1dfd0928add"
+    }
+  ],
+  "checks": [
+    {
+      "evidence": {},
+      "name": "production_setup",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "only_actual_rentable_bikes_no_fake_reserve_inventory",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "both_docks_have_raised_pictogram_and_two_sided_signs",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.2,
+        "camera_yaw": 0.361756517129627,
+        "front_wheel": [
+          749.978088378906,
+          410.056304931641
+        ],
+        "rear_wheel": [
+          640.11572265625,
+          385.965454101562
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.095366636912028
+      },
+      "name": "ordinary_shortcut_separates_wheels_within_view",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_distance_m": 1.90330851078033,
+        "prompt": "E · 따릉이 빌려 타기 · 게임 체험"
+      },
+      "name": "ordinary_shortcut_in_E_reach_with_native_line_of_sight",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_capture_production_shortcut",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "ordinary_E_mount",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.4,
+        "camera_yaw": -1.20643994760025,
+        "front_wheel": [
+          620.23974609375,
+          457.092987060547
+        ],
+        "rear_wheel": [
+          539.329833984375,
+          518.593994140625
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.0702342987060547
+      },
+      "name": "production_mount_starts_in_three_quarter_view_with_separated_wheels",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "retained_meter_scale_and_source_footprint",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_capture_production_mount",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "ordinary_E_return_restores_walking",
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "result": "PASS",
+  "scope": "Production shortcut + E mount/dismount and numerical framing, meter scale, dock signage and source footprints. Native images require separate visual review; headless is not subjective visibility acceptance.",
+  "source_hashes": {
+    "res://../tests/game/check_bike_visibility.gd": "a48de7ec0f3663be990d31e70d98fca485b7f93aad1fb0aa7a428dcaf3f7a512",
+    "res://assets/authored/bike_service.json": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8",
+    "res://scripts/city_bike_service.gd": "386ca5532c0fd2b23b94eca9512f22ce5539984d3e00febe5a78965080d77c74",
+    "res://scripts/explore_walk.gd": "139fc0613537fb906f5ec2819ecfed4d9742096e0b44f850a154c7b946b73373"
+  },
+  "task": "production_bike_visibility",
+  "total": 11
+}

@@ -244,9 +244,11 @@ func motion_limit() -> Dictionary:
 			var green_entry: bool=state=="green" and line_distance<=HALF_LENGTH+.05 and bus._speed_mps>.10
 			var amber_committed: bool=state=="amber" and bus._speed_mps>.5 and available<brake_room
 			if green_entry or amber_committed:
-				for line: Dictionary in network.design.get("stop_lines",[]):
-					if String(line.source_feature_id)!=String(design.route.source_binding.feature_id) or String(line.crossing_id)!=String(signal_limit.crossing_id):continue
-					_crossing_commit={"crossing_id":line.crossing_id,"entry_phase":state,"clear_station_m":float(line.exit_s_m)+HALF_LENGTH+.50,"reason":"green_front_entry" if green_entry else "amber_insufficient_physical_brake_room"};_event("crossing_committed",_crossing_commit);break
+				# The bus pilot and the source road have different arc origins.
+				# Convert the observed stop/clearance distance to this bus's own
+				# station; a source-road exit_s_m cannot describe its rear clearance.
+				var clearance: float=maxf(0.0,float(signal_limit.get("clearance_from_stop_m",10.0)))
+				_crossing_commit={"crossing_id":signal_limit.crossing_id,"entry_phase":state,"clear_station_m":bus.get_station_m()+line_distance+clearance+HALF_LENGTH+.50,"reason":"green_front_entry" if green_entry else "amber_insufficient_physical_brake_room"};_event("crossing_committed",_crossing_commit)
 		var committed: bool=not _crossing_commit.is_empty() and String(_crossing_commit.crossing_id)==String(signal_limit.get("crossing_id",""))
 		if (bool(signal_limit.get("required",false)) or human_wait) and not committed:
 			var distance: float=maxf(0.,float(signal_limit.get("distance_m",0.))-HALF_LENGTH-.35)
@@ -406,8 +408,9 @@ func _context_ready() -> bool:
 	if host.get_tree().paused:return false
 	if is_instance_valid(host.get("menu")) and host.menu.visible:return false
 	if _collision_release_pending and not riding:return false
-	var bicycle: Variant=host.get("city_bike_service")
-	if is_instance_valid(bicycle) and bicycle.get("riding")==true:return false
+	for key: String in ["city_bike_service","city_scooter_service"]:
+		var mobility: Variant=host.get(key)
+		if is_instance_valid(mobility) and mobility.get("riding")==true:return false
 	if not riding and host.player.facility_control:return false
 	return not host.player.interior_active and not host.interior_visit.active
 
@@ -457,6 +460,19 @@ func can_interact() -> bool:
 	if riding:return true
 	if not _boarding_candidate().is_empty():return true
 	return stop_index==0 and docked_stop<0 and _at_first_wait()
+
+func interaction_distance_m() -> float:
+	if riding:return 0.0
+	if not loaded or not is_instance_valid(host):return INF
+	var candidate: Dictionary=_boarding_candidate()
+	if not candidate.is_empty():return float(candidate.distance_m)
+	var closest:=INF;var player: Vector3=host.player.global_position
+	for row: Dictionary in design.stops:
+		closest=minf(closest,player.distance_to(row.wait_world))
+	if is_instance_valid(bus):
+		for z: float in BOARD_DOOR_Z:
+			closest=minf(closest,player.distance_to(bus.to_global(Vector3(1.58,0,z))))
+	return closest
 
 func prompt_text() -> String:
 	if not _context_ready():return ""

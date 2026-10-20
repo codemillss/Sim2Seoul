@@ -1,0 +1,5266 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"network_error": "",
+				"runtime_error": ""
+			},
+			"name": "production_scene_network_ready",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "signal_timing_is_game_authored",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"crossings": {
+					"coverage_11277565406": {
+						"pedestrian": 2,
+						"vehicle": 2
+					},
+					"coverage_11414286323": {
+						"pedestrian": 2,
+						"vehicle": 2
+					},
+					"coverage_4636374654": {
+						"pedestrian": 2,
+						"vehicle": 1
+					},
+					"sejong_marked": {
+						"pedestrian": 2,
+						"vehicle": 2
+					},
+					"source_crossing_1209132247": {
+						"pedestrian": 2,
+						"vehicle": 3
+					},
+					"source_crossing_506252749": {
+						"pedestrian": 2,
+						"vehicle": 1
+					},
+					"source_crossing_506252752": {
+						"pedestrian": 2,
+						"vehicle": 1
+					},
+					"source_node_4851224026": {
+						"pedestrian": 2,
+						"vehicle": 3
+					},
+					"source_node_921242887": {
+						"pedestrian": 2,
+						"vehicle": 2
+					}
+				},
+				"missing": [],
+				"runtime_skips": [
+					{
+						"id": "uncovered_road_paint_white",
+						"kind": "paint",
+						"omitted_xz_area_m2": 0.926659329852555,
+						"reason": "uncovered_source_slivers_omitted_by_exact_terrain_clip",
+						"source_faces": 205
+					}
+				]
+			},
+			"name": "accepted_crossings_have_both_banks_and_vehicle_heads",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": [
+					"PedestrianSignal_source_crossing_506252749_bank_1",
+					"PedestrianSignal_source_crossing_506252752_bank_0",
+					"PedestrianSignal_source_crossing_506252752_bank_1"
+				],
+				"heads": [
+					{
+						"crossing_id": "sejong_marked",
+						"front_dot": 1.0,
+						"head": [
+							78.9840621948242,
+							6.80503177642822,
+							-201.029678344727
+						],
+						"id": "sejong_south_sejong_marked_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							65.1834030151367,
+							1.54503178596497,
+							-200.976455688477
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							79.0203475952148,
+							2.15977191925049,
+							-206.48454284668
+						]
+					},
+					{
+						"crossing_id": "sejong_marked",
+						"front_dot": 1.0,
+						"head": [
+							92.9479446411133,
+							4.87042760848999,
+							-189.50065612793
+						],
+						"id": "sejong_north_sejong_marked_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							106.739501953125,
+							-0.389572560787201,
+							-188.996841430664
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							92.691535949707,
+							1.46114361286163,
+							-184.051681518555
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"front_dot": 1.00000011920929,
+						"head": [
+							44.2859344482422,
+							5.96022939682007,
+							136.449752807617
+						],
+						"id": "coverage_drive_1_coverage_11277565406_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							31.1211585998535,
+							0.700228989124298,
+							132.308532714844
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							45.977409362793,
+							1.2370822429657,
+							131.263610839844
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"front_dot": 1.0,
+						"head": [
+							-5.70526647567749,
+							8.60226535797119,
+							290.768798828125
+						],
+						"id": "coverage_drive_1_coverage_11414286323_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							-18.9782962799072,
+							3.34226512908936,
+							286.988891601562
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							-4.15614938735962,
+							4.45328712463379,
+							285.538360595703
+						]
+					},
+					{
+						"crossing_id": "coverage_4636374654",
+						"front_dot": 0.99999988079071,
+						"head": [
+							255.957275390625,
+							5.56710815429688,
+							-116.445930480957
+						],
+						"id": "coverage_drive_2_coverage_4636374654_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							252.720321655273,
+							0.307108134031296,
+							-119.12606048584
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							252.625427246094,
+							1.77517414093018,
+							-112.12670135498
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"front_dot": 1.0,
+						"head": [
+							55.0752906799316,
+							4.72958850860596,
+							146.703201293945
+						],
+						"id": "coverage_11277565406_619147735_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							60.6472206115723,
+							-0.530411779880524,
+							148.320175170898
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							53.4245147705078,
+							1.28756380081177,
+							151.902420043945
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"front_dot": 1.0,
+						"head": [
+							7.21891689300537,
+							8.42889022827148,
+							303.695037841797
+						],
+						"id": "coverage_11414286323_619147735_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							12.8264636993408,
+							3.16888952255249,
+							305.183807373047
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							5.68780851364136,
+							4.64372730255127,
+							308.930755615234
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"front_dot": 1.0,
+						"head": [
+							399.699554443359,
+							7.95329475402832,
+							391.292907714844
+						],
+						"id": "source_crossing_1209132247_1499619446_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							404.130767822266,
+							2.69329452514648,
+							399.012725830078
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							394.924957275391,
+							3.77901983261108,
+							393.931091308594
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"front_dot": 1.0,
+						"head": [
+							397.956756591797,
+							7.79178905487061,
+							377.714050292969
+						],
+						"id": "source_crossing_1209132247_383097712_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							401.110015869141,
+							2.53178906440735,
+							382.584136962891
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							402.460205078125,
+							3.96024799346924,
+							374.6357421875
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"front_dot": 1.0,
+						"head": [
+							401.503692626953,
+							7.90763187408447,
+							396.494934082031
+						],
+						"id": "source_crossing_1209132247_383097727_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							402.465179443359,
+							2.64763188362122,
+							398.914947509766
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							396.329864501953,
+							3.85853958129883,
+							398.223663330078
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252749",
+						"front_dot": 1.0,
+						"head": [
+							261.461761474609,
+							-0.766987323760986,
+							-425.915252685547
+						],
+						"id": "source_crossing_506252749_73541403_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							262.079803466797,
+							-6.02698755264282,
+							-430.072052001953
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							256.041625976562,
+							-4.16621351242065,
+							-426.530822753906
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252752",
+						"front_dot": 0.999999940395355,
+						"head": [
+							284.6826171875,
+							0.668207168579102,
+							-423.015747070312
+						],
+						"id": "source_crossing_506252752_73541403_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							285.380401611328,
+							-4.59179306030273,
+							-427.159912109375
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							279.275299072266,
+							-3.14002895355225,
+							-423.7353515625
+						]
+					},
+					{
+						"crossing_id": "source_node_921242887",
+						"front_dot": 1.00000011920929,
+						"head": [
+							75.3897247314453,
+							4.59901523590088,
+							-11.3139896392822
+						],
+						"id": "source_node_921242887_1084408283_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							61.6103477478027,
+							-0.660984992980957,
+							-12.0819854736328
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							75.7504959106445,
+							1.02684545516968,
+							-16.7570476531982
+						]
+					},
+					{
+						"crossing_id": "source_node_921242887",
+						"front_dot": 1.0,
+						"head": [
+							86.0652847290039,
+							4.48804092407227,
+							-4.38846015930176
+						],
+						"id": "source_node_921242887_378453707_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							99.8548583984375,
+							-0.771959364414215,
+							-3.83295607566833
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							85.788459777832,
+							1.1183443069458,
+							1.0595109462738
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"front_dot": 1.0,
+						"head": [
+							41.7107772827148,
+							4.94535446166992,
+							94.9692153930664
+						],
+						"id": "source_node_4851224026_493183992_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							36.6582450866699,
+							-0.314645648002625,
+							90.1222686767578
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							45.5678405761719,
+							0.901284456253052,
+							91.1117477416992
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"front_dot": 1.00000011920929,
+						"head": [
+							52.3003578186035,
+							5.51132535934448,
+							110.571403503418
+						],
+						"id": "source_node_4851224026_517634898_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							39.0184478759766,
+							0.251325309276581,
+							106.822822570801
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							54.6822853088379,
+							1.14959239959717,
+							102.458862304688
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"front_dot": 1.0,
+						"head": [
+							63.9666175842285,
+							4.0434947013855,
+							117.186714172363
+						],
+						"id": "source_node_4851224026_908622900_1_signal",
+						"kind": "vehicle",
+						"passed": true,
+						"point": [
+							77.318115234375,
+							-1.21650540828705,
+							120.679344177246
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							62.5307197570801,
+							0.4688640832901,
+							122.449333190918
+						]
+					},
+					{
+						"crossing_id": "sejong_marked",
+						"front_dot": 0.999794781208038,
+						"head": [
+							106.204360961914,
+							1.83902752399445,
+							-198.488647460938
+						],
+						"id": "PedestrianSignal_sejong_marked_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							106.348846435547,
+							-0.410972505807877,
+							-198.500869750977
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							64.8730621337891,
+							3.0011830329895,
+							-195.835494995117
+						]
+					},
+					{
+						"crossing_id": "sejong_marked",
+						"front_dot": 0.999836087226868,
+						"head": [
+							65.3964996337891,
+							3.75003528594971,
+							-195.037536621094
+						],
+						"id": "PedestrianSignal_sejong_marked_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							65.2520141601562,
+							1.50003516674042,
+							-195.025314331055
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							106.893371582031,
+							1.03978157043457,
+							-197.791290283203
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"front_dot": 0.999816417694092,
+						"head": [
+							30.0088195800781,
+							3.05128407478333,
+							137.926849365234
+						],
+						"id": "PedestrianSignal_coverage_11277565406_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							29.8663730621338,
+							0.80128401517868,
+							137.899749755859
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							70.0088348388672,
+							0.607512235641479,
+							146.332260131836
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"front_dot": 0.999810934066772,
+						"head": [
+							69.5885162353516,
+							1.34567844867706,
+							145.454986572266
+						],
+						"id": "PedestrianSignal_coverage_11277565406_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							69.7309646606445,
+							-0.904321551322937,
+							145.482086181641
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							29.6113014221191,
+							2.27272272109985,
+							137.042465209961
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"front_dot": 0.999812662601471,
+						"head": [
+							-20.333044052124,
+							5.64386796951294,
+							292.39404296875
+						],
+						"id": "PedestrianSignal_coverage_11414286323_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							-20.4722805023193,
+							3.39386796951294,
+							292.353576660156
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							19.1198692321777,
+							4.60349798202515,
+							304.695861816406
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"front_dot": 0.999812602996826,
+						"head": [
+							18.8195056915283,
+							5.3708701133728,
+							303.775604248047
+						],
+						"id": "PedestrianSignal_coverage_11414286323_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							18.9587421417236,
+							3.1208701133728,
+							303.816070556641
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							-20.632999420166,
+							4.85708332061768,
+							291.473693847656
+						]
+					},
+					{
+						"crossing_id": "coverage_4636374654",
+						"front_dot": 0.999279499053955,
+						"head": [
+							245.905181884766,
+							2.57308053970337,
+							-122.763832092285
+						],
+						"id": "PedestrianSignal_coverage_4636374654_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							245.760513305664,
+							0.323080569505692,
+							-122.773567199707
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							266.542175292969,
+							1.55212879180908,
+							-120.585899353027
+						]
+					},
+					{
+						"crossing_id": "coverage_4636374654",
+						"front_dot": 0.999239683151245,
+						"head": [
+							266.027435302734,
+							2.35670900344849,
+							-121.40991973877
+						],
+						"id": "PedestrianSignal_coverage_4636374654_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							266.172119140625,
+							0.106708899140358,
+							-121.400184631348
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							245.431030273438,
+							1.78163480758667,
+							-123.605094909668
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"front_dot": 0.999654054641724,
+						"head": [
+							392.206756591797,
+							4.62642812728882,
+							374.857696533203
+						],
+						"id": "PedestrianSignal_source_crossing_1209132247_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							392.167297363281,
+							2.37642812728882,
+							374.718170166016
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							400.444519042969,
+							4.17996072769165,
+							407.224975585938
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"front_dot": 0.999782741069794,
+						"head": [
+							401.296173095703,
+							4.98621845245361,
+							407.008575439453
+						],
+						"id": "PedestrianSignal_source_crossing_1209132247_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							401.335632324219,
+							2.73621845245361,
+							407.148101806641
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							392.703857421875,
+							3.85710430145264,
+							374.002563476562
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252749",
+						"front_dot": 0.997203946113586,
+						"head": [
+							265.246276855469,
+							-3.89039134979248,
+							-431.777648925781
+						],
+						"id": "PedestrianSignal_source_crossing_506252749_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							265.260894775391,
+							-6.14039134979248,
+							-431.921905517578
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							263.379516601562,
+							-3.39906644821167,
+							-421.270660400391
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252749",
+						"front_dot": 0.997170805931091,
+						"head": [
+							264.228393554688,
+							-2.67468881607056,
+							-421.737457275391
+						],
+						"id": "PedestrianSignal_source_crossing_506252749_bank_1",
+						"kind": "pedestrian",
+						"passed": false,
+						"point": [
+							264.213775634766,
+							-4.92468881607056,
+							-421.593200683594
+						],
+						"static_LOS_clear": false,
+						"static_obstacle": "StaticCollision",
+						"supported": true,
+						"viewpoint": [
+							266.098419189453,
+							-4.69522333145142,
+							-432.23583984375
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252752",
+						"front_dot": 0.998304903507233,
+						"head": [
+							288.921722412109,
+							-3.26451206207275,
+							-431.027404785156
+						],
+						"id": "PedestrianSignal_source_crossing_506252752_bank_0",
+						"kind": "pedestrian",
+						"passed": false,
+						"point": [
+							288.938110351562,
+							-5.51451206207275,
+							-431.171478271484
+						],
+						"static_LOS_clear": false,
+						"static_obstacle": "StaticCollision",
+						"supported": true,
+						"viewpoint": [
+							286.612152099609,
+							-1.95622098445892,
+							-417.700286865234
+						]
+					},
+					{
+						"crossing_id": "source_crossing_506252752",
+						"front_dot": 0.998212039470673,
+						"head": [
+							287.458709716797,
+							-1.12887692451477,
+							-418.177276611328
+						],
+						"id": "PedestrianSignal_source_crossing_506252752_bank_1",
+						"kind": "pedestrian",
+						"passed": false,
+						"point": [
+							287.442321777344,
+							-3.37887692451477,
+							-418.033203125
+						],
+						"static_LOS_clear": false,
+						"static_obstacle": "StaticCollision",
+						"supported": true,
+						"viewpoint": [
+							289.783020019531,
+							-4.05973291397095,
+							-431.464965820312
+						]
+					},
+					{
+						"crossing_id": "source_node_921242887",
+						"front_dot": 0.999794125556946,
+						"head": [
+							100.096633911133,
+							1.39263534545898,
+							-6.52458333969116
+						],
+						"id": "PedestrianSignal_source_node_921242887_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							100.241317749023,
+							-0.857364654541016,
+							-6.51499366760254
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							60.8216438293457,
+							0.794331967830658,
+							-9.92953205108643
+						]
+					},
+					{
+						"crossing_id": "source_node_921242887",
+						"front_dot": 0.999794125556946,
+						"head": [
+							61.3125457763672,
+							1.60798859596252,
+							-9.09523963928223
+						],
+						"id": "PedestrianSignal_source_node_921242887_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							61.1678619384766,
+							-0.642011344432831,
+							-9.10482978820801
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							100.587532043457,
+							0.620107710361481,
+							-5.6902904510498
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"front_dot": 0.999920248985291,
+						"head": [
+							78.0363006591797,
+							0.993010640144348,
+							136.866683959961
+						],
+						"id": "PedestrianSignal_source_node_4851224026_bank_0",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							78.1375198364258,
+							-1.25698935985565,
+							136.970504760742
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							34.6832084655762,
+							1.27785694599152,
+							91.2581634521484
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"front_dot": 0.999920189380646,
+						"head": [
+							34.5016288757324,
+							2.11517095565796,
+							92.2105407714844
+						],
+						"id": "PedestrianSignal_source_node_4851224026_bank_1",
+						"kind": "pedestrian",
+						"passed": true,
+						"point": [
+							34.4004096984863,
+							-0.134829118847847,
+							92.1067123413086
+						],
+						"static_LOS_clear": true,
+						"static_obstacle": "",
+						"supported": true,
+						"viewpoint": [
+							77.8547286987305,
+							0.213382840156555,
+							137.819061279297
+						]
+					}
+				]
+			},
+			"name": "actual_heads_supported_face_approach_and_static_LOS",
+			"passed": false
+		},
+		{
+			"evidence": {
+				"rows": [
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:1128365141:highway_line",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "coverage_4636374654",
+						"explicit_signal_nodes": [
+							"n/4636374654"
+						],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:469260694:highway_line"
+						],
+						"source_id": "osm:way:1208755360:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway",
+							"surface": "asphalt"
+						},
+						"status": "accepted"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "no_marked_or_explicit_signal_evidence",
+						"source_id": "osm:way:1209113130:highway_line",
+						"source_tags": {
+							"access": "no",
+							"bicycle": "yes",
+							"crossing:markings": "zebra:double",
+							"foot": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"horse": "no",
+							"motor_vehicle": "no",
+							"surface": "asphalt"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"explicit_signal_nodes": [
+							"n/7171543072",
+							"n/11203041629"
+						],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:1499619446:highway_line",
+							"osm:way:383097712:highway_line",
+							"osm:way:383097727:highway_line"
+						],
+						"source_id": "osm:way:1209132247:highway_line",
+						"source_tags": {
+							"access": "no",
+							"bicycle": "yes",
+							"foot": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"horse": "no",
+							"motor_vehicle": "no",
+							"surface": "asphalt"
+						},
+						"status": "accepted"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "no_marked_or_explicit_signal_evidence",
+						"source_id": "osm:way:1212442535:highway_line",
+						"source_tags": {
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"explicit_signal_nodes": [
+							"n/11277565404",
+							"n/11277565405"
+						],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:619147735:highway_line",
+							"osm:way:899373686:highway_line"
+						],
+						"source_id": "osm:way:1217120571:highway_line",
+						"source_tags": {
+							"access": "no",
+							"bicycle": "yes",
+							"crossing:markings": "zebra:double",
+							"foot": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"horse": "no",
+							"motor_vehicle": "no",
+							"surface": "asphalt"
+						},
+						"status": "accepted"
+					},
+					{
+						"crossing_id": "sejong_marked",
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:1084408283:highway_line",
+							"osm:way:378453707:highway_line"
+						],
+						"source_id": "osm:way:1230789306:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "accepted"
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"explicit_signal_nodes": [
+							"n/11414286311",
+							"n/11414286323"
+						],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:619147735:highway_line",
+							"osm:way:899373686:highway_line"
+						],
+						"source_id": "osm:way:1230789307:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway",
+							"surface": "asphalt"
+						},
+						"status": "accepted"
+					},
+					{
+						"crossing_id": "source_crossing_1230789312",
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "no_source_safe_supported_road_bank_pair",
+						"road_ids": [
+							"osm:way:539136610:highway_line"
+						],
+						"source_id": "osm:way:1230789312:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:1231246849:highway_line",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:1551642277:highway_line",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:1556516946:highway_line",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"lit": "no",
+							"surface": "paving_stones"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:1556516948:highway_line",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"lit": "no",
+							"surface": "paving_stones"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:506252747:highway_line",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway",
+							"surface": "asphalt"
+						},
+						"status": "excluded"
+					},
+					{
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "source_explicit_uncontrolled_or_no_signals",
+						"source_id": "osm:way:506252748:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway",
+							"lit": "no",
+							"surface": "asphalt"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "source_crossing_506252749",
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:73541403:highway_line"
+						],
+						"source_id": "osm:way:506252749:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "accepted"
+					},
+					{
+						"crossing_id": "source_crossing_506252752",
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"road_ids": [
+							"osm:way:73541403:highway_line"
+						],
+						"source_id": "osm:way:506252752:highway_line",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "accepted"
+					},
+					{
+						"crossing_id": "source_crossing_539136615",
+						"explicit_signal_nodes": [],
+						"kind": "source_crossing_way",
+						"reason": "no_source_safe_supported_road_bank_pair",
+						"road_ids": [
+							"osm:way:493183992:highway_line",
+							"osm:way:899373688:highway_line"
+						],
+						"source_id": "osm:way:539136615:highway_line",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"footway": "crossing",
+							"highway": "footway"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "source_crossing_762174871",
+						"explicit_signal_nodes": [
+							"n/7121587905"
+						],
+						"kind": "source_crossing_way",
+						"reason": "no_source_safe_supported_road_bank_pair",
+						"road_ids": [
+							"osm:way:198566324:highway_line",
+							"osm:way:619147729:highway_line",
+							"osm:way:619147734:highway_line",
+							"osm:way:913270580:highway_line"
+						],
+						"source_id": "osm:way:762174871:highway_line",
+						"source_tags": {
+							"bicycle": "yes",
+							"foot": "yes",
+							"footway": "crossing",
+							"highway": "footway",
+							"motor_vehicle": "no",
+							"surface": "asphalt"
+						},
+						"status": "excluded"
+					},
+					{
+						"crossing_id": "source_node_921242887",
+						"kind": "source_crossing_node",
+						"reason": "local_transverse_segment_authored_at_explicit_signal_node",
+						"source_id": "n/921242887",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"crossing:island": "no",
+							"highway": "crossing",
+							"kerb": "lowered",
+							"tactile_paving": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							80.230720221065,
+							-7.84132004249841
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/2463586332",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							128.880221462518,
+							-472.594324910082
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/3692726667",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:island": "no",
+							"highway": "crossing",
+							"kerb": "flush",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							203.838498014491,
+							-2.82707101339474
+						]
+					},
+					{
+						"crossing_id": "coverage_4636374654",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/4636374654",
+						"source_tags": {
+							"button_operated": "yes",
+							"crossing:signals": "yes",
+							"highway": "crossing",
+							"tactile_paving": "yes",
+							"traffic_signals:sound": "yes",
+							"traffic_signals:vibration": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							258.206003350206,
+							-121.695816686843
+						]
+					},
+					{
+						"crossing_id": "source_node_4851224026",
+						"kind": "source_crossing_node",
+						"reason": "local_transverse_segment_authored_at_explicit_signal_node",
+						"source_id": "n/4851224026",
+						"source_tags": {
+							"crossing:signals": "yes",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							39.5273925261572,
+							97.2331509827636
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/4851224030",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							18.1246743857046,
+							114.856221599504
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5157009757",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							75.8316990664462,
+							132.429073179141
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5194567167",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							80.5415013048332,
+							-194.625523362774
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5217303407",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							27.0482263655867,
+							126.427288227715
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5217303408",
+						"source_tags": {
+							"bicycle": "yes",
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							26.7027548830374,
+							108.413497779518
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5329436734",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							406.180624229251,
+							394.932216123212
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5706326038",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							126.788063846412,
+							-440.267898148857
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5706326045",
+						"source_tags": {
+							"crossing:island": "no",
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							103.91129918152,
+							-324.163231230341
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5851251273",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing",
+							"kerb": "lowered",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							86.5457690361654,
+							-13.8443697346374
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/5851251274",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing",
+							"kerb": "lowered",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							75.574075866607,
+							-14.0140186930075
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/6676267693",
+						"source_tags": {
+							"crossing": "marked",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							442.501590825734,
+							299.520053964108
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/6676619144",
+						"source_tags": {
+							"crossing": "marked",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							307.82422303583,
+							134.701484196819
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/6677066665",
+						"source_tags": {
+							"crossing": "marked",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							238.186653053155,
+							69.4932259288616
+						]
+					},
+					{
+						"crossing_id": "source_crossing_762174871",
+						"kind": "source_crossing_node",
+						"reason": "no_source_safe_supported_road_bank_pair",
+						"source_id": "n/7121587905",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							-68.3439681844902,
+							474.863264821935
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/7171543072",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"highway": "crossing",
+							"traffic_signals:sound": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							392.547533853212,
+							375.478382392321
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/7403928066",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							-408.966066445457,
+							148.774468150921
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/7505703291",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							264.593582087196,
+							-425.590092997067
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/7505703292",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							287.811054578284,
+							-422.504016538151
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/10316011992",
+						"source_tags": {
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "no"
+						},
+						"status": "excluded",
+						"xz": [
+							106.69243742089,
+							452.522795274388
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/10877889719",
+						"source_tags": {
+							"crossing:markings": "yes",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							379.623328953574,
+							-79.4086351585574
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11199667170",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:island": "no",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							114.69827239064,
+							21.9418650111184
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11199667171",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:island": "no",
+							"crossing:markings": "zebra",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							122.17748204025,
+							22.202793485485
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11199667180",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							101.114856848959,
+							53.1882690442726
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11202869271",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							61.6396235181019,
+							-437.907499482855
+						]
+					},
+					{
+						"crossing_id": "source_crossing_1209132247",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/11203041629",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"highway": "crossing",
+							"traffic_signals:sound": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							401.649003196741,
+							406.35796447238
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11203041630",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							394.759019257152,
+							379.899822699837
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11203041631",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							402.50496125652,
+							389.968652530108
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115438",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							277.542674963595,
+							-429.463407444768
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115446",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							430.938383207773,
+							-443.682752416469
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115473",
+						"source_tags": {
+							"crossing:island": "yes",
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							153.769618816674,
+							-432.249119781889
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115477",
+						"source_tags": {
+							"crossing:island": "no",
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							263.356487981277,
+							-264.581025595777
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115478",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							266.853169812181,
+							-329.770428752061
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115479",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							269.768572879431,
+							-386.424329318572
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115484",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							276.240990800841,
+							-412.084546754602
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115485",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							323.733230512182,
+							-414.39339570608
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11233115532",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							437.369809652155,
+							-401.681501270272
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/11277565404",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"highway": "crossing"
+						},
+						"status": "accepted",
+						"xz": [
+							37.6060820736457,
+							140.076186158694
+						]
+					},
+					{
+						"crossing_id": "coverage_11277565406",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/11277565405",
+						"source_tags": {
+							"crossing": "traffic_signals",
+							"highway": "crossing"
+						},
+						"status": "accepted",
+						"xz": [
+							61.0416095383698,
+							144.188824649435
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11277565406",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							42.844213953882,
+							140.999397222418
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11277565407",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							56.1467627885868,
+							143.328524631448
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11414286294",
+						"source_tags": {
+							"crossing:island": "no",
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							-41.0037337282556,
+							352.749400501605
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11414286297",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							103.583015756216,
+							-208.783113874495
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/11414286311",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"crossing:signals": "yes",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							8.10430989018641,
+							300.665278336965
+						]
+					},
+					{
+						"crossing_id": "coverage_11414286323",
+						"kind": "source_crossing_node",
+						"reason": "covered_by_source_crossing_way_or_existing_conflict",
+						"source_id": "n/11414286323",
+						"source_tags": {
+							"crossing": "marked",
+							"crossing:markings": "zebra",
+							"crossing:signals": "yes",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "accepted",
+						"xz": [
+							-7.30833921895828,
+							296.181381778326
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11414286332",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							63.2601533582783,
+							-169.331418853253
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11418728514",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							210.065363846079,
+							453.626224095933
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11418728530",
+						"source_tags": {
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							237.241277415771,
+							423.99310935894
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/11418728542",
+						"source_tags": {
+							"crossing:island": "yes",
+							"crossing:markings": "yes",
+							"crossing:signals": "no",
+							"highway": "crossing",
+							"tactile_paving": "yes"
+						},
+						"status": "excluded",
+						"xz": [
+							2.08652895514388,
+							359.31715950137
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/12234274258",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							-307.944102440379,
+							26.4755832920782
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13012013126",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							-265.97541840421,
+							-27.6926405285485
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13012013128",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							-243.213600322604,
+							-32.9298766036518
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13012013150",
+						"source_tags": {
+							"crossing": "uncontrolled",
+							"crossing:markings": "yes",
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							61.3428766195429,
+							-380.642117728479
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13721232746",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							98.3560701372335,
+							-208.984472524375
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13721232748",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							98.4528574337019,
+							52.0541265141219
+						]
+					},
+					{
+						"kind": "source_crossing_node",
+						"reason": "node_not_explicitly_signalled",
+						"source_id": "n/13721232761",
+						"source_tags": {
+							"highway": "crossing"
+						},
+						"status": "excluded",
+						"xz": [
+							41.9488469765638,
+							94.7653021640144
+						]
+					}
+				]
+			},
+			"name": "all_source_crossing_candidates_explicitly_accounted",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"no_clock_assignment_or_advance_method": true,
+				"simulation_seconds": 94.2999999999972,
+				"transitions": [
+					{
+						"cycle_t": 0.133333333333333,
+						"pedestrian": "red",
+						"simulation_seconds": 0.0333333333333333,
+						"vehicle": "green",
+						"wall_seconds": 3.949596
+					},
+					{
+						"cycle_t": 24.0000000000004,
+						"pedestrian": "red",
+						"simulation_seconds": 23.9000000000004,
+						"vehicle": "amber",
+						"wall_seconds": 5.947754
+					},
+					{
+						"cycle_t": 27.0000000000005,
+						"pedestrian": "red",
+						"simulation_seconds": 26.9000000000005,
+						"vehicle": "red",
+						"wall_seconds": 6.196633
+					},
+					{
+						"cycle_t": 29.0000000000006,
+						"pedestrian": "green",
+						"simulation_seconds": 28.9000000000006,
+						"vehicle": "red",
+						"wall_seconds": 6.36184
+					},
+					{
+						"cycle_t": 43.0000000000001,
+						"pedestrian": "red",
+						"simulation_seconds": 42.9000000000001,
+						"vehicle": "red",
+						"wall_seconds": 7.521633
+					},
+					{
+						"cycle_t": 0.0333333333332817,
+						"pedestrian": "red",
+						"simulation_seconds": 45.9333333333333,
+						"vehicle": "green",
+						"wall_seconds": 7.774254
+					},
+					{
+						"cycle_t": 24.0000000000003,
+						"pedestrian": "red",
+						"simulation_seconds": 69.8999999999986,
+						"vehicle": "amber",
+						"wall_seconds": 9.784421
+					},
+					{
+						"cycle_t": 27.0000000000004,
+						"pedestrian": "red",
+						"simulation_seconds": 72.8999999999984,
+						"vehicle": "red",
+						"wall_seconds": 10.031805
+					},
+					{
+						"cycle_t": 29.0000000000005,
+						"pedestrian": "green",
+						"simulation_seconds": 74.8999999999983,
+						"vehicle": "red",
+						"wall_seconds": 10.198663
+					},
+					{
+						"cycle_t": 43.0000000000001,
+						"pedestrian": "red",
+						"simulation_seconds": 88.8999999999975,
+						"vehicle": "red",
+						"wall_seconds": 11.363016
+					},
+					{
+						"cycle_t": 0.033333333333232,
+						"pedestrian": "red",
+						"simulation_seconds": 91.9333333333307,
+						"vehicle": "green",
+						"wall_seconds": 11.612715
+					}
+				],
+				"wall_seconds": 11.807566,
+				"wraps": 2
+			},
+			"name": "production_clock_naturally_completes_two_cycles",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"dark_physics_samples": 140,
+				"lit_physics_samples": 160
+			},
+			"name": "pedestrian_final_five_seconds_actually_flashes",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": [],
+				"samples": 405
+			},
+			"name": "real_lenses_and_physical_counters_follow_clock",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": []
+			},
+			"name": "vehicle_green_never_overlaps_pedestrian_green",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "menu_pauses_signal_clock",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "resume_restarts_signal_clock",
+			"passed": true
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"physics_hz": 30,
+	"result": "FAIL",
+	"samples": [
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.133333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.366666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.6,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.833333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.06666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.3,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.53333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.76666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.0,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.23333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.46666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.7,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.93333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.16666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.4,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.63333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.86666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.1,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.33333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.56666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.79999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.03333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.26666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.49999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.73333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.96666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.19999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.43333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.66666666666665,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.89999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.13333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.36666666666665,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.59999999999998,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.83333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.06666666666665,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.29999999999998,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.53333333333331,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.76666666666665,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.99999999999998,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.23333333333331,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.46666666666664,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.69999999999998,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.93333333333331,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.1666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.4,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.6333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.8666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.1,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.3333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.5666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.8,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.0333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.2666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.5,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.7333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.9666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.2,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.4333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.6666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.9,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.1333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.3666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.6,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.8333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.0666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.3,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.5333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.7666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.0,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.2333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.4666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.7,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.9333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.1666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.4,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.6333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.8666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.1000000000001,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.3333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.5666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.8000000000001,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.0333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.2666666666668,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.5000000000001,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.7333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.9666666666668,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.2000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.4333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.6666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.9000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.1333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.3666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.6000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.8333333333336,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.0666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.3000000000003,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.5333333333336,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.766666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.0000000000003,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.2333333333336,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.466666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.7000000000003,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.9333333333337,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.166666666667,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.4000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.6333333333337,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.8666666666671,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.1000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.3333333333338,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.5666666666671,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.8000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.0333333333338,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.2666666666671,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.5000000000005,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.7333333333338,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.9666666666672,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.2000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.4333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.6666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.9000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.1333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.3666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.6000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.8333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.0666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.3000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.533333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.7666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.0000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.233333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.4666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.7000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.933333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.1666666666674,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.4000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.6333333333341,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.8666666666674,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.1000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.3333333333341,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.5666666666674,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.8000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.033333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.2666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.5000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.733333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.9666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.2000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.4333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.6666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.9000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.1333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.3666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.6000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.8333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.0666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.3000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.5333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.7666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.0000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.2333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.4666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.7000000000004,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.9333333333337,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 38.1666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 38.4000000000004,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 38.6333333333337,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 38.866666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 39.1000000000003,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 39.3333333333337,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 39.566666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 39.8000000000003,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.0333333333336,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 40.2666666666669,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.5000000000003,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.7333333333336,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 40.9666666666669,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 41.2000000000002,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 41.4333333333335,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 41.6666666666669,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 41.9000000000002,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 42.1333333333335,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 42.3666666666668,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 42.6000000000001,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 42.8333333333335,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.0666666666668,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.3000000000001,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.5333333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.7666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.0000000000001,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.2333333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.4666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.7,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.9333333333333,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.1666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.4,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.6333333333333,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.8666666666666,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.0999999999999484,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.333333333333282,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.566666666666615,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.799999999999948,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.03333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.26666666666662,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.49999999999995,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.73333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.96666666666662,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.19999999999995,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.43333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.66666666666662,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.89999999999995,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.13333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.36666666666661,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.59999999999995,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 3.83333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.06666666666661,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.29999999999994,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.53333333333328,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.76666666666661,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 4.99999999999994,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.23333333333327,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.46666666666661,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.69999999999994,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 5.93333333333327,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.1666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.39999999999994,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.63333333333327,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 6.8666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.09999999999993,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.33333333333327,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.5666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 7.79999999999993,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.03333333333326,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.2666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.49999999999993,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.73333333333326,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 8.96666666666659,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.19999999999993,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.43333333333326,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.66666666666659,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 9.89999999999992,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.1333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.3666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.5999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 10.8333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.0666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.2999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.5333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.7666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 11.9999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.2333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.4666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.6999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 12.9333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.1666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.3999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.6333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 13.8666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.0999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.3333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.5666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 14.7999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.0333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.2666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.4999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.7333333333332,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 15.9666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.1999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.4333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.6666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 16.8999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.1333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.3666666666666,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.6,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 17.8333333333333,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.0666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.3,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.5333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 18.7666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.0,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.2333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.4666666666667,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.7000000000001,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 19.9333333333334,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.1666666666668,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.4000000000001,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.6333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 20.8666666666668,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.1000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.3333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.5666666666668,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 21.8000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.0333333333335,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.2666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.5000000000002,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.7333333333336,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 22.9666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.2000000000003,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.4333333333336,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.6666666666669,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 23.9000000000003,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.1333333333336,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.366666666667,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.6000000000003,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 24.8333333333337,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.066666666667,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.3000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.5333333333337,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 25.7666666666671,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.0000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.2333333333337,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.4666666666671,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.7000000000004,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 26.9333333333338,
+			"vehicle": "amber"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.1666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.4000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.6333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 27.8666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.1000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.3333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.5666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 28.8000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.0333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.2666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.5000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.7333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 29.9666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.2000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.433333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.6666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 30.9000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.133333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.3666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.6000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 31.833333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.0666666666674,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.3000000000007,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.533333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 32.7666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.0000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.233333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.4666666666673,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.7000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 33.9333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.1666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.4000000000006,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.6333333333339,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 34.8666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.1000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.3333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.5666666666672,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 35.8000000000005,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.0333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.2666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.5000000000004,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.7333333333338,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 36.9666666666671,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.2000000000004,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.4333333333337,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 37.9000000000004,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 38.1333333333337,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 38.366666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 38.6000000000003,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 38.8333333333336,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 39.066666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 39.3000000000003,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 39.5333333333336,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 39.7666666666669,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.0000000000002,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.2333333333336,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 40.4666666666669,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 40.7000000000002,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 40.9333333333335,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 41.1666666666668,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 41.4000000000002,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 41.6333333333335,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 41.8666666666668,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 42.1000000000001,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 42.3333333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": true,
+			"pedestrian": "green",
+			"t": 42.5666666666668,
+			"vehicle": "red"
+		},
+		{
+			"flashing": true,
+			"green_lit": false,
+			"pedestrian": "green",
+			"t": 42.8000000000001,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.0333333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.2666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.5,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.7333333333334,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 43.9666666666667,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.2,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.4333333333333,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.6666666666666,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 44.9,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.1333333333333,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.3666666666666,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.5999999999999,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 45.8333333333332,
+			"vehicle": "red"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.0666666666665653,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.299999999999899,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.533333333333232,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.766666666666565,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 0.999999999999898,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.23333333333323,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.46666666666657,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.6999999999999,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 1.93333333333323,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.16666666666657,
+			"vehicle": "green"
+		},
+		{
+			"flashing": false,
+			"green_lit": false,
+			"pedestrian": "red",
+			"t": 2.3999999999999,
+			"vehicle": "green"
+		}
+	],
+	"scope": "Production scene and real physics clock for two full cycles without assigning signal time. Actual lens/icon materials, physical counters, bank coverage, source-candidate exclusions, supported placements and static LOS. Headless is geometry/state evidence only; native human readability, official siting/timing, all NPC signal compliance and sustained performance are separate.",
+	"source_sha256": {
+		"res://../tests/game/check_signal_visibility_cycle.gd": "bdff5e0101c48c1d78b74527c3ab756432f29ca5a8cbc8d8537b8a9ed5ece20e",
+		"res://../tools/prepare_road_furniture.py": "e9d5d6b64306c18ac05b9dca0c912eb40c2dfe3ee76f5fa1646b95321d9a3711",
+		"res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+		"res://assets/authored/road_furniture.json": "ed95b6f7af09e0041f4a9404852082b0d52e4c96967f74c756c8816820fc09b0",
+		"res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+		"res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+		"res://scripts/street_network_detail.gd": "05733e63658b53f5da1112e6ada0533f32d2a8b77ad4e74f3ecf43a53041436c",
+		"res://scripts/traffic/traffic_manager.gd": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c",
+		"res://scripts/traffic/vehicle.gd": "17be106de3941f53c0eecd97612a49944d165e8909e9d6b5faf8b9cfb0eb08bf"
+	},
+	"summary": {
+		"checks": 11,
+		"failed": 1
+	},
+	"task": "EXP23_SIGNAL_VISIBILITY_CYCLE",
+	"transitions": [
+		{
+			"cycle_t": 0.133333333333333,
+			"pedestrian": "red",
+			"simulation_seconds": 0.0333333333333333,
+			"vehicle": "green",
+			"wall_seconds": 3.949596
+		},
+		{
+			"cycle_t": 24.0000000000004,
+			"pedestrian": "red",
+			"simulation_seconds": 23.9000000000004,
+			"vehicle": "amber",
+			"wall_seconds": 5.947754
+		},
+		{
+			"cycle_t": 27.0000000000005,
+			"pedestrian": "red",
+			"simulation_seconds": 26.9000000000005,
+			"vehicle": "red",
+			"wall_seconds": 6.196633
+		},
+		{
+			"cycle_t": 29.0000000000006,
+			"pedestrian": "green",
+			"simulation_seconds": 28.9000000000006,
+			"vehicle": "red",
+			"wall_seconds": 6.36184
+		},
+		{
+			"cycle_t": 43.0000000000001,
+			"pedestrian": "red",
+			"simulation_seconds": 42.9000000000001,
+			"vehicle": "red",
+			"wall_seconds": 7.521633
+		},
+		{
+			"cycle_t": 0.0333333333332817,
+			"pedestrian": "red",
+			"simulation_seconds": 45.9333333333333,
+			"vehicle": "green",
+			"wall_seconds": 7.774254
+		},
+		{
+			"cycle_t": 24.0000000000003,
+			"pedestrian": "red",
+			"simulation_seconds": 69.8999999999986,
+			"vehicle": "amber",
+			"wall_seconds": 9.784421
+		},
+		{
+			"cycle_t": 27.0000000000004,
+			"pedestrian": "red",
+			"simulation_seconds": 72.8999999999984,
+			"vehicle": "red",
+			"wall_seconds": 10.031805
+		},
+		{
+			"cycle_t": 29.0000000000005,
+			"pedestrian": "green",
+			"simulation_seconds": 74.8999999999983,
+			"vehicle": "red",
+			"wall_seconds": 10.198663
+		},
+		{
+			"cycle_t": 43.0000000000001,
+			"pedestrian": "red",
+			"simulation_seconds": 88.8999999999975,
+			"vehicle": "red",
+			"wall_seconds": 11.363016
+		},
+		{
+			"cycle_t": 0.033333333333232,
+			"pedestrian": "red",
+			"simulation_seconds": 91.9333333333307,
+			"vehicle": "green",
+			"wall_seconds": 11.612715
+		}
+	],
+	"wall_elapsed_s": 11.826046
+}

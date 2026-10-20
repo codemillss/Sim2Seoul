@@ -56,6 +56,7 @@ var terrain_binding: RefCounted
 var street_network_detail: Node3D
 var city_bus_service: Node3D
 var city_bike_service: Node3D
+var city_scooter_service: Node3D
 
 func _ready() -> void:
 	assert(exploration_physics_hz in [30,60])
@@ -196,6 +197,9 @@ func _ready() -> void:
 	city_bike_service=preload("res://scripts/city_bike_service.gd").new();add_child(city_bike_service)
 	if not city_bike_service.setup(self):
 		_exploration_failure("자전거와 대여소를 준비하지 못했습니다.");return
+	city_scooter_service=preload("res://scripts/city_scooter_service.gd").new();add_child(city_scooter_service)
+	if not city_scooter_service.setup(self):
+		_exploration_failure("전동 킥보드와 대여소를 준비하지 못했습니다.");return
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -263,7 +267,7 @@ func _build_ui() -> void:
 	options.add_child(music_switch)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
-	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"]]:
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"],["전동 킥보드 대여소로 이동","scooter_station"]]:
 		var shortcut:=Button.new();shortcut.text=detail[0]
 		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
@@ -314,7 +318,7 @@ func _time_selected(index: int) -> void:
 var street_walk_index: int=0
 
 func _visit_street_detail(kind: String) -> void:
-	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk","bus_stop","crossing","street_lamps","bike_station"]:return
+	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk","bus_stop","crossing","street_lamps","bike_station","scooter_station"]:return
 	if interior_visit.active and not interior_visit.return_to_world_spawn():return
 	if kind=="hotel_pool":
 		var destination: Dictionary=exploration_rooftop_access.representative_pool_destination()
@@ -329,10 +333,14 @@ func _visit_street_detail(kind: String) -> void:
 		if menu.visible:toggle_menu()
 		return
 	var requested:=Vector3.ZERO;var toward:=Vector3.ZERO
-	if kind=="bike_station" and is_instance_valid(city_bike_service):
-		var destination: Dictionary=city_bike_service.viewpoint()
+	var camera_view: Dictionary={}
+	if kind in ["bike_station","scooter_station"]:
+		var service: Node3D=city_scooter_service if kind=="scooter_station" else city_bike_service
+		if not is_instance_valid(service):return
+		var destination: Dictionary=service.viewpoint()
 		if destination.is_empty():return
 		requested=destination.point;toward=destination.toward
+		camera_view=destination
 	elif kind=="bus_stop" and is_instance_valid(city_bus_service):
 		var destination: Dictionary=city_bus_service.viewpoint()
 		if destination.is_empty():return
@@ -341,6 +349,7 @@ func _visit_street_detail(kind: String) -> void:
 		var destination: Dictionary=street_network_detail.destination("crossing" if kind=="crossing" else "lamps")
 		if destination.is_empty():return
 		requested=destination.point;toward=destination.toward
+		camera_view=destination
 	elif kind=="street_walk" and is_instance_valid(neighborhood_population):
 		var points: Array=neighborhood_population.coverage_viewpoints()
 		if points.is_empty():return
@@ -380,7 +389,15 @@ func _visit_street_detail(kind: String) -> void:
 	var direction: Vector3=toward-safe.point;direction.y=0
 	player.get_node("Visual").rotation.y=atan2(-direction.x,-direction.z)
 	rig.reset_orientation();rig.yaw=atan2(-direction.x,-direction.z);rig.pitch=deg_to_rad(-15.)
-	rig.requested_distance=4.5;rig.current_distance=4.5;rig.snap_to_target_pose()
+	rig.requested_distance=4.5;rig.current_distance=4.5
+	if kind in ["bike_station","scooter_station","crossing"]:
+		# Use the service's checked observer pose to keep the subject beside
+		# the avatar and foreground fixtures out of the important sight line.
+		rig.yaw=float(camera_view.get("camera_yaw",rig.yaw))
+		rig.pitch=deg_to_rad(float(camera_view.get("camera_pitch_degrees",-8.0 if kind=="crossing" else -18.0)))
+		rig.requested_distance=float(camera_view.get("camera_distance_m",4.2))
+		rig.current_distance=rig.requested_distance
+	rig.snap_to_target_pose()
 	if menu.visible:toggle_menu()
 
 func _dog_walk_viewpoint() -> Dictionary:
@@ -441,30 +458,50 @@ func _commit_exploration_teleport(point: Vector3) -> void:
 
 
 func _street_transport_riding() -> bool:
-	return (is_instance_valid(city_bus_service) and city_bus_service.riding) or (is_instance_valid(city_bike_service) and city_bike_service.riding)
+	for service: Node3D in _street_services():
+		if is_instance_valid(service) and service.riding:return true
+	return false
+
+func _street_services() -> Array[Node3D]:
+	return [city_bike_service,city_scooter_service,city_bus_service]
+
+func _street_service_distance(service: Node3D) -> float:
+	return float(service.interaction_distance_m()) if service.has_method("interaction_distance_m") else 8.0
+
+func _street_interact_target() -> Node3D:
+	var nearest: Node3D;var distance:=INF
+	for service: Node3D in _street_services():
+		if not is_instance_valid(service) or not service.loaded or not service.can_interact():continue
+		var candidate: float=_street_service_distance(service)
+		if candidate<distance:nearest=service;distance=candidate
+	return nearest
 
 func _cancel_bus_after_teleport() -> void:
 	# Shared transport cleanup runs only after a validated destination is applied.
-	if is_instance_valid(city_bike_service) and city_bike_service.riding:city_bike_service.cancel_ride_for_teleport()
-	if is_instance_valid(city_bus_service) and city_bus_service.riding:city_bus_service.cancel_ride_for_teleport()
+	for service: Node3D in _street_services():
+		if is_instance_valid(service) and service.riding:service.cancel_ride_for_teleport()
 
 func try_street_interact() -> bool:
 	# Existing fresh-E dispatcher remains the sole owner of street interactions.
-	for service: Node3D in [city_bike_service,city_bus_service]:
+	for service: Node3D in _street_services():
 		if is_instance_valid(service) and service.loaded and service.riding:
 			service.handle_interact();return true
-	for service: Node3D in [city_bike_service,city_bus_service]:
-		if is_instance_valid(service) and service.loaded and service.can_interact():return service.handle_interact()
+	var nearest: Node3D=_street_interact_target()
+	if is_instance_valid(nearest):return nearest.handle_interact()
 	return false
 
 func street_interaction_hint() -> String:
-	for service: Node3D in [city_bike_service,city_bus_service]:
+	for service: Node3D in _street_services():
 		if is_instance_valid(service) and service.loaded and service.riding:return service.prompt_text()
-	for service: Node3D in [city_bike_service,city_bus_service]:
+	var actionable: Node3D=_street_interact_target()
+	if is_instance_valid(actionable):return actionable.prompt_text()
+	var closest_hint:="";var distance:=INF
+	for service: Node3D in _street_services():
 		if is_instance_valid(service) and service.loaded:
 			var hint: String=service.prompt_text()
-			if not hint.is_empty():return hint
-	return ""
+			var candidate: float=_street_service_distance(service)
+			if not hint.is_empty() and candidate<distance:closest_hint=hint;distance=candidate
+	return closest_hint
 
 func set_pedestrians_running(enabled: bool) -> void:
 	super.set_pedestrians_running(enabled)
@@ -532,7 +569,7 @@ func set_speed_profile(id: String) -> bool:
 func set_free_roam(enabled: bool) -> void:
 	if _street_transport_riding():
 		free_roam_switch.set_pressed_no_signal(free_roam_enabled)
-		exploration_notice.text="버스나 자전거에서 내린 뒤 탐험 범위를 바꿀 수 있습니다.";return
+		exploration_notice.text="이동수단에서 내린 뒤 탐험 범위를 바꿀 수 있습니다.";return
 	if not is_instance_valid(exploration_overlay):return
 	if not enabled and is_instance_valid(interior_visit) and interior_visit.active and interior_visit.on_roof and not player.interior_active:
 		# A roof visitor has already rejoined the outdoor world. Do not switch
@@ -602,7 +639,9 @@ func _height_above_terrain(point: Vector3) -> float:
 func _process(delta: float) -> void:
 	super._process(delta)
 	if not runtime_ok:return
-	if is_instance_valid(city_bike_service) and city_bike_service.riding:
+	if is_instance_valid(city_scooter_service) and city_scooter_service.riding:
+		status.text="전동 킥보드 탑승 중 · W 가속 · S/Space 제동 · A/D 조향 · E 내리기/반납"
+	elif is_instance_valid(city_bike_service) and city_bike_service.riding:
 		status.text="자전거 탑승 중 · W 가속 · S/Space 제동 · A/D 조향 · E 내리기/반납"
 	elif is_instance_valid(city_bus_service) and city_bus_service.riding:
 		status.text="버스 탑승 중 · E · 다음 정류장 하차 예약"

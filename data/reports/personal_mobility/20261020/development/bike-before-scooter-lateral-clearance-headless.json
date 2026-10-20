@@ -1,0 +1,458 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "bike_error": "",
+        "runtime_error": ""
+      },
+      "name": "production_setup_two_source_bound_native_docks",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original30_people14_vehicles_and_native_capsule_preserved",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera_distance_m": 4.2,
+        "camera_pitch_degrees": -18.0,
+        "camera_yaw": 0.361756517129627,
+        "id": "BIKE-GAME-01",
+        "point": [
+          165.054244995117,
+          -0.289733320474625,
+          -103.882080078125
+        ],
+        "toward": [
+          165.59489440918,
+          0.404668629169464,
+          -105.705513000488
+        ]
+      },
+      "name": "supported_clear_player_rental_start",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_wall_blocks_through_wall_E_rental",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 1.13333333333333,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike1"
+            }
+          }
+        ],
+        "prompt": "따릉이 · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E 반납"
+      },
+      "name": "real_E_rents_retained_capsule_visible_rider_and_bus_lock",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "mounted_kickstand_retracted",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_speed_mps": 4.81666666666667,
+        "maximum_step_m": 0.16048489511013,
+        "snapshot": {
+          "actual_distance_m": 6.9156562241842,
+          "bike_count": 2,
+          "bikes": [
+            {
+              "distance_m": 6.9156562241842,
+              "kickstand_visible": false,
+              "layer": 4,
+              "mask": 47,
+              "name": "RentalBike1",
+              "on_floor": true,
+              "position": [
+                172.399429321289,
+                -0.193001061677933,
+                -104.426055908203
+              ],
+              "rented": true,
+              "source_allowed": true,
+              "station_id": "BIKE-GAME-01",
+              "wheel_phase": 1.19582443841546
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "layer": 4,
+              "mask": 47,
+              "name": "RentalBike2",
+              "on_floor": true,
+              "position": [
+                -127.483528137207,
+                3.66541886329651,
+                24.2506427764893
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "BIKE-GAME-02",
+              "wheel_phase": 0.0
+            }
+          ],
+          "blocked_reason": "",
+          "dock_count": 2,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 1.13333333333333,
+              "event": "rented_and_mounted",
+              "evidence": {
+                "bike": "RentalBike1"
+              }
+            }
+          ],
+          "exit_requested": false,
+          "grounded_ticks": 96,
+          "loaded": true,
+          "maximum_hand_gap_m": 0.000034133016015403,
+          "maximum_pedal_rotation": 6.16017775458243,
+          "maximum_pedal_sole_height_error_m": 0.000000650994479656219,
+          "maximum_step_m": 0.160467654466629,
+          "minimum_support_normal_y": 0.999391138553619,
+          "pedal_phase": 1.23383232780324,
+          "pending_pair_release_count": 0,
+          "rental_index": 0,
+          "riding": true,
+          "scope": "Authored physical game bicycle rental; no real station inventory, account, payment or legal cycling-access claim.",
+          "source_geometry_changed": false,
+          "speed_mps": 0.226666666666667,
+          "steer_radians": 0.0
+        },
+        "travel_m": 6.9158730506897,
+        "unsupported_ticks": 0
+      },
+      "name": "W_accelerates_real_bike_and_animates_wheels_pedals_on_terrain",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_position": [
+          167.35139465332,
+          -0.274644643068314,
+          -105.63117980957
+        ],
+        "dock": [
+          165.59489440918,
+          -0.3096764087677,
+          -105.705513000488
+        ],
+        "events": [
+          {
+            "clock_s": 1.13333333333333,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike1"
+            }
+          },
+          {
+            "clock_s": 13.9666666666666,
+            "event": "dismount_requested",
+            "evidence": {}
+          },
+          {
+            "clock_s": 14.0,
+            "event": "dismounted",
+            "evidence": {
+              "point": [
+                167.032424926758,
+                -0.220641002058983,
+                -104.730987548828
+              ]
+            }
+          },
+          {
+            "clock_s": 14.0,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-01"
+            }
+          },
+          {
+            "clock_s": 14.0333333333333,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          }
+        ]
+      },
+      "name": "physical_round_trip_E_dismount_returns_to_authored_dock",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "returned_kickstand_deployed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "after_yaw": -1.80643994760025,
+        "before_yaw": -1.80643994760025,
+        "steer": 0.0513078094415877
+      },
+      "name": "AD_steers_real_heading_and_front_assembly",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "maximum_hand_gap_m": 0.00550661282613873,
+        "maximum_sole_pedal_height_error_m": 0.000000757398083806038
+      },
+      "name": "visible_rider_hands_hold_grips_and_soles_follow_pedals",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Space_brakes_to_full_stop_without_player_jump",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 0.066375158727169,
+        "reason": "physical_sweep"
+      },
+      "name": "full_box_native_wall_sweep_prevents_riding_through_obstacle",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "actual_menu_freezes_bike_clock_rider_and_pose",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_native_dismount_keeps_rider_attached_and_capsule_safe",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_dismount_request_can_cancel_to_continue",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "safe_E_dismount_restores_original_player_control_and_masks",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "temporary_parked_bike_E_remounts",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "speed": -1.1,
+        "travel": 2.7464611530304
+      },
+      "name": "S_brakes_then_backs_out_at_bounded_low_speed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "external_cancel_fixture_has_positive_support",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "validated_external_teleport_restores_and_does_not_reattach",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_post_exit_idle_step_m": 0.0,
+        "pending_release_count": 0
+      },
+      "name": "native_published_exit_and_cancel_do_not_kick_parked_bike",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "private_interiors_rejected": 1,
+        "valid_private_interiors": 1
+      },
+      "name": "retained_private_source_exclusions_reject_riding_footprint",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 17095,
+  "maximum_post_exit_idle_step_m": 0.0,
+  "passed": 22,
+  "physics_hz": 30,
+  "result": "FAIL",
+  "scope": "Production native terrain, retained player capsule and actors, InputEventAction E/WASD/Space, physical bike moves/collision/support, real menu and validated cancel. Test-only player placements and blockers explicitly separate. Headless does not accept rendered appearance.",
+  "snapshot": {
+    "actual_distance_m": 19.6235765547608,
+    "bike_count": 2,
+    "bikes": [
+      {
+        "distance_m": 19.6235765547608,
+        "kickstand_visible": true,
+        "layer": 4,
+        "mask": 47,
+        "name": "RentalBike1",
+        "on_floor": true,
+        "position": [
+          169.05339050293,
+          -0.245637595653534,
+          -105.214813232422
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "BIKE-GAME-01",
+        "wheel_phase": -2.48540801103456
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "layer": 4,
+        "mask": 47,
+        "name": "RentalBike2",
+        "on_floor": true,
+        "position": [
+          -127.483528137207,
+          3.66541886329651,
+          24.2506427764893
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "BIKE-GAME-02",
+        "wheel_phase": 0.0
+      }
+    ],
+    "blocked_reason": "",
+    "dock_count": 2,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 1.13333333333333,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalBike1"
+        }
+      },
+      {
+        "clock_s": 13.9666666666666,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 14.0,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            167.032424926758,
+            -0.220641002058983,
+            -104.730987548828
+          ]
+        }
+      },
+      {
+        "clock_s": 14.0,
+        "event": "returned",
+        "evidence": {
+          "station_id": "BIKE-GAME-01"
+        }
+      },
+      {
+        "clock_s": 14.0333333333333,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 14.6666666666666,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalBike1"
+        }
+      },
+      {
+        "clock_s": 25.4666666666671,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 26.3666666666671,
+        "event": "dismount_cancelled",
+        "evidence": {}
+      },
+      {
+        "clock_s": 26.7000000000005,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 26.7333333333338,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            171.535690307617,
+            -0.153999015688896,
+            -103.646377563477
+          ]
+        }
+      },
+      {
+        "clock_s": 26.7666666666672,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 27.5000000000005,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalBike1"
+        }
+      },
+      {
+        "clock_s": 32.1666666666674,
+        "event": "ride_cancelled_after_validated_external_teleport",
+        "evidence": {}
+      },
+      {
+        "clock_s": 32.2000000000007,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      }
+    ],
+    "exit_requested": false,
+    "grounded_ticks": 888,
+    "loaded": true,
+    "maximum_hand_gap_m": 0.00550661282613873,
+    "maximum_pedal_rotation": 6.16017775458243,
+    "maximum_pedal_sole_height_error_m": 0.000000757398083806038,
+    "maximum_step_m": 0.160467654466629,
+    "minimum_support_normal_y": 0.999239325523376,
+    "pedal_phase": -2.50282433093286,
+    "pending_pair_release_count": 0,
+    "rental_index": -1,
+    "riding": false,
+    "scope": "Authored physical game bicycle rental; no real station inventory, account, payment or legal cycling-access claim.",
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "steer_radians": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_bike_service.gd": "839c1ca4c551857faf00599c9222022cd4f498d268f0e1e56f0ccecd3c29b332",
+    "res://assets/authored/bike_service.json": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "bb78e125b7be10a7078a90c4d502ff12d9b1696373a827a65601aabfe5917397",
+    "res://scripts/explore_walk.gd": "602d1d146a7da054328c4ad12dec6e02b3baf20cb7a72876633eebf46411b9cb",
+    "res://scripts/interior_visit.gd": "25dc0f322daaaff32f817c82465deaab4bad90aceba02ca3c9a08cd62b1c9864"
+  },
+  "task": "city_bikes",
+  "total": 23
+}

@@ -53,6 +53,9 @@ var _last_recycle_tick: int = -1
 var _endpoint_history: Array[Dictionary] = []
 var _recycle_history: Array[Dictionary] = []
 var _obstacle: Dictionary = {}
+var _painted_signal_observation: Dictionary = {}
+var _painted_signal_commit: Dictionary = {}
+var _painted_signal_events: Array[Dictionary] = []
 var _motion_cap_m: float = INF
 var _terrain_enabled: bool = false
 var _terrain_normal: Vector3 = Vector3.UP
@@ -386,6 +389,7 @@ func _choose_step_budget(delta: float) -> float:
 		_motion_cap_m = minf(_motion_cap_m, maxf(0.0, float(_obstacle.get("distance_m", 0.0)) - 0.05))
 		_state = "braking_obstacle" if _speed_mps > SPEED_EPS_MPS else "waiting_obstacle"
 		_blocked_reason = String(_obstacle.get("reason", "unknown_obstacle"))
+	target_speed=_painted_signal_speed(target_speed,delta)
 	var change: float = ACCEL_MPS2 * delta if target_speed > _speed_mps else BRAKE_MPS2 * delta
 	var next_speed: float = move_toward(_speed_mps, target_speed, change)
 	_command_speed_mps = next_speed
@@ -397,6 +401,51 @@ func _choose_step_budget(delta: float) -> float:
 	if end_remaining <= POINT_EPS_M and _blocked_reason.is_empty():
 		step_budget = minf(POINT_EPS_M, _motion_cap_m)
 	return maxf(0.0, step_budget)
+
+
+func _painted_signal_speed(target_speed: float,delta: float) -> float:
+	# Optional exploration signals supplement the old route conflicts without
+	# editing their source polyline or granting a FIFO/human-priority bypass.
+	# BusBody has its own longer-body service controller and does not expose
+	# this manager hook, so its front/rear clearance policy remains independent.
+	if not is_instance_valid(_manager) or not _manager.has_method("painted_signal_limit"):return target_speed
+	if not _painted_signal_commit.is_empty() and _station_m>=float(_painted_signal_commit.clear_station_m):
+		_painted_signal_event("rear_cleared",_painted_signal_commit)
+		_painted_signal_commit.clear()
+	var observed: Dictionary=_manager.painted_signal_limit(self,_segment_direction(_segment),30.0)
+	_painted_signal_observation=observed.duplicate(true)
+	var id: String=String(observed.get("crossing_id",""))
+	if id.is_empty():return target_speed
+	if not _painted_signal_commit.is_empty() and String(_painted_signal_commit.crossing_id)==id:return target_speed
+	var half_length: float=(body_shape.shape as BoxShape3D).size.z*.5
+	var distance: float=float(observed.get("distance_m",INF))
+	var remaining: float=distance-half_length-.35
+	var phase: String=String(observed.get("state","uncontrolled"))
+	# Historical managers may report a distant FIFO hold while still permitting
+	# travel up to that old stop point. Use the actual motion budget rather than
+	# treating that descriptive reason as a present obstruction at this crossing.
+	var clear_to_move: bool=bool(_permission.get("fresh",false)) and target_speed>SPEED_EPS_MPS and _obstacle.is_empty() and _motion_cap_m>POINT_EPS_M
+	var brake_room: float=_speed_mps*_speed_mps/(2.0*BRAKE_MPS2)+_speed_mps*delta
+	var crossing_this_step: bool=remaining<=maxf(.05,_speed_mps*delta) and _speed_mps>.10
+	var unavoidable_amber: bool=phase=="amber" and _speed_mps>.5 and remaining<brake_room
+	if clear_to_move and ((phase=="green" and crossing_this_step) or unavoidable_amber):
+		var clearance: float=maxf(0.0,float(observed.get("clearance_from_stop_m",8.0)))
+		_painted_signal_commit={"crossing_id":id,"entry_phase":phase,"entry_station_m":_station_m,"clear_station_m":_station_m+distance+clearance+half_length+.50,"reason":"green_front_entry" if phase=="green" else "amber_insufficient_physical_brake_room"}
+		_painted_signal_event("committed",_painted_signal_commit)
+		return target_speed
+	if not bool(observed.get("required",false)):return target_speed
+	_motion_cap_m=minf(_motion_cap_m,maxf(0.0,remaining))
+	var limit: float=_braking_speed(maxf(0.0,remaining),delta)
+	if limit<target_speed:
+		target_speed=limit
+		_state="braking_painted_signal" if _speed_mps>SPEED_EPS_MPS else "waiting_painted_signal"
+		_blocked_reason="painted_signal_"+phase
+	return target_speed
+
+
+func _painted_signal_event(kind: String,evidence: Dictionary) -> void:
+	if _painted_signal_events.size()>=48:_painted_signal_events.pop_front()
+	_painted_signal_events.append({"event":kind,"tick":Engine.get_physics_frames(),"station_m":_station_m,"evidence":evidence.duplicate(true)})
 
 
 func _move_on_polyline(step_budget: float, delta: float) -> float:
@@ -743,6 +792,8 @@ func try_recycle(guard: Dictionary) -> bool:
 	_blocked_reason = ""
 	_permission = {}
 	_obstacle = {}
+	_painted_signal_observation.clear()
+	_painted_signal_commit.clear()
 	_find_support()
 	return true
 
@@ -784,6 +835,7 @@ func snapshot() -> Dictionary:
 		"last_recycle_tick": _last_recycle_tick, "physics_steps": _physics_steps, "elapsed_s": _elapsed_s, "pause_ticks": _pause_ticks,
 		"actual_distance_m": _distance_m, "cycle_distance_m": _cycle_distance_m, "max_step_m": _max_step_m, "max_route_offset_m": _max_route_offset_m,
 		"blocked_reason": _blocked_reason, "obstacle": _json_safe(_obstacle), "permission": _json_safe(_permission),
+		"painted_signal":_json_safe(_painted_signal_observation),"painted_signal_commit":_json_safe(_painted_signal_commit),"painted_signal_events":_json_safe(_painted_signal_events),
 		"max_speed_limit_mps": MAX_SPEED_MPS, "crossing_speed_limit_mps": CROSSING_SPEED_MPS, "accel_mps2": ACCEL_MPS2, "decel_mps2": BRAKE_MPS2,
 		"reaction_s": REACTION_S, "clearance_m": CLEARANCE_M, "gravity_mps2": GRAVITY_MPS2,
 		"layer": collision_layer, "mask": collision_mask, "physics_priority": process_physics_priority,

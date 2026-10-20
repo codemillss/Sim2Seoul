@@ -1,0 +1,112 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {},
+      "name": "production_setup",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "only_actual_rentable_bikes_no_fake_reserve_inventory",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "both_docks_have_raised_pictogram_and_two_sided_signs",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.2,
+        "camera_yaw": 0.361756517129627,
+        "front_wheel": [
+          749.978088378906,
+          410.056304931641
+        ],
+        "rear_wheel": [
+          640.11572265625,
+          385.965454101562
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.095366636912028
+      },
+      "name": "ordinary_shortcut_separates_wheels_within_view",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_distance_m": 1.90330851078033,
+        "prompt": "E · 따릉이 빌려 타기 · 게임 체험"
+      },
+      "name": "ordinary_shortcut_in_E_reach_with_native_line_of_sight",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "ordinary_E_mount",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bike_scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "body_yaw": -1.80643994760025,
+        "both_wheels_in_front": true,
+        "both_wheels_inside_view": true,
+        "camera_distance_m": 4.4,
+        "camera_yaw": -1.20643994760025,
+        "front_wheel": [
+          620.23974609375,
+          457.092987060547
+        ],
+        "rear_wheel": [
+          539.329833984375,
+          518.593994140625
+        ],
+        "viewport": [
+          1152.0,
+          720.0
+        ],
+        "wheel_separation_x_fraction": 0.0702342987060547
+      },
+      "name": "production_mount_starts_in_three_quarter_view_with_separated_wheels",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "retained_meter_scale_and_source_footprint",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "ordinary_E_return_restores_walking",
+      "passed": true
+    }
+  ],
+  "passed": 9,
+  "result": "PASS",
+  "scope": "Production shortcut + E mount/dismount and numerical framing, meter scale, dock signage and source footprints. Native images require separate visual review; headless is not subjective visibility acceptance.",
+  "source_hashes": {
+    "res://../tests/game/check_bike_visibility.gd": "a48de7ec0f3663be990d31e70d98fca485b7f93aad1fb0aa7a428dcaf3f7a512",
+    "res://assets/authored/bike_service.json": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8",
+    "res://scripts/city_bike_service.gd": "386ca5532c0fd2b23b94eca9512f22ce5539984d3e00febe5a78965080d77c74",
+    "res://scripts/explore_walk.gd": "139fc0613537fb906f5ec2819ecfed4d9742096e0b44f850a154c7b946b73373"
+  },
+  "task": "production_bike_visibility",
+  "total": 9
+}

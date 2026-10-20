@@ -125,7 +125,9 @@ func _run() -> void:
 	# Use a real Space-action jump. Tap E early enough to remain in the portal's
 	# vertical range, isolating the grounded requirement rather than distance.
 	await _pose(visit.entrance_world_position)
-	_movement(["jump"]);await _ticks(6)
+	# Preserve the original 0.10-second early-jump observation at either the
+	# exploration's 30 Hz default or the historical 60 Hz setting.
+	_movement(["jump"]);await _ticks(ceili(.10*Engine.physics_ticks_per_second))
 	var airborne: bool = not scene.player.is_on_floor() and visit._entry_near() and visit._entry_visible()
 	before = visit.entry_count
 	_e(true);_e(false);await _ticks(3)

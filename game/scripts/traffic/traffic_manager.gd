@@ -34,6 +34,18 @@ func _signal_permission(body: CharacterBody3D,conflict: Dictionary) -> bool:
 	if body.get_station_m()>float(conflict.stop_s_m)+.05:return true
 	return _signal_allows(body.get_route_id(),String(conflict.crossing_id))
 
+func painted_signal_limit(body: CharacterBody3D,direction: Vector3,max_distance: float) -> Dictionary:
+	# New display crossings need braking even when they were absent from the
+	# historical route's conflict list. Keep that list and its FIFO grants intact;
+	# their existing controller remains the only authority for those crossings.
+	if not is_instance_valid(signal_provider) or not signal_provider.has_method("vehicle_stop_distance"):return {}
+	var route: Dictionary=routes.get(body.get_route_id(),{})
+	var source: String=String(route.get("source_binding",{}).get("feature_id",""))
+	if source.is_empty():return {}
+	var ignored: Array=[]
+	for conflict: Dictionary in route.get("conflicts",[]):ignored.append(String(conflict.crossing_id))
+	return signal_provider.vehicle_stop_distance(source,body.global_position,direction,max_distance,ignored)
+
 func _terrain_service() -> Node:
 	if not is_instance_valid(city):return null
 	var candidate: Variant=city.get_parent().get("terrain_surface")

@@ -1,0 +1,513 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"error": ""
+			},
+			"name": "production_ready",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"crossing_id": "source_node_921242887",
+				"initial_station_m": 0.0,
+				"query": {
+					"clearance_from_stop_m": 8.48870450283211,
+					"crossing_id": "source_node_921242887",
+					"distance_m": 17.50266456604,
+					"reason": "signal_red",
+					"required": true,
+					"state": "red",
+					"stop_line_id": "source_node_921242887_378453707_1"
+				},
+				"source_route": "sejong_north"
+			},
+			"name": "new_crossing_bound_to_existing_source_route",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actor_pose_writes": 0,
+				"car": {
+					"accel_mps2": 1.5,
+					"actual_distance_m": 15.0536187088292,
+					"at_end": false,
+					"blocked_reason": "painted_signal_red",
+					"body_yaw_rad": -0.0503446198999882,
+					"can_recycle": false,
+					"clearance_m": 1.0,
+					"command_speed_mps": 0.0,
+					"completed_cycles": 0,
+					"crossing_speed_limit_mps": 2.0,
+					"cycle_count": 0,
+					"cycle_distance_m": 15.0536187088292,
+					"decel_mps2": 3.0,
+					"direction": 1,
+					"early_bounds": {
+						"available": true,
+						"checks": 0,
+						"diagnostic_enabled": false,
+						"empty_returns": 198,
+						"last_violation": {},
+						"verified": 0,
+						"verified_empty": 0,
+						"violations": 0
+					},
+					"elapsed_s": 6.58333333333332,
+					"end_events": 0,
+					"endpoint_history": [],
+					"floor_collider": "N03_support_sejong_north",
+					"floor_collider_path": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+					"floor_reason": "up_floor_ray",
+					"gravity_mps2": 9.8,
+					"last_motion_contacts": [
+						{
+							"collider": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+							"geometry_id": "N03_support_sejong_north",
+							"normal": [
+								0.0217099450528622,
+								0.999537169933319,
+								-0.0213101357221603
+							],
+							"point": [
+								86.5429611206055,
+								-0.333513170480728,
+								-0.00000004600497049978
+							]
+						}
+					],
+					"last_recycle_tick": -1,
+					"layer": 8,
+					"mask": 31,
+					"max_route_offset_m": 0.0000294157216558233,
+					"max_speed_limit_mps": 5.0,
+					"max_speed_mps": 5.00019192695618,
+					"max_step_m": 0.166673064231873,
+					"motion_parts": 1,
+					"obstacle": {},
+					"on_floor": true,
+					"painted_signal": {
+						"clearance_from_stop_m": 8.48870450283211,
+						"crossing_id": "source_node_921242887",
+						"distance_m": 2.44988536834717,
+						"reason": "signal_red",
+						"required": true,
+						"state": "red",
+						"stop_line_id": "source_node_921242887_378453707_1"
+					},
+					"painted_signal_commit": {},
+					"painted_signal_events": [],
+					"pause_ticks": 0,
+					"permission": {
+						"allow_crossing": false,
+						"clear_s": 6.59999999999999,
+						"fresh": true,
+						"human_present": false,
+						"observation_age_s": 0.0,
+						"observation_tick": 199,
+						"occupied_by": "",
+						"queue": [
+							"sejong_south"
+						],
+						"reason": "signal_red_or_amber",
+						"signal_attached": true,
+						"signal_clear": false,
+						"tick": 199
+					},
+					"physics_priority": 1,
+					"physics_steps": 198,
+					"position": [
+						87.3940048217773,
+						-0.33153447508812,
+						0.990785658359528
+					],
+					"reaction_s": 0.5,
+					"recycle_history": [],
+					"route_id": "sejong_north",
+					"route_length_m": 255.073134899139,
+					"running": true,
+					"segment": 1,
+					"speed_mps": 0.0,
+					"state": "waiting_painted_signal",
+					"station_m": 15.0536175966263,
+					"terrain_clearance_XZ_this_tick_m": 0.0,
+					"terrain_clearance_moves": 199,
+					"terrain_enabled": true,
+					"terrain_grade": 0.0291797748525667,
+					"terrain_normal": [
+						0.0211210120469332,
+						0.999574542045593,
+						-0.0201176255941391
+					],
+					"terrain_orientation_blocked": false,
+					"terrain_queries": {
+						"broadphase": 0,
+						"early_broadphase": 1,
+						"early_empty": 1,
+						"envelope_triangles": 8,
+						"ground": 7,
+						"ground_envelopes": 2,
+						"narrow_intersections": 0,
+						"narrow_sweeps": 0,
+						"pose_cache_hits": 1
+					},
+					"terrain_query_tick": 199,
+					"velocity": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"visual_yaw_rad": -0.0503446198999882
+				},
+				"initial_station_m": 0.0,
+				"maximum_speed_mps": 5.00019192695618,
+				"maximum_step_m": 0.166673064231873,
+				"minimum_nose_gap_m": 0.349885368347168,
+				"red_station_m": 15.0536175966263
+			},
+			"name": "unchanged_spawn_physically_brakes_before_new_red_stop_line",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"actor_pose_writes": 0,
+				"car": {
+					"accel_mps2": 1.5,
+					"actual_distance_m": 28.8084575325192,
+					"at_end": false,
+					"blocked_reason": "fifo_or_clear_hold",
+					"body_yaw_rad": -0.0501581616699696,
+					"can_recycle": false,
+					"clearance_m": 1.0,
+					"command_speed_mps": 5.0,
+					"completed_cycles": 0,
+					"crossing_speed_limit_mps": 2.0,
+					"cycle_count": 0,
+					"cycle_distance_m": 28.8084575325192,
+					"decel_mps2": 3.0,
+					"direction": 1,
+					"early_bounds": {
+						"available": true,
+						"checks": 0,
+						"diagnostic_enabled": false,
+						"empty_returns": 642,
+						"last_violation": {},
+						"verified": 0,
+						"verified_empty": 0,
+						"violations": 0
+					},
+					"elapsed_s": 21.3833333333336,
+					"end_events": 0,
+					"endpoint_history": [],
+					"floor_collider": "N03_support_sejong_north",
+					"floor_collider_path": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+					"floor_reason": "up_floor_ray",
+					"gravity_mps2": 9.8,
+					"last_motion_contacts": [
+						{
+							"collider": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+							"geometry_id": "N03_support_sejong_north",
+							"normal": [
+								0.0348745882511139,
+								0.999271988868713,
+								-0.0154687585309148
+							],
+							"point": [
+								87.298957824707,
+								-0.618814945220947,
+								-14.888973236084
+							]
+						}
+					],
+					"last_recycle_tick": -1,
+					"layer": 8,
+					"mask": 31,
+					"max_route_offset_m": 0.0000294157216558233,
+					"max_speed_limit_mps": 5.0,
+					"max_speed_mps": 5.00019192695618,
+					"max_step_m": 0.166673064231873,
+					"motion_parts": 1,
+					"obstacle": {},
+					"on_floor": true,
+					"painted_signal": {
+						"crossing_id": "",
+						"distance_m": 30.0,
+						"reason": "no_red_signal_ahead",
+						"required": false,
+						"state": "uncontrolled"
+					},
+					"painted_signal_commit": {},
+					"painted_signal_events": [
+						{
+							"event": "committed",
+							"evidence": {
+								"clear_station_m": 28.5922075512521,
+								"crossing_id": "source_node_921242887",
+								"entry_phase": "green",
+								"entry_station_m": 15.0586782097816,
+								"reason": "green_front_entry"
+							},
+							"station_m": 15.0586782097816,
+							"tick": 514
+						},
+						{
+							"event": "rear_cleared",
+							"evidence": {
+								"clear_station_m": 28.5922075512521,
+								"crossing_id": "source_node_921242887",
+								"entry_phase": "green",
+								"entry_station_m": 15.0586782097816,
+								"reason": "green_front_entry"
+							},
+							"station_m": 28.6417894363403,
+							"tick": 643
+						}
+					],
+					"pause_ticks": 0,
+					"permission": {
+						"allow_crossing": false,
+						"clear_s": 21.4000000000002,
+						"fresh": true,
+						"human_present": false,
+						"observation_age_s": 0.0,
+						"observation_tick": 643,
+						"occupied_by": "sejong_south",
+						"queue": [
+							"sejong_north_stream_2",
+							"sejong_south_stream_2"
+						],
+						"reason": "fifo_or_clear_hold",
+						"signal_attached": true,
+						"signal_clear": true,
+						"tick": 643
+					},
+					"physics_priority": 1,
+					"physics_steps": 642,
+					"position": [
+						88.092041015625,
+						-0.609198093414307,
+						-12.7463293075562
+					],
+					"reaction_s": 0.5,
+					"recycle_history": [],
+					"route_id": "sejong_north",
+					"route_length_m": 255.073134899139,
+					"running": true,
+					"segment": 1,
+					"speed_mps": 4.99996215105057,
+					"state": "braking_crossing",
+					"station_m": 28.8084545135498,
+					"terrain_clearance_XZ_this_tick_m": 0.0,
+					"terrain_clearance_moves": 643,
+					"terrain_enabled": true,
+					"terrain_grade": 0.0377428328413911,
+					"terrain_normal": [
+						0.0336905419826508,
+						0.999288499355316,
+						-0.016955403611064
+					],
+					"terrain_orientation_blocked": false,
+					"terrain_queries": {
+						"broadphase": 0,
+						"early_broadphase": 1,
+						"early_empty": 1,
+						"envelope_triangles": 6,
+						"ground": 13,
+						"ground_envelopes": 3,
+						"narrow_intersections": 0,
+						"narrow_sweeps": 0,
+						"pose_cache_hits": 0
+					},
+					"terrain_query_tick": 643,
+					"velocity": [
+						0.253737181425095,
+						0.0,
+						-4.99351930618286
+					],
+					"visual_yaw_rad": -0.0501581616699696
+				},
+				"clock_s": 4.38333333333268,
+				"committed": true,
+				"phase_writes_after_scenario_start": 0,
+				"rear_cleared": true,
+				"resumed": true
+			},
+			"name": "natural_green_restarts_same_car_and_rear_clears_new_crossing",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"original_conflicts": [
+					{
+						"crossing_id": "sejong_marked",
+						"enter_s_m": 207.847384033344,
+						"exit_s_m": 216.36893800793,
+						"stop_s_m": 200.180717366678,
+						"stop_xz": [
+							92.6915359921911,
+							-184.051683185997
+						],
+						"stopping_distance_m": 7.66666666666667
+					}
+				],
+				"route_id": "sejong_north"
+			},
+			"name": "source_routes_and_original_conflicts_retained",
+			"passed": true
+		}
+	],
+	"display": "headless",
+	"engine": "4.7.2-stable (official)",
+	"observations": {
+		"red_stop": {
+			"accel_mps2": 1.5,
+			"actual_distance_m": 15.0536187088292,
+			"at_end": false,
+			"blocked_reason": "painted_signal_red",
+			"body_yaw_rad": -0.0503446198999882,
+			"can_recycle": false,
+			"clearance_m": 1.0,
+			"command_speed_mps": 0.0,
+			"completed_cycles": 0,
+			"crossing_speed_limit_mps": 2.0,
+			"cycle_count": 0,
+			"cycle_distance_m": 15.0536187088292,
+			"decel_mps2": 3.0,
+			"direction": 1,
+			"early_bounds": {
+				"available": true,
+				"checks": 0,
+				"diagnostic_enabled": false,
+				"empty_returns": 198,
+				"last_violation": {},
+				"verified": 0,
+				"verified_empty": 0,
+				"violations": 0
+			},
+			"elapsed_s": 6.58333333333332,
+			"end_events": 0,
+			"endpoint_history": [],
+			"floor_collider": "N03_support_sejong_north",
+			"floor_collider_path": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+			"floor_reason": "up_floor_ray",
+			"gravity_mps2": 9.8,
+			"last_motion_contacts": [
+				{
+					"collider": "/root/ExploreWalk/Infrastructure/RoadSupports/N03_support_sejong_north",
+					"geometry_id": "N03_support_sejong_north",
+					"normal": [
+						0.0217099450528622,
+						0.999537169933319,
+						-0.0213101357221603
+					],
+					"point": [
+						86.5429611206055,
+						-0.333513170480728,
+						-0.00000004600497049978
+					]
+				}
+			],
+			"last_recycle_tick": -1,
+			"layer": 8,
+			"mask": 31,
+			"max_route_offset_m": 0.0000294157216558233,
+			"max_speed_limit_mps": 5.0,
+			"max_speed_mps": 5.00019192695618,
+			"max_step_m": 0.166673064231873,
+			"motion_parts": 1,
+			"obstacle": {},
+			"on_floor": true,
+			"painted_signal": {
+				"clearance_from_stop_m": 8.48870450283211,
+				"crossing_id": "source_node_921242887",
+				"distance_m": 2.44988536834717,
+				"reason": "signal_red",
+				"required": true,
+				"state": "red",
+				"stop_line_id": "source_node_921242887_378453707_1"
+			},
+			"painted_signal_commit": {},
+			"painted_signal_events": [],
+			"pause_ticks": 0,
+			"permission": {
+				"allow_crossing": false,
+				"clear_s": 6.59999999999999,
+				"fresh": true,
+				"human_present": false,
+				"observation_age_s": 0.0,
+				"observation_tick": 199,
+				"occupied_by": "",
+				"queue": [
+					"sejong_south"
+				],
+				"reason": "signal_red_or_amber",
+				"signal_attached": true,
+				"signal_clear": false,
+				"tick": 199
+			},
+			"physics_priority": 1,
+			"physics_steps": 198,
+			"position": [
+				87.3940048217773,
+				-0.33153447508812,
+				0.990785658359528
+			],
+			"reaction_s": 0.5,
+			"recycle_history": [],
+			"route_id": "sejong_north",
+			"route_length_m": 255.073134899139,
+			"running": true,
+			"segment": 1,
+			"speed_mps": 0.0,
+			"state": "waiting_painted_signal",
+			"station_m": 15.0536175966263,
+			"terrain_clearance_XZ_this_tick_m": 0.0,
+			"terrain_clearance_moves": 199,
+			"terrain_enabled": true,
+			"terrain_grade": 0.0291797748525667,
+			"terrain_normal": [
+				0.0211210120469332,
+				0.999574542045593,
+				-0.0201176255941391
+			],
+			"terrain_orientation_blocked": false,
+			"terrain_queries": {
+				"broadphase": 0,
+				"early_broadphase": 1,
+				"early_empty": 1,
+				"envelope_triangles": 8,
+				"ground": 7,
+				"ground_envelopes": 2,
+				"narrow_intersections": 0,
+				"narrow_sweeps": 0,
+				"pose_cache_hits": 1
+			},
+			"terrain_query_tick": 199,
+			"velocity": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"visual_yaw_rad": -0.0503446198999882
+		}
+	},
+	"result": "PASS",
+	"scope": "Production exploration original sejong_north car from unchanged spawn; one explicit starting red-phase fixture followed by normal clock advancement, physical red stop/green resume/rear clearance, no car pose/station/route/permission writes. This is engineering gameplay acceptance, not live Seoul timings or full NPC pedestrian compliance.",
+	"source_sha256": {
+		"res://../tests/game/check_painted_signal_traffic.gd": "ca8b7ff9f36494af6654e2f40c62ca130b28db2d1c3097fc871ac03050c88e0f",
+		"res://assets/authored/road_furniture.json": "ed95b6f7af09e0041f4a9404852082b0d52e4c96967f74c756c8816820fc09b0",
+		"res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+		"res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+		"res://scripts/neighborhood_traffic.gd": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369",
+		"res://scripts/street_network_detail.gd": "34e181b9881ae9f280191512a8fdfde064f841bc7092a3f269e70b654c42b88a",
+		"res://scripts/traffic/traffic_manager.gd": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c",
+		"res://scripts/traffic/vehicle.gd": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84"
+	},
+	"summary": {
+		"checks": 5,
+		"failed": 0,
+		"physics_hz": 30,
+		"wall_usec": 25255151
+	},
+	"task": "EXP24_PAINTED_SIGNAL_TRAFFIC"
+}

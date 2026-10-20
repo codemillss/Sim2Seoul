@@ -50,6 +50,7 @@ func _route_signature() -> String:
 func _hashes() -> Dictionary:
 	var result: Dictionary={}
 	for path: String in INPUTS:result[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/city_scooter_service.gd","res://assets/authored/scooter_service.json","res://../tests/game/check_city_scooter_service.gd","res://../tests/game/check_bike_entry_reliability.gd"]:result[path]=FileAccess.get_sha256(path)
 	return result
 
 func _menu(open: bool) -> void:
@@ -83,7 +84,7 @@ func _run() -> void:
 	# Freeze movement synchronously after setup, before any actor physics tick.
 	scene.set_vehicles_running(false)
 	await _ticks(3)
-	_check("production_all_new_modules_and_committed_terrain",scene.runtime_ok and scene.exploration_error.is_empty() and scene.terrain_surface.loaded and scene.street_network_detail.loaded and scene.city_bus_service.loaded and scene.city_bike_service.loaded and scene.street_pedestrians.loaded,{"error":scene.exploration_error,"physics_hz":Engine.physics_ticks_per_second})
+	_check("production_all_new_modules_and_committed_terrain",scene.runtime_ok and scene.exploration_error.is_empty() and scene.terrain_surface.loaded and scene.street_network_detail.loaded and scene.city_bus_service.loaded and scene.city_bike_service.loaded and scene.city_scooter_service.loaded and scene.street_pedestrians.loaded,{"error":scene.exploration_error,"physics_hz":Engine.physics_ticks_per_second})
 	if not scene.runtime_ok or not scene.exploration_error.is_empty():_finish();return
 	visit=scene.interior_visit;network=scene.street_network_detail;transit=scene.city_bus_service
 	original_inventory=_inventory();original_capsule=_player_shape();original_routes=_route_signature();original_tin=hash(scene.terrain_surface.faces);original_tin_transform=scene.terrain_surface.support.global_transform
@@ -177,7 +178,14 @@ func _pedestrian_two_way_checks() -> void:
 		var ok: bool=facing>.95 and hit.is_empty() and not safe.is_empty() and contained and one_sided
 		if not ok:errors.append(row.id)
 		rows.append({"id":row.id,"bank":row.bank,"crossing_id":row.crossing_id,"head":target,"opposite_approach":from,"front_dot_to_opposite_bank":facing,"static_LOS_clear":hit.is_empty(),"supported_standing_point":not safe.is_empty(),"countdown_single_sided":one_sided,"countdown_inside_opaque_case":contained,"countdown_bounds":text_bounds,"case_bounds":case_bounds,"obstacle":String(hit.collider.name) if not hit.is_empty() else ""})
-	_check("pedestrian_heads_face_both_opposite_approaches_with_native_LOS",rows.size()==8 and errors.is_empty(),{"heads":rows,"errors":errors})
+	var expected: int=network.design.pedestrian_signals.size()
+	for crossing: Dictionary in network.design.crossings:
+		var banks: Array=[]
+		for row: Dictionary in rows:
+			if row.crossing_id==crossing.id:banks.append(int(row.bank))
+		banks.sort()
+		if banks!=[0,1]:errors.append({"crossing_id":crossing.id,"banks":banks})
+	_check("pedestrian_heads_face_both_opposite_approaches_with_native_LOS",rows.size()==expected and expected>=8 and errors.is_empty(),{"expected_heads":expected,"heads":rows,"errors":errors})
 	observations["pedestrian_two_way"]=rows
 	if not native:return
 	_clock(31.0)

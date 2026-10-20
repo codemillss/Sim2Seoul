@@ -44,6 +44,9 @@ var _private_index: RefCounted
 var _road_index: RefCounted
 var _walk_index: RefCounted
 
+func _design_path() -> String:return DATA_PATH
+func _ride_label() -> String:return "따릉이"
+func _ride_status_prefix() -> String:return "CITY_BIKES_READY"
 func _event(kind: String,evidence: Dictionary={}) -> void:
 	if events.size()>=80:events.pop_front()
 	events.append({"event":kind,"clock_s":_clock,"evidence":evidence})
@@ -51,7 +54,7 @@ func _fail(message: String) -> bool:load_error=message;push_error(message);retur
 func setup(scene: Node3D) -> bool:
 	if loaded or not is_instance_valid(scene) or not is_inside_tree():return false
 	host=scene;process_mode=Node.PROCESS_MODE_PAUSABLE;process_physics_priority=0
-	var raw: Variant=JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
+	var raw: Variant=JSON.parse_string(FileAccess.get_file_as_string(_design_path()))
 	if not raw is Dictionary or raw.get("schema_version")!=1:return _fail("자전거 자료 형식이 다릅니다.")
 	design=raw
 	for path: String in design.source_hashes:
@@ -68,7 +71,7 @@ func setup(scene: Node3D) -> bool:
 	for record: Dictionary in design.stations:
 		if not _make_station(record):return _fail("자전거 대여소의 안전한 원본 보행 공간을 확보하지 못했습니다: "+String(record.id))
 	var finish:=PoseFinish.new();finish.service=self;finish.process_physics_priority=2;add_child(finish)
-	loaded=true;print("CITY_BIKES_READY bikes=",bikes.size()," docks=",stations.size()," authored=true source_geometry_changed=false");return true
+	loaded=true;print(_ride_status_prefix()," bikes=",bikes.size()," docks=",stations.size()," authored=true source_geometry_changed=false");return true
 
 func _mat(color: Color,metallic:=0.0) -> StandardMaterial3D:
 	var material:=StandardMaterial3D.new();material.albedo_color=color;material.roughness=.65;material.metallic=metallic;return material
@@ -113,6 +116,13 @@ func _clear_box(at: Vector3,basis: Basis,exclude: Array[RID],motion:=Vector3.ZER
 	var space:=get_world_3d().direct_space_state
 	if not space.intersect_shape(query,1).is_empty():return false
 	query.motion=motion;return motion.is_zero_approx() or space.cast_motion(query)[0]>=.9999
+func _station_sign_clear(at: Vector3,yaw: float) -> bool:
+	# The existing bicycle box is below the raised sign. Reserve its complete
+	# upper envelope separately so a clear bike cannot put the sign in a wall,
+	# roof or overhanging static fixture. The actual station uses yaw only.
+	var query:=PhysicsShapeQueryParameters3D.new();var box:=BoxShape3D.new();box.size=Vector3(1.52,1.94,.14);query.shape=box;query.collision_mask=1|32;query.margin=.005
+	var basis:=Basis(Vector3.UP,yaw);query.transform=Transform3D(basis,at+basis*Vector3(-.9,2.45,.75))
+	return get_world_3d().direct_space_state.intersect_shape(query,1).is_empty()
 func _make_station(record: Dictionary) -> bool:
 	var route: Dictionary={}
 	for item: Dictionary in host.city.public_data.routes:
@@ -129,7 +139,7 @@ func _make_station(record: Dictionary) -> bool:
 		for local: Vector3 in [Vector3(-1.65,0,.75),Vector3(-.9,0,.75),Vector3(-.55,0,.55),Vector3(.55,0,.55)]:
 			var point: Vector3=support.point+basis*local;var source: Vector3=host.city.to_local(point)
 			if not _source_allowed(point) or not _walk_index.contains(Vector2(source.x,source.z)) or _ground(point).is_empty():fixture_clear=false
-		if fixture_clear and _footprint_allowed(support.point,basis) and _clear_box(support.point+Vector3.UP*.035,basis,[host.player.get_rid(),support.rid]):desired=support.point;accepted=true;break
+		if fixture_clear and _footprint_allowed(support.point,basis) and _station_sign_clear(support.point,yaw) and _clear_box(support.point+Vector3.UP*.035,basis,[host.player.get_rid(),support.rid]):desired=support.point;accepted=true;break
 	if not accepted:return false
 	var station:=Node3D.new();station.name=String(record.id);add_child(station);station.global_position=desired;station.global_rotation.y=yaw
 	var green:=_mat(Color(.23,.63,.12));var steel:=_mat(Color(.58,.62,.62),.45)
@@ -137,23 +147,38 @@ func _make_station(record: Dictionary) -> bool:
 		_tube(station,"RackUpright",Vector3(x,.02,.55),Vector3(x,.60,.55),.028,steel)
 	_tube(station,"RackHoop",Vector3(-.55,.60,.55),Vector3(.55,.60,.55),.028,steel)
 	_box(station,"DockGreenPlate",Vector3(1.20,.025,.35),Vector3(0,.025,.65),green)
-	_tube(station,"StationPost",Vector3(-.9,0,.75),Vector3(-.9,2.05,.75),.045,steel)
-	var panel:=Node3D.new();panel.name="FixedStationSign";panel.position=Vector3(-.9,1.9,.75);station.add_child(panel)
+	# Support the board at its left edge so the rear face's text and pictogram
+	# are readable too; a central through-post used to cover their letters.
+	_tube(station,"StationPost",Vector3(-1.60,0,.75),Vector3(-1.60,2.55,.75),.045,steel)
+	_tube(station,"PictogramMount",Vector3(-.9,2.55,.75),Vector3(-.9,2.73,.75),.035,steel)
+	var panel:=Node3D.new();panel.name="FixedStationSign";panel.position=Vector3(-.9,2.3,.75);station.add_child(panel)
 	_box(panel,"StationHeader",Vector3(1.5,.52,.06),Vector3.ZERO,green)
 	_box(panel,"StationInformation",Vector3(1.5,.42,.06),Vector3(0,-.55,0),_mat(Color(.91,.94,.87)))
 	# Physical board and both text faces share the same fixed frame.
 	for front: bool in [true,false]:
 		var face: float=1. if front else -1.
-		var title:=_label(panel,"StationTitleFront" if front else "StationTitleBack","따릉이 · 게임 대여소\n"+String(record.id),Vector3(0,0,face*.045),.0022)
-		title.billboard=BaseMaterial3D.BILLBOARD_DISABLED;title.rotation.y=0. if front else PI
-		var help:=_label(panel,"StationHelpFront" if front else "StationHelpBack","E · 빌리기 / 반납\n"+String(record.name),Vector3(0,-.55,face*.045),.0019)
+		var title:=_label(panel,"StationTitleFront" if front else "StationTitleBack",_ride_label()+" 대여소\nBICYCLE · 게임 체험",Vector3(0,0,face*.045),.0027)
+		title.modulate=Color(.98,1.,.96);title.outline_modulate=Color(.10,.30,.06);title.billboard=BaseMaterial3D.BILLBOARD_DISABLED;title.rotation.y=0. if front else PI
+		var help:=_label(panel,"StationHelpFront" if front else "StationHelpBack","E · 빌리기 / 반납\n"+String(record.name),Vector3(0,-.55,face*.045),.0024)
 		help.billboard=BaseMaterial3D.BILLBOARD_DISABLED;help.rotation.y=0. if front else PI
+	# A normal-sized, fixed bicycle pictogram makes the dock readable before
+	# its Korean text is close enough to read. These are sign graphics, not
+	# reserve bicycle models or additional rentable inventory.
+	var icon:=Node3D.new();icon.name="StationBicyclePictogram";icon.position=Vector3(-.9,3.05,.75);station.add_child(icon)
+	_box(icon,"IconBackground",Vector3(.96,.68,.06),Vector3.ZERO,green)
+	var ink:=_mat(Color(.98,1.,.96))
+	for face: float in [-1.,1.]:
+		for x: float in [-.25,.25]:
+			var ring:=TorusMesh.new();ring.inner_radius=.122;ring.outer_radius=.140;ring.rings=20;ring.ring_segments=6
+			var wheel:=_mesh(icon,"SignWheel",ring,ink,Vector3(x,-.10,face*.044));wheel.rotation.x=PI*.5
+		for line: Array in [[Vector2(-.25,-.10),Vector2(-.10,.15)],[Vector2(-.10,.15),Vector2(.05,-.10)],[Vector2(.05,-.10),Vector2(-.25,-.10)],[Vector2(-.10,.15),Vector2(.18,.15)],[Vector2(.18,.15),Vector2(.25,-.10)],[Vector2(.18,.15),Vector2(.18,.24)],[Vector2(.18,.24),Vector2(.31,.24)],[Vector2(-.17,.19),Vector2(-.02,.19)]]:
+			_tube(icon,"SignFrame",Vector3(line[0].x,line[0].y,face*.045),Vector3(line[1].x,line[1].y,face*.045),.014,ink)
 	var body:=BikeBody.new();body.name="RentalBike"+str(bikes.size()+1);body.collision_layer=4;body.collision_mask=1|2|4|8|32;body.safe_margin=.001;body.floor_snap_length=.35;body.floor_max_angle=deg_to_rad(float(design.policy.maximum_grade_degrees));add_child(body)
 	var shape:=CollisionShape3D.new();shape.name="CollisionShape";var box:=BoxShape3D.new();box.size=BOX_SIZE;shape.shape=box;shape.position.y=.95;body.add_child(shape)
 	body.global_transform=Transform3D(_pose_basis(desired,yaw),desired+Vector3.UP*.025)
 	var visual:=Node3D.new();visual.name="Visual";body.add_child(visual);var proxy:=PhysicsReset.new();proxy.name="RenderProxy";proxy.process_physics_priority=-100;visual.add_child(proxy)
 	var row: Dictionary={"body":body,"visual":visual,"proxy":proxy,"shape":shape,"station_id":record.id,"rented":false,"yaw":yaw,"wheel_phase":0.,"distance_m":0.,"previous":body.global_transform,"current":body.global_transform,"front":null,"wheels":[],"crank":null,"pedals":[],"kickstand":null}
-	_build_bike(row,proxy);bikes.append(row);stations.append({"id":record.id,"name":record.name,"point":desired,"node":station,"source_route":record.source_route,"panel":panel,"certified_footprint":true})
+	_build_bike(row,proxy);bikes.append(row);stations.append({"id":record.id,"name":record.name,"point":desired,"node":station,"source_route":record.source_route,"panel":panel,"pictogram":icon,"certified_footprint":true})
 	return true
 
 func _build_bike(row: Dictionary,parent: Node3D) -> void:
@@ -194,7 +219,7 @@ func _build_bike(row: Dictionary,parent: Node3D) -> void:
 		for z: float in [-.35,-.07]:_tube(steer,"BasketMesh",Vector3(-.195,y,z),Vector3(.195,y,z),.006,dark)
 		for x: float in [-.195,.195]:_tube(steer,"BasketMesh",Vector3(x,y,-.35),Vector3(x,y,-.07),.006,dark)
 	_box(steer,"BasketLogo",Vector3(.27,.15,.015),Vector3(0,1.11,-.365),green)
-	_label(steer,"BikeName","따릉이",Vector3(0,1.11,-.38),.0016)
+	_label(steer,"BikeName",_ride_label(),Vector3(0,1.11,-.38),.0016)
 	_box(steer,"FrontLamp",Vector3(.08,.06,.045),Vector3(0,.88,-.10),white)
 	var crank:=Node3D.new();crank.name="PedalCrank";crank.position=crank_at;parent.add_child(crank);row.crank=crank
 	for side: float in [-1.,1.]:
@@ -205,15 +230,34 @@ func _build_bike(row: Dictionary,parent: Node3D) -> void:
 func _context_ready() -> bool:
 	if not loaded or not host.runtime_ok or get_tree().paused or host.menu.visible:return false
 	if host.player.interior_active or host.interior_visit.active:return false
-	var bus: Node3D=host.get("city_bus_service")
-	return not (is_instance_valid(bus) and bus.riding)
+	return not _other_transport_riding()
+func _other_transport_riding() -> bool:
+	for property: String in ["city_bus_service","city_bike_service","city_scooter_service"]:
+		var other: Node3D=host.get(property)
+		if is_instance_valid(other) and other!=self and other.riding:return true
+	return false
 func _nearest_bike() -> int:
 	if rental_index>=0:return rental_index if host.player.global_position.distance_to(bikes[rental_index].body.global_position)<float(design.policy.interact_distance_m) else -1
-	var best:=-1;var distance:=float(design.policy.interact_distance_m)
+	var best:=-1;var visible_best:=-1;var distance:=float(design.policy.interact_distance_m);var visible_distance:=distance
 	for index: int in range(bikes.size()):
-		var value: float=host.player.global_position.distance_to(bikes[index].body.global_position)
-		if not bikes[index].rented and value<distance:best=index;distance=value
-	return best
+		var value: float=Vector2(host.player.global_position.x-bikes[index].body.global_position.x,host.player.global_position.z-bikes[index].body.global_position.z).length()
+		if bikes[index].rented:continue
+		if value<distance:best=index;distance=value
+		if value<visible_distance and _visible_bike(index):visible_best=index;visible_distance=value
+	return visible_best if visible_best>=0 else best
+func interaction_distance_m() -> float:
+	if not loaded or not _context_ready():return INF
+	var index:=_nearest_bike()
+	if index<0:return INF
+	var delta: Vector3=host.player.global_position-bikes[index].body.global_position
+	return Vector2(delta.x,delta.z).length()
+func _player_supported_for_mount() -> bool:
+	# A shortcut or a newly published contact can precede is_on_floor's next
+	# move_and_slide result. Check current native feet support as well, while
+	# a rising/falling airborne capsule remains ineligible.
+	if absf(host.player.velocity.y)>.3:return false
+	var support:=_ground(host.player.global_position,.4)
+	return not support.is_empty() and absf(host.player.global_position.y-support.point.y)<.13
 func _near_station(point: Vector3) -> String:
 	for station: Dictionary in stations:
 		if Vector2(point.x-station.point.x,point.z-station.point.z).length()<=float(design.policy.return_radius_m):return station.id
@@ -221,44 +265,61 @@ func _near_station(point: Vector3) -> String:
 func _visible_bike(index: int) -> bool:
 	if index<0:return false
 	var body: CharacterBody3D=bikes[index].body
-	if absf(host.player.global_position.y-body.global_position.y)>.4:return false
+	var horizontal:=Vector2(host.player.global_position.x-body.global_position.x,host.player.global_position.z-body.global_position.z).length()
+	if absf(host.player.global_position.y-body.global_position.y)>maxf(.4,horizontal*tan(deg_to_rad(float(design.policy.maximum_grade_degrees)))+.15):return false
+	var excludes: Array[RID]=[host.player.get_rid(),body.get_rid()]
+	# A passing registered pedestrian or dog may briefly cross both sight
+	# rays, but should not make the E target disappear. Recast through only
+	# those known actor RIDs: walls, cars and other parked mobility bodies
+	# still block sight, and _mount's full box still rejects occupied space.
+	for person: CharacterBody3D in host.traffic.humans:
+		if is_instance_valid(person) and not person is BikeBody:excludes.append(person.get_rid())
 	for height: float in [.65,1.20]:
-		var ray:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP*height,body.global_position+Vector3.UP*height,1|4|8|32,[host.player.get_rid(),body.get_rid()])
+		var ray:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP*height,body.global_position+Vector3.UP*height,1|4|8|32,excludes)
 		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():return false
 	return true
 func can_interact() -> bool:
 	if not _context_ready():return false
 	if riding:return true
-	return not host.player.facility_control and host.player.is_physics_processing() and host.player.is_on_floor() and _visible_bike(_nearest_bike())
+	return not host.player.facility_control and host.player.is_physics_processing() and _player_supported_for_mount() and _visible_bike(_nearest_bike())
 func prompt_text() -> String:
 	if not _context_ready():return ""
-	if riding:return "따릉이 · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E "+("반납" if not _near_station(bikes[rental_index].body.global_position).is_empty() else "내리기") if not exit_requested else "내릴 자리를 확인하는 중\nE · 취소하고 다시 이동"
+	if riding:return _ride_label()+" · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E "+("반납" if not _near_station(bikes[rental_index].body.global_position).is_empty() else "내리기") if not exit_requested else "내릴 자리를 확인하는 중\nE · 취소하고 다시 이동"
 	if _clock<_notice_until:return _notice
 	var index:=_nearest_bike()
-	if index<0 or not _visible_bike(index):return ""
-	if not host.player.is_on_floor():return "착지한 뒤 E · 따릉이 이용"
-	return "E · 따릉이 반납" if bikes[index].rented and not _near_station(bikes[index].body.global_position).is_empty() else ("E · 따릉이 다시 타기" if bikes[index].rented else "E · 따릉이 빌려 타기 · 게임 체험")
+	if index<0:return ""
+	if not _visible_bike(index):return _ride_label()+" 옆의 열린 공간으로 이동해 E"
+	if not _player_supported_for_mount():return "착지한 뒤 E · "+_ride_label()+" 이용"
+	return "E · "+_ride_label()+" 반납" if bikes[index].rented and not _near_station(bikes[index].body.global_position).is_empty() else ("E · "+_ride_label()+" 다시 타기" if bikes[index].rented else "E · "+_ride_label()+" 빌려 타기 · 게임 체험")
 func handle_interact() -> bool:
 	if not can_interact():return false
 	if riding:exit_requested=not exit_requested;_event("dismount_requested" if exit_requested else "dismount_cancelled");return true
 	var index:=_nearest_bike()
 	if bikes[index].rented and not _near_station(bikes[index].body.global_position).is_empty():
-		bikes[index].rented=false;bikes[index].station_id=_near_station(bikes[index].body.global_position);rental_index=-1;_notice="따릉이 반납 완료";_notice_until=_clock+3.;_event("returned",{"station_id":bikes[index].station_id});return true
-	return _mount(index)
+		bikes[index].rented=false;bikes[index].station_id=_near_station(bikes[index].body.global_position);rental_index=-1;_notice=_ride_label()+" 반납 완료";_notice_until=_clock+3.;_event("returned",{"station_id":bikes[index].station_id});return true
+	if not _mount(index):
+		_notice=_ride_label()+" 주변이 막혀 있습니다. 사람이 지나가거나 공간이 비면 E를 다시 눌러주세요." if blocked_reason=="mount_space_blocked" else _ride_label()+"가 길 위에 안전하게 서 있어야 탈 수 있습니다."
+		_notice_until=_clock+3.;_event("mount_rejected",{"reason":blocked_reason,"bike_index":index})
+	# This E belonged to the visible nearby vehicle, including a failed safe
+	# mount. Do not pass the same press through to a building entrance.
+	return true
 func _mount(index: int) -> bool:
 	if index<0 or not _context_ready():return false
 	var row: Dictionary=bikes[index];var body: CharacterBody3D=row.body;var support:=_ground(body.global_position)
-	if support.is_empty() or not _footprint_allowed(body.global_position,body.global_basis):return false
+	if support.is_empty():blocked_reason="mount_support_missing";return false
+	if not _footprint_allowed(body.global_position,body.global_basis):blocked_reason="mount_source_boundary";return false
 	var excludes: Array[RID]=[body.get_rid(),host.player.get_rid(),support.rid]
 	if is_instance_valid(host.terrain_surface.support):excludes.append(host.terrain_surface.support.get_rid())
-	if not _clear_box(body.global_position,body.global_basis,excludes):return false
+	if not _clear_box(body.global_position,body.global_basis,excludes):blocked_reason="mount_space_blocked";return false
 	var player: CharacterBody3D=host.player
-	_saved={"physics":player.is_physics_processing(),"mask":player.collision_mask,"layer":player.collision_layer,"visual":player.get_node("Visual").transform,"avatar_visible":host.exploration_avatar.visible,"left_hip":host.exploration_avatar._joints.LeftThigh.position,"right_hip":host.exploration_avatar._joints.RightThigh.position,"rig_distance":host.rig.requested_distance,"rig_current":host.rig.current_distance,"rig_max":host.rig.distance_max_m,"rig_yaw":host.rig.yaw,"rig_pitch":host.rig.pitch,"query_exclude":host.rig._query.exclude.duplicate()}
+	_saved={"physics":player.is_physics_processing(),"mask":player.collision_mask,"layer":player.collision_layer,"visual":player.get_node("Visual").transform,"avatar_visible":host.exploration_avatar.visible,"left_hip":host.exploration_avatar._joints.LeftThigh.position,"right_hip":host.exploration_avatar._joints.RightThigh.position,"rig_distance":host.rig.requested_distance,"rig_current":host.rig.current_distance,"rig_max":host.rig.distance_max_m,"rig_yaw":host.rig.yaw,"rig_pitch":host.rig.pitch,"rig_pivot":host.rig.pivot_height_m,"query_exclude":host.rig._query.exclude.duplicate()}
 	player.set_facility_control(true);player.set_physics_process(false);player.velocity=Vector3.ZERO
 	body.add_collision_exception_with(player);player.add_collision_exception_with(body)
 	var exclude: Array[RID]=host.rig._query.exclude.duplicate();exclude.append(body.get_rid());host.rig._query.exclude=exclude;host.rig.arm.add_excluded_object(body.get_rid())
-	rental_index=index;row.rented=true;row.kickstand.visible=false;riding=true;exit_requested=false;speed_mps=0.;steer_radians=0.;_reverse_hold_s=0.;host.exploration_avatar.visible=true
-	host.rig.distance_max_m=maxf(host.rig.distance_max_m,6.5);host.rig.requested_distance=5.;host.rig.current_distance=5.;host.rig.yaw=row.yaw;host.rig.pitch=deg_to_rad(-15.)
+	rental_index=index;row.rented=true;row.kickstand.visible=false;riding=true;exit_requested=false;speed_mps=0.;steer_radians=0.;_reverse_hold_s=0.;blocked_reason="";_notice="";_notice_until=0.;host.exploration_avatar.visible=true
+	# The former dead-rear view put the narrow frame and both wheels directly
+	# behind the rider. Start at a three-quarter angle; mouse orbit stays free.
+	host.rig.distance_max_m=maxf(host.rig.distance_max_m,6.5);host.rig.pivot_height_m=.8;host.rig.requested_distance=4.6;host.rig.current_distance=4.6;host.rig.yaw=row.yaw+.60;host.rig.pitch=deg_to_rad(-18.)
 	_attach_player(0.);_rider_pose(false);host.rig.snap_to_target_pose();_event("rented_and_mounted",{"bike":body.name});return true
 func _safe_dismount() -> Dictionary:
 	var row: Dictionary=bikes[rental_index];var body: CharacterBody3D=row.body
@@ -280,7 +341,7 @@ func _finish_collision_release() -> void:
 			if hit.collider==host.player:outside=false
 		if not outside:continue
 		body.remove_collision_exception_with(host.player);host.player.remove_collision_exception_with(body)
-		if pending.hold_control and not riding:
+		if pending.hold_control and not riding and not _other_transport_riding():
 			host.player.set_facility_control(false);host.player.set_physics_process(bool(pending.player_physics));host.player.require_neutral_input()
 		_collision_release_pending.remove_at(index);_event("published_exit_pair_released")
 func _restore_player(delay_control:=false) -> void:
@@ -292,7 +353,7 @@ func _restore_player(delay_control:=false) -> void:
 	player.collision_layer=int(_saved.layer);player.collision_mask=int(_saved.mask);player.get_node("Visual").transform=_saved.visual
 	if not delay_control:player.set_facility_control(false);player.set_physics_process(bool(_saved.physics))
 	player.require_neutral_input();player.reset_physics_interpolation();host.exploration_avatar.visible=bool(_saved.avatar_visible);host.exploration_avatar._joints.LeftThigh.position=_saved.left_hip;host.exploration_avatar._joints.RightThigh.position=_saved.right_hip;host.exploration_avatar._rest_pose()
-	host.rig._query.exclude=_saved.query_exclude;host.rig.arm.remove_excluded_object(body.get_rid());host.rig.distance_max_m=_saved.rig_max;host.rig.requested_distance=_saved.rig_distance;host.rig.current_distance=minf(host.rig.current_distance,host.rig.requested_distance);host.rig.yaw=_saved.rig_yaw;host.rig.pitch=_saved.rig_pitch
+	host.rig._query.exclude=_saved.query_exclude;host.rig.arm.remove_excluded_object(body.get_rid());host.rig.distance_max_m=_saved.rig_max;host.rig.pivot_height_m=_saved.rig_pivot;host.rig.requested_distance=_saved.rig_distance;host.rig.current_distance=minf(host.rig.current_distance,host.rig.requested_distance);host.rig.yaw=_saved.rig_yaw;host.rig.pitch=_saved.rig_pitch
 	riding=false;exit_requested=false;speed_mps=0.;_saved.clear();host.rig.snap_to_target_pose()
 func _try_dismount() -> bool:
 	if absf(speed_mps)>float(design.policy.dismount_speed_mps):return false
@@ -300,7 +361,7 @@ func _try_dismount() -> bool:
 	if safe.is_empty():blocked_reason="dismount_blocked";return false
 	var row: Dictionary=bikes[rental_index];host.player.global_transform=Transform3D(Basis.IDENTITY,safe.point);_restore_player(true);_event("dismounted",{"point":safe.point})
 	var station_id:=_near_station(row.body.global_position)
-	if not station_id.is_empty():row.rented=false;row.station_id=station_id;rental_index=-1;_event("returned",{"station_id":station_id});_notice="따릉이 반납 완료";_notice_until=_clock+3.
+	if not station_id.is_empty():row.rented=false;row.station_id=station_id;rental_index=-1;_event("returned",{"station_id":station_id});_notice=_ride_label()+" 반납 완료";_notice_until=_clock+3.
 	return true
 func cancel_ride_for_teleport() -> void:
 	if not riding:return
@@ -371,9 +432,14 @@ func _process(_delta: float) -> void:
 func viewpoint() -> Dictionary:
 	if stations.is_empty():return {}
 	var row: Dictionary=bikes[0];var body: CharacterBody3D=row.body
-	for offset: Vector3 in [Vector3(1.35,0,.1),Vector3(-1.35,0,.1),Vector3(0,0,2.1)]:
+	for offset: Vector3 in [Vector3(1.90,0,.1),Vector3(-1.90,0,.1),Vector3(1.65,0,.75),Vector3(-1.65,0,.75)]:
 		var safe: Dictionary=host.interior_visit._safe_external_point(body.global_position+body.global_basis*offset)
-		if not safe.is_empty():return {"point":safe.point,"toward":body.global_position+Vector3.UP*.7,"id":stations[0].id}
+		if safe.is_empty() or safe.point.distance_to(body.global_position)>float(design.policy.interact_distance_m):continue
+		var direction: Vector3=body.global_position-safe.point;direction.y=0.
+		# Keep the real bike beside the observer's silhouette, with its wheels
+		# separated on screen, rather than centring it behind the avatar.
+		var camera_yaw:=atan2(-direction.x,-direction.z)+(.65 if offset.x>0. else -.65)
+		return {"point":safe.point,"toward":body.global_position+Vector3.UP*.7,"id":stations[0].id,"camera_yaw":camera_yaw,"camera_pitch_degrees":-18.,"camera_distance_m":4.2}
 	return {}
 func snapshot() -> Dictionary:
 	var rows: Array=[]

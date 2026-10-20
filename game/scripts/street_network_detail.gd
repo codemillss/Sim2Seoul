@@ -176,7 +176,7 @@ func _visual_box(parent: Node3D,title: String,size: Vector3,at: Vector3,material
 	parent.add_child(node);return node
 
 func _lens(parent: Node3D,at: Vector3) -> MeshInstance3D:
-	var mesh:=CylinderMesh.new();mesh.top_radius=.135;mesh.bottom_radius=.135;mesh.height=.045;mesh.radial_segments=16
+	var mesh:=CylinderMesh.new();mesh.top_radius=.18;mesh.bottom_radius=.18;mesh.height=.045;mesh.radial_segments=20
 	var node:=MeshInstance3D.new();node.name="SignalLens";node.mesh=mesh;node.material_override=_materials.off;node.position=at;node.rotation_degrees.x=90
 	parent.add_child(node);return node
 
@@ -187,28 +187,40 @@ func _build_signals() -> void:
 		var direction:=Vector3(row.direction_xz[0],0,row.direction_xz[1]);direction=host.city.global_basis*direction
 		var frame:=Transform3D(Basis(Vector3.UP,atan2(-direction.x,-direction.z)),point)
 		var arm: float=float(row.arm_m)*float(row.arm_sign)
-		if not _furniture_head_clear(frame*Transform3D(Basis.IDENTITY,Vector3(arm*.5,height-.24,.08)),Vector3(absf(arm)+1.4,.70,.80)):
+		if not _furniture_head_clear(frame*Transform3D(Basis.IDENTITY,Vector3(arm*.5,height-.24,.08)),Vector3(absf(arm)+1.9,1.0,.80)):
 			skipped.append({"id":row.id,"kind":"signal","reason":"native_static_head_or_arm_volume"});continue
 		_cylinder_batch("SignalPole",.09,.07,height,frame*Transform3D(Basis.IDENTITY,Vector3(0,height*.5,0)),_materials.steel)
 		_box_batch("SignalArm_"+String(row.id),Vector3(absf(arm),.09,.09),frame*Transform3D(Basis.IDENTITY,Vector3(arm*.5,height-.1,0)),_materials.steel)
 		var head:=Node3D.new();head.name="VehicleSignal_"+String(row.id);add_child(head);head.global_transform=frame*Transform3D(Basis.IDENTITY,Vector3(arm,height-.24,0))
-		_visual_box(head,"HorizontalSignalCase",Vector3(1.26,.43,.24),Vector3.ZERO,_materials.steel)
+		_visual_box(head,"HorizontalSignalCase",Vector3(1.74,.74,.24),Vector3(0,-.12,0),_materials.steel)
 		var lenses: Array[MeshInstance3D]=[]
-		for x: float in [-.4,0,.4]:
+		for x: float in [-.55,0,.55]:
 			lenses.append(_lens(head,Vector3(x,0,.145)))
-			_visual_box(head,"LensSunHood",Vector3(.31,.055,.28),Vector3(x,.18,.22),_materials.steel)
-		signals.append({"id":row.id,"crossing_id":row.crossing_id,"kind":"vehicle","point":point,"head":head,"lenses":lenses})
+			_visual_box(head,"LensSunHood",Vector3(.40,.055,.28),Vector3(x,.23,.22),_materials.steel)
+		var remaining:=Label3D.new();remaining.name="VehiclePhaseSeconds";remaining.font_size=48;remaining.pixel_size=.0038;remaining.position=Vector3(0,-.33,.135);remaining.double_sided=false;remaining.billboard=BaseMaterial3D.BILLBOARD_DISABLED;remaining.outline_modulate=Color(.015,.02,.02);head.add_child(remaining)
+		signals.append({"id":row.id,"crossing_id":row.crossing_id,"kind":"vehicle","point":point,"head":head,"lenses":lenses,"countdown":remaining,"controller_stop_point":_world_ground(row.controller_stop_xz),"stop_line_id":row.stop_line_id})
 	# Each road bank has a physical far-end head facing INWARD across the road.
 	# Its opposite-bank approach is explicit, so reverse-direction readability
 	# is independently testable rather than a double-sided material shortcut.
 	for row: Dictionary in design.pedestrian_signals:
 		var point: Vector3=_world_ground(row.xz)
-		if not _volume_clear(point,2.9,.18):skipped.append({"id":row.id,"kind":"pedestrian_signal","reason":"native_static_volume"});continue
 		var front: Vector3=host.city.global_basis*Vector3(row.front_direction_xz[0],0,row.front_direction_xz[1])
 		var frame:=Transform3D(Basis(Vector3.UP,atan2(front.x,front.z)),point)
-		_cylinder_batch("PedestrianSignalPole",.06,.05,2.8,frame*Transform3D(Basis.IDENTITY,Vector3(0,1.4,0)),_materials.steel)
-		var head:=Node3D.new();head.name="PedestrianSignal_"+String(row.id);add_child(head);head.global_transform=frame*Transform3D(Basis.IDENTITY,Vector3(0,2.25,0))
-		_visual_box(head,"PedestrianSignalCase",Vector3(.72,.89,.19),Vector3.ZERO,_materials.steel)
+		# Terrain at the northern bridge banks has a substantial source-derived
+		# height difference. Keep the pole rooted, and raise the lower head only
+		# as far as a real native ray needs to see its front from the far bank.
+		var eye: Vector3=_world_ground(row.opposite_bank_approach_xz)+Vector3.UP*1.4
+		var head_height:=2.25
+		while head_height<5.26:
+			var target: Vector3=frame*Vector3(0,head_height,.145)
+			var ray: Dictionary=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(eye,target,1|32,[host.player.get_rid()]))
+			if ray.is_empty():break
+			head_height+=.5
+		if head_height>5.25 or not _volume_clear(point,head_height+.55,.18):skipped.append({"id":row.id,"kind":"pedestrian_signal","reason":"native_static_volume_or_far_bank_LOS"});continue
+		var pole_height: float=head_height+.55
+		_cylinder_batch("PedestrianSignalPole_"+String(row.id),.06,.05,pole_height,frame*Transform3D(Basis.IDENTITY,Vector3(0,pole_height*.5,0)),_materials.steel)
+		var head:=Node3D.new();head.name="PedestrianSignal_"+String(row.id);add_child(head);head.global_transform=frame*Transform3D(Basis.IDENTITY,Vector3(0,head_height,0))
+		_visual_box(head,"PedestrianSignalCase",Vector3(.78,1.02,.19),Vector3.ZERO,_materials.steel)
 		var red_icon:=_person_icon(head,Vector3(-.14,.23,.128),false)
 		var green_icon:=_person_icon(head,Vector3(-.14,-.16,.128),true)
 		var countdown:=Label3D.new();countdown.name="GameCrossingCountdown";countdown.font_size=32;countdown.pixel_size=.004;countdown.position=Vector3(.18,-.16,.128);countdown.double_sided=false;countdown.billboard=BaseMaterial3D.BILLBOARD_DISABLED;countdown.modulate=Color(.08,1,.28);countdown.outline_modulate=Color(.02,.04,.03);head.add_child(countdown)
@@ -243,14 +255,25 @@ func pedestrian_signal_state(crossing_id: String) -> String:
 	var t: float=fposmod(elapsed_s,float(design.cycle.duration_s))
 	return "green" if t>=float(design.cycle.pedestrian_green_start_s) and t<float(design.cycle.pedestrian_green_end_s) else "red"
 
+func signal_phase_snapshot(crossing_id: String) -> Dictionary:
+	if not _crossing_ids.has(crossing_id):return {"vehicle":"uncontrolled","pedestrian":"uncontrolled","remaining_s":0,"pedestrian_remaining_s":0,"pedestrian_flashing":false,"pedestrian_lit":false}
+	var t: float=fposmod(elapsed_s,float(design.cycle.duration_s))
+	var vehicle: String=vehicle_signal_state(crossing_id);var ped: String=pedestrian_signal_state(crossing_id)
+	var end: float=float(design.cycle.vehicle_green_end_s) if vehicle=="green" else float(design.cycle.vehicle_amber_end_s) if vehicle=="amber" else float(design.cycle.duration_s)
+	var ped_end: float=float(design.cycle.pedestrian_green_end_s) if ped=="green" else float(design.cycle.pedestrian_green_start_s) if t<float(design.cycle.pedestrian_green_start_s) else float(design.cycle.duration_s)+float(design.cycle.pedestrian_green_start_s)
+	var flashing: bool=ped=="green" and t>=float(design.cycle.get("pedestrian_flash_start_s",38.0))
+	var flash_on: bool=not flashing or fposmod(t,float(design.cycle.get("flash_period_s",.5)))<float(design.cycle.get("flash_period_s",.5))*.5
+	return {"vehicle":vehicle,"pedestrian":ped,"remaining_s":ceili(end-t),"pedestrian_remaining_s":ceili(ped_end-t),"pedestrian_flashing":flashing,"pedestrian_lit":ped=="green" and flash_on}
+
 func allows_vehicle(_route_id: String,crossing_id: String) -> bool:
 	return vehicle_signal_state(crossing_id) in ["green","uncontrolled"]
 
-func vehicle_stop_distance(source: String,point: Vector3,direction: Vector3,max_distance: float) -> Dictionary:
+func vehicle_stop_distance(source: String,point: Vector3,direction: Vector3,max_distance: float,ignored_crossings: Array=[]) -> Dictionary:
 	var flat_direction:=Vector3(direction.x,0,direction.z).normalized()
 	var best: Dictionary={"required":false,"distance_m":max_distance,"reason":"no_red_signal_ahead","crossing_id":"","state":"uncontrolled"}
 	for row: Dictionary in design.get("stop_lines",[]):
 		if String(row.source_feature_id)!=source:continue
+		if String(row.crossing_id) in ignored_crossings:continue
 		var expected: Vector3=host.city.global_basis*Vector3(row.direction_xz[0],0,row.direction_xz[1])
 		if flat_direction.dot(expected)<.75:continue
 		var stop: Vector3=host.city.to_global(Vector3(row.paint_stop_xz[0],0,row.paint_stop_xz[1]))
@@ -259,7 +282,7 @@ func vehicle_stop_distance(source: String,point: Vector3,direction: Vector3,max_
 		var lateral: float=absf(delta.dot(Vector3(expected.z,0,-expected.x)))
 		if distance<-.15 or distance>float(best.distance_m) or lateral>16.0:continue
 		var state: String=vehicle_signal_state(String(row.crossing_id))
-		best={"required":state in ["red","amber"],"distance_m":maxf(0,distance),"reason":"signal_"+state,"crossing_id":row.crossing_id,"state":state}
+		best={"required":state in ["red","amber"],"distance_m":maxf(0,distance),"reason":"signal_"+state,"crossing_id":row.crossing_id,"state":state,"clearance_from_stop_m":float(row.get("clearance_from_stop_m",10.0)),"stop_line_id":row.id}
 	return best
 
 func advance_signal_time(seconds: float) -> void:
@@ -287,31 +310,62 @@ func _update_lights() -> void:
 func _update_signals() -> void:
 	for row: Dictionary in signals:
 		var id: String=String(row.crossing_id)
+		var phase: Dictionary=signal_phase_snapshot(id)
 		if row.kind=="vehicle":
-			var state: String=vehicle_signal_state(id)
+			var state: String=phase.vehicle
 			for index: int in range(3):row.lenses[index].material_override=_materials[state] if state==["red","amber","green"][index] else _materials.off
+			row.countdown.text=str(phase.remaining_s);row.countdown.modulate=_materials[state].albedo_color
 		else:
-			var green: bool=pedestrian_signal_state(id)=="green"
+			var green: bool=phase.pedestrian=="green"
 			for icon: MeshInstance3D in row.red_icon:icon.material_override=_materials.off if green else _materials.red
-			for icon: MeshInstance3D in row.green_icon:icon.material_override=_materials.green if green else _materials.off
-			row.countdown.text=str(ceili(float(design.cycle.pedestrian_green_end_s)-fposmod(elapsed_s,46.0))) if green else ""
+			for icon: MeshInstance3D in row.green_icon:icon.material_override=_materials.green if bool(phase.pedestrian_lit) else _materials.off
+			row.countdown.text=str(phase.pedestrian_remaining_s);row.countdown.modulate=_materials.green.albedo_color if green else _materials.red.albedo_color
 
 func _physics_process(delta: float) -> void:
 	if not loaded:return
 	elapsed_s=fposmod(elapsed_s+delta,float(design.cycle.duration_s))
-	var state: String=vehicle_signal_state("sejong_marked")+pedestrian_signal_state("sejong_marked")+str(floori(elapsed_s))
+	var state: String=vehicle_signal_state("sejong_marked")+pedestrian_signal_state("sejong_marked")+str(floori(elapsed_s*4.0))
 	if state!=_last_state:_last_state=state;_update_signals()
 	_light_elapsed+=delta
 	if _light_elapsed>=.35:_light_elapsed=0;_update_lights()
 
 func destination(id := "crossing") -> Dictionary:
 	var flat:=Vector3(60,0,-204);var target:=Vector3(83,0,-195)
+	if id=="crossing":
+		for row: Dictionary in signals:
+			if row.kind=="pedestrian" and row.crossing_id=="source_node_921242887" and int(row.bank)==0:
+				var side:=Vector3(-row.front_direction.z,0,row.front_direction.x)
+				for lateral: float in [-5.5,5.5,-7.0,7.0]:
+					var safe: Dictionary=host._exploration_destination(row.opposite_bank_approach+side*lateral)
+					if safe.is_empty():continue
+					var view: Dictionary=_checked_signal_view(safe.point,row,4.2,-8.)
+					if not view.is_empty():return view
+	if id=="crossing_vehicle":
+		for row: Dictionary in signals:
+			if row.kind=="vehicle" and row.crossing_id=="source_node_921242887":
+				var forward: Vector3=-row.head.global_basis.z;forward.y=0;forward=forward.normalized()
+				var safe: Dictionary=host._exploration_destination(row.controller_stop_point-forward*8.0+Vector3.UP*.065)
+				if safe.is_empty():continue
+				var view: Dictionary=_checked_signal_view(safe.point,row,4.2,-8.)
+				if not view.is_empty():return view
 	if id=="lamps" and not lamps.is_empty():
 		var row: Dictionary=lamps[0];flat=host.city.to_local(row.point)+Vector3(-5,0,5);target=host.city.to_local(row.point)+Vector3.UP*2.0
 	var point: Vector3=host.city.to_global(flat);var y: float=terrain.ground_y_world(point)
 	point.y=y+.08
 	var toward: Vector3=host.city.to_global(target);toward.y=terrain.ground_y_world(toward)+1.1
 	return {"id":id,"point":point,"toward":toward,"basis":"authored_native_review_destination_not_real_access"}
+
+func _checked_signal_view(point: Vector3,row: Dictionary,distance: float,pitch_degrees: float) -> Dictionary:
+	var target: Vector3=row.head.global_position+row.head.global_basis.z*.145
+	var forward: Vector3=target-point;forward.y=0;forward=forward.normalized()
+	var eye: Vector3=point-forward*distance*cos(deg_to_rad(pitch_degrees))+Vector3.UP*(host.rig.pivot_height_m-distance*sin(deg_to_rad(pitch_degrees)))
+	var ray: Dictionary=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(eye,target,1|32,[host.player.get_rid()]))
+	if not ray.is_empty():return {}
+	for other: Dictionary in signals:
+		if other.head==row.head:continue
+		var box: MeshInstance3D=other.head.get_node("PedestrianSignalCase" if other.kind=="pedestrian" else "HorizontalSignalCase")
+		if box.mesh.get_aabb().intersects_segment(box.to_local(eye),box.to_local(target))!=null:return {}
+	return {"id":"crossing","point":point,"toward":target,"target_head":row.head,"camera_yaw":atan2(-forward.x,-forward.z),"camera_pitch_degrees":pitch_degrees,"camera_distance_m":distance,"basis":"authored_supported_signal_observer_with_static_and_rendered_case_LOS_not_real_access"}
 
 func snapshot() -> Dictionary:
 	var lamp_rows: Array=[];var signal_rows: Array=[]

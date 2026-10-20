@@ -94,7 +94,14 @@ func setup(root_scene: Node3D) -> bool:
 	if not entrance_world_position.is_finite() or not entrance_outward_direction.is_finite():return _fail("서울도서관 입구 좌표가 다릅니다.")
 	if not InputMap.has_action(INTERACT_ACTION):
 		InputMap.add_action(INTERACT_ACTION)
-		var key := InputEventKey.new();key.physical_keycode = KEY_E
+	# Physical keyboard events can arrive from different device IDs. An
+	# existing action (including one created before setup) still needs the
+	# all-device physical binding; synthetic action tests cannot prove it.
+	var has_keyboard_binding:=false
+	for event: InputEvent in InputMap.action_get_events(INTERACT_ACTION):
+		if event is InputEventKey and event.physical_keycode==KEY_E and event.device==-1:has_keyboard_binding=true
+	if not has_keyboard_binding:
+		var key := InputEventKey.new();key.physical_keycode = KEY_E;key.device=-1
 		InputMap.action_add_event(INTERACT_ACTION,key)
 	# Observe E while menus pause the world so a held key cannot enter on resume.
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -346,8 +353,20 @@ func entry_action_text() -> String:
 func _input(event: InputEvent) -> void:
 	# A physical tap may begin and end between physics ticks. Retain its edge,
 	# but never buffer a rejected press until the player later approaches a door.
+	if event.is_action_released(INTERACT_ACTION):
+		# Observe the release itself, including while the menu is paused. Waiting
+		# for a physics sample can otherwise discard the first fresh tap after
+		# a shortcut or a very quick press/release pair.
+		e_requires_release=false;_e_was_pressed=false
+		return
 	if event.is_action_pressed(INTERACT_ACTION) and not event.is_echo():
-		if loaded and not _menu_open() and not e_requires_release:_e_press_pending = true
+		if _menu_open() or in_elevator:
+			# Menus may open and close between physics ticks too. Record a press
+			# made there immediately so holding it cannot become a world action.
+			e_requires_release=true;_e_was_pressed=true;_e_press_pending=false
+			return
+		if loaded and not _e_was_pressed:
+			e_requires_release=false;_e_press_pending = true
 
 func _physics_process(delta: float) -> void:
 	if not loaded or not is_instance_valid(host) or not host.runtime_ok:return

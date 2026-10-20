@@ -3,6 +3,7 @@ from pathlib import Path
 from shapely.geometry import Polygon, LineString, Point, MultiPoint, shape
 from shapely.ops import unary_union, substring, voronoi_diagram, linemerge
 from shapely.strtree import STRtree
+from coordinate_system import CoordinateSystem
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description='Reproduce the bounded game-authored street paint/furniture; never modifies source geometry.')
@@ -90,6 +91,128 @@ for r in routes:
    half=max(2,min(15,domain.area/max(1,line.length)/2))
    xz=[[p.x-side[0]*half,p.y-side[1]*half],[p.x+side[0]*half,p.y+side[1]*half]]
    crossings.append({'id':c['crossing_id'],'xz':xz,'source_feature_id':source,'road_ids':[source],'basis':'authored_transverse_stripes_at_existing_source_crossing_conflict','width_m':4.4})
+
+# The initial EXP23 recipe accidentally used only animated-car conflicts as its
+# crossing inventory. Cover the source crossing geometry and explicit signal
+# nodes too. A source node locates a crossing, not a surveyed pole: its local
+# transverse bank segment and every fixture below remain game-authored.
+signal_coverage=[]
+system=CoordinateSystem(ROOT/'config/region.json')
+node_candidates=read('data/reports/d03_crossing_candidates.json')['crossing_candidates']
+signal_nodes=[]
+for row in node_candidates:
+ x,_,z=system.to_world(*row['lon_lat']);signal_nodes.append(dict(row,xz=[x,z]))
+def road_direction(source,point):
+ line=LineString(features[source]['geometry']['coordinates']);station=line.project(point)
+ a=line.interpolate(max(0,station-.2));b=line.interpolate(min(line.length,station+.2));length=a.distance(b)
+ return ((b.x-a.x)/length,(b.y-a.y)/length)
+def roads_crossed(line):
+ result=[]
+ for source,domain in drives.items():
+  portion=line.intersection(domain)
+  if portion.length<.75:continue
+  mid=line.interpolate(line.length*.5);d=road_direction(source,mid)
+  a=line.interpolate(max(0,line.project(mid)-.2));b=line.interpolate(min(line.length,line.project(mid)+.2))
+  delta=(b.x-a.x,b.y-a.y);length=math.hypot(*delta)
+  # Ignore broad source display overlap parallel to a crossing path.
+  if abs((delta[0]*d[0]+delta[1]*d[1])/max(length,1e-8))>.80:continue
+  result.append(source)
+ return result
+for source,f in features.items():
+ tags=f.get('source_tags',{})
+ if tags.get('footway')!='crossing':continue
+ line=LineString(f['geometry']['coordinates'])
+ nearby=[n for n in signal_nodes if line.distance(Point(n['xz']))<1.2]
+ explicit=[n for n in nearby if n['tags'].get('crossing')=='traffic_signals' or n['tags'].get('crossing:signals')=='yes']
+ no_signal=tags.get('crossing')=='uncontrolled' or tags.get('crossing:signals')=='no' or (nearby and all(n['tags'].get('crossing:signals')=='no' for n in nearby))
+ eligible=bool(explicit) or (tags.get('crossing')=='marked' and not no_signal)
+ row={'kind':'source_crossing_way','source_id':source,'source_tags':tags,'explicit_signal_nodes':[n['osm_id'] for n in explicit]}
+ if not eligible or no_signal:
+  row.update(status='excluded',reason='source_explicit_uncontrolled_or_no_signals' if no_signal else 'no_marked_or_explicit_signal_evidence');signal_coverage.append(row);continue
+ # These two northern bridge-bank sites passed XZ containment, but actual
+ # production rays hit source static geometry even with a rooted5.25m head.
+ # Preserve the measured rejection rather than drawing a one-sided orphan.
+ if source in ['osm:way:506252749:highway_line','osm:way:506252752:highway_line']:
+  row.update(status='excluded',reason='native_static_bridge_bank_blocks_far_end_head_or_rooted_pole',evidence='data/reports/street_detail/20261020/signals/development/headless02.json');signal_coverage.append(row);continue
+ roads=roads_crossed(line)
+ if not extent.intersects(line) or not roads:
+  row.update(status='excluded',reason='outside_extent_or_no_transverse_source_drive');signal_coverage.append(row);continue
+ nearest=min(crossings,key=lambda c:line.distance(LineString(c['xz']))) if crossings else None
+ if nearest and line.distance(LineString(nearest['xz']))<3.0:
+  crossing=nearest;crossing.update(xz=list(map(list,line.coords)),source_feature_id=source,road_ids=roads,basis='source_crossing_way_with_preserved_existing_conflict_id')
+ else:
+  crossing={'id':'source_crossing_'+source.split(':')[2],'xz':list(map(list,line.coords)),'source_feature_id':source,'road_ids':roads,'basis':'source_marked_or_explicit_signalled_crossing_way','width_m':4.4};crossings.append(crossing)
+ crossing['source_signal_nodes']=[n['osm_id'] for n in explicit]
+ row.update(status='accepted',crossing_id=crossing['id'],road_ids=roads);signal_coverage.append(row)
+for row in signal_nodes:
+ tags=row['tags'];explicit=tags.get('crossing')=='traffic_signals' or tags.get('crossing:signals')=='yes'
+ record={'kind':'source_crossing_node','source_id':row['osm_id'],'source_tags':tags,'xz':row['xz']}
+ if not explicit:
+  record.update(status='excluded',reason='node_not_explicitly_signalled');signal_coverage.append(record);continue
+ point=Point(row['xz']);near=[c for c in crossings if LineString(c['xz']).distance(point)<3]
+ if near:
+  record.update(status='accepted',crossing_id=near[0]['id'],reason='covered_by_source_crossing_way_or_existing_conflict');signal_coverage.append(record);continue
+ road_candidates=[s for s,d in drives.items() if d.distance(point)<1.5]
+ if not extent.contains(point) or not road_candidates:
+  record.update(status='excluded',reason='outside_extent_or_no_adjacent_source_drive');signal_coverage.append(record);continue
+ source=min(road_candidates,key=lambda s:LineString(features[s]['geometry']['coordinates']).distance(point));d=road_direction(source,point);side=(-d[1],d[0])
+ probe=LineString([(point.x-side[0]*45,point.y-side[1]*45),(point.x+side[0]*45,point.y+side[1]*45)])
+ segments=[g for g in getattr(probe.intersection(drive),'geoms',[probe.intersection(drive)]) if g.geom_type=='LineString' and g.length>2]
+ if not segments:
+  record.update(status='excluded',reason='no_continuous_transverse_drive_segment');signal_coverage.append(record);continue
+ segment=min(segments,key=lambda g:g.distance(point));a=segment.coords[0];b=segment.coords[-1]
+ line=LineString([(a[0]-side[0]*.4,a[1]-side[1]*.4),(b[0]+side[0]*.4,b[1]+side[1]*.4)])
+ crossing={'id':'source_node_'+row['osm_id'].split('/')[1],'xz':list(map(list,line.coords)),'source_feature_id':'osm:node:'+row['osm_id'].split('/')[1],'road_ids':roads_crossed(line),'basis':'authored_transverse_source_drive_segment_at_explicit_source_signal_node','width_m':4.4,'source_signal_nodes':[row['osm_id']]};crossings.append(crossing)
+ record.update(status='accepted',crossing_id=crossing['id'],reason='local_transverse_segment_authored_at_explicit_signal_node');signal_coverage.append(record)
+
+# Keep the old five controller stop rows byte-for-value. Additional visible
+# approaches use source-road direction and a line behind the marked crossing.
+# Existing source route arrays and their human-priority/FIFO conflicts are not
+# rewritten by this authoring tool.
+for crossing in crossings:
+ line=LineString(crossing['xz'])
+ for source in crossing['road_ids']:
+  road=LineString(features[source]['geometry']['coordinates']);mid=line.interpolate(line.length*.5);s=road.project(mid);d=road_direction(source,mid)
+  signs=[1] if features[source]['source_tags'].get('oneway')=='yes' else [1,-1]
+  for sign in signs:
+   heading=[d[0]*sign,d[1]*sign]
+   if any(r['crossing_id']==crossing['id'] and r['source_feature_id']==source and sum(a*b for a,b in zip(r['direction_xz'],heading))>.9 for r in stops):continue
+   p=road.interpolate(max(0,min(road.length,s-sign*6.0)));paint=[p.x,p.y]
+   stops.append({'id':crossing['id']+'_'+source.split(':')[2]+'_'+str(sign),'route_id':'','crossing_id':crossing['id'],'source_feature_id':source,'controller_stop_xz':[p.x-heading[0]*2.6,p.y-heading[1]*2.6],'paint_stop_xz':paint,'direction_xz':heading,'stop_s_m':max(0,s-sign*8.6),'enter_s_m':s-2.2,'exit_s_m':s+2.2,'source_refs':features[source]['source_refs'],'basis':'authored_visible_approach_at_source_crossing'})
+for stop in stops:
+ crossing=next(c for c in crossings if c['id']==stop['crossing_id']);p=stop['paint_stop_xz'];d=stop['direction_xz']
+ stop['clearance_from_stop_m']=max((q[0]-p[0])*d[0]+(q[1]-p[1])*d[1] for q in crossing['xz'])+crossing['width_m']*.5
+
+pedestrian_signals=[];unsupported_crossings=[]
+for crossing in crossings:
+ endpoints=[];raw=crossing['xz']
+ for bank in [0,1]:
+  a=raw[0] if bank==0 else raw[-1];b=raw[1] if bank==0 else raw[-2]
+  out=(a[0]-b[0],a[1]-b[1]);length=math.hypot(*out);out=(out[0]/length,out[1]/length)
+  found=None
+  for distance in [.85,1.6,2.5,3.5,4.5,6,8,10,12,15]:
+   for lateral in [0,.8,-.8,1.6,-1.6]:
+    q=Point(a[0]+out[0]*distance-out[1]*lateral,a[1]+out[1]*distance+out[0]*lateral)
+    if not extent.contains(q) or drive.distance(q)<.45 or forbidden.distance(q)<.50 or entry_union.intersects(q.buffer(.20)) or walk_mesh.distance(q)>4:continue
+    # The approach is on this physical bank; the head itself faces across the
+    # road so it is readable from the opposite bank, as a far-end signal.
+    approach=[q.x-out[1]*.8+out[0]*.4,q.y+out[0]*.8+out[1]*.4]
+    if drive.distance(Point(approach))<.25 or forbidden.distance(Point(approach))<.35:continue
+    found={'id':crossing['id']+'_bank_'+str(bank),'crossing_id':crossing['id'],'bank':bank,'xz':[q.x,q.y],'approach_xz':approach,'outward_xz':list(out),'placement':'authored_outside_union_of_source_drive_surfaces_on_actual_crossing_bank'};break
+   if found:break
+  if not found:break
+  endpoints.append(found)
+ if len(endpoints)!=2:
+  unsupported_crossings.append(crossing['id'])
+  for rec in signal_coverage:
+   if rec.get('crossing_id')==crossing['id']:rec.update(status='excluded',reason='no_source_safe_supported_road_bank_pair')
+  continue
+ for bank,row in enumerate(endpoints):
+  other=endpoints[1-bank];delta=(other['xz'][0]-row['xz'][0],other['xz'][1]-row['xz'][1]);length=math.hypot(*delta)
+  row['front_direction_xz']=[delta[0]/length,delta[1]/length];row['opposite_bank_approach_xz']=other['approach_xz'];pedestrian_signals.append(row)
+
+crossings=[c for c in crossings if c['id'] not in unsupported_crossings]
+stops=[s for s in stops if s['crossing_id'] not in unsupported_crossings]
 
 paint=[]
 def components(g):
@@ -192,40 +315,31 @@ signal_anchors=[]
 for stop in stops:
  source=stop['source_feature_id'];domain=drives[source];p=stop['paint_stop_xz'];d=stop['direction_xz'];side=(-d[1],d[0]);feature_line=LineString(features[source]['geometry']['coordinates']);width=domain.area/max(feature_line.length,1)
  found=False
- for longitudinal in [0,3,-3,6,-6]:
+ for longitudinal in [3,6,0,-3,-6]:
   for extra in [1,2.5,4]:
    for sign in [-1,1]:
     q=Point(p[0]+side[0]*sign*(width/2+extra)+d[0]*longitudinal,p[1]+side[1]*sign*(width/2+extra)+d[1]*longitudinal)
     if not extent.contains(q) or drive.distance(q)<.30 or forbidden.distance(q)<.55 or entry_union.intersects(q.buffer(.25)):continue
-    signal_anchors.append({'id':stop['id']+'_signal','crossing_id':stop['crossing_id'],'source_feature_id':source,'xz':[q.x,q.y],'direction_xz':d,'arm_sign':-sign,'arm_m':min(6,width*.45+extra-1),'height_m':5.5});found=True;break
+    reach=abs((p[0]-q.x)*side[0]+(p[1]-q.y)*side[1])
+    signal_anchors.append({'id':stop['id']+'_signal','crossing_id':stop['crossing_id'],'source_feature_id':source,'xz':[q.x,q.y],'direction_xz':d,'arm_sign':-sign,'arm_m':reach,'height_m':5.5,'controller_stop_xz':stop['controller_stop_xz'],'paint_stop_xz':p,'placement':'authored_roadside_mast_with_head_above_approach_centre','stop_line_id':stop['id']});found=True;break
    if found:break
   if found:break
 
-pedestrian_signals=[]
-for crossing in crossings:
- endpoints=[];raw=crossing['xz']
- for bank in [0,1]:
-  a=raw[0] if bank==0 else raw[-1];b=raw[1] if bank==0 else raw[-2]
-  out=(a[0]-b[0],a[1]-b[1]);length=math.hypot(*out);out=(out[0]/length,out[1]/length)
-  found=None
-  for distance in [.85,1.6,2.5,3.5,4.5,6,8,10,12,15]:
-   for lateral in [0,.8,-.8,1.6,-1.6]:
-    q=Point(a[0]+out[0]*distance-out[1]*lateral,a[1]+out[1]*distance+out[0]*lateral)
-    if not extent.contains(q) or drive.distance(q)<.45 or forbidden.distance(q)<.50 or entry_union.intersects(q.buffer(.20)) or walk_mesh.distance(q)>4:continue
-    # The approach is on this physical bank; the head itself faces across the
-    # road so it is readable from the opposite bank, as a far-end signal.
-    approach=[q.x-out[1]*.8+out[0]*.4,q.y+out[0]*.8+out[1]*.4]
-    if drive.distance(Point(approach))<.25 or forbidden.distance(Point(approach))<.35:continue
-    found={'id':crossing['id']+'_bank_'+str(bank),'crossing_id':crossing['id'],'bank':bank,'xz':[q.x,q.y],'approach_xz':approach,'outward_xz':list(out),'placement':'authored_outside_union_of_source_drive_surfaces_on_actual_crossing_bank'};break
-   if found:break
-  if not found:raise RuntimeError('No supported pedestrian signal bank for '+crossing['id']+' '+str(bank))
-  endpoints.append(found)
- for bank,row in enumerate(endpoints):
-  other=endpoints[1-bank];delta=(other['xz'][0]-row['xz'][0],other['xz'][1]-row['xz'][1]);length=math.hypot(*delta)
-  row['front_direction_xz']=[delta[0]/length,delta[1]/length];row['opposite_bank_approach_xz']=other['approach_xz'];pedestrian_signals.append(row)
+# Nearby crossing paths must not advertise simultaneous perpendicular greens.
+# This bounded layout contains only parallel approach groups at each site;
+# fail authoring rather than silently extend this schedule to a new junction.
+axis_conflicts=[]
+for index,a in enumerate(stops):
+ ca=next(c for c in crossings if c['id']==a['crossing_id'])
+ for b in stops[index+1:]:
+  cb=next(c for c in crossings if c['id']==b['crossing_id'])
+  if LineString(ca['xz']).distance(LineString(cb['xz']))>45:continue
+  dot=abs(sum(x*y for x,y in zip(a['direction_xz'],b['direction_xz'])))
+  if dot<.65:axis_conflicts.append([a['id'],b['id'],dot])
+if axis_conflicts:raise RuntimeError('Perpendicular nearby vehicle approaches require a separate coordinated phase: '+repr(axis_conflicts))
 
-paths=['game/resources/world_geometry/world.json','game/data/generated/traffic.json','game/assets/authored/neighborhood_population.json','game/assets/authored/terrain_heightfield.json','game/assets/authored/interiors/source_catalog.json','data/processed/features.json']
-out={'schema_version':1,'task':'EXP23_street_detail','coordinate_space':'source_local_xz_metres','source_hashes':{'res://'+p.removeprefix('game/'):sha(p) for p in paths if p.startswith('game/')},'source_features_sha256':sha('data/processed/features.json'),'provenance':{'source':'Existing OpenStreetMap-derived road/display triangles, existing traffic conflicts and all original entry candidates','paint':'Calm main-road-only4m dashes/12m gaps with authored4.5m lane cadence; shared ownership of overlapping opposite-direction source display surfaces, one shared double-yellow divider and outer-union white edges only. Source solids/private and intersections/crossings remain clear; not surveyed lane markings','terrain':'After EXP21 terrain.loaded; exact triangle-split runtime projection once, .052m relative paint offset above base TIN, road display .035m','schedules':'46 second coordinated game cycle; never a live Seoul signal plan','lamp':'Authored dark slim tapered poles, short horizontal LED heads, base flange/service door; no imported photograph texture','external_references':[{'url':'https://news.seoul.go.kr/gov/archives/539324','checked':'2026-10-19','observation':'Official Seoul description separates signal, streetlight and combined S-Pole models and LED lighting. Used as functional integration reference, not placement/dimensions.'},{'url':'https://mediahub.seoul.go.kr/news/article/newsArticlePrintPopup.do?articleNo=2001844','checked':'2026-10-19','observation':'Official Seoul article describes red/green pedestrian information coordinated at crossings. Text reviewed; no claim to reconstruct the photographed location.'}]},'cycle':{'duration_s':46.0,'vehicle_green_end_s':24.0,'vehicle_amber_end_s':27.0,'pedestrian_green_start_s':29.0,'pedestrian_green_end_s':43.0,'timing_basis':'game_authored_coordinated_not_real_signal_timing'},'policy':{'paint_y_above_TIN_m':.052,'new_collisions':False,'source_geometry_changed':False,'existing_route_arrays_changed':False,'real_schedule':False,'lamp_active_standard':12,'lamp_active_low':6,'lamp_range_m':16,'lamp_max_distance_m':70,'lane_dash_m':4.0,'lane_gap_m':12.0,'authored_lane_cadence_m':4.5,'lane_paint_width_m':.15,'pedestrian_heads':'One physical inward-facing far-end head on each road bank; both approaches share phase'},'corridors':corridors,'paired_direction_corridors':[{'name':m['name'],'positive_source_ids':m['positive_source_ids'],'negative_source_ids':m['negative_source_ids'],'basis':m['basis'],'median_xz':[list(line.coords) for line in lines(m['geometry'])]} for m in paired_medians],'paint':paint,'crossings':crossings,'stop_lines':stops,'signals':signal_anchors,'pedestrian_signals':pedestrian_signals,'lamps':lamps,'counts':{'road_corridors':len(corridors),'paint_polygons':len(paint),'crossings':len(crossings),'signal_poles':len(signal_anchors),'pedestrian_heads':len(pedestrian_signals),'lamps_planned':len(lamps)},'preflight':{'source_solid_private_paint_overlap_m2':round(sum(Polygon(p['xz']).intersection(forbidden).area for p in paint),9),'source_road_outside_paint_m2':round(sum(Polygon(p['xz']).difference(drives[p['source_feature_id']]).area for p in paint),9),'all_entrance_corridors_lamp_overlap_m2':round(sum(Point(l['xz']).buffer(.25).intersection(entry_union).area for l in lamps),9),'white_lane_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='lane'),3),'white_edge_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='edge'),3),'paired_yellow_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='paired_centre'),3)}}
+paths=['game/resources/world_geometry/world.json','game/data/generated/traffic.json','game/assets/authored/neighborhood_population.json','game/assets/authored/terrain_heightfield.json','game/assets/authored/interiors/source_catalog.json','data/processed/features.json','data/reports/d03_crossing_candidates.json','config/region.json','tools/coordinate_system.py']
+out={'schema_version':1,'task':'EXP23_street_detail','coordinate_space':'source_local_xz_metres','source_hashes':{'res://'+p.removeprefix('game/'):sha(p) for p in paths if p.startswith('game/')},'source_features_sha256':sha('data/processed/features.json'),'provenance':{'source':'Existing OpenStreetMap-derived road/display triangles, existing traffic conflicts and all original entry candidates','paint':'Calm main-road-only4m dashes/12m gaps with authored4.5m lane cadence; shared ownership of overlapping opposite-direction source display surfaces, one shared double-yellow divider and outer-union white edges only. Source solids/private and intersections/crossings remain clear; not surveyed lane markings','terrain':'After EXP21 terrain.loaded; exact triangle-split runtime projection once, .052m relative paint offset above base TIN, road display .035m','schedules':'46 second coordinated game cycle, protected29-43s pedestrian phase with final5s flashing; never a live Seoul signal plan','lamp':'Authored dark slim tapered poles, short horizontal LED heads, base flange/service door; no imported photograph texture','external_references':[{'url':'https://news.seoul.go.kr/gov/archives/539324','checked':'2026-10-19','observation':'Official Seoul description separates signal, streetlight and combined S-Pole models and LED lighting. Used as functional integration reference, not placement/dimensions.'},{'url':'https://mediahub.seoul.go.kr/news/article/newsArticlePrintPopup.do?articleNo=2001844','checked':'2026-10-19','observation':'Official Seoul article describes red/green pedestrian information coordinated at crossings. Text reviewed; no claim to reconstruct the photographed location.'}]},'cycle':{'duration_s':46.0,'vehicle_green_end_s':24.0,'vehicle_amber_end_s':27.0,'pedestrian_green_start_s':29.0,'pedestrian_green_end_s':43.0,'pedestrian_flash_start_s':38.0,'flash_period_s':.5,'timing_basis':'game_authored_coordinated_not_real_signal_timing'},'policy':{'paint_y_above_TIN_m':.052,'new_collisions':False,'source_geometry_changed':False,'existing_route_arrays_changed':False,'real_schedule':False,'lamp_active_standard':12,'lamp_active_low':6,'lamp_range_m':16,'lamp_max_distance_m':70,'lane_dash_m':4.0,'lane_gap_m':12.0,'authored_lane_cadence_m':4.5,'lane_paint_width_m':.15,'pedestrian_heads':'One physical inward-facing far-end head on each road bank; both approaches share phase'},'corridors':corridors,'paired_direction_corridors':[{'name':m['name'],'positive_source_ids':m['positive_source_ids'],'negative_source_ids':m['negative_source_ids'],'basis':m['basis'],'median_xz':[list(line.coords) for line in lines(m['geometry'])]} for m in paired_medians],'paint':paint,'crossings':crossings,'source_signal_coverage':signal_coverage,'stop_lines':stops,'signals':signal_anchors,'pedestrian_signals':pedestrian_signals,'lamps':lamps,'counts':{'road_corridors':len(corridors),'paint_polygons':len(paint),'crossings':len(crossings),'signal_poles':len(signal_anchors),'pedestrian_heads':len(pedestrian_signals),'lamps_planned':len(lamps)},'preflight':{'source_solid_private_paint_overlap_m2':round(sum(Polygon(p['xz']).intersection(forbidden).area for p in paint),9),'source_road_outside_paint_m2':round(sum(Polygon(p['xz']).difference(drives[p['source_feature_id']]).area for p in paint),9),'all_entrance_corridors_lamp_overlap_m2':round(sum(Point(l['xz']).buffer(.25).intersection(entry_union).area for l in lamps),9),'white_lane_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='lane'),3),'white_edge_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='edge'),3),'nearby_perpendicular_green_approach_pairs':len(axis_conflicts),'paired_yellow_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='paired_centre'),3)}}
 out['authoring']={'generator':'tools/prepare_road_furniture.py','generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'library':'Shapely2.2.0','recipe':'Source-safe game geometry; no real lane count, traffic timing or surveyed-furniture claim.'}
 serialized=json.dumps(out,ensure_ascii=False,separators=(',',':'))+'\n'
 target=ROOT/'game/assets/authored/road_furniture.json'
