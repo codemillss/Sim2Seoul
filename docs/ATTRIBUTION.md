@@ -1,5 +1,7 @@
 # 포함한 자료의 출처
 
+> 저장소 공개 상태: 2026-10-21 GitHub API에서 PUBLIC으로 확인했습니다. 아래 R03 등 과거 비공개 배포 관련 설명은 해당 버전 당시의 기록입니다. 데이터·외부 자산의 고지는 각각 유지합니다.
+
 ## 서울시 등고선·표고점 지역 원천 (2026-10-18)
 
 출처: 서울특별시 도시공간본부 도시계획상임기획과, [서울시 경사도 제공 페이지의 서울시 등고선.zip](https://data.seoul.go.kr/dataList/OA-22241/F/1/datasetView.do), 2025-03-20 갱신/제공 설명은 국토지리정보원2023년 기준 수치지형도. 공공누리1유형: 출처표시 조건으로 상업 이용·변경 가능, 제3저작권자 없음. 정확한 제공 파일/원문·취득 SHA는 [지역 manifest](../data/raw/supplemental/seoul_terrain/20261018/manifest.json)와 [이용 조건](../data/raw/supplemental/seoul_terrain/20261018/source_license.json)에 보존했다.

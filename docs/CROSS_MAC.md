@@ -36,7 +36,7 @@ python3 tools/check_terrain_handoff.py --prepared
 
 Git으로 새로 받은 WAV/PNG/GLB의 import 캐시는 각 Mac에서 필요하다. 실행기가 정식 Godot의 headless import를 먼저 마친 뒤 게임을 연다. 캐시는 저장소에 넣지 않는다. 기존 준비대로 지역 데이터/가상환경을 준비하면 국가 전체 자료를 다시 받을 필요가 없다. 현재 기능 검증은 M1 Pro16GB/macOS27.0이며 M4 Pro/추가 Mac 검증이나 새 앱 export를 대체하지 않는다.
 
-전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 비공개 저장소이므로 GitHub 계정에 접근 권한이 필요하다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다.
+전용 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul). 2026-10-21 GitHub API에서 공개 저장소임을 확인했다. 이 프로젝트 폴더에는 독립 `.git`을 사용한다. 아래 최초 비공개 공유 관련 기록은 당시의 이력이다.
 
 각 준비 절의 결과·다음 단계는 해당 작업 당시의 범위다. 아래 R02의 `v0_walk`는 당시 고정판이며 현재 EXP21 개발 실행은 위 `explore_walk` 안내를 따른다.  N04에서2NPC/2차량을켠W04필수동선을26분연속검수했다. 현재 M1의고정1920×1080성능은R01로측정했고품질/메뉴회귀는R02로확인했다. R03은 같은 V0의 M1 로컬 앱 검수를 완료했고 R04는 M4 UNRUN 대안으로 판정했다. 진행 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. M4·사람조작감·현실지형/접근은별도다.
 

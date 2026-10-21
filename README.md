@@ -1,23 +1,86 @@
-# 덕수궁과 시청 서울 시뮬레이션
+<p align="center">
+  <img src="docs/media/sim2seoul-banner.svg" alt="Sim2Seoul — From spatial data to a walkable Seoul" width="100%">
+</p>
 
-EXP23: 중앙선 기준의 정돈된 차선·양방향 보행 신호·가로등, 두 문에서 안정적으로 타는 도심01 버스, 세밀한 반려견 산책과 **E로 빌려 직접 타는 자전거2대/대여소2곳**을 추가했습니다. 실제 화면/주행·실패와 현재 한계는 [WORK_STATUS](docs/WORK_STATUS.md)를 따릅니다. 다른 Mac은 `python3 tools/check_street_detail_handoff.py` 후 일반 실행기를 사용합니다.
+<p align="center">
+  <strong>지도 위의 서울을, 직접 걸어 들어가는 공간으로.</strong><br>
+  덕수궁의 돌담길과 시청 앞 광장을 걷고, 건물에 들어가고, 자전거와 킥보드를 타는 3D 탐험 프로젝트입니다.
+</p>
 
-EXP22 당시에는 가로수를 약9.6~11.5m 성목 비례와 가지·수피·근거리 잎 모델로 보완했습니다. 최신 상태/전후 화면은 [WORK_STATUS](docs/WORK_STATUS.md), 다른 Mac 인수 검사는 `python3 tools/check_tree_detail_handoff.py`를 따릅니다. 이전 EXP21 증거는 당시 소스의 보존 기록입니다.
+<p align="center">
+  <code>Godot 4.7.2</code> · <code>GDScript</code> · <code>Python 3.14</code> · <code>GIS</code> · <code>macOS</code><br><br>
+  <a href="docs/ENGINEERING.md">기술적 문제 해결</a> ·
+  <a href="docs/RUN_GUIDE.md">실행 안내</a> ·
+  <a href="docs/WORK_STATUS.md">현재 구현·검증</a> ·
+  <a href="docs/README.md">문서 둘러보기</a>
+</p>
 
-최신 개발판 **EXP21**: 서울시 공식 지역 등고선·표고점을 보간한 지형에 도로·건물 기초·출입구·옥상과 사람·차량·나무를 연결했습니다. 실제 배치와 미터 축척을 유지하며, 건물 주변 평탄화와 실내·시설은 게임용 구성입니다. 실측 DEM이나 모든 현장 문턱의 정확도를 뜻하지 않습니다. [현재 결과/다음 행동](docs/WORK_STATUS.md) · [지형 선택·한계](docs/TERRAIN_INTEGRATION.md) · [공유 파일 대조](tools/check_terrain_handoff.py).
+## 왜 만들었나요?
 
+**익숙한 서울의 한 구역을, 바라보는 배경에서 직접 돌아다니며 머물 수 있는 공간으로 만들고 싶었습니다.** 전통 궁궐과 현대 빌딩이 맞닿아 있는 덕수궁·시청 주변을 첫 무대로 골랐습니다. 실제 도로와 건물의 위치·축척을 바탕으로 동네의 연결감을 유지하면서, 그 안에 이동과 생활 경험을 쌓아가는 개인 프로젝트입니다.
 
-2026-10-17 후속 **EXP16–19**: 사람이 비켜 지나가기, SFC 에스컬레이터·사이클/로잉, 점프로 접근/이탈하는 옥상과 큰 호텔 야외 풀, 대기 줄·낮 피크닉·한영 이정표·편의점 추가·교회 특징·버스킹 기타를 최신 개발 장면에 통합한다. 완료 판정과 증거는 [현재 작업 상태](docs/WORK_STATUS.md)를 따른다. 실제 시설/현재 점포·행사 복원이 아니며 대중교통은 후속 계획이다.
+출발점은 공개 지도였지만, 지도에 건물을 표시하는 것만으로는 걸을 수 있는 도시가 되지 않았습니다. 지면과 출입구의 높이를 맞추고, 카메라가 건물을 뚫지 않게 하고, 차에서 내린 뒤 다시 걸을 수 있게 해야 했습니다. **공간 데이터를 플레이 가능한 환경으로 바꾸는 과정**을 이 프로젝트의 핵심 과제로 삼았습니다.
 
-덕수궁과 서울시청 주변의 실제 도로·건물 배치와 축척을 바탕으로, 캐릭터를 직접 움직여 탐험하는 개인용 3D 공간을 만든다. 궁궐과 빌딩이 공존하는 서울의 풍경을 첫 경험으로 삼고, 이후 생활 게임이나 다른 시뮬레이션으로 확장한다.
+현재는 탐험과 상호작용을 중심으로 개발하고 있습니다. 장기적으로는 이 공간 위에 생활·꾸미기·주민 시뮬레이션을 확장하려 합니다. [장소 선택과 개발 방향](docs/PROJECT_CONTEXT.md#왜-이-공간을-만드는가)
 
-기획 기준일: 2026-10-12
+## 플레이 화면
 
-## Git으로 두 Mac에서 이어가기
+2026-10-17–20 개발판의 실제 Godot 실행 화면입니다. 실내·옥상 시설은 게임용으로 구성했으며, 각 화면에 캡처 날짜를 표시했습니다.
 
-전용 비공개 저장소: [codemillss/Sim2Seoul](https://github.com/codemillss/Sim2Seoul).
+<table>
+  <tr>
+    <td width="50%"><img src="data/reports/personal_mobility/20261020/bike_visibility_native_final02_production_mount.png" alt="서울도서관 앞에서 자전거를 빌려 탄 실제 게임 화면" width="100%"><br><strong>광장에서 시작하는 이동</strong><br>자전거 대여와 3인칭 탑승 시점 · 2026-10-20</td>
+    <td width="50%"><img src="data/reports/personal_mobility/20261020/scooter_native_final04_production_mount.png" alt="발판에 서서 핸들을 잡고 전동 킥보드에 탄 실제 게임 화면" width="100%"><br><strong>직접 타는 전동 킥보드</strong><br>서 있는 자세·가속·조향·제동 · 2026-10-20</td>
+  </tr>
+  <tr>
+    <td><img src="data/reports/realism_rework/20261017/final/interior_gpu_library_population_roles.png" alt="서가와 계단형 독서 공간이 있는 게임용 서울도서관 내부" width="100%"><br><strong>문 안으로 이어지는 탐험</strong><br>용도별 실내·층 이동·시설 · 2026-10-17</td>
+    <td><img src="data/reports/terrain_integration/20261018/final/entries_gpu_plaza_actual_swimming_rebased_pool.png" alt="도심 옥상의 게임용 수영장에서 캐릭터가 수영하는 모습" width="100%"><br><strong>옥상에서 머무는 경험</strong><br>게임용 야외 풀·입수·수영·탈출 · 2026-10-18</td>
+  </tr>
+  <tr>
+    <td><img src="data/reports/street_detail/20261019/native_dog_keeper_close.png" alt="돌담길 옆 보도에서 반려견과 산책하는 사람" width="100%"><br><strong>조금씩 살아나는 거리</strong><br>산책하는 사람과 반려견 · 2026-10-19</td>
+    <td><img src="data/reports/personal_mobility/20261020/signals_native_daehanmun_vehicle_view_vehicle_green_pedestrian_red.png" alt="대한문 앞 횡단보도와 차량 녹색·보행 적색 신호의 실제 렌더링" width="100%"><br><strong>움직임을 조율하는 신호</strong><br>주기·잔여 시간·차량 정지/재개 · 2026-10-20<br><sub>차량 접근 방향에 배치한 검수 시점</sub></td>
+  </tr>
+</table>
 
-현재 지역 지도와 비교용 이전 지도, 도구·설정·진행 기록을 공유한다. 다른 Mac에서는 복제 후 다음 준비 도구로 Python 환경과 지도 미리보기를 만든다.
+## 무엇을 할 수 있나요?
+
+| 경험 | 구현 내용 |
+|---|---|
+| **서울을 걸어서 탐험** | 대한문을 지나 덕수궁 경내·돌담길·서울광장·시청 주변을 이동합니다. 3인칭 카메라, 달리기, 연속 점프와 속도 선택을 지원합니다. |
+| **건물 안과 위로 이동** | 126개 방문 대상 건물·1,242개 게임 층을 구성했습니다. 도서관·공공·업무·호텔 등 용도별 실내, 계단·승강기와 다양한 옥상을 제공합니다. |
+| **시설을 실제로 사용** | 가까운 설비에서 E로 식사·샤워·운동을 시작하거나 종료합니다. 게임용 옥상 수영장에서는 물에 들어가 수영하고 밖으로 나올 수 있습니다. |
+| **다른 방식으로 이동** | 자전거 2대·킥보드 2대를 대여해 가감속·조향·제동합니다. 버스는 2개 정류장을 연결하는 작은 승하차 체험 구간입니다. |
+| **거리의 생활감 관찰** | 사람 28명·반려견 2마리·기존 이동 자동차 14대와 상점 외관·버스킹·수목·가로등을 배치했습니다. 낮·해질녘·밤을 선택할 수 있습니다. |
+| **작동하는 횡단 신호** | 7개 횡단 구역에 차량 신호 15개·보행 신호 14개를 배치했습니다. 46초 게임 주기, 잔여 시간·점멸과 차량의 정지·재출발을 연결했습니다. |
+
+기능·수량 기준은 [현재 작업 상태](docs/WORK_STATUS.md)와 [2026-10-20 검증 집계](data/reports/street_detail/20261020/summary.json)입니다. 건물별 시설과 층 배치는 실제 입주·시설 현황을 뜻하지 않습니다.
+
+## 어떻게 만들었나요?
+
+**Python은 공간 자료를 준비하고, Godot는 그 공간에서 실제로 이동하고 상호작용하는 경험을 담당합니다.** 원천 자료·추정·수동 보정을 분리해 지도 갱신과 게임 제작을 이어갈 수 있도록 구성했습니다.
+
+```mermaid
+flowchart LR
+    A["공개 공간정보<br/>OSM · Overture · 서울시 지형"] --> B["Python GIS 전처리<br/>좌표 · 도형 · 높이 · 보행 영역"]
+    B --> C["Godot 공간 구성<br/>메시 · 지형 · 충돌 · 출입구"]
+    C --> D["3인칭 탐험<br/>실내 · 시설 · 교통 상호작용"]
+    D --> E["검증과 피드백<br/>물리 검사 · 실제 화면 · OS 조작"]
+    E --> B
+    E --> D
+```
+
+| 기술적 과제 | 선택한 접근 |
+|---|---|
+| **지도와 게임의 축척 연결** | 위경도를 EPSG:32652 미터 좌표와 지역 원점으로 변환하고 **게임 1단위 = 1m**를 유지합니다. |
+| **높이가 다른 공간의 연결** | 서울시 등고선 41개·표고점 96개를 보간하고, 동일한 지형 삼각형을 표시·충돌·높이 조회에 사용합니다. 기초 평탄화와 입구 연결은 별도 제작 가정으로 남깁니다. |
+| **상호작용의 일관성** | 짧은 E 입력과 메뉴에서 누른 키를 구분하고, 안내와 실제 동작이 같은 대상을 선택하게 합니다. 자전거·킥보드·버스 사이의 제어권과 하차 복원을 함께 관리합니다. |
+| **보이는 성공과 실제 성공의 구분** | 저장된 증거 대조, 엔진 물리 검사, 그래픽 화면 검토와 OS 키보드 조작을 구분해 기록합니다. 실패 사례도 수정 근거로 보존합니다. |
+
+[E 입력 경합·하차 충돌·지형 정합성을 해결한 과정 →](docs/ENGINEERING.md)
+
+## 실행하기
+
+개발 실행의 기준 환경은 **macOS · Python 3.14 · Godot 4.7.2 Standard**입니다. Python과 Godot를 먼저 설치한 뒤 진행하세요. 최신 장면은 `explore_walk.tscn`이며 아래 실행기를 사용합니다. [환경 준비](docs/environment.md) · [기기별 상세 안내](docs/CROSS_MAC.md)
 
 ```sh
 git clone https://github.com/codemillss/Sim2Seoul.git
@@ -25,142 +88,97 @@ cd Sim2Seoul
 bash tools/setup_mac.sh
 ```
 
-Python 3.14와 저장소 접근 권한이 필요하다. [두 Mac 준비·작업 안내](docs/CROSS_MAC.md)와 [지도 출처](docs/ATTRIBUTION.md)를 참고한다.
+<details>
+<summary><strong>처음 복제한 Mac: 실행 자료를 한 번 준비하세요</strong></summary>
 
-## 다른 컴퓨터에서 같은 방향으로 시작하기
-
-루트 [AGENTS.md](AGENTS.md)가 새 에이전트의 시작 지침이다. [프로젝트 맥락과 결정](docs/PROJECT_CONTEXT.md)에서 목표·장소 선택 이유·확정/미정을, [현재 상태](docs/WORK_STATUS.md)에서 완료 증거와 다음 행동을 확인한다. [단계별 실행 이력](docs/EXECUTION_LOG.md)에는 시도·실패·수정·검증·한계를 남긴다. 작업 산출물과 이 기록을 같은 커밋으로 공유한다.
-
-대화 전체가 Git에 자동으로 전달되는 것은 아니다. 개발을 이어가는 데 필요한 결정과 결과는 위 문서에 저장한다. 최초 진입에는 전체 단계도 파악하고, 이후에는 수행할 작업과 관련 계약·검증만 읽는다.
-
-## 현재 상태
-
-최신 개발 탐험판 **EXP11·EXP12·EXP13·EXP14·EXP15**는 가까운 설비에서 **E로 음식 먹기·샤워·러닝머신/덤벨 운동**을 사용한다. 식사·샤워·운동 소품과 움직임, 포만감·청결도·운동 기록을 표시하며 사용 중 E로 그만둘 수 있다. 현재 완료·검증과 한계는 [WORK_STATUS](docs/WORK_STATUS.md)를 따른다.
-
-**EXP15**는 높이12cm 경계석/보도 띠로 차도와 보도를 입체적으로 구분하고, 산책하는 사람6명·반려견2마리를 떨어진 구간에 더한다. Esc에서 반려견 산책 구간으로 이동하고 기존 보행자 이동 설정으로 멈출 수 있다.
-
-**EXP14**는 진주회관·편의점4곳의 간판/진열 외관, 갓길 주차 차·오토바이, 돌담길의 새/버스킹과 가로등을 더한다. Esc에서 낮·해질녘·밤과 새 장소 바로가기를 선택한다. 당시 미술관 실제 진입로 XZ 위에 높이3m 게임용 언덕/쉼터를 만들었다. EXP21에서 임의 경사를 제거하고 권역 공통 지형으로 교체했다. 상점은 외관 추가이고 새 실내 출입은 없다.
-
-앞선 **EXP10**은 호텔의 한식 뷔페·운동실·샤워/탕·연회 공간과, 도서관·업무·공공·주거·전시 등 용도에 맞는 시설을 제공한다. 엘리베이터 버튼에 층별 용도를 표시해 시설을 찾을 수 있다. 시설/층 구성은 게임용이며, EXP11은 이 설비에 사용 동작을 연결한다.
-
-걷기·달리기·점프 때 몸통이 위아래로 튀고 좌우로 흔들리던 동작을 제거하고 발의 전환을 부드럽게 했다. Space를 새로 누를 때마다 공중에서도 연속 점프할 수 있고, 승강기 도착 뒤 이동키를 누른 채 새 점프가 막히던 문제와 옥상 높이 제한 복귀를 고쳤다. 팔·다리·신발이 있는 캐릭터가 실제 이동에 따라 걷고 달리며, 멈추거나 벽에 막히면 발걸음도 멈춘다.
-
-앞선 자동문 객실·다양한 옥상과 풀 입수/부력·Space 탈출, 125개 입구 안내와 초고속(걷기8.4/달리기21m/s)도 유지한다. **`Sim2Seoul.command` 또는 `sh tools/run_exploration.sh run`**으로 연다. 시설과 실내 배치는 원본 크기에 맞춘 게임 창작이며 실제 모든 방이나 각 주소의 시설 현황을 복원한 것은 아니다. [실행 안내](docs/RUN_GUIDE.md)·[현재 검증과 한계](docs/WORK_STATUS.md). 아래 V0/R03은 원래 버전 기록이다.
-
-2026-10-16: **M1 Pro에서 첫 탐험 V0의 로컬 앱 검수를 완료했다.** [앱 실행 안내](docs/RUN_GUIDE.md)·[실제 패키지 검증](data/reports/package_check.md)·[기기별 인수 판정](data/reports/first_version_acceptance.md). M4는 접근 불가 대안으로 UNRUN이며 OS 입력/사람 조작감·전송 Gatekeeper도 미실행이다. 다음 행동은 [WORK_STATUS](docs/WORK_STATUS.md)를 기준으로 한다. 과거 단계의 ‘다음 작업’은 해당 시점의 기록이다.
-
-현재 개발 장면은 다음으로 연다. 처음 준비하는 Mac은 [V0 자료 생성 순서](docs/CROSS_MAC.md#v0-개발-자료를-처음-만드는-mac의-추가-준비)를 먼저 따른다. 기본 Godot 프로젝트 main은 초기 E02 장면을 보존하므로 현재 V0와 구분한다.
+`setup_mac.sh` 이후 아래 순서로 실행합니다. 이미 같은 실행 자료를 준비한 Mac은 반복하지 않아도 됩니다. `prepare_city_landmarks.py`부터는 설치된 공식 Godot를 사용합니다. 기본 실행파일은 `/Applications/Godot.app/Contents/MacOS/Godot`이며 다른 위치는 `GODOT_BIN`에 실행파일 경로를 지정합니다.
 
 ```sh
-sh tools/run_v0.sh run
+.venv-data/bin/python tools/prepare_collision.py
+.venv-data/bin/python tools/prepare_daehanmun.py
+.venv-data/bin/python tools/prepare_palace_walk.py
+.venv-data/bin/python tools/prepare_public_walk.py
+.venv-data/bin/python tools/prepare_walkable_itinerary.py
+.venv-data/bin/python tools/prepare_landmark_spec.py
+.venv-data/bin/python tools/prepare_palace_landmarks.py
+.venv-data/bin/python tools/prepare_city_landmarks.py
+.venv-data/bin/python tools/prepare_routes.py
+.venv-data/bin/python tools/prepare_pedestrians.py
+.venv-data/bin/python tools/prepare_traffic.py
 ```
 
-실제 배치·미터 축척의 대한문 밖↔경내, 중화전 앞마당·석조전 계단 아래, 시청·서울광장·돌담길을 3인칭으로 탐험한다. 걷기·달리기·마우스/휠 카메라·충돌·안전 복귀·Esc 메뉴, 두 보행자·두 차량과 사람 우선 횡단, 품질/출처 표시를 구현했다. [N03 차량 지지·교차/실패](data/reports/vehicles.md), [N04 같은 개체의 약3.33km/26분 연속 검수](data/reports/urban_motion.md), [R02 품질·메뉴](data/reports/performance_comparison.md)를 참고한다.
+각 명령이 성공하면 다음으로 진행합니다. 기존에 준비된 지역 자료를 사용하며, 국가 전체 지도를 다시 받을 필요는 없습니다. [생성 순서와 의존성](docs/CROSS_MAC.md#v0-개발-자료를-처음-만드는-mac의-추가-준비)
 
-M1 Pro16GB의 R01은 실제1920×1080·현재2명2대·20분에서 p95 9.6133ms를 관측했다. 편집기 밖 Standard 실행의 측정이며 실제 release 앱·가벼운 품질의 성능 개선율·M4 결과로 확대하지 않는다. [측정 조건/한계](docs/performance_notes.md).
+</details>
 
-현재 지면은 임시 y=0 지원면이며 높이·문 폭·세부 외형에는 추정/수동 보정이 있다. 현장 정확도/실제 통행·사람 조작감·M4 실행은 별도다. 돈덕전·정관헌의 가림과 중화문의 약한 문 인지는 [L04 검토](data/reports/landmark_review.md)에 남겼다. 개별 건물 실내·생활AI·꾸미기는 이후 구체화할 확장 방향이다.
+준비를 마친 뒤 최신 탐험을 엽니다. 실행기가 로컬 지형을 준비하고 Godot 리소스를 가져옵니다.
 
-축척과 독립 시험장을 다시 볼 때는 [E04](data/reports/scale_view/README.md)·[사람 크기](data/reports/player_scale.md)·[이동](data/reports/movement.md)·[카메라](data/reports/camera.md)·[충돌](data/reports/collision.md)의 각 장면과 실행 방법을 따른다. 일반 사용자용 앱은 [실행 안내](docs/RUN_GUIDE.md)에 별도로 기록하며, Git pull만으로 Git 제외 앱/ZIP이 생기지는 않는다.
+```sh
+sh tools/run_exploration.sh run
+```
 
-## 계획과 다음 작업
+이후에는 `Sim2Seoul.command`로도 열 수 있습니다. 생성 캐시·개발 환경·앱 빌드는 Git에 포함하지 않습니다.
 
-- [전체 계획 — 목표·8단계·완료 기준](docs/MASTER_PLAN.md)
-- [세부 실행 계획 — 선행 조건·입력·산출물·검증·대안이 있는 32개 작업](docs/IMPLEMENTATION_TASKS.md)
-- [Sol 인수 안내 — 필요한 문서만 읽고 이어서 실행](docs/SOL_HANDOFF.md)
-- [현재 증거와 다음 작업](docs/WORK_STATUS.md)
-- [선택 이유·확정 사항·미정 사항](docs/PROJECT_CONTEXT.md)
-- [단계별 실행과 변경 이력](docs/EXECUTION_LOG.md)
-- [좌표·자료·게임 구성 계약](docs/TECHNICAL_CONTRACTS.md)
-- [보행·축척·충돌·성능·두 기기 검증 계획](docs/VALIDATION_PLAN.md)
-
-3인칭 시험장은 `sh tools/run_camera_test.sh run`으로 연다. WASD/방향키·Shift, 마우스 회전·휠 거리, Esc 메뉴/마우스 해제를 사용한다. 창을 벗어나면 일시 정지되고 Esc/돌아가기로 재개한다. 최신 충돌 시험장은 `.venv-data/bin/python tools/prepare_collision.py` 후 `sh tools/run_collision_test.sh run`으로 연다. Esc 메뉴에서 서울/덕수궁 충돌 배치를 볼 수 있다. P04 서울 보기는 고정 시점이다. 실제 대한문 보행은 `.venv-data/bin/python tools/prepare_daehanmun.py` 후 `sh tools/run_daehanmun_walk.sh run`으로 연다. 문 밖↔경내 입구를 걸을 수 있다. 경내 순환은 `.venv-data/bin/python tools/prepare_palace_walk.py` 후 `sh tools/run_palace_walk.sh run`으로 열며 중화전 앞마당·석조전 계단 아래까지 걷는다. 도심/돌담길 연결은 W02 준비 뒤 `.venv-data/bin/python tools/prepare_public_walk.py`로 준비한다. 최신 통합 보행 검증판은 이어 `python3 tools/prepare_walkable_itinerary.py` 후 `sh tools/run_walkable_milestone.sh run`으로 연다. [직접 확인 안내](docs/WALKABLE_CHECKLIST.md). 일반 실행에서는 자동으로 움직이지 않는다.
-
-## 사용자가 정한 방향
-
-| 항목 | 결정 |
+| 조작 | 키 |
 |---|---|
-| 장소 | 덕수궁 경내, 대한문, 돌담길, 서울광장, 시청 주변 |
-| 공간의 인상 | 한국의 전통 건축과 현대 서울의 빌딩이 함께 보이는 곳 |
-| 지리 | 실제 도로·건물 배치와 축척 유지 |
-| 시각 표현 | 실제 비례와 주요 특징을 살리고 세부 외형은 단순화 |
-| 시점 | 캐릭터가 보이는 3인칭 |
-| 캐릭터 | 실제 사람 정도 크기의 임시 캐릭터, 최종 외형은 추후 결정 |
-| 접근 범위 | 대한문을 지나 덕수궁 안의 길·마당·전각 사이까지 탐험 |
-| 보행자와 차량 | 정해진 경로를 움직이는 간단한 보행자·차량 |
-| 사용 환경 | 개인 컴퓨터에서 혼자 실행 |
-| 예산 | 무료 도구와 공개 데이터로 시작 |
-| 확장 방향 | 생활·꾸미기·주민 또는 다른 시뮬레이션 |
+| 걷기·달리기·점프 | **WASD / 방향키**, **Shift**, **Space** 새 입력마다 연속 점프 |
+| 카메라 | **마우스** 회전 · **휠** 거리 조절 |
+| 출입·시설·대여 | 대상 근처에서 **E** |
+| 자전거·킥보드 | **W** 가속 · **A/D** 조향 · **S / Space** 제동 · **E** 하차/반납 |
+| 버스 | 정차한 열린 문에서 **E** 탑승 · 탑승 중 **E** 다음 정류장 하차 예약 |
+| 메뉴·장소 이동 | **Esc** → 도서관·옥상 풀·산책 구간·대여소 등 바로가기 |
 
-덕수궁 경내를 걷는 범위는 포함한다. 전각과 일반 건물의 실내 진입 범위는 아직 정하지 않았다. 현재 게임 보행 경계는 W03의 원문 지원면/사유지 제외/차도 접속 규칙으로 구성했다. 현실 통행 경계·실측 지형과 구분한다.
+## 검증은 어떻게 남겼나요?
 
-## 개발 환경
+최근 기능 실행은 **2026-10-20, Apple M5 16GB / macOS 26.6.2 / Metal 4 · Forward+** 환경에서 확인했습니다. 아래는 대표 결과이며 서로 겹치는 실행 검사를 합산하지 않습니다.
 
-| 기기 | 확인 내용 | 근거 |
-|---|---|---|
-| 현재 MacBook Pro | M1 Pro, CPU 8코어, GPU 14코어, 통합 메모리 16GB, macOS 27.0 | 기기에서 직접 확인 |
-| 추가 MacBook Pro | M4 Pro, 저장공간 1TB, 메모리 용량 미확인 | 사용자 제공 |
+| 대표 시나리오 | 실행 결과 | 증거 |
+|---|---:|---|
+| 자전거 E 입력·접근·메뉴 복귀 | 그래픽 환경 **60/60** | [물리 키 이벤트 검사](data/reports/personal_mobility/20261020/bike_entry_native_final02.json) |
+| 킥보드 주행·승하차·화면 | 그래픽 환경 **37/37** | [실행 보고서](data/reports/personal_mobility/20261020/scooter_native_final04.json) |
+| 신호의 자연 두 주기·렌즈·메뉴 정지 | 그래픽 환경 **28/28** | [실행 보고서](data/reports/personal_mobility/20261020/signals_native.json) |
 
-M1 Pro에서도 실행되는 수준을 기준으로 삼고, 두 기기에서 같은 프로젝트를 개발한다. 2026-10-13 E01 시작 때 작업 볼륨의 여유 공간은 약 12.02GiB였다. 디스크 여유는 설치·다운로드 전에 다시 확인한다. 다른 Mac 엔진 준비는 [환경](docs/environment.md)을 따른다.
+별도로 [실제 OS 키보드의 탑승·이동·제동](data/reports/personal_mobility/20261020/normal_launch.json)과 [최종 그래픽 화면 19장 검토](data/reports/personal_mobility/20261020/visual_review.json)를 기록했습니다. 위 결과는 기록된 날짜와 소스에 해당하며, 다른 Mac·배포판의 실행과 장시간 성능은 별도 확인 대상입니다.
 
-## 무료 도구 기본안
+```sh
+# 저장된 코드·입력·증거의 일치 확인. 엔진을 재실행하는 명령은 아닙니다.
+python3 tools/check_street_detail_handoff.py
 
-- **Godot 4.7.2 Standard 네이티브 앱:** 현재 M1에 설치하고 3D 편집기·세 렌더러의 실제 기동을 확인했다. 개발 기준은 Forward+/Metal이다. MIT 라이선스의 무료 엔진이며, E03 서울 표시·P03 시험장3인칭·P04 도시 정적 충돌을 완료했고 W01 대한문 연결 보행은 완료했고 W02 경내 순환·W03 도심/돌담길 연결과 W04 자동 통합 검수도 완료했다. 직접 사람 조작·M4는 미검증이다. [시험 장면 실행 방법](docs/environment.md).
-- **Python:** 원본 자료 검사와 좌표·도형 변환에 사용한다. 현재 기기에서 사용할 수 있다.
-- **OpenStreetMap:** 도로, 건물 윤곽, 보행로, 일부 담장·출입구·높이 속성을 초기 배치 자료로 확보했다. 독립 자료 대비 누락률과 실제 높이·접근 가능성 검증은 남아 있다.
-- **국내 공개 공간정보:** OSM의 누락을 보완할 후보로 검토한다. 다운로드 가능 여부, 좌표계, 갱신일, 이용 조건을 자료별로 확인한다.
+# 이 Mac의 실행 자료까지 준비한 경우
+python3 tools/check_street_detail_handoff.py --prepared
+```
 
-Godot 공식 요구사항은 간단한 3D 프로젝트의 시작 가능성을 판단하는 근거다. 도시 장면의 성능을 보장하지 않는다. 현재 macOS 27의 독립 장면 기동은 E01에서 실제 확인했고 M4·도시 성능은 별도 검증한다.
+## 프로젝트 구조
 
-## 데이터와 공간의 원칙
+```text
+Sim2Seoul/
+├── config/          # 조사 범위·좌표·공간 정책
+├── data/
+│   ├── raw/         # 확보한 지역 원천 자료
+│   ├── manual/      # 수동 판단·제작 가정·참조
+│   └── reports/     # 실행 결과·실패·화면·소스 해시
+├── tools/           # GIS 전처리·생성·실행·검사 도구
+├── game/
+│   ├── assets/      # 제작 자산·외부 자산과 출처
+│   ├── scenes/      # 공간·플레이 장면
+│   ├── scripts/     # 지형·보행·실내·시설·교통 제어
+│   └── shaders/     # 표면과 시각 표현
+├── tests/game/      # 실제 Godot 장면의 검증 시나리오
+└── docs/            # 설계 판단·사용법·개발 이력
+```
 
-1. 원본 위경도를 보존하고 미터 단위 좌표로 변환한 뒤, 지역 원점을 기준으로 **게임 공간 1단위 = 1m**를 적용하는 안으로 설계한다.
-2. 원본 도형·높이, 층수에서 추정한 높이, 임시 도형을 구분한다. 추정값을 실제 측정값으로 표현하지 않는다.
-3. 도로 중심선만으로 보도 폭이나 차로 폭을 확정하지 않는다. 담장, 문, 계단, 지면 높이와 보행 연결을 별도로 확인한다.
-4. 지역 조사 경계와 실제로 걸을 수 있는 범위를 구분한다. 경계를 가로지르는 도형과 복합 건물의 중복도 처리한다.
-5. 지형, 건물 외형, 보행·주행 경로, 캐릭터와 생활 규칙을 분리해 향후 교체와 확장을 가능하게 한다.
-6. 보행자·차량의 경로 이동은 도시 분위기 표현이다. 실제 교통량이나 군중 행동을 예측하는 모형으로 간주하지 않는다.
-7. 실행 중 공개 지도 서버에 계속 의존하지 않고, 준비한 자료를 로컬에서 읽는 구성을 기본안으로 삼는다.
+## 개발 방향과 범위
 
-## 첫 제작 순서와 확인 기준
+현재 중심은 **덕수궁·시청 한 권역의 로컬 3D 탐험 프로토타입**입니다. 지형은 공개 자료의 보간이고 실내·시설·신호 주기·대여소는 게임 구성입니다. 정밀 측량 수준의 도시 복원이나 실제 교통·대여 서비스 연동을 의미하지 않습니다.
 
-| 단계 | 작업 | 통과 기준 |
-|---|---|---|
-| 1. 자료 확보 | 조사 구역 원본 수신, 출처·이용 조건·갱신 시점 기록 | 부분 응답이나 오류가 없는 파일과 출처 기록을 확보 |
-| 2. 배치와 축척 | 도로·건물·경내 길을 지도와 대조, 좌표 변환 | 대표 지점 간 거리와 방향이 원천 데이터와 맞고 추정 항목이 구분됨 |
-| 3. 첫 보행 공간 | 대한문 밖과 안을 잇는 동선, 광장, 담장과 건물 충돌 | 3인칭 캐릭터가 동선을 끝까지 이동하고 문은 통과하며 벽·지면을 뚫지 않음 |
-| 4. 장소의 특징 | 대한문, 궁궐 전각, 시청과 주요 빌딩의 간결한 외형 | 실제 위치와 비례를 유지하면서 각 장소를 구별할 수 있음 |
-| 5. 도시의 움직임 | 보행로와 도로를 구분한 NPC·차량 경로 | 보행자가 담장·건물을 관통하지 않고 차량이 궁궐 보행로로 진입하지 않음 |
-| 6. 기기 확인 | M1 Pro에서 해상도·부하·메모리 측정, M4 Pro에서도 실행 | 동일 자료를 사용한 측정 결과를 남기고 적절한 표시 거리·그림자 설정을 정함 |
+다음 확장 방향은 장소별 외형·생활 경험 보강, 대중교통 체험의 단계적 확장, 생활·꾸미기·주민 시뮬레이션입니다. 범위와 우선순위는 [현재 상태](docs/WORK_STATUS.md)와 [개발 계획](docs/IMPLEMENTATION_TASKS.md)에 기록합니다.
 
-카메라가 담장이나 건물 안으로 파고들지 않는지도 첫 보행 검증에 포함한다. 현재2NPC/2차량의 p95≤33.3ms를 R02에서 채택했다. 개발 일정·낮밤/날씨·전각 실내의 확장 범위는 정하지 않았다.
+개발에는 Codex 등 AI 코딩 도구를 활용했습니다. 실제 플레이 피드백을 구현·수정으로 연결하고, 설계 선택과 실패·검증 과정을 저장소에 함께 남깁니다.
 
-## 관련 파일
+## 출처와 이용 조건
 
-- [자료 출처와 확보 상태](docs/DATA_SOURCES.md)
-- [소구역 조회 준비 파일](data/queries/deoksugung_cityhall.overpassql)
-- [조회 결과 기록](data/availability_check.json)
+공간 자료는 OpenStreetMap·Overture Maps와 서울시 공개 지형 자료를 사용했습니다. Godot, Kenney CC0 모델 및 개별 자산의 고지는 [자료·자산 출처](docs/ATTRIBUTION.md)에 정리했습니다. 프로젝트 코드의 별도 배포 라이선스는 현재 지정하지 않았으며, 데이터·외부 자산에는 각각의 이용 조건이 적용됩니다.
 
-## 공식 참고 자료
+---
 
-- [Godot 라이선스](https://godotengine.org/license/)
-- [Godot 시스템 요구사항](https://docs.godotengine.org/en/stable/about/system_requirements.html)
-- [OpenStreetMap 저작권과 라이선스](https://www.openstreetmap.org/copyright)
-
-## 이전 단계별 실행 안내
-
-아래의 구현/다음 단계는 각 작업 종료 당시의 기록이다. 현재 V0 실행과 인수는 위 현재 상태 및 WORK_STATUS를 따른다.
-
-L03 도시 보행 기준판은 `sh tools/run_city_landmarks.sh run`으로 연다. [L03 기존 모델 비교·도시 외형·검사/실패](data/reports/city_landmarks.md), [다른 Mac 재생성](docs/CROSS_MAC.md), [다음 행동](docs/WORK_STATUS.md)을 따른다. CC0 원본과 수정 규칙은 공유하고 생성 자산은 기기에서 다시 만든다.
-
-
-L04의 [16시점 전후/눈높이·국소 보행·검사기 수정·한계](data/reports/landmark_review.md)를 공유한다. 일반 게임은 L03와 동일하며 돈덕전·정관헌 가림과 중화문의 약한 문 인지를 후속 보완으로 남겼다. 전체3.3km는 합격 당시 파일/관측 해시 일치로 재사용했고 이번 새 국소 시험과 구분했다. 사람의 장소 인상·조작/M4·현실 정확도·실내/V0 완료를 뜻하지 않는다.
-
-
-N01의 [보행자·차량 경로도/정적 검증](data/reports/route_review.md)와 [교차·정지·반복 규칙](docs/route_rules.md)을 공유한다. 기존 보행선2곳·세종대로 편도2곳의 작은 계획이며 N01 당시 초기2NPC/2차량은 아직 생성하지 않았다. 원문 방향과 가정 차로 위치를 분리하고 실제 동작/차도 지지·제동/시야밖 반복은 N02/N03에서 검증한다. 자동 경로JSON은 다른Mac에서 `prepare_routes.py`로 재생성한다.
-
-
-N02 당시 게임은 [보행자 실행·화면·검증](data/reports/pedestrians.md)을 따른다. L03/N01 준비 뒤 `.venv-data/bin/python tools/prepare_pedestrians.py`와 `sh tools/run_pedestrians.sh run`으로 연다. 앞마당·광장 전면에 각각1명이 왕복하고 `Esc` 메뉴의 `보행자 이동`으로 멈추거나 재개할 수 있다. 기존 지도/문·플레이어/카메라와 정적 충돌은 그대로다. 실행 자료는 기기에서 재생성하며 차량·통합 내구성·사람 조작/M4·V0는 후속이다. [단계별 현재 상태](docs/WORK_STATUS.md)·[다른 Mac 인수](docs/CROSS_MAC.md).
-
-
-N03 종료 당시 게임은 [차량 지지·이동·교차·화면/검증](data/reports/vehicles.md)을 따른다. L03/N01/N02 준비 뒤 `.venv-data/bin/python tools/prepare_traffic.py`와 `sh tools/run_traffic.sh run`으로 연다. 보행자2명·차량2대가 움직이고 북측 지정 횡단에서 사람을 기다린다. `Esc` 메뉴에서 차량/보행자 이동을 각각 끌 수 있다. 차량용 평면2개를 추가하되 기존 사람 경계·문/축척/출처는 유지한다. 이후 [N04](data/reports/urban_motion.md)에서 이를 켠 채26분 필수 동선을 통합 검수했다. 다른 Mac은 [재생성/인수](docs/CROSS_MAC.md)를 따른다.
+[기술 설명](docs/ENGINEERING.md) · [문서 목차](docs/README.md) · [실행 이력](docs/EXECUTION_LOG.md) · [최신 검증 집계](data/reports/street_detail/20261020/summary.json)
