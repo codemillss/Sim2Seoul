@@ -45,7 +45,7 @@ func _json(value: Variant) -> Variant:
 	return value
 func _input_hashes() -> Dictionary:
 	var hashes: Dictionary={}
-	for path: String in ["res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://assets/authored/car_service.json","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://../tests/game/check_drivable_car.gd"]:hashes[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://assets/authored/car_service.json","res://scripts/transport_motion_policy.gd","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://../tests/game/check_drivable_car.gd"]:hashes[path]=FileAccess.get_sha256(path)
 	return hashes
 func _check(name: String,passed: bool,evidence: Dictionary={}) -> void:
 	checks.append({"name":name,"passed":passed,"evidence":_json(evidence)});print("CAR_CHECK ",name," ",passed)
@@ -129,7 +129,7 @@ func _run() -> void:
 		if scene.input_router.movement_intent().y<-.1:intent_ticks+=1
 		if not service.blocked_reason.is_empty():blocked_ticks[service.blocked_reason]=int(blocked_ticks.get(service.blocked_reason,0))+1
 	_key("move_forward",false)
-	_check("W_accelerates_actual_full_car_on_native_terrain",body.global_position.distance_to(before)>1. and maximum_speed>2. and unsupported<4 and intent_ticks==60 and service.maximum_step_m<.30,{"travel_m":body.global_position.distance_to(before),"maximum_speed_mps":maximum_speed,"unsupported_ticks":unsupported,"intent_ticks":intent_ticks,"blocked_ticks":blocked_ticks,"maximum_step_m":service.maximum_step_m})
+	_check("W_accelerates_actual_full_car_on_native_terrain",body.global_position.distance_to(before)>1. and maximum_speed>2. and unsupported<4 and intent_ticks==60 and service.maximum_step_m<=float(service.motion_policy().maximum_speed_mps)/Engine.physics_ticks_per_second+.025,{"travel_m":body.global_position.distance_to(before),"maximum_speed_mps":maximum_speed,"unsupported_ticks":unsupported,"intent_ticks":intent_ticks,"blocked_ticks":blocked_ticks,"maximum_step_m":service.maximum_step_m})
 	_key("jump",true);await _ticks(45);_key("jump",false)
 	_check("Space_stops_car_without_player_jump",absf(service.speed_mps)<.02 and body.is_on_floor() and not scene.player.is_physics_processing())
 	var reverse_start: Vector3=body.global_position;var reverse_minimum:=0.;var reverse_maximum:=0.;_key("move_backward",true)

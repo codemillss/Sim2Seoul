@@ -1,5 +1,5 @@
 extends Node3D
-## A source-road, terrain-grounded two-stop game pilot. T01/GAME IDs and
+## Three physically continuous buses on one source-road closed game loop. T01/GAME IDs and
 ## arrival predictions belong to this simulation, never a live Seoul service.
 const DATA_PATH := "res://assets/authored/bus_service.json"
 const VEHICLE_SCENE := preload("res://scenes/npc/vehicle.tscn")
@@ -12,16 +12,34 @@ const BOARD_ALONG_M := 1.95
 
 class PilotBus extends "res://scripts/traffic/vehicle.gd":
 	var service: Node3D
+	var _visual_previous:=Transform3D.IDENTITY
+	var _visual_current:=Transform3D.IDENTITY
+	var _visual_ready:=false
+	var _visual_fraction:=1.0
+	var _visual_frames:=0
+	func reset_visual_history() -> void:
+		var visual: Node3D=get_node("Visual");visual.transform=Transform3D.IDENTITY;visual.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
+		_visual_previous=global_transform;_visual_current=global_transform;_visual_ready=true
+	func _capture_visual_history() -> void:
+		if not _visual_ready:reset_visual_history();return
+		_visual_previous=_visual_current;_visual_current=global_transform
+	func _render_visual_at(fraction: float) -> void:
+		if not _visual_ready:return
+		_visual_fraction=clampf(fraction,0.,1.);get_node("Visual").global_transform=_visual_previous.interpolate_with(_visual_current,_visual_fraction);_visual_frames+=1
+	func presentation_snapshot() -> Dictionary:
+		return {"ready":_visual_ready,"previous":_visual_previous,"current":_visual_current,"rendered":get_node("Visual").global_transform,"fraction":_visual_fraction,"render_frames":_visual_frames,"scope":"Bus-only render transform; native body/collider/route remain at current physics pose."}
 	func _find_support() -> void:
 		super._find_support()
-		if _floor_reason!="up_floor_ray":
-			var ray:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.7,global_position-Vector3.UP*.7,49,[get_rid()])
-			var hit: Dictionary=get_world_3d().direct_space_state.intersect_ray(ray)
-			if not hit.is_empty() and hit.normal.y>=cos(floor_max_angle):
-				_last_support_rid=hit.rid
-				if not _support_exclusions.has(_last_support_rid):_support_exclusions.append(_last_support_rid)
-				_floor_reason="up_floor_ray";_floor_name=String(hit.collider.name);_floor_path=String(hit.collider.get_path())
-		if is_instance_valid(service) and (service.riding or service._collision_release_pending):_support_exclusions.append(service.host.player.get_rid())
+		var ray:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.7,global_position-Vector3.UP*.7,33,[get_rid()])
+		var hit: Dictionary=get_world_3d().direct_space_state.intersect_ray(ray)
+		if not hit.is_empty() and hit.normal.y>=cos(floor_max_angle):
+			_last_support_rid=hit.rid
+			if not _support_exclusions.has(_last_support_rid):_support_exclusions.append(_last_support_rid)
+			_floor_reason="up_floor_ray";_floor_name=String(hit.collider.name);_floor_path=String(hit.collider.get_path())
+		if is_instance_valid(service):
+			for rid: RID in service._engineering_support_rids:
+				if not _support_exclusions.has(rid):_support_exclusions.append(rid)
+		if is_instance_valid(service) and (service._ride_bus==self or service._release_bus==self):_support_exclusions.append(service.host.player.get_rid())
 		# W03 and the EXP21 TIN overlap as ground. The first ray may choose W03;
 		# include the other explicitly known ground RID in obstacle-only queries.
 		# Native move_and_slide still retains BOTH ground collision layers.
@@ -63,46 +81,75 @@ class PilotBus extends "res://scripts/traffic/vehicle.gd":
 		var fitted:=Basis(forward.cross(normal).normalized(),normal,-forward).orthonormalized()
 		var feet:=Vector3(at.x,centre,at.z);feet.y=_terrain_clearance_height(feet,fitted)
 		var result:=Transform3D(fitted,feet);_terrain_pose_cache[key]=result;return result
+	func _physics_process(delta: float) -> void:
+		# Render offsets never enter native movement, door/world queries or the seat.
+		if service.running:get_node("Visual").transform=Transform3D.IDENTITY
+		service._switch_bus(self)
+		# Same physical joint, no transform assignment and no recycle grant.
+		if _station_m>=_length_m-POINT_EPS_M and Vector2(global_position.x-_points[0].x,global_position.z-_points[0].z).length()<=.0025:
+			var before: Vector3=global_position
+			_segment=0;_station_m=0.;_cycle_count+=1;_cycle_distance_m=0.;_state="driving"
+			service.stop_index=0;service.docked_stop=-1;service.bus_state="approaching";service._crossing_commit.clear()
+			service._event("physical_loop_joint",{"position_gap_m":before.distance_to(global_position),"cycle":_cycle_count})
+		super._physics_process(delta)
+	func _at_endpoint() -> bool:
+		return false
+	func snapshot() -> Dictionary:
+		var result: Dictionary=super.snapshot();var policy: Dictionary=service.motion_policy()
+		result.max_speed_limit_mps=policy.maximum_speed_mps;result.accel_mps2=policy.acceleration_mps2;result.decel_mps2=policy.braking_mps2
+		result["closed_physical_loop"]=true;result["recycle_enabled"]=false
+		return result
+	func _advance_vertex() -> bool:
+		var remaining: Vector3=_points[_segment+1]-global_position;remaining.y=0.
+		if remaining.length()>.0025 or _segment==_points.size()-2:return true
+		var next_segment: int=_segment+1;var yaw: float=_heading(_segment_direction(next_segment))
+		var overlap: Dictionary=_sweep_obstacle(global_position,Vector3.ZERO,yaw)
+		if not overlap.is_empty():_state="waiting_turn";_blocked_reason="next_segment_orientation_occupied:"+String(overlap.get("reason","unknown"));return false
+		_segment=next_segment;_record_station()
+		if _terrain_enabled:_apply_terrain_orientation()
+		else:global_rotation.y=yaw
+		return true
 	func _choose_step_budget(delta: float) -> float:
+		_command_speed_mps=0.;_motion_cap_m=INF;_obstacle={}
 		if service.bus_state in ["opening_doors","doors_open","closing_doors"]:
-			_command_speed_mps=0.;_state="bus_"+service.bus_state;return 0.
-		var budget: float=super._choose_step_budget(delta)
+			_state="bus_"+service.bus_state;return 0.
+		if _state=="off_route":return 0.
+		if _terrain_enabled and _terrain_orientation_blocked:
+			_state="waiting_terrain_clearance";_blocked_reason="physical_orientation_clearance_blocked";return 0.
+		if not _advance_vertex():return 0.
+		var policy: Dictionary=service.motion_policy()
+		var cap: float=float(policy.maximum_speed_mps);var brake: float=float(policy.braking_mps2)
+		var target: float=service.curve_speed_limit(self,cap,brake)
+		_blocked_reason="";_state="driving"
+		if not bool(_permission.get("fresh",false)):
+			target=0.;_state="waiting_information";_blocked_reason="stale_human_observation"
+		if _floor_reason!="up_floor_ray" and not is_on_floor():target=0.;_state="waiting_support";_blocked_reason=_floor_reason
 		var limit: Dictionary=service.motion_limit()
 		if bool(limit.get("required",false)):
-			var remaining: float=maxf(0.,float(limit.distance_m))
-			_motion_cap_m=minf(_motion_cap_m,remaining)
-			_command_speed_mps=minf(_command_speed_mps,_braking_speed(remaining,delta,2.0))
-			budget=minf(budget,minf(remaining,_command_speed_mps*delta))
-			if remaining<18.:
-				_state="bus_braking" if _speed_mps>.01 else "bus_waiting"
-				_blocked_reason=String(limit.reason)
-		return budget
-
-class BusRecycleGuard extends "res://scripts/traffic/traffic_manager.gd":
-	var source_manager: Node
-	func _refresh() -> void:
-		source_manager._refresh();humans=source_manager.humans;observations_valid=source_manager.observations_valid;last_observation_tick=source_manager.last_observation_tick;human_rows=source_manager.human_rows
-	func _corners(route: Dictionary,ending: bool) -> Array[Vector3]:
-		var points: Array=route.xz;var a: Array=points[-2] if ending else points[0];var b: Array=points[-1] if ending else points[1]
-		var direction:=Vector3(b[0]-a[0],0,b[1]-a[1]).normalized();var raw: Array=points[-1] if ending else points[0]
-		var pose: Transform3D=vehicles[0]._terrain_pose(city.to_global(Vector3(raw[0],0,raw[1])),atan2(-direction.x,-direction.z));var result: Array[Vector3]=[]
-		for x: float in [-1.53,1.53]:
-			for y: float in [0.,3.24]:
-				for z: float in [-4.55,4.55]:result.append(pose*Vector3(x,y,z))
-		return result
-	func recycle_guard(body: CharacterBody3D) -> Dictionary:
-		var result: Dictionary=super.recycle_guard(body)
-		var route: Dictionary=routes[body.get_route_id()];var raw: Array=route.xz[0];var next: Array=route.xz[1]
-		var direction:=Vector3(next[0]-raw[0],0,next[1]-raw[1]).normalized()
-		var pose: Transform3D=body._terrain_pose(city.to_global(Vector3(raw[0],0,raw[1])),atan2(-direction.x,-direction.z))
-		var collider: CollisionShape3D=body.get_node("CollisionShape");var query:=PhysicsShapeQueryParameters3D.new();query.shape=collider.shape;query.transform=pose*collider.transform;query.collision_mask=14;query.exclude=[body.get_rid()];query.margin=.08
-		var clear: bool=body.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty()
-		result["full_bus_entry_clear"]=clear;result["full_bus_view_corners"]=true
-		result.allowed=bool(result.allowed) and clear and float(result.minimum_human_surface_distance_m)>=32.0
-		return result
+			var remaining: float=maxf(0.,float(limit.distance_m));_motion_cap_m=minf(_motion_cap_m,remaining)
+			var safe_speed: float=_braking_speed(remaining,delta,brake)
+			if safe_speed<target:
+				target=safe_speed;_blocked_reason=String(limit.reason);_state="bus_braking" if _speed_mps>.01 else "bus_waiting"
+		var lookahead: float=_speed_mps*.5+_speed_mps*_speed_mps/(2.*brake)+2.
+		_obstacle=_corridor_obstacle(lookahead)
+		if not _obstacle.is_empty():
+			target=0.;_motion_cap_m=minf(_motion_cap_m,maxf(0.,float(_obstacle.get("distance_m",0.))-.05))
+			_state="braking_obstacle" if _speed_mps>.01 else "waiting_obstacle";_blocked_reason=String(_obstacle.get("reason","unknown"))
+		var change: float=(float(policy.acceleration_mps2) if target>_speed_mps else brake)*delta
+		_command_speed_mps=move_toward(_speed_mps,target,change)
+		return maxf(0.,minf(_command_speed_mps*delta,_motion_cap_m))
 
 var host: Node3D
 var bus: CharacterBody3D
+var buses: Array[CharacterBody3D]=[]
+var _records: Dictionary={}
+var _ride_bus: CharacterBody3D
+var _release_bus: CharacterBody3D
+var _waiting_stop_index:=-1
+var _source_meshes: Array[Dictionary]=[]
+var _fleet_elapsed:=0.0
+var _engineering_support_rids: Array[RID]=[]
+const RECORD_FIELDS := ["bus_state","stop_index","docked_stop","door_fraction","state_elapsed","door_panels","wheels","passenger","_crossing_commit","_board_pending","_board_pending_s","_last_cycle"]
 var design: Dictionary={}
 var loaded:=false
 var load_error:=""
@@ -126,8 +173,6 @@ var _ride_saved: Dictionary={}
 var _arrival_elapsed:=0.0
 var _last_cycle:=-1
 var _initial_vehicle_ids: Array=[]
-var _source_mesh: Dictionary={}
-var _recycle_manager: Node
 var _crossing_commit: Dictionary={}
 var waiting_for_bus:=false
 var _board_pending:=false
@@ -142,7 +187,7 @@ func _fail(message: String) -> bool:
 	load_error=message;push_error(message);return false
 
 func _event(kind: String,extra: Dictionary={}) -> void:
-	var row: Dictionary={"type":kind,"tick":Engine.get_physics_frames(),"station_m":bus.get_station_m() if is_instance_valid(bus) else 0.}
+	var row: Dictionary={"type":kind,"bus_id":bus.name if is_instance_valid(bus) else "","tick":Engine.get_physics_frames(),"station_m":bus.get_station_m() if is_instance_valid(bus) else 0.}
 	row.merge(extra);events.append(row)
 	while events.size()>128:events.pop_front()
 
@@ -183,27 +228,63 @@ func _source_contains(point: Vector2,mesh: Dictionary) -> bool:
 
 func _certify_route() -> bool:
 	var world: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/world_geometry/world.json"))
+	var ids: Array=design.route.footprint_support_feature_ids
 	for mesh: Dictionary in world.meshes:
-		if mesh.get("material")=="drive" and mesh.get("metadata",{}).get("feature_id")==design.route.source_binding.feature_id:_source_mesh=mesh;break
-	if _source_mesh.is_empty():return _fail("버스의 원본 차도 면을 찾지 못했습니다.")
-	route_certificate={"accepted":false,"samples":0,"source_feature_id":design.route.source_binding.feature_id,"source_refs":_source_mesh.metadata.source_refs,"box_m":[2.45,3.0,9.0],"spacing_m":.5,"terrain_support":"EXP21 existing physical TIN; no bus-only plane"}
+		if mesh.get("material")=="drive" and ids.has(mesh.get("metadata",{}).get("feature_id")):_source_meshes.append(mesh)
+	if _source_meshes.size()!=ids.size():return _fail("순환 버스의 연결 원본 차도 면이 없습니다.")
+	route_certificate={"accepted":false,"samples":0,"source_feature_ids":ids,"box_m":[2.45,3.0,9.0],"spacing_m":.5,"whole_box_preflight":design.preflight,"terrain_support":"EXP21 existing physical TIN; no bus-only plane"}
 	for index: int in range(int(ceil(float(design.route.length_m)/.5))+1):
 		var frame: Dictionary=_frame(minf(float(design.route.length_m),index*.5));var side:=Vector3(frame.direction.z,0,-frame.direction.x)
 		for x: float in [-HALF_WIDTH,HALF_WIDTH]:
 			for z: float in [-HALF_LENGTH,HALF_LENGTH]:
-				var point: Vector3=host.city.to_local(frame.point+side*x+frame.direction*z)
-				if not _source_contains(Vector2(point.x,point.z),_source_mesh):route_certificate.reason="full_bus_outside_source_road";route_certificate.station_m=index*.5;return _fail("버스 전체 폭과 길이가 원본 차도 밖에 놓입니다.")
-				if not is_finite(host.terrain_surface.ground_y_world(host.city.to_global(point))):return _fail("버스 경로 지면이 없습니다.")
+				var point: Vector3=host.city.to_local(frame.point+side*x+frame.direction*z);var found:=false
+				for mesh: Dictionary in _source_meshes:
+					if _source_contains(Vector2(point.x,point.z),mesh):found=true;break
+				if not found:route_certificate.station_m=index*.5;return _fail("순환 차체가 원본 차도 밖에 놓입니다.")
+				if not is_finite(host.terrain_surface.ground_y_world(host.city.to_global(point))):return _fail("순환 버스 경로 지면이 없습니다.")
 		route_certificate.samples=int(route_certificate.samples)+1
-	route_certificate.accepted=true;route_certificate.reason="all_bus_corners_inside_source_drive_triangles"
+	route_certificate.accepted=true;route_certificate.reason="source_public_drive_union_authored_closed_turns_full_box_and_native_TIN_corners"
 	return true
+
+func _store_bus() -> void:
+	if not is_instance_valid(bus) or not _records.has(bus.get_instance_id()):return
+	var row: Dictionary=_records[bus.get_instance_id()]
+	for field: String in RECORD_FIELDS:row[field]=get(field)
+
+func _switch_bus(body: CharacterBody3D) -> void:
+	if bus==body:return
+	_store_bus();bus=body
+	if not _records.has(body.get_instance_id()):return
+	var row: Dictionary=_records[body.get_instance_id()]
+	for field: String in RECORD_FIELDS:set(field,row[field])
+
+func active_bus() -> CharacterBody3D:
+	if riding and is_instance_valid(_ride_bus):_switch_bus(_ride_bus)
+	return bus
+
+func bus_singlehead() -> CharacterBody3D:
+	return buses[0] if not buses.is_empty() else null
+
+func motion_policy() -> Dictionary:
+	var policy: Dictionary={"maximum_speed_mps":design.policy.maximum_speed_mps,"acceleration_mps2":design.policy.acceleration_mps2,"braking_mps2":design.policy.braking_mps2}
+	return host.transport_motion_policy("bus",policy) if host.has_method("transport_motion_policy") else policy
+
+func curve_speed_limit(body: CharacterBody3D,cap: float,brake: float) -> float:
+	var result:=cap;var lookahead: float=body._speed_mps*body._speed_mps/(2.*brake)+12.
+	var radii: Array=design.route.segment_radius_m
+	for index: int in range(body._segment,mini(radii.size(),body._segment+int(ceil(lookahead/.20))+3)):
+		var distance: float=maxf(0.,float(body._arc[index])-body.get_station_m())
+		if distance>lookahead:break
+		var curve: float=sqrt(float(design.policy.lateral_acceleration_mps2)*float(radii[index]))
+		result=minf(result,sqrt(curve*curve+2.*brake*distance))
+	return result
 
 func setup(root_scene: Node3D) -> bool:
 	if loaded or not is_instance_valid(root_scene) or not is_inside_tree():return false
 	host=root_scene;name="CityBusService";process_mode=Node.PROCESS_MODE_PAUSABLE
 	if not is_instance_valid(host.get("terrain_surface")) or not host.terrain_surface.loaded:return _fail("버스는 전체 지형 연결 뒤 준비해야 합니다.")
 	var raw: Variant=JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
-	if not raw is Dictionary or raw.get("schema_version")!=1:return _fail("버스 체험 자료 버전이 다릅니다.")
+	if not raw is Dictionary or raw.get("schema_version")!=2:return _fail("버스 체험 자료 버전이 다릅니다.")
 	design=raw
 	for path: String in design.source_hashes:
 		if FileAccess.get_sha256(path)!=String(design.source_hashes[path]):return _fail("버스의 원본/지형 자료 해시가 다릅니다: "+path)
@@ -212,13 +293,25 @@ func setup(root_scene: Node3D) -> bool:
 	if not _certify_route():return false
 	for row: Dictionary in design.stops:
 		if not _build_stop(row):return false
-	bus=VEHICLE_SCENE.instantiate();bus.set_script(PilotBus);bus.name="BluePilotBus_T01";bus.service=self
-	bus.collision_mask=63;bus.floor_snap_length=.45;bus.set_meta("geometry_id","T01_authored_blue_bus")
-	var collider: CollisionShape3D=bus.get_node("CollisionShape");var shape:=BoxShape3D.new();shape.size=Vector3(2.45,3.0,9.0);collider.shape=shape;collider.position.y=1.5
-	bus.configure(design.route,self,host.city);add_child(bus);bus.refresh_terrain();_dress_bus()
-	_recycle_manager=BusRecycleGuard.new();_recycle_manager.name="BusOriginalCameraHumanGuard";_recycle_manager.source_manager=host.traffic;_recycle_manager.city=host.city;_recycle_manager.camera=host.rig.camera;_recycle_manager.routes={String(design.route.id):design.route};_recycle_manager.vehicles.append(bus);add_child(_recycle_manager)
+	for support: StaticBody3D in host.neighborhood_population.traffic.supports:
+		if support.get_meta("authored_flat_support",false):_engineering_support_rids.append(support.get_rid())
+	for member: Dictionary in design.fleet:
+		_store_bus();bus=VEHICLE_SCENE.instantiate();bus.set_script(PilotBus);bus.name="BlueLoopBus_"+String(member.id);bus.service=self
+		bus.collision_mask=63;bus.floor_snap_length=.45;bus.set_meta("geometry_id",String(member.id)+"_authored_blue_bus")
+		var collider: CollisionShape3D=bus.get_node("CollisionShape");var shape:=BoxShape3D.new();shape.size=Vector3(2.45,3.0,9.0);collider.shape=shape;collider.position.y=1.5
+		bus.configure(design.route,self,host.city);add_child(bus)
+		for support: StaticBody3D in host.neighborhood_population.traffic.supports:
+			if support.get_meta("authored_flat_support",false):bus.add_collision_exception_with(support)
+		bus.refresh_terrain()
+		var station: float=float(member.initial_station_m);var frame: Dictionary=_frame(station)
+		while bus._segment<bus._arc.size()-2 and float(bus._arc[bus._segment+1])<station:bus._segment+=1
+		bus._station_m=station;bus.global_transform=bus._terrain_pose(frame.point,atan2(-frame.direction.x,-frame.direction.z));bus.reset_physics_interpolation()
+		bus_state="approaching";stop_index=0;docked_stop=-1;door_fraction=0.;state_elapsed=0.;door_panels=[];wheels=[];_crossing_commit={};_board_pending=false;_board_pending_s=0.;_last_cycle=0
+		while stop_index<design.stops.size() and float(design.stops[stop_index].station_m)<station:stop_index+=1
+		_dress_bus();bus.reset_visual_history();buses.append(bus);_records[bus.get_instance_id()]={};_store_bus()
+	_switch_bus(buses[0])
 	process_physics_priority=2;loaded=true;_event("service_ready");_refresh_arrivals()
-	print("CITY_BUS_READY route=T01 stops=2 source_road_certified=true original_vehicles=",_initial_vehicle_ids.size())
+	print("CITY_BUS_READY route=T01 actual_closed_loop=true buses=",buses.size()," stops=",design.stops.size()," original_vehicles=",_initial_vehicle_ids.size())
 	return true
 
 func permission(_vehicle: CharacterBody3D) -> Dictionary:
@@ -235,12 +328,12 @@ func motion_limit() -> Dictionary:
 		if not _crossing_commit.is_empty() and bus.get_station_m()>=float(_crossing_commit.clear_station_m):
 			_event("crossing_rear_cleared",_crossing_commit);_crossing_commit.clear()
 		var direction: Vector3=bus._segment_direction(bus._segment)
-		var signal_limit: Dictionary=network.vehicle_stop_distance(String(design.route.source_binding.feature_id),bus.global_position,direction,30.)
+		var signal_limit: Dictionary=network.vehicle_stop_distance(String(design.route.segment_source_ids[bus._segment]),bus.global_position,direction,maxf(30.,bus._speed_mps*bus._speed_mps/(2.*float(motion_policy().braking_mps2))+12.))
 		var human_wait: bool=bool(host.traffic.human_present) and not String(signal_limit.get("crossing_id","")).is_empty()
 		var state: String=String(signal_limit.get("state","uncontrolled"));var line_distance: float=float(signal_limit.get("distance_m",INF))
 		if _crossing_commit.is_empty() and not human_wait and not String(signal_limit.get("crossing_id","")).is_empty():
 			var available: float=line_distance-HALF_LENGTH-.35
-			var brake_room: float=bus._speed_mps*bus._speed_mps/4.+bus._speed_mps/float(Engine.physics_ticks_per_second)
+			var brake_room: float=bus._speed_mps*bus._speed_mps/(2.*float(motion_policy().braking_mps2))+bus._speed_mps/float(Engine.physics_ticks_per_second)
 			var green_entry: bool=state=="green" and line_distance<=HALF_LENGTH+.05 and bus._speed_mps>.10
 			var amber_committed: bool=state=="amber" and bus._speed_mps>.5 and available<brake_room
 			if green_entry or amber_committed:
@@ -274,7 +367,7 @@ func _build_stop(row: Dictionary) -> bool:
 	_box(node,"BenchBack",Vector3(.07,.39,2.65),Vector3(.47,.75,.15),wood,true)
 	for z: float in [-.9,1.2]:_box(node,"BenchLeg",Vector3(.10,.43,.12),Vector3(.25,.215,z),frame_mat,true)
 	_box(node,"RouteBoard",Vector3(.07,1.34,.76),Vector3(.51,1.50,-1.68),white)
-	var board: Label3D=_label(node,"RouteDiagram","도심01\n덕수궁 돌담\n     ↓\n시청 앞 하차\n\n게임 체험 노선",Vector3(.454,1.54,-1.68),.00245,Color(.09,.21,.30));board.rotation.y=-PI/2.
+	var board: Label3D=_label(node,"RouteDiagram",_route_board_text(row),Vector3(.454,1.54,-1.68),.00245,Color(.09,.21,.30));board.rotation.y=-PI/2.
 	_box(node,"StopHeader",Vector3(.12,.38,4.6),Vector3(.60,2.35,0),blue)
 	var title: Label3D=_label(node,"StopName",String(row.name)+"  "+String(row.id),Vector3(.52,2.35,.15),.0031);title.rotation.y=-PI/2.
 	_box(node,"ArrivalDisplay",Vector3(.10,.38,1.8),Vector3(.50,1.95,.65),display)
@@ -313,13 +406,13 @@ func _dress_bus() -> void:
 	_box(visual,"DriverConsole",Vector3(.85,.42,.50),Vector3(-.57,1.20,-3.86),dark)
 	_box(visual,"FrontWindshield",Vector3(2.20,1.12,.045),Vector3(0,2.12,-4.445),glass)
 	_box(visual,"FrontHeader",Vector3(2.35,.40,.07),Vector3(0,2.74,-4.48),dark)
-	var front: Label3D=_label(visual,"DestinationLED","도심01  덕수궁 · 시청",Vector3(0,2.75,-4.526),.0038,Color(.61,1.,.55));front.rotation.y=PI
+	var front: Label3D=_label(visual,"DestinationLED","도심01  시청 · 북창 · 숭례문 순환",Vector3(0,2.75,-4.526),.0027,Color(.61,1.,.55));front.rotation.y=PI
 	var rear: Label3D=_label(visual,"RearRouteLED","도심01",Vector3(0,2.65,4.50),.005,Color(.61,1.,.55))
 	for side: float in [-1.,1.]:
 		for z: float in [-4.25,-3.5,-2.,-.5,1.,2.5,4.2]:_box(visual,"WindowPillar",Vector3(.06,1.34,.055),Vector3(side*1.216,2.15,z),blue)
 		if side<0.:_box(visual,"SilverWaistStripe",Vector3(.035,.11,8.7),Vector3(side*1.226,1.54,0),pale)
 		_box(visual,"LowerSkirt",Vector3(.035,.16,8.7),Vector3(side*1.226,.43,0),dark)
-		var number: Label3D=_label(visual,"SideRoute","도심01   덕수궁 · 시청",Vector3(side*1.245,1.16,.55),.0037);number.rotation.y=side*PI/2.
+		var number: Label3D=_label(visual,"SideRoute","도심01   시청 · 북창 · 숭례문 순환",Vector3(side*1.245,1.16,.55),.0037);number.rotation.y=side*PI/2.
 		_box(visual,"WingMirrorArm",Vector3(.30,.045,.05),Vector3(side*1.34,2.42,-3.9),dark)
 		_box(visual,"WingMirror",Vector3(.13,.36,.20),Vector3(side*1.49,2.28,-3.92),dark)
 		for z: float in [-2.68,2.62]:
@@ -347,19 +440,36 @@ func _dress_bus() -> void:
 	_box(passenger,"PassengerTorso",Vector3(.40,.50,.26),Vector3(0,.18,0),_mat(Color(.42,.59,.47)))
 	var head:=SphereMesh.new();head.radius=.15;head.height=.30;head.radial_segments=12;head.rings=8;head.material=_mat(Color(.72,.52,.37));var headnode:=MeshInstance3D.new();headnode.mesh=head;headnode.position.y=.60;passenger.add_child(headnode)
 
+func _route_board_text(current: Dictionary) -> String:
+	var result: String="도심01 ↻\n"
+	for row: Dictionary in design.stops:result+=("● " if row.id==current.id else "○ ")+String(row.name).trim_suffix(" 정류장").replace(" ","")+"\n"
+	return result+"게임 순환 · 3대\n실제 노선 아님"
+
 func set_running(enabled: bool) -> void:
 	running=enabled
-	if is_instance_valid(bus):bus.set_running(enabled)
+	for body: CharacterBody3D in buses:body.set_running(enabled)
 
 func _physics_process(delta: float) -> void:
 	if not loaded:return
+	if is_instance_valid(_release_bus):_switch_bus(_release_bus)
 	_finish_collision_release()
 	if not running:return
-	state_elapsed+=delta;_arrival_elapsed+=delta
-	if _last_cycle!=bus._cycle_count:
-		_last_cycle=bus._cycle_count
-		if _last_cycle>0:stop_index=0;docked_stop=-1;bus_state="approaching";state_elapsed=0.;_crossing_commit.clear();_event("guarded_service_repeat")
-	if waiting_for_bus and not _at_first_wait(6.0):waiting_for_bus=false;_event("wait_request_left_stop")
+	_fleet_elapsed+=delta;_arrival_elapsed+=delta
+	for body: CharacterBody3D in buses:
+		_switch_bus(body);_tick_bus(delta)
+	_store_bus()
+	if riding and is_instance_valid(_ride_bus):_switch_bus(_ride_bus);_attach_passenger(delta)
+	if _arrival_elapsed>.5:_arrival_elapsed=0.;_refresh_arrivals()
+	# Capture after priority-1 native movement and priority-2 door/seat updates.
+	for body: CharacterBody3D in buses:body._capture_visual_history()
+
+func _process(_delta: float) -> void:
+	if not loaded or not running:return
+	var fraction:=clampf(Engine.get_physics_interpolation_fraction(),0.,1.)
+	for body: CharacterBody3D in buses:body._render_visual_at(fraction)
+
+func _tick_bus(delta: float) -> void:
+	state_elapsed+=delta
 	if _board_pending:
 		_board_pending_s+=delta
 		if _board_pending_s>2.0 or not _context_ready() or _boarding_candidate().is_empty():_board_pending=false
@@ -373,8 +483,8 @@ func _physics_process(delta: float) -> void:
 		if _board_pending and not riding:
 			_board_pending=false
 			if not _boarding_candidate().is_empty():_board()
-		if riding and exit_requested:_exit_ride()
-		if state_elapsed>=float(design.policy.dwell_s) and not _doorway_occupied() and not (riding and docked_stop==design.stops.size()-1):bus_state="closing_doors";state_elapsed=0.;_event("closing_doors")
+		if riding and _ride_bus==bus and exit_requested:_exit_ride()
+		if state_elapsed>=float(design.policy.dwell_s) and not _doorway_occupied() and _headway_ready():bus_state="closing_doors";state_elapsed=0.;_event("closing_doors")
 	elif bus_state=="closing_doors":
 		if _doorway_occupied():bus_state="opening_doors";state_elapsed=door_fraction*float(design.policy.door_animation_s);_event("door_safety_reopen")
 		else:
@@ -382,19 +492,14 @@ func _physics_process(delta: float) -> void:
 			if door_fraction<=0.:stop_index+=1;docked_stop=-1;bus_state="approaching";state_elapsed=0.;_event("departed")
 	for part: Dictionary in door_panels:part.node.position=part.closed+Vector3(0,0,float(part.sign)*.48*door_fraction)
 	for wheel: Node3D in wheels:wheel.rotate_x(-bus._speed_mps*delta/.43)
-	if riding:_attach_passenger(delta)
-	if _arrival_elapsed>.5:_arrival_elapsed=0.;_refresh_arrivals()
-	# The inherited controller's recycle grant remains camera/human/entry bound.
-	if not riding and bus.can_recycle():
-		var guard: Dictionary=_recycle_manager.recycle_guard(bus)
-		bus.try_recycle(guard)
 
 func _doorway_occupied() -> bool:
 	if not is_instance_valid(bus):return true
+	if riding and _ride_bus==bus and exit_requested:return true
 	# Keep doors available while a prospective passenger is at either visible
 	# door or the adjacent stop. Boarding is still a fresh, explicit E action.
 	if not riding and not _boarding_candidate().is_empty():return true
-	if waiting_for_bus and docked_stop==0 and _at_first_wait(4.5):return true
+	if waiting_for_bus and docked_stop==_waiting_stop_index and _at_wait(_waiting_stop_index,4.5):return true
 	for human: CharacterBody3D in host.traffic.humans:
 		if human==host.player and riding:continue
 		if not is_instance_valid(human):continue
@@ -429,7 +534,7 @@ func _board_grounded() -> bool:
 	return gap>=-.025 and gap<=.20
 
 func _boarding_candidate() -> Dictionary:
-	if not _context_ready() or riding or docked_stop!=0 or bus_state not in ["opening_doors","doors_open","closing_doors"] or bus._speed_mps>.025:return {}
+	if not _context_ready() or riding or docked_stop<0 or bus_state not in ["opening_doors","doors_open","closing_doors"] or bus._speed_mps>.025:return {}
 	var local: Vector3=bus.to_local(host.player.global_position)
 	if local.x<BOARD_MIN_SIDE_M or local.x>BOARD_MAX_SIDE_M or absf(local.y)>.9 or not _board_grounded():return {}
 	var best: Dictionary={}
@@ -446,25 +551,50 @@ func _boarding_candidate() -> Dictionary:
 		if best.is_empty() or distance<float(best.distance_m):best={"door_index":index,"door_world":doorway,"distance_m":distance,"local_feet":local}
 	return best
 
-func _at_first_wait(radius: float=4.0) -> bool:
-	if not _context_ready() or riding or design.stops.is_empty() or not _board_grounded():return false
-	var wait: Vector3=design.stops[0].wait_world
+func _at_wait(index: int,radius: float=4.) -> bool:
+	if not _context_ready() or riding or index<0 or index>=design.stops.size() or not _board_grounded():return false
+	var wait: Vector3=design.stops[index].wait_world
 	if host.player.global_position.distance_to(wait)>radius:return false
-	var frame: Dictionary=_frame(float(design.stops[0].station_m));var right:=Vector3(-frame.direction.z,0,frame.direction.x)
-	var side: float=(host.player.global_position-frame.point).dot(right)
-	if side<1.5 or side>5.5:return false
+	var frame: Dictionary=_frame(float(design.stops[index].station_m));var right:=Vector3(-frame.direction.z,0,frame.direction.x)
+	if (host.player.global_position-frame.point).dot(right)<1.5:return false
 	for height: float in [.70,1.35]:
 		var query:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP*height,wait+Vector3.UP*height,1|8,[host.player.get_rid(),bus.get_rid()])
 		if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():return false
 	return true
 
+func _nearest_wait() -> int:
+	var best:=-1;var distance:=INF
+	for index: int in range(design.stops.size()):
+		if _at_wait(index):
+			var d: float=host.player.global_position.distance_to(design.stops[index].wait_world)
+			if d<distance:best=index;distance=d
+	return best
+
+func _select_for_player() -> void:
+	if riding and is_instance_valid(_ride_bus):_switch_bus(_ride_bus);return
+	var selected: CharacterBody3D;var distance:=INF
+	for body: CharacterBody3D in buses:
+		_switch_bus(body)
+		var candidate: Dictionary=_boarding_candidate()
+		var d: float=float(candidate.distance_m) if not candidate.is_empty() else INF
+		if d<distance:selected=body;distance=d
+	if is_instance_valid(selected):_switch_bus(selected)
+	elif not buses.is_empty():
+		var nearest: CharacterBody3D=buses[0];var d:=INF
+		for body: CharacterBody3D in buses:
+			var gap: float=body.global_position.distance_to(host.player.global_position)
+			if gap<d:nearest=body;d=gap
+		_switch_bus(nearest)
+
 func can_interact() -> bool:
+	_select_for_player()
 	if not _context_ready():return false
 	if riding:return true
 	if not _boarding_candidate().is_empty():return true
-	return stop_index==0 and docked_stop<0 and _at_first_wait()
+	return _nearest_wait()>=0
 
 func interaction_distance_m() -> float:
+	_select_for_player()
 	if riding:return 0.0
 	if not loaded or not is_instance_valid(host):return INF
 	var candidate: Dictionary=_boarding_candidate()
@@ -478,6 +608,7 @@ func interaction_distance_m() -> float:
 	return closest
 
 func prompt_text() -> String:
+	_select_for_player()
 	if not _context_ready():return ""
 	if riding:
 		if bus_state=="doors_open":return "E · 내리기" if not exit_requested else "안전한 하차 공간을 기다리는 중"
@@ -485,20 +616,14 @@ func prompt_text() -> String:
 	var candidate: Dictionary=_boarding_candidate()
 	if not candidate.is_empty():
 		if _board_pending:return "문이 열리면 곧 승차합니다 · 잠시 기다려주세요"
-		return "E · 도심01 버스 타기 · 앞문과 가운데 문 모두 이용" if bus_state=="doors_open" else "E · 문을 열고 도심01 버스 타기"
-	if stop_index==0 and docked_stop<0 and _at_first_wait():return "E · 도심01 승차 대기 취소" if waiting_for_bus else "E · 도심01 승차 대기 · 도착하면 문 앞에서 E"
-	for row: Dictionary in design.stops:
-		if host.player.global_position.distance_to(row.wait_world)<4.0:
-			if row.id==design.stops[-1].id:return "도심01 · 하차 전용 정류장 · 승차는 덕수궁 돌담에서"
-			if stop_index>0:return "이번 버스는 출발했습니다 · 승차는 다음 운행 때 가능합니다"
-			if not _board_grounded():return "바닥에 착지한 뒤 E · 도심01 버스 이용"
-			if docked_stop==0:return "버스 오른쪽 앞문이나 가운데 문으로 다가가 E · 승차"
-			return "도심01 · 버스 도착을 기다려주세요"
-	if host.player.global_position.distance_to(bus.global_position)<8.0:
-		if bus._state=="endpoint_wait" or stop_index>=design.stops.size():return "이번 운행을 마친 버스입니다 · 승차는 덕수궁 돌담 정류장에서"
+		return "E · 도심01 순환버스 타기 · 앞문/가운데 문" if bus_state=="doors_open" else "E · 문을 열고 도심01 순환버스 타기"
+	var wait_index: int=_nearest_wait()
+	if wait_index>=0:
+		if docked_stop==wait_index:return "도심01 정차 중 · 버스 오른쪽 문으로 다가가 E · 승차"
+		return "E · 승차 대기 취소 · 다음 버스 %s" % _eta_text(wait_index) if waiting_for_bus and _waiting_stop_index==wait_index else "E · 도심01 승차 대기 · 다음 버스 %s" % _eta_text(wait_index)
+	if is_instance_valid(bus) and host.player.global_position.distance_to(bus.global_position)<8.:
 		if bus._speed_mps>.025:return "주행 중인 버스에는 탈 수 없습니다 · 정류장에서 기다려주세요"
-		if docked_stop==design.stops.size()-1:return "하차 전용 정류장입니다 · 승차는 덕수궁 돌담 정류장에서"
-		if docked_stop==0:return "버스 오른쪽 앞문이나 가운데 문 앞에서 E · 승차"
+		if docked_stop>=0:return "버스 오른쪽 앞문이나 가운데 문 앞에서 E · 승차"
 	return ""
 
 func handle_interact() -> bool:
@@ -513,7 +638,9 @@ func handle_interact() -> bool:
 		_board_pending=true;_board_pending_s=0.;waiting_for_bus=true
 		if bus_state=="closing_doors":bus_state="opening_doors";state_elapsed=door_fraction*float(design.policy.door_animation_s)
 		_event("boarding_door_edge_accepted",{"door_index":candidate.door_index});return true
-	waiting_for_bus=not waiting_for_bus;_event("wait_requested" if waiting_for_bus else "wait_cancelled");return true
+	var requested: int=_nearest_wait()
+	if requested<0:return false
+	waiting_for_bus=not (waiting_for_bus and _waiting_stop_index==requested);_waiting_stop_index=requested;_event("wait_requested" if waiting_for_bus else "wait_cancelled",{"stop_id":design.stops[requested].id});return true
 
 func _board() -> bool:
 	if bus_state!="doors_open" or bus._speed_mps>.025:return false
@@ -528,7 +655,7 @@ func _board() -> bool:
 	# Retain the native capsule/masks and omit only the bus from the ride camera.
 	var exclude: Array[RID]=host.rig._query.exclude.duplicate();exclude.append(bus.get_rid());host.rig._query.exclude=exclude;host.rig.arm.add_excluded_object(bus.get_rid())
 	host.exploration_avatar.visible=false;host.rig.distance_max_m=14.;host.rig.requested_distance=10.;host.rig.yaw=bus.global_rotation.y;host.rig.pitch=deg_to_rad(-12.)
-	riding=true;exit_requested=false;passenger.visible=true;_attach_passenger(0.);host.rig.snap_to_target_pose();_event("boarded",{"stop_id":design.stops[docked_stop].id,"door_index":_last_board_door,"capsule_layer":player.collision_layer,"capsule_mask":player.collision_mask});return true
+	_ride_bus=bus;riding=true;exit_requested=false;passenger.visible=true;_attach_passenger(0.);host.rig.snap_to_target_pose();_event("boarded",{"stop_id":design.stops[docked_stop].id,"door_index":_last_board_door,"capsule_layer":player.collision_layer,"capsule_mask":player.collision_mask});return true
 
 func _attach_passenger(delta: float) -> void:
 	host.player.global_transform=Transform3D(Basis.IDENTITY,bus.to_global(Vector3(.35,.72,-.6)));host.player.velocity=Vector3.ZERO
@@ -551,13 +678,14 @@ func _restore_ride(external_teleport: bool=false) -> void:
 	# bus/player exception until physics actually observes the outside capsule.
 	# Otherwise the bus's tiny terrain-clearance move can depenetrate sideways
 	# from the old seated capsule and permanently leave its source route.
-	_collision_release_pending=true;_collision_release_tick=Engine.get_physics_frames()+2
+	_release_bus=bus;_collision_release_pending=true;_collision_release_tick=Engine.get_physics_frames()+2
 	_release_hold_controls=not external_teleport;_release_player_physics=bool(_ride_saved.player_physics)
 	if external_teleport:player.set_facility_control(false)
 	player.set_physics_process(_release_player_physics if external_teleport else false);player.require_neutral_input();player.reset_physics_interpolation()
 	host.exploration_avatar.visible=bool(_ride_saved.avatar_visible)
 	host.rig._query.exclude=_ride_saved.query_exclude;host.rig.arm.remove_excluded_object(bus.get_rid());host.rig.distance_max_m=float(_ride_saved.rig_max);host.rig.requested_distance=float(_ride_saved.rig_distance);host.rig.pitch=float(_ride_saved.rig_pitch)
-	riding=false;exit_requested=false;passenger.visible=false;_ride_saved.clear();host.rig.snap_to_target_pose()
+	host.rig.yaw=float(_ride_saved.rig_yaw)
+	riding=false;_ride_bus=null;exit_requested=false;passenger.visible=false;_ride_saved.clear();host.rig.snap_to_target_pose()
 
 func _finish_collision_release() -> void:
 	if not _collision_release_pending or riding or Engine.get_physics_frames()<_collision_release_tick:return
@@ -565,7 +693,7 @@ func _finish_collision_release() -> void:
 	for hit: Dictionary in get_world_3d().direct_space_state.intersect_shape(query,4):
 		if hit.collider==host.player:return
 	bus.remove_collision_exception_with(host.player);host.player.remove_collision_exception_with(bus)
-	_collision_release_pending=false
+	_collision_release_pending=false;_release_bus=null
 	if _release_hold_controls:
 		host.player.set_facility_control(false);host.player.set_physics_process(_release_player_physics);host.player.require_neutral_input();host.player.reset_physics_interpolation()
 	_release_hold_controls=false;_event("passenger_native_collision_restored")
@@ -580,15 +708,40 @@ func cancel_ride_for_teleport() -> void:
 	# Caller has already validated AND applied its destination; never choose an
 	# unsupported nearby point merely because a menu command was attempted.
 	if not riding:return
+	_switch_bus(_ride_bus)
 	_restore_ride(true);_event("ride_cancelled_after_validated_external_teleport")
+
+func _arrival_rows(index: int) -> Array:
+	_store_bus();var rows: Array=[];var length: float=design.route.length_m
+	for body: CharacterBody3D in buses:
+		var row: Dictionary=_records[body.get_instance_id()];var delta_s: float=fposmod(float(design.stops[index].station_m)-body.get_station_m(),length)
+		var docked: bool=int(row.docked_stop)==index
+		var eta: float=0. if docked else delta_s/maxf(1.,minf(10.,float(motion_policy().maximum_speed_mps)))
+		if not docked:
+			for stop: Dictionary in design.stops:
+				var gap: float=fposmod(float(stop.station_m)-body.get_station_m(),length)
+				if gap<delta_s:eta+=float(design.policy.dwell_s)+2.*float(design.policy.door_animation_s)
+			if int(row.docked_stop)>=0:eta+=maxf(0.,float(design.policy.dwell_s)-float(row.state_elapsed))
+		var delay: String=""
+		if String(body._blocked_reason).begins_with("signal_"):
+			var network: Variant=host.get("street_network_detail")
+			if is_instance_valid(network) and network.loaded:
+				var phase: float=fposmod(float(network.elapsed_s),float(network.design.cycle.duration_s))
+				if phase>=float(network.design.cycle.vehicle_green_end_s):eta+=float(network.design.cycle.duration_s)-phase;delay="signal"
+		elif body._state in ["waiting_obstacle","blocked","waiting_turn"]:delay="traffic"
+		rows.append({"delay":delay,"bus_id":body.name,"eta_s":eta,"distance_m":delta_s,"docked":docked,"state":row.bus_state,"delay_possible":true})
+	rows.sort_custom(func(a: Dictionary,b: Dictionary):return float(a.eta_s)<float(b.eta_s));return rows
+
+func _eta_text(index: int) -> String:
+	var rows: Array=_arrival_rows(index)
+	if rows.is_empty():return "운행 준비"
+	return "정차 중" if bool(rows[0].docked) else "약 %d초" % ceili(float(rows[0].eta_s))
 
 func _refresh_arrivals() -> void:
 	for index: int in range(arrival_labels.size()):
-		var text: String="도심01  이번 운행 통과"
-		if docked_stop==index:text="도심01  정차 중 · 문 열림" if door_fraction>.95 else "도심01  정차 · 문 작동 중"
-		elif stop_index<=index:
-			var remaining: float=maxf(0.,float(design.stops[index].station_m)-bus.get_station_m())
-			text="도심01  약 %d초 · 게임 운행" % ceili(remaining/4.+maxi(0,index-stop_index)*8.)
+		var rows: Array=_arrival_rows(index);var text: String="도심01 ↻ 3대 · 게임 운행\n"
+		if not rows.is_empty():text+="이번 "+_eta_text(index)
+		if rows.size()>1:text+="  다음 약 %d초" % ceili(float(rows[1].eta_s))
 		arrival_labels[index].text=text
 
 func viewpoint() -> Dictionary:
@@ -600,4 +753,19 @@ func snapshot() -> Dictionary:
 	if is_instance_valid(host):
 		for old: CharacterBody3D in host.vehicles:original_ids.append(old.get_instance_id())
 		for old: CharacterBody3D in host.neighborhood_population.traffic.vehicles:original_ids.append(old.get_instance_id())
-	return {"loaded":loaded,"error":load_error,"running":running,"riding":riding,"exit_requested":exit_requested,"waiting_for_bus":waiting_for_bus,"passenger_release_pending":_collision_release_pending,"boarding_pending":_board_pending,"last_board_door_index":_last_board_door,"state":bus_state,"stop_index":stop_index,"docked_stop":docked_stop,"door_fraction":door_fraction,"state_elapsed_s":state_elapsed,"crossing_commit":_crossing_commit.duplicate(true),"bus":bus.snapshot() if is_instance_valid(bus) else {},"route_certificate":route_certificate.duplicate(true),"stop_certificates":stop_certificates.duplicate(true),"stop_count":shelter_nodes.size(),"original_vehicle_ids_unchanged":original_ids==_initial_vehicle_ids,"events":events.duplicate(true),"source_geometry_changed":false,"scope":"One authored blue bus, two source-walk shelters, actual inherited physical drive/brake/full-box sweeps, EXP21 terrain and signal stops. E seated ride; final exit needs positive native support/full capsule clearance. T01/GAME IDs and arrival estimates are game-authored, never real schedules."}
+	return {"loaded":loaded,"error":load_error,"running":running,"riding":riding,"exit_requested":exit_requested,"waiting_for_bus":waiting_for_bus,"passenger_release_pending":_collision_release_pending,"boarding_pending":_board_pending,"last_board_door_index":_last_board_door,"state":bus_state,"stop_index":stop_index,"docked_stop":docked_stop,"door_fraction":door_fraction,"state_elapsed_s":state_elapsed,"crossing_commit":_crossing_commit.duplicate(true),"bus":bus.snapshot() if is_instance_valid(bus) else {},"route_certificate":route_certificate.duplicate(true),"stop_certificates":stop_certificates.duplicate(true),"stop_count":shelter_nodes.size(),"original_vehicle_ids_unchanged":original_ids==_initial_vehicle_ids,"events":events.duplicate(true),"source_geometry_changed":false,"fleet":_fleet_snapshot(),"bus_count":buses.size(),"motion_policy":motion_policy() if loaded else {},"engineering_support_pair_exceptions":_engineering_support_rids.size(),"physical_loop_no_recycle":true,"scope":"Three source-road physical closed-loop buses; four game-authored stops. Every stop boards/alights. No endpoint recycle or position jump. ETA is an actual local-state estimate with traffic delay, not a live Seoul schedule."}
+
+func _fleet_snapshot() -> Array:
+	_store_bus();var result: Array=[]
+	for body: CharacterBody3D in buses:
+		var state: Dictionary=_records[body.get_instance_id()]
+		result.append({"id":body.name,"state":state.bus_state,"stop_index":state.stop_index,"docked_stop":state.docked_stop,"door_fraction":state.door_fraction,"bus":body.snapshot()})
+	return result
+
+func _headway_ready() -> bool:
+	var target: float=float(design.route.length_m)/maxi(1,buses.size())*.50
+	for other: CharacterBody3D in buses:
+		if other==bus:continue
+		var gap: float=fposmod(other.get_station_m()-bus.get_station_m(),float(design.route.length_m))
+		if gap<target:return false
+	return true

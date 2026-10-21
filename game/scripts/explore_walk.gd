@@ -61,6 +61,8 @@ var drivable_car_service: Node3D
 var city_helicopter_service: Node3D
 var shop_visit_service: Node3D
 var pool_preparation_service: Node3D
+var city_subway_service: Node3D
+var game_underground_connections: Node3D
 
 func _ready() -> void:
 	assert(exploration_physics_hz in [30,60])
@@ -216,6 +218,12 @@ func _ready() -> void:
 	pool_preparation_service=preload("res://scripts/pool_preparation_service.gd").new();pool_preparation_service.name="PoolPreparationService";add_child(pool_preparation_service)
 	if not pool_preparation_service.setup(self):
 		_exploration_failure("수영장 탈의실과 샤워 준비를 완료하지 못했습니다.");return
+	city_subway_service=preload("res://scripts/city_subway_service.gd").new();add_child(city_subway_service)
+	if not city_subway_service.setup(self):
+		_exploration_failure("지하철 역사와 열차를 준비하지 못했습니다.");return
+	game_underground_connections=preload("res://scripts/game_underground_connections.gd").new();add_child(game_underground_connections)
+	if not game_underground_connections.setup(self,city_subway_service):
+		_exploration_failure("지하철과 건물의 지하 연결통로를 준비하지 못했습니다.");return
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -283,7 +291,7 @@ func _build_ui() -> void:
 	options.add_child(music_switch)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
-	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"],["전동 킥보드 대여소로 이동","scooter_station"],["편의점 쇼핑으로 이동","shop"],["옷가게 쇼핑으로 이동","clothing"],["자동차 주차 위치로 이동","car_station"],["헬리콥터 착륙장으로 이동","helipad"]]:
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"],["전동 킥보드 대여소로 이동","scooter_station"],["편의점 쇼핑으로 이동","shop"],["옷가게 쇼핑으로 이동","clothing"],["자동차 주차 위치로 이동","car_station"],["헬리콥터 착륙장으로 이동","helipad"],["시청역 5번 출구로 이동","subway_cityhall"],["을지로입구역 1-1번 출구로 이동","subway_euljiro"],["헬기 옥상 착륙지 둘러보기","helicopter_roof"],["서울파이낸스센터 입구로 이동","escalator_building"]]:
 		var shortcut:=Button.new();shortcut.text=detail[0]
 		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
@@ -319,20 +327,25 @@ func _visit_city_life(kind: String) -> void:
 	var old_mask: int=player.collision_mask
 	player.free_roam_enabled=true;player.collision_mask=old_mask|1|4|8|32
 	var destination: Dictionary={}
-	if kind=="library":
+	var target_building: String=interior_visit.LIBRARY_ID if kind=="library" else preload("res://scripts/interior_escalator.gd").BUILDING_ID
+	if kind in ["library","escalator_building"]:
 		for spec: Dictionary in interior_visit.catalog:
-			if String(spec.id)==interior_visit.LIBRARY_ID:
+			if String(spec.id)==target_building:
 				destination={"point":spec.entrance,"toward":spec.door,"camera_distance_m":4.5,"camera_pitch_degrees":-15.0};break
 	elif kind in ["shop","restaurant","clothing"] and is_instance_valid(shop_visit_service):destination=shop_visit_service.destination(kind)
 	elif kind=="car_station" and is_instance_valid(drivable_car_service):destination=drivable_car_service.viewpoint()
 	elif kind=="helipad" and is_instance_valid(city_helicopter_service):destination=city_helicopter_service.viewpoint()
+	elif kind=="helicopter_roof" and is_instance_valid(city_helicopter_service):destination=city_helicopter_service.rooftop_destination()
+	elif kind in ["subway_cityhall","subway_euljiro"] and is_instance_valid(city_subway_service):destination=city_subway_service.destination(kind)
 	player.free_roam_enabled=old_mode;player.collision_mask=old_mask
 	if destination.is_empty():
 		exploration_notice.text="이동할 곳이 잠시 막혀 있습니다. 조금 뒤 다시 찾아주세요.";return
-	var safe: Dictionary=_exploration_destination(destination.point)
-	if safe.is_empty() or not _commit_exploration_teleport(safe.point):
+	var roof_payload: Dictionary=destination if kind=="helicopter_roof" else {}
+	var safe: Dictionary={"point":destination.pool_entry} if not roof_payload.is_empty() and _roof_destination_clear(roof_payload) else (_exploration_destination(destination.point) if roof_payload.is_empty() else {})
+	if safe.is_empty() or not _commit_exploration_teleport(safe.point,roof_payload):
 		exploration_notice.text="안전한 도착 위치를 확보하지 못했습니다. 현재 위치를 유지합니다.";return
-	if kind=="library":interior_visit.select_building(interior_visit.LIBRARY_ID)
+	if kind=="helipad" and is_instance_valid(city_helicopter_service):city_helicopter_service.request_home_recovery()
+	if kind in ["library","escalator_building"]:interior_visit.select_building(target_building)
 	player.velocity=Vector3.ZERO;player.require_neutral_input();player.reset_physics_interpolation()
 	var direction: Vector3=destination.get("toward",safe.point+Vector3.FORWARD)-safe.point;direction.y=0.
 	if direction.length_squared()>.001:
@@ -370,7 +383,7 @@ func _time_selected(index: int) -> void:
 var street_walk_index: int=0
 
 func _visit_street_detail(kind: String) -> void:
-	if kind in ["shop","clothing","car_station","helipad"] or (kind=="restaurant" and is_instance_valid(shop_visit_service)):
+	if kind in ["shop","clothing","car_station","helipad","helicopter_roof","subway_cityhall","subway_euljiro","escalator_building"] or (kind=="restaurant" and is_instance_valid(shop_visit_service)):
 		_visit_city_life(kind);return
 	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk","bus_stop","crossing","street_lamps","bike_station","scooter_station"]:return
 	if kind=="hotel_pool":
@@ -511,11 +524,13 @@ func _commit_exploration_teleport(point: Vector3,roof_destination: Dictionary={}
 	var was_riding: bool=_street_transport_riding()
 	player.free_roam_enabled=true;player.collision_mask=old_mask|1|4|8|32
 	var accepted:=true
-	if _shop_active():accepted=shop_visit_service.leave_for_rooftop(roof_destination) if not roof_destination.is_empty() else shop_visit_service.leave_for_teleport(point)
+	if _subway_active():accepted=city_subway_service.leave_for_teleport(point,roof_destination)
+	elif _shop_active():accepted=shop_visit_service.leave_for_rooftop(roof_destination) if not roof_destination.is_empty() else shop_visit_service.leave_for_teleport(point)
 	elif is_instance_valid(interior_visit) and interior_visit.active:accepted=interior_visit._leave_at(point,roof_destination)
 	else:player.global_transform=Transform3D(Basis.IDENTITY,point)
 	if not accepted:
 		player.free_roam_enabled=old_mode;player.collision_mask=old_mask;return false
+	if is_instance_valid(game_underground_connections) and game_underground_connections.loaded:game_underground_connections.cancel_pending_for_transition()
 	if is_instance_valid(pool_preparation_service) and pool_preparation_service.loaded:pool_preparation_service.cancel_for_transition()
 	if is_instance_valid(shop_visit_service) and shop_visit_service.ui_open and not shop_visit_service.active:shop_visit_service.close_picker()
 	_cancel_bus_after_teleport()
@@ -536,6 +551,18 @@ func _street_transport_riding_except(excluded_service: Node3D) -> bool:
 func _shop_active() -> bool:
 	return is_instance_valid(shop_visit_service) and shop_visit_service.active
 
+func _subway_active() -> bool:
+	return is_instance_valid(city_subway_service) and city_subway_service.active
+
+func transport_motion_policy(kind: String,authored: Dictionary) -> Dictionary:
+	return preload("res://scripts/transport_motion_policy.gd").resolve(kind,authored,float(player.run_speed_mps))
+
+func try_underground_interact() -> bool:
+	return is_instance_valid(game_underground_connections) and game_underground_connections.loaded and game_underground_connections.can_interact() and game_underground_connections.handle_interact()
+
+func underground_interaction_hint() -> String:
+	return game_underground_connections.prompt_text() if is_instance_valid(game_underground_connections) and game_underground_connections.loaded and game_underground_connections.can_interact() else ""
+
 func try_pool_interact() -> bool:
 	return is_instance_valid(pool_preparation_service) and pool_preparation_service.loaded and pool_preparation_service.can_interact() and pool_preparation_service.handle_interact()
 
@@ -543,7 +570,7 @@ func pool_interaction_hint() -> String:
 	return pool_preparation_service.prompt_text() if is_instance_valid(pool_preparation_service) and pool_preparation_service.loaded else ""
 
 func _street_services() -> Array[Node3D]:
-	return [city_bike_service,city_scooter_service,city_bus_service,drivable_car_service,city_helicopter_service]
+	return [city_bike_service,city_scooter_service,city_bus_service,drivable_car_service,city_helicopter_service,city_subway_service]
 
 func _street_interaction_services() -> Array[Node3D]:
 	var services: Array[Node3D]=_street_services()
@@ -568,6 +595,9 @@ func _cancel_bus_after_teleport() -> void:
 
 func try_street_interact() -> bool:
 	# Existing fresh-E dispatcher remains the sole owner of street interactions.
+	if try_underground_interact():return true
+	if _subway_active():
+		city_subway_service.handle_interact();return true
 	if _shop_active():
 		shop_visit_service.interact();return true
 	for service: Node3D in _street_services():
@@ -579,6 +609,9 @@ func try_street_interact() -> bool:
 	return false
 
 func street_interaction_hint() -> String:
+	var underground_hint:=underground_interaction_hint()
+	if not underground_hint.is_empty():return underground_hint
+	if _subway_active():return city_subway_service.prompt_text()
 	if _shop_active():return shop_visit_service.prompt_text()
 	for service: Node3D in _street_services():
 		if is_instance_valid(service) and service.loaded and service.riding:return service.prompt_text()
@@ -602,6 +635,7 @@ func set_vehicles_running(enabled: bool) -> void:
 	super.set_vehicles_running(enabled)
 	if is_instance_valid(neighborhood_population):neighborhood_population.set_vehicles_running(enabled)
 	if is_instance_valid(city_bus_service):city_bus_service.set_running(enabled)
+	if is_instance_valid(city_subway_service):city_subway_service.set_running(enabled)
 
 func _queue_menu_layout() -> void:
 	if menu_layout_pending:return
@@ -656,6 +690,9 @@ func set_speed_profile(id: String) -> bool:
 	return true
 
 func set_free_roam(enabled: bool) -> void:
+	if _subway_active():
+		if is_instance_valid(free_roam_switch):free_roam_switch.set_pressed_no_signal(free_roam_enabled)
+		exploration_notice.text="지하철에서 지상으로 나온 뒤 탐험 범위를 바꿀 수 있습니다.";return
 	if _shop_active():
 		free_roam_switch.set_pressed_no_signal(free_roam_enabled)
 		exploration_notice.text="상점에서 나온 뒤 탐험 범위를 바꿀 수 있습니다.";return
@@ -733,8 +770,10 @@ func _process(delta: float) -> void:
 	if not runtime_ok:return
 	if _shop_active():
 		status.text=shop_visit_service.prompt_text()
+	elif _subway_active():
+		status.text=city_subway_service.prompt_text()
 	elif is_instance_valid(city_helicopter_service) and city_helicopter_service.riding:
-		status.text="헬리콥터 조종 중 · W/S 전후 · A/D 방향 · Space 상승 · Ctrl 하강 · E 착륙 후 내리기"
+		status.text="헬리콥터 조종 중 · W/S 전후 · A/D 방향 · Space 상승 · Ctrl 하강 · R 로프 · E 착륙 후 내리기"
 	elif is_instance_valid(drivable_car_service) and drivable_car_service.riding:
 		status.text="자동차 운전 중 · W 가속 · S 제동/후진 · A/D 조향 · Space 제동 · E 내리기"
 	elif is_instance_valid(city_scooter_service) and city_scooter_service.riding:
@@ -756,7 +795,9 @@ func _process(delta: float) -> void:
 func reset_player() -> void:
 	var before_reset: Vector3=player.global_position
 	if is_instance_valid(shop_visit_service) and shop_visit_service.ui_open and not shop_visit_service.active:shop_visit_service.close_picker()
-	if _shop_active():
+	if _subway_active():
+		city_subway_service.return_to_world_spawn()
+	elif _shop_active():
 		shop_visit_service.return_to_world_spawn()
 	elif is_instance_valid(interior_visit) and interior_visit.active:
 		interior_visit.return_to_world_spawn()
@@ -764,4 +805,5 @@ func reset_player() -> void:
 		var before: Vector3=player.global_position
 		super.reset_player()
 		if player.global_position.distance_to(before)>.05:_cancel_bus_after_teleport()
+	if player.global_position.distance_to(before_reset)>.05 and is_instance_valid(game_underground_connections) and game_underground_connections.loaded:game_underground_connections.cancel_pending_for_transition()
 	if player.global_position.distance_to(before_reset)>.05 and is_instance_valid(pool_preparation_service) and pool_preparation_service.loaded:pool_preparation_service.cancel_for_transition()

@@ -1,0 +1,268 @@
+{
+  "task": "EXP25_HELICOPTER_ROOF_ROPE_SPEED",
+  "status": "HEADLESS_PASS_NATIVE_REVIEW_PENDING_ROOT",
+  "product_api_frozen": true,
+  "owned_paths": [
+    "game/scripts/city_helicopter_service.gd",
+    "game/scripts/city_helicopter_rope.gd",
+    "game/assets/authored/helicopter_service.json",
+    "tests/game/check_city_helicopter.gd",
+    "tests/game/check_city_helicopter_rope.gd"
+  ],
+  "current_input_sha256": {
+    "game/scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+    "game/scripts/city_helicopter_rope.gd": "7ffd63b54a0b16f253aa7d09607dc6ae84e8746be4a615b18c03030127a14803",
+    "game/assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+    "tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+    "tests/game/check_city_helicopter_rope.gd": "0e82e4ea038a751fb7ed8d1230f8eb602fad44dee7fc83b35d192a3279439dfd",
+    "game/scripts/explore_walk.gd": "9931f994902d76435380eb88985588ce45446019789b8ca3220ca6ad4ddf58d6",
+    "game/scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4",
+    "game/scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+    "game/scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+    "game/scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+    "game/scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f"
+  },
+  "final_runs": {
+    "flight": "flight_headless_final03.json",
+    "roof_rope_speed": "rope_headless_final02.json"
+  },
+  "separate_suite_counts": {
+    "flight": {
+      "passed": 31,
+      "total": 31
+    },
+    "roof_rope_speed": {
+      "passed": 39,
+      "total": 39
+    }
+  },
+  "counts_are_not_unique_requirement_totals": true,
+  "controls": {
+    "E": "Fresh physical press boards once; when landed requests rotor stop then validated capsule exit; airborne E is consumed and rejects ejection. During rope E remains consumed.",
+    "R": "Fresh physical press brakes to stable hover, validates actual support and complete retained capsule path, transfers continuously to the outside winch and descends at 2m/s. Fresh R cancels by swept retraction; further R during retraction preserves return. Menu queued/held R requires release and a fresh press.",
+    "W_S_A_D_Space_Ctrl": "W/S forward/reverse, A/D yaw, Space climb, Ctrl descend; movement disabled while rope owns pilot."
+  },
+  "api": {
+    "rooftop_destination": "Dictionary with id,point,toward,camera_yaw,camera_pitch_degrees,camera_distance_m,building_id,building_title,roof,pool_entry,scope. Empty if current observer capsule/support is blocked. Pass roof/pool_entry payload unchanged to the existing validated roof shortcut flow.",
+    "destination": "kind helicopter_roof routes to rooftop_destination; default is helipad observer.",
+    "request_home_recovery": "bool. Call after successful validated home observer shortcut, including an unpiloted craft parked on roof. Rejects riding/another owner. Clear-home native envelope gates explicitly reported game recall.",
+    "rope.snapshot": "state,reason,target,side_point,travelled_m,maximum_step_m,last_result,line_visible,harness_visible,key_requires_release,descent_mps."
+  },
+  "certified_existing_roof": {
+    "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+    "building_id": "osm:way:198561926:building",
+    "building_title": "서울특별시청",
+    "full_rotor_tail_clear": true,
+    "native_all_skids_supported": true,
+    "observer": [
+      198.577590942383,
+      40.8521537780762,
+      -172.86491394043
+    ],
+    "point": [
+      195.977584838867,
+      40.8921508789062,
+      -172.164916992188
+    ],
+    "yaw": 0.0
+  },
+  "observed_turbo": {
+    "selected_run_mps": 21.0,
+    "forward_mps": 84.0,
+    "W_65_ticks_m": 107.800033569336,
+    "coast_stop_distance_from_high_air_fixture_m": 207.20002746582,
+    "controlled_return_horizontal_error_m": 1.742082811,
+    "maximum_game_AGL_m": 180.0
+  },
+  "preservation": {
+    "original_source_geometry": "Not modified",
+    "native_player_capsule": "Original shape identity/layer/mask retained; same capsule swept continuously during rope; cockpit-to-winch transfer excludes only aircraft pair while all world bodies remain queried.",
+    "actors": "28 original humans + 2 dogs and 14 original AI cars retained; the 30 actor-array assertion includes dogs.",
+    "pool_preparation": "Rope accepts DeckFloor only; pool water/floor, canopies, furniture, bare source roof/private terrain and roof edges reject. Existing pool-preparation guard remains untouched."
+  },
+  "recovery_scope": "Completed rope and validated player transitions may recall to certified clear home. This is game recovery, never reported as physical flight. Turbo physical return is independently verified with production input and native movement.",
+  "runtime_scope": {
+    "display": "headless",
+    "fixed_fps_argument": 60,
+    "physics_hz": 30,
+    "physical_key_events": [
+      "KEY_E",
+      "KEY_R"
+    ],
+    "held_fixture_priority": -200,
+    "OS_keyboard_verified": false,
+    "native_graphics_verified_by_this_agent": false,
+    "test_placements": "Existing roof final approach starts 6m above deck; pool/canopy/source-roof rejections and roof-edge eligibility use labelled starts; turbo cruise starts 160m over home. All subsequent cruise, braking, return, landing and rope moves use production physics."
+  },
+  "known_runtime_log_limits": "Final raw logs preserve Godot sandbox user-log/system-CA messages plus ObjectDB/resource cleanup warning at harness exit. Final runs have zero SCRIPT ERROR. No sustained performance, real aviation accuracy/permission, all-rooftop certification, OS input or visual acceptance is claimed.",
+  "historical_attempts": [
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/flight_headless_final01.json",
+      "report_sha256": "d42bd46ba440842608b6dfe4220457a0c89cf0b2c5b19f1c3947ec0fc3715ce2",
+      "result": "FAIL",
+      "passed": 30,
+      "total": 31,
+      "failed_checks": [
+        "physical_reverse_returns_over_same_helipad"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/flight_headless_final01.log.gz",
+      "raw_log_sha256": "4c96be12e8966167c20fe852c234e2263de74fe03d92fd75c938d4134c58e4bb",
+      "script_error_count": 0,
+      "elapsed_ms": 32038,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/flight_headless_final02.json",
+      "report_sha256": "e4dae05f6cc51ea4b4fa232cd11644812c4c85995616ff01f3ab0bbcec4734c3",
+      "result": "FAIL",
+      "passed": 30,
+      "total": 31,
+      "failed_checks": [
+        "source_inputs_stable_during_runtime"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/flight_headless_final02.log.gz",
+      "raw_log_sha256": "90fb8a3179e5dc97f123727318290a563e1bd094869e8c7ce739d9e4a9221b30",
+      "script_error_count": 0,
+      "elapsed_ms": 35122,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/flight_headless_final03.json",
+      "report_sha256": "a5efca74554edf3d0e0e98e4592a4f1a57710eac7b39d03e8adb1782499d94c6",
+      "result": "PASS",
+      "passed": 31,
+      "total": 31,
+      "failed_checks": [],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/flight_headless_final03.log.gz",
+      "raw_log_sha256": "793259704bf2a1150c403b86a05e40032d9b398a6af0077afc76949f8e2e03d4",
+      "script_error_count": 0,
+      "elapsed_ms": 35013,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev01.json",
+      "report_sha256": "8066b63cf195657b8724a95895cbf14606928d88a6e55e444faa0e8119a78614",
+      "result": "FAIL",
+      "passed": 1,
+      "total": 2,
+      "failed_checks": [
+        "production_scene_and_helicopter_loaded"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev01.log.gz",
+      "raw_log_sha256": "b53eb87a944cc85039741dffde152daeb3474ad3c78c61dd75ba174d04603138",
+      "script_error_count": 3,
+      "elapsed_ms": 6803,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev02.json",
+      "report_sha256": "3c13bbfde406510e8cb47089111052c7ce267cf84febc68a1f4295ceb96a418e",
+      "result": "FAIL",
+      "passed": 6,
+      "total": 7,
+      "failed_checks": [
+        "fresh_R_brakes_hover_transfers_retained_avatar_and_lowers_rope"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev02.log.gz",
+      "raw_log_sha256": "3eb38554432d467e4c023e71b6e1501f71f4b62ed95c2110869a816a321f9cea",
+      "script_error_count": 0,
+      "elapsed_ms": 15830,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev03.json",
+      "report_sha256": "a5cc9327a8006fe11c5992f0aca765157eda26297bce6027b163468ebff8ab47",
+      "result": "FAIL",
+      "passed": 20,
+      "total": 23,
+      "failed_checks": [
+        "native_Ctrl_lands_all_skids_at_actual_authored_roof_Y",
+        "rooftop_E_stops_rotor_and_restores_outdoor_walking",
+        "same_rooftop_allows_fresh_E_reboarding"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev03.log.gz",
+      "raw_log_sha256": "55c63ae90d0a9ba0decb205d904d09268a4f5b0507a35017bd2a3c8171c2c8aa",
+      "script_error_count": 0,
+      "elapsed_ms": 44651,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev04.json",
+      "report_sha256": "73ab780be33bd11b1083257f8d37b712ebb772a44133f7083e5f6f78a7c0aff7",
+      "result": "FAIL",
+      "passed": 20,
+      "total": 23,
+      "failed_checks": [
+        "native_Ctrl_lands_all_skids_at_actual_authored_roof_Y",
+        "rooftop_E_stops_rotor_and_restores_outdoor_walking",
+        "same_rooftop_allows_fresh_E_reboarding"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev04.log.gz",
+      "raw_log_sha256": "7683ebd698e3fe2f0a7b0fd23acd05662192883f31fd4299250f10f6a62cb509",
+      "script_error_count": 0,
+      "elapsed_ms": 34507,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev05.json",
+      "report_sha256": "c876695e0e878e543832fa5d2d067739f7c872184d6250542dc1560dc2b7a53e",
+      "result": "PASS",
+      "passed": 23,
+      "total": 23,
+      "failed_checks": [],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev05.log.gz",
+      "raw_log_sha256": "ae5cbbd633134a3e0995238712cd589465966a1840832152f202f0f905a6c938",
+      "script_error_count": 0,
+      "elapsed_ms": 32350,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev06.json",
+      "report_sha256": "df78537933df0bd233bc42918f9c98c842307ec99d52d749dfb408195471e1c7",
+      "result": "PASS",
+      "passed": 36,
+      "total": 36,
+      "failed_checks": [],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_dev06.log.gz",
+      "raw_log_sha256": "cff95db6f2590d2fc65363b7cedef1a446f65f2d889e68dc25c0862544690ff3",
+      "script_error_count": 0,
+      "elapsed_ms": 54230,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_final01.json",
+      "report_sha256": "ab132e2dbfe4262b63cc53a1fe7d1f54aab8d3af4864d7a0cae9393be147d050",
+      "result": "FAIL",
+      "passed": 37,
+      "total": 38,
+      "failed_checks": [
+        "source_inputs_stable_during_runtime"
+      ],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_final01.log.gz",
+      "raw_log_sha256": "41e14fbf1b7a125adc7b9847be285a955308e9dd54753769130d9e43220a3f92",
+      "script_error_count": 0,
+      "elapsed_ms": 61613,
+      "physics_hz": 30
+    },
+    {
+      "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_final02.json",
+      "report_sha256": "01f72084edf0301d07e8df38268ea742b326f2b7e0c8bac3dad147f47ca80899",
+      "result": "PASS",
+      "passed": 39,
+      "total": 39,
+      "failed_checks": [],
+      "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_final02.log.gz",
+      "raw_log_sha256": "126cd324fa3d8c8759a85791d007af0cc8228076ad72c6448d28e04bba750429",
+      "script_error_count": 0,
+      "elapsed_ms": 61579,
+      "physics_hz": 30
+    }
+  ],
+  "historical_corrections": [
+    "dev01 kept parser failure.",
+    "dev02 kept failed cabin-to-winch query caused by PhysicsShapeQueryParameters.exclude copy semantics; fixed explicit reassignment.",
+    "dev03/dev04 kept roof floor-contact margin and duplicate skid-name failure; certified support RIDs are omitted only for each uniquely named skid shape, while rotor/cabin/tail keep complete native floor queries.",
+    "flight_final01 kept 1.583m physical return vs 1.5m fixture threshold; reverse release trigger changed from 2.7m to 2.4m so actual braking returns within original tolerance.",
+    "rope_final01 and flight_final02 preserve only host-input-hash drift failure during root integration; all behavior assertions passed."
+  ]
+}

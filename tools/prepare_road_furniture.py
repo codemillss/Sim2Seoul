@@ -3,6 +3,7 @@ from pathlib import Path
 from shapely.geometry import Polygon, LineString, Point, MultiPoint, shape
 from shapely.ops import unary_union, substring, voronoi_diagram, linemerge
 from shapely.strtree import STRtree
+from shapely import constrained_delaunay_triangles, set_precision
 from coordinate_system import CoordinateSystem
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -32,7 +33,23 @@ walk_mesh=unary_union([footprint(m) for m in world['meshes'] if m['material']=='
 solids=unary_union([footprint(m) for m in world['meshes'] if m['material'] in ['building','historic','civic','barrier']]).buffer(.25)
 private=shape(green['private_polygons'])
 forbidden=solids.union(private)
-paint_forbidden=forbidden.buffer(.00001)
+paint_forbidden=forbidden.buffer(.0005)
+# Rendering precedence only: original walk/source/permission/collision data is
+# retained. Source walk at+.055 otherwise hides asphalt+.035 and paint+.052.
+surface_masks=[]
+mask_domain=drive.difference(forbidden)
+for mesh in world['meshes']:
+ if mesh['material']!='walk':continue
+ original=footprint(mesh);removed=original.intersection(mask_domain)
+ if removed.area<.00001:continue
+ remaining=original.difference(mask_domain);triangles=[]
+ for triangle in constrained_delaunay_triangles(remaining).geoms:
+  if triangle.area<1e-10:continue
+  triangles.extend([[round(x,7),round(z,7)] for x,z in list(triangle.exterior.coords)[:3]])
+ height=mesh['vertices'][1]
+ if any(abs(mesh['vertices'][i]-height)>.000001 for i in range(1,len(mesh['vertices']),3)):raise RuntimeError('Walk clipping requires flat source display: '+mesh['id'])
+ witness=removed.representative_point()
+ surface_masks.append({'node_id':mesh['id'],'source_feature_id':mesh['metadata']['feature_id'],'source_y_m':height,'original_area_m2':original.area,'masked_drive_overlap_m2':removed.area,'occlusion_witness_xz':[witness.x,witness.y],'retained_area_m2':remaining.area,'retained_triangles_xz':triangles,'basis':'render_only_walk_minus_source_drive_outside_solids_private; original nodes/colliders/permissions retained'})
 main_names=('세종대로','서소문로','소공로','을지로','남대문로','무교로','청계천로')
 main_features={s:features[s] for s in drives if features[s]['source_tags'].get('name') in main_names and features[s]['source_tags'].get('highway') in ['primary','secondary','tertiary']}
 road_by_name={name:unary_union([drives[s] for s,f in main_features.items() if f['source_tags']['name']==name]) for name in main_names}
@@ -67,6 +84,49 @@ for name in sorted(main_names):
  if median.geom_type=='MultiLineString':median=linemerge(median)
  median=median.simplify(.16)
  paired_medians.append({'name':name,'geometry':median,'positive_source_ids':[s for s in directions if directions[s]==1],'negative_source_ids':[s for s in directions if directions[s]==-1],'source_ids':list(directions),'basis':'game-authored nearest-direction partition of overlapping source display corridors,2m centreline samples,not real median survey'})
+# South Sejong-daero has asymmetric 3/8-lane source display widths. A
+# centreline-only Voronoi bisector falls outside the narrow display there.
+# Place a shared GAME divider halfway between the facing source display
+# edges, requiring the complete stripe band to fit retained source asphalt.
+# Original geometry, lane tags and actor paths are untouched.
+south_east=[f'osm:way:{number}:highway_line' for number in [619147735,619147729]]
+south_west=[f'osm:way:{number}:highway_line' for number in [899373686,619147734]]
+weighted_parts=[]
+for source in south_east:
+ line=LineString(features[source]['geometry']['coordinates']);wa=drives[source].area/line.length;chunk=[]
+ for step in range(int(math.ceil(line.length))+1):
+  at=line.interpolate(min(line.length,step));other=min(south_west,key=lambda key:LineString(features[key]['geometry']['coordinates']).distance(at))
+  opposite=LineString(features[other]['geometry']['coordinates']);near=opposite.interpolate(opposite.project(at));wb=drives[other].area/opposite.length
+  dx,dz=near.x-at.x,near.y-at.y;distance=math.hypot(dx,dz)
+  valid=False
+  if distance>.01:
+   centre=Point((at.x+near.x)/2+dx/distance*(wa-wb)/4,(at.y+near.y)/2+dz/distance*(wa-wb)/4)
+   valid=centre.y>=118 and drives[source].union(drives[other]).covers(centre.buffer(.32)) and not forbidden.intersects(centre.buffer(.32))
+  if valid:
+   if chunk and Point(chunk[-1]).distance(centre)>2.5:
+    if len(chunk)>1:weighted_parts.append(LineString(chunk))
+    chunk=[]
+   chunk.append((centre.x,centre.y))
+  elif chunk:
+   if len(chunk)>1:weighted_parts.append(LineString(chunk))
+   chunk=[]
+ if len(chunk)>1:weighted_parts.append(LineString(chunk))
+for median in paired_medians:
+ if median['name']!='세종대로':continue
+ supplement=unary_union(weighted_parts).difference(median['geometry'].buffer(1.1))
+ median['geometry']=linemerge(unary_union([median['geometry'],supplement]))
+ median['basis']+=';south-asymmetric-source-displays-use-facing-edge-midpoint-with-.32m-source-asphalt-band'
+# Adjacent source ways leave tiny Voronoi seams. Join only <=3m seams inside
+# the same source drive union, never across an intersection or private land.
+for median in paired_medians:
+ parts=list(median['geometry'].geoms) if median['geometry'].geom_type=='MultiLineString' else [median['geometry']] if median['geometry'].geom_type=='LineString' else []
+ bridges=[]
+ for i,a in enumerate(parts):
+  for b in parts[i+1:]:
+   ends=min(((Point(x),Point(y)) for x in [a.coords[0],a.coords[-1]] for y in [b.coords[0],b.coords[-1]]),key=lambda pair:pair[0].distance(pair[1]))
+   bridge=LineString([ends[0],ends[1]])
+   if .001<bridge.length<=3 and drive.covers(bridge.buffer(.25)) and not forbidden.intersects(bridge.buffer(.25)):bridges.append(bridge)
+ if bridges:median['geometry']=linemerge(unary_union(parts+bridges))
 catalog=read('game/assets/authored/interiors/source_catalog.json')
 entry=[]
 for rec in catalog['records']:
@@ -214,6 +274,22 @@ for crossing in crossings:
 crossings=[c for c in crossings if c['id'] not in unsupported_crossings]
 stops=[s for s in stops if s['crossing_id'] not in unsupported_crossings]
 
+# The authored loop's return curves are game junction openings. Derive
+# their swept full bus boxes from the frozen route and retain source asphalt.
+# This is paint authoring, never real U-turn permission or new collision.
+loop_asset=read('game/assets/authored/bus_service.json')
+turn_boxes=[]
+if loop_asset.get('schema_version')==2:
+ route=loop_asset['route'];points=route['xz'];radii=route['segment_radius_m']
+ for i,(p,q) in enumerate(zip(points,points[1:])):
+  if not ((p[1]>360 or p[1]<65) and float(radii[min(i,len(radii)-1)])<20):continue
+  dx,dz=q[0]-p[0],q[1]-p[1];length=math.hypot(dx,dz)
+  if length<.00001:continue
+  forward=(dx/length,dz/length);side=(-forward[1],forward[0])
+  turn_boxes.append(Polygon([(p[0]+forward[0]*along+side[0]*across,p[1]+forward[1]*along+side[1]*across) for along,across in [(-4.6,-1.3),(-4.6,1.3),(4.6,1.3),(4.6,-1.3)]]))
+turn_union=unary_union(turn_boxes)
+turn_clusters=list(turn_union.geoms) if turn_union.geom_type=='MultiPolygon' else [turn_union] if not turn_union.is_empty else []
+turn_gaps=unary_union([part.convex_hull for part in turn_clusters]).buffer(1.).intersection(drive)
 paint=[]
 def components(g):
  if g.is_empty:return []
@@ -223,12 +299,17 @@ def emit(id,kind,source,g,color='white',use_ownership=True):
  if source not in drives:return
  # Source road containment is exact; subtract old physical/visual solids and private land.
  safe=g.intersection(drives[source].buffer(-.08)).intersection(extent).difference(paint_forbidden)
+ if kind in ["lane","centre","paired_centre"]:safe=safe.difference(turn_gaps)
  if use_ownership and source in ownership:safe=safe.intersection(ownership[source])
  if kind=='edge':safe=safe.intersection(drive.boundary.buffer(.60))
+ # Godot consumes float32 vertices. Remove sub-millimetre overlay spikes in
+ # the authoring stage, rather than producing a self-intersecting contour.
+ safe=set_precision(safe,.0001).simplify(.0002,preserve_topology=True)
  for index,p in enumerate(components(safe)):
   if p.area<.006 or p.interiors:continue
   coords=[[round(x,6),round(z,6)] for x,z in list(p.exterior.coords)[:-1]]
-  paint.append({'id':id+'_'+str(index),'kind':kind,'source_feature_id':source,'color':color,'xz':coords})
+  if not Polygon(coords).is_valid:raise RuntimeError('Invalid paint after canonical float32-safe rounding: '+id)
+  paint.append({'id':id+'_'+source.split(':')[2]+'_'+str(index),'kind':kind,'source_feature_id':source,'color':color,'xz':coords})
 
 cross_masks=unary_union([LineString(c['xz']).buffer(c['width_m']/2+1.6,cap_style=2) for c in crossings])
 corridors=[]
@@ -240,16 +321,18 @@ for source,domain in drives.items():
  width=domain.area/max(length,1);lanes=max(1,min(8,int(tags.get('lanes','1').split(';')[0])))
  if width<3:continue
  # Existing G04 source-road display widths are estimates; offsets are authored.
- half=width/2-.48;offsets=[(-half,'edge',False),(half,'edge',False)]
+ half=width/2-.15;offsets=[(-half,'edge',False),(half,'edge',False)]
  if tags.get('oneway')!='yes' and width>=5.4:
   offsets.extend([(-.12,'centre',False),(.12,'centre',False)])
  elif lanes>=2 and width>=8.0:
-  # Calmer4.5m game-lane cadence. Place separators around the unchanged
-  # original1.6m-offset sedan corridor; the pilot bus is9m(two lanes) away.
-  anchor=1.6 if source in ['osm:way:1084408283:highway_line','osm:way:378453707:highway_line'] else 0.0
-  for k in range(-3,4):
-   offset=anchor+2.25+k*4.5
-   if abs(offset)<half-.65:offsets.append((offset,'lane',True))
+  # G04 source display assumed3.2m per lane. Preserve the original sedan's
+  # 1.6m right-offset lane centre, and expose only boundaries that fit the
+  # owned source display. Overlapping OSM lane tags are not added twice.
+  original_lane_anchors={r['source_binding']['feature_id']:float(r['source_binding'].get('right_offset_m',r['source_binding'].get('offset_m',0))) for r in routes}
+  anchor=original_lane_anchors.get(source,0.0)
+  for k in range(-8,9):
+   offset=anchor+1.6+k*3.2
+   if abs(offset)<half-1.6:offsets.append((offset,'lane',True))
  junction=domain.intersection(unary_union([road_by_name[n] for n in main_names if n!=tags['name']])).buffer(2.0)
  median_buffer=unary_union([m['geometry'].buffer(1.2) for m in paired_medians if source in m['source_ids']])
  for offset,kind,dashed in offsets:
@@ -257,12 +340,13 @@ for source,domain in drives.items():
   if line2.geom_type!='LineString':continue
   start=3.0
   while start<line2.length-3:
-   end=min(start+(4.0 if dashed else 24),line2.length-3)
+   end=min(start+4.0,line2.length-3) if dashed else line2.length-3
    stroke=substring(line2,start,end).buffer(.075 if kind=='lane' else .09,cap_style=2,join_style=2).difference(cross_masks).difference(junction)
    if kind=='lane':stroke=stroke.difference(median_buffer)
    emit(source+'_'+kind+'_'+str(round(offset,2))+'_'+str(round(start,2)),kind,source,stroke,'yellow' if kind=='centre' else 'white')
-   start=end+(12.0 if dashed else 0.04)
- corridors.append({'source_feature_id':source,'name':tags['name'],'source_refs':f['source_refs'],'oneway':tags.get('oneway'),'source_lanes':tags.get('lanes'),'source_xz':g['coordinates'],'display_width_m':round(width,3),'offsets_basis':'authored_calm4.5m_lane_cadence_4m_dash12m_gap; outer edges only; opposing source overlap has shared ownership;not_surveyed_lanes'})
+   start=end+(12.0 if dashed else 0.0)
+ lane_anchor={r['source_binding']['feature_id']:float(r['source_binding'].get('right_offset_m',r['source_binding'].get('offset_m',0))) for r in routes}.get(source,0.0)
+ corridors.append({'source_feature_id':source,'name':tags['name'],'source_refs':f['source_refs'],'oneway':tags.get('oneway'),'source_lanes':tags.get('lanes'),'source_xz':g['coordinates'],'display_width_m':round(width,3),'lane_anchor_offset_m':lane_anchor,'lane_centres_m':[round(lane_anchor+k*3.2,3) for k in range(-8,9) if abs(lane_anchor+k*3.2)+1.6<=width/2+.001],'painted_lane_offsets_m':[offset for offset,kind,dashed in offsets if kind=='lane'],'offsets_basis':'game3.2m_source_display_cadence_4m_dash12m_gap; original_car_centre_retained; boundaries_clipped_to_owned_direction; source_lane_tags_not_added_across_overlapping_ways;not_surveyed_lanes'})
 
 def lines(g):
  if g.is_empty:return []
@@ -338,8 +422,27 @@ for index,a in enumerate(stops):
   if dot<.65:axis_conflicts.append([a['id'],b['id'],dot])
 if axis_conflicts:raise RuntimeError('Perpendicular nearby vehicle approaches require a separate coordinated phase: '+repr(axis_conflicts))
 
-paths=['game/resources/world_geometry/world.json','game/data/generated/traffic.json','game/assets/authored/neighborhood_population.json','game/assets/authored/terrain_heightfield.json','game/assets/authored/interiors/source_catalog.json','data/processed/features.json','data/reports/d03_crossing_candidates.json','config/region.json','tools/coordinate_system.py']
+paths=['game/assets/authored/bus_service.json','game/resources/world_geometry/world.json','game/data/generated/traffic.json','game/assets/authored/neighborhood_population.json','game/assets/authored/terrain_heightfield.json','game/assets/authored/interiors/source_catalog.json','data/processed/features.json','data/reports/d03_crossing_candidates.json','config/region.json','tools/coordinate_system.py']
 out={'schema_version':1,'task':'EXP23_street_detail','coordinate_space':'source_local_xz_metres','source_hashes':{'res://'+p.removeprefix('game/'):sha(p) for p in paths if p.startswith('game/')},'source_features_sha256':sha('data/processed/features.json'),'provenance':{'source':'Existing OpenStreetMap-derived road/display triangles, existing traffic conflicts and all original entry candidates','paint':'Calm main-road-only4m dashes/12m gaps with authored4.5m lane cadence; shared ownership of overlapping opposite-direction source display surfaces, one shared double-yellow divider and outer-union white edges only. Source solids/private and intersections/crossings remain clear; not surveyed lane markings','terrain':'After EXP21 terrain.loaded; exact triangle-split runtime projection once, .052m relative paint offset above base TIN, road display .035m','schedules':'46 second coordinated game cycle, protected29-43s pedestrian phase with final5s flashing; never a live Seoul signal plan','lamp':'Authored dark slim tapered poles, short horizontal LED heads, base flange/service door; no imported photograph texture','external_references':[{'url':'https://news.seoul.go.kr/gov/archives/539324','checked':'2026-10-19','observation':'Official Seoul description separates signal, streetlight and combined S-Pole models and LED lighting. Used as functional integration reference, not placement/dimensions.'},{'url':'https://mediahub.seoul.go.kr/news/article/newsArticlePrintPopup.do?articleNo=2001844','checked':'2026-10-19','observation':'Official Seoul article describes red/green pedestrian information coordinated at crossings. Text reviewed; no claim to reconstruct the photographed location.'}]},'cycle':{'duration_s':46.0,'vehicle_green_end_s':24.0,'vehicle_amber_end_s':27.0,'pedestrian_green_start_s':29.0,'pedestrian_green_end_s':43.0,'pedestrian_flash_start_s':38.0,'flash_period_s':.5,'timing_basis':'game_authored_coordinated_not_real_signal_timing'},'policy':{'paint_y_above_TIN_m':.052,'new_collisions':False,'source_geometry_changed':False,'existing_route_arrays_changed':False,'real_schedule':False,'lamp_active_standard':12,'lamp_active_low':6,'lamp_range_m':16,'lamp_max_distance_m':70,'lane_dash_m':4.0,'lane_gap_m':12.0,'authored_lane_cadence_m':4.5,'lane_paint_width_m':.15,'pedestrian_heads':'One physical inward-facing far-end head on each road bank; both approaches share phase'},'corridors':corridors,'paired_direction_corridors':[{'name':m['name'],'positive_source_ids':m['positive_source_ids'],'negative_source_ids':m['negative_source_ids'],'basis':m['basis'],'median_xz':[list(line.coords) for line in lines(m['geometry'])]} for m in paired_medians],'paint':paint,'crossings':crossings,'source_signal_coverage':signal_coverage,'stop_lines':stops,'signals':signal_anchors,'pedestrian_signals':pedestrian_signals,'lamps':lamps,'counts':{'road_corridors':len(corridors),'paint_polygons':len(paint),'crossings':len(crossings),'signal_poles':len(signal_anchors),'pedestrian_heads':len(pedestrian_signals),'lamps_planned':len(lamps)},'preflight':{'source_solid_private_paint_overlap_m2':round(sum(Polygon(p['xz']).intersection(forbidden).area for p in paint),9),'source_road_outside_paint_m2':round(sum(Polygon(p['xz']).difference(drives[p['source_feature_id']]).area for p in paint),9),'all_entrance_corridors_lamp_overlap_m2':round(sum(Point(l['xz']).buffer(.25).intersection(entry_union).area for l in lamps),9),'white_lane_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='lane'),3),'white_edge_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='edge'),3),'nearby_perpendicular_green_approach_pairs':len(axis_conflicts),'paired_yellow_area_m2':round(sum(Polygon(p['xz']).area for p in paint if p['kind']=='paired_centre'),3)}}
+out['task']='EXP25_road_surface_and_signals'
+out['surface_masks']=surface_masks
+out['curb_crossing_masks']=[]
+for curb in read('game/assets/authored/street_curbs.json')['segments']:
+ band=LineString(curb['xz']).buffer(.7,cap_style=2)
+ for crossing in crossings:
+  exact=LineString(crossing['xz']).buffer(crossing['width_m']/2,cap_style=2)
+  if band.intersection(exact).area<.00001:continue
+  opening=exact.buffer(.15,join_style=2)
+  witness=band.intersection(exact).representative_point()
+  out['curb_crossing_masks'].append({'curb_id':curb['id'],'crossing_id':crossing['id'],'mask_xz':list(map(list,list(opening.exterior.coords)[:-1])),'original_overlap_m2':band.intersection(exact).area,'native_witness_xz':[witness.x,witness.y],'clearance_m':.15,'basis':'split_only_existing_game_authored_curb_at_source_crossing; source_colliders_unchanged'})
+out['policy']['authored_lane_cadence_m']=3.2
+out['loop_turn_paint_openings']={'bus_asset_sha256':sha('game/assets/authored/bus_service.json'),'game_only':True,'full_bus_box_samples':len(turn_boxes),'source_asphalt_only':True,'mask_area_m2':turn_gaps.area,'mask_rings_xz':[list(map(list,list(p.exterior.coords)[:-1])) for p in components(turn_gaps)]}
+out['policy']['render_precedence']='Existing drive asphalt+.035, paint+.052; clip only walk render overlaps, keep walk+.055 outside drive'
+out['provenance']['paint']='Source-display3.2m lane cadence,4m dashes/12m gaps; shared continuous double-yellow median on paired directions and outer-union edges. Original1.6m sedan centre retained. Boundaries clipped to owned direction; conflicting overlapping source lane tags are not a measured lane-count claim.'
+out['provenance']['surface_mask']='Source walk render mesh only minus source drive outside solids/private. Original source files/nodes/colliders/public-walk permissions unchanged. Terrain projection is applied once to newly authored flat vertices after terrain.loaded.'
+out['preflight']['walk_drive_render_overlap_before_m2']=round(walk_mesh.intersection(mask_domain).area,6)
+out['preflight']['masked_walk_source_meshes']=len(surface_masks)
+out['preflight']['game_curb_crossing_openings']=len(out['curb_crossing_masks'])
 out['authoring']={'generator':'tools/prepare_road_furniture.py','generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'library':'Shapely2.2.0','recipe':'Source-safe game geometry; no real lane count, traffic timing or surveyed-furniture claim.'}
 serialized=json.dumps(out,ensure_ascii=False,separators=(',',':'))+'\n'
 target=ROOT/'game/assets/authored/road_furniture.json'

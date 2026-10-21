@@ -51,7 +51,10 @@ func _protected(point: Vector3,half_width := .26,half_depth := .34) -> bool:
 	if box.position.x<-room.width*.5+.4 or box.end.x>room.width*.5-.4 or box.position.z<-room.depth*.5+.4 or box.end.z>room.depth*.5-.4:return true
 	for reserved: AABB in room.detail_kit.protected_zones:
 		if reserved.intersects(box):return true
-	if is_instance_valid(room.escalator) and level in [0,1] and room.escalator.reservation.intersects(box):return true
+	if is_instance_valid(room.escalator):
+		var reservation: AABB=room.escalator.reservation_for_level(level)
+		reservation.position.y=-.2;reservation.size.y=room.floor_height+.4
+		if reservation.has_volume() and reservation.intersects(box):return true
 	var y: float=level*room.floor_height+.08
 	for point_reserved in [room.to_local(room.floor_spawn(level)),room.to_local(room.elevator_point(level))]:
 		if Vector2(point.x-point_reserved.x,point.z-point_reserved.z).length()<1.35:return true
@@ -102,6 +105,8 @@ func activate_floor(next: int) -> void:
 	for person: Node3D in people:
 		remove_child(person);person.queue_free()
 	people.clear();records.clear();room.people.clear();level=next
+	if level<0:
+		programme="game_basement_link";_solids.clear();_occupied.clear();return
 	programme=String(room.detail_kit.level_profiles[level].profile_id);_cache_floor()
 	var front: float=room.depth*.5
 	var profile: String=room.detail_kit.profile_id

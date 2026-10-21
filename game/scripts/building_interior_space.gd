@@ -26,6 +26,8 @@ var detail_kit: RefCounted
 var escalator: Node3D
 var guest_doors: Array[Dictionary]=[]
 var population: Node3D
+var authored_basement_count := 0
+var basement_link: Dictionary = {}
 
 func setup(building: Dictionary, origin: Vector3) -> bool:
 	if _ready_space or not origin.is_finite():return false
@@ -34,6 +36,7 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 	depth = float(spec.get("depth",20.0))
 	floor_height = float(spec.get("floor_height",3.6))
 	floor_count = int(spec.get("floor_count",1))
+	if not _configure_authored_basement():return false
 	if not is_finite(width) or not is_finite(depth) or not is_finite(floor_height):return false
 	if width<12.0 or depth<16.0 or floor_height<3.0 or floor_height>6.0 or floor_count<1 or floor_count>60:return false
 	position = origin
@@ -45,7 +48,7 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 	stair_back = -depth*.5+.65
 	stair_mid_back = stair_back+1.40
 	stair_front = stair_mid_back+stair_run
-	interior_bounds = AABB(origin+Vector3(-width*.5+.32,-.35,-depth*.5+.32),Vector3(width-.64,floor_height*floor_count+.65,depth-.64))
+	interior_bounds = AABB(origin+Vector3(-width*.5+.32,-float(authored_basement_count)*floor_height-.35,-depth*.5+.32),Vector3(width-.64,floor_height*(floor_count+authored_basement_count)+.65,depth-.64))
 	_make_materials()
 	detail_kit = preload("res://scripts/interior_detail_kit.gd").new()
 	detail_kit.setup(self)
@@ -60,6 +63,7 @@ func setup(building: Dictionary, origin: Vector3) -> bool:
 		_build_elevator(level)
 		_build_furniture(level)
 		_build_lighting(level)
+	if authored_basement_count>0:_build_authored_basement()
 	if is_instance_valid(escalator):escalator.build()
 	detail_kit.finish()
 	_flush_batches()
@@ -141,12 +145,14 @@ func _sign(title: String, text: String, point: Vector3, font_size := 42, face_fr
 	return sign
 
 func _build_shell() -> void:
-	var height := floor_height*floor_count
-	_box("WestWall",Vector3(.24,height,depth+.4),Vector3(-width*.5-.12,height*.5,0),"wall",true)
-	_box("EastWall",Vector3(.24,height,depth+.4),Vector3(width*.5+.12,height*.5,0),"wall",true)
-	_box("RearWall",Vector3(width,height,.24),Vector3(0,height*.5,-depth*.5-.12),"wall",true)
-	_box("FrontWall",Vector3(width,height,.24),Vector3(0,height*.5,depth*.5+.12),"wall",true)
-	_box("Roof",Vector3(width+.4,.24,depth+.4),Vector3(0,height+.12,0),"ceiling",true)
+	var above_height := floor_height*floor_count
+	var height := above_height+floor_height*authored_basement_count
+	var center_y := (above_height-floor_height*authored_basement_count)*.5
+	_box("WestWall",Vector3(.24,height,depth+.4),Vector3(-width*.5-.12,center_y,0),"wall",true)
+	_box("EastWall",Vector3(.24,height,depth+.4),Vector3(width*.5+.12,center_y,0),"wall",true)
+	_box("RearWall",Vector3(width,height,.24),Vector3(0,center_y,-depth*.5-.12),"wall",true)
+	_box("FrontWall",Vector3(width,height,.24),Vector3(0,center_y,depth*.5+.12),"wall",true)
+	_box("Roof",Vector3(width+.4,.24,depth+.4),Vector3(0,above_height+.12,0),"ceiling",true)
 	# Opaque entry glazing encloses the detached interior scene completely.
 	_box("ExitDoor",Vector3(3.2,2.65,.08),Vector3(0,1.325,depth*.5-.06),"glass")
 	for x in [-1.65,0.0,1.65]:_box("ExitDoorFrame",Vector3(.07,2.75,.12),Vector3(x,1.375,depth*.5-.13),"steel")
@@ -156,8 +162,8 @@ func _build_shell() -> void:
 func _build_floor(level: int) -> void:
 	var y := level*floor_height
 	var floor_body: StaticBody3D
-	if level==0:
-		floor_body = _box("Floor0",Vector3(width,.20,depth),Vector3(0,y-.1,0),"floor",true)
+	if level==-authored_basement_count:
+		floor_body = _box("Floor%d"%level,Vector3(width,.20,depth),Vector3(0,y-.1,0),"floor",true)
 	else:
 		# Cut the complete stairwell out of upper slabs, including the headroom
 		# above both flights. The common front landing joins the rest of the floor.
@@ -166,9 +172,9 @@ func _build_floor(level: int) -> void:
 		var hole_back := stair_back
 		var hole_front := stair_front+.12
 		var east_size := width*.5-hole_right
-		if level==1 and is_instance_valid(escalator):
+		if is_instance_valid(escalator) and escalator.opening_for_level(level).has_area():
 			# A real slab opening, with the original stairwell still cut separately.
-			var hole: Rect2=escalator.opening
+			var hole: Rect2=escalator.opening_for_level(level)
 			var sections := [Rect2(hole_right,-depth*.5,hole.position.x-hole_right,depth),Rect2(hole.end.x,-depth*.5,width*.5-hole.end.x,depth),Rect2(hole.position.x,-depth*.5,hole.size.x,hole.position.y+depth*.5),Rect2(hole.position.x,hole.end.y,hole.size.x,depth*.5-hole.end.y)]
 			for section_index in range(sections.size()):
 				var section: Rect2=sections[section_index]
@@ -185,7 +191,7 @@ func _build_floor(level: int) -> void:
 		_rail("StairwellGuard%d"%level,Vector3(hole_right,y,hole_back+.2),Vector3(hole_right,y,hole_front-.25))
 	floor_bodies.append(floor_body)
 	var title := String(spec.get("title","건물"))
-	_sign("FloorTitle%d"%level,title+" · %d층"%(level+1),Vector3(minf(width*.12,3.0),y+floor_height*.70,-depth*.5+.15),48)
+	_sign("FloorTitle%d"%level,title+(" · B1 · 게임 연결통로" if level<0 else " · %d층"%(level+1)),Vector3(minf(width*.12,3.0),y+floor_height*.70,-depth*.5+.15),48)
 	_sign("StairSign%d"%level,"계단 ↑ ↓",Vector3(stair_left+stair_width+.12,y+2.05,stair_front+1.35),30)
 	# A broad, low contrast floor stripe makes the route visible without blocking it.
 	_box("CirculationStripe",Vector3(.045,.004,depth-2.4),Vector3(0,y+.002,0),"stripe")
@@ -254,14 +260,18 @@ func _build_elevator(level: int) -> void:
 	for side in [-1.0,1.0]:_box("ElevatorFrame",Vector3(.12,2.7,.18),Vector3(x+side*1.14,y+1.35,z-.03),"dark")
 	_box("ElevatorLintel",Vector3(2.4,.12,.18),Vector3(x,y+2.69,z-.03),"dark")
 	_box("ElevatorCall",Vector3(.15,.30,.10),Vector3(x+1.43,y+1.18,z-.10),"dark")
-	_sign("ElevatorSign%d"%level,"엘리베이터 · %d층"%(level+1),Vector3(x,y+2.96,z-.14),25,false)
+	_sign("ElevatorSign%d"%level,"엘리베이터 · "+("B1 · 게임 연결통로" if level<0 else "%d층"%(level+1)),Vector3(x,y+2.96,z-.14),25,false)
 	_box("ElevatorWaitingPad",Vector3(2.1,.005,1.55),Vector3(x,y+.003,z-1.40),"stripe")
 
 func _build_furniture(level: int) -> void:
 	# Reserve only the connecting floors. All other source-sized programmes keep
 	# their previous layout; solid furnishings cannot enter a ride or landing.
-	var reserved := is_instance_valid(escalator) and level in [0,1]
-	if reserved:detail_kit.protected_zones.append(escalator.reservation)
+	var reservation: AABB=escalator.reservation_for_level(level) if is_instance_valid(escalator) else AABB()
+	var reserved := reservation.has_volume()
+	if reserved:
+		# Furniture tests use floor-local XZ reservations before adding level Y.
+		reservation.position.y=-.2;reservation.size.y=floor_height+.4
+		detail_kit.protected_zones.append(reservation)
 	detail_kit.build_level(level)
 	if reserved:detail_kit.protected_zones.pop_back()
 
@@ -326,10 +336,10 @@ func _make_people() -> void:
 	population=preload("res://scripts/interior_population.gd").new();add_child(population);population.setup(self)
 
 func set_active_floor(level: int) -> void:
-	var next := clampi(level,0,floor_count-1)
+	var next := clampi(level,-authored_basement_count,floor_count-1)
 	if next==active_floor:return
 	active_floor = next
-	if detail_kit:detail_kit.set_active_floor(next)
+	if detail_kit:detail_kit.set_active_floor(maxi(0,next))
 	for child in get_children():
 		if child is OmniLight3D:
 			var light: OmniLight3D = child
@@ -338,6 +348,8 @@ func set_active_floor(level: int) -> void:
 
 func interior_snapshot() -> Dictionary:
 	var result: Dictionary=detail_kit.snapshot() if detail_kit else {}
+	result["authored_basement_count"]=authored_basement_count
+	result["basement_link"]=basement_link.duplicate(true)
 	result["escalator"]=escalator.snapshot() if is_instance_valid(escalator) else {}
 	result["population"]=population.snapshot() if is_instance_valid(population) else {}
 	result["guest_room_doors"]=guest_door_snapshot()
@@ -353,25 +365,25 @@ func _update_people(delta: float) -> void:
 		population.activate_floor(active_floor);population.step(delta)
 
 func floor_spawn(level: int) -> Vector3:
-	return to_global(Vector3(0,float(clampi(level,0,floor_count-1))*floor_height+.08,depth*.5-3.5))
+	return to_global(Vector3(0,float(clampi(level,-authored_basement_count,floor_count-1))*floor_height+.08,depth*.5-3.5))
 
 func elevator_point(level: int) -> Vector3:
-	return to_global(Vector3(-width*.5+2.2,float(clampi(level,0,floor_count-1))*floor_height+.08,depth*.5-1.65))
+	return to_global(Vector3(-width*.5+2.2,float(clampi(level,-authored_basement_count,floor_count-1))*floor_height+.08,depth*.5-1.65))
 
 func exit_point() -> Vector3:
 	return to_global(Vector3(0,.08,depth*.5-.85))
 
 func floor_index_at(point: Vector3) -> int:
-	return clampi(int(floor((to_local(point).y+.12)/floor_height)),0,floor_count-1)
+	return clampi(int(floor((to_local(point).y+.12)/floor_height)),-authored_basement_count,floor_count-1)
 
 func stair_path(from_floor: int, ascending := true) -> Array[Vector3]:
 	var result: Array[Vector3] = []
 	if not ascending:
-		if from_floor<=0 or from_floor>=floor_count:return result
+		if from_floor<=-authored_basement_count or from_floor>=floor_count:return result
 		result = stair_path(from_floor-1,true)
 		result.reverse()
 		return result
-	if from_floor<0 or from_floor>=floor_count-1:return result
+	if from_floor<-authored_basement_count or from_floor>=floor_count-1:return result
 	var base := from_floor*floor_height+.08
 	var left_x := stair_left+stair_width*.5
 	var right_x := stair_left+stair_width*1.5+.25
@@ -387,3 +399,37 @@ func stair_path(from_floor: int, ascending := true) -> Array[Vector3]:
 		result.append(to_global(Vector3(right_x,base+floor_height*.5+t*floor_height*.5,lerpf(stair_mid_back,stair_front,t))))
 	result.append(to_global(Vector3(right_x,base+floor_height,stair_front+.90)))
 	return result
+
+func _configure_authored_basement() -> bool:
+	var path: String="res://assets/authored/game_underground_connections.json"
+	if not FileAccess.file_exists(path):return true
+	var raw: Variant=JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not raw is Dictionary or raw.get("schema_version")!=1 or not raw.get("links") is Array:return false
+	if raw.get("source_world_sha256")!=FileAccess.get_sha256("res://resources/world_geometry/world.json") or raw.get("source_catalog_sha256")!=FileAccess.get_sha256("res://assets/authored/interiors/source_catalog.json"):return false
+	for link: Dictionary in raw.links:
+		if String(link.get("building_id",""))!=String(spec.get("id","")):continue
+		if int(link.get("source_floor_count",0))!=floor_count or absf(float(link.get("source_floor_height",0.))-floor_height)>.0001:return false
+		if int(link.get("authored_basement_count",0))!=1:return false
+		authored_basement_count=1;basement_link=link.duplicate(true);break
+	return true
+
+func _build_authored_basement() -> void:
+	# Additional game level; source above-ground count, height, rectangle and
+	# source colliders stay unchanged. The old U stair now reaches B1 physically.
+	_build_floor(-1);_build_stairs(-1);_build_elevator(-1);_build_lighting(-1)
+	var y: float=-floor_height
+	var portal: Vector3=to_local(basement_portal_point())
+	_box("GameB1PortalBoard",Vector3(3.4,2.35,.07),Vector3(portal.x,y+1.35,depth*.5-.18),"dark")
+	var label: Label3D=_sign("GameB1StationLink","E · 시청역 게임 연결통로\n지하철 대합실로 돌아가기\n게임 지하 연결통로",Vector3(portal.x,y+1.55,depth*.5-.25),27,false);label.pixel_size=.0043
+	var guide: Label3D=_sign("GameBasementWayfinding","B1 · 게임 연결통로\n← 계단 · 엘리베이터로 1층/전층\n시청역 연결문 →",Vector3(0,y+2.45,depth*.5-5.1),26);guide.pixel_size=.005
+	for z: float in [depth*.5-8.,depth*.5-13.]:
+		_box("B1WaitingBench",Vector3(.65,.42,2.4),Vector3(width*.5-1.0,y+.21,z),"seat",true)
+		_box("B1WallMap",Vector3(.07,1.2,2.1),Vector3(width*.5-.18,y+1.6,z),"wood")
+	for z: float in [stair_front+2.,0.,depth*.5-7.]:
+		var sign: Label3D=_sign("B1RouteDirection","← 1층/전층 계단 · 승강기\n게임 연결통로 · 시청역 →",Vector3(width*.25,y+2.2,z),24);sign.pixel_size=.004
+
+func basement_portal_point() -> Vector3:
+	return to_global(Vector3(width*.25,-floor_height+.08,depth*.5-2.0)) if authored_basement_count>0 else Vector3.INF
+
+func basement_arrival_point() -> Vector3:
+	return basement_portal_point()+Vector3(-2.0,0.,-1.5) if authored_basement_count>0 else Vector3.INF

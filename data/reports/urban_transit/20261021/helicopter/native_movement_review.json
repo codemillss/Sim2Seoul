@@ -1,0 +1,60 @@
+{
+  "task": "EXP25_HELICOPTER_NATIVE_MOVEMENT_REVIEW",
+  "report": "data/reports/urban_transit/20261021/helicopter/rope_headless_final03.json",
+  "report_sha256": "55e8409fc5a0db76e9ba56bc63a31e169b8467a9b537cfc3962d8f93ea1e358c",
+  "behavior_checks": {
+    "passed": 38,
+    "total": 38
+  },
+  "full_report_result": "FAIL",
+  "source_hash_only_failure": [
+    "res://scripts/explore_walk.gd"
+  ],
+  "raw_log_gzip": "data/reports/urban_transit/20261021/helicopter/rope_headless_final03.log.gz",
+  "raw_log_sha256": "f0f6bfb2477bac9dab1fe3ec0acc43c69414d3b37c2280ff3c928ffb1bbdf1ba",
+  "script_error_count": 0,
+  "review": {
+    "movement": "Reviewed native player.move_and_collide after full retained-capsule sweep. Distance is measured from actual body position; contact shortfall above 2mm pauses with native_capsule_contact. All 38 behavior assertions passed in the single requested run.",
+    "identity_basis_finding": "After successful rope landing, player body retains aircraft yaw while _restore_player restores only Visual local transform. free_roam_player.gd:377-378 computes target yaw from world last_direction but assigns visual.rotation.y locally, so global avatar facing inherits the extra aircraft yaw. Recommend player.global_basis=Basis.IDENTITY immediately before successful-rope _restore_player(true), without modifying position/capsule or cancelled-to-pilot branch. Reported to root; no production edits by this reviewer.",
+    "host_drift": "Root announced successful teleport/reset B1 cancel additions during this run and requested preserving the hash-only failure without rerun. Root owns final native run after all modules freeze."
+  },
+  "loaded_source_hashes": {
+    "res://../tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+    "res://../tests/game/check_city_helicopter_rope.gd": "a240501cf63689be9e4bb0a09dc1dd90119eb2fb29733e5f827a02f45ce68c85",
+    "res://assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_helicopter_rope.gd": "c0f326cb11a3ccb2ba89e350c1cd737a9a130a8e933b2797e1313a2a0bdeb761",
+    "res://scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+    "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+    "res://scripts/explore_walk.gd": "61f394414f329371bfd7bf182e89bc7a65fc5230dabc6dd357b9e19a573cb62a",
+    "res://scripts/interior_visit.gd": "df4fad88cca53871ed228551674dc2b5bb5e256494b911766cada34d77894565",
+    "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+    "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+    "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  },
+  "scope": "One headless expanded suite after root native movement change. No new features, native graphics or OS input verification.",
+  "finished_source_hashes": {
+    "res://../tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+    "res://../tests/game/check_city_helicopter_rope.gd": "a240501cf63689be9e4bb0a09dc1dd90119eb2fb29733e5f827a02f45ce68c85",
+    "res://assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_helicopter_rope.gd": "c0f326cb11a3ccb2ba89e350c1cd737a9a130a8e933b2797e1313a2a0bdeb761",
+    "res://scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+    "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+    "res://scripts/explore_walk.gd": "b3e2ada3cb5f0a12b348ac43e90160dacdc94b6f0642a48eb734a97f12e5d9a3",
+    "res://scripts/interior_visit.gd": "df4fad88cca53871ed228551674dc2b5bb5e256494b911766cada34d77894565",
+    "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+    "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+    "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  }
+}

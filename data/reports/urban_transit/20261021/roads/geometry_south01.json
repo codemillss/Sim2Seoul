@@ -1,0 +1,114 @@
+{
+	"captures": [],
+	"checks": [
+		{
+			"evidence": {
+				"error": "",
+				"geometry_only": true,
+				"whole_host_runtime_ok": true
+			},
+			"name": "production_road_and_committed_TIN_ready",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"original_cars": 14,
+				"source_records": 692
+			},
+			"name": "original_692_source_records_and_14_cars",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"covering_walk_nodes": [],
+				"original_valid_drive_overlap_m2": 6634.127543,
+				"source_nodes_and_children_unchanged": true,
+				"witnesses": 104
+			},
+			"name": "actual_104_walk_render_overlaps_removed_preserving_source_nodes",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"native_mesh_samples": 250,
+				"wrong_height_nodes": []
+			},
+			"name": "replacement_walk_meshes_projected_once",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": [],
+				"openings": [
+					{
+						"crossing_id": "source_node_921242887",
+						"curb_id": "curb_12",
+						"hit": "TerrainSupport",
+						"native_ray_point": [
+							99.2350845336914,
+							-0.8172886967659,
+							-5.57511234283447
+						],
+						"original_overlap_m2": 0.439543250602555,
+						"passed": true
+					}
+				]
+			},
+			"name": "native_curb_crossing_opening_keeps_ground_support",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"errors": 0,
+				"samples": 38702,
+				"white_and_yellow_batches": 2
+			},
+			"name": "every_actual_paint_face_matches_native_TIN",
+			"passed": true
+		},
+		{
+			"evidence": {
+				"pedestrian_heads": 14,
+				"vehicle_heads": 15,
+				"wrong_fronts": []
+			},
+			"name": "both_direction_vehicle_and_pedestrian_fronts_are_physical_single_sided",
+			"passed": true
+		},
+		{
+			"evidence": {},
+			"name": "frozen_road_inputs_match",
+			"passed": true
+		}
+	],
+	"display": "headless",
+	"geometry_only": true,
+	"result": "PASS",
+	"scenario_starts": [],
+	"scope": "Actual source-node render mesh readback and native terrain/curb rays. Without --geometry-only, also one natural authored signal cycle, original-car red/green journey and seven real-controller crossings. Only explicit player starts; original actor routes/positions are not rewritten. Native pixels need separate visual review; no real Seoul lane/signal survey claim.",
+	"source_sha256": {
+		"res://../tests/game/check_building_visits.gd": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921",
+		"res://../tests/game/check_road_surface_detail.gd": "562c54e63372298f674b310f5d5b4bc7a5342c327952190eed673158d30624e9",
+		"res://../tests/game/check_street_scene.gd": "1ce16c86be68e2b2a58f5c586f3b997d53ba63bae41472a697a96cf44fd81244",
+		"res://../tests/game/check_street_transit.gd": "8834055ceedfb8dd228a7376f022ee8e73f8232aa8ad43f6ac97d758c173e203",
+		"res://../tools/prepare_road_furniture.py": "e849e94a6951f58d96a6159f9d9810c4028021758cdedab2d0d946be5f6ff8b9",
+		"res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+		"res://assets/authored/road_furniture.json": "a6fdb874a68a732190995ae68a0349f9bf09c1bd6dc23db0e7b47afd69c64dea",
+		"res://assets/authored/street_curbs.json": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc",
+		"res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+		"res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+		"res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+		"res://scripts/street_curbs.gd": "3dda9d29bd43e9825f51a7e6694ddcf639d42bce014d3aff013dd0d71d362cd6",
+		"res://scripts/street_network_detail.gd": "367f0e64a1fe00b91d9876645b3f5d150bc19c7adf2a9e36125364d1a1d163b5",
+		"res://scripts/terrain_geometry_warp.gd": "115f1330e2b39dcbaafec14349be4efe4ef630b986e637e1b8e0766e3b38ef68",
+		"res://scripts/terrain_scene_binding.gd": "92f6bb276ac75794c327ee1fc9d9660c2c416a8b9a94e9bc9f7c002fe4b42c8b"
+	},
+	"summary": {
+		"checks": 8,
+		"failed": 0,
+		"physics_hz": 30,
+		"wall_usec": 6599476
+	},
+	"task": "EXP25_ROAD_SURFACES",
+	"walks": []
+}

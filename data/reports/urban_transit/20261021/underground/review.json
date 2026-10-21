@@ -1,0 +1,90 @@
+{
+  "kind": "read_only_static_integration_review",
+  "reviewed_at": "2026-10-21T17:47:52.315712+09:00",
+  "result": "No essential transition omission found within inspected B1/escalator integration",
+  "findings": [],
+  "checked": [
+    {
+      "contract": "Sole fresh E and matching hint priority in active station/building",
+      "anchors": [
+        "game/scripts/interior_visit.gd:397",
+        "game/scripts/interior_visit.gd:458",
+        "game/scripts/explore_walk.gd:560",
+        "game/scripts/explore_walk.gd:598"
+      ]
+    },
+    {
+      "contract": "Native target validation before current owner release in both portal directions; pending menu/owner/position changes cancel without release",
+      "anchors": [
+        "game/scripts/game_underground_connections.gd:74",
+        "game/scripts/game_underground_connections.gd:102",
+        "game/scripts/game_underground_connections.gd:115"
+      ]
+    },
+    {
+      "contract": "B1 index -1 separate from original source aboveground count; cabin ordinal mapping and roof index retained",
+      "anchors": [
+        "game/scripts/interior_visit.gd:557",
+        "game/scripts/interior_visit.gd:600",
+        "game/scripts/game_basement_elevator_cabin.gd:8"
+      ]
+    },
+    {
+      "contract": "Root successful shortcut/reset cancellation, SFC source entrance shortcut selects real SFC catalog id",
+      "anchors": [
+        "game/scripts/explore_walk.gd:326",
+        "game/scripts/explore_walk.gd:519",
+        "game/scripts/explore_walk.gd:808"
+      ]
+    },
+    {
+      "contract": "Three native escalator pairs with level-specific slab holes and furniture/population reservations; test exercises all six legs, four intermediate transfers and retained U stairs",
+      "anchors": [
+        "game/scripts/interior_escalator.gd:31",
+        "game/scripts/building_interior_space.gd:175",
+        "game/scripts/building_interior_space.gd:269",
+        "game/scripts/interior_population.gd:54",
+        "tests/game/check_multifloor_escalator.gd:141"
+      ]
+    },
+    {
+      "contract": "Native-only captures use actual carried/arrival player and production rig with explicit orbit; audio test cleanup occurs after functional evidence saved",
+      "anchors": [
+        "tests/game/check_multifloor_escalator.gd:97",
+        "tests/game/check_multifloor_escalator.gd:148",
+        "tests/game/check_multifloor_escalator.gd:190",
+        "tests/game/check_multifloor_escalator.gd:201"
+      ]
+    }
+  ],
+  "existing_headless_evidence": [
+    {
+      "report": "history_archive_01/game_B1/sim2seoul-underground-final01.json",
+      "passed": 29,
+      "total": 29,
+      "scope": "Before cleanup-only test amendment; not new engine execution in this review"
+    },
+    {
+      "report": "history_archive_01/escalator/sim2seoul-multifloor-escalator-03.json",
+      "passed": 48,
+      "total": 48,
+      "scope": "Before test cleanup/native capture additions; not new engine execution in this review"
+    }
+  ],
+  "limits": [
+    "Static inspection only; no engine, native visual or ordinary OS input acceptance supplied by this review. Root owns current native reruns and source freeze.",
+    "Subsequent live transport-shaking feedback is a separate presentation regression being investigated under transport-camera task; this review does not clear that issue.",
+    "Connections and multi-floor interior layouts are authored game content, not real surveyed underground networks/plans."
+  ],
+  "sha256_at_review": {
+    "game/scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+    "game/scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+    "game/scripts/game_underground_connections.gd": "e70bbdc98414e05b1efe180211a466edd655e10f425f91485e1a2155d0d3ea45",
+    "game/scripts/game_basement_elevator_cabin.gd": "643c86a529b45af0aebedbdecfcaf182131152fc8a39c9884cdc3963ca8d6df3",
+    "game/scripts/building_interior_space.gd": "83eef95fa5e19615f6c0c43c54f075ec4663cb5a005cdfae57194d8773c54807",
+    "game/scripts/interior_escalator.gd": "cd75501f96c117d6ec09be878f143d14d7acd916a57d5bd90f6210822d0636a0",
+    "game/scripts/interior_population.gd": "756dbc8baa22d4f3facb2577f7f9fb5fc5857a6a82f7dc9be6fdf812640588b2",
+    "tests/game/check_game_underground_connections.gd": "74e9b1aaa6b0237184c9ab02f67fe9bd62ad28f5824a189f573b12295accbcfd",
+    "tests/game/check_multifloor_escalator.gd": "e2282b7fc5fd109489ab3fe898ce598f89a4e064237b5016c6be6b257978118c"
+  }
+}

@@ -18,6 +18,7 @@ var _previous_avatar_pose := Transform3D.IDENTITY
 var _physics_avatar_pose := Transform3D.IDENTITY
 var _render_fraction := 1.0
 var _facility_mode := false
+var _moving_attachment := false
 var _roof_camera_hint: Dictionary={}
 var _roof_hint_physics_frame := -100
 var _roof_camera_fallback := false
@@ -173,9 +174,17 @@ func _solve_pose(delta: float, physics_step: bool) -> void:
 	arm.spring_length=requested_distance
 	_prepare_avatar_proxy()
 	var controlled: bool=target.get("facility_control")==true
-	if controlled!=_facility_mode:
-		_facility_mode=controlled;_reset_pending=true
-	if _pose_ready and is_instance_valid(_avatar_root) and _physics_avatar_pose.origin.distance_to(_avatar_root.global_position)>2.0:_reset_pending=true
+	# Rides retain the player's collision capsule but their native vehicle
+	# controller moves it. Fixed eating/shower/exercise props instead need the
+	# current physical hands. Do not make every controlled passenger bypass
+	# presentation interpolation as though it were a stationary activity.
+	var moving_attachment: bool=controlled and not target.is_physics_processing() and is_instance_valid(_avatar_root) and String(_avatar_root.get("_activity_kind")) in ["","rope"]
+	var fixed_activity: bool=controlled and not moving_attachment
+	if fixed_activity!=_facility_mode or moving_attachment!=_moving_attachment:
+		_facility_mode=fixed_activity;_moving_attachment=moving_attachment;_reset_pending=true
+	# An 84m/s aircraft legitimately moves 2.8m per 30Hz tick. Its explicit
+	# mount/recovery/teleport paths already snap the history when required.
+	if not _moving_attachment and _pose_ready and is_instance_valid(_avatar_root) and _physics_avatar_pose.origin.distance_to(_avatar_root.global_position)>2.0:_reset_pending=true
 	var origin := global_position
 	var basis := global_basis.orthonormalized()
 	var axis := basis.z
@@ -267,6 +276,7 @@ func snapshot() -> Dictionary:
 	result["previous_visual_anchor"]=[_previous_avatar_pose.origin.x,_previous_avatar_pose.origin.y,_previous_avatar_pose.origin.z]
 	result["visual_root_physics_owned"]=true
 	result["avatar_activity_pose_current"]=_facility_mode
+	result["moving_attachment_interpolated"]=_moving_attachment
 	result["roof_camera_fallback"]=_roof_camera_fallback
 	result["roof_pivot_offset_m"]=_roof_pivot_offset_m
 	result["roof_fallback_count"]=_roof_fallback_count

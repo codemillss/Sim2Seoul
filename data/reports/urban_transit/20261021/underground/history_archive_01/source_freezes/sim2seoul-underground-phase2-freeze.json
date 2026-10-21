@@ -1,0 +1,239 @@
+{
+  "phase": "EXP25 authored game B1 links and SFC 1F-4F escalators",
+  "sources": {
+    "game/scripts/city_subway_service.gd": "7f4d2b801fbf49fba427f125f2f1d075848e9e2e1365e195c59922643dcb211e",
+    "game/assets/authored/subway_service.json": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341",
+    "tests/game/check_city_subway.gd": "f72d8f0e8dfed88f4108811f99835179e213e4a2559262e3466d6021eb6ede04",
+    "game/scripts/building_interior_space.gd": "83eef95fa5e19615f6c0c43c54f075ec4663cb5a005cdfae57194d8773c54807",
+    "game/scripts/interior_escalator.gd": "cd75501f96c117d6ec09be878f143d14d7acd916a57d5bd90f6210822d0636a0",
+    "game/scripts/interior_population.gd": "756dbc8baa22d4f3facb2577f7f9fb5fc5857a6a82f7dc9be6fdf812640588b2",
+    "game/scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+    "game/scripts/game_basement_elevator_cabin.gd": "643c86a529b45af0aebedbdecfcaf182131152fc8a39c9884cdc3963ca8d6df3",
+    "game/scripts/game_underground_connections.gd": "e70bbdc98414e05b1efe180211a466edd655e10f425f91485e1a2155d0d3ea45",
+    "game/assets/authored/game_underground_connections.json": "a15c5fd1b1427cb9069c65eeb7e2c8eb8b88ad884558b6eb0a5b6ebcbcc89bef",
+    "tests/game/check_game_underground_connections.gd": "ca96d9bfbd145c8eea7804af56ab45f1072d94eae7b9e32131ac6a3adb7474c1",
+    "tests/game/check_multifloor_escalator.gd": "381836223a0d214ff70da8b4439e35af4276a6afbce8c76f41151e0ea184f2ad"
+  },
+  "final_headless": {
+    "game_B1": {
+      "path": "/tmp/sim2seoul-underground-final01.json",
+      "passed": 29,
+      "total": 29
+    },
+    "SFC": {
+      "path": "/tmp/sim2seoul-multifloor-escalator-03.json",
+      "passed": 48,
+      "total": 48
+    }
+  },
+  "evidence": [
+    {
+      "file": "/tmp/sim2seoul-b1-helper-parse01.log",
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe.gd",
+      "sha256": "cf37f0de17219565587c085d40b4f76ee8d53492127c78adcd512650dcc45ac4",
+      "bytes": 2096
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe01.engine.log",
+      "sha256": "2829fbd6bc434711b42b4236265218fcc3a903a567e83361f958afa420b3cd03",
+      "bytes": 1482365
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe01.json",
+      "sha256": "ab1126de156c0291d6ca0ea289389338b84a94050e5e80b984a13c26364359b1",
+      "bytes": 436,
+      "task": "narrow_B1_elevator_lifecycle_probe"
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe01.log",
+      "sha256": "019c9ba8c448fe212d1eaa6aee7783ab06fe95c9898301984a11f2d97ff4d6e6",
+      "bytes": 1483211
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe01.source.gd",
+      "sha256": "900ba8a7fe608d521b69efe7504da6736169e6cd502c44ae2fb8002e0935e319",
+      "bytes": 1977
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe02.engine.log",
+      "sha256": "2829fbd6bc434711b42b4236265218fcc3a903a567e83361f958afa420b3cd03",
+      "bytes": 1482365
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe02.json",
+      "sha256": "ab1126de156c0291d6ca0ea289389338b84a94050e5e80b984a13c26364359b1",
+      "bytes": 436,
+      "task": "narrow_B1_elevator_lifecycle_probe"
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-lifecycle-probe02.log",
+      "sha256": "429c4fc2e662df5d774bc5f63fade03a9e2d526554aee04b2a772def07fe1267",
+      "bytes": 1482515
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-room-parse01.log",
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-startup01.engine.log",
+      "sha256": "b209e2fc565149baaffa327e94f1dcff8d3c1e44324c4307fe9a250161c083c9",
+      "bytes": 5778
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-startup01.json",
+      "sha256": "4b224c1aee286feb7c05da621ef13b0462d4fe94d7ea954b1b3ff4a1c408d28f",
+      "bytes": 8414,
+      "result": "PASS",
+      "passed": 3,
+      "total": 3,
+      "task": "source_linked_game_subway",
+      "elapsed_ms": 5320
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-startup01.log",
+      "sha256": "b209e2fc565149baaffa327e94f1dcff8d3c1e44324c4307fe9a250161c083c9",
+      "bytes": 5778
+    },
+    {
+      "file": "/tmp/sim2seoul-b1-visit-parse01.log",
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-01-engine.log",
+      "sha256": "097cce33d59101d425e4988103a7251f31dcbcdfaff4a39bd4c1e5ab04d0df2a",
+      "bytes": 436
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-01.log",
+      "sha256": "72eff1b1de97151758e7550e18d474d8902f229ecfb3a2bed681bda038c57b1d",
+      "bytes": 443
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-02-engine.log",
+      "sha256": "81b1e6ee6a050c0ea24fa6e4b1a249524db70db39d9487c2207d8d3d5162def1",
+      "bytes": 5507
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-02.json",
+      "sha256": "a8f444a45ad78c55b3ba09289222b1421d566abdde7fe9b6d8638bb5c6804296",
+      "bytes": 102561,
+      "result": "PASS",
+      "task": "multifloor_escalator"
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-02.log",
+      "sha256": "fc476f3630af6e4dbd25de98ad574edc9c1ffe31b97e3b4fb3de7f07b5c8d86d",
+      "bytes": 5752
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-03-engine.log",
+      "sha256": "e84cdd4c3be3e9ea8764fabae9fe68990670ee58549d201919d90bca192f8872",
+      "bytes": 9495
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-03.json",
+      "sha256": "c278388867c588e4660ec3442cba09d256d91f2df947dc83c6f0ef5f65ab384a",
+      "bytes": 103911,
+      "result": "PASS",
+      "task": "multifloor_escalator"
+    },
+    {
+      "file": "/tmp/sim2seoul-multifloor-escalator-03.log",
+      "sha256": "e84cdd4c3be3e9ea8764fabae9fe68990670ee58549d201919d90bca192f8872",
+      "bytes": 9495
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development01.engine.log",
+      "sha256": "22ef60c0fb29736dd2591176180cf11483817e7bdd0087d159687035fcf00557",
+      "bytes": 17223
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development01.json",
+      "sha256": "faba42258865d40c83116e9ae3ee404cdca4ca5cc3f39d85174abaa4c1eb95ee",
+      "bytes": 31507,
+      "result": "FAIL",
+      "passed": 6,
+      "total": 8,
+      "task": "authored_game_B1_connections",
+      "elapsed_ms": 17211
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development01.log",
+      "sha256": "e8f8eef11a19c93fc9056ec7cb990b1a1691594c9f32e46dd01fc3f46bc08f65",
+      "bytes": 18014
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development02.engine.log",
+      "sha256": "81b25f38d62e6daec562d2ff357611b57ee8ca97e518e4d2f758ee3074d9e869",
+      "bytes": 2546932
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development02.json",
+      "sha256": "3855d7782ab1d97a98f20e06946306ffbf389eef5fe2b2b778dc15e247414af4",
+      "bytes": 4942469,
+      "result": "FAIL",
+      "passed": 21,
+      "total": 22,
+      "task": "authored_game_B1_connections",
+      "elapsed_ms": 99440
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development02.log",
+      "sha256": "da905bc0adcf3e9d173ec1f80de7e650d4eace376d471cdce2ec735f43c1d892",
+      "bytes": 2547177
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development03.engine.log",
+      "sha256": "40e370d3be1ccf04f40bdeeb3f8c6f4304ab666e288234726c11207271f2de54",
+      "bytes": 12680
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development03.json",
+      "sha256": "052d42608b5fefb5cbf8008c228be5c140d035cb82034b932509dded7c26cc27",
+      "bytes": 170609,
+      "result": "FAIL",
+      "passed": 24,
+      "total": 26,
+      "task": "authored_game_B1_connections",
+      "elapsed_ms": 147305
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-development03.log",
+      "sha256": "36360a8b4fabd7b9cbd21f776efe59455f0235ba946ea42d3fb17e946d70a6c3",
+      "bytes": 12925
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-final01.engine.log",
+      "sha256": "c6ff4c91a51c1b2a765be1f60550901f064b1d89448dc7811288714791514c40",
+      "bytes": 7988
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-final01.json",
+      "sha256": "ef8f700b4220f32eb7767df16b66a80518fa5d11e3fb32235cf39c92aa0197cc",
+      "bytes": 208007,
+      "result": "PASS",
+      "passed": 29,
+      "total": 29,
+      "task": "authored_game_B1_connections",
+      "elapsed_ms": 136754
+    },
+    {
+      "file": "/tmp/sim2seoul-underground-final01.log",
+      "sha256": "d2d0a5bd3b4eb09693c174351f20ef4bd0a9d72954d270cd0c80ecad0fa15702",
+      "bytes": 8233
+    }
+  ],
+  "notes": [
+    "Original world/source catalogue and player capsule unchanged; below-ground levels and connections are authored game content with explicit validated detached-interior portals.",
+    "All B1 loaded/finished 12 source hashes match. SFC final loaded/finished 5 source hashes match. Root owns final host/native/OS controls/visual review, docs and Git.",
+    "B1 failure01: actual helper signature mismatch corrected. Failure02: test expected food/shower interactions instead of library facilities. Failure03: test walked through preserved library furniture, fixed route to marked central aisle/front corridor. All raw outputs retained.",
+    "B1 29/29 shutdown still reports pre-existing busker AudioStreamPlaybackWAV / stonewall_guitar.wav pair; narrow --verbose probe identifies it independently from new service logic. Diagnostic audio-stop cleanup probe under /tmp only; product/test source freeze unchanged.",
+    "Narrow audio-stop probe02 succeeded without shutdown resource warnings: stop existing neighborhood_life.audio, clear stream, await two physics frames before scene cleanup. This diagnostic changed /tmp probe only; final product/test source hashes remain frozen above."
+  ]
+}

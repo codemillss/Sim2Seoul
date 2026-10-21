@@ -11,7 +11,8 @@
     "source_geometry_changed": false,
     "real_helipad_or_flight_permission": false,
     "art_and_flight_basis": "Original small game helicopter with cabin, skids, tail boom, main rotor and tail rotor. Arcade acceleration, hovering and bounded vertical flight, not an engineering flight model or a representation of actual aviation operations. The ground helipad is an authored marking on existing Seoul Plaza terrain, not a new support plane or a real helipad claim.",
-    "landing": "Native existing terrain only: shallow grade and positive support under both skids. Building roofs, water, private ground and unsupported positions do not allow E dismount. A validated external player teleport returns the game aircraft to its certified home pad only when the full native aircraft volume is clear; otherwise it holds and retries."
+    "landing": "Native public terrain or an existing authored game DeckFloor only, with positive support under all four skid samples and full rotor/tail envelope clearance. R brakes to hover and lowers the retained native player capsule continuously along a swept clear path onto public terrain or game decks; R retracts along checked segments. Water, pool floors, furniture, roof edges and private ground reject descent. Completed rope descent and validated external teleport may recover the aircraft to its certified clear home pad; this game recall is not physical flight.",
+    "altitude_basis": "180m game AGL ceiling leaves approach clearance above the retained highest source building (150m), while keeping metre scale and the original geometry."
   },
   "policy": {
     "maximum_forward_mps": 12.0,
@@ -22,23 +23,38 @@
     "descent_mps": 2.5,
     "vertical_acceleration_mps2": 5.0,
     "yaw_radians_per_second": 0.75,
-    "maximum_altitude_above_terrain_m": 120.0,
+    "maximum_altitude_above_terrain_m": 180.0,
     "rotor_spinup_seconds": 1.8,
     "rotor_spindown_seconds": 1.2,
     "protected_radius_m": 5.4,
     "pad_radius_m": 5.3,
     "maximum_landing_grade_degrees": 6.0,
     "interact_distance_m": 3.8,
-    "door_clearance_m": 5.5
+    "door_clearance_m": 5.5,
+    "rope_descent_mps": 2.0,
+    "rope_transfer_mps": 1.2
   },
   "helipad": {
     "id": "HELIPAD-GAME-01",
     "name": "서울광장 게임 비행 체험",
     "source_ground_feature": "osm:way:370019676:land_area",
     "source_route": "city_plaza",
-    "source_segment": [97, 98],
-    "candidate_fractions": [0.65, 0.45, 0.8, 0.3],
-    "candidate_side_offsets_m": [-46.0, -36.0, -54.0, -62.0],
+    "source_segment": [
+      97,
+      98
+    ],
+    "candidate_fractions": [
+      0.65,
+      0.45,
+      0.8,
+      0.3
+    ],
+    "candidate_side_offsets_m": [
+      -46.0,
+      -36.0,
+      -54.0,
+      -62.0
+    ],
     "authored_placement": true
   }
 }

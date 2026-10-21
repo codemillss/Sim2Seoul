@@ -7,6 +7,7 @@ var maximum_deck_footprint_error_m:=0.0
 
 func _design_path() -> String:return "res://assets/authored/scooter_service.json"
 func _ride_label() -> String:return "전동 킥보드"
+func _motion_kind() -> String:return "scooter"
 func _ride_status_prefix() -> String:return "CITY_SCOOTERS_READY"
 
 func _make_station(record: Dictionary) -> bool:

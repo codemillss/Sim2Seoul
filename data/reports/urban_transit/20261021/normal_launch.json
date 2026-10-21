@@ -1,0 +1,80 @@
+{
+  "started_at_utc": "2026-10-21T09:12:18.318770+00:00",
+  "launcher_pid": 90848,
+  "command": [
+    "sh",
+    "tools/run_exploration.sh",
+    "run"
+  ],
+  "log": "data/reports/urban_transit/20261021/normal_launch_startup.log",
+  "scope": "Actual OS input proves only these two short mount/move/brake/alight smokes and ordinary startup. It does not prove subjective comfort, full subway/flight/shopping/shower OS journeys or sustained performance.",
+  "actions": [
+    {
+      "ride": "bike",
+      "steps": [
+        "Esc menu -> actual rental shortcut",
+        "fresh OS E -> visible mounted avatar",
+        "OS W held550ms -> actual visible movement",
+        "OS Space held900ms -> visible0km/h stop",
+        "fresh OS E -> visible standing avatar and remount hint"
+      ]
+    },
+    {
+      "ride": "scooter",
+      "steps": [
+        "Esc menu -> actual rental shortcut",
+        "fresh OS E -> visible mounted avatar",
+        "OS W held550ms -> actual visible movement",
+        "OS Space held900ms -> visible0km/h stop",
+        "fresh OS E -> visible standing avatar and remount hint"
+      ]
+    }
+  ],
+  "verified_at_utc": "2026-10-21T09:16:28.593009+00:00",
+  "result": "PASS_STARTUP_AND_LIMITED_ACTUAL_OS_SMOKE",
+  "saved_settings_observed": {
+    "speed": "turbo",
+    "walk_mps": 8.4,
+    "run_mps": 21.0,
+    "walk_mode": "free_roam",
+    "time": "evening",
+    "quality": "standard"
+  },
+  "os_input_provider": "cua_repl native Godot app /Applications/Godot.app, actual keyboard and menu clicks",
+  "final_state": "Ordinary game open, on foot beside the ridden scooter near Seoul Plaza. E remount hint visible. No automated probe running.",
+  "captures": [
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_bike_after_move_brake.png",
+      "sha256": "4f82051297432afe4f836e6d78d9075e415222883adb947a7a742af24515aa9f"
+    },
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_bike_alighted.png",
+      "sha256": "508faa9a95ad1c1d64d4fcf900ab8e2627c9d862b91a696933a65ed2f135c2e8"
+    },
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_bike_mounted.png",
+      "sha256": "7c78a117f30c5b911f01cb829a71178bdcdd7ecda36357e576c6c79cc19e8c40"
+    },
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_scooter_after_move_brake.png",
+      "sha256": "b8bc03a5b4a02151442b480731e8c6ad95a81b7d5a01ede317de9dab9b36c0f7"
+    },
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_scooter_alighted.png",
+      "sha256": "7fab44cb008573c845b8fe97afc8e0d844d07f054c3a76e568e4b73c6e39f619"
+    },
+    {
+      "path": "data/reports/urban_transit/20261021/ordinary_os_scooter_mounted.png",
+      "sha256": "7443caa8958fcdf3483a8aa94ea4c54143aa4d6fb3e8ba04224b5ca2e8a4f010"
+    }
+  ],
+  "ongoing_live_log_untracked": "data/cache/urban_transit_20261021_live.log",
+  "script_errors_at_smoke_end": 0,
+  "source_sha256": {
+    "game/scripts/player/exploration_camera.gd": "dea6d393afaab5d760d00254b64c9b994d7584077c584b5808605b4ea1c2a7e1",
+    "game/scripts/city_subway_service.gd": "cf7fca5413a1171ade741e1e9cfd1bea3b3806d273f04c92ec9410dbb850efe2",
+    "game/scripts/city_bus_service.gd": "0845d2046f40ace57146b439574b6d149884d3036b416d86fb7c25ed40bf0472",
+    "game/scripts/city_helicopter_service.gd": "3f02e5109a2d2c5782afe891c2470e7cfac867ff4080c24a49a6c1ac76d5b863",
+    "game/scripts/city_helicopter_rope.gd": "13546a6ab88ce4b26babcfaf5cb7162de9aaceeb5b36ea17f72ae4b97b073fc2"
+  }
+}

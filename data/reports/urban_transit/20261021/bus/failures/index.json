@@ -1,0 +1,105 @@
+[
+  {
+    "attempt": "dev01",
+    "status": "failed_setup",
+    "reason": "Runtime initially checked only seven centreline meshes while full body also legitimately overlapped adjacent existing public source drive; corrected explicit footprint-support source list.",
+    "evidence": [
+      "dev01.json",
+      "dev01.log"
+    ]
+  },
+  {
+    "attempt": "dev02",
+    "status": "stopped_after_observed_deadlock",
+    "reason": "Dense route vertices plus native float error >0.1mm prevented advancing a vertex; bus-only 2.5mm tolerance within existing3mm route guard and path simplification fixed it.",
+    "evidence": [
+      "dev02.log"
+    ]
+  },
+  {
+    "attempt": "dev03",
+    "status": "test_harness_error",
+    "reason": "Harness requested record.state instead of record.bus_state; production scene loaded normally.",
+    "evidence": [
+      "dev03.log"
+    ]
+  },
+  {
+    "attempt": "dev04",
+    "status": "stopped_after_observed_native_obstacle",
+    "reason": "Legacy authored_flat_support was detected as obstacle for terrain-grounded bus. Bus-only collision pair/query exceptions preserve original legacy support and all14 vehicle bodies.",
+    "evidence": [
+      "dev04.log"
+    ]
+  },
+  {
+    "attempt": "dev05",
+    "status": "passed_9_of_9_on_old_869m_candidate",
+    "reason": "Initial source-node route passed naturally, but independent endpoint box audit found a camera-dependent permanent queue possibility. Preserved; superseded by authored812m turn.",
+    "evidence": [
+      "dev05.json",
+      "dev05.log",
+      "failures/real_node_route_869m.json"
+    ]
+  },
+  {
+    "attempt": "ride_dev01",
+    "status": "passed_7_of_7_on_old_869m_candidate",
+    "reason": "Natural occupied loop passed; source-node curve replaced to guarantee clearance from guarded endpoint queue.",
+    "evidence": [
+      "ride_dev01.json",
+      "ride_dev01.log"
+    ]
+  },
+  {
+    "attempt": "final_turn9_generator",
+    "status": "rejected_geometry_before_save",
+    "reason": "The9m-radius early turn passed0.25m sampling but the final0.2m whole-box margin check found a tiny source-edge overlap after simplification.10m-radius candidate passes strict final whole-box check.",
+    "evidence": [
+      "geometry_stages/bus_search_-44.0_386.0_9.0.json"
+    ]
+  },
+  {
+    "attempt": "review_saved_yaw_omission",
+    "status": "confirmed_product_omission_fixed",
+    "reason": "Earlier26 checks did not assert pre-boarding orbit yaw. Added one restoration line and meaningful non-bus-heading orbit assertions; final02 reruns18+8 both pass.",
+    "evidence": [
+      "../yaw_fix_delta.json",
+      "../source_freeze_before_yaw_fix.json",
+      "../safety_final02.json",
+      "../endpoint_camera_final02.json"
+    ]
+  },
+  {
+    "attempt": "root_roads_native_final01_stop_collision",
+    "status": "confirmed_product_placement_failure_fixed",
+    "reason": "L02 wait selected crossing-tagged source walk itself, full shelter blocked source crossing and collapsed actual camera. Independent review also found other shelters too close to longitudinal walk/building. All four stops relocated with full stop footprint and source semantics, not collider removal. Route/fleet/policy untouched.",
+    "evidence": [
+      "../../acceptance/roads_native_final01.json",
+      "../../acceptance/roads_native_final01.log",
+      "../../acceptance/roads_native_final01_crossing_coverage_11414286323.png",
+      "bus_service_before_crossing_fix.json",
+      "stop_clearance_before_fix.json",
+      "../stop_clearance_native_query_final01.json",
+      "../safety_stopfix_final03.json",
+      "../endpoint_camera_stopfix_final03.json"
+    ]
+  },
+  {
+    "attempt": "stop_clearance_harness_initial_parse",
+    "status": "test_harness_failure_corrected",
+    "reason": "Explicit bool required for Variant comparisons; no product change.",
+    "evidence": [
+      "stop_clearance_parse_dev01.log"
+    ]
+  },
+  {
+    "attempt": "stop_reproduction_tuple_list_compare",
+    "status": "read_only_assertion_corrected",
+    "reason": "Shapely tuple coordinates versus parsed JSON lists require JSON container normalization; exact same numeric certificate and stops after normalization, no asset change.",
+    "evidence": [
+      "stop_reproduction_tuple_list_dev01.log",
+      "../stop_clearance_reproduction_final01.json"
+    ]
+  }
+]

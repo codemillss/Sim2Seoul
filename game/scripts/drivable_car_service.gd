@@ -14,6 +14,7 @@ var source_ai_car_count_before:=0
 
 func _design_path() -> String:return "res://assets/authored/car_service.json"
 func _ride_label() -> String:return "자동차"
+func _motion_kind() -> String:return "car"
 func _ride_status_prefix() -> String:return "DRIVABLE_CAR_READY"
 func _fail(message: String) -> bool:return super._fail(message.replace("자전거","자동차"))
 func setup(scene: Node3D) -> bool:
@@ -184,7 +185,7 @@ func can_interact() -> bool:
 func _near_station(_point: Vector3) -> String:return ""
 func prompt_text() -> String:
 	if not _context_ready():return ""
-	if riding:return "자동차 · W 가속 / S 제동·후진\nA·D 조향 / Space 브레이크 / E 안전정차 후 내리기" if not exit_requested else "안전하게 정차하고 내릴 공간을 확인하는 중\nE · 취소하고 계속 운전"
+	if riding:return "자동차 · %d / %d km/h"%[roundi(absf(speed_mps)*3.6),roundi(float(motion_policy().maximum_speed_mps)*3.6)]+" · W 가속 / S 제동·후진\nA·D 조향 / Space 브레이크 / E 안전정차 후 내리기" if not exit_requested else "안전하게 정차하고 내릴 공간을 확인하는 중\nE · 취소하고 계속 운전"
 	if _clock<_notice_until:return _notice
 	if _nearest_bike()<0:return ""
 	if not host.player.free_roam_enabled:return "자유 탐험 모드에서 E · 자동차 운전"

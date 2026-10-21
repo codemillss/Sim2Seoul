@@ -1,0 +1,422 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "error": ""
+      },
+      "name": "production_scene_and_helicopter_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "audit": [
+          {
+            "building_id": "osm:way:198561926:building",
+            "deck_y": 40.7721519470215,
+            "profile": "garden",
+            "selected": true,
+            "title": "서울특별시청"
+          },
+          {
+            "building_id": "osm:way:233593641:building",
+            "deck_y": 100.613006591797,
+            "profile": "garden",
+            "selected": false,
+            "title": "한화손해보험빌딩"
+          },
+          {
+            "building_id": "osm:way:233593617:building",
+            "deck_y": 69.5147857666016,
+            "profile": "garden",
+            "selected": false,
+            "title": "한국 프레스센터"
+          },
+          {
+            "building_id": "osm:way:400821755:building",
+            "deck_y": 12.7570419311523,
+            "profile": "garden",
+            "selected": false,
+            "title": "이름 없는 건물"
+          },
+          {
+            "building_id": "osm:way:233593618:building",
+            "deck_y": 60.5440101623535,
+            "profile": "garden",
+            "selected": false,
+            "title": "이름 없는 건물"
+          }
+        ],
+        "site": {
+          "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+          "building_id": "osm:way:198561926:building",
+          "building_title": "서울특별시청",
+          "full_rotor_tail_clear": true,
+          "native_all_skids_supported": true,
+          "observer": [
+            198.577590942383,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "point": [
+            195.977584838867,
+            40.8921508789062,
+            -172.164916992188
+          ],
+          "yaw": 0.0
+        }
+      },
+      "name": "actual_existing_roof_has_native_skids_full_rotor_tail_and_exit",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "policy": {
+          "ascent_mps": 4.0,
+          "descent_mps": 2.52,
+          "door_clearance_m": 5.5,
+          "horizontal_acceleration_mps2": 12.4444444444444,
+          "horizontal_braking_mps2": 9.33333333333333,
+          "interact_distance_m": 3.8,
+          "maximum_altitude_above_terrain_m": 260.0,
+          "maximum_forward_mps": 22.4,
+          "maximum_landing_grade_degrees": 6.0,
+          "maximum_reverse_mps": 5.0,
+          "maximum_speed_mps": 22.4,
+          "on_foot_run_speed_mps": 5.6,
+          "pad_radius_m": 5.3,
+          "protected_radius_m": 5.4,
+          "rope_descent_mps": 2.0,
+          "rope_transfer_mps": 1.2,
+          "rotor_spindown_seconds": 1.2,
+          "rotor_spinup_seconds": 1.8,
+          "speed_gain": 1.86666666666667,
+          "vertical_acceleration_mps2": 5.0,
+          "yaw_radians_per_second": 0.75
+        }
+      },
+      "name": "faster_helicopter_policy_over_selected_run_speed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "physical_takeoff_for_rope",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "R_held_across_menu_requires_release_and_never_deploys",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": false,
+          "maximum_step_m": 0.0,
+          "reason": "cabin_to_winch_blocked",
+          "side_point": [
+            156.640258789062,
+            11.0311937332153,
+            -68.5698699951172
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 0.0
+        }
+      },
+      "name": "fresh_R_brakes_hover_transfers_retained_avatar_and_lowers_rope",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_city_helicopter.gd": "d9e7d27cc6f11a1bd5c3d6b8b08594a383c6cb8f1b0b5d0ae314744083224976",
+          "res://../tests/game/check_city_helicopter_rope.gd": "5601364a3fa759d0d4fa9670036f006b93855eefee1367c8ab570bc201401d4b",
+          "res://assets/authored/helicopter_service.json": "265d0daed88075351221a9ec1d71f99c0137faa8427ce274baf36274a637a6df",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_rope.gd": "f4cfd53fb5ecfed6bc7be73930bd8f024459c07cf4a648146d34b7cc39c193cf",
+          "res://scripts/city_helicopter_service.gd": "a3fc94dd8c950842270d00a2971a8f3cbd1fd4b651056128bead1689eacf502b",
+          "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+          "res://scripts/explore_walk.gd": "4fba81ce17c00e97b43b9d5d09f8e2c968a1856fb44ea7fe2fd98030dc949d5a",
+          "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+          "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        },
+        "loaded": {
+          "res://../tests/game/check_city_helicopter.gd": "d9e7d27cc6f11a1bd5c3d6b8b08594a383c6cb8f1b0b5d0ae314744083224976",
+          "res://../tests/game/check_city_helicopter_rope.gd": "5601364a3fa759d0d4fa9670036f006b93855eefee1367c8ab570bc201401d4b",
+          "res://assets/authored/helicopter_service.json": "265d0daed88075351221a9ec1d71f99c0137faa8427ce274baf36274a637a6df",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_rope.gd": "f4cfd53fb5ecfed6bc7be73930bd8f024459c07cf4a648146d34b7cc39c193cf",
+          "res://scripts/city_helicopter_service.gd": "a3fc94dd8c950842270d00a2971a8f3cbd1fd4b651056128bead1689eacf502b",
+          "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+          "res://scripts/explore_walk.gd": "4fba81ce17c00e97b43b9d5d09f8e2c968a1856fb44ea7fe2fd98030dc949d5a",
+          "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+          "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        }
+      },
+      "name": "source_inputs_stable_during_runtime",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 15830,
+  "passed": 6,
+  "physics_hz": 30,
+  "result": "FAIL",
+  "scope": "Native aircraft shapes including full rotor, existing source terrain, physical KEY_E and labelled held movement fixture. Actual takeoff, movement, rotation, same-ground return, landing and walking restoration. Near-ceiling/boundary aircraft placements and static blockers are test fixtures, not ordinary travel. No actual aviation accuracy/permission, sustained performance or subjective/native appearance acceptance from headless.",
+  "snapshot": {
+    "actual_distance_m": 11.6015485525131,
+    "blocked_reason": "",
+    "capsule_release_pending": false,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 0.1,
+        "event": "roof_landing_candidate_certified",
+        "evidence": {
+          "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+          "building_id": "osm:way:198561926:building",
+          "building_title": "서울특별시청",
+          "full_rotor_tail_clear": true,
+          "native_all_skids_supported": true,
+          "observer": [
+            198.577590942383,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "point": [
+            195.977584838867,
+            40.8921508789062,
+            -172.164916992188
+          ],
+          "yaw": 0.0
+        }
+      },
+      {
+        "clock_s": 0.566666666666667,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 6.86666666666665,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 6.86666666666665,
+        "event": "rope_rejected",
+        "evidence": {
+          "reason": "cabin_to_winch_blocked"
+        }
+      }
+    ],
+    "exit_requested": false,
+    "helipad": {
+      "fraction": 0.65,
+      "id": "HELIPAD-GAME-01",
+      "name": "서울광장 게임 비행 체험",
+      "native_envelope_clear": true,
+      "native_existing_terrain": true,
+      "point": [
+        156.508255004883,
+        -1.44508874416351,
+        -71.0183563232422
+      ],
+      "side_offset_m": -36.0,
+      "source_ground_feature": "osm:way:370019676:land_area",
+      "source_route": "city_plaza",
+      "source_segment": [
+        97.0,
+        98.0
+      ],
+      "yaw": -1.80643994817378
+    },
+    "landed": false,
+    "loaded": true,
+    "maximum_step_m": 0.133333683013916,
+    "motion_policy": {
+      "ascent_mps": 4.0,
+      "descent_mps": 2.52,
+      "door_clearance_m": 5.5,
+      "horizontal_acceleration_mps2": 12.4444444444444,
+      "horizontal_braking_mps2": 9.33333333333333,
+      "interact_distance_m": 3.8,
+      "maximum_altitude_above_terrain_m": 260.0,
+      "maximum_forward_mps": 22.4,
+      "maximum_landing_grade_degrees": 6.0,
+      "maximum_reverse_mps": 5.0,
+      "maximum_speed_mps": 22.4,
+      "on_foot_run_speed_mps": 5.6,
+      "pad_radius_m": 5.3,
+      "protected_radius_m": 5.4,
+      "rope_descent_mps": 2.0,
+      "rope_transfer_mps": 1.2,
+      "rotor_spindown_seconds": 1.2,
+      "rotor_spinup_seconds": 1.8,
+      "speed_gain": 1.86666666666667,
+      "vertical_acceleration_mps2": 5.0,
+      "yaw_radians_per_second": 0.75
+    },
+    "position": [
+      156.508255004883,
+      10.1311941146851,
+      -71.0183563232422
+    ],
+    "return_pending": false,
+    "riding": true,
+    "roof_landing_site": {
+      "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+      "building_id": "osm:way:198561926:building",
+      "building_title": "서울특별시청",
+      "full_rotor_tail_clear": true,
+      "native_all_skids_supported": true,
+      "observer": [
+        198.577590942383,
+        40.8521537780762,
+        -172.86491394043
+      ],
+      "point": [
+        195.977584838867,
+        40.8921508789062,
+        -172.164916992188
+      ],
+      "yaw": 0.0
+    },
+    "roof_site_audit": [
+      {
+        "building_id": "osm:way:198561926:building",
+        "deck_y": 40.7721519470215,
+        "profile": "garden",
+        "selected": true,
+        "title": "서울특별시청"
+      },
+      {
+        "building_id": "osm:way:233593641:building",
+        "deck_y": 100.613006591797,
+        "profile": "garden",
+        "selected": false,
+        "title": "한화손해보험빌딩"
+      },
+      {
+        "building_id": "osm:way:233593617:building",
+        "deck_y": 69.5147857666016,
+        "profile": "garden",
+        "selected": false,
+        "title": "한국 프레스센터"
+      },
+      {
+        "building_id": "osm:way:400821755:building",
+        "deck_y": 12.7570419311523,
+        "profile": "garden",
+        "selected": false,
+        "title": "이름 없는 건물"
+      },
+      {
+        "building_id": "osm:way:233593618:building",
+        "deck_y": 60.5440101623535,
+        "profile": "garden",
+        "selected": false,
+        "title": "이름 없는 건물"
+      }
+    ],
+    "rope": {
+      "descent_mps": 2.0,
+      "harness_visible": false,
+      "key_requires_release": false,
+      "last_result": "",
+      "line_visible": false,
+      "maximum_step_m": 0.0,
+      "reason": "cabin_to_winch_blocked",
+      "side_point": [
+        156.640258789062,
+        11.0311937332153,
+        -68.5698699951172
+      ],
+      "state": "idle",
+      "target": {},
+      "travelled_m": 0.0
+    },
+    "rotor_fraction": 1.0,
+    "rotor_phase": 4.17776862819774,
+    "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+    "site_audit": [
+      {
+        "accepted": false,
+        "fraction": 0.65,
+        "point": [
+          154.173568725586,
+          0.0,
+          -61.2947082519531
+        ],
+        "reason": "ground_height_spread",
+        "sample_height_range_m": [
+          -1.52911448478699,
+          -0.970099091529846
+        ],
+        "side_offset_m": -46.0
+      },
+      {
+        "accepted": true,
+        "fraction": 0.65,
+        "point": [
+          156.508255004883,
+          -1.44508874416351,
+          -71.0183563232422
+        ],
+        "reason": "",
+        "sample_height_range_m": [
+          -1.79525828361511,
+          -1.26645398139954
+        ],
+        "side_offset_m": -36.0
+      }
+    ],
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "tail_phase": 2.61657892921966,
+    "velocity": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "vertical_speed_mps": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_helicopter.gd": "d9e7d27cc6f11a1bd5c3d6b8b08594a383c6cb8f1b0b5d0ae314744083224976",
+    "res://../tests/game/check_city_helicopter_rope.gd": "5601364a3fa759d0d4fa9670036f006b93855eefee1367c8ab570bc201401d4b",
+    "res://assets/authored/helicopter_service.json": "265d0daed88075351221a9ec1d71f99c0137faa8427ce274baf36274a637a6df",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_helicopter_rope.gd": "f4cfd53fb5ecfed6bc7be73930bd8f024459c07cf4a648146d34b7cc39c193cf",
+    "res://scripts/city_helicopter_service.gd": "a3fc94dd8c950842270d00a2971a8f3cbd1fd4b651056128bead1689eacf502b",
+    "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+    "res://scripts/explore_walk.gd": "4fba81ce17c00e97b43b9d5d09f8e2c968a1856fb44ea7fe2fd98030dc949d5a",
+    "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+    "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+    "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+    "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  },
+  "task": "authored_city_helicopter",
+  "total": 7
+}

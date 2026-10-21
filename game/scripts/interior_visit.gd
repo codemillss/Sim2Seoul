@@ -110,7 +110,7 @@ func setup(root_scene: Node3D) -> bool:
 	catalog = preload("res://scripts/building_visit_catalog.gd").new().build(host)
 	if catalog.is_empty():return _fail("건물 출입 자료가 없습니다.")
 	_build_interface()
-	cabin=preload("res://scripts/elevator_cabin.gd").new()
+	cabin=preload("res://scripts/game_basement_elevator_cabin.gd").new()
 	add_child(cabin)
 	if not cabin.setup():return _fail("엘리베이터 객실을 준비하지 못했습니다.")
 	_build_markers()
@@ -394,7 +394,8 @@ func _physics_process(delta: float) -> void:
 			enter_visit()
 		return
 	if not edge:return
-	if host.has_method("try_pool_interact") and host.try_pool_interact():e_requires_release=true
+	if host.has_method("try_underground_interact") and host.try_underground_interact():e_requires_release=true
+	elif host.has_method("try_pool_interact") and host.try_pool_interact():e_requires_release=true
 	elif not active and host.has_method("try_street_interact") and host.try_street_interact():e_requires_release=true
 	elif elevator_open:_close_elevator()
 	elif is_instance_valid(host.get("interior_room_access")) and host.interior_room_access.handle_interact():e_requires_release=true
@@ -415,12 +416,12 @@ func _process(_delta: float) -> void:
 	var outdoor_roof: Node3D=_outdoor_roof_at_player()
 	var outdoor_lift: Node3D=outdoor_roof_lift_candidate() if not menu_open else null
 	var shop_active: bool=host.has_method("_shop_active") and host._shop_active()
-	wayfinding.update_guidance(_delta,active or shop_active or menu_open or is_instance_valid(outdoor_roof))
+	wayfinding.update_guidance(_delta,active or shop_active or (host.has_method("_subway_active") and host._subway_active()) or menu_open or is_instance_valid(outdoor_roof))
 	var closest: Dictionary = wayfinding.target_spec
 	var nearest := INF
 	if not closest.is_empty():nearest=host.player.global_position.distance_squared_to(closest.entrance)
 	for marker in markers:marker.node.visible=false
-	if not active and not is_instance_valid(outdoor_roof) and not closest.is_empty() and not _entry_requested:
+	if not active and not shop_active and not host.player.interior_active and not is_instance_valid(outdoor_roof) and not closest.is_empty() and not _entry_requested:
 		_set_entry(closest)
 		if nearest<10.*10.:_prepare_room()
 	indoor_panel.visible = active and not menu_open and not in_elevator and not elevator_open
@@ -439,8 +440,9 @@ func _process(_delta: float) -> void:
 			indoor_text.text="%s · %s\n승강장 앞에서 E · 층 선택 / 옥상에서 점프해 밖으로 이동할 수 있습니다."%[current_spec.title,String(rooftop.profile_title)]
 			if host.player.is_swimming():indoor_text.text+="\n수영 중 · WASD / 방향키 이동 · Space 물 밖으로 점프"
 		else:
-			indoor_text.text = "%s · %d / %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터에서 E · 1층 출입구 E\n건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다."%[current_spec.title,index+1,int(current_spec.floor_count)]
-			if is_instance_valid(room.escalator) and index in [0,1]:indoor_text.text+="\n오른쪽 상업 라운지 · 1–2층 왕복 에스컬레이터 · 걸어서 탑승"
+			indoor_text.text = "%s · %s / 지상 %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터 E · 1층 출입구 E\n음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기"%[current_spec.title,_landing_label(index),int(current_spec.floor_count)]
+			if is_instance_valid(room.escalator) and index in room.escalator.connecting_levels:indoor_text.text+="\n오른쪽 상업 라운지 · 1–%d층 양방향 에스컬레이터 · 걸어서 탑승"%(room.escalator.pair_count+1)
+			if room.authored_basement_count>0:indoor_text.text+="\nB1 · 시청역 게임 지하 연결통로 · 계단/엘리베이터"
 			indoor_text.text=indoor_text.text.replace("건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다.","음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기")
 	var facility_hint: String=facility_interaction.prompt_text() if is_instance_valid(facility_interaction) and active and not on_roof else ""
 	if is_instance_valid(host.get("interior_room_access")):
@@ -453,6 +455,8 @@ func _process(_delta: float) -> void:
 	var street_hint: String=host.street_interaction_hint() if not active and host.has_method("street_interaction_hint") else ""
 	var pool_hint: String=host.pool_interaction_hint() if host.has_method("pool_interaction_hint") else ""
 	if not pool_hint.is_empty():street_hint=pool_hint
+	var underground_hint: String=host.underground_interaction_hint() if host.has_method("underground_interaction_hint") else ""
+	if not underground_hint.is_empty():street_hint=underground_hint
 	if not street_hint.is_empty():prompt_text.text=street_hint
 	prompt.visible = not menu_open and not elevator_open and not in_elevator and (not street_hint.is_empty() or is_instance_valid(outdoor_lift) or not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and not is_instance_valid(outdoor_roof) and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))
@@ -495,15 +499,17 @@ func _open_elevator() -> void:
 	selected_floor = _current_destination()
 	for child in elevator_floors.get_children():
 		elevator_floors.remove_child(child);child.queue_free()
-	for index in range(destination_count()):
+	for index: int in _destination_indices():
 		var button := Button.new();button.text = _landing_label(index);button.custom_minimum_size = Vector2(152,58)
 		button.add_theme_font_size_override("font_size",15)
-		if index<int(current_spec.floor_count):
+		if index>=0 and index<int(current_spec.floor_count):
 			var programme_title: String=String(room.detail_kit.level_profiles[index].title)
 			button.text+="\n"+programme_title.get_slice(" · ",0)
 			button.tooltip_text=programme_title
 		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;button.focus_mode=Control.FOCUS_ALL
 		button.disabled = index==selected_floor or (index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick)
+		if index<0:button.text+="\n시청역 게임 연결통로"
+		button.set_meta("destination_index",index)
 		button.pressed.connect(request_floor.bind(index));elevator_floors.add_child(button)
 	elevator_title.text = "%s · 엘리베이터\n현재 %s · 목적층을 선택하세요"%[current_spec.title,_landing_label(selected_floor)]
 	elevator_open = true;e_requires_release = true
@@ -511,7 +517,8 @@ func _open_elevator() -> void:
 	host.player.require_neutral_input()
 	elevator_scroll.scroll_vertical=0
 	_layout_elevator_picker(host.get_viewport().get_visible_rect().size)
-	_focus_elevator_floor.call_deferred(mini(selected_floor+1,destination_count()-1) if selected_floor<destination_count()-1 else 0)
+	var ordinal: int=_destination_indices().find(selected_floor)
+	_focus_elevator_floor.call_deferred((ordinal+1)%maxi(1,destination_count()))
 
 func _layout_elevator_picker(view: Vector2) -> void:
 	var panel_width := minf(420.,maxf(1.,view.x-32.))
@@ -551,7 +558,7 @@ func request_floor(index: int) -> bool:
 	if is_instance_valid(facility_interaction) and facility_interaction.is_using():return false
 	if not active or in_elevator or _menu_open() or not _elevator_near() or not host.player.is_on_floor():return false
 	var from_index: int = _current_destination()
-	if index<0 or index>=destination_count() or index==from_index:return false
+	if not _destination_indices().has(index) or index==from_index:return false
 	if index<int(current_spec.floor_count) and Engine.get_physics_frames()<_room_ready_tick:_tell("실내 승강장을 준비하고 있습니다.");return false
 	if index==int(current_spec.floor_count) and Engine.get_physics_frames()<_roof_ready_tick:_tell("옥상 승강장을 준비하고 있습니다.");return false
 	var target: Vector3 = _landing_point(index)
@@ -584,18 +591,27 @@ func request_floor(index: int) -> bool:
 	host.player.clear_water_region()
 	host.player.global_position=cabin.passenger_point();host.player.reset_physics_interpolation()
 	host.player.get_node("Visual").visible=false
+	cabin.configure_catalog(int(current_spec.floor_count),int(room.authored_basement_count),is_instance_valid(rooftop))
 	cabin.begin(from_index,index,destination_count())
 	_set_ride_phase("boarding")
 	_update_cabin()
 	return true
 
+func _destination_indices() -> Array[int]:
+	var result: Array[int]=[]
+	var lowest: int=-int(room.authored_basement_count) if is_instance_valid(room) else 0
+	for index: int in range(lowest,int(current_spec.get("floor_count",0))+(1 if is_instance_valid(rooftop) else 0)):result.append(index)
+	return result
+
 func destination_count() -> int:
-	return int(current_spec.get("floor_count",0))+(1 if is_instance_valid(rooftop) else 0)
+	return _destination_indices().size()
 
 func landing_point(index: int) -> Vector3:return _landing_point(index)
 
 func _current_destination() -> int:
-	if in_elevator:return clampi(int(round(_current_floor_value)),0,maxi(0,destination_count()-1))
+	if in_elevator:
+		var indices: Array[int]=_destination_indices()
+		return clampi(int(round(_current_floor_value)),indices.front(),indices.back())
 	if on_roof:return int(current_spec.floor_count)
 	return room.floor_index_at(host.player.global_position)
 
@@ -604,7 +620,7 @@ func _landing_point(index: int) -> Vector3:
 	return room.elevator_point(index)
 
 func _landing_label(index: int) -> String:
-	return "옥상" if index==int(current_spec.floor_count) else "%d층"%(index+1)
+	return "B%d"%(-index) if index<0 else "옥상" if index==int(current_spec.floor_count) else "%d층"%(index+1)
 
 func _landing_bounds(index: int) -> AABB:
 	return rooftop.world_bounds if index==int(current_spec.floor_count) and is_instance_valid(rooftop) else room.interior_bounds
@@ -616,7 +632,7 @@ func _landing_rect(index: int) -> Rect2:
 	return rooftop.walkable_rect if index==int(current_spec.floor_count) and is_instance_valid(rooftop) else Rect2()
 
 func _landing_target_clear(index: int,point: Vector3) -> bool:
-	if index<0 or index>=destination_count():return false
+	if not _destination_indices().has(index):return false
 	return _point_supported_clear(point,_landing_bounds(index),_landing_frame(index),_landing_rect(index))
 
 func _indoor_target_clear(point: Vector3) -> bool:
@@ -705,7 +721,7 @@ func _step_motion(delta: float) -> void:
 func _release_candidates() -> Array[Dictionary]:
 	var points: Array[Dictionary]=[{"index":_ride_from,"point":_landing_point(_ride_from)}]
 	if _ride_from<int(current_spec.floor_count):points.append({"index":_ride_from,"point":room.floor_spawn(_ride_from)})
-	for index in range(int(current_spec.floor_count)):points.append({"index":index,"point":room.floor_spawn(index)})
+	for index: int in range(-int(room.authored_basement_count),int(current_spec.floor_count)):points.append({"index":index,"point":room.floor_spawn(index)})
 	if is_instance_valid(rooftop):points.append({"index":int(current_spec.floor_count),"point":rooftop.spawn_point()})
 	return points
 
@@ -925,7 +941,7 @@ func go_to_library_entrance() -> bool:
 
 func status_text() -> String:
 	if in_elevator:return "%s · 엘리베이터 · %s → %s"%[current_spec.title,_landing_label(_ride_from),_landing_label(selected_floor)]
-	return "%s · %s · 속도 %.2fm/s%s"%[current_spec.title,"옥상" if on_roof else "%d층"%(room.floor_index_at(host.player.global_position)+1),Vector2(host.player.velocity.x,host.player.velocity.z).length()," · 이동키를 놓아주세요" if host.player.input_latched else ""]
+	return "%s · %s · 속도 %.2fm/s%s"%[current_spec.title,"옥상" if on_roof else _landing_label(room.floor_index_at(host.player.global_position)),Vector2(host.player.velocity.x,host.player.velocity.z).length()," · 이동키를 놓아주세요" if host.player.input_latched else ""]
 
 func snapshot() -> Dictionary:
 	return {"loaded":loaded,"error":load_error,"active":active,"feature_id":current_spec.get("id",""),"entry_count":entry_count,"exit_count":exit_count,
@@ -982,3 +998,33 @@ func apply_terrain_elevation() -> bool:
 	_roof_ready_tick=Engine.get_physics_frames()+3
 	terrain_rebase_count+=1
 	return true
+
+func prepare_connected_basement(id: String) -> bool:
+	if active or in_elevator or elevator_open or _menu_open() or host.player.facility_control:return false
+	if is_instance_valid(facility_interaction) and facility_interaction.is_using():return false
+	return select_building(id) and room.authored_basement_count>0
+
+func connected_outdoor_context() -> Dictionary:
+	return {"yaw":float(_outside_view.get("yaw",0.)),"pitch":float(_outside_view.get("pitch",-.2)),"distance":float(_outside_view.get("distance",4.)),"starting_yaw":_outside_starting_yaw,"hud":_hud_was_visible,"names":_names_were_processing}
+
+func connected_basement_ready(id: String) -> bool:
+	return not active and not in_elevator and not elevator_open and prepared_id==id and is_instance_valid(room) and room.authored_basement_count>0 and Engine.get_physics_frames()>=_room_ready_tick
+
+func adopt_connected_basement(context: Dictionary,outside_point: Vector3) -> void:
+	# Caller has just committed relocate_interior_region against this room's
+	# full native capsule/floor. Keep the existing outdoor recovery untouched.
+	_outside_position=outside_point;_outside_view={"yaw":context.get("yaw",0.),"pitch":context.get("pitch",-.2),"distance":context.get("distance",4.)}
+	_outside_starting_yaw=float(context.get("starting_yaw",0.));_hud_was_visible=bool(context.get("hud",true));_names_were_processing=bool(context.get("names",true))
+	host.starting_yaw=0.;host.building_names.set_physics_process(false)
+	active=true;on_roof=false;entry_count+=1;_entry_requested=false;_notice="";e_requires_release=true;_e_was_pressed=true;_e_press_pending=false
+	selected_floor=-1;_current_floor_value=-1.;_recovery_floor=-1;room.set_active_floor(-1);room.visible=true;room.set_process(true)
+	if is_instance_valid(rooftop):rooftop.visible=false;rooftop.set_process(false)
+	host.player.require_neutral_input();_orient(0.,deg_to_rad(-15.),3.6);_hide_outdoor_labels()
+
+func release_to_connected_station() -> Dictionary:
+	# No end_interior: the caller has committed the new station region and
+	# preserves the same outdoor recovery, capsule, camera and control owner.
+	var context: Dictionary=connected_outdoor_context()
+	active=false;on_roof=false;room.visible=false;room.set_process(false);exit_count+=1;_notice="";_entry_requested=false
+	e_requires_release=true;_e_was_pressed=true;_e_press_pending=false
+	return context

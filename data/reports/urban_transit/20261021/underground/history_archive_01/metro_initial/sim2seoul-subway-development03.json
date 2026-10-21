@@ -1,0 +1,6272 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "runtime_error": "",
+        "subway_error": ""
+      },
+      "name": "production_setup_two_source_bound_game_stations",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "city": {
+          "id": "city_hall_game",
+          "point": [
+            107.242813110352,
+            -1.2559517621994,
+            -107.689788818359
+          ],
+          "source_entrance_id": 3404904655.0,
+          "station_index": 0,
+          "title": "시청",
+          "toward": [
+            106.838806152344,
+            -0.0387074947357178,
+            -110.055541992188
+          ]
+        },
+        "east": {
+          "id": "euljiro_game",
+          "point": [
+            430.956146240234,
+            -1.01426887512207,
+            -102.276878356934
+          ],
+          "source_entrance_id": 8212227135.0,
+          "station_index": 1,
+          "title": "을지로입구",
+          "toward": [
+            433.356140136719,
+            0.230320572853088,
+            -102.276878356934
+          ]
+        }
+      },
+      "name": "both_original_entrances_have_safe_supported_approaches",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "length": 338.335786819458,
+        "scope": [
+          "Only the retained geographic region; no out-of-region surface station or full real network added.",
+          "Surface portals preserve original entrance coordinates; a nearby supported public approach is validated at runtime without moving the source point.",
+          "Stairs, concourses, gates, platform screen doors, train model/service and every underground vertical height are authored gameplay content.",
+          "Continuous native train movement along the bounded source-derived route; only surface/underground portal transitions use detached interior cells.",
+          "No fares, accounts, real timetable, operating accuracy or public transit access assertion."
+        ]
+      },
+      "name": "source_way_regional_segment_and_entrance_identity_scope",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "hint": "E · 시청역 지하철 체험",
+        "position": [
+          107.242813110352,
+          -1.33563923835754,
+          -107.689788818359
+        ]
+      },
+      "name": "grounded_source_entrance_actionable",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "wall_blocks_through_wall_station_entry",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "E_held_through_menu_does_not_enter",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "active": true,
+        "blocked_reason": "",
+        "completed_legs": 0,
+        "docked_station": 0,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 3404904655.0,
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 57
+          }
+        ],
+        "loaded": true,
+        "motion_policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "release_pending": false,
+        "riding": false,
+        "route_length_m": 338.335786819458,
+        "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+        "source_geometry_changed": false,
+        "speed_mps": 0.0,
+        "state": "doors_open",
+        "station_m": 0.0,
+        "stations": [
+          {
+            "exit": [
+              1940.3681640625,
+              -356.920013427734,
+              -6.93916893005371
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.641100525856018,
+                  0.0,
+                  -0.767456889152527
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.767456889152527,
+                  0.0,
+                  0.641100525856018
+                ]
+              ],
+              "origin": [
+                1915.04211425781,
+                -360.0,
+                -28.0954856872559
+              ]
+            },
+            "gate": [
+              1936.76110839844,
+              -356.920013427734,
+              -9.95234107971191
+            ],
+            "gate_open": false,
+            "id": "city_hall_game",
+            "source_anchor": [
+              106.838806152344,
+              -1.338707447052,
+              -110.055541992188
+            ],
+            "source_entrance_id": 3404904655.0,
+            "source_station": {
+              "lon_lat": [
+                126.977114,
+                37.5654798
+              ],
+              "osm_node_id": 5935738063.0,
+              "source_xz": [
+                77.2225070894347,
+                -40.4995844690129
+              ],
+              "tags": {
+                "addr:city": "서울특별시",
+                "addr:district": "중구",
+                "addr:housenumber": "지하101",
+                "addr:postcode": "04519",
+                "addr:street": "세종대로",
+                "addr:subdistrict": "정동",
+                "alt_name": "시청역",
+                "alt_name:en": "City Hall station",
+                "departures_board": "realtime",
+                "internet_access": "wlan",
+                "layer": "-2",
+                "level": "-3",
+                "level:ref": "B3",
+                "name": "시청",
+                "name:en": "City Hall",
+                "name:ja": "市庁",
+                "name:ko": "시청",
+                "name:ko-Hani": "市廳",
+                "name:ko-Kana": "シチョン",
+                "name:zh": "市厅",
+                "network": "수도권 전철",
+                "network:en": "Seoul Metropolitan Subway",
+                "network:ko": "수도권 전철",
+                "network:wikidata": "Q16950",
+                "note": "시청\"역\" 이름 기입 금지",
+                "old_name": "시청앞역",
+                "old_ref": "1;201;51",
+                "operator": "서울교통공사",
+                "operator:en": "Seoul Metro",
+                "operator:ko": "서울교통공사",
+                "operator:type": "public",
+                "operator:wikidata": "Q28699048",
+                "public_transport": "station",
+                "railway": "station",
+                "ref": "132;201",
+                "station": "subway",
+                "subway": "yes",
+                "wikidata": "Q246660",
+                "wikipedia": "ko:시청역 (서울)"
+              }
+            },
+            "spawn": [
+              1938.83325195312,
+              -356.920013427734,
+              -8.22136878967285
+            ],
+            "title": "시청",
+            "wait": [
+              1917.42126464844,
+              -359.920013427734,
+              -26.1080741882324
+            ]
+          },
+          {
+            "exit": [
+              2232.54541015625,
+              -356.920013427734,
+              -49.5503730773926
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.999698162078857,
+                  0.0,
+                  0.0245673730969429
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  -0.0245673730969429,
+                  0.0,
+                  0.999698162078857
+                ]
+              ],
+              "origin": [
+                2233.35620117188,
+                -360.0,
+                -82.540412902832
+              ]
+            },
+            "gate": [
+              2232.66088867188,
+              -356.920013427734,
+              -54.2489547729492
+            ],
+            "gate_open": false,
+            "id": "euljiro_game",
+            "source_anchor": [
+              433.356140136719,
+              -1.0696793794632,
+              -102.276878356934
+            ],
+            "source_entrance_id": 8212227135.0,
+            "source_station": null,
+            "spawn": [
+              2232.5947265625,
+              -356.920013427734,
+              -51.5497703552246
+            ],
+            "title": "을지로입구",
+            "wait": [
+              2233.28002929688,
+              -359.920013427734,
+              -79.4413452148438
+            ]
+          }
+        ],
+        "target_station": 1,
+        "train_position": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "visit_station": 0
+      },
+      "name": "physical_E_enters_only_subway_with_original_native_controller",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "invalid_external_exit_preserves_station_and_control",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 0.24838750064373,
+        "from": [
+          1938.83325195312,
+          -356.999694824219,
+          -8.22136878967285
+        ],
+        "recoveries": 0,
+        "samples": [
+          [
+            1938.77587890625,
+            -356.999145507812,
+            -8.26923751831055
+          ],
+          [
+            1938.43188476562,
+            -356.999145507812,
+            -8.5564661026001
+          ],
+          [
+            1938.08813476562,
+            -356.999237060547,
+            -8.84370040893555
+          ],
+          [
+            1937.74389648438,
+            -356.999145507812,
+            -9.13094329833984
+          ],
+          [
+            1937.40014648438,
+            -356.999145507812,
+            -9.41825580596924
+          ],
+          [
+            1937.05627441406,
+            -356.999145507812,
+            -9.70557403564453
+          ]
+        ],
+        "target": [
+          1936.76110839844,
+          -356.920013427734,
+          -9.95234107971191
+        ],
+        "to": [
+          1936.94177246094,
+          -356.999145507812,
+          -9.80136108398438
+        ]
+      },
+      "name": "actual_controller_walk_to_ticket_gate",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "hint": "게임 교통카드 확인 · 개찰구가 열렸습니다."
+      },
+      "name": "physical_E_opens_native_card_gate",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 0.287014812231064,
+        "from": [
+          1936.94177246094,
+          -356.999145507812,
+          -9.80136108398438
+        ],
+        "recoveries": 0,
+        "samples": [
+          [
+            1936.88452148438,
+            -356.999145507812,
+            -9.84924793243408
+          ],
+          [
+            1936.54028320312,
+            -356.999145507812,
+            -10.1364669799805
+          ],
+          [
+            1936.19604492188,
+            -356.999145507812,
+            -10.4236860275269
+          ],
+          [
+            1935.85180664062,
+            -356.999145507812,
+            -10.7109098434448
+          ],
+          [
+            1935.50756835938,
+            -356.999145507812,
+            -10.9981441497803
+          ],
+          [
+            1935.16333007812,
+            -356.999145507812,
+            -11.2853851318359
+          ],
+          [
+            1934.81909179688,
+            -356.999145507812,
+            -11.5726318359375
+          ],
+          [
+            1934.47546386719,
+            -356.999145507812,
+            -11.8598794937134
+          ],
+          [
+            1934.13195800781,
+            -356.999145507812,
+            -12.1471376419067
+          ],
+          [
+            1933.80236816406,
+            -357.128601074219,
+            -12.4229135513306
+          ],
+          [
+            1933.46899414062,
+            -357.237121582031,
+            -12.701753616333
+          ],
+          [
+            1933.13562011719,
+            -357.345794677734,
+            -12.9805631637573
+          ],
+          [
+            1932.80224609375,
+            -357.454437255859,
+            -13.2593793869019
+          ],
+          [
+            1932.46899414062,
+            -357.564086914062,
+            -13.538028717041
+          ],
+          [
+            1932.13549804688,
+            -357.671875,
+            -13.8169527053833
+          ],
+          [
+            1931.80224609375,
+            -357.781402587891,
+            -14.095606803894
+          ],
+          [
+            1931.46875,
+            -357.889190673828,
+            -14.3745164871216
+          ],
+          [
+            1931.13549804688,
+            -357.997650146484,
+            -14.6531534194946
+          ],
+          [
+            1930.80212402344,
+            -358.106353759766,
+            -14.9319067001343
+          ],
+          [
+            1930.46887207031,
+            -358.214904785156,
+            -15.2105140686035
+          ],
+          [
+            1930.13562011719,
+            -358.323516845703,
+            -15.4892482757568
+          ],
+          [
+            1929.80163574219,
+            -358.432189941406,
+            -15.7680988311768
+          ],
+          [
+            1929.46765136719,
+            -358.541320800781,
+            -16.0470447540283
+          ],
+          [
+            1929.13391113281,
+            -358.649780273438,
+            -16.3256187438965
+          ],
+          [
+            1928.79992675781,
+            -358.759582519531,
+            -16.6044883728027
+          ],
+          [
+            1928.46618652344,
+            -358.867279052734,
+            -16.8831844329834
+          ],
+          [
+            1928.13244628906,
+            -358.975860595703,
+            -17.1617412567139
+          ],
+          [
+            1927.79895019531,
+            -359.085510253906,
+            -17.4403018951416
+          ],
+          [
+            1927.46508789062,
+            -359.193298339844,
+            -17.7189788818359
+          ],
+          [
+            1927.13146972656,
+            -359.301910400391,
+            -17.9975337982178
+          ],
+          [
+            1926.7978515625,
+            -359.411590576172,
+            -18.276086807251
+          ],
+          [
+            1926.46411132812,
+            -359.519317626953,
+            -18.5547657012939
+          ],
+          [
+            1926.13049316406,
+            -359.628204345703,
+            -18.8334407806396
+          ],
+          [
+            1925.796875,
+            -359.736694335938,
+            -19.1120090484619
+          ],
+          [
+            1925.46313476562,
+            -359.845489501953,
+            -19.390697479248
+          ],
+          [
+            1925.12939453125,
+            -359.954071044922,
+            -19.6692504882812
+          ],
+          [
+            1924.78881835938,
+            -359.999145507812,
+            -19.953519821167
+          ]
+        ],
+        "target": [
+          1924.40502929688,
+          -359.920013427734,
+          -20.2740592956543
+        ],
+        "to": [
+          1924.61669921875,
+          -359.999145507812,
+          -20.0971088409424
+        ]
+      },
+      "name": "actual_controller_walks_down_continuous_stair_support",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 0.275633901357651,
+        "from": [
+          1924.61669921875,
+          -359.999145507812,
+          -20.0971088409424
+        ],
+        "recoveries": 0,
+        "samples": [
+          [
+            1924.55932617188,
+            -359.999145507812,
+            -20.1449851989746
+          ],
+          [
+            1924.21508789062,
+            -359.999145507812,
+            -20.4321994781494
+          ],
+          [
+            1923.87084960938,
+            -359.999145507812,
+            -20.7194290161133
+          ],
+          [
+            1923.52661132812,
+            -359.999145507812,
+            -21.0066795349121
+          ],
+          [
+            1923.18237304688,
+            -359.999145507812,
+            -21.2939395904541
+          ],
+          [
+            1922.83813476562,
+            -359.999145507812,
+            -21.5812110900879
+          ],
+          [
+            1922.49389648438,
+            -359.999145507812,
+            -21.8684959411621
+          ],
+          [
+            1922.15002441406,
+            -359.999145507812,
+            -22.1557922363281
+          ],
+          [
+            1921.80603027344,
+            -359.999145507812,
+            -22.4430980682373
+          ],
+          [
+            1921.46240234375,
+            -359.999145507812,
+            -22.7304077148438
+          ],
+          [
+            1921.11889648438,
+            -359.999145507812,
+            -23.0177116394043
+          ],
+          [
+            1920.77514648438,
+            -359.999572753906,
+            -23.305004119873
+          ],
+          [
+            1920.43127441406,
+            -359.999145507812,
+            -23.5922966003418
+          ],
+          [
+            1920.08728027344,
+            -359.999145507812,
+            -23.8796005249023
+          ],
+          [
+            1919.74365234375,
+            -359.999145507812,
+            -24.1669101715088
+          ],
+          [
+            1919.40002441406,
+            -359.999145507812,
+            -24.4542179107666
+          ],
+          [
+            1919.05627441406,
+            -359.999145507812,
+            -24.7415256500244
+          ],
+          [
+            1918.71252441406,
+            -359.999145507812,
+            -25.0288333892822
+          ],
+          [
+            1918.36877441406,
+            -359.999145507812,
+            -25.3161487579346
+          ],
+          [
+            1918.02490234375,
+            -359.999145507812,
+            -25.6034660339355
+          ],
+          [
+            1917.68115234375,
+            -359.999145507812,
+            -25.8907794952393
+          ]
+        ],
+        "target": [
+          1917.42126464844,
+          -359.920013427734,
+          -26.1080741882324
+        ],
+        "to": [
+          1917.62377929688,
+          -359.999145507812,
+          -25.938663482666
+        ]
+      },
+      "name": "actual_controller_reaches_tactile_platform_and_waiting_door",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "active": true,
+        "blocked_reason": "",
+        "completed_legs": 2,
+        "docked_station": 0,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 3404904655.0,
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 57
+          },
+          {
+            "event": "gate_opened",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 103
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 365
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 398
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1271
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1304
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1665
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 1698
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2571
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2604
+          }
+        ],
+        "loaded": true,
+        "motion_policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "release_pending": false,
+        "riding": false,
+        "route_length_m": 338.335786819458,
+        "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+        "source_geometry_changed": false,
+        "speed_mps": 0.0,
+        "state": "doors_open",
+        "station_m": 0.0,
+        "stations": [
+          {
+            "exit": [
+              1940.3681640625,
+              -356.920013427734,
+              -6.93916893005371
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.641100525856018,
+                  0.0,
+                  -0.767456889152527
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.767456889152527,
+                  0.0,
+                  0.641100525856018
+                ]
+              ],
+              "origin": [
+                1915.04211425781,
+                -360.0,
+                -28.0954856872559
+              ]
+            },
+            "gate": [
+              1936.76110839844,
+              -356.920013427734,
+              -9.95234107971191
+            ],
+            "gate_open": true,
+            "id": "city_hall_game",
+            "source_anchor": [
+              106.838806152344,
+              -1.338707447052,
+              -110.055541992188
+            ],
+            "source_entrance_id": 3404904655.0,
+            "source_station": {
+              "lon_lat": [
+                126.977114,
+                37.5654798
+              ],
+              "osm_node_id": 5935738063.0,
+              "source_xz": [
+                77.2225070894347,
+                -40.4995844690129
+              ],
+              "tags": {
+                "addr:city": "서울특별시",
+                "addr:district": "중구",
+                "addr:housenumber": "지하101",
+                "addr:postcode": "04519",
+                "addr:street": "세종대로",
+                "addr:subdistrict": "정동",
+                "alt_name": "시청역",
+                "alt_name:en": "City Hall station",
+                "departures_board": "realtime",
+                "internet_access": "wlan",
+                "layer": "-2",
+                "level": "-3",
+                "level:ref": "B3",
+                "name": "시청",
+                "name:en": "City Hall",
+                "name:ja": "市庁",
+                "name:ko": "시청",
+                "name:ko-Hani": "市廳",
+                "name:ko-Kana": "シチョン",
+                "name:zh": "市厅",
+                "network": "수도권 전철",
+                "network:en": "Seoul Metropolitan Subway",
+                "network:ko": "수도권 전철",
+                "network:wikidata": "Q16950",
+                "note": "시청\"역\" 이름 기입 금지",
+                "old_name": "시청앞역",
+                "old_ref": "1;201;51",
+                "operator": "서울교통공사",
+                "operator:en": "Seoul Metro",
+                "operator:ko": "서울교통공사",
+                "operator:type": "public",
+                "operator:wikidata": "Q28699048",
+                "public_transport": "station",
+                "railway": "station",
+                "ref": "132;201",
+                "station": "subway",
+                "subway": "yes",
+                "wikidata": "Q246660",
+                "wikipedia": "ko:시청역 (서울)"
+              }
+            },
+            "spawn": [
+              1938.83325195312,
+              -356.920013427734,
+              -8.22136878967285
+            ],
+            "title": "시청",
+            "wait": [
+              1917.42126464844,
+              -359.920013427734,
+              -26.1080741882324
+            ]
+          },
+          {
+            "exit": [
+              2232.54541015625,
+              -356.920013427734,
+              -49.5503730773926
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.999698162078857,
+                  0.0,
+                  0.0245673730969429
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  -0.0245673730969429,
+                  0.0,
+                  0.999698162078857
+                ]
+              ],
+              "origin": [
+                2233.35620117188,
+                -360.0,
+                -82.540412902832
+              ]
+            },
+            "gate": [
+              2232.66088867188,
+              -356.920013427734,
+              -54.2489547729492
+            ],
+            "gate_open": false,
+            "id": "euljiro_game",
+            "source_anchor": [
+              433.356140136719,
+              -1.0696793794632,
+              -102.276878356934
+            ],
+            "source_entrance_id": 8212227135.0,
+            "source_station": null,
+            "spawn": [
+              2232.5947265625,
+              -356.920013427734,
+              -51.5497703552246
+            ],
+            "title": "을지로입구",
+            "wait": [
+              2233.28002929688,
+              -359.920013427734,
+              -79.4413452148438
+            ]
+          }
+        ],
+        "target_station": 0,
+        "train_position": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "visit_station": 0
+      },
+      "name": "cyclic_train_returns_to_cityhall_open",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "active": true,
+        "blocked_reason": "",
+        "completed_legs": 2,
+        "docked_station": 0,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 3404904655.0,
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 57
+          },
+          {
+            "event": "gate_opened",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 103
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 365
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 398
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1271
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1304
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1665
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 1698
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2571
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2604
+          },
+          {
+            "event": "boarded",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 2606
+          }
+        ],
+        "loaded": true,
+        "motion_policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "release_pending": false,
+        "riding": true,
+        "route_length_m": 338.335786819458,
+        "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+        "source_geometry_changed": false,
+        "speed_mps": 0.0,
+        "state": "doors_open",
+        "station_m": 0.0,
+        "stations": [
+          {
+            "exit": [
+              1940.3681640625,
+              -356.920013427734,
+              -6.93916893005371
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.641100525856018,
+                  0.0,
+                  -0.767456889152527
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.767456889152527,
+                  0.0,
+                  0.641100525856018
+                ]
+              ],
+              "origin": [
+                1915.04211425781,
+                -360.0,
+                -28.0954856872559
+              ]
+            },
+            "gate": [
+              1936.76110839844,
+              -356.920013427734,
+              -9.95234107971191
+            ],
+            "gate_open": true,
+            "id": "city_hall_game",
+            "source_anchor": [
+              106.838806152344,
+              -1.338707447052,
+              -110.055541992188
+            ],
+            "source_entrance_id": 3404904655.0,
+            "source_station": {
+              "lon_lat": [
+                126.977114,
+                37.5654798
+              ],
+              "osm_node_id": 5935738063.0,
+              "source_xz": [
+                77.2225070894347,
+                -40.4995844690129
+              ],
+              "tags": {
+                "addr:city": "서울특별시",
+                "addr:district": "중구",
+                "addr:housenumber": "지하101",
+                "addr:postcode": "04519",
+                "addr:street": "세종대로",
+                "addr:subdistrict": "정동",
+                "alt_name": "시청역",
+                "alt_name:en": "City Hall station",
+                "departures_board": "realtime",
+                "internet_access": "wlan",
+                "layer": "-2",
+                "level": "-3",
+                "level:ref": "B3",
+                "name": "시청",
+                "name:en": "City Hall",
+                "name:ja": "市庁",
+                "name:ko": "시청",
+                "name:ko-Hani": "市廳",
+                "name:ko-Kana": "シチョン",
+                "name:zh": "市厅",
+                "network": "수도권 전철",
+                "network:en": "Seoul Metropolitan Subway",
+                "network:ko": "수도권 전철",
+                "network:wikidata": "Q16950",
+                "note": "시청\"역\" 이름 기입 금지",
+                "old_name": "시청앞역",
+                "old_ref": "1;201;51",
+                "operator": "서울교통공사",
+                "operator:en": "Seoul Metro",
+                "operator:ko": "서울교통공사",
+                "operator:type": "public",
+                "operator:wikidata": "Q28699048",
+                "public_transport": "station",
+                "railway": "station",
+                "ref": "132;201",
+                "station": "subway",
+                "subway": "yes",
+                "wikidata": "Q246660",
+                "wikipedia": "ko:시청역 (서울)"
+              }
+            },
+            "spawn": [
+              1938.83325195312,
+              -356.920013427734,
+              -8.22136878967285
+            ],
+            "title": "시청",
+            "wait": [
+              1917.42126464844,
+              -359.920013427734,
+              -26.1080741882324
+            ]
+          },
+          {
+            "exit": [
+              2232.54541015625,
+              -356.920013427734,
+              -49.5503730773926
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.999698162078857,
+                  0.0,
+                  0.0245673730969429
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  -0.0245673730969429,
+                  0.0,
+                  0.999698162078857
+                ]
+              ],
+              "origin": [
+                2233.35620117188,
+                -360.0,
+                -82.540412902832
+              ]
+            },
+            "gate": [
+              2232.66088867188,
+              -356.920013427734,
+              -54.2489547729492
+            ],
+            "gate_open": false,
+            "id": "euljiro_game",
+            "source_anchor": [
+              433.356140136719,
+              -1.0696793794632,
+              -102.276878356934
+            ],
+            "source_entrance_id": 8212227135.0,
+            "source_station": null,
+            "spawn": [
+              2232.5947265625,
+              -356.920013427734,
+              -51.5497703552246
+            ],
+            "title": "을지로입구",
+            "wait": [
+              2233.28002929688,
+              -359.920013427734,
+              -79.4413452148438
+            ]
+          }
+        ],
+        "target_station": 0,
+        "train_position": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "visit_station": 0
+      },
+      "name": "physical_E_boards_train_same_capsule_and_other_transport_mutex",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "menu_pauses_train_clock_and_native_motion",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "arrived": true,
+        "attachment_error_m": 0.0,
+        "from": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "largest_frame_step_m": 0.466763824224472,
+        "physical_travel_m": 338.329751427518,
+        "policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "to": [
+          2233.35620117188,
+          -360.0,
+          -82.540412902832
+        ],
+        "trace": [
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 0
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 10
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 20
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 30
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 40
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 50
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 60
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 70
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 80
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 90
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 100
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 110
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 120
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 130
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 140
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 150
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 160
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 170
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 180
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 190
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 200
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 210
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 220
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 230
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 240
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 250
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 260
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 270
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 280
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 290
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 300
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 310
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 320
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 330
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 0.0,
+            "tick": 340
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 0.0,
+            "tick": 350
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 0.0,
+            "tick": 360
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 0.0,
+            "tick": 370
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 0.0,
+            "tick": 380
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.08862304688,
+              -360.0,
+              -28.1511974334717
+            ],
+            "speed_mps": 0.544444444444445,
+            "state": "moving",
+            "station_m": 0.0725925925925926,
+            "tick": 390
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.29638671875,
+              -360.0,
+              -28.3999099731445
+            ],
+            "speed_mps": 1.32222222222222,
+            "state": "moving",
+            "station_m": 0.396666666666667,
+            "tick": 400
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.67041015625,
+              -360.0,
+              -28.8475933074951
+            ],
+            "speed_mps": 2.1,
+            "state": "moving",
+            "station_m": 0.979999999999999,
+            "tick": 410
+          },
+          {
+            "blocked": "",
+            "point": [
+              1916.21057128906,
+              -360.0,
+              -29.4942474365234
+            ],
+            "speed_mps": 2.87777777777778,
+            "state": "moving",
+            "station_m": 1.82259259259259,
+            "tick": 420
+          },
+          {
+            "blocked": "",
+            "point": [
+              1916.9169921875,
+              -360.0,
+              -30.3398704528809
+            ],
+            "speed_mps": 3.65555555555556,
+            "state": "moving",
+            "station_m": 2.92444444444444,
+            "tick": 430
+          },
+          {
+            "blocked": "",
+            "point": [
+              1917.78955078125,
+              -360.0,
+              -31.384464263916
+            ],
+            "speed_mps": 4.43333333333334,
+            "state": "moving",
+            "station_m": 4.28555555555556,
+            "tick": 440
+          },
+          {
+            "blocked": "",
+            "point": [
+              1918.82836914062,
+              -360.0,
+              -32.6280288696289
+            ],
+            "speed_mps": 5.21111111111111,
+            "state": "moving",
+            "station_m": 5.90592592592593,
+            "tick": 450
+          },
+          {
+            "blocked": "",
+            "point": [
+              1920.03344726562,
+              -360.0,
+              -34.0705642700195
+            ],
+            "speed_mps": 5.98888888888889,
+            "state": "moving",
+            "station_m": 7.78555555555556,
+            "tick": 460
+          },
+          {
+            "blocked": "",
+            "point": [
+              1921.40466308594,
+              -360.0,
+              -35.7120666503906
+            ],
+            "speed_mps": 6.76666666666666,
+            "state": "moving",
+            "station_m": 9.92444444444444,
+            "tick": 470
+          },
+          {
+            "blocked": "",
+            "point": [
+              1922.94213867188,
+              -360.0,
+              -37.5525436401367
+            ],
+            "speed_mps": 7.54444444444444,
+            "state": "moving",
+            "station_m": 12.3225925925926,
+            "tick": 480
+          },
+          {
+            "blocked": "",
+            "point": [
+              1924.64575195312,
+              -360.0,
+              -39.5919914245605
+            ],
+            "speed_mps": 8.32222222222221,
+            "state": "moving",
+            "station_m": 14.98,
+            "tick": 490
+          },
+          {
+            "blocked": "",
+            "point": [
+              1926.515625,
+              -360.0,
+              -41.8304061889648
+            ],
+            "speed_mps": 9.09999999999999,
+            "state": "moving",
+            "station_m": 17.8966666666667,
+            "tick": 500
+          },
+          {
+            "blocked": "",
+            "point": [
+              1928.5517578125,
+              -360.0,
+              -44.2677917480469
+            ],
+            "speed_mps": 9.87777777777776,
+            "state": "moving",
+            "station_m": 21.0725925925926,
+            "tick": 510
+          },
+          {
+            "blocked": "",
+            "point": [
+              1930.75402832031,
+              -360.0,
+              -46.9041481018066
+            ],
+            "speed_mps": 10.6555555555555,
+            "state": "moving",
+            "station_m": 24.5077777777778,
+            "tick": 520
+          },
+          {
+            "blocked": "",
+            "point": [
+              1933.12255859375,
+              -360.0,
+              -49.7394752502441
+            ],
+            "speed_mps": 11.4333333333333,
+            "state": "moving",
+            "station_m": 28.2022222222222,
+            "tick": 530
+          },
+          {
+            "blocked": "",
+            "point": [
+              1936.01721191406,
+              -360.0,
+              -52.4055366516113
+            ],
+            "speed_mps": 12.2111111111111,
+            "state": "moving",
+            "station_m": 32.1559259259259,
+            "tick": 540
+          },
+          {
+            "blocked": "",
+            "point": [
+              1939.31115722656,
+              -360.0,
+              -55.0322036743164
+            ],
+            "speed_mps": 12.9888888888889,
+            "state": "moving",
+            "station_m": 36.3688888888888,
+            "tick": 550
+          },
+          {
+            "blocked": "",
+            "point": [
+              1942.80773925781,
+              -360.0,
+              -57.8205146789551
+            ],
+            "speed_mps": 13.7666666666666,
+            "state": "moving",
+            "station_m": 40.8411111111111,
+            "tick": 560
+          },
+          {
+            "blocked": "",
+            "point": [
+              1946.4501953125,
+              -360.0,
+              -60.7252044677734
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 45.5,
+            "tick": 570
+          },
+          {
+            "blocked": "",
+            "point": [
+              1950.09887695312,
+              -360.0,
+              -63.6347465515137
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 50.1666666666666,
+            "tick": 580
+          },
+          {
+            "blocked": "",
+            "point": [
+              1953.74743652344,
+              -360.0,
+              -66.5442886352539
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 54.8333333333333,
+            "tick": 590
+          },
+          {
+            "blocked": "",
+            "point": [
+              1957.57067871094,
+              -360.0,
+              -69.1788940429688
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 59.5,
+            "tick": 600
+          },
+          {
+            "blocked": "",
+            "point": [
+              1961.75537109375,
+              -360.0,
+              -71.2442779541016
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 64.1666666666667,
+            "tick": 610
+          },
+          {
+            "blocked": "",
+            "point": [
+              1965.94018554688,
+              -360.0,
+              -73.3096618652344
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 68.8333333333334,
+            "tick": 620
+          },
+          {
+            "blocked": "",
+            "point": [
+              1970.12487792969,
+              -360.0,
+              -75.3750457763672
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 73.5000000000001,
+            "tick": 630
+          },
+          {
+            "blocked": "",
+            "point": [
+              1974.3095703125,
+              -360.0,
+              -77.4404296875
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 78.1666666666667,
+            "tick": 640
+          },
+          {
+            "blocked": "",
+            "point": [
+              1978.59497070312,
+              -360.0,
+              -79.2290267944336
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 82.8333333333334,
+            "tick": 650
+          },
+          {
+            "blocked": "",
+            "point": [
+              1983.12866210938,
+              -360.0,
+              -80.3355331420898
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 87.5000000000001,
+            "tick": 660
+          },
+          {
+            "blocked": "",
+            "point": [
+              1987.66223144531,
+              -360.0,
+              -81.4420394897461
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 92.1666666666668,
+            "tick": 670
+          },
+          {
+            "blocked": "",
+            "point": [
+              1992.19580078125,
+              -360.0,
+              -82.5485458374023
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 96.8333333333335,
+            "tick": 680
+          },
+          {
+            "blocked": "",
+            "point": [
+              1996.72937011719,
+              -360.0,
+              -83.6550521850586
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 101.5,
+            "tick": 690
+          },
+          {
+            "blocked": "",
+            "point": [
+              2001.28747558594,
+              -360.0,
+              -84.5877304077148
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 106.166666666667,
+            "tick": 700
+          },
+          {
+            "blocked": "",
+            "point": [
+              2005.9501953125,
+              -360.0,
+              -84.7798461914062
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 110.833333333334,
+            "tick": 710
+          },
+          {
+            "blocked": "",
+            "point": [
+              2010.61291503906,
+              -360.0,
+              -84.9719619750977
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 115.5,
+            "tick": 720
+          },
+          {
+            "blocked": "",
+            "point": [
+              2015.27563476562,
+              -360.0,
+              -85.1640701293945
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 120.166666666667,
+            "tick": 730
+          },
+          {
+            "blocked": "",
+            "point": [
+              2019.93835449219,
+              -360.0,
+              -85.3561859130859
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 124.833333333334,
+            "tick": 740
+          },
+          {
+            "blocked": "",
+            "point": [
+              2024.60107421875,
+              -360.0,
+              -85.5483016967773
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 129.5,
+            "tick": 750
+          },
+          {
+            "blocked": "",
+            "point": [
+              2029.26379394531,
+              -360.0,
+              -85.7404174804688
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 134.166666666667,
+            "tick": 760
+          },
+          {
+            "blocked": "",
+            "point": [
+              2033.92651367188,
+              -360.0,
+              -85.9325332641602
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 138.833333333334,
+            "tick": 770
+          },
+          {
+            "blocked": "",
+            "point": [
+              2038.58923339844,
+              -360.0,
+              -86.124641418457
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 143.5,
+            "tick": 780
+          },
+          {
+            "blocked": "",
+            "point": [
+              2043.251953125,
+              -360.0,
+              -86.3167572021484
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 148.166666666667,
+            "tick": 790
+          },
+          {
+            "blocked": "",
+            "point": [
+              2047.91467285156,
+              -360.0,
+              -86.5088729858398
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 152.833333333334,
+            "tick": 800
+          },
+          {
+            "blocked": "",
+            "point": [
+              2052.57739257812,
+              -360.0,
+              -86.7009887695312
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 157.5,
+            "tick": 810
+          },
+          {
+            "blocked": "",
+            "point": [
+              2057.240234375,
+              -360.0,
+              -86.8684234619141
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 162.166666666667,
+            "tick": 820
+          },
+          {
+            "blocked": "",
+            "point": [
+              2061.90551757812,
+              -360.0,
+              -86.753776550293
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 166.833333333334,
+            "tick": 830
+          },
+          {
+            "blocked": "",
+            "point": [
+              2066.57080078125,
+              -360.0,
+              -86.6391296386719
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 171.5,
+            "tick": 840
+          },
+          {
+            "blocked": "",
+            "point": [
+              2071.23608398438,
+              -360.0,
+              -86.5244827270508
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 176.166666666667,
+            "tick": 850
+          },
+          {
+            "blocked": "",
+            "point": [
+              2075.9013671875,
+              -360.0,
+              -86.4098358154297
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 180.833333333334,
+            "tick": 860
+          },
+          {
+            "blocked": "",
+            "point": [
+              2080.56665039062,
+              -360.0,
+              -86.2951889038086
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 185.500000000001,
+            "tick": 870
+          },
+          {
+            "blocked": "",
+            "point": [
+              2085.23168945312,
+              -360.0,
+              -86.1805419921875
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 190.166666666667,
+            "tick": 880
+          },
+          {
+            "blocked": "",
+            "point": [
+              2089.89697265625,
+              -360.0,
+              -86.0658874511719
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 194.833333333334,
+            "tick": 890
+          },
+          {
+            "blocked": "",
+            "point": [
+              2094.56225585938,
+              -360.0,
+              -85.9512405395508
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 199.500000000001,
+            "tick": 900
+          },
+          {
+            "blocked": "",
+            "point": [
+              2099.2275390625,
+              -360.0,
+              -85.8365936279297
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 204.166666666667,
+            "tick": 910
+          },
+          {
+            "blocked": "",
+            "point": [
+              2103.89282226562,
+              -360.0,
+              -85.7219467163086
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 208.833333333334,
+            "tick": 920
+          },
+          {
+            "blocked": "",
+            "point": [
+              2108.55810546875,
+              -360.0,
+              -85.6072998046875
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 213.500000000001,
+            "tick": 930
+          },
+          {
+            "blocked": "",
+            "point": [
+              2113.22338867188,
+              -360.0,
+              -85.4926528930664
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 218.166666666667,
+            "tick": 940
+          },
+          {
+            "blocked": "",
+            "point": [
+              2117.888671875,
+              -360.0,
+              -85.3780059814453
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 222.833333333334,
+            "tick": 950
+          },
+          {
+            "blocked": "",
+            "point": [
+              2122.55395507812,
+              -360.0,
+              -85.2633590698242
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 227.500000000001,
+            "tick": 960
+          },
+          {
+            "blocked": "",
+            "point": [
+              2127.21923828125,
+              -360.0,
+              -85.1487121582031
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 232.166666666667,
+            "tick": 970
+          },
+          {
+            "blocked": "",
+            "point": [
+              2131.88427734375,
+              -360.0,
+              -85.034065246582
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 236.833333333334,
+            "tick": 980
+          },
+          {
+            "blocked": "",
+            "point": [
+              2136.54956054688,
+              -360.0,
+              -84.9194107055664
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 241.500000000001,
+            "tick": 990
+          },
+          {
+            "blocked": "",
+            "point": [
+              2141.21484375,
+              -360.0,
+              -84.8047637939453
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 246.166666666667,
+            "tick": 1000
+          },
+          {
+            "blocked": "",
+            "point": [
+              2145.88012695312,
+              -360.0,
+              -84.6901168823242
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 250.833333333334,
+            "tick": 1010
+          },
+          {
+            "blocked": "",
+            "point": [
+              2150.54541015625,
+              -360.0,
+              -84.5754699707031
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 255.500000000001,
+            "tick": 1020
+          },
+          {
+            "blocked": "",
+            "point": [
+              2155.21069335938,
+              -360.0,
+              -84.460823059082
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 260.166666666667,
+            "tick": 1030
+          },
+          {
+            "blocked": "",
+            "point": [
+              2159.8759765625,
+              -360.0,
+              -84.3461761474609
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 264.833333333334,
+            "tick": 1040
+          },
+          {
+            "blocked": "",
+            "point": [
+              2164.54125976562,
+              -360.0,
+              -84.2315292358398
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 269.5,
+            "tick": 1050
+          },
+          {
+            "blocked": "",
+            "point": [
+              2169.20654296875,
+              -360.0,
+              -84.1168823242188
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 274.166666666666,
+            "tick": 1060
+          },
+          {
+            "blocked": "",
+            "point": [
+              2173.87158203125,
+              -360.0,
+              -84.0022354125977
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 278.833333333333,
+            "tick": 1070
+          },
+          {
+            "blocked": "",
+            "point": [
+              2178.53686523438,
+              -360.0,
+              -83.887580871582
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 283.499999999999,
+            "tick": 1080
+          },
+          {
+            "blocked": "",
+            "point": [
+              2183.2021484375,
+              -360.0,
+              -83.7729339599609
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 288.166666666666,
+            "tick": 1090
+          },
+          {
+            "blocked": "",
+            "point": [
+              2187.86743164062,
+              -360.0,
+              -83.6582870483398
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 292.833333333332,
+            "tick": 1100
+          },
+          {
+            "blocked": "",
+            "point": [
+              2192.53271484375,
+              -360.0,
+              -83.5436401367188
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 297.499999999998,
+            "tick": 1110
+          },
+          {
+            "blocked": "",
+            "point": [
+              2197.19799804688,
+              -360.0,
+              -83.4289932250977
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 302.166666666665,
+            "tick": 1120
+          },
+          {
+            "blocked": "",
+            "point": [
+              2201.86083984375,
+              -360.0,
+              -83.3144073486328
+            ],
+            "speed_mps": 13.9264394848762,
+            "state": "moving",
+            "station_m": 306.830881316161,
+            "tick": 1130
+          },
+          {
+            "blocked": "",
+            "point": [
+              2206.31616210938,
+              -360.0,
+              -83.2049179077148
+            ],
+            "speed_mps": 12.9153283737651,
+            "state": "moving",
+            "station_m": 311.287657440749,
+            "tick": 1140
+          },
+          {
+            "blocked": "",
+            "point": [
+              2210.43481445312,
+              -360.0,
+              -83.1037063598633
+            ],
+            "speed_mps": 11.9042172626539,
+            "state": "moving",
+            "station_m": 315.4073965283,
+            "tick": 1150
+          },
+          {
+            "blocked": "",
+            "point": [
+              2214.21630859375,
+              -360.0,
+              -83.0107727050781
+            ],
+            "speed_mps": 10.8931061515428,
+            "state": "moving",
+            "station_m": 319.190098578814,
+            "tick": 1160
+          },
+          {
+            "blocked": "",
+            "point": [
+              2217.66088867188,
+              -360.0,
+              -82.9261245727539
+            ],
+            "speed_mps": 9.88199504043172,
+            "state": "moving",
+            "station_m": 322.635763592292,
+            "tick": 1170
+          },
+          {
+            "blocked": "",
+            "point": [
+              2220.7685546875,
+              -360.0,
+              -82.8497467041016
+            ],
+            "speed_mps": 8.87088392932061,
+            "state": "moving",
+            "station_m": 325.744391568732,
+            "tick": 1180
+          },
+          {
+            "blocked": "",
+            "point": [
+              2223.53930664062,
+              -360.0,
+              -82.7816619873047
+            ],
+            "speed_mps": 7.85977281820951,
+            "state": "moving",
+            "station_m": 328.515982508135,
+            "tick": 1190
+          },
+          {
+            "blocked": "",
+            "point": [
+              2225.97314453125,
+              -360.0,
+              -82.7218475341797
+            ],
+            "speed_mps": 6.8486617070984,
+            "state": "moving",
+            "station_m": 330.950536410501,
+            "tick": 1200
+          },
+          {
+            "blocked": "",
+            "point": [
+              2228.07006835938,
+              -360.0,
+              -82.6703186035156
+            ],
+            "speed_mps": 5.83755059598729,
+            "state": "moving",
+            "station_m": 333.04805327583,
+            "tick": 1210
+          },
+          {
+            "blocked": "",
+            "point": [
+              2229.830078125,
+              -360.0,
+              -82.627067565918
+            ],
+            "speed_mps": 4.82643948487618,
+            "state": "moving",
+            "station_m": 334.808533104122,
+            "tick": 1220
+          },
+          {
+            "blocked": "",
+            "point": [
+              2231.2529296875,
+              -360.0,
+              -82.5920944213867
+            ],
+            "speed_mps": 3.81532837376507,
+            "state": "moving",
+            "station_m": 336.231975895377,
+            "tick": 1230
+          },
+          {
+            "blocked": "",
+            "point": [
+              2232.33911132812,
+              -360.0,
+              -82.5654067993164
+            ],
+            "speed_mps": 2.80421726265396,
+            "state": "moving",
+            "station_m": 337.318381649595,
+            "tick": 1240
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.08813476562,
+              -360.0,
+              -82.5469970703125
+            ],
+            "speed_mps": 1.79310615154285,
+            "state": "moving",
+            "station_m": 338.067750366776,
+            "tick": 1250
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 338.335740852255,
+            "tick": 1260
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 338.335740852255,
+            "tick": 1270
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 338.335740852255,
+            "tick": 1280
+          }
+        ]
+      },
+      "name": "source_curved_track_continuous_native_train_move_to_east",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "active": true,
+        "blocked_reason": "",
+        "completed_legs": 3,
+        "docked_station": 1,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 3404904655.0,
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 57
+          },
+          {
+            "event": "gate_opened",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 103
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 365
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 398
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1271
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1304
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1665
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 1698
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2571
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2604
+          },
+          {
+            "event": "boarded",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 2606
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2980
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 3013
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3886
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3919
+          },
+          {
+            "event": "disembarked",
+            "extra": {
+              "station": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3921
+          },
+          {
+            "event": "passenger_native_collision_restored",
+            "extra": {},
+            "station_m": 338.335740852255,
+            "tick": 3923
+          }
+        ],
+        "loaded": true,
+        "motion_policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "release_pending": false,
+        "riding": false,
+        "route_length_m": 338.335786819458,
+        "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+        "source_geometry_changed": false,
+        "speed_mps": 0.0,
+        "state": "doors_open",
+        "station_m": 338.335740852255,
+        "stations": [
+          {
+            "exit": [
+              1940.3681640625,
+              -356.920013427734,
+              -6.93916893005371
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.641100525856018,
+                  0.0,
+                  -0.767456889152527
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.767456889152527,
+                  0.0,
+                  0.641100525856018
+                ]
+              ],
+              "origin": [
+                1915.04211425781,
+                -360.0,
+                -28.0954856872559
+              ]
+            },
+            "gate": [
+              1936.76110839844,
+              -356.920013427734,
+              -9.95234107971191
+            ],
+            "gate_open": true,
+            "id": "city_hall_game",
+            "source_anchor": [
+              106.838806152344,
+              -1.338707447052,
+              -110.055541992188
+            ],
+            "source_entrance_id": 3404904655.0,
+            "source_station": {
+              "lon_lat": [
+                126.977114,
+                37.5654798
+              ],
+              "osm_node_id": 5935738063.0,
+              "source_xz": [
+                77.2225070894347,
+                -40.4995844690129
+              ],
+              "tags": {
+                "addr:city": "서울특별시",
+                "addr:district": "중구",
+                "addr:housenumber": "지하101",
+                "addr:postcode": "04519",
+                "addr:street": "세종대로",
+                "addr:subdistrict": "정동",
+                "alt_name": "시청역",
+                "alt_name:en": "City Hall station",
+                "departures_board": "realtime",
+                "internet_access": "wlan",
+                "layer": "-2",
+                "level": "-3",
+                "level:ref": "B3",
+                "name": "시청",
+                "name:en": "City Hall",
+                "name:ja": "市庁",
+                "name:ko": "시청",
+                "name:ko-Hani": "市廳",
+                "name:ko-Kana": "シチョン",
+                "name:zh": "市厅",
+                "network": "수도권 전철",
+                "network:en": "Seoul Metropolitan Subway",
+                "network:ko": "수도권 전철",
+                "network:wikidata": "Q16950",
+                "note": "시청\"역\" 이름 기입 금지",
+                "old_name": "시청앞역",
+                "old_ref": "1;201;51",
+                "operator": "서울교통공사",
+                "operator:en": "Seoul Metro",
+                "operator:ko": "서울교통공사",
+                "operator:type": "public",
+                "operator:wikidata": "Q28699048",
+                "public_transport": "station",
+                "railway": "station",
+                "ref": "132;201",
+                "station": "subway",
+                "subway": "yes",
+                "wikidata": "Q246660",
+                "wikipedia": "ko:시청역 (서울)"
+              }
+            },
+            "spawn": [
+              1938.83325195312,
+              -356.920013427734,
+              -8.22136878967285
+            ],
+            "title": "시청",
+            "wait": [
+              1917.42126464844,
+              -359.920013427734,
+              -26.1080741882324
+            ]
+          },
+          {
+            "exit": [
+              2232.54541015625,
+              -356.920013427734,
+              -49.5503730773926
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.999698162078857,
+                  0.0,
+                  0.0245673730969429
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  -0.0245673730969429,
+                  0.0,
+                  0.999698162078857
+                ]
+              ],
+              "origin": [
+                2233.35620117188,
+                -360.0,
+                -82.540412902832
+              ]
+            },
+            "gate": [
+              2232.66088867188,
+              -356.920013427734,
+              -54.2489547729492
+            ],
+            "gate_open": true,
+            "id": "euljiro_game",
+            "source_anchor": [
+              433.356140136719,
+              -1.0696793794632,
+              -102.276878356934
+            ],
+            "source_entrance_id": 8212227135.0,
+            "source_station": null,
+            "spawn": [
+              2232.5947265625,
+              -356.920013427734,
+              -51.5497703552246
+            ],
+            "title": "을지로입구",
+            "wait": [
+              2233.28002929688,
+              -359.920013427734,
+              -79.4413452148438
+            ]
+          }
+        ],
+        "target_station": 1,
+        "train_position": [
+          2233.35620117188,
+          -360.0,
+          -82.540412902832
+        ],
+        "visit_station": 1
+      },
+      "name": "E_disembarks_other_station_restores_walk_and_native_collision",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 3.54217576980591,
+        "from": [
+          2233.28002929688,
+          -359.999694824219,
+          -79.4413452148438
+        ],
+        "recoveries": 0,
+        "samples": [
+          [
+            2233.28173828125,
+            -359.999145507812,
+            -79.5159912109375
+          ],
+          [
+            2233.27001953125,
+            -359.999145507812,
+            -79.068115234375
+          ],
+          [
+            2233.25830078125,
+            -359.999145507812,
+            -78.6202392578125
+          ],
+          [
+            2233.24658203125,
+            -359.999145507812,
+            -78.17236328125
+          ],
+          [
+            2233.23486328125,
+            -359.999145507812,
+            -77.7244873046875
+          ],
+          [
+            2233.22314453125,
+            -359.999145507812,
+            -77.276611328125
+          ],
+          [
+            2233.21142578125,
+            -359.999145507812,
+            -76.8287353515625
+          ],
+          [
+            2233.19970703125,
+            -359.999145507812,
+            -76.380859375
+          ],
+          [
+            2233.18798828125,
+            -359.999145507812,
+            -75.932991027832
+          ],
+          [
+            2233.17626953125,
+            -359.999145507812,
+            -75.4851303100586
+          ],
+          [
+            2233.16479492188,
+            -359.999572753906,
+            -75.0372695922852
+          ],
+          [
+            2233.15380859375,
+            -359.999145507812,
+            -74.5894012451172
+          ],
+          [
+            2233.14306640625,
+            -359.999176025391,
+            -74.1415252685547
+          ],
+          [
+            2233.13232421875,
+            -359.999145507812,
+            -73.6936569213867
+          ],
+          [
+            2233.12060546875,
+            -359.999145507812,
+            -73.2457809448242
+          ],
+          [
+            2233.10888671875,
+            -359.999145507812,
+            -72.7979049682617
+          ],
+          [
+            2233.09716796875,
+            -359.999145507812,
+            -72.3500366210938
+          ],
+          [
+            2233.08544921875,
+            -359.999145507812,
+            -71.9021606445312
+          ],
+          [
+            2233.07373046875,
+            -359.999145507812,
+            -71.4542846679688
+          ],
+          [
+            2233.06201171875,
+            -359.999145507812,
+            -71.0064086914062
+          ],
+          [
+            2233.05053710938,
+            -359.999145507812,
+            -70.5585327148438
+          ],
+          [
+            2233.03881835938,
+            -359.999145507812,
+            -70.1106567382812
+          ],
+          [
+            2233.02709960938,
+            -359.999145507812,
+            -69.6627807617188
+          ],
+          [
+            2233.0166015625,
+            -359.910583496094,
+            -69.2261734008789
+          ],
+          [
+            2233.00634765625,
+            -359.802001953125,
+            -68.7920684814453
+          ],
+          [
+            2232.99609375,
+            -359.693420410156,
+            -68.3579559326172
+          ],
+          [
+            2232.98583984375,
+            -359.584869384766,
+            -67.9238357543945
+          ],
+          [
+            2232.9755859375,
+            -359.476287841797,
+            -67.4897079467773
+          ],
+          [
+            2232.96533203125,
+            -359.367706298828,
+            -67.0555648803711
+          ],
+          [
+            2232.955078125,
+            -359.259124755859,
+            -66.621452331543
+          ],
+          [
+            2232.94482421875,
+            -359.150573730469,
+            -66.1873321533203
+          ],
+          [
+            2232.9345703125,
+            -359.0419921875,
+            -65.7532272338867
+          ],
+          [
+            2232.92431640625,
+            -358.933441162109,
+            -65.3191299438477
+          ],
+          [
+            2232.9140625,
+            -358.824859619141,
+            -64.8850173950195
+          ],
+          [
+            2232.90380859375,
+            -358.716339111328,
+            -64.4509048461914
+          ],
+          [
+            2232.8935546875,
+            -358.607727050781,
+            -64.0167465209961
+          ],
+          [
+            2232.88330078125,
+            -358.499176025391,
+            -63.5826988220215
+          ],
+          [
+            2232.87329101562,
+            -358.390594482422,
+            -63.1485328674316
+          ],
+          [
+            2232.86303710938,
+            -358.281890869141,
+            -62.7139282226562
+          ],
+          [
+            2232.85278320312,
+            -358.17333984375,
+            -62.27978515625
+          ],
+          [
+            2232.84252929688,
+            -358.064758300781,
+            -61.8456420898438
+          ],
+          [
+            2232.83227539062,
+            -357.956207275391,
+            -61.411563873291
+          ],
+          [
+            2232.82202148438,
+            -357.84765625,
+            -60.9774398803711
+          ],
+          [
+            2232.81176757812,
+            -357.739013671875,
+            -60.5433731079102
+          ],
+          [
+            2232.80151367188,
+            -357.630523681641,
+            -60.1092796325684
+          ],
+          [
+            2232.79125976562,
+            -357.521911621094,
+            -59.6751823425293
+          ],
+          [
+            2232.78100585938,
+            -357.413360595703,
+            -59.2411041259766
+          ],
+          [
+            2232.77075195312,
+            -357.304809570312,
+            -58.8069458007812
+          ],
+          [
+            2232.76049804688,
+            -357.196228027344,
+            -58.3727874755859
+          ],
+          [
+            2232.75024414062,
+            -357.087646484375,
+            -57.9386711120605
+          ]
+        ],
+        "target": [
+          2232.65600585938,
+          -356.920013427734,
+          -54.049015045166
+        ],
+        "to": [
+          2232.74194335938,
+          -356.999145507812,
+          -57.5892639160156
+        ]
+      },
+      "name": "actual_controller_walks_other_station_stairs_up",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "distance": 1.32328248023987,
+        "from": [
+          2232.74194335938,
+          -356.999145507812,
+          -57.5892639160156
+        ],
+        "recoveries": 0,
+        "samples": [
+          [
+            2232.73999023438,
+            -356.999145507812,
+            -57.5146179199219
+          ],
+          [
+            2232.72827148438,
+            -356.999145507812,
+            -57.0667419433594
+          ],
+          [
+            2232.71655273438,
+            -356.999145507812,
+            -56.6188659667969
+          ],
+          [
+            2232.70483398438,
+            -356.999145507812,
+            -56.1709899902344
+          ],
+          [
+            2232.69311523438,
+            -356.999145507812,
+            -55.7231063842773
+          ],
+          [
+            2232.68139648438,
+            -356.999145507812,
+            -55.2752075195312
+          ],
+          [
+            2232.66967773438,
+            -356.999145507812,
+            -54.8273086547852
+          ],
+          [
+            2232.65795898438,
+            -356.999145507812,
+            -54.3794097900391
+          ],
+          [
+            2232.6474609375,
+            -356.999145507812,
+            -53.9315299987793
+          ],
+          [
+            2232.63720703125,
+            -356.999145507812,
+            -53.4836540222168
+          ],
+          [
+            2232.62646484375,
+            -356.999145507812,
+            -53.0357704162598
+          ],
+          [
+            2232.61547851562,
+            -356.999145507812,
+            -52.5878791809082
+          ],
+          [
+            2232.6044921875,
+            -356.999145507812,
+            -52.1399993896484
+          ],
+          [
+            2232.5927734375,
+            -356.999206542969,
+            -51.6921157836914
+          ],
+          [
+            2232.58276367188,
+            -356.999145507812,
+            -51.2442169189453
+          ]
+        ],
+        "target": [
+          2232.54541015625,
+          -356.920013427734,
+          -49.5503730773926
+        ],
+        "to": [
+          2232.57446289062,
+          -356.999145507812,
+          -50.8709678649902
+        ]
+      },
+      "name": "actual_controller_reaches_original_east_surface_exit",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "exit": [
+          430.956146240234,
+          -1.01426887512207,
+          -102.276878356934
+        ],
+        "player": [
+          430.956146240234,
+          -1.09395635128021,
+          -102.276878356934
+        ]
+      },
+      "name": "E_exits_to_original_euljiro_1_1_source_entrance",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "same_east_entrance_reusable_for_return_visit",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "two_terminal_train_available_for_return_leg",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "physical_E_boards_return_train",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "arrived": true,
+        "attachment_error_m": 0.0,
+        "from": [
+          2233.35620117188,
+          -360.0,
+          -82.540412902832
+        ],
+        "largest_frame_step_m": 0.466763824224472,
+        "physical_travel_m": 338.330332077574,
+        "policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "to": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "trace": [
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 0
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 10
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 20
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 30
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 40
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 50
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 60
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 70
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 80
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 90
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 100
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 110
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 120
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 130
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 140
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 150
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 160
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 170
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 180
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 190
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 200
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 210
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 220
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 230
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 240
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 250
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 260
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 270
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 280
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 290
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 300
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 310
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 320
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 330
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 340
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "doors_open",
+            "station_m": 338.335740852255,
+            "tick": 350
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 338.335740852255,
+            "tick": 360
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 338.335740852255,
+            "tick": 370
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.35620117188,
+              -360.0,
+              -82.540412902832
+            ],
+            "speed_mps": 0.0,
+            "state": "closing",
+            "station_m": 338.335740852255,
+            "tick": 380
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.3173828125,
+              -360.0,
+              -82.5413665771484
+            ],
+            "speed_mps": 0.388888888888889,
+            "state": "moving",
+            "station_m": 338.296851963367,
+            "tick": 390
+          },
+          {
+            "blocked": "",
+            "point": [
+              2233.04516601562,
+              -360.0,
+              -82.5480575561523
+            ],
+            "speed_mps": 1.16666666666667,
+            "state": "moving",
+            "station_m": 338.024629741144,
+            "tick": 400
+          },
+          {
+            "blocked": "",
+            "point": [
+              2232.51391601562,
+              -360.0,
+              -82.5611114501953
+            ],
+            "speed_mps": 1.94444444444444,
+            "state": "moving",
+            "station_m": 337.493148259663,
+            "tick": 410
+          },
+          {
+            "blocked": "",
+            "point": [
+              2231.72338867188,
+              -360.0,
+              -82.5805435180664
+            ],
+            "speed_mps": 2.72222222222222,
+            "state": "moving",
+            "station_m": 336.702407518922,
+            "tick": 420
+          },
+          {
+            "blocked": "",
+            "point": [
+              2230.67358398438,
+              -360.0,
+              -82.6063385009766
+            ],
+            "speed_mps": 3.5,
+            "state": "moving",
+            "station_m": 335.652407518922,
+            "tick": 430
+          },
+          {
+            "blocked": "",
+            "point": [
+              2229.36474609375,
+              -360.0,
+              -82.6385040283203
+            ],
+            "speed_mps": 4.27777777777778,
+            "state": "moving",
+            "station_m": 334.343148259663,
+            "tick": 440
+          },
+          {
+            "blocked": "",
+            "point": [
+              2227.79663085938,
+              -360.0,
+              -82.6770324707031
+            ],
+            "speed_mps": 5.05555555555556,
+            "state": "moving",
+            "station_m": 332.774629741144,
+            "tick": 450
+          },
+          {
+            "blocked": "",
+            "point": [
+              2225.96948242188,
+              -360.0,
+              -82.7219390869141
+            ],
+            "speed_mps": 5.83333333333333,
+            "state": "moving",
+            "station_m": 330.946851963367,
+            "tick": 460
+          },
+          {
+            "blocked": "",
+            "point": [
+              2223.88305664062,
+              -360.0,
+              -82.7732086181641
+            ],
+            "speed_mps": 6.61111111111111,
+            "state": "moving",
+            "station_m": 328.85981492633,
+            "tick": 470
+          },
+          {
+            "blocked": "",
+            "point": [
+              2221.53759765625,
+              -360.0,
+              -82.8308563232422
+            ],
+            "speed_mps": 7.38888888888888,
+            "state": "moving",
+            "station_m": 326.513518630033,
+            "tick": 480
+          },
+          {
+            "blocked": "",
+            "point": [
+              2218.9326171875,
+              -360.0,
+              -82.8948669433594
+            ],
+            "speed_mps": 8.16666666666666,
+            "state": "moving",
+            "station_m": 323.907963074478,
+            "tick": 490
+          },
+          {
+            "blocked": "",
+            "point": [
+              2216.06884765625,
+              -360.0,
+              -82.9652481079102
+            ],
+            "speed_mps": 8.94444444444443,
+            "state": "moving",
+            "station_m": 321.043148259663,
+            "tick": 500
+          },
+          {
+            "blocked": "",
+            "point": [
+              2212.94555664062,
+              -360.0,
+              -83.0419998168945
+            ],
+            "speed_mps": 9.72222222222221,
+            "state": "moving",
+            "station_m": 317.919074185589,
+            "tick": 510
+          },
+          {
+            "blocked": "",
+            "point": [
+              2209.56323242188,
+              -360.0,
+              -83.125114440918
+            ],
+            "speed_mps": 10.5,
+            "state": "moving",
+            "station_m": 314.535740852255,
+            "tick": 520
+          },
+          {
+            "blocked": "",
+            "point": [
+              2205.921875,
+              -360.0,
+              -83.2146072387695
+            ],
+            "speed_mps": 11.2777777777778,
+            "state": "moving",
+            "station_m": 310.893148259663,
+            "tick": 530
+          },
+          {
+            "blocked": "",
+            "point": [
+              2202.02124023438,
+              -360.0,
+              -83.3104629516602
+            ],
+            "speed_mps": 12.0555555555555,
+            "state": "moving",
+            "station_m": 306.991296407811,
+            "tick": 540
+          },
+          {
+            "blocked": "",
+            "point": [
+              2197.861328125,
+              -360.0,
+              -83.4126892089844
+            ],
+            "speed_mps": 12.8333333333333,
+            "state": "moving",
+            "station_m": 302.8301852967,
+            "tick": 550
+          },
+          {
+            "blocked": "",
+            "point": [
+              2193.4423828125,
+              -360.0,
+              -83.5212860107422
+            ],
+            "speed_mps": 13.6111111111111,
+            "state": "moving",
+            "station_m": 298.40981492633,
+            "tick": 560
+          },
+          {
+            "blocked": "",
+            "point": [
+              2188.80297851562,
+              -360.0,
+              -83.6352996826172
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 293.769074185589,
+            "tick": 570
+          },
+          {
+            "blocked": "",
+            "point": [
+              2184.1376953125,
+              -360.0,
+              -83.7499465942383
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 289.102407518923,
+            "tick": 580
+          },
+          {
+            "blocked": "",
+            "point": [
+              2179.47241210938,
+              -360.0,
+              -83.8645935058594
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 284.435740852256,
+            "tick": 590
+          },
+          {
+            "blocked": "",
+            "point": [
+              2174.80712890625,
+              -360.0,
+              -83.9792404174805
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 279.76907418559,
+            "tick": 600
+          },
+          {
+            "blocked": "",
+            "point": [
+              2170.14184570312,
+              -360.0,
+              -84.0938873291016
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 275.102407518923,
+            "tick": 610
+          },
+          {
+            "blocked": "",
+            "point": [
+              2165.4765625,
+              -360.0,
+              -84.2085418701172
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 270.435740852257,
+            "tick": 620
+          },
+          {
+            "blocked": "",
+            "point": [
+              2160.81127929688,
+              -360.0,
+              -84.3231887817383
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 265.769074185591,
+            "tick": 630
+          },
+          {
+            "blocked": "",
+            "point": [
+              2156.14624023438,
+              -360.0,
+              -84.4378356933594
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 261.102407518924,
+            "tick": 640
+          },
+          {
+            "blocked": "",
+            "point": [
+              2151.48095703125,
+              -360.0,
+              -84.5524826049805
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 256.435740852258,
+            "tick": 650
+          },
+          {
+            "blocked": "",
+            "point": [
+              2146.81567382812,
+              -360.0,
+              -84.6671295166016
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 251.769074185591,
+            "tick": 660
+          },
+          {
+            "blocked": "",
+            "point": [
+              2142.150390625,
+              -360.0,
+              -84.7817764282227
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 247.102407518924,
+            "tick": 670
+          },
+          {
+            "blocked": "",
+            "point": [
+              2137.48510742188,
+              -360.0,
+              -84.8964233398438
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 242.435740852258,
+            "tick": 680
+          },
+          {
+            "blocked": "",
+            "point": [
+              2132.81982421875,
+              -360.0,
+              -85.0110702514648
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 237.769074185591,
+            "tick": 690
+          },
+          {
+            "blocked": "",
+            "point": [
+              2128.15454101562,
+              -360.0,
+              -85.1257171630859
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 233.102407518924,
+            "tick": 700
+          },
+          {
+            "blocked": "",
+            "point": [
+              2123.4892578125,
+              -360.0,
+              -85.2403717041016
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 228.435740852258,
+            "tick": 710
+          },
+          {
+            "blocked": "",
+            "point": [
+              2118.82397460938,
+              -360.0,
+              -85.3550186157227
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 223.769074185591,
+            "tick": 720
+          },
+          {
+            "blocked": "",
+            "point": [
+              2114.15869140625,
+              -360.0,
+              -85.4696655273438
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 219.102407518924,
+            "tick": 730
+          },
+          {
+            "blocked": "",
+            "point": [
+              2109.49365234375,
+              -360.0,
+              -85.5843124389648
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 214.435740852258,
+            "tick": 740
+          },
+          {
+            "blocked": "",
+            "point": [
+              2104.82836914062,
+              -360.0,
+              -85.6989593505859
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 209.769074185591,
+            "tick": 750
+          },
+          {
+            "blocked": "",
+            "point": [
+              2100.1630859375,
+              -360.0,
+              -85.813606262207
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 205.102407518924,
+            "tick": 760
+          },
+          {
+            "blocked": "",
+            "point": [
+              2095.49780273438,
+              -360.0,
+              -85.9282531738281
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 200.435740852258,
+            "tick": 770
+          },
+          {
+            "blocked": "",
+            "point": [
+              2090.83251953125,
+              -360.0,
+              -86.0429000854492
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 195.769074185591,
+            "tick": 780
+          },
+          {
+            "blocked": "",
+            "point": [
+              2086.16723632812,
+              -360.0,
+              -86.1575469970703
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 191.102407518924,
+            "tick": 790
+          },
+          {
+            "blocked": "",
+            "point": [
+              2081.501953125,
+              -360.0,
+              -86.2722015380859
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 186.435740852258,
+            "tick": 800
+          },
+          {
+            "blocked": "",
+            "point": [
+              2076.83666992188,
+              -360.0,
+              -86.386848449707
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 181.769074185591,
+            "tick": 810
+          },
+          {
+            "blocked": "",
+            "point": [
+              2072.17138671875,
+              -360.0,
+              -86.5014953613281
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 177.102407518924,
+            "tick": 820
+          },
+          {
+            "blocked": "",
+            "point": [
+              2067.50634765625,
+              -360.0,
+              -86.6161422729492
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 172.435740852257,
+            "tick": 830
+          },
+          {
+            "blocked": "",
+            "point": [
+              2062.84106445312,
+              -360.0,
+              -86.7307891845703
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 167.769074185591,
+            "tick": 840
+          },
+          {
+            "blocked": "",
+            "point": [
+              2058.17578125,
+              -360.0,
+              -86.8454360961914
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 163.102407518924,
+            "tick": 850
+          },
+          {
+            "blocked": "",
+            "point": [
+              2053.51220703125,
+              -360.0,
+              -86.7395095825195
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 158.435740852257,
+            "tick": 860
+          },
+          {
+            "blocked": "",
+            "point": [
+              2048.849609375,
+              -360.0,
+              -86.5473937988281
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 153.769074185591,
+            "tick": 870
+          },
+          {
+            "blocked": "",
+            "point": [
+              2044.18688964844,
+              -360.0,
+              -86.3552780151367
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 149.102407518924,
+            "tick": 880
+          },
+          {
+            "blocked": "",
+            "point": [
+              2039.52416992188,
+              -360.0,
+              -86.1631622314453
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 144.435740852257,
+            "tick": 890
+          },
+          {
+            "blocked": "",
+            "point": [
+              2034.86145019531,
+              -360.0,
+              -85.9710540771484
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 139.769074185591,
+            "tick": 900
+          },
+          {
+            "blocked": "",
+            "point": [
+              2030.19873046875,
+              -360.0,
+              -85.778938293457
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 135.102407518924,
+            "tick": 910
+          },
+          {
+            "blocked": "",
+            "point": [
+              2025.53601074219,
+              -360.0,
+              -85.5868225097656
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 130.435740852257,
+            "tick": 920
+          },
+          {
+            "blocked": "",
+            "point": [
+              2020.87329101562,
+              -360.0,
+              -85.3947067260742
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 125.769074185591,
+            "tick": 930
+          },
+          {
+            "blocked": "",
+            "point": [
+              2016.21057128906,
+              -360.0,
+              -85.2025909423828
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 121.102407518924,
+            "tick": 940
+          },
+          {
+            "blocked": "",
+            "point": [
+              2011.5478515625,
+              -360.0,
+              -85.0104827880859
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 116.435740852257,
+            "tick": 950
+          },
+          {
+            "blocked": "",
+            "point": [
+              2006.88513183594,
+              -360.0,
+              -84.8183670043945
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 111.769074185591,
+            "tick": 960
+          },
+          {
+            "blocked": "",
+            "point": [
+              2002.22241210938,
+              -360.0,
+              -84.6262512207031
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 107.102407518924,
+            "tick": 970
+          },
+          {
+            "blocked": "",
+            "point": [
+              1997.63842773438,
+              -360.0,
+              -83.8769226074219
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 102.435740852257,
+            "tick": 980
+          },
+          {
+            "blocked": "",
+            "point": [
+              1993.10485839844,
+              -360.0,
+              -82.7704162597656
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 97.7690741855905,
+            "tick": 990
+          },
+          {
+            "blocked": "",
+            "point": [
+              1988.5712890625,
+              -360.0,
+              -81.6639099121094
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 93.1024075189238,
+            "tick": 1000
+          },
+          {
+            "blocked": "",
+            "point": [
+              1984.03771972656,
+              -360.0,
+              -80.5574111938477
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 88.4357408522571,
+            "tick": 1010
+          },
+          {
+            "blocked": "",
+            "point": [
+              1979.50402832031,
+              -360.0,
+              -79.4509048461914
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 83.7690741855905,
+            "tick": 1020
+          },
+          {
+            "blocked": "",
+            "point": [
+              1975.14868164062,
+              -360.0,
+              -77.8545761108398
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 79.1024075189238,
+            "tick": 1030
+          },
+          {
+            "blocked": "",
+            "point": [
+              1970.96398925781,
+              -360.0,
+              -75.789192199707
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 74.4357408522571,
+            "tick": 1040
+          },
+          {
+            "blocked": "",
+            "point": [
+              1966.779296875,
+              -360.0,
+              -73.7238082885742
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 69.7690741855904,
+            "tick": 1050
+          },
+          {
+            "blocked": "",
+            "point": [
+              1962.59448242188,
+              -360.0,
+              -71.6584243774414
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 65.1024075189237,
+            "tick": 1060
+          },
+          {
+            "blocked": "",
+            "point": [
+              1958.40979003906,
+              -360.0,
+              -69.5930404663086
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 60.435740852257,
+            "tick": 1070
+          },
+          {
+            "blocked": "",
+            "point": [
+              1954.47900390625,
+              -360.0,
+              -67.1276931762695
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 55.7690741855903,
+            "tick": 1080
+          },
+          {
+            "blocked": "",
+            "point": [
+              1950.83044433594,
+              -360.0,
+              -64.2181549072266
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 51.1024075189237,
+            "tick": 1090
+          },
+          {
+            "blocked": "",
+            "point": [
+              1947.18188476562,
+              -360.0,
+              -61.3086166381836
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 46.435740852257,
+            "tick": 1100
+          },
+          {
+            "blocked": "",
+            "point": [
+              1943.533203125,
+              -360.0,
+              -58.3990745544434
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 41.7690741855903,
+            "tick": 1110
+          },
+          {
+            "blocked": "",
+            "point": [
+              1939.88464355469,
+              -360.0,
+              -55.4895362854004
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 37.1024075189236,
+            "tick": 1120
+          },
+          {
+            "blocked": "",
+            "point": [
+              1936.23596191406,
+              -360.0,
+              -52.5799942016602
+            ],
+            "speed_mps": 14.0,
+            "state": "moving",
+            "station_m": 32.4357408522569,
+            "tick": 1130
+          },
+          {
+            "blocked": "",
+            "point": [
+              1932.93676757812,
+              -360.0,
+              -49.5171051025391
+            ],
+            "speed_mps": 13.1175505959871,
+            "state": "moving",
+            "station_m": 27.9124756734608,
+            "tick": 1140
+          },
+          {
+            "blocked": "",
+            "point": [
+              1930.25244140625,
+              -360.0,
+              -46.3036499023438
+            ],
+            "speed_mps": 12.106439484876,
+            "state": "moving",
+            "station_m": 23.7253291785021,
+            "tick": 1150
+          },
+          {
+            "blocked": "",
+            "point": [
+              1927.7841796875,
+              -360.0,
+              -43.3488578796387
+            ],
+            "speed_mps": 11.0953283737649,
+            "state": "moving",
+            "station_m": 19.8752197205805,
+            "tick": 1160
+          },
+          {
+            "blocked": "",
+            "point": [
+              1925.53186035156,
+              -360.0,
+              -40.6527290344238
+            ],
+            "speed_mps": 10.0842172626538,
+            "state": "moving",
+            "station_m": 16.3621472996958,
+            "tick": 1170
+          },
+          {
+            "blocked": "",
+            "point": [
+              1923.49572753906,
+              -360.0,
+              -38.2152557373047
+            ],
+            "speed_mps": 9.07310615154271,
+            "state": "moving",
+            "station_m": 13.1861119158483,
+            "tick": 1180
+          },
+          {
+            "blocked": "",
+            "point": [
+              1921.67565917969,
+              -360.0,
+              -36.036449432373
+            ],
+            "speed_mps": 8.0619950404316,
+            "state": "moving",
+            "station_m": 10.3471135690377,
+            "tick": 1190
+          },
+          {
+            "blocked": "",
+            "point": [
+              1920.07165527344,
+              -360.0,
+              -34.1163024902344
+            ],
+            "speed_mps": 7.05088392932049,
+            "state": "moving",
+            "station_m": 7.84515225926425,
+            "tick": 1200
+          },
+          {
+            "blocked": "",
+            "point": [
+              1918.68371582031,
+              -360.0,
+              -32.4548149108887
+            ],
+            "speed_mps": 6.03977281820938,
+            "state": "moving",
+            "station_m": 5.68022798652779,
+            "tick": 1210
+          },
+          {
+            "blocked": "",
+            "point": [
+              1917.51184082031,
+              -360.0,
+              -31.0519905090332
+            ],
+            "speed_mps": 5.02866170709827,
+            "state": "moving",
+            "station_m": 3.85234075082837,
+            "tick": 1220
+          },
+          {
+            "blocked": "",
+            "point": [
+              1916.55603027344,
+              -360.0,
+              -29.9078273773193
+            ],
+            "speed_mps": 4.01755059598716,
+            "state": "moving",
+            "station_m": 2.36149055216598,
+            "tick": 1230
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.81640625,
+              -360.0,
+              -29.0223255157471
+            ],
+            "speed_mps": 3.00643948487605,
+            "state": "moving",
+            "station_m": 1.20767739054063,
+            "tick": 1240
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.29272460938,
+              -360.0,
+              -28.3954849243164
+            ],
+            "speed_mps": 1.99532837376494,
+            "state": "moving",
+            "station_m": 0.390901265952318,
+            "tick": 1250
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 0.0,
+            "tick": 1260
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 0.0,
+            "tick": 1270
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 0.0,
+            "tick": 1280
+          },
+          {
+            "blocked": "",
+            "point": [
+              1915.04211425781,
+              -360.0,
+              -28.0954856872559
+            ],
+            "speed_mps": 0.0,
+            "state": "opening",
+            "station_m": 0.0,
+            "tick": 1290
+          }
+        ]
+      },
+      "name": "continuous_return_leg_cityhall_and_repeating_service",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_teleport_preserves_rider_train_and_controls",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "active": false,
+        "blocked_reason": "",
+        "completed_legs": 6,
+        "docked_station": 0,
+        "door_fraction": 1.0,
+        "error": "",
+        "events": [
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 3404904655.0,
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 57
+          },
+          {
+            "event": "gate_opened",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 103
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 365
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 398
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1271
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1304
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 1665
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 1698
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2571
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2604
+          },
+          {
+            "event": "boarded",
+            "extra": {
+              "station": 0
+            },
+            "station_m": 0.0,
+            "tick": 2606
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 2980
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 3013
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3886
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3919
+          },
+          {
+            "event": "disembarked",
+            "extra": {
+              "station": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 3921
+          },
+          {
+            "event": "passenger_native_collision_restored",
+            "extra": {},
+            "station_m": 338.335740852255,
+            "tick": 3923
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 4280
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 4313
+          },
+          {
+            "event": "left_to_validated_exterior",
+            "extra": {
+              "point": [
+                430.956146240234,
+                -1.01426887512207,
+                -102.276878356934
+              ]
+            },
+            "station_m": 337.736851963367,
+            "tick": 4335
+          },
+          {
+            "event": "entered_station",
+            "extra": {
+              "source_entrance": 8212227135.0,
+              "station": 1
+            },
+            "station_m": 337.207963074478,
+            "tick": 4343
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 5186
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 5219
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 5580
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 1
+            },
+            "station_m": 0.0,
+            "tick": 5613
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 6486
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 6519
+          },
+          {
+            "event": "boarded",
+            "extra": {
+              "station": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 6521
+          },
+          {
+            "event": "train_closing",
+            "extra": {
+              "docked": 1,
+              "target": 1
+            },
+            "station_m": 338.335740852255,
+            "tick": 6880
+          },
+          {
+            "event": "train_moving",
+            "extra": {
+              "docked": -1,
+              "target": 0
+            },
+            "station_m": 338.335740852255,
+            "tick": 6913
+          },
+          {
+            "event": "train_opening",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 7786
+          },
+          {
+            "event": "train_doors_open",
+            "extra": {
+              "docked": 0,
+              "target": 0
+            },
+            "station_m": 0.0,
+            "tick": 7819
+          },
+          {
+            "event": "left_to_validated_exterior",
+            "extra": {
+              "point": [
+                49.0525360107422,
+                -0.550297737121582,
+                13.5788879394531
+              ]
+            },
+            "station_m": 0.0,
+            "tick": 7820
+          },
+          {
+            "event": "passenger_native_collision_restored",
+            "extra": {},
+            "station_m": 0.0,
+            "tick": 7822
+          }
+        ],
+        "loaded": true,
+        "motion_policy": {
+          "acceleration_mps2": 2.33333333333333,
+          "braking_mps2": 3.03333333333333,
+          "maximum_speed_mps": 14.0,
+          "on_foot_run_speed_mps": 5.6,
+          "speed_gain": 1.16666666666667
+        },
+        "release_pending": false,
+        "riding": false,
+        "route_length_m": 338.335786819458,
+        "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+        "source_geometry_changed": false,
+        "speed_mps": 0.0,
+        "state": "doors_open",
+        "station_m": 0.0,
+        "stations": [
+          {
+            "exit": [
+              1940.3681640625,
+              -356.920013427734,
+              -6.93916893005371
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.641100525856018,
+                  0.0,
+                  -0.767456889152527
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.767456889152527,
+                  0.0,
+                  0.641100525856018
+                ]
+              ],
+              "origin": [
+                1915.04211425781,
+                -360.0,
+                -28.0954856872559
+              ]
+            },
+            "gate": [
+              1936.76110839844,
+              -356.920013427734,
+              -9.95234107971191
+            ],
+            "gate_open": true,
+            "id": "city_hall_game",
+            "source_anchor": [
+              106.838806152344,
+              -1.338707447052,
+              -110.055541992188
+            ],
+            "source_entrance_id": 3404904655.0,
+            "source_station": {
+              "lon_lat": [
+                126.977114,
+                37.5654798
+              ],
+              "osm_node_id": 5935738063.0,
+              "source_xz": [
+                77.2225070894347,
+                -40.4995844690129
+              ],
+              "tags": {
+                "addr:city": "서울특별시",
+                "addr:district": "중구",
+                "addr:housenumber": "지하101",
+                "addr:postcode": "04519",
+                "addr:street": "세종대로",
+                "addr:subdistrict": "정동",
+                "alt_name": "시청역",
+                "alt_name:en": "City Hall station",
+                "departures_board": "realtime",
+                "internet_access": "wlan",
+                "layer": "-2",
+                "level": "-3",
+                "level:ref": "B3",
+                "name": "시청",
+                "name:en": "City Hall",
+                "name:ja": "市庁",
+                "name:ko": "시청",
+                "name:ko-Hani": "市廳",
+                "name:ko-Kana": "シチョン",
+                "name:zh": "市厅",
+                "network": "수도권 전철",
+                "network:en": "Seoul Metropolitan Subway",
+                "network:ko": "수도권 전철",
+                "network:wikidata": "Q16950",
+                "note": "시청\"역\" 이름 기입 금지",
+                "old_name": "시청앞역",
+                "old_ref": "1;201;51",
+                "operator": "서울교통공사",
+                "operator:en": "Seoul Metro",
+                "operator:ko": "서울교통공사",
+                "operator:type": "public",
+                "operator:wikidata": "Q28699048",
+                "public_transport": "station",
+                "railway": "station",
+                "ref": "132;201",
+                "station": "subway",
+                "subway": "yes",
+                "wikidata": "Q246660",
+                "wikipedia": "ko:시청역 (서울)"
+              }
+            },
+            "spawn": [
+              1938.83325195312,
+              -356.920013427734,
+              -8.22136878967285
+            ],
+            "title": "시청",
+            "wait": [
+              1917.42126464844,
+              -359.920013427734,
+              -26.1080741882324
+            ]
+          },
+          {
+            "exit": [
+              2232.54541015625,
+              -356.920013427734,
+              -49.5503730773926
+            ],
+            "frame": {
+              "basis": [
+                [
+                  0.999698162078857,
+                  0.0,
+                  0.0245673730969429
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  -0.0245673730969429,
+                  0.0,
+                  0.999698162078857
+                ]
+              ],
+              "origin": [
+                2233.35620117188,
+                -360.0,
+                -82.540412902832
+              ]
+            },
+            "gate": [
+              2232.66088867188,
+              -356.920013427734,
+              -54.2489547729492
+            ],
+            "gate_open": true,
+            "id": "euljiro_game",
+            "source_anchor": [
+              433.356140136719,
+              -1.0696793794632,
+              -102.276878356934
+            ],
+            "source_entrance_id": 8212227135.0,
+            "source_station": null,
+            "spawn": [
+              2232.5947265625,
+              -356.920013427734,
+              -51.5497703552246
+            ],
+            "title": "을지로입구",
+            "wait": [
+              2233.28002929688,
+              -359.920013427734,
+              -79.4413452148438
+            ]
+          }
+        ],
+        "target_station": 0,
+        "train_position": [
+          1915.04211425781,
+          -360.0,
+          -28.0954856872559
+        ],
+        "visit_station": 1
+      },
+      "name": "validated_reset_restores_world_player_camera_and_control",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "same_original_source_nodes_and_player_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_city_subway.gd": "0b8f59e51ccf5f00754b9e803ad24fe0eb9a2c4c33fd8bcf33cadf7cfba3aa3c",
+          "res://assets/authored/subway_service.json": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_subway_service.gd": "2b4bc060791e8e9986fdb6cb0912a16d1a079f12ee0aebd902a81cdc524352cd",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f"
+        },
+        "loaded": {
+          "res://../tests/game/check_city_subway.gd": "0b8f59e51ccf5f00754b9e803ad24fe0eb9a2c4c33fd8bcf33cadf7cfba3aa3c",
+          "res://assets/authored/subway_service.json": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_subway_service.gd": "2b4bc060791e8e9986fdb6cb0912a16d1a079f12ee0aebd902a81cdc524352cd",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f"
+        }
+      },
+      "name": "module_and_original_inputs_stable_during_run",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "elapsed_ms": 266607,
+  "engine": "4.7.2-stable (official)",
+  "passed": 26,
+  "physics_hz": 30,
+  "recorded_at": "2026-10-21T16:47:16",
+  "result": "FAIL",
+  "scope": "Production source scene/terrain/capsule. Synthetic physical KEY_E devices 42 and 0, actual W-controller station stairs and continuously moving train. Explicit initial and second-leg observer placements and blockers labelled. Retained original entrance identities; authored underground plans and regional game timetable/route, no real full station/service accuracy. Headless is not visible-layout or ordinary OS control proof.",
+  "snapshot": {
+    "active": false,
+    "blocked_reason": "",
+    "completed_legs": 6,
+    "docked_station": 0,
+    "door_fraction": 1.0,
+    "error": "",
+    "events": [
+      {
+        "event": "entered_station",
+        "extra": {
+          "source_entrance": 3404904655.0,
+          "station": 0
+        },
+        "station_m": 0.0,
+        "tick": 57
+      },
+      {
+        "event": "gate_opened",
+        "extra": {
+          "station": 0
+        },
+        "station_m": 0.0,
+        "tick": 103
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 0,
+          "target": 1
+        },
+        "station_m": 0.0,
+        "tick": 365
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 1
+        },
+        "station_m": 0.0,
+        "tick": 398
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 1271
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 1304
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 1665
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 0
+        },
+        "station_m": 338.335740852255,
+        "tick": 1698
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 2571
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 2604
+      },
+      {
+        "event": "boarded",
+        "extra": {
+          "station": 0
+        },
+        "station_m": 0.0,
+        "tick": 2606
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 2980
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 1
+        },
+        "station_m": 0.0,
+        "tick": 3013
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 3886
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 3919
+      },
+      {
+        "event": "disembarked",
+        "extra": {
+          "station": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 3921
+      },
+      {
+        "event": "passenger_native_collision_restored",
+        "extra": {},
+        "station_m": 338.335740852255,
+        "tick": 3923
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 4280
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 0
+        },
+        "station_m": 338.335740852255,
+        "tick": 4313
+      },
+      {
+        "event": "left_to_validated_exterior",
+        "extra": {
+          "point": [
+            430.956146240234,
+            -1.01426887512207,
+            -102.276878356934
+          ]
+        },
+        "station_m": 337.736851963367,
+        "tick": 4335
+      },
+      {
+        "event": "entered_station",
+        "extra": {
+          "source_entrance": 8212227135.0,
+          "station": 1
+        },
+        "station_m": 337.207963074478,
+        "tick": 4343
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 5186
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 5219
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 5580
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 1
+        },
+        "station_m": 0.0,
+        "tick": 5613
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 6486
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 6519
+      },
+      {
+        "event": "boarded",
+        "extra": {
+          "station": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 6521
+      },
+      {
+        "event": "train_closing",
+        "extra": {
+          "docked": 1,
+          "target": 1
+        },
+        "station_m": 338.335740852255,
+        "tick": 6880
+      },
+      {
+        "event": "train_moving",
+        "extra": {
+          "docked": -1,
+          "target": 0
+        },
+        "station_m": 338.335740852255,
+        "tick": 6913
+      },
+      {
+        "event": "train_opening",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 7786
+      },
+      {
+        "event": "train_doors_open",
+        "extra": {
+          "docked": 0,
+          "target": 0
+        },
+        "station_m": 0.0,
+        "tick": 7819
+      },
+      {
+        "event": "left_to_validated_exterior",
+        "extra": {
+          "point": [
+            49.0525360107422,
+            -0.550297737121582,
+            13.5788879394531
+          ]
+        },
+        "station_m": 0.0,
+        "tick": 7820
+      },
+      {
+        "event": "passenger_native_collision_restored",
+        "extra": {},
+        "station_m": 0.0,
+        "tick": 7822
+      }
+    ],
+    "loaded": true,
+    "motion_policy": {
+      "acceleration_mps2": 2.33333333333333,
+      "braking_mps2": 3.03333333333333,
+      "maximum_speed_mps": 14.0,
+      "on_foot_run_speed_mps": 5.6,
+      "speed_gain": 1.16666666666667
+    },
+    "release_pending": false,
+    "riding": false,
+    "route_length_m": 338.335786819458,
+    "scope": "Retained City Hall5/Euljiro1-1 entrance identities; authored bounded underground game stations and continuously moving two-terminal train on a 338m regional source-derived Line2 segment. No real platform center, complete station, timetable, fare or actual full interstation distance claim.",
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "state": "doors_open",
+    "station_m": 0.0,
+    "stations": [
+      {
+        "exit": [
+          1940.3681640625,
+          -356.920013427734,
+          -6.93916893005371
+        ],
+        "frame": {
+          "basis": [
+            [
+              0.641100525856018,
+              0.0,
+              -0.767456889152527
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.767456889152527,
+              0.0,
+              0.641100525856018
+            ]
+          ],
+          "origin": [
+            1915.04211425781,
+            -360.0,
+            -28.0954856872559
+          ]
+        },
+        "gate": [
+          1936.76110839844,
+          -356.920013427734,
+          -9.95234107971191
+        ],
+        "gate_open": true,
+        "id": "city_hall_game",
+        "source_anchor": [
+          106.838806152344,
+          -1.338707447052,
+          -110.055541992188
+        ],
+        "source_entrance_id": 3404904655.0,
+        "source_station": {
+          "lon_lat": [
+            126.977114,
+            37.5654798
+          ],
+          "osm_node_id": 5935738063.0,
+          "source_xz": [
+            77.2225070894347,
+            -40.4995844690129
+          ],
+          "tags": {
+            "addr:city": "서울특별시",
+            "addr:district": "중구",
+            "addr:housenumber": "지하101",
+            "addr:postcode": "04519",
+            "addr:street": "세종대로",
+            "addr:subdistrict": "정동",
+            "alt_name": "시청역",
+            "alt_name:en": "City Hall station",
+            "departures_board": "realtime",
+            "internet_access": "wlan",
+            "layer": "-2",
+            "level": "-3",
+            "level:ref": "B3",
+            "name": "시청",
+            "name:en": "City Hall",
+            "name:ja": "市庁",
+            "name:ko": "시청",
+            "name:ko-Hani": "市廳",
+            "name:ko-Kana": "シチョン",
+            "name:zh": "市厅",
+            "network": "수도권 전철",
+            "network:en": "Seoul Metropolitan Subway",
+            "network:ko": "수도권 전철",
+            "network:wikidata": "Q16950",
+            "note": "시청\"역\" 이름 기입 금지",
+            "old_name": "시청앞역",
+            "old_ref": "1;201;51",
+            "operator": "서울교통공사",
+            "operator:en": "Seoul Metro",
+            "operator:ko": "서울교통공사",
+            "operator:type": "public",
+            "operator:wikidata": "Q28699048",
+            "public_transport": "station",
+            "railway": "station",
+            "ref": "132;201",
+            "station": "subway",
+            "subway": "yes",
+            "wikidata": "Q246660",
+            "wikipedia": "ko:시청역 (서울)"
+          }
+        },
+        "spawn": [
+          1938.83325195312,
+          -356.920013427734,
+          -8.22136878967285
+        ],
+        "title": "시청",
+        "wait": [
+          1917.42126464844,
+          -359.920013427734,
+          -26.1080741882324
+        ]
+      },
+      {
+        "exit": [
+          2232.54541015625,
+          -356.920013427734,
+          -49.5503730773926
+        ],
+        "frame": {
+          "basis": [
+            [
+              0.999698162078857,
+              0.0,
+              0.0245673730969429
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              -0.0245673730969429,
+              0.0,
+              0.999698162078857
+            ]
+          ],
+          "origin": [
+            2233.35620117188,
+            -360.0,
+            -82.540412902832
+          ]
+        },
+        "gate": [
+          2232.66088867188,
+          -356.920013427734,
+          -54.2489547729492
+        ],
+        "gate_open": true,
+        "id": "euljiro_game",
+        "source_anchor": [
+          433.356140136719,
+          -1.0696793794632,
+          -102.276878356934
+        ],
+        "source_entrance_id": 8212227135.0,
+        "source_station": null,
+        "spawn": [
+          2232.5947265625,
+          -356.920013427734,
+          -51.5497703552246
+        ],
+        "title": "을지로입구",
+        "wait": [
+          2233.28002929688,
+          -359.920013427734,
+          -79.4413452148438
+        ]
+      }
+    ],
+    "target_station": 0,
+    "train_position": [
+      1915.04211425781,
+      -360.0,
+      -28.0954856872559
+    ],
+    "visit_station": 1
+  },
+  "source_sha256": {
+    "res://../tests/game/check_city_subway.gd": "0b8f59e51ccf5f00754b9e803ad24fe0eb9a2c4c33fd8bcf33cadf7cfba3aa3c",
+    "res://assets/authored/subway_service.json": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_subway_service.gd": "2b4bc060791e8e9986fdb6cb0912a16d1a079f12ee0aebd902a81cdc524352cd",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f"
+  },
+  "task": "source_linked_game_subway",
+  "total": 28
+}

@@ -73,7 +73,7 @@ func _finish() -> void:
 	if finished:return
 	finished=true
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size();var hashes: Dictionary={}
-	for path: String in ["res://scripts/city_bike_service.gd","res://assets/authored/bike_service.json","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://../tests/game/check_city_bike_service.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json"]:hashes[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/city_bike_service.gd","res://assets/authored/bike_service.json","res://scripts/transport_motion_policy.gd","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://../tests/game/check_city_bike_service.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json"]:hashes[path]=FileAccess.get_sha256(path)
 	var file:=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(_json({"task":"city_bikes","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"maximum_post_exit_idle_step_m":maximum_post_exit_idle_step_m,"physics_hz":Engine.physics_ticks_per_second,"source_hashes":hashes,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Production native terrain, retained player capsule and actors, InputEventAction E/WASD/Space, physical bike moves/collision/support, real menu and validated cancel. Test-only player placements and blockers explicitly separate. Headless does not accept rendered appearance."}),"  "));file.close();print("BIKE_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
 func _run() -> void:
 	scene=load("res://scenes/world/explore_walk.tscn").instantiate();scene.exploration_settings_path="/tmp/city-bike-test-"+str(OS.get_process_id())+".json";scene.quality_settings_path=scene.exploration_settings_path+".quality.json";scene.exploration_physics_hz=30;root.add_child(scene);await _ticks(8)
@@ -102,7 +102,7 @@ func _run() -> void:
 		await _ticks(1);maximum_speed=maxf(maximum_speed,service.speed_mps);maximum_step=maxf(maximum_step,body.global_position.distance_to(previous));previous=body.global_position
 		if not body.is_on_floor():unsupported+=1
 	_key("move_forward",false)
-	_check("W_accelerates_real_bike_and_animates_wheels_pedals_on_terrain",body.global_position.distance_to(before)>3. and maximum_speed>2. and maximum_step<.19 and unsupported<4 and service._maximum_pedal_rotation>.4,{"travel_m":body.global_position.distance_to(before),"maximum_speed_mps":maximum_speed,"maximum_step_m":maximum_step,"unsupported_ticks":unsupported,"snapshot":service.snapshot()})
+	_check("W_accelerates_real_bike_and_animates_wheels_pedals_on_terrain",body.global_position.distance_to(before)>3. and maximum_speed>2. and maximum_step<=float(service.motion_policy().maximum_speed_mps)/Engine.physics_ticks_per_second+.025 and unsupported<4 and service._maximum_pedal_rotation>.4,{"travel_m":body.global_position.distance_to(before),"maximum_speed_mps":maximum_speed,"maximum_step_m":maximum_step,"unsupported_ticks":unsupported,"snapshot":service.snapshot()})
 	await _capture("riding_posture",true)
 	# A complete physical out-and-back returns the rented bicycle through E.
 	_key("jump",true);await _ticks(90);_key("jump",false);_key("move_backward",true)

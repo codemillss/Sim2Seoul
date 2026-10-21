@@ -10,6 +10,8 @@ var checks: Array[Dictionary]=[]
 var captures: Array[Dictionary]=[]
 var held: Dictionary={}
 var report_path:="/tmp/sim2seoul-helicopter.json"
+var report_task:="authored_city_helicopter"
+var report_scope:="Native aircraft shapes including full rotor, existing source terrain, physical KEY_E and labelled held movement fixture. Actual takeoff, movement, rotation, same-ground return, landing and walking restoration. Near-ceiling/boundary aircraft placements and static blockers are test fixtures, not ordinary travel. No actual aviation accuracy/permission, sustained performance or subjective/native appearance acceptance from headless."
 var finished:=false
 var started:=0
 var maximum_idle_step_m:=0.0
@@ -50,7 +52,7 @@ func _json(value: Variant) -> Variant:
 	return value
 func _hashes() -> Dictionary:
 	var result: Dictionary={}
-	for path: String in ["res://scripts/city_helicopter_service.gd","res://assets/authored/helicopter_service.json","res://../tests/game/check_city_helicopter.gd","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json"]:result[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/city_helicopter_service.gd","res://scripts/city_helicopter_rope.gd","res://scripts/transport_motion_policy.gd","res://scripts/player/free_roam_player.gd","res://scripts/rooftop_space.gd","res://scripts/pool_preparation_service.gd","res://assets/authored/helicopter_service.json","res://../tests/game/check_city_helicopter.gd","res://scripts/explore_walk.gd","res://scripts/interior_visit.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json"]:result[path]=FileAccess.get_sha256(path)
 	return result
 func _check(title: String,ok: bool,evidence: Dictionary={}) -> void:
 	checks.append({"name":title,"passed":ok,"evidence":_json(evidence)});print("HELICOPTER_CHECK ",title," ",ok)
@@ -74,7 +76,7 @@ func _finish() -> void:
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size()
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:push_error("Could not write helicopter report");quit(2);return
-	file.store_string(JSON.stringify(_json({"task":"authored_city_helicopter","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"source_hashes":hashes,"physics_hz":Engine.physics_ticks_per_second,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Native aircraft shapes including full rotor, existing source terrain, physical KEY_E and labelled held movement fixture. Actual takeoff, movement, rotation, same-ground return, landing and walking restoration. Near-ceiling/boundary aircraft placements and static blockers are test fixtures, not ordinary travel. No actual aviation accuracy/permission, sustained performance or subjective/native appearance acceptance from headless."}),"  "));file.close();print("HELICOPTER_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
+	file.store_string(JSON.stringify(_json({"task":report_task,"result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"source_hashes":hashes,"physics_hz":Engine.physics_ticks_per_second,"elapsed_ms":Time.get_ticks_msec()-started,"scope":report_scope}),"  "));file.close();print("HELICOPTER_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
 func _run() -> void:
 	_loaded_hashes=_hashes();scene=load("res://scenes/world/explore_walk.tscn").instantiate();scene.exploration_settings_path="/tmp/helicopter-test-"+str(OS.get_process_id())+".json";scene.quality_settings_path=scene.exploration_settings_path+".quality.json";root.add_child(scene);await _ticks(8)
 	service=scene.get("city_helicopter_service")
@@ -112,7 +114,7 @@ func _run() -> void:
 	_key("move_backward",true)
 	for tick: int in range(300):
 		await _ticks(1)
-		if Vector2(service.body.global_position.x-home.x,service.body.global_position.z-home.z).length()<2.7:break
+		if Vector2(service.body.global_position.x-home.x,service.body.global_position.z-home.z).length()<2.4:break
 	_key("move_backward",false);await _ticks(40)
 	_check("physical_reverse_returns_over_same_helipad",Vector2(service.body.global_position.x-home.x,service.body.global_position.z-home.z).length()<1.5,{"position":service.body.global_position,"home":home})
 	_key(service.DESCEND,true)
@@ -143,9 +145,9 @@ func _run() -> void:
 	fin.queue_free();await _ticks(3)
 	# Explicit fixture places the aircraft near the configured ceiling. It is
 	# separate from the ordinary physical takeoff/return/landing above.
-	var ground_y: float=scene.terrain_surface.ground_y_world(service.body.global_position);service.body.global_position.y=ground_y+119.6;service.vertical_speed_mps=0.;service.speed_mps=0.;service.body.velocity=Vector3.ZERO
+	var ground_y: float=scene.terrain_surface.ground_y_world(service.body.global_position);service.body.global_position.y=ground_y+float(service.design.policy.maximum_altitude_above_terrain_m)-.4;service.vertical_speed_mps=0.;service.speed_mps=0.;service.body.velocity=Vector3.ZERO
 	_key(service.ASCEND,true);await _ticks(45);_key(service.ASCEND,false);await _ticks(10)
-	_check("near_ceiling_fixture_cannot_exceed_configured_altitude",service.body.global_position.y-ground_y<=120.02 and service.body.global_position.y-ground_y>=119.9,{"altitude_m":service.body.global_position.y-ground_y,"fixture":"Aircraft starts 0.4m below configured ceiling; controller performs the actual final rise and stops."})
+	_check("near_ceiling_fixture_cannot_exceed_configured_altitude",service.body.global_position.y-ground_y<=float(service.design.policy.maximum_altitude_above_terrain_m)+.02 and service.body.global_position.y-ground_y>=float(service.design.policy.maximum_altitude_above_terrain_m)-.1,{"altitude_m":service.body.global_position.y-ground_y,"fixture":"Aircraft starts 0.4m below configured ceiling; controller performs the actual final rise and stops."})
 	var lower_direction:=Vector3.FORWARD;var lower_ground:=INF
 	for direction: Vector3 in [Vector3.FORWARD,Vector3.BACK,Vector3.LEFT,Vector3.RIGHT]:
 		var height: float=scene.terrain_surface.ground_y_world(service.body.global_position+direction*2.)
@@ -155,7 +157,7 @@ func _run() -> void:
 	for tick: int in range(25):
 		await _ticks(1);maximum_agl=maxf(maximum_agl,service.body.global_position.y-scene.terrain_surface.ground_y_world(service.body.global_position))
 	_key("move_forward",false);await _ticks(3)
-	_check("ceiling_guard_also_rejects_horizontal_entry_over_lower_terrain",maximum_agl<=120.02,{"maximum_altitude_above_terrain_m":maximum_agl,"lower_direction":lower_direction})
+	_check("ceiling_guard_also_rejects_horizontal_entry_over_lower_terrain",maximum_agl<=float(service.design.policy.maximum_altitude_above_terrain_m)+.02,{"maximum_altitude_above_terrain_m":maximum_agl,"lower_direction":lower_direction})
 	var valid: Vector3=service.helipad.point;var invalid:=Vector3(scene.player.free_roam_bounds.end.x+20.,valid.y,valid.z)
 	for step: int in range(30):
 		var middle: Vector3=valid.lerp(invalid,.5)

@@ -24,6 +24,7 @@ var speed_mps:=0.0
 var steer_radians:=0.0
 var actual_distance_m:=0.0
 var maximum_step_m:=0.0
+var maximum_source_sample_spacing_m:=0.0
 var blocked_reason:=""
 var _saved: Dictionary={}
 var _collision_release_pending: Array[Dictionary]=[]
@@ -46,6 +47,19 @@ var _walk_index: RefCounted
 
 func _design_path() -> String:return DATA_PATH
 func _ride_label() -> String:return "따릉이"
+func _motion_kind() -> String:return "bike"
+func motion_policy() -> Dictionary:
+	return host.transport_motion_policy(_motion_kind(),design.policy) if is_instance_valid(host) and host.has_method("transport_motion_policy") else design.policy.duplicate(true)
+
+func _source_motion_clear(before: Vector3,motion: Vector3,yaw: float) -> bool:
+	# Whole-motion native casts remain below. Sample source permission/support
+	# between endpoints too, so boosted travel cannot skip a private strip/gap.
+	var samples:=maxi(1,ceili(motion.length()/.18))
+	maximum_source_sample_spacing_m=maxf(maximum_source_sample_spacing_m,motion.length()/samples)
+	for step: int in range(1,samples+1):
+		var point:=before+motion*float(step)/samples
+		if not _footprint_allowed(point,_pose_basis(point,yaw)):return false
+	return true
 func _ride_status_prefix() -> String:return "CITY_BIKES_READY"
 func _event(kind: String,evidence: Dictionary={}) -> void:
 	if events.size()>=80:events.pop_front()
@@ -64,7 +78,16 @@ func setup(scene: Node3D) -> bool:
 	_private_index=index_script.new();_private_index.setup(host.city.private_cache,Callable(host.city,"_contains"))
 	_walk_index=index_script.new();_walk_index.setup(host.city.movement_cache,Callable(host.city,"_contains"))
 	var road_parts: Array=[]
-	for parts: Array in host.city.road_cache:road_parts.append_array(parts)
+	# Original drive display triangles cover streets beyond the early N01
+	# traffic corridor. Rental vehicles can use these actual source roads,
+	# while private ground, entrance setbacks and physical support still gate.
+	var world: Variant=JSON.parse_string(FileAccess.get_file_as_string("res://resources/world_geometry/world.json"))
+	if not world is Dictionary:return _fail("탈것의 원본 도로 자료가 없습니다.")
+	for mesh: Dictionary in world.meshes:
+		if mesh.get("metadata",{}).get("display_mode","")!="drive":continue
+		for offset: int in range(0,mesh.vertices.size(),9):
+			var a:=Vector2(mesh.vertices[offset],mesh.vertices[offset+2]);var b:=Vector2(mesh.vertices[offset+3],mesh.vertices[offset+5]);var c:=Vector2(mesh.vertices[offset+6],mesh.vertices[offset+8])
+			if absf((b-a).cross(c-a))>.0000001:road_parts.append([PackedVector2Array([a,b,c,a])])
 	_road_index=index_script.new();_road_index.setup(road_parts,Callable(host.city,"_contains"))
 	for record: Dictionary in host.interior_visit.catalog:
 		for entry: Dictionary in record.entry_candidates:_doors.append(entry.entrance)
@@ -285,7 +308,7 @@ func can_interact() -> bool:
 	return not host.player.facility_control and host.player.is_physics_processing() and _player_supported_for_mount() and _visible_bike(_nearest_bike())
 func prompt_text() -> String:
 	if not _context_ready():return ""
-	if riding:return _ride_label()+" · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E "+("반납" if not _near_station(bikes[rental_index].body.global_position).is_empty() else "내리기") if not exit_requested else "내릴 자리를 확인하는 중\nE · 취소하고 다시 이동"
+	if riding:return _ride_label()+" · %d / %d km/h"%[roundi(absf(speed_mps)*3.6),roundi(float(motion_policy().maximum_speed_mps)*3.6)]+" · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E "+("반납" if not _near_station(bikes[rental_index].body.global_position).is_empty() else "내리기") if not exit_requested else "내릴 자리를 확인하는 중\nE · 취소하고 다시 이동"
 	if _clock<_notice_until:return _notice
 	var index:=_nearest_bike()
 	if index<0:return ""
@@ -401,11 +424,12 @@ func _physics_process(delta: float) -> void:
 			intent=Vector2.ZERO;hand_brake=true
 		_reverse_hold_s=_reverse_hold_s+delta if intent.y>.1 and speed_mps<=.02 and not hand_brake else 0.
 		var target_speed:=0.
+		var policy:=motion_policy()
 		if not hand_brake:
-			if intent.y<-.1:target_speed=float(design.policy.maximum_speed_mps)
+			if intent.y<-.1:target_speed=float(policy.maximum_speed_mps)
 			elif intent.y>.1 and _reverse_hold_s>=.55:target_speed=-1.1
 		var braking: bool=hand_brake or (intent.y>.1 and speed_mps>0.) or (intent.y<-.1 and speed_mps<0.)
-		var rate:=float(design.policy.braking_mps2) if braking else (float(design.policy.acceleration_mps2) if not is_zero_approx(target_speed) else float(design.policy.coast_deceleration_mps2))
+		var rate:=float(policy.braking_mps2) if braking else (float(policy.acceleration_mps2) if not is_zero_approx(target_speed) else float(policy.coast_deceleration_mps2))
 		speed_mps=move_toward(speed_mps,target_speed,rate*delta)
 		steer_radians=move_toward(steer_radians,-intent.x*deg_to_rad(float(design.policy.maximum_steer_degrees)),delta*1.8)
 		var yaw: float=row.yaw+clampf(speed_mps/float(design.policy.wheelbase_m)*tan(steer_radians),-1.5,1.5)*delta
@@ -413,7 +437,7 @@ func _physics_process(delta: float) -> void:
 		var basis:=_pose_basis(before+motion,yaw);var excludes: Array[RID]=[body.get_rid(),host.player.get_rid()]
 		if not support.is_empty():excludes.append(support.rid)
 		if is_instance_valid(host.terrain_surface.support):excludes.append(host.terrain_surface.support.get_rid())
-		if not _footprint_allowed(before+motion,basis):blocked_reason="source_boundary_or_support";speed_mps=0.;motion=Vector3.ZERO
+		if not _source_motion_clear(before,motion,yaw):blocked_reason="source_boundary_or_support";speed_mps=0.;motion=Vector3.ZERO
 		elif not _clear_box(before,basis,excludes,motion):blocked_reason="physical_sweep";speed_mps=0.;motion=Vector3.ZERO
 		else:blocked_reason="";body.global_basis=basis;row.yaw=yaw
 		body.velocity.x=motion.x/delta;body.velocity.z=motion.z/delta;body.velocity.y=-.12 if body.is_on_floor() else maxf(body.velocity.y-9.8*delta,-8.);body.move_and_slide()
@@ -445,4 +469,4 @@ func viewpoint() -> Dictionary:
 func snapshot() -> Dictionary:
 	var rows: Array=[]
 	for row: Dictionary in bikes:rows.append({"name":row.body.name,"position":row.body.global_position,"on_floor":row.body.is_on_floor(),"mask":row.body.collision_mask,"layer":row.body.collision_layer,"rented":row.rented,"station_id":row.station_id,"kickstand_visible":row.kickstand.visible,"distance_m":row.distance_m,"wheel_phase":row.wheel_phase,"source_allowed":_footprint_allowed(row.body.global_position,row.body.global_basis)})
-	return {"loaded":loaded,"error":load_error,"riding":riding,"rental_index":rental_index,"pending_pair_release_count":_collision_release_pending.size(),"exit_requested":exit_requested,"speed_mps":speed_mps,"steer_radians":steer_radians,"actual_distance_m":actual_distance_m,"maximum_step_m":maximum_step_m,"maximum_hand_gap_m":maximum_hand_gap_m,"maximum_pedal_sole_height_error_m":maximum_pedal_sole_height_error_m,"minimum_support_normal_y":_minimum_support_normal_y,"grounded_ticks":_grounded_ticks,"pedal_phase":_pedal_phase,"maximum_pedal_rotation":_maximum_pedal_rotation,"blocked_reason":blocked_reason,"bike_count":bikes.size(),"dock_count":stations.size(),"bikes":rows,"events":events.duplicate(true),"source_geometry_changed":false,"scope":"Authored physical game bicycle rental; no real station inventory, account, payment or legal cycling-access claim."}
+	return {"loaded":loaded,"error":load_error,"riding":riding,"rental_index":rental_index,"pending_pair_release_count":_collision_release_pending.size(),"exit_requested":exit_requested,"speed_mps":speed_mps,"steer_radians":steer_radians,"actual_distance_m":actual_distance_m,"maximum_step_m":maximum_step_m,"motion_policy":motion_policy(),"maximum_source_sample_spacing_m":maximum_source_sample_spacing_m,"maximum_hand_gap_m":maximum_hand_gap_m,"maximum_pedal_sole_height_error_m":maximum_pedal_sole_height_error_m,"minimum_support_normal_y":_minimum_support_normal_y,"grounded_ticks":_grounded_ticks,"pedal_phase":_pedal_phase,"maximum_pedal_rotation":_maximum_pedal_rotation,"blocked_reason":blocked_reason,"bike_count":bikes.size(),"dock_count":stations.size(),"bikes":rows,"events":events.duplicate(true),"source_geometry_changed":false,"scope":"Authored physical game bicycle rental; no real station inventory, account, payment or legal cycling-access claim."}

@@ -1,0 +1,76 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "error": "순환 차체가 원본 차도 밖에 놓입니다."
+      },
+      "name": "production_ready",
+      "passed": false
+    }
+  ],
+  "data_sha256": "dad24a139ac1660969ed37c31deb90f4196ecf749b6fbc5504bc54beda4b72e8",
+  "passed": 0,
+  "script_sha256": "30573389c363584c841216b55f1ca372065a99c18f73db5e897d17c0b35326ca",
+  "snapshot": {
+    "boarding_pending": false,
+    "bus": {},
+    "bus_count": 0,
+    "crossing_commit": {},
+    "docked_stop": -1,
+    "door_fraction": 0.0,
+    "error": "순환 차체가 원본 차도 밖에 놓입니다.",
+    "events": [],
+    "exit_requested": false,
+    "fleet": [],
+    "last_board_door_index": -1,
+    "loaded": false,
+    "motion_policy": {},
+    "original_vehicle_ids_unchanged": true,
+    "passenger_release_pending": false,
+    "riding": false,
+    "route_certificate": {
+      "accepted": false,
+      "box_m": [
+        2.45,
+        3.0,
+        9.0
+      ],
+      "samples": 755,
+      "source_feature_ids": [
+        "osm:way:619147732:highway_line",
+        "osm:way:517634898:highway_line",
+        "osm:way:899373686:highway_line",
+        "osm:way:619147733:highway_line",
+        "osm:way:619147735:highway_line",
+        "osm:way:908622900:highway_line",
+        "osm:way:908622899:highway_line"
+      ],
+      "spacing_m": 0.5,
+      "station_m": 377.5,
+      "terrain_support": "EXP21 existing physical TIN; no bus-only plane",
+      "whole_box_preflight": {
+        "box_with_margin_m": [
+          2.55,
+          9.1
+        ],
+        "loop_endpoint_gap_m": 0.0,
+        "minimum_centre_radius_m": 6.10061236327505,
+        "notes": "Source-display estimated widths and authored lanes, not surveyed bus swept-path approval. Native terrain/full-box checks remain mandatory.",
+        "sample_m": 0.25,
+        "samples": 3486.0,
+        "source_geometry_changed": false,
+        "whole_footprint_outside_source_m2": 0.0
+      }
+    },
+    "running": true,
+    "scope": "Three source-road physical closed-loop buses; four game-authored stops. Every stop boards/alights. No endpoint recycle or position jump. ETA is an actual local-state estimate with traffic delay, not a live Seoul schedule.",
+    "source_geometry_changed": false,
+    "state": "approaching",
+    "state_elapsed_s": 0.0,
+    "stop_certificates": [],
+    "stop_count": 0,
+    "stop_index": 0,
+    "waiting_for_bus": false
+  },
+  "total": 1
+}

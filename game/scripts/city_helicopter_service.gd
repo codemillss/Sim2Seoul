@@ -48,6 +48,12 @@ var _terrain_rid: RID
 var _doors: Array[Vector3]=[]
 var _yaw:=0.0
 var _neutral_required:=false
+var rope: Node3D
+var roof_landing_site: Dictionary={}
+var roof_site_audit: Array[Dictionary]=[]
+var _roof_candidates: Array[Node3D]=[]
+var _roof_scan_tick:=0
+var _roof_scan_done:=false
 
 func _event(kind: String,evidence: Dictionary={}) -> void:
 	if events.size()>=120:events.pop_front()
@@ -56,6 +62,9 @@ func _fail(message: String) -> bool:load_error=message;push_error(message);retur
 func setup(scene: Node3D) -> bool:
 	if loaded or not is_instance_valid(scene) or not is_inside_tree():return false
 	host=scene;process_mode=Node.PROCESS_MODE_PAUSABLE;process_physics_priority=0
+	# Publish aircraft, rope and harness after the priority-0 camera/avatar
+	# presentation, using the same current-frame interpolation fraction.
+	process_priority=1
 	var raw: Variant=JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
 	if not raw is Dictionary or raw.get("schema_version")!=1:return _fail("헬리콥터 체험 자료가 다릅니다.")
 	design=raw
@@ -88,6 +97,8 @@ func setup(scene: Node3D) -> bool:
 	_previous=body.global_transform;_current=_previous;_proxy.global_transform=_current
 	_build_pad(site)
 	_bind_key(ASCEND,KEY_SPACE);_bind_key(DESCEND,KEY_CTRL)
+	rope=preload("res://scripts/city_helicopter_rope.gd").new();rope.name="HelicopterWinch";add_child(rope);rope.setup(self)
+	_prepare_roof_candidates()
 	loaded=true;print("CITY_HELICOPTER_READY aircraft=1 source_ground=",design.helipad.source_ground_feature," source_geometry_changed=false arcade_flight=true");return true
 
 func _bind_key(action: StringName,keycode: Key) -> void:
@@ -116,7 +127,7 @@ func _make_aircraft() -> void:
 	_collision_box("TailplaneCollision",Vector3(1.76,.13,.51),Vector3(0,1.43,3.75))
 	_collision_box("TailFinCollision",Vector3(.20,1.50,.90),Vector3(0,1.95,4.40))
 	_collision_box("TailRotorCollision",Vector3(.3,1.5,1.5),Vector3(-.33,1.7,4.45))
-	for side: float in [-1.,1.]:_collision_box("SkidCollision",Vector3(.18,.32,3.85),Vector3(side*1.1,.20,-.31))
+	for side: float in [-1.,1.]:_collision_box("SkidCollisionLeft" if side<0. else "SkidCollisionRight",Vector3(.18,.32,3.85),Vector3(side*1.1,.20,-.31))
 	var disc:=CylinderShape3D.new();disc.radius=4.05;disc.height=.16;var rotor_shape:=CollisionShape3D.new();rotor_shape.name="FullRotorDiscCollision";rotor_shape.shape=disc;rotor_shape.position.y=2.95;body.add_child(rotor_shape);_shapes.append(rotor_shape)
 	_proxy=RenderReset.new();_proxy.name="AircraftRenderProxy";_proxy.process_physics_priority=-100;_proxy.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF;body.add_child(_proxy)
 	var orange:=_mat(Color(.88,.23,.075));var cream:=_mat(Color(.90,.94,.93));var dark:=_mat(Color(.055,.075,.085));var silver:=_mat(Color(.55,.62,.65),.65);var blue:=_mat(Color(.10,.28,.38));var red:=_mat(Color(.82,.035,.025))
@@ -158,6 +169,35 @@ func _terrain_point(at: Vector3) -> Dictionary:
 	var hit:=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(at.x,y+.75,at.z),Vector3(at.x,y-.75,at.z),1|32))
 	if hit.is_empty() or hit.normal.y<cos(deg_to_rad(float(design.policy.maximum_landing_grade_degrees))):return {}
 	return {"point":Vector3(at.x,hit.position.y,at.z),"normal":hit.normal,"rid":hit.rid}
+func _roof_support(hit: Dictionary,at: Vector3) -> Dictionary:
+	if hit.is_empty() or not is_instance_valid(host.exploration_rooftop_access):return {}
+	for roof: Node3D in host.exploration_rooftop_access.roofs.values():
+		if not is_instance_valid(roof) or not hit.collider in roof.bodies:continue
+		# Only the authored walking deck, never a chair, canopy, pool bottom or
+		# original source roof. The pool preparation guard remains authoritative.
+		if not String(hit.collider.name).begins_with("DeckFloor"):return {}
+		var local: Vector3=roof.frame.affine_inverse()*hit.position
+		if absf(local.y)>.12 or not roof.walkable_rect.grow(-.45).has_point(Vector2(local.x,local.z)):return {}
+		return {"point":Vector3(at.x,hit.position.y,at.z),"normal":hit.normal,"rid":hit.rid,"roof":roof,"building_id":String(roof.spec.id)}
+	return {}
+func _landing_support(at: Vector3) -> Dictionary:
+	var ray:=PhysicsRayQueryParameters3D.create(at+Vector3.UP*.55,at-Vector3.UP*.85,1|32,[body.get_rid(),host.player.get_rid()])
+	var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty() or hit.normal.y<cos(deg_to_rad(float(design.policy.maximum_landing_grade_degrees))):return {}
+	var roof:=_roof_support(hit,at)
+	if not roof.is_empty():return roof
+	if not _public_ground(at):return {}
+	var terrain:=_terrain_point(at)
+	if terrain.is_empty() or absf(hit.position.y-terrain.point.y)>.10:return {}
+	return terrain
+func _safe_roof_point(requested: Vector3) -> Dictionary:
+	var support:=_landing_support(requested)
+	if support.is_empty() or not support.has("roof"):return {}
+	var point: Vector3=support.point+Vector3.UP*.08
+	var capsule: CollisionShape3D=host.player.get_node("CollisionShape")
+	var query:=PhysicsShapeQueryParameters3D.new();query.shape=capsule.shape;query.transform=Transform3D(Basis.IDENTITY,point)*capsule.transform;query.collision_mask=1|2|4|8|32;query.exclude=[body.get_rid(),host.player.get_rid()];query.margin=.003
+	if not get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():return {}
+	return {"point":point,"building_id":support.building_id,"roof":support.roof}
 func _on_source_grass(at: Vector3) -> bool:
 	var local: Vector3=host.city.to_local(at);var point:=Vector2(local.x,local.z)
 	for triangle: PackedVector2Array in _source_triangles:
@@ -181,11 +221,31 @@ func _flight_bounds_valid(at: Vector3) -> bool:
 	for i: int in range(polygon.size()):
 		if point.distance_to(Geometry2D.get_closest_point_to_segment(point,polygon[i],polygon[(i+1)%polygon.size()]))<radius:return false
 	return true
+func _skid_support_exclusions(at: Vector3,yaw: float) -> Array[RID]:
+	var result: Array[RID]=[];var minimum:=INF;var maximum:=-INF;var roof_id:="unset"
+	for x: float in [-1.1,1.1]:
+		for z: float in [-1.3,1.2]:
+			var point:=at+Basis(Vector3.UP,yaw)*Vector3(x,0,z);var support:=_landing_support(point)
+			if support.is_empty() or point.y-support.point.y<-.08 or point.y-support.point.y>.32:return []
+			var id:=String(support.get("building_id","terrain"))
+			if roof_id!="unset" and id!=roof_id:return []
+			roof_id=id;minimum=minf(minimum,support.point.y);maximum=maxf(maximum,support.point.y)
+			if not support.rid in result:result.append(support.rid)
+	return result if maximum-minimum<.36 else []
 func _volume_clear(at: Vector3,yaw: float,exclude_player:=true) -> bool:
+	var skid_supports:=_skid_support_exclusions(at,yaw)
 	var exclude: Array[RID]=[body.get_rid(),_terrain_rid]
 	if exclude_player:exclude.append(host.player.get_rid())
 	for collider: CollisionShape3D in _shapes:
 		var query:=PhysicsShapeQueryParameters3D.new();query.shape=collider.shape;query.transform=Transform3D(Basis(Vector3.UP,yaw),at)*collider.transform;query.collision_mask=1|2|4|8|32;query.exclude=exclude;query.margin=.003
+		# Native floor contact legitimately puts the skid within query margin.
+		# Only its certified support is omitted for that skid; rotor/cabin/tail
+		# still query the complete native floor and every surrounding body.
+		if String(collider.name).begins_with("SkidCollision"):
+			var exclusions: Array[RID]=query.exclude
+			for rid: RID in skid_supports:
+				if not rid in exclusions:exclusions.append(rid)
+			query.exclude=exclusions
 		if not get_world_3d().direct_space_state.intersect_shape(query,1).is_empty():return false
 	return true
 func _choose_site() -> Dictionary:
@@ -248,15 +308,15 @@ func _landed() -> bool:
 	var minimum:=INF;var maximum:=-INF
 	for x: float in [-1.1,1.1]:
 		for z: float in [-1.3,1.2]:
-			var at: Vector3=body.to_global(Vector3(x,0,z));var support:=_terrain_point(at)
-			if support.is_empty() or not _public_ground(at):return false
+			var at: Vector3=body.to_global(Vector3(x,0,z));var support:=_landing_support(at)
+			if support.is_empty():return false
 			var gap: float=at.y-support.point.y
 			if gap<-.08 or gap>.32:return false
 			minimum=minf(minimum,support.point.y);maximum=maxf(maximum,support.point.y)
-	return maximum-minimum<.36
+	return maximum-minimum<.36 and _volume_clear(body.global_position,_yaw)
 func _player_grounded() -> bool:
 	if absf(host.player.velocity.y)>.3:return false
-	var support:=_terrain_point(host.player.global_position)
+	var support:=_landing_support(host.player.global_position)
 	return not support.is_empty() and absf(host.player.global_position.y-support.point.y)<.15
 func _entry_visible() -> bool:
 	var exclude: Array[RID]=[host.player.get_rid(),body.get_rid()]
@@ -273,21 +333,26 @@ func can_interact() -> bool:
 	if not _context_ready():return false
 	if riding:return true
 	return not return_pending and _release.is_empty() and not host.player.facility_control and host.player.is_physics_processing() and _landed() and _player_grounded() and is_finite(interaction_distance_m()) and _entry_visible()
+func motion_policy() -> Dictionary:
+	return host.transport_motion_policy("helicopter",design.policy) if host.has_method("transport_motion_policy") else design.policy.duplicate(true)
+
 func prompt_text() -> String:
 	if not _context_ready():return ""
 	if _clock<_notice_until:return _notice
 	if riding:
+		if rope.active():return rope.prompt()
 		if exit_requested:return "로터를 멈추고 안전한 하차 공간을 확인하는 중\nE · 하차 취소"
 		if rotor_fraction<.90:return "헬리콥터 · 로터 준비 %d%%\nSpace 이륙 · W/S 전후 · A/D 회전 · Ctrl 하강"%roundi(rotor_fraction*100.)
-		return "헬리콥터 · W/S 전후 · A/D 회전 · Space 상승 · Ctrl 하강\n"+("착륙 완료 · E 로터 정지 후 내리기" if _landed() else "비행 중 · 평탄한 공공 지면에 착륙한 뒤 E 하차")
+		return "헬리콥터 · %d / %d km/h · W/S 전후 · A/D 회전 · Space 상승 · Ctrl 하강\n"%[roundi(absf(speed_mps)*3.6),roundi(float(motion_policy().maximum_forward_mps)*3.6)]+("착륙 완료 · E 로터 정지 후 내리기" if _landed() else "비행 중 · R 로프 하강 · 공공 지면·게임 옥상 착륙 후 E 하차")
 	if is_finite(interaction_distance_m()):return "E · 헬리콥터 탑승 · 게임 비행 체험" if can_interact() else "기체 옆의 평탄한 지면에 서서 E · 헬리콥터 체험"
 	return ""
 func _notice_message(text: String) -> void:_notice=text;_notice_until=_clock+3.
 func handle_interact() -> bool:
 	if not _context_ready():return false
 	if riding:
+		if rope.active():_notice_message("로프 사용 중입니다. R로 기체 복귀를 선택하세요.");return true
 		if exit_requested:exit_requested=false;_neutral_required=true;_event("exit_cancelled");return true
-		if not _landed():_notice_message("공중에서는 내릴 수 없습니다. Ctrl로 평탄한 공공 지면에 착륙한 뒤 E를 눌러주세요.");_event("airborne_exit_rejected");return true
+		if not _landed():_notice_message("공중에서는 내릴 수 없습니다. R로 로프를 내리거나, Ctrl로 공공 지면·게임 옥상에 착륙한 뒤 E를 눌러주세요.");_event("airborne_exit_rejected");return true
 		exit_requested=true;_event("landed_exit_requested");return true
 	if not can_interact():return false
 	if not _volume_clear(body.global_position,_yaw):_notice_message("헬리콥터 주변에 사람이나 물체가 있습니다. 공간이 비면 E를 다시 눌러주세요.");_event("boarding_occupied_rejected");return true
@@ -302,22 +367,25 @@ func handle_interact() -> bool:
 	var exclude: Array[RID]=host.rig._query.exclude.duplicate();exclude.append(body.get_rid());host.rig._query.exclude=exclude;host.rig.arm.add_excluded_object(body.get_rid())
 	host.exploration_avatar.visible=false;_passenger.visible=true;riding=true;exit_requested=false;_neutral_required=true;_notice="";_notice_until=0.;speed_mps=0.;vertical_speed_mps=0.
 	host.rig.distance_max_m=maxf(host.rig.distance_max_m,18.);host.rig.pivot_height_m=1.4;host.rig.requested_distance=12.;host.rig.current_distance=12.;host.rig.yaw=_yaw+.45;host.rig.pitch=deg_to_rad(-20.)
-	_attach_player(0.);host.rig.snap_to_target_pose();_event("boarded");return true
+	rope.on_boarded();_attach_player(0.);host.rig.snap_to_target_pose();_event("boarded");return true
 func interact() -> bool:return handle_interact()
 func _attach_player(delta: float) -> void:
-	if not riding:return
+	if not riding or (is_instance_valid(rope) and rope.active() and rope.state!="braking"):return
 	host.player.global_transform=body.global_transform.translated_local(Vector3(.40,.90,-.70));host.player.velocity=Vector3.ZERO;host.player.physics_stepped.emit(delta)
 func _safe_exit() -> Dictionary:
 	for offset: Vector3 in [Vector3(2.3,0,-.6),Vector3(-2.3,0,-.6),Vector3(2.6,0,.7),Vector3(-2.6,0,.7)]:
 		var at:=body.to_global(offset)
+		var roof_exit:=_safe_roof_point(at)
+		if not roof_exit.is_empty():return roof_exit
 		if not _public_ground(at):continue
 		var safe: Dictionary=host.interior_visit._safe_external_point(at)
 		if not safe.is_empty() and _player_exit_supported(safe.point):return safe
 	return {}
 func _player_exit_supported(at: Vector3) -> bool:
-	var support:=_terrain_point(at)
+	var support:=_landing_support(at)
 	return not support.is_empty() and absf(at.y-support.point.y)<.2
 func _restore_player(delayed: bool) -> void:
+	if is_instance_valid(rope):rope.cleanup()
 	var player: CharacterBody3D=host.player
 	_release={"tick":Engine.get_physics_frames()+2,"hold":delayed,"physics":bool(_saved.physics)}
 	player.collision_layer=int(_saved.layer);player.collision_mask=int(_saved.mask);player.get_node("Visual").transform=_saved.visual
@@ -344,6 +412,12 @@ func cancel_ride_for_teleport() -> void:
 	_restore_player(false);return_pending=true;_return_elapsed=.5;_event("external_teleport_restored_player")
 func after_external_teleport() -> void:cancel_ride_for_teleport()
 func cancel_after_teleport() -> void:cancel_ride_for_teleport()
+func request_home_recovery() -> bool:
+	# Call only after the caller commits its validated home observer shortcut.
+	# A parked roof aircraft is otherwise left exactly where the pilot landed.
+	if not loaded or riding or _other_riding():return false
+	if body.global_position.distance_to(helipad.point)<.3 and _landed():return true
+	return_pending=true;_return_elapsed=.5;_event("game_aircraft_home_recovery_requested",{"from":body.global_position,"scope":"Certified-clear game recall after validated shortcut, not physical flight."});return true
 func _try_return_home() -> void:
 	if not return_pending or not _volume_clear(helipad.point,helipad.yaw):return
 	body.global_transform=Transform3D(Basis(Vector3.UP,helipad.yaw),helipad.point);body.velocity=Vector3.ZERO;body.reset_physics_interpolation();_yaw=helipad.yaw;_previous=body.global_transform;_current=_previous;_proxy.global_transform=_current;return_pending=false;rotor_fraction=0.;_event("game_aircraft_returned_to_clear_home_pad")
@@ -356,6 +430,7 @@ func _motion_fraction(motion: Vector3) -> float:
 func _physics_process(delta: float) -> void:
 	if not loaded or delta<=0.:return
 	_finish_release();_clock+=delta;_previous=_current
+	if not _roof_scan_done and Engine.get_physics_frames()>=_roof_scan_tick:_scan_roof_landing_site()
 	_return_elapsed+=delta
 	if return_pending and _return_elapsed>=.5:_return_elapsed=0.;_try_return_home()
 	var target_rotor:=1. if riding and not exit_requested or return_pending else 0.
@@ -369,19 +444,20 @@ func _physics_process(delta: float) -> void:
 	if _neutral_required or host.player.input_latched:
 		if intent.is_zero_approx() and not ascend and not descend:_neutral_required=false;host.player.input_latched=false
 		intent=Vector2.ZERO;ascend=false;descend=false
-	var enabled:=rotor_fraction>.90 and not exit_requested
+	var enabled: bool=rotor_fraction>.90 and not exit_requested and not rope.active()
 	var requested_yaw:=_yaw-intent.x*float(design.policy.yaw_radians_per_second)*delta if enabled else _yaw
 	if _volume_clear(body.global_position,requested_yaw):_yaw=requested_yaw;body.global_rotation.y=_yaw
 	else:blocked_reason="rotation_occupied"
+	var policy:=motion_policy()
 	var target_speed:=0.
-	if enabled:target_speed=-intent.y*float(design.policy.maximum_forward_mps if intent.y<0. else design.policy.maximum_reverse_mps)
-	var rate:=float(design.policy.horizontal_acceleration_mps2 if not is_zero_approx(target_speed) else design.policy.horizontal_braking_mps2)
+	if enabled:target_speed=-intent.y*float(policy.maximum_forward_mps if intent.y<0. else design.policy.maximum_reverse_mps)
+	var rate:=float(policy.horizontal_acceleration_mps2 if not is_zero_approx(target_speed) else policy.horizontal_braking_mps2)
 	speed_mps=move_toward(speed_mps,target_speed,rate*delta)
-	var target_vertical:=float(design.policy.ascent_mps) if ascend and not descend and enabled else (-float(design.policy.descent_mps) if descend and not ascend and enabled else 0.)
+	var target_vertical:=float(policy.ascent_mps) if ascend and not descend and enabled else (-float(policy.descent_mps) if descend and not ascend and enabled else 0.)
 	var ground_y: float=host.terrain_surface.ground_y_world(body.global_position)
 	if target_vertical<0. and body.global_position.y-ground_y<.6:target_vertical=-.6
 	if exit_requested:target_vertical=-.12
-	vertical_speed_mps=move_toward(vertical_speed_mps,target_vertical,float(design.policy.vertical_acceleration_mps2)*delta)
+	vertical_speed_mps=move_toward(vertical_speed_mps,target_vertical,float(policy.vertical_acceleration_mps2)*delta)
 	var motion: Vector3=(-body.global_basis.z*speed_mps+Vector3.UP*vertical_speed_mps)*delta
 	var next:=body.global_position+motion;var ceiling: float=host.terrain_surface.ground_y_world(next)+float(design.policy.maximum_altitude_above_terrain_m)
 	if next.y>ceiling:
@@ -400,15 +476,18 @@ func _physics_process(delta: float) -> void:
 	var actual:=body.global_position.distance_to(before);actual_distance_m+=actual;maximum_step_m=maxf(maximum_step_m,actual)
 	_current=body.global_transform;_attach_player(delta)
 	if exit_requested:_try_exit()
+	if riding:rope.step(delta)
 func _process(_delta: float) -> void:
 	if not loaded:return
 	_proxy.global_transform=_previous.interpolate_with(_current,clampf(Engine.get_physics_interpolation_fraction(),0.,1.))
+	rope.update_visual()
 func destination(_kind: String="helipad") -> Dictionary:
 	if not loaded:return {}
+	if _kind=="helicopter_roof":return rooftop_destination()
 	# A successful shortcut releases its pilot and returns the aircraft home.
 	# Its observer and camera must therefore agree on that future home pose,
 	# including when the current aircraft is far away or awaiting pad clearance.
-	var observe_home: bool=riding or return_pending or not _landed()
+	var observe_home: bool=riding or return_pending or not _landed() or not _public_ground(body.global_position)
 	var reference: Vector3=helipad.point if observe_home else body.global_position
 	var reference_basis:=Basis(Vector3.UP,helipad.yaw) if observe_home else body.global_basis
 	for offset: Vector3 in [Vector3(2.6,0,-.7),Vector3(-2.6,0,-.7),Vector3(2.8,0,.5),Vector3(-2.8,0,.5)]:
@@ -420,4 +499,58 @@ func destination(_kind: String="helipad") -> Dictionary:
 	return {}
 func viewpoint() -> Dictionary:return destination()
 func snapshot() -> Dictionary:
-	return {"loaded":loaded,"error":load_error,"riding":riding,"landed":_landed() if loaded else false,"position":body.global_position if is_instance_valid(body) else Vector3.ZERO,"velocity":body.velocity if is_instance_valid(body) else Vector3.ZERO,"speed_mps":speed_mps,"vertical_speed_mps":vertical_speed_mps,"rotor_fraction":rotor_fraction,"rotor_phase":rotor_phase,"tail_phase":tail_phase,"actual_distance_m":actual_distance_m,"maximum_step_m":maximum_step_m,"blocked_reason":blocked_reason,"exit_requested":exit_requested,"return_pending":return_pending,"capsule_release_pending":not _release.is_empty(),"helipad":helipad,"site_audit":site_audit,"events":events.duplicate(true),"source_geometry_changed":false,"scope":"One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and ground-only safe exit. No real helipad, flight permission or engineering flight-dynamics claim."}
+	return {"loaded":loaded,"error":load_error,"riding":riding,"landed":_landed() if loaded else false,"position":body.global_position if is_instance_valid(body) else Vector3.ZERO,"velocity":body.velocity if is_instance_valid(body) else Vector3.ZERO,"speed_mps":speed_mps,"vertical_speed_mps":vertical_speed_mps,"rotor_fraction":rotor_fraction,"rotor_phase":rotor_phase,"tail_phase":tail_phase,"actual_distance_m":actual_distance_m,"maximum_step_m":maximum_step_m,"motion_policy":motion_policy(),"rope":rope.snapshot() if is_instance_valid(rope) else {},"roof_landing_site":roof_landing_site,"roof_site_audit":roof_site_audit,"blocked_reason":blocked_reason,"exit_requested":exit_requested,"return_pending":return_pending,"capsule_release_pending":not _release.is_empty(),"helipad":helipad,"site_audit":site_audit,"events":events.duplicate(true),"source_geometry_changed":false,"scope":"One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim."}
+
+
+func _prepare_roof_candidates() -> void:
+	var candidates: Array[Dictionary]=[]
+	for spec: Dictionary in host.interior_visit.catalog:
+		if float(spec.width)<25. or float(spec.depth)<28. or float(spec.source_height)>float(design.policy.maximum_altitude_above_terrain_m)-20.:continue
+		var title:=String(spec.title)
+		if title.contains("호텔") or title.to_lower().contains("hotel"):continue
+		var point:=Vector3(spec.rectangle_center.x,0,spec.rectangle_center.y)
+		if not _flight_bounds_valid(point):continue
+		candidates.append({"spec":spec,"distance":Vector2(point.x-helipad.point.x,point.z-helipad.point.z).length()})
+	candidates.sort_custom(func(a: Dictionary,b: Dictionary)->bool:return float(a.distance)<float(b.distance))
+	for index: int in range(mini(5,candidates.size())):
+		var roof: Node3D=host.exploration_rooftop_access.borrow_rooftop(String(candidates[index].spec.id))
+		if is_instance_valid(roof):_roof_candidates.append(roof)
+	_roof_scan_tick=Engine.get_physics_frames()+3
+
+func _scan_roof_landing_site() -> void:
+	_roof_scan_done=true
+	for roof: Node3D in _roof_candidates:
+		if not is_instance_valid(roof):continue
+		if roof_landing_site.is_empty():
+			for x: float in [0.,-4.,4.]:
+				for z: float in [0.,3.,-3.]:
+					for yaw: float in [0.,PI*.5,PI,-PI*.5]:
+						var point: Vector3=roof.frame*Vector3(x,.12,z)
+						var supported:=true
+						for sx: float in [-1.1,1.1]:
+							for sz: float in [-1.3,1.2]:
+								var support:=_landing_support(point+Basis(Vector3.UP,yaw)*Vector3(sx,0,sz))
+								if support.is_empty() or support.get("roof")!=roof:supported=false
+						var clear:=supported and _volume_clear(point,yaw)
+						if not clear:continue
+						var exit: Dictionary={}
+						for side: float in [2.6,-2.6]:
+							exit=_safe_roof_point(point+Basis(Vector3.UP,yaw)*Vector3(side,0,-.7))
+							if not exit.is_empty():break
+						if exit.is_empty():continue
+						roof_landing_site={"building_id":String(roof.spec.id),"building_title":String(roof.spec.title),"point":point,"yaw":yaw,"observer":exit.point,"native_all_skids_supported":true,"full_rotor_tail_clear":true,"basis":"Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit."}
+						_label(roof,"HelicopterRoofGuide","게임 옥상 착륙 가능 구역\n로터·꼬리 여유 확인 · Ctrl 하강",roof.to_local(point)+Vector3.UP*4.5,.0034)
+						break
+					if not roof_landing_site.is_empty():break
+				if not roof_landing_site.is_empty():break
+		roof_site_audit.append({"building_id":String(roof.spec.id),"title":String(roof.spec.title),"profile":roof.profile_id,"deck_y":roof.frame.origin.y,"selected":roof_landing_site.get("building_id","")==String(roof.spec.id)})
+		if roof_landing_site.get("building_id","")!=String(roof.spec.id):host.exploration_rooftop_access.release_rooftop(roof)
+	_roof_candidates.clear()
+	_event("roof_landing_candidate_certified",roof_landing_site.duplicate())
+
+func rooftop_destination() -> Dictionary:
+	if not loaded or roof_landing_site.is_empty():return {}
+	var safe:=_safe_roof_point(roof_landing_site.observer)
+	if safe.is_empty():return {}
+	var direction: Vector3=roof_landing_site.point-safe.point;direction.y=0.
+	return {"id":roof_landing_site.building_id,"point":safe.point,"toward":roof_landing_site.point+Vector3.UP,"camera_yaw":atan2(-direction.x,-direction.z)+.5,"camera_pitch_degrees":-15.,"camera_distance_m":9.,"building_id":roof_landing_site.building_id,"building_title":roof_landing_site.building_title,"roof":safe.roof,"pool_entry":safe.point,"scope":"Game rooftop viewpoint. Aircraft remains at its actual pose or uses explicitly reported home recovery after pilot teleport."}

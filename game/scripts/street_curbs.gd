@@ -15,6 +15,8 @@ var _prepared: Array[Dictionary] = []
 var _vertices := {"stone":[],"tile":[]}
 var _shape_count := 0
 var _built_length := 0.0
+var _crossing_masks: Dictionary={}
+var crossing_mask_audit: Array=[]
 
 func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: Node3D) -> bool:
 	if loaded or not is_instance_valid(source_city) or not is_instance_valid(controlled_player):return false
@@ -23,6 +25,14 @@ func setup(source_city: Node3D,controlled_player: CharacterBody3D,camera_rig: No
 	if not raw is Dictionary or raw.get("schema_version")!=1:return _fail("게임용 연석 설계 자료를 읽지 못했습니다.")
 	_design=raw
 	if not _validate():return false
+	var road: Variant=JSON.parse_string(FileAccess.get_file_as_string("res://assets/authored/road_furniture.json"))
+	if road is Dictionary:
+		for mask: Dictionary in road.get("curb_crossing_masks",[]):
+			var polygon:=PackedVector2Array()
+			for xz: Array in mask.mask_xz:polygon.append(Vector2(xz[0],xz[1]))
+			if not _crossing_masks.has(mask.curb_id):_crossing_masks[mask.curb_id]=[]
+			_crossing_masks[mask.curb_id].append(polygon)
+			crossing_mask_audit.append({"curb_id":mask.curb_id,"crossing_id":mask.crossing_id,"original_overlap_m2":mask.original_overlap_m2,"clearance_m":mask.clearance_m,"policy":"only_game_authored_curb_top_and_collision_split; source_bodies_unchanged"})
 	global_transform=city.global_transform
 	# Preflight against the scene before adding any of our own collision shapes.
 	for record: Dictionary in _design.segments:
@@ -112,6 +122,24 @@ func _triangle(material: String,a: Vector3,b: Vector3,c: Vector3) -> void:
 	if (b-a).cross(c-a).y>0.:_vertices[material].append_array([a,c,b])
 	else:_vertices[material].append_array([a,b,c])
 
+func _emit_curb_triangle(record: Dictionary,body: StaticBody3D,material: String,a: Vector3,b: Vector3,c: Vector3) -> void:
+	var parts: Array=[PackedVector2Array([Vector2(a.x,a.z),Vector2(b.x,b.z),Vector2(c.x,c.z)])]
+	for mask: PackedVector2Array in _crossing_masks.get(record.id,[]):
+		var remaining: Array=[]
+		for polygon: PackedVector2Array in parts:remaining.append_array(Geometry2D.clip_polygons(polygon,mask))
+		parts=remaining
+	var plane: Vector3=(b-a).cross(c-a)
+	if absf(plane.y)<.000001:return
+	for polygon: PackedVector2Array in parts:
+		var indices: PackedInt32Array=Geometry2D.triangulate_polygon(polygon)
+		for index: int in range(0,indices.size(),3):
+			var points: Array[Vector3]=[]
+			for corner: int in range(3):
+				var xz: Vector2=polygon[indices[index+corner]]
+				var height: float=a.y-(plane.x*(xz.x-a.x)+plane.z*(xz.y-a.z))/plane.y
+				points.append(Vector3(xz.x,height,xz.y))
+			_prism(body,points[0],points[1],points[2]);_triangle(material,points[0],points[1],points[2])
+
 func _build_segment(record: Dictionary) -> void:
 	var body:=StaticBody3D.new();body.name=record.id;body.collision_layer=1;body.collision_mask=0
 	body.set_meta("geometry_id","street_curbs/"+record.id);body.set_meta("authored_game_curb",true);add_child(body);bodies.append(body)
@@ -119,9 +147,8 @@ func _build_segment(record: Dictionary) -> void:
 		var first: Dictionary=record.sections[index-1];var second: Dictionary=record.sections[index]
 		for strip in [[-.7,-.15],[-.15,.15],[.15,.7]]:
 			var a:=_surface(record,first,strip[0]);var b:=_surface(record,first,strip[1]);var c:=_surface(record,second,strip[1]);var d:=_surface(record,second,strip[0])
-			_prism(body,a,b,c);_prism(body,a,c,d)
 			var material: String="stone" if strip[0]==-.15 or signf(float(strip[0])+float(strip[1]))==float(record.roadside_sign) else "tile"
-			_triangle(material,a,b,c);_triangle(material,a,c,d)
+			_emit_curb_triangle(record,body,material,a,b,c);_emit_curb_triangle(record,body,material,a,c,d)
 	var middle: float=record.length_m*.5
 	var point:=_point(record,middle);var tangent:=(_point(record,middle+.05)-_point(record,middle-.05)).normalized()
 	segments.append({"id":record.id,"length_m":record.length_m,"body_instance_id":body.get_instance_id(),"source_drive_features":record.source_drive_features,"source_xz":_json_xz(record.line),"top_point":to_global(point+Vector3.UP*.12),"foot_point":to_global(point+Vector3.UP*.20),"lateral_direction":global_basis*Vector3(tangent.z,0,-tangent.x),"cut_points":[to_global(record.line.front()),to_global(record.line.back())],"sample_count":record.sections.size(),"height_m":.12,"width_m":1.4})

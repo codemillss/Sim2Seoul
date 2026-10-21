@@ -1,0 +1,73 @@
+{
+  "result": "PASS",
+  "cases": [
+    {
+      "case": "valid_engine_only",
+      "expected": "PASS",
+      "observed": {
+        "result": "PASS",
+        "files": 0,
+        "deferred": [],
+        "failures": [],
+        "scope": "Stored street code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance."
+      },
+      "exit_code": 0,
+      "scope": "Verifier fixture, not an additional gameplay run."
+    },
+    {
+      "case": "wrong_denominator",
+      "expected": "FAIL",
+      "observed": {
+        "result": "FAIL",
+        "files": 0,
+        "deferred": [],
+        "failures": [
+          {
+            "path": "data/reports/urban_transit/20261021/acceptance/speed_headless_final03.json",
+            "reason": "unexpected_check_denominator"
+          }
+        ],
+        "scope": "Stored street code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance."
+      },
+      "exit_code": 1,
+      "scope": "Verifier fixture, not an additional gameplay run."
+    },
+    {
+      "case": "numeric_pass_but_script_error",
+      "expected": "FAIL",
+      "observed": {
+        "result": "FAIL",
+        "files": 0,
+        "deferred": [],
+        "failures": [
+          {
+            "path": "data/reports/urban_transit/20261021/checker_fixtures/synthetic_script_error.log",
+            "reason": "engine_script_error_even_if_report_passed"
+          }
+        ],
+        "scope": "Stored street code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance."
+      },
+      "exit_code": 1,
+      "scope": "Verifier fixture, not an additional gameplay run."
+    },
+    {
+      "case": "missing_component_binding",
+      "expected": "FAIL",
+      "observed": {
+        "result": "FAIL",
+        "files": 0,
+        "deferred": [],
+        "failures": [
+          {
+            "path": "game/scripts/city_bike_service.gd",
+            "reason": "component_report_input_changed"
+          }
+        ],
+        "scope": "Stored street code, inputs and evidence integrity only. No engine rerun, other Mac/export, measured road accuracy or sustained performance acceptance."
+      },
+      "exit_code": 1,
+      "scope": "Verifier fixture, not an additional gameplay run."
+    }
+  ],
+  "scope": "One valid engine-only manifest accepted; incorrect denominator, script-error log behind numeric PASS, and missing component SHA are rejected. Does not rerun the engine or accept gameplay."
+}

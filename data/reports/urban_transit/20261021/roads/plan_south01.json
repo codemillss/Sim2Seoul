@@ -1,0 +1,617 @@
+{
+  "task": "EXP25_ROAD_PLAN",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "south_asymmetric_road_has_one_shared_double_yellow",
+      "passed": true,
+      "evidence": {
+        "source_sections": [
+          {
+            "z": 150,
+            "x": 51.23,
+            "stripe_count": 2,
+            "widths_m": [
+              0.15717373554868885,
+              0.15716558831411476
+            ]
+          },
+          {
+            "z": 200,
+            "x": 35.32,
+            "stripe_count": 2,
+            "widths_m": [
+              0.1576742700633602,
+              0.1577414572521647
+            ]
+          },
+          {
+            "z": 250,
+            "x": 19.45,
+            "stripe_count": 2,
+            "widths_m": [
+              0.15710732294760632,
+              0.15709609551089443
+            ]
+          },
+          {
+            "z": 350,
+            "x": -11.55,
+            "stripe_count": 2,
+            "widths_m": [
+              0.15755601858666424,
+              0.15751773180667605
+            ]
+          },
+          {
+            "z": 400,
+            "x": -28.12,
+            "stripe_count": 2,
+            "widths_m": [
+              0.15808365189471374,
+              0.15809141328475818
+            ]
+          },
+          {
+            "z": 450,
+            "x": -45.04,
+            "stripe_count": 2,
+            "widths_m": [
+              0.1587370751377577,
+              0.15880196153073456
+            ]
+          },
+          {
+            "z": 470,
+            "x": -53.73,
+            "stripe_count": 2,
+            "widths_m": [
+              0.16506134226371216,
+              0.164990715539318
+            ]
+          }
+        ],
+        "intersection_gaps_expected": true
+      }
+    },
+    {
+      "name": "retained_walk_has_no_valid_drive_render_overlap",
+      "passed": true,
+      "evidence": {
+        "before_m2": 6634.127542722019,
+        "after_m2": 2.1377519282605785e-05,
+        "source_walk_y_m": 0.055,
+        "source_drive_y_m": 0.035,
+        "paint_y_m": 0.052
+      }
+    },
+    {
+      "name": "walk_outside_road_and_source_height_retained",
+      "passed": true,
+      "evidence": {
+        "symmetric_difference_m2": 9.89905245507467e-05,
+        "wrong_height_nodes": []
+      }
+    },
+    {
+      "name": "all_paint_contours_are_valid",
+      "passed": true,
+      "evidence": {
+        "invalid": [],
+        "polygons": 1053
+      }
+    },
+    {
+      "name": "white_boundaries_clear_original_car_footprints",
+      "passed": true,
+      "evidence": {
+        "routes": [
+          {
+            "route_id": "sejong_south",
+            "white_line_body_overlap_m2": 0.0
+          },
+          {
+            "route_id": "sejong_north",
+            "white_line_body_overlap_m2": 0.0
+          },
+          {
+            "route_id": "coverage_drive_0",
+            "white_line_body_overlap_m2": 0.0
+          },
+          {
+            "route_id": "coverage_drive_1",
+            "white_line_body_overlap_m2": 0.0
+          },
+          {
+            "route_id": "coverage_drive_2",
+            "white_line_body_overlap_m2": 0.0
+          },
+          {
+            "route_id": "coverage_drive_3",
+            "white_line_body_overlap_m2": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "unchanged_source_inputs",
+      "passed": true,
+      "evidence": {
+        "inputs": {
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://assets/authored/terrain_heightfield.json": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e",
+          "res://assets/authored/interiors/source_catalog.json": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848"
+        }
+      }
+    },
+    {
+      "name": "bounded_game_policies_explicit",
+      "passed": true,
+      "evidence": {
+        "lane_plans": [
+          {
+            "source_feature_id": "osm:way:1084408283:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 1.6,
+            "lane_centres_m": [
+              -11.2,
+              -8.0,
+              -4.8,
+              -1.6,
+              1.6,
+              4.8,
+              8.0,
+              11.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1199229108:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1199229109:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1312934686:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1424068313:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1499619438:highway_line",
+            "source_lanes": "9",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -12.8,
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6,
+              12.8
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1499619445:highway_line",
+            "source_lanes": "4",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1499619446:highway_line",
+            "source_lanes": "4",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1499619447:highway_line",
+            "source_lanes": "4",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:1499619449:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:183272462:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198564930:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198564932:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198564933:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198564935:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198564937:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198566324:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:198691067:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:218923160:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:218923188:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:218961360:highway_line",
+            "source_lanes": "5",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:333972428:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:345046979:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:350127794:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:355655439:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:377289802:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:378453707:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 1.6,
+            "lane_centres_m": [
+              -11.2,
+              -8.0,
+              -4.8,
+              -1.6,
+              1.6,
+              4.8,
+              8.0,
+              11.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:383097712:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:383097714:highway_line",
+            "source_lanes": "10",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -12.8,
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6,
+              12.8
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:469260694:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:480233462:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:517634898:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:619147729:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:619147732:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:619147734:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:619147735:highway_line",
+            "source_lanes": "3",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:620634303:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:708672701:highway_line",
+            "source_lanes": "4",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:73541403:highway_line",
+            "source_lanes": "2",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              0.0
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:899373686:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:899373688:highway_line",
+            "source_lanes": null,
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -3.2,
+              0.0,
+              3.2
+            ]
+          },
+          {
+            "source_feature_id": "osm:way:908622900:highway_line",
+            "source_lanes": "8",
+            "lane_anchor_offset_m": 0.0,
+            "lane_centres_m": [
+              -9.6,
+              -6.4,
+              -3.2,
+              0.0,
+              3.2,
+              6.4,
+              9.6
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Independent Shapely source/display geometry; actual GPU appearance, source roadway surveying, and controller journeys are separate."
+}

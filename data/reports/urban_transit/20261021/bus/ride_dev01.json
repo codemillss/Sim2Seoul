@@ -1,0 +1,3851 @@
+{
+  "checks": [
+    {
+      "evidence": {},
+      "name": "production_three_bus_loop_ready",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "bus": {
+          "accel_mps2": 2.52,
+          "actual_distance_m": 40.9097652523778,
+          "at_end": false,
+          "blocked_reason": "scheduled_stop_GAME-L03",
+          "body_yaw_rad": -0.307622492313385,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "closed_physical_loop": true,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 0,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 0,
+          "cycle_distance_m": 40.9097652523778,
+          "decel_mps2": 5.04,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 425,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 7.88333333333331,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                -0.00351854367181659,
+                0.999589622020721,
+                0.0284283272922039
+              ],
+              "point": [
+                37.0505294799805,
+                1.05781865119934,
+                209.999984741211
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.000030517578125,
+          "max_speed_limit_mps": 10.08,
+          "max_speed_mps": 10.0805282592773,
+          "max_step_m": 0.168008804321289,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "painted_signal": {},
+          "painted_signal_commit": {},
+          "painted_signal_events": [],
+          "pause_ticks": 0,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 474
+          },
+          "physics_priority": 1,
+          "physics_steps": 473,
+          "position": [
+            38.3412132263184,
+            1.0650886297226,
+            209.983108520508
+          ],
+          "reaction_s": 0.5,
+          "recycle_enabled": false,
+          "recycle_history": [],
+          "route_id": "T01_source_closed_loop",
+          "route_length_m": 869.760275885463,
+          "running": true,
+          "segment": 427,
+          "speed_mps": 0.0,
+          "state": "bus_opening_doors",
+          "station_m": 620.749953150749,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 417,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0347317748508373,
+          "terrain_normal": [
+            -0.00516261206939816,
+            0.999397397041321,
+            0.0343254655599594
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 0,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 7,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 474,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": -0.307622492313385
+        }
+      },
+      "name": "natural_dock_without_test_bus_reposition",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "state": {
+          "boarding_pending": false,
+          "bus": {
+            "accel_mps2": 2.52,
+            "actual_distance_m": 40.9097652523778,
+            "at_end": false,
+            "blocked_reason": "scheduled_stop_GAME-L03",
+            "body_yaw_rad": -0.307622492313385,
+            "can_recycle": false,
+            "clearance_m": 1.0,
+            "closed_physical_loop": true,
+            "command_speed_mps": 0.0,
+            "completed_cycles": 0,
+            "crossing_speed_limit_mps": 2.0,
+            "cycle_count": 0,
+            "cycle_distance_m": 40.9097652523778,
+            "decel_mps2": 5.04,
+            "direction": 1,
+            "early_bounds": {
+              "available": true,
+              "checks": 0,
+              "diagnostic_enabled": false,
+              "empty_returns": 425,
+              "last_violation": {},
+              "verified": 0,
+              "verified_empty": 0,
+              "violations": 0
+            },
+            "elapsed_s": 7.88333333333331,
+            "end_events": 0,
+            "endpoint_history": [],
+            "floor_collider": "TerrainSupport",
+            "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+            "floor_reason": "up_floor_ray",
+            "gravity_mps2": 9.8,
+            "last_motion_contacts": [
+              {
+                "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "geometry_id": "EXP21_interpolated_terrain",
+                "normal": [
+                  -0.00351854367181659,
+                  0.999589622020721,
+                  0.0284283272922039
+                ],
+                "point": [
+                  37.0505294799805,
+                  1.05781865119934,
+                  209.999984741211
+                ]
+              }
+            ],
+            "last_recycle_tick": -1,
+            "layer": 8,
+            "mask": 63,
+            "max_route_offset_m": 0.000030517578125,
+            "max_speed_limit_mps": 10.08,
+            "max_speed_mps": 10.0805282592773,
+            "max_step_m": 0.168008804321289,
+            "motion_parts": 1,
+            "obstacle": {},
+            "on_floor": true,
+            "painted_signal": {},
+            "painted_signal_commit": {},
+            "painted_signal_events": [],
+            "pause_ticks": 9,
+            "permission": {
+              "allow_crossing": true,
+              "fresh": true,
+              "human_present": false,
+              "reason": "pilot_full_box_observation_and_source_signal",
+              "tick": 474
+            },
+            "physics_priority": 1,
+            "physics_steps": 482,
+            "position": [
+              38.3412132263184,
+              1.0650886297226,
+              209.983108520508
+            ],
+            "reaction_s": 0.5,
+            "recycle_enabled": false,
+            "recycle_history": [],
+            "route_id": "T01_source_closed_loop",
+            "route_length_m": 869.760275885463,
+            "running": false,
+            "segment": 427,
+            "speed_mps": 0.0,
+            "state": "paused",
+            "station_m": 620.749953150749,
+            "terrain_clearance_XZ_this_tick_m": 0.0,
+            "terrain_clearance_moves": 417,
+            "terrain_enabled": true,
+            "terrain_grade": 0.0347317748508373,
+            "terrain_normal": [
+              -0.00516261206939816,
+              0.999397397041321,
+              0.0343254655599594
+            ],
+            "terrain_orientation_blocked": false,
+            "terrain_queries": {
+              "broadphase": 0,
+              "early_broadphase": 0,
+              "early_empty": 0,
+              "envelope_triangles": 0,
+              "ground": 7,
+              "ground_envelopes": 0,
+              "narrow_intersections": 0,
+              "narrow_sweeps": 0,
+              "pose_cache_hits": 0
+            },
+            "terrain_query_tick": 474,
+            "velocity": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "visual_yaw_rad": -0.307622492313385
+          },
+          "bus_count": 3,
+          "crossing_commit": {},
+          "docked_stop": 2,
+          "door_fraction": 1.0,
+          "engineering_support_pair_exceptions": 4,
+          "error": "",
+          "events": [
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 0.0,
+              "tick": 1,
+              "type": "service_ready"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 66.6751226403157,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 36.6273571699858,
+              "tick": 339,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.0105682946741581,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 426,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 474,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "capsule_layer": 2,
+              "capsule_mask": 45,
+              "door_index": 1,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 481,
+              "type": "boarded"
+            }
+          ],
+          "exit_requested": false,
+          "fleet": [
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 59.4752455616981,
+                "at_end": false,
+                "blocked_reason": "",
+                "body_yaw_rad": 2.84509420394897,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 0.0,
+                "completed_cycles": 0,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 0,
+                "cycle_distance_m": 59.4752455616981,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 410,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 7.88333333333331,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.0563497580587864,
+                      0.998401045799255,
+                      0.00447283824905753
+                    ],
+                    "point": [
+                      40.4801025390625,
+                      0.134354084730148,
+                      124.519889831543
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.00177737465128303,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.0810360908508,
+                "max_step_m": 0.168017268180847,
+                "motion_parts": 2,
+                "obstacle": {},
+                "on_floor": false,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 474
+                },
+                "physics_priority": 1,
+                "physics_steps": 482,
+                "position": [
+                  42.6083641052246,
+                  0.0478932037949562,
+                  120.812629699707
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": false,
+                "segment": 56,
+                "speed_mps": 0.0,
+                "state": "paused",
+                "station_m": 59.4752444289625,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 521,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0571151003997591,
+                "terrain_normal": [
+                  0.0564053878188133,
+                  0.998372912406921,
+                  0.00836827605962753
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 0,
+                  "early_broadphase": 1,
+                  "early_empty": 1,
+                  "envelope_triangles": 0,
+                  "ground": 26,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 1,
+                  "narrow_sweeps": 0,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 474,
+                "velocity": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "visual_yaw_rad": 2.84509420394897
+              },
+              "docked_stop": -1,
+              "door_fraction": 0.0,
+              "id": "BlueLoopBus_T01-01",
+              "state": "approaching",
+              "stop_index": 0
+            },
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 57.6618242244585,
+                "at_end": false,
+                "blocked_reason": "",
+                "body_yaw_rad": 3.111004114151,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 0.0,
+                "completed_cycles": 0,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 0,
+                "cycle_distance_m": 57.6618242244585,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 473,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 7.88333333333331,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.0156746692955494,
+                      0.999661266803741,
+                      -0.0207729525864124
+                    ],
+                    "point": [
+                      -42.8445167541504,
+                      3.56590223312378,
+                      395.0
+                    ]
+                  },
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.0156746692955494,
+                      0.999661266803741,
+                      -0.0207729525864124
+                    ],
+                    "point": [
+                      -42.8445205688477,
+                      3.56590223312378,
+                      395.0
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.000152587890625,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.0823593139648,
+                "max_step_m": 0.168039321899414,
+                "motion_parts": 1,
+                "obstacle": {},
+                "on_floor": true,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 474
+                },
+                "physics_priority": 1,
+                "physics_steps": 482,
+                "position": [
+                  -41.6388626098633,
+                  3.56474328041077,
+                  395.647094726562
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": false,
+                "segment": 204,
+                "speed_mps": 0.0,
+                "state": "paused",
+                "station_m": 347.581926450133,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 492,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0298770861114603,
+                "terrain_normal": [
+                  0.0154521968215704,
+                  0.999553978443146,
+                  -0.0255552232265472
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 0,
+                  "early_broadphase": 1,
+                  "early_empty": 1,
+                  "envelope_triangles": 0,
+                  "ground": 13,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 0,
+                  "narrow_sweeps": 0,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 474,
+                "velocity": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "visual_yaw_rad": 3.111004114151
+              },
+              "docked_stop": -1,
+              "door_fraction": 0.0,
+              "id": "BlueLoopBus_T01-02",
+              "state": "approaching",
+              "stop_index": 0
+            },
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 40.9097652523778,
+                "at_end": false,
+                "blocked_reason": "scheduled_stop_GAME-L03",
+                "body_yaw_rad": -0.307622492313385,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 0.0,
+                "completed_cycles": 0,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 0,
+                "cycle_distance_m": 40.9097652523778,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 425,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 7.88333333333331,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      -0.00351854367181659,
+                      0.999589622020721,
+                      0.0284283272922039
+                    ],
+                    "point": [
+                      37.0505294799805,
+                      1.05781865119934,
+                      209.999984741211
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.000030517578125,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.0805282592773,
+                "max_step_m": 0.168008804321289,
+                "motion_parts": 1,
+                "obstacle": {},
+                "on_floor": true,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 474
+                },
+                "physics_priority": 1,
+                "physics_steps": 482,
+                "position": [
+                  38.3412132263184,
+                  1.0650886297226,
+                  209.983108520508
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": false,
+                "segment": 427,
+                "speed_mps": 0.0,
+                "state": "paused",
+                "station_m": 620.749953150749,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 417,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0347317748508373,
+                "terrain_normal": [
+                  -0.00516261206939816,
+                  0.999397397041321,
+                  0.0343254655599594
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 0,
+                  "early_broadphase": 0,
+                  "early_empty": 0,
+                  "envelope_triangles": 0,
+                  "ground": 7,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 0,
+                  "narrow_sweeps": 0,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 474,
+                "velocity": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "visual_yaw_rad": -0.307622492313385
+              },
+              "docked_stop": 2,
+              "door_fraction": 1.0,
+              "id": "BlueLoopBus_T01-03",
+              "state": "doors_open",
+              "stop_index": 2
+            }
+          ],
+          "last_board_door_index": 1,
+          "loaded": true,
+          "motion_policy": {
+            "acceleration_mps2": 2.52,
+            "braking_mps2": 5.04,
+            "maximum_speed_mps": 10.08,
+            "on_foot_run_speed_mps": 5.6,
+            "speed_gain": 1.26
+          },
+          "original_vehicle_ids_unchanged": true,
+          "passenger_release_pending": false,
+          "physical_loop_no_recycle": true,
+          "riding": true,
+          "route_certificate": {
+            "accepted": true,
+            "box_m": [
+              2.45,
+              3.0,
+              9.0
+            ],
+            "reason": "closed_source_forward_graph_and_full_box_preflight_with_native_TIN_corners",
+            "samples": 1741,
+            "source_feature_ids": [
+              "osm:way:1084408283:highway_line",
+              "osm:way:117914849:highway_line",
+              "osm:way:183272613:highway_line",
+              "osm:way:198564929:highway_line",
+              "osm:way:198564935:highway_line",
+              "osm:way:228797635:highway_line",
+              "osm:way:228950040:highway_line",
+              "osm:way:37400087:highway_line",
+              "osm:way:378453707:highway_line",
+              "osm:way:493183992:highway_line",
+              "osm:way:517634898:highway_line",
+              "osm:way:539136610:highway_line",
+              "osm:way:619147729:highway_line",
+              "osm:way:619147732:highway_line",
+              "osm:way:619147733:highway_line",
+              "osm:way:619147734:highway_line",
+              "osm:way:619147735:highway_line",
+              "osm:way:821107999:highway_line",
+              "osm:way:856393258:highway_line",
+              "osm:way:899373686:highway_line",
+              "osm:way:899373687:highway_line",
+              "osm:way:899373688:highway_line",
+              "osm:way:908622899:highway_line",
+              "osm:way:908622900:highway_line"
+            ],
+            "spacing_m": 0.5,
+            "terrain_support": "EXP21 existing physical TIN; no bus-only plane",
+            "whole_box_preflight": {
+              "box_with_margin_m": [
+                2.55,
+                9.1
+              ],
+              "loop_endpoint_gap_m": 0.0,
+              "minimum_centre_radius_m": 6.10061236327505,
+              "notes": "Source-display estimated widths and authored lanes, not surveyed bus swept-path approval. Native terrain/full-box checks remain mandatory.",
+              "sample_m": 0.25,
+              "samples": 3486.0,
+              "source_geometry_changed": false,
+              "whole_footprint_outside_source_m2": 0.0
+            }
+          },
+          "running": false,
+          "scope": "Three source-road physical closed-loop buses; four game-authored stops. Every stop boards/alights. No endpoint recycle or position jump. ETA is an actual local-state estimate with traffic delay, not a live Seoul schedule.",
+          "source_geometry_changed": false,
+          "state": "doors_open",
+          "state_elapsed_s": 0.0,
+          "stop_certificates": [
+            {
+              "authored_id": true,
+              "id": "GAME-L01",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": 3.22659635543823
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L02",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789307:highway_line",
+              "terrain_y_m": 3.08752727508545
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L03",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": 1.24178421497345
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L04",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": -1.10565662384033
+            }
+          ],
+          "stop_count": 4,
+          "stop_index": 2,
+          "waiting_for_bus": false
+        }
+      },
+      "name": "fresh_E_selects_third_bus_and_sole_rider",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_distance": 869.785083867157,
+        "bus": {
+          "accel_mps2": 2.52,
+          "actual_distance_m": 910.694849119534,
+          "at_end": false,
+          "blocked_reason": "",
+          "body_yaw_rad": -0.307623296976089,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "closed_physical_loop": true,
+          "command_speed_mps": 0.330169495761394,
+          "completed_cycles": 1,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 1,
+          "cycle_distance_m": 620.774769950971,
+          "decel_mps2": 5.04,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 8029,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 227.36666666674,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                -0.00351678067818284,
+                0.999090194702148,
+                0.0425013117492199
+              ],
+              "point": [
+                37.0505180358887,
+                1.05781853199005,
+                210.0
+              ]
+            },
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                -0.00351854367181659,
+                0.999589622020721,
+                0.0284283272922039
+              ],
+              "point": [
+                37.0505180358887,
+                1.0578179359436,
+                210.0
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00244884542189538,
+          "max_speed_limit_mps": 10.08,
+          "max_speed_mps": 10.0864407420158,
+          "max_step_m": 0.168107345700264,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "painted_signal": {},
+          "painted_signal_commit": {},
+          "painted_signal_events": [],
+          "pause_ticks": 9,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 13652
+          },
+          "physics_priority": 1,
+          "physics_steps": 13651,
+          "position": [
+            38.3487167358398,
+            1.06680238246918,
+            209.95947265625
+          ],
+          "reaction_s": 0.5,
+          "recycle_enabled": false,
+          "recycle_history": [],
+          "route_id": "T01_source_closed_loop",
+          "route_length_m": 869.760275885463,
+          "running": true,
+          "segment": 427,
+          "speed_mps": 0.328489691019058,
+          "state": "driving",
+          "station_m": 620.774751543999,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 14090,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0347145781306081,
+          "terrain_normal": [
+            -0.0051297009922564,
+            0.999397993087769,
+            0.0343132689595222
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 1,
+            "early_empty": 1,
+            "envelope_triangles": 0,
+            "ground": 13,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 13652,
+          "velocity": [
+            0.0994058474898338,
+            0.0,
+            -0.313087791204453
+          ],
+          "visual_yaw_rad": -0.307623296976089
+        },
+        "seen_stops": [
+          "2",
+          "3",
+          "0",
+          "1"
+        ],
+        "start_station": 620.749953150749
+      },
+      "name": "occupied_bus_physically_completes_entire_loop_with_camera",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "attachment_error_m": 0.0,
+        "max_step_m": 0.168107345700264
+      },
+      "name": "occupied_motion_has_closed_doors_and_no_position_jump",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": "(70.95355, -1.054008, 139.8098)",
+        "snapshot": {
+          "boarding_pending": false,
+          "bus": {
+            "accel_mps2": 2.52,
+            "actual_distance_m": 987.42010341033,
+            "at_end": false,
+            "blocked_reason": "scheduled_stop_GAME-L04",
+            "body_yaw_rad": -0.306526243686676,
+            "can_recycle": false,
+            "clearance_m": 1.0,
+            "closed_physical_loop": true,
+            "command_speed_mps": 0.0,
+            "completed_cycles": 1,
+            "crossing_speed_limit_mps": 2.0,
+            "cycle_count": 1,
+            "cycle_distance_m": 697.500024241766,
+            "decel_mps2": 5.04,
+            "direction": 1,
+            "early_bounds": {
+              "available": true,
+              "checks": 0,
+              "diagnostic_enabled": false,
+              "empty_returns": 8603,
+              "last_violation": {},
+              "verified": 0,
+              "verified_empty": 0,
+              "violations": 0
+            },
+            "elapsed_s": 238.800000000082,
+            "end_events": 0,
+            "endpoint_history": [],
+            "floor_collider": "TerrainSupport",
+            "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+            "floor_reason": "up_floor_ray",
+            "gravity_mps2": 9.8,
+            "last_motion_contacts": [
+              {
+                "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "geometry_id": "EXP21_interpolated_terrain",
+                "normal": [
+                  0.0280262511223555,
+                  0.999509513378143,
+                  -0.0139731504023075
+                ],
+                "point": [
+                  64.0893707275391,
+                  -1.03534293174744,
+                  132.912948608398
+                ]
+              }
+            ],
+            "last_recycle_tick": -1,
+            "layer": 8,
+            "mask": 63,
+            "max_route_offset_m": 0.00244884542189538,
+            "max_speed_limit_mps": 10.08,
+            "max_speed_mps": 10.0869718194008,
+            "max_step_m": 0.168116196990013,
+            "motion_parts": 1,
+            "obstacle": {},
+            "on_floor": true,
+            "painted_signal": {},
+            "painted_signal_commit": {},
+            "painted_signal_events": [],
+            "pause_ticks": 9,
+            "permission": {
+              "allow_crossing": true,
+              "fresh": true,
+              "human_present": false,
+              "reason": "pilot_full_box_observation_and_source_signal",
+              "tick": 14338
+            },
+            "physics_priority": 1,
+            "physics_steps": 14337,
+            "position": [
+              61.5647850036621,
+              -0.87274044752121,
+              136.830963134766
+            ],
+            "reaction_s": 0.5,
+            "recycle_enabled": false,
+            "recycle_history": [],
+            "route_id": "T01_source_closed_loop",
+            "route_length_m": 869.760275885463,
+            "running": true,
+            "segment": 428,
+            "speed_mps": 0.0,
+            "state": "bus_doors_open",
+            "station_m": 697.500006556511,
+            "terrain_clearance_XZ_this_tick_m": 0.0,
+            "terrain_clearance_moves": 14777,
+            "terrain_enabled": true,
+            "terrain_grade": 0.0379102195465846,
+            "terrain_normal": [
+              0.0314919911324978,
+              0.99928218126297,
+              -0.0210579391568899
+            ],
+            "terrain_orientation_blocked": false,
+            "terrain_queries": {
+              "broadphase": 0,
+              "early_broadphase": 0,
+              "early_empty": 0,
+              "envelope_triangles": 0,
+              "ground": 7,
+              "ground_envelopes": 0,
+              "narrow_intersections": 0,
+              "narrow_sweeps": 0,
+              "pose_cache_hits": 0
+            },
+            "terrain_query_tick": 14338,
+            "velocity": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "visual_yaw_rad": -0.306526243686676
+          },
+          "bus_count": 3,
+          "crossing_commit": {
+            "clear_station_m": 698.790582923014,
+            "crossing_id": "coverage_11277565406",
+            "entry_phase": "green",
+            "reason": "green_front_entry"
+          },
+          "docked_stop": 3,
+          "door_fraction": 1.0,
+          "engineering_support_pair_exceptions": 4,
+          "error": "",
+          "events": [
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 0.0,
+              "tick": 1,
+              "type": "service_ready"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 66.6751226403157,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 36.6273571699858,
+              "tick": 339,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.0105682946741581,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 426,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 474,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "capsule_layer": 2,
+              "capsule_mask": 45,
+              "door_index": 1,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 481,
+              "type": "boarded"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 66.6751226403157,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7584497779608,
+              "tick": 628,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 86.540685100662,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7584497779608,
+              "tick": 628,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 86.540685100662,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 86.5657043904066,
+              "tick": 765,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "tick": 1203,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "tick": 1251,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 249.352844523907,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "amber",
+              "reason": "amber_insufficient_physical_brake_room",
+              "station_m": 218.609476193786,
+              "tick": 1551,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "speed_mps": 0.0115274733980186,
+              "station_m": 446.000008821487,
+              "stop_id": "GAME-L01",
+              "tick": 1693,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 249.352844523907,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "amber",
+              "reason": "amber_insufficient_physical_brake_room",
+              "station_m": 249.353453233838,
+              "tick": 1734,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 446.000008821487,
+              "stop_id": "GAME-L01",
+              "tick": 1741,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 446.000008821487,
+              "tick": 2461,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 446.000008821487,
+              "tick": 2509,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 698.790581015665,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 678.742409586906,
+              "tick": 2791,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.00868545466801152,
+              "station_m": 697.500009417534,
+              "stop_id": "GAME-L04",
+              "tick": 3048,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 697.500009417534,
+              "stop_id": "GAME-L04",
+              "tick": 3096,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 532.443174712442,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 514.710232973099,
+              "tick": 3143,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "speed_mps": 0.0172149919671938,
+              "station_m": 525.999978780746,
+              "stop_id": "GAME-L02",
+              "tick": 3272,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 525.999978780746,
+              "stop_id": "GAME-L02",
+              "tick": 3320,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 697.500009417534,
+              "tick": 3816,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 697.500009417534,
+              "tick": 3864,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 698.790581015665,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 698.810159564018,
+              "tick": 3925,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 525.999978780746,
+              "tick": 4040,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 740.28107678767,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 709.76251969859,
+              "tick": 4051,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 525.999978780746,
+              "tick": 4088,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 532.443174712442,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 532.44614815712,
+              "tick": 4223,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 740.28107678767,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 740.37363409996,
+              "tick": 4239,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "speed_mps": 0.0106399285141379,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 4833,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 4881,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "speed_mps": 0.00786318210884929,
+              "station_m": 446.000009417534,
+              "stop_id": "GAME-L01",
+              "tick": 5125,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 446.000009417534,
+              "stop_id": "GAME-L01",
+              "tick": 5173,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "cycle": 1,
+              "position_gap_m": 0.0,
+              "station_m": 0.0,
+              "tick": 5491,
+              "type": "physical_loop_joint"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 620.749953150749,
+              "tick": 5601,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 620.749953150749,
+              "tick": 5649,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 36.5191685408354,
+              "tick": 5809,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 446.000009417534,
+              "tick": 5893,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 446.000009417534,
+              "tick": 5941,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7590916007757,
+              "tick": 5989,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 86.5406855774991,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7590916007757,
+              "tick": 5989,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 86.5406855774991,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 86.5828973799944,
+              "tick": 6107,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 698.790582923014,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 678.851387858391,
+              "tick": 6116,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "speed_mps": 0.0142734940163791,
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 6289,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 6337,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 532.443174712442,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 514.710232973099,
+              "tick": 6575,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "speed_mps": 0.0172149919671938,
+              "station_m": 525.999978780746,
+              "stop_id": "GAME-L02",
+              "tick": 6704,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 525.999978780746,
+              "stop_id": "GAME-L02",
+              "tick": 6752,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 249.35688837123,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 229.210224047303,
+              "tick": 6956,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 697.500006556511,
+              "tick": 7057,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 249.35688837123,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 249.37041528523,
+              "tick": 7076,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "station_m": 697.500006556511,
+              "tick": 7105,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 698.790582923014,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 698.810159564018,
+              "tick": 7166,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 525.999978780746,
+              "tick": 7472,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 525.999978780746,
+              "tick": 7520,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 532.443174712442,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 532.44614815712,
+              "tick": 7655,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "speed_mps": 0.0106399285141379,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 8265,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 740.281076567878,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 709.687749505043,
+              "tick": 8311,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 8313,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 740.281076567878,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 740.363113164902,
+              "tick": 8586,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.00964449107414111,
+              "station_m": 446.000009119511,
+              "stop_id": "GAME-L01",
+              "tick": 8792,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 446.000009119511,
+              "stop_id": "GAME-L01",
+              "tick": 8840,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 620.749953150749,
+              "tick": 9033,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 620.749953150749,
+              "tick": 9081,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 698.790582923014,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 678.851387858391,
+              "tick": 9548,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 446.000009119511,
+              "tick": 9560,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 446.000009119511,
+              "tick": 9608,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "speed_mps": 0.0142734940163791,
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 9721,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 9769,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "cycle": 1,
+              "position_gap_m": 0.0,
+              "station_m": 0.0,
+              "tick": 9853,
+              "type": "physical_loop_joint"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 697.500006556511,
+              "tick": 10489,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "station_m": 697.500006556511,
+              "tick": 10537,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 698.790582923014,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 698.810159564018,
+              "tick": 10598,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 740.281076567878,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 709.687749505043,
+              "tick": 11071,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 532.443174086594,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 514.665181726217,
+              "tick": 11071,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 36.5273272246122,
+              "tick": 11072,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.00387243446311913,
+              "station_m": 525.999979734421,
+              "stop_id": "GAME-L02",
+              "tick": 11267,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 525.999979734421,
+              "stop_id": "GAME-L02",
+              "tick": 11315,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7141867727041,
+              "tick": 11344,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 86.5406849814527,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7141867727041,
+              "tick": 11344,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 740.281076567878,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 740.363113164902,
+              "tick": 11346,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 86.5406849814527,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 86.7059921473265,
+              "tick": 11463,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 525.999979734421,
+              "tick": 12035,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 525.999979734421,
+              "tick": 12083,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 532.443174086594,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 532.44614815712,
+              "tick": 12218,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 249.356887000323,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 229.165579751134,
+              "tick": 12311,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-02",
+              "clear_station_m": 249.356887000323,
+              "crossing_id": "coverage_11414286323",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 249.493734911084,
+              "tick": 12432,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "cycle": 1,
+              "position_gap_m": 0.0,
+              "station_m": 0.0,
+              "tick": 12613,
+              "type": "physical_loop_joint"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.0106399285141379,
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 12828,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "stop_id": "GAME-L03",
+              "tick": 12876,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "tick": 13596,
+              "type": "closing_doors"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.749953150749,
+              "tick": 13644,
+              "type": "departed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 620.821788668633,
+              "tick": 13659,
+              "type": "exit_requested"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 36.5273272246122,
+              "tick": 13832,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 66.6751231171528,
+              "crossing_id": "source_node_4851224026",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7141867727041,
+              "tick": 14104,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 86.5406849814527,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 66.7141867727041,
+              "tick": 14104,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "clear_station_m": 698.790582923014,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 678.851387858391,
+              "tick": 14111,
+              "type": "crossing_committed"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-01",
+              "clear_station_m": 86.5406849814527,
+              "crossing_id": "coverage_11277565406",
+              "entry_phase": "green",
+              "reason": "green_front_entry",
+              "station_m": 86.7059921473265,
+              "tick": 14223,
+              "type": "crossing_rear_cleared"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "speed_mps": 0.0142734940163791,
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 14284,
+              "type": "docked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 14332,
+              "type": "doors_open"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "point": "(70.95355, -0.97432, 139.8098)",
+              "station_m": 697.500006556511,
+              "stop_id": "GAME-L04",
+              "tick": 14333,
+              "type": "disembarked"
+            },
+            {
+              "bus_id": "BlueLoopBus_T01-03",
+              "station_m": 697.500006556511,
+              "tick": 14335,
+              "type": "passenger_native_collision_restored"
+            }
+          ],
+          "exit_requested": false,
+          "fleet": [
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 975.9685377237,
+                "at_end": false,
+                "blocked_reason": "",
+                "body_yaw_rad": 2.69628310203552,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 10.08,
+                "completed_cycles": 1,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 1,
+                "cycle_distance_m": 106.208248492036,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 8037,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 238.800000000082,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.0342335551977158,
+                      0.999228477478027,
+                      -0.0192451421171427
+                    ],
+                    "point": [
+                      28.0177955627441,
+                      1.27861034870148,
+                      165.000015258789
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.00239661382511258,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.08873607032,
+                "max_step_m": 0.168145601172,
+                "motion_parts": 1,
+                "obstacle": {},
+                "on_floor": true,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 14338
+                },
+                "physics_priority": 1,
+                "physics_steps": 14337,
+                "position": [
+                  26.8029613494873,
+                  1.31645667552948,
+                  164.702239990234
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": true,
+                "segment": 94,
+                "speed_mps": 10.0801438093185,
+                "state": "driving",
+                "station_m": 106.193846926093,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 14917,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0386869700229966,
+                "terrain_normal": [
+                  0.0351009704172611,
+                  0.999252498149872,
+                  -0.0162003748118877
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 1,
+                  "early_broadphase": 1,
+                  "early_empty": 0,
+                  "envelope_triangles": 0,
+                  "ground": 385,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 0,
+                  "narrow_sweeps": 0,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 14338,
+                "velocity": [
+                  -4.34857845306396,
+                  0.0,
+                  9.09390735626221
+                ],
+                "visual_yaw_rad": 2.69628310203552
+              },
+              "docked_stop": -1,
+              "door_fraction": 0.0,
+              "id": "BlueLoopBus_T01-01",
+              "state": "approaching",
+              "stop_index": 0
+            },
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 938.242047002848,
+                "at_end": false,
+                "blocked_reason": "body:Vehicle_coverage_drive_1_car_0",
+                "body_yaw_rad": 2.87181878089905,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 0.0,
+                "completed_cycles": 1,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 1,
+                "cycle_distance_m": 358.401870814127,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 8685,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 238.800000000082,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.00981765985488892,
+                      0.999763309955597,
+                      -0.019415408372879
+                    ],
+                    "point": [
+                      -40.8818092346191,
+                      3.75216007232666,
+                      405.000030517578
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.00239661382511258,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.0869718194008,
+                "max_step_m": 0.168116196990013,
+                "motion_parts": 1,
+                "obstacle": {
+                  "distance_m": 1.99955803705961,
+                  "reason": "body:Vehicle_coverage_drive_1_car_0"
+                },
+                "on_floor": true,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 14338
+                },
+                "physics_priority": 1,
+                "physics_steps": 14337,
+                "position": [
+                  -42.5363578796387,
+                  3.79061961174011,
+                  406.387298583984
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": true,
+                "segment": 228,
+                "speed_mps": 0.0,
+                "state": "waiting_obstacle",
+                "station_m": 358.387446392328,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 14884,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0180620158666237,
+                "terrain_normal": [
+                  0.0106719555333257,
+                  0.999836921691895,
+                  -0.014570776373148
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 1,
+                  "early_broadphase": 1,
+                  "early_empty": 0,
+                  "envelope_triangles": 0,
+                  "ground": 73,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 7,
+                  "narrow_sweeps": 6,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 14338,
+                "velocity": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "visual_yaw_rad": 2.87181878089905
+              },
+              "docked_stop": -1,
+              "door_fraction": 0.0,
+              "id": "BlueLoopBus_T01-02",
+              "state": "approaching",
+              "stop_index": 0
+            },
+            {
+              "bus": {
+                "accel_mps2": 2.52,
+                "actual_distance_m": 987.42010341033,
+                "at_end": false,
+                "blocked_reason": "scheduled_stop_GAME-L04",
+                "body_yaw_rad": -0.306526243686676,
+                "can_recycle": false,
+                "clearance_m": 1.0,
+                "closed_physical_loop": true,
+                "command_speed_mps": 0.0,
+                "completed_cycles": 1,
+                "crossing_speed_limit_mps": 2.0,
+                "cycle_count": 1,
+                "cycle_distance_m": 697.500024241766,
+                "decel_mps2": 5.04,
+                "direction": 1,
+                "early_bounds": {
+                  "available": true,
+                  "checks": 0,
+                  "diagnostic_enabled": false,
+                  "empty_returns": 8603,
+                  "last_violation": {},
+                  "verified": 0,
+                  "verified_empty": 0,
+                  "violations": 0
+                },
+                "elapsed_s": 238.800000000082,
+                "end_events": 0,
+                "endpoint_history": [],
+                "floor_collider": "TerrainSupport",
+                "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                "floor_reason": "up_floor_ray",
+                "gravity_mps2": 9.8,
+                "last_motion_contacts": [
+                  {
+                    "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+                    "geometry_id": "EXP21_interpolated_terrain",
+                    "normal": [
+                      0.0280262511223555,
+                      0.999509513378143,
+                      -0.0139731504023075
+                    ],
+                    "point": [
+                      64.0893707275391,
+                      -1.03534293174744,
+                      132.912948608398
+                    ]
+                  }
+                ],
+                "last_recycle_tick": -1,
+                "layer": 8,
+                "mask": 63,
+                "max_route_offset_m": 0.00244884542189538,
+                "max_speed_limit_mps": 10.08,
+                "max_speed_mps": 10.0869718194008,
+                "max_step_m": 0.168116196990013,
+                "motion_parts": 1,
+                "obstacle": {},
+                "on_floor": true,
+                "painted_signal": {},
+                "painted_signal_commit": {},
+                "painted_signal_events": [],
+                "pause_ticks": 9,
+                "permission": {
+                  "allow_crossing": true,
+                  "fresh": true,
+                  "human_present": false,
+                  "reason": "pilot_full_box_observation_and_source_signal",
+                  "tick": 14338
+                },
+                "physics_priority": 1,
+                "physics_steps": 14337,
+                "position": [
+                  61.5647850036621,
+                  -0.87274044752121,
+                  136.830963134766
+                ],
+                "reaction_s": 0.5,
+                "recycle_enabled": false,
+                "recycle_history": [],
+                "route_id": "T01_source_closed_loop",
+                "route_length_m": 869.760275885463,
+                "running": true,
+                "segment": 428,
+                "speed_mps": 0.0,
+                "state": "bus_doors_open",
+                "station_m": 697.500006556511,
+                "terrain_clearance_XZ_this_tick_m": 0.0,
+                "terrain_clearance_moves": 14777,
+                "terrain_enabled": true,
+                "terrain_grade": 0.0379102195465846,
+                "terrain_normal": [
+                  0.0314919911324978,
+                  0.99928218126297,
+                  -0.0210579391568899
+                ],
+                "terrain_orientation_blocked": false,
+                "terrain_queries": {
+                  "broadphase": 0,
+                  "early_broadphase": 0,
+                  "early_empty": 0,
+                  "envelope_triangles": 0,
+                  "ground": 7,
+                  "ground_envelopes": 0,
+                  "narrow_intersections": 0,
+                  "narrow_sweeps": 0,
+                  "pose_cache_hits": 0
+                },
+                "terrain_query_tick": 14338,
+                "velocity": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "visual_yaw_rad": -0.306526243686676
+              },
+              "docked_stop": 3,
+              "door_fraction": 1.0,
+              "id": "BlueLoopBus_T01-03",
+              "state": "doors_open",
+              "stop_index": 3
+            }
+          ],
+          "last_board_door_index": 1,
+          "loaded": true,
+          "motion_policy": {
+            "acceleration_mps2": 2.52,
+            "braking_mps2": 5.04,
+            "maximum_speed_mps": 10.08,
+            "on_foot_run_speed_mps": 5.6,
+            "speed_gain": 1.26
+          },
+          "original_vehicle_ids_unchanged": true,
+          "passenger_release_pending": false,
+          "physical_loop_no_recycle": true,
+          "riding": false,
+          "route_certificate": {
+            "accepted": true,
+            "box_m": [
+              2.45,
+              3.0,
+              9.0
+            ],
+            "reason": "closed_source_forward_graph_and_full_box_preflight_with_native_TIN_corners",
+            "samples": 1741,
+            "source_feature_ids": [
+              "osm:way:1084408283:highway_line",
+              "osm:way:117914849:highway_line",
+              "osm:way:183272613:highway_line",
+              "osm:way:198564929:highway_line",
+              "osm:way:198564935:highway_line",
+              "osm:way:228797635:highway_line",
+              "osm:way:228950040:highway_line",
+              "osm:way:37400087:highway_line",
+              "osm:way:378453707:highway_line",
+              "osm:way:493183992:highway_line",
+              "osm:way:517634898:highway_line",
+              "osm:way:539136610:highway_line",
+              "osm:way:619147729:highway_line",
+              "osm:way:619147732:highway_line",
+              "osm:way:619147733:highway_line",
+              "osm:way:619147734:highway_line",
+              "osm:way:619147735:highway_line",
+              "osm:way:821107999:highway_line",
+              "osm:way:856393258:highway_line",
+              "osm:way:899373686:highway_line",
+              "osm:way:899373687:highway_line",
+              "osm:way:899373688:highway_line",
+              "osm:way:908622899:highway_line",
+              "osm:way:908622900:highway_line"
+            ],
+            "spacing_m": 0.5,
+            "terrain_support": "EXP21 existing physical TIN; no bus-only plane",
+            "whole_box_preflight": {
+              "box_with_margin_m": [
+                2.55,
+                9.1
+              ],
+              "loop_endpoint_gap_m": 0.0,
+              "minimum_centre_radius_m": 6.10061236327505,
+              "notes": "Source-display estimated widths and authored lanes, not surveyed bus swept-path approval. Native terrain/full-box checks remain mandatory.",
+              "sample_m": 0.25,
+              "samples": 3486.0,
+              "source_geometry_changed": false,
+              "whole_footprint_outside_source_m2": 0.0
+            }
+          },
+          "running": true,
+          "scope": "Three source-road physical closed-loop buses; four game-authored stops. Every stop boards/alights. No endpoint recycle or position jump. ETA is an actual local-state estimate with traffic delay, not a live Seoul schedule.",
+          "source_geometry_changed": false,
+          "state": "doors_open",
+          "state_elapsed_s": 0.1,
+          "stop_certificates": [
+            {
+              "authored_id": true,
+              "id": "GAME-L01",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": 3.22659635543823
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L02",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789307:highway_line",
+              "terrain_y_m": 3.08752727508545
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L03",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": 1.24178421497345
+            },
+            {
+              "authored_id": true,
+              "id": "GAME-L04",
+              "source_wait_inside": true,
+              "source_walk_feature_id": "osm:way:1230789308:highway_line",
+              "terrain_y_m": -1.10565662384033
+            }
+          ],
+          "stop_count": 4,
+          "stop_index": 3,
+          "waiting_for_bus": false
+        }
+      },
+      "name": "fresh_E_request_alights_next_safe_actual_stop",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original14_vehicles_and_source_unchanged",
+      "passed": true
+    }
+  ],
+  "data_sha256": "ecc2ccd72e79d7a99b7f754fd6d769ecfd695861999cdd8d2e64b6afc3506230",
+  "passed": 7,
+  "script_sha256": "9da7020778e7c14b21994594c061698bca3c61faaf2c12abc885ed6208283efb",
+  "snapshot": {
+    "boarding_pending": false,
+    "bus": {
+      "accel_mps2": 2.52,
+      "actual_distance_m": 987.42010341033,
+      "at_end": false,
+      "blocked_reason": "scheduled_stop_GAME-L04",
+      "body_yaw_rad": -0.306526243686676,
+      "can_recycle": false,
+      "clearance_m": 1.0,
+      "closed_physical_loop": true,
+      "command_speed_mps": 0.0,
+      "completed_cycles": 1,
+      "crossing_speed_limit_mps": 2.0,
+      "cycle_count": 1,
+      "cycle_distance_m": 697.500024241766,
+      "decel_mps2": 5.04,
+      "direction": 1,
+      "early_bounds": {
+        "available": true,
+        "checks": 0,
+        "diagnostic_enabled": false,
+        "empty_returns": 8603,
+        "last_violation": {},
+        "verified": 0,
+        "verified_empty": 0,
+        "violations": 0
+      },
+      "elapsed_s": 238.800000000082,
+      "end_events": 0,
+      "endpoint_history": [],
+      "floor_collider": "TerrainSupport",
+      "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "floor_reason": "up_floor_ray",
+      "gravity_mps2": 9.8,
+      "last_motion_contacts": [
+        {
+          "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "geometry_id": "EXP21_interpolated_terrain",
+          "normal": [
+            0.0280262511223555,
+            0.999509513378143,
+            -0.0139731504023075
+          ],
+          "point": [
+            64.0893707275391,
+            -1.03534293174744,
+            132.912948608398
+          ]
+        }
+      ],
+      "last_recycle_tick": -1,
+      "layer": 8,
+      "mask": 63,
+      "max_route_offset_m": 0.00244884542189538,
+      "max_speed_limit_mps": 10.08,
+      "max_speed_mps": 10.0869718194008,
+      "max_step_m": 0.168116196990013,
+      "motion_parts": 1,
+      "obstacle": {},
+      "on_floor": true,
+      "painted_signal": {},
+      "painted_signal_commit": {},
+      "painted_signal_events": [],
+      "pause_ticks": 9,
+      "permission": {
+        "allow_crossing": true,
+        "fresh": true,
+        "human_present": false,
+        "reason": "pilot_full_box_observation_and_source_signal",
+        "tick": 14338
+      },
+      "physics_priority": 1,
+      "physics_steps": 14337,
+      "position": [
+        61.5647850036621,
+        -0.87274044752121,
+        136.830963134766
+      ],
+      "reaction_s": 0.5,
+      "recycle_enabled": false,
+      "recycle_history": [],
+      "route_id": "T01_source_closed_loop",
+      "route_length_m": 869.760275885463,
+      "running": true,
+      "segment": 428,
+      "speed_mps": 0.0,
+      "state": "bus_doors_open",
+      "station_m": 697.500006556511,
+      "terrain_clearance_XZ_this_tick_m": 0.0,
+      "terrain_clearance_moves": 14777,
+      "terrain_enabled": true,
+      "terrain_grade": 0.0379102195465846,
+      "terrain_normal": [
+        0.0314919911324978,
+        0.99928218126297,
+        -0.0210579391568899
+      ],
+      "terrain_orientation_blocked": false,
+      "terrain_queries": {
+        "broadphase": 0,
+        "early_broadphase": 0,
+        "early_empty": 0,
+        "envelope_triangles": 0,
+        "ground": 7,
+        "ground_envelopes": 0,
+        "narrow_intersections": 0,
+        "narrow_sweeps": 0,
+        "pose_cache_hits": 0
+      },
+      "terrain_query_tick": 14338,
+      "velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visual_yaw_rad": -0.306526243686676
+    },
+    "bus_count": 3,
+    "crossing_commit": {
+      "clear_station_m": 698.790582923014,
+      "crossing_id": "coverage_11277565406",
+      "entry_phase": "green",
+      "reason": "green_front_entry"
+    },
+    "docked_stop": 3,
+    "door_fraction": 1.0,
+    "engineering_support_pair_exceptions": 4,
+    "error": "",
+    "events": [
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 0.0,
+        "tick": 1,
+        "type": "service_ready"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 66.6751226403157,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 36.6273571699858,
+        "tick": 339,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.0105682946741581,
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 426,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 474,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "capsule_layer": 2,
+        "capsule_mask": 45,
+        "door_index": 1,
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 481,
+        "type": "boarded"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 66.6751226403157,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7584497779608,
+        "tick": 628,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 86.540685100662,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7584497779608,
+        "tick": 628,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 86.540685100662,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 86.5657043904066,
+        "tick": 765,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "tick": 1203,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "tick": 1251,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 249.352844523907,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "amber",
+        "reason": "amber_insufficient_physical_brake_room",
+        "station_m": 218.609476193786,
+        "tick": 1551,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "speed_mps": 0.0115274733980186,
+        "station_m": 446.000008821487,
+        "stop_id": "GAME-L01",
+        "tick": 1693,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 249.352844523907,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "amber",
+        "reason": "amber_insufficient_physical_brake_room",
+        "station_m": 249.353453233838,
+        "tick": 1734,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 446.000008821487,
+        "stop_id": "GAME-L01",
+        "tick": 1741,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 446.000008821487,
+        "tick": 2461,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 446.000008821487,
+        "tick": 2509,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 698.790581015665,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 678.742409586906,
+        "tick": 2791,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.00868545466801152,
+        "station_m": 697.500009417534,
+        "stop_id": "GAME-L04",
+        "tick": 3048,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 697.500009417534,
+        "stop_id": "GAME-L04",
+        "tick": 3096,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 532.443174712442,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 514.710232973099,
+        "tick": 3143,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "speed_mps": 0.0172149919671938,
+        "station_m": 525.999978780746,
+        "stop_id": "GAME-L02",
+        "tick": 3272,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 525.999978780746,
+        "stop_id": "GAME-L02",
+        "tick": 3320,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 697.500009417534,
+        "tick": 3816,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 697.500009417534,
+        "tick": 3864,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 698.790581015665,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 698.810159564018,
+        "tick": 3925,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 525.999978780746,
+        "tick": 4040,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 740.28107678767,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 709.76251969859,
+        "tick": 4051,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 525.999978780746,
+        "tick": 4088,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 532.443174712442,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 532.44614815712,
+        "tick": 4223,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 740.28107678767,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 740.37363409996,
+        "tick": 4239,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "speed_mps": 0.0106399285141379,
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 4833,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 4881,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "speed_mps": 0.00786318210884929,
+        "station_m": 446.000009417534,
+        "stop_id": "GAME-L01",
+        "tick": 5125,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 446.000009417534,
+        "stop_id": "GAME-L01",
+        "tick": 5173,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "cycle": 1,
+        "position_gap_m": 0.0,
+        "station_m": 0.0,
+        "tick": 5491,
+        "type": "physical_loop_joint"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 620.749953150749,
+        "tick": 5601,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 620.749953150749,
+        "tick": 5649,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 36.5191685408354,
+        "tick": 5809,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 446.000009417534,
+        "tick": 5893,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 446.000009417534,
+        "tick": 5941,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7590916007757,
+        "tick": 5989,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 86.5406855774991,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7590916007757,
+        "tick": 5989,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 86.5406855774991,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 86.5828973799944,
+        "tick": 6107,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 698.790582923014,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 678.851387858391,
+        "tick": 6116,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "speed_mps": 0.0142734940163791,
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 6289,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 6337,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 532.443174712442,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 514.710232973099,
+        "tick": 6575,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "speed_mps": 0.0172149919671938,
+        "station_m": 525.999978780746,
+        "stop_id": "GAME-L02",
+        "tick": 6704,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 525.999978780746,
+        "stop_id": "GAME-L02",
+        "tick": 6752,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 249.35688837123,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 229.210224047303,
+        "tick": 6956,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 697.500006556511,
+        "tick": 7057,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 249.35688837123,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 249.37041528523,
+        "tick": 7076,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "station_m": 697.500006556511,
+        "tick": 7105,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 698.790582923014,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 698.810159564018,
+        "tick": 7166,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 525.999978780746,
+        "tick": 7472,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 525.999978780746,
+        "tick": 7520,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 532.443174712442,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 532.44614815712,
+        "tick": 7655,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "speed_mps": 0.0106399285141379,
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 8265,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 740.281076567878,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 709.687749505043,
+        "tick": 8311,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 8313,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 740.281076567878,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 740.363113164902,
+        "tick": 8586,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.00964449107414111,
+        "station_m": 446.000009119511,
+        "stop_id": "GAME-L01",
+        "tick": 8792,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 446.000009119511,
+        "stop_id": "GAME-L01",
+        "tick": 8840,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 620.749953150749,
+        "tick": 9033,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 620.749953150749,
+        "tick": 9081,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 698.790582923014,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 678.851387858391,
+        "tick": 9548,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 446.000009119511,
+        "tick": 9560,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 446.000009119511,
+        "tick": 9608,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "speed_mps": 0.0142734940163791,
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 9721,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 9769,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "cycle": 1,
+        "position_gap_m": 0.0,
+        "station_m": 0.0,
+        "tick": 9853,
+        "type": "physical_loop_joint"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 697.500006556511,
+        "tick": 10489,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "station_m": 697.500006556511,
+        "tick": 10537,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 698.790582923014,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 698.810159564018,
+        "tick": 10598,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 740.281076567878,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 709.687749505043,
+        "tick": 11071,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 532.443174086594,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 514.665181726217,
+        "tick": 11071,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 36.5273272246122,
+        "tick": 11072,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.00387243446311913,
+        "station_m": 525.999979734421,
+        "stop_id": "GAME-L02",
+        "tick": 11267,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 525.999979734421,
+        "stop_id": "GAME-L02",
+        "tick": 11315,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7141867727041,
+        "tick": 11344,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 86.5406849814527,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7141867727041,
+        "tick": 11344,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 740.281076567878,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 740.363113164902,
+        "tick": 11346,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 86.5406849814527,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 86.7059921473265,
+        "tick": 11463,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 525.999979734421,
+        "tick": 12035,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 525.999979734421,
+        "tick": 12083,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 532.443174086594,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 532.44614815712,
+        "tick": 12218,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 249.356887000323,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 229.165579751134,
+        "tick": 12311,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-02",
+        "clear_station_m": 249.356887000323,
+        "crossing_id": "coverage_11414286323",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 249.493734911084,
+        "tick": 12432,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "cycle": 1,
+        "position_gap_m": 0.0,
+        "station_m": 0.0,
+        "tick": 12613,
+        "type": "physical_loop_joint"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.0106399285141379,
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 12828,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "stop_id": "GAME-L03",
+        "tick": 12876,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "tick": 13596,
+        "type": "closing_doors"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.749953150749,
+        "tick": 13644,
+        "type": "departed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 620.821788668633,
+        "tick": 13659,
+        "type": "exit_requested"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 36.5273272246122,
+        "tick": 13832,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 66.6751231171528,
+        "crossing_id": "source_node_4851224026",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7141867727041,
+        "tick": 14104,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 86.5406849814527,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 66.7141867727041,
+        "tick": 14104,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "clear_station_m": 698.790582923014,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 678.851387858391,
+        "tick": 14111,
+        "type": "crossing_committed"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-01",
+        "clear_station_m": 86.5406849814527,
+        "crossing_id": "coverage_11277565406",
+        "entry_phase": "green",
+        "reason": "green_front_entry",
+        "station_m": 86.7059921473265,
+        "tick": 14223,
+        "type": "crossing_rear_cleared"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "speed_mps": 0.0142734940163791,
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 14284,
+        "type": "docked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 14332,
+        "type": "doors_open"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "point": "(70.95355, -0.97432, 139.8098)",
+        "station_m": 697.500006556511,
+        "stop_id": "GAME-L04",
+        "tick": 14333,
+        "type": "disembarked"
+      },
+      {
+        "bus_id": "BlueLoopBus_T01-03",
+        "station_m": 697.500006556511,
+        "tick": 14335,
+        "type": "passenger_native_collision_restored"
+      }
+    ],
+    "exit_requested": false,
+    "fleet": [
+      {
+        "bus": {
+          "accel_mps2": 2.52,
+          "actual_distance_m": 975.9685377237,
+          "at_end": false,
+          "blocked_reason": "",
+          "body_yaw_rad": 2.69628310203552,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "closed_physical_loop": true,
+          "command_speed_mps": 10.08,
+          "completed_cycles": 1,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 1,
+          "cycle_distance_m": 106.208248492036,
+          "decel_mps2": 5.04,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 8037,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 238.800000000082,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.0342335551977158,
+                0.999228477478027,
+                -0.0192451421171427
+              ],
+              "point": [
+                28.0177955627441,
+                1.27861034870148,
+                165.000015258789
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00239661382511258,
+          "max_speed_limit_mps": 10.08,
+          "max_speed_mps": 10.08873607032,
+          "max_step_m": 0.168145601172,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "painted_signal": {},
+          "painted_signal_commit": {},
+          "painted_signal_events": [],
+          "pause_ticks": 9,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 14338
+          },
+          "physics_priority": 1,
+          "physics_steps": 14337,
+          "position": [
+            26.8029613494873,
+            1.31645667552948,
+            164.702239990234
+          ],
+          "reaction_s": 0.5,
+          "recycle_enabled": false,
+          "recycle_history": [],
+          "route_id": "T01_source_closed_loop",
+          "route_length_m": 869.760275885463,
+          "running": true,
+          "segment": 94,
+          "speed_mps": 10.0801438093185,
+          "state": "driving",
+          "station_m": 106.193846926093,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 14917,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0386869700229966,
+          "terrain_normal": [
+            0.0351009704172611,
+            0.999252498149872,
+            -0.0162003748118877
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 1,
+            "early_broadphase": 1,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 385,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 14338,
+          "velocity": [
+            -4.34857845306396,
+            0.0,
+            9.09390735626221
+          ],
+          "visual_yaw_rad": 2.69628310203552
+        },
+        "docked_stop": -1,
+        "door_fraction": 0.0,
+        "id": "BlueLoopBus_T01-01",
+        "state": "approaching",
+        "stop_index": 0
+      },
+      {
+        "bus": {
+          "accel_mps2": 2.52,
+          "actual_distance_m": 938.242047002848,
+          "at_end": false,
+          "blocked_reason": "body:Vehicle_coverage_drive_1_car_0",
+          "body_yaw_rad": 2.87181878089905,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "closed_physical_loop": true,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 1,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 1,
+          "cycle_distance_m": 358.401870814127,
+          "decel_mps2": 5.04,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 8685,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 238.800000000082,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.00981765985488892,
+                0.999763309955597,
+                -0.019415408372879
+              ],
+              "point": [
+                -40.8818092346191,
+                3.75216007232666,
+                405.000030517578
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00239661382511258,
+          "max_speed_limit_mps": 10.08,
+          "max_speed_mps": 10.0869718194008,
+          "max_step_m": 0.168116196990013,
+          "motion_parts": 1,
+          "obstacle": {
+            "distance_m": 1.99955803705961,
+            "reason": "body:Vehicle_coverage_drive_1_car_0"
+          },
+          "on_floor": true,
+          "painted_signal": {},
+          "painted_signal_commit": {},
+          "painted_signal_events": [],
+          "pause_ticks": 9,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 14338
+          },
+          "physics_priority": 1,
+          "physics_steps": 14337,
+          "position": [
+            -42.5363578796387,
+            3.79061961174011,
+            406.387298583984
+          ],
+          "reaction_s": 0.5,
+          "recycle_enabled": false,
+          "recycle_history": [],
+          "route_id": "T01_source_closed_loop",
+          "route_length_m": 869.760275885463,
+          "running": true,
+          "segment": 228,
+          "speed_mps": 0.0,
+          "state": "waiting_obstacle",
+          "station_m": 358.387446392328,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 14884,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0180620158666237,
+          "terrain_normal": [
+            0.0106719555333257,
+            0.999836921691895,
+            -0.014570776373148
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 1,
+            "early_broadphase": 1,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 73,
+            "ground_envelopes": 0,
+            "narrow_intersections": 7,
+            "narrow_sweeps": 6,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 14338,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": 2.87181878089905
+        },
+        "docked_stop": -1,
+        "door_fraction": 0.0,
+        "id": "BlueLoopBus_T01-02",
+        "state": "approaching",
+        "stop_index": 0
+      },
+      {
+        "bus": {
+          "accel_mps2": 2.52,
+          "actual_distance_m": 987.42010341033,
+          "at_end": false,
+          "blocked_reason": "scheduled_stop_GAME-L04",
+          "body_yaw_rad": -0.306526243686676,
+          "can_recycle": false,
+          "clearance_m": 1.0,
+          "closed_physical_loop": true,
+          "command_speed_mps": 0.0,
+          "completed_cycles": 1,
+          "crossing_speed_limit_mps": 2.0,
+          "cycle_count": 1,
+          "cycle_distance_m": 697.500024241766,
+          "decel_mps2": 5.04,
+          "direction": 1,
+          "early_bounds": {
+            "available": true,
+            "checks": 0,
+            "diagnostic_enabled": false,
+            "empty_returns": 8603,
+            "last_violation": {},
+            "verified": 0,
+            "verified_empty": 0,
+            "violations": 0
+          },
+          "elapsed_s": 238.800000000082,
+          "end_events": 0,
+          "endpoint_history": [],
+          "floor_collider": "TerrainSupport",
+          "floor_collider_path": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+          "floor_reason": "up_floor_ray",
+          "gravity_mps2": 9.8,
+          "last_motion_contacts": [
+            {
+              "collider": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+              "geometry_id": "EXP21_interpolated_terrain",
+              "normal": [
+                0.0280262511223555,
+                0.999509513378143,
+                -0.0139731504023075
+              ],
+              "point": [
+                64.0893707275391,
+                -1.03534293174744,
+                132.912948608398
+              ]
+            }
+          ],
+          "last_recycle_tick": -1,
+          "layer": 8,
+          "mask": 63,
+          "max_route_offset_m": 0.00244884542189538,
+          "max_speed_limit_mps": 10.08,
+          "max_speed_mps": 10.0869718194008,
+          "max_step_m": 0.168116196990013,
+          "motion_parts": 1,
+          "obstacle": {},
+          "on_floor": true,
+          "painted_signal": {},
+          "painted_signal_commit": {},
+          "painted_signal_events": [],
+          "pause_ticks": 9,
+          "permission": {
+            "allow_crossing": true,
+            "fresh": true,
+            "human_present": false,
+            "reason": "pilot_full_box_observation_and_source_signal",
+            "tick": 14338
+          },
+          "physics_priority": 1,
+          "physics_steps": 14337,
+          "position": [
+            61.5647850036621,
+            -0.87274044752121,
+            136.830963134766
+          ],
+          "reaction_s": 0.5,
+          "recycle_enabled": false,
+          "recycle_history": [],
+          "route_id": "T01_source_closed_loop",
+          "route_length_m": 869.760275885463,
+          "running": true,
+          "segment": 428,
+          "speed_mps": 0.0,
+          "state": "bus_doors_open",
+          "station_m": 697.500006556511,
+          "terrain_clearance_XZ_this_tick_m": 0.0,
+          "terrain_clearance_moves": 14777,
+          "terrain_enabled": true,
+          "terrain_grade": 0.0379102195465846,
+          "terrain_normal": [
+            0.0314919911324978,
+            0.99928218126297,
+            -0.0210579391568899
+          ],
+          "terrain_orientation_blocked": false,
+          "terrain_queries": {
+            "broadphase": 0,
+            "early_broadphase": 0,
+            "early_empty": 0,
+            "envelope_triangles": 0,
+            "ground": 7,
+            "ground_envelopes": 0,
+            "narrow_intersections": 0,
+            "narrow_sweeps": 0,
+            "pose_cache_hits": 0
+          },
+          "terrain_query_tick": 14338,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "visual_yaw_rad": -0.306526243686676
+        },
+        "docked_stop": 3,
+        "door_fraction": 1.0,
+        "id": "BlueLoopBus_T01-03",
+        "state": "doors_open",
+        "stop_index": 3
+      }
+    ],
+    "last_board_door_index": 1,
+    "loaded": true,
+    "motion_policy": {
+      "acceleration_mps2": 2.52,
+      "braking_mps2": 5.04,
+      "maximum_speed_mps": 10.08,
+      "on_foot_run_speed_mps": 5.6,
+      "speed_gain": 1.26
+    },
+    "original_vehicle_ids_unchanged": true,
+    "passenger_release_pending": false,
+    "physical_loop_no_recycle": true,
+    "riding": false,
+    "route_certificate": {
+      "accepted": true,
+      "box_m": [
+        2.45,
+        3.0,
+        9.0
+      ],
+      "reason": "closed_source_forward_graph_and_full_box_preflight_with_native_TIN_corners",
+      "samples": 1741,
+      "source_feature_ids": [
+        "osm:way:1084408283:highway_line",
+        "osm:way:117914849:highway_line",
+        "osm:way:183272613:highway_line",
+        "osm:way:198564929:highway_line",
+        "osm:way:198564935:highway_line",
+        "osm:way:228797635:highway_line",
+        "osm:way:228950040:highway_line",
+        "osm:way:37400087:highway_line",
+        "osm:way:378453707:highway_line",
+        "osm:way:493183992:highway_line",
+        "osm:way:517634898:highway_line",
+        "osm:way:539136610:highway_line",
+        "osm:way:619147729:highway_line",
+        "osm:way:619147732:highway_line",
+        "osm:way:619147733:highway_line",
+        "osm:way:619147734:highway_line",
+        "osm:way:619147735:highway_line",
+        "osm:way:821107999:highway_line",
+        "osm:way:856393258:highway_line",
+        "osm:way:899373686:highway_line",
+        "osm:way:899373687:highway_line",
+        "osm:way:899373688:highway_line",
+        "osm:way:908622899:highway_line",
+        "osm:way:908622900:highway_line"
+      ],
+      "spacing_m": 0.5,
+      "terrain_support": "EXP21 existing physical TIN; no bus-only plane",
+      "whole_box_preflight": {
+        "box_with_margin_m": [
+          2.55,
+          9.1
+        ],
+        "loop_endpoint_gap_m": 0.0,
+        "minimum_centre_radius_m": 6.10061236327505,
+        "notes": "Source-display estimated widths and authored lanes, not surveyed bus swept-path approval. Native terrain/full-box checks remain mandatory.",
+        "sample_m": 0.25,
+        "samples": 3486.0,
+        "source_geometry_changed": false,
+        "whole_footprint_outside_source_m2": 0.0
+      }
+    },
+    "running": true,
+    "scope": "Three source-road physical closed-loop buses; four game-authored stops. Every stop boards/alights. No endpoint recycle or position jump. ETA is an actual local-state estimate with traffic delay, not a live Seoul schedule.",
+    "source_geometry_changed": false,
+    "state": "doors_open",
+    "state_elapsed_s": 0.1,
+    "stop_certificates": [
+      {
+        "authored_id": true,
+        "id": "GAME-L01",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:1230789308:highway_line",
+        "terrain_y_m": 3.22659635543823
+      },
+      {
+        "authored_id": true,
+        "id": "GAME-L02",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:1230789307:highway_line",
+        "terrain_y_m": 3.08752727508545
+      },
+      {
+        "authored_id": true,
+        "id": "GAME-L03",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:1230789308:highway_line",
+        "terrain_y_m": 1.24178421497345
+      },
+      {
+        "authored_id": true,
+        "id": "GAME-L04",
+        "source_wait_inside": true,
+        "source_walk_feature_id": "osm:way:1230789308:highway_line",
+        "terrain_y_m": -1.10565662384033
+      }
+    ],
+    "stop_count": 4,
+    "stop_index": 3,
+    "waiting_for_bus": false
+  },
+  "total": 7
+}

@@ -29,6 +29,7 @@ var _paint_faces := 0
 var _minimum_paint_clearance_m := INF
 var _maximum_paint_clearance_m := -INF
 var _setup_usec := 0
+var surface_mask_audit: Array=[]
 
 func _fail(message: String) -> bool:
 	load_error=message;push_error(message);return false
@@ -47,6 +48,7 @@ func setup(root_scene: Node3D) -> bool:
 	var started: int=Time.get_ticks_usec()
 	_make_materials()
 	for row: Dictionary in design.crossings:_crossing_ids[String(row.id)]=true
+	if not _mask_walk_render_surfaces():return false
 	if not _build_paint():return false
 	_build_lamps();_build_signals();_publish_batches()
 	loaded=not paint_meshes.is_empty() and not signals.is_empty() and not lamps.is_empty()
@@ -78,6 +80,31 @@ func _make_materials() -> void:
 	_materials.white.roughness=.96;_materials.yellow.roughness=.96
 	# The authored paint is a thin surface with a17mm clearance over the old
 	# .035m road display. No polygon offset or raised box hides terrain seams.
+
+func _mask_walk_render_surfaces() -> bool:
+	var warp: RefCounted=WARP.new();warp.configure(terrain,host.city)
+	for row: Dictionary in design.get("surface_masks",[]):
+		var visual: MeshInstance3D=host.city.source_nodes.get(row.node_id)
+		if not is_instance_valid(visual):return _fail("차도와 겹친 원본 보도 표시 노드가 없습니다: "+String(row.node_id))
+		var identity: int=visual.get_instance_id();var children: Array=visual.get_children()
+		var points:=PackedVector3Array()
+		for i: int in range(0,row.retained_triangles_xz.size(),3):
+			var triangle:=PackedVector3Array()
+			for j: int in range(3):
+				var xz: Array=row.retained_triangles_xz[i+j];triangle.append(Vector3(xz[0],row.source_y_m,xz[1]))
+			if (triangle[2]-triangle[0]).cross(triangle[1]-triangle[0]).y<0:points.append_array(PackedVector3Array([triangle[0],triangle[2],triangle[1]]))
+			else:points.append_array(triangle)
+		var audit: Dictionary={"node_id":row.node_id,"source_feature_id":row.source_feature_id,"masked_drive_overlap_m2":row.masked_drive_overlap_m2,"retained_area_m2":row.retained_area_m2,"source_y_m":row.source_y_m}
+		if points.is_empty():visual.visible=false;audit["entire_display_masked"]=true
+		else:
+			var normals:=PackedVector3Array();normals.resize(points.size());normals.fill(Vector3.UP)
+			var arrays: Array=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=points;arrays[Mesh.ARRAY_NORMAL]=normals
+			var mesh:=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);visual.mesh=mesh
+			audit["projection"]=warp.warp_mesh(visual)
+			if not audit.projection.ok:return _fail("보도 표시 경계의 지형 투영에 실패했습니다.")
+		audit["same_source_node"]=visual.get_instance_id()==identity;audit["same_children"]=visual.get_children()==children
+		surface_mask_audit.append(audit)
+	return true
 
 func _build_paint() -> bool:
 	var points: Dictionary={"white":PackedVector3Array(),"yellow":PackedVector3Array()}
@@ -190,11 +217,15 @@ func _build_signals() -> void:
 		if not _furniture_head_clear(frame*Transform3D(Basis.IDENTITY,Vector3(arm*.5,height-.24,.08)),Vector3(absf(arm)+1.9,1.0,.80)):
 			skipped.append({"id":row.id,"kind":"signal","reason":"native_static_head_or_arm_volume"});continue
 		_cylinder_batch("SignalPole",.09,.07,height,frame*Transform3D(Basis.IDENTITY,Vector3(0,height*.5,0)),_materials.steel)
+		_box_batch("SignalPoleServiceBox",Vector3(.22,.42,.14),frame*Transform3D(Basis.IDENTITY,Vector3(0,1.05,-.04)),_materials.steel)
+		_box_batch("SignalPoleBase",Vector3(.34,.15,.34),frame*Transform3D(Basis.IDENTITY,Vector3(0,.075,0)),_materials.flange)
 		_box_batch("SignalArm_"+String(row.id),Vector3(absf(arm),.09,.09),frame*Transform3D(Basis.IDENTITY,Vector3(arm*.5,height-.1,0)),_materials.steel)
 		var head:=Node3D.new();head.name="VehicleSignal_"+String(row.id);add_child(head);head.global_transform=frame*Transform3D(Basis.IDENTITY,Vector3(arm,height-.24,0))
+		_visual_box(head,"SignalBackplate",Vector3(1.90,.88,.035),Vector3(0,-.12,-.125),_materials.steel)
 		_visual_box(head,"HorizontalSignalCase",Vector3(1.74,.74,.24),Vector3(0,-.12,0),_materials.steel)
 		var lenses: Array[MeshInstance3D]=[]
 		for x: float in [-.55,0,.55]:
+			var rim:=_lens(head,Vector3(x,0,.125));(rim.mesh as CylinderMesh).top_radius=.215;(rim.mesh as CylinderMesh).bottom_radius=.215;rim.material_override=_materials.flange;rim.name="LensBezel"
 			lenses.append(_lens(head,Vector3(x,0,.145)))
 			_visual_box(head,"LensSunHood",Vector3(.40,.055,.28),Vector3(x,.23,.22),_materials.steel)
 		var remaining:=Label3D.new();remaining.name="VehiclePhaseSeconds";remaining.font_size=48;remaining.pixel_size=.0038;remaining.position=Vector3(0,-.33,.135);remaining.double_sided=false;remaining.billboard=BaseMaterial3D.BILLBOARD_DISABLED;remaining.outline_modulate=Color(.015,.02,.02);head.add_child(remaining)
@@ -221,6 +252,8 @@ func _build_signals() -> void:
 		_cylinder_batch("PedestrianSignalPole_"+String(row.id),.06,.05,pole_height,frame*Transform3D(Basis.IDENTITY,Vector3(0,pole_height*.5,0)),_materials.steel)
 		var head:=Node3D.new();head.name="PedestrianSignal_"+String(row.id);add_child(head);head.global_transform=frame*Transform3D(Basis.IDENTITY,Vector3(0,head_height,0))
 		_visual_box(head,"PedestrianSignalCase",Vector3(.78,1.02,.19),Vector3.ZERO,_materials.steel)
+		_visual_box(head,"PedestrianInsetFace",Vector3(.70,.94,.015),Vector3(0,0,.105),_materials.off)
+		_visual_box(head,"PedestrianVisor",Vector3(.85,.045,.32),Vector3(0,.52,.16),_materials.steel)
 		var red_icon:=_person_icon(head,Vector3(-.14,.23,.128),false)
 		var green_icon:=_person_icon(head,Vector3(-.14,-.16,.128),true)
 		var countdown:=Label3D.new();countdown.name="GameCrossingCountdown";countdown.font_size=32;countdown.pixel_size=.004;countdown.position=Vector3(.18,-.16,.128);countdown.double_sided=false;countdown.billboard=BaseMaterial3D.BILLBOARD_DISABLED;countdown.modulate=Color(.08,1,.28);countdown.outline_modulate=Color(.02,.04,.03);head.add_child(countdown)
@@ -371,4 +404,4 @@ func snapshot() -> Dictionary:
 	var lamp_rows: Array=[];var signal_rows: Array=[]
 	for row: Dictionary in lamps:lamp_rows.append({"id":row.id,"source_feature_id":row.source_feature_id,"point":row.point,"head":row.head,"height_m":row.height_m,"active":row.active,"actual_light_class":row.light.get_class(),"range_m":row.light.spot_range,"energy":row.light.light_energy,"visible":row.light.visible})
 	for row: Dictionary in signals:signal_rows.append({"id":row.id,"crossing_id":row.crossing_id,"kind":row.kind,"bank":row.get("bank",-1),"point":row.point,"head_point":row.head.global_position,"front_direction":row.head.global_basis.z,"approach_point":row.get("approach_point",row.point),"opposite_bank_approach":row.get("opposite_bank_approach",row.point),"state":vehicle_signal_state(String(row.crossing_id)) if row.kind=="vehicle" else pedestrian_signal_state(String(row.crossing_id))})
-	return {"loaded":loaded,"error":load_error,"terrain_bound_after_loaded":true,"source_geometry_changed":false,"old_route_arrays_changed":false,"new_collision_count":0,"paint_mesh_count":paint_meshes.size(),"paint_faces":_paint_faces,"paint_polygons":design.get("paint",[]).size(),"paint_clearance_TIN_min_m":_minimum_paint_clearance_m,"paint_clearance_TIN_max_m":_maximum_paint_clearance_m,"paint_projection":paint_projection.duplicate(true),"counts":design.get("counts",{}).duplicate(true),"preflight":design.get("preflight",{}).duplicate(true),"lamps":lamp_rows,"signals":signal_rows,"active_lights":active_lights,"light_budget":6 if quality_id in ["low","light"] else 12,"time_id":time_id,"quality_id":quality_id,"elapsed_s":elapsed_s,"vehicle_state":vehicle_signal_state("sejong_marked"),"pedestrian_state":pedestrian_signal_state("sejong_marked"),"cycle":design.get("cycle",{}).duplicate(true),"stop_lines":design.get("stop_lines",[]).duplicate(true),"skipped":skipped.duplicate(true),"setup_usec":_setup_usec,"timing_basis":"game_authored_coordinated_not_real_signal_timing","provenance":design.get("provenance",{}).duplicate(true),"design_sha256":FileAccess.get_sha256(DESIGN_PATH)}
+	return {"loaded":loaded,"error":load_error,"terrain_bound_after_loaded":true,"source_geometry_changed":false,"old_route_arrays_changed":false,"new_collision_count":0,"paint_mesh_count":paint_meshes.size(),"paint_faces":_paint_faces,"paint_polygons":design.get("paint",[]).size(),"paint_clearance_TIN_min_m":_minimum_paint_clearance_m,"paint_clearance_TIN_max_m":_maximum_paint_clearance_m,"paint_projection":paint_projection.duplicate(true),"surface_masks":surface_mask_audit.duplicate(true),"counts":design.get("counts",{}).duplicate(true),"preflight":design.get("preflight",{}).duplicate(true),"lamps":lamp_rows,"signals":signal_rows,"active_lights":active_lights,"light_budget":6 if quality_id in ["low","light"] else 12,"time_id":time_id,"quality_id":quality_id,"elapsed_s":elapsed_s,"vehicle_state":vehicle_signal_state("sejong_marked"),"pedestrian_state":pedestrian_signal_state("sejong_marked"),"cycle":design.get("cycle",{}).duplicate(true),"stop_lines":design.get("stop_lines",[]).duplicate(true),"skipped":skipped.duplicate(true),"setup_usec":_setup_usec,"timing_basis":"game_authored_coordinated_not_real_signal_timing","provenance":design.get("provenance",{}).duplicate(true),"design_sha256":FileAccess.get_sha256(DESIGN_PATH)}

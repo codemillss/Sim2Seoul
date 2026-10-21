@@ -1,0 +1,3834 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "error": ""
+      },
+      "name": "production_scene_and_helicopter_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original_street_actors_30_and_AI_cars_14_retained",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "audit": [
+          {
+            "building_id": "osm:way:198561926:building",
+            "deck_y": 40.7721519470215,
+            "profile": "garden",
+            "selected": true,
+            "title": "서울특별시청"
+          },
+          {
+            "building_id": "osm:way:233593641:building",
+            "deck_y": 100.613006591797,
+            "profile": "garden",
+            "selected": false,
+            "title": "한화손해보험빌딩"
+          },
+          {
+            "building_id": "osm:way:233593617:building",
+            "deck_y": 69.5147857666016,
+            "profile": "garden",
+            "selected": false,
+            "title": "한국 프레스센터"
+          },
+          {
+            "building_id": "osm:way:400821755:building",
+            "deck_y": 12.7570419311523,
+            "profile": "garden",
+            "selected": false,
+            "title": "이름 없는 건물"
+          },
+          {
+            "building_id": "osm:way:233593618:building",
+            "deck_y": 60.5440101623535,
+            "profile": "garden",
+            "selected": false,
+            "title": "이름 없는 건물"
+          }
+        ],
+        "site": {
+          "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+          "building_id": "osm:way:198561926:building",
+          "building_title": "서울특별시청",
+          "full_rotor_tail_clear": true,
+          "native_all_skids_supported": true,
+          "observer": [
+            198.577590942383,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "point": [
+            195.977584838867,
+            40.8921508789062,
+            -172.164916992188
+          ],
+          "yaw": 0.0
+        }
+      },
+      "name": "actual_existing_roof_has_native_skids_full_rotor_tail_and_exit",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "policy": {
+          "ascent_mps": 4.0,
+          "descent_mps": 2.52,
+          "door_clearance_m": 5.5,
+          "horizontal_acceleration_mps2": 12.4444444444444,
+          "horizontal_braking_mps2": 9.33333333333333,
+          "interact_distance_m": 3.8,
+          "maximum_altitude_above_terrain_m": 180.0,
+          "maximum_forward_mps": 22.4,
+          "maximum_landing_grade_degrees": 6.0,
+          "maximum_reverse_mps": 5.0,
+          "maximum_speed_mps": 22.4,
+          "on_foot_run_speed_mps": 5.6,
+          "pad_radius_m": 5.3,
+          "protected_radius_m": 5.4,
+          "rope_descent_mps": 2.0,
+          "rope_transfer_mps": 1.2,
+          "rotor_spindown_seconds": 1.2,
+          "rotor_spinup_seconds": 1.8,
+          "speed_gain": 1.86666666666667,
+          "vertical_acceleration_mps2": 5.0,
+          "yaw_radians_per_second": 0.75
+        }
+      },
+      "name": "faster_helicopter_policy_over_selected_run_speed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "physical_takeoff_for_rope",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "queued_physical_R_before_menu_is_cancelled_on_resume",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "R_held_across_menu_requires_release_and_never_deploys",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": true,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": true,
+          "maximum_step_m": 0.0400035567581654,
+          "reason": "",
+          "side_point": [
+            156.640258789062,
+            11.0311937332153,
+            -68.5698699951172
+          ],
+          "state": "lowering",
+          "target": {
+            "building_id": "",
+            "point": [
+              156.640258789062,
+              -1.40320241451263,
+              -68.5698699951172
+            ],
+            "support_kind": "native_public_terrain",
+            "support_rid": "RID(110183091013158)"
+          },
+          "travelled_m": 1.94999944977462
+        }
+      },
+      "name": "fresh_R_brakes_hover_transfers_retained_avatar_and_lowers_rope",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_step_m": 0.0666666030883789,
+        "minimum_y": 9.03119564056396
+      },
+      "name": "rope_avatar_descends_continuously_at_bounded_speed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "menu_freezes_actual_rope_player_aircraft_and_progress",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "R_cancels_descent_with_continuous_upward_retraction",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "fresh_R_during_final_retraction_keeps_returning_to_cabin",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "cancelled_back_in_cabin",
+          "line_visible": false,
+          "maximum_step_m": 0.0666666030883789,
+          "reason": "",
+          "side_point": [
+            156.640258789062,
+            11.0311937332153,
+            -68.5698699951172
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 8.29999470338225
+        }
+      },
+      "name": "retraction_returns_same_pilot_to_cabin_without_ejection",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": [
+          156.640258789062,
+          10.1645278930664,
+          -68.5698699951172
+        ],
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": true,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": true,
+          "maximum_step_m": 0.0666666030883789,
+          "reason": "native_capsule_path_blocked",
+          "side_point": [
+            156.640258789062,
+            11.0311937332153,
+            -68.5698699951172
+          ],
+          "state": "blocked",
+          "target": {
+            "building_id": "",
+            "point": [
+              156.640258789062,
+              -1.40320241451263,
+              -68.5698699951172
+            ],
+            "support_kind": "native_public_terrain",
+            "support_rid": "RID(110183091013158)"
+          },
+          "travelled_m": 2.81666528992355
+        }
+      },
+      "name": "new_native_blocker_pauses_descent_without_crossing_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_rope_can_safely_retract_after_obstacle_clears",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": [
+          156.640258789062,
+          -1.48210871219635,
+          -68.5698699951172
+        ],
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "completed",
+          "line_visible": false,
+          "maximum_step_m": 0.0666667222976685,
+          "reason": "",
+          "side_point": [
+            156.640258789062,
+            11.0311937332153,
+            -68.5698699951172
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 14.3843955975026
+        },
+        "snapshot": {
+          "actual_distance_m": 11.6015485525131,
+          "blocked_reason": "",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 0.133333683013916,
+          "motion_policy": {
+            "ascent_mps": 4.0,
+            "descent_mps": 2.52,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 12.4444444444444,
+            "horizontal_braking_mps2": 9.33333333333333,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 22.4,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 22.4,
+            "on_foot_run_speed_mps": 5.6,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 1.86666666666667,
+            "vertical_acceleration_mps2": 5.0,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            156.508255004883,
+            -1.47035443782806,
+            -71.0183563232422
+          ],
+          "return_pending": false,
+          "riding": false,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "completed",
+            "line_visible": false,
+            "maximum_step_m": 0.0666667222976685,
+            "reason": "",
+            "side_point": [
+              156.640258789062,
+              11.0311937332153,
+              -68.5698699951172
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 14.3843955975026
+          },
+          "rotor_fraction": 0.0,
+          "rotor_phase": 1.95361291639678,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 0.0301973353644112,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "rope_reaches_real_native_support_and_restores_capsule_camera",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "completed_rope_uses_explicit_game_recall_to_clear_home",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "takeoff_again_for_roof_fixture",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Aircraft begins 6m above certified existing game roof; actual Ctrl physics performs final landing.",
+        "position": [
+          195.977584838867,
+          40.732536315918,
+          -172.164916992188
+        ],
+        "roof": {
+          "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+          "building_id": "osm:way:198561926:building",
+          "building_title": "서울특별시청",
+          "full_rotor_tail_clear": true,
+          "native_all_skids_supported": true,
+          "observer": [
+            198.577590942383,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "point": [
+            195.977584838867,
+            40.8921508789062,
+            -172.164916992188
+          ],
+          "yaw": 0.0
+        }
+      },
+      "name": "native_Ctrl_lands_all_skids_at_actual_authored_roof_Y",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": [
+          198.277587890625,
+          40.7724647521973,
+          -172.764923095703
+        ],
+        "snapshot": {
+          "actual_distance_m": 24.2627155780792,
+          "blocked_reason": "native_aircraft_sweep",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 28.0000000000006,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 35.8333333333339,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 37.0333333333338,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  198.277587890625,
+                  40.8521537780762,
+                  -172.764923095703
+                ]
+              }
+            },
+            {
+              "clock_s": 37.0666666666671,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 0.133333683013916,
+          "motion_policy": {
+            "ascent_mps": 4.0,
+            "descent_mps": 2.52,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 12.4444444444444,
+            "horizontal_braking_mps2": 9.33333333333333,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 22.4,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 22.4,
+            "on_foot_run_speed_mps": 5.6,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 1.86666666666667,
+            "vertical_acceleration_mps2": 5.0,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            195.977584838867,
+            40.732536315918,
+            -172.164916992188
+          ],
+          "return_pending": false,
+          "riding": false,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "completed",
+            "line_visible": false,
+            "maximum_step_m": 0.0666667222976685,
+            "reason": "",
+            "side_point": [
+              156.640258789062,
+              11.0311937332153,
+              -68.5698699951172
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 14.3843955975026
+          },
+          "rotor_fraction": 0.0,
+          "rotor_phase": 1.72649668152083,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 2.20604162356336,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "rooftop_E_stops_rotor_and_restores_outdoor_walking",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "snapshot": {
+          "actual_distance_m": 24.2627155780792,
+          "blocked_reason": "",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 28.0000000000006,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 35.8333333333339,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 37.0333333333338,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  198.277587890625,
+                  40.8521537780762,
+                  -172.764923095703
+                ]
+              }
+            },
+            {
+              "clock_s": 37.0666666666671,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 38.2666666666671,
+              "event": "boarded",
+              "evidence": {}
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 0.133333683013916,
+          "motion_policy": {
+            "ascent_mps": 4.0,
+            "descent_mps": 2.52,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 12.4444444444444,
+            "horizontal_braking_mps2": 9.33333333333333,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 22.4,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 22.4,
+            "on_foot_run_speed_mps": 5.6,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 1.86666666666667,
+            "vertical_acceleration_mps2": 5.0,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            195.977584838867,
+            40.732536315918,
+            -172.164916992188
+          ],
+          "return_pending": false,
+          "riding": true,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "completed",
+            "line_visible": false,
+            "maximum_step_m": 0.0666667222976685,
+            "reason": "",
+            "side_point": [
+              156.640258789062,
+              11.0311937332153,
+              -68.5698699951172
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 14.3843955975026
+          },
+          "rotor_fraction": 1.0,
+          "rotor_phase": 4.54434755741745,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 5.67448460407495,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "same_rooftop_allows_fresh_E_reboarding",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": true,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": true,
+          "maximum_step_m": 0.0399932861328125,
+          "reason": "",
+          "side_point": [
+            198.327590942383,
+            46.300724029541,
+            -172.86491394043
+          ],
+          "state": "lowering",
+          "target": {
+            "building_id": "osm:way:198561926:building",
+            "point": [
+              198.327606201172,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "support_kind": "game_roof_deck",
+            "support_rid": "RID(152024662410943)"
+          },
+          "travelled_m": 1.95001220703125
+        }
+      },
+      "name": "airborne_rope_can_target_actual_existing_game_deck",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "completed",
+          "line_visible": false,
+          "maximum_step_m": 0.0666656494140625,
+          "reason": "",
+          "side_point": [
+            198.327590942383,
+            46.300724029541,
+            -172.86491394043
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 7.39858245849609
+        }
+      },
+      "name": "roof_rope_landing_restores_player_on_same_deck",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "new_rope_takeoff_for_external_teleport",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": [
+          145.833786010742,
+          -0.225006818771362,
+          -114.841453552246
+        ],
+        "snapshot": {
+          "actual_distance_m": 40.5324503183365,
+          "blocked_reason": "",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 28.0000000000006,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 35.8333333333339,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 37.0333333333338,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  198.277587890625,
+                  40.8521537780762,
+                  -172.764923095703
+                ]
+              }
+            },
+            {
+              "clock_s": 37.0666666666671,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 38.2666666666671,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.5333333333335,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.6333333333335,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "osm:way:198561926:building",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "game_roof_deck",
+                "target": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ]
+              }
+            },
+            {
+              "clock_s": 44.2666666666667,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 46.9999999999999,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "osm:way:198561926:building",
+                "maximum_step_m": 0.0666656494140625,
+                "point": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "support_kind": "game_roof_deck",
+                "travelled_m": 7.39858245849609
+              }
+            },
+            {
+              "clock_s": 47.0333333333332,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 47.5333333333332,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 49.3999999999998,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.3999999999994,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.4999999999994,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "external_teleport_restored_player",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 0.133335113525391,
+          "motion_policy": {
+            "ascent_mps": 4.0,
+            "descent_mps": 2.52,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 12.4444444444444,
+            "horizontal_braking_mps2": 9.33333333333333,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 22.4,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 22.4,
+            "on_foot_run_speed_mps": 5.6,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 1.86666666666667,
+            "vertical_acceleration_mps2": 5.0,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            156.508255004883,
+            -1.47035443782806,
+            -71.0183563232422
+          ],
+          "return_pending": false,
+          "riding": false,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "",
+            "line_visible": false,
+            "maximum_step_m": 0.0400035567581654,
+            "reason": "",
+            "side_point": [
+              156.640258789062,
+              11.0311937332153,
+              -68.5698699951172
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 1.94999944977462
+          },
+          "rotor_fraction": 0.0,
+          "rotor_phase": 5.9389308784356,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 0.924692918935436,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "teleport_during_rope_restores_avatar_camera_capsule_and_cleans_line",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Parked roof start only; request_home_recovery is the post-validation API and is explicitly a game recall, not flight."
+      },
+      "name": "explicit_parked_roof_game_recall_preserves_validated_observer",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "takeoff_for_native_rejection_fixtures",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Only the airborne start is placed; fresh R performs actual native support/full capsule checks.",
+        "fixture_winch_start": [
+          167.519241333008,
+          99.0520324707031,
+          50.0642356872559
+        ],
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": false,
+          "maximum_step_m": 0.0,
+          "reason": "not_native_public_ground_or_game_deck",
+          "side_point": [
+            167.519241333008,
+            99.0520324707031,
+            50.0642356872559
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 0.0
+        }
+      },
+      "name": "physical_R_rejects_pool_water_floor",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Only the airborne start is placed; fresh R performs actual native support/full capsule checks.",
+        "fixture_winch_start": [
+          179.478042602539,
+          54.7721519470215,
+          -172.288452148438
+        ],
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": false,
+          "maximum_step_m": 0.0,
+          "reason": "not_native_public_ground_or_game_deck",
+          "side_point": [
+            179.478042602539,
+            54.7721519470215,
+            -172.288452148438
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 0.0
+        }
+      },
+      "name": "physical_R_rejects_rooftop_lift_canopy",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Only the airborne start is placed; fresh R performs actual native support/full capsule checks.",
+        "fixture_winch_start": [
+          195.842819213867,
+          54.7721519470215,
+          -154.165420532227
+        ],
+        "rope": {
+          "descent_mps": 2.0,
+          "harness_visible": false,
+          "key_requires_release": false,
+          "last_result": "",
+          "line_visible": false,
+          "maximum_step_m": 0.0,
+          "reason": "not_native_public_ground_or_game_deck",
+          "side_point": [
+            195.842819213867,
+            54.7721519470215,
+            -154.165420532227
+          ],
+          "state": "idle",
+          "target": {},
+          "travelled_m": 0.0
+        }
+      },
+      "name": "physical_R_rejects_bare_original_source_roof",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Synchronous roof-edge eligibility fixture; no physics tick advances at the unsupported pose."
+      },
+      "name": "roof_edge_never_counts_as_four_skid_landing",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fixture": "Starts 160m above home with full native volume intact. Subsequent cruise/brake/turn/return/landing use production held inputs.",
+        "run_mps": 21.0,
+        "top_mps": 84.0,
+        "travel_m": 107.800033569336
+      },
+      "name": "actual_turbo_helicopter_reaches_84mps_and_exceeds_21mps_run",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance_from_home_m": 207.20002746582,
+        "policy": {
+          "ascent_mps": 13.65,
+          "descent_mps": 9.45,
+          "door_clearance_m": 5.5,
+          "horizontal_acceleration_mps2": 46.6666666666667,
+          "horizontal_braking_mps2": 35.0,
+          "interact_distance_m": 3.8,
+          "maximum_altitude_above_terrain_m": 180.0,
+          "maximum_forward_mps": 84.0,
+          "maximum_landing_grade_degrees": 6.0,
+          "maximum_reverse_mps": 5.0,
+          "maximum_speed_mps": 84.0,
+          "on_foot_run_speed_mps": 21.0,
+          "pad_radius_m": 5.3,
+          "protected_radius_m": 5.4,
+          "rope_descent_mps": 2.0,
+          "rope_transfer_mps": 1.2,
+          "rotor_spindown_seconds": 1.2,
+          "rotor_spinup_seconds": 1.8,
+          "speed_gain": 7.0,
+          "vertical_acceleration_mps2": 17.0625,
+          "yaw_radians_per_second": 0.75
+        },
+        "stopped": [
+          156.508255004883,
+          158.554916381836,
+          -278.218383789062
+        ]
+      },
+      "name": "actual_turbo_coast_brake_stops_aircraft_without_relocation",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "home": [
+          156.508255004883,
+          158.554916381836,
+          -71.0183563232422
+        ],
+        "position": [
+          158.25032043457,
+          158.554916381836,
+          -71.0261383056641
+        ],
+        "yaw": 3.14999999999999
+      },
+      "name": "controlled_turbo_turn_and_braking_return_over_same_real_pad",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "snapshot": {
+          "actual_distance_m": 626.457545828074,
+          "blocked_reason": "",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 28.0000000000006,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 35.8333333333339,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 37.0333333333338,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  198.277587890625,
+                  40.8521537780762,
+                  -172.764923095703
+                ]
+              }
+            },
+            {
+              "clock_s": 37.0666666666671,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 38.2666666666671,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.5333333333335,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.6333333333335,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "osm:way:198561926:building",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "game_roof_deck",
+                "target": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ]
+              }
+            },
+            {
+              "clock_s": 44.2666666666667,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 46.9999999999999,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "osm:way:198561926:building",
+                "maximum_step_m": 0.0666656494140625,
+                "point": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "support_kind": "game_roof_deck",
+                "travelled_m": 7.39858245849609
+              }
+            },
+            {
+              "clock_s": 47.0333333333332,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 47.5333333333332,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 49.3999999999998,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.3999999999994,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.4999999999994,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "external_teleport_restored_player",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 59.5666666666658,
+              "event": "game_aircraft_home_recovery_requested",
+              "evidence": {
+                "from": [
+                  195.977584838867,
+                  40.7324447631836,
+                  -172.164916992188
+                ],
+                "scope": "Certified-clear game recall after validated shortcut, not physical flight."
+              }
+            },
+            {
+              "clock_s": 59.5999999999992,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 60.9666666666658,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.0999999999988,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.0999999999988,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            },
+            {
+              "clock_s": 67.6333333333321,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.6333333333321,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            },
+            {
+              "clock_s": 68.1666666666654,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 68.1666666666654,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 2.80000305175781,
+          "motion_policy": {
+            "ascent_mps": 13.65,
+            "descent_mps": 9.45,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 46.6666666666667,
+            "horizontal_braking_mps2": 35.0,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 84.0,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 84.0,
+            "on_foot_run_speed_mps": 21.0,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 7.0,
+            "vertical_acceleration_mps2": 17.0625,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            158.25032043457,
+            -1.40272009372711,
+            -71.0261383056641
+          ],
+          "return_pending": false,
+          "riding": true,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "",
+            "line_visible": false,
+            "maximum_step_m": 0.0,
+            "reason": "not_native_public_ground_or_game_deck",
+            "side_point": [
+              195.842819213867,
+              54.7721519470215,
+              -154.165420532227
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 0.0
+          },
+          "rotor_fraction": 1.0,
+          "rotor_phase": 2.23771922046556,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 4.22220931428828,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "turbo_Ctrl_descent_lands_on_original_public_native_ground",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "turbo_landed_E_restores_same_native_walking_owner",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "takeoff_and_rope_for_reset_lifecycle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "player": [
+          49.0525360107422,
+          -0.629204034805298,
+          13.5788879394531
+        ],
+        "snapshot": {
+          "actual_distance_m": 641.928683470935,
+          "blocked_reason": "",
+          "capsule_release_pending": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 0.1,
+              "event": "roof_landing_candidate_certified",
+              "evidence": {
+                "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+                "building_id": "osm:way:198561926:building",
+                "building_title": "서울특별시청",
+                "full_rotor_tail_clear": true,
+                "native_all_skids_supported": true,
+                "observer": [
+                  198.577590942383,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "point": [
+                  195.977584838867,
+                  40.8921508789062,
+                  -172.164916992188
+                ],
+                "yaw": 0.0
+              }
+            },
+            {
+              "clock_s": 0.566666666666667,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 7.16666666666665,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 8.79999999999998,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 9.93333333333331,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.6333333333333,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 12.8333333333333,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 14.4666666666666,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 14.9333333333333,
+              "event": "rope_paused",
+              "evidence": {
+                "reason": "native_capsule_path_blocked"
+              }
+            },
+            {
+              "clock_s": 15.5,
+              "event": "rope_retraction_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.5333333333334,
+              "event": "rope_retracted_to_pilot",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 17.7333333333334,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 19.3666666666668,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 25.6000000000004,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "",
+                "maximum_step_m": 0.0666667222976685,
+                "point": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ],
+                "support_kind": "native_public_terrain",
+                "travelled_m": 14.3843955975026
+              }
+            },
+            {
+              "clock_s": 25.6333333333338,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 26.1333333333338,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 28.0000000000006,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 35.8333333333339,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 37.0333333333338,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  198.277587890625,
+                  40.8521537780762,
+                  -172.764923095703
+                ]
+              }
+            },
+            {
+              "clock_s": 37.0666666666671,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 38.2666666666671,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.5333333333335,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 42.6333333333335,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "osm:way:198561926:building",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "game_roof_deck",
+                "target": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ]
+              }
+            },
+            {
+              "clock_s": 44.2666666666667,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 46.9999999999999,
+              "event": "rope_completed",
+              "evidence": {
+                "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+                "building_id": "osm:way:198561926:building",
+                "maximum_step_m": 0.0666656494140625,
+                "point": [
+                  198.327606201172,
+                  40.8521537780762,
+                  -172.86491394043
+                ],
+                "support_kind": "game_roof_deck",
+                "travelled_m": 7.39858245849609
+              }
+            },
+            {
+              "clock_s": 47.0333333333332,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 47.5333333333332,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 49.3999999999998,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.3999999999994,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 55.4999999999994,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  156.640258789062,
+                  -1.40320241451263,
+                  -68.5698699951172
+                ]
+              }
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.1333333333327,
+              "event": "external_teleport_restored_player",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 57.166666666666,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 59.5666666666658,
+              "event": "game_aircraft_home_recovery_requested",
+              "evidence": {
+                "from": [
+                  195.977584838867,
+                  40.7324447631836,
+                  -172.164916992188
+                ],
+                "scope": "Certified-clear game recall after validated shortcut, not physical flight."
+              }
+            },
+            {
+              "clock_s": 59.5999999999992,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 60.9666666666658,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.0999999999988,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.0999999999988,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            },
+            {
+              "clock_s": 67.6333333333321,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 67.6333333333321,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            },
+            {
+              "clock_s": 68.1666666666654,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 68.1666666666654,
+              "event": "rope_rejected",
+              "evidence": {
+                "reason": "not_native_public_ground_or_game_deck"
+              }
+            },
+            {
+              "clock_s": 100.73333333333,
+              "event": "landed_exit_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 101.93333333333,
+              "event": "disembarked",
+              "evidence": {
+                "point": [
+                  155.955444335938,
+                  -1.50290417671204,
+                  -70.4068222045898
+                ]
+              }
+            },
+            {
+              "clock_s": 101.966666666663,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            },
+            {
+              "clock_s": 103.366666666663,
+              "event": "boarded",
+              "evidence": {}
+            },
+            {
+              "clock_s": 107.599999999996,
+              "event": "rope_hover_requested",
+              "evidence": {}
+            },
+            {
+              "clock_s": 107.699999999996,
+              "event": "rope_deployed",
+              "evidence": {
+                "building_id": "",
+                "capsule_shape_id": -9223372008283175437,
+                "support_kind": "native_public_terrain",
+                "target": [
+                  155.906295776367,
+                  -1.50381481647491,
+                  -70.3064041137695
+                ]
+              }
+            },
+            {
+              "clock_s": 109.33333333333,
+              "event": "rope_lowering_started",
+              "evidence": {}
+            },
+            {
+              "clock_s": 109.33333333333,
+              "event": "external_teleport_restored_player",
+              "evidence": {}
+            },
+            {
+              "clock_s": 109.366666666663,
+              "event": "game_aircraft_returned_to_clear_home_pad",
+              "evidence": {}
+            },
+            {
+              "clock_s": 109.366666666663,
+              "event": "native_capsule_restored",
+              "evidence": {}
+            }
+          ],
+          "exit_requested": false,
+          "helipad": {
+            "fraction": 0.65,
+            "id": "HELIPAD-GAME-01",
+            "name": "서울광장 게임 비행 체험",
+            "native_envelope_clear": true,
+            "native_existing_terrain": true,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "side_offset_m": -36.0,
+            "source_ground_feature": "osm:way:370019676:land_area",
+            "source_route": "city_plaza",
+            "source_segment": [
+              97.0,
+              98.0
+            ],
+            "yaw": -1.80643994817378
+          },
+          "landed": true,
+          "loaded": true,
+          "maximum_step_m": 2.80000305175781,
+          "motion_policy": {
+            "ascent_mps": 13.65,
+            "descent_mps": 9.45,
+            "door_clearance_m": 5.5,
+            "horizontal_acceleration_mps2": 46.6666666666667,
+            "horizontal_braking_mps2": 35.0,
+            "interact_distance_m": 3.8,
+            "maximum_altitude_above_terrain_m": 180.0,
+            "maximum_forward_mps": 84.0,
+            "maximum_landing_grade_degrees": 6.0,
+            "maximum_reverse_mps": 5.0,
+            "maximum_speed_mps": 84.0,
+            "on_foot_run_speed_mps": 21.0,
+            "pad_radius_m": 5.3,
+            "protected_radius_m": 5.4,
+            "rope_descent_mps": 2.0,
+            "rope_transfer_mps": 1.2,
+            "rotor_spindown_seconds": 1.2,
+            "rotor_spinup_seconds": 1.8,
+            "speed_gain": 7.0,
+            "vertical_acceleration_mps2": 17.0625,
+            "yaw_radians_per_second": 0.75
+          },
+          "position": [
+            156.508255004883,
+            -1.47035443782806,
+            -71.0183563232422
+          ],
+          "return_pending": false,
+          "riding": false,
+          "roof_landing_site": {
+            "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+            "building_id": "osm:way:198561926:building",
+            "building_title": "서울특별시청",
+            "full_rotor_tail_clear": true,
+            "native_all_skids_supported": true,
+            "observer": [
+              198.577590942383,
+              40.8521537780762,
+              -172.86491394043
+            ],
+            "point": [
+              195.977584838867,
+              40.8921508789062,
+              -172.164916992188
+            ],
+            "yaw": 0.0
+          },
+          "roof_site_audit": [
+            {
+              "building_id": "osm:way:198561926:building",
+              "deck_y": 40.7721519470215,
+              "profile": "garden",
+              "selected": true,
+              "title": "서울특별시청"
+            },
+            {
+              "building_id": "osm:way:233593641:building",
+              "deck_y": 100.613006591797,
+              "profile": "garden",
+              "selected": false,
+              "title": "한화손해보험빌딩"
+            },
+            {
+              "building_id": "osm:way:233593617:building",
+              "deck_y": 69.5147857666016,
+              "profile": "garden",
+              "selected": false,
+              "title": "한국 프레스센터"
+            },
+            {
+              "building_id": "osm:way:400821755:building",
+              "deck_y": 12.7570419311523,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            },
+            {
+              "building_id": "osm:way:233593618:building",
+              "deck_y": 60.5440101623535,
+              "profile": "garden",
+              "selected": false,
+              "title": "이름 없는 건물"
+            }
+          ],
+          "rope": {
+            "descent_mps": 2.0,
+            "harness_visible": false,
+            "key_requires_release": false,
+            "last_result": "",
+            "line_visible": false,
+            "maximum_step_m": 0.0399947576224804,
+            "reason": "",
+            "side_point": [
+              155.906295776367,
+              14.9684171676636,
+              -70.3064041137695
+            ],
+            "state": "idle",
+            "target": {},
+            "travelled_m": 1.94998954795301
+          },
+          "rotor_fraction": 0.0,
+          "rotor_phase": 0.675789390718785,
+          "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+          "site_audit": [
+            {
+              "accepted": false,
+              "fraction": 0.65,
+              "point": [
+                154.173568725586,
+                0.0,
+                -61.2947082519531
+              ],
+              "reason": "ground_height_spread",
+              "sample_height_range_m": [
+                -1.52911448478699,
+                -0.970099091529846
+              ],
+              "side_offset_m": -46.0
+            },
+            {
+              "accepted": true,
+              "fraction": 0.65,
+              "point": [
+                156.508255004883,
+                -1.44508874416351,
+                -71.0183563232422
+              ],
+              "reason": "",
+              "sample_height_range_m": [
+                -1.79525828361511,
+                -1.26645398139954
+              ],
+              "side_offset_m": -36.0
+            }
+          ],
+          "source_geometry_changed": false,
+          "speed_mps": 0.0,
+          "tail_phase": 5.31249987684768,
+          "velocity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "vertical_speed_mps": 0.0
+        }
+      },
+      "name": "reset_during_rope_cleans_line_capsule_avatar_camera_without_reattach",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+          "res://../tests/game/check_city_helicopter_rope.gd": "0e82e4ea038a751fb7ed8d1230f8eb602fad44dee7fc83b35d192a3279439dfd",
+          "res://assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_rope.gd": "7ffd63b54a0b16f253aa7d09607dc6ae84e8746be4a615b18c03030127a14803",
+          "res://scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+          "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+          "res://scripts/explore_walk.gd": "9931f994902d76435380eb88985588ce45446019789b8ca3220ca6ad4ddf58d6",
+          "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+          "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        },
+        "loaded": {
+          "res://../tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+          "res://../tests/game/check_city_helicopter_rope.gd": "0e82e4ea038a751fb7ed8d1230f8eb602fad44dee7fc83b35d192a3279439dfd",
+          "res://assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_rope.gd": "7ffd63b54a0b16f253aa7d09607dc6ae84e8746be4a615b18c03030127a14803",
+          "res://scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+          "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+          "res://scripts/explore_walk.gd": "9931f994902d76435380eb88985588ce45446019789b8ca3220ca6ad4ddf58d6",
+          "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+          "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        }
+      },
+      "name": "source_inputs_stable_during_runtime",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 61579,
+  "passed": 39,
+  "physics_hz": 30,
+  "result": "PASS",
+  "scope": "Production flight, rope and retained native capsule with engine physical KEY_E/KEY_R and priority -200 held-action fixture. Labelled starting fixtures above existing roof/pool/canopy and high-altitude speed lane are test placements; subsequent movement, sweep, braking, landing and restoration use production physics. Completed rope uses explicitly recorded clear-home game recall, not physical return flight. No OS keyboard, human feel, native visual review or long performance claim.",
+  "snapshot": {
+    "actual_distance_m": 641.928683470935,
+    "blocked_reason": "",
+    "capsule_release_pending": false,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 0.1,
+        "event": "roof_landing_candidate_certified",
+        "evidence": {
+          "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+          "building_id": "osm:way:198561926:building",
+          "building_title": "서울특별시청",
+          "full_rotor_tail_clear": true,
+          "native_all_skids_supported": true,
+          "observer": [
+            198.577590942383,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "point": [
+            195.977584838867,
+            40.8921508789062,
+            -172.164916992188
+          ],
+          "yaw": 0.0
+        }
+      },
+      {
+        "clock_s": 0.566666666666667,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 7.16666666666665,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 7.16666666666665,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "native_public_terrain",
+          "target": [
+            156.640258789062,
+            -1.40320241451263,
+            -68.5698699951172
+          ]
+        }
+      },
+      {
+        "clock_s": 8.79999999999998,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 9.93333333333331,
+        "event": "rope_retraction_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 12.6333333333333,
+        "event": "rope_retracted_to_pilot",
+        "evidence": {}
+      },
+      {
+        "clock_s": 12.8333333333333,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 12.8333333333333,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "native_public_terrain",
+          "target": [
+            156.640258789062,
+            -1.40320241451263,
+            -68.5698699951172
+          ]
+        }
+      },
+      {
+        "clock_s": 14.4666666666666,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 14.9333333333333,
+        "event": "rope_paused",
+        "evidence": {
+          "reason": "native_capsule_path_blocked"
+        }
+      },
+      {
+        "clock_s": 15.5,
+        "event": "rope_retraction_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.5333333333334,
+        "event": "rope_retracted_to_pilot",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.7333333333334,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.7333333333334,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "native_public_terrain",
+          "target": [
+            156.640258789062,
+            -1.40320241451263,
+            -68.5698699951172
+          ]
+        }
+      },
+      {
+        "clock_s": 19.3666666666668,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 25.6000000000004,
+        "event": "rope_completed",
+        "evidence": {
+          "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+          "building_id": "",
+          "maximum_step_m": 0.0666667222976685,
+          "point": [
+            156.640258789062,
+            -1.40320241451263,
+            -68.5698699951172
+          ],
+          "support_kind": "native_public_terrain",
+          "travelled_m": 14.3843955975026
+        }
+      },
+      {
+        "clock_s": 25.6333333333338,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      },
+      {
+        "clock_s": 26.1333333333338,
+        "event": "game_aircraft_returned_to_clear_home_pad",
+        "evidence": {}
+      },
+      {
+        "clock_s": 28.0000000000006,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 35.8333333333339,
+        "event": "landed_exit_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 37.0333333333338,
+        "event": "disembarked",
+        "evidence": {
+          "point": [
+            198.277587890625,
+            40.8521537780762,
+            -172.764923095703
+          ]
+        }
+      },
+      {
+        "clock_s": 37.0666666666671,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      },
+      {
+        "clock_s": 38.2666666666671,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 42.5333333333335,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 42.6333333333335,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "osm:way:198561926:building",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "game_roof_deck",
+          "target": [
+            198.327606201172,
+            40.8521537780762,
+            -172.86491394043
+          ]
+        }
+      },
+      {
+        "clock_s": 44.2666666666667,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 46.9999999999999,
+        "event": "rope_completed",
+        "evidence": {
+          "aircraft_recovery": "certified_clear_home_recall_not_physical_flight",
+          "building_id": "osm:way:198561926:building",
+          "maximum_step_m": 0.0666656494140625,
+          "point": [
+            198.327606201172,
+            40.8521537780762,
+            -172.86491394043
+          ],
+          "support_kind": "game_roof_deck",
+          "travelled_m": 7.39858245849609
+        }
+      },
+      {
+        "clock_s": 47.0333333333332,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      },
+      {
+        "clock_s": 47.5333333333332,
+        "event": "game_aircraft_returned_to_clear_home_pad",
+        "evidence": {}
+      },
+      {
+        "clock_s": 49.3999999999998,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 55.3999999999994,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 55.4999999999994,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "native_public_terrain",
+          "target": [
+            156.640258789062,
+            -1.40320241451263,
+            -68.5698699951172
+          ]
+        }
+      },
+      {
+        "clock_s": 57.1333333333327,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 57.1333333333327,
+        "event": "external_teleport_restored_player",
+        "evidence": {}
+      },
+      {
+        "clock_s": 57.166666666666,
+        "event": "game_aircraft_returned_to_clear_home_pad",
+        "evidence": {}
+      },
+      {
+        "clock_s": 57.166666666666,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      },
+      {
+        "clock_s": 59.5666666666658,
+        "event": "game_aircraft_home_recovery_requested",
+        "evidence": {
+          "from": [
+            195.977584838867,
+            40.7324447631836,
+            -172.164916992188
+          ],
+          "scope": "Certified-clear game recall after validated shortcut, not physical flight."
+        }
+      },
+      {
+        "clock_s": 59.5999999999992,
+        "event": "game_aircraft_returned_to_clear_home_pad",
+        "evidence": {}
+      },
+      {
+        "clock_s": 60.9666666666658,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 67.0999999999988,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 67.0999999999988,
+        "event": "rope_rejected",
+        "evidence": {
+          "reason": "not_native_public_ground_or_game_deck"
+        }
+      },
+      {
+        "clock_s": 67.6333333333321,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 67.6333333333321,
+        "event": "rope_rejected",
+        "evidence": {
+          "reason": "not_native_public_ground_or_game_deck"
+        }
+      },
+      {
+        "clock_s": 68.1666666666654,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 68.1666666666654,
+        "event": "rope_rejected",
+        "evidence": {
+          "reason": "not_native_public_ground_or_game_deck"
+        }
+      },
+      {
+        "clock_s": 100.73333333333,
+        "event": "landed_exit_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 101.93333333333,
+        "event": "disembarked",
+        "evidence": {
+          "point": [
+            155.955444335938,
+            -1.50290417671204,
+            -70.4068222045898
+          ]
+        }
+      },
+      {
+        "clock_s": 101.966666666663,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      },
+      {
+        "clock_s": 103.366666666663,
+        "event": "boarded",
+        "evidence": {}
+      },
+      {
+        "clock_s": 107.599999999996,
+        "event": "rope_hover_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 107.699999999996,
+        "event": "rope_deployed",
+        "evidence": {
+          "building_id": "",
+          "capsule_shape_id": -9223372008283175437,
+          "support_kind": "native_public_terrain",
+          "target": [
+            155.906295776367,
+            -1.50381481647491,
+            -70.3064041137695
+          ]
+        }
+      },
+      {
+        "clock_s": 109.33333333333,
+        "event": "rope_lowering_started",
+        "evidence": {}
+      },
+      {
+        "clock_s": 109.33333333333,
+        "event": "external_teleport_restored_player",
+        "evidence": {}
+      },
+      {
+        "clock_s": 109.366666666663,
+        "event": "game_aircraft_returned_to_clear_home_pad",
+        "evidence": {}
+      },
+      {
+        "clock_s": 109.366666666663,
+        "event": "native_capsule_restored",
+        "evidence": {}
+      }
+    ],
+    "exit_requested": false,
+    "helipad": {
+      "fraction": 0.65,
+      "id": "HELIPAD-GAME-01",
+      "name": "서울광장 게임 비행 체험",
+      "native_envelope_clear": true,
+      "native_existing_terrain": true,
+      "point": [
+        156.508255004883,
+        -1.44508874416351,
+        -71.0183563232422
+      ],
+      "side_offset_m": -36.0,
+      "source_ground_feature": "osm:way:370019676:land_area",
+      "source_route": "city_plaza",
+      "source_segment": [
+        97.0,
+        98.0
+      ],
+      "yaw": -1.80643994817378
+    },
+    "landed": true,
+    "loaded": true,
+    "maximum_step_m": 2.80000305175781,
+    "motion_policy": {
+      "ascent_mps": 13.65,
+      "descent_mps": 9.45,
+      "door_clearance_m": 5.5,
+      "horizontal_acceleration_mps2": 46.6666666666667,
+      "horizontal_braking_mps2": 35.0,
+      "interact_distance_m": 3.8,
+      "maximum_altitude_above_terrain_m": 180.0,
+      "maximum_forward_mps": 84.0,
+      "maximum_landing_grade_degrees": 6.0,
+      "maximum_reverse_mps": 5.0,
+      "maximum_speed_mps": 84.0,
+      "on_foot_run_speed_mps": 21.0,
+      "pad_radius_m": 5.3,
+      "protected_radius_m": 5.4,
+      "rope_descent_mps": 2.0,
+      "rope_transfer_mps": 1.2,
+      "rotor_spindown_seconds": 1.2,
+      "rotor_spinup_seconds": 1.8,
+      "speed_gain": 7.0,
+      "vertical_acceleration_mps2": 17.0625,
+      "yaw_radians_per_second": 0.75
+    },
+    "position": [
+      156.508255004883,
+      -1.47035443782806,
+      -71.0183563232422
+    ],
+    "return_pending": false,
+    "riding": false,
+    "roof_landing_site": {
+      "basis": "Existing authored game DeckFloor on retained source-height roof. No new platform or source collider edit.",
+      "building_id": "osm:way:198561926:building",
+      "building_title": "서울특별시청",
+      "full_rotor_tail_clear": true,
+      "native_all_skids_supported": true,
+      "observer": [
+        198.577590942383,
+        40.8521537780762,
+        -172.86491394043
+      ],
+      "point": [
+        195.977584838867,
+        40.8921508789062,
+        -172.164916992188
+      ],
+      "yaw": 0.0
+    },
+    "roof_site_audit": [
+      {
+        "building_id": "osm:way:198561926:building",
+        "deck_y": 40.7721519470215,
+        "profile": "garden",
+        "selected": true,
+        "title": "서울특별시청"
+      },
+      {
+        "building_id": "osm:way:233593641:building",
+        "deck_y": 100.613006591797,
+        "profile": "garden",
+        "selected": false,
+        "title": "한화손해보험빌딩"
+      },
+      {
+        "building_id": "osm:way:233593617:building",
+        "deck_y": 69.5147857666016,
+        "profile": "garden",
+        "selected": false,
+        "title": "한국 프레스센터"
+      },
+      {
+        "building_id": "osm:way:400821755:building",
+        "deck_y": 12.7570419311523,
+        "profile": "garden",
+        "selected": false,
+        "title": "이름 없는 건물"
+      },
+      {
+        "building_id": "osm:way:233593618:building",
+        "deck_y": 60.5440101623535,
+        "profile": "garden",
+        "selected": false,
+        "title": "이름 없는 건물"
+      }
+    ],
+    "rope": {
+      "descent_mps": 2.0,
+      "harness_visible": false,
+      "key_requires_release": false,
+      "last_result": "",
+      "line_visible": false,
+      "maximum_step_m": 0.0399947576224804,
+      "reason": "",
+      "side_point": [
+        155.906295776367,
+        14.9684171676636,
+        -70.3064041137695
+      ],
+      "state": "idle",
+      "target": {},
+      "travelled_m": 1.94998954795301
+    },
+    "rotor_fraction": 0.0,
+    "rotor_phase": 0.675789390718785,
+    "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and public-terrain or authored-game-deck safe exit and swept native-capsule rope descent. No real helipad, flight permission or engineering flight-dynamics claim.",
+    "site_audit": [
+      {
+        "accepted": false,
+        "fraction": 0.65,
+        "point": [
+          154.173568725586,
+          0.0,
+          -61.2947082519531
+        ],
+        "reason": "ground_height_spread",
+        "sample_height_range_m": [
+          -1.52911448478699,
+          -0.970099091529846
+        ],
+        "side_offset_m": -46.0
+      },
+      {
+        "accepted": true,
+        "fraction": 0.65,
+        "point": [
+          156.508255004883,
+          -1.44508874416351,
+          -71.0183563232422
+        ],
+        "reason": "",
+        "sample_height_range_m": [
+          -1.79525828361511,
+          -1.26645398139954
+        ],
+        "side_offset_m": -36.0
+      }
+    ],
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "tail_phase": 5.31249987684768,
+    "velocity": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "vertical_speed_mps": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_helicopter.gd": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd",
+    "res://../tests/game/check_city_helicopter_rope.gd": "0e82e4ea038a751fb7ed8d1230f8eb602fad44dee7fc83b35d192a3279439dfd",
+    "res://assets/authored/helicopter_service.json": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_helicopter_rope.gd": "7ffd63b54a0b16f253aa7d09607dc6ae84e8746be4a615b18c03030127a14803",
+    "res://scripts/city_helicopter_service.gd": "bd6c33180b4193255c8890f4ed64b9fbbe0e83c1bfd52477b57ecda19e54f44e",
+    "res://scripts/exploration_rooftop_access.gd": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11",
+    "res://scripts/explore_walk.gd": "9931f994902d76435380eb88985588ce45446019789b8ca3220ca6ad4ddf58d6",
+    "res://scripts/interior_visit.gd": "15f567c1a8b47a2fad439959e617f0d6687b614ce05a1031b7b38cab401006b8",
+    "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+    "res://scripts/pool_preparation_service.gd": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160",
+    "res://scripts/rooftop_space.gd": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  },
+  "task": "EXP25_HELICOPTER_ROOF_ROPE_SPEED",
+  "total": 39
+}

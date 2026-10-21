@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-10-21T17:37:35.914325+09:00",
+  "kind": "historical_headless_and_development_evidence_archive",
+  "final_prior_headless": [
+    {
+      "feature": "game_B1_connections",
+      "passed": 29,
+      "total": 29,
+      "report": "game_B1/sim2seoul-underground-final01.json",
+      "status": "PASS before cleanup-only test amendment",
+      "source_integrity": "all 12 loaded/finished file hashes match in raw report"
+    },
+    {
+      "feature": "SFC_1F_4F_escalators",
+      "passed": 48,
+      "total": 48,
+      "report": "escalator/sim2seoul-multifloor-escalator-03.json",
+      "status": "PASS before cleanup and native-only capture test amendment",
+      "source_integrity": "all 5 loaded/finished file hashes match in raw report"
+    }
+  ],
+  "historical_metro": [
+    {
+      "feature": "phase1_two_terminal_game_metro",
+      "passed": 40,
+      "total": 40,
+      "report": "metro_initial/sim2seoul-subway-development05.json",
+      "status": "Historical initial metro before B1 links; post-report fixture nil callback was later fixed"
+    },
+    {
+      "feature": "production_shortcuts_reset_exact_controls",
+      "passed": 14,
+      "total": 14,
+      "report": "metro_initial/sim2seoul-subway-transition02.json",
+      "status": "Historical transition-focused subset, not a current full suite"
+    }
+  ],
+  "cleanup_validation": {
+    "scope": "Test-only ending drains the existing busker WAV: stop, clear stream, await two physics frames, release scene. Functional production code unchanged.",
+    "verbose_narrow_probe": "diagnostics/sim2seoul-b1-lifecycle-probe02.json",
+    "narrow_probe_log": "diagnostics/sim2seoul-b1-lifecycle-probe02.log.gz",
+    "setup_smoke": "metro_initial/sim2seoul-subway-cleanup-final01.json",
+    "setup_smoke_passed": 3,
+    "setup_smoke_total": 3,
+    "setup_smoke_log": "metro_initial/sim2seoul-subway-cleanup-final01.log",
+    "three_test_parsers": "PASS",
+    "not_a_full_gameplay_rerun": true
+  },
+  "current_product_sha256": {
+    "game/scripts/city_subway_service.gd": "7f4d2b801fbf49fba427f125f2f1d075848e9e2e1365e195c59922643dcb211e",
+    "game/assets/authored/subway_service.json": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341",
+    "game/scripts/building_interior_space.gd": "83eef95fa5e19615f6c0c43c54f075ec4663cb5a005cdfae57194d8773c54807",
+    "game/scripts/interior_escalator.gd": "cd75501f96c117d6ec09be878f143d14d7acd916a57d5bd90f6210822d0636a0",
+    "game/scripts/interior_population.gd": "756dbc8baa22d4f3facb2577f7f9fb5fc5857a6a82f7dc9be6fdf812640588b2",
+    "game/scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+    "game/scripts/game_basement_elevator_cabin.gd": "643c86a529b45af0aebedbdecfcaf182131152fc8a39c9884cdc3963ca8d6df3",
+    "game/scripts/game_underground_connections.gd": "e70bbdc98414e05b1efe180211a466edd655e10f425f91485e1a2155d0d3ea45",
+    "game/assets/authored/game_underground_connections.json": "a15c5fd1b1427cb9069c65eeb7e2c8eb8b88ad884558b6eb0a5b6ebcbcc89bef"
+  },
+  "current_test_sha256_after_cleanup_and_native_capture": {
+    "tests/game/check_city_subway.gd": "89379fc2279e4ec1acf710e613de3ea1f87d9a65b67c3e08ec82bb7baf684cf4",
+    "tests/game/check_game_underground_connections.gd": "74e9b1aaa6b0237184c9ab02f67fe9bd62ad28f5824a189f573b12295accbcfd",
+    "tests/game/check_multifloor_escalator.gd": "e2282b7fc5fd109489ab3fe898ce598f89a4e064237b5016c6be6b257978118c"
+  },
+  "product_sources_unchanged_from_phase2_freeze": true,
+  "root_native_validation": "Pending separately; this archive does not assert native visual review, real OS keyboard acceptance, sustained performance, surveyed station/interior accuracy or real underground connectivity.",
+  "raw_archive": {
+    "files": 73,
+    "lossless_roundtrip_verified": true,
+    "long_logs_gzipped_above_bytes": 65536
+  },
+  "record_notes": [
+    "Development failures and interrupted runs are retained without rewriting their internal report content. Original /tmp paths in raw JSON stay intact; manifest maps them to archived paths.",
+    "B1 development01 actual four-argument native-check contract mismatch fixed. Development02 expected food/shower interactions in a library; corrected to preserved library facility records. Development03 blind observer route crossed preserved desks; final follows actual central aisle/front corridor.",
+    "Initial metro development03 short walking observation budgets were fixed; full development05 then passed. Shutdown warnings were separately diagnosed as the pre-existing looping street WAV, not accepted as new gameplay failure.",
+    "The latest escalator harness adds two native-only captures (actual 1F-to-2F carry / actual 4F arrival) with file hashes; headless functional count remains48. Native capture passes and actual image review belong to root."
+  ]
+}
