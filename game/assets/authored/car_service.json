@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task": "AUTHORED_DRIVABLE_CAR",
+  "source_hashes": {
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+  },
+  "scope": {
+    "game_cars": 1,
+    "original_ai_cars_changed": false,
+    "source_geometry_changed": false,
+    "parking": "Separate authored game parking/launch placement derived from an existing source-forward traffic polyline and verified against the actual source drive mesh. Not a surveyed bay, real vehicle inventory or real parking permission.",
+    "art": "Original generic blue compact sedan with transparent cabin glazing, doors, seats, steering wheel, mirrors, lamps and four animated wheels; no real manufacturer model."
+  },
+  "policy": {
+    "maximum_speed_mps": 8.0,
+    "acceleration_mps2": 2.4,
+    "coast_deceleration_mps2": 0.65,
+    "braking_mps2": 5.2,
+    "wheelbase_m": 2.68,
+    "wheel_radius_m": 0.315,
+    "maximum_steer_degrees": 26.0,
+    "maximum_grade_degrees": 24.0,
+    "dismount_speed_mps": 0.2,
+    "interact_distance_m": 1.75,
+    "return_radius_m": 3.0,
+    "door_clearance_m": 3.0,
+    "reverse_speed_mps": 1.1,
+    "reverse_hold_s": 0.55
+  },
+  "stations": [
+    {
+      "id": "DRIVE-GAME-01",
+      "name": "세종대로 자동차 운전 체험",
+      "source_route": "sejong_south",
+      "source_feature_id": "osm:way:1084408283:highway_line",
+      "station_m": 30.0,
+      "right_offset_m": 6.0,
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1084408283",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ]
+    }
+  ]
+}

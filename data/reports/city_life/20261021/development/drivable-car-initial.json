@@ -1,0 +1,484 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "car_error": "",
+        "placement": [
+          {
+            "accepted": true,
+            "authored_right_offset_m": 6.0,
+            "point": [
+              84.8832473754883,
+              0.50527560710907,
+              -189.843780517578
+            ],
+            "rejected": [],
+            "scope": "Separate authored game parking/launch placement on actual retained source road; not an observed parking bay or cloned AI actor.",
+            "segment": 1,
+            "source_feature_id": "osm:way:1084408283:highway_line",
+            "source_refs": [
+              {
+                "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+                "object_id": "w/1084408283",
+                "provider": "OpenStreetMap via Geofabrik",
+                "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+              }
+            ],
+            "source_route": "sejong_south",
+            "station_m": 30.0
+          }
+        ],
+        "runtime_error": ""
+      },
+      "name": "production_setup_one_source_bound_full_body_car",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original14_AI_cars_and30_people_retained",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "layer": 8,
+        "mask": 47,
+        "shape_size": [
+          2.20000004768372,
+          1.64999997615814,
+          4.5
+        ]
+      },
+      "name": "native_car_envelope_covers_body_mirrors_and_length",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original_authored_sedan_has_four_wheels_doors_cabin_and_seats",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera_distance_m": 7.2,
+        "camera_pitch_degrees": -14.0,
+        "camera_yaw": 0.933408585370172,
+        "id": "DRIVE-GAME-01",
+        "point": [
+          87.0255355834961,
+          0.491247028112411,
+          -189.437576293945
+        ],
+        "toward": [
+          84.8832473754883,
+          1.36406993865967,
+          -189.843780517578
+        ]
+      },
+      "name": "supported_car_door_shortcut_exists",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "door_distance": 0.96956479549408,
+        "player": [
+          87.0255355834961,
+          0.412340760231018,
+          -189.437576293945
+        ],
+        "prompt": "E · 자동차 운전석에 타기",
+        "support": true,
+        "visible": true
+      },
+      "name": "shortcut_matches_prompt_and_native_E_eligibility",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_wall_prevents_through_wall_driver_entry",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 0.866666666666667,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "PlayerCar"
+            }
+          }
+        ],
+        "prompt": "자동차 · W 가속 / S 제동·후진\nA·D 조향 / Space 브레이크 / E 안전정차 후 내리기"
+      },
+      "name": "physical_E_mount_keeps_native_capsule_and_locks_other_transports",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "blocked_ticks": {},
+        "intent_ticks": 60,
+        "maximum_speed_mps": 4.8,
+        "maximum_step_m": 0.160000413656235,
+        "travel_m": 4.88287830352783,
+        "unsupported_ticks": 0
+      },
+      "name": "W_accelerates_actual_full_car_on_native_terrain",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Space_stops_car_without_player_jump",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "blocked_reason": "",
+        "maximum_absolute_speed_mps": 1.1,
+        "minimum_speed_mps": -1.1,
+        "travel_m": 3.01985573768616
+      },
+      "name": "S_brakes_then_reverses_at_bounded_low_speed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "steer": 0.326214394481474,
+        "yaw_after": 3.03789114516668,
+        "yaw_before": 3.12934087510112,
+        "yaw_right": 3.05518177565907
+      },
+      "name": "AD_changes_car_yaw_front_axle_and_steering_wheel",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_driver_hand_gap_m": 0.0000341365521308035
+      },
+      "name": "driver_hands_hold_actual_steering_wheel_grips",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "reason": "physical_sweep",
+        "travel_m": 0.356500208377838
+      },
+      "name": "native_full_car_sweep_stops_at_actual_wall",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "actual_menu_pauses_car_clock_and_pose",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "occupied_native_exit_candidates_keep_driver_safely_seated",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_exit_can_cancel_without_losing_control",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            90.4252624511719,
+            2.70790338516235,
+            -180.134292602539
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 536,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "near": 0.0799999982118607,
+          "observed_ticks": 537,
+          "physics_visual_anchor": [
+            86.1925888061523,
+            0.243217572569847,
+            -181.123229980469
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            86.1925888061523,
+            1.54321753978729,
+            -181.123229980469
+          ],
+          "previous_visual_anchor": [
+            86.1925888061523,
+            0.243217572569847,
+            -181.123229980469
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            86.1925888061523,
+            0.243217572569847,
+            -181.123229980469
+          ],
+          "rendered_frames": 2186,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 5,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "pending": 0,
+        "riding": false
+      },
+      "name": "safe_E_exit_restores_capsule_camera_and_walking",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "physical_E_device42_remounts_same_parked_car",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "external_cancel_has_validated_supported_destination",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "validated_external_teleport_restores_and_does_not_reattach",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_post_exit_idle_step_m": 0.0
+      },
+      "name": "native_pair_publication_does_not_kick_parked_car",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "plaza": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "name": "road_only_permission_rejects_plaza_nonfinite_and_outside",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "checked": 1,
+        "rejected": 1
+      },
+      "name": "actual_private_building_rings_remain_forbidden",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original_AI_cars_and_source_route_bindings_retained_after_drive",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "after": {
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+        },
+        "before": {
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+        }
+      },
+      "name": "actual_world_traffic_and_actor_source_files_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_drivable_car.gd": "73b0cf4ed7c5f95745881d610370cd0abedbf105e05597d10c8b2da71dd1b3c8",
+          "res://assets/authored/car_service.json": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2",
+          "res://scripts/city_bike_service.gd": "70ba35bf2d2f72384e5663f8057a8ce8534e41ce79ecbc2b2a41932cc26852ce",
+          "res://scripts/drivable_car_service.gd": "5d4bf3880a394376b7e565269c510dfe12ef5614249c4746737a9423bbd3507a",
+          "res://scripts/explore_walk.gd": "fcba5ead29b7931da74c9310c52c4b9f59ed46376127c565fdf4e1b212dc270e",
+          "res://scripts/interior_visit.gd": "1f867a380097528b869130b06c573d2d6c2e571e5640671176c8e348cff2a029"
+        },
+        "loaded": {
+          "res://../tests/game/check_drivable_car.gd": "73b0cf4ed7c5f95745881d610370cd0abedbf105e05597d10c8b2da71dd1b3c8",
+          "res://assets/authored/car_service.json": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2",
+          "res://scripts/city_bike_service.gd": "70ba35bf2d2f72384e5663f8057a8ce8534e41ce79ecbc2b2a41932cc26852ce",
+          "res://scripts/drivable_car_service.gd": "5d4bf3880a394376b7e565269c510dfe12ef5614249c4746737a9423bbd3507a",
+          "res://scripts/explore_walk.gd": "fcba5ead29b7931da74c9310c52c4b9f59ed46376127c565fdf4e1b212dc270e",
+          "res://scripts/interior_visit.gd": "1f867a380097528b869130b06c573d2d6c2e571e5640671176c8e348cff2a029"
+        }
+      },
+      "name": "runtime_inputs_stable_during_test",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 22575,
+  "maximum_post_exit_idle_step_m": 0.0,
+  "passed": 27,
+  "physics_hz": 30,
+  "result": "PASS",
+  "scope": "One original authored player car on an actual retained source road, original AI actors retained, native full-car physics and player capsule. Physical KEY_E input events devices 0 and 42; test-only held movement refreshed at physics priority -200. Player observer placements and named blockers are fixtures. Headless does not accept rendered appearance or human OS key hold.",
+  "snapshot": {
+    "actual_distance_m": 14.4605694402708,
+    "blocked_reason": "",
+    "car_collision_size_m": [
+      2.20000004768372,
+      1.64999997615814,
+      4.5
+    ],
+    "car_count": 1,
+    "cars": [
+      {
+        "distance_m": 14.4605694402708,
+        "layer": 8,
+        "mask": 47,
+        "on_floor": true,
+        "position": [
+          84.3827209472656,
+          0.351862549781799,
+          -181.629608154297
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "yaw": 3.05605638555241
+      }
+    ],
+    "dock_count": 1,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 0.866666666666667,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "PlayerCar"
+        }
+      },
+      {
+        "clock_s": 15.9666666666666,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 16.7,
+        "event": "dismount_cancelled",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.0333333333333,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.0666666666667,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            86.1925888061523,
+            0.322123855352402,
+            -181.123229980469
+          ]
+        }
+      },
+      {
+        "clock_s": 17.1,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.6666666666667,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "PlayerCar"
+        }
+      },
+      {
+        "clock_s": 17.8666666666667,
+        "event": "ride_cancelled_after_validated_external_teleport",
+        "evidence": {}
+      },
+      {
+        "clock_s": 17.9,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      }
+    ],
+    "exit_requested": false,
+    "grounded_ticks": 492,
+    "loaded": true,
+    "maximum_driver_hand_gap_m": 0.0000341365521308035,
+    "maximum_hand_gap_m": 0.0,
+    "maximum_step_m": 0.160000413656235,
+    "minimum_support_normal_y": 0.998625159263611,
+    "original_ai_car_count_before": 14,
+    "original_ai_car_count_now": 14,
+    "pending_pair_release_count": 0,
+    "placement_audit": [
+      {
+        "accepted": true,
+        "authored_right_offset_m": 6.0,
+        "point": [
+          84.8832473754883,
+          0.50527560710907,
+          -189.843780517578
+        ],
+        "rejected": [],
+        "scope": "Separate authored game parking/launch placement on actual retained source road; not an observed parking bay or cloned AI actor.",
+        "segment": 1,
+        "source_feature_id": "osm:way:1084408283:highway_line",
+        "source_refs": [
+          {
+            "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+            "object_id": "w/1084408283",
+            "provider": "OpenStreetMap via Geofabrik",
+            "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+          }
+        ],
+        "source_route": "sejong_south",
+        "station_m": 30.0
+      }
+    ],
+    "rental_index": -1,
+    "riding": false,
+    "scope": "One separately authored parked game car on a retained source road; player controlled, full native car box and road/private/door/support checks. Original 14 AI actors/routes remain unchanged; no surveyed parking location or official traffic-operation claim.",
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "steer_radians": 0.0
+  },
+  "task": "drivable_car",
+  "total": 27
+}

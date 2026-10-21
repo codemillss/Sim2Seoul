@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "task": "source_linked_game_shop_visits",
+  "source_storefronts": "res://assets/authored/street_businesses.json",
+  "source_storefronts_sha256": "1e37a8697526c5a97b6c089e83543b41c75ea2b73a56b39bb4d6f20b2ac54152",
+  "initial_game_credits": 50000,
+  "currency_label": "게임원",
+  "inventory_scope": "Current running session only. No real payment, account or saved inventory.",
+  "assumptions": [
+    "Exterior source buildings, shop facade records and existing building-visit catalog are unchanged. A portal links each retained displayed shop door to a detached authored room.",
+    "Brand/name and retained POI are location references, not confirmation of current occupancy or a surveyed unit/interior.",
+    "All products, prices, stock and room plans are authored game content, not current store menus/prices.",
+    "Each explicit selection creates one purchase token; repeated confirmation cannot debit it twice.",
+    "Citywear is a fictional game clothing unit on a retained commercial building edge, not a claim of real current tenancy. Purchased upper outfits alter only copied avatar materials and noncolliding display details; the capsule is unchanged."
+  ],
+  "shops": [
+    {
+      "id": "gs25_game_shop",
+      "storefront_id": "shop_12072483362",
+      "title": "GS25 · 게임 편의점",
+      "kind": "convenience",
+      "door_local_x_factor": -0.31,
+      "room_origin": [
+        1200,
+        -220,
+        0
+      ],
+      "room_size": [
+        12,
+        3.8,
+        9
+      ],
+      "products": [
+        {
+          "id": "rice_triangle",
+          "title": "삼각김밥",
+          "price": 1800,
+          "model": "rice_triangle",
+          "color": [
+            0.13,
+            0.28,
+            0.22
+          ]
+        },
+        {
+          "id": "water",
+          "title": "생수",
+          "price": 1000,
+          "model": "bottle",
+          "color": [
+            0.23,
+            0.67,
+            0.87
+          ]
+        },
+        {
+          "id": "banana_milk",
+          "title": "바나나 우유",
+          "price": 1800,
+          "model": "carton",
+          "color": [
+            0.96,
+            0.82,
+            0.26
+          ]
+        },
+        {
+          "id": "potato_snack",
+          "title": "감자 과자",
+          "price": 2000,
+          "model": "packet",
+          "color": [
+            0.83,
+            0.27,
+            0.19
+          ]
+        },
+        {
+          "id": "lunch_box",
+          "title": "도시락",
+          "price": 5500,
+          "model": "lunch_box",
+          "color": [
+            0.2,
+            0.36,
+            0.28
+          ]
+        },
+        {
+          "id": "iced_coffee",
+          "title": "아이스 커피",
+          "price": 2200,
+          "model": "cup",
+          "color": [
+            0.42,
+            0.25,
+            0.13
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jinju_game_restaurant",
+      "storefront_id": "jinjuhoegwan",
+      "title": "진주회관 · 게임 식당",
+      "kind": "restaurant",
+      "door_local_x_factor": 0,
+      "room_origin": [
+        1240,
+        -220,
+        0
+      ],
+      "room_size": [
+        14,
+        3.8,
+        10
+      ],
+      "products": [
+        {
+          "id": "soybean_noodles",
+          "title": "콩국수",
+          "price": 9500,
+          "model": "bowl",
+          "color": [
+            0.92,
+            0.86,
+            0.64
+          ]
+        },
+        {
+          "id": "kimchi_rice",
+          "title": "김치볶음밥",
+          "price": 8000,
+          "model": "plate",
+          "color": [
+            0.75,
+            0.25,
+            0.12
+          ]
+        },
+        {
+          "id": "barley_tea",
+          "title": "보리차",
+          "price": 1500,
+          "model": "cup",
+          "color": [
+            0.56,
+            0.37,
+            0.18
+          ]
+        }
+      ]
+    },
+    {
+      "id": "citywear_game_clothing",
+      "storefront_id": "citywear_authored_frontage",
+      "title": "시티웨어 · 게임 의류점",
+      "kind": "clothing",
+      "door_local_x_factor": 0,
+      "room_origin": [
+        1280,
+        -220,
+        0
+      ],
+      "room_size": [
+        14,
+        3.8,
+        10
+      ],
+      "virtual_frontage": {
+        "id": "citywear_authored_frontage",
+        "title": "시티웨어 · 게임 의류점",
+        "style": "clothing",
+        "source_feature_id": "osm:way:344644338:building",
+        "source_edge_xz": [
+          [
+            -6.047802484652493,
+            72.76103756669909
+          ],
+          [
+            10.296786592516582,
+            89.75402549700812
+          ]
+        ],
+        "facade_center_xz": [
+          -1.9184184776633728,
+          77.05423651217731
+        ],
+        "outward_xz": [
+          0.7207233414100129,
+          -0.6932228106076617
+        ],
+        "facade_width_m": 6.0,
+        "existing_visit_source_match": true,
+        "basis": "Game-authored clothing unit, seven metres along retained source edge from existing building entrance; actual current shop and exact door are unverified.",
+        "source_reference_url": "https://www.openstreetmap.org/way/344644338"
+      },
+      "products": [
+        {
+          "id": "ivory_cardigan",
+          "title": "아이보리 카디건",
+          "price": 9000,
+          "model": "apparel",
+          "color": [
+            0.88,
+            0.81,
+            0.64
+          ],
+          "outfit": {
+            "style": "cardigan",
+            "body": [
+              0.88,
+              0.81,
+              0.64
+            ],
+            "trim": [
+              0.55,
+              0.4,
+              0.25
+            ],
+            "shirt": [
+              0.98,
+              0.97,
+              0.9
+            ]
+          }
+        },
+        {
+          "id": "cobalt_hoodie",
+          "title": "코발트 후디",
+          "price": 12000,
+          "model": "apparel",
+          "color": [
+            0.1,
+            0.3,
+            0.67
+          ],
+          "outfit": {
+            "style": "hoodie",
+            "body": [
+              0.1,
+              0.3,
+              0.67
+            ],
+            "trim": [
+              0.08,
+              0.18,
+              0.46
+            ],
+            "shirt": [
+              0.83,
+              0.88,
+              0.96
+            ]
+          }
+        },
+        {
+          "id": "charcoal_jacket",
+          "title": "차콜 재킷",
+          "price": 15000,
+          "model": "apparel",
+          "color": [
+            0.2,
+            0.23,
+            0.26
+          ],
+          "outfit": {
+            "style": "jacket",
+            "body": [
+              0.2,
+              0.23,
+              0.26
+            ],
+            "trim": [
+              0.08,
+              0.11,
+              0.13
+            ],
+            "shirt": [
+              0.75,
+              0.32,
+              0.12
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

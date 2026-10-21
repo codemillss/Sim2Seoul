@@ -1,0 +1,2666 @@
+{
+  "schema_version": 1,
+  "task": "EXP24",
+  "result": "PASS_ENGINE_VISUAL_AND_STARTUP_OS_SCOPE_LIMITED",
+  "recorded_at": "2026-10-21T06:13:19.277981+00:00",
+  "environment": {
+    "machine": "Apple M5 16GB",
+    "os": "macOS 26.6.2 (25G83)",
+    "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
+    "renderer": "Metal 4 / Forward+",
+    "physics_hz": 30
+  },
+  "features": [
+    "3 authored game shops and token-guarded session purchases",
+    "3 real avatar outfits, inventory and swimwear/previous-outfit restoration",
+    "1 source-road drivable car with full body and native support/collision",
+    "1 authored source-plaza helicopter with native rotor/tail clearance and bounded flight",
+    "Changing room -> swimsuit -> completed 4s shower -> pool gate -> actual swimming/Space exit"
+  ],
+  "current_engine_reports": [
+    "data/reports/city_life/20261021/acceptance/shop_native_final03.json",
+    "data/reports/city_life/20261021/acceptance/car_native_final03.json",
+    "data/reports/city_life/20261021/acceptance/helicopter_native_final03.json",
+    "data/reports/city_life/20261021/acceptance/pool_native_final03.json",
+    "data/reports/city_life/20261021/acceptance/integration_headless_final03.json",
+    "data/reports/city_life/20261021/acceptance/bike_entry_headless_final03.json",
+    "data/reports/city_life/20261021/acceptance/scooter_headless_final03.json",
+    "data/reports/city_life/20261021/acceptance/library_headless_final01.json",
+    "data/reports/city_life/20261021/acceptance/bus_headless_final01.json"
+  ],
+  "results": [
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03.json",
+      "passed": 75,
+      "total": 75,
+      "scope": "Actual production scene/terrain/capsules. Physical KEY_E and UI signals; test-only observer placements, blockers and insufficient-balance fixture are explicit. Session game credits, no real payment. Headless does not prove visible layout or actual OS keyboard control."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03.json",
+      "passed": 30,
+      "total": 30,
+      "scope": "One original authored player car on an actual retained source road, original AI actors retained, native full-car physics and player capsule. Physical KEY_E input events devices 0 and 42; test-only held movement refreshed at physics priority -200. Player observer placements and named blockers are fixtures. Headless does not accept rendered appearance or human OS key hold."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03.json",
+      "passed": 34,
+      "total": 34,
+      "scope": "Native aircraft shapes including full rotor, existing source terrain, physical KEY_E and labelled held movement fixture. Actual takeoff, movement, rotation, same-ground return, landing and walking restoration. Near-ceiling/boundary aircraft placements and static blockers are test fixtures, not ordinary travel. No actual aviation accuracy/permission, sustained performance or subjective/native appearance acceptance from headless."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03.json",
+      "passed": 34,
+      "total": 34,
+      "scope": "Production roof-local rooms, full retained native player capsule, physical E, held-action walking fixture priority -200, actual shower clock/menu/abort, swimsuit lock, native water guard and actual swim/Space exit. Explicit illegal-water and fall placements are fixtures; headless does not accept visual appearance. Prior EXP23 unrestricted casual-clothes pool-entry expectations are intentionally superseded."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final03.json",
+      "passed": 33,
+      "total": 33,
+      "scope": "Production host shortcuts only for every location change, physical KEY_E, test-only held walking/flight inputs and named raised shortcut blockers. Covers ownership/capsule/camera/UI restoration and original IDs/source hashes, not detailed product transactions, driving/flight completeness, OS keyboard control, rendered appearance or performance."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final03.json",
+      "passed": 60,
+      "total": 60,
+      "scope": "Production physical E keyboard events with explicit observer placements around both bikes, contact and ground gates. No subjective/native visual acceptance."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final03.json",
+      "passed": 30,
+      "total": 30,
+      "scope": "Production native terrain, retained player capsule and actors, Physical KEY_E devices 0 and 42, InputEventAction WASD/Space, physical scooter moves/collision/support, real menu and validated cancel. Test-only player placements and blockers explicitly separate. Headless does not accept rendered appearance."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/library_headless_final01.json",
+      "passed": 35,
+      "total": 35,
+      "scope": "Starting and indoor exit poses are explicit test-only teleports. Every facade contact is reached through the real controller with forward input. E uses the production physical key mapping; no native keyboard/GPU claims."
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bus_headless_final01.json",
+      "passed": 32,
+      "total": 32,
+      "scope": "See original suite and recorded source hashes."
+    }
+  ],
+  "count_scope": "Each suite is an overlapping run, not unique requirements. Legacy 30-people test labels count 28 humans + 2 dogs, not 30 humans. Original AI cars remain 14.",
+  "visual_review": "data/reports/city_life/20261021/visual_review.json",
+  "normal_launch": "data/reports/city_life/20261021/normal_launch.json",
+  "pending": [
+    "Complete agent-driven OS shopping/driving/shower smoke; CUA command timed out and possible concurrent human flight was observed, so ordinary window was preserved.",
+    "Other Mac/export and sustained performance/subjective feel."
+  ],
+  "historical_scope": "All earlier final01/final02 source freezes and native/development runs remain history. Some were numerically PASS before later visual issues were found. Only current_engine_reports have been accepted against present relevant input hashes.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "kind": "source_or_runbook",
+      "bytes": 5169,
+      "sha256": "fe501fed6cc7cc1d3d2bb235fd857f74afa4f55db364cf043584cb4fef137679"
+    },
+    {
+      "path": "README.md",
+      "kind": "source_or_runbook",
+      "bytes": 16107,
+      "sha256": "d262eb9401518e81e81490a0f0d98a471ce52698cd91f3f3aac8e977d1ce4716"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 403,
+      "sha256": "0a46fa0e00112dab908874f690a4ec46052f9021024359aec04d1b1cb662eb3f"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run02.json",
+      "kind": "evidence_or_history",
+      "bytes": 33522,
+      "sha256": "1e70490c631f4c0bf249f48f1abcbcb47b7a2d9ab2daf3d5b5f3aa04e1622cd1"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2531,
+      "sha256": "40de4a98e9145ce1993a925d460b0017dc5175f6f78f889a7cb2768ef4d6add1"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run03.json",
+      "kind": "evidence_or_history",
+      "bytes": 33935,
+      "sha256": "7ab71d8e896ab3d27f14e834d74e3c6b1dad7202ac28d76e27f29832acdeb8d6"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2593,
+      "sha256": "5d49ee271ecfc353fd4fc4cdc15c05a0b53d622d9b3baed66eab5d12fdd987b0"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run04.json",
+      "kind": "evidence_or_history",
+      "bytes": 36528,
+      "sha256": "13cf31380fe2b3e7f880cfc8dad5740ce04f7f5711fc44708c0a69f6db24c7cc"
+    },
+    {
+      "path": "data/reports/city_helicopter/20261021/development/headless_run04.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2699,
+      "sha256": "1708e15fa89bc32eed8e3ca17be57ba240b6e4883bd17f531e5999209425efbe"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 62147,
+      "sha256": "8199d16bc1a02075a62116e7e6ea5d0ae3989c40b2c5e6fa270432487f06b3b5"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2363,
+      "sha256": "d82c4796ebe870beb3a94e5e865bb92e26f2354f04b0e794be52b6abc4d26bfb"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 971,
+      "sha256": "71af1f22fe49cb60d696766da4ce7eb8916b5c31ef2dc2380bf614bb3edd0519"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final02.json",
+      "kind": "evidence_or_history",
+      "bytes": 62147,
+      "sha256": "ddb3060c91c1377bbb212ac5cfb3787e882419a132513a61c5edc439d82e2fa0"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2363,
+      "sha256": "d82c4796ebe870beb3a94e5e865bb92e26f2354f04b0e794be52b6abc4d26bfb"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final02.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 971,
+      "sha256": "58d9ef927852c9eba408481f349ff9dc5750be32aad3d362baf66f3f156e942b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final03.json",
+      "kind": "current_evidence",
+      "bytes": 62147,
+      "sha256": "6e919fdf001012494b2f9d8253cbb7156473b57fc295f2f1cb1c97476b41ffbd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2363,
+      "sha256": "d82c4796ebe870beb3a94e5e865bb92e26f2354f04b0e794be52b6abc4d26bfb"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bike_entry_headless_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 971,
+      "sha256": "f74fdf8195b38912658889b89b39817e973626b6c8477b1f4801548dff520afc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bus_headless_final01.json",
+      "kind": "current_evidence",
+      "bytes": 305347,
+      "sha256": "02e3e25f79a87fba04885560353251df221646fec3746dfa7b7e67a9070b9154"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bus_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2606,
+      "sha256": "a8347ed07ad14a4f9a5745b93cee01d898d0e576064b830d410c62f01a759507"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/bus_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 944,
+      "sha256": "998e9870604fc842ec25b57f292ec9557eab6e54fe2f06602b6640fe59bfa32c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 27167,
+      "sha256": "b44c8a90b8b01e396dd2963ffb8cb4b4fc6870c8fc1a8c7875d6d3ebbff663dc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2474,
+      "sha256": "cb722928d07862fdc0c212264634aa5f3169cffd86f715521ac6010fc1de8888"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 916,
+      "sha256": "0489d7b8a8a51265a7dfaf29affd7826828e4068c596d43e90c8d5da55c6ebe5"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01_production_exited.png",
+      "kind": "evidence_or_history",
+      "bytes": 694593,
+      "sha256": "e53094996df5e5d3ceee24bf70929296968a26b47abb9e63e47812a2c6352c29"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01_production_mount.png",
+      "kind": "evidence_or_history",
+      "bytes": 758172,
+      "sha256": "ce80527e48c2c9e80fd91bddad15e9d56a823a4f7f9ac5f9e773cfa18afa757b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final01_production_shortcut.png",
+      "kind": "evidence_or_history",
+      "bytes": 687077,
+      "sha256": "7c2afcc17f64708f49457e514c0bfd80d794b3954b272a2ef7b3e3d9847ee166"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03.json",
+      "kind": "current_evidence",
+      "bytes": 27203,
+      "sha256": "4890a89227fba444063bd06696ce4e70cd73f17c2b8850d80d2ffa91e84aa068"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2474,
+      "sha256": "cb722928d07862fdc0c212264634aa5f3169cffd86f715521ac6010fc1de8888"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 916,
+      "sha256": "0e915d53f729e79f4d070524b05358eacf5016d2ad2bbd2a1d5b8704333e9cea"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03_production_exited.png",
+      "kind": "evidence_or_history",
+      "bytes": 694558,
+      "sha256": "ddca7e49492411a9883ed5302780d420206acc51fb970b94b3d154fd8ee82582"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03_production_mount.png",
+      "kind": "evidence_or_history",
+      "bytes": 758327,
+      "sha256": "c9e7799de24b81323ec046bb7d1290f473ae99741176d88c8e2531bc78076467"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/car_native_final03_production_shortcut.png",
+      "kind": "evidence_or_history",
+      "bytes": 687055,
+      "sha256": "8e72f08c1636d6d9a28975354934e739bb9fa3baad5987f7c2862831503bf764"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 52364,
+      "sha256": "1a86eed66dab4ed84b0dc7585b96b057a32a9484adba57437f7bb2abe526da64"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2572,
+      "sha256": "3e198732312240b2f228e353bac6f18f63b59bea9aab4fe980f4b3429720d23a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 940,
+      "sha256": "ba379518163dce529048bb2a465343f0f4fdd5a5f48bfff249d338fbd1813e22"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01_airborne.png",
+      "kind": "evidence_or_history",
+      "bytes": 904169,
+      "sha256": "6007fb3dc700767e35482b6c9dae8c36d4f362a6b57f5b29368d461b9c50c2ad"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01_helipad_before_boarding.png",
+      "kind": "evidence_or_history",
+      "bytes": 834719,
+      "sha256": "f3dc8737d3adee8b4ca960c960a1d9289144e4c885e587a792b2b3224218ba27"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final01_landed.png",
+      "kind": "evidence_or_history",
+      "bytes": 865750,
+      "sha256": "eeb5260ae6937951f44ddfc09af75bccf4b9b4b1eaf19b3cbb5197ab172e2482"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03.json",
+      "kind": "current_evidence",
+      "bytes": 52420,
+      "sha256": "da34b4151a654ae1642d8724dc12fb65ff15bcfb082d8c3ad5b617c4393959dd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2572,
+      "sha256": "3e198732312240b2f228e353bac6f18f63b59bea9aab4fe980f4b3429720d23a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 940,
+      "sha256": "79547aab3340823049e6657577137e4a7dca64df56d944c7dc80a4331daf31de"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03_airborne.png",
+      "kind": "evidence_or_history",
+      "bytes": 903682,
+      "sha256": "5b35c33a0863b1f9f025b9165aaba8dd094056b36431441e9474ce66eee4a9bd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03_helipad_before_boarding.png",
+      "kind": "evidence_or_history",
+      "bytes": 834663,
+      "sha256": "52335859820e89cd5cda64a0bde84134d29459196bc9127524a7a1fcbe51ecf9"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/helicopter_native_final03_landed.png",
+      "kind": "evidence_or_history",
+      "bytes": 865838,
+      "sha256": "84efcd30ba544c666e0856b2c131d20921b6e195c0d85cd8c7ea1d000d3a44ac"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 31506,
+      "sha256": "c4f88c2497724a123d5006b7cc26d11cf375ac8e0603817a08b0fff37b0170a9"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2512,
+      "sha256": "231664ee97d45c63a43fc29a4756b116d8d780f32548ddfb2727fd5b4645e9a2"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 973,
+      "sha256": "49f4612fb1b93817b8c6d5db200c9e6ea527b4b16f9f52d0e6dc2220ac855b6e"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final02.json",
+      "kind": "evidence_or_history",
+      "bytes": 31506,
+      "sha256": "bbd69c9dd752051ae357324eb3a6a0d692e7f247adb1cf0c34c968613a0c7337"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2512,
+      "sha256": "231664ee97d45c63a43fc29a4756b116d8d780f32548ddfb2727fd5b4645e9a2"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final02.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 973,
+      "sha256": "7a3a07f0a48ee490a908fb6dc216196d0de115c27362f16e743cea2c28a9c27b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final03.json",
+      "kind": "current_evidence",
+      "bytes": 31506,
+      "sha256": "aa1238966168a6c53ddaaf6bc20e51918904e82ce9eb85e578b7489194913803"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2512,
+      "sha256": "231664ee97d45c63a43fc29a4756b116d8d780f32548ddfb2727fd5b4645e9a2"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/integration_headless_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 973,
+      "sha256": "912bd8bafbb084cfcd99c3cb3e4eeff5e2486f208b639f21cf111b923cec5aa6"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/library_headless_final01.json",
+      "kind": "current_evidence",
+      "bytes": 143912,
+      "sha256": "f737c8df027d34e75633f793bd34c7a6318a74e057ad54a5fba90d966674f22a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/library_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 1824,
+      "sha256": "bd89946b9401cbee3ac2a757733c71f14eab0eb0a7883b5bc98f2c86f79e0b83"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/library_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 961,
+      "sha256": "badc02f3323671bf63e27429cd4dac97e265cbf0cbb8a6d5c8aff75208c3e8ef"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_headless_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 23319,
+      "sha256": "f645f5a057bebf4e9e27abd13abccac5717c27df7495d7030c799f12f1c5a3ed"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2466,
+      "sha256": "bbeb675027e4343076e6cf1070093a425ffb02e51bbbaa661e4a0cebaf4e4c46"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 947,
+      "sha256": "2d31c9efa2ce5f3a447d65d7143f3754b4f23c09907331d1f4f0e57f5140e587"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 42234,
+      "sha256": "3f44184745c320cbc2e2457867609a5c1900f1b1644ad6b750309fc6666fff4c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2502,
+      "sha256": "27c6d197d4bbf4a8a2afbb86c97da5ea58e9710714d493ab7a1971326be1e524"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 923,
+      "sha256": "8055d7762a6b30ef3e036348fbd8cd4bf0ccd0113e09420f1db3a9c91af1177b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_changing_room_lockers_and_bench.png",
+      "kind": "evidence_or_history",
+      "bytes": 435624,
+      "sha256": "9410755db05a1a9234bb881fd2e7e18a088110be5175eb150354676415a2cb80"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_ordinary_pool_arrival.png",
+      "kind": "evidence_or_history",
+      "bytes": 491441,
+      "sha256": "dc7a0f64a86fa99c8a8ea0d07dd1cf72b7edf6d0bd2063faccf85c6993064568"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_prepared_actual_swimming.png",
+      "kind": "evidence_or_history",
+      "bytes": 415217,
+      "sha256": "e545796d58d312d6f200f8d93900717713f34c0e0307a978fbbabc426a54b726"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_prepared_swimwear_shower_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 275759,
+      "sha256": "23d6e2db6b7023e56d51fe35a4eedb07fd733f435c8a718d5ed53c31708f2e3f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_previous_outfit_restored.png",
+      "kind": "evidence_or_history",
+      "bytes": 434620,
+      "sha256": "a29bd33d67afee9eec2bc61ff76a224103980345c90fd6500df31b02516085f6"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_shower_running_water.png",
+      "kind": "evidence_or_history",
+      "bytes": 278176,
+      "sha256": "87165d2739cdaf69914cb47844c654055f9278f08237cf258fb54a053af2ca88"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final01_swimwear_in_changing_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 440257,
+      "sha256": "849c71adbc55c530f8b53d3606a994a93f4d04f566f185313693cf3bd7277190"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02.json",
+      "kind": "evidence_or_history",
+      "bytes": 42232,
+      "sha256": "231710bea7b1fb946e3ac96431920bb59afc60dd8a6281e36f78a2e1f351c77b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2502,
+      "sha256": "27c6d197d4bbf4a8a2afbb86c97da5ea58e9710714d493ab7a1971326be1e524"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 923,
+      "sha256": "cd8663fc6905edae5e5dd4148b63f25c7143678c5624d3b5c07b0deb9a2305bf"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_changing_room_lockers_and_bench.png",
+      "kind": "evidence_or_history",
+      "bytes": 435617,
+      "sha256": "da81e0b2040097722466dbd5d3e0eeae75db805c8234bee8399e02c69e471529"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_ordinary_pool_arrival.png",
+      "kind": "evidence_or_history",
+      "bytes": 557347,
+      "sha256": "3f118b19dd9f9f25eacb83c7b08e7ea7dcdc382148ff4718bde17a35a92a1fcc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_prepared_actual_swimming.png",
+      "kind": "evidence_or_history",
+      "bytes": 415269,
+      "sha256": "ac649d126b9012245b2fd639d323db46af725d4a8ac534c751b766676a37f40a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_prepared_swimwear_shower_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 275824,
+      "sha256": "7c0a150340604dc763783170dd71a6088970ab3eed09173d518a6cf3e42ae73c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_previous_outfit_restored.png",
+      "kind": "evidence_or_history",
+      "bytes": 434844,
+      "sha256": "ee425775f00ab36a6f58a645ee79e7fcd75abd3815823fcac985aeaae48aec47"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_shower_running_water.png",
+      "kind": "evidence_or_history",
+      "bytes": 278023,
+      "sha256": "8a34c1e5eaa8e96817bff490a285ce615ca5b3aa0d1ff914bf0598fca89b90a1"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final02_swimwear_in_changing_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 440257,
+      "sha256": "849c71adbc55c530f8b53d3606a994a93f4d04f566f185313693cf3bd7277190"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03.json",
+      "kind": "current_evidence",
+      "bytes": 41960,
+      "sha256": "4eabda91e94ef0abf1f1dd8596c757e7702fd061e676ab740eaeef52ab3909c8"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2502,
+      "sha256": "27c6d197d4bbf4a8a2afbb86c97da5ea58e9710714d493ab7a1971326be1e524"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 923,
+      "sha256": "5c69d13fe7eca58b4b85c3a1126ca852e8f70d6bedc6e7ecbf55d92c4838cf72"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_changing_room_lockers_and_bench.png",
+      "kind": "evidence_or_history",
+      "bytes": 550082,
+      "sha256": "01320d8eb9df0742b8eafb4c678cbaa82eda5b9d454ca9900a908197f818aafb"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_ordinary_pool_arrival.png",
+      "kind": "evidence_or_history",
+      "bytes": 503978,
+      "sha256": "560af6d1ca615c7b52bd995457648179add3f637f7a6fac628b0b7032cf934a1"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_prepared_actual_swimming.png",
+      "kind": "evidence_or_history",
+      "bytes": 514948,
+      "sha256": "c17c79c4646707348e40052b2096ce353757f1dcff692d08abf9491f22022455"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_prepared_swimwear_shower_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 518680,
+      "sha256": "2de0a5562bc618cbdd0ebf0caf84dabfad4e769b8894b0f05810b9dbbe9377ca"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_previous_outfit_restored.png",
+      "kind": "evidence_or_history",
+      "bytes": 548852,
+      "sha256": "a4e161a353ee708926fbc933c59bf1221b1f6516484dd98749bc96947f994876"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_shower_running_water.png",
+      "kind": "evidence_or_history",
+      "bytes": 512287,
+      "sha256": "e96fb2a0c28d5014515a042674489a24fe8f1a1fe1da8b33dd10f868abb70545"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/pool_native_final03_swimwear_in_changing_room.png",
+      "kind": "evidence_or_history",
+      "bytes": 554831,
+      "sha256": "e3590347986c8f8e22c0f5279f1a212a9daeb88cbc04a70d0df143531fc3e6fa"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 22428,
+      "sha256": "e94a9080f88e97685ee664b2474ad6731641504690f7830c05e649e96c5d037c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2563,
+      "sha256": "ebf199a0f5ba7024c22c6cbb4aea7560228d2a71d1a8787219a04a7610c5bf18"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 960,
+      "sha256": "c47a4bed0346ba34895a13383fda51f88c08085c057d4b7e84cc197857452d9f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final02.json",
+      "kind": "evidence_or_history",
+      "bytes": 22428,
+      "sha256": "9fe9601d4aa9738abc747c5557ae6662e34f5524837199dcfa53b033274c6b53"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2563,
+      "sha256": "ebf199a0f5ba7024c22c6cbb4aea7560228d2a71d1a8787219a04a7610c5bf18"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final02.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 960,
+      "sha256": "cd530b7ad4790eb27d6c803bf915d712657173761918444ca9078bebb1310304"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final03.json",
+      "kind": "current_evidence",
+      "bytes": 22428,
+      "sha256": "5b48d508aad3b503df15f0d259f9d09436d551aa1bc607364f470db1b36e9e98"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2563,
+      "sha256": "ebf199a0f5ba7024c22c6cbb4aea7560228d2a71d1a8787219a04a7610c5bf18"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/scooter_headless_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 960,
+      "sha256": "df1b064201d3939e8f93f813e3b8d9a024a74965fe9a3d57296cb54906330767"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01.json",
+      "kind": "evidence_or_history",
+      "bytes": 57311,
+      "sha256": "336643d4fb2fc26ac1c72e84e0014113573df2ac176dd757638abbbe0f175394"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3079,
+      "sha256": "6a8b2a3c3ccaddb5bf3b9a226164705feda67585b651e55c9e324dee289a7130"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 917,
+      "sha256": "44e5d46eba46a2313a785f61aee184330a369003c13e73aefeff73bbee71fde6"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_clothing_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 210688,
+      "sha256": "e64b8f31b4cc16caee556ccfcd9521b4b8635af09afd6b34366882c57c7ffa26"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_convenience_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 202058,
+      "sha256": "0497e1014a42d106668056720efa1fb3a5541739235b2235b19d77cb06392656"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_convenience_purchase_receipt.png",
+      "kind": "evidence_or_history",
+      "bytes": 155497,
+      "sha256": "0e0f922548bb834cf4e9aea60814abd691c2efdaeaea9053ea8ce902f1b74208"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_convenience_source_door.png",
+      "kind": "evidence_or_history",
+      "bytes": 433927,
+      "sha256": "4e76f4de2c05c6bef2c082ab57a9f555dec18f8afe212e9c94dd687b6c4a944c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_inventory_reequipped_hoodie.png",
+      "kind": "evidence_or_history",
+      "bytes": 418201,
+      "sha256": "a1031dacd1d51b7ddf8c065a3865303e6ff2c2b1e4f5b890c78e87abf3a921e3"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_outfit_charcoal_jacket.png",
+      "kind": "evidence_or_history",
+      "bytes": 202766,
+      "sha256": "455ce5835b8565c22837d453566d75ac58a50a406d896eebae8ea95247ae5186"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_outfit_cobalt_hoodie.png",
+      "kind": "evidence_or_history",
+      "bytes": 203748,
+      "sha256": "a66df35ee3b591c9888b8acd12d0825483e0bd23df9178e4d524532320700933"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_outfit_ivory_cardigan.png",
+      "kind": "evidence_or_history",
+      "bytes": 202698,
+      "sha256": "8f9e06f01cff08480d6c1e119bb70b3da14def9e6918f2211b02d000fb59f00c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_purchased_cardigan_actual_avatar.png",
+      "kind": "evidence_or_history",
+      "bytes": 201185,
+      "sha256": "33de459f9d248f2afc944d268e73f76a95e4808b32e5afec39e8c7488363266f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_restaurant_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 210047,
+      "sha256": "0901d26badd96e1864c62c1b7c93e56e1e0ec31e2e01a037f077f47ed23adaf5"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_restaurant_purchase_receipt.png",
+      "kind": "evidence_or_history",
+      "bytes": 160348,
+      "sha256": "4f019d73ab83bd0476757c2bf4319d62ed54a9273b636d371c1525b71304cf67"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_small640_inventory.png",
+      "kind": "evidence_or_history",
+      "bytes": 104759,
+      "sha256": "93b74c37b2d5e0d3e3d221bb4b25f0b2e929caae09abedf5dab43704ef7265dc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_small640_purchase.png",
+      "kind": "evidence_or_history",
+      "bytes": 76216,
+      "sha256": "b77d939951124e673465fdaeb176ea728bdb3de140b8e15db4e16c84412a9b80"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final01_swimwear_actual_avatar.png",
+      "kind": "evidence_or_history",
+      "bytes": 806565,
+      "sha256": "d2466afa82c5e7b5db83b19cb0d1d4fe72f6978b9add33154264886fd9a2acbd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03.json",
+      "kind": "current_evidence",
+      "bytes": 72795,
+      "sha256": "4754eda7572017a6e0f61c3be053b1a09b42dbc162e362df27c16e645e40fe70"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3164,
+      "sha256": "526c8fab88385f909111a249bfb565661f8e6cb8ab308cc914a33f8b9854177d"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03.run.json",
+      "kind": "evidence_or_history",
+      "bytes": 917,
+      "sha256": "ccd1af211918e66e5405ffb5e916882e5879ac5f2b8f494c6b36be8f6d411123"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_clothing_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 206845,
+      "sha256": "6e18e10a5801200efae454a7cb0d8730822a2eff3965c9b778f98d223c70f1fd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_convenience_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 202058,
+      "sha256": "0497e1014a42d106668056720efa1fb3a5541739235b2235b19d77cb06392656"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_convenience_purchase_receipt.png",
+      "kind": "evidence_or_history",
+      "bytes": 155504,
+      "sha256": "bf48a7124589d5b615fed8e17b30e231dc3bfaa2087902b8430cf83d5c7bed00"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_convenience_source_door.png",
+      "kind": "evidence_or_history",
+      "bytes": 433927,
+      "sha256": "4e76f4de2c05c6bef2c082ab57a9f555dec18f8afe212e9c94dd687b6c4a944c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_inventory_hoodie_actual_avatar.png",
+      "kind": "evidence_or_history",
+      "bytes": 160607,
+      "sha256": "5327c613388e0dcd9fdb2b441356763a960c0c5696a235ff553e5f818b3f816a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_inventory_reequipped_hoodie.png",
+      "kind": "evidence_or_history",
+      "bytes": 144572,
+      "sha256": "b2d039e74bb04b5b68494fcea5323a42baf01864c7ce3678ef772d50b14b5325"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_outfit_charcoal_jacket.png",
+      "kind": "evidence_or_history",
+      "bytes": 161340,
+      "sha256": "60fbb032011404897043cbf0b65a9c5ae84f719bd7c5c44e0bc7b7832211bca0"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_outfit_cobalt_hoodie.png",
+      "kind": "evidence_or_history",
+      "bytes": 163987,
+      "sha256": "216442f14238bd6dbf33521cae6d715019bc2ab0609c2d3181fd36794c6a10e2"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_outfit_ivory_cardigan.png",
+      "kind": "evidence_or_history",
+      "bytes": 163885,
+      "sha256": "33c65727f1b4ee36bdc0266882829c5dbb55e1443ddca4e65aa076071076da9e"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_purchased_cardigan_actual_avatar.png",
+      "kind": "evidence_or_history",
+      "bytes": 161349,
+      "sha256": "1840cc0d1aaa614533be97510e4825eab4f5fd8c8916f8d642865c4007ec3b55"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_restaurant_interior.png",
+      "kind": "evidence_or_history",
+      "bytes": 210051,
+      "sha256": "91fbdf8d83c4afd66efd949ada286895a1925e08adfeffa471d2f0e049331768"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_restaurant_purchase_receipt.png",
+      "kind": "evidence_or_history",
+      "bytes": 160358,
+      "sha256": "a8450c876409a5ea23dfe8633479d536c970dd387dc7ab6efab69ca4a3b0a02f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_small640_inventory.png",
+      "kind": "evidence_or_history",
+      "bytes": 57101,
+      "sha256": "63d47b056289aef79563102d4f5458887176786519ed329282bf4a95a4a70c6c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_small640_purchase.png",
+      "kind": "evidence_or_history",
+      "bytes": 76216,
+      "sha256": "b77d939951124e673465fdaeb176ea728bdb3de140b8e15db4e16c84412a9b80"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/shop_native_final03_swimwear_actual_avatar.png",
+      "kind": "evidence_or_history",
+      "bytes": 161972,
+      "sha256": "0ca01b647f9378845b2d6518145d09aab5e9394331fcecc430382d0465931cd0"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/source_freeze.json",
+      "kind": "evidence_or_history",
+      "bytes": 23872,
+      "sha256": "782d8eec99040a659a8cbbb88a1ad3da5e5fbd048c7e6ee2fb95e4a5be609568"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/source_freeze02.json",
+      "kind": "evidence_or_history",
+      "bytes": 23918,
+      "sha256": "d50f332c203893668dfa014006cb2ddd92d2eb7c584e055624036cb25f593a96"
+    },
+    {
+      "path": "data/reports/city_life/20261021/acceptance/source_freeze03.json",
+      "kind": "evidence_or_history",
+      "bytes": 23992,
+      "sha256": "1be03afbb154285b983b7ebed3d1d45cc3b4d09be67482a43bb545cdab9fb810"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/check_pool_room_clearance.gd",
+      "kind": "evidence_or_history",
+      "bytes": 2742,
+      "sha256": "770f8bc164f45161ba87124f99a97cdb29189156bfe32de7ebb569cb5bd5561e"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/drivable-car-host-shortcut.json",
+      "kind": "evidence_or_history",
+      "bytes": 17443,
+      "sha256": "68ee16bca233ba2d52b627bb7ed1e3ab42b9db5d7fdd57d738f5e8761c5f8429"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/drivable-car-host-shortcut.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2487,
+      "sha256": "dc1a028eef2e184fb9f6bb1b72739867a3189885212af3d47fb0b2d31e996350"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/drivable-car-initial.json",
+      "kind": "evidence_or_history",
+      "bytes": 15016,
+      "sha256": "1aea8f0f769b74e5c62802ca8792b3ed5683a55f213293eabca552fad1cc3deb"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/drivable-car-initial.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2407,
+      "sha256": "5de8b875627ce0a73bd8d73e703ad2f4fef8b0df56c423ce87fc1d91af3a8352"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/integration_run01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 398,
+      "sha256": "c80e6688f4b632b810acc6deb10d3162132082672c8c9223227a21b95dea3966"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/integration_run02.json",
+      "kind": "evidence_or_history",
+      "bytes": 31094,
+      "sha256": "00979ca1dc77922b918a16dd06f981c421aadc1d46c04c76c32d405617b96166"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/integration_run02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2628,
+      "sha256": "c8ea1e775a96b4e85641eeb629776db822a14367b0132f938118d867c7cc3158"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/integration_run03.json",
+      "kind": "evidence_or_history",
+      "bytes": 31143,
+      "sha256": "4028e38b1c75cd3d65b49fdbbd606fd81c359cf78aa9ca9a7d84376fc667e434"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/integration_run03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2625,
+      "sha256": "e17aaf7d77685f6e4f94ab714b34d512270ec0837c63bf1af511ede890730a81"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-central-rooms.json",
+      "kind": "evidence_or_history",
+      "bytes": 23087,
+      "sha256": "e78f41d2f8f9b3ac0b262c11c82cb9e79efe1b2bc4ce1238416645810aa264f8"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-central-rooms.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2466,
+      "sha256": "bbeb675027e4343076e6cf1070093a425ffb02e51bbbaa661e4a0cebaf4e4c46"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-initial.json",
+      "kind": "evidence_or_history",
+      "bytes": 22263,
+      "sha256": "7e039b8b9d49381bf68ec97ad251e4ec4d9afea2cdeced61ef685b4b351f5a67"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-initial.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2436,
+      "sha256": "21746efe63175807e8cef762c7e39a87ede9cc2b7837e89411ab69476ef12a40"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-parse.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 317,
+      "sha256": "104d2f30417503ef62ce8af54c25f56576f106972b1db8a673fbba93248cd76a"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-second.json",
+      "kind": "evidence_or_history",
+      "bytes": 23319,
+      "sha256": "47552960f030aae63b547dda5d99d73764a6ef473286270c00df780ac7846de4"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-preparation-second.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2466,
+      "sha256": "bbeb675027e4343076e6cf1070093a425ffb02e51bbbaa661e4a0cebaf4e4c46"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-room-clearance-initial-name-only.json",
+      "kind": "evidence_or_history",
+      "bytes": 3932,
+      "sha256": "80689c0acce89cb2f071a22ace12c8f6ad184fe7d219e2cc574c18d7469fa635"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/pool-room-clearance.json",
+      "kind": "evidence_or_history",
+      "bytes": 5040,
+      "sha256": "dd321ba27814d19d6fec0c5b948aa08e80b9c74b9f273614ec5b0f18b574c33f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-city-life-boot.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 1791,
+      "sha256": "6f9ef19fa35064b39b0f7d228e0d6219feb58717c69d5b7cc91fa5f78c3bec0c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-heli-native-initial.json",
+      "kind": "evidence_or_history",
+      "bytes": 6784,
+      "sha256": "c696076bfa57a0130c25bd5155c8f289193ab064f01e759fa58857513ef52731"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-heli-native-initial.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2018,
+      "sha256": "23738da35cf49bac5f9f716dacdfb750771c894d6c41d57f355db385a72d6b99"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development01.json",
+      "kind": "evidence_or_history",
+      "bytes": 42393,
+      "sha256": "f0ef6f4f26c15a6938404e9e6899ebb64d36c506c123ff156643bd1271e66918"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3071,
+      "sha256": "51bd252737a14286a7467b275f178fb9e94e902d77ac2b0e792cb43512407591"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development02.json",
+      "kind": "evidence_or_history",
+      "bytes": 43603,
+      "sha256": "2a5b7feaa072642bb0a427f3c83650ec65e221894e1b66229c772f891e8b0cda"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3055,
+      "sha256": "632cf7edaf5946c1ce79e226e9e95b735cc696a1e72f5942b2943b54f33f38a6"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development03.json",
+      "kind": "evidence_or_history",
+      "bytes": 44977,
+      "sha256": "9237948705f50925b077f71e5c12108d49b769f8421a137f7f8ee4beb9564cdd"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-clothing-development03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3099,
+      "sha256": "a7040f87ff8fb2ff4ff8e061e9c27a46af3cd233896d0b243b80f5948daaf19b"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development01.json",
+      "kind": "evidence_or_history",
+      "bytes": 23113,
+      "sha256": "7449d21f86e6d570c10b3c19e2f0a11a2b23795808f0908f97d4b5815f3bddd9"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2921,
+      "sha256": "a0f25b6f8ce7ad34f4f41df6611b27ccf99d707c38d8cbcf46c8c65b260a2175"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development02.json",
+      "kind": "evidence_or_history",
+      "bytes": 23712,
+      "sha256": "fbf2d85346d86af8a3110d6c1488f5e278676d8e965ffe71695b021ac8a19f78"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development02.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2644,
+      "sha256": "af35ce496a10ba3a9a90fb9ca13c3eff05a74ee4a744f46b9d4e3688bf883e53"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development03.json",
+      "kind": "evidence_or_history",
+      "bytes": 23634,
+      "sha256": "ee378387560d73d58d34ba0ad16c0d0e614d145d928144a8a0d4fc832fcb1c28"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development03.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2794,
+      "sha256": "a612c1d4ba772efef0c7a9cbd36e67ab867c6631ab3c81dbf383db7bae62a5de"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development04.json",
+      "kind": "evidence_or_history",
+      "bytes": 23783,
+      "sha256": "ae6759f4d15adfd147a8bd26505a42ec195bbbe2f83747a8b54f458a3560f875"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development04.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2533,
+      "sha256": "8f10e1ca16dac00c6c825177fd3adebe98244e7ef47dc97af546acee17dcf35f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development05.json",
+      "kind": "evidence_or_history",
+      "bytes": 24264,
+      "sha256": "e11b9ca2396fb0c55e6556d37f2a66829e1358d3434efc81c1a8a7e0301db6b4"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-development05.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2644,
+      "sha256": "bc962c9ff3fd53a1a9efe76f2efcbdb8bb5678faf0a8b2e95ab798aede5587bc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-observer-development01.json",
+      "kind": "evidence_or_history",
+      "bytes": 54434,
+      "sha256": "fab1e8bc4027be20ca92cc3219869594ab2e37842785a216c5840658675e8cbc"
+    },
+    {
+      "path": "data/reports/city_life/20261021/development/sim2seoul-shop-observer-development01.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 3197,
+      "sha256": "c0b4ef2f20fcd0230958e4196688b4fa5c5e505609e824a65a5bd35f925ae2ad"
+    },
+    {
+      "path": "data/reports/city_life/20261021/normal_launch.json",
+      "kind": "current_evidence",
+      "bytes": 1572,
+      "sha256": "38967057e3de3636d5d0f2b2f6de9388ce6b9d57c274e1c260b1858371598442"
+    },
+    {
+      "path": "data/reports/city_life/20261021/normal_launch.log.gz",
+      "kind": "evidence_or_history",
+      "bytes": 2585,
+      "sha256": "7160a7b6400fc9b9d7e51a5d6239c004ffbd31856c892d5e705dcf14ef8b4440"
+    },
+    {
+      "path": "data/reports/city_life/20261021/normal_launch_start.json",
+      "kind": "evidence_or_history",
+      "bytes": 209,
+      "sha256": "6f2292b02b6bef9e82ff5b106fad1a8ee09879cc8495e050421a8b37cd165d7c"
+    },
+    {
+      "path": "data/reports/city_life/20261021/normal_observed_flight.png",
+      "kind": "evidence_or_history",
+      "bytes": 123942,
+      "sha256": "eee87165f3c2da332235a03240ee5ba3c3e1fee2f95691e8054f90dd5bf9f80f"
+    },
+    {
+      "path": "data/reports/city_life/20261021/visual_review.json",
+      "kind": "current_evidence",
+      "bytes": 5469,
+      "sha256": "bcb81ffb4ad830ab2240261464420afd1fb770d93317b8a37ace8864bb826dbd"
+    },
+    {
+      "path": "docs/ASSET_REUSE_OPTIONS.md",
+      "kind": "documentation",
+      "bytes": 4828,
+      "sha256": "798a4dee1510225f66f778ae66972fa5fde53a24bb4fa7cb7c020b19b6360dbd"
+    },
+    {
+      "path": "docs/ATTRIBUTION.md",
+      "kind": "documentation",
+      "bytes": 18020,
+      "sha256": "402807c24c9d95d6d062d0934ec7a035ca98217ae214b86d799cecc76d943cfe"
+    },
+    {
+      "path": "docs/CROSS_MAC.md",
+      "kind": "documentation",
+      "bytes": 49402,
+      "sha256": "3618e6987043471dbbc1b19b2ad26eb7d8c80a62b804e737edd2faaaeae97d7f"
+    },
+    {
+      "path": "docs/DATA_SOURCES.md",
+      "kind": "documentation",
+      "bytes": 10748,
+      "sha256": "900ad2156814fe57b2995c259f8bfae9d9578795a6549d5f9f07c94e9732e221"
+    },
+    {
+      "path": "docs/ENGINEERING.md",
+      "kind": "documentation",
+      "bytes": 12229,
+      "sha256": "7f96192f68beae183a01c9f11aa422b055a2bc9b3e1eab290b15a9419404b6a9"
+    },
+    {
+      "path": "docs/EXECUTION_LOG.md",
+      "kind": "documentation",
+      "bytes": 291082,
+      "sha256": "5cfab666dd329f5fdb83345001ca4fe3468ee4f1e7934471669ef09655356260"
+    },
+    {
+      "path": "docs/GAME_PROJECT.md",
+      "kind": "documentation",
+      "bytes": 23209,
+      "sha256": "960ba1bf3b9a3514d599aa07c3523d70ec1e92c0edf2b74dc034539cdfd57008"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_TASKS.md",
+      "kind": "documentation",
+      "bytes": 78564,
+      "sha256": "062abef97bbf74f1f5901782234999b3b66053fad0605093d3b95fe79e7dd57c"
+    },
+    {
+      "path": "docs/MASTER_PLAN.md",
+      "kind": "documentation",
+      "bytes": 11568,
+      "sha256": "f8e584a24283cc910fdf9ccfa0545bfc3d7cd91941f36b001a1717e3e0406da7"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "kind": "documentation",
+      "bytes": 53393,
+      "sha256": "914c3962e40e4c35410145c6481467968a98f9a0c3d84ab3ac55f9d6370cd6da"
+    },
+    {
+      "path": "docs/README.md",
+      "kind": "documentation",
+      "bytes": 2085,
+      "sha256": "d1d9664451aa6895ad8b320130a2c65a4d13d3d42387c45b6d47aeb089d13b50"
+    },
+    {
+      "path": "docs/REALISM_REWORK.md",
+      "kind": "documentation",
+      "bytes": 7536,
+      "sha256": "014c6605f5227d208daaaf3c07e297d468b4172904f986b6c96595a07137d8d1"
+    },
+    {
+      "path": "docs/RUN_GUIDE.md",
+      "kind": "documentation",
+      "bytes": 35555,
+      "sha256": "8696adf8675027067750dc6529ef07de3251d5fd64b929150bd0a3919bd0cb16"
+    },
+    {
+      "path": "docs/SOL_HANDOFF.md",
+      "kind": "documentation",
+      "bytes": 29048,
+      "sha256": "99520117752e72d127a00980ee4c2f8c0c7376e3bd81f6b89982db1ef5bf21da"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "kind": "documentation",
+      "bytes": 138156,
+      "sha256": "2892d52ddfc4942d51795aff27f80e8060c6316e2c08e1d85583862772ff5066"
+    },
+    {
+      "path": "docs/TERRAIN_INTEGRATION.md",
+      "kind": "documentation",
+      "bytes": 8932,
+      "sha256": "9cc02ef856d409f03138307aa8ff5dfeb6f1047f5eac45ced377a3bc0b815adb"
+    },
+    {
+      "path": "docs/VALIDATION_PLAN.md",
+      "kind": "documentation",
+      "bytes": 106550,
+      "sha256": "8b4bbeb44623cf2611ffd87681642338c076f072ebec33a316cbfdd97c9d19d3"
+    },
+    {
+      "path": "docs/WALKABLE_CHECKLIST.md",
+      "kind": "documentation",
+      "bytes": 3482,
+      "sha256": "f3de3dd68c37560c74b0aa4914d31dc8383bb15de9323065c54c1e33a89cb935"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "kind": "documentation",
+      "bytes": 109721,
+      "sha256": "4880baa9ad27893ef589f8a7964e331c140f6f636f226ed6e1dc98dde2566ee0"
+    },
+    {
+      "path": "docs/data_gaps.md",
+      "kind": "documentation",
+      "bytes": 10746,
+      "sha256": "e07bfc1814ea76fb027caab698537b741ee1a91c685a903898e5c1d8c88b8f82"
+    },
+    {
+      "path": "docs/environment.md",
+      "kind": "documentation",
+      "bytes": 4980,
+      "sha256": "a7f6ce04ab5840f849a584ed902b8adb4bf99e6d82e1f2f6e050835c9c725237"
+    },
+    {
+      "path": "docs/landmark_reference.md",
+      "kind": "documentation",
+      "bytes": 29676,
+      "sha256": "92a81e9e4b1b24edea5bafa4743265f078c586c13615132f873e3b90bd59f7d3"
+    },
+    {
+      "path": "docs/performance_notes.md",
+      "kind": "documentation",
+      "bytes": 8834,
+      "sha256": "f8dbf848f004061ea7bf0afae6eee78929ca5f50ed530e1eb23a974792cdf52f"
+    },
+    {
+      "path": "docs/route_rules.md",
+      "kind": "documentation",
+      "bytes": 8414,
+      "sha256": "5aec2bedaf0360c766cc8f0941c7dea39c4ed61d7f0dad5f256c40df03524b1c"
+    },
+    {
+      "path": "game/assets/authored/bike_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 2561,
+      "sha256": "605df422a3e86e939d93dd04e0b9883e7c1df48dad402de28cb1605b095fc5d8"
+    },
+    {
+      "path": "game/assets/authored/building_exteriors.json",
+      "kind": "game_source_or_test",
+      "bytes": 57462,
+      "sha256": "5550848db8eb2a59ec74f98bf4601078eb9658856e3e49ffdc96ca41685ceb29"
+    },
+    {
+      "path": "game/assets/authored/bus_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 8506,
+      "sha256": "f9cb2f6cfb4009ec39b7ba21d6ed4d0e1fd3b7f00092f423354adde2042c8718"
+    },
+    {
+      "path": "game/assets/authored/car_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 1865,
+      "sha256": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2"
+    },
+    {
+      "path": "game/assets/authored/exploration_extent.json",
+      "kind": "game_source_or_test",
+      "bytes": 1403,
+      "sha256": "7add4fef0bea3950241d840498aa044ba01d564c2da3c48f8d88f5e16f30155a"
+    },
+    {
+      "path": "game/assets/authored/helicopter_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 2145,
+      "sha256": "9d5e2bc4ac20824e34e5b245c522c55ddfe0761c3b7d671ec96265918fbcf311"
+    },
+    {
+      "path": "game/assets/authored/interiors/source_catalog.json",
+      "kind": "game_source_or_test",
+      "bytes": 358090,
+      "sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848"
+    },
+    {
+      "path": "game/assets/authored/interiors/supplemental_catalog.json",
+      "kind": "game_source_or_test",
+      "bytes": 9510,
+      "sha256": "d6749acae2093912e2465691d7c11082fb1fabceadc7ccfbf7fffb64bebd0d6d"
+    },
+    {
+      "path": "game/assets/authored/landmarks/city/recipes.json",
+      "kind": "game_source_or_test",
+      "bytes": 972,
+      "sha256": "0a4b2fbff36a34a2fdf4a9b817de146739fd83c1d1749e7f7d46378450d73bf3"
+    },
+    {
+      "path": "game/assets/authored/landmarks/palace/recipes.json",
+      "kind": "game_source_or_test",
+      "bytes": 2021,
+      "sha256": "b36647ffcac6063d5a71d603dbc3d0eeedeb76fbe431de017d4294528204b83e"
+    },
+    {
+      "path": "game/assets/authored/museum_approach.json",
+      "kind": "game_source_or_test",
+      "bytes": 3001,
+      "sha256": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_greenery.json",
+      "kind": "game_source_or_test",
+      "bytes": 165253,
+      "sha256": "cc2d16801bbc97eb5c70641250c590f02416530a9910373b038b8db91cd8ade6"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_population.json",
+      "kind": "game_source_or_test",
+      "bytes": 79247,
+      "sha256": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2"
+    },
+    {
+      "path": "game/assets/authored/road_furniture.json",
+      "kind": "game_source_or_test",
+      "bytes": 462365,
+      "sha256": "7a87b49638f047248e00e723f6215a51f513f2ec933307da33829969a430ac41"
+    },
+    {
+      "path": "game/assets/authored/scooter_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 1986,
+      "sha256": "ebc154814abe3515b668a93d9a35603287b5cc3467dcce900898153468418bba"
+    },
+    {
+      "path": "game/assets/authored/shop_service.json",
+      "kind": "game_source_or_test",
+      "bytes": 7067,
+      "sha256": "075fe1b431ffc01ee9d7910fc9589ca0a780284b03da1718328f0a3cfdc1f31a"
+    },
+    {
+      "path": "game/assets/authored/street_businesses.json",
+      "kind": "game_source_or_test",
+      "bytes": 30238,
+      "sha256": "1e37a8697526c5a97b6c089e83543b41c75ea2b73a56b39bb4d6f20b2ac54152"
+    },
+    {
+      "path": "game/assets/authored/street_curbs.json",
+      "kind": "game_source_or_test",
+      "bytes": 12305,
+      "sha256": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc"
+    },
+    {
+      "path": "game/assets/authored/street_life.json",
+      "kind": "game_source_or_test",
+      "bytes": 2703,
+      "sha256": "6d6b34d895707c21aef639a134a6194590bf36fcc73d84f5ab04268240cff0b9"
+    },
+    {
+      "path": "game/assets/authored/street_pedestrians.json",
+      "kind": "game_source_or_test",
+      "bytes": 5872,
+      "sha256": "4f48536000261a66b3ae46e7b9a44e8aff3c69f705e600cdf56e7cc4d49bd07f"
+    },
+    {
+      "path": "game/assets/authored/terrain_heightfield.json",
+      "kind": "game_source_or_test",
+      "bytes": 1045434,
+      "sha256": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e"
+    },
+    {
+      "path": "game/data/generated/public_walk.json",
+      "kind": "generated_runtime_input",
+      "bytes": 657998,
+      "sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+    },
+    {
+      "path": "game/data/generated/terrain_surface.json",
+      "kind": "generated_runtime_input",
+      "bytes": 10509215,
+      "sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+    },
+    {
+      "path": "game/data/generated/traffic.json",
+      "kind": "generated_runtime_input",
+      "bytes": 277933,
+      "sha256": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+    },
+    {
+      "path": "game/project.godot",
+      "kind": "source_or_runbook",
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    {
+      "path": "game/resources/world_geometry/world.json",
+      "kind": "generated_runtime_input",
+      "bytes": 5037995,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "path": "game/scenes/world/explore_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 589,
+      "sha256": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939"
+    },
+    {
+      "path": "game/scripts/base_world.gd",
+      "kind": "game_source_or_test",
+      "bytes": 1624,
+      "sha256": "5cd8edc754ed310cdbe1ee67353da6893dbd9a02ca305b34aeaff7594be553c4"
+    },
+    {
+      "path": "game/scripts/building_exterior_identity.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14993,
+      "sha256": "45769ecd558e791932902e3838d8f4ac05970be2e5ae2d669c3248b49b24a0f7"
+    },
+    {
+      "path": "game/scripts/building_interior_space.gd",
+      "kind": "game_source_or_test",
+      "bytes": 20380,
+      "sha256": "38f4654f37d85185d910302dbbdd7c7d4f7111eaee11100dd8227852c8531be4"
+    },
+    {
+      "path": "game/scripts/building_names.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5162,
+      "sha256": "926118855ec1b9eccd9f8fbef9ca3e947ebc7f81bb394d86ffb373bf5cfebde7"
+    },
+    {
+      "path": "game/scripts/building_type_identity.gd",
+      "kind": "game_source_or_test",
+      "bytes": 9529,
+      "sha256": "4f4c5d193ffe2626540e0bf4667977bc80a94297375c2151c366afe85c189875"
+    },
+    {
+      "path": "game/scripts/building_visit_catalog.gd",
+      "kind": "game_source_or_test",
+      "bytes": 8981,
+      "sha256": "6e78922df14418b89daa4b9434228f981d5771be34069969b27a453c89e99043"
+    },
+    {
+      "path": "game/scripts/camera_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3402,
+      "sha256": "85dac21a6d8e6a941b17fef83230fdb257811a3dbb3ec5415169552bda6dd063"
+    },
+    {
+      "path": "game/scripts/city_bike_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 37227,
+      "sha256": "70ba35bf2d2f72384e5663f8057a8ce8534e41ce79ecbc2b2a41932cc26852ce"
+    },
+    {
+      "path": "game/scripts/city_bus_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 43825,
+      "sha256": "5027d742f2a6971faf1025a39e9d9af1e79e1591047473ef88016f5afbc062ee"
+    },
+    {
+      "path": "game/scripts/city_facades.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5197,
+      "sha256": "7a773f211214722c998fd4ac8ee344d76d2b9d740489e7baddfc0898e01975e4"
+    },
+    {
+      "path": "game/scripts/city_helicopter_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 33355,
+      "sha256": "0cbaf9e9db1ee1c4444c9919efbf693d0b5df0d8f028917a75f7647b37775772"
+    },
+    {
+      "path": "game/scripts/city_landmark_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 574,
+      "sha256": "d9b6a6e3456e3216afba92f293791ebc871346f9256b0cd8f0dcdb98afc04f7a"
+    },
+    {
+      "path": "game/scripts/city_scooter_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 9013,
+      "sha256": "e7068d486fa5bf178ab4b9087d456be495d53a3c9ffa14a04dc22b052a4e1450"
+    },
+    {
+      "path": "game/scripts/city_visuals.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5410,
+      "sha256": "dde6da1d14a623c6b565ab2d3db8745c55575c7ada06e826574fa11586c68f4d"
+    },
+    {
+      "path": "game/scripts/collision_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4252,
+      "sha256": "42b33663b364acd5c9cda67914dab39452d79b8f44ad518d9712038bdcb1d86f"
+    },
+    {
+      "path": "game/scripts/collision_world.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5311,
+      "sha256": "78ea28c07e6901b2b6096a298eef1b1ccb3185e9a1e87bc23cbda1f232421231"
+    },
+    {
+      "path": "game/scripts/daehanmun_connection.gd",
+      "kind": "game_source_or_test",
+      "bytes": 8792,
+      "sha256": "dec55dd79bd5ac6a5b4696e44144cbe4ef47bc810816ad0354e2adec2810fd2d"
+    },
+    {
+      "path": "game/scripts/daehanmun_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3115,
+      "sha256": "cc97cc02fb46f093d2ab477c3ac03ebd43f87986c9663b0c80e70ef247ae7fdb"
+    },
+    {
+      "path": "game/scripts/drivable_car_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19708,
+      "sha256": "5d4bf3880a394376b7e565269c510dfe12ef5614249c4746737a9423bbd3507a"
+    },
+    {
+      "path": "game/scripts/elevator_cabin.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10417,
+      "sha256": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad"
+    },
+    {
+      "path": "game/scripts/entrance_wayfinding.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18512,
+      "sha256": "e94e6542d70bd810f629d87d3c57176e56d4f8c215f3b9dac7a9243ece802a4b"
+    },
+    {
+      "path": "game/scripts/exploration_overlay.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4268,
+      "sha256": "dc61b47691e62b212c629e15e2947d40fef05b5306960852df0af887720dcf35"
+    },
+    {
+      "path": "game/scripts/exploration_pedestrian_avoidance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6880,
+      "sha256": "df8b0f3f5be8b34feb46486b349ab0cfea9a32c71dbbf840c5731f29198950b2"
+    },
+    {
+      "path": "game/scripts/exploration_rooftop_access.gd",
+      "kind": "game_source_or_test",
+      "bytes": 8351,
+      "sha256": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11"
+    },
+    {
+      "path": "game/scripts/exploration_traffic.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3268,
+      "sha256": "4a91a4a0d153ef4a325b34db555e8f998065a52d3f301fbbb6a14c0ff88ce24d"
+    },
+    {
+      "path": "game/scripts/explore_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 47961,
+      "sha256": "32dabf3400e9a2306855eaabf76e2c6e180437fab856f6fd61029a5e9c569914"
+    },
+    {
+      "path": "game/scripts/facility_activity_visuals.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13913,
+      "sha256": "0dfa0824a390e551e3d79e90cfe1858356e46f01143d44586c6d2de3287b7d04"
+    },
+    {
+      "path": "game/scripts/facility_interaction.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18281,
+      "sha256": "a427614cbb71cc44d9bef120e1ee29fbbc8bfe99e7934b86182d743b9e1ed495"
+    },
+    {
+      "path": "game/scripts/input_router.gd",
+      "kind": "game_source_or_test",
+      "bytes": 611,
+      "sha256": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff"
+    },
+    {
+      "path": "game/scripts/interior_detail_kit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 40275,
+      "sha256": "b64dba3a6331c75984769520f45f8847c9b59aa3e5b3d01f5c0571548321b52b"
+    },
+    {
+      "path": "game/scripts/interior_escalator.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6853,
+      "sha256": "73d3f5b5ef1f5654eda710560bd90c407bc5d8b66bea7599c6d324285828be42"
+    },
+    {
+      "path": "game/scripts/interior_facility_kit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 27653,
+      "sha256": "eb5d88789c23d2335ed450a8455ef9ff2fe71fa1d9c9d75de7f8cc48aed25b6d"
+    },
+    {
+      "path": "game/scripts/interior_population.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15516,
+      "sha256": "a76b15a363d341fbc3b533066e4f562dde41b073c0cba7c53913f0b1860c8b8f"
+    },
+    {
+      "path": "game/scripts/interior_room_access.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6488,
+      "sha256": "d655b16f5187ccd11975086c6b8c109c5a86869d4d250a220569357ad0a7bfb5"
+    },
+    {
+      "path": "game/scripts/interior_visit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 57686,
+      "sha256": "be862af44b6004abf739d92c0b965786dd669d70e45aac967ac3425b8d2857c7"
+    },
+    {
+      "path": "game/scripts/landmark_visuals.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5511,
+      "sha256": "75ef430d105b1d5640dbbc405fa38950bd8a428d90131ab64b31a604da62d8d7"
+    },
+    {
+      "path": "game/scripts/landmark_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 610,
+      "sha256": "f290413753f9ba0794794f4ab55b4a7327d09a4e6f7d536866c23f7a1326636c"
+    },
+    {
+      "path": "game/scripts/main.gd",
+      "kind": "game_source_or_test",
+      "bytes": 9693,
+      "sha256": "0f0b1cda49df0350a0750445cb36ae7a05991dc5da3287d91f48b2af0a1cf054"
+    },
+    {
+      "path": "game/scripts/movement_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7854,
+      "sha256": "16ad475cd5f56ebfacc59d0fcfa009869fa3269415ea805f0c16a97672e7ba82"
+    },
+    {
+      "path": "game/scripts/museum_approach.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19426,
+      "sha256": "58516b9919a3d3fcabe81e5f5e4a6b0703459db8ca99da1e5e6368b36be7f070"
+    },
+    {
+      "path": "game/scripts/neighborhood_greenery.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13983,
+      "sha256": "dd9294f3a3f9efba77296df4faa13ffcd4197273f8ed6477ec60193bd6b1cb1d"
+    },
+    {
+      "path": "game/scripts/neighborhood_life.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10725,
+      "sha256": "690af26e362234b3fea26860f06e554d2755b0909233254012030a6cccdba50b"
+    },
+    {
+      "path": "game/scripts/neighborhood_population.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10592,
+      "sha256": "f627c04ae8a8ef38de5d7f63377acbfd3e481450bd261ead308dc17ee284fd0f"
+    },
+    {
+      "path": "game/scripts/neighborhood_traffic.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19459,
+      "sha256": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369"
+    },
+    {
+      "path": "game/scripts/npc/pedestrian.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13906,
+      "sha256": "5c0e5c4868a9ad97b048886e9cb2b48c2bef570543dbcf0d2cd4d32ae55fa275"
+    },
+    {
+      "path": "game/scripts/palace_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3009,
+      "sha256": "5c94a9f6481288c01d7255e0a744010f653fbd04199e3e515678cc6bd21a6653"
+    },
+    {
+      "path": "game/scripts/palace_world.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7757,
+      "sha256": "7f699af6a0f58b26edd03618085999a609ef4eaed319b6f4acf1c16a59a3866f"
+    },
+    {
+      "path": "game/scripts/pedestrian_corridor_avoidance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14274,
+      "sha256": "69085e7ffd2640712f5bae45b202fe989bb5fc5ae3984f5e951d2555453dbfa4"
+    },
+    {
+      "path": "game/scripts/pedestrian_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6119,
+      "sha256": "56392feca1ad1c14b661cece60ac5c5f57a0ab5367016562770fb3e70cec409d"
+    },
+    {
+      "path": "game/scripts/photo_atmosphere.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4804,
+      "sha256": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff"
+    },
+    {
+      "path": "game/scripts/photo_civic_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 17379,
+      "sha256": "d40b345831b743e537f20cc0077fc0eacd6f25b419bf7a3b04eb76da45512a3b"
+    },
+    {
+      "path": "game/scripts/photo_palace_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 17991,
+      "sha256": "60807a6c3e5cc445a8a34fb6dc3c60bb0bc5457a1abac7ca752f8c6e5d0357bc"
+    },
+    {
+      "path": "game/scripts/photo_wall_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2533,
+      "sha256": "d768f0aeefab5cf95350e1389d77a874cc23ccd7c1618f6fc1c9790b3976f925"
+    },
+    {
+      "path": "game/scripts/player/camera_rig.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5267,
+      "sha256": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390"
+    },
+    {
+      "path": "game/scripts/player/daehanmun_player.gd",
+      "kind": "game_source_or_test",
+      "bytes": 630,
+      "sha256": "82b417b5eb08507fd70750709341981c3751db8b41ecf78f8cbb77c287d2a3d1"
+    },
+    {
+      "path": "game/scripts/player/exploration_avatar.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14878,
+      "sha256": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331"
+    },
+    {
+      "path": "game/scripts/player/exploration_camera.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13807,
+      "sha256": "0ab167d1ea3f690e80b51b8af55b8bbd5aedbec52d2805ff1e951deb8f40ecd0"
+    },
+    {
+      "path": "game/scripts/player/free_roam_player.gd",
+      "kind": "game_source_or_test",
+      "bytes": 21788,
+      "sha256": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f"
+    },
+    {
+      "path": "game/scripts/player/idle_support.gd",
+      "kind": "game_source_or_test",
+      "bytes": 380,
+      "sha256": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec"
+    },
+    {
+      "path": "game/scripts/player/movement_controller.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3872,
+      "sha256": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1"
+    },
+    {
+      "path": "game/scripts/player/palace_player.gd",
+      "kind": "game_source_or_test",
+      "bytes": 1001,
+      "sha256": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b"
+    },
+    {
+      "path": "game/scripts/player/public_player.gd",
+      "kind": "game_source_or_test",
+      "bytes": 780,
+      "sha256": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed"
+    },
+    {
+      "path": "game/scripts/player_fixture.gd",
+      "kind": "game_source_or_test",
+      "bytes": 9533,
+      "sha256": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6"
+    },
+    {
+      "path": "game/scripts/pool_preparation_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 12237,
+      "sha256": "1e62b951c76ac0f63b3296f5e7c9ff46522eb2561fcf0db81da9358f8fbde160"
+    },
+    {
+      "path": "game/scripts/public_boundary.gd",
+      "kind": "game_source_or_test",
+      "bytes": 304,
+      "sha256": "45ba308463fac36fec2f344cb68ea3d5d225e28250649758bf436033de6a1294"
+    },
+    {
+      "path": "game/scripts/public_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4298,
+      "sha256": "1607280fed1e5afac1f19f26e151e3b0e55c16a8963a2fc9f1673ba24c9fa19a"
+    },
+    {
+      "path": "game/scripts/public_world.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7868,
+      "sha256": "8e919bd972c4ed9a7866cb40103fc86566e619a7d07f49e43cbf516f5dd4d781"
+    },
+    {
+      "path": "game/scripts/rooftop_space.gd",
+      "kind": "game_source_or_test",
+      "bytes": 35644,
+      "sha256": "b5d7628b9251cd23b5a4447063013f3c2694af9c3b11f7dcb16ca4e0e7c44a2f"
+    },
+    {
+      "path": "game/scripts/scale_config.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4635,
+      "sha256": "1ffcfa62326a18425bdf6c0154dd6e4dfdcb42d37f2b60ceb327431dec3afa68"
+    },
+    {
+      "path": "game/scripts/scale_view.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11955,
+      "sha256": "c262d6d69a1e0c7c2b35978e0fed2adaf5368e17180c10252803575cafc73d22"
+    },
+    {
+      "path": "game/scripts/seoul_identity.gd",
+      "kind": "game_source_or_test",
+      "bytes": 20751,
+      "sha256": "a1aa7c3009a89002cc3054db9e189b1ef32a31693199ef4a45655336d15906fd"
+    },
+    {
+      "path": "game/scripts/shop_visit_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 47674,
+      "sha256": "a64600150ee6df21f319deeec9d9c9ffa7addf3c6a33dc54767fca6f54db18e0"
+    },
+    {
+      "path": "game/scripts/source_polygon_index.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5095,
+      "sha256": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1"
+    },
+    {
+      "path": "game/scripts/street_businesses.gd",
+      "kind": "game_source_or_test",
+      "bytes": 12475,
+      "sha256": "e0585cd05f5dd29888a27e88e5ee8bb30a2c6529a412ea7d791a426e5f2c66cf"
+    },
+    {
+      "path": "game/scripts/street_curbs.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11433,
+      "sha256": "becd38411c927cc4afb0f40180d50bb6e2d8951ab60ea8206d4d847bc7d89a63"
+    },
+    {
+      "path": "game/scripts/street_dog_model.gd",
+      "kind": "game_source_or_test",
+      "bytes": 12535,
+      "sha256": "933f14f3e346e9df36f48670ce5d6a326819c84cfbf9253abf10fd7ebd733373"
+    },
+    {
+      "path": "game/scripts/street_life.gd",
+      "kind": "game_source_or_test",
+      "bytes": 25375,
+      "sha256": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89"
+    },
+    {
+      "path": "game/scripts/street_network_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 28415,
+      "sha256": "bbd42a2d75efe4ea510692be9a43d2bc49eb7f360bf20ca126c157ede988af6d"
+    },
+    {
+      "path": "game/scripts/street_pedestrians.gd",
+      "kind": "game_source_or_test",
+      "bytes": 33351,
+      "sha256": "db9174ff48d9e8cbaeb1c36d263aca0d62351652a424957f7077d980847f5db7"
+    },
+    {
+      "path": "game/scripts/street_tree_model.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6877,
+      "sha256": "c16f15150c0a75f99ede0620dadeac90560a0a99533133dd57e3feeeae800620"
+    },
+    {
+      "path": "game/scripts/terrain_geometry_warp.gd",
+      "kind": "game_source_or_test",
+      "bytes": 23521,
+      "sha256": "115f1330e2b39dcbaafec14349be4efe4ef630b986e637e1b8e0766e3b38ef68"
+    },
+    {
+      "path": "game/scripts/terrain_scene_binding.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6079,
+      "sha256": "92f6bb276ac75794c327ee1fc9d9660c2c416a8b9a94e9bc9f7c002fe4b42c8b"
+    },
+    {
+      "path": "game/scripts/terrain_surface.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7948,
+      "sha256": "edeb1449d77921548766bc5085fa2933895a144099dc7e4fce8ec2deda38c886"
+    },
+    {
+      "path": "game/scripts/traffic/exploration_vehicle.gd",
+      "kind": "game_source_or_test",
+      "bytes": 619,
+      "sha256": "c79954bdd2e95da51ea353297102b323a1c778ddf194118f02a5c4b0352eff08"
+    },
+    {
+      "path": "game/scripts/traffic/traffic_manager.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11805,
+      "sha256": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c"
+    },
+    {
+      "path": "game/scripts/traffic/vehicle.gd",
+      "kind": "game_source_or_test",
+      "bytes": 42676,
+      "sha256": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84"
+    },
+    {
+      "path": "game/scripts/traffic_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7874,
+      "sha256": "152d8a78702ca216d3b1ff7c6fc22c63569a955cdb28dab202fafd3cc303aec0"
+    },
+    {
+      "path": "game/scripts/v0_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15874,
+      "sha256": "0265608762ab42c3838129602a168ffdbc432749d83685966366d62306fd085c"
+    },
+    {
+      "path": "game/scripts/water_effect.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3299,
+      "sha256": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420"
+    },
+    {
+      "path": "game/scripts/world_config.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7882,
+      "sha256": "8b42120b0f3f860342972c66687c8fa93b2a1a4f364b56a718b56df254834f91"
+    },
+    {
+      "path": "tests/game/check_bike_entry_reliability.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10135,
+      "sha256": "d7d65e2d1d5e1263abea4ef3f5e18c2492e3467913ea0b0a30b90549c8777e31"
+    },
+    {
+      "path": "tests/game/check_bike_visibility.gd",
+      "kind": "game_source_or_test",
+      "bytes": 9183,
+      "sha256": "2e34180911dba353dc5bd9674529f2c481399950529a762626fb8cf8171eabd9"
+    },
+    {
+      "path": "tests/game/check_bounded_roof_lift.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7936,
+      "sha256": "2e7471d2ef990070507bbbcbbdfcbab33067042abf564940b8a196ff35e32291"
+    },
+    {
+      "path": "tests/game/check_building_exterior_identity.gd",
+      "kind": "game_source_or_test",
+      "bytes": 25819,
+      "sha256": "c8ecc4904a23ef18692e19b4e4686973688b8b989eb4210c2c1d1aba93b66959"
+    },
+    {
+      "path": "tests/game/check_building_visits.gd",
+      "kind": "game_source_or_test",
+      "bytes": 29946,
+      "sha256": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921"
+    },
+    {
+      "path": "tests/game/check_bundle.gd",
+      "kind": "game_source_or_test",
+      "bytes": 234,
+      "sha256": "fca3db6fd2eae7fbcb277060d2e09bb946603ef3f126b07ff11c942c702a8c71"
+    },
+    {
+      "path": "tests/game/check_camera_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15274,
+      "sha256": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7"
+    },
+    {
+      "path": "tests/game/check_city_bike_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15789,
+      "sha256": "839c1ca4c551857faf00599c9222022cd4f498d268f0e1e56f0ccecd3c29b332"
+    },
+    {
+      "path": "tests/game/check_city_bus_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 16384,
+      "sha256": "cb07868c29173ecc8aa0e93b8c01fca7155499cd1d70363d4bd24a0bbc9d6d48"
+    },
+    {
+      "path": "tests/game/check_city_helicopter.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18772,
+      "sha256": "aaa94a282f9c6ff5d0817d3b22df29943572227ab179ac01eb2e10e409ca34b6"
+    },
+    {
+      "path": "tests/game/check_city_landmarks_views.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5009,
+      "sha256": "c29d0235c43d437c89652ced953699ffbb869cb8688f51e8f3b0460b309c04bd"
+    },
+    {
+      "path": "tests/game/check_city_landmarks_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3934,
+      "sha256": "6a0a154628f1043b50e5c971adcd3ea70bdd55bc121a78147432ddbb713909ba"
+    },
+    {
+      "path": "tests/game/check_city_life_integration.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18907,
+      "sha256": "c3c154c60a83c86ce3de778539b98d5ffc888352e55f22629f87f6c729c32616"
+    },
+    {
+      "path": "tests/game/check_city_scooter_service.gd",
+      "kind": "game_source_or_test",
+      "bytes": 23326,
+      "sha256": "389f1fc34f4cbc8e518f9cddce8caba22966fe68f71dac400aeb746e51ddc4ee"
+    },
+    {
+      "path": "tests/game/check_collision_mode.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3410,
+      "sha256": "fb164f0267dda5cb71fd6cd6300b4c344612f4cecc4e575016116e3c9395123c"
+    },
+    {
+      "path": "tests/game/check_collision_rejection.gd",
+      "kind": "game_source_or_test",
+      "bytes": 961,
+      "sha256": "c02c9ca6d10348c41295f1489a2b35196bded3969f858a49012427c8e0d4d2f9"
+    },
+    {
+      "path": "tests/game/check_collision_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19577,
+      "sha256": "41d6d0879cc30513bc460d861d62dbda2a79bb58ee7a3cda401442493dcff5ee"
+    },
+    {
+      "path": "tests/game/check_daehanmun_rejection.gd",
+      "kind": "game_source_or_test",
+      "bytes": 866,
+      "sha256": "82d3bf78f8ded1b8b2e078c6322f0f348e75152491435c3d62194c45543aae9b"
+    },
+    {
+      "path": "tests/game/check_daehanmun_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14848,
+      "sha256": "4cfd5828a47e32b2325ce2be558a9297f099a319105dbcdc53935449ef0ac1f4"
+    },
+    {
+      "path": "tests/game/check_direct_roof_lift.gd",
+      "kind": "game_source_or_test",
+      "bytes": 17653,
+      "sha256": "8669232af331075ad00eb71fc4732d32dbd745698c495fd45b1e0dff5c2fd9d7"
+    },
+    {
+      "path": "tests/game/check_double_jump.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11538,
+      "sha256": "eff07dabf90b524738ca97afe5233c361381fc86d1f6c35adc3e700e1affcf42"
+    },
+    {
+      "path": "tests/game/check_drivable_car.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18407,
+      "sha256": "f9e62ca5a53be655c90605b9bdb8b9a4bc3fc3a8f05058c928d4add8d1529548"
+    },
+    {
+      "path": "tests/game/check_entrance_guidance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 27781,
+      "sha256": "d9512cf87a8a598f23a5da5cde8ec991aa3cf4034203a693e287c3b15df7531a"
+    },
+    {
+      "path": "tests/game/check_escalator_gym.gd",
+      "kind": "game_source_or_test",
+      "bytes": 16151,
+      "sha256": "57701ad324a594fb93ac8f5fa02903f0e2f5a4345b9839e1b611ef9fbdb16276"
+    },
+    {
+      "path": "tests/game/check_exploration.gd",
+      "kind": "game_source_or_test",
+      "bytes": 17873,
+      "sha256": "23202ef79504b792539cc6e9f2485750ee9268177a4dd5d91700d2787bc76ddf"
+    },
+    {
+      "path": "tests/game/check_exploration_camera.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7959,
+      "sha256": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70"
+    },
+    {
+      "path": "tests/game/check_exploration_motion.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19547,
+      "sha256": "4d60ebec9371a950cb3e27dd63369032a8e1346a1f401680f5a2762303850655"
+    },
+    {
+      "path": "tests/game/check_facility_faults.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5507,
+      "sha256": "b2c7a67aec39b3a25f8b1d630c707e16880a66a60bb9d5bbaadc54a73a354954"
+    },
+    {
+      "path": "tests/game/check_facility_interactions.gd",
+      "kind": "game_source_or_test",
+      "bytes": 36500,
+      "sha256": "b12954a8855e94ef0077b669687500088ea9f55871ab6bf34b23f3e4c405e309"
+    },
+    {
+      "path": "tests/game/check_facility_targets.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13870,
+      "sha256": "06355abb8a78820f49e504d508ea8a169752bc0a1b6c2fa7f010173c2968056a"
+    },
+    {
+      "path": "tests/game/check_fast_exploration.gd",
+      "kind": "game_source_or_test",
+      "bytes": 21701,
+      "sha256": "c084d3c7e58bbf5e449108fc1ebc15275486930a8b3981634925df0f7356c9f1"
+    },
+    {
+      "path": "tests/game/check_interior_access_population.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19488,
+      "sha256": "77bc9dbfef0a21cc892ce0cb4396af323cd79734a856d3f76b4511714d58ba4c"
+    },
+    {
+      "path": "tests/game/check_interior_facilities.gd",
+      "kind": "game_source_or_test",
+      "bytes": 25253,
+      "sha256": "6bef7a8a14def60c263ce9020a88358995afca5f1309bd27e229092834fd6968"
+    },
+    {
+      "path": "tests/game/check_interior_geometry.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2284,
+      "sha256": "a34d50f14ecfda0499c3af19ba6657c7bdf936fd3770691b1a1fb794e433084b"
+    },
+    {
+      "path": "tests/game/check_interior_identity.gd",
+      "kind": "game_source_or_test",
+      "bytes": 40083,
+      "sha256": "32e377af7d303a3e834ad4d9c7b934a5d3ca82c5b9c5e75360e952f08c29fcfc"
+    },
+    {
+      "path": "tests/game/check_interior_stairs_geometry.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2540,
+      "sha256": "c8dcb1ec9ef8d66d1c8f33bfdb9440dcadf1accdf459634612e7ead6c9fdb8bc"
+    },
+    {
+      "path": "tests/game/check_interior_visit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18193,
+      "sha256": "f6087e7920c17f1c9d97f0e31ff2e5fd8c5aeb7caa9bf26ba5a14bc7f7121b50"
+    },
+    {
+      "path": "tests/game/check_jump.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10299,
+      "sha256": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984"
+    },
+    {
+      "path": "tests/game/check_landmark_review.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7634,
+      "sha256": "5adca5ccea221d85fc83ed949e970d4aa03b1b11dc8bb0af91dc61071d958e7e"
+    },
+    {
+      "path": "tests/game/check_large_outdoor_pool.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15262,
+      "sha256": "64d9b0a6cf8e484c8d9873e3642bbb87f5cc9a4b490cd9573ac25c86efd8ce18"
+    },
+    {
+      "path": "tests/game/check_library_entry_contact.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10541,
+      "sha256": "585dbb976be17e5d024b43951e04ccd0ce971e5910c78472d734eed39b59b263"
+    },
+    {
+      "path": "tests/game/check_lift_experience.gd",
+      "kind": "game_source_or_test",
+      "bytes": 25689,
+      "sha256": "4937a1ad98c95dd02b9b0f279402965bb88029ea861242830fe399d94a5d8ee7"
+    },
+    {
+      "path": "tests/game/check_lived_streets.gd",
+      "kind": "game_source_or_test",
+      "bytes": 33236,
+      "sha256": "51b3b343400c42eb3aa63286de59a53e71bffbf7c651fabff024059201e556e7"
+    },
+    {
+      "path": "tests/game/check_lotte_visit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 12453,
+      "sha256": "62f025dde50250d1c0a810fb25dd9050cb174904702fac226a82427e094e9e46"
+    },
+    {
+      "path": "tests/game/check_movement_test.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13949,
+      "sha256": "ef35583c75ec1549bdcabcea7930f8e1c27233128bcaf14557dcbc81dfe2b0db"
+    },
+    {
+      "path": "tests/game/check_neighborhood_coverage.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18850,
+      "sha256": "dfc7864ed819452b9b43255b23a0af127731ce8707945c0f190e11b84cd4516c"
+    },
+    {
+      "path": "tests/game/check_neighborhood_life.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7258,
+      "sha256": "08ea80117836a2173bd080cb21697b16ce4d92d739c077db5d58a0a6ccd1a42f"
+    },
+    {
+      "path": "tests/game/check_neighborhood_traffic.gd",
+      "kind": "game_source_or_test",
+      "bytes": 21097,
+      "sha256": "af7bbbc96c3af50858131e1e7a204227eb9fcef3f2aa8c542f45a0d87f0a7b9f"
+    },
+    {
+      "path": "tests/game/check_observation_exit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 425,
+      "sha256": "88359272b443a46126e2115756cea96dfd053502382342ade0ac69bce17542b3"
+    },
+    {
+      "path": "tests/game/check_outdoor_roof_jumping.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7486,
+      "sha256": "5fe51b3b6fec08c17075ce0cfeb8645af0477b5ec1b2bd2ec220c6109bd30bee"
+    },
+    {
+      "path": "tests/game/check_packaged_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3097,
+      "sha256": "141a3ec43373978e38b327685c034c8512e871087e45c426859ef857b3fcc0fd"
+    },
+    {
+      "path": "tests/game/check_painted_signal_traffic.gd",
+      "kind": "game_source_or_test",
+      "bytes": 6941,
+      "sha256": "ca8b7ff9f36494af6654e2f40c62ca130b28db2d1c3097fc871ac03050c88e0f"
+    },
+    {
+      "path": "tests/game/check_palace_landmarks_views.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2944,
+      "sha256": "c2380903523e52f3ebcc2ba1eb416ced5ae3421a8d2fbc0a37936d274e737bcc"
+    },
+    {
+      "path": "tests/game/check_palace_landmarks_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3846,
+      "sha256": "e6fa7b4149e75b8f4fd4009390cdd1f829bec2ab9aaca901de966eebac84b4f4"
+    },
+    {
+      "path": "tests/game/check_palace_rejection.gd",
+      "kind": "game_source_or_test",
+      "bytes": 868,
+      "sha256": "e4cb14778859554ee582185e9c0551c74ac20a83088a5a859a1d0a66506a5abc"
+    },
+    {
+      "path": "tests/game/check_palace_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13496,
+      "sha256": "50740fba72206df715a5d7c28a96f5085380efd3cb7b071dde3e384dc094b01c"
+    },
+    {
+      "path": "tests/game/check_pedestrian_avoidance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14500,
+      "sha256": "bd5c5fac5d03c45b2689e062dddb42e6cf625e79c25e651c393cf8a2a8bc3133"
+    },
+    {
+      "path": "tests/game/check_pedestrians.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10696,
+      "sha256": "6820fc24f0106cc2557695700af295954d5b0ec6d4699a9c35a52cc6e8491fed"
+    },
+    {
+      "path": "tests/game/check_photo_realism.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2648,
+      "sha256": "b968a50e220c5d128240ae82a86a342769a83a11a46583e63f234368b31078d5"
+    },
+    {
+      "path": "tests/game/check_player_fixture.gd",
+      "kind": "game_source_or_test",
+      "bytes": 5098,
+      "sha256": "ad7bbb90c259dd23f27dc8519b8cf3a927956b62a3590fae5665fecbfc16ea58"
+    },
+    {
+      "path": "tests/game/check_pool_preparation.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15967,
+      "sha256": "fe1a7df56e1659295a8715c954b560940d055565fe57eafadb31b4e5b2cca75a"
+    },
+    {
+      "path": "tests/game/check_project.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4409,
+      "sha256": "54d71f8519fd15e7bcfc46cb6d85017a1f2713384b8c280b1c985d313c7b1855"
+    },
+    {
+      "path": "tests/game/check_public_rejection.gd",
+      "kind": "game_source_or_test",
+      "bytes": 868,
+      "sha256": "d9b09ceb2acaa1a3aea0b09c79b4afb3a388e7d3d499f7a784212c1e3452e841"
+    },
+    {
+      "path": "tests/game/check_public_walk.gd",
+      "kind": "game_source_or_test",
+      "bytes": 16350,
+      "sha256": "04bbbd4d16540717ecd3e946550112d1233f8d4007628fde03aa1e569fe9436f"
+    },
+    {
+      "path": "tests/game/check_quality.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11278,
+      "sha256": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c"
+    },
+    {
+      "path": "tests/game/check_road_support.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7924,
+      "sha256": "ce1af0fa1523d7d97edf14d12bc5f00f7dbb960e13ac45b31343d19b0148f79d"
+    },
+    {
+      "path": "tests/game/check_rooftop_swimming.gd",
+      "kind": "game_source_or_test",
+      "bytes": 19189,
+      "sha256": "348eba62604079c08d4dda7e04baf46464198faba2c53db42a711fa752c03fd0"
+    },
+    {
+      "path": "tests/game/check_rooftops.gd",
+      "kind": "game_source_or_test",
+      "bytes": 23499,
+      "sha256": "880be26602427ad944fe5a8535a2a6705d236acb17e194c6538ed9adc8baa8bb"
+    },
+    {
+      "path": "tests/game/check_rooftops_bounded_regression.gd",
+      "kind": "game_source_or_test",
+      "bytes": 828,
+      "sha256": "a470f51eb6ec6bb584d707e050f33609a67666576115ee5bb55ab765dfdb3e8b"
+    },
+    {
+      "path": "tests/game/check_scale_bundle.gd",
+      "kind": "game_source_or_test",
+      "bytes": 522,
+      "sha256": "0e7117be1d633cc25053eb0a6ca18968cfa828598bc35b4fc99247a2896ead88"
+    },
+    {
+      "path": "tests/game/check_scale_view.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3532,
+      "sha256": "5399a5b217b2e7be4b92e7b3e7c8d71d620ed5bef27947d81ed34d8b27a67713"
+    },
+    {
+      "path": "tests/game/check_seoul_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18537,
+      "sha256": "c3125d5ea9569cef7501ad7f3aec35fdd577fb3c5832d5fa1d464c7172635128"
+    },
+    {
+      "path": "tests/game/check_shop_visit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 29593,
+      "sha256": "81d64d3bdf29994dc64aef3ed3f92c8c84aab75678ddc1d1599ac213b0c01ba7"
+    },
+    {
+      "path": "tests/game/check_signal_visibility_cycle.gd",
+      "kind": "game_source_or_test",
+      "bytes": 14185,
+      "sha256": "eb4dbc490ce53361d5481cff4321481165e7de2873eb912d134af60fbb1e9aa3"
+    },
+    {
+      "path": "tests/game/check_stable_motion.gd",
+      "kind": "game_source_or_test",
+      "bytes": 13097,
+      "sha256": "211f4fa68df4fb537b0c06595d4733a77bde4ec8deabc8c6764e72815d4ab463"
+    },
+    {
+      "path": "tests/game/check_street_scene.gd",
+      "kind": "game_source_or_test",
+      "bytes": 25791,
+      "sha256": "1ce16c86be68e2b2a58f5c586f3b997d53ba63bae41472a697a96cf44fd81244"
+    },
+    {
+      "path": "tests/game/check_street_transit.gd",
+      "kind": "game_source_or_test",
+      "bytes": 34364,
+      "sha256": "8834055ceedfb8dd228a7376f022ee8e73f8232aa8ad43f6ac97d758c173e203"
+    },
+    {
+      "path": "tests/game/check_terrain_actors.gd",
+      "kind": "game_source_or_test",
+      "bytes": 34799,
+      "sha256": "a50f9492aa2009c64487d473e954907bd028da038d666a818117bace6c2dc016"
+    },
+    {
+      "path": "tests/game/check_terrain_entries.gd",
+      "kind": "game_source_or_test",
+      "bytes": 30789,
+      "sha256": "06d1e491d82d358dab6dcf634f3e12040615d1c2e61ad76aafe992f342749d18"
+    },
+    {
+      "path": "tests/game/check_terrain_integration.gd",
+      "kind": "game_source_or_test",
+      "bytes": 18333,
+      "sha256": "dd4e909ae574843dfcd6d9484b0a90ac09399f0f001359217e56e82c2b2e6e75"
+    },
+    {
+      "path": "tests/game/check_terrain_projection_cache.gd",
+      "kind": "game_source_or_test",
+      "bytes": 7865,
+      "sha256": "5293c38b8873b631411bced5473857df716eeee76ec40480db15e7e514575e26"
+    },
+    {
+      "path": "tests/game/check_tree_detail.gd",
+      "kind": "game_source_or_test",
+      "bytes": 34603,
+      "sha256": "0771f4d9f26a5eecbc18c5fc7f0df3002f04d577c009088c42c5f200f90b67c6"
+    },
+    {
+      "path": "tests/game/check_urban_motion.gd",
+      "kind": "game_source_or_test",
+      "bytes": 21319,
+      "sha256": "0c8524501e0d28a432ba0580ff2a71e5b44e846d98cd0ee7a6e6b423deca6d17"
+    },
+    {
+      "path": "tests/game/check_vehicles.gd",
+      "kind": "game_source_or_test",
+      "bytes": 11951,
+      "sha256": "adb258649ac1e3c164aa125d3aa17d1a688407f5210478286a94d78bf0efdb8a"
+    },
+    {
+      "path": "tests/game/check_walkable_milestone.gd",
+      "kind": "game_source_or_test",
+      "bytes": 10801,
+      "sha256": "78b0dc05ee82339e2f27d3f7d4eba273c4df0c64d859a4a923be7fd950049001"
+    },
+    {
+      "path": "tests/game/check_world.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4315,
+      "sha256": "91c491c57f2b93a3219251705d62c931f06916166d10d4126b9d91989ceb4799"
+    },
+    {
+      "path": "tests/game/city_visual_observation.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2839,
+      "sha256": "3e920ffd6308bdda19eaf3cf1483a4cf01f0d97a49cdea59a47b630a14b17e72"
+    },
+    {
+      "path": "tests/game/daehanmun_probe_input.gd",
+      "kind": "game_source_or_test",
+      "bytes": 885,
+      "sha256": "ff5074388a520d678225c009814359a07c265607731b6f97f3b236b3827a0221"
+    },
+    {
+      "path": "tests/game/inspect_city_reuse.gd",
+      "kind": "game_source_or_test",
+      "bytes": 2878,
+      "sha256": "ed3c241549bdcf472da03012c4c22034949dab0053064cb33774550cde3eed16"
+    },
+    {
+      "path": "tests/game/inspect_pedestrians.gd",
+      "kind": "game_source_or_test",
+      "bytes": 1169,
+      "sha256": "eb42a0896492b9f579046dab5cfe95823596808cc611eaef831c6dd720fe65b4"
+    },
+    {
+      "path": "tests/game/inspect_traffic.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3478,
+      "sha256": "e7060957b82a81fa202f0285ab44299437877bef368886d942e5fdeec1206d56"
+    },
+    {
+      "path": "tests/game/measure_performance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 15917,
+      "sha256": "0808db1a1671035f9212eae1383c970b6f98dd38dcf3ab0476368b5ef8fc3788"
+    },
+    {
+      "path": "tests/game/package_dispatch.gd",
+      "kind": "game_source_or_test",
+      "bytes": 1617,
+      "sha256": "00b0f722b51c7f21a6cd42805369e432b4ae8d0d4ca0961b1bd495d07c6f7faf"
+    },
+    {
+      "path": "tests/game/palace_visual_observation.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3989,
+      "sha256": "2e133af10339f162f3968880c29c43b80ca036fbd2a16fa13aada52d7f35e11a"
+    },
+    {
+      "path": "tests/game/probe_terrain_path_block.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3339,
+      "sha256": "3dc2d1ad20fec16821e5cadfac4d63569c1e33c95c03ec9d6f0bcebca3492de2"
+    },
+    {
+      "path": "tests/game/probe_terrain_startup.gd",
+      "kind": "game_source_or_test",
+      "bytes": 771,
+      "sha256": "42dd57dab4d86c8045851ca32b27e495040d1aac392eb7307556f0fd61e63eb3"
+    },
+    {
+      "path": "tests/game/profile_terrain_runtime.gd",
+      "kind": "game_source_or_test",
+      "bytes": 3225,
+      "sha256": "dc7f530cd4fe90c899d96a82cce1f47b6daae6af86a59c839f77c1ef3f5d7b9d"
+    },
+    {
+      "path": "tests/game/profile_terrain_subsystems.gd",
+      "kind": "game_source_or_test",
+      "bytes": 4121,
+      "sha256": "9861c6551679842f4cba8ef1d2cedd6529d0ac86fbdca96ae3ed563e47cc4ddf"
+    },
+    {
+      "path": "tests/game/public_unbounded_player.gd",
+      "kind": "game_source_or_test",
+      "bytes": 436,
+      "sha256": "68a6a214f05acf2fc0c3bdea58644dcf031c21e674e5902a759ab237b40c2dc4"
+    },
+    {
+      "path": "tests/game/source_polygon_index_checks.gd",
+      "kind": "game_source_or_test",
+      "bytes": 8398,
+      "sha256": "e3b276a7770c3b684e7d431387023efe43fa7aca688b135fc5df49e0e1e5203a"
+    },
+    {
+      "path": "tests/game/terrain_greenery_checks.gd",
+      "kind": "game_source_or_test",
+      "bytes": 12874,
+      "sha256": "463a056fda9bd05d92d6592589bf01b28a1c727e9097a475974fbd9a8063658a"
+    },
+    {
+      "path": "tests/game/urban_motion_guidance.gd",
+      "kind": "game_source_or_test",
+      "bytes": 8539,
+      "sha256": "1823ead091c320e6f1e3ddeeb59353466782dce03ebf4421207b9fefd9421031"
+    },
+    {
+      "path": "tools/check_street_detail_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 3196,
+      "sha256": "b4a4f2905536eb1bedd31f90253ae3401f984ce18ff1ce69887dd57ba04ade01"
+    },
+    {
+      "path": "tools/run_exploration.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1248,
+      "sha256": "17b253c241a2eb6eea177c976b6470f27e11d1d49ef9ce63c6d9ac45a4281682"
+    },
+    {
+      "path": "tools/setup_mac.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1765,
+      "sha256": "5b1b4cea17f6cf7f40b5df0eca32249ee071fec21f88ef45197c3674fed8ef21"
+    }
+  ],
+  "scope": "Stored source/input/evidence integrity plus explicitly linked engine runs and representative images. Checker does not rerun Godot, certify actual Seoul shops/prices/transport/aviation, perform real payments, or prove full OS acceptance."
+}

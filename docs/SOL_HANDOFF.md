@@ -1,5 +1,16 @@
 # Sol 작업 인수 안내
 
+## 현재 인수: 2026-10-21 EXP24 상점·옷·운전·비행·수영 준비
+
+[WORK_STATUS](WORK_STATUS.md)와 [EXP24 집계](../data/reports/city_life/20261021/summary.json)를 먼저 읽는다. `shop_visit_service.gd`는 기존 문에 연결한 편의점/식당과 가상 의류점, 거래 토큰·보유품·구매 의상/수영복을 맡는다. `drivable_car_service.gd`는 자전거 기반의 전체 차체/차도 판정을 별도로 대체하고, `city_helicopter_service.gd`는 로터·꼬리 포함 native 기체와 실제 비행/착륙·안전 회수를 맡는다.
+
+`pool_preparation_service.gd`는 별도 E 입력 없이 공통 디스패처로 탈의·수영복·샤워 완료·입수 허가를 처리한다. `rooftop_space.gd`가 현재 두 게임 호텔 풀의 준비실/게이트를 생성하고 같은 outdoor_pool 클래스의 새 지붕에도 적용한다. `free_roam_player.gd`의 물 이동 전/후 guard로 사복·미완료 상태의 점프/낙하 우회를 막는다. 사복 즉시 입수였던 과거 기대값을 되살리지 않는다.
+
+`explore_walk.gd`의 소유권·가까운 대상/힌트·검증 후 장소 이동/복원과 `interior_visit.gd`의 단일 physical E를 함께 유지한다. 실패 목적지는 현재 방문/탑승/샤워를 먼저 취소하지 않는다. 검증한 roof는 terrain y로 다시 내리지 않는다. 메뉴 복귀 시 상품/소지품의 커서·포커스를 보존한다. 테스트의 observer 배치/합성 유지 입력과 실제 OS 조작을 구분하며, 현재 source hashes가 맞는 보고서만 최신 판정에 사용한다.
+
+새 의존성이나 외부 모델 다운로드는 없다. 새 Mac은 기존 준비 순서 후 일반 실행기를 사용하고, `python3 tools/check_street_detail_handoff.py --prepared`는 저장 입력·증거 일치만 검사한다. 실제 실행은 [RUN_GUIDE](RUN_GUIDE.md), 재검증은 [VALIDATION_PLAN](VALIDATION_PLAN.md)를 따른다. 첫 native 옷 관찰 가림·풀 준비실 시야/부호 문제와 수정 전 결과를 지우지 않는다. 아래 EXP23은 이전 소스/날짜의 인수 이력이다.
+
+
 ## 현재 인수: 2026-10-20 E 탑승 안정화·킥보드와 거리 신호 회귀
 
 [WORK_STATUS](WORK_STATUS.md)와 [최신 집계](../data/reports/street_detail/20261020/summary.json)부터 읽는다. 같은 날짜에 두 요청 흐름이 이어졌다. 첫째는 자전거 시야와 원본 횡단 후보의 신호 배치/자동 주기이고, 둘째는 실제 E 탑승의 간헐적 실패와 직접 타는 전동 킥보드다. 아래 선행 완료 기록을 추가 요청 뒤 소스의 통과로 재사용하지 않는다. 추가 요청까지 동결 소스로 완료했고 이 Mac의 일반 창에서 OS E 탑승·W 이동·Space 제동·E 하차를 확인했다. 최신 실행·화면·실패와 수정은 집계와 WORK_STATUS에 연결한다.

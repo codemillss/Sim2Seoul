@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>지도 위의 서울을, 직접 걸어 들어가는 공간으로.</strong><br>
-  덕수궁의 돌담길과 시청 앞 광장을 걷고, 건물에 들어가고, 자전거와 킥보드를 타는 3D 탐험 프로젝트입니다.
+  덕수궁·시청 주변을 걷고, 상점·건물·옥상에서 이동과 생활 경험을 넓혀가는 3D 탐험 프로젝트입니다.
 </p>
 
 <p align="center">
@@ -40,6 +40,10 @@
     <td><img src="data/reports/street_detail/20261019/native_dog_keeper_close.png" alt="돌담길 옆 보도에서 반려견과 산책하는 사람" width="100%"><br><strong>조금씩 살아나는 거리</strong><br>산책하는 사람과 반려견 · 2026-10-19</td>
     <td><img src="data/reports/personal_mobility/20261020/signals_native_daehanmun_vehicle_view_vehicle_green_pedestrian_red.png" alt="대한문 앞 횡단보도와 차량 녹색·보행 적색 신호의 실제 렌더링" width="100%"><br><strong>움직임을 조율하는 신호</strong><br>주기·잔여 시간·차량 정지/재개 · 2026-10-20<br><sub>차량 접근 방향에 배치한 검수 시점</sub></td>
   </tr>
+  <tr>
+    <td><img src="data/reports/city_life/20261021/acceptance/shop_native_final03_inventory_hoodie_actual_avatar.png" alt="가상 의류점에서 구매한 파란 후디를 실제 캐릭터가 입은 모습" width="100%"><br><strong>고르고, 사고, 갈아입기</strong><br>게임 상점·상의 3종·소지품 · 2026-10-21<br><sub>빈 통로의 명시적 의상 관찰 시점</sub></td>
+    <td><img src="data/reports/city_life/20261021/acceptance/pool_native_final03_ordinary_pool_arrival.png" alt="옥상 수영장 앞의 탈의실과 샤워실, 중앙 통로" width="100%"><br><strong>수영 전 준비부터</strong><br>탈의실 → 수영복 → 샤워 → 입장 · 2026-10-21</td>
+  </tr>
 </table>
 
 ## 무엇을 할 수 있나요?
@@ -49,11 +53,14 @@
 | **서울을 걸어서 탐험** | 대한문을 지나 덕수궁 경내·돌담길·서울광장·시청 주변을 이동합니다. 3인칭 카메라, 달리기, 연속 점프와 속도 선택을 지원합니다. |
 | **건물 안과 위로 이동** | 126개 방문 대상 건물·1,242개 게임 층을 구성했습니다. 도서관·공공·업무·호텔 등 용도별 실내, 계단·승강기와 다양한 옥상을 제공합니다. |
 | **시설을 실제로 사용** | 가까운 설비에서 E로 식사·샤워·운동을 시작하거나 종료합니다. 게임용 옥상 수영장에서는 물에 들어가 수영하고 밖으로 나올 수 있습니다. |
+| **옷을 고르고 갈아입기** | 편의점·식당·가상 의류점에서 게임머니로 상품을 구매합니다. 상의 3종은 실제 캐릭터 외형에 적용하고, I 소지품에서 다시 입습니다. |
+| **준비하고 수영하기** | 옥상 탈의실에서 수영복으로 갈아입고 샤워를 마쳐야 입장할 수 있습니다. 수영·Space 출수 뒤에는 기존 의상으로 돌아옵니다. |
+| **직접 운전하고 비행** | 게임 자동차 1대는 가속·제동·후진·조향을, 헬리콥터 1대는 이륙·비행·착륙을 직접 조작합니다. |
 | **다른 방식으로 이동** | 자전거 2대·킥보드 2대를 대여해 가감속·조향·제동합니다. 버스는 2개 정류장을 연결하는 작은 승하차 체험 구간입니다. |
 | **거리의 생활감 관찰** | 사람 28명·반려견 2마리·기존 이동 자동차 14대와 상점 외관·버스킹·수목·가로등을 배치했습니다. 낮·해질녘·밤을 선택할 수 있습니다. |
 | **작동하는 횡단 신호** | 7개 횡단 구역에 차량 신호 15개·보행 신호 14개를 배치했습니다. 46초 게임 주기, 잔여 시간·점멸과 차량의 정지·재출발을 연결했습니다. |
 
-기능·수량 기준은 [현재 작업 상태](docs/WORK_STATUS.md)와 [2026-10-20 검증 집계](data/reports/street_detail/20261020/summary.json)입니다. 건물별 시설과 층 배치는 실제 입주·시설 현황을 뜻하지 않습니다.
+기능·수량 기준은 [현재 작업 상태](docs/WORK_STATUS.md)와 [2026-10-21 검증 집계](data/reports/city_life/20261021/summary.json)입니다. 건물별 시설과 층 배치는 실제 입주·시설 현황을 뜻하지 않습니다.
 
 ## 어떻게 만들었나요?
 
@@ -121,22 +128,27 @@ sh tools/run_exploration.sh run
 |---|---|
 | 걷기·달리기·점프 | **WASD / 방향키**, **Shift**, **Space** 새 입력마다 연속 점프 |
 | 카메라 | **마우스** 회전 · **휠** 거리 조절 |
-| 출입·시설·대여 | 대상 근처에서 **E** |
+| 출입·쇼핑·시설·승하차 | 대상 근처에서 **E** |
+| 소지품·갈아입기 | **I** · 의류점에서 구매한 옷 재착용 |
+| 자동차 | **W** 가속 · **A/D** 조향 · **S** 제동/후진 · **Space** 제동 · 멈춘 뒤 **E** 하차 |
+| 헬리콥터 | **Space** 상승 · **Ctrl** 하강 · **W/S** 전후 · **A/D** 회전 · 착륙 후 **E** 하차 |
 | 자전거·킥보드 | **W** 가속 · **A/D** 조향 · **S / Space** 제동 · **E** 하차/반납 |
 | 버스 | 정차한 열린 문에서 **E** 탑승 · 탑승 중 **E** 다음 정류장 하차 예약 |
 | 메뉴·장소 이동 | **Esc** → 도서관·옥상 풀·산책 구간·대여소 등 바로가기 |
 
 ## 검증은 어떻게 남겼나요?
 
-최근 기능 실행은 **2026-10-20, Apple M5 16GB / macOS 26.6.2 / Metal 4 · Forward+** 환경에서 확인했습니다. 아래는 대표 결과이며 서로 겹치는 실행 검사를 합산하지 않습니다.
+최근 기능 실행은 **2026-10-21, Apple M5 16GB / macOS 26.6.2 / Metal 4 · Forward+** 환경에서 확인했습니다. 아래 결과는 서로 겹치는 실행 판정이며 고유 요구사항 수로 합산하지 않습니다.
 
 | 대표 시나리오 | 실행 결과 | 증거 |
 |---|---:|---|
-| 자전거 E 입력·접근·메뉴 복귀 | 그래픽 환경 **60/60** | [물리 키 이벤트 검사](data/reports/personal_mobility/20261020/bike_entry_native_final02.json) |
-| 킥보드 주행·승하차·화면 | 그래픽 환경 **37/37** | [실행 보고서](data/reports/personal_mobility/20261020/scooter_native_final04.json) |
-| 신호의 자연 두 주기·렌즈·메뉴 정지 | 그래픽 환경 **28/28** | [실행 보고서](data/reports/personal_mobility/20261020/signals_native.json) |
+| 상점·구매·의상·수영복·작은 화면 UI | 그래픽 환경 **75/75** | [실행 보고서](data/reports/city_life/20261021/acceptance/shop_native_final03.json) |
+| 자동차 운전·충돌·안전 하차 | 그래픽 환경 **30/30** | [실행 보고서](data/reports/city_life/20261021/acceptance/car_native_final03.json) |
+| 헬리콥터 이착륙·기체 충돌·회수 | 그래픽 환경 **34/34** | [실행 보고서](data/reports/city_life/20261021/acceptance/helicopter_native_final03.json) |
+| 탈의·샤워·실제 수영·출수·의상 복원 | 그래픽 환경 **34/34** | [실행 보고서](data/reports/city_life/20261021/acceptance/pool_native_final03.json) |
+| 상점·탈것·건물·옥상 간 소유권 전환 | headless **33/33** | [통합 보고서](data/reports/city_life/20261021/acceptance/integration_headless_final03.json) |
 
-별도로 [실제 OS 키보드의 탑승·이동·제동](data/reports/personal_mobility/20261020/normal_launch.json)과 [최종 그래픽 화면 19장 검토](data/reports/personal_mobility/20261020/visual_review.json)를 기록했습니다. 위 결과는 기록된 날짜와 소스에 해당하며, 다른 Mac·배포판의 실행과 장시간 성능은 별도 확인 대상입니다.
+[현재 집계](data/reports/city_life/20261021/summary.json)에 E·킥보드·버스·도서관 회귀와 입력 해시를, [대표 화면 15장 검토](data/reports/city_life/20261021/visual_review.json)에 가림·안내판 실패와 수정 범위를 기록했습니다. 테스트의 물리 키 이벤트·유지 액션과 관찰자 배치는 실제 OS 키보드 체험과 구분합니다. [일반 실행 기록](data/reports/city_life/20261021/normal_launch.json)은 기동과 실제 창에서 확인한 범위만 기록합니다. 다른 Mac·배포판과 장시간 성능은 별도 확인 대상입니다.
 
 ```sh
 # 저장된 코드·입력·증거의 일치 확인. 엔진을 재실행하는 명령은 아닙니다.

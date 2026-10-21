@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "task": "AUTHORED_CITY_HELICOPTER",
+  "source_hashes": {
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+  },
+  "scope": {
+    "game_helicopters": 1,
+    "game_helipads": 1,
+    "source_geometry_changed": false,
+    "real_helipad_or_flight_permission": false,
+    "art_and_flight_basis": "Original small game helicopter with cabin, skids, tail boom, main rotor and tail rotor. Arcade acceleration, hovering and bounded vertical flight, not an engineering flight model or a representation of actual aviation operations. The ground helipad is an authored marking on existing Seoul Plaza terrain, not a new support plane or a real helipad claim.",
+    "landing": "Native existing terrain only: shallow grade and positive support under both skids. Building roofs, water, private ground and unsupported positions do not allow E dismount. A validated external player teleport returns the game aircraft to its certified home pad only when the full native aircraft volume is clear; otherwise it holds and retries."
+  },
+  "policy": {
+    "maximum_forward_mps": 12.0,
+    "maximum_reverse_mps": 5.0,
+    "horizontal_acceleration_mps2": 3.0,
+    "horizontal_braking_mps2": 5.0,
+    "ascent_mps": 4.0,
+    "descent_mps": 2.5,
+    "vertical_acceleration_mps2": 5.0,
+    "yaw_radians_per_second": 0.75,
+    "maximum_altitude_above_terrain_m": 120.0,
+    "rotor_spinup_seconds": 1.8,
+    "rotor_spindown_seconds": 1.2,
+    "protected_radius_m": 5.4,
+    "pad_radius_m": 5.3,
+    "maximum_landing_grade_degrees": 6.0,
+    "interact_distance_m": 3.8,
+    "door_clearance_m": 5.5
+  },
+  "helipad": {
+    "id": "HELIPAD-GAME-01",
+    "name": "서울광장 게임 비행 체험",
+    "source_ground_feature": "osm:way:370019676:land_area",
+    "source_route": "city_plaza",
+    "source_segment": [97, 98],
+    "candidate_fractions": [0.65, 0.45, 0.8, 0.3],
+    "candidate_side_offsets_m": [-46.0, -36.0, -54.0, -62.0],
+    "authored_placement": true
+  }
+}

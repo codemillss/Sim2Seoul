@@ -394,7 +394,8 @@ func _physics_process(delta: float) -> void:
 			enter_visit()
 		return
 	if not edge:return
-	if not active and host.has_method("try_street_interact") and host.try_street_interact():e_requires_release=true
+	if host.has_method("try_pool_interact") and host.try_pool_interact():e_requires_release=true
+	elif not active and host.has_method("try_street_interact") and host.try_street_interact():e_requires_release=true
 	elif elevator_open:_close_elevator()
 	elif is_instance_valid(host.get("interior_room_access")) and host.interior_room_access.handle_interact():e_requires_release=true
 	elif is_instance_valid(facility_interaction) and facility_interaction.handle_interact():e_requires_release=true
@@ -413,7 +414,8 @@ func _process(_delta: float) -> void:
 	if _notice_until>0 and Time.get_ticks_msec()>_notice_until:_notice = "";_notice_until = 0
 	var outdoor_roof: Node3D=_outdoor_roof_at_player()
 	var outdoor_lift: Node3D=outdoor_roof_lift_candidate() if not menu_open else null
-	wayfinding.update_guidance(_delta,active or menu_open or is_instance_valid(outdoor_roof))
+	var shop_active: bool=host.has_method("_shop_active") and host._shop_active()
+	wayfinding.update_guidance(_delta,active or shop_active or menu_open or is_instance_valid(outdoor_roof))
 	var closest: Dictionary = wayfinding.target_spec
 	var nearest := INF
 	if not closest.is_empty():nearest=host.player.global_position.distance_squared_to(closest.entrance)
@@ -449,6 +451,8 @@ func _process(_delta: float) -> void:
 	elif not facility_hint.is_empty():prompt_text.text=facility_hint
 	elif not _notice.is_empty():prompt_text.text = _notice
 	var street_hint: String=host.street_interaction_hint() if not active and host.has_method("street_interaction_hint") else ""
+	var pool_hint: String=host.pool_interaction_hint() if host.has_method("pool_interaction_hint") else ""
+	if not pool_hint.is_empty():street_hint=pool_hint
 	if not street_hint.is_empty():prompt_text.text=street_hint
 	prompt.visible = not menu_open and not elevator_open and not in_elevator and (not street_hint.is_empty() or is_instance_valid(outdoor_lift) or not facility_hint.is_empty() or (active and (_exit_near() or _elevator_near())) or (not active and not is_instance_valid(outdoor_roof) and _entry_near() and _entry_visible()) or not _notice.is_empty())
 	prompt.custom_minimum_size.x = minf(520.,maxf(1.,view.x-32.))
@@ -840,9 +844,15 @@ func _safe_external_point(requested: Vector3) -> Dictionary:
 	if not terrain_enabled and not host.city.volume_clear(point,node.shape.height,node.shape.radius):return {}
 	return {"point":point}
 
-func _leave_at(requested: Vector3) -> bool:
+func _leave_at(requested: Vector3,roof_destination: Dictionary={}) -> bool:
 	if in_elevator:return false
-	var safe := _safe_external_point(requested)
+	# A certified rooftop must retain its elevation instead of being projected
+	# onto terrain. Both paths validate before releasing the current room.
+	var safe: Dictionary={}
+	if not roof_destination.is_empty():
+		if requested.distance_to(roof_destination.get("pool_entry",Vector3.INF))>.001 or not host._roof_destination_clear(roof_destination):return false
+		safe={"point":requested}
+	else:safe=_safe_external_point(requested)
 	if safe.is_empty():return false
 	if is_instance_valid(facility_interaction) and not facility_interaction.cancel():return false
 	if host.player.interior_active:

@@ -1,0 +1,169 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "error": "",
+        "site_audit": [
+          {
+            "accepted": false,
+            "fraction": 0.65,
+            "point": [
+              154.173568725586,
+              0.0,
+              -61.2947082519531
+            ],
+            "reason": "ground_height_spread",
+            "sample_height_range_m": [
+              -1.52911448478699,
+              -0.970099091529846
+            ],
+            "side_offset_m": -46.0
+          },
+          {
+            "accepted": true,
+            "fraction": 0.65,
+            "point": [
+              156.508255004883,
+              -1.44508874416351,
+              -71.0183563232422
+            ],
+            "reason": "",
+            "sample_height_range_m": [
+              -1.79525828361511,
+              -1.26645398139954
+            ],
+            "side_offset_m": -36.0
+          }
+        ]
+      },
+      "name": "production_setup_original_source_grass_and_native_terrain",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_city_helicopter.gd": "0988b7a2bc2f89ded6e4910cecb744fe809aa2a477e16f86adcad102acb3b683",
+          "res://assets/authored/helicopter_service.json": "9d5e2bc4ac20824e34e5b245c522c55ddfe0761c3b7d671ec96265918fbcf311",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_service.gd": "bb7c3eb7fce3f7ea3a5d4337aa2a6eab1fe5e05b7ac52f48823d69851da5de51",
+          "res://scripts/explore_walk.gd": "4eb22be4ae1148d2bb7db06abe32e1387f1c4155c2a843e87060f57830f3c88e",
+          "res://scripts/interior_visit.gd": "3106489c91663bca4d1a9802b2bbb7e68a601fbe9e390b317e65bd71632f6d16"
+        },
+        "loaded": {
+          "res://../tests/game/check_city_helicopter.gd": "0988b7a2bc2f89ded6e4910cecb744fe809aa2a477e16f86adcad102acb3b683",
+          "res://assets/authored/helicopter_service.json": "9d5e2bc4ac20824e34e5b245c522c55ddfe0761c3b7d671ec96265918fbcf311",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_helicopter_service.gd": "bb7c3eb7fce3f7ea3a5d4337aa2a6eab1fe5e05b7ac52f48823d69851da5de51",
+          "res://scripts/explore_walk.gd": "4eb22be4ae1148d2bb7db06abe32e1387f1c4155c2a843e87060f57830f3c88e",
+          "res://scripts/interior_visit.gd": "3106489c91663bca4d1a9802b2bbb7e68a601fbe9e390b317e65bd71632f6d16"
+        }
+      },
+      "name": "source_inputs_stable_during_runtime",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 7816,
+  "passed": 1,
+  "physics_hz": 30,
+  "result": "FAIL",
+  "scope": "Native aircraft shapes including full rotor, existing source terrain, physical KEY_E and labelled held movement fixture. Actual takeoff, movement, rotation, same-ground return, landing and walking restoration. Near-ceiling/boundary aircraft placements and static blockers are test fixtures, not ordinary travel. No actual aviation accuracy/permission, sustained performance or subjective/native appearance acceptance from headless.",
+  "snapshot": {
+    "actual_distance_m": 0.0,
+    "blocked_reason": "",
+    "capsule_release_pending": false,
+    "error": "",
+    "events": [],
+    "exit_requested": false,
+    "helipad": {
+      "fraction": 0.65,
+      "id": "HELIPAD-GAME-01",
+      "name": "서울광장 게임 비행 체험",
+      "native_envelope_clear": true,
+      "native_existing_terrain": true,
+      "point": [
+        156.508255004883,
+        -1.44508874416351,
+        -71.0183563232422
+      ],
+      "side_offset_m": -36.0,
+      "source_ground_feature": "osm:way:370019676:land_area",
+      "source_route": "city_plaza",
+      "source_segment": [
+        97.0,
+        98.0
+      ],
+      "yaw": -1.80643994817378
+    },
+    "landed": true,
+    "loaded": true,
+    "maximum_step_m": 0.0,
+    "position": [
+      156.508255004883,
+      -1.44508874416351,
+      -71.0183563232422
+    ],
+    "return_pending": false,
+    "riding": false,
+    "rotor_fraction": 0.0,
+    "rotor_phase": 0.0,
+    "scope": "One authored arcade helicopter and game marking on source Seoul Plaza terrain. Full main-rotor collision, native movement, bounded altitude/region and ground-only safe exit. No real helipad, flight permission or engineering flight-dynamics claim.",
+    "site_audit": [
+      {
+        "accepted": false,
+        "fraction": 0.65,
+        "point": [
+          154.173568725586,
+          0.0,
+          -61.2947082519531
+        ],
+        "reason": "ground_height_spread",
+        "sample_height_range_m": [
+          -1.52911448478699,
+          -0.970099091529846
+        ],
+        "side_offset_m": -46.0
+      },
+      {
+        "accepted": true,
+        "fraction": 0.65,
+        "point": [
+          156.508255004883,
+          -1.44508874416351,
+          -71.0183563232422
+        ],
+        "reason": "",
+        "sample_height_range_m": [
+          -1.79525828361511,
+          -1.26645398139954
+        ],
+        "side_offset_m": -36.0
+      }
+    ],
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "tail_phase": 0.0,
+    "velocity": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "vertical_speed_mps": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_helicopter.gd": "0988b7a2bc2f89ded6e4910cecb744fe809aa2a477e16f86adcad102acb3b683",
+    "res://assets/authored/helicopter_service.json": "9d5e2bc4ac20824e34e5b245c522c55ddfe0761c3b7d671ec96265918fbcf311",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_helicopter_service.gd": "bb7c3eb7fce3f7ea3a5d4337aa2a6eab1fe5e05b7ac52f48823d69851da5de51",
+    "res://scripts/explore_walk.gd": "4eb22be4ae1148d2bb7db06abe32e1387f1c4155c2a843e87060f57830f3c88e",
+    "res://scripts/interior_visit.gd": "3106489c91663bca4d1a9802b2bbb7e68a601fbe9e390b317e65bd71632f6d16"
+  },
+  "task": "authored_city_helicopter",
+  "total": 2
+}

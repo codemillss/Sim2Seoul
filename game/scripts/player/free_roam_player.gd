@@ -31,6 +31,7 @@ var _water_entries := 0
 var _water_exits := 0
 var _water_jumps := 0
 var facility_control := false
+var pool_preparation_guard: Node3D
 var terrain_surface: Node
 var _terrain_recovery_rebased := false
 
@@ -308,6 +309,10 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		physics_stepped.emit(delta)
 		return
+	# The retained controller owns actual water entry. A jump or fall cannot
+	# bypass roof-local swimwear/shower preparation through the visual gate.
+	if is_instance_valid(pool_preparation_guard) and not pool_preparation_guard.enforce_player_water_access():
+		physics_stepped.emit(delta);return
 	if not global_position.is_finite() or global_position.y<_current_fall_limit_y():
 		recover("fall")
 		physics_stepped.emit(delta)
@@ -372,6 +377,7 @@ func _physics_process(delta: float) -> void:
 	if last_direction.length_squared()>0.000001:
 		visual.rotation.y = rotate_toward(visual.rotation.y,atan2(-last_direction.x,-last_direction.z),turn_speed_radians*delta)
 	move_and_slide()
+	if is_instance_valid(pool_preparation_guard):pool_preparation_guard.enforce_player_water_access()
 	if is_on_floor():_air_jumps_used = 0
 	physics_stepped.emit(delta)
 

@@ -33,6 +33,10 @@ const POOL_FLOOR_Y := -1.40
 const POOL_SURFACE_Y := -.18
 const POOL_RIM_Y := 0.0
 var _pool_deck_opening := Rect2()
+var _pool_preparation: Dictionary={}
+var _pool_gate_visual: Node3D
+var _pool_gate_body: StaticBody3D
+var _pool_shower_water: Node3D
 var _materials: Dictionary = {}
 var _loaded := false
 
@@ -325,6 +329,7 @@ func _build_pool() -> void:
 	var lounge_length: float=minf(clear_size.y+.9,depth-6.0)
 	_box("PoolLoungeDeck",Vector3(2.8,.012,lounge_length),Vector3(lounge_x,.008,-depth*.5+1.2+lounge_length*.5),"wood")
 	_build_hotel_pool_amenities(lounge_x,point.z+basin.y*.5,long_m,short_m)
+	_build_pool_preparation(point.z+basin.y*.5)
 	var dimensions: String="%.1f × %.1fm"%[snappedf(long_m,.1),snappedf(short_m,.1)]
 	var entry: Label3D=_sign("PoolEntrySign","계단으로 입수 · Space 물 밖 점프\n수심 1.22m · "+dimensions,Vector3(_pool_access_x,1.28,point.z+basin.y*.5+1.14),19)
 	entry.pixel_size=.0055
@@ -337,23 +342,61 @@ func _build_hotel_pool_amenities(lounge_x: float, pool_front: float, long_m: flo
 	_box("HotelPoolEntranceFascia",Vector3(3.15,.60,.12),Vector3(_pool_access_x,2.50,gate_z),"ink")
 	var brand: Label3D=_sign("PoolNotice","ROOFTOP POOL\n야외 수영장 · %.0f × %.0fm"%[long_m,short_m],Vector3(_pool_access_x,2.48,gate_z+.075),25)
 	brand.pixel_size=.0055;brand.modulate=Color(.96,.94,.82);brand.outline_modulate=Color(.08,.17,.18)
-	var shower_z: float=pool_front+1.55
-	_box("OutdoorShowerPad",Vector3(1.6,.025,1.6),Vector3(lounge_x,.015,shower_z),"tile")
-	_box("OutdoorShowerColumn",Vector3(.16,2.3,.16),Vector3(lounge_x-.53,1.15,shower_z-.50),"steel",true)
-	_box("OutdoorShowerArm",Vector3(.16,.10,.75),Vector3(lounge_x-.53,2.27,shower_z-.15),"steel")
-	_cylinder("OutdoorShowerHead",Vector3(lounge_x-.53,2.20,shower_z+.17),.20,.07,"steel")
-	_cylinder("OutdoorShowerTap",Vector3(lounge_x-.40,1.05,shower_z-.49),.07,.04,"cream")
-	var shower_sign: Label3D=_sign("OutdoorShowerSign","야외 샤워",Vector3(lounge_x,1.62,shower_z-.58),18);shower_sign.pixel_size=.0045
-	_box("TowelStand",Vector3(1.10,.74,.55),Vector3(lounge_x,.37,shower_z+1.35),"wood",true)
-	for index: int in range(3):
-		_box("FoldedPoolTowel",Vector3(.82,.09,.40),Vector3(lounge_x,.79+float(index)*.095,shower_z+1.35),"towel")
-	var towel_sign: Label3D=_sign("TowelSign","POOL TOWELS",Vector3(lounge_x,1.35,shower_z+1.35),16);towel_sign.pixel_size=.0045
 	_plant(Vector3(-width*.5+1.0,0,depth*.5-2.4),.80)
 	_plant(Vector3(_pool_point.x,0,-depth*.5+.65),.65)
 	_box("PoolLifeRingHolder",Vector3(.10,1.2,.10),Vector3(_pool_access_x-2.0,.60,gate_z+.10),"steel")
 	var ring: MeshInstance3D=MeshInstance3D.new();ring.name="PoolLifeRing"
 	var torus: TorusMesh=TorusMesh.new();torus.inner_radius=.22;torus.outer_radius=.37;torus.rings=16;torus.ring_segments=8
 	ring.mesh=torus;ring.material_override=_materials.cream;ring.position=Vector3(_pool_access_x-2.0,1.0,gate_z+.10);ring.rotation.x=PI*.5;add_child(ring)
+
+func _build_pool_preparation(pool_front: float) -> void:
+	# The existing pool layout reserves at least seven metres in front. Two
+	# human-scale rooms flank the retained central lift landing and corridor.
+	var room_width:=minf(3.0,(width-4.0)*.5);var room_x:=minf(4.5,width*.5-room_width*.5-.65)
+	var centre_z:=pool_front+4.5;var changing:=Vector3(-room_x,.08,centre_z-.10);var shower:=Vector3(room_x,.08,centre_z-.10)
+	for entry: Array in [["Changing",-room_x,"탈의실 · E 수영복"],["Shower",room_x,"샤워실 · E 샤워"]]:
+		var x: float=entry[1];var prefix: String="Pool"+String(entry[0]);var front:=centre_z-1.3
+		_box(prefix+"Tile",Vector3(room_width-.12,.018,2.5),Vector3(x,.012,centre_z),"tile")
+		_box(prefix+"PrivacyRear",Vector3(room_width,2.30,.10),Vector3(x,1.15,centre_z+1.3),"cream",true)
+		for side: float in [-1.,1.]:
+			_box(prefix+"PrivacySide",Vector3(.10,2.30,2.6),Vector3(x+side*room_width*.5,1.15,centre_z),"cream",true)
+			var panel_width: float=(room_width-1.20)*.5
+			_box(prefix+"DoorScreen",Vector3(panel_width,2.15,.10),Vector3(x+side*(.60+panel_width*.5),1.075,front),"wood",true)
+		var sign:=_sign(prefix+"Sign",String(entry[2]),Vector3(x,2.32,front-.075),22);sign.rotation.y=PI;sign.pixel_size=.006;sign.double_sided=false
+		# The lift arrives behind these rooms. Give that approach its own
+		# outward-facing text instead of showing a mirrored sign back.
+		var rear_sign:=_sign(prefix+"RearSign",String(entry[2])+"\n입구는 반대편",Vector3(x,2.10,centre_z+1.375),22);rear_sign.pixel_size=.006;rear_sign.double_sided=false
+		var number:=_sign(prefix+"Step","1 · 갈아입기" if entry[0]=="Changing" else "2 · 샤워 후 입장",Vector3(x,1.4,centre_z+1.22),17);number.pixel_size=.004
+	for index: int in range(3):
+		var x:=changing.x-room_width*.31+index*room_width*.31
+		_box("PoolLocker",Vector3(room_width*.28,1.65,.34),Vector3(x,.825,centre_z+1.04),"steel",true)
+		_box("PoolLockerDoor",Vector3(room_width*.26,1.56,.025),Vector3(x,.83,centre_z+.855),"wood")
+		_box("PoolLockerHandle",Vector3(.045,.15,.03),Vector3(x+.12,.85,centre_z+.83),"cream")
+	_box("PoolChangingBench",Vector3(.38,.15,1.10),Vector3(changing.x-room_width*.5+.27,.43,centre_z-.25),"wood",true)
+	_box("PoolShowerColumn",Vector3(.12,2.15,.12),Vector3(shower.x,1.075,centre_z+1.12),"steel",true)
+	_box("PoolShowerArm",Vector3(.10,.08,.85),Vector3(shower.x,2.13,centre_z+.74),"steel")
+	_cylinder("PoolShowerHead",Vector3(shower.x,2.07,centre_z+.32),.19,.06,"steel")
+	_cylinder("PoolShowerTap",Vector3(shower.x+.16,1.05,centre_z+1.01),.065,.045,"cream")
+	_pool_shower_water=Node3D.new();_pool_shower_water.name="PoolPreparationShowerWater";add_child(_pool_shower_water)
+	var material:=StandardMaterial3D.new();material.albedo_color=Color(.40,.78,.92,.6);material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
+	for index: int in range(13):
+		var line:=MeshInstance3D.new();var stream:=CylinderMesh.new();stream.top_radius=.010;stream.bottom_radius=.015;stream.height=1.80;line.mesh=stream;line.material_override=material
+		var angle:=TAU*index/13.;line.position=Vector3(shower.x+cos(angle)*.15,1.10,centre_z+.32+sin(angle)*.15);_pool_shower_water.add_child(line)
+	_pool_shower_water.visible=false
+	var gate_z:=pool_front+1.05
+	_pool_gate_visual=Node3D.new();_pool_gate_visual.name="PoolPreparationGate";_pool_gate_visual.position=Vector3(_pool_access_x-1.45,0,gate_z);add_child(_pool_gate_visual)
+	var gate:=MeshInstance3D.new();gate.name="GatePanel";var gate_mesh:=BoxMesh.new();gate_mesh.size=Vector3(2.9,1.25,.10);gate.mesh=gate_mesh;gate.material_override=_materials.wood;gate.position=Vector3(1.45,.73,0);_pool_gate_visual.add_child(gate)
+	_pool_gate_body=StaticBody3D.new();_pool_gate_body.name="PoolPreparationGateBody";_pool_gate_body.position=Vector3(_pool_access_x,.73,gate_z);_pool_gate_body.collision_layer=1;var collider:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=gate_mesh.size;collider.shape=box;_pool_gate_body.add_child(collider);add_child(_pool_gate_body);bodies.append(_pool_gate_body)
+	var rules:=_sign("PoolPreparationRules","수영장 이용 순서\n1 탈의실 수영복 → 2 샤워실 → 3 입장\n물 밖으로 나온 뒤 탈의실 E · 원래 옷",Vector3(0,1.7,pool_front+3.0),19);rules.rotation.y=PI;rules.pixel_size=.0045;rules.double_sided=false
+	_pool_preparation={"changing":frame*changing,"shower":frame*shower,"arrival":frame*Vector3(0,.08,pool_front+2.75),"gate":frame*Vector3(_pool_access_x,.08,gate_z+1.0),"changing_rect":Rect2(Vector2(changing.x-room_width*.5,centre_z-1.3),Vector2(room_width,2.6)),"shower_rect":Rect2(Vector2(shower.x-room_width*.5,centre_z-1.3),Vector2(room_width,2.6))}
+	features.append_array(["pool_changing_room_lockers_and_bench","private_shower_room_and_visible_water","required_swimwear_shower_gate"])
+
+func pool_preparation_points() -> Dictionary:return _pool_preparation.duplicate()
+func set_pool_access_authorized(allowed: bool) -> void:
+	if is_instance_valid(_pool_gate_body):_pool_gate_body.collision_layer=0 if allowed else 1
+	if is_instance_valid(_pool_gate_visual):_pool_gate_visual.rotation.y=-PI*.5 if allowed else 0.
+func set_pool_shower_running(running: bool) -> void:
+	if is_instance_valid(_pool_shower_water):_pool_shower_water.visible=running
 
 func _pool_parasol(point: Vector3) -> void:
 	_cylinder("ParasolPole",point+Vector3.UP*1.2,.04,2.4,"steel")
@@ -408,7 +451,7 @@ func pool_water_region() -> Dictionary:
 	return {"id":String(spec.get("id",""))+":roof_pool","frame":frame,"rect":_pool_rect,"floor_y":POOL_FLOOR_Y,"surface_y":POOL_SURFACE_Y}
 
 func pool_entry_point() -> Vector3:
-	return frame*Vector3(_pool_access_x,.08,_pool_point.z+_pool_size.y*.5+1.40)
+	return _pool_preparation.get("arrival",frame*Vector3(_pool_access_x,.08,_pool_point.z+_pool_size.y*.5+1.40))
 
 func pool_rim_point() -> Vector3:
 	return frame*Vector3(_pool_access_x,POOL_RIM_Y+.08,_pool_point.z+_pool_size.y*.5+.40)

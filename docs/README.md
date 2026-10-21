@@ -9,7 +9,7 @@
 | 현재 완료한 기능과 남은 작업 | [현재 작업 상태](WORK_STATUS.md) · [상세 작업 계획](IMPLEMENTATION_TASKS.md) |
 | 왜 이 장소·범위·표현을 골랐나 | [프로젝트 맥락과 결정](PROJECT_CONTEXT.md) · [전체 계획](MASTER_PLAN.md) |
 | 좌표·충돌·입력·지형의 구현 규칙 | [기술 계약](TECHNICAL_CONTRACTS.md) · [지형 통합](TERRAIN_INTEGRATION.md) |
-| 무엇을 어떻게 검증했나 | [검증 계획](VALIDATION_PLAN.md) · [2026-10-20 실행 집계](../data/reports/street_detail/20261020/summary.json) |
+| 무엇을 어떻게 검증했나 | [검증 계획](VALIDATION_PLAN.md) · [2026-10-21 실행 집계](../data/reports/city_life/20261021/summary.json) |
 | 실패·수정·개발 순서 | [실행 이력](EXECUTION_LOG.md) · [원시 증거 폴더](../data/reports/) |
 | 데이터와 모델의 출처·이용 조건 | [자료 출처](DATA_SOURCES.md) · [자료·자산 고지](ATTRIBUTION.md) |
 | 다른 기기에서 개발 이어가기 | [에이전트 시작 지침](../AGENTS.md) · [인수 안내](SOL_HANDOFF.md) |

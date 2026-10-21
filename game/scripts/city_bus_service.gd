@@ -408,9 +408,12 @@ func _context_ready() -> bool:
 	if host.get_tree().paused:return false
 	if is_instance_valid(host.get("menu")) and host.menu.visible:return false
 	if _collision_release_pending and not riding:return false
-	for key: String in ["city_bike_service","city_scooter_service"]:
-		var mobility: Variant=host.get(key)
-		if is_instance_valid(mobility) and mobility.get("riding")==true:return false
+	if host.has_method("_street_transport_riding_except"):
+		if host._street_transport_riding_except(self):return false
+	else:
+		for key: String in ["city_bike_service","city_scooter_service"]:
+			var mobility: Variant=host.get(key)
+			if is_instance_valid(mobility) and mobility.get("riding")==true:return false
 	if not riding and host.player.facility_control:return false
 	return not host.player.interior_active and not host.interior_visit.active
 

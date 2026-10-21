@@ -1,0 +1,33 @@
+{
+  "result": "PASS_STARTUP_OS_SCOPE_LIMITED",
+  "started": {
+    "pid": 55891,
+    "started_at": "2026-10-21T06:07:16.302566+00:00",
+    "launcher": "sh tools/run_exploration.sh run",
+    "automatic_probe": false,
+    "log": "data/cache/interactive/20261021/exp24-normal.log"
+  },
+  "engine_ready": true,
+  "script_errors": 0,
+  "error_lines": 0,
+  "observations": [
+    "Fresh ordinary launcher, no automatic-probe or test scene. First CUA screenshot showed Daehanmun and new I/interaction help.",
+    "A later screenshot showed live helicopter flight in the ordinary window, including the expected flight controls. Input source was not established."
+  ],
+  "os_input_smoke": {
+    "result": "NOT_COMPLETED",
+    "reason": "CUA Escape command timed out. Re-read showed helicopter flight although the root had not navigated or boarded. Possible concurrent human play; asked user and preserved the live window. Do not claim agent OS driving, shopping or shower-flow acceptance."
+  },
+  "screenshot": {
+    "path": "data/reports/city_life/20261021/normal_observed_flight.png",
+    "sha256": "eee87165f3c2da332235a03240ee5ba3c3e1fee2f95691e8054f90dd5bf9f80f"
+  },
+  "left_running": true,
+  "settings_observed": {
+    "speed": "turbo",
+    "free_roam": true,
+    "time": "evening"
+  },
+  "recorded_at": "2026-10-21T06:12:14.676003+00:00",
+  "scope": "Ordinary engine startup and observed live window only. Native scripted physics/UI tests and their snapshots are separate evidence. Short observed flight is not sustained performance or complete OS interaction acceptance."
+}

@@ -6,14 +6,14 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = ROOT / 'data/reports/street_detail/20261020/summary.json'
+SUMMARY = ROOT / 'data/reports/city_life/20261021/summary.json'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepared', action='store_true')
     parser.add_argument('--summary', type=Path, default=SUMMARY,
-                        help='Manifest to check; defaults to the latest street revision.')
+                        help='Manifest to check; defaults to the latest city-life revision.')
     args = parser.parse_args()
     summary = args.summary.resolve()
     if not summary.is_relative_to(ROOT) or not summary.is_file():

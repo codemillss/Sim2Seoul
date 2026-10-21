@@ -232,6 +232,7 @@ func _context_ready() -> bool:
 	if host.player.interior_active or host.interior_visit.active:return false
 	return not _other_transport_riding()
 func _other_transport_riding() -> bool:
+	if host.has_method("_street_transport_riding_except"):return host._street_transport_riding_except(self)
 	for property: String in ["city_bus_service","city_bike_service","city_scooter_service"]:
 		var other: Node3D=host.get(property)
 		if is_instance_valid(other) and other!=self and other.riding:return true
