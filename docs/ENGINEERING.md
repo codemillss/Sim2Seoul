@@ -7,7 +7,7 @@ Sim2Seoul은 공개 공간자료를 Python GIS 파이프라인에서 정리하�
 ## 아키텍처
 
 ```mermaid
-flowchart LR
+flowchart TB
     S["공개 공간자료<br/>OSM · Overture · 서울시 등고선/표고점"] --> G["Python GIS<br/>좌표 변환 · 도형/높이 검토"]
     G --> D["지역 XZ 계약과 제작 자산<br/>원천 · 가정 · 입력 SHA 보존"]
     D --> R["Godot 런타임<br/>메시 · 지형 · 충돌 · 배우"]
