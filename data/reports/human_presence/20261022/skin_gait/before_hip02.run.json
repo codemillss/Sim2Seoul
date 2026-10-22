@@ -1,0 +1,43 @@
+{
+  "task": "EXP29_WEIGHTED_HUMAN_SKIN_GAIT",
+  "observed_result": "FAIL",
+  "executor_returncode": 1,
+  "executor_wall_time_seconds": 1.102576917,
+  "report": "data/reports/human_presence/20261022/skin_gait/before_hip02.json",
+  "report_sha256": "cd11fd0d89afe050373184875d12c04bad67afa9f79b2afe28c22f67de98a1f3",
+  "summary": {
+    "checks": 141,
+    "failed": 53
+  },
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--log-file",
+    "../data/reports/human_presence/20261022/skin_gait/before_hip02.log",
+    "--script",
+    "../tests/game/check_human_skin_gait.gd",
+    "--",
+    "--report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/human_presence/20261022/skin_gait/before_hip02.json"
+  ],
+  "raw_logs": {
+    "data/reports/human_presence/20261022/skin_gait/before_hip02.log": "691c22af816680faa0112e025c81523e7b33a18c3cf0d63426aefe283d98620a",
+    "data/reports/human_presence/20261022/skin_gait/before_hip02.console.log": "7904b207dc1a96829b9991c40c53c281b5a0baee9735a955ef87f7cb1a4af940"
+  },
+  "script_errors": false,
+  "warnings": true,
+  "source_sha256": {
+    "res://../tests/game/check_human_skin_gait.gd": "fcdb5abbc62b2f98032a4c8678b8f730848d61c5cc8d792c96ce3cd57c2c8c97",
+    "res://../tests/game/check_textured_human_rig.gd": "5e3e31d09484bb36e15d09e8c6c023727db4064e724acdc53012ed8ad242882b",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://scripts/player/exploration_avatar.gd": "48cffe5e3a744dd793faaa0c6b20804a0d390806d0ef98b8442f15f4b6cbd996",
+    "res://scripts/player/human_activity_dimensions.gd": "60ef0b366ee88d81af97ab37b47c7742c4762f64a3106a5e240e6004c1574e96",
+    "res://scripts/player/textured_human_rig.gd": "5d2c4d89ac9fce60b8a7c66caaf47c27dd0466f8f00476845342cad2434578a4",
+    "res://scripts/player/textured_human_surface.gd": "f94937c3a56a2a1cdf550275c7f0f3e7608c33e8b5e0f94057522ae309d8461f"
+  },
+  "current_sources_match_recorded": false,
+  "recorded_at_utc": "2026-10-22T07:49:40.393777+00:00",
+  "executor_note": "Initial diagnostic141checks; subsequently corrected global_transform vector subtraction to global_basis, separated0.198mm idle reach margin from moving defects, and added independent stance measurements. Superseded by controlled_before01 using final identical fixture."
+}

@@ -1,0 +1,84 @@
+{
+  "task": "EXP29_FAILURES_AND_CORRECTIONS",
+  "raw_failures_preserved": true,
+  "items": [
+    {
+      "issue": "First procedural human did not meet the user realism requirement",
+      "decision": "Rejected as visible final art despite geometry checks. Preserve compatibility contact markers invisibly; replace visible body with licensed textured weighted models.",
+      "scope": "User visual feedback governs acceptance; numeric proportion PASS was not substituted for realism."
+    },
+    {
+      "issue": "Native draw capture stopped in obscured macOS window",
+      "evidence": "camera/human_camera_native_final02.json",
+      "decision": "Record physics/process/draw clocks and actual focus. Explicit RenderingServer.force_draw captures the current GPU frame; no larger timeout or weaker criterion."
+    },
+    {
+      "issue": "120Hz display and 60Hz physics locked render phases to two bins",
+      "evidence": "camera/human_camera_native_final03.json",
+      "decision": "Fixture-only VSync disable with backend readback and actual frame clocks. All193 criteria including three phase bins retained. Corrected native final04 passed193; later runtime changes require fresh selected runs."
+    },
+    {
+      "issue": "Real source limbs cannot meet obsolete long proxy arms and equipment travel",
+      "evidence": "retarget/summary.json",
+      "decision": "Preserve actual bone lengths. On-foot source directions, palm IK for equipment contacts, bounded torso hinge. Shared authored weights low.92m/travel.44m and rowing seattravel.20m in real props and reference targets."
+    },
+    {
+      "issue": "Swim neck/shoulder triangles cut with a horizontal height plane",
+      "evidence": "appearance/human_portrait_native_final03.json",
+      "decision": "Visual FAIL despite32numericPASS. Use original head-weight boundary and keep original Rocketbox head/hair; later clip boundary intersections continuously instead of dropping whole triangles."
+    },
+    {
+      "issue": "Hybrid MakeHuman body placed head too high and female neck too far back",
+      "evidence": "retarget/hybrid_neck_headless_dev02.json",
+      "decision": "Fit upper torso/neck XYZ continuously to the original head skeleton; rigidly translate arm chains and preserve anatomical segment lengths, hips/legs and total1.70m."
+    },
+    {
+      "issue": "Female swim garment armholes and collar visibly zigzagged",
+      "evidence": "appearance/human_portrait_native_female_final02_swimwear_neck_three_quarter.png",
+      "decision": "Visual FAIL despite34numericPASS. Clip armhole edge intersections with interpolated UV/normals/skin weights; retain opacity and private hidden geometry exclusions. Refresh machine-local GLB imports and verify sourceMD5."
+    },
+    {
+      "issue": "Dark original leather prevented white staff clothing and purchased colors",
+      "evidence": "appearance/textured_palette_headless_dev02.json",
+      "decision": "Actual UV-area weighted texture mean, linear common material gain and bounded vertex colors. Split existing weighted Hand/Finger triangles to an original-color skin surface; do not add floating sphere hands."
+    },
+    {
+      "issue": "Old hoodie/cardigan/jacket shape props are incompatible with new weighted body",
+      "decision": "Keep obsolete props invisible. Current three products are explicitly named ivory/cobalt/charcoal color tops, with original IDs/prices and purchase/equip preserved. Original clothing silhouette is shared; do not claim three distinct garment shapes."
+    },
+    {
+      "issue": "User reports unnatural front/back/side walking, especially buttocks",
+      "evidence": "skin_gait/before_hip02.json",
+      "decision": "Actual skin and native joints reveal14-15cm pelvis/lower-spine/thigh local displacement. Repair a common anatomical pelvis connection and fit stride to native leg reach. New multi-view phase captures are required; prior front-only portraits are insufficient.",
+      "status": "Final current-source skin157, multiview2x37 and visual review selected in canonical summary."
+    },
+    {
+      "issue": "Multi-view gait first image retained previous camera despite37numericPASS",
+      "evidence": "skin_gait/human_gait_native_final01.json",
+      "decision": "Visual/capture FAIL. Force Camera3D transform updates, choose view before settling, and continuously track current view in the late observer. Preserve72originals and all contact sheets. Root opened all four corrected first-view images in native final02."
+    },
+    {
+      "issue": "Realistic3.5mps run foot slid0.1996mps after shorter gait cycle",
+      "evidence": "appearance/human_portrait_native_female_final03.json",
+      "decision": "Keep25mmpscontactcriterion. Shorter1.595mblendedcycle needs2.194Hz, but old blendedlimit2.069Hz capped it early. Use the retainedglobal2.2Hzlimit; turbo remains bounded. Actual rendered foot bone and CPU sole tests cover both walk/run."
+    },
+    {
+      "issue": "Neutral hybrid neckPASS missed moving wardrobe head-body gap",
+      "evidence": "retarget/hybrid_gait_join_diagnostic01.json",
+      "decision": "Actual two-rig walk/run71checks found up to46.10mm neck/head gap. Native leg length differences yield different pelvis drops. After both rigs update, translate original Neck subtree rigidly to the swim bodyHead in render-onlypriority110; preserve neutral/internalheadlengths and restore base every primaryrigframe. Physics/camera/sourcecontacts unchanged. Test actualfinalskeletons, immediatebegin/end and idempotence."
+    },
+    {
+      "issue": "Shop inventory selector used old hoodie title after products became explicit color variants",
+      "evidence": "regression/shop_headless_skin_final01.json",
+      "decision": "57/61 was a fixture UI selection failure; all three purchases and actual weighted palette changes passed. Match the actual renamed cobaltcolor top button. Preserve oldtestsource and rerun61currentchecks rather than change product IDs, wallet or ride logic.",
+      "final_selected_headless": "regression/shop_headless_skin_final03.json"
+    },
+    {
+      "issue": "Native shop picker hidden assertion ran before actual UI process boundary",
+      "evidence": "shop/shop_native_skin_final02.json",
+      "decision": "77/78 retained. Wait the real process_frame after menu opens; keep rejection/hidden/one-transaction criteria and capture concrete state. Rechecknative78/78 and headless61/61 using the same updated fixture.",
+      "final_native": "shop/shop_native_skin_final03.json"
+    }
+  ],
+  "scope": "Development/correction history, not a substitute for final current-source engine, pixel-sequence or OS input acceptance."
+}

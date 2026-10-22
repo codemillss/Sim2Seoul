@@ -1,0 +1,51 @@
+extends SceneTree
+class Actor extends CharacterBody3D:
+ var facility_control:=false
+var report:={"engine":Engine.get_version_info().string,"models":[]}
+func _j(v:Variant)->Variant:
+ if v is Vector3:return [v.x,v.y,v.z]
+ if v is AABB:return {"position":_j(v.position),"size":_j(v.size)}
+ if v is Transform3D:return {"origin":_j(v.origin),"basis":[_j(v.basis.x),_j(v.basis.y),_j(v.basis.z)]}
+ if v is Dictionary:
+  var d:={}
+  for k in v:d[str(k)]=_j(v[k])
+  return d
+ if v is Array:
+  var a:=[]
+  for x in v:a.append(_j(x))
+  return a
+ return v
+func _initialize():call_deferred("_run")
+func _geometry(avatar:Node3D,id:String)->Dictionary:
+ var wrapper:Node3D=avatar._textured_surface
+ var sex:String="male" if id=="Male_Adult_04" else "female"
+ var source:Node3D=load("res://assets/vendor/makehuman_swim/swim_"+sex+".glb").instantiate()
+ var original:MeshInstance3D=source.find_child("TexturedBody",true,false)
+ var actual:MeshInstance3D=wrapper._swim_root.find_child("TexturedBody",true,false)
+ var result:Dictionary={"original_vertex_prefix_identical":true,"original_uv_prefix_identical":true,"original_normal_prefix_identical":true,"original_weights_prefix_identical":true,"original_bone_prefix_identical":true,"all_normals_finite_unit":true,"normal_length_min":1e9,"normal_length_max":0.,"normal_vector_max_delta":0.,"normal_direction_min_dot":1.,"retained_triangles":0,"original_triangles":0,"rendered_upper_lateral_triangles":0}
+ for surface:int in range(actual.mesh.get_surface_count()):
+  var original_arrays:Array=original.mesh.surface_get_arrays(surface)
+  var arrays:Array=actual.mesh.surface_get_arrays(surface)
+  result.original_vertex_prefix_identical=result.original_vertex_prefix_identical and arrays[Mesh.ARRAY_VERTEX].slice(0,original_arrays[Mesh.ARRAY_VERTEX].size())==original_arrays[Mesh.ARRAY_VERTEX]
+  result.original_uv_prefix_identical=result.original_uv_prefix_identical and arrays[Mesh.ARRAY_TEX_UV].slice(0,original_arrays[Mesh.ARRAY_TEX_UV].size())==original_arrays[Mesh.ARRAY_TEX_UV]
+  result.original_normal_prefix_identical=result.original_normal_prefix_identical and arrays[Mesh.ARRAY_NORMAL].slice(0,original_arrays[Mesh.ARRAY_NORMAL].size())==original_arrays[Mesh.ARRAY_NORMAL]
+  result.original_weights_prefix_identical=result.original_weights_prefix_identical and arrays[Mesh.ARRAY_WEIGHTS].slice(0,original_arrays[Mesh.ARRAY_WEIGHTS].size())==original_arrays[Mesh.ARRAY_WEIGHTS]
+  result.original_bone_prefix_identical=result.original_bone_prefix_identical and arrays[Mesh.ARRAY_BONES].slice(0,original_arrays[Mesh.ARRAY_BONES].size())==original_arrays[Mesh.ARRAY_BONES]
+  for normal_index:int in range(original_arrays[Mesh.ARRAY_NORMAL].size()):
+   var normal:Vector3=arrays[Mesh.ARRAY_NORMAL][normal_index]
+   var original_normal:Vector3=original_arrays[Mesh.ARRAY_NORMAL][normal_index]
+   result.normal_vector_max_delta=maxf(result.normal_vector_max_delta,normal.distance_to(original_normal))
+   result.normal_direction_min_dot=minf(result.normal_direction_min_dot,normal.normalized().dot(original_normal.normalized()))
+   var length:float=normal.length();result.normal_length_min=minf(result.normal_length_min,length);result.normal_length_max=maxf(result.normal_length_max,length);result.all_normals_finite_unit=result.all_normals_finite_unit and normal.is_finite() and absf(length-1.)<.001
+  var indices:PackedInt32Array=arrays[Mesh.ARRAY_INDEX];var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+  result.retained_triangles+=indices.size()/3;result.original_triangles+=original_arrays[Mesh.ARRAY_INDEX].size()/3
+  for triangle:int in range(0,indices.size(),3):
+   var midpoint:Vector3=(vertices[indices[triangle]]+vertices[indices[triangle+1]]+vertices[indices[triangle+2]])/3.
+   if midpoint.y>1.28 and midpoint.y<1.51 and absf(midpoint.x)>.12:result.rendered_upper_lateral_triangles+=1
+ source.free();return result
+func _run():
+ for id:String in ["Male_Adult_04","Female_Adult_07"]:
+  var actor:=Actor.new();root.add_child(actor);actor.set_meta("human_model_id",id);var visual:=Node3D.new();visual.name="Visual";actor.add_child(visual);var old:=MeshInstance3D.new();old.name="Body";visual.add_child(old)
+  var avatar:Node3D=load("res://scripts/player/exploration_avatar.gd").new();visual.add_child(avatar);var ready:bool=avatar.setup(actor);avatar.set_physics_process(false);await process_frame;await process_frame
+  var snap:Dictionary=avatar.textured_model_snapshot();snap["setup_return"]=ready;avatar.set_swimwear_visuals(true);await process_frame;await process_frame;snap["swim"]=avatar.textured_model_snapshot();snap["swim_reference_fit"]=avatar._textured_surface._swim_rig.snapshot();snap["geometry_integrity"]=_geometry(avatar,id);avatar.set_swimwear_visuals(false);await process_frame;snap["restored"]=avatar.textured_model_snapshot();snap["legacy_visible"]=avatar._meshes.filter(func(x:MeshInstance3D)->bool:return x.is_visible_in_tree()).size();report.models.append(snap);actor.free()
+ var file:=FileAccess.open("/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev07.json",FileAccess.WRITE);file.store_string(JSON.stringify(_j(report),"  ")+"\n");file.close();print("ROCKETBOX_AVATAR_BRIDGE models=",report.models.size());quit()

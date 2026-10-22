@@ -1,0 +1,51 @@
+{
+  "task": "SWIM_GARMENT_AND_NECK_BOUNDARY_INTERPOLATION",
+  "result": "DEVELOPMENT_NUMERIC_AND_IMPORT_PASS_PENDING_NATIVE_VISUAL_REVIEW",
+  "change": "Garmentarmweightiso.30 andneckHeadweightiso.50 clipping now interpolate shared-edge positions/UVs/normals/sourceweights instead of removing complete crossing triangles. No importer/sourceanatomy/scale/physics change.",
+  "source_sha256": {
+    "tools/prepare_makehuman_swim.py": "816bacc2b30ca05286d7c40f0e6745a1bbca59ff4108cc93535d4be9cb9c3c01",
+    "game/scripts/player/textured_human_surface.gd": "a758926f261bc9983eb30b3eb121d7575899a980d1fbab105e6a36a85270950f",
+    "game/assets/vendor/makehuman_swim/swim_male.glb": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294",
+    "game/assets/vendor/makehuman_swim/swim_female.glb": "697537a49ae569dcfbdaaa715e67769532b5e321864497a113dfb95e3c686c4a",
+    "game/assets/vendor/makehuman_swim/provenance.json": "acd1d1aedd226d8705eb3305999e1c4633cc264d3a8097bf5647ebf89a436005"
+  },
+  "vendor_originals_unchanged": {
+    "raw_source_caches": true,
+    "licenses": true,
+    "skin_textures": true,
+    "male_glb": true,
+    "body_and_eye_mesh_attributes_and_indices": true,
+    "fixed_opaque_garments": true,
+    "covered_private_body_removal_interval": true
+  },
+  "previous_derived_assets_cache": "data/cache/human_assets/makehuman/derived_before_smooth_boundary_20261022",
+  "female_garment": {
+    "vertices": 1246,
+    "triangles": 2246
+  },
+  "source_and_cache_md5": {
+    "male": {
+      "actual_source": "a0278fae904ada98f4b84eea91277ef2",
+      "cache_source_matches": true,
+      "cache_metadata": "source_md5=\"a0278fae904ada98f4b84eea91277ef2\"\ndest_md5=\"6f79710f816317fed1840a24772a1bd6\""
+    },
+    "female": {
+      "actual_source": "120a2146fb16a62bf739fd204f885162",
+      "cache_source_matches": true,
+      "cache_metadata": "source_md5=\"120a2146fb16a62bf739fd204f885162\"\ndest_md5=\"a5d442508b475188ecf78e02806dc3e2\""
+    }
+  },
+  "failed_attempt": {
+    "file": "swim_boundary_dev01_failed_fixture.log",
+    "reason": "Temporary development diagnostic compared all new cut vertices against a shorter original normal array;SCRIPTindexerror and cleanup leaks preserved. This is not accepted despite engineexit0.",
+    "correction": "dev02 compares original vertex prefix; added interpolated boundary vertices are allowed. Productioncodeunchangedbyfixturefix."
+  },
+  "clean_attempt": {
+    "file": "swim_boundary_dev02_wrapper.log",
+    "exit_code": 0,
+    "script_or_error_markers": false,
+    "native_visual_acceptance": false,
+    "actual_wrapper_results": "../source_candidates/rocketbox/avatar_bridge_swim_headless_dev07.json"
+  },
+  "scope": "This is a development component/import check, not final native appearance, new gait, city, OS input or runtime performance acceptance."
+}

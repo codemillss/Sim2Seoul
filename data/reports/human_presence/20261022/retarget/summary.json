@@ -1,0 +1,696 @@
+{
+  "task": "EXP29_TEXTURED_HUMAN_RETARGET",
+  "status": "CURRENT_SCOPED_NECK_AND_GAIT_PROBES_PASS_PENDING_ROOT_NATIVE_AND_CITY_ACCEPTANCE",
+  "production_frozen": true,
+  "owned_production": {
+    "game/scripts/player/textured_human_rig.gd": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+    "game/scripts/player/exploration_avatar.gd": "e0fec8d493a308942d22088a9601325f1a37c163734fb7875c53222f4f38cf45",
+    "game/scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+  },
+  "owned_test": {
+    "tests/game/check_textured_human_rig.gd": "5e3e31d09484bb36e15d09e8c6c023727db4064e724acdc53012ed8ad242882b",
+    "tests/game/check_hybrid_neck_fit.gd": "ece68a04115c949302a29e1e936d120d24b0d519eb76d6280eff04084c98dfad"
+  },
+  "selected_report": "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.json",
+  "selected_run": "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.run.json",
+  "expected_checks": 804,
+  "passed_checks": 804,
+  "failed_checks": 0,
+  "models": [
+    {
+      "id": "Male_Adult_04",
+      "bones": 81,
+      "source": "Microsoft Rocketbox MIT"
+    },
+    {
+      "id": "Female_Adult_07",
+      "bones": 81,
+      "source": "Microsoft Rocketbox MIT"
+    },
+    {
+      "id": "swim_male",
+      "bones": 163,
+      "source": "MakeHuman derived swim GLB CC0"
+    },
+    {
+      "id": "swim_female",
+      "bones": 163,
+      "source": "MakeHuman derived swim GLB CC0"
+    }
+  ],
+  "measurements": {
+    "maximum_required_contact_error_m": 9.98565665213391e-05,
+    "maximum_contact_hip_hinge_degrees": 22.29736328125,
+    "maximum_allowed_hip_hinge_degrees": 25,
+    "contact_error_acceptance_m": 0.01,
+    "neutral_actual_skin_bounds": {
+      "Male_Adult_04_neutral": {
+        "position": [
+          -0.247628748416901,
+          -2.47149728238583e-07,
+          -0.173988670110703
+        ],
+        "size": [
+          0.495259284973145,
+          1.70000016689301,
+          0.313052803277969
+        ]
+      },
+      "Female_Adult_07_neutral": {
+        "position": [
+          -0.225302577018738,
+          1.95473361941367e-08,
+          -0.124763526022434
+        ],
+        "size": [
+          0.450605273246765,
+          1.70000028610229,
+          0.354394108057022
+        ]
+      },
+      "swim_male_neutral": {
+        "position": [
+          -0.241526409983635,
+          -9.60564108254403e-08,
+          -0.196351438760757
+        ],
+        "size": [
+          0.483052730560303,
+          1.70000004768372,
+          0.315765470266342
+        ]
+      },
+      "swim_female_neutral": {
+        "position": [
+          -0.229148298501968,
+          -8.38842240113991e-09,
+          -0.214889615774155
+        ],
+        "size": [
+          0.458296477794647,
+          1.69999992847443,
+          0.325532644987106
+        ]
+      }
+    }
+  },
+  "contract": [
+    "Godot4 complete local bone poses include original rest; import rest and inverse binds remain unchanged.",
+    "Rest bone-child axes calibrated into the retained neutral pose; no T/A pose arm-spread at idle.",
+    "Original native arm lengths preserved. On-foot hands follow actual anatomy and source directions, not obsolete long-arm marker endpoints.",
+    "Native foot targets use each model actual segment lengths with supported hips; original source/player pose remains read-only.",
+    "Only real hand-contact ownership uses palm-target IK and the smallest feasible forward pelvis hinge, capped25degrees. Chest, clavicles and head share the hinge; original leg/foot contacts remain.",
+    "Process priority100 reads the same render-interpolated source markers after the camera publishes them. No camera/player/capsule/controller ownership added.",
+    "Shared human_activity_dimensions changes are game-authored: weights low.92m/travel.44m, rowing seat travel.20m, matched source pose and actual equipment.",
+    "Optional original-head reference fits the hybrid swim body upper torso/neck height and planar center continuously, translates entire arm chains to original shoulder centers without stretching, leaves imported rests/binds/original head/hips/legs untouched. Native visual neck join remains separate root acceptance.",
+    "Moving gait now preserves native pelvis/first-Spine/Thigh local origins using one shared pelvis solution; detailed actual skin/stance before-after acceptance and source bindings are in skin_gait/summary.json. Existing non-gait facility pose ownership is retained.",
+    "Final surface priority110 performs render-only rigid translation of the complete original Neck subtree to the active swim Head after both priority100rigs. Neutral shifts<=1micrometre are skipped, local neck/head lengths/rotations are retained, primary sync removes prior-frame correction, and clothing exit immediately resyncs original rig. Dynamic actual skeleton endpoints are measured after coupling; original import rests, source markers, physics and camera stay untouched."
+  ],
+  "development_attempts": [
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_headless_dev01.json",
+      "meaning": "75/78: Female eat/cycle/rowing hands exceed real reach with the original rigid torso.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_headless_dev02.json",
+      "meaning": "78/78 at one activity time after a bounded forward torso hinge; superseded by full-cycle sampling.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_headless_dev03.json",
+      "meaning": "397/402: Expanded seven samples per activity reveal female low dumbbell and male maximum rowing foot targets outside real limb reach.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_headless_dev04.json",
+      "meaning": "400/402: First shared dimension revision insufficient at two exact endpoints.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_headless_final01.json",
+      "meaning": "402/402 for Rocketbox only; historical test source before adding the two swim bodies.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/rig_swim_headless_dev01.json",
+      "meaning": "804/804 before optional hybrid neck fit. Retained; superseded by current-source 804 report.",
+      "raw_retained": true
+    },
+    {
+      "report": "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev01.json",
+      "meaning": "23/23 Y-only hybrid fit; source extended afterward to address the female forward/back neck mismatch.",
+      "raw_retained": true
+    }
+  ],
+  "scope": "Four standalone actual upstream skins: 804 component conditions for gait/activities/contact and CPU-skinned bounds. A separate 27-condition real wardrobe wrapper check measures hybrid neck/head/shoulder XYZ joins, ordered neck chain, unchanged original head/limb lengths/hips/legs and 1.70m actual referenced visible skin height. Does not establish subjective native visual quality, city physics, OS input or performance; root independently accepts those.",
+  "artifacts": {
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.console.log": {
+      "bytes": 18351,
+      "sha256": "4d3c91b96a839c50b9d8e35b4ff4049d73401dfe01a5e92af932ef60fec56ebc"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.json": {
+      "bytes": 66583,
+      "sha256": "633a0f7b639f0df406798b726b76b54e66d1c301d4598e02596a53259a60da16"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.log": {
+      "bytes": 17911,
+      "sha256": "6f70e85214d79b8bbac9f7df3710ef3bbc6600360e5951ed2d9986b2d630aaee"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.run.json": {
+      "bytes": 2817,
+      "sha256": "93f07271c6d9ca86407173d33f56d62ba52c327522317a529d98bde1b9e0287d"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.console.log": {
+      "bytes": 103,
+      "sha256": "f676dc9f09022dd515070e582244c677ab5b98ec6f0e6e7141fb9f2d07c55bb2"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.json": {
+      "bytes": 84395,
+      "sha256": "0b7ac96ab130882d5ae3087d8636e439bbe3039eac260870bc1341492ab9ae50"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.log": {
+      "bytes": 103,
+      "sha256": "f676dc9f09022dd515070e582244c677ab5b98ec6f0e6e7141fb9f2d07c55bb2"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.run.json": {
+      "bytes": 2427,
+      "sha256": "f2351050b70a23e02f6433531de1aee15fbd4ed79b83ada24a1e260f43d1a14e"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.console.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.json": {
+      "bytes": 87100,
+      "sha256": "b98653bb9560427b9f60d7886a38dd00b89c25694ae856afec488aa2b99a4957"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.run.json": {
+      "bytes": 2565,
+      "sha256": "a6545be1313e69d380265a9e19467dfa0ced223ccb66e708a1126ae993565cb5"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev01.console.log": {
+      "bytes": 102,
+      "sha256": "9a2c4708e01bc45af5d17e6a9208b61470525bab3dd27c556f5b97c8f8c39f6e"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev01.json": {
+      "bytes": 42658,
+      "sha256": "bda96a6758b844202ff373b312f62eda03b041d514ce3b6a99906a93a6d4efeb"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev01.log": {
+      "bytes": 102,
+      "sha256": "9a2c4708e01bc45af5d17e6a9208b61470525bab3dd27c556f5b97c8f8c39f6e"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev01.run.json": {
+      "bytes": 2781,
+      "sha256": "96deccf31d2c5b9332ac7695395502d5c150e4e86fb5c168f4f8b47e274a91a5"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev02.console.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev02.json": {
+      "bytes": 84373,
+      "sha256": "37f8df6e73876ac80260e879cd7c4d1b67376d9090f4b0f9a43cb5516b7fce26"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev02.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev02.run.json": {
+      "bytes": 2775,
+      "sha256": "86237969cb0f5c98b18c4b666055e32d8a72c13dfc2a6f268d602cc5eac0d686"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev03.console.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev03.json": {
+      "bytes": 84377,
+      "sha256": "0295ba53bba2411978c58bccf6876d4c9d0a5cf1a4323339154a0dd24308d409"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev03.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_dev03.run.json": {
+      "bytes": 2743,
+      "sha256": "be32f89098b4a976b1518a3034b55ca67406c9cc80e7a4dedc70d12a4a6e00a2"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_hipfinal01.console.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_hipfinal01.json": {
+      "bytes": 85975,
+      "sha256": "ed935521745b2d9274e6ef5d598ef5eac18a53ad8742d474f8368f35648c4f16"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_hipfinal01.log": {
+      "bytes": 102,
+      "sha256": "a0e6883aeb6683f5501f2dc0a56effa8c4aa2bd2470d378e3cc66a4dfabcea87"
+    },
+    "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_hipfinal01.run.json": {
+      "bytes": 2982,
+      "sha256": "d5939de8ce79cf9e4e8f0e1bb44df349eaf6d232ad2539f88f74d65035300e5e"
+    },
+    "data/reports/human_presence/20261022/retarget/parser01.console.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    "data/reports/human_presence/20261022/retarget/parser01.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev01.console.log": {
+      "bytes": 1373,
+      "sha256": "e526864b03a072e15cc7a28e9c5cbf0cdab9f738f0359f932785ba0320c71511"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev01.json": {
+      "bytes": 159776,
+      "sha256": "afef415c44d5e626ab7edff51a181890bf84a4185d608229dee38094db8f4bce"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev01.log": {
+      "bytes": 1343,
+      "sha256": "0d7aadabc3c56871412b8e4e4930d1f649dd3a8de8e412be54c3c7215f616dfc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev02.console.log": {
+      "bytes": 105,
+      "sha256": "a294b24628caf1f5bd44ac73918109132e2a6130f04747a466f376d3c3d74090"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev02.json": {
+      "bytes": 164697,
+      "sha256": "ca8d2d9b9b08347024f2420976c4262a3007801d5ca7a1b108d59fae7276cb7c"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev02.log": {
+      "bytes": 105,
+      "sha256": "a294b24628caf1f5bd44ac73918109132e2a6130f04747a466f376d3c3d74090"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev03.console.log": {
+      "bytes": 2246,
+      "sha256": "33edcdc3833abebb677af1a98bfb88d5d92f1c0198083363cc41253dbcaaba28"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev03.json": {
+      "bytes": 615077,
+      "sha256": "30eceea94bb8258ac4258f3760f52759699b9e371143815f531af0479e4be2c0"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev03.log": {
+      "bytes": 2196,
+      "sha256": "f80657122b940526b2c2be3f469a88ef6386ff99044a3f5af39841fab7b335e0"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev04.console.log": {
+      "bytes": 962,
+      "sha256": "58a9ed5a84712f88dc9123afa0242d9195608a9b8e1b7a4350886ad63d199ba6"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev04.json": {
+      "bytes": 617684,
+      "sha256": "9405a9eae2e69e9bfa9f46a70dc324ad6c579837d67a8dbc24bd974eea43138e"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_dev04.log": {
+      "bytes": 942,
+      "sha256": "1f4b35be54f5f3871ab774765f63800edea005cf4d0c585246171132df6f7a35"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_final01.console.log": {
+      "bytes": 107,
+      "sha256": "165a110a5d47e6f99fc703a24e4c49dde223049e20d61a4ae5c2c72477070761"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_final01.json": {
+      "bytes": 617706,
+      "sha256": "902f2244ee013b2ecd0545f1fbd2f14d1667073558e5b36caadd0d8711279421"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_headless_final01.log": {
+      "bytes": 107,
+      "sha256": "165a110a5d47e6f99fc703a24e4c49dde223049e20d61a4ae5c2c72477070761"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_dev01.console.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_dev01.json": {
+      "bytes": 1233258,
+      "sha256": "1427cdca985b26c2f362b5242ec7384bdbc2136eb40971f838153ef95d4c63d8"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_dev01.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_dev01.run.json": {
+      "bytes": 2781,
+      "sha256": "b840ad1d71583f573e73a1d1d93e55068cc70bc110348cb79f3cfc240f6f658c"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.console.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.json": {
+      "bytes": 1339312,
+      "sha256": "768ceafd253ed9db5177b99fe29264272e2661a2ccd0f52da4abe7f404087a94"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_hipfinal01.run.json": {
+      "bytes": 2696,
+      "sha256": "63ffc1d7d42ca2abff0608e57f422081c5e9f4d142edd380801bbdacb401ac68"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_neckfit01.console.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_neckfit01.json": {
+      "bytes": 1249522,
+      "sha256": "4db826024282a00717f99602f94f313a7b1d0c7587bc2a4bd973d637f11765ad"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_neckfit01.log": {
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    "data/reports/human_presence/20261022/retarget/rig_swim_headless_neckfit01.run.json": {
+      "bytes": 2694,
+      "sha256": "574135800bd064a49e930e9fa5b8e158211dd7507ea48a51e7bd434c568c189d"
+    },
+    "data/reports/human_presence/20261022/retarget/source_snapshots/check_hybrid_neck_fit.before_gait_join.gd.txt": {
+      "bytes": 7242,
+      "sha256": "ece68a04115c949302a29e1e936d120d24b0d519eb76d6280eff04084c98dfad"
+    },
+    "data/reports/human_presence/20261022/retarget/source_snapshots/textured_human_surface.before_gait_join.gd.txt": {
+      "bytes": 25905,
+      "sha256": "a758926f261bc9983eb30b3eb121d7575899a980d1fbab105e6a36a85270950f"
+    }
+  },
+  "source_sha256": {
+    "res://../tests/game/check_hybrid_gait_join.gd": "c0b5138b9997f61c623c3f63fa3d9f272b17cbaf718f23859186a1a7131a95d6",
+    "res://../tests/game/check_hybrid_neck_fit.gd": "ece68a04115c949302a29e1e936d120d24b0d519eb76d6280eff04084c98dfad",
+    "res://assets/vendor/makehuman_swim/swim_female.glb": "697537a49ae569dcfbdaaa715e67769532b5e321864497a113dfb95e3c686c4a",
+    "res://assets/vendor/makehuman_swim/swim_male.glb": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://scripts/player/exploration_avatar.gd": "e0fec8d493a308942d22088a9601325f1a37c163734fb7875c53222f4f38cf45",
+    "res://scripts/player/textured_human_rig.gd": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+    "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+  },
+  "hybrid_neck_fit": {
+    "selected_report": "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.json",
+    "selected_run": "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.run.json",
+    "checks": 27,
+    "passed": 27,
+    "failed": 0,
+    "scope": "Actual wardrobe wrapper combining original Rocketbox head with MakeHuman swim body. Native XYZ neck/head/shoulder joins, ordered neck chain, limb lengths, original skeleton immutability and referenced rendered CPU skin bounds; numeric join checks supplement separate three-quarter/profile/full-body visual review and do not certify subjective realism.",
+    "models": [
+      {
+        "model": "Male_Adult_04",
+        "fit": {
+          "actual_neck_base_world_m": [
+            8.24217977424269e-07,
+            1.38427627086639,
+            0.0110801924020052
+          ],
+          "arm_chains_translated_without_stretching": true,
+          "enabled": true,
+          "fitted_head_joint_y_m": 1.44451975822449,
+          "fitted_neck_base_y_m": 1.38427674770355,
+          "head_joint_error_m": 1.8196658402303e-07,
+          "head_joint_height_error_m": 1.19209289550781e-07,
+          "head_joint_offset_m": [
+            7.45951069802686e-08,
+            1.19209289550781e-07,
+            -1.15483999252319e-07
+          ],
+          "height_anchors_m": [
+            [
+              1.05124795436859,
+              1.05124795436859
+            ],
+            [
+              1.24044251441956,
+              1.20267188549042
+            ],
+            [
+              1.34173989295959,
+              1.29991483688354
+            ],
+            [
+              1.37307918071747,
+              1.32840347290039
+            ],
+            [
+              1.44637298583984,
+              1.38427674770355
+            ],
+            [
+              1.54124438762665,
+              1.44451975822449
+            ]
+          ],
+          "height_and_planar_offset_anchors_m": [
+            [
+              1.05124795436859,
+              0.0,
+              0.0
+            ],
+            [
+              1.24044251441956,
+              -5.62871036891011e-07,
+              0.0406587645411491
+            ],
+            [
+              1.34173989295959,
+              -7.07805156707764e-07,
+              -0.0335036963224411
+            ],
+            [
+              1.37307918071747,
+              -7.33882188796997e-07,
+              -0.0334361419081688
+            ],
+            [
+              1.44637298583984,
+              -8.23249308723462e-07,
+              -0.015392011962831
+            ],
+            [
+              1.54124438762665,
+              -9.07933440430497e-07,
+              -0.0415043830871582
+            ]
+          ],
+          "hips_and_legs_fitted": false,
+          "method": "continuous_upper_torso_neck_height_and_center_fit_to_original_head_skeleton",
+          "neck_base_error_m": 4.81778556604695e-07,
+          "neck_base_height_error_m": -4.76837158203125e-07,
+          "neck_base_offset_m": [
+            6.85155328028486e-08,
+            -4.76837158203125e-07,
+            6.51925802230835e-09
+          ],
+          "neck_vertical_span_m": 0.0602434873580933,
+          "original_head_moved": false,
+          "original_import_rests_modified": false,
+          "reference_neck_base_world_m": [
+            7.5570244462142e-07,
+            1.38427674770355,
+            0.0110801858827472
+          ],
+          "shoulder_center_errors_m": {
+            "Left": 3.71801888832124e-07,
+            "Right": 2.96582015835156e-07
+          },
+          "shoulder_height_errors_m": {
+            "Left": -3.57627868652344e-07,
+            "Right": -2.38418579101562e-07
+          },
+          "shoulder_offsets_m": {
+            "Left": [
+              8.94069671630859e-08,
+              -3.57627868652344e-07,
+              -4.84287738800049e-08
+            ],
+            "Right": [
+              1.63912773132324e-07,
+              -2.38418579101562e-07,
+              -6.51925802230835e-08
+            ]
+          },
+          "source_head_joint_y_m": 1.54124438762665,
+          "source_neck_base_y_m": 1.44637298583984
+        },
+        "actual_hybrid_bounds": {
+          "position": [
+            -0.24152672290802,
+            7.78834277070928e-08,
+            -0.196351423859596
+          ],
+          "size": [
+            0.483053416013718,
+            1.69999969005585,
+            0.315765500068665
+          ]
+        }
+      },
+      {
+        "model": "Female_Adult_07",
+        "fit": {
+          "actual_neck_base_world_m": [
+            1.02253512324069e-08,
+            1.43528819084167,
+            0.0707892701029778
+          ],
+          "arm_chains_translated_without_stretching": true,
+          "enabled": true,
+          "fitted_head_joint_y_m": 1.50294029712677,
+          "fitted_neck_base_y_m": 1.43528807163239,
+          "head_joint_error_m": 1.31020911453561e-07,
+          "head_joint_height_error_m": 1.19209289550781e-07,
+          "head_joint_offset_m": [
+            -4.95582810344786e-08,
+            1.19209289550781e-07,
+            2.23517417907715e-08
+          ],
+          "height_anchors_m": [
+            [
+              1.02634751796722,
+              1.02634751796722
+            ],
+            [
+              1.28604376316071,
+              1.27242791652679
+            ],
+            [
+              1.34814727306366,
+              1.36247479915619
+            ],
+            [
+              1.36559188365936,
+              1.38493096828461
+            ],
+            [
+              1.43801069259644,
+              1.43528807163239
+            ],
+            [
+              1.55162882804871,
+              1.50294029712677
+            ]
+          ],
+          "height_and_planar_offset_anchors_m": [
+            [
+              1.02634751796722,
+              0.0,
+              0.0
+            ],
+            [
+              1.28604376316071,
+              -1.95973566263774e-08,
+              -0.032079704105854
+            ],
+            [
+              1.34814727306366,
+              -8.94069671630859e-08,
+              -0.0822926014661789
+            ],
+            [
+              1.36559188365936,
+              -7.82310962677002e-08,
+              -0.0743489414453506
+            ],
+            [
+              1.43801069259644,
+              -4.03675848303919e-09,
+              -0.0689459219574928
+            ],
+            [
+              1.55162882804871,
+              -1.0939040784308e-08,
+              -0.102828443050385
+            ]
+          ],
+          "hips_and_legs_fitted": false,
+          "method": "continuous_upper_torso_neck_height_and_center_fit_to_original_head_skeleton",
+          "neck_base_error_m": 3.62076804094613e-07,
+          "neck_base_height_error_m": 3.57627868652344e-07,
+          "neck_base_offset_m": [
+            -4.25927311198393e-08,
+            3.57627868652344e-07,
+            -3.72529029846191e-08
+          ],
+          "neck_vertical_span_m": 0.0676521062850952,
+          "original_head_moved": false,
+          "original_import_rests_modified": false,
+          "reference_neck_base_world_m": [
+            5.28180805758893e-08,
+            1.43528783321381,
+            0.0707893073558807
+          ],
+          "shoulder_center_errors_m": {
+            "Left": 1.40231321665851e-07,
+            "Right": 9.77844365479541e-08
+          },
+          "shoulder_height_errors_m": {
+            "Left": 0.0,
+            "Right": 0.0
+          },
+          "shoulder_offsets_m": {
+            "Left": [
+              -1.34110450744629e-07,
+              0.0,
+              -4.09781932830811e-08
+            ],
+            "Right": [
+              -7.45058059692383e-08,
+              0.0,
+              -6.33299350738525e-08
+            ]
+          },
+          "source_head_joint_y_m": 1.55162882804871,
+          "source_neck_base_y_m": 1.43801069259644
+        },
+        "actual_hybrid_bounds": {
+          "position": [
+            -0.229148283600807,
+            5.89990420962749e-08,
+            -0.21488955616951
+          ],
+          "size": [
+            0.458296537399292,
+            1.70000028610229,
+            0.444520205259323
+          ]
+        }
+      }
+    ]
+  },
+  "new_skin_gait_summary": "data/reports/human_presence/20261022/skin_gait/summary.json",
+  "hybrid_gait_join_diagnostic": {
+    "report": "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.json",
+    "run": "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.run.json",
+    "checks": 71,
+    "failed": 44,
+    "production_changed": false,
+    "maximum_neck_error_m": 0.0461039170622826,
+    "maximum_head_error_m": 0.0460410118103027,
+    "minimum_proposed_rigid_chain_translation_residual_m": 0.004854332416647341,
+    "meaning": "Neutral27check pass does not cover moving independent native leg lengths. Actual dual-rig native gait shows centimetre-scale head/neck separation; root review/approved fix required. Current production left frozen."
+  },
+  "selected_report_scope": "Historical804fixed-pose component report, before final avatar cadence-limit and surface-only head coupler fixes. Its exact recorded source bindings are preserved; it is not relabelled as a current-source full804rerun.",
+  "current_selected_reports": {
+    "dynamic_hybrid_join71": "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.json",
+    "neutral_hybrid27": "data/reports/human_presence/20261022/retarget/hybrid_neck_headless_coupled01.json",
+    "actual_skin_walk_run157": "data/reports/human_presence/20261022/skin_gait/run_stance_final01.json"
+  },
+  "hybrid_gait_join_fixed": {
+    "report": "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.json",
+    "run": "data/reports/human_presence/20261022/retarget/hybrid_gait_join_fixed01.run.json",
+    "checks": 71,
+    "passed": 71,
+    "failed": 0,
+    "maximum_actual_neck_error_m": 0.00485433172434568,
+    "maximum_actual_head_error_m": 2.88524205416252e-07,
+    "prior_diagnostic_failed": 44,
+    "prior_diagnostic_checks": 71,
+    "scope": "Actual production dual-rig wardrobe wrapper. Original rig sync first, MakeHuman body rig second, neutral plus eight walking/eight running phases for each sex. Engine neck/head global positions, not proxy nodes or neutral-only fit. Read-only production diagnostic; no rendering, FPS, camera or real-time city acceptance."
+  }
+}

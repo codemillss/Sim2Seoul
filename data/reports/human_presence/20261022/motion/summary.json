@@ -1,0 +1,335 @@
+{
+  "task": "EXP29_NATURAL_LOCOMOTION",
+  "status": "COMPONENT_PASS_PENDING_ROOT_NATIVE_AND_CITY_INTEGRATION",
+  "time_utc": "2026-10-22T05:48:54.974522+00:00",
+  "base_commit": "8b664cacdac28cf10c7ed4b7244a8b4334d14e8a",
+  "owned_production": {
+    "game/scripts/player/free_roam_player.gd": "3c92f46f6c5a171dbe04dee5588f04e59063920e999ee2f5890145603fbd58a1"
+  },
+  "owned_test": {
+    "tests/game/check_human_locomotion.gd": "5e8fcd7bbe688d25af74bb5a095c296c6921aeba06c418e0dda00bec4d15dac4"
+  },
+  "selected_reports": [
+    {
+      "path": "data/reports/human_presence/20261022/motion/locomotion_headless_final02.json",
+      "expected": 114,
+      "passed": 114,
+      "returncode": 0
+    },
+    {
+      "path": "data/reports/human_presence/20261022/motion/jump_headless_final01.json",
+      "expected": 24,
+      "passed": 24,
+      "returncode": 0
+    }
+  ],
+  "controlled_baseline": {
+    "path": "data/reports/human_presence/20261022/motion/locomotion_baseline02.json",
+    "original_source_path": "data/reports/human_presence/20261022/motion/baseline_free_roam_player.gd",
+    "new_acceptance_checks": 114,
+    "passed": 88,
+    "failed": 26,
+    "expected_failure": true,
+    "meaning": "Pre-change controller executed in the same independent native-physics fixture under EXP29-specific criteria; failures are comparison outcomes, not a claim that an older release promised EXP29 behavior."
+  },
+  "measurements": {
+    "baseline_profile_results": {
+      "30": {
+        "brisk_run": {
+          "reach_99_percent_s": 0.166666666666667,
+          "stop_time_s": 0.266666666666667,
+          "tail_drift_m": 0.0
+        },
+        "brisk_walk": {
+          "reach_99_percent_s": 0.166666666666667,
+          "stop_time_s": 0.133333333333333,
+          "tail_drift_m": 0.0
+        },
+        "run": {
+          "reach_99_percent_s": 0.166666666666667,
+          "stop_time_s": 0.233333333333333,
+          "tail_drift_m": 0.0
+        },
+        "turbo": {
+          "reach_99_percent_s": 0.166666666666667,
+          "stop_time_s": 0.4,
+          "tail_drift_m": 0.0
+        },
+        "walk": {
+          "reach_99_percent_s": 0.166666666666667,
+          "stop_time_s": 0.133333333333333,
+          "tail_drift_m": 0.0
+        }
+      },
+      "60": {
+        "brisk_run": {
+          "reach_99_percent_s": 0.15,
+          "stop_time_s": 0.283333333333333,
+          "tail_drift_m": 0.0
+        },
+        "brisk_walk": {
+          "reach_99_percent_s": 0.15,
+          "stop_time_s": 0.133333333333333,
+          "tail_drift_m": 0.0
+        },
+        "run": {
+          "reach_99_percent_s": 0.15,
+          "stop_time_s": 0.233333333333333,
+          "tail_drift_m": 0.0
+        },
+        "turbo": {
+          "reach_99_percent_s": 0.15,
+          "stop_time_s": 0.433333333333333,
+          "tail_drift_m": 0.0
+        },
+        "walk": {
+          "reach_99_percent_s": 0.15,
+          "stop_time_s": 0.133333333333333,
+          "tail_drift_m": 0.0
+        }
+      }
+    },
+    "current_profile_results": {
+      "30": {
+        "brisk_run": {
+          "reach_99_percent_s": 0.466666666666667,
+          "stop_time_s": 0.3,
+          "tail_drift_m": 0.0
+        },
+        "brisk_walk": {
+          "reach_99_percent_s": 0.366666666666667,
+          "stop_time_s": 0.233333333333333,
+          "tail_drift_m": 0.0
+        },
+        "run": {
+          "reach_99_percent_s": 0.466666666666667,
+          "stop_time_s": 0.3,
+          "tail_drift_m": 0.0
+        },
+        "turbo": {
+          "reach_99_percent_s": 0.4,
+          "stop_time_s": 0.266666666666667,
+          "tail_drift_m": 0.0
+        },
+        "walk": {
+          "reach_99_percent_s": 0.3,
+          "stop_time_s": 0.2,
+          "tail_drift_m": 0.0
+        }
+      },
+      "60": {
+        "brisk_run": {
+          "reach_99_percent_s": 0.45,
+          "stop_time_s": 0.283333333333333,
+          "tail_drift_m": 0.0
+        },
+        "brisk_walk": {
+          "reach_99_percent_s": 0.35,
+          "stop_time_s": 0.233333333333333,
+          "tail_drift_m": 0.0
+        },
+        "run": {
+          "reach_99_percent_s": 0.45,
+          "stop_time_s": 0.283333333333333,
+          "tail_drift_m": 0.0
+        },
+        "turbo": {
+          "reach_99_percent_s": 0.4,
+          "stop_time_s": 0.25,
+          "tail_drift_m": 0.0
+        },
+        "walk": {
+          "reach_99_percent_s": 0.283333333333333,
+          "stop_time_s": 0.183333333333333,
+          "tail_drift_m": 0.0
+        }
+      }
+    },
+    "baseline_facing_actual_course_alignment_minimum_cosine": {
+      "30hz_walk.turn_90_physical_course_follows_visible_facing": 0.780342102050781,
+      "30hz_walk.turn_180_physical_course_follows_visible_facing": -0.877582550048828,
+      "30hz_run.turn_90_physical_course_follows_visible_facing": 0.780341744422913,
+      "30hz_run.turn_180_physical_course_follows_visible_facing": -0.877582550048828,
+      "60hz_walk.turn_90_physical_course_follows_visible_facing": 0.747264981269836,
+      "60hz_walk.turn_180_physical_course_follows_visible_facing": -0.900447130203247,
+      "60hz_run.turn_90_physical_course_follows_visible_facing": 0.747260570526123,
+      "60hz_run.turn_180_physical_course_follows_visible_facing": -0.900447130203247
+    },
+    "current_facing_actual_course_alignment_minimum_cosine": {
+      "30hz_walk.turn_90_physical_course_follows_visible_facing": 0.999999940395355,
+      "30hz_walk.turn_180_physical_course_follows_visible_facing": 0.999999940395355,
+      "30hz_run.turn_90_physical_course_follows_visible_facing": 0.999999940395355,
+      "30hz_run.turn_180_physical_course_follows_visible_facing": 1.0,
+      "60hz_walk.turn_90_physical_course_follows_visible_facing": 0.99999988079071,
+      "60hz_walk.turn_180_physical_course_follows_visible_facing": 0.999999940395355,
+      "60hz_run.turn_90_physical_course_follows_visible_facing": 0.999999940395355,
+      "60hz_run.turn_180_physical_course_follows_visible_facing": 1.0
+    }
+  },
+  "changes": [
+    "Walk/run/brisk onset and braking vary by selected target speed; arcade speed limits preserved.",
+    "Ground translation follows smoothly rotating visible heading; sharp reversals brake to rest, then pivot and start.",
+    "Angular stopping distance suppresses target overshoot.",
+    "Ground arcs retain full sampled original area/private boundary checks plus native capsule collisions.",
+    "A router disabled during an ownership/menu transition cannot prematurely clear the neutral-input latch.",
+    "Reset/teleport/facility control clears horizontal motion without a stale velocity ramp.",
+    "Direct sandbox air/swim control, unlimited fresh-press air jumps, shape identity, no camera bob retained."
+  ],
+  "development_attempts": [
+    {
+      "name": "dev01",
+      "result": "80/92",
+      "causes": [
+        "Braking rate recalculated from decreasing turbo speed caused a long exponential tail; fixed by preserving the reference speed within a braking episode.",
+        "Test measured total 3D idle drift and mistakenly included native floor Y settlement; now tests horizontal drift and explicitly records settlement.",
+        "Disabled router zero intent prematurely released neutral-input latch; fixed production condition."
+      ],
+      "raw_kept": true,
+      "platform_error": "Sandbox run printed macOS get_system_ca_certificates error; escalated final runs below have no ERROR or SCRIPT ERROR logs."
+    },
+    {
+      "name": "dev02/final01",
+      "result": "92/92; preliminary same production source",
+      "superseded_by": "final02 expands brisk walk/run coverage to114 without production edits."
+    },
+    {
+      "name": "parser development",
+      "result": "Inferred Variant hard_stop type was rejected; explicitly typed bool before component runs."
+    }
+  ],
+  "scope": "Production CharacterBody3D in authored flat/wall/12-degree slope fixtures at30 and60 physicsHz with Input.action_press, no UI/settings writes or city actors repositioned. Headless fixed-fps120 accelerates simulation only. Root must run actual native city/OS/character/rendering acceptance separately. Private geometry contract retained by code but fixture private_cache is empty; area guard alone is measured here. Does not claim planted-foot behavior while turning, mocap, actual GTA quality, or subjective comfort.",
+  "integration_review": {
+    "hospital": "95/140/155 W/S ticks at defaultbrisk have multi-second margin; ordinary native integration still required.",
+    "bus_access": "12-second feedback-steered walk budget for6.48-9.25m at1.4m/s has nominal onset/pivot margin; actual four connectors still required.",
+    "police_headquarters": "D14/A14 fixed-duration assumptions at30Hz are too short for90/180 turning; root should use bounded physical waypoint/retrace observation, retaining collision and exit assertions."
+  },
+  "artifacts": {
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final01.json": {
+      "bytes": 6230001,
+      "sha256": "46c3147ae123547734aedfbb4232eb7fdd7776448f938580264266d5f1414bc0"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline01.json": {
+      "bytes": 3642642,
+      "sha256": "533e0119094fca86820f88427674e41dec56f7054cf07b07be540aa4b9737def"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final01.console.log": {
+      "bytes": 103,
+      "sha256": "9404875c436c7dbaf7cfb3e8551697afbe22d7f676918c8a362c849d99b406c4"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline02.console.log": {
+      "bytes": 14022,
+      "sha256": "a0bec5118c9dedf1c8e5f9305d26e80ad8d6c4ff752ba34cdc2af79da65b64f7"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev01.log": {
+      "bytes": 5890,
+      "sha256": "fad0f57dd8edf6b1016cfaf4da70729e42afbc03f2292484f1b2b7dda3ebf40c"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final01.run.json": {
+      "bytes": 1073,
+      "sha256": "853dabe09a719f86bfbdf81168abf0ef95ab7fc5b78a8e7d4750c69b6da46848"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev02.log": {
+      "bytes": 226,
+      "sha256": "94fc5397a05e365868608ab51cb4436c451795bfa429e0a5d05f38ed1588c329"
+    },
+    "data/reports/human_presence/20261022/motion/jump_headless_final01.log": {
+      "bytes": 107,
+      "sha256": "70baa13e47e1fcaf3bed295997e627d7f7ae3f0dd4e4799bec1fa202b55fdcac"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline01.console.log": {
+      "bytes": 11859,
+      "sha256": "165dc6b118b4933dcb589215d75b91e781d82e226822ddceb97de4f13159eadb"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline01.run.json": {
+      "bytes": 1167,
+      "sha256": "8677aee690ded2062190bf5987d5e0ef9e09ae2f9e8274323af930b8080cb870"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev02.json": {
+      "bytes": 6229934,
+      "sha256": "075fee0f560bb78178936809f780e59fc488ba91dd3d9cb6b1355b75fc60bfc7"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final02.console.log": {
+      "bytes": 105,
+      "sha256": "080eee885575cfa8202d2ca5f0219790b4e8a1ebc3a8176144579043610af0b0"
+    },
+    "data/reports/human_presence/20261022/motion/jump_headless_final01.run.json": {
+      "bytes": 1049,
+      "sha256": "59f4506eb6bcaa096e96a3efdbd16fea91f611aabb15b69af13c1f9fe29b028f"
+    },
+    "data/reports/human_presence/20261022/motion/jump_headless_final01.json": {
+      "bytes": 7898,
+      "sha256": "21a3947a7ae07b0b2e9f214f50d5761dbe05e018137f05b70840ba500465c1d7"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev01.json": {
+      "bytes": 6236301,
+      "sha256": "913a3a5388171254c0babc2cb81b53b8ce763e501f799ec731c6a6a41e1911b9"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final02.run.json": {
+      "bytes": 1074,
+      "sha256": "ed2471749ab4b54174ad94cb2ed73549a455453e6f6c371a73436fbb0fd35757"
+    },
+    "data/reports/human_presence/20261022/motion/jump_headless_final01.console.log": {
+      "bytes": 107,
+      "sha256": "70baa13e47e1fcaf3bed295997e627d7f7ae3f0dd4e4799bec1fa202b55fdcac"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline01.log": {
+      "bytes": 11595,
+      "sha256": "663b9f68caee55184153a983ac3c77b9651a3a14b734cdc50dbb67d09a329fe2"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev01.console.log": {
+      "bytes": 6036,
+      "sha256": "79b01dec409d710129262bfff791961f8496e75adda5955def7f2dda92325ac0"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline02.log": {
+      "bytes": 13710,
+      "sha256": "0d30ab4c6206b564d27ea14c24fd0dd8239137be3b290f5f0f6356bf701b8d94"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_dev02.console.log": {
+      "bytes": 226,
+      "sha256": "94fc5397a05e365868608ab51cb4436c451795bfa429e0a5d05f38ed1588c329"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final02.log": {
+      "bytes": 105,
+      "sha256": "080eee885575cfa8202d2ca5f0219790b4e8a1ebc3a8176144579043610af0b0"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final01.log": {
+      "bytes": 103,
+      "sha256": "9404875c436c7dbaf7cfb3e8551697afbe22d7f676918c8a362c849d99b406c4"
+    },
+    "data/reports/human_presence/20261022/motion/baseline_free_roam_player.gd": {
+      "bytes": 24449,
+      "sha256": "c03f31d1a4f397e4c8965bec148576e56c0772c81c3a54fd87274af0ab12b66b"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline02.run.json": {
+      "bytes": 1168,
+      "sha256": "675bdec4f3bffdb676b4444abc4bcd6977e82bd2a4ec9dfbf7232318bb58febd"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_headless_final02.json": {
+      "bytes": 7260962,
+      "sha256": "a1d4cc10f30b81b69e6aa41d09331ffbc94ff94a76565021e76bc4b940d855ca"
+    },
+    "data/reports/human_presence/20261022/motion/locomotion_baseline02.json": {
+      "bytes": 4247997,
+      "sha256": "a868c0e1d75a67141a2560b1adb69f4483e94238305ba55c85a078f1fb47648a"
+    }
+  },
+  "read_only_review": {
+    "reviewer": "presence_review",
+    "blocking_findings": 0,
+    "reviewed": [
+      "Independent sampled boundary check for curved candidates",
+      "Native/private original guards remain",
+      "Refused intent zeroes momentum",
+      "Teleport begins a new velocity ramp",
+      "Menu/facility neutral stops",
+      "Direct jump/swim control unchanged",
+      "Frozen braking reference and brake-before-pivot turn behavior"
+    ],
+    "excluded_claims": [
+      "Turbo is still arcade movement",
+      "Air/swim facing alignment not part of ground locomotion claim",
+      "Root owns rendered joints, camera, city and OS verification"
+    ]
+  },
+  "production_frozen": true
+}

@@ -13,9 +13,17 @@ const MAX_AIR_JUMPS := -1
 const SWIM_SPEED_MPS := 3.0
 const FLOAT_DEPTH_M := 1.0
 const WATER_EXIT_HEIGHT_M := 2.4
-const GROUND_ACCEL_TIME_S := .14
-const GROUND_BRAKE_TIME_S := .12
-const TURN_ACCEL_RADIANS_S2 := 45.0
+## A brisk start and a shorter release remain responsive to digital keys, while
+## real walk/run profiles no longer use the same one-frame-sized velocity ramp.
+const WALK_ACCEL_TIME_S := .28
+const RUN_ACCEL_TIME_S := .44
+const WALK_BRAKE_TIME_S := .18
+const RUN_BRAKE_TIME_S := .28
+const ARCADE_ACCEL_TIME_S := .40
+const ARCADE_BRAKE_TIME_S := .24
+const TURN_ACCEL_RADIANS_S2 := 28.0
+const RUN_TURN_RADIANS_S := 4.8
+const PIVOT_MOVE_ALIGNMENT := .15
 signal water_splashed(world_point: Vector3, impact_speed_mps: float)
 var _jump_was_pressed := false
 var _jump_requires_release := false
@@ -40,6 +48,12 @@ var _terrain_recovery_rebased := false
 var _visual_turn_speed := 0.0
 var _motion_previous_position := Vector3.INF
 var motion_guard_stops := 0
+var _locomotion_state := "idle"
+var _desired_horizontal_velocity := Vector3.ZERO
+var _motion_turn_error := 0.0
+var _motion_acceleration := 0.0
+var _last_motion_heading := 0.0
+var _brake_reference_speed := 0.0
 
 func bind_terrain_surface(service: Node) -> bool:
 	# Root warps the live actor separately. Rebase only the outdoor recovery
@@ -292,6 +306,9 @@ func recover(reason: String) -> bool:
 func require_neutral_input() -> void:
 	super.require_neutral_input()
 	_visual_turn_speed=0.0
+	_locomotion_state="neutral";_desired_horizontal_velocity=Vector3.ZERO
+	_motion_turn_error=0.0;_motion_acceleration=0.0
+	_brake_reference_speed=0.0
 	# No buffered takeoff may survive a menu, settings change, reset or recovery.
 	# Preserve the airborne count; menus never create a new Space press.
 	_jump_was_pressed = false
@@ -335,7 +352,7 @@ func _physics_process(delta: float) -> void:
 	var intent: Vector2 = router.movement_intent().limit_length(1.0)
 	var fast: bool = router.fast_intent()
 	if input_latched:
-		if intent.length_squared()<0.000001 and not fast and not jump_held:input_latched = false
+		if router.gameplay_enabled and intent.length_squared()<0.000001 and not fast and not jump_held:input_latched = false
 		intent = Vector2.ZERO
 		fast = false
 		# Old movement keys may remain held after a lift/menu. A separate
@@ -380,9 +397,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = clampf(velocity.y+buoyancy*delta,-4.0,4.0)
 	else:
 		velocity.y -= gravity_mps2*delta
-	if last_direction.length_squared()>0.000001:
-		_update_visual_heading(atan2(-last_direction.x,-last_direction.z),delta)
-	else:_visual_turn_speed=move_toward(_visual_turn_speed,0.,TURN_ACCEL_RADIANS_S2*delta)
 	move_and_slide()
 	_motion_previous_position=global_position
 	if is_instance_valid(pool_preparation_guard):pool_preparation_guard.enforce_player_water_access()
@@ -397,32 +411,99 @@ func _offset_inside(offset: Vector3) -> bool:
 
 func _apply_horizontal_motion(desired: Vector3,intent: Vector2,grounded: bool,delta: float) -> void:
 	var before:=Vector3(velocity.x,0,velocity.z)
+	_desired_horizontal_velocity=desired
+	_motion_acceleration=0.0;_motion_turn_error=0.0
 	# Explicit transitions, controller ownership and boundary refusal always stop
 	# immediately. Easing must never turn stale momentum into an edge bypass.
 	var transition:=not _motion_previous_position.is_finite() or global_position.distance_to(_motion_previous_position)>2.
 	var refused:=intent.length_squared()>.000001 and desired.is_zero_approx()
-	var candidate:=desired
-	if grounded and not transition and not input_latched and router.gameplay_enabled and not refused:
-		var cap:=maxf(walk_speed_mps,maxf(before.length(),desired.length()))
-		var braking:=desired.length_squared()<before.length_squared() or before.dot(desired)<0.
-		var seconds:=GROUND_BRAKE_TIME_S if braking else GROUND_ACCEL_TIME_S
-		candidate=before.move_toward(desired,cap/seconds*delta)
-		if desired.is_zero_approx() and candidate.length()<.015:candidate=Vector3.ZERO
+	var hard_stop: bool=input_latched or not router.gameplay_enabled or refused
+	var candidate:=Vector3.ZERO
+	if hard_stop:
+		_locomotion_state="guarded" if refused else "neutral"
+		_visual_turn_speed=0.0;_brake_reference_speed=0.0
+	elif not grounded:
+		# Retain deliberate direct sandbox air/swim control and unlimited fresh
+		# jump presses; a ground steering arc must not change water ownership.
+		candidate=desired;_locomotion_state="air_or_water"
+		if not desired.is_zero_approx():_update_visual_heading(atan2(-desired.x,-desired.z),delta)
+	else:
+		if transition:
+			# A validated teleport/recovery starts a new ramp, never the former
+			# velocity and never an immediate snap to the complete chosen speed.
+			before=Vector3.ZERO;_visual_turn_speed=0.0
+		var current_speed:=before.length()
+		var target_speed:=desired.length()
+		if desired.is_zero_approx():
+			_capture_brake_reference(current_speed)
+			var brake:=_ground_brake_rate(current_speed)
+			candidate=before.move_toward(Vector3.ZERO,brake*delta)
+			_locomotion_state="braking" if candidate.length()>.015 else "idle"
+			_visual_turn_speed=move_toward(_visual_turn_speed,0.,TURN_ACCEL_RADIANS_S2*delta)
+		elif current_speed>.015 and before.normalized().dot(desired.normalized())<-.25:
+			# Reversals shed their former momentum before turning. Turning the
+			# mesh while immediately driving backwards produced visible skating.
+			_capture_brake_reference(current_speed)
+			candidate=before.move_toward(Vector3.ZERO,_ground_brake_rate(current_speed)*delta)
+			_locomotion_state="reversal_brake"
+			_update_visual_heading(atan2(-before.x,-before.z),delta)
+		else:
+			_brake_reference_speed=0.0
+			var target_heading:=atan2(-desired.x,-desired.z)
+			var turn_limit:=lerpf(turn_speed_radians,RUN_TURN_RADIANS_S,clampf((maxf(current_speed,target_speed)-1.4)/2.1,0.,1.))
+			_update_visual_heading(target_heading,delta,turn_limit)
+			var forward:=Vector3(-sin(visual.rotation.y),0.,-cos(visual.rotation.y))
+			var alignment:=forward.dot(desired.normalized())
+			_motion_turn_error=angle_difference(visual.rotation.y,target_heading)
+			# A still actor pivots before setting off into a direction behind its
+			# shoulder. A moving actor follows a continuous, slightly slower arc.
+			if current_speed<.05 and alignment<PIVOT_MOVE_ALIGNMENT:
+				target_speed=0.;_locomotion_state="pivot"
+			else:
+				target_speed*=lerpf(.35,1.,clampf(alignment,0.,1.))
+				_locomotion_state="turning" if absf(_motion_turn_error)>.10 else "moving"
+			var rate:=_ground_accel_rate(desired.length()) if target_speed>=current_speed else _ground_brake_rate(current_speed)
+			candidate=forward*move_toward(current_speed,target_speed,rate*delta)
+		if candidate.length()<.015 and desired.is_zero_approx():candidate=Vector3.ZERO
+		_motion_acceleration=(candidate.length()-current_speed)/maxf(delta,.000001)
 	if not _offset_inside(candidate*delta):
-		candidate=desired if _offset_inside(desired*delta) else Vector3.ZERO
+		# A curved course can encounter a boundary that the direct intent did
+		# not. Refuse it immediately rather than snapping to a different course.
+		candidate=Vector3.ZERO;_locomotion_state="guarded"
 		motion_guard_stops+=1
 	velocity.x=candidate.x;velocity.z=candidate.z
+	if not candidate.is_zero_approx():_last_motion_heading=atan2(-candidate.x,-candidate.z)
 
-func _update_visual_heading(target_yaw: float,delta: float) -> void:
+func _ground_accel_rate(target_speed: float) -> float:
+	var seconds:=lerpf(WALK_ACCEL_TIME_S,RUN_ACCEL_TIME_S,clampf((target_speed-1.4)/2.1,0.,1.))
+	if target_speed>6.:seconds=ARCADE_ACCEL_TIME_S
+	return maxf(target_speed,.15)/seconds
+
+func _capture_brake_reference(current_speed: float) -> void:
+	if _locomotion_state not in ["braking","reversal_brake","idle"]:_brake_reference_speed=current_speed
+	_brake_reference_speed=maxf(_brake_reference_speed,current_speed)
+
+func _ground_brake_rate(current_speed: float) -> float:
+	var profile_speed:=maxf(walk_speed_mps,minf(run_speed_mps,maxf(_brake_reference_speed,maxf(current_speed,1.4))))
+	var seconds:=lerpf(WALK_BRAKE_TIME_S,RUN_BRAKE_TIME_S,clampf((profile_speed-1.4)/2.1,0.,1.))
+	if profile_speed>6.:seconds=ARCADE_BRAKE_TIME_S
+	return maxf(profile_speed,1.4)/seconds
+
+func _update_visual_heading(target_yaw: float,delta: float,maximum_speed:=-1.0) -> void:
+	if maximum_speed<0.:maximum_speed=turn_speed_radians
 	var difference:=angle_difference(visual.rotation.y,target_yaw)
-	var wanted:=clampf(difference/maxf(delta,.000001),-turn_speed_radians,turn_speed_radians)
+	if absf(difference)<.0005:
+		visual.rotation.y=target_yaw;_visual_turn_speed=0.;return
+	# The stopping-distance limit brakes angular speed near its destination,
+	# instead of overshooting and changing turn direction every physics tick.
+	var wanted:=signf(difference)*minf(maximum_speed,sqrt(2.*TURN_ACCEL_RADIANS_S2*absf(difference)))
 	_visual_turn_speed=move_toward(_visual_turn_speed,wanted,TURN_ACCEL_RADIANS_S2*delta)
 	var advance:=_visual_turn_speed*delta
-	if absf(advance)>absf(difference):advance=difference;_visual_turn_speed=0.
+	if signf(advance)==signf(difference) and absf(advance)>=absf(difference):advance=difference;_visual_turn_speed=0.
 	visual.rotation.y=wrapf(visual.rotation.y+advance,-PI,PI)
 
 func locomotion_snapshot() -> Dictionary:
-	return {"ground_accel_time_s":GROUND_ACCEL_TIME_S,"ground_brake_time_s":GROUND_BRAKE_TIME_S,"visual_turn_accel_radians_s2":TURN_ACCEL_RADIANS_S2,"visual_turn_speed_radians_s":_visual_turn_speed,"guard_stops":motion_guard_stops,"walk_speed_mps":walk_speed_mps,"run_speed_mps":run_speed_mps,"air_control":"Retained direct sandbox air control and fresh-press jumps","camera_bob_added":false}
+	return {"ground_accel_time_s":WALK_ACCEL_TIME_S,"ground_brake_time_s":WALK_BRAKE_TIME_S,"walk_accel_time_s":WALK_ACCEL_TIME_S,"run_accel_time_s":RUN_ACCEL_TIME_S,"walk_brake_time_s":WALK_BRAKE_TIME_S,"run_brake_time_s":RUN_BRAKE_TIME_S,"arcade_accel_time_s":ARCADE_ACCEL_TIME_S,"arcade_brake_time_s":ARCADE_BRAKE_TIME_S,"visual_turn_accel_radians_s2":TURN_ACCEL_RADIANS_S2,"visual_turn_speed_radians_s":_visual_turn_speed,"run_turn_limit_radians_s":RUN_TURN_RADIANS_S,"state":_locomotion_state,"desired_horizontal_velocity":_desired_horizontal_velocity,"actual_horizontal_velocity":Vector3(velocity.x,0.,velocity.z),"acceleration_mps2":_motion_acceleration,"heading_error_radians":_motion_turn_error,"motion_heading_radians":_last_motion_heading,"guard_stops":motion_guard_stops,"walk_speed_mps":walk_speed_mps,"run_speed_mps":run_speed_mps,"air_control":"Retained direct sandbox air/swim control and fresh-press jumps","camera_bob_added":false}
 
 func _inside(point: Vector3) -> bool:
 	if interior_active:

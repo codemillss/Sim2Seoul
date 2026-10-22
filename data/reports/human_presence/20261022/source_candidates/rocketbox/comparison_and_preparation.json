@@ -1,0 +1,152 @@
+{
+  "task": "EXP29_REAL_TEXTURED_HUMAN_SOURCING_AND_REPLACEMENT",
+  "status": "NECK_REFERENCE_FIT_AND_ACTUAL_FABRIC_PALETTE_FROZEN_PENDING_NATIVE_ACCEPTANCE",
+  "user_direction": "User explicitly rejected the procedural appearance as unrealistic. Numeric acceptance of invisible procedural meshes is not final visible-character acceptance.",
+  "local_inventory": {
+    "checked": [
+      "game/assets",
+      "~/Downloads",
+      "~/Documents",
+      "/Applications",
+      "~/Applications",
+      "PATH"
+    ],
+    "existing_human_models": [],
+    "existing_3d_asset": "Only prior Kenney city-building GLB found.",
+    "blender_available": false,
+    "makehuman_available": false,
+    "assimp_available": false,
+    "selected_importer": "Godot4.7.2 built-in ufbx; no Blender/software installation needed."
+  },
+  "candidates": [
+    {
+      "supplier": "Microsoft Rocketbox",
+      "official_page": "https://github.com/microsoft/Microsoft-Rocketbox",
+      "official_license": "https://raw.githubusercontent.com/microsoft/Microsoft-Rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9/LICENSE.md",
+      "license": "MIT; preserve Microsoft copyright and permission notice with redistributed originals/derivatives.",
+      "selection": "Chosen clothed defaults Male_Adult_04 and Female_Adult_07. Actual official preview pixels inspected by appearance agent and root, then real game native clothed preview inspected by root. Textured face/hair/fabric/hands and a genuinely weighted connected mesh replace the rejected procedural art.",
+      "verified_files": "Each chosen original FBX contains one high-detail skinned mesh,3surfaces,81bones; male8684triangles/female8308triangles. Whole-library4LOD README statement is not asserted for these selected files.",
+      "limitations": [
+        "Older realtime character art, not current AAA scan quality.",
+        "Body material includes integrated clothing; no full hidden unclothed body.",
+        "Skin texture normal maps/materials must be deliberately assigned.",
+        "Imported raw mesh AABB is Z-up while skin bind matrices generate correct Y-up; use real CPUskinned bounds."
+      ]
+    },
+    {
+      "supplier": "MakeHuman core / MPFB assets",
+      "official_page": "https://static.makehumancommunity.org/about/license.html",
+      "official_assets_license": "https://github.com/makehumancommunity/makehuman/blob/master/LICENSE.ASSETS.md",
+      "license": "Core assets and exportsCC0; application code is a separateGPL/AGPL license. Third-party community asset licenses are perasset, not blanketCC0.",
+      "selection": "Chosen supplemental textured male/female swim bodies from pinnedCC0core base,targets,skin,eyes and helper-tights-derived opaque swimwear. Built and independently tested by presence_review agent.",
+      "runtime_integration": "Original Rocketbox head/hair remain visible. MakeHuman head/eyes are excluded in the instance; actual textured body and opaque garment below the neck are rendered with their own163bone rig. Exact source/derivative metadata lives in makehuman_swim vendor provenance.",
+      "limitations": [
+        "Neck join and skin tone require real native visual inspection.",
+        "CC0 assets establish lawful reuse, not anatomical measurements of a real person."
+      ]
+    },
+    {
+      "supplier": "Blender Studio Human Base Meshes",
+      "official_page": "https://www.blender.org/download/demo-files/",
+      "official_download_index": "https://download.blender.org/demo/asset-bundles/human-base-meshes/",
+      "license": "Official demo bundleCC0.",
+      "selection": "Notselected: anatomical sculpting base needs additional texturing, clothing and rigging; no localBlender installed. No asset downloaded."
+    },
+    {
+      "supplier": "Quaternius / lowpoly packs",
+      "selection": "Notselected due user explicitly rejecting cartoon/procedural appearance; no new Quaternius human asset downloaded or licence relied upon."
+    },
+    {
+      "supplier": "Adobe Mixamo",
+      "official_page": "https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html",
+      "selection": "Notselected. Adobe FAQ confirms game-use royaltyfree but this research did not establish an unrestricted standalone source-asset redistribution licence suitable for publicrepositoryrawassets. No Mixamo asset downloaded."
+    }
+  ],
+  "preparation": {
+    "upstream_commit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+    "raw_cache_ignored": "data/cache/human_assets/rocketbox/0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+    "vendor": "game/assets/vendor/microsoft_rocketbox",
+    "raw_bytes": 185713032,
+    "vendor_bytes_at_initial_conversion": 55687960,
+    "pixel_conversion": "Original2048²RGB/RGBA TGA →PNG, decoded mode/dimensions/pixel bytes verified exactlyequal. No resizing or recolouring oforiginaltextures.",
+    "fbx_change": "Same-length .tga/.TGA→.png texture filename suffix replacements. AllotherFBXbytes retained; geometry/UV/weights unmodified. Foldernormalizedlowercase textures to match exact FBX relativepath; originalcasewarningspreserved.",
+    "notice": "OriginalMITLICENSE retained. PROVENANCE.json maps every source URL/hash/bytecount to derived vendor file/hash/bytecount. OriginalTGAfiles remain ignoredcache, not committed184MBrawbulk."
+  },
+  "integration": {
+    "render": "One actual weighted clothed MeshInstance with3materialsperadult,81nativebones; stableNPCid-based two-model choice with human_gender/human_model_id metadata override; player usesMaleAdult04.",
+    "physics": "OriginalCharacterBody/capsule/movement/input ownership untouched byrenderbridge. Existing11joints+pelvis remain invisible pose/contact/wardrobe markers.",
+    "rendered_geometry_proof": "textured_model_snapshot(refresh=true) computes avatar-local bounds from referenced vertices transformed by actual current bonepose*skinbind matrices. Replaced/hidden bodies/heads excluded, not bind-AABB or proxy geometry.",
+    "normalization": "Actual CPUskin source height male1.8685753345/female1.7225717306→1.70m, soles≈0; onlyuniformscale+source+Z→game−ZyawPI.",
+    "wardrobe": "Original default texture unchanged. Selected fabric colours use rendered triangle area-weighted UV texture means in linearRGB; cloth-only HDR StandardMaterial gain and normalized packed vertex values avoidRGBA8clamp. Original real hands use a separate untouched weighted surface/skin material. Head/hair/nativeUVs/weights/normaltexture remain. Twenty actual-mesh readback conditions pass; native changedoutfit/staff visual acceptance still required.",
+    "public_getter": "avatar.textured_model_snapshot():loaded/model_id/visible_mesh_count/skeleton_bone_count/actual_visible_bounds_m/actual_height_m/normalized_rest_height_m/surface_texture_uv_ready/rig_contact_metrics/swimwear_active/active_body_source/original_head_and_hair_preserved.",
+    "equipment_hands": "Actual weighted skin hands stay visible during eat/weights. LegacyproxyvisibilityAPI is retained only for compatibility; root facility kit suppresses its obsolete sphericalreplacementhands when textured_model_loaded.",
+    "swim_neck_correction": "The original lowest-head-surface height cut was rejected in actual native male/female images. Replacement removes triangles only when mean weight in native Head bone/descendants exceeds0.50. No whole-body height plane. Shoulder/clavicle/arm source triangles and all UV/vertex/weights remain; ArrayMesh normal repacking is measured separately.",
+    "swim_neck_reference_fit": "Original Rocketbox actual nativeHead/Neck/Clavicle/Shoulder Y anchors drive continuous MakeHuman upper torso/neck rest-derived presentation fit. Male neckspan.06024m/female.06765m, jointheight errors<.001mm. Originalhead/pelvis/legs stayfixed; armchains translate without stretch. NativeGPU review stillrequired."
+  },
+  "development_records": [
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/import.log",
+      "result": "DEVELOPMENT_CASE_MISMATCH_WARNINGS",
+      "correction": "Normalizedderivedtexturefoldercasetoexactlowercase; originalsourcecacheunchanged."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/inspection.log",
+      "result": "DEVELOPMENT_TEST_PARSE_ERROR",
+      "correction": "InspectorArrayvariablemadeexplicitlytyped; fixedread-onlyinspectionlogclean."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_headless_dev01.log",
+      "result": "NUMERICSETUP_SUCCESS_BUT_DUMMY_RENDERER_CLEANUP_ERROR",
+      "correction": "CustomShaderMaterialgarmentmask caused nullmaterial instancequeryatcleanup; basefallbackalone didnotresolve(dev02). ReplacedcustomshaderwithStandardMaterial+vertexpalettes. Unusedshaderremoved."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_headless_dev02.log",
+      "result": "DUMMY_RENDERER_CLEANUP_ERROR_PRESERVED"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev01.log",
+      "result": "FULLBRIDGEMATERIAL_CLEANUP_CLEAN",
+      "details": "Twoactualavatarsclothed→MakeHumanhybridswim→clothed. Sourceheadhairretained,81+163bones,0legacyvisible; height1.70000017m; noSCRIPT/Parse/ERROR/WARNING. Thisisdiagnostic, notnativevisualacceptance."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final03_swimwear_full_body.png",
+      "female_file": "data/reports/human_presence/20261022/appearance/human_portrait_native_female_final01_swimwear_full_body.png",
+      "result": "NATIVE_NUMERIC_PASS_BUT_SWIM_VISUAL_REJECTED",
+      "details": "Root and independent reviewer actually opened male/female swim images. Head-material lowest-height plane removed shoulders/upper arms and left a serrated horizontal opening/neck gap. Numeric32/32 does not establish visual acceptance. Existing images/reports retained. New Head-weight-only cut awaits new native close-front/profile validation."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev02.log",
+      "result": "ENVIRONMENT_LOGGING_CERTIFICATE_ERRORS_PRESERVED",
+      "details": "Workspace-sandbox run completed two models but user:// log-write and macOS certificate access errors are present. Not considered clean validation."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev03.log",
+      "json": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev03.json",
+      "result": "HEAD_WEIGHT_CUT_DIAGNOSTIC_CLEAN_PENDING_NATIVE_PIXELS",
+      "details": "Clean engine exit0, no SCRIPT/Parse/ERROR/WARNING. Both models clothed→swim→clothed; actualskinheight1.700000m, feet≈0, legacyvisible0, restoredoriginalbounds. Perbody8146headweightedtrianglesremoved;606male/526female upperlateraltriangles preserved. Vertex/UV/bone/weight arrays byte-equivalent in Godot; normals recompressed with maxvector difference0.000129/directiondot>=0.99999982 and finiteunitnormals. This diagnostic does not establish visible seam acceptance."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final04_swimwear_neck_three_quarter.png",
+      "result": "SHOULDER_HOLES_RESOLVED_BUT_BODY_NECK_PROPORTION_REQUIRES_FURTHER_FIT",
+      "details": "Root/appearance/reviewer directly viewed images. Actual shoulders/arms continuous and no openhole, but neck was buried by different supplier joint heights. Root requested new reference-skeleton fit; do not usefinal04 asfinalcurrent-sourceacceptance."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/source_candidates/rocketbox/avatar_bridge_swim_headless_dev05.log",
+      "result": "REFERENCE_FIT_AND_PALETTE_INTEGRATION_CLEAN_PENDING_GPU",
+      "details": "Bothactual1.70m skins swim/restore clean. Male nativeNeckY1.38428/Head1.44452m; female1.43529/1.50294m. Hips/legs unchanged, armnative lengths unchanged. Production frozen forroot34portrait+nativeoutfitinspection."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/textured_palette_headless_dev02.log",
+      "result": "ACTUAL_IMPORTED_MESH_PALETTE_20_OF20_PASS",
+      "details": "Originaldefault/restoredcachedmesh/materials/skin/UVs/weights retained; selectedwhite/redjackets+bluepants measuredrenderedtexture*RGBA8vertexreadback*HDRmateriallinearreflectanceerror<.04. Originalhead/hair/handtexture/material/colourunchangedbywardrobe. Nativeactualpixelsstillrequired."
+    }
+  ],
+  "own_frozen_source_sha256": {
+    "game/scripts/player/exploration_avatar.gd": "48cffe5e3a744dd793faaa0c6b20804a0d390806d0ef98b8442f15f4b6cbd996",
+    "game/scripts/player/textured_human_surface.gd": "7febbff574b0428df3af469fa0e28a868f3a0e0fc072d20e9c648696519554d9",
+    "game/scripts/player/human_surface_meshes.gd": "0b501db6886106e66501a677758b5bfa053d4064085d95126073e543850e67c5",
+    "game/scripts/player/textured_human_rig.gd": "981602adc1826c9ffb46018791b2e027cf6f1c70f085772d1160caa716ef6495",
+    "game/assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+    "tools/check_textured_human_palette.gd": "e4a4b9bd482413589469ccc21a8c4081b37d1e98f6568bd4fc4e37cdf050285a"
+  }
+}

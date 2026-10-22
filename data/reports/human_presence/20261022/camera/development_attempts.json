@@ -1,0 +1,81 @@
+{
+  "task": "EXP29_INDEPENDENT_HUMAN_PRESENCE_CAMERA",
+  "expected_final_checks": {
+    "headless": 178,
+    "native": 187
+  },
+  "expected_native_camera_images": 9,
+  "development_attempts": [
+    {
+      "id": "initial_parse",
+      "status": "TEST_PARSE_CORRECTED",
+      "detail": "Initial test declaration used inferred bool for a Variant expression. Changed frozen to explicit bool; subsequent parse checks passed. Production unchanged."
+    },
+    {
+      "id": "camera_headless_dev01",
+      "status": "STOPPED_TEST_FIXTURE_ERRORS",
+      "returncode": 130,
+      "console": "data/reports/human_presence/20261022/camera/camera_headless_dev01.console.log",
+      "detail": "Stopped owned process after identifying two fixture errors: assumed at least 16 joint nodes instead of actual 11 articulated nodes plus pelvis; first measured yaw step incorrectly accumulated five warmup ticks. Also first relative engine log path attempted user://data; later runs use absolute project evidence log paths. No PASS or JSON report claimed."
+    },
+    {
+      "id": "camera_headless_dev02",
+      "status": "DEVELOPMENT_PASS",
+      "returncode": 0,
+      "summary": {
+        "checks": 172,
+        "failed": 0
+      },
+      "elapsed_wall_seconds": 99.282,
+      "report": "data/reports/human_presence/20261022/camera/camera_headless_dev02.json",
+      "report_sha256": "5a20dcb05287919292806474652c64e1f490ff221805104bac0d9a1a7fa8af18",
+      "console": "data/reports/human_presence/20261022/camera/camera_headless_dev02.console.log",
+      "engine_log": "data/reports/human_presence/20261022/camera/camera_headless_dev02.log",
+      "source_drift_when_index_written": [
+        "res://../tests/game/check_human_presence_camera.gd",
+        "res://../tests/game/check_human_scale_motion.gd",
+        "res://scripts/player/exploration_camera.gd"
+      ],
+      "detail": "Actual normal scheduled headless engine run, no fixed-fps. Development evidence is retained separately; final frozen-source native proof is coordinated by root."
+    },
+    {
+      "id": "camera_headless_dev03",
+      "status": "DEVELOPMENT_PASS",
+      "returncode": 0,
+      "summary": {
+        "checks": 178,
+        "failed": 0
+      },
+      "elapsed_wall_seconds": 106.15,
+      "report": "data/reports/human_presence/20261022/camera/camera_headless_dev03.json",
+      "report_sha256": "cb5ff97efb4f324ecdfe67c741c12db1c0fbc6f2e80534d9c4f861e7b41c3520",
+      "console": "data/reports/human_presence/20261022/camera/camera_headless_dev03.console.log",
+      "engine_log": "data/reports/human_presence/20261022/camera/camera_headless_dev03.log",
+      "source_drift_when_index_written": [],
+      "detail": "Actual normal scheduled headless engine run, no fixed-fps. Development evidence is retained separately; final frozen-source native proof is coordinated by root."
+    }
+  ],
+  "test_source": "tests/game/check_human_presence_camera.gd",
+  "test_sha256": "3c65eb28fee0e39ebff3b8bf8f7e4a4101b4334aa8a2c7e947dc48d2d42e4fcb",
+  "independent_review": {
+    "source_review": "No blocking new native/private/boundary/input-ownership issue in natural locomotion candidate. Ground course follows facing; reversal brakes then pivots. Air/swim and turbo sandbox remain distinct.",
+    "portrait_preview_01": {
+      "actual_files_opened": [
+        "human_portrait_native_preview01_face_front_close.png",
+        "human_portrait_native_preview01_human_profile.png",
+        "human_portrait_native_preview01_swimwear_full_body.png",
+        "human_portrait_native_preview01_clothed_full_body.png",
+        "human_portrait_native_preview01_face_three_quarter_close.png",
+        "human_portrait_native_preview01_actual_walk_1_4mps.png"
+      ],
+      "findings": [
+        "Both upper sleeve/shoulder tips form upright protrusions above torso shoulder line.",
+        "White shirt opening has a separated or floating panel appearance in close views.",
+        "Swimwear shows triangular cloth-like protrusions at waist.",
+        "Profile body is occluded by test ruler and cannot support full side-silhouette acceptance."
+      ],
+      "status": "CORRECTION_REQUESTED_TO_ROOT_AND_HUMAN_VISUALS"
+    }
+  },
+  "scope": "Test and assigned evidence only. No production edit, native GUI input or model download. Independent image viewing is separate from engine numeric PASS."
+}

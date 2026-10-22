@@ -2,6 +2,16 @@
 
 > 저장소 공개 상태: 2026-10-21 GitHub API에서 PUBLIC으로 확인했습니다. 아래 R03 등 과거 비공개 배포 관련 설명은 해당 버전 당시의 기록입니다. 데이터·외부 자산의 고지는 각각 유지합니다.
 
+## EXP29 사람 모델과 수영복 전용 몸체 (2026-10-22)
+
+**Microsoft Rocketbox Avatar Library — MIT, Copyright (c) Microsoft Corporation.** [공식 저장소](https://github.com/microsoft/Microsoft-Rocketbox)의 고정 커밋 `0943055db6ec570bcef9f2c8b41c9e5467c808f9`에서 `Male_Adult_04`, `Female_Adult_07`의 FBX·텍스처를 도입했다. [라이선스 원문](../game/assets/vendor/microsoft_rocketbox/LICENSE.md)과 [파일별 원본 URL·SHA·변환 기록](../game/assets/vendor/microsoft_rocketbox/PROVENANCE.json)을 보존한다. TGA를 무손실 PNG로 바꾸고 FBX의 텍스처 확장자/경로를 맞췄으며, 게임에서 미터 높이·방향·자체 동작 리타게팅·의복 색을 적용한다. 선택한 두 FBX는 실제 검사에서 각각 81본과 가중치가 있는 단일 메시를 가졌다. 전체 라이브러리의 여러 LOD 설명을 이 두 파일에 그대로 적용하지 않는다.
+
+**MakeHuman Community core/system data assets — CC0 1.0.** [공식 라이선스의 데이터 범위](https://github.com/makehumancommunity/makehuman/blob/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/LICENSE.md)와 [시스템 자산 팩](https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html)을 확인했다. 앱 소스 코드와 데이터 자산의 조건을 구분하며, MakeHuman 앱의 AGPL 코드를 복사하지 않았다. [CC0 원문](../game/assets/vendor/makehuman_swim/LICENSE.CC0.md)·[라이선스 범위](../game/assets/vendor/makehuman_swim/UPSTREAM_LICENSE_SCOPE.md)·[원본/산출물 SHA 및 제작 내용](../game/assets/vendor/makehuman_swim/provenance.json)을 보존한다. 실제 인체 데이터·UV·가중치에서 별도 수영복 몸체를 만들고 불투명 반바지/수영복으로 덮으며, 숨은 보정 형상은 렌더하지 않는다. 도입한 GLB는 재생성 기록을 가진 파생 자산이다. 각 수영 몸체는 원본 스킨 가중치의163본을 보존한다. 수영복은 CC0 core의 helper-tights 형상에서 만든 불투명 남성 반바지/여성 shorty 수영복이며 별도 커뮤니티 수영복의 이용 조건을 이 고지로 대신하지 않는다. 피부·의복·눈의 원본/파생 파일과 가려진 몸 표면 제외 범위는 해당 provenance를 따른다.
+
+실행 중 정규화·방향 보정·자체 IK 리타게팅, 원본 머리를 유지한 수영 몸체 접합, 기존 원본 UV를 이용한 의상 색상 처리는 프로젝트의 연결 코드다. 의상 색은 실제 옷 표면의 평균 선형RGB와 StandardMaterial/정점색으로 처리하며 원본 normal map·피부 형상을 새 스캔 자산으로 설명하지 않는다. 기존59개 자체 절차형 외형은 숨긴 호환용 기준으로만 보존한다. 상점의 아이보리/코발트/차콜 컬러 상의는 같은 공급자 원본 의복 형상의 색상 변형이며 독립된 후드/카디건/재킷 자산을 추가한 것은 아니다. 공급자 사진/preview와 실제 게임 GPU 캡처, 데이터 이용 조건과 외형 품질 수용을 구분한다. 최신 XYZ 목 접합·실제 의상 화면 검수의 완료 판정은 통합 검증 대기이며 이 출처 문서가 수용 증명서는 아니다. 사람 스캔·모션 캡처·GTA 원본 자산을 도입했다는 주장은 하지 않는다. 보행·기구 접촉·골반/척추 연결의 보정은 프로젝트의 자체 코드이며, 고정 시선과 숨긴 접촉 관절을 실제 가중치 몸의 높이/골반 회전 제한으로 혼동하지 않는다. 최신 보행 변형과 외형 수용은 별도 검증 대기다.
+
+기존 자체 도형은 보이지 않는 동작·시설 접촉·의상 호환 기준으로 남긴다. 그 도형을 새 사실적 외형의 증거로 사용하지 않는다. 위 라이선스는 해당 외부 자산에 적용하며 프로젝트 전체 코드·지도·다른 자산에 일괄 적용하지 않는다. GTA/The Sims 모델·리깅·모션·음향을 추출한 자산은 포함하지 않았다. [참조·RE 범위](REFERENCE_DIRECTION.md)와 실제 수용 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다.
+
 ## 서울시 등고선·표고점 지역 원천 (2026-10-18)
 
 출처: 서울특별시 도시공간본부 도시계획상임기획과, [서울시 경사도 제공 페이지의 서울시 등고선.zip](https://data.seoul.go.kr/dataList/OA-22241/F/1/datasetView.do), 2025-03-20 갱신/제공 설명은 국토지리정보원2023년 기준 수치지형도. 공공누리1유형: 출처표시 조건으로 상업 이용·변경 가능, 제3저작권자 없음. 정확한 제공 파일/원문·취득 SHA는 [지역 manifest](../data/raw/supplemental/seoul_terrain/20261018/manifest.json)와 [이용 조건](../data/raw/supplemental/seoul_terrain/20261018/source_license.json)에 보존했다.
@@ -47,7 +57,7 @@ Copernicus WorldDEM-30를 사용해 만든 지역 추출 사본이다. 출처 �
 
 ## 로컬 참고 자료와 이후 작업
 
-국내 SHP·NGII 지역 원본·사진·거리뷰는 포함하지 않았다. 외부 3D 모델은 아래 L03 CC0 파일만 추가했다. VWorld 컬럼 정의서와 공식 궁궐 안내 HTML은 로컬 참고용이며 Git에서는 제외한다. 공개 열람만으로 지도·사진의 게임 재사용을 허용하지 않는다. 출처 URL·해시·조사 요약은 공유한다.
+국내 SHP·NGII 지역 원본·사진·거리뷰는 포함하지 않았다. 외부 3D 모델은 아래 L03 CC0와 위 EXP29 사람 자산의 개별 고지를 따른다. VWorld 컬럼 정의서와 공식 궁궐 안내 HTML은 로컬 참고용이며 Git에서는 제외한다. 공개 열람만으로 지도·사진의 게임 재사용을 허용하지 않는다. 출처 URL·해시·조사 요약은 공유한다.
 
 D04에서 실제 공유 파일·원천·사용 판정을 대조했다. 사용 범위는 [data_gaps](data_gaps.md), 기계 판독 규칙은 [data_usage](../config/data_usage.json)를 따른다. 국내 본체나 미허가 이미지가 새로 들어오면 이 판정을 다시 확인한다.
 
@@ -128,4 +138,4 @@ Godot과 새 자산은 실제 사용하는 버전·파일에 따라 출처를 �
 
 사용자는 현재 지도 외곽의 실제 크기 기준 게임용 대형 병원/소방서/경찰서를 선택했다. [병원](../game/assets/authored/city_hospital.json)·[대형 경찰청사](../game/assets/authored/police_headquarters.json)·[소방서](../game/assets/authored/fire_station_service.json)는 자체 기본 형상과 미터 설계이며 실제 서울 기관의 상호/부지/현재 평면·운영을 복원한 자산이 아니다. 병원 본체는 원본 `landuse=construction` 필지 안에 놓고 두 출입 경사로는 인접한 비사유지 게임 지면까지 연결한다. 원본 건물/도로/보도·사유지·나무와 원본 TIN을 유지하는 범위와 동결 입력 SHA를 각 자료/실행 기록에 남긴다.
 
-인체 외형과 관절/동작, 치수 선/숫자·1m 격자는 자체 절차적 제작이다. 외부 캐릭터·GTA 자산·모션 캡처를 가져오지 않았다. [원본 전수 치수 감사](../data/reports/real_scale/20261022/source_audit.json)는 보존된 OSM 기반 원자료 재투영/표시 외곽과 이격거리의 비교이며, 모든 건물의 실측 치수를 새로 확보한 자료가 아니다. 높이 근거의 추정/태그 구분과 원래 ODbL 고지는 유지한다.
+EXP28 당시 인체 외형과 관절/동작, 치수 선/숫자·1m 격자는 자체 절차적 제작이었다. 당시에는 외부 캐릭터·GTA 자산·모션 캡처를 가져오지 않았다. EXP29의 현재 보이는 사람은 위 MIT/CC0 텍스처·스킨 자산으로 교체하며 이 문장은 이전 단계의 출처 이력이다. [원본 전수 치수 감사](../data/reports/real_scale/20261022/source_audit.json)는 보존된 OSM 기반 원자료 재투영/표시 외곽과 이격거리의 비교이며, 모든 건물의 실측 치수를 새로 확보한 자료가 아니다. 높이 근거의 추정/태그 구분과 원래 ODbL 고지는 유지한다.

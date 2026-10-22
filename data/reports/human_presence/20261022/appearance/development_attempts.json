@@ -1,0 +1,94 @@
+{
+  "task": "EXP29_APPEARANCE_NATIVE_FINAL01_TIMEOUT_READ_ONLY_ANALYSIS",
+  "production_or_test_changes": false,
+  "engine_or_gui_runs": false,
+  "failure": {
+    "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.json",
+    "result": "NATIVE_TIMEOUT_FAIL_24_OF25_PARTIAL_7_OF9_IMAGES",
+    "reason": "Native final01 returned1 after90.936wallseconds. Actualassertions24PASS/1FAIL bounded_runtime; bothwalk/run180-samplephysicaltrials completed and theirchecks passed, but no actualrunportrait or airborneportrait/jumplanding/finalcapsuleassertion completed.7imagesexist. NoSCRIPTERROR/ParseError inrawlog. This is failedpartialnative evidence, not fullappearanceacceptance.",
+    "raw_log": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.log",
+    "run_metadata": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.run.json",
+    "script_errors": false,
+    "wall_seconds": 90.936,
+    "passed": 24,
+    "total": 25,
+    "captures": 7,
+    "expected_full_checks": 29,
+    "expected_full_captures": 9
+  },
+  "source_evidence": {
+    "timer": "tests/game/check_stable_motion.gd:34 create_timer(90.,true,false,true):90elapsedseconds,alwaysprocess,process-frame(notphysics),ignoresEngine.time_scale. Not90frames.",
+    "timeout_label_mismatch": "Inherited check_jump._timeout atline213 emits evidence timeout_seconds45 even though stable_motion overrides_initializeto90sec; final01runmetadata confirmsactual90.936s. Thislabelisinaccuratebutrawpreserved.",
+    "completion_budget": "Normalcompleteprocedure has542 fullticks (15startup+2swim+2x180walking+2x30release+105jump) plus4x12physics-onlyplacementticks =590minimumphysicssteps,about9.833simulationsecondsat60Hz, plus9imagecaptureprocess/postdraw waits andsetup/serialization. Engine maxfps144 is rendercap,physics60. Actualpreview01/02 eachcompleted29assertions9imagesin11.071/11.124wallseconds;90secis~8.1timesobservednormalbudget.",
+    "partial_stage": "final01actual_run_3_5mps has180samplesand3PASSchecks,then_sourcecalls await_portrait(actual_run_3_5mps) before30releasefullticks/jump. No runimage ornative.actual_actual_run portraitassertionexists. Evidence narrowsstalltothe runportrait request oritsyield/readback/save beforeassertion; lacksper-stageclocksoexactawaitnotproven. _portrait awaitsprocess_frame thenRenderingServer.frame_post_draw beforeimage readback/save.",
+    "inference": "Initial6portraitscompletewithin~6secondsandwalkphotoat9.25secondsafterlaunch;~80remainingsecondswithoutnextimage makesuniformlyslowfixtureorinsufficient90secnotestablished. RenderingServer.frame_post_draw wait/windowvisibility/renderpublication is a plausible liveness issue; notprovenwithoutroottelemetry. Increasingtimeoutalonewouldnotexplain11secpreviewsversus90secpartial."
+  },
+  "completed_native_physical_trials": [
+    {
+      "kind": "actual_walk_1_4mps",
+      "samples": 180,
+      "stance_samples": 171,
+      "maximum_world_stance_foot_slip_mps": 0.0124740600585938
+    },
+    {
+      "kind": "actual_run_3_5mps",
+      "samples": 180,
+      "stance_samples": 92,
+      "maximum_world_stance_foot_slip_mps": 0.0011444091796875
+    }
+  ],
+  "image_chronology": [
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_clothed_full_body.png",
+      "sha256": "55716e5155515c21e0fa45036b598db9a11f310518f988f1c0d3adc616dd8475",
+      "modified_utc": "2026-10-22T06:08:37.464241+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_face_front_close.png",
+      "sha256": "5b231f47c6d3366de6167f6bdd73ef4f80682e8e8c90923e17f6607f8984f861",
+      "modified_utc": "2026-10-22T06:08:37.488516+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_face_three_quarter_close.png",
+      "sha256": "fb5703c794033615a807d578934a3fcadad43547a6c86bf31e44ca31fab71cee",
+      "modified_utc": "2026-10-22T06:08:37.511702+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_human_profile.png",
+      "sha256": "d782ad25c835c1721bc1338e586ece767cc968ef61fe0833ce479d2265a89a35",
+      "modified_utc": "2026-10-22T06:08:37.531770+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_swimwear_full_body.png",
+      "sha256": "af60e75ed489f109932ef33ec58127ea2883f0b207ec64a35e1269edcc65d339",
+      "modified_utc": "2026-10-22T06:08:41.460475+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_restored_clothed_full_body.png",
+      "sha256": "28d3a5fd96bd910dd08f5c5373d4369b9a532df2fae1411b88f8db4ebb4e36fc",
+      "modified_utc": "2026-10-22T06:08:41.497512+00:00"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01_actual_walk_1_4mps.png",
+      "sha256": "27609bd88ddb86a86d94a4f2c4475134562bfbb348d40d8f0cc90ae3b5359cc9",
+      "modified_utc": "2026-10-22T06:08:44.782237+00:00"
+    }
+  ],
+  "preview_wall_seconds": [
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_preview01.run.json",
+      "wall_seconds": 11.071
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_preview02.run.json",
+      "wall_seconds": 11.124
+    }
+  ],
+  "raw_artifact_sha256": {
+    "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.json": "4ab55dc59a29ef19523e1e265f861d47bb2a86d5621192c0f5f23864ddc4d397",
+    "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.log": "2a6fc132d628e99757a3e07ff1992de74f24568b867fa0aeb888c88231ca98a1",
+    "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.console.log": "4e3e1abbb2650d0a0f81c51bd03ec948bd6054de3fd3ad3a3df11cc84205cfc4",
+    "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.run.json": "82808cda37b90fd9225c9643c5e9f095336897378808c6c814e24af7eb113dc6"
+  },
+  "next_step": "Rootdiagnosescameratelemetryfirst; no mutationorengine/GUIruninthisanalysis."
+}

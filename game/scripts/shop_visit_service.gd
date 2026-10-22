@@ -443,18 +443,25 @@ func begin_swimwear() -> bool:
 		var skin_part: bool=part in ["Torso","LeftSleeve","RightSleeve","LeftLowerSleeve","RightLowerSleeve","LeftLowerLeg","RightLowerLeg","LeftShoe","RightShoe"]
 		var shorts_part: bool=part in ["Pelvis","LeftUpperLeg","RightUpperLeg"]
 		if (skin_part or shorts_part) and mesh.material_override is StandardMaterial3D:
-			var material: StandardMaterial3D=mesh.material_override.duplicate(true);material.albedo_color=skin if skin_part else shorts;mesh.material_override=material
+			var material: StandardMaterial3D=host.exploration_avatar._materials.skin.duplicate(true) if skin_part else mesh.material_override.duplicate(true);material.albedo_color=skin if skin_part else shorts;mesh.material_override=material
 	if is_instance_valid(_outfit_details):_outfit_details.visible=false
-	_swim_details=Node3D.new();_swim_details.name="GameSwimShorts";host.exploration_avatar.add_child(_swim_details)
-	var box:=BoxMesh.new();box.size=Vector3(.36,.045,.25);var waist:=MeshInstance3D.new();waist.name="SwimShortsWaistband";waist.mesh=box;waist.position=Vector3(0.,.88,0.);waist.material_override=_material(Color(.02,.17,.23));_swim_details.add_child(waist)
+	# Follow the actual pelvis so the waistband remains fitted during stance,
+	# swimming and the existing render-only joint interpolation.
+	_swim_details=Node3D.new();_swim_details.name="GameSwimShorts";host.exploration_avatar._pelvis.add_child(_swim_details)
+	var waist:=MeshInstance3D.new();waist.name="SwimShortsWaistband"
+	waist.mesh=preload("res://scripts/player/human_surface_meshes.gd").loft("swim_waist",[[.012,.172,.126,.125,0.],[.025,.174,.127,.126,0.],[.048,.169,.121,.122,0.]],28)
+	waist.material_override=_material(Color(.02,.17,.23));_swim_details.add_child(waist)
 	for side: String in ["Left","Right"]:
-		var foot_mesh:=BoxMesh.new();foot_mesh.size=Vector3(.13,.075,.23)
-		var bare:=MeshInstance3D.new();bare.name=side+"SwimBareFoot";bare.mesh=foot_mesh;bare.material_override=_material(skin);bare.position=Vector3(0.,-.055,-.04)
+		var bare:=MeshInstance3D.new();bare.name=side+"SwimBareFoot"
+		bare.mesh=preload("res://scripts/player/human_surface_meshes.gd").loft("bare_foot",[[-.110,.042,.139,.057,-.030],[-.092,.061,.154,.063,-.030],[-.060,.062,.144,.059,-.025],[-.020,.042,.057,.048,.015],[.009,.036,.044,.042,.022]],24)
+		bare.material_override=host.exploration_avatar._materials.skin
 		host.exploration_avatar._joints[side+"Foot"].add_child(bare);_swim_feet.append(bare)
+	host.exploration_avatar.set_swimwear_visuals(true)
 	swimwear_active=true;_event("swimwear_started",{"saved_outfit":equipped_item_id});return true
 
 func end_swimwear() -> bool:
 	if not swimwear_active:return true
+	host.exploration_avatar.set_swimwear_visuals(false)
 	for saved: Dictionary in _swim_saved.get("meshes",[]):
 		if is_instance_valid(saved.node):saved.node.material_override=saved.material;saved.node.visible=bool(saved.visible)
 	if is_instance_valid(_outfit_details):_outfit_details.visible=bool(_swim_saved.get("details_visible",true))

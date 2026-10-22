@@ -1,0 +1,229 @@
+{
+  "scope": "Read-only independent diagnosis of completed native_final03 raw report/log before fixture-only V-Sync control change; no engine run.",
+  "source_report": "data/reports/human_presence/20261022/camera/human_camera_native_final03.json",
+  "source_report_sha256": "c932e211157a35739948131539768353dd5111c4212a0cf2245df43390aa8089",
+  "original_result": "FAIL",
+  "original_summary": {
+    "checks": 193,
+    "failed": 3
+  },
+  "observed_facts": "Metal Forward+; three failures solely require >=3 actual fraction bins. Actual local interpolation position/basis errors remain zero, intermediate joints observed.60Hz/144cap turn90/180 process cadence is~120Hz and fractions alternate two half-cycle-separated phases.",
+  "cause_inference": "Strong evidence of120Hz display V-Sync phase-lock with60Hz physics. Prior fixture did not query V-Sync mode or monitor refresh, so exact backend mode is an inference, not a measured fact.",
+  "controlled_change": "Only disposable test window requests VSYNC_DISABLED; record original/requested/readback modes, display refresh and actual process/draw wall clocks. Preserve same30/60Hz physics,30/60/144cap matrix,193native checks, >=3bins criterion, production camera/joint owners and actual engine interpolation fractions. Restore original test-window mode at finish. No FPS performance assertion.",
+  "official_api": "https://docs.godotengine.org/en/stable/classes/class_displayserver.html#class-displayserver-method-window-set-vsync-mode",
+  "api_limits": "Official docs support nonenabled modes for Forward+/Mobile; backend/OS may fall back. Native final03 uses Metal Forward+, so request is appropriate but success must be read back and actual scheduling observed.",
+  "cases": [
+    {
+      "name": "60hz_144cap_walk",
+      "saved_rows": 90,
+      "full_fraction_bins": [
+        4,
+        1
+      ],
+      "actual_moving_joint_between_endpoints": true,
+      "max_local_position_error_m": 0.0,
+      "max_local_basis_error": 0.0,
+      "focused_observed_frames": 114,
+      "observed_frames": 114,
+      "process_frames": 120,
+      "whole_case_wall_s": 0.999,
+      "whole_case_process_per_wall_second": 120.12012012012012,
+      "median_engine_process_delta_s": 0.00833333333333333,
+      "fraction_minmax": [
+        0.345480000000051,
+        0.919900000000051
+      ],
+      "saved_delta_exactly_1_over_120_count": 55,
+      "first12_fraction_values": [
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031,
+        0.877360000000031
+      ],
+      "saved_fraction_20bin_histogram": {
+        "17": 29,
+        "7": 12,
+        "18": 1,
+        "6": 24,
+        "16": 24
+      }
+    },
+    {
+      "name": "60hz_144cap_run",
+      "saved_rows": 90,
+      "full_fraction_bins": [
+        1,
+        4,
+        2
+      ],
+      "actual_moving_joint_between_endpoints": true,
+      "max_local_position_error_m": 0.0,
+      "max_local_basis_error": 0.0,
+      "focused_observed_frames": 156,
+      "observed_frames": 156,
+      "process_frames": 168,
+      "whole_case_wall_s": 1.41,
+      "whole_case_process_per_wall_second": 119.14893617021278,
+      "median_engine_process_delta_s": 0.00833333333333333,
+      "fraction_minmax": [
+        0.342400000000053,
+        0.923080000000054
+      ],
+      "saved_delta_exactly_1_over_120_count": 85,
+      "first12_fraction_values": [
+        0.344220000000053,
+        0.844220000000053,
+        0.344220000000053,
+        0.844220000000053,
+        0.344220000000053,
+        0.844220000000053,
+        0.344220000000053,
+        0.844220000000053,
+        0.344220000000053,
+        0.844220000000053,
+        0.344220000000053,
+        0.844220000000053
+      ],
+      "saved_fraction_20bin_histogram": {
+        "6": 37,
+        "16": 37,
+        "7": 1,
+        "17": 1,
+        "8": 7,
+        "18": 7
+      }
+    },
+    {
+      "name": "60hz_144cap_turn_90",
+      "saved_rows": 90,
+      "full_fraction_bins": [
+        2,
+        4
+      ],
+      "actual_moving_joint_between_endpoints": true,
+      "max_local_position_error_m": 0.0,
+      "max_local_basis_error": 0.0,
+      "focused_observed_frames": 144,
+      "observed_frames": 144,
+      "process_frames": 156,
+      "whole_case_wall_s": 1.301,
+      "whole_case_process_per_wall_second": 119.90776325903153,
+      "median_engine_process_delta_s": 0.00833333333333333,
+      "fraction_minmax": [
+        0.421220000000053,
+        0.930460000000055
+      ],
+      "saved_delta_exactly_1_over_120_count": 89,
+      "first12_fraction_values": [
+        0.421220000000054,
+        0.921220000000054,
+        0.421220000000054,
+        0.921220000000054,
+        0.421220000000054,
+        0.921220000000054,
+        0.421220000000054,
+        0.921220000000054,
+        0.421220000000054,
+        0.921220000000054,
+        0.421220000000054,
+        0.921220000000054
+      ],
+      "saved_fraction_20bin_histogram": {
+        "8": 45,
+        "18": 45
+      }
+    },
+    {
+      "name": "60hz_144cap_turn_180",
+      "saved_rows": 90,
+      "full_fraction_bins": [
+        2,
+        4
+      ],
+      "actual_moving_joint_between_endpoints": true,
+      "max_local_position_error_m": 0.0,
+      "max_local_basis_error": 0.0,
+      "focused_observed_frames": 144,
+      "observed_frames": 144,
+      "process_frames": 156,
+      "whole_case_wall_s": 1.301,
+      "whole_case_process_per_wall_second": 119.90776325903153,
+      "median_engine_process_delta_s": 0.00833333333333333,
+      "fraction_minmax": [
+        0.438680000000057,
+        0.938680000000057
+      ],
+      "saved_delta_exactly_1_over_120_count": 90,
+      "first12_fraction_values": [
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057
+      ],
+      "saved_fraction_20bin_histogram": {
+        "8": 45,
+        "18": 45
+      }
+    },
+    {
+      "name": "60hz_144cap_jump",
+      "saved_rows": 90,
+      "full_fraction_bins": [
+        2,
+        4,
+        0,
+        3,
+        1
+      ],
+      "actual_moving_joint_between_endpoints": true,
+      "max_local_position_error_m": 0.0,
+      "max_local_basis_error": 0.0,
+      "focused_observed_frames": 215,
+      "observed_frames": 215,
+      "process_frames": 227,
+      "whole_case_wall_s": 1.9,
+      "whole_case_process_per_wall_second": 119.47368421052632,
+      "median_engine_process_delta_s": 0.00833333333333333,
+      "fraction_minmax": [
+        0.438680000000057,
+        0.938680000000057
+      ],
+      "saved_delta_exactly_1_over_120_count": 90,
+      "first12_fraction_values": [
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057,
+        0.438680000000057,
+        0.938680000000057
+      ],
+      "saved_fraction_20bin_histogram": {
+        "8": 45,
+        "18": 45
+      }
+    }
+  ],
+  "frozen_test_sha256": "2cc9a87c680d00c0856a2239572b4dc1a63b95bb5e2d2e923bf9894294cd4766"
+}

@@ -71,7 +71,7 @@ func _hashes() -> Dictionary:
 
 func _capture(title: String) -> void:
 	if DisplayServer.get_name()=="headless":return
-	await _ticks(3);await RenderingServer.frame_post_draw
+	await _ticks(3);await process_frame;RenderingServer.force_draw()
 	var image:=root.get_texture().get_image();var path: String=report_path.get_basename()+"_"+title+".png";var error: Error=image.save_png(path)
 	_check("native_capture_"+title,error==OK,{"file":path,"image_size":image.get_size()})
 	if error==OK:captures.append({"file":path,"sha256":FileAccess.get_sha256(path),"observer_position":scene.player.global_position,"camera_yaw":scene.rig.yaw,"camera_pitch":scene.rig.pitch,"scope":"Production camera rig with explicitly placed test observer and test camera orbit. Clothing/swimwear views use the empty room arrival aisle, away from display mannequins; earlier final01 mannequin occlusion was an observer-position defect. Saved images require separate visual review; this is not ordinary OS gameplay proof."})
@@ -100,7 +100,7 @@ func _outfit_capture(title: String) -> void:
 func _small_ui_capture(title: String,panel: Control) -> void:
 	if DisplayServer.get_name()=="headless":return
 	var previous_size: Vector2i=root.size;var previous_mode: int=root.content_scale_mode;var previous_scale: Vector2i=root.content_scale_size
-	root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED;root.size=Vector2i(640,480);await _ticks(5);await RenderingServer.frame_post_draw
+	root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED;root.size=Vector2i(640,480);await _ticks(5);await process_frame;RenderingServer.force_draw()
 	var view: Rect2=scene.get_viewport().get_visible_rect();var bounds: Rect2=panel.get_global_rect()
 	_check("native_640x480_"+title+"_panel_within_view",view.size.is_equal_approx(Vector2(640.,480.)) and view.grow(-8.).encloses(bounds),{"viewport":view.size,"panel_position":bounds.position,"panel_size":bounds.size,"scope":"Panel geometry and actual capture; scroll content/legibility still require native image review."})
 	await _capture("small640_"+title)
@@ -167,8 +167,8 @@ func _run() -> void:
 	_check("same_selection_token_cannot_purchase_twice",service.balance==before-int(item.price) and service.transactions.size()==1 and int(service.inventory.rice_triangle)==1)
 	service.select_item("water");var credit_fixture: int=service.balance;service.balance=0
 	var denied: bool=service.purchase_selected();_check("insufficient_credit_fixture_does_not_mutate_inventory",not denied and service.balance==0 and not service.inventory.has("water") and service.transactions.size()==1,{"notice":service._receipt_text.text,"fixture":"Balance temporarily set to zero; restored after this assertion."});service.balance=credit_fixture
-	service.select_item("water");scene.toggle_menu();await _ticks(3);var paused_buy: bool=service.purchase_selected()
-	_check("menu_pauses_purchase_and_hides_picker",not paused_buy and not service._picker.visible and service.transactions.size()==1)
+	service.select_item("water");scene.toggle_menu();await _ticks(3);await process_frame;var paused_buy: bool=service.purchase_selected()
+	_check("menu_pauses_purchase_and_hides_picker",not paused_buy and not service._picker.visible and service.transactions.size()==1,{"menu_visible":scene.menu.visible,"picker_visible":service._picker.visible,"purchase_allowed":paused_buy,"transactions":service.transactions.size(),"process_frame":Engine.get_process_frames(),"physics_frame":Engine.get_physics_frames(),"scope":"Observe the real UI process boundary after menu opens; keep purchase rejection, picker hidden and transaction denominator unchanged."})
 	scene.toggle_menu();await _ticks(4)
 	_check("menu_return_restores_visible_cursor_purchase_focus_and_modal_input",Input.mouse_mode==Input.MOUSE_MODE_VISIBLE and not scene.input_router.gameplay_enabled and service._buy_button.has_focus())
 	await _tap_e()
@@ -212,6 +212,11 @@ func _run() -> void:
 	await _capture("clothing_interior")
 	await _place(service._current.interactions[0].point);await _tap_e()
 	var clothing_start_balance: int=service.balance;var clothing_start_transactions: int=service.transactions.size();var price_total:=0;var outfit_checks: Array=[]
+	var original_jacket: StandardMaterial3D=scene.exploration_avatar._materials.jacket
+	var original_jacket_color: Color=original_jacket.albedo_color
+	var actual_surface: Node3D=scene.exploration_avatar._textured_surface
+	var original_palette: int=hash(actual_surface.visible_meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR])
+	var actual_palettes: Array[int]=[]
 	for product: Dictionary in service._current.products:
 		service.select_item(String(product.id));service._buy_button.pressed.emit();await _ticks(2);price_total+=int(product.price)
 		var parts: Array=service.outfit_snapshot().parts;var changed: int=parts.filter(func(part: Dictionary)->bool:return not part.original_material).size()
@@ -221,9 +226,12 @@ func _run() -> void:
 		var expected_color:=Color(float(product.outfit.body[0]),float(product.outfit.body[1]),float(product.outfit.body[2]))
 		outfit_checks.append({"id":product.id,"equipped":service.equipped_item_id,"changed_parts":changed,"torso_color":torso,"expected_color":expected_color,"details":service.outfit_snapshot().cosmetic_detail_count})
 		_check("purchase_equip_real_avatar_"+String(product.id),service.equipped_item_id==String(product.id) and int(service.inventory.get(String(product.id),0))==1 and changed>=9 and torso.is_equal_approx(expected_color) and service.outfit_snapshot().cosmetic_detail_count>0,outfit_checks.back())
-		service.close_picker();await _ticks(3);await _outfit_capture("outfit_"+String(product.id))
+		service.close_picker();await _ticks(3)
+		var rendered_palette: int=hash(actual_surface.visible_meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR])
+		_check("purchase_updates_visible_weighted_clothing_"+String(product.id),actual_surface.visible_meshes[0].is_visible_in_tree() and rendered_palette!=original_palette and rendered_palette not in actual_palettes,{"original_palette":original_palette,"actual_rendered_palette":rendered_palette})
+		actual_palettes.append(rendered_palette);await _outfit_capture("outfit_"+String(product.id))
 		await _place(service._current.interactions[0].point);service.open_picker("ivory_cardigan");await _ticks(3)
-	_check("three_outfits_share_wallet_without_modifying_original_materials",service.balance==clothing_start_balance-price_total and service.transactions.size()==clothing_start_transactions+3 and scene.exploration_avatar._materials.jacket.albedo_color.is_equal_approx(Color(.13,.24,.31)),{"outfits":outfit_checks,"balance":service.balance})
+	_check("three_outfits_share_wallet_without_modifying_original_materials",service.balance==clothing_start_balance-price_total and service.transactions.size()==clothing_start_transactions+3 and scene.exploration_avatar._materials.jacket==original_jacket and original_jacket.albedo_color.is_equal_approx(original_jacket_color),{"outfits":outfit_checks,"balance":service.balance,"original_jacket_before":original_jacket_color,"original_jacket_after":original_jacket.albedo_color})
 	var clothing_paid: int=service.balance;var purchases: int=service.transactions.size();service.select_item("ivory_cardigan");service._buy_button.pressed.emit();service.purchase_selected();await _ticks(2)
 	_check("owned_clothing_rebuy_equips_without_duplicate_charge_or_quantity",service.balance==clothing_paid and service.transactions.size()==purchases and int(service.inventory.ivory_cardigan)==1 and service.equipped_item_id=="ivory_cardigan")
 	service.close_picker();await _ticks(3);var swim_in_shop: bool=service.begin_swimwear();service.open_picker("ivory_cardigan");var swimsuit_purchase: bool=service.purchase_selected()
@@ -235,7 +243,7 @@ func _run() -> void:
 	service.restore_default_outfit();await _ticks(2)
 	_check("default_outfit_restores_original_material_references_and_details",service.equipped_item_id.is_empty() and service.outfit_snapshot().parts.all(func(part: Dictionary)->bool:return part.original_material) and service.outfit_snapshot().cosmetic_detail_count==0)
 	for button: Button in service._wardrobe_buttons.get_children():
-		if button.text.begins_with("코발트 후디"):button.pressed.emit();break
+		if button.text.begins_with("코발트 컬러 상의"):button.pressed.emit();break
 	await _ticks(2);_check("owned_inventory_button_reequips_real_avatar_without_payment",service.equipped_item_id=="cobalt_hoodie" and service.balance==clothing_paid and service.transactions.size()==purchases)
 	await _capture("inventory_reequipped_hoodie")
 	await _small_ui_capture("inventory",service._wardrobe)
@@ -265,6 +273,7 @@ func _run() -> void:
 	var before_swim: Array=[]
 	for mesh: MeshInstance3D in scene.exploration_avatar._meshes:before_swim.append({"node":mesh,"material":mesh.material_override,"visible":mesh.visible})
 	var previous_outfit: String=service.equipped_item_id;var details_id: int=service._outfit_details.get_instance_id() if is_instance_valid(service._outfit_details) else 0
+	var previous_details_visible: bool=service._outfit_details.visible if is_instance_valid(service._outfit_details) else false
 	var changed_to_swim: bool=service.begin_swimwear();var swim_torso: Color=Color.TRANSPARENT;var shorts_color: Color=Color.TRANSPARENT
 	for mesh: MeshInstance3D in scene.exploration_avatar._meshes:
 		if mesh.get_meta("avatar_part","")=="Torso":swim_torso=mesh.material_override.albedo_color
@@ -278,6 +287,6 @@ func _run() -> void:
 	_check("repeated_begin_swimwear_does_not_replace_saved_outfit",service.begin_swimwear() and service.equipped_item_id==previous_outfit)
 	var ended: bool=service.end_swimwear();var references_restored:=true
 	for saved: Dictionary in before_swim:references_restored=references_restored and saved.node.material_override==saved.material and saved.node.visible==saved.visible
-	_check("end_swimwear_restores_exact_purchased_materials_visibility_and_details",ended and not service.swimwear_active and service._swim_feet.is_empty() and service.equipped_item_id==previous_outfit and references_restored and (details_id==0 or (service._outfit_details.get_instance_id()==details_id and service._outfit_details.visible)))
+	_check("end_swimwear_restores_exact_purchased_materials_visibility_and_details",ended and not service.swimwear_active and service._swim_feet.is_empty() and service.equipped_item_id==previous_outfit and references_restored and (details_id==0 or (service._outfit_details.get_instance_id()==details_id and service._outfit_details.visible==previous_details_visible)))
 	service.leave_for_teleport(wardrobe_place.point);await _ticks(5)
 	_finish()

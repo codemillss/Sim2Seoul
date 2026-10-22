@@ -1,0 +1,99 @@
+{
+  "task": "EXP29_HUMAN_APPEARANCE_COMPONENT",
+  "status": "HISTORICAL_PROCEDURAL_APPEARANCE_REJECTED_BY_USER_REPLACED_WITH_REAL_TEXTURED_ASSETS",
+  "production_scope": "Original authored anatomical smooth meshes and editable materials, not a scanned or photoreal external model. No physics/camera/collision changes. Existing gait and activity target coordinates retained.",
+  "source_sha256": {
+    "game/scripts/player/exploration_avatar.gd": "e3cdb053ce75a54a1a464afc13c079ba889abf64f18739a7f843574af283de1a",
+    "game/scripts/player/human_surface_meshes.gd": "0b501db6886106e66501a677758b5bfa053d4064085d95126073e543850e67c5",
+    "tests/game/check_human_appearance.gd": "91ae529e3a27fa80edadb826f01ed713fc53b68f6e46e261999aad531bbd086a",
+    "tests/game/check_human_appearance_native.gd": "be4bbcd4f75010a71828800ed5dcb43f0f2cad33d3743abb441adb652b975e98"
+  },
+  "current_reports": [],
+  "development_attempts": [
+    {
+      "file": "data/reports/human_presence/20261022/appearance/component_headless_dev01.log",
+      "result": "TEST_PARSE_FAIL",
+      "reason": "Focused test load().new() variables required explicit Node3D type; source compiled separately."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/component_headless_dev02.json",
+      "result": "13/15",
+      "reason": "Conservative rest bounds width0.6168m exceeded0.61m and shoe laces using shirt material were wrongly counted as purchasable garment surfaces. Narrowed sleeve loft radii; kept joint positions. Explicitly excluded shoe laces from garment-only check, while swim still tests hiding them."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/component_headless_dev03.json",
+      "result": "14/15",
+      "reason": "Isolated sleeve AABB overwidth, fixed by narrowing upper sleeve and forearm radii."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/native_fixture_headless_dev01.json",
+      "result": "19/20",
+      "reason": "Inherited EXP28 stance sampling began tick35 during newly longer EXP29 run onset. Observed transient0.0365m/s tick36; below0.00161m/s after45. New fixture measures steady contacts after12consecutive actualspeed2percent/runblenddelta.001 samples; retains0.025m/s threshold. Onset acceptance remains locomotion agent scope."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_preview01.json",
+      "result": "NUMERIC29/29_BUT_VISUAL_FAIL",
+      "reason": "Root and independent reviewer plus appearance agent opened actual PNGs. Upper arms protruded above torso as pipes (torso ended1.331m vsarmcap1.41m), closed shirt loft floated asbib, longneck, swimwaistrisers and ruler-obscured profile. This is not visually accepted release evidence. Correctedtorso/clavicleheight1.39-1.408, rounded sleeve cap, shortenedneck, actualconformingfrontpatches and connected collar. Added4swimmesh resource substitutions/restores; root changedwardrobe actualskinmaterials/curvedwaistband/feet. Portrait player moved(-8,8)toavoidfixtureocclusion."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/native_fixture_headless_final02.json",
+      "result": "PASS_SOURCE_BINDING_STALE",
+      "reason": "Root changed shared testbase after this successful component run; not selected current evidence. Mismatches:res://../tests/game/check_human_scale_motion.gd"
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_preview02.json",
+      "result": "29_NUMERIC_CHECKS_PASS_BUT_RAW_SCRIPT_ERROR_REJECTED",
+      "reason": "Minimal component WardrobeHost supplies onlyexploration_avatar, butnativeInput events reachedproductionshop._input->_paused and missingmenu property. Native runner correctly rejected despite29/29 assertions. Component-onlyfixture nowdisablesinputandunhandledinputprocessing inadditiontoprocess/physicsprocessing; tests directlyexerciseclothing API only. Fullgame/shop input isseparatelytested. Productionappearance pixels openedbyrootandappearanceagentconfirmshoulderpipes,floatingbib,waistrisers andrulerocclusionresolved; stillstylizednotphotoreal."
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.json",
+      "result": "NATIVE_TIMEOUT_FAIL_24_OF25_PARTIAL_7_OF9_IMAGES",
+      "reason": "Native final01 returned1 after90.936wallseconds. Actualassertions24PASS/1FAIL bounded_runtime; bothwalk/run180-samplephysicaltrials completed and theirchecks passed, but no actualrunportrait or airborneportrait/jumplanding/finalcapsuleassertion completed.7imagesexist. NoSCRIPTERROR/ParseError inrawlog. This is failedpartialnative evidence, not fullappearanceacceptance.",
+      "raw_log": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.log",
+      "run_metadata": "data/reports/human_presence/20261022/appearance/human_portrait_native_final01.run.json",
+      "script_errors": false,
+      "wall_seconds": 90.936,
+      "passed": 24,
+      "total": 25,
+      "captures": 7,
+      "expected_full_checks": 29,
+      "expected_full_captures": 9
+    }
+  ],
+  "native_command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--path",
+    "game",
+    "--script",
+    "../tests/game/check_human_appearance_native.gd",
+    "--",
+    "--report=/absolute/output.json"
+  ],
+  "native_expected_checks": 29,
+  "native_expected_images": 9,
+  "limitations": [
+    "Currentheadlessgeometry/componentchecksarenotnativeacceptance. Nativepreview01visualFAIL,preview02rawSCRIPTERRORandfinal01timeout24/25with7imagesarefaileddevelopmentrecords; fullnativeacceptancepending.",
+    "59 mesh instances per adult using sharedcustommeshcache andonesharedsphere; noFPSorlargecrowdperformanceclaim.",
+    "Original authoredanatomical surfaces are nothuman scan,mocap,licensedGTAassetorphotorealproductionrig.",
+    "Upper body remains level; no camera/head bob added."
+  ],
+  "appearance_metrics": {
+    "rest_top_m": 1.70000004768372,
+    "sole_clearance_m": 0.00586394872516,
+    "rest_width_m": 0.6088142395,
+    "rest_depth_m": 0.361864984,
+    "head_height_m": 0.2300000191,
+    "mesh_instances_per_adult": 59,
+    "custom_surface_instances": 27,
+    "custom_triangles_instanced_per_adult": 6672,
+    "custom_normals_invalid": 0,
+    "custom_winding_mismatches": 0
+  },
+  "swim_visual_api": {
+    "entry": "set_swimwear_visuals(true) after production wardrobe creates feet and assigns swim skin/shorts materials",
+    "exit": "set_swimwear_visuals(false) before production wardrobe restores originals",
+    "scope": "Swaps4existingmesh resources:Torso,Pelvis,LeftUpperLeg,RightUpperLeg. Exactmeshresource identities restored. No actor,joint,controller,collider orcamera change."
+  },
+  "superseded_by": "data/reports/human_presence/20261022/source_candidates/rocketbox/comparison_and_preparation.json",
+  "user_rejection": "User explicitly said character stilllooksbadandnotrealistic. Prior numeric geometry/pose/component PASS does not mean acceptedcharacterappearance."
+}

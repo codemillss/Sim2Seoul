@@ -16,6 +16,9 @@ const SPEED_PROFILES := {
 # Rendering remains independent; validation may explicitly request60Hz stress.
 @export var exploration_physics_hz: int=30
 var speed_id := "brisk"
+# Runtime previews may temporarily select a different profile. Unrelated
+# settings saves retain the loaded or explicitly selected speed preference.
+var _persisted_speed_id := "brisk"
 var free_roam_enabled := true
 var exploration_settings_recovered := false
 var exploration_error := ""
@@ -96,6 +99,7 @@ func _ready() -> void:
 	if not set_speed_profile(saved.speed_id):
 		_exploration_failure("이동 속도를 준비하지 못했습니다.")
 		return
+	_persisted_speed_id=saved.speed_id
 	set_free_roam(saved.free_roam)
 	if not exploration_error.is_empty():return
 	exploration_avatar=preload("res://scripts/player/exploration_avatar.gd").new()
@@ -261,7 +265,7 @@ func _ready() -> void:
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD 이동 · Shift 달리기 · Space 연속 점프 · 마우스 회전 · 휠 거리\nE 출입 / 쇼핑 / 시설 / 승하차 · I 소지품·옷 · F 주먹 · Q 킥보드 호출 · Esc 메뉴"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD 이동 · Shift 달리기 · Space 연속 점프 · 마우스 회전 · 휠 거리 · V 눈높이\nE 출입 / 쇼핑 / 시설 / 승하차 · I 소지품·옷 · F 주먹 · Q 킥보드 호출 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():
@@ -287,6 +291,10 @@ func _build_ui() -> void:
 	speed_option.custom_minimum_size=Vector2(150,32)
 	speed_option.item_selected.connect(_speed_selected)
 	speed_row.add_child(speed_option);options.add_child(speed_row)
+	var human_view:=Button.new();human_view.name="HumanEyeView";human_view.text="사람 눈높이로 시점 맞추기 · V"
+	human_view.pressed.connect(_human_eye_selected);options.add_child(human_view)
+	var natural_walk:=Button.new();natural_walk.name="NaturalWalkPreview";natural_walk.text="자연스러운 걷기·달리기 체험"
+	natural_walk.pressed.connect(_preview_human_presence);options.add_child(natural_walk)
 	var time_row:=HBoxContainer.new()
 	var time_caption:=Label.new();time_caption.text="시간대"
 	time_caption.add_theme_color_override("font_color",Color(.08,.12,.16))
@@ -635,6 +643,13 @@ func _sandbox_controls_ready() -> bool:
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey:return
 	var code: int=event.physical_keycode if event.physical_keycode!=0 else event.keycode
+	if code==KEY_V:
+		if not event.pressed:_sandbox_held["human_view"]=false;return
+		if event.echo or _sandbox_held.get("human_view",false):return
+		_sandbox_held["human_view"]=true
+		if not get_tree().paused and input_router.gameplay_enabled and _can_reset_human_view():
+			rig.use_human_eye_view();get_viewport().set_input_as_handled()
+		return
 	var action: String="punch" if code==KEY_F else "summon" if code==KEY_Q else ""
 	if action.is_empty():return
 	if not event.pressed:_sandbox_held[action]=false;return
@@ -642,6 +657,23 @@ func _input(event: InputEvent) -> void:
 	_sandbox_held[action]=true
 	if not _sandbox_controls_ready():return
 	_sandbox_requests[action]=true;get_viewport().set_input_as_handled()
+
+func _can_reset_human_view() -> bool:
+	return runtime_ok and is_instance_valid(rig) and not _sandbox_detained() and not player.facility_control and not _street_transport_riding()
+
+func _human_eye_selected() -> void:
+	if not _can_reset_human_view():return
+	rig.use_human_eye_view()
+	if menu.visible:toggle_menu()
+
+func _preview_human_presence() -> void:
+	if not _can_reset_human_view():return
+	# Preview changes this session only. Keep the user's saved fast exploration
+	# preference and all five speed choices available for ordinary travel.
+	if not set_speed_profile("realistic"):return
+	rig.use_human_eye_view()
+	exploration_notice.text="자연스러운 보폭으로 체험 중입니다. 이동 속도에서 기존 빠른 설정을 다시 선택할 수 있습니다."
+	if menu.visible:toggle_menu()
 
 func _physics_process(_delta: float) -> void:
 	if _sandbox_requests.is_empty():return
@@ -852,7 +884,9 @@ func _update_exploration_description() -> void:
 func _speed_selected(index: int) -> void:
 	if index<0 or index>=SPEED_IDS.size():return
 	exploration_notice.text=""
-	if set_speed_profile(SPEED_IDS[index]):_save_exploration_settings()
+	if set_speed_profile(SPEED_IDS[index]):
+		_persisted_speed_id=speed_id
+		_save_exploration_settings()
 
 func _free_roam_selected(enabled: bool) -> void:
 	exploration_notice.text=""
@@ -864,7 +898,7 @@ func _save_exploration_settings() -> void:
 	if file==null:
 		exploration_notice.text="탐험 설정을 저장하지 못했습니다. 이번 실행에는 적용됩니다."
 		return
-	file.store_string(JSON.stringify({"schema_version":1,"speed_id":speed_id,"free_roam":free_roam_enabled})+"\n")
+	file.store_string(JSON.stringify({"schema_version":1,"speed_id":_persisted_speed_id,"free_roam":free_roam_enabled})+"\n")
 	file.close()
 
 func exploration_snapshot() -> Dictionary:

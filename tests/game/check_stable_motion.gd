@@ -36,6 +36,7 @@ func _initialize() -> void:
 
 func _json(value: Variant) -> Variant:
 	if value is Vector3:return [value.x,value.y,value.z]
+	if value is AABB:return {"position":_json(value.position),"size":_json(value.size),"end":_json(value.end)}
 	if value is Transform3D:return {"origin":_json(value.origin),"basis":[_json(value.basis.x),_json(value.basis.y),_json(value.basis.z)]}
 	if value is Dictionary:
 		var result:={}
@@ -92,6 +93,7 @@ func _setup_stable() -> void:
 	rig=load("res://scenes/player/camera_rig.tscn").instantiate();rig.set_script(load("res://scripts/player/exploration_camera.gd"));rig.target_path=NodePath("../Player");fixture.add_child(rig)
 	player.movement_camera=rig.camera
 	avatar=load("res://scripts/player/exploration_avatar.gd").new();player.get_node("Visual").add_child(avatar)
+	if "--female-model" in OS.get_cmdline_user_args():player.set_meta("human_model_id","Female_Adult_07")
 	_check("startup.actual_exploration_avatar_ready",avatar.setup(player))
 	recorder=LateRecorder.new();recorder.test=self;recorder.process_priority=1000;recorder.process_physics_priority=1000;recorder.process_mode=Node.PROCESS_MODE_ALWAYS;fixture.add_child(recorder)
 	initial_capsule=_capsule()

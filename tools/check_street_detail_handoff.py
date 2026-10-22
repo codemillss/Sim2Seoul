@@ -7,14 +7,14 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = ROOT / 'data/reports/real_scale/20261022/summary.json'
+SUMMARY = ROOT / 'data/reports/human_presence/20261022/summary.json'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepared', action='store_true')
     parser.add_argument('--summary', type=Path, default=SUMMARY,
-                        help='Manifest to check; defaults to the latest real-scale/civic revision.')
+                        help='Manifest to check; defaults to the latest human-presence revision.')
     args = parser.parse_args()
     summary = args.summary.resolve()
     if not summary.is_relative_to(ROOT) or not summary.is_file():
@@ -38,7 +38,10 @@ def main():
             continue
         report = json.loads(report_path.read_text())
         checks = report.get('checks', [])
-        declared_pass = report.get('result') == 'PASS' or (report.get('result') is None and report.get('passed') == len(checks) and report.get('total') == len(checks))
+        result = report.get('result')
+        declared_pass = result == 'PASS' or (result is None and report.get('passed') == len(checks) and report.get('total') == len(checks))
+        if isinstance(result, dict):
+            declared_pass = result.get('status') in ('PASS', 'pass') and result.get('failed') == 0 and result.get('passed') == len(checks) and result.get('total') == len(checks)
         if not declared_pass or not checks or not all(row.get('passed') is True for row in checks):
             failures.append({'path': relative, 'reason': 'engine_checks_not_pass'})
         for resource, expected in report.get('source_sha256', report.get('source_hashes', {})).items():

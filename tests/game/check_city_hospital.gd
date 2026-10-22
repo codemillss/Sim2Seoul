@@ -21,6 +21,7 @@ func _hashes() -> Dictionary:
 func _json(v: Variant) -> Variant:
 	if v is Vector3:return [v.x,v.y,v.z]
 	if v is Vector2:return [v.x,v.y]
+	if v is AABB:return {"position":_json(v.position),"size":_json(v.size),"end":_json(v.end)}
 	if v is Dictionary:
 		var out: Dictionary={}
 		for key: Variant in v:out[str(key)]=_json(v[key])
@@ -40,7 +41,7 @@ func _key(key: Key,pressed: bool) -> void:
 func _tap_e() -> void:_key(KEY_E,true);await _ticks(2);_key(KEY_E,false);await _ticks(2)
 func _capture(title: String) -> void:
 	if DisplayServer.get_name()=="headless":return
-	await _ticks(4);await RenderingServer.frame_post_draw;var path:=report_path.get_basename()+"_"+title+".png";var result:=root.get_texture().get_image().save_png(path)
+	await _ticks(4);RenderingServer.force_draw();var path:=report_path.get_basename()+"_"+title+".png";var result:=root.get_texture().get_image().save_png(path)
 	_check("native_capture_"+title,result==OK,{"path":path})
 	if result==OK:captures.append({"path":path,"sha256":FileAccess.get_sha256(path)})
 func _place(point: Vector3,toward: Vector3) -> bool:

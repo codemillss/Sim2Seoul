@@ -25,6 +25,12 @@ var _roof_camera_fallback := false
 var _roof_pivot_offset_m := 0.0
 var _roof_fallback_count := 0
 var _roof_fallback_reason := "no_hint"
+const HUMAN_PIVOT_M := 1.20
+const HUMAN_DISTANCE_M := 3.40
+const HUMAN_PITCH_DEGREES := -7.0
+var _joint_nodes: Array[Node3D] = []
+var _previous_joint_poses: Array[Transform3D] = []
+var _physics_joint_poses: Array[Transform3D] = []
 const ROOF_MAX_PIVOT_RAISE_M := 1.2
 const ROOF_MIN_RETRY_DISTANCE_M := 1.8
 const ROOF_RESTORE_DISTANCE_M := 1.9
@@ -32,12 +38,19 @@ const ROOF_RESTORE_DISTANCE_M := 1.9
 class AvatarRenderProxy extends Node3D:
 	# Restore simulation-space joint globals before the player, gait and
 	# facility controllers run. Pausing retains the last displayed pose.
-	func _physics_process(_delta: float) -> void:transform=Transform3D.IDENTITY
+	var owner_rig: Node3D
+	func _physics_process(_delta: float) -> void:
+		transform=Transform3D.IDENTITY
+		if is_instance_valid(owner_rig):owner_rig._restore_physics_joints()
 
 func _init() -> void:
 	pitch_min_degrees = -65.0
 	pitch_max_degrees = 20.0
-	default_pitch_degrees = -18.0
+	# At rest the eye is 1.20 + sin(7deg)*3.40 = 1.614m above the feet.
+	# Focus on the upper back rather than raising the whole camera overhead.
+	pivot_height_m = HUMAN_PIVOT_M
+	default_distance_m = HUMAN_DISTANCE_M
+	default_pitch_degrees = HUMAN_PITCH_DEGREES
 
 func _ready() -> void:
 	super._ready()
@@ -60,6 +73,17 @@ func _ready() -> void:
 func apply_exploration_view_distance() -> void:
 	# The inherited quality preset has a 200m cutoff; call after apply_quality too.
 	if is_instance_valid(camera):camera.far = exploration_far_m
+
+func use_human_eye_view() -> void:
+	# A deliberate on-foot reset. Vehicle/room controllers still save/restore
+	# their own camera and never inherit a continuously forced human pivot.
+	_restore_physics_joints()
+	pivot_height_m=HUMAN_PIVOT_M
+	pitch=deg_to_rad(HUMAN_PITCH_DEGREES)
+	requested_distance=HUMAN_DISTANCE_M
+	current_distance=HUMAN_DISTANCE_M
+	skip_motion=true
+	snap_to_target_pose()
 
 func set_roof_camera_hint(hint: Dictionary) -> void:
 	# A live roof helper refreshes or clears this every physics tick. Never
@@ -134,7 +158,7 @@ func _prepare_avatar_proxy() -> void:
 	if avatar==null or avatar==_avatar_root:return
 	_release_avatar_proxy()
 	_avatar_root=avatar
-	_avatar_proxy=AvatarRenderProxy.new();_avatar_proxy.name="RenderProxy"
+	_avatar_proxy=AvatarRenderProxy.new();_avatar_proxy.name="RenderProxy";_avatar_proxy.owner_rig=self
 	_avatar_proxy.process_mode=Node.PROCESS_MODE_PAUSABLE
 	_avatar_proxy.process_physics_priority=-100
 	_avatar_proxy.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
@@ -148,15 +172,45 @@ func _prepare_avatar_proxy() -> void:
 	_avatar_proxy.transform=Transform3D.IDENTITY
 	_previous_avatar_pose=avatar.global_transform
 	_physics_avatar_pose=avatar.global_transform
+	_joint_nodes.clear();_previous_joint_poses.clear();_physics_joint_poses.clear()
+	var joints: Variant=avatar.get("_joints")
+	if joints is Dictionary:
+		for joint: Variant in joints.values():
+			if joint is Node3D and is_instance_valid(joint):_joint_nodes.append(joint)
+	var pelvis: Variant=avatar.get("_pelvis")
+	if pelvis is Node3D and is_instance_valid(pelvis):_joint_nodes.append(pelvis)
+	_capture_joint_poses(true)
 	_reset_pending=true
 
 func _release_avatar_proxy() -> void:
+	_restore_physics_joints()
 	if is_instance_valid(_avatar_proxy):
 		_avatar_proxy.transform=Transform3D.IDENTITY
 		if is_instance_valid(_avatar_root) and not _avatar_root.is_queued_for_deletion():
 			for child in _avatar_proxy.get_children():child.reparent(_avatar_root,false)
 		_avatar_proxy.queue_free()
 	_avatar_proxy=null;_avatar_root=null
+	_joint_nodes.clear();_previous_joint_poses.clear();_physics_joint_poses.clear()
+
+func _restore_physics_joints() -> void:
+	# Rendered joint interpolation must never feed back into the next IK step,
+	# physics-time hand contacts, or an independently controlled ride pose.
+	for index: int in range(mini(_joint_nodes.size(),_physics_joint_poses.size())):
+		if is_instance_valid(_joint_nodes[index]):_joint_nodes[index].transform=_physics_joint_poses[index]
+
+func _capture_joint_poses(reset: bool) -> void:
+	var previous: Array[Transform3D]=_physics_joint_poses.duplicate()
+	_previous_joint_poses.clear();_physics_joint_poses.clear()
+	for index: int in range(_joint_nodes.size()):
+		var joint:=_joint_nodes[index]
+		var pose: Transform3D=joint.transform if is_instance_valid(joint) else Transform3D.IDENTITY
+		_physics_joint_poses.append(pose)
+		_previous_joint_poses.append(pose if reset or index>=previous.size() else previous[index])
+
+func _publish_joint_poses(fraction: float) -> void:
+	for index: int in range(_joint_nodes.size()):
+		if not is_instance_valid(_joint_nodes[index]) or index>=_physics_joint_poses.size():continue
+		_joint_nodes[index].transform=_previous_joint_poses[index].interpolate_with(_physics_joint_poses[index],clampf(fraction,0.,1.))
 
 func _publish_avatar_pose(pose: Transform3D) -> void:
 	if is_instance_valid(_avatar_proxy) and is_instance_valid(_avatar_root):
@@ -233,6 +287,9 @@ func _solve_pose(delta: float, physics_step: bool) -> void:
 		if _pose_ready:transition_snaps += 1
 	_physics_pose = next_pose
 	if is_instance_valid(_avatar_root):_physics_avatar_pose=_avatar_root.global_transform
+	# The local limb poses need the same rendered time as their root. Fixed
+	# eating/weights/shower props instead retain current physical hand contact.
+	_capture_joint_poses(not _transition_clear or _facility_mode)
 	# Live activity props use current physical hand positions. A fixed user
 	# keeps that pose while the camera can still orbit normally.
 	if _facility_mode:_previous_avatar_pose=_physics_avatar_pose
@@ -255,6 +312,10 @@ func _process(_delta: float) -> void:
 	_render_fraction=clampf(Engine.get_physics_interpolation_fraction(),0.0,1.0)
 	camera.global_transform = _render_pose(_render_fraction)
 	_publish_avatar_pose(_previous_avatar_pose.interpolate_with(_physics_avatar_pose,_render_fraction))
+	# Equipment still publishes current local pedal/handle/seat transforms.
+	# Keep attached limbs on that same clock until those local props interpolate;
+	# their complete moving body and the camera continue to share render time.
+	_publish_joint_poses(1.0 if _facility_mode or _moving_attachment else _render_fraction)
 	rendered_frames += 1
 
 func _render_pose(fraction: float) -> Transform3D:
@@ -282,6 +343,10 @@ func snapshot() -> Dictionary:
 	result["roof_fallback_count"]=_roof_fallback_count
 	result["roof_fallback_reason"]=_roof_fallback_reason
 	result["roof_camera_hint"]=_roof_camera_hint.duplicate()
+	result["joint_interpolation_ready"]=_joint_nodes.size()>0 and _joint_nodes.size()==_physics_joint_poses.size()
+	result["joint_interpolation_count"]=_joint_nodes.size()
+	result["joint_presentation_policy"]="current_equipment_contacts" if _facility_mode or _moving_attachment else "interpolated_onfoot_joints"
+	result["human_eye_reference_m"]=HUMAN_PIVOT_M+sin(deg_to_rad(-HUMAN_PITCH_DEGREES))*HUMAN_DISTANCE_M
 	return result
 
 func _exit_tree() -> void:_release_avatar_proxy()

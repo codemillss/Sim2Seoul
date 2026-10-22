@@ -1,0 +1,42 @@
+{
+  "task": "EXP29_HYBRID_GAIT_JOIN_DIAGNOSTIC",
+  "executor_returncode": 1,
+  "executor_wall_time_seconds": 0.833547125,
+  "expected_diagnostic_result": "FAIL confirms previously uncovered moving dual-rig gap",
+  "summary": {
+    "checks": 71,
+    "failed": 44
+  },
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--log-file",
+    "../data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.log",
+    "--script",
+    "../tests/game/check_hybrid_gait_join.gd",
+    "--",
+    "--report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.json"
+  ],
+  "report_sha256": "633a0f7b639f0df406798b726b76b54e66d1c301d4598e02596a53259a60da16",
+  "raw_logs": {
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.log": "6f70e85214d79b8bbac9f7df3710ef3bbc6600360e5951ed2d9986b2d630aaee",
+    "data/reports/human_presence/20261022/retarget/hybrid_gait_join_diagnostic01.console.log": "4d3c91b96a839c50b9d8e35b4ff4049d73401dfe01a5e92af932ef60fec56ebc"
+  },
+  "script_errors": false,
+  "expected_assertion_warnings": 88,
+  "source_sha256": {
+    "res://../tests/game/check_hybrid_gait_join.gd": "5fa11f9a3766908c7d3e46ef6ce1698848343df0c2a91d6da4ea10050c9c63b0",
+    "res://../tests/game/check_hybrid_neck_fit.gd": "ece68a04115c949302a29e1e936d120d24b0d519eb76d6280eff04084c98dfad",
+    "res://assets/vendor/makehuman_swim/swim_female.glb": "697537a49ae569dcfbdaaa715e67769532b5e321864497a113dfb95e3c686c4a",
+    "res://assets/vendor/makehuman_swim/swim_male.glb": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://scripts/player/exploration_avatar.gd": "ad585d7033b57f8ade901c31ae125c0bac3846dec62dd70b50c07b542efc225b",
+    "res://scripts/player/textured_human_rig.gd": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+    "res://scripts/player/textured_human_surface.gd": "a758926f261bc9983eb30b3eb121d7575899a980d1fbab105e6a36a85270950f"
+  },
+  "scope": "Actual production dual-rig wardrobe wrapper. Original rig sync first, MakeHuman body rig second, neutral plus eight walking/eight running phases for each sex. Engine neck/head global positions, not proxy nodes or neutral-only fit. Read-only production diagnostic; no rendering, FPS, camera or real-time city acceptance.",
+  "recorded_at_utc": "2026-10-22T08:02:37.281649+00:00"
+}

@@ -7,15 +7,17 @@ Requires setup_mac.sh inputs and Godot; reports are never overwritten.
 from pathlib import Path
 import subprocess,sys,json,datetime,time,os,argparse
 root=Path(__file__).resolve().parents[1]
-names={'shop':'check_shop_visit','car':'check_drivable_car','helicopter':'check_city_helicopter','pool':'check_pool_preparation','integration':'check_city_life_integration','bike_entry':'check_bike_entry_reliability','bus':'check_city_bus_loop_native','bus_safety':'check_city_bus_loop_safety','library':'check_library_entry_contact','scooter':'check_city_scooter_service','bike':'check_city_bike_service','speed':'check_transport_speed','subway':'check_city_subway','roads':'check_road_surface_detail','rope':'check_city_helicopter_rope','underground':'check_game_underground_connections','escalators':'check_multifloor_escalator','camera':'check_transport_camera_stability','distribution':'check_mobility_distribution','bike_visibility':'check_bike_visibility','takeover':'check_traffic_car_takeover','police':'check_city_public_safety','weather_fire':'check_city_weather_emergency','sandbox_controls':'check_city_sandbox_controls','car_police':'check_stolen_car_arrest','stolen_euljiro':'check_stolen_car_arrest_euljiro','bus_access':'check_bus_stop_access','audio':'check_city_vehicle_audio','hospital':'check_city_hospital','police_facility':'check_police_facility','police_headquarters':'check_police_headquarters','human_motion':'check_human_scale_motion','human_city':'check_human_city_integration'}
+names={'shop':'check_shop_visit','car':'check_drivable_car','helicopter':'check_city_helicopter','pool':'check_pool_preparation','integration':'check_city_life_integration','bike_entry':'check_bike_entry_reliability','bus':'check_city_bus_loop_native','bus_safety':'check_city_bus_loop_safety','library':'check_library_entry_contact','scooter':'check_city_scooter_service','bike':'check_city_bike_service','speed':'check_transport_speed','subway':'check_city_subway','roads':'check_road_surface_detail','rope':'check_city_helicopter_rope','underground':'check_game_underground_connections','escalators':'check_multifloor_escalator','camera':'check_transport_camera_stability','distribution':'check_mobility_distribution','bike_visibility':'check_bike_visibility','takeover':'check_traffic_car_takeover','police':'check_city_public_safety','weather_fire':'check_city_weather_emergency','sandbox_controls':'check_city_sandbox_controls','car_police':'check_stolen_car_arrest','stolen_euljiro':'check_stolen_car_arrest_euljiro','bus_access':'check_bus_stop_access','audio':'check_city_vehicle_audio','hospital':'check_city_hospital','police_facility':'check_police_facility','police_headquarters':'check_police_headquarters','human_motion':'check_human_scale_motion','human_city':'check_human_city_integration','human_appearance':'check_human_appearance','human_portrait':'check_human_appearance_native','human_gait':'check_human_gait_views','human_locomotion':'check_human_locomotion','human_camera':'check_human_presence_camera','human_presence_city':'check_human_presence_city','facilities':'check_facility_interactions'}
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('suite', choices=names)
 parser.add_argument('mode', choices=['headless','native'])
 parser.add_argument('tag', help='Fresh simple run tag; existing evidence is preserved')
 parser.add_argument('--fixed-fps', type=int, choices=[60,120], help='Headless simulation acceleration only; never a performance claim')
+parser.add_argument('--female-model', action='store_true', help='Explicit female human_portrait/human_gait fixture; does not modify the normal game preference')
 parser.add_argument('--output-dir', type=Path, default=Path('data/reports/urban_transit/20261021/acceptance'), help='Project-relative evidence folder; historical runs retain the EXP25 default')
 opts=parser.parse_args()
 if opts.fixed_fps and opts.mode!='headless':parser.error('--fixed-fps is headless only')
+if opts.female_model and opts.suite not in ['human_portrait','human_gait']:parser.error('--female-model is human_portrait or human_gait only')
 suite,mode,tag=opts.suite,opts.mode,opts.tag
 if not tag.replace('_','').replace('-','').isalnum():parser.error('tag must be alphanumeric with underscores or hyphens')
 destination=(root/opts.output_dir).resolve()
@@ -28,6 +30,7 @@ if mode=='headless':
  args+=['--headless']
  if opts.fixed_fps:args+=['--fixed-fps',str(opts.fixed_fps)]
 args+=['--path',str(root/'game'),'--log-file',str(base)+'.log','--script',f'res://../tests/game/{names[suite]}.gd','--','--automatic-probe','--report='+str(base)+'.json']
+if opts.female_model:args+=['--female-model']
 started=datetime.datetime.now(datetime.timezone.utc).isoformat();now=time.monotonic()
 print('RUN',suite,mode,flush=True)
 try:

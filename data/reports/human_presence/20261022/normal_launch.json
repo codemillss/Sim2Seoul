@@ -1,0 +1,92 @@
+{
+  "task": "EXP29_ORDINARY_LAUNCH_OS_INPUT",
+  "recorded_at": "2026-10-22T08:59:54.136657+00:00",
+  "launch": "LaunchServices fresh Godot4.7.2 with current game/scenes/world/explore_walk.tscn; imported GLB sourceMD5 was refreshed before acceptance.",
+  "game_left_open": true,
+  "window_verified": "Sim2Seoul (DEBUG), raised and visible through native CUA",
+  "saved_preferences_before": {
+    "/Users/jmjeon/Library/Application Support/Godot/app_userdata/Sim2Seoul/sim2seoul_exploration.json": {
+      "sha256": "f4335ea84bc4ff4fb25138cf06517ad431bd7da489e0e0cb440a9db552379bdb",
+      "text": "{\"schema_version\":1,\"speed_id\":\"turbo\",\"free_roam\":true}\n"
+    },
+    "/Users/jmjeon/Library/Application Support/Godot/app_userdata/Sim2Seoul/sim2seoul_exploration.json.time.json": {
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878",
+      "text": "{\"schema_version\":1,\"time_id\":\"evening\"}\n"
+    }
+  },
+  "saved_preferences_after": {
+    "/Users/jmjeon/Library/Application Support/Godot/app_userdata/Sim2Seoul/sim2seoul_exploration.json": {
+      "sha256": "f4335ea84bc4ff4fb25138cf06517ad431bd7da489e0e0cb440a9db552379bdb",
+      "text": "{\"schema_version\":1,\"speed_id\":\"turbo\",\"free_roam\":true}\n"
+    },
+    "/Users/jmjeon/Library/Application Support/Godot/app_userdata/Sim2Seoul/sim2seoul_exploration.json.time.json": {
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878",
+      "text": "{\"schema_version\":1,\"time_id\":\"evening\"}\n"
+    }
+  },
+  "saved_preferences_unchanged": true,
+  "session_profile": "realistic, via actual menu NaturalWalkPreview; storedturbo/evening/free-roam preserved",
+  "actions": [
+    {
+      "input": "Escape",
+      "observed": "Normal game menu opens with saved turbo profile and evening"
+    },
+    {
+      "input": "Native click NaturalWalkPreview",
+      "observed": "Menu closes and HUD shows realistic speed; later steps use this session profile"
+    },
+    {
+      "input": "V then W1000ms",
+      "observed": "New thirdperson frame and actual street advance; entrance15m→14m"
+    },
+    {
+      "input": "Shift+W1000ms then D650ms",
+      "observed": "Street advance and actor changes facing; screenshot04"
+    },
+    {
+      "input": "S900ms",
+      "observed": "Actor faces camera after reverse; screenshot05"
+    },
+    {
+      "input": "Space40ms",
+      "observed": "Issued OS jump key; this screenshot sequence is not a measured apex/air-jump acceptance"
+    },
+    {
+      "input": "V",
+      "observed": "Final eye-level view with grounded visible human and free exploration"
+    }
+  ],
+  "captures": [
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/01_initial_saved_turbo.png",
+      "sha256": "66df4b0df8d2f87747eea38f32902d0a3fdc967a783a79e2069efbc8ac4a466e"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/02_natural_preview.png",
+      "sha256": "71b4e5ff073c56c333ba718061d56b36576ec85be81ba8bea6f5ef0205e58dd3"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/03_walk_after.png",
+      "sha256": "a0a5c2966add35adad3ceb65ea9db38b6aff2f69a946ada25474c942ccd8b1b9"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/04_run_and_turn.png",
+      "sha256": "120176e7fc10a60838194dfc9de3e480df207eb1f76dd2f3a1b9f1566498d6ad"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/05_reverse_front.png",
+      "sha256": "1333e7d2b1757ca101b7d98ce4b71662ec9cd1747cfc566097494e8d1b8c45c8"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/06_after_jump_key.png",
+      "sha256": "91a1ed4cd92bba332e56ffa70abba55b3d022c8e5f1c6061bf1f720e2c7db419"
+    },
+    {
+      "path": "data/reports/human_presence/20261022/normal_launch/07_final_playable.png",
+      "sha256": "57ae05a8c96618aea27b8316770c71760d99fcd304ff43f832dde1ebb98605b7"
+    }
+  ],
+  "log": "data/reports/human_presence/20261022/normal_launch/ordinary_startup.log",
+  "script_errors": false,
+  "scope": "Actual normal Godot window and OS keyboard/menu actions, not test Input.action_press. Held-key speed/apex, full transport/medical/facility OS journeys, subjective GTA-quality naturalness, sustained FPS and speaker quality are not inferred from still captures."
+}

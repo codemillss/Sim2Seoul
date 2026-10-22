@@ -299,6 +299,32 @@ func _observe_animation(kind: String,title: String) -> void:
 	var evidence:={"kind":kind,"before":state_before,"after":state_after,"actual_before":first,"actual_after":second,"actual_mesh_transforms_changed":moving}
 	activity_observations.append(evidence)
 	_check("visual."+title+".actual_distinct_meshes_animate_without_added_collision",_actual_roles(kind,first) and _actual_roles(kind,second) and moving>0 and state_after.elapsed>state_before.elapsed,evidence)
+	if kind in ["eat","weights"]:_check_weighted_hands(title)
+
+func _check_weighted_hands(title: String) -> void:
+	# Observe the render mesh's actual weighted finger vertices and alpha,
+	# rather than the hidden compatibility hand's logical visibility flag.
+	var surface: Node3D=scene.exploration_avatar._textured_surface
+	var hands:=0;var opaque:=0;var old_props:=0;var visible_old_props:=0
+	for mesh: MeshInstance3D in surface.visible_meshes:
+		for index: int in range(mesh.mesh.get_surface_count()):
+			var arrays: Array=mesh.mesh.surface_get_arrays(index);var bones: PackedInt32Array=arrays[Mesh.ARRAY_BONES];var weights: PackedFloat32Array=arrays[Mesh.ARRAY_WEIGHTS];var colours: PackedColorArray=arrays[Mesh.ARRAY_COLOR] if arrays[Mesh.ARRAY_COLOR]!=null else PackedColorArray()
+			var used: Dictionary={}
+			for vertex: int in arrays[Mesh.ARRAY_INDEX]:used[vertex]=true
+			for vertex: int in used:
+				var hand_weight:=0.
+				for influence: int in range(4):
+					var bind: int=bones[vertex*4+influence];var name_: String=mesh.skin.get_bind_name(bind)
+					if name_.is_empty():name_=surface.skeleton.get_bone_name(mesh.skin.get_bind_bone(bind))
+					if "Hand" in name_ or "Finger" in name_:hand_weight+=weights[vertex*4+influence]
+				if hand_weight>.5:
+					hands+=1
+					if mesh.is_visible_in_tree() and (colours.is_empty() or colours[vertex].a>.9):opaque+=1
+	for node: Node in _descendants(activity):
+		if node is MeshInstance3D and String(node.get_meta("role",""))=="activity_hand":
+			old_props+=1
+			if node.is_visible_in_tree():visible_old_props+=1
+	_check("visual."+title+".real_weighted_fingers_remain_visible_instead_of_spherical_hands",hands>20 and opaque==hands and old_props>=2 and visible_old_props==0,{"actual_weighted_hand_vertices":hands,"opaque_visible_hand_vertices":opaque,"legacy_prop_nodes":old_props,"visible_spherical_hand_props":visible_old_props})
 
 func _eating(target: Dictionary,title: String) -> void:
 	if not await _begin(target,title):return

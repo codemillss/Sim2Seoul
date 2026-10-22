@@ -1,0 +1,67 @@
+{
+  "task": "EXP29_CAMERA_NATIVE_FINAL01_TIMEOUT_DIAGNOSIS",
+  "report": "data/reports/human_presence/20261022/camera/human_camera_native_final01.json",
+  "run": "data/reports/human_presence/20261022/camera/human_camera_native_final01.run.json",
+  "observed": {
+    "runner_returncode": 1,
+    "script_errors": false,
+    "test_elapsed_wall_seconds": 239.525,
+    "completed_case_count": 10,
+    "completed_checks": 56,
+    "passed_checks": 55,
+    "failed_checks": [
+      {
+        "evidence": {
+          "phase": "30hz_144cap_walk",
+          "timeout_seconds": 240
+        },
+        "name": "bounded_runtime",
+        "passed": false
+      }
+    ],
+    "last_saved_completed_case_physics_frame": 832,
+    "last_saved_completed_case_process_frame": 1264,
+    "images": 1
+  },
+  "interpretation": {
+    "supported": "The bounded wall-clock deadline was reached. All earlier functional conditions passed; there is no recorded script error. The existing report does not separate initialization, shader/render startup, capture wait, foreground/background state, per-case wall time or physics-delta time.",
+    "not_established": [
+      "No proof that steady native FPS was 832/239.525: those counters include unknown setup and waits, and the final active phase is partly omitted.",
+      "No proof that App Nap, renderer throttling, CPU contention or the new model alone caused the deadline.",
+      "Concurrent full-city headless engines and prior ordinary native game were reported by root; they were not independently inventoried by this reviewer."
+    ]
+  },
+  "test_only_followup": {
+    "file": "tests/game/check_human_presence_camera.gd",
+    "changed": "Read-only diagnostic clock/focus/frame telemetry and live stage checkpoints.",
+    "unchanged": [
+      "178 headless / 187 native conditions",
+      "All walk/run/90/180/jump cycles at 30/60Hz physics and 30/60/144 render caps",
+      "No fixed-fps or production setting mutation",
+      "Original 240-second deadline retained for the uncontended retry"
+    ],
+    "root_execution": "Root will close only the identified prior ordinary game, complete its sequential headless job, then run the native test alone.",
+    "measurements": [
+      "Fixture construction and initial capture wall time vs frames",
+      "Per-case wall time, physics/process/drawn frame deltas",
+      "Sum observed physics delta and process delta",
+      "Actual focused vs observed render frames",
+      "Engine time_scale, max_physics_steps_per_frame, low_processor_usage_mode and sleep_usec",
+      "Active-case counters at timeout"
+    ]
+  },
+  "primary_api_references": [
+    {
+      "url": "https://docs.godotengine.org/en/stable/classes/class_engine.html",
+      "scope": "max_fps is only an upper limit; actual frame production can be lower. Limited physics steps per render frame can slow simulation. Counters alone do not locate a stall."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/stable/classes/class_displayserver.html#class-displayserver-method-window-is-focused",
+      "scope": "Read actual native window focus; headless returns dummy window values and is explicitly reported separately."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/stable/classes/class_os.html#class-os-property-low-processor-usage-mode",
+      "scope": "Read, do not change, low-processor mode and sleep setting."
+    }
+  ]
+}

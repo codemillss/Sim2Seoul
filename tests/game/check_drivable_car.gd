@@ -78,7 +78,7 @@ func _clear_fixtures() -> void:
 	_fixtures.clear();await _ticks(3)
 func _capture(title: String) -> void:
 	if DisplayServer.get_name()=="headless":return
-	await _ticks(3);await RenderingServer.frame_post_draw
+	await _ticks(3);await process_frame;RenderingServer.force_draw()
 	var image:=root.get_texture().get_image();var path:=report_path.get_basename()+"_"+title+".png";var error:=image.save_png(path)
 	_check("native_capture_"+title,error==OK,{"file":path,"size":[image.get_width(),image.get_height()]})
 	if error==OK:captures.append({"file":path,"sha256":FileAccess.get_sha256(path),"camera":scene.rig.snapshot(),"production_camera_preserved":true,"scope":"No test camera override. Image review is still required for car body, doors, wheels, cabin seats, driver posture and rendering."})

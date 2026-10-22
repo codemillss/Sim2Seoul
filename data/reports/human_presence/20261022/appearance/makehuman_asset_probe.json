@@ -1,0 +1,232 @@
+{
+	"checks": [
+		{
+			"evidence": {
+				"error": 0
+			},
+			"id": "male_parse",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"count": 163
+			},
+			"id": "male_skeleton163",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"finite": true,
+				"order": true,
+				"semantics": true
+			},
+			"id": "male_finite_topological_semantics",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"count": 3,
+				"surfaces": [
+					{
+						"mesh": "TexturedBody",
+						"opaque": true,
+						"texture": true,
+						"triangles": 25088,
+						"vertices": 13756
+					},
+					{
+						"mesh": "OpaqueSwimShorts",
+						"opaque": true,
+						"texture": false,
+						"triangles": 988,
+						"vertices": 561
+					},
+					{
+						"mesh": "CC0LowPolyEyes",
+						"opaque": true,
+						"texture": true,
+						"triangles": 172,
+						"vertices": 96
+					}
+				]
+			},
+			"id": "male_three_surfaces",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"opaque": true,
+				"skin_eye_textures": true,
+				"uv": true
+			},
+			"id": "male_original_uv_textures_opaque",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"bounds_position": "(-0.55623, -0.0, -0.11929)",
+				"bounds_size": "(1.11246, 1.7, 0.47872)",
+				"max_imported_weight_sum_error": 0.0000458164140582085,
+				"max_rest_skin_error_m": 0.0000727569276932627,
+				"precision_tolerance_m": 0.0001,
+				"weights_normalized": true
+			},
+			"id": "male_rest_skin_ground_height",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"error": 0
+			},
+			"id": "female_parse",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"count": 163
+			},
+			"id": "female_skeleton163",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"finite": true,
+				"order": true,
+				"semantics": true
+			},
+			"id": "female_finite_topological_semantics",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"count": 3,
+				"surfaces": [
+					{
+						"mesh": "TexturedBody",
+						"opaque": true,
+						"texture": true,
+						"triangles": 22904,
+						"vertices": 12664
+					},
+					{
+						"mesh": "OpaqueShortySwimsuit",
+						"opaque": true,
+						"texture": false,
+						"triangles": 2216,
+						"vertices": 1230
+					},
+					{
+						"mesh": "CC0LowPolyEyes",
+						"opaque": true,
+						"texture": true,
+						"triangles": 172,
+						"vertices": 96
+					}
+				]
+			},
+			"id": "female_three_surfaces",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"opaque": true,
+				"skin_eye_textures": true,
+				"uv": true
+			},
+			"id": "female_original_uv_textures_opaque",
+			"pass": true
+		},
+		{
+			"evidence": {
+				"bounds_position": "(-0.519666, -0.0, -0.110484)",
+				"bounds_size": "(1.039332, 1.7, 0.421905)",
+				"max_imported_weight_sum_error": 0.0000458117574453354,
+				"max_rest_skin_error_m": 0.0000732473708922043,
+				"precision_tolerance_m": 0.0001,
+				"weights_normalized": true
+			},
+			"id": "female_rest_skin_ground_height",
+			"pass": true
+		}
+	],
+	"fixture": {
+		"engine": "4.7.2-stable (official)",
+		"entrypoint": "tools/check_makehuman_swim_assets.gd",
+		"precision_note": "Source float weights are renormalized. Godot import quantizes weights; observed max weight sum error 4.58e-5 and max rest skin position error 0.0733mm are checked against 0.1mm.",
+		"render_scope": "headless GLTFDocument actual parsing, node generation, texture decode, CPU skin rest; no native visual or locomotion claim"
+	},
+	"result": {
+		"failed": 0,
+		"passed": 12,
+		"status": "pass",
+		"total": 12
+	},
+	"scope": "Actual Godot4 GLTFDocument import and CPU skin rest bounds of both original CC0 data-derived swim GLBs; not a movement or native visual acceptance.",
+	"source_hashes": {
+		"game/assets/vendor/makehuman_swim/provenance.json": "431e83c1a3daf1f5e937fb058d90b4f35c2745dc508cb74de81a38dbcbcdaa37",
+		"game/assets/vendor/makehuman_swim/swim_female.glb": "3876ec170d2f4f3b92c39bb552a2baa921761a12790adab68fb318bc6e8811dc",
+		"game/assets/vendor/makehuman_swim/swim_male.glb": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294",
+		"tools/check_makehuman_swim_assets.gd": "5900bc8c43d843a06bc4f93e4b0a47b1c01062a6b909271c0d342ca46de347ff",
+		"tools/prepare_makehuman_swim.py": "997168f00f9600b3db46747152ebe246d21819a7023e201c4bb7fa865517724c"
+	},
+	"variants": [
+		{
+			"bone_count": 163,
+			"bounds_position": "(-0.55623, -0.0, -0.11929)",
+			"bounds_size": "(1.11246, 1.7, 0.47872)",
+			"sex": "male",
+			"surfaces": [
+				{
+					"mesh": "TexturedBody",
+					"opaque": true,
+					"texture": true,
+					"triangles": 25088,
+					"vertices": 13756
+				},
+				{
+					"mesh": "OpaqueSwimShorts",
+					"opaque": true,
+					"texture": false,
+					"triangles": 988,
+					"vertices": 561
+				},
+				{
+					"mesh": "CC0LowPolyEyes",
+					"opaque": true,
+					"texture": true,
+					"triangles": 172,
+					"vertices": 96
+				}
+			]
+		},
+		{
+			"bone_count": 163,
+			"bounds_position": "(-0.519666, -0.0, -0.110484)",
+			"bounds_size": "(1.039332, 1.7, 0.421905)",
+			"sex": "female",
+			"surfaces": [
+				{
+					"mesh": "TexturedBody",
+					"opaque": true,
+					"texture": true,
+					"triangles": 22904,
+					"vertices": 12664
+				},
+				{
+					"mesh": "OpaqueShortySwimsuit",
+					"opaque": true,
+					"texture": false,
+					"triangles": 2216,
+					"vertices": 1230
+				},
+				{
+					"mesh": "CC0LowPolyEyes",
+					"opaque": true,
+					"texture": true,
+					"triangles": 172,
+					"vertices": 96
+				}
+			]
+		}
+	]
+}

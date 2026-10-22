@@ -68,10 +68,20 @@ func run() -> void:
 		if scene.player.velocity.length()<.05:door_stall+=1
 	_key(KEY_W,false);await _ticks(4)
 	_check("actual_w_walks_into_furnished_lobby_without_teleport_or_new_owner",campus.contains_player() and not scene.player.interior_active and not scene.player.facility_control and not campus.active and campus.facade.to_local(scene.player.global_position).z<6. and scene.player.is_on_floor(),{"point":scene.player.global_position,"campus":campus.snapshot(),"stalled_ticks":door_stall});await _capture("walkable_public_lobby")
-	var inside: Vector3=scene.player.global_position;_key(KEY_D,true);await _ticks(14);_key(KEY_D,false);await _ticks(4);_check("same_world_lobby_supports_free_public_walking",campus.contains_player() and scene.player.global_position.distance_to(inside)>.6 and scene.player.is_on_floor(),{"distance":scene.player.global_position.distance_to(inside)})
+	var inside: Vector3=scene.player.global_position;_key(KEY_D,true)
+	for tick: int in range(60):
+		await _ticks(1)
+		if scene.player.global_position.distance_to(inside)>.9:break
+	_key(KEY_D,false);await _ticks(12);_check("same_world_lobby_supports_free_public_walking",campus.contains_player() and scene.player.global_position.distance_to(inside)>.6 and scene.player.is_on_floor(),{"distance":scene.player.global_position.distance_to(inside)})
 	# Walk back toward the door from this actual interior position. No player
 	# placement, officer relocation or native door force-state is used here.
-	_key(KEY_A,true);await _ticks(14);_key(KEY_A,false);await _ticks(4);_key(KEY_S,true)
+	# A natural 180-degree reversal brakes and pivots before translating. Return
+	# by real input to the measured doorway X, instead of assuming equal taps.
+	_key(KEY_A,true)
+	for tick: int in range(90):
+		await _ticks(1)
+		if absf(scene.player.global_position.x-inside.x)<.22:break
+	_key(KEY_A,false);await _ticks(12);_key(KEY_S,true)
 	for index: int in range(100):
 		await _ticks(1)
 		if campus.can_interact():break

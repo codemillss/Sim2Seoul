@@ -1,0 +1,43 @@
+{
+  "task": "EXP29_WEIGHTED_HUMAN_SKIN_GAIT",
+  "observed_result": "PASS",
+  "executor_returncode": 0,
+  "executor_wall_time_seconds": 1.105073083,
+  "report": "data/reports/human_presence/20261022/skin_gait/after_hip02.json",
+  "report_sha256": "ececdbf05176a4672c4a0a2dc17cc4f3f492391940ffec2fe78e7112421e9741",
+  "summary": {
+    "checks": 141,
+    "failed": 0
+  },
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--log-file",
+    "../data/reports/human_presence/20261022/skin_gait/after_hip02.log",
+    "--script",
+    "../tests/game/check_human_skin_gait.gd",
+    "--",
+    "--report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/human_presence/20261022/skin_gait/after_hip02.json"
+  ],
+  "raw_logs": {
+    "data/reports/human_presence/20261022/skin_gait/after_hip02.log": "1486657891dbe9ca12eb5037a7f401d9ccb001368a541b8d9b4cf8fe7de473bf",
+    "data/reports/human_presence/20261022/skin_gait/after_hip02.console.log": "1486657891dbe9ca12eb5037a7f401d9ccb001368a541b8d9b4cf8fe7de473bf"
+  },
+  "script_errors": false,
+  "warnings": false,
+  "source_sha256": {
+    "res://../tests/game/check_human_skin_gait.gd": "02ed680231bda904b6e98be8dbc2b215c0838a8f994c461005b611fed0a652d3",
+    "res://../tests/game/check_textured_human_rig.gd": "5e3e31d09484bb36e15d09e8c6c023727db4064e724acdc53012ed8ad242882b",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://scripts/player/exploration_avatar.gd": "ad585d7033b57f8ade901c31ae125c0bac3846dec62dd70b50c07b542efc225b",
+    "res://scripts/player/human_activity_dimensions.gd": "60ef0b366ee88d81af97ab37b47c7742c4762f64a3106a5e240e6004c1574e96",
+    "res://scripts/player/textured_human_rig.gd": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+    "res://scripts/player/textured_human_surface.gd": "a758926f261bc9983eb30b3eb121d7575899a980d1fbab105e6a36a85270950f"
+  },
+  "current_sources_match_recorded": false,
+  "recorded_at_utc": "2026-10-22T07:49:40.440081+00:00",
+  "executor_note": "141structural checks before adding independent actual bone/sole stance velocity sampling; retained."
+}

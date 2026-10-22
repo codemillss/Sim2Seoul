@@ -29,3 +29,9 @@ data/reports/mobility_distribution/20261022/**/*.log -text -eol whitespace=-blan
 data/reports/city_sandbox/20261022/**/*.log -text -eol whitespace=-blank-at-eof
 # EXP28 preserves raw native/headless output, including failed attempts.
 data/reports/real_scale/20261022/**/*.log -text -eol whitespace=-blank-at-eof
+# EXP29 retains the raw human/camera regression and rejection evidence bytes.
+data/reports/human_presence/20261022/**/*.log -text -eol whitespace=-blank-at-eof
+
+# Preserve verbatim upstream reference/license snapshots, including Setext and whitespace.
+data/reports/human_presence/20261022/source_candidates/rocketbox/README.md -text -diff -merge
+game/assets/vendor/makehuman_swim/UPSTREAM_LICENSE_SCOPE.md -text -diff -merge

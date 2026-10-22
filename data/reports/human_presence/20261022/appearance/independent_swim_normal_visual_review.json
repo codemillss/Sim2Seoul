@@ -1,0 +1,237 @@
+{
+  "reviewed_at_utc": "2026-10-22T07:04:21.100381+00:00",
+  "scope": "Independent actual image review plus binary GLB NORMAL, index winding and PBR data inspection; no new engine or GPU run. Does not establish post-retarget GPU normal correctness.",
+  "actual_images_opened": [
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_final03_swimwear_full_body.png",
+      "sha256": "e8d9b7b2f8ad5ae0d080acd834682e7dd2586ecef062ac039d14ff5999160976",
+      "visible_findings": [
+        "jagged shoulder/upper-arm edge",
+        "head/neck join discontinuity",
+        "opaque clothing and skin have weak surface volume under current lighting"
+      ]
+    },
+    {
+      "file": "data/reports/human_presence/20261022/appearance/human_portrait_native_female_final01_swimwear_full_body.png",
+      "sha256": "2e1fe3cc9ba36d119eb29d036d0d0447d11cca5572f6146ad6a07dad5a2bdc66",
+      "visible_findings": [
+        "jagged shoulder/upper-arm edge",
+        "head/neck join discontinuity",
+        "opaque clothing and skin have weak surface volume under current lighting"
+      ]
+    }
+  ],
+  "visual_verdict": "FAIL: native pictures show jagged upper-arm/shoulder cutoff, neck discontinuity and weak volume cues. Numeric import pass does not override visible defects.",
+  "source_geometry_diagnosis": "No global reversed winding, zero normals, missing normal stream or unlit material found. Both target files affect all2674 helper-tights vertices; missing garment morphology is not the cause.",
+  "lighting_hypothesis": "Existing fixture shines from behind the front-facing actor. Plain opaque swimwear has no baked creases or normal map and is largely lit only by constant ambient. Confirm with separately labelled front-key-light image, not a replacement of baseline evidence.",
+  "official_direction_source": "https://docs.godotengine.org/en/4.5/classes/class_directionallight3d.html",
+  "normal_light_math_scope": "Rest GLB normal directions rotated by actor Y=180degrees, not post-retarget GPU normal readback. Godot directional light emits along -basis.z, so surface-to-light is+basis.z.",
+  "models": [
+    {
+      "sex_variant": "male",
+      "sha256": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294",
+      "extensions": [],
+      "materials": [
+        {
+          "name": "CC0OriginalSkinUV",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.7,
+            "baseColorTexture": {
+              "index": 0
+            }
+          },
+          "doubleSided": false,
+          "alphaMode": "OPAQUE"
+        },
+        {
+          "name": "AlwaysOpaqueSwimwear",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.025,
+              0.14,
+              0.19,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.82
+          },
+          "doubleSided": true,
+          "alphaMode": "OPAQUE"
+        },
+        {
+          "name": "CC0OriginalBrownEyes",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.32,
+            "baseColorTexture": {
+              "index": 1
+            }
+          },
+          "doubleSided": false,
+          "alphaMode": "OPAQUE"
+        }
+      ],
+      "meshes": [
+        {
+          "name": "TexturedBody",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 0.9993622448979592,
+          "front_chest_region": {
+            "vertices": 341,
+            "normal_mean_source": [
+              4.037734058215392e-08,
+              0.04340497776865959,
+              0.9366313815116882
+            ],
+            "current_light_positive_ndotl_fraction": 0.0,
+            "current_light_lambert_mean": 0.0,
+            "front_key_positive_ndotl_fraction": 1.0,
+            "front_key_lambert_mean": 0.64362181285405
+          }
+        },
+        {
+          "name": "OpaqueSwimShorts",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 0.9777327935222672
+        },
+        {
+          "name": "CC0LowPolyEyes",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 1.0
+        }
+      ]
+    },
+    {
+      "sex_variant": "female",
+      "sha256": "3876ec170d2f4f3b92c39bb552a2baa921761a12790adab68fb318bc6e8811dc",
+      "extensions": [],
+      "materials": [
+        {
+          "name": "CC0OriginalSkinUV",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.7,
+            "baseColorTexture": {
+              "index": 0
+            }
+          },
+          "doubleSided": false,
+          "alphaMode": "OPAQUE"
+        },
+        {
+          "name": "AlwaysOpaqueSwimwear",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.055,
+              0.09,
+              0.22,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.82
+          },
+          "doubleSided": true,
+          "alphaMode": "OPAQUE"
+        },
+        {
+          "name": "CC0OriginalBrownEyes",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.32,
+            "baseColorTexture": {
+              "index": 1
+            }
+          },
+          "doubleSided": false,
+          "alphaMode": "OPAQUE"
+        }
+      ],
+      "meshes": [
+        {
+          "name": "TexturedBody",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 0.9993887530562348
+        },
+        {
+          "name": "OpaqueShortySwimsuit",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 0.9810469314079422,
+          "front_chest_region": {
+            "vertices": 115,
+            "normal_mean_source": [
+              6.867491464390696e-09,
+              0.12405640631914139,
+              0.9046770334243774
+            ],
+            "current_light_positive_ndotl_fraction": 0.0,
+            "current_light_lambert_mean": 0.0,
+            "front_key_positive_ndotl_fraction": 0.9739130434782609,
+            "front_key_lambert_mean": 0.677122863920669
+          }
+        },
+        {
+          "name": "CC0LowPolyEyes",
+          "normal_length_min": 0.9999999403953552,
+          "normal_length_max": 1.0,
+          "zero_normals": 0,
+          "face_vertex_normal_agreement_fraction": 1.0
+        }
+      ]
+    }
+  ],
+  "fixture_light": {
+    "rotation_degrees": [
+      -42,
+      -28,
+      0
+    ],
+    "surface_to_light": [
+      -0.34888536259312036,
+      0.6691306063588582,
+      0.6561579348008326
+    ],
+    "ambient_energy": 0.65,
+    "sun_energy": 1.2,
+    "proposed_diagnostic_only_front_key_y_degrees": 152,
+    "front_key_surface_to_light": [
+      0.34888536259312025,
+      0.6691306063588582,
+      -0.6561579348008326
+    ]
+  }
+}
