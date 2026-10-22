@@ -1,0 +1,196 @@
+{
+  "task": "EXP28_HUMAN_SCALE_MOTION",
+  "result": "PASS_WITH_DECLARED_SCOPE",
+  "date": "2026-10-22",
+  "source_hashes": {
+    "game/scripts/player/exploration_avatar.gd": "961b05212e8f41cd60249d25e9e9c6edd4ab345eee2678c62648f55268fc122d",
+    "game/scripts/player/free_roam_player.gd": "c03f31d1a4f397e4c8965bec148576e56c0772c81c3a54fd87274af0ab12b66b",
+    "game/scripts/exploration_pedestrian_avoidance.gd": "c011012edd261afc6282aea46ccdd7e5bc7c841381ba2543ee131cde339e23d2",
+    "game/scripts/street_pedestrians.gd": "343685fef7c80ed6dc5020e1e26d1b48b663757ce9dfdc0f62b22cd186c6ef06",
+    "tests/game/check_human_scale_motion.gd": "9270fcd8f1df46937e8f538585a8e3ad2d8fb90b9f5f7b8bd13505d37a649e90",
+    "tests/game/check_human_city_integration.gd": "0c0dabff36d47bd7956f781fd922f65d760cf3e6f8824213108903c5018f016f"
+  },
+  "current_engine_reports": [
+    {
+      "report": "data/reports/real_scale/20261022/human_motion/motion_headless_final01.json",
+      "sha256": "b2f228de55fd10b7c9453b2a84e8c7251468f38fadb4c3ac5f4ec7322ce4a661",
+      "expected_checks": 36,
+      "passed": 36,
+      "scope": "production human/controller/car art in isolated metre fixture",
+      "log": "data/reports/real_scale/20261022/human_motion/motion_headless_final01.log",
+      "console": "data/reports/real_scale/20261022/human_motion/motion_headless_final01.console.log"
+    },
+    {
+      "report": "data/reports/real_scale/20261022/human_motion/motion_native_final01.json",
+      "sha256": "22f8f39cfbe020f361b3d74af26494ec191d2caaa4b64d93591c3831a5e35fe9",
+      "expected_checks": 43,
+      "passed": 43,
+      "scope": "same fixture, actual Metal native viewport plus seven rendered images",
+      "log": "data/reports/real_scale/20261022/human_motion/motion_native_final01.log",
+      "console": "data/reports/real_scale/20261022/human_motion/motion_native_final01.console.log"
+    },
+    {
+      "report": "data/reports/real_scale/20261022/human_motion/jump_headless_final01.json",
+      "sha256": "636f9848eef971556280a9ffb2bade30a852f119ae95c94b2b1ab5d5cad59212",
+      "expected_checks": 24,
+      "passed": 24,
+      "scope": "retained jump/air control/ceiling/menu controls in independent fixture",
+      "log": "data/reports/real_scale/20261022/human_motion/jump_headless_final01.log",
+      "console": "data/reports/real_scale/20261022/human_motion/jump_headless_final01.console.log"
+    },
+    {
+      "report": "data/reports/real_scale/20261022/human_motion/stable_headless_final01.json",
+      "sha256": "ab7306208a38da95ac4c4f3b212f073570e3e0f366f5f7e9aba4c8615dc2e421",
+      "expected_checks": 44,
+      "passed": 44,
+      "scope": "headless process-frame interpolation math at render caps 30/60/144; not native GPU performance",
+      "log": "data/reports/real_scale/20261022/human_motion/stable_headless_final01.log",
+      "console": "data/reports/real_scale/20261022/human_motion/stable_headless_final01.console.log"
+    },
+    {
+      "report": "data/reports/real_scale/20261022/human_motion/city_headless_dev01.json",
+      "sha256": "881216a2511f4e4c030f67ffe4b867a32b3fb18c3faac967cf62a5acbe16c761",
+      "expected_checks": 9,
+      "passed": 9,
+      "scope": "entire ordinary city, original two N02 bodies physically walk and rest; all 44 original actors and 1233 source nodes retained",
+      "log": "data/reports/real_scale/20261022/human_motion/city_headless_dev01.log",
+      "console": "data/reports/real_scale/20261022/human_motion/city_headless_dev01.console.log"
+    }
+  ],
+  "native_captures": 7,
+  "actual_measurements": {
+    "capsule": {
+      "disabled": false,
+      "height": 1.70000004768372,
+      "layer": 2,
+      "mask": 1,
+      "node": 36305896949,
+      "radius": 0.300000011920929,
+      "shape": -9223372000532101642,
+      "transform": {
+        "basis": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "origin": [
+          0.0,
+          0.850000023841858,
+          0.0
+        ]
+      }
+    },
+    "car_render_size_m": [
+      4.41500043869019,
+      1.52999997138977,
+      2.15999984741211
+    ],
+    "car_safety_box_m": [
+      2.2,
+      1.65,
+      4.5
+    ],
+    "door_clear_opening_m": [
+      1.2,
+      2.2
+    ],
+    "head_render_height_m": 0.230002403259277,
+    "hip_joint_y_m": 0.977646350860596,
+    "render_head_units": 7.36727272727273,
+    "render_max_world_m": [
+      0.299814790487289,
+      1.70052134990692,
+      0.137349516153336
+    ],
+    "render_min_world_m": [
+      -0.299814730882645,
+      0.00603090459480882,
+      -0.235009104013443
+    ],
+    "render_size_m": [
+      0.599629521369934,
+      1.69449043273926,
+      0.372358620166779
+    ],
+    "scope": "Actual production mesh bounds and retained controller in a 1m grid fixture; authored adult character, not an anthropometric scan or proof of all city geometry.",
+    "shoulder_joint_y_m": 1.36000001430511
+  },
+  "motion_summary": [
+    {
+      "kind": "walk_1_4mps",
+      "actual_speed_mps": 1.39999997615814,
+      "maximum_world_stance_foot_slip_mps": 0.001373291015625,
+      "maximum_cadence_hz": 1.11116681780134,
+      "maximum_torso_bob_m": 2.38418579323607e-08,
+      "maximum_torso_roll_radians": 0.0,
+      "sole_range_m": [
+        0.00549990278854966,
+        0.0804417656287551
+      ]
+    },
+    {
+      "kind": "run_3_5mps",
+      "actual_speed_mps": 3.5,
+      "maximum_world_stance_foot_slip_mps": 0.000457763671875,
+      "maximum_cadence_hz": 2.05532653729887,
+      "maximum_torso_bob_m": 2.38418579323607e-08,
+      "maximum_torso_roll_radians": 0.0,
+      "sole_range_m": [
+        0.00549990860931575,
+        0.183340896062553
+      ]
+    },
+    {
+      "kind": "turbo_21mps",
+      "actual_speed_mps": 21.0,
+      "maximum_world_stance_foot_slip_mps": 16.9081878662109,
+      "maximum_cadence_hz": 2.19999999950467,
+      "maximum_torso_bob_m": 2.38418579323607e-08,
+      "maximum_torso_roll_radians": 0.0,
+      "sole_range_m": [
+        0.00549990791082382,
+        0.215495120642707
+      ]
+    }
+  ],
+  "preserved": [
+    "original player collision capsule height1.70m radius0.30m and identity",
+    "original source1233 mesh IDs, native collisions and terrain",
+    "original28 adults,2dogs,14AI cars and exact original N02 routes/body IDs",
+    "all speed-profile maximums including turbo21m/s,3m fresh-press unlimited sandbox jumping",
+    "original punch/flinch/facility/clothing material APIs and camera-root interpolation"
+  ],
+  "changes": [
+    "actual visible height approximately1.6645m to1.69449m, hairtop1.70m; head0.285m to0.230m; actual visible ratio5.84 to7.367heads",
+    "adult shoulder/leg/arm silhouette, upright neutral stance, continuous knee/elbow/shoulder volumes and tapered jacket",
+    "distance-driven constant-rate stance and derivative-continuous Hermite swing, walk/run blend and elbow flexion",
+    "grounded speed transition0.14s acceleration/0.12s braking and bounded visual angular acceleration, with original private/bounds/native checks retained",
+    "two historical capsule-only N02 humans gain same articulated exploration-only visual and separate render proxy while original controllers/scenes are unchanged"
+  ],
+  "limits": [
+    "Original project units are metres; this alone was not used as proof of real-world proportions.",
+    "Authored adult figure and procedural movement, not measured anthropometry, motion capture, GTA model/assets or photorealism.",
+    "Intentional turbo21m/s exceeds physically plausible gait; measured foot slip16.908m/s is declared, not hidden by high-frequency limb vibration.",
+    "Grounded torso translation remains fixed atlocalY0.85 and roll0; pelvis adjusts to leg support. Camera bob is not added.",
+    "The city integration run is headless and does not substitute for final whole-city native gameplay.",
+    "Game jump3m/unlimitedairpresses and turbo were retained because they are prior user-requested sandbox controls, not biological realism."
+  ],
+  "history": [
+    "motion_headless_dev01 run stance slip0.04257m/s failed because the old cadence cap limited represented gait speed3.458m/s; revised authored run stride to1.86m, then passed.",
+    "motion_native_dev01 numeric40/40 was visually rejected for crouched standing knees.",
+    "motion_native_dev02 numeric43/43 was visually rejected for a comparison-car-obscured profile; final camera is on opposite side."
+  ],
+  "visual_review": "data/reports/real_scale/20261022/human_motion/visual_review.json"
+}

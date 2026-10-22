@@ -1,0 +1,42 @@
+{
+  "task": "stolen_car_arrest_first_request_input_phase",
+  "status": "test_only_process_phase_sync_applied_native_final02_pending",
+  "original_failure": "data/reports/real_scale/20261022/acceptance/car_police_native_final01.json",
+  "original_counts": {
+    "passed": 3,
+    "total": 4
+  },
+  "failed_checks": [
+    "investigation_physical_E_theft_stops_and_boards_exact_original_car"
+  ],
+  "observed_initial_car_approach_passed": true,
+  "original_car_request_observations": {
+    "events": [],
+    "pending_stop": false,
+    "pending_elapsed_s": 0.0,
+    "pending_actual_distance_m": 0.0,
+    "seized_car_count": 0
+  },
+  "finding": "The original early report observed a supported initial car approach but no pending request, braking, adoption event, or seized car. This proves the requested handoff was unobserved when the old camera-signal-only fixture immediately broke out; it does not alone prove an input scheduling cause.",
+  "test_change": "Shared _ticks waits for physics_frame and process_frame rather than only the rig camera physics signal. Actual E press/release remains unchanged, and before/immediate-parse/release/after phase snapshots record held/pending/release latches, street target, native frame/tick, actual car events, pending progress and police offense state. The same snapshots appear in the original theft assertion evidence, even on an early failure.",
+  "expected_checks": {
+    "central_native": 25,
+    "euljiro_native": 14
+  },
+  "assertions_changed": false,
+  "production_changes": [],
+  "custody_and_second_exit_concurrency_checks_changed": false,
+  "harness_sha256": "ac6dd7f23f940f2ec89bc7a6a52a0eee347f9ca5af4f5dff7e4364945ab3eae6",
+  "wrapper_sha256": "5d19d8ae3e174d54096ffb95d9f88d58bc191863a74b5357417f1f2c283b508d",
+  "wrapper_changed": false,
+  "parser_validation": {
+    "base_returncode": 0,
+    "wrapper_returncode": 0,
+    "script_errors": false,
+    "scope": "Parser only. No full headless or native acceptance executed by this agent."
+  },
+  "limits": "First-request unobserved is the confirmed finding. Native final02 is required to confirm or reject a busy-native-frame input race explanation; no assertion or success status has been promoted.",
+  "frozen_at": "2026-10-22T04:09:43.445169+00:00",
+  "new_actor_teleport_timer_or_owner_mutations_added": false,
+  "existing_fixture_scope": "Original player-only initial car approach placements remain. Cars and police are not repositioned, and actual theft reporting, physical pursuit, real 8/12 game-second custody and automatic release remain unchanged."
+}

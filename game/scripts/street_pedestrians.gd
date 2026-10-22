@@ -280,9 +280,9 @@ func _make_actor(group: Dictionary,kind: String,side: float) -> Dictionary:
 		var color:=Color(group.record.clothing[0],group.record.clothing[1],group.record.clothing[2])
 		for key in ["jacket","jacket_trim"]:avatar._materials[key].albedo_color=color.lightened(.12 if key=="jacket_trim" else 0.)
 		if group.record.dog:
-			var head_pivot:=Node3D.new();head_pivot.name="KeeperHead";head_pivot.position=Vector3(0,.65,-.005);avatar._upper_body.add_child(head_pivot)
+			var head_pivot:=Node3D.new();head_pivot.name="KeeperHead";head_pivot.position=Vector3(0,.705,-.005);avatar._upper_body.add_child(head_pivot)
 			for part: Node3D in avatar._upper_body.get_children():
-				if String(part.name).begins_with("Eye") or String(part.name) in ["Head","Hair","HairBack","Nose"]:part.reparent(head_pivot,true)
+				if String(part.name).begins_with("Eye") or String(part.name).begins_with("Ear") or String(part.name) in ["Head","Hair","HairBack","Nose"]:part.reparent(head_pivot,true)
 			row["keeper_head"]=head_pivot
 		var appearance: Dictionary=group.record.get("appearance",{})
 		for key in ["skin","hair","trousers"]:

@@ -42,10 +42,10 @@ func _stream(kind: String,loop: bool) -> AudioStreamWAV:
 func _player(title: String,stream: AudioStream,volume: float,unit: float,range_m: float) -> AudioStreamPlayer3D:
 	var voice:=AudioStreamPlayer3D.new();voice.name=title;voice.stream=stream;voice.bus=bus_name;voice.volume_db=-80.;voice.max_db=-8.;voice.unit_size=unit;voice.max_distance=range_m;voice.panning_strength=.9;voice.attenuation_model=AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE;voice.doppler_tracking=AudioStreamPlayer3D.DOPPLER_TRACKING_DISABLED;voice.attenuation_filter_cutoff_hz=6500.;voice.set_meta("base_volume_db",volume);add_child(voice);return voice
 
-func _add_vehicle(body: CharacterBody3D,kind: String,provider: Node3D) -> void:
+func _add_vehicle(body: PhysicsBody3D,kind: String,provider: Node3D) -> void:
 	if not is_instance_valid(body) or _registered.has(body.get_instance_id()):return
 	_registered[body.get_instance_id()]=true
-	var diesel: bool=kind in ["bus","fire"]
+	var diesel: bool=kind in ["bus","fire","fire_parked"]
 	var engine:=_player(kind+"Engine",_streams.diesel if diesel else _streams.rotor if kind=="helicopter" else _streams.engine,-18. if diesel else -17. if kind=="helicopter" else -24.,7. if diesel else 10. if kind=="helicopter" else 4.,110. if kind=="helicopter" else 75.)
 	var rolling: AudioStreamPlayer3D
 	if kind!="helicopter":rolling=_player(kind+"Tyres",_streams.tyres,-31.,4.,48.)
@@ -62,18 +62,23 @@ func _discover() -> void:
 	if is_instance_valid(host.city_bus_service):
 		for body: CharacterBody3D in host.city_bus_service.buses:_add_vehicle(body,"bus",host.city_bus_service)
 	if is_instance_valid(host.city_helicopter_service):_add_vehicle(host.city_helicopter_service.body,"helicopter",host.city_helicopter_service)
-	if is_instance_valid(host.city_weather_emergency):_add_vehicle(host.city_weather_emergency.engine,"fire",host.city_weather_emergency)
+	if is_instance_valid(host.city_weather_emergency):
+		_add_vehicle(host.city_weather_emergency.engine,"fire",host.city_weather_emergency)
+		if is_instance_valid(host.city_weather_emergency.get("standby_engine")):_add_vehicle(host.city_weather_emergency.standby_engine,"fire_parked",host.city_weather_emergency)
 	if is_instance_valid(host.city_public_safety):
 		var provider: Node3D=host.city_public_safety.get("patrol_vehicle_service")
 		if is_instance_valid(provider):
 			var body: CharacterBody3D=provider.get("vehicle")
 			if is_instance_valid(body):_add_vehicle(body,"police",provider)
+		var headquarters: Node3D=host.city_public_safety.get("police_headquarters")
+		if is_instance_valid(headquarters) and is_instance_valid(headquarters.get("parked_car")):_add_vehicle(headquarters.parked_car,"police_parked",headquarters)
 
 func _state(row: Dictionary,delta: float) -> Dictionary:
-	var body: CharacterBody3D=row.body;var provider: Node3D=row.provider
+	var body: PhysicsBody3D=row.body;var provider: Node3D=row.provider
 	var travel: float=Vector2(body.global_position.x-row.last_point.x,body.global_position.z-row.last_point.z).length();row.last_point=body.global_position
 	var speed: float=travel/maxf(delta,.001) if travel<6. else 0.
 	var out:={"speed_mps":speed,"engine_active":speed>.03,"siren_active":false,"door_open":false}
+	if String(row.kind) in ["fire_parked","police_parked"]:return {"speed_mps":0.,"engine_active":false,"siren_active":false,"door_open":false}
 	if String(row.kind) in ["fire","police"] and provider.has_method("audio_state"):
 		var state: Dictionary=provider.audio_state();out.merge(state,true)
 	elif row.kind=="fire":out.engine_active=provider.fire_state!="ready";out.siren_active=provider.fire_state in ["garage_exit","responding","engine_to_road","engine_to_fire"]
@@ -118,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	if _discovery_s>.5:_discovery_s=0.;_discover()
 	for row: Dictionary in voices:
 		if not is_instance_valid(row.body):continue
-		var body: CharacterBody3D=row.body
+		var body: PhysicsBody3D=row.body
 		for key: String in ["engine","rolling","siren","door"]:
 			if is_instance_valid(row[key]):row[key].global_position=body.global_position+Vector3.UP*1.1;row[key].stream_paused=paused
 		if paused:row.last_point=body.global_position;continue

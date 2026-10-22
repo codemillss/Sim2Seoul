@@ -20,6 +20,7 @@ var _routed: Array=[]
 var _original_ids: Array=[]
 var _fire_start:=Vector3.ZERO
 var _police_start:=Vector3.ZERO
+var _standby_origins: Dictionary={}
 
 func _initialize() -> void:
 	for arg: String in OS.get_cmdline_user_args():
@@ -49,7 +50,7 @@ func _check(title: String,passed: bool,evidence: Dictionary={}) -> void:
 
 func _hashes() -> Dictionary:
 	var out: Dictionary={}
-	for path: String in ["res://scripts/city_vehicle_audio.gd","res://scripts/explore_walk.gd","res://scripts/city_public_safety.gd","res://scripts/city_police_patrol.gd","res://scripts/city_police_facility.gd","res://scripts/city_weather_emergency.gd","res://scripts/fire_station_facility.gd","res://scripts/traffic_car_takeover.gd","res://scripts/city_bus_service.gd","res://scripts/drivable_car_service.gd","res://scripts/city_helicopter_service.gd","res://assets/authored/fire_station_service.json","res://assets/authored/police_patrol.json","res://assets/authored/police_facility.json","res://assets/authored/neighborhood_population.json","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json","res://data/generated/traffic.json","res://../tools/make_city_vehicle_audio.py","res://assets/audio/city_vehicles/provenance.json","res://../tests/game/check_city_vehicle_audio.gd"]:
+	for path: String in ["res://scripts/city_vehicle_audio.gd","res://scripts/explore_walk.gd","res://scripts/city_public_safety.gd","res://scripts/city_police_patrol.gd","res://scripts/city_police_facility.gd","res://scripts/city_police_headquarters.gd","res://scripts/city_weather_emergency.gd","res://scripts/fire_station_facility.gd","res://scripts/traffic_car_takeover.gd","res://scripts/city_bus_service.gd","res://scripts/drivable_car_service.gd","res://scripts/city_helicopter_service.gd","res://assets/authored/fire_station_service.json","res://assets/authored/police_patrol.json","res://assets/authored/police_facility.json","res://assets/authored/police_headquarters.json","res://assets/authored/neighborhood_population.json","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json","res://data/generated/traffic.json","res://../tools/make_city_vehicle_audio.py","res://assets/audio/city_vehicles/provenance.json","res://../tests/game/check_city_vehicle_audio.gd"]:
 		if FileAccess.file_exists(path):out[path]=FileAccess.get_sha256(path)
 	for kind: String in ["engine","diesel","tyres","police_siren","fire_siren","rotor","rain","water","door_air"]:
 		var path: String="res://assets/audio/city_vehicles/"+kind+".wav";out[path]=FileAccess.get_sha256(path)
@@ -148,6 +149,19 @@ func _audible(row: Dictionary) -> bool:
 func _quiet(row: Dictionary) -> bool:
 	return int(row.frames)>=512 and float(row.peak)<.0000001 and float(row.rms_left)<.0000001 and float(row.rms_right)<.0000001
 
+func _standby_silent(row: Dictionary) -> bool:
+	return not row.engine_active and not row.siren_active and float(row.speed_mps)==0. and not row.engine.playing and not row.rolling.playing and not is_instance_valid(row.siren) and row.body.global_position.distance_to(_standby_origins[row.kind])<.0001
+
+func _water_observation_budget() -> Dictionary:
+	var emergency: Node3D=scene.city_weather_emergency;var route_m:=0.;var last: Vector3=emergency.engine.global_position
+	if emergency.fire_state=="dispatch":
+		for i: int in range(emergency._engine_waypoint,emergency._outbound_route.size()):
+			var point: Vector3=emergency._outbound_route[i];route_m+=last.distance_to(point);last=point
+	var crew_m:=0.;var targets: Array=emergency._crew_targets()
+	for i: int in range(emergency.firefighters.size()):crew_m=maxf(crew_m,emergency.firefighters[i].body.global_position.distance_to(targets[i]))
+	var nominal_s:=route_m/maxf(.1,float(emergency.policy.engine_mps))+crew_m/maxf(.1,float(emergency.policy.crew_mps))
+	return {"remaining_engine_route_m":route_m,"longest_remaining_crew_walk_m":crew_m,"nominal_unblocked_seconds":nominal_s,"observation_budget_s":nominal_s*2.5+20.,"scope":"Derived observer deadline only; no production speed, route, timer or responder pose changes."}
+
 func _police_observer_away_from_officers(body: CharacterBody3D) -> bool:
 	for offset: Vector3 in [Vector3(45,0,0),Vector3(-45,0,0),Vector3(0,0,45),Vector3(0,0,-45),Vector3(32,0,32),Vector3(-32,0,-32)]:
 		var safe: Dictionary=scene.interior_visit._safe_external_point(body.global_position+offset)
@@ -169,10 +183,12 @@ func _run() -> void:
 	_check("ordinary_menu_sound_switch_and_gain_slider_are_present",is_instance_valid(sound_switch) and is_instance_valid(volume) and volume.min_value==0. and volume.max_value==100.)
 	if not is_instance_valid(sound_switch) or not is_instance_valid(volume):_finish();return
 	_original_ids=_ids();var counts: Dictionary={};var body_ids: Dictionary={};var bound_ids: Array=[];var expected_ids: Array=_original_ids.duplicate()
-	for body: CharacterBody3D in [scene.drivable_car_service.bikes[0].body,scene.city_helicopter_service.body,scene.city_weather_emergency.engine,scene.city_public_safety.patrol_vehicle_service.vehicle]:expected_ids.append(body.get_instance_id())
-	for row: Dictionary in service.voices:counts[row.kind]=int(counts.get(row.kind,0))+1;body_ids[row.body.get_instance_id()]=true;bound_ids.append(row.body.get_instance_id())
+	for body: PhysicsBody3D in [scene.drivable_car_service.bikes[0].body,scene.city_helicopter_service.body,scene.city_weather_emergency.engine,scene.city_weather_emergency.standby_engine,scene.city_public_safety.patrol_vehicle_service.vehicle,scene.city_public_safety.police_headquarters.parked_car]:expected_ids.append(body.get_instance_id())
+	for row: Dictionary in service.voices:
+		counts[row.kind]=int(counts.get(row.kind,0))+1;body_ids[row.body.get_instance_id()]=true;bound_ids.append(row.body.get_instance_id())
+		if String(row.kind) in ["fire_parked","police_parked"]:_standby_origins[row.kind]=row.body.global_position
 	bound_ids.sort();expected_ids.sort()
-	_check("twenty_one_unique_actual_vehicle_bodies_bound_without_clones",service.voices.size()==21 and body_ids.size()==21 and bound_ids==expected_ids and counts.get("traffic",0)==14 and counts.get("bus",0)==3 and counts.get("player_car",0)==1 and counts.get("helicopter",0)==1 and counts.get("fire",0)==1 and counts.get("police",0)==1,{"counts":counts,"exact_expected_body_ids":expected_ids,"exact_bound_body_ids":bound_ids,"audio_snapshot":service.snapshot()})
+	_check("twenty_three_unique_actual_vehicle_bodies_bound_without_clones",service.voices.size()==23 and body_ids.size()==23 and bound_ids==expected_ids and counts.get("traffic",0)==14 and counts.get("bus",0)==3 and counts.get("player_car",0)==1 and counts.get("helicopter",0)==1 and counts.get("fire",0)==1 and counts.get("fire_parked",0)==1 and counts.get("police",0)==1 and counts.get("police_parked",0)==1,{"counts":counts,"exact_expected_body_ids":expected_ids,"exact_bound_body_ids":bound_ids,"standby_origins":_standby_origins,"root_bindings":"explore_walk.gd source hash binds the assembled hospital and metric modules; those unrelated journeys are not claimed by audio acceptance.","audio_snapshot":service.snapshot()})
 	_make_capture_bus()
 	if DisplayServer.get_name()=="headless":
 		native_mix_required=true;_check("native_stereo_mixer_required_headless_cannot_claim_audibility",false,{"display":DisplayServer.get_name(),"device":AudioServer.get_output_device(),"reason":"Headless preparation validates assets and production binding only. No zero-signal or playing-flag audibility pass."});_finish();return
@@ -199,14 +215,16 @@ func _run() -> void:
 	_check("actual_moving_fireengine_emits_distinct_audible_siren_pcm",_audible(fire_siren) and fire.body.global_position.distance_to(_fire_start)>.1,{"record":fire_siren,"engine_distance_m":scene.city_weather_emergency.engine_distance_m})
 	var diesel:=await _record("actual_fireengine_diesel",fire.engine,fire.body,Vector3(-6.,1.1,0),20)
 	_check("actual_fireengine_diesel_is_audible_and_unclipped",_audible(diesel),{"record":diesel})
+	var standby_fire:=_voice("fire_parked");var silent_fire:=await _record("standby_fireengine_silent_during_dispatch",standby_fire.engine,standby_fire.body,Vector3(6.,1.1,0),12)
+	_check("separate_standby_fireengine_keeps_silent_engine_and_tyres_during_real_dispatch",_quiet(silent_fire) and _standby_silent(standby_fire) and scene.city_weather_emergency.fire_state!="ready" and standby_fire.body.global_position.distance_to(scene.rig.camera.global_position)<standby_fire.engine.max_distance,{"record":silent_fire,"active_fire_state":scene.city_weather_emergency.fire_state,"standby_body_class":standby_fire.body.get_class(),"listener_cull_camera_distance_m":standby_fire.body.global_position.distance_to(scene.rig.camera.global_position)})
 	var rain:=await _record("actual_outdoor_rain",service._rain,scene.rig.camera,Vector3.ZERO,18)
 	_check("actual_outdoor_rain_state_emits_nonzero_pcm",scene.city_weather_emergency.weather=="rain" and scene.city_weather_emergency.outdoors and _audible(rain),{"record":rain})
-	var extinguishing:=false
-	for tick: int in range(30*100):
+	var extinguishing:=false;var water_budget:=_water_observation_budget()
+	for tick: int in range(ceili(float(water_budget.observation_budget_s)*float(Engine.physics_ticks_per_second))):
 		_observe_pitch()
 		if scene.city_weather_emergency.fire_state=="extinguishing":extinguishing=true;break
 		await _ticks(1)
-	_check("fireengine_and_crew_physically_reach_real_water_stage_without_clock_changes",extinguishing,{"snapshot":scene.city_weather_emergency.snapshot()})
+	_check("fireengine_and_crew_physically_reach_real_water_stage_without_clock_changes",extinguishing,{"snapshot":scene.city_weather_emergency.snapshot(),"observer_budget":water_budget})
 	if extinguishing:
 		scene._visit_city_life("fire_station");await _ticks(3);var water:=await _record("actual_firefighters_water_spray",service._water,service._water,Vector3(0,0,3.),18)
 		_check("actual_firefighter_water_stage_emits_audible_pcm",_audible(water) and bool(scene.city_weather_emergency.audio_state().water_active),{"record":water})
@@ -223,6 +241,9 @@ func _run() -> void:
 			scene.city_public_safety.report_offense("audio_test_direct_dispatch_fixture",scene.player.global_position);await _ticks(3)
 			var siren:=await _record("actual_dispatch_police_siren",police.siren,police.body,Vector3(-6.,1.1,0),25)
 			_check("actual_police_dispatch_emits_audible_siren_while_native_vehicle_moves",_audible(siren) and police.body.global_position.distance_to(_police_start)>.1 and bool(police.provider.audio_state().siren_active),{"record":siren,"vehicle_state":police.provider.snapshot() if police.provider.has_method("snapshot") else {}})
+			scene._visit_city_life("police_headquarters");await _ticks(3)
+			var standby_police:=_voice("police_parked");var silent_police:=await _record("headquarters_parked_police_silent_during_dispatch",standby_police.engine,standby_police.body,Vector3(-6.,1.1,0),12)
+			_check("separate_headquarters_static_police_car_stays_silent_during_real_dispatch",_quiet(silent_police) and _standby_silent(standby_police) and bool(police.provider.audio_state().siren_active) and standby_police.body.global_position.distance_to(scene.rig.camera.global_position)<standby_police.engine.max_distance,{"record":silent_police,"standby_body_class":standby_police.body.get_class(),"original_standby_point":_standby_origins.police_parked,"listener_cull_camera_distance_m":standby_police.body.global_position.distance_to(scene.rig.camera.global_position)})
 	_check("original_fourteen_car_and_three_bus_identities_retained",_ids()==_original_ids,{"original_count":_original_ids.size()})
 	_finish()
 

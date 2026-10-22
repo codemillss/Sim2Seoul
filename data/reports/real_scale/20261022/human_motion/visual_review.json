@@ -1,0 +1,54 @@
+{
+  "task": "EXP28_HUMAN_VISUAL_REVIEW",
+  "reviewed_at_local": "2026-10-22T12:38:02.850871",
+  "method": "Actual PNG pixels opened with view_image, independently of numeric PASS. No OS controls were used in this fixture.",
+  "images": [
+    {
+      "file": "data/reports/real_scale/20261022/human_motion/motion_native_final01_front_car_door_ruler.png",
+      "sha256": "73445bf4596a91a544463d26f97388273f5eb8177d70b1539ac3866fdc3c6673",
+      "review": "ACCEPT_WITH_STATED_LIMITS",
+      "notes": "Actual human beside 2m ruler with 0.1m ticks, original-size 1.2x2.2m doorway and production car art. Standing knees no longer stay in deep crouch. This is a metre fixture, not a city-geography accuracy claim."
+    },
+    {
+      "file": "data/reports/real_scale/20261022/human_motion/motion_native_final01_human_front.png",
+      "sha256": "fe5b79eb5282a6feb854377daa1009c0a54f1e61dcb4d2c1555c1ecade28c532",
+      "review": "ACCEPT_WITH_STATED_LIMITS",
+      "notes": "Entire adult silhouette and shoes visible, smaller 0.23m head and taller shoulders. Elbow/knee/shoulder volumes connect segmented limbs. Original simple geometry style remains."
+    },
+    {
+      "file": "data/reports/real_scale/20261022/human_motion/motion_native_final01_human_profile.png",
+      "sha256": "c8a41d2a549346afd52abb08cc714f1e753d7fd2a70fcd8e8c4cf43bba0363c8",
+      "review": "ACCEPT_WITH_STATED_LIMITS",
+      "notes": "Car no longer occludes the human as in dev02. Yellow ruler crosses part of the front contour; side knee, back, head and shoes remain visible. Not a clean isolated silhouette or a photorealistic-human claim."
+    },
+    {
+      "file": "data/reports/real_scale/20261022/human_motion/motion_native_final01_walk_1_4mps.png",
+      "sha256": "4f128c5f8f5c1e68c7a0d0d18f7572c6973c13e39d508640d9fa31e305d65254",
+      "review": "ACCEPT_WITH_STATED_LIMITS",
+      "notes": "Grounded stance and raised swing foot visible; torso/head anchor stays level. One image alone does not establish movement comfort; actual physical stance samples are in motion report."
+    },
+    {
+      "file": "data/reports/real_scale/20261022/human_motion/motion_native_final01_run_3_5mps.png",
+      "sha256": "b9d77eacb494fecc524f7bbc59fb277578497dfbde6f9792343ecd6273aabb07",
+      "review": "ACCEPT_WITH_STATED_LIMITS",
+      "notes": "Opposed arms/legs, bent running elbow and swing knee visible; stable torso, no added camera bob. Procedural game gait, not mocap."
+    }
+  ],
+  "historical_failures": [
+    {
+      "run": "motion_native_dev01",
+      "numeric_checks": "40/40",
+      "visual_result": "REJECT standing-knee crouch despite numeric proportion PASS; raised standing pelvis and limit it to both contact-leg reaches while preserving level torso."
+    },
+    {
+      "run": "motion_native_dev02",
+      "numeric_checks": "43/43",
+      "visual_result": "REJECT profile camera through comparison car; reversed fixture camera side. Added small continuous joint/clothing volumes and replaced spherical neck after actual pixels."
+    }
+  ],
+  "limits": [
+    "Only these five final PNGs were actually opened by this agent. Jump/turbo images exist but are not asserted independently reviewed here.",
+    "GTA-level assets, a realistic face or a scanned/mocap human are not delivered by this procedural model.",
+    "Metre fixture review does not establish all-world geometry accuracy, 28-actor native appearance, OS keyboard acceptance, sustained frame rate or subjective comfort."
+  ]
+}

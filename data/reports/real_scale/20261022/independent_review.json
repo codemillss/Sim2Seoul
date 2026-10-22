@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "task": "EXP28_INDEPENDENT_READ_ONLY_REVIEW",
+  "reviewed_at_local": "2026-10-22T12:44:26.340939",
+  "status": "CLOSED_NO_REMAINING_ACTIONABLE_FINDINGS_WITH_STATED_LIMITS",
+  "method": "Read-only source and independent Shapely comparisons plus one actual stored fire-campus native PNG opened with view_image; no production edits, GUI controls, engine run, altered fixtures or remote operations. Pending current whole-scene acceptance belongs to root.",
+  "reviewed_source_sha256": {
+    "game/scripts/city_hospital.gd": "77c5b9c211180e3b914890a388feb9970c3525af754a8ec44865bd0e4334055d",
+    "game/scripts/city_metric_overlay.gd": "65ed099cfa7bf4a301a9b153e5b06da9ef9f638f778e91416502200b0f39e9e6",
+    "tools/audit_real_scale.py": "f5c4e18f8b4892f02289d4db6d75d6864d1c3fec1085af4cd2894ce546ab03d8",
+    "tests/game/check_city_hospital.gd": "16b6dc82ec8cb7a0e9f3cdc5eaef68839bfc41222dc9d27e7453da7eda0a0800",
+    "game/assets/authored/city_hospital.json": "8093dcfa9ec6da4c69938690f65f8afe790c0ad7df61a7ed2ee1d9cc3c1a8c7d",
+    "game/assets/authored/city_metric_reference.json": "7fcbe979710a4e17c6dd11cc65e240d1020f853db742a2d91e889a81bbe4901c"
+  },
+  "findings": [
+    {
+      "id": "IR01",
+      "severity": "P2",
+      "state": "CLOSED_NATIVE_READOUT_LEGIBILITY_VERIFIED",
+      "file": "game/scripts/city_metric_overlay.gd",
+      "line": 59,
+      "title": "Footprint-centre metric captions are commonly inside buildings",
+      "evidence": {
+        "caption_y_above_ground_m": 3.5,
+        "footprint_center_inside_original_building_and_height_above_anchor": 611,
+        "source_buildings": 635,
+        "examples": [
+          "osm:relation:10650821:building",
+          "osm:relation:10658335:building",
+          "osm:relation:10658336:building",
+          "osm:relation:10754645:building",
+          "osm:relation:10755129:building",
+          "osm:relation:10757525:building",
+          "osm:relation:19357693:building",
+          "osm:relation:8885007:building"
+        ]
+      },
+      "impact": "Depth-tested Label3D anchors commonly lie inside solid original footprints. Mesh existence and selected-building counts do not prove that the user can read the width/depth/gap text. Hidden replacement originals mean this is a strong geometric risk, not a completed pixel-level failure diagnosis.",
+      "requested_fix_or_verification": "Move captions onto a visible nearby exterior anchor and inspect actual native screenshots for legibility."
+    },
+    {
+      "id": "IR02",
+      "severity": "P3",
+      "state": "CLOSED_STATIC_FAIL_FAST_DESIGN_VALIDATION",
+      "file": "game/scripts/city_hospital.gd",
+      "line": 43,
+      "title": "Hospital JSON edits can diverge from hardcoded constructed dimensions",
+      "evidence": "The design file is parsed and source-world hash checked, but setup, shell, openings, approach and viewpoint use fixed constants rather than center_xz_m/width_x_m/depth_z_m/height_m/door dimensions.",
+      "impact": "Current values match, but a later author can change the JSON dimensions and still load the old physical hospital. Tests currently assert declared dimensions rather than every constructed envelope dimension.",
+      "requested_fix_or_verification": "Reject unsupported design dimensions at setup or generate the physical dimensions from the same design."
+    },
+    {
+      "id": "IR03",
+      "severity": "P3",
+      "state": "CLOSED_STATIC_AND_NATIVE_AXIS_ORIENTED_LABELS",
+      "file": "game/scripts/city_metric_overlay.gd",
+      "line": 58,
+      "title": "Axis-aligned dimensions need axis-explicit labels",
+      "evidence": "width_x_m/depth_z_m are the world east-west/north-south source bounding-box extents, not each rotated building facade intrinsic width/depth.",
+      "requested_fix_or_verification": "Root plans east-west/north-south labels plus independent oriented exterior dimensions."
+    },
+    {
+      "id": "IR04",
+      "severity": "P3",
+      "state": "CLOSED_STATIC_APPROACH_SCOPE_CLARIFIED",
+      "file": "game/scripts/city_hospital.gd",
+      "line": 144,
+      "title": "Emergency ramp extends beyond named construction parcel",
+      "evidence": [
+        {
+          "piece": "hospital_body",
+          "bounds_xz_m": [
+            241.0,
+            358.0,
+            289.0,
+            392.0
+          ],
+          "inside_named_construction_parcel": true,
+          "source_geometry_private_conflicts": []
+        },
+        {
+          "piece": "main_approach_ramp",
+          "bounds_xz_m": [
+            289.0,
+            373.5,
+            301.0,
+            376.5
+          ],
+          "inside_named_construction_parcel": true,
+          "source_geometry_private_conflicts": []
+        },
+        {
+          "piece": "emergency_approach_ramp",
+          "bounds_xz_m": [
+            289.0,
+            363.5,
+            301.0,
+            366.5
+          ],
+          "inside_named_construction_parcel": false,
+          "source_geometry_private_conflicts": []
+        }
+      ],
+      "impact": "No original obstacle or private intersection was found for either approach. Only the full body and main ramp are wholly inside the named parcel.",
+      "requested_fix_or_verification": "Describe the main body as parcel-contained and access ramps as bounded adjacent game approaches."
+    },
+    {
+      "id": "IR05",
+      "severity": "P2",
+      "state": "CLOSED_STATIC_GUIDANCE_AND_NATIVE_HOSPITAL_EQUIVALENT_VERIFIED",
+      "file": "data/reports/city_sandbox/20261022/fire_weather/large_native_dev02_initial_daylight_119_station_front.png",
+      "title": "Legacy entrance and nearest-building overlays point away from new fire campus",
+      "evidence": {
+        "image_sha256": "ffdfd1a4006e99bbc8d207a3ed5717670834ed5e81abb86b3708bff1438dea36",
+        "actual_pixels_opened": true,
+        "entrance_overlay": "입구 · 58m / 이름 없는 건물 / 왼쪽 입구",
+        "nearest_building_overlay": "가까운 건물 · former Sontag Hotel · 9m",
+        "scene": "Player visibly stands in front of new large red three-bay brick fire campus with two engines."
+      },
+      "impact": "The large left overlay covers part of the new facade and names/directions refer to another retained source building. This can confuse the user about the entry of the facility they are standing at. It is an actual stored native-image observation, not a fresh run or a diagnosis of hospital behavior.",
+      "requested_fix_or_verification": "Give the new authored campus entrances precedence in nearby-entry guidance, or suppress unrelated original-building guidance when facing a new facility; inspect hospital and police native pixels too."
+    },
+    {
+      "id": "IR06",
+      "severity": "P2",
+      "state": "CLOSED_STATIC_DISPLAY_STATE_NO_LONGER_MUTATES_TARGETING",
+      "file": "game/scripts/civic_facility_guidance.gd",
+      "title": "Display override initially reset shared building ray-target fields",
+      "evidence": "Initial new guidance set building_names.current_name, current_id and current_is_targeted; entrance_wayfinding._select_target reads current_id/current_is_targeted to choose catalog target_spec. Root removed all three assignments after report. Only caption/panel visibility and position are now modified.",
+      "impact": "No immediate E blockage was proven because the existing <=5m nearest-door priority remained. Removing shared state writes avoids altering original look-target selection and room preparation through a visual-only override."
+    }
+  ],
+  "static_checks": {
+    "hospital_and_approach_source_audit": [
+      {
+        "piece": "hospital_body",
+        "bounds_xz_m": [
+          241.0,
+          358.0,
+          289.0,
+          392.0
+        ],
+        "inside_named_construction_parcel": true,
+        "source_geometry_private_conflicts": []
+      },
+      {
+        "piece": "main_approach_ramp",
+        "bounds_xz_m": [
+          289.0,
+          373.5,
+          301.0,
+          376.5
+        ],
+        "inside_named_construction_parcel": true,
+        "source_geometry_private_conflicts": []
+      },
+      {
+        "piece": "emergency_approach_ramp",
+        "bounds_xz_m": [
+          289.0,
+          363.5,
+          301.0,
+          366.5
+        ],
+        "inside_named_construction_parcel": false,
+        "source_geometry_private_conflicts": []
+      }
+    ],
+    "source_building_projection_hausdorff_max_m": 0.0,
+    "existing_critical_observations": "Physical sliding doors retain collision, aperture occupation prevents closing onto actors, same-world hospital keeps ordinary player ownership, whole body native occupancy query precedes construction, source footprint positions are retained, legacy fixture mistakes remain preserved."
+  },
+  "scope_limits": [
+    "The retained coordinate and geodesic audit is not an independent measurement of actual Seoul buildings.",
+    "An unchanged original hidden source footprint is not proof that replacement facade art has accurate visible width/depth.",
+    "No GTA-quality or mocap claim follows from procedural motion proportions.",
+    "No native acceptance or subjective comfort claim was made by this review."
+  ],
+  "followup_static_review": {
+    "reviewed_at_local": "2026-10-22T12:50:15.529557",
+    "source_sha256": {
+      "game/scripts/city_hospital.gd": "e41f362357b7221b35abc633a0a2e60be75c49cb4b931c8c746d84ab61bfd5b1",
+      "game/scripts/city_metric_overlay.gd": "3693cdf958c5c15559a968d7e0b84e65f96969b53b07c3dd8cfcf1643f982006",
+      "game/scripts/civic_facility_guidance.gd": "de260c2caac20962c9286c2bf5f0e89455df2a5943ac66316daa697941fc8e73",
+      "tools/audit_real_scale.py": "f5c4e18f8b4892f02289d4db6d75d6864d1c3fec1085af4cd2894ce546ab03d8",
+      "tests/game/check_city_hospital.gd": "c4d45256942c085d6acd377c68e9313cf5d5def93d6ee26e629273d38ff45cd4",
+      "game/assets/authored/city_hospital.json": "8093dcfa9ec6da4c69938690f65f8afe790c0ad7df61a7ed2ee1d9cc3c1a8c7d",
+      "game/assets/authored/city_metric_reference.json": "7fcbe979710a4e17c6dd11cc65e240d1020f853db742a2d91e889a81bbe4901c"
+    },
+    "details": [
+      "Hospital setup now rejects mismatched declared dimensions, centre, footprint, entrance direction or parcel.",
+      "Metric panel now displays east-west/north-south bounds and separate oriented rectangle long/short dimensions; only a high-contrast two-building 2D readout shows numeric captions, with 1m ground grid and 2m ruler retained.",
+      "Comparison mode only hides competing visual panels, and existing source wayfinding recalculates visibility on normal process after it is disabled.",
+      "Civic guidance now leaves source current_* targeting state, catalogs and E/input owners untouched.",
+      "Hospital authored design now distinguishes parcel-contained main body from adjacent bounded game approach ramps."
+    ],
+    "limits": "Current whole-scene native preview02 images are pending; no new engine or GUI was run by independent reviewer."
+  },
+  "final_production_source_sha256": {
+    "game/scripts/city_hospital.gd": "e41f362357b7221b35abc633a0a2e60be75c49cb4b931c8c746d84ab61bfd5b1",
+    "game/scripts/city_metric_overlay.gd": "3693cdf958c5c15559a968d7e0b84e65f96969b53b07c3dd8cfcf1643f982006",
+    "game/scripts/civic_facility_guidance.gd": "de260c2caac20962c9286c2bf5f0e89455df2a5943ac66316daa697941fc8e73",
+    "tools/audit_real_scale.py": "f5c4e18f8b4892f02289d4db6d75d6864d1c3fec1085af4cd2894ce546ab03d8",
+    "game/assets/authored/city_hospital.json": "8093dcfa9ec6da4c69938690f65f8afe790c0ad7df61a7ed2ee1d9cc3c1a8c7d",
+    "game/assets/authored/city_metric_reference.json": "7fcbe979710a4e17c6dd11cc65e240d1020f853db742a2d91e889a81bbe4901c"
+  },
+  "native_followup_review": {
+    "reviewed_at_local": "2026-10-22T12:52:29.453782",
+    "engine_report": "data/reports/real_scale/20261022/hospital/hospital_native_final01.json",
+    "engine_report_sha256": "70b0ba7f3ad422c35e517a5c4d2f936ecdb942f81f405df52ec2ab7cc03a9aef",
+    "reported_result": "PASS",
+    "reported_checks": {
+      "passed": 23,
+      "total": 23
+    },
+    "images": [
+      {
+        "file": "data/reports/real_scale/20261022/hospital/hospital_native_final01_normal_hospital_approach.png",
+        "sha256": "08382b8fe8e7a8accb95cd2c7a3529a9425cd49f3f26517de997bc2211f13623",
+        "actual_pixels_opened_with_view_image": true,
+        "result": "ACCEPT_WITH_STATED_LIMITS",
+        "notes": "Actual main and emergency entrance Korean fascia text is legible. Lower caption identifies Seoul City General Hospital and the actual main reception door at 10m/front, plus E/ordinary walking instructions. No unrelated legacy entrance badge or former-Sontag nearest-building label remains."
+      },
+      {
+        "file": "data/reports/real_scale/20261022/hospital/hospital_native_final01_source_width_depth_and_gap_comparison.png",
+        "sha256": "55fcde317a6f45b22c78cabfdb27f1a90332f31be46bc8c90d8807b135e6f58e",
+        "actual_pixels_opened_with_view_image": true,
+        "result": "ACCEPT_WITH_STATED_LIMITS",
+        "notes": "All numeric text for Seoul Library and Seoul City Hall is legible in the high-contrast lower-left panel. East-west/north-south bounds and separate oriented long/short bounds, source versus estimated heights and 6.77m gap are visible. Original entrance pin and nearest-building panel do not cover it. Ordinary world entrance frame and 2m ruler remain visible."
+      }
+    ],
+    "method": "Existing native PNGs independently opened with view_image; no new engine run or OS input was used by independent reviewer. Report numeric PASS does not substitute for this image review.",
+    "limits": [
+      "Only these two final01 PNGs were independently opened in this followup. Hospital lobby/full-height exterior, new fire-campus guidance and police-campus guidance were not independently reopened by this reviewer.",
+      "The earlier fire-campus wrong-label image is preserved; the common guidance code fix and hospital counterpart were verified, while direct fresh fire/police pixel checks belong to root acceptance.",
+      "Root plans final02 test-only external-observer HUD cleanup; production hashes above bind this review, while final runner/test hash and report selection belong to root manifest.",
+      "World geometry remains source-grounded with explicit uncertain heights. This is not a proof of independently surveyed proportions for all buildings, GTA-quality characters, mocap movement or subjective comfort."
+    ]
+  }
+}

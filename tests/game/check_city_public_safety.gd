@@ -19,7 +19,7 @@ func _initialize() -> void:
 	_run.call_deferred()
 func _hashes() -> Dictionary:
 	var result: Dictionary={}
-	for path: String in ["res://scripts/city_public_safety.gd","res://scripts/city_bike_service.gd","res://scripts/drivable_car_service.gd","res://scripts/traffic_car_takeover.gd","res://scripts/player/exploration_avatar.gd","res://scripts/explore_walk.gd","res://resources/world_geometry/world.json","res://assets/authored/bike_service.json","res://assets/authored/scooter_service.json","res://assets/authored/neighborhood_population.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json","res://../tests/game/check_city_public_safety.gd"]:result[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/city_police_headquarters.gd","res://assets/authored/police_headquarters.json","res://scripts/city_police_facility.gd","res://assets/authored/police_facility.json","res://scripts/city_police_patrol.gd","res://assets/authored/police_patrol.json","res://scripts/city_public_safety.gd","res://scripts/city_bike_service.gd","res://scripts/drivable_car_service.gd","res://scripts/traffic_car_takeover.gd","res://scripts/player/exploration_avatar.gd","res://scripts/explore_walk.gd","res://resources/world_geometry/world.json","res://assets/authored/bike_service.json","res://assets/authored/scooter_service.json","res://assets/authored/neighborhood_population.json","res://data/generated/public_walk.json","res://data/generated/terrain_surface.json","res://../tests/game/check_city_public_safety.gd"]:result[path]=FileAccess.get_sha256(path)
 	return result
 func _json(value: Variant) -> Variant:
 	if value is Vector3:return [value.x,value.y,value.z]

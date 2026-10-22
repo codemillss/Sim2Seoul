@@ -1,0 +1,58 @@
+{
+  "task": "EXP28_POLICE_FACILITIES_PATROL_AND_CUSTODY_REGRESSION",
+  "status": "COMPONENT_HEADLESS_VERIFIED_NATIVE_VISUAL_AND_OS_ACCEPTANCE_PENDING_ROOT",
+  "police_production_frozen": true,
+  "new_hq_metres": [
+    30,
+    22,
+    15.6
+  ],
+  "new_hq_floors": 4,
+  "new_hq_kind": "Fictional game campus on audited original nonprivate native ground; direct walkable first-floor lobby/native E doors; upper floors visual staff offices",
+  "retained_actual_substation": "세종로파출소, source1215689854, officialaddress서울중구세종대로141; authored facade/lobby52m2; original source footprint/collision retained",
+  "moving_patrol_scope": "Additional physical263.043m source-direction block loop, native obstacle yield and physical bay return. Foot officers retain60s pursuit/catch. Not universal policecar pursuit or drivable/takeover vehicle.",
+  "expected_native_denominators": {
+    "police_facility": 29,
+    "police_headquarters": 17,
+    "public_safety": 32
+  },
+  "reports": [
+    {
+      "path": "data/reports/city_sandbox/20261022/police_facility/headless_final01.json",
+      "sha256": "b4edc6bc1e0e58b0517cc3acebc86c2a92d87bb05a72f11f66cf672041a4e20f",
+      "result": "PASS",
+      "passed": 26,
+      "total": 26,
+      "currently_changed_bound_sources": []
+    },
+    {
+      "path": "data/reports/city_sandbox/20261022/police_facility/public_safety_real_scale_headless01.json",
+      "sha256": "e761210c322cb4ffbb494a74f1d2d499a8fcab18212beac4244e30dc5abd0ddc",
+      "result": "PASS",
+      "passed": 28,
+      "total": 28,
+      "currently_changed_bound_sources": []
+    },
+    {
+      "path": "data/reports/city_sandbox/20261022/police_facility/headquarters_headless_dev04.json",
+      "sha256": "322215b6f6928f723b4e5c01df088c1c8bc65ffe33fab58184a9d26b65d928d0",
+      "result": "PASS",
+      "passed": 15,
+      "total": 15,
+      "currently_changed_bound_sources": []
+    }
+  ],
+  "owned_files_sha256": {
+    "game/scripts/city_public_safety.gd": "30b0e2cc59827ea548db2a4fe5043f6be25edd644551c1894d5ea2426a174ed6",
+    "game/scripts/city_police_facility.gd": "5bf92a31b70c88f867f90a822e268b75cee12a053dc109b806ad757813caed89",
+    "game/scripts/city_police_patrol.gd": "40d35b8752cda0eb3a97311df6d3a0a45e34abec538acf84f821045758b883aa",
+    "game/scripts/city_police_headquarters.gd": "edb7a4ef823d3b17a9f6c87f32e725b1d1c4133f2711f13c5cc3fbe35b2aa97e",
+    "game/assets/authored/police_facility.json": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73",
+    "game/assets/authored/police_patrol.json": "29e2832b96cd2873beaf63fc2a8d0e9dd4ede522c66963b5727b9a32ae8af630",
+    "game/assets/authored/police_headquarters.json": "fd550a2df6b79744191b4c3e4676c130c6d18c32a592cfa054606daba0fe6598",
+    "tests/game/check_city_public_safety.gd": "ef3abb11714f2568dfbcd47fe07bb05899b0783d981fa65609d3fa41d1576047",
+    "tests/game/check_police_facility.gd": "206c509bb3e310ade152f25ea235fc9eba44c3c33aa38a3644d473bb16113741",
+    "tests/game/check_police_headquarters.gd": "769891bb669f61d74221ea133b73796d8fbfb04b9b8684f7300f4fac865fd90c"
+  },
+  "native_visual_status": "Root requested sequential native reviews; no native GUI was launched by this component agent."
+}

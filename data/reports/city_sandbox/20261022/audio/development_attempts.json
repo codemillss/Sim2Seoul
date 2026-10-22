@@ -1,0 +1,23 @@
+{
+  "task": "EXP27_EXP28_AUDIO_DEVELOPMENT_HISTORY",
+  "current_acceptance": "audio_native_final01.json",
+  "attempts": [
+    {
+      "report": "audio_headless_prepare01.json",
+      "result": "FAIL",
+      "passed": 4,
+      "total": 5,
+      "cause": "Original asset header/DSP checks passed; full scene failed before audio setup because then-unfinished patrol preflight rejected native support. No native audio samples were generated.",
+      "resolution": "Police owner corrected its guarded source/native route in later development. Native final01 uses the frozen final production assembly and separately passes real PCM checks.",
+      "acceptance_status": "Preserved failed preparation only; excluded from current acceptance."
+    },
+    {
+      "report": "audio_native_final01.json",
+      "result": "PASS",
+      "passed": 27,
+      "total": 27,
+      "recordings": 13,
+      "acceptance_status": "Current native audio acceptance at its source hashes."
+    }
+  ]
+}

@@ -44,7 +44,20 @@ func _run() -> void:
 	service._switch_bus(target);var p: Vector3=target.to_global(Vector3(-2.2,0,-2.95));p.y=scene.terrain_surface.ground_y_world(p)+.08;await _pose(p);await _tap();_check("opposite_road_side_denied",not service.riding and not service.can_interact())
 	p=target.to_global(Vector3(2.2,0,.55));p.y=scene.terrain_surface.ground_y_world(p)+.08;await _pose(p);scene.player.set_physics_process(false);scene.player.global_position.y+=1.;await _ticks(2);await _tap();_check("airborne_old_floor_flag_denied",not service.riding and not service.can_interact());scene.player.set_physics_process(true)
 	var wall:=StaticBody3D.new();wall.name="BusDoorWallSafetyFixture";wall.collision_layer=1;wall.collision_mask=6;var box:=BoxShape3D.new();box.size=Vector3(.18,2.2,1.8);var collider:=CollisionShape3D.new();collider.shape=box;collider.position.y=1.1;wall.add_child(collider);scene.add_child(wall);wall.global_position=target.to_global(Vector3(2.4,0,.55));wall.global_position.y=scene.terrain_surface.ground_y_world(wall.global_position)+.02;wall.global_rotation.y=target.global_rotation.y
-	p=target.to_global(Vector3(3.5,0,.55));p.y=scene.terrain_surface.ground_y_world(p)+.08;var wall_pose: bool=await _pose(p);await _tap();_check("native_wall_blocks_boarding_LOS",wall_pose and not service.riding and not service.can_interact());wall.queue_free();await _ticks(3)
+	p=target.to_global(Vector3(3.5,0,.55));p.y=scene.terrain_surface.ground_y_world(p)+.08;var wall_pose: bool=await _pose(p)
+	# A safe stop-wait interaction remains available beside the new boarding
+	# marker. It must never be mistaken for permission to board through a wall.
+	var door_los: Array=[]
+	for height: float in [.70,1.35]:
+		var ray:=PhysicsRayQueryParameters3D.create(scene.player.global_position+Vector3.UP*height,target.to_global(Vector3(1.58,height,.55)),1|8,[scene.player.get_rid(),target.get_rid()])
+		var hit: Dictionary=scene.get_world_3d().direct_space_state.intersect_ray(ray)
+		door_los.append({"height_m":height,"hit_test_wall":not hit.is_empty() and hit.collider==wall,"collider":String(hit.collider.name) if not hit.is_empty() else "","hit_position":str(hit.get("position",Vector3.INF))})
+	var blocked_candidate_before: Dictionary=service._boarding_candidate();var safe_wait_index: int=service._nearest_wait();var waiting_before: bool=service.waiting_for_bus
+	await _tap()
+	var blocked_candidate_after: Dictionary=service._boarding_candidate()
+	var wait_branch_consistent: bool=service.waiting_for_bus!=waiting_before if safe_wait_index>=0 else service.waiting_for_bus==waiting_before
+	_check("native_wall_blocks_actual_boarding_with_separate_safe_stop_waiting",wall_pose and door_los.size()==2 and door_los.all(func(row: Dictionary)->bool:return row.hit_test_wall) and blocked_candidate_before.is_empty() and blocked_candidate_after.is_empty() and not service.riding and wait_branch_consistent,{"wall_pose":wall_pose,"middle_door_native_LOS":door_los,"boarding_candidate_before":str(blocked_candidate_before),"boarding_candidate_after":str(blocked_candidate_after),"riding_after_actual_E":service.riding,"safe_wait_index":safe_wait_index,"waiting_before":waiting_before,"waiting_after":service.waiting_for_bus,"waiting_branch_consistent":wait_branch_consistent,"can_interact_includes_stop_waiting":service.can_interact(),"prompt":service.prompt_text(),"scope":"Both production-height rays hit the retained test wall, no actual E boarding occurs, and the independently safe stop-wait action may toggle. The later fresh_E_boards_while_walk_input_held check retains the wall-removed positive boarding control."})
+	wall.queue_free();await _ticks(3)
 	p=target.to_global(Vector3(1.6,0,.55));p.y=scene.terrain_surface.ground_y_world(p)+.08;await _pose(p);service.set_running(true);var held: float=target.get_station_m();await _ticks(60*15);service._switch_bus(target)
 	_check("actual_door_presence_holds_after_twelve_second_dwell",service.bus_state=="doors_open" and service.can_interact() and absf(target.get_station_m()-held)<.002,{"elapsed":service.state_elapsed})
 	Input.action_press("move_forward");await _ticks(2);await _tap();Input.action_release("move_forward");_check("fresh_E_boards_while_walk_input_held",service.riding and service.active_bus()==target)

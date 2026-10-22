@@ -13,6 +13,9 @@ const MAX_AIR_JUMPS := -1
 const SWIM_SPEED_MPS := 3.0
 const FLOAT_DEPTH_M := 1.0
 const WATER_EXIT_HEIGHT_M := 2.4
+const GROUND_ACCEL_TIME_S := .14
+const GROUND_BRAKE_TIME_S := .12
+const TURN_ACCEL_RADIANS_S2 := 45.0
 signal water_splashed(world_point: Vector3, impact_speed_mps: float)
 var _jump_was_pressed := false
 var _jump_requires_release := false
@@ -34,6 +37,9 @@ var facility_control := false
 var pool_preparation_guard: Node3D
 var terrain_surface: Node
 var _terrain_recovery_rebased := false
+var _visual_turn_speed := 0.0
+var _motion_previous_position := Vector3.INF
+var motion_guard_stops := 0
 
 func bind_terrain_surface(service: Node) -> bool:
 	# Root warps the live actor separately. Rebase only the outdoor recovery
@@ -285,6 +291,7 @@ func recover(reason: String) -> bool:
 
 func require_neutral_input() -> void:
 	super.require_neutral_input()
+	_visual_turn_speed=0.0
 	# No buffered takeoff may survive a menu, settings change, reset or recovery.
 	# Preserve the airborne count; menus never create a new Space press.
 	_jump_was_pressed = false
@@ -349,9 +356,8 @@ func _physics_process(delta: float) -> void:
 	_swimming = submerged and not _water_jump_locked
 	var speed := run_speed_mps if fast else walk_speed_mps
 	if submerged:speed = SWIM_SPEED_MPS
-	velocity.x = last_direction.x*speed
-	velocity.z = last_direction.z*speed
 	var grounded := is_on_floor()
+	_apply_horizontal_motion(last_direction*speed,intent,grounded and not submerged,delta)
 	if grounded:
 		_air_jumps_used = 0
 		velocity.y = 0.0
@@ -375,11 +381,48 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y -= gravity_mps2*delta
 	if last_direction.length_squared()>0.000001:
-		visual.rotation.y = rotate_toward(visual.rotation.y,atan2(-last_direction.x,-last_direction.z),turn_speed_radians*delta)
+		_update_visual_heading(atan2(-last_direction.x,-last_direction.z),delta)
+	else:_visual_turn_speed=move_toward(_visual_turn_speed,0.,TURN_ACCEL_RADIANS_S2*delta)
 	move_and_slide()
+	_motion_previous_position=global_position
 	if is_instance_valid(pool_preparation_guard):pool_preparation_guard.enforce_player_water_access()
 	if is_on_floor():_air_jumps_used = 0
 	physics_stepped.emit(delta)
+
+func _offset_inside(offset: Vector3) -> bool:
+	var samples:=maxi(1,int(ceil(offset.length()/SEGMENT_SAMPLE_M)))
+	for index in range(1,samples+1):
+		if not _inside(global_position+offset*float(index)/float(samples)):return false
+	return true
+
+func _apply_horizontal_motion(desired: Vector3,intent: Vector2,grounded: bool,delta: float) -> void:
+	var before:=Vector3(velocity.x,0,velocity.z)
+	# Explicit transitions, controller ownership and boundary refusal always stop
+	# immediately. Easing must never turn stale momentum into an edge bypass.
+	var transition:=not _motion_previous_position.is_finite() or global_position.distance_to(_motion_previous_position)>2.
+	var refused:=intent.length_squared()>.000001 and desired.is_zero_approx()
+	var candidate:=desired
+	if grounded and not transition and not input_latched and router.gameplay_enabled and not refused:
+		var cap:=maxf(walk_speed_mps,maxf(before.length(),desired.length()))
+		var braking:=desired.length_squared()<before.length_squared() or before.dot(desired)<0.
+		var seconds:=GROUND_BRAKE_TIME_S if braking else GROUND_ACCEL_TIME_S
+		candidate=before.move_toward(desired,cap/seconds*delta)
+		if desired.is_zero_approx() and candidate.length()<.015:candidate=Vector3.ZERO
+	if not _offset_inside(candidate*delta):
+		candidate=desired if _offset_inside(desired*delta) else Vector3.ZERO
+		motion_guard_stops+=1
+	velocity.x=candidate.x;velocity.z=candidate.z
+
+func _update_visual_heading(target_yaw: float,delta: float) -> void:
+	var difference:=angle_difference(visual.rotation.y,target_yaw)
+	var wanted:=clampf(difference/maxf(delta,.000001),-turn_speed_radians,turn_speed_radians)
+	_visual_turn_speed=move_toward(_visual_turn_speed,wanted,TURN_ACCEL_RADIANS_S2*delta)
+	var advance:=_visual_turn_speed*delta
+	if absf(advance)>absf(difference):advance=difference;_visual_turn_speed=0.
+	visual.rotation.y=wrapf(visual.rotation.y+advance,-PI,PI)
+
+func locomotion_snapshot() -> Dictionary:
+	return {"ground_accel_time_s":GROUND_ACCEL_TIME_S,"ground_brake_time_s":GROUND_BRAKE_TIME_S,"visual_turn_accel_radians_s2":TURN_ACCEL_RADIANS_S2,"visual_turn_speed_radians_s":_visual_turn_speed,"guard_stops":motion_guard_stops,"walk_speed_mps":walk_speed_mps,"run_speed_mps":run_speed_mps,"air_control":"Retained direct sandbox air control and fresh-press jumps","camera_bob_added":false}
 
 func _inside(point: Vector3) -> bool:
 	if interior_active:

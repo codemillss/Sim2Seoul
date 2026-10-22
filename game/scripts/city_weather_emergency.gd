@@ -25,6 +25,11 @@ var blocked_ticks:=0
 var last_block: Dictionary={}
 var station: Node3D
 var engine: CharacterBody3D
+var standby_engine: CharacterBody3D
+var _outbound_route: Array[Vector3]=[]
+var _crew_target_points: Array[Vector3]=[]
+const ENGINE_BOX:=Vector3(2.5,3.05,8.0)
+const ENGINE_ENVELOPE:=Vector3(2.7,3.6,8.4)
 var firefighters: Array[Dictionary]=[]
 var provenance: Dictionary={}
 var facility_details: Dictionary={}
@@ -34,6 +39,7 @@ var _site_triangles: Array[PackedVector2Array]=[]
 var _forecourt_polygon:=PackedVector2Array()
 var _crew_homes: Array[Vector3]=[]
 var _foundation_depth:=.32
+var _facility_rids: Array[RID]=[]
 var _native_engine_speed:=0.0
 var events: Array[Dictionary]=[]
 var _guard: Node3D
@@ -85,7 +91,7 @@ func setup(scene: Node3D) -> bool:
 	if not _choose_corridor():print("FIRE_EDGE_SITE_REJECTED ",JSON.stringify(_json(site_audit)));return _fail("119 안전센터의 원본 공공 면·도로 공간을 확보하지 못했습니다.")
 	_make_station();_make_engine();_make_crew();_make_fire();_make_rain()
 	next_fire_s=float(policy.first_fire_s);loaded=true
-	print("CITY_WEATHER_EMERGENCY_READY game_station=1 extra_fireengine=1 firefighters=2 source_changed=false ",JSON.stringify(_json(provenance)))
+	print("CITY_WEATHER_EMERGENCY_READY game_station=1 extra_fireengine=2 firefighters=2 source_changed=false ",JSON.stringify(_json(provenance)))
 	return true
 
 func _mat(color: Color,emissive:=false) -> StandardMaterial3D:
@@ -107,7 +113,28 @@ func _tube(parent: Node3D,title: String,a: Vector3,b: Vector3,radius: float,mat:
 	return node
 func _label(parent: Node3D,text: String,point: Vector3,size:=.0035) -> Label3D:
 	var label:=Label3D.new();label.text=text;label.position=point;label.font_size=46;label.pixel_size=size;label.modulate=Color.WHITE;label.outline_size=6;label.billboard=BaseMaterial3D.BILLBOARD_ENABLED;parent.add_child(label);return label
-func _ground(at: Vector3) -> Dictionary:return _guard._ground(at,1.2)
+func _ground(at: Vector3) -> Dictionary:
+	# Query retained terrain, excluding only this module's authored floor/walls.
+	# The source ray/support/grade policy is identical to the shared guard.
+	var y: float=host.terrain_surface.ground_y_world(at)
+	if not is_finite(y):return {}
+	var ray:=PhysicsRayQueryParameters3D.create(Vector3(at.x,y+1.2,at.z),Vector3(at.x,y-1.2,at.z),1|32,_facility_rids)
+	var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
+	if hit.is_empty() or hit.normal.y<cos(deg_to_rad(float(_guard.design.policy.maximum_grade_degrees))):return {}
+	return {"point":Vector3(at.x,hit.position.y,at.z),"normal":hit.normal,"rid":hit.rid}
+func _remember_facility_colliders(node: Node) -> void:
+	if node is CollisionObject3D:_facility_rids.append(node.get_rid())
+	for child: Node in node.get_children():_remember_facility_colliders(child)
+func _travel_ground(at: Vector3) -> Dictionary:
+	var ground:=_ground(at)
+	if ground.is_empty() or not is_instance_valid(station):return ground
+	var local:=station.to_local(at)
+	if absf(local.x)<=18. and absf(local.z)<=15.01:
+		ground.point.y=station.global_position.y
+	elif local.z<=-15. and local.z>=-29. and ((local.x>=-8.5 and local.x<=-3.5) or (local.x>=9.8 and local.x<=11.7)):
+		var edge: Vector3=station.to_global(Vector3(local.x,0,-29.));var far:=_ground(edge)
+		if not far.is_empty():ground.point.y=lerpf(station.global_position.y,far.point.y+.025,clampf((-local.z-15.)/14.,0.,1.))
+	return ground
 func _on_site_grass(at: Vector3) -> bool:
 	var local: Vector3=host.city.to_local(at);var flat:=Vector2(local.x,local.z)
 	for triangle: PackedVector2Array in _site_triangles:
@@ -144,7 +171,7 @@ func _box_pose(at: Vector3,yaw: float,size: Vector3) -> Transform3D:
 	var basis:=Basis(Vector3.UP,yaw);var high:=-INF
 	for x: float in [-size.x*.5,size.x*.5]:
 		for z: float in [-size.z*.5,size.z*.5]:
-			var sample: Dictionary=_ground(at+basis*Vector3(x,0,z))
+			var sample: Dictionary=_travel_ground(at+basis*Vector3(x,0,z))
 			if sample.is_empty():return Transform3D(Basis.IDENTITY,Vector3.INF)
 			high=maxf(high,sample.point.y)
 	return Transform3D(basis,Vector3(at.x,high+.10,at.z))
@@ -172,7 +199,7 @@ func _truck_path_safe(a: Vector3,b: Vector3) -> bool:
 	var n:=maxi(1,ceili(a.distance_to(b)/.7));var yaw:=atan2(-(b-a).x,-(b-a).z)
 	for i: int in range(n+1):
 		var point:=a.lerp(b,float(i)/n)
-		if not _rectangle_supported(point,yaw,2.1,4.5) or not _static_clear(point,yaw,Vector3(2.1,2.5,4.5)):return false
+		if not _rectangle_supported(point,yaw,ENGINE_ENVELOPE.x,ENGINE_ENVELOPE.z) or not _static_clear(point,yaw,ENGINE_ENVELOPE):return false
 	return true
 func _near_crossing(at: Vector3,radius: float) -> bool:
 	var local: Vector3=host.city.to_local(at);var point:=Vector2(local.x,local.z)
@@ -182,7 +209,7 @@ func _near_crossing(at: Vector3,radius: float) -> bool:
 			if point.distance_to(Geometry2D.get_closest_point_to_segment(point,a,b))<radius+float(crossing.get("width_m",4.4))*.5:return true
 	return false
 func _walk_corridors_clear(center: Vector3,yaw: float) -> bool:
-	var inverse:=Transform3D(Basis(Vector3.UP,yaw),center).affine_inverse();var reserved:=Rect2(Vector2(-8.,-6.),Vector2(16.,12.))
+	var inverse:=Transform3D(Basis(Vector3.UP,yaw),center).affine_inverse();var reserved:=Rect2(Vector2(-20.,-17.),Vector2(40.,34.))
 	var routes: Array=host.city.public_data.routes.duplicate();routes.append_array(host.neighborhood_population.design.routes)
 	var corners: Array[Vector2]=[reserved.position,Vector2(reserved.end.x,reserved.position.y),reserved.end,Vector2(reserved.position.x,reserved.end.y)]
 	for route: Dictionary in routes:
@@ -192,82 +219,114 @@ func _walk_corridors_clear(center: Vector3,yaw: float) -> bool:
 			for edge: int in range(4):
 				if Geometry2D.segment_intersects_segment(a,b,corners[edge],corners[(edge+1)%4])!=null:return false
 	return true
+func _curve_route(start: Vector3,c1: Vector3,c2: Vector3,join: Vector3,arrival: Vector3,depot: Vector3) -> Array[Vector3]:
+	var route: Array[Vector3]=[]
+	var n:=ceili(depot.distance_to(start)/.7)
+	for i: int in range(1,n+1):route.append(depot.lerp(start,float(i)/n))
+	for i: int in range(1,33):route.append(start.bezier_interpolate(c1,c2,join,float(i)/32.))
+	n=ceili(join.distance_to(arrival)/.7)
+	for i: int in range(1,n+1):route.append(join.lerp(arrival,float(i)/n))
+	return route
 func _choose_corridor() -> bool:
-	var route: Dictionary={}
-	for record: Dictionary in host.neighborhood_population.design.vehicle_routes:
-		if String(record.id)==String(_site_design.response.source_road_route):route=record;break
-	if route.is_empty():return false
-	var a: Array=route.xz[3];var b: Array=route.xz[4];var first: Vector3=host.city.to_global(Vector3(a[0],0,a[1]));var last: Vector3=host.city.to_global(Vector3(b[0],0,b[1]));var forward: Vector3=(last-first).normalized();forward.y=0.;forward=forward.normalized()
+	var source_segment: Array=_site_design.response.source_segment_xz
+	var first:=Vector3(source_segment[0][0],0,source_segment[0][1]);var last:=Vector3(source_segment[1][0],0,source_segment[1][1]);var forward: Vector3=(last-first).normalized();var side:=Vector3(-forward.z,0,forward.x)
 	for candidate: Array in _site_design.facility.candidate_centers_xz:
-		var center: Vector3=host.city.to_global(Vector3(candidate[0],0,candidate[1]));var record: Dictionary={"center":center,"source_ground_feature":_site_design.provenance.source_ground_feature,"rejection":""}
+		var center: Vector3=host.city.to_global(Vector3(candidate[0],0,candidate[1]));var yaw: float=_site_design.facility.yaw_radians;var basis:=Basis(Vector3.UP,yaw);var record: Dictionary={"center":center,"source_ground_feature":_site_design.provenance.source_ground_feature,"rejection":""}
 		_forecourt_polygon.clear()
-		for point: Array in _site_design.facility.authored_forecourt_local_xz:_forecourt_polygon.append(Vector2(center.x+float(point[0]),center.z+float(point[1])))
+		for point: Array in _site_design.facility.authored_campus_xz:_forecourt_polygon.append(Vector2(float(point[0]),float(point[1])))
 		var low:=INF;var high:=-INF;var footprint_ok:=true
-		for x: float in [-6.,-3.,0.,3.,6.]:
-			for z: float in [-4.,0.,4.]:
-				var point:=center+Vector3(x,0,z);var floor:=_ground(point)
-				if not _on_site_grass(point) or not _public(point,true) or floor.is_empty():footprint_ok=false;continue
+		for x: float in range(-18,19,2):
+			for z: float in range(-15,16,2):
+				var point:=center+basis*Vector3(x,0,z);var floor:=_ground(point)
+				if not _public(point,true) or floor.is_empty():footprint_ok=false;continue
 				low=minf(low,floor.point.y);high=maxf(high,floor.point.y)
-		if not footprint_ok or not _walk_corridors_clear(center,0.):record.rejection="source_grass_or_private_or_existing_walk_corridor";site_audit.append(record);continue
-		if not _static_clear(center,0.,Vector3(12.4,7.,8.5),4|8):record.rejection="full_native_building_envelope";site_audit.append(record);continue
-		var depot:=center+Vector3(-2.55,0,0);var exit:=center+Vector3(-2.55,0,-10.)
-		# Project the front's garage centre onto the exact retained road segment.
-		var line2:=Geometry2D.get_closest_point_to_segment(Vector2(depot.x,depot.z),Vector2(first.x,first.z),Vector2(last.x,last.z));var start:=Vector3(line2.x,0,line2.y);var arrival:=start+forward*float(_site_design.response.outbound_road_m);var side:=Vector3(-forward.z,0,forward.x)
-		var return_first:=arrival+side*float(_site_design.response.return_lane_offset_m);var return_second:=start+side*float(_site_design.response.return_lane_offset_m)
-		if _near_crossing(start,5.) or _near_crossing(arrival,5.):record.rejection="source_crossing_reservation";site_audit.append(record);continue
-		if not _truck_path_safe(depot,exit) or not _truck_path_safe(exit,start) or not _truck_path_safe(start,arrival) or not _truck_path_safe(arrival,return_first) or not _truck_path_safe(return_first,return_second) or not _truck_path_safe(return_second,exit):record.rejection="full_truck_source_support_or_native_route";site_audit.append(record);continue
-		var incident:=arrival+side*float(_site_design.response.incident_offset_south_m);var found_incident:=false
-		for shift: float in _site_design.response.incident_candidate_delta_x_m:
-			var point:=incident+forward*shift
-			if _rectangle_supported(point,0.,2.6,2.6,true) and _static_clear(point,0.,Vector3(2.6,3.8,2.6),4|8):incident=point;found_incident=true;break
-		if not found_incident:record.rejection="contained_incident_whole_footprint";site_audit.append(record);continue
-		var homes: Array[Vector3]=[];var crew_safe:=true
+		if not footprint_ok or not _walk_corridors_clear(center,yaw):record.rejection="bounded_campus_private_support_or_existing_walk_corridor";site_audit.append(record);continue
+		if not _static_clear(center,yaw,Vector3(36.5,13.7,30.5),4|8):record.rejection="full_native_building_envelope";site_audit.append(record);continue
+		var depot:=center+basis*Vector3(-6.,0,-8.);var exit:=center+basis*Vector3(-6.,0,-24.)
+		var curve_start:=Vector3(_site_design.response.curve_start_xz[0],0,_site_design.response.curve_start_xz[1]);var c1:=Vector3(_site_design.response.curve_control_1_xz[0],0,_site_design.response.curve_control_1_xz[1]);var c2:=Vector3(_site_design.response.curve_control_2_xz[0],0,_site_design.response.curve_control_2_xz[1]);var join:=Vector3(_site_design.response.road_join_xz[0],0,_site_design.response.road_join_xz[1]);var arrival:=join+forward*float(_site_design.response.outbound_road_m)
+		var route:=_curve_route(curve_start,c1,c2,join,arrival,depot);var route_ok:=true;var previous:=depot
+		for point: Vector3 in route:
+			if not _truck_path_safe(previous,point):route_ok=false;record["route_rejection_at"]=point;break
+			previous=point
+		if not route_ok:record.rejection="full_size_truck_curve_source_support_or_native_route";site_audit.append(record);continue
+		var incident:=Vector3(_site_design.response.incident_xz[0],0,_site_design.response.incident_xz[1])
+		if not _rectangle_supported(incident,0.,2.6,2.6,true) or not _static_clear(incident,0.,Vector3(2.6,3.8,2.6),4|8):record.rejection="contained_incident_whole_footprint";site_audit.append(record);continue
+		var homes: Array[Vector3]=[];var targets: Array[Vector3]=[];var crew_safe:=true
 		for i: int in range(2):
-			var home:=center+Vector3(float(_site_design.response.crew_home_local_x),0,float(_site_design.response.crew_home_local_z[i]));var target:=incident-forward*1.8+side*(.55-float(i)*1.1)
+			var home:=Vector3(_site_design.response.crew_home_xz[i][0],0,_site_design.response.crew_home_xz[i][1]);var target:=Vector3(_site_design.response.crew_target_xz[i][0],0,_site_design.response.crew_target_xz[i][1])
 			if not _path_safe(home,target,.30):crew_safe=false
-			homes.append(_ground(home).point+Vector3.UP*.05 if not _ground(home).is_empty() else home)
+			homes.append(_ground(home).point+Vector3.UP*.05 if not _ground(home).is_empty() else home);targets.append(target)
 		if not crew_safe:record.rejection="two_separate_firefighter_capsule_lanes";site_audit.append(record);continue
-		_start=_ground(start).point;_arrival=_ground(arrival).point;_site=_ground(incident).point;_side=side;_forward=forward;_engine_yaw=0.;_depot=_ground(depot).point;_garage_exit=_ground(exit).point;_crew_homes=homes;_foundation_depth=maxf(.32,high-low+.20)
-		_return_route=[_ground(return_first).point,_ground(return_second).point,_garage_exit,_depot]
-		station=Node3D.new();station.name="Game119SafetyStation";add_child(station);station.global_position=Vector3(center.x,high+.035,center.z)
+		_start=_ground(join).point;_arrival=_ground(arrival).point;_site=_ground(incident).point;_side=side;_forward=forward;_engine_yaw=yaw;_depot=_ground(depot).point;_garage_exit=_ground(exit).point;_crew_homes=homes;_crew_target_points=targets;_foundation_depth=maxf(.32,high-low+.20)
+		_outbound_route=route;_return_route=route.duplicate();_return_route.reverse();_return_route.remove_at(0);_return_route.append(_depot)
+		station=Node3D.new();station.name="Game119SafetyStation";add_child(station);station.global_position=Vector3(center.x,high+.035,center.z);station.rotation.y=yaw
 		record["accepted"]=true;site_audit.append(record)
-		provenance={"road_route":route.id,"road_source_binding":route.source_binding,"road_start":_start,"road_arrival":_arrival,"return_lane":_return_route,"garage_exit":_garage_exit,"station":station.global_position,"incident_site":_site,"source_ground_feature":_site_design.provenance.source_ground_feature,"source_refs":_site_design.provenance.source_refs,"whole_building_footprint_on_named_source_grass":true,"existing_walk_corridors_clearance_m":2.,"source_support_verified":true,"source_geometry_changed":false,"real_station_location_claim":false,"game_rule":"Fictional game firestation on an explicit eastern-edge source parcel. Retained road follows source direction outbound with a separate collision-aware return lane; no actual Seoul station or emergency-route claim."}
+		provenance={"road_route":_site_design.response.source_road_route,"road_source_binding":_site_design.response.source_feature_id,"road_start":_start,"road_arrival":_arrival,"return_route_points":_return_route.size(),"return_route_start":_return_route[0],"return_route_end":_return_route[-1],"garage_exit":_garage_exit,"station":station.global_position,"incident_site":_site,"source_ground_feature":_site_design.provenance.source_ground_feature,"source_refs":_site_design.provenance.source_refs,"bounded_authored_campus_xz":_site_design.facility.authored_campus_xz,"whole_building_footprint_on_named_source_grass":false,"whole_building_on_non_private_supported_game_campus":true,"existing_walk_corridors_clearance_m":2.,"source_support_verified":true,"source_geometry_changed":false,"real_station_location_claim":false,"game_rule":_site_design.response.return_rule}
 		return true
 	return false
 func _make_station() -> void:
 	facility_details=preload("res://scripts/fire_station_facility.gd").new().build(self,station)
-	_make_station_ramp()
+	_make_station_ramp();_remember_facility_colliders(station);_make_forecourt_skin()
+func _make_forecourt_skin() -> void:
+	# A thin TIN-following game forecourt, only on this authored campus. Keep
+	# every original sidewalk and roadway visible; this adds no collider.
+	var vertices:=PackedVector3Array();var normals:=PackedVector3Array()
+	for x: float in range(-18,18,2):
+		for z: float in range(-29,-15,2):
+			var points: Array[Vector3]=[];var allowed:=true
+			for offset: Vector2 in [Vector2(0,0),Vector2(2,0),Vector2(0,2),Vector2(2,2)]:
+				var world: Vector3=station.to_global(Vector3(x+offset.x,0,z+offset.y));var flat:=Vector2(world.x,world.z);var floor:=_travel_ground(world)
+				if not _public(world,true) or floor.is_empty() or _guard._road_index.contains(flat) or _guard._walk_index.contains(flat):allowed=false;break
+				points.append(station.to_local(floor.point+Vector3.UP*.035))
+			if not allowed:continue
+			for i: int in [0,2,1,1,2,3]:vertices.append(points[i]);normals.append(Vector3.UP)
+	if vertices.is_empty():return
+	var mesh:=ArrayMesh.new();var arrays: Array=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=vertices;arrays[Mesh.ARRAY_NORMAL]=normals;mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	_mesh(station,"BoundedTINForecourtPaving",mesh,Vector3.ZERO,_mat(Color(.25,.29,.31)))
+	facility_details["forecourt_triangles"]=vertices.size()/3
 func _make_station_ramp() -> void:
-	# The short apron transition ends before the protected original footway.
-	# It joins the new level garage to the retained TIN; source is not edited.
-	var left:=-5.05;var right:=-.05;var near_z:=-4.02;var far_z:=-6.20
-	var points: Array[Vector3]=[]
-	for local: Vector3 in [Vector3(left,0,near_z),Vector3(right,0,near_z),Vector3(left,0,far_z),Vector3(right,0,far_z)]:
-		if local.z==far_z:
-			var floor:=_ground(station.to_global(local));local.y=floor.point.y-station.global_position.y+.025 if not floor.is_empty() else 0.
-		points.append(local)
-	var faces:=PackedVector3Array([points[0],points[2],points[1],points[1],points[2],points[3]]);var mesh:=ArrayMesh.new();var arrays: Array=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=faces;arrays[Mesh.ARRAY_NORMAL]=PackedVector3Array([Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP]);mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
-	var visual:=_mesh(station,"GarageApronRamp",mesh,Vector3.ZERO,_mat(Color(.30,.33,.33)))
-	var body:=StaticBody3D.new();body.name="AuthoredGarageRampCollision";body.collision_layer=32;var collider:=CollisionShape3D.new();var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);collider.shape=shape;body.add_child(collider);visual.add_child(body)
+	# New ramps join this authored floor to retained TIN; no source geometry is
+	# raised, cut or removed. Both ramps stay within the protected game campus.
+	for span: Vector2 in [Vector2(-8.5,-3.5),Vector2(9.8,11.7)]:
+		var points: Array[Vector3]=[]
+		for local: Vector3 in [Vector3(span.x,0,-15.01),Vector3(span.y,0,-15.01),Vector3(span.x,0,-29.),Vector3(span.y,0,-29.)]:
+			if local.z==-29.:
+				var floor:=_ground(station.to_global(local));local.y=floor.point.y-station.global_position.y+.025 if not floor.is_empty() else 0.
+			points.append(local)
+		var faces:=PackedVector3Array([points[0],points[2],points[1],points[1],points[2],points[3]]);var mesh:=ArrayMesh.new();var arrays: Array=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=faces;arrays[Mesh.ARRAY_NORMAL]=PackedVector3Array([Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP,Vector3.UP]);mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+		var visual:=_mesh(station,"AuthoredAccessibleApronRamp",mesh,Vector3.ZERO,_mat(Color(.30,.33,.33)))
+		var body:=StaticBody3D.new();body.name="AuthoredGarageRampCollision";body.collision_layer=32;var collider:=CollisionShape3D.new();var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);collider.shape=shape;body.add_child(collider);visual.add_child(body)
+func _make_engine_body(title: String,depot: Vector3) -> CharacterBody3D:
+	var body:=ResponderBody.new();body.name=title;body.collision_layer=8;body.collision_mask=1|2|4|8|32
+	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=ENGINE_BOX;shape.shape=box;shape.position.y=1.75;body.add_child(shape);add_child(body)
+	body.global_transform=_box_pose(depot,_engine_yaw,ENGINE_ENVELOPE)
+	var visual:=Node3D.new();visual.name="Visual";body.add_child(visual)
+	var red:=_mat(Color(.76,.045,.025));var silver:=_mat(Color(.64,.68,.67));var dark:=_mat(Color(.035,.075,.10));var yellow:=_mat(Color(1.,.85,.15))
+	_box(visual,"FullSizePumpChassis",Vector3(2.45,.65,7.8),Vector3(0,.95,0),dark)
+	_box(visual,"PumpCabin",Vector3(2.45,2.20,2.50),Vector3(0,1.90,-2.65),red)
+	_box(visual,"Windshield",Vector3(2.12,.88,.05),Vector3(0,2.40,-3.93),dark)
+	_box(visual,"FrontGrille",Vector3(1.65,.42,.07),Vector3(0,1.20,-3.94),silver)
+	_box(visual,"FrontBumper",Vector3(2.5,.28,.25),Vector3(0,.70,-3.92),silver)
+	_box(visual,"WaterTankEquipmentBody",Vector3(2.46,2.10,5.0),Vector3(0,1.85,1.05),red)
+	for side: float in [-1.,1.]:
+		for z: float in [-.85,.65,2.15]:
+			_box(visual,"EquipmentRollerDoor",Vector3(.055,1.40,1.35),Vector3(side*1.25,1.85,z),silver)
+			for y: float in [1.3,1.65,2.,2.35]:_box(visual,"EquipmentDoorSlat",Vector3(.065,.025,1.30),Vector3(side*1.29,y,z),dark)
+		_box(visual,"KoreanSafetyStripe",Vector3(.04,.18,7.1),Vector3(side*1.28,1.02,-.1),yellow)
+		_box(visual,"CabSideWindow",Vector3(.05,.80,1.65),Vector3(side*1.25,2.4,-2.7),dark)
+		for z: float in [-2.65,2.50]:
+			var wheel:=CylinderMesh.new();wheel.top_radius=.53;wheel.bottom_radius=.53;wheel.height=.26;wheel.radial_segments=16
+			var node:=_mesh(visual,"Wheel",wheel,Vector3(side*1.24,.55,z),dark);node.rotation.z=PI*.5
+			var hub:=CylinderMesh.new();hub.top_radius=.24;hub.bottom_radius=.24;hub.height=.28;hub.radial_segments=12;var hub_node:=_mesh(visual,"WheelHub",hub,Vector3(side*1.25,.55,z),silver);hub_node.rotation.z=PI*.5
+	for x: float in [-.82,.82]:_box(visual,"EmergencyBeacon",Vector3(.52,.22,.35),Vector3(x,3.13,-2.55),_mat(Color(1.,.08,.03),true))
+	_box(visual,"RoofLadder",Vector3(.9,.16,4.6),Vector3(0,3.03,.95),silver)
+	for z: float in [-1.,-.4,.2,.8,1.4,2.,2.6]:_box(visual,"LadderRung",Vector3(.85,.07,.10),Vector3(0,3.14,z),dark)
+	var label:=_label(visual,"119  소방",Vector3(0,1.4,-4.08),.0035);label.billboard=BaseMaterial3D.BILLBOARD_DISABLED;label.rotation.y=PI
+	_visuals.append({"body":body,"visual":visual,"previous":body.global_transform,"current":body.global_transform})
+	return body
 func _make_engine() -> void:
-	engine=ResponderBody.new();engine.name="Extra119FireEngine";engine.collision_layer=8;engine.collision_mask=1|2|4|8|32
-	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(1.9,2.1,4.3);shape.shape=box;shape.position.y=1.25;engine.add_child(shape);add_child(engine)
-	var pose:=_box_pose(_depot,_engine_yaw,Vector3(2.1,2.5,4.5));engine.global_transform=pose
-	var visual:=Node3D.new();visual.name="Visual";engine.add_child(visual)
-	var red:=_mat(Color(.76,.045,.025));var silver:=_mat(Color(.64,.68,.67));var dark:=_mat(Color(.10,.15,.18));var yellow:=_mat(Color(1.,.85,.15))
-	_box(visual,"TruckBody",Vector3(1.95,1.55,4.1),Vector3(0,1.10,0),red)
-	_box(visual,"Cabin",Vector3(1.90,1.05,1.65),Vector3(0,1.85,-1.16),red)
-	_box(visual,"Windshield",Vector3(1.65,.65,.035),Vector3(0,1.99,-2.02),dark)
-	_box(visual,"HoseStorage",Vector3(1.97,.92,1.9),Vector3(0,1.2,.69),silver)
-	_box(visual,"SafetyStripe",Vector3(1.99,.16,3.8),Vector3(0,.75,0),yellow)
-	for x: float in [-.98,.98]:
-		for z: float in [-1.34,1.34]:
-			var wheel:=CylinderMesh.new();wheel.top_radius=.39;wheel.bottom_radius=.39;wheel.height=.2;wheel.radial_segments=12
-			var node:=_mesh(visual,"Wheel",wheel,Vector3(x,.39,z),dark);node.rotation.z=PI*.5
-	for x: float in [-.63,.63]:_box(visual,"EmergencyBeacon",Vector3(.42,.18,.35),Vector3(x,2.50,-1.1),_mat(Color(1.,.08,.03),true))
-	_box(visual,"RoofLadder",Vector3(.80,.12,2.45),Vector3(0,2.07,.74),silver)
-	_label(visual,"119",Vector3(0,2.82,.15),.0040)
-	_visuals.append({"body":engine,"visual":visual,"previous":engine.global_transform,"current":engine.global_transform})
+	engine=_make_engine_body("Extra119FireEngine",_depot)
+	standby_engine=_make_engine_body("Standby119PumpEngine",station.to_global(Vector3(0,0,-8.)))
 	_last_engine=engine.global_position
 func _make_crew() -> void:
 	var orange:=_mat(Color(.87,.29,.045));var dark:=_mat(Color(.10,.12,.13));var trim:=_mat(Color(.96,.92,.28));var skin:=_mat(Color(.75,.55,.40))
@@ -352,16 +411,16 @@ func _move_body(body: CharacterBody3D,target: Vector3,speed: float,delta: float,
 	if diff.length()<.14:return true
 	var motion:=diff.normalized()*minf(diff.length(),speed*delta)
 	var proposed:=body.global_position+motion
-	if not _supported(proposed,1.05 if truck else .27):blocked_ticks+=1;return false
-	var floor: Dictionary=_ground(proposed)
+	if not _supported(proposed,1.35 if truck else .27):blocked_ticks+=1;return false
+	var floor: Dictionary=_travel_ground(proposed)
 	if floor.is_empty():blocked_ticks+=1;return false
 	if truck:
 		var yaw:=atan2(-diff.x,-diff.z)
 		# Garage arrival is a reverse manoeuvre through the same opening.
-		if fire_state=="engine_return" and _engine_waypoint==_return_route.size()-1:yaw+=PI
-		if not _rectangle_supported(proposed,yaw,2.1,4.5) or not _static_clear(proposed,yaw,Vector3(1.9,2.1,4.3)):blocked_ticks+=1;return false
+		if fire_state=="engine_return":yaw+=PI
+		if not _rectangle_supported(proposed,yaw,ENGINE_ENVELOPE.x,ENGINE_ENVELOPE.z) or not _static_clear(proposed,yaw,ENGINE_BOX):blocked_ticks+=1;return false
 		_engine_yaw=yaw;body.rotation.y=yaw
-		var pose:=_box_pose(proposed,yaw,Vector3(2.1,2.5,4.5))
+		var pose:=_box_pose(proposed,yaw,ENGINE_ENVELOPE)
 		if not pose.origin.is_finite():return false
 		proposed.y=pose.origin.y
 	else:proposed.y=floor.point.y+.05
@@ -374,7 +433,7 @@ func _move_body(body: CharacterBody3D,target: Vector3,speed: float,delta: float,
 	return Vector2(body.global_position.x-target.x,body.global_position.z-target.z).length()<.14
 func _crew_targets(arrival:=true) -> Array[Vector3]:
 	var out: Array[Vector3]=[]
-	for i: int in range(2):out.append(_site-_forward*1.8+_side*(.55-float(i)*1.1) if arrival else firefighters[i].home)
+	for i: int in range(2):out.append(_crew_target_points[i] if arrival else firefighters[i].home)
 	return out
 func _fire_tick(delta: float) -> void:
 	state_clock_s+=delta
@@ -384,10 +443,10 @@ func _fire_tick(delta: float) -> void:
 		"dispatch":
 			# Crew remain visible in the station, then follow the engine on foot
 			# to the contained incident. No responder is teleported into position.
-			var targets: Array[Vector3]=[_garage_exit,_start,_arrival]
+			var targets: Array[Vector3]=_outbound_route
 			if _move_body(engine,targets[_engine_waypoint],float(policy.engine_mps),delta,true):
 				_engine_waypoint+=1
-				if _engine_waypoint==3:fire_state="crew_approach";state_clock_s=0.;_event("fireengine_arrived")
+				if _engine_waypoint==targets.size():fire_state="crew_approach";state_clock_s=0.;_event("fireengine_arrived")
 		"crew_approach":
 			var ready:=true;var targets:=_crew_targets()
 			for i: int in range(2):
@@ -437,20 +496,24 @@ func viewpoint() -> Dictionary:
 	if fire_state=="ready":
 		# Visitor standing/camera areas are to the left of the complete truck
 		# exit/return sweep, and away from both office-side firefighter lanes.
-		for depth: float in [9.5,10.5,8.5,11.0,7.5]:
-			for lateral: float in [-7.0,-8.5,-6.5,7.0,8.5]:
-				var point: Vector3=station.to_global(Vector3(lateral,0,-depth));var view:=_observer_view(point,station.to_global(Vector3(0,2.1,-3.8)),4.4,0.,true)
+		for depth: float in [24.,28.,32.,20.]:
+			for lateral: float in [0.,-4.,4.,-8.,8.,12.,-12.]:
+				var point: Vector3=station.to_global(Vector3(lateral,0,-depth));var view:=_observer_view(point,station.to_global(Vector3(0,6.,-14.9)),20.,0.,true)
 				if not view.is_empty():return view
 		return {}
 	for distance: float in [6.,7.,8.,5.]:
 		for direction: Vector3 in [-_side,-_forward,_side,_forward]:
-			var point:=_site+direction*distance;var view:=_observer_view(point,_site+Vector3.UP*1.5,4.0,-8.,false)
+			var point:=_site+direction*distance;var offset:=Vector3(-direction.z,0,direction.x)*2.5;var view:=_observer_view(point,_site+offset+Vector3.UP*1.5,5.0,-8.,false)
 			if not view.is_empty():return view
 	return {}
 func _observer_view(point: Vector3,target: Vector3,distance: float,pitch: float,station_front_check: bool) -> Dictionary:
-	var floor:=_ground(point)
+	var floor:=_travel_ground(point)
 	if floor.is_empty() or not _supported(point,.30,true):return {}
 	var foot: Vector3=floor.point+Vector3.UP*.08
+	var previous:=_depot
+	for route_point: Vector3 in _outbound_route:
+		if Vector2(point.x,point.z).distance_to(Geometry2D.get_closest_point_to_segment(Vector2(point.x,point.z),Vector2(previous.x,previous.z),Vector2(route_point.x,route_point.z)))<2.1:return {}
+		previous=route_point
 	var capsule:=PhysicsShapeQueryParameters3D.new();capsule.shape=host.player.get_node("CollisionShape").shape;capsule.transform=Transform3D(Basis.IDENTITY,foot+Vector3.UP*.85);capsule.collision_mask=1|2|4|8|32;capsule.exclude=[host.player.get_rid()]
 	var space:=get_world_3d().direct_space_state
 	if not space.intersect_shape(capsule,1).is_empty():return {}
@@ -460,13 +523,13 @@ func _observer_view(point: Vector3,target: Vector3,distance: float,pitch: float,
 	var camera_query:=PhysicsShapeQueryParameters3D.new();camera_query.shape=host.rig.arm.shape;camera_query.transform=Transform3D(Basis.IDENTITY,pivot);camera_query.collision_mask=1|8|32;camera_query.exclude=[host.player.get_rid()];camera_query.motion=eye-pivot
 	if not space.intersect_shape(camera_query,1).is_empty() or space.cast_motion(camera_query)[0]<.99999:return {}
 	if station_front_check:
-		var header: Vector3=station.to_global(Vector3(-2.55,4.30,-4.30));var front: Vector3=-station.global_basis.z;var truck_front: Vector3=engine.global_position+front*2.03+Vector3.UP*1.99
+		var header: Vector3=station.to_global(Vector3(-6.,5.56,-15.30));var front: Vector3=-station.global_basis.z;var truck_front: Vector3=engine.global_position+front*4.05+Vector3.UP*2.4
 		var header_ray:=PhysicsRayQueryParameters3D.create(eye,header,1|8|32,[host.player.get_rid()])
 		if not space.intersect_ray(header_ray).is_empty():return {}
 		var truck_ray:=PhysicsRayQueryParameters3D.create(eye,truck_front,1|8|32,[host.player.get_rid()]);var hit: Dictionary=space.intersect_ray(truck_ray)
 		if not hit.is_empty() and hit.collider!=engine:return {}
 	else:
-		var ray:=PhysicsRayQueryParameters3D.create(eye,target,1|8|32,[host.player.get_rid()])
+		var ray:=PhysicsRayQueryParameters3D.create(eye,_site+Vector3.UP*1.5,1|8|32,[host.player.get_rid()])
 		if not space.intersect_ray(ray).is_empty():return {}
 	return {"point":foot,"toward":target,"camera_distance":distance,"camera_pitch":pitch,"camera_distance_m":distance,"camera_pitch_degrees":pitch,"station_front_quarter_view":station_front_check,"header_and_truck_los_clear":station_front_check,"predicted_camera_eye":eye,"observer_outside_response_paths":true}
 func status_text() -> String:
@@ -489,4 +552,4 @@ func _json(value: Variant) -> Variant:
 func snapshot() -> Dictionary:
 	var crew: Array=[]
 	for row: Dictionary in firefighters:crew.append({"position":row.body.global_position,"home":row.home,"moving":row.moving})
-	return _json({"loaded":loaded,"error":load_error,"clock_s":clock_s,"weather":weather,"weather_clock_s":weather_clock_s,"rain_intensity":rain_intensity,"outdoors":outdoors,"visible_streaks":RAIN_STREAK_COUNT if is_instance_valid(_rain) and _rain.visible else 0,"rain_render_batches":1,"fire_state":fire_state,"fires_started":fires_started,"fires_extinguished":fires_extinguished,"completed_returns":completed_returns,"water_seconds":water_seconds,"engine_distance_m":engine_distance_m,"crew_distance_m":crew_distance_m,"blocked_ticks":blocked_ticks,"last_block":last_block,"engine_position":engine.global_position if is_instance_valid(engine) else Vector3.ZERO,"firefighters":crew,"provenance":provenance,"facility_details":facility_details,"site_audit":site_audit,"events":events,"source_geometry_changed":false,"original_actor_counts_changed":false,"scope":"Authored weather, safety station and contained game fire; no actual Seoul firestation, weather feed, fire spread or emergency-route accuracy claim."})
+	return _json({"loaded":loaded,"error":load_error,"clock_s":clock_s,"weather":weather,"weather_clock_s":weather_clock_s,"rain_intensity":rain_intensity,"outdoors":outdoors,"visible_streaks":RAIN_STREAK_COUNT if is_instance_valid(_rain) and _rain.visible else 0,"rain_render_batches":1,"fire_state":fire_state,"fires_started":fires_started,"fires_extinguished":fires_extinguished,"completed_returns":completed_returns,"water_seconds":water_seconds,"engine_distance_m":engine_distance_m,"crew_distance_m":crew_distance_m,"blocked_ticks":blocked_ticks,"last_block":last_block,"engine_position":engine.global_position if is_instance_valid(engine) else Vector3.ZERO,"firefighters":crew,"provenance":provenance,"engine_dimensions_m":ENGINE_BOX,"standby_engine_position":standby_engine.global_position if is_instance_valid(standby_engine) else Vector3.ZERO,"facility_details":facility_details,"site_audit":site_audit,"events":events,"source_geometry_changed":false,"original_actor_counts_changed":false,"scope":"Authored weather, safety station and contained game fire; no actual Seoul firestation, weather feed, fire spread or emergency-route accuracy claim."})

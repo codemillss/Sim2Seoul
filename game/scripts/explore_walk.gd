@@ -67,6 +67,9 @@ var traffic_car_takeover: Node3D
 var city_public_safety: Node3D
 var city_weather_emergency: Node3D
 var city_vehicle_audio: Node3D
+var city_hospital: Node3D
+var city_metric_overlay: Node3D
+var civic_facility_guidance: Node
 var sandbox_status: Label
 var _sandbox_held: Dictionary={}
 var _sandbox_requests: Dictionary={}
@@ -244,6 +247,13 @@ func _ready() -> void:
 	city_vehicle_audio=preload("res://scripts/city_vehicle_audio.gd").new();city_vehicle_audio.name="CityVehicleAudio";add_child(city_vehicle_audio)
 	if not city_vehicle_audio.setup(self):
 		_exploration_failure("차량과 출동 음향을 준비하지 못했습니다.");return
+	city_hospital=preload("res://scripts/city_hospital.gd").new();city_hospital.name="CityHospital";add_child(city_hospital)
+	if not city_hospital.setup(self):
+		_exploration_failure("외곽 종합병원과 정문을 준비하지 못했습니다.");return
+	city_metric_overlay=preload("res://scripts/city_metric_overlay.gd").new();city_metric_overlay.name="CityMetricOverlay";add_child(city_metric_overlay)
+	if not city_metric_overlay.setup(self):
+		_exploration_failure("건물 크기와 간격 비교 자료를 준비하지 못했습니다.");return
+	civic_facility_guidance=preload("res://scripts/civic_facility_guidance.gd").new();civic_facility_guidance.name="CivicFacilityGuidance";add_child(civic_facility_guidance);civic_facility_guidance.setup(self)
 	set_time_profile(_read_street_time())
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
@@ -320,13 +330,18 @@ func _build_ui() -> void:
 		vehicle_volume_caption.text="차량·날씨 음량 · %d%%"%roundi(value)
 		if is_instance_valid(city_vehicle_audio):city_vehicle_audio.set_gain(value/100.))
 	options.add_child(vehicle_volume)
+	var metric_switch:=CheckButton.new();metric_switch.name="MetreComparison";metric_switch.text="크기 비교 · 건물 치수와 1m 눈금"
+	for color_name: String in ["font_color","font_hover_color","font_pressed_color","font_hover_pressed_color"]:metric_switch.add_theme_color_override(color_name,Color(.08,.12,.16))
+	metric_switch.toggled.connect(func(value: bool):
+		if is_instance_valid(city_metric_overlay):city_metric_overlay.set_enabled(value))
+	options.add_child(metric_switch)
 	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
 	var summon:=Button.new();summon.text="내 근처에 킥보드 호출 · Q";summon.pressed.connect(func():
 		_sandbox_requests["summon"]=true
 		if menu.visible:toggle_menu()
 	);options.add_child(summon)
-	for detail: Array in [["도로 자동차 가까이 가기","traffic_car"],["세종로파출소 정문으로 이동","police_post"],["외곽 게임119안전센터로 이동","fire_station"],["119 출동 체험 · 비와 화재","fire_demo"]]:
+	for detail: Array in [["외곽 종합병원 정문으로 이동","hospital"],["외곽 대형 경찰청사로 이동","police_headquarters"],["도로 자동차 가까이 가기","traffic_car"],["세종로파출소 정문으로 이동","police_post"],["외곽 대형 소방서로 이동","fire_station"],["119 출동 체험 · 비와 화재","fire_demo"]]:
 		var button:=Button.new();button.text=String(detail[0]);button.pressed.connect(_visit_city_life.bind(String(detail[1])));options.add_child(button)
 	var sandbox_layer:=CanvasLayer.new();sandbox_layer.name="CitySandboxHUD";sandbox_layer.layer=19;add_child(sandbox_layer)
 	sandbox_status=Label.new();sandbox_status.name="SandboxStatus";sandbox_status.anchor_left=1.;sandbox_status.anchor_right=1.;sandbox_status.offset_left=-390.;sandbox_status.offset_right=-16.;sandbox_status.offset_top=16.;sandbox_status.offset_bottom=155.;sandbox_status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;sandbox_status.add_theme_font_size_override("font_size",16);sandbox_status.add_theme_color_override("font_shadow_color",Color(.02,.03,.05));sandbox_status.add_theme_constant_override("shadow_offset_x",2);sandbox_status.add_theme_constant_override("shadow_offset_y",2);sandbox_status.mouse_filter=Control.MOUSE_FILTER_IGNORE;sandbox_layer.add_child(sandbox_status)
@@ -377,6 +392,8 @@ func _visit_city_life(kind: String) -> void:
 	elif kind=="car_station" and is_instance_valid(drivable_car_service):destination=drivable_car_service.viewpoint()
 	elif kind=="traffic_car" and is_instance_valid(traffic_car_takeover):destination=traffic_car_takeover.viewpoint()
 	elif kind=="police_post" and is_instance_valid(city_public_safety):destination=city_public_safety.viewpoint()
+	elif kind=="police_headquarters" and is_instance_valid(city_public_safety) and is_instance_valid(city_public_safety.get("police_headquarters")):destination=city_public_safety.police_headquarters.viewpoint()
+	elif kind=="hospital" and is_instance_valid(city_hospital):destination=city_hospital.viewpoint()
 	elif kind in ["fire_station","fire_demo"] and is_instance_valid(city_weather_emergency):destination=city_weather_emergency.viewpoint()
 	elif kind=="helipad" and is_instance_valid(city_helicopter_service):destination=city_helicopter_service.viewpoint()
 	elif kind=="helicopter_roof" and is_instance_valid(city_helicopter_service):destination=city_helicopter_service.rooftop_destination()
@@ -428,7 +445,7 @@ func _time_selected(index: int) -> void:
 var street_walk_index: int=0
 
 func _visit_street_detail(kind: String) -> void:
-	if kind in ["shop","clothing","car_station","helipad","helicopter_roof","subway_cityhall","subway_euljiro","escalator_building","traffic_car","police_post","fire_station","fire_demo"] or (kind=="restaurant" and is_instance_valid(shop_visit_service)):
+	if kind in ["shop","clothing","car_station","helipad","helicopter_roof","subway_cityhall","subway_euljiro","escalator_building","traffic_car","police_post","fire_station","fire_demo","police_headquarters","hospital"] or (kind=="restaurant" and is_instance_valid(shop_visit_service)):
 		_visit_city_life(kind);return
 	if not is_instance_valid(interior_visit) or kind not in ["restaurant","busking","hill","dog_walk","hotel_pool","picnic","church","street_walk","bus_stop","crossing","street_lamps","bike_station","scooter_station"]:return
 	if kind=="hotel_pool":
@@ -669,6 +686,7 @@ func _street_interaction_services() -> Array[Node3D]:
 	var services: Array[Node3D]=_street_services()
 	if is_instance_valid(shop_visit_service):services.append(shop_visit_service)
 	if is_instance_valid(city_public_safety):services.append(city_public_safety)
+	if is_instance_valid(city_hospital):services.append(city_hospital)
 	return services
 
 func _street_service_distance(service: Node3D) -> float:

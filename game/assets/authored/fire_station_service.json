@@ -1,95 +1,174 @@
 {
   "schema_version": 1,
-  "task": "EXP27_GAME_FIRE_STATION_EDGE",
+  "task": "EXP27_REAL_SCALE_FICTIONAL_FIRE_CAMPUS",
   "source_hashes": {
     "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
     "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2"
   },
   "provenance": {
-    "placement": "Authored fictional facility at the playable region eastern edge; not an actual Seoul firestation location.",
-    "source_ground_feature": "osm:way:768396101:land_area",
+    "placement": "Fictional western-edge game campus. Metre-sized model design only; not an actual station, actual Korean pump model, surveyed parcel or measured emergency operation.",
+    "source_ground_feature": "osm:way:1216346302:land_area",
     "source_ground_tags": {
       "landuse": "grass"
     },
     "source_refs": [
       {
         "provider": "OpenStreetMap via Geofabrik",
-        "object_id": "w/768396101",
+        "object_id": "w/1216346302",
         "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
         "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
       }
     ]
   },
   "facility": {
-    "title": "게임 119안전센터",
-    "width_m": 12,
-    "depth_m": 8,
-    "height_m": 6.2,
+    "title": "게임 서울서부소방서",
+    "width_m": 36,
+    "depth_m": 30,
+    "height_m": 12,
     "candidate_centers_xz": [
       [
-        419,
-        -72
+        -420,
+        -182
       ],
       [
-        411,
-        -72
+        -424,
+        -182
       ],
       [
-        427,
-        -72
+        -416,
+        -182
       ]
     ],
-    "yaw_radians": 0,
-    "garage_center_local_x": -2.55,
-    "garage_depot_local_z": 0.0,
-    "garage_exit_local_z": -10.0,
-    "source_footpath_minimum_clearance_m": 2.0,
-    "authored_forecourt_local_xz": [
+    "yaw_radians": 1.5707963267948966,
+    "garage_center_local_x": -6,
+    "garage_depot_local_z": -8,
+    "garage_exit_local_z": -24,
+    "source_footpath_minimum_clearance_m": 2,
+    "authored_campus_xz": [
       [
-        -8,
-        -11
+        -464,
+        -173.5
       ],
       [
-        18,
-        -11
+        -466,
+        -186.5
       ],
       [
-        18,
-        -3
+        -459,
+        -188
       ],
       [
-        -8,
-        -3
+        -453,
+        -193
+      ],
+      [
+        -448,
+        -205
+      ],
+      [
+        -438,
+        -205
+      ],
+      [
+        -438,
+        -203
+      ],
+      [
+        -401,
+        -203
+      ],
+      [
+        -401,
+        -160
+      ],
+      [
+        -440,
+        -160
       ]
     ],
-    "forecourt_basis": "Bounded authored connector on retained non-private native TIN between this source parcel and the existing source road/walk masks. Paint only across the old footpath; no permanent solid or original geometry edit."
+    "campus_basis": "Explicit bounded game campus on retained non-private TIN. Original school, embassy, walls, source trees, pedestrian routes and road geometry remain intact. Source grass alone cannot contain the full building plus forecourt. No public land ownership or actual station placement claim.",
+    "apparatus_bay_count": 3,
+    "apparatus_clear_width_m": 4.8,
+    "apparatus_clear_height_m": 4.5,
+    "apparatus_clear_depth_m": 12,
+    "forecourt_depth_m": 15,
+    "storey_heights_m": [
+      4.8,
+      3.6,
+      3.6
+    ],
+    "reception_door_width_m": 1.6
   },
   "response": {
-    "source_road_route": "coverage_drive_3",
-    "source_feature_id": "osm:way:218923160:highway_line",
-    "source_segment": [
-      3,
-      4
+    "source_road_route": "authored_source_jeongdong_response",
+    "source_feature_id": "osm:way:238543311:highway_line",
+    "source_segment_xz": [
+      [
+        -462.6080274283886,
+        -172.7582053449005
+      ],
+      [
+        -446.03411239373963,
+        -208.1799340164289
+      ]
     ],
     "outbound_road_m": 18,
-    "return_lane_offset_m": 3.0,
-    "incident_offset_south_m": 15.0,
-    "incident_candidate_delta_x_m": [
-      0,
-      -1.5,
-      1.5
+    "curve_start_xz": [
+      -442,
+      -176
     ],
-    "crew_home_local_x": 6.5,
-    "crew_home_local_z": [
-      -6.2,
-      -7.3
-    ]
+    "curve_control_1_xz": [
+      -458,
+      -176
+    ],
+    "curve_control_2_xz": [
+      -462,
+      -180
+    ],
+    "road_join_xz": [
+      -456.0,
+      -186.881
+    ],
+    "incident_xz": [
+      -448,
+      -170
+    ],
+    "crew_home_xz": [
+      [
+        -438,
+        -166
+      ],
+      [
+        -438,
+        -167.1
+      ]
+    ],
+    "crew_target_xz": [
+      [
+        -446.5,
+        -169.4
+      ],
+      [
+        -446.5,
+        -170.5
+      ]
+    ],
+    "engine_size_m": [
+      2.5,
+      3.05,
+      8.0
+    ],
+    "engine_visual_height_m": 3.3,
+    "standby_engine_local_x": 0,
+    "reverse_return": true,
+    "return_rule": "Physical reverse along the certified bounded response route because this short game roadside incident has no certified full-size U-turn space. No teleport or 180-degree body flip."
   },
   "scope": {
     "original_geometry_modified": false,
     "real_station_location_claim": false,
     "public_access_claim": false,
-    "game_authoring_on_one_named_source_grass_parcel_only": true,
-    "existing_walk_corridors_reserved": true
+    "game_authoring_on_one_named_source_grass_parcel_only": false,
+    "existing_walk_corridors_reserved": true,
+    "bounded_authored_campus_on_retained_native_TIN": true
   }
 }

@@ -1,0 +1,155 @@
+{
+  "task": "bus_wall_guard_vs_stop_waiting_contract",
+  "status": "PASS",
+  "initial_failure": "data/reports/real_scale/20261022/regression/bus_safety_headless_final01.json",
+  "diagnostic_report": "data/reports/real_scale/20261022/regression/bus_safety_wall_diagnostic01.json",
+  "diagnostic_log": "data/reports/real_scale/20261022/regression/bus_safety_wall_diagnostic01.log",
+  "diagnostic_values": {
+    "after_E": {
+      "allowed_doors": [
+        0,
+        1
+      ],
+      "boarding_candidate": "{  }",
+      "boarding_point": "(43.03633, 1.312744, 203.9524)",
+      "bus_position": "(39.61786, 1.191195, 205.9622)",
+      "bus_yaw": -0.307639360427856,
+      "can_interact": true,
+      "docked_stop": 2,
+      "door_rays": [
+        {
+          "door_index": 0,
+          "from": "(42.78714, 1.851469, 207.5453)",
+          "hit": {},
+          "to": "(42.01725, 1.949026, 203.6476)"
+        },
+        {
+          "door_index": 0,
+          "from": "(42.78714, 2.501469, 207.5453)",
+          "hit": {},
+          "to": "(42.01772, 2.598812, 203.6642)"
+        },
+        {
+          "door_index": 1,
+          "from": "(42.78714, 1.851469, 207.5453)",
+          "hit": {
+            "class": "StaticBody3D",
+            "name": "BusDoorWallSafetyFixture",
+            "normal": "(0.953051, 0.0, 0.30281)",
+            "position": "(41.82182, 1.858246, 207.2482)",
+            "shape": 0
+          },
+          "to": "(40.95773, 1.864313, 206.9823)"
+        },
+        {
+          "door_index": 1,
+          "from": "(42.78714, 2.501469, 207.5453)",
+          "hit": {
+            "class": "StaticBody3D",
+            "name": "BusDoorWallSafetyFixture",
+            "normal": "(0.953051, 0.0, 0.30281)",
+            "position": "(41.81929, 2.508153, 207.2562)",
+            "shape": 0
+          },
+          "to": "(40.95819, 2.514099, 206.9989)"
+        }
+      ],
+      "fixture_only": "Original wall assertion unchanged; only detailed observation fields added.",
+      "nearest_wait": 2,
+      "player_bus_local": "(3.499977, 0.003137, 0.549927)",
+      "player_position": "(42.78714, 1.151469, 207.5453)",
+      "prompt": "도심01 정차 중 · 승차 표시까지 4m · 문 앞에서 E",
+      "requested_external_contains": true,
+      "requested_full_capsule_contacts": [],
+      "requested_ground": "(42.78714, 1.231157, 207.5453)",
+      "requested_observer": "(42.78714, 1.231157, 207.5453)",
+      "riding": false,
+      "shelter_point": "(48.52947, 1.309779, 208.7916)",
+      "wait_active": true,
+      "wall_pose": true,
+      "wall_position": "(41.73875, 1.172798, 207.2125)"
+    },
+    "before_E": {
+      "allowed_doors": [
+        0,
+        1
+      ],
+      "boarding_candidate": "{  }",
+      "boarding_point": "(43.03633, 1.312744, 203.9524)",
+      "bus_position": "(39.61786, 1.191195, 205.9622)",
+      "bus_yaw": -0.307639360427856,
+      "can_interact": true,
+      "docked_stop": 2,
+      "door_rays": [
+        {
+          "door_index": 0,
+          "from": "(42.78714, 1.851469, 207.5453)",
+          "hit": {},
+          "to": "(42.01725, 1.949026, 203.6476)"
+        },
+        {
+          "door_index": 0,
+          "from": "(42.78714, 2.501469, 207.5453)",
+          "hit": {},
+          "to": "(42.01772, 2.598812, 203.6642)"
+        },
+        {
+          "door_index": 1,
+          "from": "(42.78714, 1.851469, 207.5453)",
+          "hit": {
+            "class": "StaticBody3D",
+            "name": "BusDoorWallSafetyFixture",
+            "normal": "(0.953051, 0.0, 0.30281)",
+            "position": "(41.82182, 1.858246, 207.2482)",
+            "shape": 0
+          },
+          "to": "(40.95773, 1.864313, 206.9823)"
+        },
+        {
+          "door_index": 1,
+          "from": "(42.78714, 2.501469, 207.5453)",
+          "hit": {
+            "class": "StaticBody3D",
+            "name": "BusDoorWallSafetyFixture",
+            "normal": "(0.953051, 0.0, 0.30281)",
+            "position": "(41.81929, 2.508153, 207.2562)",
+            "shape": 0
+          },
+          "to": "(40.95819, 2.514099, 206.9989)"
+        }
+      ],
+      "fixture_only": "Original wall assertion unchanged; only detailed observation fields added.",
+      "nearest_wait": 2,
+      "player_bus_local": "(3.499977, 0.003137, 0.549927)",
+      "player_position": "(42.78714, 1.151469, 207.5453)",
+      "prompt": "도심01 정차 중 · 승차 표시까지 4m · 문 앞에서 E",
+      "requested_external_contains": true,
+      "requested_full_capsule_contacts": [],
+      "requested_ground": "(42.78714, 1.231157, 207.5453)",
+      "requested_observer": "(42.78714, 1.231157, 207.5453)",
+      "riding": false,
+      "shelter_point": "(48.52947, 1.309779, 208.7916)",
+      "wait_active": false,
+      "wall_pose": true,
+      "wall_position": "(41.73875, 1.172798, 207.2125)"
+    }
+  },
+  "finding": "Original can_interact=false assertion conflated physical bus boarding with separate safe stop-wait interaction after boarding-marker placement changed. The native wall still blocks both middle-door heights, _boarding_candidate is empty before and after actual E, and the player is not seated. E legitimately toggles waiting_for_bus at a nearby safe stop marker.",
+  "production_files_changed": [],
+  "test_file": "tests/game/check_city_bus_loop_safety.gd",
+  "test_sha256_at_final02_start": "863aaaa6a2920f2b7687e57b40f4085071f035021f566ade2d56d10bd5bc82f2",
+  "change": "Replace that single wall assertion with explicit dual-height native wall hit checks, empty boarding candidate before and after physical E, no rider ownership, and a separately verified waiting toggle only when _nearest_wait is eligible. Preserve the original 18-check denominator and later actual wall-removed E boarding positive control.",
+  "other_regressions": "All nine other suites passed unchanged production inputs. Original failed test and copied diagnostic remain preserved.",
+  "current_report": "data/reports/real_scale/20261022/regression/bus_safety_headless_final02.json",
+  "current_report_sha256": "d777eb5bf5bdfc5c4d7d0c9929efb33ebad8cbf145d0ed83bca29f35d30be574",
+  "current_metadata": "data/reports/real_scale/20261022/regression/bus_safety_headless_final02.run.json",
+  "current_log_paths": [
+    "data/reports/real_scale/20261022/regression/bus_safety_headless_final02.log",
+    "data/reports/real_scale/20261022/regression/bus_safety_headless_final02.console.log"
+  ],
+  "checks": 18,
+  "passed": 18,
+  "test_sha256_at_finish": "863aaaa6a2920f2b7687e57b40f4085071f035021f566ade2d56d10bd5bc82f2",
+  "test_source_unchanged_during_final02": true,
+  "production_inputs_unchanged_from_batch_start": true
+}

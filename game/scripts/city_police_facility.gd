@@ -146,9 +146,19 @@ func _enter_lobby() -> bool:
 func leave_for_teleport(point: Vector3) -> bool:
 	if not active or not _external_clear(point):return false
 	if host.player.interior_active:
-		if not host.player.end_interior(point):return false
+		if not host.player.end_interior(point):
+			# A custody room is deliberately outside the ordinary exterior
+			# domain. The host has already validated its complete native
+			# capsule/floor and marks this same-tick internal transfer only.
+			# Restore the lobby recovery owner through a separately validated
+			# outdoor anchor before moving to that validated custody point.
+			var custody_transfer: bool=host.get("_sandbox_custody_transfer")==true and point.distance_to(safety._room_origin)<8.
+			if not custody_transfer:return false
+			var anchor: Dictionary=host.interior_visit._safe_external_point(_saved.get("outside",entry_point))
+			if anchor.is_empty() or not _external_clear(anchor.point) or not host.player.end_interior(anchor.point):return false
+			host.player.global_transform=Transform3D(Basis.IDENTITY,point);host.player.require_neutral_input();host.player.reset_physics_interpolation()
 	else:host.player.global_transform=Transform3D(Basis.IDENTITY,point);host.player.set_facility_control(false);host.player.require_neutral_input();host.player.reset_physics_interpolation()
-	active=false;phase="outside";lobby.visible=false;exit_count+=1
+	active=false;phase="outside";_timer=0.;lobby.visible=false;exit_count+=1
 	if not _saved.is_empty():host.rig.yaw=_saved.yaw;host.rig.pitch=_saved.pitch;host.rig.requested_distance=_saved.distance;host.rig.current_distance=_saved.current;host.rig.pivot_height_m=_saved.pivot;_saved.clear()
 	host.rig.snap_to_target_pose();events.append({"event":"validated_lobby_exit","point":point});return true
 func return_to_world_spawn() -> bool:

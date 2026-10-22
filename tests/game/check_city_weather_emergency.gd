@@ -46,12 +46,12 @@ func _run() -> void:
 	var original: Dictionary={"source_nodes":scene.city.source_nodes.size(),"old_people":scene.pedestrians.size(),"old_vehicles":scene.vehicles.size(),"new_people":scene.neighborhood_population.walkers.actors.size(),"new_cars":scene.neighborhood_population.traffic.vehicles.size(),"capsule":scene.player.get_node("CollisionShape").shape.get_rid().get_id()}
 	_check("separate_visible_fire_station_engine_and_two_firefighters",is_instance_valid(service.station) and is_instance_valid(service.engine) and service.firefighters.size()==2,{"snapshot":service.snapshot()})
 	var footprint_ok:=true
-	for x: float in [-6.,-3.,0.,3.,6.]:
-		for z: float in [-4.,0.,4.]:
-			var point: Vector3=service.station.to_global(Vector3(x,0,z));footprint_ok=footprint_ok and service._on_site_grass(point) and not scene.city_bike_service._private_index.contains(Vector2(point.x,point.z))
-	_check("entire_outskirts_building_on_named_grass_off_retained_walks_and_trees",footprint_ok and absf(service.station.global_position.x)>350. and service._walk_corridors_clear(service.station.global_position,service.station.rotation.y) and service._retained_tree_box_clear(service.station.global_position,service.station.rotation.y,Vector3(12.4,7.,8.5)),{"footprint_m":[12.,8.],"source_ground_feature":service.provenance.source_ground_feature,"provenance":service._json(service.provenance),"whole_retained_tree_reservation":true})
+	for x: float in range(-18,19,2):
+		for z: float in range(-15,16,2):
+			var point: Vector3=service.station.to_global(Vector3(x,0,z));footprint_ok=footprint_ok and service._public(point,true) and not scene.city_bike_service._private_index.contains(Vector2(point.x,point.z)) and not service._ground(point).is_empty()
+	_check("entire_real_scale_outskirts_campus_off_retained_private_walks_and_trees",footprint_ok and absf(service.station.global_position.x)>350. and service._walk_corridors_clear(service.station.global_position,service.station.rotation.y) and service._retained_tree_box_clear(service.station.global_position,service.station.rotation.y,Vector3(36.5,13.7,30.5)),{"footprint_m":[36.,30.],"source_ground_feature":service.provenance.source_ground_feature,"provenance":service._json(service.provenance),"whole_retained_tree_reservation":true,"bounded_game_campus_not_actual_public_land_claim":true})
 	var required: Array=["RedApparatusHeader","ReceptionFrontLeftGlass","ReceptionDesk","UpperOfficeWindow","119IdentityLarge","GarageDoorSlat","FireGearLocker","CanopyWarmLED"]
-	_check("recognizable_public_facility_with_real_open_reception_and_apparatus_bay",required.all(func(title: String)->bool:return title in service.facility_details.features) and float(service.facility_details.reception_open_door_width_m)>=1.2 and float(service.facility_details.garage_width_m)>=5.,{"details":service.facility_details,"scope":"Component/size checks; actual native images still require independent visual review."})
+	_check("recognizable_public_facility_with_real_open_reception_and_apparatus_bay",required.all(func(title: String)->bool:return title in service.facility_details.features) and float(service.facility_details.reception_open_door_width_m)>=1.2 and float(service.facility_details.garage_width_m)>=4.5 and service.facility_details.apparatus_bay_count>=2 and service.facility_details.garage_clear_height_m>=4.5 and service.facility_details.garage_clear_depth_m>=11. and is_instance_valid(service.standby_engine) and service.engine.get_child(0).shape.size.z>=8.,{"details":service.facility_details,"scope":"Component/size checks; actual native images still require independent visual review."})
 	var full_capsules_clear:=true;var capsule_rows: Array=[]
 	for row: Dictionary in service.firefighters:
 		var query:=PhysicsShapeQueryParameters3D.new();query.shape=row.body.get_child(0).shape;query.transform=row.body.global_transform;query.transform.origin+=Vector3.UP*.90;query.collision_mask=1|2|4|8|32;query.exclude=[row.body.get_rid()]
@@ -59,9 +59,20 @@ func _run() -> void:
 		for hit: Dictionary in scene.get_world_3d().direct_space_state.intersect_shape(query,8):hits.append(String(hit.collider.get_path()))
 		full_capsules_clear=full_capsules_clear and hits.is_empty();capsule_rows.append({"name":String(row.body.name),"contacts":hits})
 	_check("complete_initial_firefighter_capsules_clear_actual_garage_and_engine",full_capsules_clear,{"capsules":capsule_rows})
-	var engine_query:=PhysicsShapeQueryParameters3D.new();engine_query.shape=service.engine.get_child(0).shape;engine_query.transform=service.engine.global_transform;engine_query.transform.origin+=Vector3.UP*1.25;engine_query.collision_mask=1|2|4|8|32;engine_query.exclude=[service.engine.get_rid()];var engine_hits: Array=[]
+	var engine_query:=PhysicsShapeQueryParameters3D.new();engine_query.shape=service.engine.get_child(0).shape;engine_query.transform=service.engine.global_transform;engine_query.transform.origin+=Vector3.UP*1.75;engine_query.collision_mask=1|2|4|8|32;engine_query.exclude=[service.engine.get_rid()];var engine_hits: Array=[]
 	for hit: Dictionary in scene.get_world_3d().direct_space_state.intersect_shape(engine_query,8):engine_hits.append(String(hit.collider.get_path()))
 	_check("full_initial_engine_box_clear_actual_garage_and_crew",engine_hits.is_empty(),{"contacts":engine_hits})
+	var visitor:=CharacterBody3D.new();visitor.name="ExplicitEntranceCapsuleProbe";visitor.collision_layer=2;visitor.collision_mask=1|2|4|8|32
+	var visitor_shape:=CollisionShape3D.new();visitor_shape.shape=scene.player.get_node("CollisionShape").shape;visitor_shape.position.y=.85;visitor.add_child(visitor_shape);scene.add_child(visitor)
+	var entrance_clear:=true;var entrance_distance:=0.;var entrance_contacts: Array=[]
+	var entrance_start: Vector3=service.station.to_global(Vector3(10.75,0,-28.5));visitor.global_position=service._travel_ground(entrance_start).point+Vector3.UP*.08
+	for i: int in range(1,317):
+		var point: Vector3=service.station.to_global(Vector3(10.75,0,-28.5+float(i)*.05));var floor: Dictionary=service._travel_ground(point)
+		if floor.is_empty():entrance_clear=false;break
+		point.y=floor.point.y+.08;var before: Vector3=visitor.global_position;var hit:=visitor.move_and_collide(point-before,false,.001,false);entrance_distance+=visitor.global_position.distance_to(before)
+		if hit!=null:entrance_contacts.append(String(hit.get_collider().get_path()));entrance_clear=false;break
+	_check("actual_human_capsule_traverses_accessible_apron_and_reception_door",entrance_clear and entrance_distance>15.,{"distance_m":entrance_distance,"contacts":entrance_contacts,"capsule":"Unmodified production player shape; actual native movement from forecourt through 1.6m open door, no responder teleport."})
+	visitor.queue_free();await _ticks(2)
 	scene.set_time_profile("day");await _capture("initial_daylight_119_station_front")
 	var before: Dictionary=service.snapshot();scene.toggle_menu();await _ticks(15);var after: Dictionary=service.snapshot();_check("menu_pauses_both_weather_and_response_clocks",before.clock_s==after.clock_s and before.weather_clock_s==after.weather_clock_s,{"before":before,"after":after});scene.toggle_menu()
 	# Explicit short-clock test configuration. Physical speeds, support,

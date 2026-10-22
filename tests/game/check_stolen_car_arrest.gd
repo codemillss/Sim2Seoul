@@ -7,6 +7,7 @@ var police: Node3D
 var checks: Array=[]
 var captures: Array=[]
 var samples: Array=[]
+var input_phase_samples: Array=[]
 var report_path:="/tmp/sim2seoul-stolen-car-arrest.json"
 var hashes: Dictionary={}
 var initial_car_ids: Array=[]
@@ -46,11 +47,20 @@ func _json(value: Variant) -> Variant:
 func _check(name: String,passed: bool,evidence: Dictionary={}) -> void:
 	checks.append({"name":name,"passed":passed,"evidence":_json(evidence)});print("STOLEN_ARREST_CHECK ",name," ",passed)
 func _ticks(count: int) -> void:
-	for index: int in range(count):await scene.rig.camera_stepped
+	# A camera physics signal can precede buffered input dispatch on the
+	# first busy native frame. Wait for ordinary physics and process phases.
+	for index: int in range(count):await physics_frame;await process_frame
+func _e_input_observation(label: String) -> Dictionary:
+	var visit: Node3D=scene.interior_visit
+	var target: Node3D=scene._street_interact_target()
+	return {"label":label,"physics_tick":Engine.get_physics_frames(),"process_frame":Engine.get_process_frames(),"interact_held":Input.is_action_pressed("interact"),"e_press_pending":visit._e_press_pending,"e_was_pressed":visit._e_was_pressed,"e_requires_release":visit.e_requires_release,"menu_open":scene.menu.visible,"street_target":String(target.name) if is_instance_valid(target) else "none","player":scene.player.global_position,"player_physics":scene.player.is_physics_processing(),"facility_control":scene.player.facility_control,"car_events":cars.events.duplicate(true),"pending_car_id":cars.pending_car.get_instance_id() if is_instance_valid(cars.pending_car) else 0,"pending_elapsed_s":cars.pending_elapsed_s,"pending_actual_distance_m":cars.pending_actual_distance_m,"car_riding":cars.riding,"seized_car_count":cars.bikes.size(),"police_wanted":police.wanted,"police_offense_count":police.offense_count}
 func _press_e(pressed: bool) -> void:
 	var event:=InputEventKey.new();event.keycode=KEY_E;event.physical_keycode=KEY_E;event.device=42;event.pressed=pressed;Input.parse_input_event(event)
 func _tap_e() -> void:
-	_press_e(true);await _ticks(2);_press_e(false);await _ticks(3)
+	input_phase_samples.append(_e_input_observation("before_actual_E_press"))
+	_press_e(true);input_phase_samples.append(_e_input_observation("immediately_after_pressed_parse_input_event"));await _ticks(2)
+	_press_e(false);input_phase_samples.append(_e_input_observation("immediately_after_released_parse_input_event"));await _ticks(3)
+	input_phase_samples.append(_e_input_observation("after_actual_E_process_and_physics_phases"))
 func _capture(title: String) -> void:
 	if DisplayServer.get_name()=="headless":return
 	await _ticks(3);await RenderingServer.frame_post_draw
@@ -96,12 +106,12 @@ func _one_theft(kind: String,exit_near_officer: bool) -> bool:
 	if not is_instance_valid(body):return false
 	var initial_speed: float=body._speed_mps;var initial_car_position: Vector3=body.global_position;var initial_officers: Array=[]
 	for row: Dictionary in police.officers:initial_officers.append({"id":row.body.get_instance_id(),"point":row.body.global_position,"distance_m":row.distance_m})
-	var offenses_before: int=police.offense_count;await _tap_e()
+	var offenses_before: int=police.offense_count;var input_phase_start: int=input_phase_samples.size();await _tap_e()
 	for tick: int in range(180):
 		if not is_instance_valid(cars.pending_car):break
 		await _ticks(1)
 	var mounted: bool=cars.riding and not is_instance_valid(cars.pending_car) and cars.rental_index>=0 and cars.bikes[cars.rental_index].body==body
-	_check(kind+"_physical_E_theft_stops_and_boards_exact_original_car",mounted and (kind!="investigation" or initial_speed>.25),{"body_id":body.get_instance_id(),"route_id":body.get_route_id(),"initial_speed_mps":initial_speed,"initial_position":initial_car_position,"stopped_position":body.global_position,"stop_distance_m":cars.pending_actual_distance_m,"officers_before":initial_officers,"cars":cars.snapshot()})
+	_check(kind+"_physical_E_theft_stops_and_boards_exact_original_car",mounted and (kind!="investigation" or initial_speed>.25),{"body_id":body.get_instance_id(),"route_id":body.get_route_id(),"initial_speed_mps":initial_speed,"initial_position":initial_car_position,"stopped_position":body.global_position,"stop_distance_m":cars.pending_actual_distance_m,"officers_before":initial_officers,"input_phase":input_phase_samples.slice(input_phase_start),"cars":cars.snapshot()})
 	if not mounted:return false
 	stolen.append(body)
 	_check(kind+"_confirmed_theft_automatically_starts_actual_police_chase",police.wanted and police.offense_count==offenses_before+1 and police.chase_remaining_s>58.,police.snapshot())
@@ -169,4 +179,4 @@ func _finish() -> void:
 	_check("runtime_inputs_stable_during_actual_integration",hashes==_hashes() and not hashes.values().has(""),{"start":hashes,"end":_hashes()})
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size();var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:quit(2);return
-	file.store_string(JSON.stringify(_json({"task":"EXP27_STOLEN_CAR_ACTUAL_ARREST","region_fixture":region_fixture,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"physics_hz":Engine.physics_ticks_per_second,"recorded_at":Time.get_datetime_string_from_system(),"result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"source_hashes":hashes,"police":police.snapshot() if is_instance_valid(police) else {},"cars":cars.snapshot() if is_instance_valid(cars) else {},"samples":samples,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Physical KEY_E original moving-car theft, naturally posted officers physically approach/catch, actual custody and automatic release; player-only initial car approach fixtures. No officer/car teleport, direct capture method, forged offense/timer/ownership flags or OS/native visual acceptance claim."}),"  "));file.close();print("STOLEN_ARREST_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
+	file.store_string(JSON.stringify(_json({"task":"EXP27_STOLEN_CAR_ACTUAL_ARREST","region_fixture":region_fixture,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"physics_hz":Engine.physics_ticks_per_second,"recorded_at":Time.get_datetime_string_from_system(),"result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"source_hashes":hashes,"police":police.snapshot() if is_instance_valid(police) else {},"cars":cars.snapshot() if is_instance_valid(cars) else {},"samples":samples,"input_phase_samples":input_phase_samples,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Physical KEY_E original moving-car theft, naturally posted officers physically approach/catch, actual custody and automatic release; player-only initial car approach fixtures. No officer/car teleport, direct capture method, forged offense/timer/ownership flags or OS/native visual acceptance claim."}),"  "));file.close();print("STOLEN_ARREST_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)

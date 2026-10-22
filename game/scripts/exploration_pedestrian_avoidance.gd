@@ -6,6 +6,13 @@ var running := true
 var groups: Array[Dictionary]=[]
 var street: Node3D
 var _original: Array[CharacterBody3D]=[]
+const AVATAR := preload("res://scripts/player/exploration_avatar.gd")
+class HumanRenderProxy extends Node3D:
+	func _physics_process(_delta: float) -> void:transform=Transform3D.IDENTITY
+class HumanPoseFinisher extends Node:
+	var service: Node3D
+	func _physics_process(_delta: float) -> void:service._finish_human_poses()
+var human_visuals: Array[Dictionary]=[]
 
 func setup(_city: Node3D,_player: CharacterBody3D,original_people: Array[CharacterBody3D],street_people: Node3D) -> bool:
 	if loaded or not is_instance_valid(street_people) or not street_people.loaded or original_people.size()!=2:return false
@@ -28,8 +35,26 @@ func setup(_city: Node3D,_player: CharacterBody3D,original_people: Array[Charact
 		actor.set_meta("exploration_avoidance_adapter",true)
 		actor.collision_mask|=32;actor.floor_snap_length=.35
 		actor.set_physics_process(false)
+		var avatar:=AVATAR.new()
+		if not avatar.setup(actor):return false
+		var front:=actor.get_node_or_null("Visual/Front") as Node3D
+		if front!=null:front.visible=false
+		var proxy:=HumanRenderProxy.new();proxy.name="AdultRenderProxy";proxy.process_mode=Node.PROCESS_MODE_PAUSABLE;proxy.process_physics_priority=-100;proxy.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF;avatar.add_child(proxy)
+		for child: Node in avatar.get_children():
+			if child!=proxy and child is Node3D:child.reparent(proxy,false)
+		human_visuals.append({"body":actor,"avatar":avatar,"proxy":proxy,"previous":avatar.global_transform,"current":avatar.global_transform})
+	var finisher:=HumanPoseFinisher.new();finisher.service=self;finisher.process_physics_priority=3;add_child(finisher)
 	loaded=true;print("EXPLORATION_PEDESTRIAN_AVOIDANCE_READY people=2 original_core_unchanged=true")
 	return true
+
+func _finish_human_poses() -> void:
+	for row: Dictionary in human_visuals:
+		row.previous=row.current;row.current=row.avatar.global_transform
+		if row.previous.origin.distance_to(row.current.origin)>2.:row.previous=row.current
+
+func _process(_delta: float) -> void:
+	var fraction:=clampf(Engine.get_physics_interpolation_fraction(),0.,1.)
+	for row: Dictionary in human_visuals:row.proxy.global_transform=row.previous.interpolate_with(row.current,fraction)
 
 func refresh_terrain() -> void:
 	if not loaded or street._terrain_service()==null:return
@@ -100,4 +125,4 @@ func _physics_process(delta: float) -> void:
 func snapshot() -> Dictionary:
 	var rows:=[]
 	for group: Dictionary in groups:rows.append({"id":group.id,"station_m":group.station,"direction":group.direction,"state":group.state if running else "paused","offset_m":group.get("avoidance_offset_m",0.),"avoidance_count":group.get("avoidance_count",0),"blocked_reason":group.blocked_reason,"position":group.members[0].body.global_position})
-	return {"loaded":loaded,"running":running,"routes":rows,"original_controller_source_changed":false}
+	return {"loaded":loaded,"running":running,"routes":rows,"original_controller_source_changed":false,"retained_original_bodies_with_adult_visuals":human_visuals.size()}

@@ -1,0 +1,221 @@
+{
+  "task": "bus_access_first_wait_phase_analysis",
+  "status": "test_only_process_phase_sync_applied_native_final02_pending",
+  "original_native_failure": "data/reports/real_scale/20261022/acceptance/bus_access_native_final01.json",
+  "original_failed_check": "source_wait_fresh_E_requests_bus_1",
+  "native_request_events_preserved": [
+    {
+      "bus_id": "BlueLoopBus_T01-02",
+      "station_m": 270.920802399516,
+      "stop_id": "GAME-L01",
+      "tick": 17,
+      "type": "wait_requested"
+    }
+  ],
+  "native_request_is_observed": true,
+  "headless_diagnostic": "data/reports/real_scale/20261022/regression/bus_first_wait_diagnostic01.json",
+  "headless_observations": [
+    {
+      "boarding_candidate": "{  }",
+      "bus_can_interact": true,
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        }
+      ],
+      "interact_held": false,
+      "label": "before_original_first_E",
+      "menu_open": false,
+      "nearest_wait": 0,
+      "physics_tick": 12,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "posed": true,
+      "process_frame": 43,
+      "requested_wait_world": "(-3.029914, 3.163638, 371.4117)",
+      "street_target": "CityBusService",
+      "waiting_for_bus": false,
+      "waiting_stop_index": -1
+    },
+    {
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        }
+      ],
+      "interact_held": false,
+      "label": "before_pressed_parse_input_event",
+      "menu_open": false,
+      "physics_tick": 12,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "process_frame": 43,
+      "waiting_for_bus": false,
+      "waiting_stop_index": -1
+    },
+    {
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        }
+      ],
+      "interact_held": false,
+      "label": "immediately_after_pressed_parse_input_event",
+      "menu_open": false,
+      "physics_tick": 12,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "process_frame": 43,
+      "waiting_for_bus": false,
+      "waiting_stop_index": -1
+    },
+    {
+      "e_press_pending": false,
+      "e_requires_release": true,
+      "e_was_pressed": true,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        },
+        {
+          "bus_id": "BlueLoopBus_T01-02",
+          "station_m": 270.910393998027,
+          "stop_id": "GAME-L01",
+          "tick": 13,
+          "type": "wait_requested"
+        }
+      ],
+      "interact_held": true,
+      "label": "immediately_after_released_parse_input_event",
+      "menu_open": false,
+      "physics_tick": 14,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "process_frame": 51,
+      "waiting_for_bus": true,
+      "waiting_stop_index": 0
+    },
+    {
+      "bus_can_interact": true,
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        },
+        {
+          "bus_id": "BlueLoopBus_T01-02",
+          "station_m": 270.910393998027,
+          "stop_id": "GAME-L01",
+          "tick": 13,
+          "type": "wait_requested"
+        }
+      ],
+      "interact_held": false,
+      "label": "same_original_assertion_phase",
+      "menu_open": false,
+      "nearest_wait": 0,
+      "physics_tick": 17,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "posed": true,
+      "process_frame": 63,
+      "street_target": "CityBusService",
+      "waiting_for_bus": true,
+      "waiting_stop_index": 0
+    },
+    {
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        },
+        {
+          "bus_id": "BlueLoopBus_T01-02",
+          "station_m": 270.910393998027,
+          "stop_id": "GAME-L01",
+          "tick": 13,
+          "type": "wait_requested"
+        }
+      ],
+      "interact_held": false,
+      "label": "after_next_process_frame",
+      "menu_open": false,
+      "physics_tick": 17,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "process_frame": 63,
+      "waiting_for_bus": true,
+      "waiting_stop_index": 0
+    },
+    {
+      "e_press_pending": false,
+      "e_requires_release": false,
+      "e_was_pressed": false,
+      "events": [
+        {
+          "bus_id": "BlueLoopBus_T01-01",
+          "station_m": 0.0,
+          "tick": 1,
+          "type": "service_ready"
+        },
+        {
+          "bus_id": "BlueLoopBus_T01-02",
+          "station_m": 270.910393998027,
+          "stop_id": "GAME-L01",
+          "tick": 13,
+          "type": "wait_requested"
+        }
+      ],
+      "interact_held": false,
+      "label": "settled_after_process_and_physics",
+      "menu_open": false,
+      "physics_tick": 20,
+      "player": "(-3.029914, 3.08395, 371.4117)",
+      "process_frame": 75,
+      "waiting_for_bus": true,
+      "waiting_stop_index": 0
+    }
+  ],
+  "finding": "First source-wait pose and CityBusService target are supported in the short headless observation. Input.parse_input_event is not immediately reflected in held/pending state; the request appears at a later input/process/physics stage. The native failure report records the actual GAME-L01 wait_requested event at tick17, so loss of the requested action is disproven, but its empty assertion evidence cannot show which subcondition was false at the original inspection phase.",
+  "inference": "A physics-only harness timing race on the first heavy native frame is consistent with these observations; native revalidation with detailed assertion evidence and explicit process-stage waits is required before calling it confirmed.",
+  "proposed_test_only_change": "Override _ticks in check_bus_stop_access.gd to await both physics_frame and process_frame, retaining the same physical E press/release, same assertions/31 native denominator, and actual W/door/alighting controls. Record posed/ticks/dispatcher/request-event state on each original source-wait assertion.",
+  "production_changes": [],
+  "harness_unchanged_so_far": "tests/game/check_bus_stop_access.gd",
+  "harness_sha256": "b004b4f1dcba1c60cd1006b229eb6b1e4d7cc1d33a36808f85e40406a806f8d5",
+  "recorded_at": "2026-10-22T04:04:28.031726+00:00",
+  "updated_harness_sha256": "f49649afde4304739bdcbaf54247ec6086fc3019f77b34c101a66474d1340eb0",
+  "test_change": "bus_access-only _ticks now awaits physics_frame and process_frame; original source-wait condition and 31 native/27 headless assertions remain unchanged. Each source-wait check records before/after posed, physics/process frames, real request events, held/pending/release latches and actual street target.",
+  "parse_validation": {
+    "command": "Godot --headless --path game --check-only --script res://../tests/game/check_bus_stop_access.gd",
+    "returncode": 0,
+    "script_errors": false,
+    "scope": "Parser only; no acceptance/gameplay or native first-frame race conclusion."
+  },
+  "native_verification_required": true,
+  "frozen_at": "2026-10-22T04:05:17.262945+00:00"
+}

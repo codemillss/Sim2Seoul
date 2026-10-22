@@ -1,0 +1,228 @@
+{
+  "task": "EXP28_INTEGRATED_EXP27",
+  "recorded_at": "2026-10-22T04:27:43.710538+00:00",
+  "items": [
+    {
+      "issue": "outside-dock rental ownership hid called scooter E target",
+      "change": "release prior rental ownership only; leave actual parked body; reuse one personal body",
+      "proof": "data/reports/real_scale/20261022/acceptance/sandbox_controls_native_final01.json",
+      "checkpoint_draft_proof_reference": "controls/sandbox_controls_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "deferred native dismount pair release could unlock new custody",
+      "change": "release collision pair without restoring controls while public safety owns custody",
+      "proof": "data/reports/real_scale/20261022/acceptance/car_police_native_final02.json",
+      "checkpoint_draft_proof_reference": "car_police/car_police_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "menu free-roam and destination could recover out of detention",
+      "change": "guard external toggles/reset/teleports; trusted custody transition after native floor/capsule guard",
+      "proof": "data/reports/real_scale/20261022/regression/police_headless_final01.json",
+      "checkpoint_draft_proof_reference": "police/police_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "one synchronous police route job measured249.613ms",
+      "change": "incremental per-officer planning with1.5ms target chunks, native validation retained; interpolate displayed bodies",
+      "proof": "data/reports/real_scale/20261022/regression/police_headless_final01.json",
+      "limit": "soft budget; individual queries may exceed target; not sustained FPS acceptance",
+      "checkpoint_draft_proof_reference": "police/police_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "Euljiro officer stalled7-8m away from exact original stolen car",
+      "diagnosis": "data/reports/city_sandbox/20261022/police/euljiro_assessment.json",
+      "change": "police-only original playable nonprivate TIN fallback across1.5m source-index gap; door/native footprint/sweep remain",
+      "proof": "data/reports/real_scale/20261022/acceptance/stolen_euljiro_native_final01.json",
+      "checkpoint_draft_proof_reference": "car_police/stolen_euljiro_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "fire dev03 crew crossed garage wall;dev04 head-on return deadlock;dev05 truck rear5cm in garage wall",
+      "change": "crew homes outside front corners, separate supported return lane, depot40cmforward and full native box checks",
+      "proof": "data/reports/real_scale/20261022/acceptance/weather_fire_native_final01.json",
+      "checkpoint_draft_proof_reference": "fire_weather/weather_fire_native_final03.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "first native47/52 expected moving request after fixture had already physically stopped selected car",
+      "change": "verify actual speed and native braking corridor immediately before request; no production braking loosened",
+      "history": "data/reports/city_sandbox/20261022/car/takeover_native_final.json",
+      "proof": "data/reports/real_scale/20261022/regression/takeover_headless_final01.json",
+      "checkpoint_draft_proof_reference": "car/takeover_native_final03.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "cancelling pending stop restored stale traffic running state after menuOFF",
+      "change": "restore current traffic checkbox policy; real OFF/shortcutcancel/ON regression",
+      "proof": "data/reports/real_scale/20261022/regression/takeover_headless_final01.json",
+      "checkpoint_draft_proof_reference": "car/takeover_native_final03.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "controls dev01 used rig camera-step wait while menupaused and wrong before-Q region eligibility",
+      "change": "pause-safe SceneTree tick wait and supported player-only neighborhood fixture; product guards unchanged",
+      "history": "data/reports/city_sandbox/20261022/controls/sandbox_controls_headless_dev01.json",
+      "proof": "data/reports/real_scale/20261022/acceptance/sandbox_controls_native_final01.json",
+      "checkpoint_draft_proof_reference": "controls/sandbox_controls_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "initial native119 return view showed garage back",
+      "change": "prefer front-quarter supported observer and camera/header/truck LOS; respect viewpoint metadata; add initial daylight front image",
+      "history": "data/reports/city_sandbox/20261022/fire_weather/weather_fire_native_final_returned_119_station.png",
+      "proof": "data/reports/real_scale/20261022/acceptance/weather_fire_native_final01.json",
+      "checkpoint_draft_proof_reference": "fire_weather/weather_fire_native_final03.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "native controller final02 53/55 omitted finaltwo Euljiro takeovers after the long14carloop",
+      "history": "data/reports/city_sandbox/20261022/car/takeover_native_final02.json",
+      "diagnosis": "No final request events; evidence did not record custody state, so interception is consistent with behavior but not definitively established from that run.",
+      "change": "After proving real theft→wanted, pause only police physics in explicitly isolated controller fixture, retain reporting and original actors, restore physics at finish. Live central+exactEuljiro native suites independently test actual pursuit and arrest.",
+      "proof": [
+        "data/reports/real_scale/20261022/regression/takeover_headless_final01.json",
+        "data/reports/real_scale/20261022/acceptance/car_police_native_final02.json",
+        "data/reports/real_scale/20261022/acceptance/stolen_euljiro_native_final01.json"
+      ],
+      "checkpoint_draft_proof_reference": [
+        "car/takeover_native_final03.json",
+        "car_police/car_police_native_final02.json",
+        "car_police/stolen_euljiro_native_final02.json"
+      ],
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "Q native first capture showed close camera/old parked scooter obscuring called rider",
+      "history": "data/reports/city_sandbox/20261022/controls/sandbox_controls_native_final_called_scooter_mounted.png",
+      "change": "Camera-only quarter-turn inspection orbit and35realphysicsframes settling; keep camera collision enabled. No production change.",
+      "proof": "data/reports/real_scale/20261022/acceptance/sandbox_controls_native_final01.json",
+      "checkpoint_draft_proof_reference": "controls/sandbox_controls_native_final02.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "initial strict front-quarter finder rejected all viewpoints: native16/18",
+      "history": "data/reports/city_sandbox/20261022/fire_weather/weather_fire_native_final02.json",
+      "diagnosis": "data/reports/city_sandbox/20261022/fire_weather/front_view_guard_diagnostic.json",
+      "change": "48native query probes showed overly distant front points lay outside source sidewalk. Add proven3mfront+6mlateral public-pavement point without relaxing capsule/camera/header/truck LOS guards.",
+      "proof": "data/reports/real_scale/20261022/acceptance/weather_fire_native_final01.json",
+      "checkpoint_draft_proof_reference": "fire_weather/weather_fire_native_final03.json",
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "new posted officer physically blocked originalSCOOTER-GAME-05 W departure after0.371m; distribution86/88",
+      "history": "data/reports/city_sandbox/20261022/regression/distribution_headless_final.json",
+      "diagnosis": "native sweeps/contact diagnostics identified CityPublicSafety/GamePoliceOfficer5, matching initial controlsdev01 stopped distance; this is a real production regression, not only a fixture issue.",
+      "change": "reserve all16 station full-yaw8mdeparture sweeps plus fixture/boarding clearance from posted police/home/release/viewpoint; preserve valid posts and try small local nudges first",
+      "proof": [
+        "data/reports/real_scale/20261022/regression/distribution_headless_final01.json",
+        "data/reports/real_scale/20261022/regression/police_headless_final01.json"
+      ],
+      "checkpoint_draft_proof_reference": [
+        "regression/distribution_headless_final02.json",
+        "police/police_native_final03.json"
+      ],
+      "proof_scope": "Current integrated production acceptance; historical failure remains separate. No unexecuted anticipated final03 is asserted."
+    },
+    {
+      "issue": "Original metric claim was based on metre settings, not full projected footprint or gap evidence.",
+      "change": "Reproject actual source polygons and geodesic edge lengths; measure axis bounds, oriented envelopes and true polygon gaps; verify all635 original engine bounds separately.",
+      "proof": [
+        "data/reports/real_scale/20261022/source_audit.json",
+        "data/reports/real_scale/20261022/hospital/hospital_native_final02.json"
+      ],
+      "limit": "Source consistency does not independently establish real survey accuracy or every replacement landmark visual.479 default heights remain."
+    },
+    {
+      "issue": "Initial projected edge audit zipped reordered polygon rings and reported meaningless0.005..62 scale ratios.",
+      "change": "Project each actual source edge and compare geometry sets; preserve raw development audit separately.",
+      "proof": [
+        "data/reports/real_scale/20261022/source_audit.json"
+      ],
+      "limit": ""
+    },
+    {
+      "issue": "Human short visible torso/head ratio, bent standing knees, disconnected-looking neck/limbs and stance foot slip.",
+      "change": "Actual adult mesh1.69449m,7.37-head ratio, standing hip and reach-aware gait joints; camera and upperbody bob remain zero.",
+      "proof": [
+        "data/reports/real_scale/20261022/human_motion/motion_native_final01.json",
+        "data/reports/real_scale/20261022/regression/human_city_headless_final01.json"
+      ],
+      "limit": "Procedural stylized model.21m/s turbo still has disclosed foot sliding; no GTA/mocap quality claim."
+    },
+    {
+      "issue": "Old small fire station, short engine and new large-campus source/support/crew/garage clearance failures.",
+      "change": "Bounded36x30m3-floor3-bay fictional facility, two full8m engines, supported physical road/crew/water/reverse return; reserve original tree/walk/source space.",
+      "proof": [
+        "data/reports/real_scale/20261022/acceptance/weather_fire_native_final01.json"
+      ],
+      "limit": ""
+    },
+    {
+      "issue": "No real large police or hospital source institution existed inside this retained map.",
+      "change": "Add fictional48x34m12F hospital and30x22m4F police campus outside retained originals; retain actual Sejong source footprint and add52m2 authored detached public lobby.",
+      "proof": [
+        "data/reports/real_scale/20261022/hospital/hospital_native_final02.json",
+        "data/reports/real_scale/20261022/acceptance/police_headquarters_native_final01.json",
+        "data/reports/real_scale/20261022/acceptance/police_facility_native_final01.json"
+      ],
+      "limit": "New hospital/police upper floors are exterior/staff envelopes, not playable full floors or reconstructions of actual institutions."
+    },
+    {
+      "issue": "Initial hospital parcel edge, ER door identity and design data could silently disagree.",
+      "change": "Move centre from267 to265m for source parcel; identify door by actual z; fail fast on authored dimensions/location/door/source; disclose ER ramp on bounded adjacent ground.",
+      "proof": [
+        "data/reports/real_scale/20261022/hospital/hospital_native_final02.json"
+      ],
+      "limit": ""
+    },
+    {
+      "issue": "World-centroid dimension text hid inside611/635 buildings; entrance compass showed unrelated original site near new facility.",
+      "change": "Use readable2D size readout plus1m world ruler; scoped civic caption/panel adapter leaves actual names.current_* and E target state untouched.",
+      "proof": [
+        "data/reports/real_scale/20261022/independent_review.json",
+        "data/reports/real_scale/20261022/hospital/hospital_native_final02_source_width_depth_and_gap_comparison.png"
+      ],
+      "limit": "Near-door action prompt and civic caption can still overlap, noted in actual OS evidence; no input-selection ownership is changed."
+    },
+    {
+      "issue": "Headquarters parked car is StaticBody3D and standby engine should stay off during dispatch.",
+      "change": "Bind audio to PhysicsBody3D, explicit parked roles; real mixer capture verifies both parked vehicles silence, dispatch/rain/water/controls/pan.",
+      "proof": [
+        "data/reports/city_sandbox/20261022/audio/audio_native_final01.json"
+      ],
+      "limit": "Original synthesized sounds;13 captured PCM clips do not prove physical-speaker quality or full Master clipping."
+    },
+    {
+      "issue": "bus_safety first final17/18 conflated safe waiting interaction with illegal boarding through wall.",
+      "change": "Require both native LOS rays hitting wall, empty boarding candidate, real E refusing boarding while separate waiting may remain available; wall removal real E positive control retained.",
+      "proof": [
+        "data/reports/real_scale/20261022/regression/bus_wall_correction.json",
+        "data/reports/real_scale/20261022/regression/bus_safety_headless_final02.json"
+      ],
+      "limit": "Same18 conditions; production bus unchanged."
+    },
+    {
+      "issue": "bus_access native final01 first wait assertion raced unobserved input stage:30/31; four actual W/E boarding paths otherwise passed.",
+      "change": "Await both physics and process boundaries and record actual wait event/latches/frame indices; retain31 conditions and four real connector/boarding/alight sequences.",
+      "proof": [
+        "data/reports/real_scale/20261022/regression/bus_access_input_phase_analysis.json",
+        "data/reports/real_scale/20261022/acceptance/bus_access_native_final02.json"
+      ],
+      "limit": "Timing diagnosis is supported by later event observation; production route/boarding rules were not relaxed."
+    },
+    {
+      "issue": "car_police first native final01 ended3/4 before actual E stop request was observed.",
+      "change": "Shared harness awaits physics+process boundaries and records parsed press/release/request/custody frames. Same25/14 conditions and real chase/custody durations remain.",
+      "proof": [
+        "data/reports/real_scale/20261022/regression/stolen_car_input_phase_analysis.json",
+        "data/reports/real_scale/20261022/acceptance/car_police_native_final02.json",
+        "data/reports/real_scale/20261022/acceptance/stolen_euljiro_native_final01.json"
+      ],
+      "limit": "Production not changed for this test-phase correction."
+    }
+  ],
+  "scope": "Failures, production corrections and test-only corrections are distinguished. Current reports are selected by exact source bindings; failed/development logs remain unchanged."
+}

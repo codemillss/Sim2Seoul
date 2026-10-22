@@ -1,9 +1,13 @@
 extends Node3D
 ## Latest exploration scene only. Articulated clothing follows the retained
 ## 1.7m controller capsule; meshes never supply movement or collision.
-const LEG_LENGTH := .36
+const LEG_LENGTH := .43
 const STANDING_ANKLE_Y := .12
-const HIP_Y := .79
+const HIP_Y := .978
+const ADULT_VISUAL_HEIGHT_M := 1.70
+const HEAD_HEIGHT_M := .23
+const UPPER_ARM_LENGTH_M := .31
+const FOREARM_LENGTH_M := .29
 const MAX_CADENCE_HZ := 2.2
 var player: CharacterBody3D
 var state := "idle"
@@ -18,7 +22,14 @@ var _last_position := Vector3.ZERO
 var _last_grounded := true
 var _air_weight := 0.0
 var _run_weight := 0.0
+var _stance_fraction := .60
+var _cycle_distance_m := 1.26
+var _gait_speed_mps := 0.0
+var _air_tuck := 0.0
+var _facility_property := false
 var _upper_body: Node3D
+var _pelvis: MeshInstance3D
+var _hip_pose_y := HIP_Y
 var _old_body: MeshInstance3D
 var _old_body_visible := true
 var _joints: Dictionary = {}
@@ -45,6 +56,8 @@ func setup(controlled_player: CharacterBody3D) -> bool:
 	process_physics_priority=2
 	_old_body=original;_old_body_visible=original.visible;original.visible=false
 	_last_position=player.global_position;_last_grounded=player.is_on_floor()
+	for property: Dictionary in player.get_property_list():
+		if String(property.name)=="facility_control":_facility_property=true;break
 	_make_materials();_build_body();_rest_pose()
 	_ready_avatar=true
 	return true
@@ -76,38 +89,51 @@ func _joint(parent: Node3D,title: String,at: Vector3) -> Node3D:
 
 func _build_body() -> void:
 	_upper_body=_joint(self,"UpperBody",Vector3(0,.85,0))
-	_box(_upper_body,"Torso",Vector3(.40,.43,.25),Vector3(0,.225,0),"jacket")
-	_box(_upper_body,"Shirt",Vector3(.16,.36,.018),Vector3(0,.235,-.133),"shirt")
-	for side in [-1.0,1.0]:_box(_upper_body,"JacketFront",Vector3(.12,.39,.023),Vector3(side*.135,.225,-.144),"jacket_trim")
-	_box(_upper_body,"JacketHem",Vector3(.41,.045,.26),Vector3(0,.025,0),"jacket_trim")
-	_round(_upper_body,"Neck",Vector3(.13,.14,.13),Vector3(0,.47,0),"skin")
-	_round(_upper_body,"Head",Vector3(.235,.285,.235),Vector3(0,.65,-.005),"skin")
-	_round(_upper_body,"Hair",Vector3(.245,.15,.24),Vector3(0,.745,.005),"hair")
-	_box(_upper_body,"HairBack",Vector3(.215,.13,.07),Vector3(0,.655,.085),"hair")
-	_round(_upper_body,"Nose",Vector3(.043,.05,.05),Vector3(0,.64,-.124),"skin")
-	for side in [-1.0,1.0]:_round(_upper_body,"Eye",Vector3(.018,.024,.012),Vector3(side*.047,.682,-.111),"eye")
-	_box(self,"Pelvis",Vector3(.34,.17,.235),Vector3(0,.80,0),"trousers")
+	# Adult-size authored geometry, independently of the untouched safety capsule.
+	# The jacket tapers at the waist; the head is no longer nearly a sixth of height.
+	var torso:=CylinderMesh.new();torso.top_radius=.205;torso.bottom_radius=.170;torso.height=.46;torso.radial_segments=16
+	var jacket:=_mesh(_upper_body,"Torso",torso,Vector3(0,.27,0),"jacket");jacket.scale.z=.67
+	_box(_upper_body,"Shirt",Vector3(.14,.37,.018),Vector3(0,.285,-.133),"shirt")
+	for side in [-1.0,1.0]:_box(_upper_body,"JacketFront",Vector3(.095,.40,.023),Vector3(side*.117,.27,-.136),"jacket_trim")
+	_box(_upper_body,"JacketHem",Vector3(.35,.035,.235),Vector3(0,.055,0),"jacket_trim")
+	var neck:=CylinderMesh.new();neck.top_radius=.048;neck.bottom_radius=.052;neck.height=.12;neck.radial_segments=12
+	_mesh(_upper_body,"Neck",neck,Vector3(0,.535,0),"skin")
+	_box(_upper_body,"ShirtCollar",Vector3(.145,.035,.145),Vector3(0,.505,-.005),"shirt")
+	_round(_upper_body,"Head",Vector3(.175,HEAD_HEIGHT_M,.195),Vector3(0,.705,-.005),"skin")
+	_round(_upper_body,"Hair",Vector3(.185,.12,.202),Vector3(0,.790,.005),"hair")
+	_box(_upper_body,"HairBack",Vector3(.165,.11,.055),Vector3(0,.710,.075),"hair")
+	_round(_upper_body,"Nose",Vector3(.035,.043,.046),Vector3(0,.695,-.110),"skin")
+	for side in [-1.0,1.0]:
+		_round(_upper_body,"Eye",Vector3(.014,.019,.010),Vector3(side*.037,.735,-.099),"eye")
+		_round(_upper_body,"Ear",Vector3(.030,.058,.037),Vector3(side*.088,.705,0),"skin")
+	_pelvis=_box(self,"Pelvis",Vector3(.32,.15,.22),Vector3(0,HIP_Y,0),"trousers")
 	for side_name in ["Left","Right"]:
 		var side := -1.0 if side_name=="Left" else 1.0
 		var thigh := _joint(self,side_name+"Thigh",Vector3(side*.105,HIP_Y,0))
 		_limb(thigh,side_name+"UpperLeg",LEG_LENGTH,.074,"trousers")
 		var shin := _joint(thigh,side_name+"Shin",Vector3(0,-LEG_LENGTH,0))
+		_round(shin,side_name+"Knee",Vector3(.13,.13,.14),Vector3.ZERO,"trousers")
 		_limb(shin,side_name+"LowerLeg",LEG_LENGTH,.060,"trousers")
 		var foot := _joint(shin,side_name+"Foot",Vector3(0,-LEG_LENGTH,0))
 		_box(foot,side_name+"Shoe",Vector3(.15,.105,.29),Vector3(0,-.057,-.060),"shoes")
 		_box(foot,side_name+"ShoeSole",Vector3(.155,.025,.30),Vector3(0,-.102,-.060),"sole")
 		_box(foot,side_name+"ShoeLaces",Vector3(.095,.010,.07),Vector3(0,-.001,-.095),"jacket_trim")
-		var arm := _joint(self,side_name+"UpperArm",Vector3(side*.252,1.25,0))
-		_limb(arm,side_name+"Sleeve",.27,.060,"jacket")
-		var forearm := _joint(arm,side_name+"Forearm",Vector3(0,-.27,0))
-		_limb(forearm,side_name+"LowerSleeve",.24,.050,"jacket_trim")
-		_hands.append(_round(forearm,side_name+"Hand",Vector3(.085,.105,.075),Vector3(0,-.265,0),"skin"))
+		var arm := _joint(self,side_name+"UpperArm",Vector3(side*.235,1.36,0))
+		_round(arm,side_name+"Shoulder",Vector3(.108,.12,.115),Vector3(0,-.025,0),"jacket")
+		_limb(arm,side_name+"Sleeve",UPPER_ARM_LENGTH_M,.054,"jacket")
+		var forearm := _joint(arm,side_name+"Forearm",Vector3(0,-UPPER_ARM_LENGTH_M,0))
+		_round(forearm,side_name+"Elbow",Vector3(.088,.10,.095),Vector3.ZERO,"jacket_trim")
+		_limb(forearm,side_name+"LowerSleeve",FOREARM_LENGTH_M,.043,"jacket_trim")
+		_hands.append(_round(forearm,side_name+"Hand",Vector3(.075,.105,.062),Vector3(0,-FOREARM_LENGTH_M-.025,0),"skin"))
 
 func _rest_pose() -> void:
 	walk_weight=0.0;_air_weight=0.0;_run_weight=0.0;cadence_hz=0.0
+	_stance_fraction=.60;_cycle_distance_m=1.26;_gait_speed_mps=0.;_air_tuck=0.;_hip_pose_y=HIP_Y
 	position=Vector3.ZERO
 	_upper_body.position=Vector3(0,.85,0);_upper_body.rotation=Vector3.ZERO
+	_pelvis.position.y=HIP_Y
 	for side_name: String in ["Left","Right"]:
+		(_joints[side_name+"Thigh"] as Node3D).position.y=HIP_Y
 		var side := -1.0 if side_name=="Left" else 1.0
 		_feet[side_name]=Vector3(side*.105,STANDING_ANKLE_Y,-.025)
 		_leg_pose(side_name,_feet[side_name])
@@ -129,11 +155,12 @@ func _arm_to(side_name: String,target: Vector3) -> void:
 	var side := -1.0 if side_name=="Left" else 1.0
 	var offset := target-arm.position
 	var direction := offset.normalized()
-	var distance := clampf(offset.length(),.06,.27+.265-.0002)
+	var distance := clampf(offset.length(),.06,UPPER_ARM_LENGTH_M+FOREARM_LENGTH_M+.025-.0002)
 	var pole := Vector3(side*.8,-.3,.3)
 	pole=(pole-direction*pole.dot(direction)).normalized()
-	var along := (.27*.27-.265*.265+distance*distance)/(2.0*distance)
-	var elbow := arm.position+direction*along+pole*sqrt(maxf(0.,.27*.27-along*along))
+	var forearm_reach:=FOREARM_LENGTH_M+.025
+	var along := (UPPER_ARM_LENGTH_M*UPPER_ARM_LENGTH_M-forearm_reach*forearm_reach+distance*distance)/(2.0*distance)
+	var elbow := arm.position+direction*along+pole*sqrt(maxf(0.,UPPER_ARM_LENGTH_M*UPPER_ARM_LENGTH_M-along*along))
 	var grip := arm.position+direction*distance
 	arm.basis=Basis(Quaternion(Vector3.DOWN,(elbow-arm.position).normalized()))
 	forearm.basis=arm.basis.inverse()*Basis(Quaternion(Vector3.DOWN,(grip-elbow).normalized()))
@@ -189,7 +216,7 @@ func _activity_pose() -> void:
 		"shower":_upper_body.rotation.z=sin(elapsed*2.1)*.025
 
 func _leg_pose(side_name: String,foot: Vector3) -> void:
-	var down := HIP_Y-foot.y
+	var down := _hip_pose_y-foot.y
 	var reach := minf(sqrt(down*down+foot.z*foot.z),LEG_LENGTH*2.0-.002)
 	var direction := atan2(-foot.z,down)
 	var bend := acos(clampf(reach/(LEG_LENGTH*2.0),.01,1.0))
@@ -199,14 +226,34 @@ func _leg_pose(side_name: String,foot: Vector3) -> void:
 	(_joints[side_name+"Shin"] as Node3D).rotation.x=lower-upper
 	(_joints[side_name+"Foot"] as Node3D).rotation.x=-lower
 
+func _supported_hips(feet: Dictionary) -> void:
+	# Standing legs are nearly straight. During locomotion only the pelvis
+	# follows the two contact-leg reach limits under the jacket. The torso/head
+	# and camera anchor stay level, avoiding the former visible head bob.
+	var height:=HIP_Y
+	var maximum_reach:=LEG_LENGTH*2.-.002
+	for foot: Vector3 in feet.values():
+		height=minf(height,foot.y+sqrt(maxf(.01,maximum_reach*maximum_reach-foot.z*foot.z)))
+	_hip_pose_y=height;_pelvis.position.y=height
+	for side: String in ["Left","Right"]:(_joints[side+"Thigh"] as Node3D).position.y=height
+
 func _gait_foot(side: float,phase: float,reach: float,lift: float) -> Vector3:
-	# Continuous turnarounds and a zero-speed toe-off/landing avoid the
-	# abrupt foot reversals of a triangular stride, without lifting stance.
-	var foot := Vector3(side*.105,STANDING_ANKLE_Y,-cos(phase)*reach)
-	if phase>=PI:
-		var arch := sin(phase-PI)
-		foot.y+=arch*arch*lift
+	# During stance the ankle travels backwards at a constant body-relative
+	# speed. With uncapped distance-driven cadence, that cancels world travel.
+	# Cubic swing matches that derivative at both contacts; no impact snap/bob.
+	var fraction:=fposmod(phase/TAU,1.0)
+	var duty:=clampf(_stance_fraction,.38,.65)
+	var foot := Vector3(side*.105,STANDING_ANKLE_Y,0)
+	if fraction<duty:foot.z=lerpf(-reach,reach,fraction/duty)
+	else:
+		var swing:=(fraction-duty)/(1.-duty)
+		var tangent:=2.*reach*(1.-duty)/duty
+		var t2:=swing*swing;var t3:=t2*swing
+		foot.z=(2.*t3-3.*t2+1.)*reach+(t3-2.*t2+swing)*tangent+(-2.*t3+3.*t2)*(-reach)+(t3-t2)*tangent
+		foot.y+=pow(sin(swing*PI),2.)*lift
 	return foot
+
+func _facility_controlled() -> bool:return bool(player.get("facility_control")) if _facility_property else false
 
 func play_sandbox_action(kind: String,seconds := .4) -> void:
 	if kind not in ["punch","flinch"]:return
@@ -228,10 +275,12 @@ func _physics_process(delta: float) -> void:
 	_last_position=player.global_position
 	measured_displacement_m=Vector2(movement.x,movement.z).length()
 	actual_speed_mps=measured_displacement_m/delta
-	if player.facility_control or not player.is_physics_processing():
-		state="facility" if player.facility_control else "transport"
+	var facility:=_facility_controlled()
+	var adapter_walked:=bool(player.get_meta("exploration_avoidance_adapter",false))
+	if facility or (not player.is_physics_processing() and not adapter_walked):
+		state="facility" if facility else "transport"
 		actual_speed_mps=0.0;measured_displacement_m=0.0
-		if player.facility_control and not _activity_kind.is_empty():_activity_pose()
+		if facility and not _activity_kind.is_empty():_activity_pose()
 		else:_rest_pose()
 		return
 	# Region changes and recovery are transitions, never one giant stride.
@@ -242,37 +291,46 @@ func _physics_process(delta: float) -> void:
 	var blend := 1.0-exp(-delta*14.0)
 	walk_weight=lerpf(walk_weight,minf(1.0,actual_speed_mps/.75) if moving else 0.0,blend)
 	if walk_weight<.001:walk_weight=0.0
-	_run_weight=lerpf(_run_weight,clampf((actual_speed_mps-3.2)/3.5,0.0,1.0),blend)
+	_run_weight=lerpf(_run_weight,clampf((actual_speed_mps-1.9)/2.1,0.0,1.0),blend)
 	_air_weight=lerpf(_air_weight,0.0 if grounded else 1.0,blend)
+	_air_tuck=lerpf(_air_tuck,clampf(player.velocity.y/7.5,0.,1.),blend)
+	_stance_fraction=lerpf(.60,.40,_run_weight)
+	_cycle_distance_m=lerpf(1.26,1.86,_run_weight)
 	cadence_hz=0.0
 	if moving:
-		var nominal_stride := lerpf(1.00,1.42,_run_weight)
 		var cadence_limit := lerpf(1.65,MAX_CADENCE_HZ,_run_weight)
-		var advance := minf(measured_displacement_m/nominal_stride,delta*cadence_limit)
+		var advance := minf(measured_displacement_m/_cycle_distance_m,delta*cadence_limit)
 		stride_phase=fmod(stride_phase+advance*TAU,TAU);cadence_hz=advance/delta
 		clock+=delta
+	_gait_speed_mps=cadence_hz*_cycle_distance_m
 	state="air" if not grounded else ("run" if _run_weight>.45 and moving else ("walk" if moving else "idle"))
-	var reach := lerpf(.17,.25,_run_weight)*walk_weight
-	var lift := lerpf(.09,.17,_run_weight)*walk_weight
+	var reach := _cycle_distance_m*_stance_fraction*.5*walk_weight
+	var lift := lerpf(.075,.21,_run_weight)*walk_weight
 	# The limbs carry the gait. A steady head/torso removes the former
 	# four-pulses-per-stride bob (8.8Hz at turbo cadence) and lateral sway.
 	_upper_body.position=Vector3(0,.85,0)
 	_upper_body.rotation.x=-.075*_run_weight*walk_weight-.035*_air_weight
 	_upper_body.rotation.z=0.0
+	var posed_feet:={}
 	for side_name: String in ["Left","Right"]:
 		var side := -1.0 if side_name=="Left" else 1.0
 		var phase := fmod(stride_phase+(PI if side_name=="Right" else 0.0),TAU)
 		var foot := _gait_foot(side,phase,reach,lift)
 		foot.z-=.025*(1.0-walk_weight)
-		var air_foot := Vector3(side*.105,.22+(.06 if side_name=="Left" else 0.0),-.11 if side_name=="Left" else .10)
+		var air_foot := Vector3(side*.105,.15+.18*_air_tuck,(-.10 if side_name=="Left" else .08)*(.5+.5*_air_tuck))
 		foot=foot.lerp(air_foot,_air_weight)
+		posed_feet[side_name]=foot
+	_supported_hips(posed_feet)
+	for side_name: String in ["Left","Right"]:
+		var side := -1.0 if side_name=="Left" else 1.0
+		var foot: Vector3=posed_feet[side_name]
 		# IK retains flat shoe soles through stance; only the swing foot lifts.
 		_feet[side_name]=foot;_leg_pose(side_name,foot)
-		var arm_swing := -cos(phase)*lerpf(.38,.80,_run_weight)*walk_weight
+		var arm_swing := clampf(foot.z/maxf(reach,.001),-1.,1.)*lerpf(.32,.70,_run_weight)*walk_weight
 		var arm := _joints[side_name+"UpperArm"] as Node3D
 		var forearm := _joints[side_name+"Forearm"] as Node3D
 		arm.rotation=Vector3(lerpf(arm_swing-.04,.48,_air_weight),0,side*.035)
-		forearm.rotation=Vector3(lerpf(.14+.45*_run_weight*walk_weight,.50,_air_weight),0,0)
+		forearm.rotation=Vector3(lerpf(.14+.72*_run_weight*walk_weight,.50,_air_weight),0,0)
 	_last_grounded=grounded
 	_sandbox_pose(delta)
 
@@ -285,7 +343,8 @@ func snapshot() -> Dictionary:
 		var bounds: AABB=mesh.global_transform*mesh.get_aabb()
 		body_bounds=bounds if not initialized else body_bounds.merge(bounds);initialized=true
 	return {"ready":_ready_avatar,"state":state,"clock":clock,"stride_phase":stride_phase,"cadence_hz":cadence_hz,"cadence_cap_hz":MAX_CADENCE_HZ,"actual_speed_mps":actual_speed_mps,"measured_displacement_m":measured_displacement_m,"walk_weight":walk_weight,"air_weight":_air_weight,"run_weight":_run_weight,
-		"joint_transforms":transforms,"feet_world":feet,"mesh_count":_meshes.size(),"body_bounds":body_bounds,"original_body_hidden":is_instance_valid(_old_body) and not _old_body.visible,"uses_original_physics_capsule":true,"visual_forward":-global_basis.z,"facility_control":player.facility_control if is_instance_valid(player) else false,"activity_kind":_activity_kind,"activity_elapsed":_activity_elapsed,"avatar_hands_visible":_hands[0].visible if not _hands.is_empty() else false}
+		"joint_transforms":transforms,"feet_world":feet,"mesh_count":_meshes.size(),"body_bounds":body_bounds,"original_body_hidden":is_instance_valid(_old_body) and not _old_body.visible,"uses_original_physics_capsule":true,"visual_forward":-global_basis.z,"facility_control":_facility_controlled() if is_instance_valid(player) else false,"activity_kind":_activity_kind,"activity_elapsed":_activity_elapsed,"avatar_hands_visible":_hands[0].visible if not _hands.is_empty() else false,
+		"authored_adult_height_m":ADULT_VISUAL_HEIGHT_M,"head_height_m":HEAD_HEIGHT_M,"standing_hip_joint_height_m":HIP_Y,"hip_height_m":_hip_pose_y,"head_units":ADULT_VISUAL_HEIGHT_M/HEAD_HEIGHT_M,"stance_fraction":_stance_fraction,"cycle_distance_m":_cycle_distance_m,"represented_gait_speed_mps":_gait_speed_mps,"arcade_speed_excess_mps":maxf(0.,actual_speed_mps-_gait_speed_mps),"motion_scope":"Authored adult proportions and distance-driven stance/swing, not a scanned human or motion capture. Turbo speeds retain bounded cadence and can visibly exceed plausible limb travel."}
 
 func _exit_tree() -> void:
 	if is_instance_valid(_old_body):_old_body.visible=_old_body_visible

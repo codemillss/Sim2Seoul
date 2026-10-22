@@ -19,7 +19,7 @@ func _initialize() -> void:
 	run.call_deferred()
 func _hashes() -> Dictionary:
 	var out: Dictionary={}
-	for path: String in ["res://scripts/city_public_safety.gd","res://scripts/city_police_facility.gd","res://scripts/city_police_patrol.gd","res://assets/authored/police_facility.json","res://assets/authored/police_patrol.json","res://scripts/explore_walk.gd","res://scripts/drivable_car_service.gd","res://scripts/interior_visit.gd","res://scripts/player/free_roam_player.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://../tests/game/check_police_facility.gd"]:out[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/city_police_headquarters.gd","res://assets/authored/police_headquarters.json","res://scripts/city_police_facility.gd","res://assets/authored/police_facility.json","res://scripts/city_police_patrol.gd","res://assets/authored/police_patrol.json","res://scripts/city_public_safety.gd","res://scripts/city_police_facility.gd","res://scripts/city_police_patrol.gd","res://assets/authored/police_facility.json","res://assets/authored/police_patrol.json","res://scripts/explore_walk.gd","res://scripts/drivable_car_service.gd","res://scripts/interior_visit.gd","res://scripts/player/free_roam_player.gd","res://resources/world_geometry/world.json","res://data/generated/public_walk.json","res://../tests/game/check_police_facility.gd"]:out[path]=FileAccess.get_sha256(path)
 	return out
 func _json(v: Variant) -> Variant:
 	if v is Vector3:return [v.x,v.y,v.z]
@@ -69,6 +69,18 @@ func run() -> void:
 	var invalid: bool=scene._commit_exploration_teleport(Vector3(4850,150,4800));_check("invalid_external_transfer_retains_lobby_owner",not invalid and facility.active and scene.player.interior_active)
 	await _tap_e();await _ticks(24);_check("physical_e_exit_returns_native_street_and_clears_owner",not facility.active and not scene.player.interior_active and not scene.player.facility_control and scene.player.is_physics_processing() and facility._external_clear(scene.player.global_position+Vector3.UP*.025),facility.snapshot())
 	await _tap_e();await _ticks(24);var shortcut_before: int=facility.exit_count;scene._visit_street_detail("bike_station");await _ticks(4);_check("menu_validated_shortcut_cleans_actual_lobby_owner",not facility.active and not scene.player.interior_active and facility.exit_count==shortcut_before+1 and not scene.player.facility_control,facility.snapshot())
+	# These are ownership-interruption requests, not substitutes for the
+	# separate original-NPC/physical-F actual street-arrest acceptance suite.
+	for entering_phase: String in ["opening","inside"]:
+		var start_ok:=await _place_player(facility.entry_point,facility.entry_door);await _tap_e()
+		if entering_phase=="inside":await _ticks(24)
+		var phase_ok: bool=facility.active and facility.phase==entering_phase
+		var entries_before: int=facility.entry_count
+		safety.report_offense("test internal custody owner interruption",scene.player.global_position)
+		var accepted: bool=safety._capture();await _ticks(2)
+		_check("custody_from_"+entering_phase+"_cleans_lobby_owner_same_tick",start_ok and phase_ok and accepted and safety.detained and not facility.active and facility.phase=="outside" and not scene.player.interior_active and scene.player.facility_control and not scene.player.is_physics_processing(),{"facility":facility.snapshot(),"safety":safety.snapshot()})
+		await _ticks(390)
+		_check("custody_from_"+entering_phase+"_releases_without_stale_entry_callback",not safety.detained and not facility.active and facility.phase=="outside" and facility.entry_count==entries_before and not scene.player.interior_active and not scene.player.facility_control and scene.player.is_physics_processing() and facility._external_clear(scene.player.global_position+Vector3.UP*.025),{"facility":facility.snapshot(),"safety":safety.snapshot()})
 	# Player-only raised observer prevents an unrelated on-foot catch from
 	# truncating this car route. No original or police actor is relocated.
 	var platform:=StaticBody3D.new();platform.name="TestOnlyPatrolObserverPlatform";platform.collision_layer=32;var collider:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(4.,.2,4.);collider.shape=box;platform.add_child(collider);scene.add_child(platform);platform.global_position=scene.player.global_position+Vector3.UP*5.;scene.player.global_position=platform.global_position+Vector3.UP*.12;scene.player.velocity=Vector3.ZERO;scene.player.set_physics_process(false);scene.player.reset_physics_interpolation();scene.rig.snap_to_target_pose();await _ticks(3)

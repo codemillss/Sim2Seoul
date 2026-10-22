@@ -16,6 +16,7 @@ class Officer extends CharacterBody3D:
 	var facility_control := false
 	func _physics_process(_delta: float) -> void:pass
 var police_facility: Node3D
+var police_headquarters: Node3D
 var patrol_vehicle_service: Node3D
 var host: Node3D
 var loaded := false
@@ -84,6 +85,8 @@ func setup(scene: Node3D) -> bool:
 	station_point=police_facility.entry_point
 	patrol_vehicle_service=preload("res://scripts/city_police_patrol.gd").new();add_child(patrol_vehicle_service)
 	if not patrol_vehicle_service.setup(host,self,police_facility):load_error=patrol_vehicle_service.load_error;return false
+	police_headquarters=preload("res://scripts/city_police_headquarters.gd").new();add_child(police_headquarters)
+	if not police_headquarters.setup(host,self):load_error=police_headquarters.load_error;return false
 	loaded=true;print("CITY_PUBLIC_SAFETY_READY officers=",officers.size()," chase_seconds=",CHASE_SECONDS," game_authored=true")
 	return true
 
@@ -381,17 +384,29 @@ func _release() -> bool:
 	detained=false;releases+=1;_cooldown_s=5.;_room.visible=false;host.player.get_node("Visual").transform=_saved.visual;host.player.set_facility_control(false);host.player.set_physics_process(true);host.player.velocity=Vector3.ZERO;host.player.require_neutral_input();host.player.reset_physics_interpolation()
 	host.set_free_roam(bool(_saved.get("free_roam",true)));host.player.free_roam_enabled=bool(_saved.get("player_free_roam",host.free_roam_enabled))
 	host.rig.yaw=_saved.rig_yaw;host.rig.pitch=_saved.rig_pitch;host.rig.requested_distance=_saved.rig_distance;host.rig.current_distance=_saved.rig_distance;host.rig.pivot_height_m=_saved.rig_pivot;host.rig.snap_to_target_pose();_saved.clear();_notice="조사 종료 · 안전 안내소 앞 귀가";_notice_until=_clock+4.;_event("released",{"point":safe.point});return true
-func can_interact() -> bool:return detained and detention_remaining_s<=.1 if detained else is_instance_valid(police_facility) and police_facility.can_interact()
-func interaction_distance_m() -> float:return (0. if can_interact() else INF) if detained else (police_facility.interaction_distance_m() if is_instance_valid(police_facility) else INF)
-func interact() -> bool:return (_release() if can_interact() else false) if detained else (police_facility.handle_interact() if is_instance_valid(police_facility) else false)
+func _nearest_facility() -> Node3D:
+	var target: Node3D;var distance:=INF
+	for facility: Node3D in [police_facility,police_headquarters]:
+		if not is_instance_valid(facility) or not facility.loaded or not facility.can_interact():continue
+		var range_m: float=facility.interaction_distance_m()
+		if range_m<distance:target=facility;distance=range_m
+	return target
+func can_interact() -> bool:return detained and detention_remaining_s<=.1 if detained else is_instance_valid(_nearest_facility())
+func interaction_distance_m() -> float:
+	if detained:return 0. if can_interact() else INF
+	var target:=_nearest_facility();return target.interaction_distance_m() if is_instance_valid(target) else INF
+func interact() -> bool:
+	if detained:return _release() if can_interact() else false
+	var target:=_nearest_facility();return target.handle_interact() if is_instance_valid(target) else false
 func handle_interact() -> bool:return interact()
 func prompt_text() -> String:
 	if detained:return ("조사실" if custody_kind=="investigation" else "유치장")+" · "+str(ceili(detention_remaining_s))+"초 후 자동 귀가 · 게임용 가상 절차"
 	if wanted:return "경찰 추격 · "+str(ceili(chase_remaining_s))+"초 버티면 추격 종료"
-	return police_facility.prompt_text() if is_instance_valid(police_facility) else ""
+	var target:=_nearest_facility();return target.prompt_text() if is_instance_valid(target) else ""
 func status_text() -> String:
 	if is_instance_valid(police_facility) and police_facility.active:return police_facility.status_text()
 	if detained or wanted:return prompt_text()
+	if is_instance_valid(police_headquarters) and police_headquarters.contains_player():return police_headquarters.status_text()
 	return _notice if _clock<_notice_until else "F 가까운 성인에게 주먹 · 경찰 출동"
 func viewpoint() -> Dictionary:
 	if is_instance_valid(police_facility) and police_facility.loaded:return police_facility.viewpoint()
@@ -440,4 +455,4 @@ func _process(_delta: float) -> void:
 func snapshot() -> Dictionary:
 	var rows: Array=[]
 	for row: Dictionary in officers:rows.append({"name":String(row.body.name),"position":row.body.global_position,"home":row.home,"state":row.state,"on_floor":row.body.is_on_floor(),"avatar_state":row.avatar.state,"distance_m":row.distance_m,"source_allowed":_source_allowed(row.body.global_position),"native_supported":not _supported(row.body.global_position).is_empty(),"render_anchor":row.proxy.global_position,"previous_anchor":row.previous_pose.origin,"physics_anchor":row.current_pose.origin,"pending_path_job":not row.path_job.is_empty(),"capsule_retained":row.body.get_node("CollisionShape").shape is CapsuleShape3D,"layer":row.body.collision_layer,"mask":row.body.collision_mask})
-	return {"loaded":loaded,"load_error":load_error,"police_facility":police_facility.snapshot() if is_instance_valid(police_facility) else {},"patrol_vehicle":patrol_vehicle_service.snapshot() if is_instance_valid(patrol_vehicle_service) else {},"rental_posting_clearance":rental_clearance_snapshot(),"wanted":wanted,"detained":detained,"chase_remaining_s":chase_remaining_s,"detention_remaining_s":detention_remaining_s,"custody_kind":custody_kind,"offense_count":offense_count,"officers":rows,"hits":hits,"catches":catches,"releases":releases,"police_navigation_domain":"Original source walk/drive plus native-supported, non-private original game-playable TIN connectors; source entry setback .75m and complete native capsule guards retained. Vehicle domains unchanged.","public_playable_fallback_queries":public_playable_fallback_queries,"path_replans":path_replans,"maximum_path_plan_ms":maximum_path_plan_ms,"maximum_path_job_cpu_ms":maximum_path_job_cpu_ms,"path_job_budget_ms_per_officer":1.5,"render_frames":render_frames,"maximum_render_anchor_error_m":maximum_render_anchor_error_m,"static_graph_cells":_cell_cache.size(),"static_graph_edges":_edge_cache.size(),"maximum_step_m":maximum_step_m,"actual_officer_distance_m":actual_officer_distance_m,"events":events,"source_hashes":_source_hashes,"scope":"Fictional non-graphic sandbox; adult humans only; 60-second game-time pursuit, native original public-playable TIN capsule paths and LOS ground catch; reversible 8/12-second authored custody; no real police procedure or geography claim."}
+	return {"loaded":loaded,"load_error":load_error,"police_facility":police_facility.snapshot() if is_instance_valid(police_facility) else {},"police_headquarters":police_headquarters.snapshot() if is_instance_valid(police_headquarters) else {},"patrol_vehicle":patrol_vehicle_service.snapshot() if is_instance_valid(patrol_vehicle_service) else {},"rental_posting_clearance":rental_clearance_snapshot(),"wanted":wanted,"detained":detained,"chase_remaining_s":chase_remaining_s,"detention_remaining_s":detention_remaining_s,"custody_kind":custody_kind,"offense_count":offense_count,"officers":rows,"hits":hits,"catches":catches,"releases":releases,"police_navigation_domain":"Original source walk/drive plus native-supported, non-private original game-playable TIN connectors; source entry setback .75m and complete native capsule guards retained. Vehicle domains unchanged.","public_playable_fallback_queries":public_playable_fallback_queries,"path_replans":path_replans,"maximum_path_plan_ms":maximum_path_plan_ms,"maximum_path_job_cpu_ms":maximum_path_job_cpu_ms,"path_job_budget_ms_per_officer":1.5,"render_frames":render_frames,"maximum_render_anchor_error_m":maximum_render_anchor_error_m,"static_graph_cells":_cell_cache.size(),"static_graph_edges":_edge_cache.size(),"maximum_step_m":maximum_step_m,"actual_officer_distance_m":actual_officer_distance_m,"events":events,"source_hashes":_source_hashes,"scope":"Fictional non-graphic sandbox; adult humans only; 60-second game-time pursuit, native original public-playable TIN capsule paths and LOS ground catch; reversible 8/12-second authored custody; no real police procedure or geography claim."}
