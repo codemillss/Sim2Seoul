@@ -80,7 +80,8 @@ func _run() -> void:
 	service=scene.get("city_bike_service")
 	if not is_instance_valid(service):
 		service=load("res://scripts/city_bike_service.gd").new();service.name="CityBikeServiceTest";scene.add_child(service);service.setup(scene)
-	_check("production_setup_two_source_bound_native_docks",scene.runtime_ok and service.loaded and service.stations.size()==2 and service.bikes.size()==2,{"runtime_error":scene.exploration_error,"bike_error":service.load_error})
+	var expected: int=service.design.get("stations",[]).size()
+	_check("production_setup_all_source_bound_native_docks",scene.runtime_ok and service.loaded and expected>=2 and service.stations.size()==expected and service.bikes.size()==expected,{"runtime_error":scene.exploration_error,"bike_error":service.load_error,"authored_docks":expected,"actual_docks":service.stations.size(),"actual_bikes":service.bikes.size()})
 	if not scene.runtime_ok or not service.loaded:_finish();return
 	if scene.menu.visible:scene.toggle_menu()
 	_check("original30_people14_vehicles_and_native_capsule_preserved",scene.pedestrians.size()+scene.street_pedestrians.actors.size()+scene.neighborhood_population.walkers.actors.size()==30 and scene.vehicles.size()+scene.neighborhood_population.traffic.vehicles.size()==14)

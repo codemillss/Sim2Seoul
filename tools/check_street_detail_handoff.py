@@ -7,14 +7,14 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = ROOT / 'data/reports/urban_transit/20261021/summary.json'
+SUMMARY = ROOT / 'data/reports/mobility_distribution/20261022/summary.json'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepared', action='store_true')
     parser.add_argument('--summary', type=Path, default=SUMMARY,
-                        help='Manifest to check; defaults to the latest urban-transit revision.')
+                        help='Manifest to check; defaults to the latest mobility-distribution revision.')
     args = parser.parse_args()
     summary = args.summary.resolve()
     if not summary.is_relative_to(ROOT) or not summary.is_file():

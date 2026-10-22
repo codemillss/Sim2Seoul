@@ -1,5 +1,5 @@
 extends Node3D
-## Two authored rental bicycles. The bike body alone owns riding movement;
+## Source-bound authored rental bicycles. The bike body alone owns riding movement;
 ## player capsule, actor controllers and source geometry are retained.
 const DATA_PATH := "res://assets/authored/bike_service.json"
 const BOX_SIZE := Vector3(.70,1.90,1.90)
@@ -76,7 +76,7 @@ func setup(scene: Node3D) -> bool:
 	if not is_instance_valid(host.get("terrain_surface")) or not host.terrain_surface.loaded:return _fail("자전거 지면이 준비되지 않았습니다.")
 	var index_script:=preload("res://scripts/source_polygon_index.gd")
 	_private_index=index_script.new();_private_index.setup(host.city.private_cache,Callable(host.city,"_contains"))
-	_walk_index=index_script.new();_walk_index.setup(host.city.movement_cache,Callable(host.city,"_contains"))
+	var walk_parts: Array=host.city.movement_cache.duplicate()
 	var road_parts: Array=[]
 	# Original drive display triangles cover streets beyond the early N01
 	# traffic corridor. Rental vehicles can use these actual source roads,
@@ -84,10 +84,18 @@ func setup(scene: Node3D) -> bool:
 	var world: Variant=JSON.parse_string(FileAccess.get_file_as_string("res://resources/world_geometry/world.json"))
 	if not world is Dictionary:return _fail("탈것의 원본 도로 자료가 없습니다.")
 	for mesh: Dictionary in world.meshes:
-		if mesh.get("metadata",{}).get("display_mode","")!="drive":continue
+		var mode: String=mesh.get("metadata",{}).get("display_mode","")
+		if mode!="drive" and mode!="walk":continue
 		for offset: int in range(0,mesh.vertices.size(),9):
 			var a:=Vector2(mesh.vertices[offset],mesh.vertices[offset+2]);var b:=Vector2(mesh.vertices[offset+3],mesh.vertices[offset+5]);var c:=Vector2(mesh.vertices[offset+6],mesh.vertices[offset+8])
-			if absf((b-a).cross(c-a))>.0000001:road_parts.append([PackedVector2Array([a,b,c,a])])
+			if absf((b-a).cross(c-a))<=.0000001:continue
+			var part: Array=[PackedVector2Array([a,b,c,a])]
+			if mode=="walk":walk_parts.append(part)
+			else:road_parts.append(part)
+	# Keep W03's authored walk polygons and the original exterior walk surfaces.
+	# Private polygons, doors, complete native support and occupancy still gate
+	# each station and every vehicle step; this adds no new source geometry.
+	_walk_index=index_script.new();_walk_index.setup(walk_parts,Callable(host.city,"_contains"))
 	_road_index=index_script.new();_road_index.setup(road_parts,Callable(host.city,"_contains"))
 	for record: Dictionary in host.interior_visit.catalog:
 		for entry: Dictionary in record.entry_candidates:_doors.append(entry.entrance)
@@ -150,6 +158,9 @@ func _make_station(record: Dictionary) -> bool:
 	var route: Dictionary={}
 	for item: Dictionary in host.city.public_data.routes:
 		if item.id==record.source_route:route=item;break
+	if route.is_empty() and is_instance_valid(host.neighborhood_population):
+		for item: Dictionary in host.neighborhood_population.design.routes:
+			if item.id==record.source_route:route=item;break
 	if route.is_empty():return false
 	var a: Array=route.xz[record.source_segment[0]];var b: Array=route.xz[record.source_segment[1]]
 	var start: Vector3=host.city.to_global(Vector3(a[0],0,a[1]));var end: Vector3=host.city.to_global(Vector3(b[0],0,b[1]));var direction: Vector3=end-start;direction.y=0.;direction=direction.normalized();var side:=Vector3(direction.z,0,-direction.x)
@@ -158,9 +169,12 @@ func _make_station(record: Dictionary) -> bool:
 		var candidate: Vector3=desired+direction*shift;support=_ground(candidate)
 		if support.is_empty():continue
 		var basis:=_pose_basis(support.point,yaw)
+		var fixture_basis:=Basis(Vector3.UP,yaw)
 		var fixture_clear:=true
-		for local: Vector3 in [Vector3(-1.65,0,.75),Vector3(-.9,0,.75),Vector3(-.55,0,.55),Vector3(.55,0,.55)]:
-			var point: Vector3=support.point+basis*local;var source: Vector3=host.city.to_local(point)
+		# Reserve the raised sign's entire ground projection and all four
+		# corners of the 1.20m rack plate, not only its narrower uprights.
+		for local: Vector3 in [Vector3(-1.66,0,.68),Vector3(-1.66,0,.82),Vector3(-.14,0,.68),Vector3(-.14,0,.82),Vector3(-.60,0,.475),Vector3(.60,0,.475),Vector3(-.60,0,.825),Vector3(.60,0,.825)]:
+			var point: Vector3=support.point+fixture_basis*local;var source: Vector3=host.city.to_local(point)
 			if not _source_allowed(point) or not _walk_index.contains(Vector2(source.x,source.z)) or _ground(point).is_empty():fixture_clear=false
 		if fixture_clear and _footprint_allowed(support.point,basis) and _station_sign_clear(support.point,yaw) and _clear_box(support.point+Vector3.UP*.035,basis,[host.player.get_rid(),support.rid]):desired=support.point;accepted=true;break
 	if not accepted:return false

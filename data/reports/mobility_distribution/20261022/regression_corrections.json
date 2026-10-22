@@ -1,0 +1,24 @@
+{
+  "task": "EXP26",
+  "current_runtime_geometry_and_motion_unchanged_by_test_correction": true,
+  "car_failure": {
+    "report": "data/reports/mobility_distribution/20261022/acceptance/car_native_final01.json",
+    "passed": 29,
+    "total": 30,
+    "failed_check": "Space_stops_car_without_player_jump",
+    "observed_maximum_speed_mps": 14,
+    "old_brake_wait_ticks": 45,
+    "physics_hz": 30,
+    "resolved_braking_mps2": 9.1,
+    "analysis": "45/30=1.5s is shorter than14/9.1=1.5385s. The previous fixed wait could pass only when prior travel had already been slowed.",
+    "fix": "Test derives ceil(current_speed/current_braking_rate*physics_hz)+3 input ticks and records start/rate/remaining speed/support. Product braking/movement is unchanged.",
+    "accepted_report": "data/reports/mobility_distribution/20261022/acceptance/car_native_final02.json"
+  },
+  "history": [
+    {
+      "report": "data/reports/mobility_distribution/20261022/acceptance/speed_headless_final01.json",
+      "reason": "29/29 passed but test-base source changed after the bounded car-braking assertion was corrected. Final02 reruns current input hashes."
+    }
+  ],
+  "scope": "Preserved failed/obsolete reports are history; only explicitly current reports in summary.json establish acceptance."
+}

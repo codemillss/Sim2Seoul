@@ -1,0 +1,27 @@
+{
+  "task": "EXP26_MOBILITY_DISTRIBUTION",
+  "attempts": [
+    {
+      "report": "headless_development01.json",
+      "result": "79/88 FAIL",
+      "preserved": "Both raw engine log and console log retained. No script errors and all 27 input hashes stable during execution.",
+      "test_corrections": [
+        "Historical 692 subset count was incorrectly applied to all source_nodes. Original world.json actually has 1233 mesh IDs; compare the complete ID set directly.",
+        "A single 3.4m flat cast produced false blockage against rising terrain despite actual successful short rides. Independent native full-box sweep now follows native support with <=0.18m 3D segments and unchanged collision masks."
+      ],
+      "production_findings": [
+        "Real DockGreenPlate edges are +/-0.60m wide, while prior source fixture guards sampled only +/-0.55m rack centres. Six new docks had actual plate-edge samples outside their narrow original footway. Root hardened full fixture bounds; locations 04/07/08 offsets changed from -0.60m to -0.55m.",
+        "Bicycle04 actually stopped after 1.728m with physical_sweep. Offset -0.55m cleared the observed ride on the next run; no actor collision was suppressed.",
+        "Scooter04 fraction changed from 0.60 to 0.55 after original native departure queries."
+      ]
+    },
+    {
+      "report": "headless_development02.json",
+      "result": "88/88 PASS",
+      "scope": "Diagnostic Trial02 layout before final yaw-only production fixture projection correction and precise people/dog check naming. Not the final current-source report."
+    }
+  ],
+  "source_preservation": "All trials retain original source nodes, native player capsule, TIN, 28 people, 2 dogs and 14 original AI cars. Only supported observer/player starts are positioned by the harness. Real KEY_E press/release events and maintained synthetic W/Space actions use the production dispatcher/controllers. No direct mounts or vehicle/actor/source position writes.",
+  "final_harness": "check_mobility_distribution.gd cf2126060238453e751687e5d3c121db9e3fb8e764ef8ec22b73b40c3dfa0be4",
+  "native_scope": "Native image capture, separate visual review and ordinary OS input are parent-agent-owned; headless PASS does not establish those."
+}

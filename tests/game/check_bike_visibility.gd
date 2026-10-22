@@ -71,15 +71,16 @@ func _run() -> void:
 	service=scene.get("city_bike_service")
 	_check("production_setup",scene.runtime_ok and is_instance_valid(service) and service.loaded)
 	if not scene.runtime_ok or not is_instance_valid(service) or not service.loaded:_finish();return
-	_check("only_actual_rentable_bikes_no_fake_reserve_inventory",service.bikes.size()==2 and service.stations.size()==2)
+	var expected: int=service.design.stations.size()
+	_check("only_actual_rentable_bikes_no_fake_reserve_inventory",expected>=2 and service.bikes.size()==expected and service.stations.size()==expected)
 	var marked:=0
 	for station: Dictionary in service.stations:
 		if station.node.has_node("StationBicyclePictogram") and station.panel.has_node("StationTitleFront") and station.panel.has_node("StationTitleBack") and station.pictogram.position.y>=2.8:marked+=1
-	_check("both_docks_have_raised_pictogram_and_two_sided_signs",marked==2)
+	_check("all_docks_have_raised_pictogram_and_two_sided_signs",marked==expected)
 	var signs_clear:=true;var sign_checks: Array=[]
 	for station: Dictionary in service.stations:
 		var result:=_sign_native_clearance(station);signs_clear=signs_clear and result.clear;sign_checks.append(result)
-	_check("both_raised_signs_native_static_volumes_clear",signs_clear,{"signs":sign_checks,"collision_mask":1|32,"bike_own_layer_excluded":4})
+	_check("all_raised_signs_native_static_volumes_clear",signs_clear,{"signs":sign_checks,"collision_mask":1|32,"bike_own_layer_excluded":4})
 	# A high blocker leaves the old low bike box clear; it must still reject
 	# the sign envelope. This fixture is removed before the ordinary shortcut.
 	var station: Dictionary=service.stations[0];var blocker:=StaticBody3D.new();blocker.collision_layer=1;var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(.20,.40,.20);shape.shape=box;blocker.add_child(shape);scene.add_child(blocker);blocker.global_position=station.node.to_global(Vector3(-.9,3.,.75));await _ticks(3)

@@ -1,0 +1,4335 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "runtime_error": ""
+      },
+      "name": "ordinary_production_scene_both_services_ready",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "capsule": {
+          "height": 1.70000004768372,
+          "layer": 2,
+          "mask": 45,
+          "player": 66555217493,
+          "radius": 0.300000011920929,
+          "shape": -9223372008299952654,
+          "shape_transform": {
+            "basis": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "origin": [
+              0.0,
+              0.850000023841858,
+              0.0
+            ]
+          }
+        },
+        "retained_actors": 44,
+        "source_nodes": 1233
+      },
+      "name": "original_source_nodes_30_people14_vehicles_and_native_capsule_present",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "bike": 8,
+        "bike_source_routes": [
+          "city_plaza",
+          "stonewall",
+          "coverage_walk_09_0",
+          "coverage_walk_05_0",
+          "coverage_walk_07_0",
+          "coverage_walk_00_0",
+          "coverage_walk_08_0"
+        ],
+        "scooter": 8,
+        "scooter_source_routes": [
+          "city_plaza",
+          "stonewall",
+          "coverage_walk_09_0",
+          "coverage_walk_05_0",
+          "coverage_walk_07_0",
+          "coverage_walk_00_0",
+          "coverage_walk_08_0"
+        ]
+      },
+      "name": "data_driven_distributed_unique_native_stations_beyond_original_two",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 84.4632034301758,
+        "departure_m": 3.4,
+        "failures": [
+          "native_full_body_or_departure_blocked"
+        ],
+        "heading": -1.80643994760025,
+        "minimum_door_clearance_m": 20.759485244751,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 0.74609375,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          165.59489440918,
+          -0.295331358909607,
+          -105.705513000488
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "city_plaza",
+        "station": "BIKE-GAME-01",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 666,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-01_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 0,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          165.054244995117,
+          -0.368639588356018,
+          -103.882080078125
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-01",
+        "visible": true
+      },
+      "name": "BIKE-GAME-01_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 0.566666666666667,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike1"
+            }
+          }
+        ],
+        "nearest_before_E": 0,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 0,
+        "riding": true
+      },
+      "name": "BIKE-GAME-01_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.99626111984253,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1175210454811,
+        "forward_samples": 32,
+        "from": [
+          165.59489440918,
+          -0.295331358909607,
+          -105.705513000488
+        ],
+        "maximum_native_step_m": 0.110546007752419,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-01",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          168.507659912109,
+          -0.260162115097046,
+          -105.003105163574
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-01_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            172.421356201172,
+            2.16835522651672,
+            -103.113975524902
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 92,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 93,
+          "physics_visual_anchor": [
+            168.188690185547,
+            -0.296330451965332,
+            -104.102912902832
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            168.188690185547,
+            1.00366950035095,
+            -104.102912902832
+          ],
+          "previous_visual_anchor": [
+            168.188690185547,
+            -0.296330451965332,
+            -104.102912902832
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            168.188690185547,
+            -0.296330451965332,
+            -104.102912902832
+          ],
+          "rendered_frames": 315,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 4,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-01_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 194.405822753906,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": 1.65137831108193,
+        "minimum_door_clearance_m": 18.3469867706299,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -127.483528137207,
+          3.66541886329651,
+          24.2506427764893
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "stonewall",
+        "station": "BIKE-GAME-02",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 666,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-02_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 1,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          -127.231269836426,
+          3.73965787887573,
+          26.1343517303467
+        ],
+        "requested_local_offset": [
+          -1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-02",
+        "visible": true
+      },
+      "name": "BIKE-GAME-02_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 2.7,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-01"
+            }
+          },
+          {
+            "clock_s": 2.73333333333333,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 3.46666666666666,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike2"
+            }
+          }
+        ],
+        "nearest_before_E": 1,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 1,
+        "riding": true
+      },
+      "name": "BIKE-GAME-02_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.97529435157776,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1180277174329,
+        "forward_samples": 32,
+        "from": [
+          -127.483528137207,
+          3.66541886329651,
+          24.2506427764893
+        ],
+        "maximum_native_step_m": 0.110341779887676,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-02",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -130.44953918457,
+          3.84691286087036,
+          24.4854927062988
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-02_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -126.500442504883,
+            6.21424865722656,
+            26.305347442627
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.01140625178814,
+          "far": 1400.0,
+          "follow_ticks": 181,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 183,
+          "physics_visual_anchor": [
+            -130.273544311523,
+            3.87602019309998,
+            25.4237842559814
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -130.273544311523,
+            5.17602014541626,
+            25.4237842559814
+          ],
+          "previous_visual_anchor": [
+            -130.273544311523,
+            3.87602019309998,
+            25.4237842559814
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.851738888888906,
+          "render_visual_anchor": [
+            -130.273544311523,
+            3.87602019309998,
+            25.4237842559814
+          ],
+          "rendered_frames": 699,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 9,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-02_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 16.93869972229,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.80092303286381,
+        "minimum_door_clearance_m": 32.282844543457,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          106.23072052002,
+          -0.571026504039764,
+          -162.394714355469
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "city_plaza",
+        "station": "BIKE-GAME-03",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 666,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-03_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 2,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          105.70361328125,
+          -0.323954552412033,
+          -160.582901000977
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-03",
+        "visible": true
+      },
+      "name": "BIKE-GAME-03_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 5.69999999999999,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-02"
+            }
+          },
+          {
+            "clock_s": 5.73333333333332,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 6.29999999999999,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike3"
+            }
+          }
+        ],
+        "nearest_before_E": 2,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 2,
+        "riding": true
+      },
+      "name": "BIKE-GAME-03_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.98789858818054,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1185343893847,
+        "forward_samples": 32,
+        "from": [
+          106.23072052002,
+          -0.571026504039764,
+          -162.394714355469
+        ],
+        "maximum_native_step_m": 0.110407024621964,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-03",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          109.142822265625,
+          -0.461745977401733,
+          -161.725982666016
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-03_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            113.063262939453,
+            2.12637209892273,
+            -159.842407226562
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 265,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 268,
+          "physics_visual_anchor": [
+            108.830589294434,
+            -0.338313609361649,
+            -160.831344604492
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            108.830589294434,
+            0.961686372756958,
+            -160.831344604492
+          ],
+          "previous_visual_anchor": [
+            108.830589294434,
+            -0.338313609361649,
+            -160.831344604492
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            108.830589294434,
+            -0.338313609361649,
+            -160.831344604492
+          ],
+          "rendered_frames": 1058,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 13,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-03_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 78.9715576171875,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk"
+        ],
+        "heading": 1.46868534713281,
+        "minimum_door_clearance_m": 25.5362873077393,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          142.40966796875,
+          -1.23129594326019,
+          -434.016296386719
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_09_0",
+        "station": "BIKE-GAME-04",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 4,
+          "ok": false,
+          "projection_samples": 666,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                142.943359375,
+                -1.21895563602448,
+                -434.564758300781
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                143.291534423828,
+                -1.21895563602448,
+                -434.529083251953
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                142.943359375,
+                -1.19395554065704,
+                -434.564758300781
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                143.291534423828,
+                -1.19395554065704,
+                -434.529083251953
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-04_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 3,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          142.702774047852,
+          -1.18486487865448,
+          -435.895751953125
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-04",
+        "visible": true
+      },
+      "name": "BIKE-GAME-04_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 8.53333333333331,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-03"
+            }
+          },
+          {
+            "clock_s": 8.56666666666665,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 9.13333333333331,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike4"
+            }
+          }
+        ],
+        "nearest_before_E": 3,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 3,
+        "riding": true
+      },
+      "name": "BIKE-GAME-04_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 1.72825288772583,
+        "blocked_ticks": {
+          "physical_sweep": 41
+        },
+        "body_on_floor": true,
+        "body_retained": 1190410613365,
+        "forward_samples": 75,
+        "from": [
+          142.40966796875,
+          -1.23129594326019,
+          -434.016296386719
+        ],
+        "maximum_native_step_m": 0.107165396213531,
+        "maximum_speed_mps": 3.21481481481481,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-04",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          140.690200805664,
+          -1.23087465763092,
+          -434.190338134766
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-04_actual_W_travel_native_support_and_Space_stop",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            145.119155883789,
+            1.25442481040955,
+            -434.136016845703
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 370,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 374,
+          "physics_visual_anchor": [
+            140.886489868164,
+            -1.21026086807251,
+            -435.124969482422
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            140.886489868164,
+            0.0897390842437744,
+            -435.124969482422
+          ],
+          "previous_visual_anchor": [
+            140.886489868164,
+            -1.21026086807251,
+            -435.124969482422
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.979591111111135,
+          "render_visual_anchor": [
+            140.886489868164,
+            -1.21026086807251,
+            -435.124969482422
+          ],
+          "rendered_frames": 1520,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 17,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "physical_sweep",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-04_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 16.9292125701904,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.59583599837692,
+        "minimum_door_clearance_m": 4.93254852294922,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          339.828857421875,
+          3.11862659454346,
+          -79.7129516601562
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_05_0",
+        "station": "BIKE-GAME-05",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 666,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-05_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 4,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          339.681427001953,
+          3.25363802909851,
+          -77.820915222168
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-05",
+        "visible": true
+      },
+      "name": "BIKE-GAME-05_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 12.0666666666666,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-04"
+            }
+          },
+          {
+            "clock_s": 12.1,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 12.6666666666666,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike5"
+            }
+          }
+        ],
+        "nearest_before_E": 4,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 4,
+        "riding": true
+      },
+      "name": "BIKE-GAME-05_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.99939465522766,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1195477332883,
+        "forward_samples": 32,
+        "from": [
+          339.828857421875,
+          3.11862659454346,
+          -79.7129516601562
+        ],
+        "maximum_native_step_m": 0.110596895217896,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-05",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          342.827484130859,
+          3.11578702926636,
+          -79.6450805664062
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-05_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            346.936462402344,
+            5.64870452880859,
+            -77.7113876342773
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 454,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 459,
+          "physics_visual_anchor": [
+            342.703796386719,
+            3.18401885032654,
+            -78.700325012207
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            342.703796386719,
+            4.48401880264282,
+            -78.700325012207
+          ],
+          "previous_visual_anchor": [
+            342.703796386719,
+            3.18401885032654,
+            -78.700325012207
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.892354444444469,
+          "render_visual_anchor": [
+            342.703796386719,
+            3.18401885032654,
+            -78.700325012207
+          ],
+          "rendered_frames": 1882,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 21,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-05_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 107.657432556152,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.68523716533812,
+        "minimum_door_clearance_m": 5.74440717697144,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          112.929405212402,
+          3.15445494651794,
+          301.519409179688
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_07_0",
+        "station": "BIKE-GAME-06",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 666,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-06_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 5,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          112.613182067871,
+          3.20950794219971,
+          303.394836425781
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-06",
+        "visible": true
+      },
+      "name": "BIKE-GAME-06_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 14.9,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-05"
+            }
+          },
+          {
+            "clock_s": 14.9333333333333,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 15.5,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike6"
+            }
+          }
+        ],
+        "nearest_before_E": 5,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 5,
+        "riding": true
+      },
+      "name": "BIKE-GAME-06_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.99964547157288,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1200544052401,
+        "forward_samples": 32,
+        "from": [
+          112.929405212402,
+          3.15445494651794,
+          301.519409179688
+        ],
+        "maximum_native_step_m": 0.110603347420692,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-06",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          115.909622192383,
+          3.14165663719177,
+          301.860260009766
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-06_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            119.934547424316,
+            5.64458322525024,
+            303.780883789062
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 538,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 544,
+          "physics_visual_anchor": [
+            115.701873779297,
+            3.17989754676819,
+            302.791931152344
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            115.701873779297,
+            4.47989749908447,
+            302.791931152344
+          ],
+          "previous_visual_anchor": [
+            115.701873779297,
+            3.17989754676819,
+            302.791931152344
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            115.701873779297,
+            3.17989754676819,
+            302.791931152344
+          ],
+          "rendered_frames": 2241,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 29,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-06_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 119.380477905273,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk"
+        ],
+        "heading": 1.70271258706418,
+        "minimum_door_clearance_m": 4.84604597091675,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -56.6543235778809,
+          2.71663451194763,
+          59.476619720459
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_00_0",
+        "station": "BIKE-GAME-07",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 6,
+          "ok": false,
+          "projection_samples": 666,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -56.2623710632324,
+                2.72897458076477,
+                58.8193511962891
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -56.0888938903809,
+                2.72897458076477,
+                58.7963333129883
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -55.915412902832,
+                2.72897458076477,
+                58.7733154296875
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -56.2623710632324,
+                2.7539746761322,
+                58.8193511962891
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -56.0888938903809,
+                2.7539746761322,
+                58.7963333129883
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -55.915412902832,
+                2.7539746761322,
+                58.7733154296875
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-07_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 6,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          -56.8047904968262,
+          2.61896157264709,
+          57.5825157165527
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-07",
+        "visible": true
+      },
+      "name": "BIKE-GAME-07_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 17.7333333333334,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-06"
+            }
+          },
+          {
+            "clock_s": 17.7666666666667,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 18.3333333333334,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike7"
+            }
+          }
+        ],
+        "nearest_before_E": 6,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 6,
+        "riding": true
+      },
+      "name": "BIKE-GAME-07_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 2.99262690544128,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1205610771919,
+        "forward_samples": 32,
+        "from": [
+          -56.6543235778809,
+          2.71663451194763,
+          59.476619720459
+        ],
+        "maximum_native_step_m": 0.110507287085056,
+        "maximum_speed_mps": 3.31851851851852,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-07",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -59.6215553283691,
+          2.78665041923523,
+          59.8656578063965
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-07_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -55.4145584106445,
+            5.20563840866089,
+            59.9010238647461
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 622,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 629,
+          "physics_visual_anchor": [
+            -59.6472282409668,
+            2.74095249176025,
+            58.9120826721191
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -59.6472282409668,
+            4.04095268249512,
+            58.9120826721191
+          ],
+          "previous_visual_anchor": [
+            -59.6472282409668,
+            2.74095249176025,
+            58.9120826721191
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            -59.6472282409668,
+            2.74095249176025,
+            58.9120826721191
+          ],
+          "rendered_frames": 2612,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 33,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-07_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 113.464767456055,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk"
+        ],
+        "heading": -0.454821370401003,
+        "minimum_door_clearance_m": 6.3105902671814,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -30.9815502166748,
+          4.73431634902954,
+          -247.005325317383
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_08_0",
+        "station": "BIKE-GAME-08",
+        "station_fixture_projection": {
+          "actual_meshes": 29,
+          "failed_samples": 6,
+          "ok": false,
+          "projection_samples": 666,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.6512145996094,
+                4.74665689468384,
+                -246.315032958984
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.7280921936035,
+                4.74665689468384,
+                -246.157821655273
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.8049697875977,
+                4.74665689468384,
+                -246.000610351562
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.6512145996094,
+                4.77165651321411,
+                -246.315032958984
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.7280921936035,
+                4.77165651321411,
+                -246.157821655273
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -30.8049697875977,
+                4.77165651321411,
+                -246.000610351562
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "BIKE-GAME-08_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 7,
+        "ordinary_dispatch_target": "@Node3D@4160",
+        "point": [
+          -29.3342895507812,
+          4.40986824035645,
+          -246.089340209961
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "BIKE-GAME-08",
+        "visible": true
+      },
+      "name": "BIKE-GAME-08_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 20.5666666666668,
+            "event": "returned",
+            "evidence": {
+              "station_id": "BIKE-GAME-07"
+            }
+          },
+          {
+            "clock_s": 20.6000000000002,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 21.1666666666669,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalBike8"
+            }
+          }
+        ],
+        "nearest_before_E": 7,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 7,
+        "riding": true
+      },
+      "name": "BIKE-GAME-08_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.12659358978271,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1210677491437,
+        "forward_samples": 33,
+        "from": [
+          -30.9815502166748,
+          4.73431634902954,
+          -247.005325317383
+        ],
+        "maximum_native_step_m": 0.112693145871162,
+        "maximum_speed_mps": 3.42222222222222,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "BIKE-GAME-08",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -29.5931930541992,
+          5.08291292190552,
+          -249.806762695312
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "BIKE-GAME-08_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -25.0261936187744,
+            7.24459886550903,
+            -247.338684082031
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 766,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 774,
+          "physics_visual_anchor": [
+            -29.2588653564453,
+            4.77991342544556,
+            -248.327621459961
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -29.2588653564453,
+            6.07991313934326,
+            -248.327621459961
+          ],
+          "previous_visual_anchor": [
+            -29.2588653564453,
+            4.77991342544556,
+            -248.327621459961
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            -29.2588653564453,
+            4.77991342544556,
+            -248.327621459961
+          ],
+          "rendered_frames": 3247,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 37,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "BIKE-GAME-08_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 92.7577285766602,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.80643994760025,
+        "minimum_door_clearance_m": 29.2866992950439,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          174.698043823242,
+          -0.118225648999214,
+          -105.730903625488
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "city_plaza",
+        "station": "SCOOTER-GAME-01",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 494,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-01_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 0,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          174.157272338867,
+          -0.168422996997833,
+          -103.906898498535
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-01",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-01_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 26.0000000000005,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter1"
+            }
+          }
+        ],
+        "nearest_before_E": 0,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 0,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-01_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.06785106658936,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1215945537552,
+        "forward_samples": 29,
+        "from": [
+          174.698043823242,
+          -0.118225648999214,
+          -105.730903625488
+        ],
+        "maximum_native_step_m": 0.125157833099365,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-01",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          177.680740356445,
+          -0.0634502097964287,
+          -105.013107299805
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-01_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            180.640808105469,
+            2.35869312286377,
+            -103.351463317871
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 900,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 909,
+          "physics_visual_anchor": [
+            176.408142089844,
+            -0.105992503464222,
+            -104.340400695801
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            176.408142089844,
+            1.194007396698,
+            -104.340400695801
+          ],
+          "previous_visual_anchor": [
+            176.408142089844,
+            -0.105992503464222,
+            -104.340400695801
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.85016222222226,
+          "render_visual_anchor": [
+            176.408142089844,
+            -0.105992503464222,
+            -104.340400695801
+          ],
+          "rendered_frames": 3830,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 41,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-01_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 183.554779052734,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": 1.65137831108193,
+        "minimum_door_clearance_m": 26.604398727417,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -116.177116394043,
+          2.81449198722839,
+          23.3375701904297
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "stonewall",
+        "station": "SCOOTER-GAME-02",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 494,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-02_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 1,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          -115.925186157227,
+          2.94601154327393,
+          25.2187080383301
+        ],
+        "requested_local_offset": [
+          -1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-02",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-02_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 29.9000000000006,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-01"
+            }
+          },
+          {
+            "clock_s": 29.933333333334,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 30.5000000000007,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter2"
+            }
+          }
+        ],
+        "nearest_before_E": 1,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 1,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-02_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.03623294830322,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1220777376032,
+        "forward_samples": 29,
+        "from": [
+          -116.177116394043,
+          2.81449198722839,
+          23.3375701904297
+        ],
+        "maximum_native_step_m": 0.124430432915688,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-02",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -119.203994750977,
+          3.06931686401367,
+          23.5757255554199
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-02_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -114.005546569824,
+            5.37529516220093,
+            23.5337982177734
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1033,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1043,
+          "physics_visual_anchor": [
+            -118.238220214844,
+            2.91060948371887,
+            22.5448589324951
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -118.238220214844,
+            4.21060943603516,
+            22.5448589324951
+          ],
+          "previous_visual_anchor": [
+            -118.238220214844,
+            2.91060948371887,
+            22.5448589324951
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            -118.238220214844,
+            2.91060948371887,
+            22.5448589324951
+          ],
+          "rendered_frames": 4418,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 45,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-02_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 22.8032188415527,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.80092303286381,
+        "minimum_door_clearance_m": 26.634090423584,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          113.299926757812,
+          -0.324093788862228,
+          -160.738571166992
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "city_plaza",
+        "station": "SCOOTER-GAME-03",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 494,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-03_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 2,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          113.631912231445,
+          -0.581294775009155,
+          -162.593811035156
+        ],
+        "requested_local_offset": [
+          -1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-03",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-03_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 34.3666666666673,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-02"
+            }
+          },
+          {
+            "clock_s": 34.4000000000006,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 34.9666666666672,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter3"
+            }
+          }
+        ],
+        "nearest_before_E": 2,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 2,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-03_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.0644850730896,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1225609214512,
+        "forward_samples": 29,
+        "from": [
+          113.299926757812,
+          -0.324093788862228,
+          -160.738571166992
+        ],
+        "maximum_native_step_m": 0.125123932957649,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-03",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          116.286529541016,
+          -0.226904168725014,
+          -160.05207824707
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-03_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            116.929321289062,
+            1.60624432563782,
+            -158.943542480469
+          ],
+          "clearance_corrections": 1,
+          "distance": 2.02937500178814,
+          "far": 1400.0,
+          "follow_ticks": 1167,
+          "fov": 62.0,
+          "hit_length": 2.02937500178814,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1178,
+          "physics_visual_anchor": [
+            115.0205078125,
+            -0.218996584415436,
+            -159.389526367188
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            115.0205078125,
+            1.08100342750549,
+            -159.389526367188
+          ],
+          "previous_visual_anchor": [
+            115.0205078125,
+            -0.218996584415436,
+            -159.389526367188
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            115.0205078125,
+            -0.218996584415436,
+            -159.389526367188
+          ],
+          "rendered_frames": 5010,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 51,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-03_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 73.3565673828125,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk",
+          "native_full_body_or_departure_blocked"
+        ],
+        "heading": 1.46868534713281,
+        "minimum_door_clearance_m": 30.9375228881836,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 0.90234375,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          134.725189208984,
+          -1.28873336315155,
+          -434.8037109375
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_09_0",
+        "station": "SCOOTER-GAME-04",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 4,
+          "ok": false,
+          "projection_samples": 494,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                135.258880615234,
+                -1.28490006923676,
+                -435.352172851562
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                135.607055664062,
+                -1.28490006923676,
+                -435.316497802734
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                135.258880615234,
+                -1.25989997386932,
+                -435.352172851562
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                135.607055664062,
+                -1.25989997386932,
+                -435.316497802734
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-04_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 3,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          135.018325805664,
+          -1.2523398399353,
+          -436.683532714844
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-04",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-04_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 38.866666666667,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-03"
+            }
+          },
+          {
+            "clock_s": 38.9000000000004,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 39.466666666667,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter4"
+            }
+          }
+        ],
+        "nearest_before_E": 3,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 3,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-04_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.07380104064941,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1230441052992,
+        "forward_samples": 29,
+        "from": [
+          134.725189208984,
+          -1.28873336315155,
+          -434.8037109375
+        ],
+        "maximum_native_step_m": 0.125322684645653,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-04",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          131.667358398438,
+          -1.30041229724884,
+          -435.116638183594
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-04_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            137.069458007812,
+            1.18443298339844,
+            -434.962524414062
+          ],
+          "clearance_corrections": 1,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1301,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1313,
+          "physics_visual_anchor": [
+            132.836791992188,
+            -1.28025281429291,
+            -435.951477050781
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            132.836791992188,
+            0.0197471380233765,
+            -435.951477050781
+          ],
+          "previous_visual_anchor": [
+            132.836791992188,
+            -1.28025281429291,
+            -435.951477050781
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.915826666666718,
+          "render_visual_anchor": [
+            132.836791992188,
+            -1.28025281429291,
+            -435.951477050781
+          ],
+          "rendered_frames": 5607,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 55,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-04_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 11.1646013259888,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.59583599837692,
+        "minimum_door_clearance_m": 5.67102146148682,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          347.973693847656,
+          3.11285758018494,
+          -79.5089645385742
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_05_0",
+        "station": "SCOOTER-GAME-05",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 494,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-05_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 4,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          347.826293945312,
+          3.25351119041443,
+          -77.6171798706055
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-05",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-05_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 43.3666666666668,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-04"
+            }
+          },
+          {
+            "clock_s": 43.4000000000001,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 43.9666666666667,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter5"
+            }
+          }
+        ],
+        "nearest_before_E": 4,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 4,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-05_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.07329607009888,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1235272891472,
+        "forward_samples": 29,
+        "from": [
+          347.973693847656,
+          3.11285758018494,
+          -79.5089645385742
+        ],
+        "maximum_native_step_m": 0.125311478972435,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-05",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          351.046203613281,
+          3.11145424842834,
+          -79.439453125
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-05_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            354.177337646484,
+            5.64836502075195,
+            -77.5358505249023
+          ],
+          "clearance_corrections": 1,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1435,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1448,
+          "physics_visual_anchor": [
+            349.944671630859,
+            3.1836793422699,
+            -78.524787902832
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            349.944671630859,
+            4.48367929458618,
+            -78.524787902832
+          ],
+          "previous_visual_anchor": [
+            349.944671630859,
+            3.1836793422699,
+            -78.524787902832
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.916666666666667,
+          "render_visual_anchor": [
+            349.944671630859,
+            3.1836793422699,
+            -78.524787902832
+          ],
+          "rendered_frames": 6187,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 59,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-05_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 114.788208007812,
+        "departure_m": 3.4,
+        "failures": [],
+        "heading": -1.68523716533812,
+        "minimum_door_clearance_m": 12.9240036010742,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": true,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          121.415000915527,
+          3.17467355728149,
+          302.494781494141
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_07_0",
+        "station": "SCOOTER-GAME-06",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 0,
+          "ok": true,
+          "projection_samples": 494,
+          "sample_failures": [],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-06_full_native_supported_source_private_door_and_departure_clear",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_index": 5,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          121.532363891602,
+          3.08036518096924,
+          300.598175048828
+        ],
+        "requested_local_offset": [
+          -1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-06",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-06_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 47.8666666666665,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-05"
+            }
+          },
+          {
+            "clock_s": 47.8999999999998,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 48.4666666666665,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter6"
+            }
+          }
+        ],
+        "nearest_before_E": 5,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 5,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-06_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.07189536094666,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1240104729952,
+        "forward_samples": 29,
+        "from": [
+          121.415000915527,
+          3.17467355728149,
+          302.494781494141
+        ],
+        "maximum_native_step_m": 0.125324726104736,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-06",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          124.467247009277,
+          3.18886590003967,
+          302.841674804688
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-06_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            127.521095275879,
+            5.68538904190063,
+            304.649047851562
+          ],
+          "clearance_corrections": 1,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1569,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1583,
+          "physics_visual_anchor": [
+            123.288421630859,
+            3.220703125,
+            303.660095214844
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            123.288421630859,
+            4.52070331573486,
+            303.660095214844
+          ],
+          "previous_visual_anchor": [
+            123.288421630859,
+            3.220703125,
+            303.660095214844
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            123.288421630859,
+            3.220703125,
+            303.660095214844
+          ],
+          "rendered_frames": 6772,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 63,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-06_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 126.245750427246,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk"
+        ],
+        "heading": 1.70271258706418,
+        "minimum_door_clearance_m": 4.87769889831543,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 1.0,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -63.5635566711426,
+          2.84007000923157,
+          60.3933868408203
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_00_0",
+        "station": "SCOOTER-GAME-07",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 6,
+          "ok": false,
+          "projection_samples": 494,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -63.1716041564941,
+                2.85241007804871,
+                59.7361183166504
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -62.9981269836426,
+                2.85241007804871,
+                59.7131004333496
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -62.8246459960938,
+                2.85241007804871,
+                59.6900825500488
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -63.1716041564941,
+                2.87741017341614,
+                59.7361183166504
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -62.9981269836426,
+                2.87741017341614,
+                59.7131004333496
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -62.8246459960938,
+                2.87741017341614,
+                59.6900825500488
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-07_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 6,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          -63.7143478393555,
+          2.78613185882568,
+          58.4967575073242
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-07",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-07_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 52.3666666666663,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-06"
+            }
+          },
+          {
+            "clock_s": 52.3999999999996,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 52.9666666666662,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter7"
+            }
+          }
+        ],
+        "nearest_before_E": 6,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 6,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-07_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.07149958610535,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1244936568432,
+        "forward_samples": 29,
+        "from": [
+          -63.5635566711426,
+          2.84007000923157,
+          60.3933868408203
+        ],
+        "maximum_native_step_m": 0.125258252024651,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-07",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -66.6083755493164,
+          2.87610220909119,
+          60.7973518371582
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-07_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -61.4312858581543,
+            5.32290315628052,
+            60.7026100158691
+          ],
+          "clearance_corrections": 1,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1703,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1718,
+          "physics_visual_anchor": [
+            -65.6639556884766,
+            2.85821723937988,
+            59.7136688232422
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -65.6639556884766,
+            4.15821743011475,
+            59.7136688232422
+          ],
+          "previous_visual_anchor": [
+            -65.6639556884766,
+            2.85821723937988,
+            59.7136688232422
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 1.0,
+          "render_visual_anchor": [
+            -65.6639556884766,
+            2.85821723937988,
+            59.7136688232422
+          ],
+          "rendered_frames": 7368,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 67,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-07_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "closest_current_original_car_or_game_bus_origin_m": 112.074356079102,
+        "departure_m": 3.4,
+        "failures": [
+          "station_fixture_mesh_projection_outside_original_exterior_walk",
+          "native_full_body_or_departure_blocked"
+        ],
+        "heading": -0.454821370401003,
+        "minimum_door_clearance_m": 14.0238513946533,
+        "native_initial_hits": [],
+        "native_sweep_fraction": 0.6875,
+        "ok": false,
+        "other_station_fixture_conflicts": [],
+        "parked_body_overlaps_original_drive": false,
+        "parked_body_samples_on_exterior_walk": true,
+        "point": [
+          -27.4863052368164,
+          5.25650882720947,
+          -254.15283203125
+        ],
+        "required_door_clearance_m": 2.0,
+        "source_route": "coverage_walk_08_0",
+        "station": "SCOOTER-GAME-08",
+        "station_fixture_projection": {
+          "actual_meshes": 17,
+          "failed_samples": 6,
+          "ok": false,
+          "projection_samples": 494,
+          "sample_failures": [
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.155969619751,
+                5.26663780212402,
+                -253.462539672852
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.2328472137451,
+                5.26663780212402,
+                -253.305328369141
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.3097248077393,
+                5.26663780212402,
+                -253.14811706543
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.155969619751,
+                5.2916374206543,
+                -253.462539672852
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.2328472137451,
+                5.2916374206543,
+                -253.305328369141
+              ]
+            },
+            {
+              "mesh": "DockGreenPlate",
+              "point": [
+                -27.3097248077393,
+                5.2916374206543,
+                -253.14811706543
+              ]
+            }
+          ],
+          "scope": "Conservative actual mesh-envelope surface samples projected onto original exterior walk, with original drive/private exclusion; <=0.18m lattice spacing."
+        },
+        "support_samples": 45
+      },
+      "name": "SCOOTER-GAME-08_full_native_supported_source_private_door_and_departure_clear",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "nearest_index": 7,
+        "ordinary_dispatch_target": "@Node3D@4842",
+        "point": [
+          -25.8527641296387,
+          4.89321184158325,
+          -253.242736816406
+        ],
+        "requested_local_offset": [
+          1.89999997615814,
+          0.0,
+          0.100000001490116
+        ],
+        "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+        "station": "SCOOTER-GAME-08",
+        "visible": true
+      },
+      "name": "SCOOTER-GAME-08_safe_visible_observer_targets_exact_station",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 56.866666666666,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-07"
+            }
+          },
+          {
+            "clock_s": 56.8999999999993,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          },
+          {
+            "clock_s": 57.466666666666,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter8"
+            }
+          }
+        ],
+        "nearest_before_E": 7,
+        "other_riding": false,
+        "reason": "",
+        "rental_index": 7,
+        "riding": true
+      },
+      "name": "SCOOTER-GAME-08_fresh_physical_E_dispatch_mounts_requested_vehicle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_travel_m": 3.06139898300171,
+        "blocked_ticks": {},
+        "body_on_floor": true,
+        "body_retained": 1249768406912,
+        "forward_samples": 29,
+        "from": [
+          -27.4863052368164,
+          5.25650882720947,
+          -254.15283203125
+        ],
+        "maximum_native_step_m": 0.125137865543365,
+        "maximum_speed_mps": 3.75925925925926,
+        "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+        "station": "SCOOTER-GAME-08",
+        "stopped_speed_mps": 0.0,
+        "to": [
+          -26.1250286102295,
+          5.37277173995972,
+          -256.894927978516
+        ],
+        "unsupported_forward_ticks": 0
+      },
+      "name": "SCOOTER-GAME-08_actual_W_travel_native_support_and_Space_stop",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.227516800165176,
+              0.0,
+              -0.973774194717407
+            ],
+            [
+              -0.252031326293945,
+              0.965925872325897,
+              -0.058885682374239
+            ],
+            [
+              0.940593600273132,
+              0.258819073438644,
+              0.219764351844788
+            ]
+          ],
+          "camera": [
+            -21.5158805847168,
+            7.61388063430786,
+            -254.517272949219
+          ],
+          "clearance_corrections": 1,
+          "distance": 4.5,
+          "far": 1400.0,
+          "follow_ticks": 1837,
+          "fov": 62.0,
+          "hit_length": 4.5,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 1853,
+          "physics_visual_anchor": [
+            -25.7485523223877,
+            5.14919471740723,
+            -255.506210327148
+          ],
+          "pitch": -0.261799387799149,
+          "pivot": [
+            -25.7485523223877,
+            6.44919490814209,
+            -255.506210327148
+          ],
+          "previous_visual_anchor": [
+            -25.7485523223877,
+            5.14919471740723,
+            -255.506210327148
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.916666666666667,
+          "render_visual_anchor": [
+            -25.7485523223877,
+            5.14919471740723,
+            -255.506210327148
+          ],
+          "rendered_frames": 7957,
+          "requested_distance": 4.5,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 71,
+          "visual_root_physics_owned": true,
+          "yaw": 1.34126954770077
+        },
+        "facility_control": false,
+        "pending_pairs": 0,
+        "player_physics": true,
+        "reason": "",
+        "rental_index": -1,
+        "riding": false
+      },
+      "name": "SCOOTER-GAME-08_E_alights_returns_and_restores_original_controls_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "completed_stations": 16,
+        "expected_stations": 16
+      },
+      "name": "every_authored_station_completed_an_actual_dispatch_ride_and_return",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "TIN_faces": 146882,
+        "actors": 44,
+        "source_nodes": 1233
+      },
+      "name": "original_source_nodes_actors_capsule_and_TIN_retained",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "recovery_count_after": 0,
+        "recovery_count_before": 0
+      },
+      "name": "all_trials_without_recovery_or_transport_ownership_leak",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_mobility_distribution.gd": "792cb488dbeddd52289566b1539077f7b05c31e6f5b5facaf70a866b3a10b917",
+          "res://assets/authored/bike_service.json": "4591b22340af4d7015d85afbbcc0f212f78f425540c594df9bdbe9358057c61c",
+          "res://assets/authored/bus_service.json": "a5b7c4cbc36553f022e2b0796f89acc15fdf21efa1c349ba94a557cd7077d2ea",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+          "res://assets/authored/scooter_service.json": "65b0261eb9462a24f062f4fd18f61176e6dd0934b21d95bf5d764dd3e684fccf",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scenes/world/explore_walk.tscn": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+          "res://scripts/city_bike_service.gd": "e7877f29978e4bb73adb28b5d457dfaedd5519f7de3aaf80d73acf5c8435ee53",
+          "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+          "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+          "res://scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+          "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/daehanmun_player.gd": "82b417b5eb08507fd70750709341981c3751db8b41ecf78f8cbb77c287d2a3d1",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/exploration_camera.gd": "dea6d393afaab5d760d00254b64c9b994d7584077c584b5808605b4ea1c2a7e1",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+          "res://scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+          "res://scripts/player/palace_player.gd": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b",
+          "res://scripts/player/public_player.gd": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed",
+          "res://scripts/source_polygon_index.gd": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        },
+        "loaded": {
+          "res://../tests/game/check_mobility_distribution.gd": "792cb488dbeddd52289566b1539077f7b05c31e6f5b5facaf70a866b3a10b917",
+          "res://assets/authored/bike_service.json": "4591b22340af4d7015d85afbbcc0f212f78f425540c594df9bdbe9358057c61c",
+          "res://assets/authored/bus_service.json": "a5b7c4cbc36553f022e2b0796f89acc15fdf21efa1c349ba94a557cd7077d2ea",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+          "res://assets/authored/scooter_service.json": "65b0261eb9462a24f062f4fd18f61176e6dd0934b21d95bf5d764dd3e684fccf",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scenes/world/explore_walk.tscn": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+          "res://scripts/city_bike_service.gd": "e7877f29978e4bb73adb28b5d457dfaedd5519f7de3aaf80d73acf5c8435ee53",
+          "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+          "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+          "res://scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+          "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+          "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+          "res://scripts/player/daehanmun_player.gd": "82b417b5eb08507fd70750709341981c3751db8b41ecf78f8cbb77c287d2a3d1",
+          "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+          "res://scripts/player/exploration_camera.gd": "dea6d393afaab5d760d00254b64c9b994d7584077c584b5808605b4ea1c2a7e1",
+          "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+          "res://scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+          "res://scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+          "res://scripts/player/palace_player.gd": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b",
+          "res://scripts/player/public_player.gd": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed",
+          "res://scripts/source_polygon_index.gd": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        }
+      },
+      "name": "all_relevant_runtime_source_and_test_inputs_stable",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "checks_before_guard": 87,
+        "expected_total_including_guard": 88,
+        "native": false,
+        "station_count": 16
+      },
+      "name": "strict_complete_data_driven_check_denominator",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "elapsed_ms": 66863,
+  "expected_total": 88,
+  "observer_starts": [
+    {
+      "nearest_index": 0,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        165.054244995117,
+        -0.368639588356018,
+        -103.882080078125
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-01",
+      "visible": true
+    },
+    {
+      "nearest_index": 1,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        -127.231269836426,
+        3.73965787887573,
+        26.1343517303467
+      ],
+      "requested_local_offset": [
+        -1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-02",
+      "visible": true
+    },
+    {
+      "nearest_index": 2,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        105.70361328125,
+        -0.323954552412033,
+        -160.582901000977
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-03",
+      "visible": true
+    },
+    {
+      "nearest_index": 3,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        142.702774047852,
+        -1.18486487865448,
+        -435.895751953125
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-04",
+      "visible": true
+    },
+    {
+      "nearest_index": 4,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        339.681427001953,
+        3.25363802909851,
+        -77.820915222168
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-05",
+      "visible": true
+    },
+    {
+      "nearest_index": 5,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        112.613182067871,
+        3.20950794219971,
+        303.394836425781
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-06",
+      "visible": true
+    },
+    {
+      "nearest_index": 6,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        -56.8047904968262,
+        2.61896157264709,
+        57.5825157165527
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-07",
+      "visible": true
+    },
+    {
+      "nearest_index": 7,
+      "ordinary_dispatch_target": "@Node3D@4160",
+      "point": [
+        -29.3342895507812,
+        4.40986824035645,
+        -246.089340209961
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "BIKE-GAME-08",
+      "visible": true
+    },
+    {
+      "nearest_index": 0,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        174.157272338867,
+        -0.168422996997833,
+        -103.906898498535
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-01",
+      "visible": true
+    },
+    {
+      "nearest_index": 1,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        -115.925186157227,
+        2.94601154327393,
+        25.2187080383301
+      ],
+      "requested_local_offset": [
+        -1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-02",
+      "visible": true
+    },
+    {
+      "nearest_index": 2,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        113.631912231445,
+        -0.581294775009155,
+        -162.593811035156
+      ],
+      "requested_local_offset": [
+        -1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-03",
+      "visible": true
+    },
+    {
+      "nearest_index": 3,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        135.018325805664,
+        -1.2523398399353,
+        -436.683532714844
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-04",
+      "visible": true
+    },
+    {
+      "nearest_index": 4,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        347.826293945312,
+        3.25351119041443,
+        -77.6171798706055
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-05",
+      "visible": true
+    },
+    {
+      "nearest_index": 5,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        121.532363891602,
+        3.08036518096924,
+        300.598175048828
+      ],
+      "requested_local_offset": [
+        -1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-06",
+      "visible": true
+    },
+    {
+      "nearest_index": 6,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        -63.7143478393555,
+        2.78613185882568,
+        58.4967575073242
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-07",
+      "visible": true
+    },
+    {
+      "nearest_index": 7,
+      "ordinary_dispatch_target": "@Node3D@4842",
+      "point": [
+        -25.8527641296387,
+        4.89321184158325,
+        -253.242736816406
+      ],
+      "requested_local_offset": [
+        1.89999997615814,
+        0.0,
+        0.100000001490116
+      ],
+      "scope": "Test-only positively supported player observer start. No vehicle, source node or actor transform is written.",
+      "station": "SCOOTER-GAME-08",
+      "visible": true
+    }
+  ],
+  "passed": 79,
+  "physics_hz": 30,
+  "result": "FAIL",
+  "scope": "Entire ordinary production scene and all authored bicycle/scooter docks. Only positively supported player observer fixtures are placed; physical KEY_E press/release dispatch and synthetic maintained W/Space actions drive actual retained bodies and original collisions/supports. No vehicle/actor/source transform fixtures, no direct mount calls. Native saved images require separate image review; engine events are not human OS-key, subjective comfort or performance acceptance.",
+  "source_hashes": {
+    "res://../tests/game/check_mobility_distribution.gd": "792cb488dbeddd52289566b1539077f7b05c31e6f5b5facaf70a866b3a10b917",
+    "res://assets/authored/bike_service.json": "4591b22340af4d7015d85afbbcc0f212f78f425540c594df9bdbe9358057c61c",
+    "res://assets/authored/bus_service.json": "a5b7c4cbc36553f022e2b0796f89acc15fdf21efa1c349ba94a557cd7077d2ea",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+    "res://assets/authored/scooter_service.json": "65b0261eb9462a24f062f4fd18f61176e6dd0934b21d95bf5d764dd3e684fccf",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scenes/world/explore_walk.tscn": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939",
+    "res://scripts/city_bike_service.gd": "e7877f29978e4bb73adb28b5d457dfaedd5519f7de3aaf80d73acf5c8435ee53",
+    "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+    "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+    "res://scripts/input_router.gd": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff",
+    "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+    "res://scripts/player/camera_rig.gd": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390",
+    "res://scripts/player/daehanmun_player.gd": "82b417b5eb08507fd70750709341981c3751db8b41ecf78f8cbb77c287d2a3d1",
+    "res://scripts/player/exploration_avatar.gd": "da1a3b255332704a286af340d8cb4935cb863ba8231070f08bfcf31a865cb331",
+    "res://scripts/player/exploration_camera.gd": "dea6d393afaab5d760d00254b64c9b994d7584077c584b5808605b4ea1c2a7e1",
+    "res://scripts/player/free_roam_player.gd": "e6a61bd19005ee20ef1d254b2bea467ae7843d39bb55314ec40aec4b9cf69e4f",
+    "res://scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "res://scripts/player/movement_controller.gd": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1",
+    "res://scripts/player/palace_player.gd": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b",
+    "res://scripts/player/public_player.gd": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed",
+    "res://scripts/source_polygon_index.gd": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  },
+  "startup_elapsed_ms": 5321,
+  "startup_timing_scope": "Single whole-scene test startup plus eight fixed ticks and input hashing on this Mac; not repeated load benchmark, frame-rate or another-Mac performance acceptance.",
+  "station_trials": [
+    {
+      "actual_travel_m": 2.99626111984253,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1175210454811,
+      "forward_samples": 32,
+      "from": [
+        165.59489440918,
+        -0.295331358909607,
+        -105.705513000488
+      ],
+      "maximum_native_step_m": 0.110546007752419,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-01",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        168.507659912109,
+        -0.260162115097046,
+        -105.003105163574
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 2.97529435157776,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1180277174329,
+      "forward_samples": 32,
+      "from": [
+        -127.483528137207,
+        3.66541886329651,
+        24.2506427764893
+      ],
+      "maximum_native_step_m": 0.110341779887676,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-02",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -130.44953918457,
+        3.84691286087036,
+        24.4854927062988
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 2.98789858818054,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1185343893847,
+      "forward_samples": 32,
+      "from": [
+        106.23072052002,
+        -0.571026504039764,
+        -162.394714355469
+      ],
+      "maximum_native_step_m": 0.110407024621964,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-03",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        109.142822265625,
+        -0.461745977401733,
+        -161.725982666016
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 1.72825288772583,
+      "blocked_ticks": {
+        "physical_sweep": 41
+      },
+      "body_on_floor": true,
+      "body_retained": 1190410613365,
+      "forward_samples": 75,
+      "from": [
+        142.40966796875,
+        -1.23129594326019,
+        -434.016296386719
+      ],
+      "maximum_native_step_m": 0.107165396213531,
+      "maximum_speed_mps": 3.21481481481481,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-04",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        140.690200805664,
+        -1.23087465763092,
+        -434.190338134766
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 2.99939465522766,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1195477332883,
+      "forward_samples": 32,
+      "from": [
+        339.828857421875,
+        3.11862659454346,
+        -79.7129516601562
+      ],
+      "maximum_native_step_m": 0.110596895217896,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-05",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        342.827484130859,
+        3.11578702926636,
+        -79.6450805664062
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 2.99964547157288,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1200544052401,
+      "forward_samples": 32,
+      "from": [
+        112.929405212402,
+        3.15445494651794,
+        301.519409179688
+      ],
+      "maximum_native_step_m": 0.110603347420692,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-06",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        115.909622192383,
+        3.14165663719177,
+        301.860260009766
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 2.99262690544128,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1205610771919,
+      "forward_samples": 32,
+      "from": [
+        -56.6543235778809,
+        2.71663451194763,
+        59.476619720459
+      ],
+      "maximum_native_step_m": 0.110507287085056,
+      "maximum_speed_mps": 3.31851851851852,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-07",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -59.6215553283691,
+        2.78665041923523,
+        59.8656578063965
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.12659358978271,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1210677491437,
+      "forward_samples": 33,
+      "from": [
+        -30.9815502166748,
+        4.73431634902954,
+        -247.005325317383
+      ],
+      "maximum_native_step_m": 0.112693145871162,
+      "maximum_speed_mps": 3.42222222222222,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "BIKE-GAME-08",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -29.5931930541992,
+        5.08291292190552,
+        -249.806762695312
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.06785106658936,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1215945537552,
+      "forward_samples": 29,
+      "from": [
+        174.698043823242,
+        -0.118225648999214,
+        -105.730903625488
+      ],
+      "maximum_native_step_m": 0.125157833099365,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-01",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        177.680740356445,
+        -0.0634502097964287,
+        -105.013107299805
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.03623294830322,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1220777376032,
+      "forward_samples": 29,
+      "from": [
+        -116.177116394043,
+        2.81449198722839,
+        23.3375701904297
+      ],
+      "maximum_native_step_m": 0.124430432915688,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-02",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -119.203994750977,
+        3.06931686401367,
+        23.5757255554199
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.0644850730896,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1225609214512,
+      "forward_samples": 29,
+      "from": [
+        113.299926757812,
+        -0.324093788862228,
+        -160.738571166992
+      ],
+      "maximum_native_step_m": 0.125123932957649,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-03",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        116.286529541016,
+        -0.226904168725014,
+        -160.05207824707
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.07380104064941,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1230441052992,
+      "forward_samples": 29,
+      "from": [
+        134.725189208984,
+        -1.28873336315155,
+        -434.8037109375
+      ],
+      "maximum_native_step_m": 0.125322684645653,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-04",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        131.667358398438,
+        -1.30041229724884,
+        -435.116638183594
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.07329607009888,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1235272891472,
+      "forward_samples": 29,
+      "from": [
+        347.973693847656,
+        3.11285758018494,
+        -79.5089645385742
+      ],
+      "maximum_native_step_m": 0.125311478972435,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-05",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        351.046203613281,
+        3.11145424842834,
+        -79.439453125
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.07189536094666,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1240104729952,
+      "forward_samples": 29,
+      "from": [
+        121.415000915527,
+        3.17467355728149,
+        302.494781494141
+      ],
+      "maximum_native_step_m": 0.125324726104736,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-06",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        124.467247009277,
+        3.18886590003967,
+        302.841674804688
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.07149958610535,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1244936568432,
+      "forward_samples": 29,
+      "from": [
+        -63.5635566711426,
+        2.84007000923157,
+        60.3933868408203
+      ],
+      "maximum_native_step_m": 0.125258252024651,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-07",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -66.6083755493164,
+        2.87610220909119,
+        60.7973518371582
+      ],
+      "unsupported_forward_ticks": 0
+    },
+    {
+      "actual_travel_m": 3.06139898300171,
+      "blocked_ticks": {},
+      "body_on_floor": true,
+      "body_retained": 1249768406912,
+      "forward_samples": 29,
+      "from": [
+        -27.4863052368164,
+        5.25650882720947,
+        -254.15283203125
+      ],
+      "maximum_native_step_m": 0.125137865543365,
+      "maximum_speed_mps": 3.75925925925926,
+      "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+      "station": "SCOOTER-GAME-08",
+      "stopped_speed_mps": 0.0,
+      "to": [
+        -26.1250286102295,
+        5.37277173995972,
+        -256.894927978516
+      ],
+      "unsupported_forward_ticks": 0
+    }
+  ],
+  "task": "EXP26_MOBILITY_DISTRIBUTION",
+  "total": 88
+}

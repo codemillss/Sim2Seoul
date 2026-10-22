@@ -1,0 +1,896 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "actual_docks": 8,
+        "actual_scooters": 8,
+        "authored_docks": 8,
+        "runtime_error": "",
+        "scooter_error": ""
+      },
+      "name": "production_setup_all_source_bound_native_docks",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original30_people14_vehicles_and_native_capsule_preserved",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "camera_distance_m": 4.2,
+        "camera_pitch_degrees": -18.0,
+        "camera_yaw": 0.361780499275673,
+        "id": "SCOOTER-GAME-01",
+        "point": [
+          174.157272338867,
+          -0.08873550593853,
+          -103.906898498535
+        ],
+        "toward": [
+          174.698043823242,
+          0.581774353981018,
+          -105.730903625488
+        ]
+      },
+      "name": "supported_clear_player_rental_start",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "nearest_bike_m": 6.43745136260986
+      },
+      "name": "both_scooter_docks_do_not_overlap_parked_bicycles",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "minimum_lateral_clearance_m": 1.5,
+        "scooter_in_bicycle_departure_frame": [
+          -2.15408325195312,
+          0.0877351760864258,
+          -8.84599304199219
+        ]
+      },
+      "name": "scooter_dock_leaves_bicycle_departure_corridor_open",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "scooter_deck_small_wheels_stem_display_and_no_saddle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual": [
+          174.157272338867,
+          -0.168422996997833,
+          -103.906898498535
+        ],
+        "camera": {
+          "aspect": 1.6,
+          "avatar_activity_pose_current": false,
+          "avatar_render_proxy_path": "/root/ExploreWalk/Actors/Player/Visual/ExplorationAvatar/RenderProxy",
+          "avatar_render_proxy_ready": true,
+          "basis": [
+            [
+              0.935268104076385,
+              0.0,
+              -0.353940039873123
+            ],
+            [
+              -0.109373487532139,
+              0.95105654001236,
+              -0.289013743400574
+            ],
+            [
+              0.336616992950439,
+              0.30901700258255,
+              0.889492869377136
+            ]
+          ],
+          "camera": [
+            175.571060180664,
+            2.42944812774658,
+            -100.171028137207
+          ],
+          "clearance_corrections": 0,
+          "distance": 4.2,
+          "far": 1400.0,
+          "follow_ticks": 16,
+          "fov": 62.0,
+          "hit_length": 4.2,
+          "input_enabled": true,
+          "interpolation_transition_clear": true,
+          "mask": 33,
+          "mouse_mode": 0,
+          "moving_attachment_interpolated": false,
+          "near": 0.0799999982118607,
+          "observed_ticks": 16,
+          "physics_visual_anchor": [
+            174.157272338867,
+            -0.168422996997833,
+            -103.906898498535
+          ],
+          "pitch": -0.314159265358979,
+          "pivot": [
+            174.157272338867,
+            1.1315770149231,
+            -103.906898498535
+          ],
+          "previous_visual_anchor": [
+            174.157272338867,
+            -0.168422996997833,
+            -103.906898498535
+          ],
+          "probe_radius": 0.200000002980232,
+          "render_fraction": 0.75,
+          "render_visual_anchor": [
+            174.157272338867,
+            -0.168422996997833,
+            -103.906898498535
+          ],
+          "rendered_frames": 63,
+          "requested_distance": 4.2,
+          "roof_camera_fallback": false,
+          "roof_camera_hint": {},
+          "roof_fallback_count": 0,
+          "roof_fallback_reason": "normal_cast_clear",
+          "roof_pivot_offset_m": 0.0,
+          "transform_owner": "exploration_camera",
+          "transition_snaps": 1,
+          "visual_root_physics_owned": true,
+          "yaw": 0.361780499275673
+        },
+        "context": true,
+        "expected": [
+          174.157272338867,
+          -0.08873550593853,
+          -103.906898498535
+        ],
+        "facility_control": false,
+        "hint": "E · 전동 킥보드 빌려 타기 · 게임 체험",
+        "nearest_index": 0,
+        "player_physics": true,
+        "player_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "supported": true,
+        "visible": true
+      },
+      "name": "production_menu_shortcut_uses_supported_scooter_viewpoint",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_wall_blocks_through_wall_E_rental",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "events": [
+          {
+            "clock_s": 1.13333333333333,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter1"
+            }
+          }
+        ],
+        "prompt": "전동 킥보드 · 0 / 40 km/h · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E 반납"
+      },
+      "name": "real_E_rents_retained_capsule_visible_rider_and_bus_lock",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "mounted_kickstand_retracted",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "blocked_ticks": {},
+        "forward_action_ticks": 90,
+        "forward_intent_ticks": 90,
+        "held_input_fixture": "Test-only Node at physics priority -200 refreshes held movement/brake state with Input.action_press before the production controller; native focus handling unchanged. This is synthetic sustained movement, not a human OS key-hold acceptance. KEY_E retains actual physical press/release events.",
+        "maximum_speed_mps": 11.2,
+        "maximum_step_m": 0.373275846242905,
+        "multiple_collision_ticks": 90,
+        "snapshot": {
+          "actual_distance_m": 23.6930482722819,
+          "blocked_reason": "",
+          "dock_count": 8,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 1.13333333333333,
+              "event": "rented_and_mounted",
+              "evidence": {
+                "bike": "RentalScooter1"
+              }
+            }
+          ],
+          "exit_requested": false,
+          "grounded_ticks": 96,
+          "loaded": true,
+          "maximum_deck_footprint_error_m": 0.0,
+          "maximum_deck_sole_height_error_m": 0.00000101470947266868,
+          "maximum_hand_gap_m": 0.0000381486497644801,
+          "maximum_source_sample_spacing_m": 0.179753080010414,
+          "maximum_step_m": 0.373245626688004,
+          "minimum_support_normal_y": 0.999512195587158,
+          "motion_policy": {
+            "acceleration_mps2": 6.22222222222222,
+            "braking_mps2": 9.0,
+            "coast_deceleration_mps2": 1.1,
+            "dismount_speed_mps": 0.2,
+            "door_clearance_m": 2.0,
+            "interact_distance_m": 3.1,
+            "maximum_grade_degrees": 30.0,
+            "maximum_speed_mps": 11.2,
+            "maximum_steer_degrees": 25.0,
+            "on_foot_run_speed_mps": 5.6,
+            "return_radius_m": 3.0,
+            "reverse_hold_s": 0.55,
+            "reverse_speed_mps": 1.1,
+            "speed_gain": 2.0,
+            "wheel_radius_m": 0.12,
+            "wheelbase_m": 1.06
+          },
+          "pending_pair_release_count": 0,
+          "rental_index": 0,
+          "riding": true,
+          "scooter_count": 8,
+          "scooters": [
+            {
+              "distance_m": 23.6930482722819,
+              "kickstand_visible": false,
+              "name": "RentalScooter1",
+              "on_floor": true,
+              "position": [
+                197.809799194336,
+                0.278417855501175,
+                -100.505432128906
+              ],
+              "rented": true,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-01",
+              "wheel_phase": 2.66332441311522
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter2",
+              "on_floor": true,
+              "position": [
+                -116.177116394043,
+                2.81449198722839,
+                23.3375701904297
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-02",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter3",
+              "on_floor": true,
+              "position": [
+                113.299926757812,
+                -0.324093788862228,
+                -160.738571166992
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-03",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter4",
+              "on_floor": true,
+              "position": [
+                136.000839233398,
+                -1.28188002109528,
+                -434.622741699219
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-04",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter5",
+              "on_floor": true,
+              "position": [
+                347.973693847656,
+                3.11285758018494,
+                -79.5089645385742
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-05",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter6",
+              "on_floor": true,
+              "position": [
+                121.415000915527,
+                3.17467355728149,
+                302.494781494141
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-06",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter7",
+              "on_floor": true,
+              "position": [
+                -63.5569763183594,
+                2.8402271270752,
+                60.4429512023926
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-07",
+              "wheel_phase": 0.0
+            },
+            {
+              "distance_m": 0.0,
+              "kickstand_visible": true,
+              "name": "RentalScooter8",
+              "on_floor": true,
+              "position": [
+                -27.5312213897705,
+                5.26616716384888,
+                -254.174789428711
+              ],
+              "rented": false,
+              "source_allowed": true,
+              "station_id": "SCOOTER-GAME-08",
+              "wheel_phase": 0.0
+            }
+          ],
+          "scope": "Authored physical electric kickboard game experience; no real service, inventory, payment or legal riding-access claim. Shared conservative bicycle collision envelope and native source/support protections.",
+          "source_geometry_changed": false,
+          "speed_mps": 11.2,
+          "steer_radians": 0.0
+        },
+        "travel_m": 23.6963062286377,
+        "unsupported_ticks": 0
+      },
+      "name": "W_accelerates_real_scooter_and_animates_wheels_on_terrain",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_absolute_speed": 1.1,
+        "minimum_reverse_speed": -1.1,
+        "scope": "Measured during the physical straight return to the dock, before steering and crowded terminal tests. Actor occupancy still brakes the production body.",
+        "travel": 28.5992031097412
+      },
+      "name": "S_brakes_then_backs_out_at_bounded_low_speed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "dock": [
+          174.698043823242,
+          -0.123659670352936,
+          -105.730903625488
+        ],
+        "events": [
+          {
+            "clock_s": 1.13333333333333,
+            "event": "rented_and_mounted",
+            "evidence": {
+              "bike": "RentalScooter1"
+            }
+          },
+          {
+            "clock_s": 35.1000000000006,
+            "event": "dismount_requested",
+            "evidence": {}
+          },
+          {
+            "clock_s": 35.1333333333339,
+            "event": "dismounted",
+            "evidence": {
+              "point": [
+                176.223358154297,
+                -0.0226888488978148,
+                -104.684349060059
+              ]
+            }
+          },
+          {
+            "clock_s": 35.1333333333339,
+            "event": "returned",
+            "evidence": {
+              "station_id": "SCOOTER-GAME-01"
+            }
+          },
+          {
+            "clock_s": 35.1666666666672,
+            "event": "published_exit_pair_released",
+            "evidence": {}
+          }
+        ],
+        "scooter_position": [
+          176.542327880859,
+          -0.0793563574552536,
+          -105.584548950195
+        ]
+      },
+      "name": "physical_round_trip_E_dismount_returns_to_authored_dock",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "returned_kickstand_deployed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "after_yaw": -2.44786823517418,
+        "before_yaw": -1.80643994760025,
+        "steer": 0.103667687001418
+      },
+      "name": "AD_steers_real_heading_and_front_assembly",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_hand_gap_m": 0.0000511845319124404,
+        "maximum_sole_deck_height_error_m": 0.00000101470947266868,
+        "maximum_sole_outside_deck_m": 0.0
+      },
+      "name": "standing_rider_hands_hold_grips_and_both_soles_stay_on_deck",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "Space_brakes_to_full_stop_without_player_jump",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "distance": 0.0,
+        "reason": "physical_sweep"
+      },
+      "name": "full_box_native_wall_sweep_prevents_riding_through_obstacle",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "actual_menu_freezes_scooter_clock_rider_and_pose",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_native_dismount_keeps_rider_attached_and_capsule_safe",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "blocked_dismount_request_can_cancel_to_continue",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "safe_E_dismount_restores_original_player_control_and_masks",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "temporary_parked_scooter_E_remounts",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "external_cancel_fixture_has_positive_support",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "validated_external_teleport_restores_and_does_not_reattach",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_post_exit_idle_step_m": 0.0,
+        "pending_release_count": 0
+      },
+      "name": "native_published_exit_and_cancel_do_not_kick_parked_scooter",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "prompt": "전동 킥보드 · 0 / 40 km/h · W 가속 / S 제동·뒤로\nA·D 방향 / Space 제동 / E 반납",
+        "rental_index": 1
+      },
+      "name": "second_stonewall_dock_physical_E_device42_rents_correct_scooter",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "second_dock_E_returns_and_restores_native_control",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "private_interiors_rejected": 1,
+        "valid_private_interiors": 1
+      },
+      "name": "retained_private_source_exclusions_reject_riding_footprint",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_city_scooter_service.gd": "6fe0c18933c18c95ebf4dbc687086e1eb0132490ab994e724d8ac0ccae74c0e3",
+          "res://assets/authored/bike_service.json": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4",
+          "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+          "res://assets/authored/scooter_service.json": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "16100ab69a5f90520eaacf115d2642463c5d0331aec950ecacefb3f964846280",
+          "res://scripts/city_bus_service.gd": "0845d2046f40ace57146b439574b6d149884d3036b416d86fb7c25ed40bf0472",
+          "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+          "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+          "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+          "res://scripts/street_network_detail.gd": "367f0e64a1fe00b91d9876645b3f5d150bc19c7adf2a9e36125364d1a1d163b5",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        },
+        "loaded": {
+          "res://../tests/game/check_city_scooter_service.gd": "6fe0c18933c18c95ebf4dbc687086e1eb0132490ab994e724d8ac0ccae74c0e3",
+          "res://assets/authored/bike_service.json": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4",
+          "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+          "res://assets/authored/scooter_service.json": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "16100ab69a5f90520eaacf115d2642463c5d0331aec950ecacefb3f964846280",
+          "res://scripts/city_bus_service.gd": "0845d2046f40ace57146b439574b6d149884d3036b416d86fb7c25ed40bf0472",
+          "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+          "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+          "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+          "res://scripts/street_network_detail.gd": "367f0e64a1fe00b91d9876645b3f5d150bc19c7adf2a9e36125364d1a1d163b5",
+          "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+        }
+      },
+      "name": "source_inputs_stable_during_actual_runtime",
+      "passed": true
+    }
+  ],
+  "elapsed_ms": 33536,
+  "maximum_post_exit_idle_step_m": 0.0,
+  "passed": 30,
+  "physics_hz": 30,
+  "result": "PASS",
+  "scope": "Production native terrain, retained player capsule and actors, Physical KEY_E devices 0 and 42, InputEventAction WASD/Space, physical scooter moves/collision/support, real menu and validated cancel. Test-only player placements and blockers explicitly separate. Headless does not accept rendered appearance.",
+  "snapshot": {
+    "actual_distance_m": 95.3352454951964,
+    "blocked_reason": "",
+    "dock_count": 8,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 1.13333333333333,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalScooter1"
+        }
+      },
+      {
+        "clock_s": 35.1000000000006,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 35.1333333333339,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            176.223358154297,
+            -0.0226888488978148,
+            -104.684349060059
+          ]
+        }
+      },
+      {
+        "clock_s": 35.1333333333339,
+        "event": "returned",
+        "evidence": {
+          "station_id": "SCOOTER-GAME-01"
+        }
+      },
+      {
+        "clock_s": 35.1666666666672,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 35.8000000000005,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalScooter1"
+        }
+      },
+      {
+        "clock_s": 46.5999999999999,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 47.4999999999999,
+        "event": "dismount_cancelled",
+        "evidence": {}
+      },
+      {
+        "clock_s": 47.8333333333332,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 47.8666666666665,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            207.752258300781,
+            0.419653743505478,
+            -91.1460266113281
+          ]
+        }
+      },
+      {
+        "clock_s": 47.8999999999998,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 48.6333333333331,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalScooter1"
+        }
+      },
+      {
+        "clock_s": 49.9666666666664,
+        "event": "ride_cancelled_after_validated_external_teleport",
+        "evidence": {}
+      },
+      {
+        "clock_s": 49.9999999999997,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      },
+      {
+        "clock_s": 50.3999999999997,
+        "event": "rented_and_mounted",
+        "evidence": {
+          "bike": "RentalScooter2"
+        }
+      },
+      {
+        "clock_s": 50.633333333333,
+        "event": "dismount_requested",
+        "evidence": {}
+      },
+      {
+        "clock_s": 50.6666666666664,
+        "event": "dismounted",
+        "evidence": {
+          "point": [
+            -116.153953552246,
+            2.81583070755005,
+            22.3858337402344
+          ]
+        }
+      },
+      {
+        "clock_s": 50.6666666666664,
+        "event": "returned",
+        "evidence": {
+          "station_id": "SCOOTER-GAME-02"
+        }
+      },
+      {
+        "clock_s": 50.6999999999997,
+        "event": "published_exit_pair_released",
+        "evidence": {}
+      }
+    ],
+    "exit_requested": false,
+    "grounded_ticks": 1430,
+    "loaded": true,
+    "maximum_deck_footprint_error_m": 0.0,
+    "maximum_deck_sole_height_error_m": 0.00000101470947266868,
+    "maximum_hand_gap_m": 0.0000511845319124404,
+    "maximum_source_sample_spacing_m": 0.179944455623627,
+    "maximum_step_m": 0.373245626688004,
+    "minimum_support_normal_y": 0.9941725730896,
+    "motion_policy": {
+      "acceleration_mps2": 6.22222222222222,
+      "braking_mps2": 9.0,
+      "coast_deceleration_mps2": 1.1,
+      "dismount_speed_mps": 0.2,
+      "door_clearance_m": 2.0,
+      "interact_distance_m": 3.1,
+      "maximum_grade_degrees": 30.0,
+      "maximum_speed_mps": 11.2,
+      "maximum_steer_degrees": 25.0,
+      "on_foot_run_speed_mps": 5.6,
+      "return_radius_m": 3.0,
+      "reverse_hold_s": 0.55,
+      "reverse_speed_mps": 1.1,
+      "speed_gain": 2.0,
+      "wheel_radius_m": 0.12,
+      "wheelbase_m": 1.06
+    },
+    "pending_pair_release_count": 0,
+    "rental_index": -1,
+    "riding": false,
+    "scooter_count": 8,
+    "scooters": [
+      {
+        "distance_m": 95.3352454951964,
+        "kickstand_visible": true,
+        "name": "RentalScooter1",
+        "on_floor": true,
+        "position": [
+          208.539031982422,
+          0.350366771221161,
+          -91.6876525878906
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-01",
+        "wheel_phase": 2.7413268490846
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter2",
+        "on_floor": true,
+        "position": [
+          -116.177116394043,
+          2.81449198722839,
+          23.3375701904297
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-02",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter3",
+        "on_floor": true,
+        "position": [
+          113.299926757812,
+          -0.324093788862228,
+          -160.738571166992
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-03",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter4",
+        "on_floor": true,
+        "position": [
+          136.000839233398,
+          -1.28188002109528,
+          -434.622741699219
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-04",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter5",
+        "on_floor": true,
+        "position": [
+          347.973693847656,
+          3.11285758018494,
+          -79.5089645385742
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-05",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter6",
+        "on_floor": true,
+        "position": [
+          121.415000915527,
+          3.17467355728149,
+          302.494781494141
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-06",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter7",
+        "on_floor": true,
+        "position": [
+          -63.5569763183594,
+          2.8402271270752,
+          60.4429512023926
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-07",
+        "wheel_phase": 0.0
+      },
+      {
+        "distance_m": 0.0,
+        "kickstand_visible": true,
+        "name": "RentalScooter8",
+        "on_floor": true,
+        "position": [
+          -27.5312213897705,
+          5.26616716384888,
+          -254.174789428711
+        ],
+        "rented": false,
+        "source_allowed": true,
+        "station_id": "SCOOTER-GAME-08",
+        "wheel_phase": 0.0
+      }
+    ],
+    "scope": "Authored physical electric kickboard game experience; no real service, inventory, payment or legal riding-access claim. Shared conservative bicycle collision envelope and native source/support protections.",
+    "source_geometry_changed": false,
+    "speed_mps": 0.0,
+    "steer_radians": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_scooter_service.gd": "6fe0c18933c18c95ebf4dbc687086e1eb0132490ab994e724d8ac0ccae74c0e3",
+    "res://assets/authored/bike_service.json": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4",
+    "res://assets/authored/road_furniture.json": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14",
+    "res://assets/authored/scooter_service.json": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "16100ab69a5f90520eaacf115d2642463c5d0331aec950ecacefb3f964846280",
+    "res://scripts/city_bus_service.gd": "0845d2046f40ace57146b439574b6d149884d3036b416d86fb7c25ed40bf0472",
+    "res://scripts/city_scooter_service.gd": "5a56b05e1d60571e6a7fe46b20414209448348a5a94ed9d65e6180944ac05713",
+    "res://scripts/explore_walk.gd": "c7d98791fd544d72baa89d153a44caf4fd42d971a4b326d99ecaa403cfcba023",
+    "res://scripts/interior_visit.gd": "0f9e87a6d695c86498697b3ef0c6ae89be651618842773dc7e71b4ad71d069c4",
+    "res://scripts/street_network_detail.gd": "367f0e64a1fe00b91d9876645b3f5d150bc19c7adf2a9e36125364d1a1d163b5",
+    "res://scripts/transport_motion_policy.gd": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+  },
+  "task": "city_scooters",
+  "total": 30
+}

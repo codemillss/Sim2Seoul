@@ -896,3 +896,18 @@ camera native final01은65/66이었다. 보간·고속·로프7개 관찰은 모
 최종 인수 검사기는 두 보고서 형식(result=PASS 또는 passed/total 완전 일치)을 구분해 실제 체크 배열 전체와 예상 분모·원시 script 오류·component 입력 SHA를 확인한다. 정상 engine-only fixture1개를 수용하고, 잘못된 분모·숫자PASS 뒤 script오류·누락된 component SHA3개를 각각 거절한 결과를 checker_validation.json에 보존했다. 최초 임시 집계 도구의 result 필드 가정은 legacy 버스 보고서에서 KeyError가 나 파일을 쓰지 않았고, 올바른 declared-count 형식 처리를 추가한 뒤 집계/검사를 다시 실행했다.
 
 Git 단계 검사는 parser 원시 로그13개의 마지막 빈 줄을 whitespace로 보고했다. 원문 바이트·agent manifest를 고치지 않고 기존 저장소 관례대로 EXP25 `.log`에만 text/EOL 변환과 blank-at-EOF 검사를 제외하는 좁은 attribute를 추가했다. 제품 코드·문서·JSON의 whitespace 검사는 유지한다.
+
+
+## 2026-10-22 EXP26 · 여러 동네에서 찾는 자전거·킥보드
+
+사용자는 대여 지점이 한정돼 아쉽다고 요청했다. a250a73에서 별도 codex/mobility-distribution 브랜치로 시작했고 ff-only pull은 이미 최신이었다. 원래 두 지점/정책은 보존하고 여섯 구역에 자전거·킥보드 쌍을 더해 각각8대/8곳으로 확대했다. 원본 walk 삼각형과 기존 출처 경로를 재사용했으며 source geometry/배우를 옮기지 않았다.
+
+0.4m 탐색 간격이 폭2.4m 길의 가능한 구간을 건너뛰는 원인을 독립 검토에서 찾았다. 표지의 소형화 실험은 과거 후보로만 남기고 제품 외형은 유지했다. 좁은 보도 거치대 판의 실제 ±0.60m 끝부분을 검사해 경계 위의 점을 피했고, 경사 차체 basis와 수직 표지 yaw-only basis를 분리했다. 정적 배치 감사는 새12지점의 차도/횡단/서로 출발 공간 겹침0과 쌍 간격6.437~8.541m를 기록한다.
+
+첫 전수79/88의 실패에는 실제 거치대 투영/출발 문제와 검사 자체의 오래된 source ID 상수·경사에서의 긴 수평 cast가 섞여 있었다. 실제 외형의 18cm 이하 표면 표본, 원본 ID 집합, 경사면을 따르는 18cm 이하 native cast로 검사를 바로잡았다. source/충돌 기준을 완화하지 않았다. 마지막 yaw-only guard 반영 전 개발88/88과 반영 후 최종headless88/88/native92/92를 구분한다.
+
+현재 입력의 전16대 E→W→Space→E와 원본 ID1,233개/사람28·개2·차14/capsule/TIN 보존을 통과했다. 기존 자전거23/23·킥보드30/30·E204/204·시야14/14·고속29/29·자동차30/30·카메라73/73도 통과했다. 최초 자동차29/30은 14m/s를 9.1m/s²로 제동하는 데 필요한1.5385초보다 짧은45틱/30Hz=1.5초 대기였으며, 제품 제동력 변경 없이 현재 정책으로 계산한 제한 시간+입력3틱으로 수정 후 재검증했다. 해당 테스트를 상속한 속도 검사는 final02를 새로 실행했다.
+
+새 구역 native4장을 직접 열어 실제 탈것/탑승자·그림/지명 표지·보도 분리와 기존 배우를 확인했다. 일반 실행의 실제 창·초고속/자유탐험/해질녘과 OS Esc 메뉴도 관측했다. 후속 CUA 스크롤/재연결이 각각 시간 초과로 끝나 OS 승하차는 이번 개정에서 미검증으로 남겼다. CUA 세션 초기화 후 재연결에서 전체 화면의 버스 탑승이 관측됐으나 해당 탑승/화면 확대는 이 에이전트가 명령하지 않았다. 입력 출처를 확정하지 않고 추가 자동 조작을 중단했다. 창은 유지했고 엔진 입력을 OS 조작 증거로 대체하지 않는다.
+
+[집계/현재 SHA/재현](../data/reports/mobility_distribution/20261022/summary.json)·[배치 원천/실패](../data/reports/mobility_distribution/20261022/placement/summary.json)·[전수 하네스/검사 수정](../data/reports/mobility_distribution/20261022/coverage/summary.json)·[자동차 검사 보정](../data/reports/mobility_distribution/20261022/regression_corrections.json)·[시각 검수](../data/reports/mobility_distribution/20261022/visual_review.json)·[일반 실행](../data/reports/mobility_distribution/20261022/normal_launch.json). 다음 첫 행동은 새8구역을 직접 산책하며 가시성/밀도·조작감을 확인하는 것이다. 실제 대여소 운영·현장 주행 허가·다른 Mac/export·장시간 FPS를 입증한 작업은 아니다.

@@ -3,16 +3,18 @@
   "task": "AUTHORED_CITY_SCOOTERS",
   "source_hashes": {
     "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
-    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2"
   },
   "scope": {
-    "game_scooters": 2,
-    "game_docks": 2,
+    "game_scooters": 8,
+    "game_docks": 8,
     "real_station_locations_or_availability": false,
     "official_rental_or_payment": false,
     "source_geometry_changed": false,
     "art_basis": "Original generic electric kickboard: battery deck, traction ribs, small motor-hub wheels, mudguards, folding stem, cable/brake, grips, throttle, speed display and reflectors. No commercial model or surveyed dimensions claim.",
-    "ride_basis": "E rental/dismount/return with actual native body acceleration, steering, braking, source/public-road support, private and door-clearance rejection. The Seoul Plaza dock is laterally offset 2.15 m from the bicycle departure line, preserving both physical departure corridors. Not a statement about real legal riding access."
+    "ride_basis": "E rental/dismount/return with actual native body acceleration, steering, braking, source/public-road support, private and door-clearance rejection. The Seoul Plaza dock is laterally offset 2.15 m from the bicycle departure line, preserving both physical departure corridors. Not a statement about real legal riding access.",
+    "distribution_basis": "Eight geographically dispersed authored game docks per vehicle kind. Original plaza and stonewall station records retained without field changes. Six added pairs use existing source-bound exterior routes with separate departure paths; not official rental locations or live inventory."
   },
   "policy": {
     "maximum_speed_mps": 5.6,
@@ -47,6 +49,132 @@
       "source_segment": [13, 14],
       "fraction": 0.73,
       "side_offset_m": -0.15
+    },
+    {
+      "id": "SCOOTER-GAME-03",
+      "name": "서울도서관 북측 킥보드",
+      "source_route": "city_plaza",
+      "source_segment": [
+        31,
+        32
+      ],
+      "fraction": 0.6,
+      "side_offset_m": -0.6,
+      "source_feature_id": "osm:way:1498257483:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1498257483",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing W03 city_plaza runtime connector, not a newly authored route."
+    },
+    {
+      "id": "SCOOTER-GAME-04",
+      "name": "세종대로 북측 킥보드",
+      "source_route": "coverage_walk_09_0",
+      "source_segment": [
+        0,
+        1
+      ],
+      "fraction": 0.55,
+      "side_offset_m": -0.55,
+      "source_feature_id": "osm:way:1212442533:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1212442533",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing source-bound neighborhood footway route; original source geometry and actors retained."
+    },
+    {
+      "id": "SCOOTER-GAME-05",
+      "name": "을지로입구 킥보드",
+      "source_route": "coverage_walk_05_0",
+      "source_segment": [
+        2,
+        3
+      ],
+      "fraction": 0.4,
+      "side_offset_m": -0.6,
+      "source_feature_id": "osm:way:1556516945:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1556516945",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing source-bound neighborhood footway route; original source geometry and actors retained."
+    },
+    {
+      "id": "SCOOTER-GAME-06",
+      "name": "북창동 남측 킥보드",
+      "source_route": "coverage_walk_07_0",
+      "source_segment": [
+        0,
+        1
+      ],
+      "fraction": 0.6,
+      "side_offset_m": -0.6,
+      "source_feature_id": "osm:way:856393264:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/856393264",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing source-bound neighborhood footway route; original source geometry and actors retained."
+    },
+    {
+      "id": "SCOOTER-GAME-07",
+      "name": "서소문 보행로 킥보드",
+      "source_route": "coverage_walk_00_0",
+      "source_segment": [
+        3,
+        4
+      ],
+      "fraction": 0.7,
+      "side_offset_m": -0.55,
+      "source_feature_id": "osm:way:1207660402:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/1207660402",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing source-bound neighborhood footway route; original source geometry and actors retained."
+    },
+    {
+      "id": "SCOOTER-GAME-08",
+      "name": "덕수궁 북측 킥보드",
+      "source_route": "coverage_walk_08_0",
+      "source_segment": [
+        1,
+        2
+      ],
+      "fraction": 0.6,
+      "side_offset_m": -0.55,
+      "source_feature_id": "osm:way:974875196:highway_line",
+      "source_refs": [
+        {
+          "provider": "OpenStreetMap via Geofabrik",
+          "object_id": "w/974875196",
+          "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+        }
+      ],
+      "placement_basis": "Authored game rental dock on retained source public exterior walk surface; not an official rental station or surveyed fixture. Existing source-bound neighborhood footway route; original source geometry and actors retained."
     }
   ]
 }

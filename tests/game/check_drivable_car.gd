@@ -130,8 +130,13 @@ func _run() -> void:
 		if not service.blocked_reason.is_empty():blocked_ticks[service.blocked_reason]=int(blocked_ticks.get(service.blocked_reason,0))+1
 	_key("move_forward",false)
 	_check("W_accelerates_actual_full_car_on_native_terrain",body.global_position.distance_to(before)>1. and maximum_speed>2. and unsupported<4 and intent_ticks==60 and service.maximum_step_m<=float(service.motion_policy().maximum_speed_mps)/Engine.physics_ticks_per_second+.025,{"travel_m":body.global_position.distance_to(before),"maximum_speed_mps":maximum_speed,"unsupported_ticks":unsupported,"intent_ticks":intent_ticks,"blocked_ticks":blocked_ticks,"maximum_step_m":service.maximum_step_m})
-	_key("jump",true);await _ticks(45);_key("jump",false)
-	_check("Space_stops_car_without_player_jump",absf(service.speed_mps)<.02 and body.is_on_floor() and not scene.player.is_physics_processing())
+	# Profiles can reach cruise before this check. Derive the bounded stop
+	# allowance from the actual speed and production brake rate (45 ticks
+	# at 30Hz is shorter than 14m/s / 9.1m/s²), then allow three input ticks.
+	var brake_start_speed:=absf(service.speed_mps);var brake_rate: float=service.motion_policy().braking_mps2
+	var brake_ticks:=ceili(brake_start_speed/brake_rate*Engine.physics_ticks_per_second)+3
+	_key("jump",true);await _ticks(brake_ticks);_key("jump",false)
+	_check("Space_stops_car_without_player_jump",absf(service.speed_mps)<.02 and body.is_on_floor() and not scene.player.is_physics_processing(),{"start_speed_mps":brake_start_speed,"braking_mps2":brake_rate,"physics_hz":Engine.physics_ticks_per_second,"allowed_ticks":brake_ticks,"remaining_speed_mps":service.speed_mps,"on_floor":body.is_on_floor()})
 	var reverse_start: Vector3=body.global_position;var reverse_minimum:=0.;var reverse_maximum:=0.;_key("move_backward",true)
 	for tick: int in range(105):await _ticks(1);reverse_minimum=minf(reverse_minimum,service.speed_mps);reverse_maximum=maxf(reverse_maximum,absf(service.speed_mps))
 	_key("move_backward",false)

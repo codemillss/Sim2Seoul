@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one explicitly selected EXP25 suite; native opens a Godot window.
+"""Run one explicitly selected transport suite; native opens a Godot window.
 
 Usage: python3 tools/run_urban_transit_acceptance.py speed native my_run
 Requires setup_mac.sh inputs and Godot; reports are never overwritten.
@@ -7,17 +7,20 @@ Requires setup_mac.sh inputs and Godot; reports are never overwritten.
 from pathlib import Path
 import subprocess,sys,json,datetime,time,os,argparse
 root=Path(__file__).resolve().parents[1]
-names={'shop':'check_shop_visit','car':'check_drivable_car','helicopter':'check_city_helicopter','pool':'check_pool_preparation','integration':'check_city_life_integration','bike_entry':'check_bike_entry_reliability','bus':'check_city_bus_loop_native','bus_safety':'check_city_bus_loop_safety','library':'check_library_entry_contact','scooter':'check_city_scooter_service','bike':'check_city_bike_service','speed':'check_transport_speed','subway':'check_city_subway','roads':'check_road_surface_detail','rope':'check_city_helicopter_rope','underground':'check_game_underground_connections','escalators':'check_multifloor_escalator','camera':'check_transport_camera_stability'}
+names={'shop':'check_shop_visit','car':'check_drivable_car','helicopter':'check_city_helicopter','pool':'check_pool_preparation','integration':'check_city_life_integration','bike_entry':'check_bike_entry_reliability','bus':'check_city_bus_loop_native','bus_safety':'check_city_bus_loop_safety','library':'check_library_entry_contact','scooter':'check_city_scooter_service','bike':'check_city_bike_service','speed':'check_transport_speed','subway':'check_city_subway','roads':'check_road_surface_detail','rope':'check_city_helicopter_rope','underground':'check_game_underground_connections','escalators':'check_multifloor_escalator','camera':'check_transport_camera_stability','distribution':'check_mobility_distribution','bike_visibility':'check_bike_visibility'}
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('suite', choices=names)
 parser.add_argument('mode', choices=['headless','native'])
 parser.add_argument('tag', help='Fresh simple run tag; existing evidence is preserved')
 parser.add_argument('--fixed-fps', type=int, choices=[60,120], help='Headless simulation acceleration only; never a performance claim')
+parser.add_argument('--output-dir', type=Path, default=Path('data/reports/urban_transit/20261021/acceptance'), help='Project-relative evidence folder; historical runs retain the EXP25 default')
 opts=parser.parse_args()
 if opts.fixed_fps and opts.mode!='headless':parser.error('--fixed-fps is headless only')
 suite,mode,tag=opts.suite,opts.mode,opts.tag
 if not tag.replace('_','').replace('-','').isalnum():parser.error('tag must be alphanumeric with underscores or hyphens')
-base=root/'data/reports/urban_transit/20261021/acceptance'/f'{suite}_{mode}_{tag}'
+destination=(root/opts.output_dir).resolve()
+if not destination.is_relative_to(root/'data/reports'):parser.error('--output-dir must be inside project data/reports')
+base=destination/f'{suite}_{mode}_{tag}'
 base.parent.mkdir(parents=True,exist_ok=True)
 if any(base.parent.glob(base.name+'*')):parser.error('run tag already exists; choose a new tag')
 args=[os.environ.get('SIM2SEOUL_GODOT','/Applications/Godot.app/Contents/MacOS/Godot')]

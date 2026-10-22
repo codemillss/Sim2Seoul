@@ -1,6 +1,18 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: 2026-10-21 EXP25 빠른 이동·도로·순환 교통·지하 연결
+## 현재 인수: 2026-10-22 EXP26 분산 대여
+
+[WORK_STATUS](WORK_STATUS.md)와 [EXP26 집계](../data/reports/mobility_distribution/20261022/summary.json)부터 읽는다. 두 authored service JSON은 각각8개 지점이며 기존 첫2개 record/policy는 그대로다. 추가 지점은 도서관 북측·세종대로 북측·을지로입구·북창동 남측·서소문·덕수궁 북측이다. 실제 업체/대여소 위치가 아닌 게임 배치다.
+
+`city_bike_service.gd`는 원본 walk 삼각형을 기존 movement 색인에 더하고 public_walk에 없는 경로 ID를 이미 로드한 neighborhood 원본 경로에서 찾는다. JSON의 neighborhood 입력 SHA를 유지한다. 모든 표지/판/거치대 바닥 투영은 실제 수직 시설과 같은 yaw-only 좌표, 차체는 기존 경사 basis를 사용한다. source/사유지/정문·native 지원/점유와 주행 sweep을 약화하지 않는다. 좁은 보도에서 모델 크기나 source를 바꿔 해결하지 않았다.
+
+현재 전수 실행은 headless88/88·native92/92이며 원본 mesh ID1,233개와 사람28·개2·AI차14·capsule/TIN을 보존한다. native 새 구역 대표4장을 직접 검수했다. E 회귀204/204, 자전거23/23·킥보드30/30·시야14/14·고속29/29·자동차30/30·탑승 카메라73/73도 현재 입력과 일치한다. 중복 시나리오이며 고유 요구사항으로 합산하지 않는다.
+
+실행 도구의 `distribution`을 사용하고 `--output-dir data/reports/mobility_distribution/20261022/acceptance`를 지정한다. 기본 출력 경로는 옛 실행 재현을 위해 EXP25 그대로다. 저장 무결성 검사기의 기본 summary는 EXP26으로 갱신했다. `--prepared`는 재생성 입력의 SHA까지 확인하며 새 엔진 실행/성능/실제 서울 정확도는 판정하지 않는다. 실패/과거 보고서를 current 목록에 추가하지 않는다.
+
+일반 실행 창·초고속/자유탐험/해질녘 및 OS Esc 메뉴는 확인했으나 CUA 스크롤/재연결이 응답 시간 초과로 끝나 이번 개정의 일반 OS E/W/Space/E는 미검증이다. 재연결 후 버스 탑승 화면이 관측됐으나 해당 입력은 이 에이전트가 수행하지 않아 출처를 확정하지 않고 추가 자동 조작을 중단했다. 창을 유지했다. [일반 실행 기록](../data/reports/mobility_distribution/20261022/normal_launch.json), 조작은 [RUN_GUIDE](RUN_GUIDE.md)를 따른다. 아래 EXP25의 기능 설명은 이어받되 당시 검사 수를 이번 source 판정으로 재사용하지 않는다.
+
+## 이전 인수: 2026-10-21 EXP25 빠른 이동·도로·순환 교통·지하 연결
 
 [WORK_STATUS](WORK_STATUS.md)와 [EXP25 집계](../data/reports/urban_transit/20261021/summary.json)부터 확인한다. 최종 실행 범위와 남은 확인은 그 두 파일을 기준으로 하며 아래 EXP24/23 판정을 변경된 소스의 수용 결과로 재사용하지 않는다. 일반 실행은 `sh tools/run_exploration.sh run`이고 새 외부 모델·의존성 다운로드는 없다.
 
