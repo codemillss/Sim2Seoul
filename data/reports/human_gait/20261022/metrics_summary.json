@@ -1,0 +1,990 @@
+{
+  "task": "EXP30_HUMAN_GAIT_NUMERIC_ACCEPTANCE",
+  "recorded_at_utc": "2026-10-22T11:18:32.863259+00:00",
+  "result": "PASS",
+  "summary": {
+    "runs": 4,
+    "overlapping_assertions": 124,
+    "failed": 0,
+    "scope": "Four runs share criteria and source.124assertions are overlapping run assertions, not124unique requirements."
+  },
+  "source_sha256_by_run": {
+    "metrics_male_hz30_07": {
+      "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+      "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+      "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+      "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+      "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+      "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+      "res://scripts/player/exploration_avatar.gd": "ad84f7cd8d79750e3d45731dc238a54a675da9528e75318aa4dfb30cd435039a",
+      "res://scripts/player/exploration_camera.gd": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d",
+      "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3",
+      "res://scripts/player/human_gait_support.gd": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4",
+      "res://scripts/player/textured_human_rig.gd": "05a807dc3d73561861f46acf6b770f4567687667243d72c948c10ced8a439f1c",
+      "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+    },
+    "metrics_male_hz120_07": {
+      "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+      "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+      "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+      "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+      "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+      "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+      "res://scripts/player/exploration_avatar.gd": "ad84f7cd8d79750e3d45731dc238a54a675da9528e75318aa4dfb30cd435039a",
+      "res://scripts/player/exploration_camera.gd": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d",
+      "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3",
+      "res://scripts/player/human_gait_support.gd": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4",
+      "res://scripts/player/textured_human_rig.gd": "05a807dc3d73561861f46acf6b770f4567687667243d72c948c10ced8a439f1c",
+      "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+    },
+    "metrics_female_hz30_07": {
+      "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+      "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+      "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+      "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+      "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+      "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+      "res://scripts/player/exploration_avatar.gd": "ad84f7cd8d79750e3d45731dc238a54a675da9528e75318aa4dfb30cd435039a",
+      "res://scripts/player/exploration_camera.gd": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d",
+      "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3",
+      "res://scripts/player/human_gait_support.gd": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4",
+      "res://scripts/player/textured_human_rig.gd": "05a807dc3d73561861f46acf6b770f4567687667243d72c948c10ced8a439f1c",
+      "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+    },
+    "metrics_female_hz120_07": {
+      "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+      "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+      "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+      "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+      "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+      "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+      "res://scripts/player/exploration_avatar.gd": "ad84f7cd8d79750e3d45731dc238a54a675da9528e75318aa4dfb30cd435039a",
+      "res://scripts/player/exploration_camera.gd": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d",
+      "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3",
+      "res://scripts/player/human_gait_support.gd": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4",
+      "res://scripts/player/textured_human_rig.gd": "05a807dc3d73561861f46acf6b770f4567687667243d72c948c10ced8a439f1c",
+      "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+    }
+  },
+  "exact_current_runs": [
+    {
+      "tag": "metrics_male_hz30_07",
+      "model": "Male_Adult_04",
+      "physics_hz": 30,
+      "requested_render_cap_hz": 120,
+      "report": "data/reports/human_gait/20261022/metrics_male_hz30_07.json",
+      "report_sha256": "ffde89d2b56f272e2dc82399ae40ab2d8b9ed5471e29d018cc271f124c19ae73",
+      "run_metadata": "data/reports/human_gait/20261022/metrics_male_hz30_07.run.json",
+      "run_metadata_sha256": "1e568e0b40d1aa954276f778340151daf302ee14dbaf498d30461dd3cd0d1865",
+      "executor_returncode": 0,
+      "executor_wall_time_seconds": null,
+      "result": "PASS",
+      "summary": {
+        "checks": 32,
+        "failed": 0
+      },
+      "raw_logs": {
+        "data/reports/human_gait/20261022/metrics_male_hz30_07.log": "02f488831dad924da1184c7f039854cd66ac8e3d61fea1bdc3cd0e6c83123235",
+        "data/reports/human_gait/20261022/metrics_male_hz30_07.console.log": "02f488831dad924da1184c7f039854cd66ac8e3d61fea1bdc3cd0e6c83123235"
+      },
+      "script_errors": false,
+      "engine_diagnostic_signatures": [
+        "get_system_ca_certificates",
+        "material_get_instance_shader_parameters"
+      ],
+      "source_hashes_checked_current": true,
+      "source_mismatches": [],
+      "trials": [
+        {
+          "mode": "walk",
+          "configured_speed_mps": 1.4,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            1.04083408558608e-16,
+            0.75
+          ],
+          "distinct_observed_physical_states": 120,
+          "pelvis_height_m": {
+            "excursion": 0.0319997787009925,
+            "maximum": 0.79857060557697,
+            "minimum": 0.766570826875977,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0319996594917029,
+            "maximum": 1.42802474147175,
+            "minimum": 1.39602508198004,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0179524521809071,
+            "maximum": 0.76235342817381,
+            "minimum": 0.744400975992903,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.255730838980526,
+          "maximum_pelvis_vertical_acceleration_mps2": 4.08691540360451,
+          "maximum_one_tick_vertical_change_m": 0.00213109032483771,
+          "maximum_local_connection_error_m": 2.31375612092107e-07,
+          "maximum_leg_length_error_m": 7.15255737304688e-07,
+          "minimum_knee_forward_m": 0.0370635986328125,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 27.6682307149299,
+            "Right": 27.2220076262638
+          },
+          "camera_eye_height_m": {
+            "excursion": 2.2409949451685e-07,
+            "maximum": 1.61435591534246,
+            "minimum": 1.61435569124296,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 190,
+            "intervals_by_patch": {
+              "Heel": 48,
+              "Toe": 142
+            },
+            "maximum_skin_to_target_pivot_gap_m": 6.03857870373758e-07,
+            "maximum_world_contact_patch_xz_speed_mps": 0.00011494272712298
+          },
+          "flat_stance_counts": {
+            "Left": 121,
+            "Right": 121
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000293855282507138,
+            "Right": 0.000992612694972195
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000116435194286169,
+            "Right": 0.00011478963187983
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00150615163147449,
+              "maximum": 0.00274530169554055,
+              "minimum": 0.00123915006406605,
+              "samples": 121
+            },
+            "Right": {
+              "excursion": 0.00151870492845774,
+              "maximum": 0.0027355425991118,
+              "minimum": 0.00121683767065406,
+              "samples": 121
+            }
+          }
+        },
+        {
+          "mode": "run",
+          "configured_speed_mps": 3.5,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            1.04083408558608e-16,
+            0.75
+          ],
+          "distinct_observed_physical_states": 120,
+          "pelvis_height_m": {
+            "excursion": 0.0441899579018354,
+            "maximum": 0.795268893707544,
+            "minimum": 0.751078935805708,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0441905539482832,
+            "maximum": 1.42328685568646,
+            "minimum": 1.37909630173817,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0447952129179612,
+            "maximum": 0.821767600020394,
+            "minimum": 0.776972387102433,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.607833028770983,
+          "maximum_pelvis_vertical_acceleration_mps2": 16.7243678122759,
+          "maximum_one_tick_vertical_change_m": 0.00506527523975819,
+          "maximum_local_connection_error_m": 2.32069604675636e-07,
+          "maximum_leg_length_error_m": 1.69873237609863e-06,
+          "minimum_knee_forward_m": 0.030426025390625,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 31.8297215422461,
+            "Right": 32.0104688382521
+          },
+          "camera_eye_height_m": {
+            "excursion": 2.09314748644829e-07,
+            "maximum": 1.61435591545887,
+            "minimum": 1.61435570614412,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 96,
+            "intervals_by_patch": {
+              "Heel": 16,
+              "Toe": 80
+            },
+            "maximum_skin_to_target_pivot_gap_m": 1.91151866602013e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.000458046451967675
+          },
+          "flat_stance_counts": {
+            "Left": 86,
+            "Right": 86
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000457819551229477,
+            "Right": 0.000461783329228638
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000458771901321597,
+            "Right": 0.000457889400422573
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00165778084192425,
+              "maximum": 0.00273786392062902,
+              "minimum": 0.00108008307870477,
+              "samples": 86
+            },
+            "Right": {
+              "excursion": 0.00197676941752434,
+              "maximum": 0.00282705249264836,
+              "minimum": 0.000850283075124025,
+              "samples": 86
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tag": "metrics_male_hz120_07",
+      "model": "Male_Adult_04",
+      "physics_hz": 120,
+      "requested_render_cap_hz": 120,
+      "report": "data/reports/human_gait/20261022/metrics_male_hz120_07.json",
+      "report_sha256": "960342b54f5d5c840cbd25b2cb287a3558ca5e28985a2e6eb31a193a01eeaabc",
+      "run_metadata": "data/reports/human_gait/20261022/metrics_male_hz120_07.run.json",
+      "run_metadata_sha256": "075fdf7463930062ed8ea4fbf611b63221fda3e733314270bc7091e453928a5c",
+      "executor_returncode": 0,
+      "executor_wall_time_seconds": null,
+      "result": "PASS",
+      "summary": {
+        "checks": 30,
+        "failed": 0
+      },
+      "raw_logs": {
+        "data/reports/human_gait/20261022/metrics_male_hz120_07.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac",
+        "data/reports/human_gait/20261022/metrics_male_hz120_07.console.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac"
+      },
+      "script_errors": false,
+      "engine_diagnostic_signatures": [
+        "get_system_ca_certificates",
+        "material_get_instance_shader_parameters"
+      ],
+      "source_hashes_checked_current": true,
+      "source_mismatches": [],
+      "trials": [
+        {
+          "mode": "walk",
+          "configured_speed_mps": 1.4,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            0.0,
+            0.0
+          ],
+          "distinct_observed_physical_states": 480,
+          "pelvis_height_m": {
+            "excursion": 0.0319997299229726,
+            "maximum": 0.798577275592834,
+            "minimum": 0.766577545669861,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0319999087369069,
+            "maximum": 1.4280315306969,
+            "minimum": 1.39603162195999,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0299385575344786,
+            "maximum": 0.824492884334177,
+            "minimum": 0.794554326799698,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.255708466283977,
+          "maximum_pelvis_vertical_acceleration_mps2": 4.0877602994442,
+          "maximum_one_tick_vertical_change_m": 0.00213090388569981,
+          "maximum_local_connection_error_m": 2.32131481953194e-07,
+          "maximum_leg_length_error_m": 6.25848770141602e-07,
+          "minimum_knee_forward_m": 0.0370063781738281,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 27.5907080678503,
+            "Right": 27.2994346506951
+          },
+          "camera_eye_height_m": {
+            "excursion": 7.01984390616417e-08,
+            "maximum": 1.61435581941623,
+            "minimum": 1.61435574921779,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 189,
+            "intervals_by_patch": {
+              "Heel": 46,
+              "Toe": 143
+            },
+            "maximum_skin_to_target_pivot_gap_m": 9.56957364905975e-07,
+            "maximum_world_contact_patch_xz_speed_mps": 0.000115331522465567
+          },
+          "flat_stance_counts": {
+            "Left": 120,
+            "Right": 120
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000117542113002855,
+            "Right": 0.00011478963187983
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000116435194286169,
+            "Right": 0.000115566936074174
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00033406843431294,
+              "maximum": 0.0028492733836174,
+              "minimum": 0.00251520494930446,
+              "samples": 120
+            },
+            "Right": {
+              "excursion": 0.000333999283611774,
+              "maximum": 0.00284885987639427,
+              "minimum": 0.0025148605927825,
+              "samples": 120
+            }
+          }
+        },
+        {
+          "mode": "run",
+          "configured_speed_mps": 3.5,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            0.0,
+            0.0
+          ],
+          "distinct_observed_physical_states": 480,
+          "pelvis_height_m": {
+            "excursion": 0.0441867008339614,
+            "maximum": 0.795268154703081,
+            "minimum": 0.751081453869119,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0441867435583845,
+            "maximum": 1.42328562296461,
+            "minimum": 1.37909887940623,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0345287663512863,
+            "maximum": 0.822720487427432,
+            "minimum": 0.788191721076146,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.607815985567868,
+          "maximum_pelvis_vertical_acceleration_mps2": 16.7259913869202,
+          "maximum_one_tick_vertical_change_m": 0.00506513321306556,
+          "maximum_local_connection_error_m": 2.32069604675636e-07,
+          "maximum_leg_length_error_m": 1.60932540893555e-06,
+          "minimum_knee_forward_m": 0.030339241027832,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 31.885640300981,
+            "Right": 32.102703712804
+          },
+          "camera_eye_height_m": {
+            "excursion": 6.85104168951511e-08,
+            "maximum": 1.61435584252467,
+            "minimum": 1.61435577401426,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 97,
+            "intervals_by_patch": {
+              "Heel": 14,
+              "Toe": 83
+            },
+            "maximum_skin_to_target_pivot_gap_m": 1.92354968930886e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.00114444410428405
+          },
+          "flat_stance_counts": {
+            "Left": 85,
+            "Right": 85
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000915548735065386,
+            "Right": 0.000801198675617343
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000801104379206663,
+            "Right": 0.000801184214651585
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00100025301799178,
+              "maximum": 0.00275004329159856,
+              "minimum": 0.00174979027360678,
+              "samples": 85
+            },
+            "Right": {
+              "excursion": 0.00100022298283875,
+              "maximum": 0.00274961814284325,
+              "minimum": 0.0017493951600045,
+              "samples": 85
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tag": "metrics_female_hz30_07",
+      "model": "Female_Adult_07",
+      "physics_hz": 30,
+      "requested_render_cap_hz": 120,
+      "report": "data/reports/human_gait/20261022/metrics_female_hz30_07.json",
+      "report_sha256": "9bed9ba348fc2a45e583d2ef45e070bb0d0c0d8137c4c270999c4c25bb20907f",
+      "run_metadata": "data/reports/human_gait/20261022/metrics_female_hz30_07.run.json",
+      "run_metadata_sha256": "fb4946738f51ba16594a6dd0253fda2deae90cd488bcf9b4ffe2793173e2f314",
+      "executor_returncode": 0,
+      "executor_wall_time_seconds": null,
+      "result": "PASS",
+      "summary": {
+        "checks": 32,
+        "failed": 0
+      },
+      "raw_logs": {
+        "data/reports/human_gait/20261022/metrics_female_hz30_07.log": "02f488831dad924da1184c7f039854cd66ac8e3d61fea1bdc3cd0e6c83123235",
+        "data/reports/human_gait/20261022/metrics_female_hz30_07.console.log": "02f488831dad924da1184c7f039854cd66ac8e3d61fea1bdc3cd0e6c83123235"
+      },
+      "script_errors": false,
+      "engine_diagnostic_signatures": [
+        "get_system_ca_certificates",
+        "material_get_instance_shader_parameters"
+      ],
+      "source_hashes_checked_current": true,
+      "source_mismatches": [],
+      "trials": [
+        {
+          "mode": "walk",
+          "configured_speed_mps": 1.4,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            1.04083408558608e-16,
+            0.75
+          ],
+          "distinct_observed_physical_states": 120,
+          "pelvis_height_m": {
+            "excursion": 0.0319998383056372,
+            "maximum": 0.90389195329044,
+            "minimum": 0.871892114984803,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.031999897910282,
+            "maximum": 1.49512991553638,
+            "minimum": 1.4631300176261,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0217869319021702,
+            "maximum": 0.869989116908982,
+            "minimum": 0.848202185006812,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.25571653386578,
+          "maximum_pelvis_vertical_acceleration_mps2": 4.08725822344422,
+          "maximum_one_tick_vertical_change_m": 0.00213097111554816,
+          "maximum_local_connection_error_m": 4.26476799259673e-07,
+          "maximum_leg_length_error_m": 4.17232513427734e-07,
+          "minimum_knee_forward_m": 0.0420050621032715,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 20.7355477262319,
+            "Right": 20.3550310573814
+          },
+          "camera_eye_height_m": {
+            "excursion": 2.2409949451685e-07,
+            "maximum": 1.61435591534246,
+            "minimum": 1.61435569124296,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 190,
+            "intervals_by_patch": {
+              "Heel": 48,
+              "Toe": 142
+            },
+            "maximum_skin_to_target_pivot_gap_m": 3.99479586121743e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.000171894048435206
+          },
+          "flat_stance_counts": {
+            "Left": 121,
+            "Right": 121
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.00035015700632357,
+            "Right": 0.00116922441520728
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000117147014861985,
+            "Right": 0.000172117115653236
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00150642148219049,
+              "maximum": 0.00379880191758275,
+              "minimum": 0.00229238043539226,
+              "samples": 121
+            },
+            "Right": {
+              "excursion": 0.0015186311211437,
+              "maximum": 0.00378924096003175,
+              "minimum": 0.00227060983888805,
+              "samples": 121
+            }
+          }
+        },
+        {
+          "mode": "run",
+          "configured_speed_mps": 3.5,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            1.04083408558608e-16,
+            0.75
+          ],
+          "distinct_observed_physical_states": 120,
+          "pelvis_height_m": {
+            "excursion": 0.0441899579018354,
+            "maximum": 0.903502703178674,
+            "minimum": 0.859312745276839,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0441904347389936,
+            "maximum": 1.49330443190411,
+            "minimum": 1.44911399716511,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0326257706619799,
+            "maximum": 0.918765784939751,
+            "minimum": 0.886140014277771,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.607833350077271,
+          "maximum_pelvis_vertical_acceleration_mps2": 16.7249662801623,
+          "maximum_one_tick_vertical_change_m": 0.0050652779173106,
+          "maximum_local_connection_error_m": 3.68309227809314e-07,
+          "maximum_leg_length_error_m": 1.75833702087402e-06,
+          "minimum_knee_forward_m": 0.0341048240661621,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 24.4409526717205,
+            "Right": 24.6490548753525
+          },
+          "camera_eye_height_m": {
+            "excursion": 2.09314748644829e-07,
+            "maximum": 1.61435591545887,
+            "minimum": 1.61435570614412,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 96,
+            "intervals_by_patch": {
+              "Heel": 16,
+              "Toe": 80
+            },
+            "maximum_skin_to_target_pivot_gap_m": 4.86257886223029e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.000343439151038183
+          },
+          "flat_stance_counts": {
+            "Left": 86,
+            "Right": 86
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000457911228295416,
+            "Right": 0.000457806454505771
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000458046451967675,
+            "Right": 0.000229056404350558
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00165744009427726,
+              "maximum": 0.00379139371216297,
+              "minimum": 0.00213395361788571,
+              "samples": 86
+            },
+            "Right": {
+              "excursion": 0.00197674275841564,
+              "maximum": 0.00388080626726151,
+              "minimum": 0.00190406350884587,
+              "samples": 86
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tag": "metrics_female_hz120_07",
+      "model": "Female_Adult_07",
+      "physics_hz": 120,
+      "requested_render_cap_hz": 120,
+      "report": "data/reports/human_gait/20261022/metrics_female_hz120_07.json",
+      "report_sha256": "36a8b499957b06d5780caecad2138bd6956dfcacb5011f465613b2fa458d9df3",
+      "run_metadata": "data/reports/human_gait/20261022/metrics_female_hz120_07.run.json",
+      "run_metadata_sha256": "a0997051044d44ee3d0318e1517f8a084656f879945504ec13ede2cf0863cc8f",
+      "executor_returncode": 0,
+      "executor_wall_time_seconds": null,
+      "result": "PASS",
+      "summary": {
+        "checks": 30,
+        "failed": 0
+      },
+      "raw_logs": {
+        "data/reports/human_gait/20261022/metrics_female_hz120_07.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac",
+        "data/reports/human_gait/20261022/metrics_female_hz120_07.console.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac"
+      },
+      "script_errors": false,
+      "engine_diagnostic_signatures": [
+        "get_system_ca_certificates",
+        "material_get_instance_shader_parameters"
+      ],
+      "source_hashes_checked_current": true,
+      "source_mismatches": [],
+      "trials": [
+        {
+          "mode": "walk",
+          "configured_speed_mps": 1.4,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            0.0,
+            0.0
+          ],
+          "distinct_observed_physical_states": 480,
+          "pelvis_height_m": {
+            "excursion": 0.0319997299229726,
+            "maximum": 0.903898682910949,
+            "minimum": 0.871898952987976,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.0319996703183278,
+            "maximum": 1.49513646634296,
+            "minimum": 1.46313679602463,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0238650914980099,
+            "maximum": 0.886095596826635,
+            "minimum": 0.862230505328625,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.255708466283977,
+          "maximum_pelvis_vertical_acceleration_mps2": 4.08623982220888,
+          "maximum_one_tick_vertical_change_m": 0.00213090388569981,
+          "maximum_local_connection_error_m": 3.67948065202982e-07,
+          "maximum_leg_length_error_m": 4.4703483581543e-07,
+          "minimum_knee_forward_m": 0.0418667793273926,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 20.6742194576744,
+            "Right": 20.4498204226828
+          },
+          "camera_eye_height_m": {
+            "excursion": 7.01984390616417e-08,
+            "maximum": 1.61435581941623,
+            "minimum": 1.61435574921779,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 189,
+            "intervals_by_patch": {
+              "Heel": 46,
+              "Toe": 143
+            },
+            "maximum_skin_to_target_pivot_gap_m": 3.54777307620679e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.000115829484457208
+          },
+          "flat_stance_counts": {
+            "Left": 120,
+            "Right": 120
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.00011478963187983,
+            "Right": 6.14311102253851e-05
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000115331522465567,
+            "Right": 0.000115566936074174
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.000334057956933975,
+              "maximum": 0.00307501433417201,
+              "minimum": 0.00274095637723804,
+              "samples": 120
+            },
+            "Right": {
+              "excursion": 0.000334174372255802,
+              "maximum": 0.00307519407942891,
+              "minimum": 0.00274101970717311,
+              "samples": 120
+            }
+          }
+        },
+        {
+          "mode": "run",
+          "configured_speed_mps": 3.5,
+          "samples": 480,
+          "observed_duration_s": 3.99999999999999,
+          "render_fraction_range": [
+            0.0,
+            0.0
+          ],
+          "distinct_observed_physical_states": 480,
+          "pelvis_height_m": {
+            "excursion": 0.0441867604386061,
+            "maximum": 0.903501904569566,
+            "minimum": 0.85931514413096,
+            "samples": 480
+          },
+          "head_height_m": {
+            "excursion": 0.044186862767674,
+            "maximum": 1.49330319918226,
+            "minimum": 1.44911633641459,
+            "samples": 480
+          },
+          "rear_skin_centre_height_m": {
+            "excursion": 0.0234791997936554,
+            "maximum": 0.911841448978521,
+            "minimum": 0.888362249184866,
+            "samples": 480
+          },
+          "maximum_pelvis_vertical_speed_mps": 0.607815985567868,
+          "maximum_pelvis_vertical_acceleration_mps2": 16.7285663075745,
+          "maximum_one_tick_vertical_change_m": 0.00506513321306556,
+          "maximum_local_connection_error_m": 3.97059409351641e-07,
+          "maximum_leg_length_error_m": 1.60932540893555e-06,
+          "minimum_knee_forward_m": 0.0339622497558594,
+          "native_stance_knee_flexion_median_degrees": {
+            "Left": 24.614125287937,
+            "Right": 24.6809791795331
+          },
+          "camera_eye_height_m": {
+            "excursion": 6.85104168951511e-08,
+            "maximum": 1.61435584252467,
+            "minimum": 1.61435577401426,
+            "samples": 480
+          },
+          "heel_toe_weighted_skin_contact": {
+            "contact_intervals": 97,
+            "intervals_by_patch": {
+              "Heel": 14,
+              "Toe": 83
+            },
+            "maximum_skin_to_target_pivot_gap_m": 3.96235054722638e-06,
+            "maximum_world_contact_patch_xz_speed_mps": 0.00114441059849923
+          },
+          "flat_stance_counts": {
+            "Left": 85,
+            "Right": 85
+          },
+          "maximum_world_foot_bone_flat_stance_xz_speed_mps": {
+            "Left": 0.000686980729369679,
+            "Right": 0.00080114677984966
+          },
+          "maximum_world_cpu_skin_sole_flat_stance_xz_speed_mps": {
+            "Left": 0.000801118349045282,
+            "Right": 0.000801184214651585
+          },
+          "actual_world_flat_sole_height_m": {
+            "Left": {
+              "excursion": 0.00100026838481426,
+              "maximum": 0.00297575118020177,
+              "minimum": 0.00197548279538751,
+              "samples": 85
+            },
+            "Right": {
+              "excursion": 0.00100052310153842,
+              "maximum": 0.00297586270608008,
+              "minimum": 0.00197533960454166,
+              "samples": 85
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "corrected_baseline_120hz_reports": [
+    {
+      "model": "Male_Adult_04",
+      "report": "data/reports/human_gait/20261022/baseline_male02.json",
+      "sha256": "c67889407366c41370a63036c758568078887a0c1f252d22449bce016bb0c784",
+      "result": "FAIL",
+      "summary": {
+        "checks": 27,
+        "failed": 11
+      },
+      "replay_before_bob": true,
+      "source_sha256": {
+        "res://../data/reports/human_gait/20261022/source_snapshots/exploration_avatar.before_bob.gd.txt": "e0fec8d493a308942d22088a9601325f1a37c163734fb7875c53222f4f38cf45",
+        "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_rig.before_bob.gd.txt": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+        "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_surface.before_bob.gd.txt": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a",
+        "res://../tests/game/check_human_gait_continuity.gd": "59ec2bca093245d28234b755c86d52a8674dcb53596408fe059094bdef3d3a85",
+        "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+        "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+        "res://scripts/player/exploration_camera.gd": "af0e2a6cabc879a23c0e0882a399c33e7449536f7dcfdec942e906522aa6a67e",
+        "res://scripts/player/free_roam_player.gd": "3c92f46f6c5a171dbe04dee5588f04e59063920e999ee2f5890145603fbd58a1"
+      },
+      "pelvis_vertical_excursion_m": {
+        "walk": 0.0846696455846541,
+        "run": 0.106387111300137
+      },
+      "scope": "Corrected displayed-root reference,120Hzphysics with480per-trialobservations. Exact pre-bob avatar/rig/surface snapshots; these older fixture counts are not current tests or feature counts."
+    },
+    {
+      "model": "Female_Adult_07",
+      "report": "data/reports/human_gait/20261022/baseline_female02.json",
+      "sha256": "8fa75360234a2ea46c5350941d0b3156516956cf0f85e49646c23aa292407c57",
+      "result": "FAIL",
+      "summary": {
+        "checks": 27,
+        "failed": 10
+      },
+      "replay_before_bob": true,
+      "source_sha256": {
+        "res://../data/reports/human_gait/20261022/source_snapshots/exploration_avatar.before_bob.gd.txt": "e0fec8d493a308942d22088a9601325f1a37c163734fb7875c53222f4f38cf45",
+        "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_rig.before_bob.gd.txt": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+        "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_surface.before_bob.gd.txt": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a",
+        "res://../tests/game/check_human_gait_continuity.gd": "59ec2bca093245d28234b755c86d52a8674dcb53596408fe059094bdef3d3a85",
+        "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+        "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+        "res://scripts/player/exploration_camera.gd": "af0e2a6cabc879a23c0e0882a399c33e7449536f7dcfdec942e906522aa6a67e",
+        "res://scripts/player/free_roam_player.gd": "3c92f46f6c5a171dbe04dee5588f04e59063920e999ee2f5890145603fbd58a1"
+      },
+      "pelvis_vertical_excursion_m": {
+        "walk": 0.0730549758300185,
+        "run": 0.0910944622592069
+      },
+      "scope": "Corrected displayed-root reference,120Hzphysics with480per-trialobservations. Exact pre-bob avatar/rig/surface snapshots; these older fixture counts are not current tests or feature counts."
+    }
+  ],
+  "actual_pelvis_120hz_before_after": [
+    {
+      "model": "Male_Adult_04",
+      "mode": "walk",
+      "physics_hz": 120,
+      "before_actual_pelvis_excursion_m": 0.0846696455846541,
+      "after_actual_pelvis_excursion_m": 0.0319997299229726,
+      "before_peak_vertical_speed_mps": 2.35741752432659,
+      "after_peak_vertical_speed_mps": 0.255708466283977,
+      "before_peak_vertical_acceleration_mps2": 209.935679007322,
+      "after_peak_vertical_acceleration_mps2": 4.0877602994442,
+      "scope": "Same actual displayed-root-relative native pelvis quantity; baseline/currentfixtures differ as documented. Numericaldesigncomparison, notmocap orsubjectiveacceptance."
+    },
+    {
+      "model": "Male_Adult_04",
+      "mode": "run",
+      "physics_hz": 120,
+      "before_actual_pelvis_excursion_m": 0.106387111300137,
+      "after_actual_pelvis_excursion_m": 0.0441867008339614,
+      "before_peak_vertical_speed_mps": 1.9466332742013,
+      "after_peak_vertical_speed_mps": 0.607815985567868,
+      "before_peak_vertical_acceleration_mps2": 188.015080243349,
+      "after_peak_vertical_acceleration_mps2": 16.7259913869202,
+      "scope": "Same actual displayed-root-relative native pelvis quantity; baseline/currentfixtures differ as documented. Numericaldesigncomparison, notmocap orsubjectiveacceptance."
+    },
+    {
+      "model": "Female_Adult_07",
+      "mode": "walk",
+      "physics_hz": 120,
+      "before_actual_pelvis_excursion_m": 0.0730549758300185,
+      "after_actual_pelvis_excursion_m": 0.0319997299229726,
+      "before_peak_vertical_speed_mps": 2.32880729483441,
+      "after_peak_vertical_speed_mps": 0.255708466283977,
+      "before_peak_vertical_acceleration_mps2": 232.646715547889,
+      "after_peak_vertical_acceleration_mps2": 4.08623982220888,
+      "scope": "Same actual displayed-root-relative native pelvis quantity; baseline/currentfixtures differ as documented. Numericaldesigncomparison, notmocap orsubjectiveacceptance."
+    },
+    {
+      "model": "Female_Adult_07",
+      "mode": "run",
+      "physics_hz": 120,
+      "before_actual_pelvis_excursion_m": 0.0910944622592069,
+      "after_actual_pelvis_excursion_m": 0.0441867604386061,
+      "before_peak_vertical_speed_mps": 1.67976420605555,
+      "after_peak_vertical_speed_mps": 0.607815985567868,
+      "before_peak_vertical_acceleration_mps2": 177.909374982119,
+      "after_peak_vertical_acceleration_mps2": 16.7285663075745,
+      "scope": "Same actual displayed-root-relative native pelvis quantity; baseline/currentfixtures differ as documented. Numericaldesigncomparison, notmocap orsubjectiveacceptance."
+    }
+  ],
+  "tightest_flat_sole_vertical_range": {
+    "run": "metrics_male_hz30_07",
+    "mode": "run",
+    "side": "Right",
+    "excursion_m": 0.00197676941752434
+  },
+  "predeclared_limits": {
+    "pelvis_vertical_excursion_m": {
+      "walk": 0.035,
+      "run": 0.055
+    },
+    "pelvis_vertical_speed_mps": {
+      "walk": 0.35,
+      "run": 0.75
+    },
+    "pelvis_vertical_acceleration_mps2": {
+      "walk": 8,
+      "run": 20
+    },
+    "support_knee_median_degrees": {
+      "walk": 35,
+      "run": 40
+    },
+    "planted_contact_horizontal_speed_mps": 0.025,
+    "flat_sole_world_vertical_range_m": 0.002,
+    "weighted_heel_toe_contact_to_target_pivot_gap_m": 0.005
+  },
+  "criteria_history": [
+    "Baseline01 used physicalroot Y and falsely included submillimetre physics-floor/interpolation mismatch in body/camera metrics. Exact old fixture and raw reports remain.",
+    "Baseline02 fixes the reference to the actual RenderProxy displayedroot. It still observes the old body-motion failures.",
+    "Early world3D stance velocity criterion divided submillimetre floor-height noise by120Hzdt. Final test preserves that3D observation and separately checks25mmpsXZ plus2mm worldsoleY range during genuinely flat stance. This does not discard vertical position.",
+    "Heel/toe roll intentionally moves ankle/whole-solecentroid. Its actual weighted heel/toe contact bands are independently selected from originalrest indexed skin; actualmoving CPUcontact vsrigpivot and stationaryXZ are checked separately.",
+    "Deep-crouch supportknee guard was added beforefinalprofile selection; old numeric bob PASS withsupportmedian49\u201356degrees was rejected.",
+    "30Hzphysics120render sampling includes everylateframe and actualrenderdt, rather than onlynewphysicalstates. Fixed120simulation exercises0/.25/.5/.75 renderfractions and is notperformance evidence.",
+    "30Hzdevelopment failures exposed physical-to-render supportframe bias, C0verticalcurveinterpolation, future-swing endpoint mixing, andcentimetre actualgroundedroot penetration. Final code fixes those ratherthan increasinglimits.",
+    "Optional --replay-before-bob now also uses the exact original d0039fe camera, preserving oldavatar API compatibility. Its29checks execute fully with7expectedoldmotionfailures andnoscripterror. Defaultbehavior/thresholdsunchanged; fourcurrentruns rerun07 solelybecausefixtureSHAchanged."
+  ],
+  "limitations": [
+    "Numerical acceptance is separate from native pixel review and actual OS-keyboard play.",
+    "Each steadywalk/run observation is480renderframes after240renderframesettling. Terrain, turns, start-stop, swim/facility/transport and subjective comfort are outside this focused fixture.",
+    "Headlessfixed-fps accelerates simulatedtime. Actual end-to-end walltime was notinstrumented; it is null, not a speed/FPS measurement.",
+    "Raw logs preserve macOS CAlookup get_system_ca_certificates and headless dummy material_get_instance_shader_parameters ERROR diagnostics. No SCRIPT/PARSE/COMPILE error was found; engine logs are notclaimederror-free.",
+    "The tightest actual flatsole verticalvariation is1.976769mm against2mm; the report retains this near-limit observation. Native/terrain play can need further tuning.",
+    "Baseline and current criteria counts differ as tests gained actualcontact/crouch/subframe guards. Their totals are not compared asquality scores."
+  ],
+  "frozen_replay_smoke": {
+    "run_metadata": "data/reports/human_gait/20261022/metrics_replay_male07.run.json",
+    "sha256": "068ff35f4e7b8aabd577c5e6dc9ac4a891ad5b4219e5ad5198fdd6246fe6ef37",
+    "expected_result": "FAIL",
+    "executor_returncode": 1,
+    "checks": 29,
+    "failed_old_design_criteria": 7,
+    "script_errors": false,
+    "frozen_camera_base_commit": "d0039fe829b0ec5da156cba83df20ff016f897e2"
+  }
+}

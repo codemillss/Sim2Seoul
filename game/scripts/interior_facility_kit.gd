@@ -92,6 +92,15 @@ func decorate(profile: String,level: int) -> void:
 		_label("FacilityStudyNotice","자료 토론 · 그룹 스터디",Vector3(p.x,1.7,zone.back+.12),minf(2.3,float(zone.width)-.4),23)
 		kit._feature("library_group_study")
 
+func register_study_desk(table: Vector3,seat: Vector3,digital: bool) -> void:
+	_active_facility_id="library_desk_%d_%d"%[kit._level,interactions.size()];_active_facility_type="library_study"
+	var y: float=kit._level*room.floor_height
+	var approach:=seat+Vector3(0,.08,.65);var use:=seat+Vector3.UP*.08
+	facilities.append({"id":_active_facility_id,"type":"library_study","programme":String(kit.level_profiles[kit._level].profile_id),"level":kit._level,"title":"디지털 열람석" if digital else "조용한 열람석","entry_point":approach+Vector3.UP*y,"walk_points":[approach+Vector3.UP*y,use+Vector3.UP*y],"coordinate_space":"room_local","bounds":AABB(table+Vector3(-1.04,y,-.54),Vector3(2.08,1.8,2.45))})
+	_interaction("study","열람석에 앉아 공부하기","study",use,approach,table+Vector3(0,.87,.10),{"facing_yaw":0.,"equipment_title":"Detail_ReadingDeskTop","duration_seconds":20.,"digital":digital,"seat_height_m":.52,"desk_height_m":.82,"seat_center":seat+Vector3.UP*y,"table_center":table+Vector3.UP*y})
+	_label("StudySeatPrompt","E · 앉아서 공부 / 다시 E · 일어나기",seat+Vector3(0,1.25,.05),1.65,18)
+	kit._feature("usable_seated_library_study")
+
 func _b(title: String,size: Vector3,p: Vector3,material: String,solid := false,basis := Basis.IDENTITY) -> bool:
 	var added: bool=kit._box(title,size,p,material,solid,basis)
 	if added:

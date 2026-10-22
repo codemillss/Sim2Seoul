@@ -1,0 +1,151 @@
+extends "res://../tests/game/check_stable_motion.gd"
+## Dense observations of production Input-driven gait and weighted human skin.
+## Small body-motion design limits are not motion-capture/visual acceptance.
+signal late_observed
+const OBSERVATION_HZ := 120
+const SAMPLE_TICKS := 480
+var surface: Node3D
+var human: Node3D
+var skeleton: Skeleton3D
+var sampled: Array=[]
+var sampling:=false
+var last_physical:=-1
+var skin_patches: Array=[]
+var gait_results: Array=[]
+var sole_samples:={"Left":0,"Right":0}
+
+func _initialize() -> void:
+	super._initialize()
+	Engine.physics_ticks_per_second=OBSERVATION_HZ
+	Engine.max_fps=OBSERVATION_HZ
+
+func _observe_physics(_delta: float) -> void:pass
+
+func _world_bone(semantic: String) -> Vector3:
+	return skeleton.global_transform*skeleton.get_bone_global_pose(human._find(semantic)).origin
+
+func _point(row: Dictionary,index: int,matrices: Array[Transform3D]) -> Vector3:
+	var value:=Vector3.ZERO
+	for slot: int in range(4):
+		var weight: float=row.weights[index*4+slot]
+		if weight>0.:value+=(matrices[row.bones[index*4+slot]]*row.vertices[index])*weight
+	return value
+
+func _prepare_skin_patches() -> void:
+	var pelvis_y: float=(avatar.global_transform.affine_inverse()*_world_bone("Pelvis")).y
+	for row: Dictionary in surface._surfaces:
+		var selected:={"LeftSole":[],"RightSole":[],"LeftButtock":[],"RightButtock":[]}
+		var matrices: Array[Transform3D]=surface._skin_matrices(row.mesh,row.bind_bones,row.skeleton)
+		for index: int in row.referenced:
+			var point:=_point(row,index,matrices)
+			if point.y>-.02 and point.y<.015:
+				if point.x<-.02:selected.LeftSole.append(index)
+				elif point.x>.02:selected.RightSole.append(index)
+			if absf(point.y-pelvis_y)<.12 and absf(point.x)>.015 and absf(point.x)<.25 and point.z>.015:
+				selected[("Left" if point.x<0. else "Right")+"Buttock"].append(index)
+		skin_patches.append({"row":row,"selected":selected})
+
+func _observe_render(_delta: float) -> void:
+	var physical:=Engine.get_physics_frames()
+	if sampling and physical!=last_physical:
+		var bones:={};var skin:={};var count:={}
+		for semantic: String in ["Pelvis","Head","Spine","LeftThigh","LeftShin","LeftFoot","RightThigh","RightShin","RightFoot"]:bones[semantic]=_world_bone(semantic)
+		for key: String in ["LeftSole","RightSole","LeftButtock","RightButtock"]:skin[key]=Vector3.ZERO;count[key]=0
+		for patch: Dictionary in skin_patches:
+			var row: Dictionary=patch.row
+			var matrices: Array[Transform3D]=surface._skin_matrices(row.mesh,row.bind_bones,row.skeleton)
+			for key: String in patch.selected:
+				for index: int in patch.selected[key]:skin[key]+=_point(row,index,matrices);count[key]+=1
+		for key: String in skin:skin[key]=avatar.global_transform*(skin[key]/maxi(1,int(count[key])))
+		var local_error:=0.;var length_error:=0.;var knee_forward_min:=INF;var finite:=true
+		for semantic: String in ["Spine","LeftThigh","RightThigh"]:
+			var index: int=human._find(semantic)
+			local_error=maxf(local_error,skeleton.get_bone_pose(index).origin.distance_to(skeleton.get_bone_rest(index).origin)*skeleton.global_basis.get_scale().abs().x)
+		for side: String in ["Left","Right"]:
+			var hip: Vector3=bones[side+"Thigh"];var knee: Vector3=bones[side+"Shin"];var foot: Vector3=bones[side+"Foot"]
+			var projection:=hip.lerp(foot,clampf((knee-hip).dot(foot-hip)/(foot-hip).length_squared(),0.,1.))
+			knee_forward_min=minf(knee_forward_min,(knee-projection).dot(-avatar.global_basis.z.normalized()))
+			for pair: Array in [["Thigh","Shin"],["Shin","Foot"]]:
+				var a: int=human._find(side+pair[0]);var b: int=human._find(side+pair[1])
+				var rest_length: float=(skeleton.global_basis*(human._rest_global[b].origin-human._rest_global[a].origin)).length()
+				length_error=maxf(length_error,absf(Vector3(bones[side+pair[0]]).distance_to(bones[side+pair[1]])-rest_length))
+		for value: Vector3 in bones.values():finite=finite and value.is_finite()
+		var snapshot: Dictionary=avatar.snapshot()
+		sampled.append({"physics_frame":physical,"phase_radians":avatar.stride_phase,"render_fraction":Engine.get_physics_interpolation_fraction(),"run_weight":avatar._run_weight,"stance_fraction":avatar._stance_fraction,"cycle_distance_m":avatar._cycle_distance_m,"cadence_hz":avatar.cadence_hz,"actual_speed_mps":Vector2(player.velocity.x,player.velocity.z).length(),"player":player.global_position,"avatar":avatar.global_position,"bones":bones,"skin":skin,"skin_patch_counts":count,"finite":finite,"local_connection_error_m":local_error,"leg_length_error_m":length_error,"minimum_knee_forward_m":knee_forward_min,"grounded":player.is_on_floor(),"contact_error_m":human.snapshot().maximum_contact_error_m,"camera_eye_height_m":rig.camera.global_position.y-player.global_position.y})
+	last_physical=physical
+	late_observed.emit()
+
+func _wait_steps(count: int) -> void:
+	var prior:=Engine.get_physics_frames();var done:=0
+	while done<count:
+		await late_observed
+		var physical:=Engine.get_physics_frames()
+		if physical!=prior:done+=1;prior=physical
+
+func _range(values: Array[float]) -> Dictionary:
+	var minimum:=INF;var maximum:=-INF
+	for value: float in values:minimum=minf(minimum,value);maximum=maxf(maximum,value)
+	return {"minimum":minimum,"maximum":maximum,"excursion":maximum-minimum}
+
+func _analyse(mode: String,speed: float) -> void:
+	var pelvis: Array[float]=[];var head: Array[float]=[];var rear: Array[float]=[];var vertical_velocity: Array[float]=[];var vertical_acceleration: Array[float]=[];var camera: Array[float]=[]
+	var maximum_connections:=0.;var maximum_length:=0.;var minimum_knee:=INF;var maximum_contact:=0.;var finite:=true;var floor_all:=true;var maximum_speed_error:=0.;var maximum_step:=0.
+	var maximum_bone_slip:={"Left":0.,"Right":0.};var maximum_sole_slip:={"Left":0.,"Right":0.};var stance_counts:={"Left":0,"Right":0};var count_min:=100000
+	for index: int in range(sampled.size()):
+		var row: Dictionary=sampled[index];var root_y: float=row.player.y
+		pelvis.append(float(row.bones.Pelvis.y)-root_y);head.append(float(row.bones.Head.y)-root_y);rear.append((float(row.skin.LeftButtock.y)+float(row.skin.RightButtock.y))*.5-root_y);camera.append(row.camera_eye_height_m)
+		maximum_connections=maxf(maximum_connections,row.local_connection_error_m);maximum_length=maxf(maximum_length,row.leg_length_error_m);minimum_knee=minf(minimum_knee,row.minimum_knee_forward_m);maximum_contact=maxf(maximum_contact,row.contact_error_m);finite=finite and row.finite;floor_all=floor_all and row.grounded;maximum_speed_error=maxf(maximum_speed_error,absf(float(row.actual_speed_mps)-speed))
+		for key: String in row.skin_patch_counts:count_min=mini(count_min,row.skin_patch_counts[key])
+		if index==0:continue
+		var prior: Dictionary=sampled[index-1];var dt: float=float(int(row.physics_frame)-int(prior.physics_frame))/OBSERVATION_HZ
+		var delta_y: float=pelvis[index]-pelvis[index-1];maximum_step=maxf(maximum_step,absf(delta_y));vertical_velocity.append(delta_y/dt)
+		if vertical_velocity.size()>1:vertical_acceleration.append((vertical_velocity[-1]-vertical_velocity[-2])/dt)
+		for side: String in ["Left","Right"]:
+			# Interpolation fraction is zero in deterministic headless execution;
+			# inspect the rendered skeleton's previous physical gait phase.
+			var phase_: float=fposmod(float(prior.phase_radians)/TAU+(.5 if side=="Right" else 0.),1.)
+			var before_phase: float=fposmod(float(sampled[maxi(0,index-2)].phase_radians)/TAU+(.5 if side=="Right" else 0.),1.)
+			if phase_>.04 and phase_<float(row.stance_fraction)-.04 and before_phase>.04 and before_phase<float(prior.stance_fraction)-.04 and phase_>before_phase:
+				maximum_bone_slip[side]=maxf(maximum_bone_slip[side],Vector3(row.bones[side+"Foot"]).distance_to(prior.bones[side+"Foot"])/dt)
+				maximum_sole_slip[side]=maxf(maximum_sole_slip[side],Vector3(row.skin[side+"Sole"]).distance_to(prior.skin[side+"Sole"])/dt);stance_counts[side]+=1
+	var velocity_peak:=0.;var acceleration_peak:=0.
+	for value: float in vertical_velocity:velocity_peak=maxf(velocity_peak,absf(value))
+	for value: float in vertical_acceleration:acceleration_peak=maxf(acceleration_peak,absf(value))
+	var result:={"mode":mode,"configured_speed_mps":speed,"samples":sampled.size(),"duration_s":float(sampled.size())/OBSERVATION_HZ,"pelvis_height_m":_range(pelvis),"head_height_m":_range(head),"rear_skin_centre_height_m":_range(rear),"maximum_pelvis_vertical_speed_mps":velocity_peak,"maximum_pelvis_vertical_acceleration_mps2":acceleration_peak,"maximum_one_tick_vertical_change_m":maximum_step,"maximum_local_connection_error_m":maximum_connections,"maximum_leg_length_error_m":maximum_length,"minimum_knee_forward_m":minimum_knee,"maximum_contact_error_m":maximum_contact,"minimum_cpu_skin_patch_vertices":count_min,"maximum_actual_speed_error_mps":maximum_speed_error,"camera_eye_height_m":_range(camera),"stance_counts":stance_counts,"maximum_world_foot_bone_stance_speed_mps":maximum_bone_slip,"maximum_world_cpu_skin_sole_stance_speed_mps":maximum_sole_slip,"trace":sampled.duplicate(true)}
+	gait_results.append(result)
+	_check(mode+".production_input_actual_speed_and_ground_support",maximum_speed_error<.015 and floor_all and sampled.size()>=SAMPLE_TICKS-2,{"speed_error_mps":maximum_speed_error,"all_supported":floor_all,"samples":sampled.size()})
+	_check(mode+".actual_pelvis_vertical_excursion_is_small",float(result.pelvis_height_m.excursion)<=(.035 if mode=="walk" else .055),{"range_m":result.pelvis_height_m,"predeclared_limit_m":.035 if mode=="walk" else .055})
+	_check(mode+".actual_pelvis_vertical_velocity_is_bounded",velocity_peak<=(.35 if mode=="walk" else .75),{"peak_mps":velocity_peak,"predeclared_limit_mps":.35 if mode=="walk" else .75})
+	_check(mode+".actual_pelvis_vertical_acceleration_has_no_contact_cusp",acceleration_peak<=(8. if mode=="walk" else 20.),{"peak_mps2":acceleration_peak,"predeclared_limit_mps2":8. if mode=="walk" else 20.})
+	_check(mode+".actual_native_hip_connections_and_leg_lengths_preserved",maximum_connections<.00002 and maximum_length<.00002,{"maximum_connections_m":maximum_connections,"maximum_length_error_m":maximum_length})
+	_check(mode+".knees_bend_forward_and_all_visible_samples_are_finite",minimum_knee>-.0005 and finite and count_min>2,{"minimum_knee_forward_m":minimum_knee,"finite":finite,"minimum_cpu_patch_vertices":count_min})
+	_check(mode+".actual_skeleton_feet_still_reach_contact_goals",maximum_contact<.01,{"maximum_contact_error_m":maximum_contact})
+	_check(mode+".camera_has_no_added_vertical_bob",float(result.camera_eye_height_m.excursion)<.0001,{"camera_eye_range_m":result.camera_eye_height_m})
+	for side: String in ["Left","Right"]:
+		_check(mode+"."+side+"_world_bone_and_weighted_sole_stance_remain_planted",int(stance_counts[side])>80 and float(maximum_bone_slip[side])<.025 and float(maximum_sole_slip[side])<.025,{"stance_intervals":stance_counts[side],"bone_maximum_mps":maximum_bone_slip[side],"weighted_sole_maximum_mps":maximum_sole_slip[side]})
+
+func _trial(mode: String,speed: float) -> void:
+	await _place(Vector3(0,.08,0));player.walk_speed_mps=speed;player.run_speed_mps=speed
+	_keys(["move_forward","move_fast"] if mode=="run" else ["move_forward"])
+	await _wait_steps(240);sampled=[];sampling=true;await _wait_steps(SAMPLE_TICKS);sampling=false;_analyse(mode,speed)
+	_keys([]);await _wait_steps(90)
+
+func _run() -> void:
+	for path: String in ["res://scripts/player/free_roam_player.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/exploration_camera.gd","res://../tests/game/check_jump.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_human_gait_continuity.gd"]:source_hashes[path]=FileAccess.get_sha256(path)
+	_setup_stable();await _wait_steps(20);await _place(Vector3(0,.08,0))
+	surface=avatar._textured_surface;human=surface.rig;skeleton=surface.skeleton
+	_prepare_skin_patches();await _trial("walk",1.4);await _trial("run",3.5)
+	var same:=true
+	for path: String in source_hashes:same=same and FileAccess.get_sha256(path)==source_hashes[path]
+	_check("source_bindings_unchanged",same)
+	_check("original_capsule_and_physics_roots_preserved",_capsule()==initial_capsule and avatar.find_children("*","CollisionObject3D",true,false).is_empty())
+	_finish()
+
+func _finish() -> void:
+	if finished:return
+	finished=true;sampling=false;_keys([])
+	var failed:=checks.filter(func(row: Dictionary)->bool:return not row.passed).size()
+	var report:={"task":"EXP30_PRODUCTION_HUMAN_GAIT_CONTINUITY","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"model_id":surface.model_id if is_instance_valid(surface) else "","physics_hz":Engine.physics_ticks_per_second,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"trials":gait_results,"source_sha256":source_hashes,"scope":"Actual production controller Input actions and weighted native skeleton/CPU sparse skin at 120Hz in isolated flat fixture. Steady 4 seconds each walk/run after2secondsettle. Numeric motion design limits, not OS input, native pixels, motion capture, terrain/turn/start-stop or subjective realism acceptance. Sparse sole centroid excludes contact boundaries. No phase/pose assignment."}
+	var file:=FileAccess.open(report_path,FileAccess.WRITE)
+	if file==null:push_error("Cannot write continuity report");quit(2);return
+	file.store_string(JSON.stringify(_json(report),"  ")+"\n");file.close();print("HUMAN_GAIT_CONTINUITY_RESULT ",checks.size()-failed,"/",checks.size());quit(0 if failed==0 else 1)

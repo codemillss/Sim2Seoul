@@ -441,6 +441,7 @@ func _process(_delta: float) -> void:
 			if host.player.is_swimming():indoor_text.text+="\n수영 중 · WASD / 방향키 이동 · Space 물 밖으로 점프"
 		else:
 			indoor_text.text = "%s · %s / 지상 %d층\n왼쪽 뒤 계단 · 앞쪽 엘리베이터 E · 1층 출입구 E\n음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기"%[current_spec.title,_landing_label(index),int(current_spec.floor_count)]
+			if room.detail_kit.profile_id=="library":indoor_text.text+="\n왼쪽 열람석 표지 · E 앉아서 공부 / 다시 E 일어나기"
 			if is_instance_valid(room.escalator) and index in room.escalator.connecting_levels:indoor_text.text+="\n오른쪽 상업 라운지 · 1–%d층 양방향 에스컬레이터 · 걸어서 탑승"%(room.escalator.pair_count+1)
 			if room.authored_basement_count>0:indoor_text.text+="\nB1 · 시청역 게임 지하 연결통로 · 계단/엘리베이터"
 			indoor_text.text=indoor_text.text.replace("건물 원본 크기·층수에 맞춘 게임 공간입니다. 방 배치와 동선은 재구성했습니다.","음식·샤워·운동기구 가까이에서 E · 사용 중 E로 그만하기")

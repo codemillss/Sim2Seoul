@@ -314,9 +314,19 @@ func _shelf(point: Vector3, serial: int, full_height := false) -> void:
 	_feature("varied_book_spines")
 
 func _reading_desk(point: Vector3, digital := false) -> void:
-	if not _desk(point,"ReadingDesk","oak",2.0):return
-	_chair(point+Vector3(0,0,1.05),"sage")
-	_box("DeskDivider",Vector3(.04,.38,.80),point+Vector3(0,1.01,-.04),"oak_light")
+	# A usable desk needs knee space, not a floor-to-top cabinet collider.
+	if not _box("ReadingDeskTop",Vector3(2.08,.08,1.08),point+Vector3(0,.78,0),"oak_light",true):return
+	for x: float in [-.87,.87]:
+		for z: float in [-.38,.38]:_box("ReadingDeskLeg",Vector3(.075,.74,.075),point+Vector3(x,.37,z),"oak",true)
+	var seat:=point+Vector3(0,0,1.05)
+	# Like the existing stationary-cycle saddle, this seated display keeps the
+	# original upright capsule on the real floor. The chair itself is visual.
+	_box("ReadingChairSeat",Vector3(.54,.12,.54),seat+Vector3.UP*.46,"sage")
+	_box("ReadingChairBack",Vector3(.54,.48,.075),seat+Vector3(0,.76,.245),"sage")
+	for x: float in [-.20,.20]:
+		for z: float in [-.20,.20]:_box("ReadingChairLeg",Vector3(.045,.42,.045),seat+Vector3(x,.21,z),"walnut")
+	facility_kit.register_study_desk(point,seat,digital)
+	_box("DeskDivider",Vector3(2.04,.38,.04),point+Vector3(0,1.01,-.50),"oak_light")
 	for side in [-1.0,1.0]:
 		var lamp := point+Vector3(side*.65,0,-.25)
 		_round("ReadingLampBase","cylinder",Vector3(.20,.025,.20),lamp+Vector3.UP*.84,"brass")
@@ -327,8 +337,11 @@ func _reading_desk(point: Vector3, digital := false) -> void:
 		_box("LaptopKeyboard",Vector3(.48,.025,.30),point+Vector3(-.50,.84,.10),"steel")
 		_box("LaptopScreen",Vector3(.48,.31,.035),point+Vector3(-.50,1.00,-.055),"ink")
 		_box("LaptopDisplay",Vector3(.42,.25,.008),point+Vector3(-.50,1.00,-.030),"screen")
-	else:_book(point+Vector3(-.48,.87,.10),_level)
-	_paper(point+Vector3(.55,.84,.12))
+	else:
+		_box("StudyOpenBookCover",Vector3(.52,.025,.35),point+Vector3(0,.835,.10),"book_blue")
+		for side: float in [-1.,1.]:_box("StudyOpenBookPage",Vector3(.245,.012,.33),point+Vector3(side*.128,.856,.10),"paper",false,Basis(Vector3.FORWARD,side*.045))
+		for row: int in range(5):_box("StudyPrintedText",Vector3(.19,.003,.006),point+Vector3(-.13,.865,-.02+row*.05),"stone")
+	_paper(point+Vector3(.18,.84,.34))
 	_feature("individual_reading_lamps")
 
 func _library(level: int) -> void:
@@ -343,7 +356,7 @@ func _library(level: int) -> void:
 			_box("ReturnDisplay",Vector3(.40,.24,.03),machine+Vector3(0,1.04,.325),"screen")
 			_label("ReturnMachineLabel","도서 반납",machine+Vector3(0,1.42,.33),23)
 			_feature("book_return_machine")
-		_label("LibraryGuide","서울도서관\n자료를 찾으시나요?\n종합안내에 문의하세요",Vector3(_left_x(1.8),2.05,_front(6.95)),26)
+		_label("LibraryGuide","서울도서관\n왼쪽 열람석 · E 앉아서 공부\n다시 E · 일어나기",Vector3(_left_x(1.8),2.05,_front(6.95)),26)
 	elif level==1:
 		_reading_terrace(Vector3(_left_x(1.8),0,_front(8.0)))
 	elif level==3:

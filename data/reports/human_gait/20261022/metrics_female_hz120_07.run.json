@@ -1,0 +1,55 @@
+{
+  "task": "EXP30_PRODUCTION_HUMAN_GAIT_CONTINUITY",
+  "executor_returncode": 0,
+  "executor_returncode_evidence": "Observed subprocess.run.returncode. No shell wrapper or status masking.",
+  "executor_wall_time_seconds": null,
+  "wall_time_scope": "End-to-end walltime was notinstrumented. Headlessfixed-fps120 accelerates simulatedtime and is notperformance/FPS evidence.",
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--fixed-fps",
+    "120",
+    "--log-file",
+    "/Users/jmjeon/Desktop/jobseeker/\uc6d0\uc11c_\uc81c\ucd9c/02_\ud575\uc2ec\ud504\ub85c\uc81d\ud2b8_\ub9c8\uc2a4\ud130\ud480/sim2seoul/data/reports/human_gait/20261022/metrics_female_hz120_07.log",
+    "--script",
+    "../tests/game/check_human_gait_continuity.gd",
+    "--",
+    "--female-model",
+    "--physics-hz=120",
+    "--report=/Users/jmjeon/Desktop/jobseeker/\uc6d0\uc11c_\uc81c\ucd9c/02_\ud575\uc2ec\ud504\ub85c\uc81d\ud2b8_\ub9c8\uc2a4\ud130\ud480/sim2seoul/data/reports/human_gait/20261022/metrics_female_hz120_07.json"
+  ],
+  "observed_result": "PASS",
+  "summary": {
+    "checks": 30,
+    "failed": 0
+  },
+  "report_sha256": "36a8b499957b06d5780caecad2138bd6956dfcacb5011f465613b2fa458d9df3",
+  "raw_logs": {
+    "data/reports/human_gait/20261022/metrics_female_hz120_07.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac",
+    "data/reports/human_gait/20261022/metrics_female_hz120_07.console.log": "ec8aeae6656ccba96207f7c3fe117c5460c67ffecf06bad4961076f59aa9ccac"
+  },
+  "script_errors": false,
+  "engine_diagnostic_signatures": [
+    "get_system_ca_certificates",
+    "material_get_instance_shader_parameters"
+  ],
+  "diagnostic_scope": "Raw startup CAlookup andheadless dummy materialstorage diagnostics remainpresent. No script error was observed; engine logs are notclaimederror-free.",
+  "source_sha256": {
+    "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+    "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+    "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+    "res://scripts/player/exploration_avatar.gd": "ad84f7cd8d79750e3d45731dc238a54a675da9528e75318aa4dfb30cd435039a",
+    "res://scripts/player/exploration_camera.gd": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d",
+    "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3",
+    "res://scripts/player/human_gait_support.gd": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4",
+    "res://scripts/player/textured_human_rig.gd": "05a807dc3d73561861f46acf6b770f4567687667243d72c948c10ced8a439f1c",
+    "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+  },
+  "current_sources_match_recorded": true,
+  "recorded_at_utc": "2026-10-22T11:17:46.223886+00:00"
+}

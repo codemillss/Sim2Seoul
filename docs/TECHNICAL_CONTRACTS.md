@@ -1,5 +1,13 @@
 # 공간·데이터·게임 계약
 
+## EXP30 — 표시 시점의 공통 골반과 발 접촉
+
+실제 인체의 native pelvis→first spine→thigh local 연결 및 원래 본 길이를 유지한다. 순간 reach의 최소값을 몸 전체 상하 궤적으로 쓰지 않고,64위상에서 실제 leg reach·10도 무릎 여유·heel/toe 목표를 만족하는 공통 support base를 구한다. 표시 위상은 이전/현재 물리 위상을 wrap-aware 보간하고, 골반 곡선은 걷기32mm/달리기 혼합 최대48mm 범위의 C1 함수로 평가한다. 캐시의 기준 프레임은 native skin과 marker의 공통 표시 parent다. 물리 actor 원점은 표시 proxy와 달라 캐시 높이에 사용하지 않는다.
+
+`human_gait_support.gd`의 실제 rest-weighted sole heel/toe 중심을 pivot으로 삼아 ankle 위치와 foot basis를 함께 보정한다. 일반 보행의 표시 발 목표는 보간된 gait 위상에서 계산해 물리 tick 사이 stance/swing 경계를 지킨다. `render_gait_state`/`render_gait_foot_goals_world`는 표시 전용이며 physics priority−100 복원 때 제거한다. 고정 활동/탑승/수영은 이 ground-gait 경로를 사용하지 않는다. 카메라 자체 위치/회전·충돌 보호 및 속도 설정은 이전 계약을 유지한다.
+
+바닥 위에서 점프가 없는 경우 하향 접촉 속도만 최대0.04m/s로 제한하고 native floor snap/충돌을 유지한다. 공중 중력·점프 임펄스·수영 부력은 바꾸지 않는다. study는 기존 facility owner/안전한 return corridor를 재사용한다. pool bar는 준비 서비스의 fresh-E dispatcher를 공유하고 탈의/샤워/입수 guard의 권한을 우회하지 않는다. 실제4개 광원은 활성 야외 풀과 저녁/밤에 한정한다.
+
 ## EXP29 시선·보행·사람 외형 계약
 
 이 절은 현재 구현·수용 기준이다. **현재 결과는 동결 소스의 수치·실제 시각 검토·일반 OS 입력을 구분해 기록**이며, 현재 완료 수는 [WORK_STATUS](WORK_STATUS.md)와 동결 소스가 일치하는 최종 보고서에서 확정한다. 아래 EXP28 이하의 당시 외형/검사 기록은 이력으로 보존한다.

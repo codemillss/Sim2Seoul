@@ -4,6 +4,7 @@ extends Node3D
 const HUMAN_SURFACES := preload("res://scripts/player/human_surface_meshes.gd")
 const TEXTURED_SURFACE := preload("res://scripts/player/textured_human_surface.gd")
 const ACTIVITY_DIMENSIONS := preload("res://scripts/player/human_activity_dimensions.gd")
+const GAIT_SUPPORT := preload("res://scripts/player/human_gait_support.gd")
 const TORSO_ROWS := [[.025,.160,.113,.106,0.],[.055,.174,.119,.114,0.],[.130,.170,.124,.119,0.],[.225,.178,.135,.121,0.],[.335,.197,.141,.121,0.],[.430,.205,.125,.111,0.],[.490,.206,.109,.101,0.],[.525,.205,.092,.085,0.],[.543,.164,.071,.066,0.],[.558,.061,.048,.045,0.]]
 const LEG_LENGTH := .43
 const STANDING_ANKLE_Y := .12
@@ -249,6 +250,16 @@ func _activity_pose() -> void:
 	_rest_pose();state="facility"
 	var elapsed := _activity_elapsed
 	match _activity_kind:
+		"study":
+			# Seat height is authored by the library service. Only the visible
+			# skeleton sits; the retained capsule remains supported at the desk.
+			position.y=-.36;_upper_body.rotation.x=-.08
+			for side_name: String in ["Left","Right"]:
+				var side := -1. if side_name=="Left" else 1.
+				var foot:=Vector3(side*.16,.40,-.28)
+				_feet[side_name]=foot;_leg_pose(side_name,foot)
+				var write:=sin(elapsed*3.4)*.012 if side>0. else 0.
+				_arm_to(side_name,Vector3(side*.18+write,1.16,-.62))
 		"eat":
 			var bite_phase := fmod(elapsed/1.2,1.0)
 			var lift := sin(clampf((bite_phase-.1)/.7,0.,1.)*PI)
@@ -305,11 +316,14 @@ func _leg_pose(side_name: String,foot: Vector3) -> void:
 	(_joints[side_name+"Thigh"] as Node3D).rotation.x=upper
 	(_joints[side_name+"Shin"] as Node3D).rotation.x=lower-upper
 	(_joints[side_name+"Foot"] as Node3D).rotation.x=-lower
+	if _activity_kind.is_empty() and (state in ["walk","run"] or (state=="idle" and walk_weight>.001)):
+		var phase:=stride_phase+(PI if side_name=="Right" else 0.)
+		(_joints[side_name+"Foot"] as Node3D).rotation.x+=GAIT_SUPPORT.angle(phase,_stance_fraction,_run_weight,walk_weight)
 
 func _supported_hips(feet: Dictionary) -> void:
-	# Standing legs are nearly straight. During locomotion only the pelvis
-	# follows the two contact-leg reach limits under the jacket. The torso/head
-	# and camera anchor stay level, avoiding the former visible head bob.
+	# These invisible compatibility legs solve their own contact reach. The
+	# actual weighted human has a separate smooth, common hip support profile;
+	# this instantaneous proxy envelope never supplies its body height.
 	var height:=HIP_Y
 	var maximum_reach:=LEG_LENGTH*2.-.002
 	for foot: Vector3 in feet.values():
@@ -338,13 +352,31 @@ func _pose_pelvis_gait(feet: Dictionary) -> void:
 	# rotations rather than a raw physics-phase staircase. The camera stays level.
 	var signed_step:=clampf((Vector3(feet.Right)-Vector3(feet.Left)).z/.65,-1.,1.)*walk_weight
 	_pelvis.rotation=Vector3(0.,deg_to_rad(3.)*signed_step,deg_to_rad(1.2)*sin(stride_phase)*walk_weight)
+	# Publish the small continuous support wave in the interpolated marker.
+	# The native rig solves one safe cycle-wide height for the connected hips,
+	# rather than dragging the whole torso down with each instantaneous reach.
+	_pelvis.position.y=HIP_Y+gait_support_wave(stride_phase,_run_weight,walk_weight)
+
+func gait_support_wave(phase: float,run_weight: float,weight: float) -> float:
+	return -lerpf(.016,.024,clampf(run_weight,0.,1.))*(1.+cos(phase*2.))*clampf(weight,0.,1.)
 
 func _gait_foot(side: float,phase: float,reach: float,lift: float) -> Vector3:
+	return _gait_foot_with_duty(side,phase,reach,lift,_stance_fraction)
+
+func sample_gait_foot(side_name: String,phase: float,run: float,weight: float,duty: float,cycle: float) -> Vector3:
+	# Evaluate a displayed gait phase without assigning simulation pose/state.
+	# A contact boundary can lie between two physical ticks; blending the old
+	# planted ankle with a future swing ankle would move the planted sole early.
+	var foot:=_gait_foot_with_duty(-1. if side_name=="Left" else 1.,phase,cycle*duty*.5*weight,lerpf(.10,.24,run)*weight,duty)
+	foot.z-=float(_gait_ankle_center_z[side_name])*weight+.025*(1.-weight)
+	return foot
+
+func _gait_foot_with_duty(side: float,phase: float,reach: float,lift: float,stance_fraction: float) -> Vector3:
 	# During stance the ankle travels backwards at a constant body-relative
 	# speed. With uncapped distance-driven cadence, that cancels world travel.
 	# Cubic swing matches that derivative at both contacts; no impact snap/bob.
 	var fraction:=fposmod(phase/TAU,1.0)
-	var duty:=clampf(_stance_fraction,.38,.65)
+	var duty:=clampf(stance_fraction,.36,.65)
 	var foot := Vector3(side*.105,STANDING_ANKLE_Y,0)
 	if fraction<duty:foot.z=lerpf(-reach,reach,fraction/duty)
 	else:
@@ -398,7 +430,7 @@ func _physics_process(delta: float) -> void:
 	_run_weight=lerpf(_run_weight,clampf((actual_speed_mps-1.9)/2.1,0.0,1.0),blend)
 	_air_weight=lerpf(_air_weight,0.0 if grounded else 1.0,blend)
 	_air_tuck=lerpf(_air_tuck,clampf(player.velocity.y/7.5,0.,1.),blend)
-	_stance_fraction=lerpf(.60,.40,_run_weight)
+	_stance_fraction=lerpf(.56,.36,_run_weight)
 	_cycle_distance_m=lerpf(WALK_CYCLE_DISTANCE_M,RUN_CYCLE_DISTANCE_M,_run_weight)
 	cadence_hz=0.0
 	if moving:
@@ -409,7 +441,7 @@ func _physics_process(delta: float) -> void:
 	_gait_speed_mps=cadence_hz*_cycle_distance_m
 	state="air" if not grounded else ("run" if _run_weight>.45 and moving else ("walk" if moving else "idle"))
 	var reach := _cycle_distance_m*_stance_fraction*.5*walk_weight
-	var lift := lerpf(.075,.21,_run_weight)*walk_weight
+	var lift := lerpf(.10,.24,_run_weight)*walk_weight
 	# The limbs carry the gait. A steady head/torso removes the former
 	# four-pulses-per-stride bob (8.8Hz at turbo cadence) and lateral sway.
 	_upper_body.position=Vector3(0,.85,0)

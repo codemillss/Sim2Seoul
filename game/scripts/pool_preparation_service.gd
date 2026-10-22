@@ -71,17 +71,40 @@ func _near_station(roof: Node3D,kind: String) -> bool:
 	if _safe_point(host.player.global_position).is_empty():return false
 	var ray:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP,points[kind]+Vector3.UP,host.player.collision_mask,[host.player.get_rid()])
 	return get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
+func _bar_choice(roof: Node3D) -> Dictionary:
+	if not is_instance_valid(roof) or not roof.has_method("pool_bar"):return {}
+	var bar: Dictionary=roof.pool_bar()
+	if not bar.has("drink_options"):return {}
+	if bar.stage!="idle":return bar.drink_options[int(bar.selected_drink_index)]
+	var best: Dictionary={};var gap:=INF
+	for choice: Dictionary in bar.drink_options:
+		var distance: float=host.player.global_position.distance_squared_to(choice.use_point)
+		if distance<gap:best=choice;gap=distance
+	return best
+
+func _near_bar(roof: Node3D) -> bool:
+	if not is_instance_valid(roof) or not roof.has_method("pool_bar"):return false
+	var bar: Dictionary=roof.pool_bar()
+	var choice:=_bar_choice(roof)
+	if choice.is_empty():return false
+	var point: Vector3=choice.use_point;var local: Vector3=roof.frame.affine_inverse()*host.player.global_position
+	if absf(local.y)>.16 or host.player.is_swimming() or host.player.global_position.distance_to(point)>1.05:return false
+	if _safe_point(host.player.global_position).is_empty():return false
+	var ray:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP,point+Vector3.UP,host.player.collision_mask,[host.player.get_rid()])
+	return get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
+
 func can_interact() -> bool:
 	if _busy():return false
 	if showering:return true
 	var roof:=_at_roof()
-	return is_instance_valid(roof) and (_near_station(roof,"changing") or _near_station(roof,"shower") or _near_station(roof,"gate"))
+	return is_instance_valid(roof) and (_near_station(roof,"changing") or _near_station(roof,"shower") or _near_station(roof,"gate") or _near_bar(roof))
 func interaction_distance_m() -> float:
 	if showering:return 0.
 	var roof:=_at_roof()
 	if not is_instance_valid(roof):return INF
 	var distance:=INF;var points: Dictionary=roof.pool_preparation_points()
 	for kind: String in ["changing","shower","gate"]:distance=minf(distance,host.player.global_position.distance_to(points[kind]))
+	if roof.has_method("pool_bar") and roof.pool_bar().has("use_point"):distance=minf(distance,host.player.global_position.distance_to(roof.pool_bar().use_point))
 	return distance
 func handle_interact() -> bool:
 	if not can_interact():return false
@@ -90,6 +113,8 @@ func handle_interact() -> bool:
 	_last_interact_tick=tick
 	if showering:_finish_shower(false);_tell("샤워가 취소됐습니다. 끝까지 샤워한 뒤 입장하세요.");return true
 	var roof:=_at_roof();var id:=String(roof.spec.id)
+	if _near_bar(roof):
+		_tell(roof.interact_pool_bar(int(_bar_choice(roof).id)));_event("nonalcohol_bar_interaction",{"roof_id":id,"bar":roof.pool_bar()});return true
 	if _near_station(roof,"changing"):
 		if host.shop_visit_service.swimwear_active:
 			cancel_for_transition();_tell("원래 옷으로 갈아입었습니다. 다시 이용하려면 수영복과 샤워를 준비하세요.")
@@ -139,6 +164,9 @@ func prompt_text() -> String:
 	if showering:return "샤워 중 · %d%%\nE · 취소 · 끝까지 씻으면 수영장 입장 가능"%mini(100,roundi(shower_elapsed/SHOWER_SECONDS*100.))
 	var roof:=_at_roof()
 	if not is_instance_valid(roof):return ""
+	if _near_bar(roof):
+		var bar: Dictionary=roof.pool_bar()
+		return "바텐더가 음료 준비 중 · 잠시 기다려 주세요" if bar.stage=="preparing" else ("E · "+String(bar.drink)+" 받기 · 무알코올 · 무료" if bar.stage=="ready" else "E · "+String(_bar_choice(roof).title)+" 주문 · 무알코올 · 무료")
 	if _near_station(roof,"changing"):return "E · 원래 옷으로 갈아입기" if host.shop_visit_service.swimwear_active else "E · 수영복으로 갈아입기"
 	if _near_station(roof,"shower"):return "E · 샤워하기 · 4초" if host.shop_visit_service.swimwear_active and pool_id==String(roof.spec.id) else "탈의실에서 수영복으로 갈아입은 뒤 샤워하세요."
 	if _near_station(roof,"gate"):return "입장 가능 · 계단으로 입수 / Space 물 밖으로" if water_access_allowed(roof) else "입장 준비 · 탈의실 수영복 → 샤워실 샤워"
@@ -156,7 +184,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			shower_elapsed+=delta;host.exploration_avatar.set_activity("shower",shower_elapsed)
 			if shower_elapsed>=SHOWER_SECONDS:_finish_shower(true);_tell("샤워 완료 · 수영장 게이트가 열렸습니다.")
-	for roof: Node3D in _roofs():roof.set_pool_access_authorized(water_access_allowed(roof))
+	for roof: Node3D in _roofs():
+		roof.set_pool_access_authorized(water_access_allowed(roof))
+		if roof.has_method("update_pool_lounge"):roof.update_pool_lounge(String(host.get("time_id") if host.get("time_id")!=null else "day"),roof==current,delta)
 	if is_instance_valid(current):
 		var local: Vector3=current.frame.affine_inverse()*host.player.global_position
 		if absf(local.y)<.16 and not current.pool_water_region().rect.grow(.30).has_point(Vector2(local.x,local.z)):
@@ -165,5 +195,5 @@ func _physics_process(delta: float) -> void:
 func snapshot() -> Dictionary:
 	var rooms: Array=[]
 	if loaded:
-		for roof: Node3D in _roofs():rooms.append({"id":roof.spec.id,"points":roof.pool_preparation_points(),"authorized":water_access_allowed(roof),"gate_layer":roof._pool_gate_body.collision_layer,"shower_water_visible":roof._pool_shower_water.visible})
+		for roof: Node3D in _roofs():rooms.append({"id":roof.spec.id,"points":roof.pool_preparation_points(),"authorized":water_access_allowed(roof),"gate_layer":roof._pool_gate_body.collision_layer,"shower_water_visible":roof._pool_shower_water.visible,"lounge":roof.pool_lounge_snapshot() if roof.has_method("pool_lounge_snapshot") else {}})
 	return {"loaded":loaded,"error":load_error,"pool_id":pool_id,"swimwear_active":host.shop_visit_service.swimwear_active if loaded else false,"showering":showering,"shower_elapsed_s":shower_elapsed,"showered":showered,"completed_showers":completed_showers,"cancelled_showers":cancelled_showers,"rejected_water_entries":rejected_water_entries,"rooms":rooms,"events":events.duplicate(true),"scope":"Authored roof-local changing/shower rooms and native gate; completed preparation required for actual water entry including jumps/falls. No real hotel amenity or surveyed interior claim."}

@@ -30,6 +30,7 @@ var _rowing_seat: MeshInstance3D
 var _rowing_handle: MeshInstance3D
 var _rowing_cable: MeshInstance3D
 var _stroke_fraction := 0.0
+var _study_pen: MeshInstance3D
 
 func build(activity: String, player: CharacterBody3D, room: Node3D, target: Dictionary) -> void:
 	kind=activity;_player=player;_room=room;_target=target.duplicate(true)
@@ -46,6 +47,7 @@ func build(activity: String, player: CharacterBody3D, room: Node3D, target: Dict
 		"weights":_build_weights()
 		"cycle":_build_cycle()
 		"rowing":_build_rowing()
+		"study":_build_study()
 	var human: Node3D=player.get_node_or_null("Visual/ExplorationAvatar")
 	if is_instance_valid(human) and human.has_method("textured_model_snapshot") and human.textured_model_snapshot(false).get("loaded",false):
 		# The weighted human supplies real fingers. Keep legacy prop nodes for
@@ -174,6 +176,10 @@ func _animate_rowing() -> void:
 	_rowing_cable.position=(origin+_rowing_handle.position)*.5
 	_rowing_cable.basis=Basis.looking_at(difference.normalized(),Vector3.UP)*Basis.from_scale(Vector3(1,1,difference.length()/.65))
 
+func _build_study() -> void:
+	_study_pen=_box(_avatar_root,"study_pencil",Vector3(.010,.010,.16),Vector3(.18,.80,-.68),Color(.85,.62,.15))
+	_study_pen.rotation.y=-.25;_study_pen.rotation.x=-.38
+
 func animate(elapsed: float, progress: float, session: Dictionary) -> void:
 	time=elapsed
 	if not is_instance_valid(_player) or not is_instance_valid(_avatar_root):return
@@ -205,6 +211,8 @@ func animate(elapsed: float, progress: float, session: Dictionary) -> void:
 			_target["live_distance"]=float(session.get("distance_m",0.0));_animate_cycle()
 		"rowing":
 			_animate_rowing();_display.text="%d 회 · %.0f m"%[int(session.get("strokes",0)),float(session.get("distance_m",0.0))]
+		"study":
+			_study_pen.position=Vector3(.18+sin(time*1.8)*.012,.80,-.68+cos(time*1.8)*.010)
 		"weights":
 			var curl := (1.-cos(time*TAU/2.0))*.5
 			_dumbbell_height=HUMAN_ACTIVITY_DIMENSIONS.WEIGHT_LOW_M+curl*HUMAN_ACTIVITY_DIMENSIONS.WEIGHT_TRAVEL_M

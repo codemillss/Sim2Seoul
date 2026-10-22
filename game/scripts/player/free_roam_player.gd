@@ -395,6 +395,11 @@ func _physics_process(delta: float) -> void:
 		var target := surface_world-FLOAT_DEPTH_M
 		var buoyancy := (target-global_position.y)*20.0-velocity.y*6.0
 		velocity.y = clampf(velocity.y+buoyancy*delta,-4.0,4.0)
+	elif grounded and not jump_edge and velocity.y<=0.:
+		# A full 30Hz gravity impulse repeatedly drives a supported capsule
+		# about 1cm into its contact recovery. A small downward bias keeps
+		# floor contact; native floor snap still follows descending surfaces.
+		velocity.y=-minf(.04,gravity_mps2*delta)
 	else:
 		velocity.y -= gravity_mps2*delta
 	move_and_slide()

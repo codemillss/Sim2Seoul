@@ -3,6 +3,9 @@ extends "res://../tests/game/check_human_scale_motion.gd"
 ## This metre fixture injects engine actions; it does not claim OS input,
 ## whole-city geometry accuracy, sustained frame rate or subjective comfort.
 const ATTACHED_BIKE_SERVICE := preload("res://scripts/city_bike_service.gd")
+const EXPECTED_HIP_MARKER_Y_M := .978
+const EXPECTED_WALK_SUPPORT_HALF_AMPLITUDE_M := .016
+const EXPECTED_RUN_SUPPORT_HALF_AMPLITUDE_M := .024
 class AttachedBikeHost extends Node3D:
 	var player: CharacterBody3D
 	var exploration_avatar: Node3D
@@ -34,6 +37,14 @@ var presence_current: Array[Transform3D]=[]
 var presence_previous_root := Transform3D.IDENTITY
 var presence_current_root := Transform3D.IDENTITY
 var presence_history_ready := false
+var presence_previous_gait: Dictionary={}
+var presence_current_gait: Dictionary={}
+var presence_analytic_pelvis_samples := 0
+var presence_analytic_pelvis_nontrivial_samples := 0
+var presence_analytic_pelvis_maximum_error_m := 0.
+var presence_analytic_pelvis_maximum_linear_difference_m := 0.
+var presence_paused_teleport_pending := false
+var presence_paused_teleport_result: Dictionary={}
 var presence_eye_baseline := 0.0
 var presence_started_ms := 0
 var presence_physics_hz := 30
@@ -128,6 +139,9 @@ func _observe_physics(delta: float) -> void:
 	if not is_instance_valid(avatar) or presence_nodes.is_empty():return
 	var next: Array[Transform3D]=[]
 	for node: Node3D in presence_nodes:next.append(node.transform)
+	var next_gait:={"stride_phase":float(avatar.get("stride_phase")),"walk_weight":float(avatar.get("walk_weight")),"run_weight":float(avatar.get("_run_weight")),"state":String(avatar.get("state")),"activity":String(avatar.get("_activity_kind")),"facility_control":bool(player.get("facility_control"))}
+	presence_previous_gait=presence_current_gait.duplicate() if presence_history_ready else next_gait.duplicate()
+	presence_current_gait=next_gait
 	presence_previous=presence_current.duplicate() if presence_history_ready else next.duplicate()
 	presence_current=next
 	presence_previous_root=presence_current_root if presence_history_ready else avatar.global_transform
@@ -156,7 +170,7 @@ func _observe_physics(delta: float) -> void:
 		var difference:=_presence_bone_difference(presence_previous[index],presence_current[index])
 		if float(difference.position_m)>.0001 or float(difference.basis)>.0001:presence_joint_changed=true
 	if presence_physics.size()<90:
-		presence_physics.append({"physics_frame":Engine.get_physics_frames(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"physics_delta_s":delta,"position":player.global_position,"velocity":player.velocity,"visual_yaw":yaw,"heading_velocity_difference_radians":alignment,"upper_body":upper.transform,"eye_offset_m":eye_offset,"grounded":player.is_on_floor(),"state":avatar.state})
+		presence_physics.append({"physics_frame":Engine.get_physics_frames(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"physics_delta_s":delta,"position":player.global_position,"velocity":player.velocity,"visual_yaw":yaw,"heading_velocity_difference_radians":alignment,"upper_body":upper.transform,"eye_offset_m":eye_offset,"grounded":player.is_on_floor(),"state":avatar.state,"independent_physics_gait":next_gait})
 
 func _observe_render(delta: float) -> void:
 	if presence_phase.is_empty() or presence_tick_count<=5 or not presence_history_ready:return
@@ -171,17 +185,35 @@ func _observe_render(delta: float) -> void:
 	var fixed_activity: bool=rig.get("_facility_mode")==true or rig.get("_moving_attachment")==true
 	var max_position:=0.0;var max_basis:=0.0;var intermediate:=false
 	var local_rows: Array=[]
+	var analytic:={}
+	# Independently recorded physical fields drive the stated display contract.
+	# Do not use render metadata or call production gait_support_wave here.
+	if not fixed_activity and not presence_current_gait.is_empty() and String(presence_current_gait.state) in ["idle","walk","run"] and String(presence_current_gait.activity).is_empty() and not bool(presence_current_gait.facility_control):
+		var before_phase: float=presence_previous_gait.stride_phase
+		var interpolated_phase:=before_phase+fposmod(float(presence_current_gait.stride_phase)-before_phase,TAU)*fraction
+		var interpolated_run:=lerpf(float(presence_previous_gait.run_weight),float(presence_current_gait.run_weight),fraction)
+		var interpolated_walk:=lerpf(float(presence_previous_gait.walk_weight),float(presence_current_gait.walk_weight),fraction)
+		var expected_y:=EXPECTED_HIP_MARKER_Y_M-lerpf(EXPECTED_WALK_SUPPORT_HALF_AMPLITUDE_M,EXPECTED_RUN_SUPPORT_HALF_AMPLITUDE_M,clampf(interpolated_run,0.,1.))*(1.+cos(2.*interpolated_phase))*clampf(interpolated_walk,0.,1.)
+		analytic={"expected_y_m":expected_y,"unwrapped_phase_radians":interpolated_phase,"interpolated_run_weight":interpolated_run,"interpolated_walk_weight":interpolated_walk,"previous_independent_physics_gait":presence_previous_gait,"current_independent_physics_gait":presence_current_gait,"oracle":"Independently recorded physical phase/weights and declared .978m hip marker minus .016/.024m half-amplitude cosine support wave; no production helper/metadata read."}
 	for index: int in range(presence_nodes.size()):
 		var expected: Transform3D=presence_current[index] if fixed_activity else presence_previous[index].interpolate_with(presence_current[index],fraction)
+		var linear_expected:=expected
+		if presence_node_names[index]=="Pelvis" and not analytic.is_empty():expected.origin.y=float(analytic.expected_y_m)
 		var actual: Transform3D=presence_nodes[index].transform
+		if presence_node_names[index]=="Pelvis" and not analytic.is_empty():
+			presence_analytic_pelvis_samples+=1
+			var linear_difference:=absf(expected.origin.y-linear_expected.origin.y)
+			if fraction>.15 and fraction<.85 and linear_difference>.0003:presence_analytic_pelvis_nontrivial_samples+=1
+			presence_analytic_pelvis_maximum_error_m=maxf(presence_analytic_pelvis_maximum_error_m,absf(actual.origin.y-expected.origin.y))
+			presence_analytic_pelvis_maximum_linear_difference_m=maxf(presence_analytic_pelvis_maximum_linear_difference_m,linear_difference)
 		var difference:=_presence_bone_difference(actual,expected)
 		max_position=maxf(max_position,float(difference.position_m));max_basis=maxf(max_basis,float(difference.basis))
 		var endpoint_difference:=_presence_bone_difference(presence_previous[index],presence_current[index])
 		if not fixed_activity and fraction>.15 and fraction<.85 and float(endpoint_difference.basis)>.015:
 			var from_previous:=_presence_bone_difference(actual,presence_previous[index]);var from_current:=_presence_bone_difference(actual,presence_current[index])
 			if float(from_previous.basis)>.001 and float(from_current.basis)>.001:intermediate=true
-		if presence_render.size()<12 and index<6:
-			local_rows.append({"name":presence_node_names[index],"actual":actual,"previous_physical":presence_previous[index],"current_physical":presence_current[index],"expected_at_fraction":expected,"independent_fraction_0":presence_previous[index].interpolate_with(presence_current[index],0.),"independent_fraction_half":presence_previous[index].interpolate_with(presence_current[index],.5),"independent_fraction_1":presence_previous[index].interpolate_with(presence_current[index],1.)})
+		if presence_render.size()<12 and (index<6 or presence_node_names[index]=="Pelvis"):
+			local_rows.append({"name":presence_node_names[index],"actual":actual,"previous_physical":presence_previous[index],"current_physical":presence_current[index],"expected_at_fraction":expected,"linear_expected_at_fraction":linear_expected,"analytic_pelvis_contract":analytic if presence_node_names[index]=="Pelvis" else {},"independent_fraction_0":presence_previous[index].interpolate_with(presence_current[index],0.),"independent_fraction_half":presence_previous[index].interpolate_with(presence_current[index],.5),"independent_fraction_1":presence_previous[index].interpolate_with(presence_current[index],1.)})
 	presence_observed_intermediate=presence_observed_intermediate or intermediate
 	presence_max_joint_position_error=maxf(presence_max_joint_position_error,max_position);presence_max_joint_basis_error=maxf(presence_max_joint_basis_error,max_basis)
 	var root_expected:=presence_previous_root.interpolate_with(presence_current_root,fraction)
@@ -203,8 +235,9 @@ func _observe_render(delta: float) -> void:
 			var grip: Vector3=presence_bicycle_row.front.to_global(Vector3(side*.265,1.20,.36))
 			presence_bicycle_max_hand_error=maxf(presence_bicycle_max_hand_error,avatar._hands[side_index].global_position.distance_to(grip))
 	if presence_render.size()<90:
-		presence_render.append({"process_frame":Engine.get_process_frames(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"process_delta_s":delta,"window_focused":DisplayServer.window_is_focused() if DisplayServer.get_name()!="headless" else false,"fraction":fraction,"actual_camera":rig.camera.global_transform,"independent_camera":camera_expected,"actual_visible_anchor":root_actual,"independent_visible_anchor":root_expected,"maximum_local_joint_position_error_m":max_position,"maximum_local_joint_basis_error":max_basis,"moving_joint_is_between_endpoints":intermediate,"fixed_activity":fixed_activity,"joints":local_rows})
+		presence_render.append({"process_frame":Engine.get_process_frames(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"process_delta_s":delta,"window_focused":DisplayServer.window_is_focused() if DisplayServer.get_name()!="headless" else false,"fraction":fraction,"actual_camera":rig.camera.global_transform,"independent_camera":camera_expected,"actual_visible_anchor":root_actual,"independent_visible_anchor":root_expected,"maximum_local_joint_position_error_m":max_position,"maximum_local_joint_basis_error":max_basis,"moving_joint_is_between_endpoints":intermediate,"fixed_activity":fixed_activity,"independent_analytic_pelvis":analytic,"joints":local_rows})
 	if presence_moving_v_pending and intermediate:_presence_apply_moving_v(fraction)
+	if presence_paused_teleport_pending and intermediate:_presence_apply_paused_teleport(fraction)
 
 func _presence_apply_moving_v(fraction: float) -> void:
 	# Run after the real camera and avatar renderer, at an observed intermediate
@@ -332,6 +365,65 @@ func _presence_moving_reset() -> void:
 		_check("view.moving_human_reset_preserves_actual_momentum_capsule_and_human_eye",false,{"reason":"Prerequisite intermediate render observation absent"})
 	_keys([]);await _presence_wait(15)
 
+func _presence_physical_joint_world(node: Node3D) -> Transform3D:
+	# Compose authored locals in physical avatar space. The presentation proxy
+	# is intentionally omitted, independently of camera history/metadata.
+	var chain: Array[Transform3D]=[];var cursor: Node=node
+	var proxy:=avatar.get_node_or_null("RenderProxy")
+	while cursor!=null and cursor!=avatar:
+		if cursor is Node3D and cursor!=proxy:chain.append((cursor as Node3D).transform)
+		cursor=cursor.get_parent()
+	var value:=avatar.global_transform
+	for index: int in range(chain.size()-1,-1,-1):value=value*chain[index]
+	return value
+
+func _presence_apply_paused_teleport(fraction: float) -> void:
+	presence_paused_teleport_pending=false;presence_phase=""
+	var displayed_difference:=0.
+	for index: int in range(presence_nodes.size()):displayed_difference=maxf(displayed_difference,float(_presence_bone_difference(presence_nodes[index].transform,presence_current[index]).basis))
+	var root_before:=_anchor().global_transform;var metadata_before:=avatar.has_meta("render_gait_foot_goals_world") or avatar.has_meta("render_gait_state")
+	var old_position:=player.global_position
+	paused=true
+	player.global_position+=Vector3(17.,0.,-13.);player.velocity=Vector3.ZERO
+	player.require_neutral_input();player.reset_physics_interpolation()
+	# A portal/activity service may author the destination pose before snapping.
+	# Restoring an older camera joint array here would discard that new pose.
+	avatar._rest_pose()
+	var authored: Array[Transform3D]=[]
+	for node: Node3D in presence_nodes:authored.append(node.transform)
+	var expected_feet:={}
+	for side: String in ["Left","Right"]:expected_feet[side]=_presence_physical_joint_world(avatar._joints[side+"Foot"]).origin
+	rig.snap_to_target_pose()
+	var maximum_position:=0.;var maximum_basis:=0.;var maximum_foot_error:=0.;var maximum_actual_foot_error:=0.;var foot_rows:={}
+	for index: int in range(presence_nodes.size()):
+		var difference:=_presence_bone_difference(presence_nodes[index].transform,authored[index])
+		maximum_position=maxf(maximum_position,float(difference.position_m));maximum_basis=maxf(maximum_basis,float(difference.basis))
+	for side: String in ["Left","Right"]:
+		var published: Vector3=rig._physics_foot_goals.get(side,Vector3.INF)
+		var error:=published.distance_to(Vector3(expected_feet[side]));maximum_foot_error=maxf(maximum_foot_error,error)
+		var actual: Vector3=avatar._joints[side+"Foot"].global_position
+		maximum_actual_foot_error=maxf(maximum_actual_foot_error,actual.distance_to(Vector3(expected_feet[side])))
+		foot_rows[side]={"independent_destination_physical_foot_world":expected_feet[side],"published_physics_foot_world":published,"actual_displayed_foot_world":actual,"published_error_m":error}
+	var cleared:=not avatar.has_meta("render_gait_foot_goals_world") and not avatar.has_meta("render_gait_state")
+	presence_paused_teleport_result={"observed_intermediate_fraction":fraction,"displayed_vs_physical_basis_difference_before_pause":displayed_difference,"render_metadata_existed_before_pause":metadata_before,"old_player_position":old_position,"destination_player_position":player.global_position,"old_displayed_root":root_before,"destination_displayed_root":_anchor().global_transform,"destination_physical_avatar":avatar.global_transform,"maximum_authored_local_position_error_m":maximum_position,"maximum_authored_local_basis_error":maximum_basis,"maximum_published_foot_error_m":maximum_foot_error,"maximum_displayed_foot_error_m":maximum_actual_foot_error,"old_render_metadata_cleared":cleared,"joint_histories_collapsed":rig._previous_joint_poses==rig._physics_joint_poses,"world_foot_histories_collapsed":rig._previous_foot_goals==rig._physics_foot_goals,"foot_rows":foot_rows,"physics_frame":Engine.get_physics_frames(),"tree_paused":paused}
+	_check("menu.paused_midstride_teleport_preserves_new_authored_pose_and_collapses_history",displayed_difference>.001 and paused and maximum_position<.0003 and maximum_basis<.0005 and rig._previous_joint_poses==rig._physics_joint_poses and _anchor().global_position.distance_to(avatar.global_position)<.0003 and rig._previous_pose.origin.distance_to(rig._physics_pose.origin)<.0003,presence_paused_teleport_result)
+	_check("menu.paused_midstride_teleport_reseeds_world_foot_goals_and_clears_old_render_metadata",metadata_before and cleared and maximum_foot_error<.0003 and maximum_actual_foot_error<.0003 and rig._previous_foot_goals==rig._physics_foot_goals,presence_paused_teleport_result)
+
+func _presence_paused_midstride_teleport() -> void:
+	Engine.physics_ticks_per_second=30;Engine.max_fps=144;presence_physics_hz=30;presence_render_cap=144
+	await _presence_place(Vector3(-60,.08,-60));_keys(["move_forward","move_fast"]);await _presence_wait(24)
+	presence_paused_teleport_result={};_presence_reset_observation("paused_midstride_teleport");presence_paused_teleport_pending=true
+	for index: int in range(240):
+		if not presence_paused_teleport_pending:break
+		await process_frame
+	if presence_paused_teleport_pending:
+		presence_paused_teleport_pending=false;presence_phase=""
+		_check("menu.paused_midstride_teleport_preserves_new_authored_pose_and_collapses_history",false,{"reason":"No moving intermediate render observation within240processframes"})
+		_check("menu.paused_midstride_teleport_reseeds_world_foot_goals_and_clears_old_render_metadata",false,{"reason":"Prerequisite intermediate render observation absent"})
+	_keys([])
+	for index: int in range(3):await process_frame
+	paused=false;await _presence_wait(15)
+
 func _presence_door() -> void:
 	await _presence_place(Vector3(0,.08,-1.));var before: int=player.recoveries;var overlaps:=0;var invalid:=0;var rows: Array=[]
 	_keys(["move_forward"])
@@ -432,7 +524,7 @@ func _presence_attached_bicycle() -> void:
 	rig.snap_to_target_pose();await _presence_wait(3)
 
 func _run() -> void:
-	for path: String in ["res://scripts/player/free_roam_player.gd","res://scripts/player/public_player.gd","res://scripts/player/palace_player.gd","res://scripts/player/movement_controller.gd","res://scripts/player/idle_support.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_activity_dimensions.gd","res://assets/vendor/microsoft_rocketbox/PROVENANCE.json","res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx","res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx","res://assets/vendor/makehuman_swim/provenance.json","res://assets/vendor/makehuman_swim/swim_male.glb","res://assets/vendor/makehuman_swim/swim_female.glb","res://scripts/player/human_surface_meshes.gd","res://scripts/player/exploration_camera.gd","res://scripts/player/camera_rig.gd","res://scripts/input_router.gd","res://scenes/player/camera_rig.tscn","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://../tests/game/check_jump.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_human_scale_motion.gd","res://../tests/game/check_human_presence_camera.gd"]:source_hashes[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/player/free_roam_player.gd","res://scripts/player/public_player.gd","res://scripts/player/palace_player.gd","res://scripts/player/movement_controller.gd","res://scripts/player/idle_support.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/human_gait_support.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_activity_dimensions.gd","res://assets/vendor/microsoft_rocketbox/PROVENANCE.json","res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx","res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx","res://assets/vendor/makehuman_swim/provenance.json","res://assets/vendor/makehuman_swim/swim_male.glb","res://assets/vendor/makehuman_swim/swim_female.glb","res://scripts/player/human_surface_meshes.gd","res://scripts/player/exploration_camera.gd","res://scripts/player/camera_rig.gd","res://scripts/input_router.gd","res://scenes/player/camera_rig.tscn","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://../tests/game/check_jump.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_human_scale_motion.gd","res://../tests/game/check_human_presence_camera.gd"]:source_hashes[path]=FileAccess.get_sha256(path)
 	_presence_checkpoint("fixture_build_begin")
 	_setup_stable();fixture.name="IndependentHumanPresenceCameraFixture";_metric_scene()
 	_presence_checkpoint("fixture_build_end")
@@ -456,7 +548,8 @@ func _run() -> void:
 			await _presence_turn(prefix+"turn_90","move_right",photo)
 			await _presence_turn(prefix+"turn_180","move_backward",photo)
 			await _presence_motion(prefix+"jump",["move_forward","jump"],1.9,photo)
-	await _presence_moving_reset();await _presence_door();await _presence_attached_bicycle();await _presence_safety();await _presence_facility_and_pause()
+	await _presence_moving_reset();await _presence_paused_midstride_teleport();await _presence_door();await _presence_attached_bicycle();await _presence_safety();await _presence_facility_and_pause()
+	_check("render.analytic_pelvis_support_curve_has_independent_nontrivial_subphysics_coverage",presence_analytic_pelvis_samples>=30 and presence_analytic_pelvis_nontrivial_samples>=8 and presence_analytic_pelvis_maximum_error_m<.0003,{"independently_checked_pelvis_samples":presence_analytic_pelvis_samples,"intermediate_samples_differing_from_linear_by_over_0_3mm":presence_analytic_pelvis_nontrivial_samples,"maximum_analytic_y_error_m":presence_analytic_pelvis_maximum_error_m,"maximum_analytic_vs_linear_y_difference_m":presence_analytic_pelvis_maximum_linear_difference_m,"position_tolerance_unchanged_m":.0003,"oracle":"Hardcoded display contract and independent previous/current physical phase and weights, without calling production helpers or reading render metadata."})
 	_check("physics.original_capsule_and_collision_layers_preserved_through_every_case",_capsule()==initial_capsule,{"original_capsule":initial_capsule,"final_capsule":_capsule()})
 	_finish()
 
@@ -468,7 +561,7 @@ func _finish() -> void:
 	if presence_vsync_before>=0 and DisplayServer.get_name()!="headless":
 		DisplayServer.window_set_vsync_mode(presence_vsync_before as DisplayServer.VSyncMode)
 		scheduling["restored_original_mode_readback"]=int(DisplayServer.window_get_vsync_mode())
-	var result:={"schema_version":1,"task":"EXP29_HUMAN_PRESENCE_CAMERA","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"source_sha256":source_hashes,"cases":presence_cases,"moving_human_view_reset":presence_moving_v_result,"timing_events":presence_timing_events,"captures":presence_captures,"scope":"Isolated metre floor/grid, actual latest production CharacterBody3D/avatar/exploration camera and engine Input actions. Independent late physics/process recorder captures local joint transforms and visible-root/eye histories at 30/60Hz physics and 30/60/144 render caps. Explicit placements, native walls/parapet/new-obstacle/recovery faults and fixed facility pose are test-only. Actual observed render fractions are used without assigning production render fraction. Images use the ordinary production exploration Camera3D. No city actors, persistent settings, source geometry, OS keyboard, sustained FPS, real anthropometry/photorealism or subjective comfort claim."}
+	var result:={"schema_version":1,"task":"EXP29_HUMAN_PRESENCE_CAMERA","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"elapsed_wall_seconds":float(Time.get_ticks_msec()-presence_started_ms)/1000.,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"source_sha256":source_hashes,"cases":presence_cases,"moving_human_view_reset":presence_moving_v_result,"paused_midstride_teleport":presence_paused_teleport_result,"analytic_pelvis_oracle":{"samples":presence_analytic_pelvis_samples,"nontrivial_samples":presence_analytic_pelvis_nontrivial_samples,"maximum_error_m":presence_analytic_pelvis_maximum_error_m,"maximum_linear_difference_m":presence_analytic_pelvis_maximum_linear_difference_m},"timing_events":presence_timing_events,"captures":presence_captures,"scope":"Isolated metre floor/grid, actual latest production CharacterBody3D/avatar/exploration camera and engine Input actions. Independent late physics/process recorder captures local joint transforms, physical gait phase/weights and visible-root/eye histories at 30/60Hz physics and 30/60/144 render caps. All local transforms retain strict linear position/basis expectation except pelvis Y, independently checked against the declared analytic support-wave contract with the same0.3mm tolerance. A paused midstride teleport checks freshly authored destination joints and independently composed physical foot globals. Explicit placements, native walls/parapet/new-obstacle/recovery faults and fixed facility pose are test-only. Actual observed render fractions are used without assigning production render fraction. Images use the ordinary production exploration Camera3D. No city actors, persistent settings, source geometry, OS keyboard, sustained FPS, real anthropometry/photorealism or subjective comfort claim."}
 	result["window_scheduling"]=scheduling
 	var output:=FileAccess.open(report_path,FileAccess.WRITE)
 	if output==null:push_error("Cannot write human presence camera report");quit(2);return

@@ -343,7 +343,7 @@ func _build_ui() -> void:
 	metric_switch.toggled.connect(func(value: bool):
 		if is_instance_valid(city_metric_overlay):city_metric_overlay.set_enabled(value))
 	options.add_child(metric_switch)
-	var library_shortcut := Button.new();library_shortcut.text = "서울도서관 정문으로 이동"
+	var library_shortcut := Button.new();library_shortcut.name="LibraryStudyEntrance";library_shortcut.text = "서울도서관 공부 · 정문으로 이동"
 	library_shortcut.pressed.connect(_visit_library_entrance);options.add_child(library_shortcut)
 	var summon:=Button.new();summon.text="내 근처에 킥보드 호출 · Q";summon.pressed.connect(func():
 		_sandbox_requests["summon"]=true
@@ -353,7 +353,7 @@ func _build_ui() -> void:
 		var button:=Button.new();button.text=String(detail[0]);button.pressed.connect(_visit_city_life.bind(String(detail[1])));options.add_child(button)
 	var sandbox_layer:=CanvasLayer.new();sandbox_layer.name="CitySandboxHUD";sandbox_layer.layer=19;add_child(sandbox_layer)
 	sandbox_status=Label.new();sandbox_status.name="SandboxStatus";sandbox_status.anchor_left=1.;sandbox_status.anchor_right=1.;sandbox_status.offset_left=-390.;sandbox_status.offset_right=-16.;sandbox_status.offset_top=16.;sandbox_status.offset_bottom=155.;sandbox_status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;sandbox_status.add_theme_font_size_override("font_size",16);sandbox_status.add_theme_color_override("font_shadow_color",Color(.02,.03,.05));sandbox_status.add_theme_constant_override("shadow_offset_x",2);sandbox_status.add_theme_constant_override("shadow_offset_y",2);sandbox_status.mouse_filter=Control.MOUSE_FILTER_IGNORE;sandbox_layer.add_child(sandbox_status)
-	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["호텔 야외 수영장으로 이동","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"],["전동 킥보드 대여소로 이동","scooter_station"],["편의점 쇼핑으로 이동","shop"],["옷가게 쇼핑으로 이동","clothing"],["자동차 주차 위치로 이동","car_station"],["헬리콥터 착륙장으로 이동","helipad"],["시청역 5번 출구로 이동","subway_cityhall"],["을지로입구역 1-1번 출구로 이동","subway_euljiro"],["헬기 옥상 착륙지 둘러보기","helicopter_roof"],["서울파이낸스센터 입구로 이동","escalator_building"]]:
+	for detail in [["진주회관 앞 거리로 이동","restaurant"],["돌담길 버스킹으로 이동","busking"],["미술관 언덕 입구로 이동","hill"],["반려견 산책 구간으로 이동","dog_walk"],["야외 수영장 · 해질녘 조명과 바텐더","hotel_pool"],["서울광장 피크닉으로 이동","picnic"],["성공회교회당 앞으로 이동","church"],["다음 거리 산책 지점으로 이동","street_walk"],["버스 정류장으로 이동","bus_stop"],["신호등·횡단보도로 이동","crossing"],["가로등 거리로 이동","street_lamps"],["자전거 대여소로 이동","bike_station"],["전동 킥보드 대여소로 이동","scooter_station"],["편의점 쇼핑으로 이동","shop"],["옷가게 쇼핑으로 이동","clothing"],["자동차 주차 위치로 이동","car_station"],["헬리콥터 착륙장으로 이동","helipad"],["시청역 5번 출구로 이동","subway_cityhall"],["을지로입구역 1-1번 출구로 이동","subway_euljiro"],["헬기 옥상 착륙지 둘러보기","helicopter_roof"],["서울파이낸스센터 입구로 이동","escalator_building"]]:
 		var shortcut:=Button.new();shortcut.text=detail[0]
 		shortcut.pressed.connect(_visit_street_detail.bind(detail[1]));options.add_child(shortcut)
 	if quit_action!=null:options.move_child(quit_action,options.get_child_count()-1)
@@ -461,6 +461,9 @@ func _visit_street_detail(kind: String) -> void:
 		if destination.is_empty() or not _roof_destination_clear(destination):
 			exploration_notice.text="수영장 입구가 잠시 막혀 있습니다. 조금 뒤 다시 찾아주세요.";return
 		if not _commit_exploration_teleport(destination.pool_entry,destination):return
+		# This labelled evening shortcut changes the current session only.
+		# Explicit time-menu selection remains the sole persisted preference.
+		set_time_profile("evening")
 		player.velocity=Vector3.ZERO;player.require_neutral_input();player.reset_physics_interpolation()
 		# Arrive facing the changing/shower doors before entering the pool.
 		var forward: Vector3=destination.roof.frame.basis.z

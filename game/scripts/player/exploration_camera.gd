@@ -31,6 +31,10 @@ const HUMAN_PITCH_DEGREES := -7.0
 var _joint_nodes: Array[Node3D] = []
 var _previous_joint_poses: Array[Transform3D] = []
 var _physics_joint_poses: Array[Transform3D] = []
+var _previous_foot_goals: Dictionary = {}
+var _physics_foot_goals: Dictionary = {}
+var _previous_gait_state: Dictionary = {}
+var _physics_gait_state: Dictionary = {}
 const ROOF_MAX_PIVOT_RAISE_M := 1.2
 const ROOF_MIN_RETRY_DISTANCE_M := 1.8
 const ROOF_RESTORE_DISTANCE_M := 1.9
@@ -191,14 +195,30 @@ func _release_avatar_proxy() -> void:
 		_avatar_proxy.queue_free()
 	_avatar_proxy=null;_avatar_root=null
 	_joint_nodes.clear();_previous_joint_poses.clear();_physics_joint_poses.clear()
+	_previous_foot_goals.clear();_physics_foot_goals.clear()
+	_previous_gait_state.clear();_physics_gait_state.clear()
 
 func _restore_physics_joints() -> void:
 	# Rendered joint interpolation must never feed back into the next IK step,
 	# physics-time hand contacts, or an independently controlled ride pose.
 	for index: int in range(mini(_joint_nodes.size(),_physics_joint_poses.size())):
 		if is_instance_valid(_joint_nodes[index]):_joint_nodes[index].transform=_physics_joint_poses[index]
+	if is_instance_valid(_avatar_root):
+		_avatar_root.remove_meta("render_gait_foot_goals_world");_avatar_root.remove_meta("render_gait_state")
 
 func _capture_joint_poses(reset: bool) -> void:
+	var prior_gait:=_physics_gait_state.duplicate();_physics_gait_state.clear()
+	if is_instance_valid(_avatar_root):
+		for field: String in ["stride_phase","walk_weight","_run_weight","_stance_fraction","_cycle_distance_m"]:_physics_gait_state[field]=float(_avatar_root.get(field))
+	_previous_gait_state=_physics_gait_state.duplicate() if reset or prior_gait.is_empty() else prior_gait
+	var prior_feet:=_physics_foot_goals.duplicate();_physics_foot_goals.clear();_previous_foot_goals.clear()
+	if is_instance_valid(_avatar_root):
+		for side: String in ["Left","Right"]:
+			var joints: Dictionary=_avatar_root.get("_joints")
+			var foot:=joints.get(side+"Foot") as Node3D
+			if not is_instance_valid(foot):continue
+			_physics_foot_goals[side]=foot.global_position
+			_previous_foot_goals[side]=foot.global_position if reset or not prior_feet.has(side) else prior_feet[side]
 	var previous: Array[Transform3D]=_physics_joint_poses.duplicate()
 	_previous_joint_poses.clear();_physics_joint_poses.clear()
 	for index: int in range(_joint_nodes.size()):
@@ -211,6 +231,25 @@ func _publish_joint_poses(fraction: float) -> void:
 	for index: int in range(_joint_nodes.size()):
 		if not is_instance_valid(_joint_nodes[index]) or index>=_physics_joint_poses.size():continue
 		_joint_nodes[index].transform=_previous_joint_poses[index].interpolate_with(_physics_joint_poses[index],clampf(fraction,0.,1.))
+	if is_instance_valid(_avatar_root):
+		# Interpolated thigh/shin rotations draw a small FK arc at the ankle.
+		# Solve the native legs toward linearly interpolated physical endpoints,
+		# so a planted heel/toe stays planted between the 30Hz physics steps.
+		var goals:={}
+		for side: String in _physics_foot_goals:goals[side]=Vector3(_previous_foot_goals[side]).lerp(Vector3(_physics_foot_goals[side]),clampf(fraction,0.,1.))
+		_avatar_root.set_meta("render_gait_foot_goals_world",goals)
+		if not _physics_gait_state.is_empty() and String(_avatar_root.get("state")) in ["walk","run","idle"] and not _facility_mode and not _moving_attachment:
+			var gait:={};var phase_before: float=_previous_gait_state.stride_phase
+			gait.stride_phase=phase_before+fposmod(float(_physics_gait_state.stride_phase)-phase_before,TAU)*clampf(fraction,0.,1.)
+			for field: String in ["walk_weight","_run_weight","_stance_fraction","_cycle_distance_m"]:gait[field]=lerpf(float(_previous_gait_state[field]),float(_physics_gait_state[field]),clampf(fraction,0.,1.))
+			_avatar_root.set_meta("render_gait_state",gait)
+			var pelvis:=_avatar_root.get("_pelvis") as Node3D
+			pelvis.position.y=float(_avatar_root.get_script().get_script_constant_map().HIP_Y)+float(_avatar_root.call("gait_support_wave",gait.stride_phase,gait._run_weight,gait.walk_weight))
+			if String(_avatar_root.get("state")) in ["walk","run"] or float(gait.walk_weight)>.001:
+				for side: String in ["Left","Right"]:
+					var point: Vector3=_avatar_root.call("sample_gait_foot",side,float(gait.stride_phase)+(PI if side=="Right" else 0.),float(gait._run_weight),float(gait.walk_weight),float(gait._stance_fraction),float(gait._cycle_distance_m))
+					goals[side]=_avatar_proxy.global_transform*point
+				_avatar_root.set_meta("render_gait_foot_goals_world",goals)
 
 func _publish_avatar_pose(pose: Transform3D) -> void:
 	if is_instance_valid(_avatar_proxy) and is_instance_valid(_avatar_root):
@@ -289,6 +328,12 @@ func _solve_pose(delta: float, physics_step: bool) -> void:
 	if is_instance_valid(_avatar_root):_physics_avatar_pose=_avatar_root.global_transform
 	# The local limb poses need the same rendered time as their root. Fixed
 	# eating/weights/shower props instead retain current physical hand contact.
+	if not physics_step:
+		# A paused portal/menu snap may carry an old displayed root offset.
+		# Keep freshly authored activity joints, reset only that root before
+		# collapsing the new world-space contact history.
+		if is_instance_valid(_avatar_proxy):_avatar_proxy.transform=Transform3D.IDENTITY
+		if is_instance_valid(_avatar_root):_avatar_root.remove_meta("render_gait_foot_goals_world");_avatar_root.remove_meta("render_gait_state")
 	_capture_joint_poses(not _transition_clear or _facility_mode)
 	# Live activity props use current physical hand positions. A fixed user
 	# keeps that pose while the camera can still orbit normally.

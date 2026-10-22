@@ -1,0 +1,35 @@
+{
+  "task": "EXP30_FROZEN_BASELINE_REPLAY_SMOKE",
+  "executor_returncode": 1,
+  "executor_returncode_evidence": "Observed tools.write_stdin completion exit_code1 for this exact engine process. This is expected because old gait fails new design criteria.",
+  "executor_wall_time_seconds": null,
+  "expected_result": "FAIL",
+  "observed_result": "FAIL",
+  "summary": {
+    "checks": 29,
+    "failed": 7
+  },
+  "report": "data/reports/human_gait/20261022/metrics_replay_male07.json",
+  "report_sha256": "0199c0a5bcb780f2b85d5fb99093a78caad8fdb11145eb5e1599ad26bd825a55",
+  "raw_logs": {
+    "data/reports/human_gait/20261022/metrics_replay_male07.log": "d979fd076ec13919062bfb33cb6c787bdd10025aeb7c6ec44a3a42f1262567e6",
+    "data/reports/human_gait/20261022/metrics_replay_male07.console.log": "61f2eddfc9c18d131164107c542a215eb800a71ba166268713aab8f9bccc21de"
+  },
+  "script_errors": false,
+  "source_sha256": {
+    "res://../data/reports/human_gait/20261022/source_snapshots/exploration_avatar.before_bob.gd.txt": "e0fec8d493a308942d22088a9601325f1a37c163734fb7875c53222f4f38cf45",
+    "res://../data/reports/human_gait/20261022/source_snapshots/exploration_camera.before_bob.gd.txt": "af0e2a6cabc879a23c0e0882a399c33e7449536f7dcfdec942e906522aa6a67e",
+    "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_rig.before_bob.gd.txt": "a68b8181d2de8a2208e53f2fbc9143ad6b48affd9d373af132ae94c0db6928e3",
+    "res://../data/reports/human_gait/20261022/source_snapshots/textured_human_surface.before_bob.gd.txt": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a",
+    "res://../tests/game/check_human_gait_continuity.gd": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27",
+    "res://../tests/game/check_jump.gd": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984",
+    "res://../tests/game/check_stable_motion.gd": "aa71902ac07f23be80dfdbf5f04e53aca79540baeb558e9029528431ddfb0845",
+    "res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8",
+    "res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc",
+    "res://assets/vendor/microsoft_rocketbox/PROVENANCE.json": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8",
+    "res://scripts/player/free_roam_player.gd": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3"
+  },
+  "current_sources_match_recorded": true,
+  "scope": "Optional replay completed all29checks through old three human files and original d0039fe camera. Seven expected old-motion design failures; no SCRIPT/PARSE/COMPILE error. Newcurrentcontroller stays in this focusedfixture, so this is not a wholeoldbuild reproduction.",
+  "recorded_at_utc": "2026-10-22T11:18:32.776038+00:00"
+}

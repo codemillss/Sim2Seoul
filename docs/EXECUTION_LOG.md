@@ -981,3 +981,15 @@ EXP27 최종 배포 전에 사용자가 도로/기관/음향 재점검과 EXP28�
 root가 현재 남녀20개 위상시트 모두와 별도 대표11개 native 원본을 실제 열었다. 골반 분리/큰 찢어짐은 해결됐으나 수영복 armhole/목 경계의 각진 형상·피부톤·가까운 머리카락 카드와 몸 상하 이동은 남는다. 숫자PASS를 전체 외형 품질 또는 사용자 편안함의 수용으로 부르지 않는다. 처음숫자PASS/시각FAIL·이전카메라첫컷·옛상품명selector·menu가열린뒤UIprocess관찰전assert실패를 보존했고, 판정 기준/분모를 줄이지 않고 관련 검사를 다시 했다.
 
 일반 LaunchServices 창을 새로 열고 실제 OS Esc/걷기체험/V/W1000ms/Shift+W1000ms/D650ms/S900ms/Space/V를 보냈다. 실제 보행 위치·몸 방향 전환과 화면/현실속도HUD를 확인했으며 일반OS정점/모든시설/탈것여정을 측정한 것으로 확대하지 않는다. 저장turbo/자유탐험/해질녘JSON두개의SHA는원래와같고 대한문앞새창을열어뒀다. [기동/7PNG/원시로그](../data/reports/human_presence/20261022/normal_launch.json). runtime/의존성캐시·원본TGA는Git에넣지않고라이선스와파생자산을동봉한다. 저장인수도구의기본집계는EXP29다.
+
+
+## 2026-10-22 · EXP30: 보행 지지/표시 연속성과 도서관·풀 생활
+
+- 사용자 지시: 몸의 상하 들썩임과 뒤에서 보는 엉덩이/다리의 자연스러움을 더 다듬고, 도서관 책상 공부와 야외 풀 수영·저녁 조명·바텐더를 연결한다.
+- 원인/변경: 순간 최대 leg reach가 common pelvis/머리까지73–106mm 급하게 낮추던 구조를64위상 safe support profile과 작은 C1 높이 곡선으로 바꿨다. 실제 rest-weighted heel/toe pivot을 구해 foot basis와 ankle target을 함께 회전하고 native hip 기준 앞으로 굽는 무릎을 사용했다. 원래 local 골반/허리/허벅지 연결·본 길이·캡슐은 유지했다.
+- 실패/교정: 첫16/28mm 결과는 수치가 작아도 지지기 무릎 중앙값 약50/57도로 웅크려 보였다. heel22/toe32도·stance fraction .56/.36·발 들기와32/44.19mm 곡선을 함께 조정했다.120Hz fixed PASS 이후 실제30Hz subframe에서 profile cache의 물리/표시 원점 혼용, FK 발 arc, 미래 swing endpoint의 조기 혼합, 선형 골반 보간의 속도 단절이 드러났다. 공통 marker frame, 이전/현재 phase의 보간 후 analytic 발/골반 평가, 지면 하향 contact bias .04m/s를 적용했다. 표시 metadata는 다음 physics tick에서 제거하며 공중 중력/점프/수영은 유지했다.
+- 생활 구현: 도서관 solid-cube 책상을 실제 다리/상판/무릎 공간·좌석/열린 책/필기로 바꿔 기존 fresh-E facility study를 연결했다. E 기립·clear aisle 복귀, 메뉴 정지와 실제 skin/손/바닥을 검사했다. 첫 단일 타입 추론 파서 실패와 중앙 divider/책 겹침은 보정하고 원시 결과를 유지했다. 풀은 기존 탈의/샤워/수영/출수를 재사용하고 저녁4광원·텍스처 바텐더·무료 무알코올3종 선택/1.6초 잔 준비/E 수령을 연결했다.
+- 검증: 현재19개 engine report와 정확한 source SHA/분모/원시 로그는 [EXP30 summary](../data/reports/human_gait/20261022/summary.json)를 따른다. 총1749개는 중복 assertion 합계다. 남녀30/120Hz124개, native144위상/20sheet, 카메라197개와6종 교통/로프73개, life23/native27·기존수영27, 이동114·점프24·시설112·통합33·도시24·기하22·수영복접합71·리그804를 각각 확인했다. 카메라 첫196/197은144cap jump가2개의 실제 표시 bin에만 겹친 관측 부족이며 기준/분모를 바꾸지 않고197/197로 재검증했다.
+- 증거 경계: [숫자](../data/reports/human_gait/20261022/metrics_summary.json)·[독립 시각검토](../data/reports/human_gait/20261022/visual_review_peer.json)·[root 시각검토](../data/reports/human_gait/20261022/visual_review.json)·[일반 창 OS 입력](../data/reports/human_gait/20261022/normal_launch.json)을 구분한다. 실제 OS Esc/체험 선택/V/W/Shift+W/D/S를 확인했고 새 일반 게임을 대한문 바깥에 현실 걷기 세션으로 열어뒀다. 저장 초고속/자유탐험/해질녘 파일은 바이트까지 동일하다. OS 도서관/수영 전체 여정이나 주관적 편안함/장시간 FPS를 확인했다는 주장은 하지 않는다.
+- 보존/한계: raw 개발·거절·실패와 성공을 별도 보존한다. dev_male03은 동시 태그 충돌로 최종 선별하지 않았다. 선택형 old-gait replay는 옛 camera+3human source를 함께 동결해 정상 실행/예상7실패를 확인했다. 일부 headless CA/dummy material 및 life 종료 ObjectDB/resource 경고는 원문에 남고 script error는 현재 수용에 없다. 상체/팔의 반복, 여성 부츠의 높은 발 들기, 기존 실내 직원의 단순 외형·수영복/헤어 경계는 남는다.
+- 다음 첫 행동: 열린 새 게임에서 뒤쪽 보행을 직접 체험하고 Esc의 도서관/야외 풀 바로가기로 새 생활 기능을 이용한다. 도시 전체 실측/새 export·다른 Mac 성능은 별도다.

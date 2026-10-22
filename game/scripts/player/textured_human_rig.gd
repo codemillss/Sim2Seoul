@@ -1,4 +1,5 @@
 extends Node3D
+const GAIT_SUPPORT := preload("res://scripts/player/human_gait_support.gd")
 ## Presentation-only bridge from the retained game IK markers to a skinned
 ## human. No player pose, capsule, source joint or import rest is ever changed.
 ## Godot4 bone poses include their rest transforms; set complete local poses.
@@ -35,6 +36,10 @@ var _fit_heights: Array[Vector2]=[]
 var _fit_planar_offsets: Array[Vector3]=[]
 var _fit_diagnostics: Dictionary={}
 var _fit_neck_index:=-1
+var _sole_contacts: Dictionary={}
+var _ground_feet: Dictionary={}
+var _support_profile_cache: Dictionary={}
+var _support_base:=0.
 const MAX_CONTACT_LEAN_RADIANS:=PI*25./180.
 
 func setup(source_avatar: Node3D,imported_root: Node3D,imported_skeleton: Skeleton3D,original_head_skeleton: Skeleton3D=null) -> bool:
@@ -83,7 +88,9 @@ func setup(source_avatar: Node3D,imported_root: Node3D,imported_skeleton: Skelet
 		_corrections[side+"Hand"]=_source_reference[side+"Forearm"].basis.inverse()*hand_neutral
 		_hand_contacts[side]=_hand_contact(hand_index)
 	if is_instance_valid(reference_skeleton) and not _prepare_reference_fit():return _fail("invalid_reference_upper_body_fit")
-	_poses=_rest.duplicate();_global_poses=_rest_global.duplicate();loaded=true;sync_pose();return _finite
+	_poses=_rest.duplicate();_global_poses=_rest_global.duplicate();loaded=true
+	_sole_contacts=GAIT_SUPPORT.calibrate(self)
+	sync_pose();return _finite
 
 func _fail(reason: String) -> bool:
 	load_error=reason;loaded=false;return false
@@ -270,7 +277,8 @@ func _is_upper_body_bone(index: int) -> bool:
 	return false
 
 func _contact_hinge(angle: float) -> Transform3D:
-	var axis: Vector3=(skeleton.global_basis.inverse()*avatar.global_basis.x).normalized()
+	var marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+	var axis: Vector3=(skeleton.global_basis.inverse()*marker_frame.global_basis.x).normalized()
 	var turn:=Basis(axis,-angle);var pivot:=_global_poses[_find("Pelvis")].origin
 	return Transform3D(turn,pivot-turn*pivot)
 
@@ -311,6 +319,58 @@ func _apply_contact_lean() -> void:
 	for index: int in range(targets.size()):_poses[index]=targets[index] if _parents[index]<0 else targets[_parents[index]].affine_inverse()*targets[index]
 	_rebuild_globals()
 
+func _ground_foot(side: String) -> Dictionary:
+	var source:=_source_pose(_source_node(side+"Foot"));var foot:=_find(side+"Foot")
+	var rendered: Dictionary=avatar.get_meta("render_gait_foot_goals_world",{})
+	if rendered.has(side):source.origin=skeleton.global_transform.affine_inverse()*Vector3(rendered[side])
+	var neutral:=source.origin+Vector3(_foot_offsets[side])
+	var turn: Basis=(source.basis*_source_reference[side+"Foot"].basis.inverse()).orthonormalized()
+	var rotation:=turn.get_rotation_quaternion()
+	var marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+	var axis: Vector3=(skeleton.global_basis.inverse()*marker_frame.global_basis.x).normalized()
+	var angle:=2.*atan2(Vector3(rotation.x,rotation.y,rotation.z).dot(axis),rotation.w)
+	var gait: Dictionary=avatar.get_meta("render_gait_state",{})
+	if not gait.is_empty():angle=GAIT_SUPPORT.angle(float(gait.stride_phase)+(PI if side=="Right" else 0.),float(gait._stance_fraction),float(gait._run_weight),float(gait.walk_weight))
+	var contact: Dictionary=_sole_contacts.get("feet",{}).get(side,{})
+	return GAIT_SUPPORT.corrected_goal(neutral,_rest_global[foot].basis,contact,angle)
+
+func _cycle_support_base(pelvis: int) -> float:
+	# Fit a smooth two-step support curve once for each blended gait. All
+	# samples use the original leg lengths, measured shoe pivots and knee
+	# reserve. No temporal filter can lag behind a planted foot/reach limit.
+	var weight: float=avatar.get("walk_weight");var run: float=avatar.get("_run_weight")
+	var duty: float=avatar.get("_stance_fraction");var cycle: float=avatar.get("_cycle_distance_m")
+	var key:="%.3f_%.3f_%.3f_%.3f"%[weight,run,duty,cycle]
+	if _support_profile_cache.has(key):return float(_support_profile_cache[key])
+	# Markers and skeleton share the displayed root. Physical avatar origin
+	# would add up to a full physics step's travel to the cached reach profile.
+	var marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+	var frame:=skeleton.global_transform.affine_inverse()*marker_frame.global_transform
+	var rotation_frame:=frame.basis.orthonormalized();var result:=0.
+	for sample: int in range(64):
+		var phase:=TAU*float(sample)/64.;var feet:={}
+		for side: String in ["Left","Right"]:
+			feet[side]=avatar.call("sample_gait_foot",side,phase+(PI if side=="Right" else 0.),run,weight,duty,cycle)
+		var signed_step:=clampf((Vector3(feet.Right)-Vector3(feet.Left)).z/.65,-1.,1.)*weight
+		var turn:=rotation_frame*Basis.from_euler(Vector3(0.,deg_to_rad(3.)*signed_step,deg_to_rad(1.2)*sin(phase)*weight))*rotation_frame.inverse()
+		var wave: Vector3=frame.basis*Vector3(0.,float(avatar.call("gait_support_wave",phase,run,weight)),0.)
+		for side: String in ["Left","Right"]:
+			var thigh:=_find(side+"Thigh");var shin:=_find(side+"Shin");var foot:=_find(side+"Foot")
+			var hip:=_rest_global[pelvis].origin+turn*(_rest_global[thigh].origin-_rest_global[pelvis].origin)
+			var neutral: Vector3=frame*Vector3(feet[side])+Vector3(_foot_offsets[side])
+			var rolled: Dictionary=GAIT_SUPPORT.corrected_goal(neutral,_rest_global[foot].basis,_sole_contacts.get("feet",{}).get(side,{}),GAIT_SUPPORT.angle(phase+(PI if side=="Right" else 0.),duty,run,weight))
+			var goal: Vector3=rolled.goal
+			var a:=_rest_global[thigh].origin.distance_to(_rest_global[shin].origin);var b:=_rest_global[shin].origin.distance_to(_rest_global[foot].origin)
+			var knee:=deg_to_rad(10.)*weight
+			var reach_squared:=a*a+b*b+2.*a*b*cos(knee)
+			var horizontal:=Vector2(hip.x-goal.x,hip.z-goal.z).length_squared()
+			result=minf(result,goal.y+sqrt(maxf(.0001,reach_squared-horizontal))-hip.y-wave.y)
+	# 2mm reserve covers the finite cycle sampling and three-decimal cache key.
+	result-=.002*weight/maxf(skeleton.global_basis.get_scale().abs().x,.0001)
+	if _support_profile_cache.size()>64:_support_profile_cache.clear()
+	_support_profile_cache[key]=result
+	return result
+
 func _prepare_ground_pelvis(pelvis: int) -> void:
 	# Feet retain actual contact targets. A single pelvis displacement meets
 	# both native leg reaches, instead of pulling each hip out of its socket.
@@ -318,16 +378,19 @@ func _prepare_ground_pelvis(pelvis: int) -> void:
 	var walking: bool=String(avatar.get("state")) in ["walk","run"] or (String(avatar.get("state"))=="idle" and float(avatar.get("walk_weight"))>.001)
 	_ground_gait=walking and not _contact_mode and String(avatar.get("_activity_kind")).is_empty() and not (is_instance_valid(player) and player.get("facility_control")==true)
 	_pelvis_gait_turn=Basis.IDENTITY;_pelvis_yaw_radians=0.;_pelvis_roll_radians=0.
+	_ground_feet.clear()
 	if not _ground_gait:return
 	_pelvis_gait_turn=(_source_pose(_source_node("Pelvis")).basis*_source_reference.Pelvis.basis.inverse()).orthonormalized()
 	var source_pelvis:=_source_node("Pelvis")
 	_pelvis_yaw_radians=source_pelvis.rotation.y;_pelvis_roll_radians=source_pelvis.rotation.z
 	var initial:=_rest_global[pelvis];initial.basis=_pelvis_gait_turn*initial.basis
 	_set_global(pelvis,initial)
-	var drop:=0.
+	_support_base=_cycle_support_base(pelvis)
+	var drop:=_support_base+(_source_pose(_source_node("Pelvis")).origin-_source_pelvis_reference).y
 	for side: String in ["Left","Right"]:
 		var thigh:=_find(side+"Thigh");var shin:=_find(side+"Shin");var foot:=_find(side+"Foot")
-		var hip:=_global_poses[thigh].origin;var goal: Vector3=_source_pose(_source_node(side+"Foot")).origin+_foot_offsets[side]
+		_ground_feet[side]=_ground_foot(side)
+		var hip:=_global_poses[thigh].origin;var goal: Vector3=_ground_feet[side].goal
 		var length:=_rest_global[thigh].origin.distance_to(_rest_global[shin].origin)+_rest_global[shin].origin.distance_to(_rest_global[foot].origin)-.0002
 		var horizontal:=Vector2(hip.x-goal.x,hip.z-goal.z).length()
 		drop=minf(drop,goal.y+sqrt(maxf(.0001,length*length-horizontal*horizontal))-hip.y)
@@ -340,7 +403,7 @@ func sync_pose() -> bool:
 	_apply_reference_fit_rest()
 	var player: Variant=avatar.get("player")
 	var activity:=String(avatar.get("_activity_kind"))
-	_contact_mode=activity in ["eat","weights","cycle","rowing"] or (activity in ["","rope"] and is_instance_valid(player) and player.get("facility_control")==true)
+	_contact_mode=activity in ["eat","weights","cycle","rowing","study"] or (activity in ["","rope"] and is_instance_valid(player) and player.get("facility_control")==true)
 	var pelvis:=_find("Pelvis");var pelvis_pose:=_rest_global[pelvis]
 	_last_hip_delta=_source_pose(_source_node("Pelvis")).origin-_source_pelvis_reference
 	pelvis_pose.origin+=_last_hip_delta;_set_global(pelvis,pelvis_pose)
@@ -354,9 +417,9 @@ func sync_pose() -> bool:
 	for index: int in range(spine_bones.size()):
 		var bone:=spine_bones[index];var weight:=float(index+1)/float(spine_bones.size())
 		var spine_pose:=_global_poses[bone]
-		# The retained gait lowers only the hips to meet leg reach, while its
-		# upper body/head deliberately remain level. Do not reintroduce a head
-		# bob by blindly inheriting that pelvis displacement through the spine.
+		# Ground gait carries one connected pelvis/spine/thigh anatomy through
+		# the small smooth support wave. Non-gait activities retain the existing
+		# independent upper-body target used by fixed equipment contacts.
 		if index==0 and not _ground_gait:spine_pose.origin=_rest_global[bone].origin+(upper_pose.origin-_source_reference.UpperBody.origin)
 		spine_pose.basis=Basis(Quaternion.IDENTITY.slerp(upper_delta.get_rotation_quaternion(),weight))*_rest_global[bone].basis
 		if _ground_gait and index==0:spine_pose.basis=_pelvis_gait_turn*spine_pose.basis
@@ -369,6 +432,7 @@ func sync_pose() -> bool:
 	for side: String in ["Left","Right"]:
 		var foot:=_find(side+"Foot");var source_foot:=_source_pose(_source_node(side+"Foot"))
 		var foot_goal: Vector3=source_foot.origin+_foot_offsets[side]
+		if _ground_gait:foot_goal=_ground_feet[side].goal
 		# Rocketbox thighs are children of Spine rather than Pelvis. Restore
 		# the independent game hip displacement explicitly after stabilizing
 		# the upper body, using this model's true leg reach for the stance.
@@ -380,8 +444,13 @@ func sync_pose() -> bool:
 		if not _ground_gait:thigh_pose.origin.y=minf(thigh_pose.origin.y,foot_goal.y+sqrt(maxf(.0001,maximum_leg*maximum_leg-horizontal*horizontal)))
 		_set_global(thigh,thigh_pose)
 		var knee_hint:=_source_pose(_source_node(side+"Shin")).origin
+		if _ground_gait:
+			# The old proxy knee can lie behind a lowered native hip. Project a
+			# forward anatomical bend plane from this real hip, never that proxy.
+			var marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+			knee_hint=thigh_pose.origin+(skeleton.global_basis.inverse()*(-marker_frame.global_basis.z)).normalized()*maximum_leg*.75
 		_two_bone(side+"Thigh",side+"Shin",side+"Foot",foot_goal,knee_hint)
-		_set_rotation(foot,source_foot.basis*_corrections[side+"Foot"])
+		_set_rotation(foot,_ground_feet[side].basis if _ground_gait else source_foot.basis*_corrections[side+"Foot"])
 		_goals[side+"Foot"]={"index":foot,"target":foot_goal,"contact":Vector3.ZERO,"required":true}
 		var hand:=_find(side+"Hand");var source_hand:=_source_pose(_source_node(side+"Hand"));var source_forearm:=_source_pose(_source_node(side+"Forearm"))
 		var hand_basis: Basis=(source_forearm.basis*_corrections[side+"Hand"]).orthonormalized()

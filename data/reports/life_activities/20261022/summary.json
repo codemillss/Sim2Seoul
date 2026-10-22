@@ -1,0 +1,205 @@
+{
+  "task": "Library seated study and evening outdoor pool lounge",
+  "recorded_at_utc": "2026-10-22T11:18:46.737177+00:00",
+  "selected_headless_evidence": [
+    {
+      "actual_exit_code": 0,
+      "passed": 23,
+      "total": 23,
+      "result": "PASS",
+      "elapsed_ms": 14824,
+      "source_binding_matches_current": true,
+      "log_findings": {
+        "log": {
+          "script_errors": 0,
+          "engine_error_lines": 0,
+          "engine_warning_lines": 0
+        },
+        "console.log": {
+          "script_errors": 0,
+          "engine_error_lines": 1,
+          "engine_warning_lines": 1
+        }
+      },
+      "report": "data/reports/life_activities/20261022/library_pool_headless_final02.json",
+      "run_metadata": "data/reports/life_activities/20261022/library_pool_headless_final02.run.json"
+    },
+    {
+      "actual_exit_code": 0,
+      "passed": 27,
+      "total": 27,
+      "result": "PASS",
+      "elapsed_ms": 66523,
+      "source_binding_matches_current": true,
+      "log_findings": {
+        "log": {
+          "script_errors": 0,
+          "engine_error_lines": 0,
+          "engine_warning_lines": 0
+        },
+        "console.log": {
+          "script_errors": 0,
+          "engine_error_lines": 0,
+          "engine_warning_lines": 0
+        }
+      },
+      "report": "data/reports/life_activities/20261022/pool_preparation_headless_final01.json",
+      "run_metadata": "data/reports/life_activities/20261022/pool_preparation_headless_final01.run.json"
+    }
+  ],
+  "study_actual_skin": {
+    "actual_pelvis_world_m": [
+      644.525390625,
+      -99.4649353027344,
+      16.7009677886963
+    ],
+    "actual_sole_floor_gap_m": -0.0003662109375,
+    "floor_y_m": -100.0,
+    "rig": {
+      "bone_count": 81,
+      "contact_lean_degrees": 8.52392578125,
+      "contact_mode": true,
+      "contacts": {
+        "LeftFoot": {
+          "actual_world": [
+            644.4189453125,
+            -99.9072723388672,
+            16.4591808319092
+          ],
+          "error_m": 0.0,
+          "required_contact": true,
+          "target_world": [
+            644.4189453125,
+            -99.9072723388672,
+            16.4591808319092
+          ]
+        },
+        "LeftHand": {
+          "actual_world": [
+            644.342956542969,
+            -99.1111297607422,
+            16.1084480285645
+          ],
+          "error_m": 0.0,
+          "required_contact": true,
+          "target_world": [
+            644.342956542969,
+            -99.1111297607422,
+            16.1084480285645
+          ]
+        },
+        "RightFoot": {
+          "actual_world": [
+            644.6318359375,
+            -99.9072723388672,
+            16.4591808319092
+          ],
+          "error_m": 0.0,
+          "required_contact": true,
+          "target_world": [
+            644.6318359375,
+            -99.9072723388672,
+            16.4591808319092
+          ]
+        },
+        "RightHand": {
+          "actual_world": [
+            644.719177246094,
+            -99.1113739013672,
+            16.1077213287354
+          ],
+          "error_m": 8.9055007265415e-05,
+          "required_contact": true,
+          "target_world": [
+            644.719177246094,
+            -99.1113891601562,
+            16.1076335906982
+          ]
+        }
+      },
+      "finite_bone_poses": true,
+      "frames": 36,
+      "godot_bone_pose_includes_rest": true,
+      "ground_gait_common_pelvis": false,
+      "load_error": "",
+      "loaded": true,
+      "maximum_contact_error_m": 8.9055007265415e-05,
+      "maximum_contact_lean_degrees": 25.0,
+      "maximum_marker_gap_m": 8.9055007265415e-05,
+      "maximum_unreachable_target_clamp_m": 8.92702402711833e-05,
+      "pelvis_displacement_skeleton_m": [
+        0.0,
+        -4.41074371337891e-06,
+        0.0
+      ],
+      "pelvis_roll_degrees": 0.0,
+      "pelvis_yaw_degrees": 0.0,
+      "physics_or_source_joints_modified": false,
+      "pose_owner": "textured_human_rig_render_priority_100",
+      "source_joint_count": 11,
+      "upper_body_reference_fit": {}
+    },
+    "seat_top_world_m": [
+      644.525390625,
+      -99.4800033569336,
+      16.7009677886963
+    ],
+    "study_actual_skin_world_bounds": {
+      "position": [
+        644.281311035156,
+        -100.000366210938,
+        15.9943532943726
+      ],
+      "size": [
+        0.48760986328125,
+        1.39578247070312,
+        0.830948829650879
+      ]
+    }
+  },
+  "production_status": "Frozen; parent-owned native image review and final integration pending.",
+  "prior_attempts": [
+    {
+      "stem": "library_pool_headless_dev01",
+      "actual_exit_code": 1,
+      "selection": "invalid failed development run",
+      "reason": "Missing explicit float in library floor-height calculation caused dependency compile error; parent avatar source also changed during run. 12/14 was not acceptance."
+    },
+    {
+      "stem": "library_pool_headless_dev02",
+      "actual_exit_code": 0,
+      "selection": "superseded historical 23/23",
+      "reason": "Before explicit three-position drink selection."
+    },
+    {
+      "stem": "library_pool_headless_dev03",
+      "actual_exit_code": 0,
+      "selection": "superseded historical 23/23",
+      "reason": "Before desk central-divider correction."
+    },
+    {
+      "stem": "library_pool_headless_final01",
+      "actual_exit_code": 0,
+      "selection": "superseded fixture-teardown run 23/23",
+      "reason": "Feature checks and source binding passed; ObjectDB2/resource1 shutdown residual. Final02 preserves same runtime with explicit scene teardown."
+    }
+  ],
+  "known_boundaries": [
+    "Bartender orders/prepares/receives a visible nonalcohol cup; no drinking animation or persisted drink inventory.",
+    "Authored game desks and rooftop amenities are not surveyed real venue interiors or operating claims.",
+    "Seated display preserves the original upright native player capsule and actual floor; no physical body scaling or resize.",
+    "The existing swim implementation and changing/shower gate were reused, not duplicated.",
+    "Native image review and human comfort/sustained FPS are separate from these headless counts."
+  ],
+  "native_handoff": {
+    "fixture": "tests/game/check_library_pool_life.gd",
+    "expected_checks": 27,
+    "captures": [
+      "library_seated_study",
+      "library_stood_up",
+      "pool_evening_lights",
+      "pool_bartender_ready_drink"
+    ],
+    "status": "Parent to execute and inspect; no native windows launched by this subagent."
+  }
+}

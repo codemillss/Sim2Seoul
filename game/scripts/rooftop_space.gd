@@ -39,6 +39,20 @@ var _pool_gate_body: StaticBody3D
 var _pool_shower_water: Node3D
 var _materials: Dictionary = {}
 var _loaded := false
+var _host: Node3D
+var _pool_lights: Array[OmniLight3D]=[]
+var _glow_materials: Array[StandardMaterial3D]=[]
+var _lounge_time:="day"
+var _bar: Dictionary={}
+var _bartender: CharacterBody3D
+var _bar_cup: Node3D
+var _bar_origin:=Vector3.ZERO
+var _bar_stage:="idle"
+var _bar_elapsed:=0.
+var _bar_drinks_served:=0
+var _bar_drink_index:=0
+const BAR_DRINKS:=["유자에이드","보리차","탄산수"]
+
 
 func setup(host: Node3D, building: Dictionary) -> bool:
 	if _loaded or not is_instance_valid(host) or not is_inside_tree():return false
@@ -58,6 +72,7 @@ func setup(host: Node3D, building: Dictionary) -> bool:
 	# uses the same footprint with a proper basis, preserving front-face normals.
 	var axes := Basis(axis,Vector3.UP,axis.cross(Vector3.UP))
 	if not axes.is_finite() or absf(axes.determinant()-1.0)>.001:return false
+	_host=host
 	spec = building.duplicate(true)
 	walkable_rect = Rect2(-width*.5,-depth*.5,width,depth)
 	var plan := Transform3D(axes,Vector3(centre.x,0.0,centre.y))*AABB(Vector3(-width*.5,0.0,-depth*.5),Vector3(width,1.0,depth))
@@ -330,10 +345,79 @@ func _build_pool() -> void:
 	_box("PoolLoungeDeck",Vector3(2.8,.012,lounge_length),Vector3(lounge_x,.008,-depth*.5+1.2+lounge_length*.5),"wood")
 	_build_hotel_pool_amenities(lounge_x,point.z+basin.y*.5,long_m,short_m)
 	_build_pool_preparation(point.z+basin.y*.5)
+	_build_pool_lounge(point.z+basin.y*.5)
 	var dimensions: String="%.1f × %.1fm"%[snappedf(long_m,.1),snappedf(short_m,.1)]
 	var entry: Label3D=_sign("PoolEntrySign","계단으로 입수 · Space 물 밖 점프\n수심 1.22m · "+dimensions,Vector3(_pool_access_x,1.28,point.z+basin.y*.5+1.14),19)
 	entry.pixel_size=.0055
 	features.append_array(["flush_sunken_pool_in_raised_authored_deck","real_open_deck_cutout","large_outdoor_swimming_pool","buoyant_water_region","walk_down_pool_entry","submerged_entry_steps","continuous_access_handrails","visible_splash_and_ripples","solid_safe_pool_floor","sun_loungers","parasol","towels_and_outdoor_shower","hotel_pool_entrance","open_sky_and_city_views","human_scale_lane_tiles"])
+
+func _pool_light(name_: String,at: Vector3,color: Color,range_: float) -> void:
+	var light:=OmniLight3D.new();light.name=name_;light.position=at;light.light_color=color;light.omni_range=range_;light.light_energy=1.25;light.shadow_enabled=false;light.visible=false;add_child(light);_pool_lights.append(light)
+
+func _glowing_box(name_: String,size: Vector3,at: Vector3,color: Color) -> void:
+	var mesh:=_box(name_,size,at,"cream");var material:=StandardMaterial3D.new();material.albedo_color=color;material.emission_enabled=true;material.emission=color;material.emission_energy_multiplier=0.;mesh.material_override=material;_glow_materials.append(material)
+
+func _build_pool_lounge(pool_front: float) -> void:
+	# Stay on the existing side deck before the preparation-room fronts. The
+	# central lift corridor and every water/step/gate footprint remain clear.
+	_bar_origin=Vector3(-width*.5+2.20,0.,minf(depth*.5-5.80,pool_front+.90))
+	_box("PoolBarCounter",Vector3(.75,.98,3.0),_bar_origin+Vector3.UP*.49,"wood",true)
+	_box("PoolBarStoneTop",Vector3(.91,.07,3.14),_bar_origin+Vector3.UP*1.015,"cream")
+	_box("PoolBarRearShelf",Vector3(.25,1.75,2.65),Vector3(-width*.5+.50,.875,_bar_origin.z),"wood",true)
+	for index: int in range(3):
+		var z:=_bar_origin.z-.90+index*.90
+		_cylinder("PoolBarCarafe",Vector3(-width*.5+.72,1.10,z),.10,.30,"aqua" if index==2 else "cream")
+		_cylinder("PoolBarDisplayGlass",_bar_origin+Vector3(0,1.14,-.90+index*.90),.055,.17,"aqua")
+		var choice:=_sign("PoolBarDrinkChoice",String(BAR_DRINKS[index])+" · 무료\n가까이서 E 주문",_bar_origin+Vector3(.49,1.32,-.90+index*.90),15);choice.pixel_size=.0035;choice.rotation.y=PI*.5
+	var sign:=_sign("PoolBarMenu","POOL BAR · 무알코올
+유자에이드 · 보리차 · 탄산수
+E · 주문 / 준비된 잔 받기",_bar_origin+Vector3(.48,1.75,0),19);sign.pixel_size=.0045;sign.rotation.y=PI*.5
+	var standing:=_bar_origin+Vector3(.99,.08,0)
+	var drink_options: Array=[]
+	for index: int in range(BAR_DRINKS.size()):drink_options.append({"id":index,"title":BAR_DRINKS[index],"cost_game_credits":0,"use_point":frame*(standing+Vector3(0,0,-.90+index*.90))})
+	_bar={"use_point":frame*standing,"approach_point":frame*(standing+Vector3(.55,0,0)),"counter_point":frame*(_bar_origin+Vector3(.20,1.07,0)),"bartender_point":frame*(_bar_origin+Vector3(-.85,0,0)),"drinks":BAR_DRINKS.duplicate(),"nonalcoholic":true,"cost_game_credits":0,"drink_options":drink_options,"stage":"idle"}
+	_bartender=CharacterBody3D.new();_bartender.name="PoolBartender";_bartender.collision_layer=4;_bartender.collision_mask=0;_bartender.set_meta("human_model_id","Female_Adult_07");add_child(_bartender);_bartender.position=_bar_origin+Vector3(-.85,0,0);_bartender.set_physics_process(false)
+	var collider:=CollisionShape3D.new();collider.name="CollisionShape";var capsule:=CapsuleShape3D.new();capsule.height=1.70;capsule.radius=.27;collider.shape=capsule;collider.position.y=.85;_bartender.add_child(collider)
+	var visual:=Node3D.new();visual.name="Visual";_bartender.add_child(visual);var placeholder:=MeshInstance3D.new();placeholder.name="Body";placeholder.mesh=CapsuleMesh.new();visual.add_child(placeholder)
+	var avatar:=preload("res://scripts/player/exploration_avatar.gd").new();visual.add_child(avatar);avatar.setup(_bartender);avatar.set_physics_process(false);avatar._materials.jacket.albedo_color=Color(.88,.87,.78);avatar._materials.trousers.albedo_color=Color(.09,.12,.14);visual.rotation.y=-PI*.5
+	var name_tag:=_sign("PoolBartenderName","바텐더 · 무알코올 음료",_bartender.position+Vector3(0,2.,0),17);name_tag.pixel_size=.0038;name_tag.billboard=BaseMaterial3D.BILLBOARD_ENABLED
+	_bar_cup=Node3D.new();_bar_cup.name="OrderedDrink";add_child(_bar_cup)
+	var glass:=MeshInstance3D.new();glass.name="PreparedGlass";var shape:=CylinderMesh.new();shape.top_radius=.065;shape.bottom_radius=.048;shape.height=.19;shape.radial_segments=16;glass.mesh=shape;var mat:=StandardMaterial3D.new();mat.albedo_color=Color(.94,.65,.18,.90);mat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;mat.roughness=.20;glass.material_override=mat;glass.position.y=.095;_bar_cup.add_child(glass);_bar_cup.visible=false
+	for side: float in [-1.,1.]:
+		var x:=_pool_point.x+side*(_pool_rect.size.x*.5-.12)
+		_glowing_box("PoolUnderwaterLED",Vector3(.055,.12,_pool_rect.size.y-.70),Vector3(x,-.55,_pool_point.z),Color(.25,.78,.85))
+		_pool_light("PoolWaterLight",Vector3(x,1.15,_pool_point.z),Color(.41,.76,.88),9.)
+	for index: int in range(6):
+		var at:=Vector3(-width*.5+.42,.62,lerpf(-depth*.5+1.,depth*.5-3.8,float(index)/5.))
+		_box("PoolDeckBollard",Vector3(.10,.60,.10),at-Vector3.UP*.30,"steel")
+		_glowing_box("PoolDeckWarmLamp",Vector3(.13,.12,.13),at,Color(1.,.76,.42))
+	_pool_light("PoolBarWarmLight",_bar_origin+Vector3(0,2.3,0),Color(1.,.75,.43),7.)
+	_pool_light("PoolEntryWarmLight",Vector3(_pool_access_x,2.0,pool_front+1.7),Color(1.,.82,.56),7.)
+	features.append_array(["evening_pool_underwater_leds","warm_deck_and_bar_lights","textured_adult_bartender","nonalcohol_drink_order_and_collection"])
+
+func update_pool_lounge(time_id: String,active: bool,delta: float=0.) -> void:
+	_lounge_time=time_id
+	var dark:=time_id in ["evening","night"]
+	for material: StandardMaterial3D in _glow_materials:material.emission_energy_multiplier=1.4 if dark else 0.
+	for light: OmniLight3D in _pool_lights:light.visible=dark and active;light.light_energy=1.4 if time_id=="night" else 1.0
+	if _bar_stage=="preparing" and active:
+		_bar_elapsed=minf(1.6,_bar_elapsed+maxf(0.,delta));_bar_cup.position=_bar_origin+Vector3(lerpf(-.40,.20,_bar_elapsed/1.6),1.07,-.90+_bar_drink_index*.90)
+		if _bar_elapsed>=1.6:_bar_stage="ready"
+
+func pool_bar() -> Dictionary:
+	var result:=_bar.duplicate(true);result["stage"]=_bar_stage;result["elapsed_s"]=_bar_elapsed;result["served"]=_bar_drinks_served;result["drink"]=BAR_DRINKS[_bar_drink_index];result["selected_drink_index"]=_bar_drink_index;
+	if not _bar.is_empty() and _bar_stage!="idle":result["use_point"]=_bar.drink_options[_bar_drink_index].use_point
+	return result
+
+func interact_pool_bar(drink_index: int=0) -> String:
+	if _bar_stage=="preparing":return "바텐더가 잔을 준비하고 있어요."
+	if _bar_stage=="ready":
+		var drink:=String(BAR_DRINKS[_bar_drink_index]);_bar_drinks_served+=1;_bar_stage="idle";_bar_cup.visible=false;return drink+" 한 잔을 받았습니다. · 무알코올 · 무료"
+	_bar_drink_index=clampi(drink_index,0,BAR_DRINKS.size()-1)
+	_bar_stage="preparing";_bar_elapsed=0.;_bar_cup.position=_bar_origin+Vector3(-.40,1.07,-.90+_bar_drink_index*.90);_bar_cup.visible=true;return "무알코올 "+String(BAR_DRINKS[_bar_drink_index])+" 준비 중 · 1.6초"
+
+func pool_lounge_snapshot() -> Dictionary:
+	return {"time_id":_lounge_time,"active_lights":_pool_lights.filter(func(light: OmniLight3D)->bool:return light.visible).size(),"light_budget":4,"light_nodes":_pool_lights.size(),"emissive_fixture_count":_glow_materials.size(),"bar":pool_bar(),"bartender_textured":is_instance_valid(_bartender) and _bartender.get_node_or_null("Visual/ExplorationAvatar")!=null,"bar_cup_visible":is_instance_valid(_bar_cup) and _bar_cup.visible}
 
 func _build_hotel_pool_amenities(lounge_x: float, pool_front: float, long_m: float, short_m: float) -> void:
 	var gate_z: float=pool_front+2.20
@@ -522,5 +606,5 @@ func snapshot() -> Dictionary:
 		"world_bounds_position":_v(world_bounds.position),"world_bounds_size":_v(world_bounds.size),"spawn":_v(spawn_point()),"lift_point":_v(lift_point()),
 		"ceiling_unbounded":true,"open_sky_jump_space":true,"landing_validation_height_m":9.35,
 		"features":features.duplicate(),"collision_bodies":bodies.size(),"height_observations":observations.duplicate(true),
-		"pool_dimensions":pool_dimensions(),"pool_camera_point":_v(pool_camera_point()) if profile_id=="outdoor_pool" else [],"water_region":pool_water_region(),"water_effects":water_effects.snapshot() if water_effects!=null else {},"pool_entry":_v(pool_entry_point()) if profile_id=="outdoor_pool" else [],"pool_rim":_v(pool_rim_point()) if profile_id=="outdoor_pool" else [],
+		"pool_lounge":pool_lounge_snapshot(),"pool_dimensions":pool_dimensions(),"pool_camera_point":_v(pool_camera_point()) if profile_id=="outdoor_pool" else [],"water_region":pool_water_region(),"water_effects":water_effects.snapshot() if water_effects!=null else {},"pool_entry":_v(pool_entry_point()) if profile_id=="outdoor_pool" else [],"pool_rim":_v(pool_rim_point()) if profile_id=="outdoor_pool" else [],
 		"basis":"Source-positioned fictional game amenity on an inset source rectangle; observed source-top clearance is an authored offset, not a surveyed roof or factual pool/penthouse. Pool deck is authored 1.55m above the normal source-clearance deck, with four solid surround panels and a real water opening. The basin floor remains above the intact source roof; water is 0.18m below deck and 1.22m deep. No source height correction, surveyed venue amenity or full fluid simulation."}
