@@ -360,6 +360,23 @@ func _pose_pelvis_gait(feet: Dictionary) -> void:
 func gait_support_wave(phase: float,run_weight: float,weight: float) -> float:
 	return -lerpf(.016,.024,clampf(run_weight,0.,1.))*(1.+cos(phase*2.))*clampf(weight,0.,1.)
 
+func sample_upper_gait(phase: float,run_weight: float,weight: float) -> Dictionary:
+	# A smooth independent arm pendulum avoids the flat pauses made by
+	# clipping the foot's stance/swing path. The faster style bends elbows
+	# rather than making a long straight arm swing farther through the coat.
+	var amount:=clampf(weight,0.,1.);var run:=smoothstep(0.,.70,clampf(run_weight,0.,1.))
+	var torso:=Vector3(-deg_to_rad(lerpf(1.5,7.,run))*amount,-deg_to_rad(lerpf(2.5,4.,run))*cos(phase-.10)*amount,-deg_to_rad(lerpf(.4,.65,run))*sin(phase)*amount)
+	var result:={"torso":torso}
+	for side_name: String in ["Left","Right"]:
+		var side:=-1. if side_name=="Left" else 1.
+		var cycle:=phase+(PI if side>0. else 0.)
+		var swing:=-cos(cycle-.16)
+		var upper:=Vector3(-.04+(.14*run+lerpf(.28,.52,run)*swing)*amount,side*lerpf(.02,.06,run)*(.5+.5*swing)*amount,side*lerpf(.035,deg_to_rad(lerpf(5.,7.,run)),amount))
+		var elbow:=deg_to_rad(lerpf(17.+5.*swing,85.+10.*swing,run))
+		var lower:=Vector3(lerpf(.14,elbow,amount),side*.045*run*sin(cycle-.35)*amount,0.)
+		result[side_name]={"upper":upper,"lower":lower}
+	return result
+
 func _gait_foot(side: float,phase: float,reach: float,lift: float) -> Vector3:
 	return _gait_foot_with_duty(side,phase,reach,lift,_stance_fraction)
 
@@ -442,11 +459,11 @@ func _physics_process(delta: float) -> void:
 	state="air" if not grounded else ("run" if _run_weight>.45 and moving else ("walk" if moving else "idle"))
 	var reach := _cycle_distance_m*_stance_fraction*.5*walk_weight
 	var lift := lerpf(.10,.24,_run_weight)*walk_weight
-	# The limbs carry the gait. A steady head/torso removes the former
-	# four-pulses-per-stride bob (8.8Hz at turbo cadence) and lateral sway.
+	# Marker poses retain physical-time contacts. The native rig evaluates
+	# this same smooth gait at displayed time; no camera bob/roll is added.
+	var upper_gait:=sample_upper_gait(stride_phase,_run_weight,walk_weight)
 	_upper_body.position=Vector3(0,.85,0)
-	_upper_body.rotation.x=-.075*_run_weight*walk_weight-.035*_air_weight
-	_upper_body.rotation.z=0.0
+	_upper_body.rotation=Vector3(upper_gait.torso).lerp(Vector3(-.035,0.,0.),_air_weight)
 	var posed_feet:={}
 	for side_name: String in ["Left","Right"]:
 		var side := -1.0 if side_name=="Left" else 1.0
@@ -464,11 +481,10 @@ func _physics_process(delta: float) -> void:
 		var foot: Vector3=posed_feet[side_name]
 		# IK retains flat shoe soles through stance; only the swing foot lifts.
 		_feet[side_name]=foot;_leg_pose(side_name,foot)
-		var arm_swing := clampf(foot.z/maxf(reach,.001),-1.,1.)*lerpf(.32,.70,_run_weight)*walk_weight
 		var arm := _joints[side_name+"UpperArm"] as Node3D
 		var forearm := _joints[side_name+"Forearm"] as Node3D
-		arm.rotation=Vector3(lerpf(arm_swing-.04,.48,_air_weight),0,side*.035)
-		forearm.rotation=Vector3(lerpf(.14+.72*_run_weight*walk_weight,.50,_air_weight),0,0)
+		arm.rotation=Vector3(upper_gait[side_name].upper).lerp(Vector3(.48,0.,side*.035),_air_weight)
+		forearm.rotation=Vector3(upper_gait[side_name].lower).lerp(Vector3(.50,0.,0.),_air_weight)
 	_last_grounded=grounded
 	_sandbox_pose(delta)
 

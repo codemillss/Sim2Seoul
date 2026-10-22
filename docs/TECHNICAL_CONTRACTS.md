@@ -1,5 +1,13 @@
 # 공간·데이터·게임 계약
 
+## EXP31 — 상체/팔의 표시 위상과 기존 동작 우선권
+
+`exploration_avatar.gd::sample_upper_gait`는 보행 위상·run blend·이동 weight에서 상체와 양팔 자세를 순수하게 구한다. 팔 흔들림은 발 stance/swing의 clip과 분리한 연속 pendulum이며, 팔꿈치는 걷기12~22°/달리기75~95°를 사용한다. 어깨/가슴은 작은 pitch·yaw·roll을 허용하되 카메라 bob/roll은 추가하지 않는다. 아래 EXP29의 숨긴 UpperBody roll0은 이전 계약이며 EXP31에서 작은 몸 회전을 허용하도록 바뀌었다. 높이0.85m·캡슐/카메라 계약은 유지한다.
+
+native rig는 `render_gait_state`의 보간된 표시 위상에서 같은 함수를 평가한다. 첫 spine은 pelvis 회전을 유지해 thigh socket을 보존하고, 위 척추는 pelvis→chest의 절대 방향을 분배한다. 각 본에 전체 가슴 회전을 반복해서 누적하지 않는다. ground gait의 목/머리 원점은 원래 native 계층을 따르며 proxy 머리 원점을 강제로 대입하지 않는다. 머리는20% 가슴 회전과 독립 look을 따르고 팔/손 방향에는 chest turn을 한 번만 합성한다. 원래 본 길이와 어깨/목 local 연결을 유지한다.
+
+고정 시설·공부·탑승·수영 접촉은 기존 `_contact_mode` 경로를 우선한다. `_sandbox_remaining_s>0`의 타격/움찔에서는 analytic 보행 상체/팔 덮어쓰기를 중단하고 authored source pose를 유지한다. 지면의 하체 지지는 계속 유지한다. 이 표시 계산은 물리 pose/입력/카메라를 갱신하지 않는다. 현재 근거는 [EXP31 집계](../data/reports/upper_body_gait/20261022/summary.json)다.
+
 ## EXP30 — 표시 시점의 공통 골반과 발 접촉
 
 실제 인체의 native pelvis→first spine→thigh local 연결 및 원래 본 길이를 유지한다. 순간 reach의 최소값을 몸 전체 상하 궤적으로 쓰지 않고,64위상에서 실제 leg reach·10도 무릎 여유·heel/toe 목표를 만족하는 공통 support base를 구한다. 표시 위상은 이전/현재 물리 위상을 wrap-aware 보간하고, 골반 곡선은 걷기32mm/달리기 혼합 최대48mm 범위의 C1 함수로 평가한다. 캐시의 기준 프레임은 native skin과 marker의 공통 표시 parent다. 물리 actor 원점은 표시 proxy와 달라 캐시 높이에 사용하지 않는다.

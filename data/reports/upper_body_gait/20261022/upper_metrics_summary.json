@@ -1,0 +1,827 @@
+{
+  "task": "EXP31_ACTUAL_UPPER_BODY_GAIT_ACCEPTANCE",
+  "recorded_at_utc": "2026-10-22T12:55:50.997797+00:00",
+  "base_commit": "ed94b8aee89f98248cdd0cf803dcc761fd9ac853",
+  "result": "PASS",
+  "summary": {
+    "runs": 3,
+    "overlapping_assertions": 184,
+    "failed": 0
+  },
+  "exact_current_runs": [
+    {
+      "report": "data/reports/upper_body_gait/20261022/upper_final_male_hz30_03.json",
+      "report_sha256": "5fce1d041558ac6e1a1bec1b2421703bdf5522d8f9b763e92269603560cfaff3",
+      "metadata": "data/reports/upper_body_gait/20261022/upper_final_male_hz30_03.run.json",
+      "actual_returncode": 0,
+      "expected_checks": 62,
+      "physics_hz": 30,
+      "model_id": "Male_Adult_04",
+      "source_bindings_match_current": true,
+      "raw_logs": {
+        "data/reports/upper_body_gait/20261022/upper_final_male_hz30_03.log": {
+          "sha256": "32dbc72863d1a72903cba5b1869374373fc9e6eb03c5ce5a962edd32df3f11ac",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        },
+        "data/reports/upper_body_gait/20261022/upper_final_male_hz30_03.console.log": {
+          "sha256": "32dbc72863d1a72903cba5b1869374373fc9e6eb03c5ce5a962edd32df3f11ac",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        }
+      },
+      "actual_upper_body_metrics": [
+        {
+          "configured_speed_mps": 1.4,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 10.000011661924,
+              "maximum": 22.0000069868981,
+              "minimum": 11.9999953249741,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 9.99999800154563,
+              "maximum": 21.9999933265197,
+              "minimum": 11.9999953249741,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.0886092476836071,
+            "maximum": 0.0443030791321436,
+            "minimum": -0.0443061685514636,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.999784660617039,
+          "maximum_arm_angular_speed_radians_s": 2.94379010796547,
+          "maximum_neck_head_local_translation_error_m": 2.986652767594e-07,
+          "maximum_one_render_palm_change_m": 0.0110327564179897,
+          "maximum_original_arm_length_error_m": 3.87430191040039e-07,
+          "maximum_palm_speed_mps": 1.32393077015877,
+          "maximum_shoulder_clavicle_local_translation_error_m": 2.60393107498555e-07,
+          "maximum_torso_angular_speed_radians_s": 0.370579557493329,
+          "mode": "walk",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.319969430565834,
+              "maximum": 0.182449251413345,
+              "minimum": -0.137520179152489,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.319969370961189,
+              "maximum": 0.18244905769825,
+              "minimum": -0.137520313262939,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.0386104583740234,
+              "maximum": 0.767388641834259,
+              "minimum": 0.728778183460236,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.0386093854904175,
+              "maximum": 0.76738715171814,
+              "minimum": 0.728777766227722,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.965836771417431,
+            "Right": -0.965844737677896
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.996151680381987,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.175909163205358,
+            "maximum": 0.0879548926599633,
+            "minimum": -0.0879542705453943,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.0873020925712408,
+            "maximum": 0.0436487597261995,
+            "minimum": -0.0436533328450413,
+            "samples": 480
+          }
+        },
+        {
+          "configured_speed_mps": 3.5,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 19.9992310219042,
+              "maximum": 94.9994432509719,
+              "minimum": 75.0002122290677,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 19.9992788332284,
+              "maximum": 94.9998325717546,
+              "minimum": 75.0005537385262,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.104720023799599,
+            "maximum": 0.0523585182786931,
+            "minimum": -0.052361505520906,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.89837714405616,
+          "maximum_arm_angular_speed_radians_s": 9.55114513635635,
+          "maximum_neck_head_local_translation_error_m": 2.47761144425958e-07,
+          "maximum_one_render_palm_change_m": 0.0294041782617569,
+          "maximum_original_arm_length_error_m": 3.57627868652344e-07,
+          "maximum_palm_speed_mps": 3.52850139141083,
+          "maximum_shoulder_clavicle_local_translation_error_m": 2.61779851499995e-07,
+          "maximum_torso_angular_speed_radians_s": 0.969901755452156,
+          "mode": "run",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.270306013524532,
+              "maximum": 0.343676865100861,
+              "minimum": 0.0733708515763283,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.27029524743557,
+              "maximum": 0.343677222728729,
+              "minimum": 0.0733819752931595,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.351338028907776,
+              "maximum": 1.16274356842041,
+              "minimum": 0.811405539512634,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.35134094953537,
+              "maximum": 1.16274523735046,
+              "minimum": 0.811404287815094,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.844476280728862,
+            "Right": -0.846157225653012
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.915015405911573,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.244422821793511,
+            "maximum": 0.122099371848346,
+            "minimum": -0.122323449945164,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.139928335193735,
+            "maximum": 0.0699633329791134,
+            "minimum": -0.0699650022146216,
+            "samples": 480
+          }
+        }
+      ]
+    },
+    {
+      "report": "data/reports/upper_body_gait/20261022/upper_final_female_hz30_03.json",
+      "report_sha256": "47a4ac624f013036b6f8915d9db8ee682927c6f263a1e52b3149352a520d8495",
+      "metadata": "data/reports/upper_body_gait/20261022/upper_final_female_hz30_03.run.json",
+      "actual_returncode": 0,
+      "expected_checks": 62,
+      "physics_hz": 30,
+      "model_id": "Female_Adult_07",
+      "source_bindings_match_current": true,
+      "raw_logs": {
+        "data/reports/upper_body_gait/20261022/upper_final_female_hz30_03.log": {
+          "sha256": "32dbc72863d1a72903cba5b1869374373fc9e6eb03c5ce5a962edd32df3f11ac",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        },
+        "data/reports/upper_body_gait/20261022/upper_final_female_hz30_03.console.log": {
+          "sha256": "32dbc72863d1a72903cba5b1869374373fc9e6eb03c5ce5a962edd32df3f11ac",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        }
+      },
+      "actual_upper_body_metrics": [
+        {
+          "configured_speed_mps": 1.4,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 10.000011661924,
+              "maximum": 22.0000206472764,
+              "minimum": 12.0000089853524,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 10.000011661924,
+              "maximum": 22.0000206472764,
+              "minimum": 12.0000089853524,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.0886092196055728,
+            "maximum": 0.044303056106389,
+            "minimum": -0.0443061634991839,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.999787128248767,
+          "maximum_arm_angular_speed_radians_s": 2.94495642185211,
+          "maximum_neck_head_local_translation_error_m": 1.87119339285324e-07,
+          "maximum_one_render_palm_change_m": 0.0107507407665253,
+          "maximum_original_arm_length_error_m": 4.32133674621582e-07,
+          "maximum_palm_speed_mps": 1.29008889198303,
+          "maximum_shoulder_clavicle_local_translation_error_m": 3.18748635861764e-07,
+          "maximum_torso_angular_speed_radians_s": 0.370579557493329,
+          "mode": "walk",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.311563789844513,
+              "maximum": 0.140357598662376,
+              "minimum": -0.171206191182137,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.311563968658447,
+              "maximum": 0.140357464551926,
+              "minimum": -0.171206504106522,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.038037121295929,
+              "maximum": 0.856053352355957,
+              "minimum": 0.818016231060028,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.038037896156311,
+              "maximum": 0.85605388879776,
+              "minimum": 0.818015992641449,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.965638949638328,
+            "Right": -0.965615985259762
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.996151676515672,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.175909084406874,
+            "maximum": 0.0879547815835744,
+            "minimum": -0.0879543028232991,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.0873019912505052,
+            "maximum": 0.0436487565155901,
+            "minimum": -0.0436532347349152,
+            "samples": 480
+          }
+        },
+        {
+          "configured_speed_mps": 3.5,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 19.9993539653093,
+              "maximum": 94.9995115528636,
+              "minimum": 75.0001575875543,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 19.9992310219042,
+              "maximum": 94.999771100052,
+              "minimum": 75.0005400781478,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.104720005485265,
+            "maximum": 0.052358515264849,
+            "minimum": -0.0523614902204157,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.898318846656747,
+          "maximum_arm_angular_speed_radians_s": 9.55114513635635,
+          "maximum_neck_head_local_translation_error_m": 1.88251843231577e-07,
+          "maximum_one_render_palm_change_m": 0.0287253446877003,
+          "maximum_original_arm_length_error_m": 4.61935997009277e-07,
+          "maximum_palm_speed_mps": 3.44704136252403,
+          "maximum_shoulder_clavicle_local_translation_error_m": 2.70738608443418e-07,
+          "maximum_torso_angular_speed_radians_s": 0.966355539858341,
+          "mode": "run",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.262737132608891,
+              "maximum": 0.295843660831451,
+              "minimum": 0.0331065282225609,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.26272926852107,
+              "maximum": 0.295846462249756,
+              "minimum": 0.0331171937286854,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.342349827289581,
+              "maximum": 1.24654364585876,
+              "minimum": 0.904193818569183,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.34235030412674,
+              "maximum": 1.24654281139374,
+              "minimum": 0.904192507266998,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.843599205740905,
+            "Right": -0.845322943818454
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.915015423609232,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.244422897782548,
+            "maximum": 0.12209926348559,
+            "minimum": -0.122323634296958,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.13992844867104,
+            "maximum": 0.0699633027840607,
+            "minimum": -0.0699651458869791,
+            "samples": 480
+          }
+        }
+      ]
+    },
+    {
+      "report": "data/reports/upper_body_gait/20261022/upper_final_male_hz120_03.json",
+      "report_sha256": "084c237e407107073c666424aaae364116a72fb93e077d232889055b3914f6e6",
+      "metadata": "data/reports/upper_body_gait/20261022/upper_final_male_hz120_03.run.json",
+      "actual_returncode": 0,
+      "expected_checks": 60,
+      "physics_hz": 120,
+      "model_id": "Male_Adult_04",
+      "source_bindings_match_current": true,
+      "raw_logs": {
+        "data/reports/upper_body_gait/20261022/upper_final_male_hz120_03.log": {
+          "sha256": "006d0e35a9e1637e6b793f73eb29a2b4b48dfd710761589b04efacc8c0b19f4d",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        },
+        "data/reports/upper_body_gait/20261022/upper_final_male_hz120_03.console.log": {
+          "sha256": "006d0e35a9e1637e6b793f73eb29a2b4b48dfd710761589b04efacc8c0b19f4d",
+          "engine_error_lines": [
+            "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+            "ERROR: Parameter \"material\" is null."
+          ]
+        }
+      },
+      "actual_upper_body_metrics": [
+        {
+          "configured_speed_mps": 1.4,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 9.99987505814057,
+              "maximum": 21.9999523453847,
+              "minimum": 12.0000772872441,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 9.99988871851891,
+              "maximum": 21.9999386850064,
+              "minimum": 12.0000499664874,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.0886092881606669,
+            "maximum": 0.0443031239998441,
+            "minimum": -0.0443061641608228,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.999785588291657,
+          "maximum_arm_angular_speed_radians_s": 2.94379010796547,
+          "maximum_neck_head_local_translation_error_m": 2.4452995074399e-07,
+          "maximum_one_render_palm_change_m": 0.0110316341742873,
+          "maximum_original_arm_length_error_m": 3.57627868652344e-07,
+          "maximum_palm_speed_mps": 1.32379610091448,
+          "maximum_shoulder_clavicle_local_translation_error_m": 2.84002508160323e-07,
+          "maximum_torso_angular_speed_radians_s": 0.370579557493329,
+          "mode": "walk",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.319967046380043,
+              "maximum": 0.182444930076599,
+              "minimum": -0.137522116303444,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.319964051246643,
+              "maximum": 0.182449147105217,
+              "minimum": -0.137514904141426,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.0386097431182861,
+              "maximum": 0.76739490032196,
+              "minimum": 0.728785157203674,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.038609504699707,
+              "maximum": 0.767394721508026,
+              "minimum": 0.728785216808319,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.965808858150253,
+            "Right": -0.965940336010201
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.996135354888848,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.175912272096301,
+            "maximum": 0.0879562811366885,
+            "minimum": -0.0879559909596122,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.0873031596223999,
+            "maximum": 0.043650189448952,
+            "minimum": -0.043652970173448,
+            "samples": 480
+          }
+        },
+        {
+          "configured_speed_mps": 3.5,
+          "elbow_flex_degrees": {
+            "Left": {
+              "excursion": 19.9993471351201,
+              "maximum": 94.9994910622961,
+              "minimum": 75.000143927176,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 19.9993744558768,
+              "maximum": 94.9998667227004,
+              "minimum": 75.0004922668236,
+              "samples": 480
+            }
+          },
+          "finite": true,
+          "hip_yaw_range_radians": {
+            "excursion": 0.104720094324982,
+            "maximum": 0.0523585446455373,
+            "minimum": -0.0523615496794452,
+            "samples": 480
+          },
+          "left_right_palm_correlation": -0.897778334676398,
+          "maximum_arm_angular_speed_radians_s": 9.55114513635635,
+          "maximum_neck_head_local_translation_error_m": 2.24483238414543e-07,
+          "maximum_one_render_palm_change_m": 0.0293998569250107,
+          "maximum_original_arm_length_error_m": 3.87430191040039e-07,
+          "maximum_palm_speed_mps": 3.52798283100128,
+          "maximum_shoulder_clavicle_local_translation_error_m": 2.82560040994179e-07,
+          "maximum_torso_angular_speed_radians_s": 0.973435118794441,
+          "mode": "run",
+          "palm_forward_ranges_m": {
+            "Left": {
+              "excursion": 0.270306147634983,
+              "maximum": 0.343676835298538,
+              "minimum": 0.0733706876635551,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.270303286612034,
+              "maximum": 0.343677580356598,
+              "minimum": 0.0733742937445641,
+              "samples": 480
+            }
+          },
+          "palm_vertical_ranges_m": {
+            "Left": {
+              "excursion": 0.351338803768158,
+              "maximum": 1.16274750232697,
+              "minimum": 0.811408698558807,
+              "samples": 480
+            },
+            "Right": {
+              "excursion": 0.351341128349304,
+              "maximum": 1.16274762153625,
+              "minimum": 0.811406493186951,
+              "samples": 480
+            }
+          },
+          "same_side_palm_foot_forward_correlation": {
+            "Left": -0.843937631621194,
+            "Right": -0.844057374919525
+          },
+          "samples": 480,
+          "shoulder_hip_yaw_correlation": -0.913890583475058,
+          "shoulder_minus_hip_yaw_range_radians": {
+            "excursion": 0.244645168926172,
+            "maximum": 0.122321448122555,
+            "minimum": -0.122323720803617,
+            "samples": 480
+          },
+          "shoulder_yaw_range_radians": {
+            "excursion": 0.139925441095627,
+            "maximum": 0.0699601391017602,
+            "minimum": -0.0699653019938668,
+            "samples": 480
+          }
+        }
+      ]
+    }
+  ],
+  "baseline": {
+    "report": "data/reports/upper_body_gait/20261022/upper_baseline_male02.json",
+    "expected_design_failures": 8,
+    "actual_returncode": 1,
+    "checks": 62,
+    "passed": 54,
+    "scope": "Original-source observed baseline. Sourcebindingsstable, rawlogs and4originalhuman/camerasources plusfixture frozen. Newupperbody designcriteria failasexpected, notcurrentacceptance.",
+    "findings": [
+      "Shoulder yaw range nearly zero despite 0.329m/0.556m palm swing.",
+      "Elbows remain essentially8.021degrees walking/39.45degrees running with less0.003degree variation.",
+      "Head localtranslation reaches5.15mmwalking/19.21mmrunning relativeimportedparent connection."
+    ]
+  },
+  "predeclared_project_design_limits": {
+    "palm_forward_excursion_min_m": {
+      "walk": 0.12,
+      "run": 0.2
+    },
+    "shoulder_yaw_excursion_degrees": [
+      2,
+      25
+    ],
+    "shoulder_hip_relative_yaw_excursion_min_degrees": 2,
+    "elbow_flexion_range_degrees": {
+      "walk": [
+        5,
+        105
+      ],
+      "run": [
+        45,
+        130
+      ]
+    },
+    "elbow_variation_min_degrees": 3,
+    "native_arm_length_and_shoulder_connection_max_error_m": 2e-05,
+    "neck_head_local_connection_max_error_m": 0.0005,
+    "steady_arm_angular_speed_max_radians_s": {
+      "walk": 12,
+      "run": 18
+    },
+    "steady_torso_angular_speed_max_radians_s": 4,
+    "scope": "Project pose-design guards, not measuredhumanbiomechanics standards or proof of naturalness."
+  },
+  "current_findings": [
+    "Shoulder yaw about5degrees walk/8degrees run peak-to-peak.",
+    "Elbows vary12..22degrees walk/75..95degrees run; arms oppose same-sideleg motion.",
+    "Actual male palmfore-aft range about0.320mwalking/0.270mrunning; female0.312m/0.263m.",
+    "Actual neck/headlocaltranslation errorbelow0.0003mm; originalarm lengths/clavicleorigins retained.",
+    "Inheritedactual pelvis/sole/camera checks and actual Inputstart/stop pass."
+  ],
+  "limitations": [
+    "Numericacceptance only. Nativepixel/OSinput/subjectivecomfort remain separate.",
+    "Headlessfixedfps acceleratesengine simulation and isnot measurednativeperformance.",
+    "The three current upper-body runs overlap. Their 184 assertions are not 184 unique requirements. The separate stable-motion regression retains 44 assertions.",
+    "Headlessdummy material-is-null cleanup diagnostic preserved in rawlogs; no selectedSCRIPT/PARSEerrors.",
+    "Baseline01 used relative logpath and showed sandboxpath/CA diagnostics; baseline02 withabsolutelog is selectedcomparison."
+  ],
+  "revision_history": {
+    "pre_action_gate_summary": "data/reports/upper_body_gait/20261022/upper_metrics_summary.before_action_gate.json",
+    "reason": "Existing authored punch/flinch pose ownership guard changed production source after firstnumericpass. Samecriteria repeated on currentfrozenproduction.",
+    "pre_stable_contract_summary": "data/reports/upper_body_gait/20261022/upper_metrics_summary.before_stable_contract.json",
+    "stable_contract_reason": "The legacy stable-motion fixture required exact-zero hidden torso roll, superseded by EXP31 small anatomical body roll. Its assertion and scope now independently bound roll <= 0.7 degrees without removing or reducing any check. The same upper numerical criteria were rerun on the new complete source bindings."
+  },
+  "legacy_stable_motion_regression": {
+    "report": "data/reports/upper_body_gait/20261022/regression/stable_motion_headless_final01.json",
+    "report_sha256": "846c6cdf74a7f4f692084c08fc76ebd60a6ce1c691e69533f70e045e794097fb",
+    "metadata": "data/reports/upper_body_gait/20261022/regression/stable_motion_headless_final01.run.json",
+    "actual_returncode": 0,
+    "summary": {
+      "checks": 44,
+      "failed": 0
+    },
+    "physics_hz": 60,
+    "source_bindings_match_current": true,
+    "raw_logs": {
+      "data/reports/upper_body_gait/20261022/regression/stable_motion_headless_final01.log": {
+        "sha256": "91a027a4c56aa11e62b7e17837170a62740e65d768968df9b4a4b77c6f9a34ae",
+        "engine_error_lines": [
+          "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+          "ERROR: Parameter \"material\" is null."
+        ]
+      },
+      "data/reports/upper_body_gait/20261022/regression/stable_motion_headless_final01.console.log": {
+        "sha256": "91a027a4c56aa11e62b7e17837170a62740e65d768968df9b4a4b77c6f9a34ae",
+        "engine_error_lines": [
+          "ERROR: Condition \"ret != noErr\" is true. Returning: \"\"",
+          "ERROR: Parameter \"material\" is null."
+        ]
+      }
+    },
+    "contract_revision": "The old exact-zero torso roll assertion is intentionally superseded by independently bounded anatomical body roll <= 0.7 degrees. The torso marker remains at Y = 0.85 m. All 44 assertions, camera interpolation, capsule, obstruction, pause and recovery checks remain.",
+    "observed_case_metrics": [
+      {
+        "name": "30fps.walk_8_4mps",
+        "render_cap_fps": 30,
+        "physics_samples": 55,
+        "render_samples": 27,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.649718916672259,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 2.66560078898692e-07,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.13578,
+          0.37432
+        ]
+      },
+      {
+        "name": "30fps.run_21mps",
+        "render_cap_fps": 30,
+        "physics_samples": 56,
+        "render_samples": 28,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.6500002884495549,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 2.66560078898692e-07,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.0,
+          0.964400000000001
+        ]
+      },
+      {
+        "name": "30fps.jump_3m",
+        "render_cap_fps": 30,
+        "physics_samples": 56,
+        "render_samples": 28,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.09736419320607943,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 3.37174782316652e-07,
+        "maximum_independent_render_anchor_error_m": 0.0,
+        "render_fraction_range": [
+          0.898960000000002,
+          0.964400000000001
+        ]
+      },
+      {
+        "name": "60fps.walk_8_4mps",
+        "render_cap_fps": 60,
+        "physics_samples": 55,
+        "render_samples": 55,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.6494156669452833,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 2.66560078898692e-07,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.378720000000003,
+          0.413100000000003
+        ]
+      },
+      {
+        "name": "60fps.run_21mps",
+        "render_cap_fps": 60,
+        "physics_samples": 56,
+        "render_samples": 56,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.6500049842046054,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 2.66560078898692e-07,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.376940000000003,
+          0.378720000000003
+        ]
+      },
+      {
+        "name": "60fps.jump_3m",
+        "render_cap_fps": 60,
+        "physics_samples": 56,
+        "render_samples": 56,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.04837448129128475,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 3.37174782316652e-07,
+        "maximum_independent_render_anchor_error_m": 0.0,
+        "render_fraction_range": [
+          0.370360000000004,
+          0.376940000000003
+        ]
+      },
+      {
+        "name": "144fps.walk_8_4mps",
+        "render_cap_fps": 144,
+        "physics_samples": 55,
+        "render_samples": 128,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.6496593659604313,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 7.86781311035156e-06,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.0,
+          0.982433333333342
+        ]
+      },
+      {
+        "name": "144fps.run_21mps",
+        "render_cap_fps": 144,
+        "physics_samples": 56,
+        "render_samples": 134,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.6498500242878098,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 7.86781311035156e-06,
+        "maximum_independent_render_anchor_error_m": 5.82076609134674e-11,
+        "render_fraction_range": [
+          0.0,
+          0.916666666666667
+        ]
+      },
+      {
+        "name": "144fps.jump_3m",
+        "render_cap_fps": 144,
+        "physics_samples": 56,
+        "render_samples": 134,
+        "torso_y_range_m": [
+          0.850000023841858,
+          0.850000023841858
+        ],
+        "maximum_torso_roll_degrees": 0.07333041837335104,
+        "body_roll_limit_degrees": 0.7,
+        "maximum_camera_avatar_relative_error_m": 7.8714247138123e-06,
+        "maximum_independent_render_anchor_error_m": 0.0,
+        "render_fraction_range": [
+          4.68375338513738e-16,
+          0.916666666666668
+        ]
+      }
+    ]
+  }
+}

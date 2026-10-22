@@ -410,6 +410,15 @@ func sync_pose() -> bool:
 	_prepare_ground_pelvis(pelvis)
 	var upper_pose:=_source_pose(_source_node("UpperBody"))
 	var upper_delta: Basis=(upper_pose.basis*_source_reference.UpperBody.basis.inverse()).orthonormalized()
+	var upper_gait: Dictionary={};var marker_basis:=Basis.IDENTITY
+	var authored_action:=float(avatar.get("_sandbox_remaining_s"))>0.
+	if _ground_gait and not authored_action:
+		var gait: Dictionary=avatar.get_meta("render_gait_state",{})
+		if not gait.is_empty():
+			upper_gait=avatar.call("sample_upper_gait",float(gait.stride_phase),float(gait._run_weight),float(gait.walk_weight))
+			var marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+			marker_basis=(skeleton.global_basis.inverse()*marker_frame.global_basis).orthonormalized()
+			upper_delta=marker_basis*Basis.from_euler(Vector3(upper_gait.torso))*marker_basis.inverse()
 	var spine_bones: Array[int]=[]
 	for key: String in ["bip01spine","bip01spine1","bip01spine2","bip01spine3","bip01spine4"]:
 		if _bones.has(key):spine_bones.append(_bones[key])
@@ -421,13 +430,26 @@ func sync_pose() -> bool:
 		# the small smooth support wave. Non-gait activities retain the existing
 		# independent upper-body target used by fixed equipment contacts.
 		if index==0 and not _ground_gait:spine_pose.origin=_rest_global[bone].origin+(upper_pose.origin-_source_reference.UpperBody.origin)
-		spine_pose.basis=Basis(Quaternion.IDENTITY.slerp(upper_delta.get_rotation_quaternion(),weight))*_rest_global[bone].basis
-		if _ground_gait and index==0:spine_pose.basis=_pelvis_gait_turn*spine_pose.basis
+		if _ground_gait:
+			# First spine carries the thigh sockets: leave it with the pelvis.
+			# Higher absolute orientations distribute the counterturn once.
+			var twist:=0. if spine_bones.size()==1 else float(index)/float(spine_bones.size()-1)
+			spine_pose.basis=Basis(_pelvis_gait_turn.get_rotation_quaternion().slerp(upper_delta.get_rotation_quaternion(),twist))*_rest_global[bone].basis
+		else:spine_pose.basis=Basis(Quaternion.IDENTITY.slerp(upper_delta.get_rotation_quaternion(),weight))*_rest_global[bone].basis
 		_set_global(bone,spine_pose)
 	var head:=_find("Head");var head_pose:=_source_pose(_source_node("Head"))
 	var target_head:=_global_poses[head];var base_head:=_rest_global[head] if _fitted_rest_global.is_empty() else _fitted_rest_global[head]
-	target_head.origin=base_head.origin+(head_pose.origin-_source_reference.Head.origin)+(_last_hip_delta if _ground_gait else Vector3.ZERO)
-	target_head.basis=head_pose.basis*_source_reference.Head.basis.inverse()*_rest_global[head].basis;_set_global(head,target_head)
+	if _ground_gait:
+		# Keep the original neck/head connection as the chest turns. Gaze
+		# follows only a small part of that turn, plus independent NPC looks.
+		var relative_head: Basis=upper_pose.basis.inverse()*head_pose.basis
+		var reference_head: Basis=_source_reference.UpperBody.basis.inverse()*_source_reference.Head.basis
+		var look: Basis=_source_reference.UpperBody.basis*(relative_head*reference_head.inverse())*_source_reference.UpperBody.basis.inverse()
+		target_head.basis=Basis(Quaternion.IDENTITY.slerp(upper_delta.get_rotation_quaternion(),.20))*look*_rest_global[head].basis
+	else:
+		target_head.origin=base_head.origin+(head_pose.origin-_source_reference.Head.origin)
+		target_head.basis=head_pose.basis*_source_reference.Head.basis.inverse()*_rest_global[head].basis
+	_set_global(head,target_head)
 	_apply_contact_lean()
 	for side: String in ["Left","Right"]:
 		var foot:=_find(side+"Foot");var source_foot:=_source_pose(_source_node(side+"Foot"))
@@ -453,7 +475,13 @@ func sync_pose() -> bool:
 		_set_rotation(foot,_ground_feet[side].basis if _ground_gait else source_foot.basis*_corrections[side+"Foot"])
 		_goals[side+"Foot"]={"index":foot,"target":foot_goal,"contact":Vector3.ZERO,"required":true}
 		var hand:=_find(side+"Hand");var source_hand:=_source_pose(_source_node(side+"Hand"));var source_forearm:=_source_pose(_source_node(side+"Forearm"))
-		var hand_basis: Basis=(source_forearm.basis*_corrections[side+"Hand"]).orthonormalized()
+		var arm_pose: Basis=_source_pose(_source_node(side+"UpperArm")).basis
+		var forearm_pose: Basis=source_forearm.basis
+		if not upper_gait.is_empty():
+			arm_pose=marker_basis*Basis.from_euler(Vector3(upper_gait[side].upper))
+			forearm_pose=arm_pose*Basis.from_euler(Vector3(upper_gait[side].lower))
+		var chest_turn:=upper_delta if _ground_gait and not authored_action else Basis.IDENTITY
+		var hand_basis: Basis=(chest_turn*forearm_pose*_corrections[side+"Hand"]).orthonormalized()
 		var contact: Vector3=_hand_contacts[side]
 		var wrist_goal:=source_hand.origin-hand_basis*contact
 		var elbow_hint:=_source_pose(_source_node(side+"Forearm")).origin
@@ -462,8 +490,8 @@ func sync_pose() -> bool:
 			# Ordinary walking uses the real model's anatomical segment lengths,
 			# driven by the retained pose directions. The old long-arm marker is
 			# an equipment target only while actual hands hold/use something.
-			for segment: String in ["UpperArm","Forearm"]:
-				var semantic:=side+segment;_set_rotation(_find(semantic),_source_pose(_source_node(semantic)).basis*_corrections[semantic])
+			_set_rotation(_find(side+"UpperArm"),chest_turn*arm_pose*_corrections[side+"UpperArm"])
+			_set_rotation(_find(side+"Forearm"),chest_turn*forearm_pose*_corrections[side+"Forearm"])
 		_set_rotation(hand,hand_basis)
 		_goals[side+"Hand"]={"index":hand,"target":source_hand.origin,"contact":contact,"required":_contact_mode}
 	_finite=true

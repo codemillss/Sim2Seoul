@@ -1,6 +1,8 @@
 extends "res://../tests/game/check_jump.gd"
 ## Focused metre fixture: production player, avatar and camera, 60Hz physics
 ## against independent 30/60/144Hz late-process observations. No city/UI writes.
+## The torso marker keeps its height; small anatomical body roll is allowed
+## independently of the camera, whose interpolation and safety contract stays fixed.
 class LateRecorder extends Node:
 	var test
 	func _physics_process(delta: float) -> void:test._observe_physics(delta)
@@ -116,13 +118,13 @@ func _case(title: String,actions: Array,ticks := 60) -> void:
 	for row: Dictionary in render_rows:
 		relative_error=maxf(relative_error,row.camera_avatar_relative_error_m);anchor_error=maxf(anchor_error,row.anchor_error_m);raw_error=maxf(raw_error,row.raw_Visual_physics_error_m)
 		fmin=minf(fmin,row.fraction);fmax=maxf(fmax,row.fraction);proxies=proxies and row.proxy_exists
-	var evidence:={"name":title,"render_cap_fps":Engine.max_fps,"physics_samples":physics_rows.size(),"render_samples":render_rows.size(),"torso_y_range_m":[min_y,max_y],"maximum_torso_roll_radians":max_roll,"arm_range_radians":max_arm-min_arm,"leg_range_radians":max_leg-min_leg,"maximum_camera_avatar_relative_error_m":relative_error,"maximum_independent_render_anchor_error_m":anchor_error,"maximum_raw_Visual_physics_error_m":raw_error,"render_fraction_range":[fmin,fmax],"physical_rows":physics_rows,"render_rows":render_rows}
+	var evidence:={"name":title,"render_cap_fps":Engine.max_fps,"physics_samples":physics_rows.size(),"render_samples":render_rows.size(),"torso_y_range_m":[min_y,max_y],"maximum_torso_roll_radians":max_roll,"body_roll_limit_degrees":.7,"arm_range_radians":max_arm-min_arm,"leg_range_radians":max_leg-min_leg,"maximum_camera_avatar_relative_error_m":relative_error,"maximum_independent_render_anchor_error_m":anchor_error,"maximum_raw_Visual_physics_error_m":raw_error,"render_fraction_range":[fmin,fmax],"physical_rows":physics_rows,"render_rows":render_rows}
 	records.append(evidence)
-	_check(title+".torso_has_no_walk_run_or_jump_bob_and_roll",physics_rows.size()>30 and absf(min_y-.85)<.00001 and absf(max_y-.85)<.00001 and max_roll<.00001,evidence)
+	_check(title+".torso_marker_height_is_fixed_and_body_roll_is_small",physics_rows.size()>30 and absf(min_y-.85)<.00001 and absf(max_y-.85)<.00001 and max_roll<=deg_to_rad(.7),evidence)
 	_check(title+".camera_and_visible_body_share_render_fraction",render_rows.size()>=10 and proxies and relative_error<.002 and anchor_error<.002,evidence)
 	_check(title+".physics_roots_remain_unmodified_and_no_recovery",raw_error<.0001 and player.recoveries==recovery_before and _capsule()==initial_capsule,{"maximum_Visual_error_m":raw_error,"recovery_delta":player.recoveries-recovery_before})
 	if "jump" not in actions:
-		_check(title+".limbs_still_animate_while_torso_stays_level",max_arm-min_arm>.1 and max_leg-min_leg>.1,{"arm_range":max_arm-min_arm,"leg_range":max_leg-min_leg})
+		_check(title+".limbs_animate_with_stable_torso_marker_height",max_arm-min_arm>.1 and max_leg-min_leg>.1,{"arm_range":max_arm-min_arm,"leg_range":max_leg-min_leg})
 	if Engine.max_fps==144:_check(title+".subphysics_render_fractions_are_exercised",fmax-fmin>.5,{"minimum_fraction":fmin,"maximum_fraction":fmax,"samples":render_rows.size()})
 
 func _overlaps(point: Vector3) -> bool:
@@ -173,7 +175,7 @@ func _finish() -> void:
 	var failed:=0
 	for check in checks:
 		if not check.passed:failed+=1
-	var result:={"task":"stable_motion","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"physics_hz":Engine.physics_ticks_per_second,"source_sha256":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"cases":records,"scope":"Synthetic flat metre fixture with actual latest production player, articulated avatar and exploration camera. Real Input actions drive walk8.4/run21/jump3m. A late-priority recorder observes actual physics state and actual camera/render-proxy transforms at 30/60/144 render caps with 60Hz physics. Torso local Y/roll, independent interpolation expectation, fixed camera/avatar relative offset, retained capsule, obstruction, pause and recovery are checked quantitatively. Explicit scenario placements/recovery fault are test-only. Headless process-frame observations are not native GPU image quality, human perceived comfort, all city camera angles or performance acceptance."}
+	var result:={"task":"stable_motion","result":"PASS" if failed==0 else "FAIL","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"started_at_local":started_at,"finished_at_local":Time.get_datetime_string_from_system(),"physics_hz":Engine.physics_ticks_per_second,"source_sha256":source_hashes,"summary":{"checks":checks.size(),"failed":failed},"checks":checks,"cases":records,"scope":"Synthetic flat metre fixture with actual latest production player, articulated avatar and exploration camera. Real Input actions drive walk8.4/run21/jump3m. A late-priority recorder observes actual physics state and actual camera/render-proxy transforms at 30/60/144 render caps with 60Hz physics. Fixed torso-marker local Y and independently bounded body roll (at most 0.7 degrees), independent interpolation expectation, fixed camera/avatar relative offset, retained capsule, obstruction, pause and recovery are checked quantitatively. Explicit scenario placements/recovery fault are test-only. Headless process-frame observations are not native GPU image quality, human perceived comfort, all city camera angles or performance acceptance."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file!=null:file.store_string(JSON.stringify(_json(result),"\t")+"\n");file.close()
 	else:failed+=1;push_error("Could not save stable motion report")

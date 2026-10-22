@@ -1,12 +1,18 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: 2026-10-22 EXP30 보행 지지·도서관 공부·야외 풀
+## 현재 인수: 2026-10-22 EXP31 상체·팔 보행
+
+[WORK_STATUS](WORK_STATUS.md)·[EXP31 summary](../data/reports/upper_body_gait/20261022/summary.json)·[구현/조작](HUMAN_GAIT_AND_LIFE.md)을 먼저 읽는다. 새로운 의존성/자산은 없다. 작은 가슴/어깨 회전과 팔꿈치 굽힘을 표시 위상에 맞추고, 첫 척추와 thigh socket은 골반을 따른다. 원래 목/머리 local 연결과 본 길이를 유지한다. 고정 접촉과 authored 타격/움찔이 보행 팔보다 우선한다.
+
+새 fixture는 `tests/game/check_human_upper_gait.gd`와 `tests/game/check_human_authored_actions.gd`다. 정확한 실행 인수는 집계가 선별한 `.run.json`을 따른다. `human_gait native`는 실제 남녀144PNG를 만든다. 현재 저장 무결성 기본 manifest는 EXP31이며 `--prepared`는 네 생성 입력까지 대조한다. 새 엔진 실행·픽셀 검토·일반 OS 조작·사용자 편안함은 서로 다른 증거다. 보행 체험은 세션1.4/3.5m/s이고 저장 초고속/해질녘은 보존한다. 아래 인수의 당시 기본 경로/수치는 역사 기록이다.
+
+## 이전 인수: 2026-10-22 EXP30 보행 지지·도서관 공부·야외 풀
 
 [WORK_STATUS](WORK_STATUS.md), [EXP30 summary](../data/reports/human_gait/20261022/summary.json), [조작·설계·검증](HUMAN_GAIT_AND_LIFE.md)을 먼저 읽는다. 실제 표시 시점의 골반/발 접촉을 검사하며 고정120Hz PASS로 기본30Hz의 중간 프레임까지 수용하지 않는다. `human_gait_support.gd`는 실제 rest skin의 sole patch로 heel/toe pivot을 구하고, `exploration_camera.gd`는 이전/현재 물리 gait를 보간한 표시 위상과 발 목표를 렌더 전용 metadata로 전달한다. 다음 물리 tick에서는 metadata/표시 pose를 복원해 피드백하지 않는다. 공통 골반 profile 캐시는 공통 marker parent 프레임을 쓰며 현재 물리 actor 원점과 섞지 않는다.
 
 공부는 기존 facility fresh-E owner의 study 활동이다. 풀 바는 기존 pool-preparation dispatcher를 공유하고 준비 gate를 열지 않는다. Esc의 서울도서관 공부 정문, 야외 풀 해질녘 바로가기를 사용한다. 새 다운로드·의존성·원본 지도 변경은 없고 일반 실행기는 기존 준비/import를 사용한다. 저장 초고속/시간과 현재 체험 세션은 구분한다. 아래 인수와 EXP29 manifest는 과거 소스의 기록이다.
 
-## 현재 인수: 2026-10-22 EXP29 사람 시선·텍스처 인체·골반/보행
+## 이전 인수: 2026-10-22 EXP29 사람 시선·텍스처 인체·골반/보행
 
 [WORK_STATUS](WORK_STATUS.md)·[EXP29 최종 집계](../data/reports/human_presence/20261022/summary.json)를 먼저 읽는다. source Avatar/Rig/Surface는 실제81본 스킨과163본 수영 몸체를 연결하며 기존59개 외형은 숨긴 접촉 호환 기준이다. 실제 사람의 geometry를 숨긴 proxy AABB로 검증하지 않는다. 원본 본 길이·골반 연결·실제 CPU 스킨 인덱스와 앞뒤양옆 위상을 본다. 중립 목만 맞는 것으로 보행 접합까지 수용하지 않으며 표시 단계 머리 체인 동기화를 유지한다.
 
