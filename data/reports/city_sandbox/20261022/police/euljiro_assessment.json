@@ -1,0 +1,140 @@
+{
+  "task": "EXP27_EULJIRO_ROUTE_ASSESSMENT",
+  "finding": "FIX_REQUIRED_POLICE_DOMAIN_GAP",
+  "failed_integration": "data/reports/city_sandbox/20261022/car_police/arrest_headless_dev02.json",
+  "read_only_native_probe": "data/reports/city_sandbox/20261022/police/euljiro_probe.json",
+  "probe_sha256": "41f6cfdba9df3ec20cfc43776bc59fa8f5b4b1a5ad853d834a9aa144236ae272",
+  "sample_spacing_m": 0.25,
+  "public_nonprivate_membership_gap_samples": [
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.72316551208496,
+        -82.5
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -82.5
+      ]
+    },
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.68887805938721,
+        -82.75
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -82.75
+      ]
+    },
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.65459060668945,
+        -83.0
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -83.0
+      ]
+    },
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.62030339241028,
+        -83.25
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -83.25
+      ]
+    },
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.5860161781311,
+        -83.5
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -83.5
+      ]
+    },
+    {
+      "floor_node": "/root/ExploreWalk/TerrainSurface/TerrainSupport",
+      "ground": [
+        353.799987792969,
+        2.55172872543335,
+        -83.75
+      ],
+      "native_and_source_segment_from_previous": false,
+      "private": false,
+      "road": false,
+      "source_allowed": false,
+      "static_capsule_hits": [],
+      "supported": false,
+      "walk": false,
+      "xz": [
+        353.799987792969,
+        -83.75
+      ]
+    }
+  ],
+  "conclusion": "At X353.8, source walk ends aroundZ-82.3 and source drive begins aroundZ-84.0. The1.5m verge has continuous originalTerrainSupport with smooth grade and no native static capsule contacts. Police stopped because inherited rental surface membership rejected the verge, rather than a real physical barrier. This is a mismatch with the already playable original free-exploration ground.",
+  "planned_correction": "Police-only original playable-TIN non-private connector domain, retain full native support/capsule/sweeps, city bounds and source entry setback. Keep police initial postings/release markers on explicit original source walk/drive. Do not alter player/rental vehicle/source geometry permissions.",
+  "state": "CORRECTED_EXACT_PRIOR_FAILURE_ACTUAL_ENGINE_PASS",
+  "correction": "Police-only original playable-TIN non-private connector domain; complete native support/capsule/sweeps, city bounds and indexed source-entry setback retained. Police initial postings/release markers remain explicit original source walk/drive. Player/rental vehicle/source geometry permissions unchanged.",
+  "targeted_actual_acceptance": {
+    "report": "data/reports/city_sandbox/20261022/car_police/arrest_headless_euljiro_dev04.json",
+    "report_sha256": "30689311602a0cdbc7faf09f7ff285e025011c0f50f8004887df1724206c8a78",
+    "passed": 13,
+    "total": 13,
+    "case": "The identical original coverage_drive_3_car_1 natural moving initial approach and stopped XYZ354.291,1.717,-88.753. Actual physical E theft, original officer approach/catch2.30game-s, actual8s investigation and safe release. Same14cars/four officers retained; no car/officer teleport, direct capture or modified timer.",
+    "boundary": "Fresh headless engine acceptance; native14checks and pixels remain root-owned.",
+    "post_run_current_source_drift": [
+      "res://scripts/city_weather_emergency.gd"
+    ],
+    "post_run_current_scope": "Police, car takeover and host hashes match current at audit; weather changed after this run. Keep this engine snapshot intact and use fresh native acceptance for final all-input manifest."
+  }
+}

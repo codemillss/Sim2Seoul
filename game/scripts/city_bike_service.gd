@@ -210,13 +210,18 @@ func _make_station(record: Dictionary) -> bool:
 			var wheel:=_mesh(icon,"SignWheel",ring,ink,Vector3(x,-.10,face*.044));wheel.rotation.x=PI*.5
 		for line: Array in [[Vector2(-.25,-.10),Vector2(-.10,.15)],[Vector2(-.10,.15),Vector2(.05,-.10)],[Vector2(.05,-.10),Vector2(-.25,-.10)],[Vector2(-.10,.15),Vector2(.18,.15)],[Vector2(.18,.15),Vector2(.25,-.10)],[Vector2(.18,.15),Vector2(.18,.24)],[Vector2(.18,.24),Vector2(.31,.24)],[Vector2(-.17,.19),Vector2(-.02,.19)]]:
 			_tube(icon,"SignFrame",Vector3(line[0].x,line[0].y,face*.045),Vector3(line[1].x,line[1].y,face*.045),.014,ink)
+	_make_rental_body(desired,yaw,String(record.id))
+	stations.append({"id":record.id,"name":record.name,"point":desired,"node":station,"source_route":record.source_route,"panel":panel,"pictogram":icon,"certified_footprint":true})
+	return true
+
+func _make_rental_body(desired: Vector3,yaw: float,station_id: String) -> Dictionary:
 	var body:=BikeBody.new();body.name="RentalBike"+str(bikes.size()+1);body.collision_layer=4;body.collision_mask=1|2|4|8|32;body.safe_margin=.001;body.floor_snap_length=.35;body.floor_max_angle=deg_to_rad(float(design.policy.maximum_grade_degrees));add_child(body)
 	var shape:=CollisionShape3D.new();shape.name="CollisionShape";var box:=BoxShape3D.new();box.size=BOX_SIZE;shape.shape=box;shape.position.y=.95;body.add_child(shape)
 	body.global_transform=Transform3D(_pose_basis(desired,yaw),desired+Vector3.UP*.025)
 	var visual:=Node3D.new();visual.name="Visual";body.add_child(visual);var proxy:=PhysicsReset.new();proxy.name="RenderProxy";proxy.process_physics_priority=-100;visual.add_child(proxy)
-	var row: Dictionary={"body":body,"visual":visual,"proxy":proxy,"shape":shape,"station_id":record.id,"rented":false,"yaw":yaw,"wheel_phase":0.,"distance_m":0.,"previous":body.global_transform,"current":body.global_transform,"front":null,"wheels":[],"crank":null,"pedals":[],"kickstand":null}
-	_build_bike(row,proxy);bikes.append(row);stations.append({"id":record.id,"name":record.name,"point":desired,"node":station,"source_route":record.source_route,"panel":panel,"pictogram":icon,"certified_footprint":true})
-	return true
+	var row: Dictionary={"body":body,"visual":visual,"proxy":proxy,"shape":shape,"station_id":station_id,"rented":false,"yaw":yaw,"wheel_phase":0.,"distance_m":0.,"previous":body.global_transform,"current":body.global_transform,"front":null,"wheels":[],"crank":null,"pedals":[],"kickstand":null}
+	_build_bike(row,proxy);bikes.append(row)
+	return row
 
 func _build_bike(row: Dictionary,parent: Node3D) -> void:
 	var white:=_mat(Color(.91,.93,.88));var green:=_mat(Color(.26,.66,.12));var dark:=_mat(Color(.06,.075,.07));var silver:=_mat(Color(.57,.63,.62),.6);var red:=_mat(Color(.67,.025,.015));var amber:=_mat(Color(1.,.61,.12))
@@ -379,7 +384,8 @@ func _finish_collision_release() -> void:
 			if hit.collider==host.player:outside=false
 		if not outside:continue
 		body.remove_collision_exception_with(host.player);host.player.remove_collision_exception_with(body)
-		if pending.hold_control and not riding and not _other_transport_riding():
+		var custody_owner: bool=host.has_method("_sandbox_detained") and host._sandbox_detained()
+		if pending.hold_control and not riding and not _other_transport_riding() and not custody_owner:
 			host.player.set_facility_control(false);host.player.set_physics_process(bool(pending.player_physics));host.player.require_neutral_input()
 		_collision_release_pending.remove_at(index);_event("published_exit_pair_released")
 func _restore_player(delay_control:=false) -> void:

@@ -1,0 +1,127 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "exploration_error": "비와 게임119안전센터를 준비하지 못했습니다.",
+        "service_error": "119 안전센터의 원본 공공 면·도로 공간을 확보하지 못했습니다."
+      },
+      "name": "whole_production_scene_and_new_service_loaded",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "end": {
+          "res://../tests/game/check_city_weather_emergency.gd": "6f6dacad84c54972ad8aebafe3efdee52c31a1cbc454de5e21506f77fe72cbe2",
+          "res://assets/authored/fire_station_service.json": "6886758d85b9195c36894629aa0585f896c423f7abe3a6447203cd630a1456dd",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+          "res://scripts/city_weather_emergency.gd": "f8283395ecd39738dd43c3e085097c8528d18cf213f11a497510adcd9ec8c74c",
+          "res://scripts/explore_walk.gd": "6062fe030d29cebc05d41dde507bfe45ba6fcfc3bf1e0991aef8b4c6cafba7df",
+          "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+          "res://scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff"
+        },
+        "start": {
+          "res://../tests/game/check_city_weather_emergency.gd": "6f6dacad84c54972ad8aebafe3efdee52c31a1cbc454de5e21506f77fe72cbe2",
+          "res://assets/authored/fire_station_service.json": "6886758d85b9195c36894629aa0585f896c423f7abe3a6447203cd630a1456dd",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+          "res://scripts/city_weather_emergency.gd": "f8283395ecd39738dd43c3e085097c8528d18cf213f11a497510adcd9ec8c74c",
+          "res://scripts/explore_walk.gd": "6062fe030d29cebc05d41dde507bfe45ba6fcfc3bf1e0991aef8b4c6cafba7df",
+          "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+          "res://scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff"
+        }
+      },
+      "name": "source_inputs_stable_during_run",
+      "passed": true
+    }
+  ],
+  "display_server": "headless",
+  "elapsed_ms": 7307,
+  "passed": 1,
+  "physics_hz": 30,
+  "result": "FAIL",
+  "scope": "Whole production scene. Short weather/fire timer configuration explicitly labelled; physical engine/crew positions and movement are production. No real weather, fire spread, Seoul station/operations, subjective comfort or sustained performance claim.",
+  "snapshot": {
+    "blocked_ticks": 0,
+    "clock_s": 0.0,
+    "completed_returns": 0,
+    "crew_distance_m": 0.0,
+    "engine_distance_m": 0.0,
+    "engine_position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "error": "119 안전센터의 원본 공공 면·도로 공간을 확보하지 못했습니다.",
+    "events": [],
+    "facility_details": {},
+    "fire_state": "ready",
+    "firefighters": [],
+    "fires_extinguished": 0,
+    "fires_started": 0,
+    "last_block": {},
+    "loaded": false,
+    "original_actor_counts_changed": false,
+    "outdoors": true,
+    "provenance": {},
+    "rain_intensity": 0.0,
+    "rain_render_batches": 1,
+    "scope": "Authored weather, safety station and contained game fire; no actual Seoul firestation, weather feed, fire spread or emergency-route accuracy claim.",
+    "site_audit": [
+      {
+        "center": [
+          419.0,
+          0.0,
+          -72.0
+        ],
+        "rejection": "full_truck_source_support_or_native_route",
+        "source_ground_feature": "osm:way:768396101:land_area"
+      },
+      {
+        "center": [
+          411.0,
+          0.0,
+          -72.0
+        ],
+        "rejection": "full_truck_source_support_or_native_route",
+        "source_ground_feature": "osm:way:768396101:land_area"
+      },
+      {
+        "center": [
+          427.0,
+          0.0,
+          -72.0
+        ],
+        "rejection": "full_truck_source_support_or_native_route",
+        "source_ground_feature": "osm:way:768396101:land_area"
+      }
+    ],
+    "source_geometry_changed": false,
+    "visible_streaks": 0,
+    "water_seconds": 0.0,
+    "weather": "clear",
+    "weather_clock_s": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_city_weather_emergency.gd": "6f6dacad84c54972ad8aebafe3efdee52c31a1cbc454de5e21506f77fe72cbe2",
+    "res://assets/authored/fire_station_service.json": "6886758d85b9195c36894629aa0585f896c423f7abe3a6447203cd630a1456dd",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+    "res://scripts/city_weather_emergency.gd": "f8283395ecd39738dd43c3e085097c8528d18cf213f11a497510adcd9ec8c74c",
+    "res://scripts/explore_walk.gd": "6062fe030d29cebc05d41dde507bfe45ba6fcfc3bf1e0991aef8b4c6cafba7df",
+    "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+    "res://scripts/photo_atmosphere.gd": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff"
+  },
+  "task": "EXP27_FIRE_WEATHER",
+  "total": 2
+}

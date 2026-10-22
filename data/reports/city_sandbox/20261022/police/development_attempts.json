@@ -1,0 +1,50 @@
+{
+  "task": "EXP27_PUBLIC_SAFETY",
+  "date": "2026-10-22",
+  "attempts": [
+    {
+      "id": "development01",
+      "status": "FAIL_HARNESS",
+      "raw_log": "development01_harness_type_failure.log",
+      "cause": "Harness treated neighborhood traffic CharacterBody3D array as Dictionary rows. Actual scene/police setup completed; test halted before interactions. Process explicitly terminated.",
+      "fix": "Iterate original bodies directly; do not modify production actor arrays."
+    },
+    {
+      "id": "development02",
+      "status": "FAIL_HARNESS_ASSERTION",
+      "report": "development02_premature_catch_assertion.json",
+      "raw_log": "development02_premature_catch_assertion.log",
+      "cause": "Player-only start moved near a police officer already following its previous route. Assertion ran after 0.17 seconds before route refresh; catch occurred later. Test also lacked required escaped event check.",
+      "fix": "Wait bounded actual catch, then release before beginning a distinct elevated escape trial. Require real escaped_after_sixty_seconds event."
+    },
+    {
+      "id": "development03",
+      "status": "PASS_HISTORICAL",
+      "report": "development03_22of22_before_ui_cleanup.json",
+      "raw_log": "development03_22of22_before_ui_cleanup.log",
+      "scope": "22 checks on earlier production source; not current source acceptance."
+    },
+    {
+      "id": "headless_final01",
+      "status": "FAIL_HARNESS_PARSE",
+      "raw_log_created": false,
+      "console": "ERROR Could not create directory user://../data. SCRIPT ERROR Parse Error: There is already a variable named box declared in this scope. check_city_public_safety.gd:124. Failed to load script.",
+      "fix": "Use absolute Godot log/report path and rename nested test-only blocker box to wall_box. Nonzero script error detected even engine exit code0."
+    },
+    {
+      "id": "headless_final02",
+      "status": "PASS_HISTORICAL",
+      "report": "headless_final02.json",
+      "raw_log": "headless_final02.log",
+      "scope": "23 checks before incremental path jobs/visual interpolation. Max synchronous path planner 249.613ms motivated new bounded jobs. Known ambient audio shutdown resource warning remains raw."
+    },
+    {
+      "id": "headless_final03",
+      "status": "PASS_HISTORICAL_TEST_CLEANUP_ONLY",
+      "report": "headless_final03.json",
+      "raw_log": "headless_final03.log",
+      "scope": "27 behavioral checks on current production with old harness cleanup. Path chunks max2.462ms, old complete graph work distributed across ticks. Known existing ambient audio teardown warning prompted explicit audio stop/stream clear/scene free in harness."
+    }
+  ],
+  "boundary": "Historical attempts are retained verbatim and cannot substitute for the current frozen-source engine/native/OS runs."
+}

@@ -1,0 +1,73 @@
+{
+  "task": "EXP27_PUBLIC_SAFETY",
+  "status": "CURRENT_HEADLESS_28_AND_ALL16_RENTALS_88_PASS_ROOT_NATIVE_PENDING",
+  "headless_checks": {
+    "passed": 28,
+    "total": 28
+  },
+  "production_source_hashes": {
+    "res://../tests/game/check_city_public_safety.gd": "6fff50ec04015b2c3977b80edac8b1cabf371d93d99bbef29f478cfcdb07fbfc",
+    "res://assets/authored/bike_service.json": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://assets/authored/scooter_service.json": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+    "res://scripts/city_public_safety.gd": "aea74c4db5d6cd52baaa08a4f0446aa356991ca3e1b08928918956e402e5c005",
+    "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "res://scripts/explore_walk.gd": "c53af815dc3bc7760bc2f60b5f27109dafc5229e625e2812a61a9b30355074c1",
+    "res://scripts/player/exploration_avatar.gd": "28528b35b3fcd321b6e60c9d93693de2df23ef6aa7c7c119063154ab548668a7",
+    "res://scripts/traffic_car_takeover.gd": "3bb0ed920fd818a2ce3cf3b0db2b13ad30d76a3fc8db660534993af3341c70aa"
+  },
+  "implemented": {
+    "melee": "Physical F queued by root, adult humans only, 1.9m reach, front cone, static/car LOS, 0.65s cooldown, no graphic injury or original NPC relocation. Player arm swing and brief NPC flinch/feedback. Dogs excluded.",
+    "police": "Four Korean-labelled uniformed officers, original-source public walk/road/private guards, native capsule support and motion sweeps, native floor contact while posted, 60 game seconds pursuit, real near-ground pedestrian or stopped/slow-car-door catch, wall/othercar LOS blockers retained. Every initial/home/release/viewpoint placement reserves all16 rental fixtures and8m forward paths; only previously obstructing officer5 moved0.906m, three others retain original home positions.",
+    "navigation": "3m local AStar on original public walk/drive and original native-supported non-private playable-TIN connector ground, indexed .75m entry setback plus full capsule support and sweeps; incremental1.5ms/officer soft work budget per physics tick; initial posting/release remain original walk/drive; visual-only previous/current interpolation.",
+    "custody": "First caught offense8s investigation, repeated offense12s holding cell behind bars, detached labelled game-authored room, timers pause in menu, automatic safe release, saved exploration mode restored, no jail escape via shortcuts/settings.",
+    "boundaries": "Simplified fictional game rules, no real police station/procedure/location claim. No damage system, death, weapons or graphic violence; no actual policing AI/network/backend."
+  },
+  "measured_headless": {
+    "maximum_path_plan_ms": 9.159,
+    "maximum_path_job_cpu_ms": 378.94,
+    "maximum_render_anchor_error_m": 3.814697265625e-05,
+    "render_frames": 11115,
+    "actual_officer_distance_m": 391.63107171841,
+    "maximum_step_m": 0.184697687625885,
+    "catches": 2,
+    "releases": 2,
+    "public_playable_fallback_queries": 125281
+  },
+  "native_pending": "Latest source passed fresh police28 and all16 actual rental distribution88 checks. Root owns fresh nativepolice32, currentEuljiro14 and other regression acceptance. Earlier native31 and Euljiro13 snapshots are history after the precise0.906m posting correction; do not describe their full source hashes as current.",
+  "evidence": {
+    "report": {
+      "path": "data/reports/city_sandbox/20261022/police/headless_final07.json",
+      "sha256": "118abfc6872855968e89ec2cce4dd04b39a2763156fb6b4880059eb4e0384db9"
+    },
+    "rawlog": {
+      "path": "data/reports/city_sandbox/20261022/police/headless_final07.log",
+      "sha256": "b45a95398caf414f8f4898b11e8666c96284ea6cd410755438fd387e9aba88b0"
+    },
+    "history": "development_attempts.json"
+  },
+  "scope": "Current component headless result only; historical reports retained and distinctly labelled.",
+  "historical_headless_report_before_tin_fix": "data/reports/city_sandbox/20261022/police/headless_final04.json",
+  "read_only_path_diagnosis": "data/reports/city_sandbox/20261022/police/euljiro_assessment.json",
+  "current_headless_report": "data/reports/city_sandbox/20261022/police/headless_final07.json",
+  "targeted_euljiro_actual_arrest": {
+    "report": "data/reports/city_sandbox/20261022/car_police/arrest_headless_euljiro_dev04.json",
+    "report_sha256": "30689311602a0cdbc7faf09f7ff285e025011c0f50f8004887df1724206c8a78",
+    "passed": 13,
+    "total": 13,
+    "case": "The identical original coverage_drive_3_car_1 natural moving initial approach and stopped XYZ354.291,1.717,-88.753. Actual physical E theft, original officer approach/catch2.30game-s, actual8s investigation and safe release. Same14cars/four officers retained; no car/officer teleport, direct capture or modified timer.",
+    "boundary": "Fresh headless engine acceptance; native14checks and pixels remain root-owned.",
+    "post_run_current_source_drift": [
+      "res://scripts/city_weather_emergency.gd"
+    ],
+    "post_run_current_scope": "Police, car takeover and host hashes match current at audit; weather changed after this run. Keep this engine snapshot intact and use fresh native acceptance for final all-input manifest."
+  },
+  "rental_posting_clearance_fix": {
+    "path": "data/reports/city_sandbox/20261022/police/rental_posting_clearance_fix.json",
+    "sha256": "75d5adc7c5d3480da87d45df64b710797be8a6c36855b0c42fa4c60e6c547a69"
+  }
+}

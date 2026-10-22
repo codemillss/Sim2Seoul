@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "task": "EXP27_GAME_FIRE_STATION_EDGE",
+  "source_hashes": {
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2"
+  },
+  "provenance": {
+    "placement": "Authored fictional facility at the playable region eastern edge; not an actual Seoul firestation location.",
+    "source_ground_feature": "osm:way:768396101:land_area",
+    "source_ground_tags": {
+      "landuse": "grass"
+    },
+    "source_refs": [
+      {
+        "provider": "OpenStreetMap via Geofabrik",
+        "object_id": "w/768396101",
+        "file": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+        "snapshot_sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea"
+      }
+    ]
+  },
+  "facility": {
+    "title": "게임 119안전센터",
+    "width_m": 12,
+    "depth_m": 8,
+    "height_m": 6.2,
+    "candidate_centers_xz": [
+      [
+        419,
+        -72
+      ],
+      [
+        411,
+        -72
+      ],
+      [
+        427,
+        -72
+      ]
+    ],
+    "yaw_radians": 0,
+    "garage_center_local_x": -2.55,
+    "garage_depot_local_z": 0.0,
+    "garage_exit_local_z": -10.0,
+    "source_footpath_minimum_clearance_m": 2.0,
+    "authored_forecourt_local_xz": [
+      [
+        -8,
+        -11
+      ],
+      [
+        18,
+        -11
+      ],
+      [
+        18,
+        -3
+      ],
+      [
+        -8,
+        -3
+      ]
+    ],
+    "forecourt_basis": "Bounded authored connector on retained non-private native TIN between this source parcel and the existing source road/walk masks. Paint only across the old footpath; no permanent solid or original geometry edit."
+  },
+  "response": {
+    "source_road_route": "coverage_drive_3",
+    "source_feature_id": "osm:way:218923160:highway_line",
+    "source_segment": [
+      3,
+      4
+    ],
+    "outbound_road_m": 18,
+    "return_lane_offset_m": 3.0,
+    "incident_offset_south_m": 15.0,
+    "incident_candidate_delta_x_m": [
+      0,
+      -1.5,
+      1.5
+    ],
+    "crew_home_local_x": 6.5,
+    "crew_home_local_z": [
+      -6.2,
+      -7.3
+    ]
+  },
+  "scope": {
+    "original_geometry_modified": false,
+    "real_station_location_claim": false,
+    "public_access_claim": false,
+    "game_authoring_on_one_named_source_grass_parcel_only": true,
+    "existing_walk_corridors_reserved": true
+  }
+}

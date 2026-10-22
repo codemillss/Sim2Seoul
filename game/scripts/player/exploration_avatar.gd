@@ -25,6 +25,9 @@ var _joints: Dictionary = {}
 var _meshes: Array[MeshInstance3D] = []
 var _hands: Array[MeshInstance3D] = []
 var _materials: Dictionary = {}
+var _sandbox_action := ""
+var _sandbox_remaining_s := 0.0
+var _sandbox_duration_s := 0.0
 var _activity_kind := ""
 var _activity_elapsed := 0.0
 var _feet := {"Left":Vector3(-.105,STANDING_ANKLE_Y,-.025),"Right":Vector3(.105,STANDING_ANKLE_Y,-.025)}
@@ -205,6 +208,20 @@ func _gait_foot(side: float,phase: float,reach: float,lift: float) -> Vector3:
 		foot.y+=arch*arch*lift
 	return foot
 
+func play_sandbox_action(kind: String,seconds := .4) -> void:
+	if kind not in ["punch","flinch"]:return
+	_sandbox_action=kind;_sandbox_remaining_s=seconds;_sandbox_duration_s=seconds
+
+func _sandbox_pose(delta: float) -> void:
+	if _sandbox_remaining_s<=0. or _sandbox_duration_s<=0.:return
+	_sandbox_remaining_s=maxf(0.,_sandbox_remaining_s-delta)
+	var phase:=1.0-_sandbox_remaining_s/_sandbox_duration_s
+	var weight:=sin(phase*PI)
+	if _sandbox_action=="punch":
+		_arm_to("Right",Vector3(.24,1.22,-.12-.52*weight))
+		_arm_to("Left",Vector3(-.23,1.17,-.25))
+	else:_upper_body.rotation.x=.16*weight
+
 func _physics_process(delta: float) -> void:
 	if not _ready_avatar or not is_instance_valid(player) or delta<=0.0:return
 	var movement: Vector3=player.global_position-_last_position
@@ -257,6 +274,7 @@ func _physics_process(delta: float) -> void:
 		arm.rotation=Vector3(lerpf(arm_swing-.04,.48,_air_weight),0,side*.035)
 		forearm.rotation=Vector3(lerpf(.14+.45*_run_weight*walk_weight,.50,_air_weight),0,0)
 	_last_grounded=grounded
+	_sandbox_pose(delta)
 
 func snapshot() -> Dictionary:
 	var transforms := {};var feet := {};var body_bounds := AABB();var initialized := false

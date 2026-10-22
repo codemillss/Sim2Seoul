@@ -4,6 +4,46 @@ extends "res://scripts/city_bike_service.gd"
 ## differ; there is no second movement controller or external rental service.
 var maximum_deck_sole_height_error_m:=0.0
 var maximum_deck_footprint_error_m:=0.0
+var summoned_index:=-1
+var summon_count:=0
+var last_summon_point:=Vector3.INF
+
+func summon_personal_scooter() -> bool:
+	if not _context_ready() or riding or not _player_supported_for_mount() or host.player.facility_control or not _collision_release_pending.is_empty():
+		_notice="Q · 밖의 평평한 길에 서서, 타고 있던 탈것에서 내린 뒤 호출하세요.";_notice_until=_clock+4.;return false
+	var yaw: float=host.rig.yaw;var flat:=Basis(Vector3.UP,yaw);var accepted: Dictionary={}
+	var ignored: Array[RID]=[host.player.get_rid()]
+	if summoned_index>=0:ignored.append(bikes[summoned_index].body.get_rid())
+	for local: Vector3 in [Vector3(1.55,0,-1.6),Vector3(-1.55,0,-1.6),Vector3(1.9,0,.2),Vector3(-1.9,0,.2),Vector3(2.7,0,-2.),Vector3(-2.7,0,-2.),Vector3(0,0,-3.),Vector3(0,0,3.)]:
+		var requested: Vector3=host.player.global_position+flat*local;var support:=_ground(requested)
+		if support.is_empty():continue
+		var pose:=_pose_basis(support.point,yaw);var excludes: Array[RID]=ignored.duplicate();excludes.append(support.rid)
+		if is_instance_valid(host.terrain_surface.support):excludes.append(host.terrain_surface.support.get_rid())
+		if not _footprint_allowed(support.point,pose) or not _clear_box(support.point+Vector3.UP*.035,pose,excludes):continue
+		# Keep the fresh scooter visible and reachable from this exact player,
+		# without passing it through a wall between the two clear endpoints.
+		var ray:=PhysicsRayQueryParameters3D.create(host.player.global_position+Vector3.UP,support.point+Vector3.UP,1|4|8|32,excludes)
+		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():continue
+		accepted=support;break
+	if accepted.is_empty():
+		_notice="근처에 킥보드가 들어갈 빈 공공 공간이 없습니다. 조금 옮긴 뒤 Q를 눌러주세요.";_notice_until=_clock+4.;return false
+	var row: Dictionary
+	if summoned_index<0:
+		row=_make_rental_body(accepted.point,yaw,"");summoned_index=bikes.size()-1;row.summoned=true
+	else:
+		row=bikes[summoned_index];row.body.global_transform=Transform3D(_pose_basis(accepted.point,yaw),accepted.point+Vector3.UP*.025);row.body.velocity=Vector3.ZERO;row.body.reset_physics_interpolation()
+		row.previous=row.body.global_transform;row.current=row.body.global_transform;row.proxy.transform=Transform3D.IDENTITY;row.rented=false;row.station_id="";row.yaw=yaw;row.kickstand.visible=true
+		if rental_index==summoned_index:rental_index=-1
+	# A successful call replaces this session's previous scooter rental. Keep
+	# that physical scooter parked and rentable, rather than letting its old
+	# rental_index hide the newly called one from the ordinary E dispatcher.
+	if rental_index>=0:
+		bikes[rental_index].rented=false;bikes[rental_index].station_id=_near_station(bikes[rental_index].body.global_position);rental_index=-1
+	summon_count+=1;last_summon_point=row.body.global_position
+	_notice="호출 킥보드 도착 · 옆으로 다가가 E로 타세요.";_notice_until=_clock+5.;_event("personal_scooter_summoned",{"body_id":row.body.get_instance_id(),"point":last_summon_point,"reused_single_body":summon_count>1})
+	return true
+
+func summon_notice() -> String:return _notice if _clock<_notice_until else ""
 
 func _design_path() -> String:return "res://assets/authored/scooter_service.json"
 func _ride_label() -> String:return "전동 킥보드"
@@ -113,5 +153,6 @@ func snapshot() -> Dictionary:
 	data.scooter_count=bikes.size();data.scooters=[]
 	for row: Dictionary in bikes:data.scooters.append({"name":row.body.name,"position":row.body.global_position,"on_floor":row.body.is_on_floor(),"rented":row.rented,"station_id":row.station_id,"kickstand_visible":row.kickstand.visible,"distance_m":row.distance_m,"wheel_phase":row.wheel_phase,"source_allowed":_footprint_allowed(row.body.global_position,row.body.global_basis)})
 	data.maximum_deck_sole_height_error_m=maximum_deck_sole_height_error_m;data.maximum_deck_footprint_error_m=maximum_deck_footprint_error_m
+	data.summoned_index=summoned_index;data.summon_count=summon_count;data.last_summon_point=last_summon_point;data.authored_dock_inventory=design.stations.size()
 	data.scope="Authored physical electric kickboard game experience; no real service, inventory, payment or legal riding-access claim. Shared conservative bicycle collision envelope and native source/support protections."
 	return data

@@ -1,0 +1,110 @@
+{
+  "task": "EXP27_POLICE_RENTAL_POSTING_REGRESSION",
+  "status": "CORRECTED_HEADLESS_28_AND_ALL16_RENTALS_88_PASS_NATIVE_PENDING_ROOT",
+  "cause": "Naturally posted GamePoliceOfficer5 was inside SCOOTER-GAME-05 initial full-body forward path. Native contact made actual W travel stop at0.371m; this was a production obstruction, not a disposable test fixture.",
+  "fix": "Precise all16 source rental-body0.70x1.90 footprint swept8mforward, expanded by officer capsule radius0.27m+margin0.15m; sign/rack/post projections and ordinary side/rear boarding access also reserved. Original safe candidates win first; only rental-conflicting candidates get small local nudges. Sameguard chooses posts/home/release/viewpoint. Returning police cannot settle short of a safehome inside the reserved corridor; last approach remains native movement.",
+  "post_changes": [
+    {
+      "officer": "GamePoliceOfficer1",
+      "old_home": [
+        165.59489440918,
+        -0.457537621259689,
+        -100.705513000488
+      ],
+      "new_home": [
+        165.59489440918,
+        -0.457537621259689,
+        -100.705513000488
+      ],
+      "distance_m": 0.0
+    },
+    {
+      "officer": "GamePoliceOfficer3",
+      "old_home": [
+        106.23072052002,
+        -0.213236019015312,
+        -155.394714355469
+      ],
+      "new_home": [
+        106.23072052002,
+        -0.213236019015312,
+        -155.394714355469
+      ],
+      "distance_m": 0.0
+    },
+    {
+      "officer": "GamePoliceOfficer5",
+      "old_home": [
+        348.828857421875,
+        3.10151314735413,
+        -79.7129516601562
+      ],
+      "new_home": [
+        348.828857421875,
+        2.99999690055847,
+        -80.6129531860352
+      ],
+      "distance_m": 0.9057087252246254
+    },
+    {
+      "officer": "GamePoliceOfficer7",
+      "old_home": [
+        -46.4850692749023,
+        2.27864766120911,
+        55.3166656494141
+      ],
+      "new_home": [
+        -46.4850692749023,
+        2.27864766120911,
+        55.3166656494141
+      ],
+      "distance_m": 0.0
+    }
+  ],
+  "all16_guard": {
+    "extra_margin_m": 0.15,
+    "forward_clearance_m": 8.0,
+    "home_violations": [],
+    "officer_radius_m": 0.27,
+    "officers": 4,
+    "posted_violations": [],
+    "reserved_docks": 16,
+    "scope": "All original source rental fixtures, native-body forward departure and boarding access guarded during police posting/home/release/viewpoint choice. Pursuit remains physical and may temporarily occupy roads like other people."
+  },
+  "actual_previous_failing_scooter_trial": {
+    "actual_travel_m": 3.07329607009888,
+    "blocked_ticks": {},
+    "body_on_floor": true,
+    "body_retained": 1237672033386,
+    "forward_samples": 29,
+    "from": [
+      347.973693847656,
+      3.11285758018494,
+      -79.5089645385742
+    ],
+    "maximum_native_step_m": 0.125311478972435,
+    "maximum_speed_mps": 3.75925925925926,
+    "native_blocked_contact_diagnostics": [],
+    "scope": "Actual production W movement, native full box/casts and source/support checks followed by Space braking; no vehicle pose fixture.",
+    "station": "SCOOTER-GAME-05",
+    "stopped_speed_mps": 0.0,
+    "to": [
+      351.046203613281,
+      3.11145424842834,
+      -79.439453125
+    ],
+    "unsupported_forward_ticks": 0
+  },
+  "evidence": {
+    "police": {
+      "path": "data/reports/city_sandbox/20261022/police/headless_final07.json",
+      "sha256": "118abfc6872855968e89ec2cce4dd04b39a2763156fb6b4880059eb4e0384db9"
+    },
+    "all16_actual_rentals": {
+      "path": "data/reports/city_sandbox/20261022/police/distribution_post_clearance_headless02.json",
+      "sha256": "db0d63bfba893c5dc1b327ba29da4e564d469716280893cd00a03651b76a26b6"
+    }
+  },
+  "source_binding": "Police report hashes current public_safety implementation, avatar, host, vehicle controller sources and police harness; existing legacy distribution report hashes its retained source list. Combine both with frozen-source global manifest; legacy distribution does not independently hash the new police service.",
+  "boundaries": "No original actor/dock/source geometry transforms edited. Native root police32checks, all16 native rentalevaluation and current-source Euljiro catch remain root-owned. Known legacy distribution audio teardown leak warning preserved in rawlog; no SCRIPT/Parse errors."
+}

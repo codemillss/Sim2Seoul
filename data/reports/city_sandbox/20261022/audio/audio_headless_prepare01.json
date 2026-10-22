@@ -1,0 +1,220 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "assets": [
+          {
+            "kind": "engine",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.229986848287729,
+            "samples": 43328,
+            "sha256": "0d355ae061467b435b6ade3e00ad555d513b72d541e18b6eb690c0510cdf822a"
+          },
+          {
+            "kind": "diesel",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.228327249507329,
+            "samples": 43328,
+            "sha256": "48cec129018b3867f294f978680eaa7ca71654bb6da70c015877287384ede67f"
+          },
+          {
+            "kind": "tyres",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.257297946644243,
+            "samples": 43328,
+            "sha256": "bad0036bfff9c4c3d1ef29a9bba93005a23860c6a8f037481a3fd9f882cf92da"
+          },
+          {
+            "kind": "police_siren",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.373609132590785,
+            "samples": 87428,
+            "sha256": "964c106582b193740e22b65ed5f2f34f4f9a38bf03e3f0c883e1c41b1011cdd0"
+          },
+          {
+            "kind": "fire_siren",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.373625876512122,
+            "samples": 87428,
+            "sha256": "527b75e924a25379def2d47177d569a777619230de10d318bf797813be028ac0"
+          },
+          {
+            "kind": "rotor",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.117455568188551,
+            "samples": 43328,
+            "sha256": "2b3eece27192deea2ea7b33aad40eb7d144c323866ef5ad08045d9f9f2c82e3c"
+          },
+          {
+            "kind": "rain",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.168090763911426,
+            "samples": 87428,
+            "sha256": "3c8c875b6fcbae6cab27fbb9ab6b84ad7b7dadbffa684a9b553a136477dd430f"
+          },
+          {
+            "kind": "water",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.183351538641938,
+            "samples": 43328,
+            "sha256": "c8e02d00ad5470ca35462b38dc2c96e029b963219e237fe82235917f25019b97"
+          },
+          {
+            "kind": "door_air",
+            "pcm16_mono_22050": true,
+            "peak": 0.54998779296875,
+            "rms": 0.15494668721332,
+            "samples": 15435,
+            "sha256": "9e5351d69f530aa43be38f1c5658f8f322cac77c7c39fe9e26888936d729f843"
+          }
+        ]
+      },
+      "name": "nine_original_assets_have_canonical_pcm16_mono_22050_headers",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "source_only_not_mixer_acceptance": true
+      },
+      "name": "all_nine_source_signals_are_nonzero_and_unclipped",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "fire_and_police_sirens_are_different_original_signals",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "audio_error": "service missing",
+        "scene_error": "게임 경찰과 조사실을 준비하지 못했습니다."
+      },
+      "name": "whole_production_scene_and_original_sound_service_loaded",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "end": {
+          "res://../tests/game/check_city_vehicle_audio.gd": "09bd9bd96edb53b206fd56890d522824e623aedcc585de0404045f1bffeecab0",
+          "res://../tools/make_city_vehicle_audio.py": "b1fcf04a3aad448ee79f860820f4406748b6517f9886cb3f49ab2ad02e724455",
+          "res://assets/audio/city_vehicles/diesel.wav": "48cec129018b3867f294f978680eaa7ca71654bb6da70c015877287384ede67f",
+          "res://assets/audio/city_vehicles/door_air.wav": "9e5351d69f530aa43be38f1c5658f8f322cac77c7c39fe9e26888936d729f843",
+          "res://assets/audio/city_vehicles/engine.wav": "0d355ae061467b435b6ade3e00ad555d513b72d541e18b6eb690c0510cdf822a",
+          "res://assets/audio/city_vehicles/fire_siren.wav": "527b75e924a25379def2d47177d569a777619230de10d318bf797813be028ac0",
+          "res://assets/audio/city_vehicles/police_siren.wav": "964c106582b193740e22b65ed5f2f34f4f9a38bf03e3f0c883e1c41b1011cdd0",
+          "res://assets/audio/city_vehicles/provenance.json": "5a386772640b4b2c89eb518af5dfcbfceb3371d905b6d5a00b36ed4171d5863b",
+          "res://assets/audio/city_vehicles/rain.wav": "3c8c875b6fcbae6cab27fbb9ab6b84ad7b7dadbffa684a9b553a136477dd430f",
+          "res://assets/audio/city_vehicles/rotor.wav": "2b3eece27192deea2ea7b33aad40eb7d144c323866ef5ad08045d9f9f2c82e3c",
+          "res://assets/audio/city_vehicles/tyres.wav": "bad0036bfff9c4c3d1ef29a9bba93005a23860c6a8f037481a3fd9f882cf92da",
+          "res://assets/audio/city_vehicles/water.wav": "c8e02d00ad5470ca35462b38dc2c96e029b963219e237fe82235917f25019b97",
+          "res://assets/authored/fire_station_service.json": "67d1111ee05bfab9fd7fff5c0195ca85b0e3f690846de10c250c4ce87f4909c9",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://assets/authored/police_facility.json": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73",
+          "res://assets/authored/police_patrol.json": "548963564b966620cdb680e8ed4ca3bd380280c222cae1273a6ec638bb067920",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bus_service.gd": "1900e08ea6cd58d20c1648e3b11d8cdad9557319b7aecdb00a13cf1097a72e2f",
+          "res://scripts/city_helicopter_service.gd": "3f02e5109a2d2c5782afe891c2470e7cfac867ff4080c24a49a6c1ac76d5b863",
+          "res://scripts/city_police_facility.gd": "fc86ae8a534bb96ee5a25036e79a6460c4f0c1e4ac403b66daa3afbe8b80700b",
+          "res://scripts/city_police_patrol.gd": "ea7e43625692e6632835a008d9572cc089911e911b8eed9ab7da8b760d1f20c6",
+          "res://scripts/city_public_safety.gd": "8b4ad06c9dd406414296a64b6e72acfaec2359138d5f28a5e721229e905a0e92",
+          "res://scripts/city_vehicle_audio.gd": "273d4c7a5334a9160953726d139f8eff10d450a285d27b895d5386c0b69aa455",
+          "res://scripts/city_weather_emergency.gd": "f658961c560488fba7fb948d3b71e3dfa1ae3af27eac9f13b65cf959c4c1159d",
+          "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+          "res://scripts/explore_walk.gd": "e9e17e22696a8e8141695e80298769677daf3485bef9334a8f56ada9ff25ce5a",
+          "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+          "res://scripts/traffic_car_takeover.gd": "3bb0ed920fd818a2ce3cf3b0db2b13ad30d76a3fc8db660534993af3341c70aa"
+        },
+        "start": {
+          "res://../tests/game/check_city_vehicle_audio.gd": "09bd9bd96edb53b206fd56890d522824e623aedcc585de0404045f1bffeecab0",
+          "res://../tools/make_city_vehicle_audio.py": "b1fcf04a3aad448ee79f860820f4406748b6517f9886cb3f49ab2ad02e724455",
+          "res://assets/audio/city_vehicles/diesel.wav": "48cec129018b3867f294f978680eaa7ca71654bb6da70c015877287384ede67f",
+          "res://assets/audio/city_vehicles/door_air.wav": "9e5351d69f530aa43be38f1c5658f8f322cac77c7c39fe9e26888936d729f843",
+          "res://assets/audio/city_vehicles/engine.wav": "0d355ae061467b435b6ade3e00ad555d513b72d541e18b6eb690c0510cdf822a",
+          "res://assets/audio/city_vehicles/fire_siren.wav": "527b75e924a25379def2d47177d569a777619230de10d318bf797813be028ac0",
+          "res://assets/audio/city_vehicles/police_siren.wav": "964c106582b193740e22b65ed5f2f34f4f9a38bf03e3f0c883e1c41b1011cdd0",
+          "res://assets/audio/city_vehicles/provenance.json": "5a386772640b4b2c89eb518af5dfcbfceb3371d905b6d5a00b36ed4171d5863b",
+          "res://assets/audio/city_vehicles/rain.wav": "3c8c875b6fcbae6cab27fbb9ab6b84ad7b7dadbffa684a9b553a136477dd430f",
+          "res://assets/audio/city_vehicles/rotor.wav": "2b3eece27192deea2ea7b33aad40eb7d144c323866ef5ad08045d9f9f2c82e3c",
+          "res://assets/audio/city_vehicles/tyres.wav": "bad0036bfff9c4c3d1ef29a9bba93005a23860c6a8f037481a3fd9f882cf92da",
+          "res://assets/audio/city_vehicles/water.wav": "c8e02d00ad5470ca35462b38dc2c96e029b963219e237fe82235917f25019b97",
+          "res://assets/authored/fire_station_service.json": "67d1111ee05bfab9fd7fff5c0195ca85b0e3f690846de10c250c4ce87f4909c9",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://assets/authored/police_facility.json": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73",
+          "res://assets/authored/police_patrol.json": "548963564b966620cdb680e8ed4ca3bd380280c222cae1273a6ec638bb067920",
+          "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+          "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bus_service.gd": "1900e08ea6cd58d20c1648e3b11d8cdad9557319b7aecdb00a13cf1097a72e2f",
+          "res://scripts/city_helicopter_service.gd": "3f02e5109a2d2c5782afe891c2470e7cfac867ff4080c24a49a6c1ac76d5b863",
+          "res://scripts/city_police_facility.gd": "fc86ae8a534bb96ee5a25036e79a6460c4f0c1e4ac403b66daa3afbe8b80700b",
+          "res://scripts/city_police_patrol.gd": "ea7e43625692e6632835a008d9572cc089911e911b8eed9ab7da8b760d1f20c6",
+          "res://scripts/city_public_safety.gd": "8b4ad06c9dd406414296a64b6e72acfaec2359138d5f28a5e721229e905a0e92",
+          "res://scripts/city_vehicle_audio.gd": "273d4c7a5334a9160953726d139f8eff10d450a285d27b895d5386c0b69aa455",
+          "res://scripts/city_weather_emergency.gd": "f658961c560488fba7fb948d3b71e3dfa1ae3af27eac9f13b65cf959c4c1159d",
+          "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+          "res://scripts/explore_walk.gd": "e9e17e22696a8e8141695e80298769677daf3485bef9334a8f56ada9ff25ce5a",
+          "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+          "res://scripts/traffic_car_takeover.gd": "3bb0ed920fd818a2ce3cf3b0db2b13ad30d76a3fc8db660534993af3341c70aa"
+        }
+      },
+      "name": "all_audio_and_game_inputs_stable_during_run",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "elapsed_ms": 7591,
+  "output_device": "Default",
+  "passed": 4,
+  "physics_hz": 30,
+  "recordings": [],
+  "result": "FAIL",
+  "scope": "Original source signal audit plus actual production 3D mixer PCM captured to a temporary isolated proof bus. Supported player observer and identity-basis audio listener fixtures only; direct police offense report is disclosed. No vehicle/officer warp, shortened response clock, speaker acoustic measurement, actual Korean siren reconstruction, OS-keyboard, human comfort or sustained FPS claim. Headless zero signals never count as audible acceptance.",
+  "snapshot": {},
+  "source_hashes": {
+    "res://../tests/game/check_city_vehicle_audio.gd": "09bd9bd96edb53b206fd56890d522824e623aedcc585de0404045f1bffeecab0",
+    "res://../tools/make_city_vehicle_audio.py": "b1fcf04a3aad448ee79f860820f4406748b6517f9886cb3f49ab2ad02e724455",
+    "res://assets/audio/city_vehicles/diesel.wav": "48cec129018b3867f294f978680eaa7ca71654bb6da70c015877287384ede67f",
+    "res://assets/audio/city_vehicles/door_air.wav": "9e5351d69f530aa43be38f1c5658f8f322cac77c7c39fe9e26888936d729f843",
+    "res://assets/audio/city_vehicles/engine.wav": "0d355ae061467b435b6ade3e00ad555d513b72d541e18b6eb690c0510cdf822a",
+    "res://assets/audio/city_vehicles/fire_siren.wav": "527b75e924a25379def2d47177d569a777619230de10d318bf797813be028ac0",
+    "res://assets/audio/city_vehicles/police_siren.wav": "964c106582b193740e22b65ed5f2f34f4f9a38bf03e3f0c883e1c41b1011cdd0",
+    "res://assets/audio/city_vehicles/provenance.json": "5a386772640b4b2c89eb518af5dfcbfceb3371d905b6d5a00b36ed4171d5863b",
+    "res://assets/audio/city_vehicles/rain.wav": "3c8c875b6fcbae6cab27fbb9ab6b84ad7b7dadbffa684a9b553a136477dd430f",
+    "res://assets/audio/city_vehicles/rotor.wav": "2b3eece27192deea2ea7b33aad40eb7d144c323866ef5ad08045d9f9f2c82e3c",
+    "res://assets/audio/city_vehicles/tyres.wav": "bad0036bfff9c4c3d1ef29a9bba93005a23860c6a8f037481a3fd9f882cf92da",
+    "res://assets/audio/city_vehicles/water.wav": "c8e02d00ad5470ca35462b38dc2c96e029b963219e237fe82235917f25019b97",
+    "res://assets/authored/fire_station_service.json": "67d1111ee05bfab9fd7fff5c0195ca85b0e3f690846de10c250c4ce87f4909c9",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://assets/authored/police_facility.json": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73",
+    "res://assets/authored/police_patrol.json": "548963564b966620cdb680e8ed4ca3bd380280c222cae1273a6ec638bb067920",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bus_service.gd": "1900e08ea6cd58d20c1648e3b11d8cdad9557319b7aecdb00a13cf1097a72e2f",
+    "res://scripts/city_helicopter_service.gd": "3f02e5109a2d2c5782afe891c2470e7cfac867ff4080c24a49a6c1ac76d5b863",
+    "res://scripts/city_police_facility.gd": "fc86ae8a534bb96ee5a25036e79a6460c4f0c1e4ac403b66daa3afbe8b80700b",
+    "res://scripts/city_police_patrol.gd": "ea7e43625692e6632835a008d9572cc089911e911b8eed9ab7da8b760d1f20c6",
+    "res://scripts/city_public_safety.gd": "8b4ad06c9dd406414296a64b6e72acfaec2359138d5f28a5e721229e905a0e92",
+    "res://scripts/city_vehicle_audio.gd": "273d4c7a5334a9160953726d139f8eff10d450a285d27b895d5386c0b69aa455",
+    "res://scripts/city_weather_emergency.gd": "f658961c560488fba7fb948d3b71e3dfa1ae3af27eac9f13b65cf959c4c1159d",
+    "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "res://scripts/explore_walk.gd": "e9e17e22696a8e8141695e80298769677daf3485bef9334a8f56ada9ff25ce5a",
+    "res://scripts/fire_station_facility.gd": "19f994b7b65583a1d984d62c3d00205e6f370697b330c710a35b02a7ac6c7f08",
+    "res://scripts/traffic_car_takeover.gd": "3bb0ed920fd818a2ce3cf3b0db2b13ad30d76a3fc8db660534993af3341c70aa"
+  },
+  "task": "EXP27_VEHICLE_AUDIO_MIX",
+  "total": 5
+}

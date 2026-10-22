@@ -260,7 +260,7 @@ func _paused() -> bool:return not is_instance_valid(host) or host.menu.visible o
 
 func _busy_elsewhere() -> bool:
 	if host.player.facility_control and not ui_open:return true
-	for key: String in ["city_bike_service","city_scooter_service","city_bus_service","drivable_car_service","city_helicopter_service"]:
+	for key: String in ["city_bike_service","city_scooter_service","city_bus_service","drivable_car_service","city_helicopter_service","traffic_car_takeover"]:
 		var service: Variant=host.get(key)
 		if is_instance_valid(service) and service.get("riding")==true:return true
 	return is_instance_valid(host.get("interior_visit")) and (host.interior_visit.active or host.interior_visit.in_elevator or host.interior_visit.elevator_open)

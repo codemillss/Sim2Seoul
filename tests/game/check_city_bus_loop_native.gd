@@ -75,7 +75,7 @@ func _run() -> void:
 	if button==null:_finish();return
 	button.pressed.emit();await _ticks(7)
 	var view: Dictionary=service.viewpoint();var safe: Dictionary=scene.interior_visit._safe_external_point(scene.player.global_position)
-	_check("production_shortcut_supported_at_source_walk_wait",not scene.menu.visible and not paused and not safe.is_empty() and scene.player.global_position.distance_to(view.point)<.35)
+	_check("production_shortcut_supported_at_authored_public_TIN_boarding",not scene.menu.visible and not paused and not safe.is_empty() and scene.player.global_position.distance_to(view.point)<.35)
 	await _tap();_check("fresh_E_wait_request_without_automatic_boarding",service.waiting_for_bus and not service.riding)
 	var target: CharacterBody3D
 	for tick: int in range(requested_hz*65):

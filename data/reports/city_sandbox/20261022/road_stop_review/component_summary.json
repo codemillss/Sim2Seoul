@@ -1,0 +1,61 @@
+{
+  "task": "EXP27_ROAD_STOP_REVIEW_COMPONENT",
+  "status": "implementation_frozen_parent_native_acceptance_pending",
+  "production_files": [
+    "game/scripts/city_bus_service.gd"
+  ],
+  "test_files": [
+    "tests/game/check_bus_stop_access.gd",
+    "tests/game/check_city_bus_loop_native.gd",
+    "tests/game/check_city_bus_loop_safety.gd"
+  ],
+  "source_sha256": {
+    "game/scripts/city_bus_service.gd": "1900e08ea6cd58d20c1648e3b11d8cdad9557319b7aecdb00a13cf1097a72e2f",
+    "tests/game/check_bus_stop_access.gd": "b004b4f1dcba1c60cd1006b229eb6b1e4d7cc1d33a36808f85e40406a806f8d5",
+    "tests/game/check_city_bus_loop_native.gd": "9b202d7e46a23c27ff435ad16190f7d04ba69a29daa12bc864fdcc7961e90343",
+    "tests/game/check_city_bus_loop_safety.gd": "646c6443ec2b0d4936a381ee32c52e8c6a5cba1b88d60e48852badf6b19641a1"
+  },
+  "independent_current_placement": {
+    "report": "data/reports/city_sandbox/20261022/road_stop_review/placement_final02.json",
+    "passed": 5,
+    "total": 5
+  },
+  "road_source_display_geometry": {
+    "report": "data/reports/city_sandbox/20261022/road_stop_review/road_plan_before.json",
+    "passed": 8,
+    "total": 8,
+    "geometry_inputs_unchanged_after_review": true
+  },
+  "development_walk_report": {
+    "report": "data/reports/city_sandbox/20261022/road_stop_review/access_headless_dev02.json",
+    "passed": 27,
+    "total": 27,
+    "process_returncode": 0,
+    "script_errors": 0,
+    "final_production_hash_current": false,
+    "reason": "After development27/27, final production added source-domain guards to fallback exits, source-wait shortcut fallback in walk-restricted mode, and rejection of the unsafe fourth-stop front door. Fresh parent native acceptance is required."
+  },
+  "observed_original_car_14": {
+    "number": 14,
+    "minimum_actual_distance_m": 68.0093884454836,
+    "maximum_actual_distance_m": 577.565715947494,
+    "completed_guarded_cycles": 18,
+    "maximum_physical_step_m": 0.166797995567322,
+    "maximum_source_route_offset_m": 0.0003204345703125,
+    "no_car_or_bus_or_NPC_transform_assignment": true
+  },
+  "accepted_expected_checks": {
+    "bus_access_headless": 27,
+    "bus_access_native": 31
+  },
+  "native_images_reviewed_by_component_agent": [],
+  "no_official_real_Seoul_stop_placement_claim": true,
+  "limitations": [
+    "All four T01 stops are authored on the eastern side of one closed southern loop, not a complete Seoul bus network or official stop locations.",
+    "The rejected multi-lane hypothesis is retained: original direct wait-to-front-door drive travel is 0 to 0.70m, with no painted lane crossings; setback across the verge, not crossing multiple lanes, caused the long approach.",
+    "Current lane width is a 3.2m authored cadence fitted to source-display road widths; actual markings, curb surveys and present-day signal schedules are not established.",
+    "Original normal cars follow finite source-forward corridors with guarded off-camera endpoint recycling, rather than routing through an entire street graph.",
+    "Existing raised kerbs cover bounded central stretches; source sidewalk heights across the whole city have not been surveyed or rebuilt.",
+    "This independent planar audit cannot prove native support, live crowd traffic, FPS, visual quality or physical-key/OS acceptance."
+  ]
+}
