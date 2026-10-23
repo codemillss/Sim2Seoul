@@ -1,0 +1,32 @@
+{
+  "task": "VEHICLE_TRANSITION_POSE_DEVELOPMENT",
+  "status": "historical_development",
+  "actual_returncode": 0,
+  "reason": "Corrected fixture scope; later matching-owner cancellation assertions were not yet included.",
+  "files": {
+    "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev02.json": {
+      "sha256": "2393065c3b739af199c459ea9ffce961eeec38a4abf2222e4bf1b4b1c75ccdfa",
+      "bytes": 408641
+    },
+    "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev02.log": {
+      "sha256": "08fb80a64b25adecbb804efd8d86c2ec46086081031f70c0b92d9da108ef9a2b",
+      "bytes": 376
+    }
+  },
+  "source_binding": "The original report stores its then-current source SHA values. These development runs are not selected as final/current assertions.",
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--script",
+    "../tests/game/check_vehicle_transition_pose.gd",
+    "--fixed-fps",
+    "120",
+    "--log-file",
+    "/private/tmp/sim2seoul-exp32-vehicle-pose-dev02.log",
+    "--",
+    "--report=/private/tmp/sim2seoul-exp32-vehicle-pose-dev02.json"
+  ],
+  "environment_diagnostics": "sandbox system CA lookup and headless dummy material diagnostic preserved in actual raw log; no SCRIPT ERROR observed."
+}

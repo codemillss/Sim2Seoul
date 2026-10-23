@@ -38,6 +38,10 @@ var releases := 0
 var hits := 0
 var _clock := 0.0
 var _next_punch_s := 0.0
+var guarding := false
+var _combat_action: Dictionary = {}
+var _combo_step := 0
+var _combo_expires_s := 0.0
 var _notice := ""
 var _notice_until := 0.0
 var _cell_cache: Dictionary = {}
@@ -215,11 +219,15 @@ func _make_custody_room() -> void:
 	_room.visible=false
 func _adult_candidates() -> Array[Dictionary]:
 	var result: Array[Dictionary]=[]
-	for body: CharacterBody3D in host.pedestrians:result.append({"body":body,"avatar":null})
+	for body: CharacterBody3D in host.pedestrians:result.append({"body":body,"avatar":body.get_node_or_null("Visual/ExplorationAvatar")})
 	for controller: Node in [host.street_pedestrians,host.neighborhood_population.walkers]:
 		for row: Dictionary in controller.actors:
 			if row.kind=="walker":result.append({"body":row.body,"avatar":row.get("avatar")})
 	for row: Dictionary in officers:result.append({"body":row.body,"avatar":row.avatar})
+	var takeover: Variant=host.get("traffic_car_takeover")
+	if is_instance_valid(takeover):
+		for row: Dictionary in takeover.drivers:
+			if is_instance_valid(row.body):result.append({"body":row.body,"avatar":row.avatar})
 	return result
 func _line_clear(a: Vector3,b: Vector3,excludes: Array[RID]=[]) -> bool:
 	return get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(a,b,1|8|32,excludes)).is_empty()
@@ -228,21 +236,70 @@ func _on_ordinary_ground() -> bool:
 	var floor:=_ground(host.player.global_position)
 	return not floor.is_empty() and absf(host.player.global_position.y-floor.point.y)<.35 and absf(host.player.velocity.y)<1.0
 func punch() -> bool:
-	if not loaded or detained or _clock<_next_punch_s or host.menu.visible or not _on_ordinary_ground():return false
-	_next_punch_s=_clock+.65
-	if host.exploration_avatar.has_method("play_sandbox_action"):host.exploration_avatar.play_sandbox_action("punch",.36)
+	if not _can_start_melee():return false
+	if _clock>_combo_expires_s:_combo_step=0
+	var kinds: Array[String]=["jab_left","cross_right","hook_left"]
+	var durations: Array[float]=[.42,.48,.56]
+	var contacts: Array[float]=[.10,.14,.20]
+	var index:=_combo_step%3;_combo_step=index+1
+	_start_melee(kinds[index],durations[index],contacts[index],_combo_step)
+	return true
+func shove() -> bool:
+	if not _can_start_melee():return false
+	_combo_step=0;_combo_expires_s=0.
+	_start_melee("shove",.64,.18,0)
+	return true
+func _can_start_melee() -> bool:
+	return loaded and not detained and not guarding and _combat_action.is_empty() and _clock>=_next_punch_s and not host.menu.visible and _on_ordinary_ground()
+func set_guarding(active: bool) -> bool:
+	var allowed: bool=loaded and not detained and not host.menu.visible and _on_ordinary_ground() and _combat_action.is_empty()
+	guarding=active and allowed
+	if is_instance_valid(host) and is_instance_valid(host.exploration_avatar) and host.exploration_avatar.has_method("set_sandbox_guarding"):host.exploration_avatar.set_sandbox_guarding(guarding)
+	if not guarding and not allowed and is_instance_valid(host) and host.exploration_avatar.has_method("cancel_sandbox_action"):host.exploration_avatar.cancel_sandbox_action("guard")
+	if guarding:_combo_step=0;_combo_expires_s=0.
+	return guarding
+func _start_melee(kind: String,duration: float,contact: float,combo: int) -> void:
+	_next_punch_s=_clock+duration;_combo_expires_s=_next_punch_s+.85
+	_combat_action={"kind":kind,"started_s":_clock,"contact_s":_clock+contact,"ends_s":_next_punch_s,"contact_resolved":false,"combo_step":combo}
+	if host.exploration_avatar.has_method("play_sandbox_action"):host.exploration_avatar.play_sandbox_action(kind,duration)
+	_event("melee_started",{"action":kind,"combo_step":combo,"windup_s":contact,"duration_s":duration})
+func _advance_melee() -> void:
+	if guarding and (detained or not _on_ordinary_ground()):set_guarding(false)
+	if _combat_action.is_empty():return
+	# Targets are queried at contact, rather than reserved on the key press.
+	# Walking away, turning, boarding or an intervening wall can make it miss.
+	if detained or not _on_ordinary_ground():
+		_cancel_melee_for_owner_change();return
+	if not _combat_action.contact_resolved and _clock+0.000001>=float(_combat_action.contact_s):
+		_combat_action.contact_resolved=true;_resolve_melee_contact(String(_combat_action.kind))
+	if _clock+0.000001>=float(_combat_action.ends_s):_combat_action.clear()
+func _cancel_melee_for_owner_change() -> void:
+	if _combat_action.is_empty():return
+	var kind:=String(_combat_action.kind)
+	if host.exploration_avatar.has_method("cancel_sandbox_action"):host.exploration_avatar.cancel_sandbox_action(kind)
+	_event("melee_cancelled",{"action":kind,"reason":"ordinary_ground_ownership_lost"});_combat_action.clear()
+func combat_snapshot() -> Dictionary:
+	var phase:="idle"
+	if not _combat_action.is_empty():phase="windup" if not _combat_action.contact_resolved else "recovery"
+	return {"action":String(_combat_action.get("kind","")),"phase":phase,"combo_step":int(_combat_action.get("combo_step",_combo_step)),"guarding":guarding,"contact_resolved":bool(_combat_action.get("contact_resolved",false)),"remaining_s":maxf(0.,float(_combat_action.get("ends_s",_clock))-_clock),"contact_in_s":maxf(0.,float(_combat_action.get("contact_s",_clock))-_clock),"guard_is_cosmetic":true}
+func _resolve_melee_contact(kind: String) -> void:
 	var forward: Vector3=-host.player.get_node("Visual").global_basis.z;forward.y=0.;forward=forward.normalized()
 	var best:=INF;var target: Dictionary={}
+	var reach:=1.55 if kind=="shove" else 1.9
 	for row: Dictionary in _adult_candidates():
 		var difference: Vector3=row.body.global_position-host.player.global_position;var distance:=difference.length();difference.y=0.
-		if distance>1.9 or distance>=best or absf(row.body.global_position.y-host.player.global_position.y)>.65 or forward.dot(difference.normalized())<.35:continue
+		if distance>reach or distance>=best or absf(row.body.global_position.y-host.player.global_position.y)>.65 or forward.dot(difference.normalized())<.35:continue
 		if not _line_clear(host.player.global_position+Vector3.UP*1.2,row.body.global_position+Vector3.UP*1.2,[host.player.get_rid(),row.body.get_rid()]):continue
 		target=row;best=distance
-	if target.is_empty():_notice="주먹 휘두르기 · 가까운 성인에게만 닿습니다";_notice_until=_clock+1.2;_event("punch_missed");return true
+	if target.is_empty():
+		_notice="밀기 · 가까운 성인에게만 닿습니다" if kind=="shove" else "주먹 휘두르기 · 가까운 성인에게만 닿습니다";_notice_until=_clock+1.2
+		_event("melee_missed",{"action":kind});_event("punch_missed",{"action":kind});return
 	hits+=1
-	if is_instance_valid(target.avatar) and target.avatar.has_method("play_sandbox_action"):target.avatar.play_sandbox_action("flinch",.5)
-	var marker:=_label(target.body,"NonGraphicHitReaction","앗!",Vector3(0,2.3,0),.004);get_tree().create_timer(.65,false).timeout.connect(func()->void:if is_instance_valid(marker):marker.queue_free())
-	_event("adult_hit",{"target_path":String(target.body.get_path()),"distance_m":best,"non_graphic":true});report_offense("폭행 신고",host.player.global_position);return true
+	var reaction_s:=.85 if kind=="shove" else .5
+	if is_instance_valid(target.avatar) and target.avatar.has_method("play_sandbox_action"):target.avatar.play_sandbox_action("flinch",reaction_s)
+	var marker:=_label(target.body,"NonGraphicHitReaction","밀지 마세요!" if kind=="shove" else "앗!",Vector3(0,2.3,0),.004);get_tree().create_timer(reaction_s,false).timeout.connect(func()->void:if is_instance_valid(marker):marker.queue_free())
+	_event("melee_contact",{"action":kind,"target_path":String(target.body.get_path()),"distance_m":best,"reaction_s":reaction_s,"non_graphic":true})
+	_event("adult_hit",{"action":kind,"target_path":String(target.body.get_path()),"distance_m":best,"non_graphic":true});report_offense("폭행 신고",host.player.global_position)
 func report_offense(reason: String,at: Vector3) -> void:
 	if not loaded or detained or not at.is_finite():return
 	offense_count+=1;wanted=true;chase_remaining_s=CHASE_SECONDS;_cooldown_s=0.
@@ -362,6 +419,8 @@ func _capture() -> bool:
 	var next_kind: String="investigation" if offense_count<2 else "holding"
 	var room_point:=_room_origin+Vector3(0. if next_kind=="investigation" else 3.,.03,.5)
 	if not host.city_sandbox_force_ground_exit(room_point):_event("capture_safe_transition_rejected");return false
+	_cancel_melee_for_owner_change();set_guarding(false)
+	if host.exploration_avatar.has_method("cancel_sandbox_action"):host.exploration_avatar.cancel_sandbox_action("guard")
 	_saved={"free_roam":selected_host_mode,"player_free_roam":selected_player_mode,"physics":host.player.is_physics_processing(),"visual":host.player.get_node("Visual").transform,"rig_yaw":host.rig.yaw,"rig_pitch":host.rig.pitch,"rig_distance":host.rig.requested_distance,"rig_pivot":host.rig.pivot_height_m}
 	detained=true;wanted=false;chase_remaining_s=0.;catches+=1;custody_kind=next_kind;detention_remaining_s=8. if custody_kind=="investigation" else 12.
 	host.player.set_facility_control(true);host.player.set_physics_process(false);host.player.velocity=Vector3.ZERO;host.player.get_node("Visual").rotation=Vector3.ZERO;host.player.reset_physics_interpolation();_room.visible=true
@@ -407,7 +466,8 @@ func status_text() -> String:
 	if is_instance_valid(police_facility) and police_facility.active:return police_facility.status_text()
 	if detained or wanted:return prompt_text()
 	if is_instance_valid(police_headquarters) and police_headquarters.contains_player():return police_headquarters.status_text()
-	return _notice if _clock<_notice_until else "F 가까운 성인에게 주먹 · 경찰 출동"
+	if guarding:return "G 방어 자세 · F 연속 타격 · X 밀기 · 경찰 체포는 막지 못합니다"
+	return _notice if _clock<_notice_until else "F 잽→스트레이트→훅 · X 밀기 · G 방어 자세"
 func viewpoint() -> Dictionary:
 	if is_instance_valid(police_facility) and police_facility.loaded:return police_facility.viewpoint()
 	var safe:=_find_open(station_point,4.)
@@ -416,6 +476,7 @@ func viewpoint() -> Dictionary:
 func _physics_process(delta: float) -> void:
 	if not loaded or delta<=0. or host.menu.visible:return
 	_clock+=delta;_cooldown_s=maxf(0.,_cooldown_s-delta)
+	_advance_melee()
 	if detained:
 		detention_remaining_s=maxf(0.,detention_remaining_s-delta);_custody_text.text=("조사실 · 진술 확인 중" if custody_kind=="investigation" else "유치장 · 재범 임시 보호")+"\n"+str(ceili(detention_remaining_s))+"초 후 자동 귀가\n게임용 가상 시설 · 실제 절차와 무관"
 		if detention_remaining_s<=0.:_release()
@@ -455,4 +516,4 @@ func _process(_delta: float) -> void:
 func snapshot() -> Dictionary:
 	var rows: Array=[]
 	for row: Dictionary in officers:rows.append({"name":String(row.body.name),"position":row.body.global_position,"home":row.home,"state":row.state,"on_floor":row.body.is_on_floor(),"avatar_state":row.avatar.state,"distance_m":row.distance_m,"source_allowed":_source_allowed(row.body.global_position),"native_supported":not _supported(row.body.global_position).is_empty(),"render_anchor":row.proxy.global_position,"previous_anchor":row.previous_pose.origin,"physics_anchor":row.current_pose.origin,"pending_path_job":not row.path_job.is_empty(),"capsule_retained":row.body.get_node("CollisionShape").shape is CapsuleShape3D,"layer":row.body.collision_layer,"mask":row.body.collision_mask})
-	return {"loaded":loaded,"load_error":load_error,"police_facility":police_facility.snapshot() if is_instance_valid(police_facility) else {},"police_headquarters":police_headquarters.snapshot() if is_instance_valid(police_headquarters) else {},"patrol_vehicle":patrol_vehicle_service.snapshot() if is_instance_valid(patrol_vehicle_service) else {},"rental_posting_clearance":rental_clearance_snapshot(),"wanted":wanted,"detained":detained,"chase_remaining_s":chase_remaining_s,"detention_remaining_s":detention_remaining_s,"custody_kind":custody_kind,"offense_count":offense_count,"officers":rows,"hits":hits,"catches":catches,"releases":releases,"police_navigation_domain":"Original source walk/drive plus native-supported, non-private original game-playable TIN connectors; source entry setback .75m and complete native capsule guards retained. Vehicle domains unchanged.","public_playable_fallback_queries":public_playable_fallback_queries,"path_replans":path_replans,"maximum_path_plan_ms":maximum_path_plan_ms,"maximum_path_job_cpu_ms":maximum_path_job_cpu_ms,"path_job_budget_ms_per_officer":1.5,"render_frames":render_frames,"maximum_render_anchor_error_m":maximum_render_anchor_error_m,"static_graph_cells":_cell_cache.size(),"static_graph_edges":_edge_cache.size(),"maximum_step_m":maximum_step_m,"actual_officer_distance_m":actual_officer_distance_m,"events":events,"source_hashes":_source_hashes,"scope":"Fictional non-graphic sandbox; adult humans only; 60-second game-time pursuit, native original public-playable TIN capsule paths and LOS ground catch; reversible 8/12-second authored custody; no real police procedure or geography claim."}
+	return {"loaded":loaded,"load_error":load_error,"combat":combat_snapshot(),"police_facility":police_facility.snapshot() if is_instance_valid(police_facility) else {},"police_headquarters":police_headquarters.snapshot() if is_instance_valid(police_headquarters) else {},"patrol_vehicle":patrol_vehicle_service.snapshot() if is_instance_valid(patrol_vehicle_service) else {},"rental_posting_clearance":rental_clearance_snapshot(),"wanted":wanted,"detained":detained,"chase_remaining_s":chase_remaining_s,"detention_remaining_s":detention_remaining_s,"custody_kind":custody_kind,"offense_count":offense_count,"officers":rows,"hits":hits,"catches":catches,"releases":releases,"police_navigation_domain":"Original source walk/drive plus native-supported, non-private original game-playable TIN connectors; source entry setback .75m and complete native capsule guards retained. Vehicle domains unchanged.","public_playable_fallback_queries":public_playable_fallback_queries,"path_replans":path_replans,"maximum_path_plan_ms":maximum_path_plan_ms,"maximum_path_job_cpu_ms":maximum_path_job_cpu_ms,"path_job_budget_ms_per_officer":1.5,"render_frames":render_frames,"maximum_render_anchor_error_m":maximum_render_anchor_error_m,"static_graph_cells":_cell_cache.size(),"static_graph_edges":_edge_cache.size(),"maximum_step_m":maximum_step_m,"actual_officer_distance_m":actual_officer_distance_m,"events":events,"source_hashes":_source_hashes,"scope":"Fictional non-graphic sandbox; adult humans only; 60-second game-time pursuit, native original public-playable TIN capsule paths and LOS ground catch; reversible 8/12-second authored custody; no real police procedure or geography claim."}

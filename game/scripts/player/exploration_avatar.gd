@@ -46,6 +46,8 @@ var _materials: Dictionary = {}
 var _sandbox_action := ""
 var _sandbox_remaining_s := 0.0
 var _sandbox_duration_s := 0.0
+var _sandbox_guarding := false
+var _sandbox_guard_weight := 0.0
 var _activity_kind := ""
 var _activity_elapsed := 0.0
 var _swim_mesh_defaults: Array[Dictionary]=[]
@@ -409,18 +411,76 @@ func _gait_foot_with_duty(side: float,phase: float,reach: float,lift: float,stan
 func _facility_controlled() -> bool:return bool(player.get("facility_control")) if _facility_property else false
 
 func play_sandbox_action(kind: String,seconds := .4) -> void:
-	if kind not in ["punch","flinch"]:return
-	_sandbox_action=kind;_sandbox_remaining_s=seconds;_sandbox_duration_s=seconds
+	if kind not in ["punch","flinch","jab_left","cross_right","hook_left","shove","guard","vehicle_enter","vehicle_exit"]:return
+	if kind=="guard":set_sandbox_guarding(true);return
+	_sandbox_action=kind;_sandbox_remaining_s=maxf(.05,seconds);_sandbox_duration_s=_sandbox_remaining_s
+
+func set_sandbox_guarding(active: bool) -> void:
+	_sandbox_guarding=active
+
+func cancel_sandbox_action(expected_kind: String="") -> void:
+	# Ownership can change after a newer vehicle pose has already started.
+	# A previous melee owner must never erase that new owner's animation.
+	if not expected_kind.is_empty() and _sandbox_action!=expected_kind:return
+	if _sandbox_action=="guard":_sandbox_guarding=false;_sandbox_guard_weight=0.
+	_sandbox_action="";_sandbox_remaining_s=0.;_sandbox_duration_s=0.
+
+func _blend_arm_to(side_name: String,target: Vector3,amount: float) -> void:
+	var arm:=_joints[side_name+"UpperArm"] as Node3D
+	var forearm:=_joints[side_name+"Forearm"] as Node3D
+	var original_arm:=arm.basis;var original_forearm:=forearm.basis
+	_arm_to(side_name,target)
+	arm.basis=original_arm.slerp(arm.basis,amount)
+	forearm.basis=original_forearm.slerp(forearm.basis,amount)
+
+func _guard_pose(amount: float) -> void:
+	_blend_arm_to("Left",Vector3(-.18,1.32,-.28),amount)
+	_blend_arm_to("Right",Vector3(.17,1.28,-.32),amount)
+	_upper_body.rotation=_upper_body.rotation.lerp(Vector3(-.045,.045,-.015),amount)
 
 func _sandbox_pose(delta: float) -> void:
-	if _sandbox_remaining_s<=0. or _sandbox_duration_s<=0.:return
+	_sandbox_guard_weight=lerpf(_sandbox_guard_weight,1. if _sandbox_guarding else 0.,1.-exp(-delta*16.))
+	if _sandbox_action=="guard" or _sandbox_remaining_s<=0.:
+		if _sandbox_guard_weight>.001:
+			_sandbox_action="guard";_sandbox_remaining_s=.1;_sandbox_duration_s=.1;_guard_pose(_sandbox_guard_weight);return
+		_sandbox_guard_weight=0.;_sandbox_remaining_s=0.;_sandbox_action="";return
+	if _sandbox_duration_s<=0.:return
 	_sandbox_remaining_s=maxf(0.,_sandbox_remaining_s-delta)
 	var phase:=1.0-_sandbox_remaining_s/_sandbox_duration_s
 	var weight:=sin(phase*PI)
 	if _sandbox_action=="punch":
 		_arm_to("Right",Vector3(.24,1.22,-.12-.52*weight))
 		_arm_to("Left",Vector3(-.23,1.17,-.25))
-	else:_upper_body.rotation.x=.16*weight
+	elif _sandbox_action=="flinch":_upper_body.rotation.x=.16*weight
+	elif _sandbox_action in ["vehicle_enter","vehicle_exit"]:
+		var direction:=1. if _sandbox_action=="vehicle_enter" else -1.
+		_upper_body.rotation=Vector3(.16*weight,direction*.15*weight,direction*.075*weight)
+		_blend_arm_to("Left",Vector3(-.29,1.21,-.34-.18*weight),weight)
+		_blend_arm_to("Right",Vector3(.26,1.08,-.16-.16*weight),weight)
+	else:
+		# Windup, extension and recovery use the same duration fractions as the
+		# contact service. Only the upper pose changes; feet remain grounded.
+		var contact:=.18/.64
+		match _sandbox_action:
+			"jab_left":contact=.10/.42
+			"cross_right":contact=.14/.48
+			"hook_left":contact=.20/.56
+		var extension:=smoothstep(contact*.40,contact,phase)*(1.-smoothstep(contact,1.,phase))
+		var amount:=smoothstep(0.,contact*.50,phase)*smoothstep(0.,.20,1.-phase)
+		_guard_pose(amount)
+		match _sandbox_action:
+			"jab_left":
+				_blend_arm_to("Left",Vector3(-.19,1.31,-.28-.39*extension),amount)
+				_upper_body.rotation.y=-.10*extension
+			"cross_right":
+				_blend_arm_to("Right",Vector3(.13,1.33,-.28-.40*extension),amount)
+				_upper_body.rotation.y=.21*extension
+			"hook_left":
+				_blend_arm_to("Left",Vector3(lerpf(-.43,.12,extension),1.32,-.32-.18*extension),amount)
+				_upper_body.rotation.y=-.26*extension
+			"shove":
+				for side_name: String in ["Left","Right"]:_blend_arm_to(side_name,Vector3(-.17 if side_name=="Left" else .17,1.23,-.27-.40*extension),amount)
+				_upper_body.rotation.x=-.085*extension
 
 func _physics_process(delta: float) -> void:
 	if not _ready_avatar or not is_instance_valid(player) or delta<=0.0:return
@@ -435,6 +495,7 @@ func _physics_process(delta: float) -> void:
 		actual_speed_mps=0.0;measured_displacement_m=0.0
 		if facility and not _activity_kind.is_empty():_activity_pose()
 		else:_rest_pose()
+		if _sandbox_action in ["vehicle_enter","vehicle_exit"]:_sandbox_pose(delta)
 		return
 	# Region changes and recovery are transitions, never one giant stride.
 	if movement.length()>2.0:

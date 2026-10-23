@@ -1,6 +1,12 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: 2026-10-22 EXP31 상체·팔 보행
+## 현재 인수: 2026-10-23 EXP32 도시 액션
+
+[WORK_STATUS](WORK_STATUS.md)·[EXP32 summary](../data/reports/city_action_freedom/20261023/summary.json)·[조작/구현 범위](CITY_ACTION_FREEDOM.md)를 먼저 읽는다. F 세 연속 동작/X 밀기/G 방어 자세와 원래 도로 차14대의 staged E 진입/H 경적이 추가됐다. `city_public_safety.gd`가 접촉 시 실제 성인/벽을 검사하고, avatar의 matching cancel은 지난 동작이 새 탑승/구금 제어를 덮지 않게 한다. `traffic_car_takeover.gd`는 본래 차의 AI/FIFO→player 제어를 성공 시 인계하고 player_enter 취소와 체포 소유권을 구분한다.
+
+새 자산/의존성 다운로드는 없으며 MIT 인체/기존 지도/네 생성 입력 준비를 유지한다. 일반 실행은 기존 실행기다. 새 `action_freedom` suite와 승하차/취소 fixture의 정확한 명령은 선별된 `.run.json`에 있다. 저장 인수 기본 summary는 EXP32이고 저장 무결성 검사를 새 엔진 실행·픽셀/OS·주관적 조작감으로 확대하지 않는다. 기존 열린 창은 새 코드를 자동으로 받지 않으므로 재실행이 필요하다.
+
+## 이전 인수: 2026-10-22 EXP31 상체·팔 보행
 
 [WORK_STATUS](WORK_STATUS.md)·[EXP31 summary](../data/reports/upper_body_gait/20261022/summary.json)·[구현/조작](HUMAN_GAIT_AND_LIFE.md)을 먼저 읽는다. 새로운 의존성/자산은 없다. 작은 가슴/어깨 회전과 팔꿈치 굽힘을 표시 위상에 맞추고, 첫 척추와 thigh socket은 골반을 따른다. 원래 목/머리 local 연결과 본 길이를 유지한다. 고정 접촉과 authored 타격/움찔이 보행 팔보다 우선한다.
 

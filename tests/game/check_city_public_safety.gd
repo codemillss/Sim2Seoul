@@ -79,7 +79,14 @@ func _run() -> void:
 	_check("player_only_supported_approach_to_existing_adult",not target.is_empty())
 	if target.is_empty():_finish();return
 	await _capture("adult_before_punch")
-	var before_hits: int=service.hits;await _tap_f();_check("physical_f_hits_existing_adult_and_starts_sixty_seconds",service.hits==before_hits+1 and service.wanted and service.chase_remaining_s>59.,{"snapshot":service.snapshot()})
+	var before_hits: int=service.hits;await _tap_f()
+	# EXP32 resolves melee contact after the visible windup. Retain the same
+	# one-hit/pursuit criterion, allowing at most .65s for actual contact rather
+	# than expecting a hit at the key edge.
+	for tick: int in range(20):
+		if service.hits>before_hits:break
+		await _ticks(1)
+	_check("physical_f_hits_existing_adult_and_starts_sixty_seconds",service.hits==before_hits+1 and service.wanted and service.chase_remaining_s>59.,{"snapshot":service.snapshot()})
 	var punch_weight: float=scene.exploration_avatar._sandbox_remaining_s;_check("visible_non_graphic_punch_animation_without_camera_shake",punch_weight>0.,{"action":scene.exploration_avatar._sandbox_action,"remaining_s":punch_weight})
 	var start_count: int=service.offense_count;service.punch();_check("punch_cooldown_blocks_repeat_offense",service.offense_count==start_count)
 	await _capture("police_response")

@@ -1,5 +1,13 @@
 # 검증 계획과 완료 판정
 
+## EXP32 — 도시 액션과 실제 차량 접근
+
+새 `check_city_action_freedom.gd`는 일반 탐험 장면에서 물리 F/X/G/H/E edge와 실제 Input W를 관측한다. 준비 중 즉시 명중하지 않음, 세 연속 동작의 native 팔/손 이동·회복, 키 유지/echo/짧은 tap/메뉴/다른 owner 차단, 접촉 시 벽/개 제외·기존 경찰 조사/귀가를 검사한다. 늦은 관찰 priority1000에서 native rig 갱신 뒤 같은 프레임의 source/native 방향을 비교한다. 복사한 생산 곡선을 정답으로 쓰지 않는다.
+
+기존14대 테스트는 새 문 바로 옆 접근을 만족하는 명시적 플레이어 관측 fixture를 사용하되 원래 차를 옮기지 않는다. 새 결합 검사는 W로 실제 문에 접근하고 정차/운전자/탑승/경적/하차를 확인한다. `check_traffic_entry_cancel.gd`는 player_enter의 실제 E 취소·메뉴 정지·안전한 외부 이동과 capsule/AI/임시 운전자 복원을, `check_vehicle_transition_pose.gd`는 시설 소유 중 실제 native 손 이동과 원래 접촉 잔여 오차/루트/카메라 불변·지난 동작 취소를 검사한다.
+
+기존 안전/경찰 fixture의 즉시 F 명중 대기는 새 접촉 시간 뒤로 옮기고 원래 명중/벽/개/추격60초/구금 기준과 분모는 유지한다. 차량/체포 시험은 정차한 차 문까지 실제 Input으로 걸으며 중간 player teleport를 추가하지 않는다. 현재 소스 SHA·실제 종료코드·기대 분모·원시 실패/수정과 정확한 native 캡처 시점을 [집계](../data/reports/city_action_freedom/20261023/summary.json)에 남긴다. 숫자 PASS, 정지 이미지, 일반 OS 입력과 사용자 액션 자연스러움은 따로 판단한다.
+
 ## EXP31 — 실제 native 상체·팔의 연속성
 
 [현재 집계](../data/reports/upper_body_gait/20261022/summary.json)의 source SHA·기대 분모·실제 종료코드·원시 로그를 대조한다. `check_human_upper_gait.gd`는 생산 Input으로1.4/3.5m/s를 만들고 실제 스킨 본/손바닥·어깨/골반 축을 독립 관측한다. 생산 곡선을 정답으로 복사하지 않는다. 남녀30Hz/표시120Hz 및 남성120Hz에서 팔의 좌우 교대·같은 쪽 발과 반대 위상·팔꿈치 가변·어깨 반대 회전·속도/출발/정지·원래 길이/목/어깨 local 연결을 검사하고 기존 하체/CPU sole/카메라 조건을 함께 유지한다.

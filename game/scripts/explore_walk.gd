@@ -265,7 +265,7 @@ func _ready() -> void:
 func _build_ui() -> void:
 	super._build_ui()
 	var help: Label=status.get_parent().get_child(0)
-	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD 이동 · Shift 달리기 · Space 연속 점프 · 마우스 회전 · 휠 거리 · V 눈높이\nE 출입 / 쇼핑 / 시설 / 승하차 · I 소지품·옷 · F 주먹 · Q 킥보드 호출 · Esc 메뉴"
+	help.text="덕수궁 · 시청 · 돌담길 자유 탐험\nWASD 이동 · Shift 달리기 · Space 연속 점프 · 마우스/휠 · V 눈높이\nE 상호작용 · F 연속 주먹 · X 밀치기 · G 방어 자세\nI 소지품·옷 · Q 킥보드 호출 · H 도로차 경적 · Esc 메뉴"
 	var options:=menu.get_child(0) as VBoxContainer
 	var quit_action: Button
 	for child in options.get_children():
@@ -349,7 +349,7 @@ func _build_ui() -> void:
 		_sandbox_requests["summon"]=true
 		if menu.visible:toggle_menu()
 	);options.add_child(summon)
-	for detail: Array in [["외곽 종합병원 정문으로 이동","hospital"],["외곽 대형 경찰청사로 이동","police_headquarters"],["도로 자동차 가까이 가기","traffic_car"],["세종로파출소 정문으로 이동","police_post"],["외곽 대형 소방서로 이동","fire_station"],["119 출동 체험 · 비와 화재","fire_demo"]]:
+	for detail: Array in [["외곽 종합병원 정문으로 이동","hospital"],["외곽 대형 경찰청사로 이동","police_headquarters"],["도시 액션 · 도로 자동차 가까이 가기","traffic_car"],["세종로파출소 정문으로 이동","police_post"],["외곽 대형 소방서로 이동","fire_station"],["119 출동 체험 · 비와 화재","fire_demo"]]:
 		var button:=Button.new();button.text=String(detail[0]);button.pressed.connect(_visit_city_life.bind(String(detail[1])));options.add_child(button)
 	var sandbox_layer:=CanvasLayer.new();sandbox_layer.name="CitySandboxHUD";sandbox_layer.layer=19;add_child(sandbox_layer)
 	sandbox_status=Label.new();sandbox_status.name="SandboxStatus";sandbox_status.anchor_left=1.;sandbox_status.anchor_right=1.;sandbox_status.offset_left=-390.;sandbox_status.offset_right=-16.;sandbox_status.offset_top=16.;sandbox_status.offset_bottom=155.;sandbox_status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;sandbox_status.add_theme_font_size_override("font_size",16);sandbox_status.add_theme_color_override("font_shadow_color",Color(.02,.03,.05));sandbox_status.add_theme_constant_override("shadow_offset_x",2);sandbox_status.add_theme_constant_override("shadow_offset_y",2);sandbox_status.mouse_filter=Control.MOUSE_FILTER_IGNORE;sandbox_layer.add_child(sandbox_status)
@@ -375,7 +375,9 @@ func _visit_library_entrance() -> void:
 
 func toggle_menu() -> void:
 	super.toggle_menu()
-	if menu.visible:_sandbox_requests.clear()
+	if menu.visible:
+		_sandbox_requests.clear()
+		if is_instance_valid(city_public_safety):city_public_safety.set_guarding(false)
 	# Returning from pause must preserve the open shop's mouse ownership.
 	if not menu.visible and is_instance_valid(shop_visit_service) and shop_visit_service.ui_open:
 		input_router.gameplay_enabled=false
@@ -653,13 +655,21 @@ func _input(event: InputEvent) -> void:
 		if not get_tree().paused and input_router.gameplay_enabled and _can_reset_human_view():
 			rig.use_human_eye_view();get_viewport().set_input_as_handled()
 		return
-	var action: String="punch" if code==KEY_F else "summon" if code==KEY_Q else ""
+	var action: String="punch" if code==KEY_F else "summon" if code==KEY_Q else "shove" if code==KEY_X else "guard" if code==KEY_G else "horn" if code==KEY_H else ""
 	if action.is_empty():return
-	if not event.pressed:_sandbox_held[action]=false;return
+	if not event.pressed:
+		_sandbox_held[action]=false
+		if action=="guard":
+			_sandbox_requests.erase("guard")
+			if is_instance_valid(city_public_safety):city_public_safety.set_guarding(false)
+		return
 	if event.echo or _sandbox_held.get(action,false):return
 	_sandbox_held[action]=true
-	if not _sandbox_controls_ready():return
+	if not (_sandbox_horn_ready() if action=="horn" else _sandbox_controls_ready()):return
 	_sandbox_requests[action]=true;get_viewport().set_input_as_handled()
+
+func _sandbox_horn_ready() -> bool:
+	return runtime_ok and not get_tree().paused and not menu.visible and input_router.gameplay_enabled and not _sandbox_detained() and is_instance_valid(traffic_car_takeover) and traffic_car_takeover.riding and traffic_car_takeover.rental_index>=0 and not is_instance_valid(traffic_car_takeover.pending_car)
 
 func _can_reset_human_view() -> bool:
 	return runtime_ok and is_instance_valid(rig) and not _sandbox_detained() and not player.facility_control and not _street_transport_riding()
@@ -679,10 +689,16 @@ func _preview_human_presence() -> void:
 	if menu.visible:toggle_menu()
 
 func _physics_process(_delta: float) -> void:
+	# A held guard belongs to ordinary walking only. Opening another owner or
+	# the menu cancels it and requires a new physical edge after key release.
+	if is_instance_valid(city_public_safety) and not _sandbox_controls_ready():city_public_safety.set_guarding(false)
 	if _sandbox_requests.is_empty():return
 	var requested: Dictionary=_sandbox_requests.duplicate();_sandbox_requests.clear()
+	if requested.get("horn",false) and _sandbox_horn_ready():traffic_car_takeover.honk()
 	if not _sandbox_controls_ready():return
+	if requested.get("guard",false) and _sandbox_held.get("guard",false) and is_instance_valid(city_public_safety):city_public_safety.set_guarding(true)
 	if requested.get("punch",false) and is_instance_valid(city_public_safety):city_public_safety.punch()
+	if requested.get("shove",false) and is_instance_valid(city_public_safety):city_public_safety.shove()
 	if requested.get("summon",false) and is_instance_valid(city_scooter_service):city_scooter_service.summon_personal_scooter()
 
 func city_sandbox_force_ground_exit(point: Vector3) -> bool:

@@ -1,0 +1,17 @@
+{
+  "dev02": {
+    "actual_returncode": 1,
+    "result": "17/18",
+    "cause": "Legacy observer followed only within2.3m of door; the new staged entry deliberately requires1.10m. Test fixture now re-places player at source-supported close-door pose only after real braking."
+  },
+  "dev03": {
+    "actual_returncode": 1,
+    "result": "53/55",
+    "cause": "One sloped car original shape allowed the newly spawned exterior driver but the larger conservative future driving box overlapped its upright shoulders; new whole-height egress side clearance corrected it. Concurrent city_public_safety edits also changed source hash."
+  },
+  "dev04": {
+    "actual_returncode": 1,
+    "result": "55/56",
+    "cause": "All14 car takeovers and exits passed after slope fix; driver visual facing/interpolation and avatar cancel API were finalized while this development run was executing, so runtime source-integrity gate correctly failed."
+  }
+}

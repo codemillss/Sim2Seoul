@@ -1,0 +1,32 @@
+{
+  "task": "VEHICLE_TRANSITION_POSE_DEVELOPMENT",
+  "status": "historical_development",
+  "actual_returncode": 1,
+  "reason": "Fixture assertion scope error: aggregate native contact included original standing-foot/rest residual, and Quaternion.angle_to of unchanged camera basis had float precision floor; assertions isolated actual hand baseline and camera unit-axis differences without reducing denominator.",
+  "files": {
+    "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev01.json": {
+      "sha256": "cee386911ed1e5a64ced75f8f681fdf48973e2741c6514a4cfa68f0f9f994ca1",
+      "bytes": 406233
+    },
+    "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev01.log": {
+      "sha256": "e751a9cb2bdff09d4f2dbf5c5eb2be12fe3154a4f751f394f7752b109363cb31",
+      "bytes": 2685
+    }
+  },
+  "source_binding": "The original report stores its then-current source SHA values. These development runs are not selected as final/current assertions.",
+  "command": [
+    "/Applications/Godot.app/Contents/MacOS/Godot",
+    "--headless",
+    "--path",
+    "game",
+    "--script",
+    "../tests/game/check_vehicle_transition_pose.gd",
+    "--fixed-fps",
+    "120",
+    "--log-file",
+    "/private/tmp/sim2seoul-exp32-vehicle-pose-dev01.log",
+    "--",
+    "--report=/private/tmp/sim2seoul-exp32-vehicle-pose-dev01.json"
+  ],
+  "environment_diagnostics": "sandbox system CA lookup and headless dummy material diagnostic preserved in actual raw log; no SCRIPT ERROR observed."
+}

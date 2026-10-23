@@ -86,8 +86,8 @@ func _select_car(require_moving:=true) -> CharacterBody3D:
 		var prefix: String="coverage_drive_3" if region_fixture=="euljiro" else "sejong_south"
 		if not String(body.get_route_id()).begins_with(prefix):continue
 		var speed: float=body._speed_mps
-		# A genuinely moving low-speed pass leaves physical braking room while
-		# the player waits at this one initial approach (no follow-up teleport).
+		# A genuinely moving low-speed pass leaves physical braking room after
+		# the one initial observer placement. Later approach uses actual Input.
 		if (require_moving and speed<.25) or speed>2.0:continue
 		var nearest:=INF
 		for row: Dictionary in police.officers:nearest=minf(nearest,body.global_position.distance_to(row.body.global_position))
@@ -109,7 +109,16 @@ func _one_theft(kind: String,exit_near_officer: bool) -> bool:
 	var offenses_before: int=police.offense_count;var input_phase_start: int=input_phase_samples.size();await _tap_e()
 	for tick: int in range(180):
 		if not is_instance_valid(cars.pending_car):break
+		# EXP32 requires standing at the front door before the timed entry.
+		# Walk the retained capsule toward the stopped car; never move the car
+		# or place the player again to satisfy the closer interaction contract.
+		if cars.pending_stage=="approach" and cars._door_distance_for(body)>1.02:
+			var left: Vector3=body.to_global(Vector3(-1.20,0,-.38));var right: Vector3=body.to_global(Vector3(1.20,0,-.38))
+			var toward: Vector3=(left if scene.player.global_position.distance_to(left)<scene.player.global_position.distance_to(right) else right)-scene.player.global_position;toward.y=0.
+			scene.rig.yaw=atan2(-toward.x,-toward.z);Input.action_press("move_forward")
+		else:Input.action_release("move_forward")
 		await _ticks(1)
+	Input.action_release("move_forward")
 	var mounted: bool=cars.riding and not is_instance_valid(cars.pending_car) and cars.rental_index>=0 and cars.bikes[cars.rental_index].body==body
 	_check(kind+"_physical_E_theft_stops_and_boards_exact_original_car",mounted and (kind!="investigation" or initial_speed>.25),{"body_id":body.get_instance_id(),"route_id":body.get_route_id(),"initial_speed_mps":initial_speed,"initial_position":initial_car_position,"stopped_position":body.global_position,"stop_distance_m":cars.pending_actual_distance_m,"officers_before":initial_officers,"input_phase":input_phase_samples.slice(input_phase_start),"cars":cars.snapshot()})
 	if not mounted:return false

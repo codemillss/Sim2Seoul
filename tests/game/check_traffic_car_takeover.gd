@@ -1,6 +1,9 @@
 extends SceneTree
 ## Production14 original cars. Only player observation poses and held movement
 ## are fixtures; no AI vehicle/source route/model is moved or substituted.
+## EXP32 additionally observer-places the player beside the actual stopped door
+## before staged entry. Physical on-foot approach itself belongs to the new
+## check_city_action_freedom suite, not this controller-isolation fixture.
 class HeldInput extends Node:
 	var harness: SceneTree
 	func _physics_process(_delta: float) -> void:harness._hold()
@@ -42,7 +45,7 @@ func _json(value: Variant) -> Variant:
 	return value
 func _hashes() -> Dictionary:
 	var result: Dictionary={}
-	for path: String in ["res://scripts/traffic_car_takeover.gd","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://scripts/explore_walk.gd","res://scripts/city_public_safety.gd","res://scripts/city_weather_emergency.gd","res://scripts/traffic/vehicle.gd","res://scripts/traffic/traffic_manager.gd","res://scripts/neighborhood_traffic.gd","res://assets/authored/car_service.json","res://assets/authored/neighborhood_population.json","res://resources/world_geometry/world.json","res://data/generated/traffic.json","res://../tests/game/check_traffic_car_takeover.gd"]:result[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/textured_human_rig.gd","res://scripts/traffic_car_takeover.gd","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://scripts/explore_walk.gd","res://scripts/city_public_safety.gd","res://scripts/city_weather_emergency.gd","res://scripts/traffic/vehicle.gd","res://scripts/traffic/traffic_manager.gd","res://scripts/neighborhood_traffic.gd","res://assets/authored/car_service.json","res://assets/authored/neighborhood_population.json","res://resources/world_geometry/world.json","res://data/generated/traffic.json","res://../tests/game/check_traffic_car_takeover.gd"]:result[path]=FileAccess.get_sha256(path)
 	return result
 func _check(name: String,passed: bool,evidence: Dictionary={}) -> void:
 	checks.append({"name":name,"passed":passed,"evidence":_json(evidence)});print("TAKEOVER_CHECK ",name," ",passed)
@@ -89,7 +92,7 @@ func _finish() -> void:
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size()
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:quit(2);return
-	file.store_string(JSON.stringify(_json({"task":"EXP27_traffic_car_takeover","recorded_at":Time.get_datetime_string_from_system(),"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"physics_hz":Engine.physics_ticks_per_second,"source_hashes":hashes,"result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"police_controller_unit_fixture":_police_controller_unit_fixture,"elapsed_ms":Time.get_ticks_msec()-_started,"scope":"Production original AI actors; original body/model/shape and traffic route identities. Physical KEY_E events device42, test-only held movement and source-supported player observer poses. After actual theft-report/wanted integration is proven, ONLY police physics is paused for remaining car-controller/all14 E checks, then restored on finish; complete live pursuit/capture/release is separately checked by check_stolen_car_arrest and its Euljiro variant. No car teleport, AI body/model replacement, real OS key, sustained-performance or human-comfort claim."}),"  "));file.close()
+	file.store_string(JSON.stringify(_json({"task":"EXP27_traffic_car_takeover","recorded_at":Time.get_datetime_string_from_system(),"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"physics_hz":Engine.physics_ticks_per_second,"source_hashes":hashes,"result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"police_controller_unit_fixture":_police_controller_unit_fixture,"elapsed_ms":Time.get_ticks_msec()-_started,"scope":"Production original AI actors; original body/model/shape and traffic route identities. Physical KEY_E events device42, test-only held movement and source-supported player observer poses, including close door re-positioning after physical braking for EXP32 staged entry. Actual on-foot door approach belongs to check_city_action_freedom separately. After actual theft-report/wanted integration is proven, ONLY police physics is paused for remaining car-controller/all14 E checks, then restored on finish; complete live pursuit/capture/release is separately checked by check_stolen_car_arrest and its Euljiro variant. No car teleport, AI body/model replacement, real OS key, sustained-performance or human-comfort claim."}),"  "));file.close()
 	print("TAKEOVER_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
 func _run() -> void:
 	hashes=_hashes();scene=load("res://scenes/world/explore_walk.tscn").instantiate();scene.exploration_settings_path="/tmp/traffic-takeover-test-"+str(OS.get_process_id())+".json";scene.quality_settings_path=scene.exploration_settings_path+".quality.json";scene.exploration_physics_hz=30;root.add_child(scene);await _ticks(8)
@@ -147,7 +150,7 @@ func _run() -> void:
 	for tick: int in range(180):
 		if not is_instance_valid(service.pending_car):break
 		saw_onfoot_pending=saw_onfoot_pending or scene.player.is_physics_processing()
-		if service._door_distance_for(moving)>2.3:await _observer(moving)
+		if service._door_distance_for(moving)>2.3 or service.pending_stage=="approach" and service._door_distance_for(moving)>1.10:await _observer(moving)
 		await _ticks(1);maximum_braking_step=maxf(maximum_braking_step,Vector2(moving.global_position.x-previous.x,moving.global_position.z-previous.z).length());previous=moving.global_position
 	_check("moving_original_car_physically_decelerates_before_seat_handoff",saw_braking and saw_onfoot_pending and service.pending_actual_distance_m>.05 and maximum_braking_step<.20,{"initial_speed_mps":service.pending_initial_speed_mps,"actual_stop_distance_m":service.pending_actual_distance_m,"maximum_step_m":maximum_braking_step,"snapshot":service.snapshot()})
 	_check("confirmed_takeover_locks_capsule_and_other_transports",service.riding and not is_instance_valid(service.pending_car) and not scene.player.is_physics_processing() and scene.player.facility_control and not scene.city_bike_service.can_interact() and not scene.city_scooter_service.can_interact())
@@ -199,7 +202,7 @@ func _run() -> void:
 		if approached:await _tap_e()
 		for tick: int in range(240):
 			if not is_instance_valid(service.pending_car):break
-			if service._door_distance_for(body)>2.3:await _observer(body)
+			if service._door_distance_for(body)>2.3 or service.pending_stage=="approach" and service._door_distance_for(body)>1.10:await _observer(body)
 			await _ticks(1)
 		var mounted: bool=service.riding and not is_instance_valid(service.pending_car) and service.rental_index>=0 and service.bikes[service.rental_index].body==body
 		_check("physical_E_seizes_original_"+String(body.get_route_id()),approached and mounted,{"body_id":body.get_instance_id(),"snapshot":service.snapshot()})

@@ -139,3 +139,7 @@ Godot과 새 자산은 실제 사용하는 버전·파일에 따라 출처를 �
 사용자는 현재 지도 외곽의 실제 크기 기준 게임용 대형 병원/소방서/경찰서를 선택했다. [병원](../game/assets/authored/city_hospital.json)·[대형 경찰청사](../game/assets/authored/police_headquarters.json)·[소방서](../game/assets/authored/fire_station_service.json)는 자체 기본 형상과 미터 설계이며 실제 서울 기관의 상호/부지/현재 평면·운영을 복원한 자산이 아니다. 병원 본체는 원본 `landuse=construction` 필지 안에 놓고 두 출입 경사로는 인접한 비사유지 게임 지면까지 연결한다. 원본 건물/도로/보도·사유지·나무와 원본 TIN을 유지하는 범위와 동결 입력 SHA를 각 자료/실행 기록에 남긴다.
 
 EXP28 당시 인체 외형과 관절/동작, 치수 선/숫자·1m 격자는 자체 절차적 제작이었다. 당시에는 외부 캐릭터·GTA 자산·모션 캡처를 가져오지 않았다. EXP29의 현재 보이는 사람은 위 MIT/CC0 텍스처·스킨 자산으로 교체하며 이 문장은 이전 단계의 출처 이력이다. [원본 전수 치수 감사](../data/reports/real_scale/20261022/source_audit.json)는 보존된 OSM 기반 원자료 재투영/표시 외곽과 이격거리의 비교이며, 모든 건물의 실측 치수를 새로 확보한 자료가 아니다. 높이 근거의 추정/태그 구분과 원래 ODbL 고지는 유지한다.
+
+## EXP32 원본 경적과 운전자 반응
+
+도로 차 H 경적은 `traffic_car_takeover.gd`가384/512Hz 두 파형과 자체 envelope로 생성하는0.5초 PCM이다. 외부 녹음·게임 음원을 사용하지 않았다. 추가 운전자 배우는 이미 고지한 MIT Microsoft Rocketbox 인체와 기존 자체 avatar 동작을 사용하며 별도의 새 자산 다운로드가 없다. 원래 도로 차 body/model은 보존한다.

@@ -1,0 +1,4513 @@
+{
+  "schema_version": 1,
+  "task": "EXP32_CITY_ACTION_FREEDOM",
+  "client_task_date": "2026-10-23",
+  "recorded_at_utc": "2026-10-23T09:27:31.586478+00:00",
+  "result": "PASS",
+  "base_commit": "a40333496bae53f3d9a59a78174c379b4eab7130",
+  "archive_branch": "codex/archive-before-real-scale-20261022",
+  "archive_commit": "69db9ca0a214c7d27e9b03f9646b37f486724944",
+  "environment": {
+    "engine": "Godot4.7.2.stable.official.ed1daf0bf",
+    "native": "Apple M5 Metal4 Forward+",
+    "headless": "fixed-fps120 simulation acceleration, no performance claim",
+    "production_physics_hz": 30,
+    "upper_motion_test_physics_hz": [
+      30,
+      120
+    ],
+    "date_scope": "Report folder follows client task date. Raw engine/system timestamps are retained unchanged."
+  },
+  "features": [
+    "Fresh F leftjab/rightcross/lefthook with windup/contact/recovery, X shove pose and Gheldguard pose",
+    "Contact-time adult/cone/height/LOS game test, unchanged police60s and custody with matched action cancellation",
+    "Original14trafficcar braking, actualWdoorapproach, authoredexteriordriverreaction, timedplayerentry, originaldriving and cancellation/ownerrestore",
+    "Addedmax4texturedadultdrivers with actualcapsule/sweeps/displayinterpolation",
+    "OriginaldualtonePCM Hhorn withaudioenabled/gain/menu/ownershipguards"
+  ],
+  "current_engine_reports": [
+    "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.json",
+    "data/reports/city_action_freedom/20261023/action_freedom_native_native01.json",
+    "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.json",
+    "data/reports/city_action_freedom/20261023/regression/police_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.json",
+    "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.json"
+  ],
+  "current_engine_runs": [
+    {
+      "report": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.json",
+      "metadata": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.run.json",
+      "log": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.log",
+      "expected_checks": 38,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.log",
+      "expected_checks": 45,
+      "actual_returncode": 0,
+      "display": "macOS",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.log",
+      "expected_checks": 56,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.log",
+      "expected_checks": 13,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.log",
+      "expected_checks": 17,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.json",
+      "metadata": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.run.json",
+      "log": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.log",
+      "expected_checks": 27,
+      "actual_returncode": 0,
+      "display": "macOS",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.log",
+      "expected_checks": 28,
+      "actual_returncode": 0,
+      "display": null,
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.log",
+      "expected_checks": 23,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.log",
+      "expected_checks": 13,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.log",
+      "expected_checks": 18,
+      "actual_returncode": 0,
+      "display": null,
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.log",
+      "expected_checks": 112,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.log",
+      "expected_checks": 23,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.log",
+      "expected_checks": 33,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.log",
+      "expected_checks": 804,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.log",
+      "expected_checks": 71,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.log",
+      "expected_checks": 15,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.log",
+      "expected_checks": 62,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.log",
+      "expected_checks": 62,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    },
+    {
+      "report": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.json",
+      "metadata": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.run.json",
+      "log": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.log",
+      "expected_checks": 60,
+      "actual_returncode": 0,
+      "display": "headless",
+      "script_errors": false
+    }
+  ],
+  "results": {
+    "runs": 19,
+    "overlapping_assertions": 1520,
+    "failed": 0
+  },
+  "visual_review": "data/reports/city_action_freedom/20261023/visual_review_root.json",
+  "peer_visual_review": "data/reports/city_action_freedom/20261023/visual_review_peer.json",
+  "additional_pose_peer_review": "data/reports/city_action_freedom/20261023/action_views/visual_review_peer.json",
+  "normal_launch": "data/reports/city_action_freedom/20261023/normal_launch.json",
+  "captured_originals_selected": 19,
+  "count_scope": "Assertions overlap across models/regressions. Native45 and27 include capture/integrity checks; pixel reviews are separate. Not unique features or whole-city OS playthrough.",
+  "history": [
+    "Original failure/raw logs and measured fixture corrections retained under this folder, including original report names.",
+    "Headless action_freedom_dev02 selected because it passes38samecriteria with exactly frozen current sources/fixture; native samefixture45 adds7captures. The dev label is retained rather than relabeling the original run.",
+    "Takeover dev02 old2.3mapproach fixture gap; dev03 tiltedfuturebox/drivercapsule conflict and concurrentSHA; dev04 onlyconcurrentSHA. Final56includesall14.",
+    "Initial vehiclepose9/13 separated original16.8mmresthandreach/footresidual from actualhandcontact and adds matched-cancel controls; final17 criteria passed.",
+    "New actiondev01 lateobserver/typedArrayfixture corrections retained; no threshold relaxation or production phase injection.",
+    "Additionalpose final01caption redraw lag corrected onlyfixture in final02. Contact samples within one30Hztick, stillphase proof separately from actualworldevents."
+  ],
+  "limits": [
+    "Original open hands, chest-level guard, procedural palm-strike/gesture quality rather than realistic closed fists/mocap",
+    "X is pose/flinch; no physical knockback, health/damage or invulnerable guard",
+    "Original car door remains monolithic; exterior authored driver and timed upper entry gesture, not articulated continuous cabin extraction",
+    "Existing lower HUD/entrance-hint overlap in some city views",
+    "GUI mouse preview clicks failed with noWindowsAvailable; real keyboard route and visible current UI observed, but focus-out pause limits continuous OS combo/vehicle acceptance",
+    "Raw dummy renderer material-null/resource cleanup and host warnings remain; no selected script/parse errors",
+    "OtherMac/export, sustained performance, user comfort and full-city OS actions remain separate"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "kind": "source_or_runbook",
+      "bytes": 3168,
+      "sha256": "f5e2ba30e8743ef47e2485adf0ce58e09ced78ade426a5d93d0d35d764246625"
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "source_or_runbook",
+      "bytes": 5169,
+      "sha256": "fe501fed6cc7cc1d3d2bb235fd857f74afa4f55db364cf043584cb4fef137679"
+    },
+    {
+      "path": "README.md",
+      "kind": "source_or_runbook",
+      "bytes": 27151,
+      "sha256": "c9ad2fb5daacc85bf556ff9ec32ed4307a2ccff336bc96661a395b34c25de243"
+    },
+    {
+      "path": "config/data_usage.json",
+      "kind": "source_or_runbook",
+      "bytes": 5784,
+      "sha256": "a6ab907db9772e9f8c70c94c9ecf25f9d1d40f5bc8b3a5301392d309a15f2abb"
+    },
+    {
+      "path": "config/geometry_rules.json",
+      "kind": "source_or_runbook",
+      "bytes": 1161,
+      "sha256": "0f2109457a7d4f0f947d6db668b5e58bf02d4d16319b2956232b86e4403a3177"
+    },
+    {
+      "path": "config/height_rules.json",
+      "kind": "source_or_runbook",
+      "bytes": 2072,
+      "sha256": "84d219530c8f8596415395b9f20044e4129b61ab1896b09837f9f7a526b0326d"
+    },
+    {
+      "path": "config/movement_rules.json",
+      "kind": "source_or_runbook",
+      "bytes": 1734,
+      "sha256": "f405642fdc95dfd8edeba2dee71edf351229d5fb2457417ca4b725e81f37e488"
+    },
+    {
+      "path": "config/region.json",
+      "kind": "source_or_runbook",
+      "bytes": 949,
+      "sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834"
+    },
+    {
+      "path": "config/scale_view.json",
+      "kind": "source_or_runbook",
+      "bytes": 1125,
+      "sha256": "9dd74f3dccf20adf1af8a260632287694106a585567ff24e9203227426eaaecc"
+    },
+    {
+      "path": "config/world_display.json",
+      "kind": "source_or_runbook",
+      "bytes": 1478,
+      "sha256": "a585fe08c70db11b950cbd536b0a3f0e3c60c81f92839c7733bd1ddf3ccdd3b3"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev01.console.log",
+      "kind": "evidence",
+      "bytes": 435196,
+      "sha256": "ac470dac14ebd87fd2abe448ef57ce3e1f4385e8b349f77fee22747b95a858de"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev01.json",
+      "kind": "evidence",
+      "bytes": 29022,
+      "sha256": "cbd727d5c13538f8138adba5d0243742221594c429d06ae439fcb2e5c657aaf6"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev01.log",
+      "kind": "evidence",
+      "bytes": 404200,
+      "sha256": "656ce0a0cd1cdca568e2290ba3245dd91f3c761482db49b248c40166975194fc"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev01.run.json",
+      "kind": "evidence",
+      "bytes": 1058,
+      "sha256": "82d83e261ebea609fc282740f83723512d63654cfe909ad19e811aee573eeda7"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.console.log",
+      "kind": "evidence",
+      "bytes": 10888,
+      "sha256": "ab66a750490d2550c99c8735ee00a147e1b41272efe85a0da598ceff504d71dd"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.json",
+      "kind": "evidence",
+      "bytes": 54459,
+      "sha256": "eea3034174275359565c5b975355bebdf4d9e4c47610fd436134ccdfb7a3abbf"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.log",
+      "kind": "evidence",
+      "bytes": 10643,
+      "sha256": "d03e7340989d55310b81eb44f57e5c793a2bc858df10265f5829ea35fb809e8b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_headless_dev02.run.json",
+      "kind": "evidence",
+      "bytes": 1059,
+      "sha256": "f26fb2a80175908d36bba6f927ab51c69040aad293f0902c179471e832bdf187"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.console.log",
+      "kind": "evidence",
+      "bytes": 11084,
+      "sha256": "e81beac4533e3182056f87643db6a3bc7d3856c6a4dd325e2b5a28281fe94896"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.json",
+      "kind": "evidence",
+      "bytes": 56009,
+      "sha256": "6a96813b75698bf62003a422e2ec08111a37a2177f5ac92de55fda9f66963872"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.log",
+      "kind": "evidence",
+      "bytes": 11084,
+      "sha256": "e81beac4533e3182056f87643db6a3bc7d3856c6a4dd325e2b5a28281fe94896"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.run.json",
+      "kind": "evidence",
+      "bytes": 1012,
+      "sha256": "e5312e33bc88dae2e30d71d53ea338b9febd55c0834f9311fe39fb4bdabe2b5e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_cross_right_intermediate.png",
+      "kind": "evidence",
+      "bytes": 813228,
+      "sha256": "e62f9c583c0d9c265336e331a34af3ccc9734b73ea433b45afe82dbe8c306b20"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_held_guard.png",
+      "kind": "evidence",
+      "bytes": 815701,
+      "sha256": "ae1e603ab737d7779f96d89f8dfa12160a512e585e45d75d9e100fef87ff2b64"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_hook_left_intermediate.png",
+      "kind": "evidence",
+      "bytes": 812524,
+      "sha256": "6ffe6eaddb75901038c37445d545b255ca625bc765fdb7b6de8e49ee2b6caa6c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_jab_left_intermediate.png",
+      "kind": "evidence",
+      "bytes": 813552,
+      "sha256": "cffacd431b6ccf102b61ef2c25c030669101b678bc6556a0727c3eff5a715d43"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_original_car_driver_exit.png",
+      "kind": "evidence",
+      "bytes": 760011,
+      "sha256": "87c3d621c7afa0562460c3d3cf1a6c810562fca2290cd981491eddb02175b38c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_original_car_player_entry.png",
+      "kind": "evidence",
+      "bytes": 759127,
+      "sha256": "29efd0d13c103352f2ed519992593b83f3ad55d52c806ffa5e2cb5c82c5b069e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_native_native01_shove_intermediate.png",
+      "kind": "evidence",
+      "bytes": 812831,
+      "sha256": "c04482416917cd346b32ead9da95c9f79300f40c3a16120e806f2990b1b4a766"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_freedom_pixel_review_acceptance.json",
+      "kind": "evidence",
+      "bytes": 6689,
+      "sha256": "da5d45fe8028876532bc48a8307dff93e46554a468f7d9922639bd6c9e84e8b8"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01.console.log",
+      "kind": "evidence",
+      "bytes": 180,
+      "sha256": "79c0303002fbcad3665e05e7e5c89724a6cbd1ad04bf9f173fd37488254445c0"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01.json",
+      "kind": "evidence",
+      "bytes": 737081,
+      "sha256": "33f83a8bfb87b07152085c42c16845144b951eadf4709edd887b94a6bc85cd3b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01.log",
+      "kind": "evidence",
+      "bytes": 180,
+      "sha256": "79c0303002fbcad3665e05e7e5c89724a6cbd1ad04bf9f173fd37488254445c0"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01.run.json",
+      "kind": "evidence",
+      "bytes": 4023,
+      "sha256": "c344b22201eddf7800fda826de798d067a693da72c3d5b704b8766c473c0f165"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_cross_right_contact_side.png",
+      "kind": "evidence",
+      "bytes": 97682,
+      "sha256": "3002d7aedea70abe06282a41831ec65c6b3282950e5369c4b54ba794ee4f44ae"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_cross_right_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 119333,
+      "sha256": "6a1de3f6b5a500c8472706a1c219fdb2ea8d4066eba757147b668edb2788db3a"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_guard_steady_front.png",
+      "kind": "evidence",
+      "bytes": 120537,
+      "sha256": "19e6317bbc05c5876c79650eca83a4ca84c76a750cef6daabb89c4eb21c2a324"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_guard_steady_side.png",
+      "kind": "evidence",
+      "bytes": 94553,
+      "sha256": "dad228fd0322871867a448a1c6e9206db282e4d97ddd501377129db32c91e401"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_hook_left_contact_front.png",
+      "kind": "evidence",
+      "bytes": 118824,
+      "sha256": "31e765d6adf67faeab4ebc2664d8c845fd70c19f76b86cf979fff4db1ba971fa"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_hook_left_recovery_side.png",
+      "kind": "evidence",
+      "bytes": 95450,
+      "sha256": "6ee549ad367330c3707d947e89ee1055ea9fdeafdf5b8f7e3c550956a4d6fcca"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_jab_left_contact_side.png",
+      "kind": "evidence",
+      "bytes": 80695,
+      "sha256": "199a0b10fc56c198794f24c74a642ec2a1a8d1c9d2327908dc04bcddec5043a9"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_jab_left_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 119759,
+      "sha256": "82e2c0fd0191ae16b3ed85cf2d88e79f46b55b4bf74cd8e7751f89dacb4c0ede"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_shove_extension_side.png",
+      "kind": "evidence",
+      "bytes": 97763,
+      "sha256": "f996f1ed2e19c5f7759f9278573fad6d66e707c9c705876b74c6b64fa4d44616"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_shove_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 120276,
+      "sha256": "722d53712170e69e0c8563791f1a62094b4dfb90a2c124977908d11f3ea907d7"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_vehicle_enter_midgesture_quarter.png",
+      "kind": "evidence",
+      "bytes": 107794,
+      "sha256": "a576684c5db0da755e3b02f902e773f6da3590687a804bb7ececf42cb52ff966"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final01_vehicle_exit_midgesture_quarter.png",
+      "kind": "evidence",
+      "bytes": 107091,
+      "sha256": "39c63d1ebe52b508dd9922788bd9d5cae47ffa8decee945d065404f6224bc778"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.console.log",
+      "kind": "evidence",
+      "bytes": 180,
+      "sha256": "79c0303002fbcad3665e05e7e5c89724a6cbd1ad04bf9f173fd37488254445c0"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.json",
+      "kind": "evidence",
+      "bytes": 737070,
+      "sha256": "7583b50d87f03c7872dd11d1e2ca22facb29653c5d2324e2dad3b09126cbc0ec"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.log",
+      "kind": "evidence",
+      "bytes": 180,
+      "sha256": "79c0303002fbcad3665e05e7e5c89724a6cbd1ad04bf9f173fd37488254445c0"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02.run.json",
+      "kind": "evidence",
+      "bytes": 4024,
+      "sha256": "8fc109758d05796584b3097c6f70491bfc2a7c0c4d04966c0e6afa2b25486207"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_cross_right_contact_side.png",
+      "kind": "evidence",
+      "bytes": 82975,
+      "sha256": "4e2d617912227841ea27fa879b361049f6b150eefe1b869fd69e3c9dcca60184"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_cross_right_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 104448,
+      "sha256": "0bd8a2370264826699a39f889bacd85c7a86dece43f2786a2db7768b7d416f4e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_guard_steady_front.png",
+      "kind": "evidence",
+      "bytes": 105761,
+      "sha256": "cae4e43a17fc4eaba3682cf3fdcdde53942a6f4346e8cf58676277ca4edc50c0"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_guard_steady_side.png",
+      "kind": "evidence",
+      "bytes": 79435,
+      "sha256": "e3b7bcf10f71a64ebe7b09c3e0212f47303883c593a06b1c372e791ec8c09385"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_hook_left_contact_front.png",
+      "kind": "evidence",
+      "bytes": 103311,
+      "sha256": "6aa51d3ffcea0b9f503496fe249665acc300f3ff2c003af8b606eccc128bbb13"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_hook_left_recovery_side.png",
+      "kind": "evidence",
+      "bytes": 80293,
+      "sha256": "f244c6b0af2ce8233206ca66a1ec025b932d1d3ca324eb2026f033398e724aea"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_jab_left_contact_side.png",
+      "kind": "evidence",
+      "bytes": 80736,
+      "sha256": "ef4a7b286cbed538c91196303cb2e3bccdea93d334edf36960b6b8b566a4fdb8"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_jab_left_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 105334,
+      "sha256": "55b179551ead862c9d70369bb56ff28367b6b46d88bce07f43479a3275cb581b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_shove_extension_side.png",
+      "kind": "evidence",
+      "bytes": 83350,
+      "sha256": "8c5c9a4f6a43ae653d5c91c95aeb6ddda0dd80a83ac796d8e111b193f89634f2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_shove_recovery_front.png",
+      "kind": "evidence",
+      "bytes": 106010,
+      "sha256": "603495f5528f2439f6a04dab51219acab5af2147976148a3328e4f957872428d"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_vehicle_enter_midgesture_quarter.png",
+      "kind": "evidence",
+      "bytes": 93238,
+      "sha256": "c32d3b0fd9c00d9ced6aac0eafb0986bfffda6ea25eb1d6aa6f02259e488d5ad"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/action_views_native_final02_vehicle_exit_midgesture_quarter.png",
+      "kind": "evidence",
+      "bytes": 90984,
+      "sha256": "c1e2690d77e8112a49279fe3835f98e889cb39d466b7a92e8910f1200ac45f65"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/development/check_city_action_views_before_caption_fix.gd",
+      "kind": "evidence",
+      "bytes": 10070,
+      "sha256": "9f77e8237f78263f5b2ca7e779d05f901df4e803652070f68ae73596c7c41546"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/development/headless_parse_native_guard.json",
+      "kind": "evidence",
+      "bytes": 2736,
+      "sha256": "f72f7ae8c8d931d4baa7682d2c383856c5c45e5ba2cc3c22d1ec186aabaeca18"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/development/headless_parse_native_guard.log",
+      "kind": "evidence",
+      "bytes": 524,
+      "sha256": "4f8c658e7371f05fef5e9f3aa644acd5f63ecd1ed453a29be767b16af733808a"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/development/history.json",
+      "kind": "evidence",
+      "bytes": 731,
+      "sha256": "f8823442b4184d34e34387d89ffb8ce39f52073ae4014b4023fb82da2e589083"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/action_views/visual_review_peer.json",
+      "kind": "evidence",
+      "bytes": 17670,
+      "sha256": "481315ea9966a9357a11e426c5d4e3625eb9b8193d3bb6ac6d0ce9286e6b729c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch.json",
+      "kind": "evidence",
+      "bytes": 2715,
+      "sha256": "50daeb87443198c72bba243b2724265c5c1e3a169d279022658384b93a3c9c82"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/old_ordinary_process.json",
+      "kind": "evidence",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/ordinary_actions_and_walk.png",
+      "kind": "evidence",
+      "bytes": 165732,
+      "sha256": "8c37cf4cc602dbb7ef466e276551ca633d05fc994a38ca31d5bced59a6f1259f"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/ordinary_keys_observed.png",
+      "kind": "evidence",
+      "bytes": 161144,
+      "sha256": "3c3ff44d7ea1a12b4c4eb87a23631842777578d5b30c80569732931daf6a77f5"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/ordinary_startup_snapshot.log",
+      "kind": "evidence",
+      "bytes": 7711,
+      "sha256": "0843350c7b788110061a31e37446e6dea2abec950cd410eed08fcea7ccce666a"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/preferences_after.json",
+      "kind": "evidence",
+      "bytes": 463,
+      "sha256": "809950ea2f33697edf911d2c92c3bf0f3062351ad0af3f29ef3b79cb39165b51"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/normal_launch/preferences_before.json",
+      "kind": "evidence",
+      "bytes": 463,
+      "sha256": "809950ea2f33697edf911d2c92c3bf0f3062351ad0af3f29ef3b79cb39165b51"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 251,
+      "sha256": "ef35f8ed871c7a89721a5cda7eafade026fa7cb829909afcca2f806718348b8e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 334602,
+      "sha256": "bf6012db7e9ef5c21012a9e85a996a94a3fdf6123210796b87506ccb3fdb3ddd"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 251,
+      "sha256": "ef35f8ed871c7a89721a5cda7eafade026fa7cb829909afcca2f806718348b8e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/authored_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 978,
+      "sha256": "fa442cdc83257c427946c6a1d9851ca935f2c7b345e97cde769d460410cacd48"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 9686,
+      "sha256": "737a2a51d60a571ec9a3d8a9ba263f6d98d127046d40aeb26933b9870022bf01"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 245533,
+      "sha256": "44181058e7b794c5fd0be7d571faadb711ae2f4e2171e1b6628d19380b4eb4f2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 9686,
+      "sha256": "737a2a51d60a571ec9a3d8a9ba263f6d98d127046d40aeb26933b9870022bf01"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/car_police_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1071,
+      "sha256": "dbb9894718f5edca1e0e01e755b39cc9ca362830339bdaf479c4d4aae4eeb1db"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 7938,
+      "sha256": "012b580d25e40fc2d843f2e2f98c4daf23a4d44dae9e2c3da688671958e6f74b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 3045163,
+      "sha256": "eb0e1943f347e500212cb49c62d8927659af480304be478e8e6888a80fa13967"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 7693,
+      "sha256": "a17b6e5bfccfa062d12f26bf93030e8a5bb2f921bad9a98b1aacba84a2349680"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/facilities_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1076,
+      "sha256": "1543cbed4af0ec739e0e62f149a2252d8c041c29c077ac122b62b1e337241867"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 103,
+      "sha256": "f676dc9f09022dd515070e582244c677ab5b98ec6f0e6e7141fb9f2d07c55bb2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 84405,
+      "sha256": "c6be1e6e325d7d0ed89866111292cebdec4e4dae8ed02060c5e2253a9d939616"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 103,
+      "sha256": "f676dc9f09022dd515070e582244c677ab5b98ec6f0e6e7141fb9f2d07c55bb2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/hybrid_gait_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 978,
+      "sha256": "1985a992391ea4920b791e31d667b3bb26b3b2ec769aabd0dda84fced8103940"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 10023,
+      "sha256": "2b99a4963ed1e71bdcf6f03a2f5c0ec490f4c92af37620c416b9815d6fd074ef"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 35483,
+      "sha256": "b644d4c6215819e582d3f32f7e32beb070dc7680b00479988dbd6a31d4396e61"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 10023,
+      "sha256": "2b99a4963ed1e71bdcf6f03a2f5c0ec490f4c92af37620c416b9815d6fd074ef"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/integration_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1078,
+      "sha256": "1dab7f99e1f374ded9cc4c29e4ff4bfb24c39a49a9bd685605eb4987b2a08c30"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 9660,
+      "sha256": "7d9815a28094764759896255f21f1aae44bbf67000a87ccd76b8a8d5e811b3bd"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 134609,
+      "sha256": "67689431d39810305fd6c80f5a0737d0a4fa976caeca64f1aacb2f9051eb44d8"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 9415,
+      "sha256": "37a405dd5b2e3ea29515208a85e3943d2eb88df74d5952d451ec81fc500a3111"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/library_pool_life_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1092,
+      "sha256": "0852df79fafe93251df6b60b1b4da9c4f9578f05966e30261d4afdab1ec85f5c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 9750,
+      "sha256": "5add544649317736a5705cdf5043c6c8fbe39097f8bab785c829a5b8ca2a847e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 134248,
+      "sha256": "327ce401c490e51e07b22f2af5b70446b6cabdd9a058da98940e3e0a845e5e95"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 9750,
+      "sha256": "5add544649317736a5705cdf5043c6c8fbe39097f8bab785c829a5b8ca2a847e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/police_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1061,
+      "sha256": "4dbc049154355a88076b1703bc7de0b8c0b2e131be001a2fba6f837e1658f11b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 1339312,
+      "sha256": "a15c632c7e077635506d145730972ff7abf37bc28cbbeba3a3f8b8a3bc5ab92f"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 107,
+      "sha256": "99d067a1c371621fe47070b74299d1d7756348a27d1452ab1cfeafc5f57bffcc"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/rig_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 987,
+      "sha256": "c70a101e5e9e5f92c3e8eb0bce4d04783e85bf5c133e6b646ade54a3111eadca"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 9335,
+      "sha256": "df2ce5e46d1b60b3707ee56166717026fc02e960771902ec5ecd0fde2c70f03b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 23417,
+      "sha256": "9d1d5afb5a29cbfd1e6cdbee8a3921918fb883e89b14e5928635da6a0a58a49d"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 9090,
+      "sha256": "de8a8b7691d4d96266527ab358a775da2f36fd6ee8267d482f518279724ca769"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/sandbox_controls_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1093,
+      "sha256": "9c6e23676b59cea6a229808abce2b83e325e9370c5c025e1f3cf4fda8575b911"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 8809,
+      "sha256": "bf57313bc10cd58e4397f7fe37d5e6a191895a5f583a037941ef294f3dabae08"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 107352,
+      "sha256": "d2e2756c4b5524525ea38aab33769eeda8d28c5e4a7783b73ff80361c6db286c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 8809,
+      "sha256": "bf57313bc10cd58e4397f7fe37d5e6a191895a5f583a037941ef294f3dabae08"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/stolen_euljiro_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1091,
+      "sha256": "d801ceb53721e7a2e49800ed4a25b3d3fcd214b3620e1a27a54dfbc7dc3f5e48"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.console.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "4374f6467988b6e3b6bc5cda3953c250dac7b2d7535c100abd15567971576cd2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.json",
+      "kind": "evidence",
+      "bytes": 1176482,
+      "sha256": "6d50f2db44bb1d55366b2264983129755dfe775afcf951bf9aa175b940b3a529"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "4374f6467988b6e3b6bc5cda3953c250dac7b2d7535c100abd15567971576cd2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_female_hz30_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1017,
+      "sha256": "26e5044f6f2675029e07031e2cd5a507f5468bd9d55b33eba351b7df3ec4e09d"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.console.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "03ba544b05e501fbd5b87386b0367975221a9cce772354f33e9f271b4f747b2e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.json",
+      "kind": "evidence",
+      "bytes": 1183127,
+      "sha256": "68d40da01b6f368036534239f702fd2fbe6a1d0a0b864faddd7d31bb05023b4d"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "03ba544b05e501fbd5b87386b0367975221a9cce772354f33e9f271b4f747b2e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz120_final01.run.json",
+      "kind": "evidence",
+      "bytes": 995,
+      "sha256": "2ffd955833b2c989ba40b19bb6227ec81ab130b3a98a1a73e9f69647726eb0bb"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.console.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "4374f6467988b6e3b6bc5cda3953c250dac7b2d7535c100abd15567971576cd2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.json",
+      "kind": "evidence",
+      "bytes": 1190662,
+      "sha256": "795927720d91f32e8026dc842d6ebe989992fe686a27690ad2d1b96d0ccc76b4"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.log",
+      "kind": "evidence",
+      "bytes": 246,
+      "sha256": "4374f6467988b6e3b6bc5cda3953c250dac7b2d7535c100abd15567971576cd2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/regression/upper_male_hz30_final01.run.json",
+      "kind": "evidence",
+      "bytes": 992,
+      "sha256": "5386ab46c4c6216716158e4ca59d2f3318da8b666cdd3d2eaba14512ecadd39f"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/development_failure_notes.json",
+      "kind": "evidence",
+      "bytes": 936,
+      "sha256": "63d6f999b0178fc0e555c4f73f54632050b4d5f20faeff6f4b7bc7da9e8dca2c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 38102,
+      "sha256": "dee75f1f58e0ccfaceab100c54c8179c7f0c65de12f545c88c1abd7b66eeb36c"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 9029,
+      "sha256": "945cd5faca3084114a84928884ab4986122e6954f9675cf84d09b81580f514aa"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/entry_cancel_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1044,
+      "sha256": "8521ebfea0cd4b521d464cc082e3bf0d3ef7acfe8163daf8331c1b793965b257"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev02.json",
+      "kind": "evidence",
+      "bytes": 36946,
+      "sha256": "6906f2445cc6fd324b2837dc7145764537bc939f11fadab4ee2589ef3a2cd714"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev02.log",
+      "kind": "evidence",
+      "bytes": 9108,
+      "sha256": "55149b399a62e2614afc1b722ebae374b885b4062133583f5cc638219ff65213"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev03.json",
+      "kind": "evidence",
+      "bytes": 454980,
+      "sha256": "b57f5b9d132230bfbf9b6ce4b80874335e2983d204e3292a78680c7b168ef411"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev03.log",
+      "kind": "evidence",
+      "bytes": 11574,
+      "sha256": "a691f478ed9a8cc87056210923285a3f5b48002aca3df314fb5119c14b1ec9bf"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev04.json",
+      "kind": "evidence",
+      "bytes": 479573,
+      "sha256": "d7cbd1ae5cc67a0d1046ae7595570afb999f423bbe9f67e030ea1c1ab7b489f2"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_dev04.log",
+      "kind": "evidence",
+      "bytes": 11633,
+      "sha256": "64374d2474b95d14a36ea88ecdf02304b95662d22da7aa95e3a542cb078b6bb5"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 11632,
+      "sha256": "8ccc0101ac52d44fa7a9c0009893d96262ee49f9549da041e67f677b1e5dcb92"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 480843,
+      "sha256": "5411ffc095c1c765747fea9074154e20d25bbda16439e2393e9e5e25e28bef9b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 11632,
+      "sha256": "8ccc0101ac52d44fa7a9c0009893d96262ee49f9549da041e67f677b1e5dcb92"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle/takeover_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 1055,
+      "sha256": "fa594e067f16950d58431db797d5a1c5ef1e66fdc478de1c1a1ff1d2396a05be"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev01.json",
+      "kind": "evidence",
+      "bytes": 406233,
+      "sha256": "cee386911ed1e5a64ced75f8f681fdf48973e2741c6514a4cfa68f0f9f994ca1"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev01.log",
+      "kind": "evidence",
+      "bytes": 2685,
+      "sha256": "e751a9cb2bdff09d4f2dbf5c5eb2be12fe3154a4f751f394f7752b109363cb31"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev01.run.json",
+      "kind": "evidence",
+      "bytes": 1532,
+      "sha256": "2b5d1e1287b2798acb8bb9bfa673cb2e96da1d20e3d046d8eb193f1b87c665ab"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev02.json",
+      "kind": "evidence",
+      "bytes": 408641,
+      "sha256": "2393065c3b739af199c459ea9ffce961eeec38a4abf2222e4bf1b4b1c75ccdfa"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev02.log",
+      "kind": "evidence",
+      "bytes": 376,
+      "sha256": "08fb80a64b25adecbb804efd8d86c2ec46086081031f70c0b92d9da108ef9a2b"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev02.run.json",
+      "kind": "evidence",
+      "bytes": 1340,
+      "sha256": "ece8364b33894509b14966884defb1bee0d2d0d7a94890bdbc1fc2dc7abb85d7"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev03.json",
+      "kind": "evidence",
+      "bytes": 409140,
+      "sha256": "dd83b63e0afef81e2939de470eab89b69cc8176380e7610fa24b8e53d82969a8"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev03.log",
+      "kind": "evidence",
+      "bytes": 376,
+      "sha256": "041c1aaa65328a995497d7f1d4b6755aa38741c327825714694710cfcca7c2d4"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/development/vehicle_pose_dev03.run.json",
+      "kind": "evidence",
+      "bytes": 1756,
+      "sha256": "4e0994211ed854ef83d0d04f079fe95b3b1e0707ce56b0cf7b25dc9c6ce2a7fe"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.console.log",
+      "kind": "evidence",
+      "bytes": 253,
+      "sha256": "0055dac508c4138d14d58a0a6c28a85ef88bee5bcdacdb2ac3eca935c1e336e1"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.json",
+      "kind": "evidence",
+      "bytes": 409469,
+      "sha256": "8670be9ea80cf1022a25c3d5d95829a4763d4c7f0e7ed886bb33786e1bc2b33e"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.log",
+      "kind": "evidence",
+      "bytes": 253,
+      "sha256": "0055dac508c4138d14d58a0a6c28a85ef88bee5bcdacdb2ac3eca935c1e336e1"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/vehicle_pose/vehicle_pose_headless_final01.run.json",
+      "kind": "evidence",
+      "bytes": 3516,
+      "sha256": "66be1b64a536c0270fa7889261195779d7d164c4abe1804a74fd138c058b44d6"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/visual_review_peer.json",
+      "kind": "evidence",
+      "bytes": 16647,
+      "sha256": "6b156eee61599df38e69748da13bd78a8fa078033629348ff9a16a2951c11ddb"
+    },
+    {
+      "path": "data/reports/city_action_freedom/20261023/visual_review_root.json",
+      "kind": "evidence",
+      "bytes": 6022,
+      "sha256": "6973543aa18285b56e9bfd023a9b9ca8e36a1094ec12e62aa981f4e07ecb3c2b"
+    },
+    {
+      "path": "docs/ASSET_REUSE_OPTIONS.md",
+      "kind": "source_or_runbook",
+      "bytes": 4828,
+      "sha256": "798a4dee1510225f66f778ae66972fa5fde53a24bb4fa7cb7c020b19b6360dbd"
+    },
+    {
+      "path": "docs/ATTRIBUTION.md",
+      "kind": "source_or_runbook",
+      "bytes": 26024,
+      "sha256": "4b69e63281faf8834cc5832c0024d2409cb00c7dc9c4a587f38542de3d857aa1"
+    },
+    {
+      "path": "docs/CITY_ACTION_FREEDOM.md",
+      "kind": "source_or_runbook",
+      "bytes": 3550,
+      "sha256": "9816be070eab5b1e96286c954f56e0f4b1a0a0f0901b54c8933ef5455efc5431"
+    },
+    {
+      "path": "docs/CROSS_MAC.md",
+      "kind": "source_or_runbook",
+      "bytes": 49402,
+      "sha256": "3618e6987043471dbbc1b19b2ad26eb7d8c80a62b804e737edd2faaaeae97d7f"
+    },
+    {
+      "path": "docs/DATA_SOURCES.md",
+      "kind": "source_or_runbook",
+      "bytes": 10748,
+      "sha256": "900ad2156814fe57b2995c259f8bfae9d9578795a6549d5f9f07c94e9732e221"
+    },
+    {
+      "path": "docs/ENGINEERING.md",
+      "kind": "source_or_runbook",
+      "bytes": 22265,
+      "sha256": "aa8ccf6eff25353a3186021ae76f941396f59cee20573618f0f51d4792553ac8"
+    },
+    {
+      "path": "docs/EXECUTION_LOG.md",
+      "kind": "source_or_runbook",
+      "bytes": 338422,
+      "sha256": "89e9390d70c4a640fb53d3b2bfdb605204a2d13f7a0ee73f4317fdc00ecf21f5"
+    },
+    {
+      "path": "docs/GAME_PROJECT.md",
+      "kind": "source_or_runbook",
+      "bytes": 23209,
+      "sha256": "960ba1bf3b9a3514d599aa07c3523d70ec1e92c0edf2b74dc034539cdfd57008"
+    },
+    {
+      "path": "docs/HUMAN_GAIT_AND_LIFE.md",
+      "kind": "source_or_runbook",
+      "bytes": 7963,
+      "sha256": "4f5992ba066cbc7bc514a7da415b5d3b88da1a5b54de5e5c8da79607afd138d8"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_TASKS.md",
+      "kind": "source_or_runbook",
+      "bytes": 88371,
+      "sha256": "26bb95fb50148c4959b347a1d792dd8600c074f4b8ac158b8376e5a7a0ee4f45"
+    },
+    {
+      "path": "docs/MASTER_PLAN.md",
+      "kind": "source_or_runbook",
+      "bytes": 11568,
+      "sha256": "f8e584a24283cc910fdf9ccfa0545bfc3d7cd91941f36b001a1717e3e0406da7"
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "kind": "source_or_runbook",
+      "bytes": 65269,
+      "sha256": "241024b04269a1c4f697781ff9d74f72101e494be790d01607c957bd69fd0a7e"
+    },
+    {
+      "path": "docs/README.md",
+      "kind": "source_or_runbook",
+      "bytes": 3292,
+      "sha256": "dbd269a797f4db6dd03b3da9e7e4255ca69298c38df23e278d6e2de887492d6c"
+    },
+    {
+      "path": "docs/REALISM_REWORK.md",
+      "kind": "source_or_runbook",
+      "bytes": 7536,
+      "sha256": "014c6605f5227d208daaaf3c07e297d468b4172904f986b6c96595a07137d8d1"
+    },
+    {
+      "path": "docs/REFERENCE_DIRECTION.md",
+      "kind": "source_or_runbook",
+      "bytes": 7118,
+      "sha256": "f38a4d5e83b29cdfdbfd8a29ba87399e6db87088061565d64070b623d6851a04"
+    },
+    {
+      "path": "docs/RUN_GUIDE.md",
+      "kind": "source_or_runbook",
+      "bytes": 54674,
+      "sha256": "901ea2db5a3b13c50a61246974cae5e36cbfb80fe2cc481284606e826380f09f"
+    },
+    {
+      "path": "docs/SOL_HANDOFF.md",
+      "kind": "source_or_runbook",
+      "bytes": 48010,
+      "sha256": "d81d94773513607ceb173d8f98ecabb66c2aa17eb3125bb6fdd9a54971e37086"
+    },
+    {
+      "path": "docs/TECHNICAL_CONTRACTS.md",
+      "kind": "source_or_runbook",
+      "bytes": 164873,
+      "sha256": "163088fdfde4268712fcc53e60df1009da47db2c5c4af802fab95be990da3e71"
+    },
+    {
+      "path": "docs/TERRAIN_INTEGRATION.md",
+      "kind": "source_or_runbook",
+      "bytes": 8932,
+      "sha256": "9cc02ef856d409f03138307aa8ff5dfeb6f1047f5eac45ced377a3bc0b815adb"
+    },
+    {
+      "path": "docs/VALIDATION_PLAN.md",
+      "kind": "source_or_runbook",
+      "bytes": 125624,
+      "sha256": "b64ac6d690c7cc78f3fadcf00c6be9fda1d518b6a2639ce6c845abed00356f67"
+    },
+    {
+      "path": "docs/WALKABLE_CHECKLIST.md",
+      "kind": "source_or_runbook",
+      "bytes": 3482,
+      "sha256": "f3de3dd68c37560c74b0aa4914d31dc8383bb15de9323065c54c1e33a89cb935"
+    },
+    {
+      "path": "docs/WORK_STATUS.md",
+      "kind": "source_or_runbook",
+      "bytes": 136638,
+      "sha256": "a653e3abfbbc316d8a69a7edf21d00eacae06a4c1429bb04ff14286eed1e5351"
+    },
+    {
+      "path": "docs/data_gaps.md",
+      "kind": "source_or_runbook",
+      "bytes": 10746,
+      "sha256": "e07bfc1814ea76fb027caab698537b741ee1a91c685a903898e5c1d8c88b8f82"
+    },
+    {
+      "path": "docs/environment.md",
+      "kind": "source_or_runbook",
+      "bytes": 4980,
+      "sha256": "a7f6ce04ab5840f849a584ed902b8adb4bf99e6d82e1f2f6e050835c9c725237"
+    },
+    {
+      "path": "docs/evidence/D02_EXTRACT_REVIEW.md",
+      "kind": "source_or_runbook",
+      "bytes": 4054,
+      "sha256": "c731e1d058c229b2fcd8f7c338068f5c18e2a30a28fafd3e2c3375180870319f"
+    },
+    {
+      "path": "docs/evidence/D03_KOREAN_SOURCE_ACCESS.md",
+      "kind": "source_or_runbook",
+      "bytes": 6351,
+      "sha256": "5457d5bb300d29fee1fb007a6829ca80ad1f4a823533ee07a9d3bc7223d39ed9"
+    },
+    {
+      "path": "docs/evidence/D03_PALACE_ROUTE_SOURCES.md",
+      "kind": "source_or_runbook",
+      "bytes": 11886,
+      "sha256": "2b853a74e14af3bd7e384169f2b1a06a1aeaf7606ee556d050ea56ab7caf5fd8"
+    },
+    {
+      "path": "docs/evidence/D03_SOURCE_OVERVIEW.svg",
+      "kind": "source_or_runbook",
+      "bytes": 336601,
+      "sha256": "9e301171f7a6e6dcd210b3a03df9a8fbd6a74c282a88a313893e5bf2ea71a5d1"
+    },
+    {
+      "path": "docs/evidence/D03_SUPPLEMENTAL_REVIEW.md",
+      "kind": "source_or_runbook",
+      "bytes": 8973,
+      "sha256": "9f06a63e690f8686d91f951908760120ac67bbe85cfe5c78e176a27a5326075f"
+    },
+    {
+      "path": "docs/evidence/G01_COORDINATE_CHECK.md",
+      "kind": "source_or_runbook",
+      "bytes": 4430,
+      "sha256": "cb927f6463d536f15c4773eab78543b12029dc9bba7effd85c58065ea0a786ee"
+    },
+    {
+      "path": "docs/evidence/G02_GEOMETRY_REVIEW.md",
+      "kind": "source_or_runbook",
+      "bytes": 7653,
+      "sha256": "9aa5327dd27837d5b699a6892bab9bd167b7feb43d84af1f2f468dbb8c75ee1a"
+    },
+    {
+      "path": "docs/evidence/W03_INPUT_REVIEW.md",
+      "kind": "source_or_runbook",
+      "bytes": 3778,
+      "sha256": "9ffd7817c1c2d07996ded445521fd43e559c739b7f6606cf77a06b53ede87220"
+    },
+    {
+      "path": "docs/landmark_reference.md",
+      "kind": "source_or_runbook",
+      "bytes": 29676,
+      "sha256": "92a81e9e4b1b24edea5bafa4743265f078c586c13615132f873e3b90bd59f7d3"
+    },
+    {
+      "path": "docs/media/sim2seoul-banner.svg",
+      "kind": "source_or_runbook",
+      "bytes": 3700,
+      "sha256": "435514f5d5f128ec050ebad96574e2dbfce1b421b88a21a38a4a12459ffc227d"
+    },
+    {
+      "path": "docs/performance_notes.md",
+      "kind": "source_or_runbook",
+      "bytes": 8834,
+      "sha256": "f8dbf848f004061ea7bf0afae6eee78929ca5f50ed530e1eb23a974792cdf52f"
+    },
+    {
+      "path": "docs/route_rules.md",
+      "kind": "source_or_runbook",
+      "bytes": 8414,
+      "sha256": "5aec2bedaf0360c766cc8f0941c7dea39c4ed61d7f0dad5f256c40df03524b1c"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/diesel.wav",
+      "kind": "source_or_runbook",
+      "bytes": 86700,
+      "sha256": "48cec129018b3867f294f978680eaa7ca71654bb6da70c015877287384ede67f"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/door_air.wav",
+      "kind": "source_or_runbook",
+      "bytes": 30914,
+      "sha256": "9e5351d69f530aa43be38f1c5658f8f322cac77c7c39fe9e26888936d729f843"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/engine.wav",
+      "kind": "source_or_runbook",
+      "bytes": 86700,
+      "sha256": "0d355ae061467b435b6ade3e00ad555d513b72d541e18b6eb690c0510cdf822a"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/fire_siren.wav",
+      "kind": "source_or_runbook",
+      "bytes": 174900,
+      "sha256": "527b75e924a25379def2d47177d569a777619230de10d318bf797813be028ac0"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/police_siren.wav",
+      "kind": "source_or_runbook",
+      "bytes": 174900,
+      "sha256": "964c106582b193740e22b65ed5f2f34f4f9a38bf03e3f0c883e1c41b1011cdd0"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/provenance.json",
+      "kind": "source_or_runbook",
+      "bytes": 3491,
+      "sha256": "5a386772640b4b2c89eb518af5dfcbfceb3371d905b6d5a00b36ed4171d5863b"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/rain.wav",
+      "kind": "source_or_runbook",
+      "bytes": 174900,
+      "sha256": "3c8c875b6fcbae6cab27fbb9ab6b84ad7b7dadbffa684a9b553a136477dd430f"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/rotor.wav",
+      "kind": "source_or_runbook",
+      "bytes": 86700,
+      "sha256": "2b3eece27192deea2ea7b33aad40eb7d144c323866ef5ad08045d9f9f2c82e3c"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/tyres.wav",
+      "kind": "source_or_runbook",
+      "bytes": 86700,
+      "sha256": "bad0036bfff9c4c3d1ef29a9bba93005a23860c6a8f037481a3fd9f882cf92da"
+    },
+    {
+      "path": "game/assets/audio/city_vehicles/water.wav",
+      "kind": "source_or_runbook",
+      "bytes": 86700,
+      "sha256": "c8e02d00ad5470ca35462b38dc2c96e029b963219e237fe82235917f25019b97"
+    },
+    {
+      "path": "game/assets/audio/stonewall_guitar.wav",
+      "kind": "source_or_runbook",
+      "bytes": 1280044,
+      "sha256": "612e03522960d842ec7a77b4aa4b03a9a9f58647ceda03d8690ddcb260c01775"
+    },
+    {
+      "path": "game/assets/authored/README.md",
+      "kind": "source_or_runbook",
+      "bytes": 276,
+      "sha256": "85db7912db064e8d5f18c7c54b172fe07bcd39057401e65ad94a9f38d86473da"
+    },
+    {
+      "path": "game/assets/authored/bike_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 8076,
+      "sha256": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4"
+    },
+    {
+      "path": "game/assets/authored/building_exteriors.json",
+      "kind": "source_or_runbook",
+      "bytes": 57462,
+      "sha256": "5550848db8eb2a59ec74f98bf4601078eb9658856e3e49ffdc96ca41685ceb29"
+    },
+    {
+      "path": "game/assets/authored/bus_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 141429,
+      "sha256": "a5b7c4cbc36553f022e2b0796f89acc15fdf21efa1c349ba94a557cd7077d2ea"
+    },
+    {
+      "path": "game/assets/authored/car_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 1865,
+      "sha256": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2"
+    },
+    {
+      "path": "game/assets/authored/city_hospital.json",
+      "kind": "source_or_runbook",
+      "bytes": 1499,
+      "sha256": "8093dcfa9ec6da4c69938690f65f8afe790c0ad7df61a7ed2ee1d9cc3c1a8c7d"
+    },
+    {
+      "path": "game/assets/authored/city_metric_reference.json",
+      "kind": "source_or_runbook",
+      "bytes": 597346,
+      "sha256": "7fcbe979710a4e17c6dd11cc65e240d1020f853db742a2d91e889a81bbe4901c"
+    },
+    {
+      "path": "game/assets/authored/exploration_extent.json",
+      "kind": "source_or_runbook",
+      "bytes": 1403,
+      "sha256": "7add4fef0bea3950241d840498aa044ba01d564c2da3c48f8d88f5e16f30155a"
+    },
+    {
+      "path": "game/assets/authored/fire_station_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 4022,
+      "sha256": "e6c68b587394d872822a3119ea04a85ae38c46df4fe0c2dba7eb145bc0e520ed"
+    },
+    {
+      "path": "game/assets/authored/game_underground_connections.json",
+      "kind": "source_or_runbook",
+      "bytes": 2855,
+      "sha256": "a15c5fd1b1427cb9069c65eeb7e2c8eb8b88ad884558b6eb0a5b6ebcbcc89bef"
+    },
+    {
+      "path": "game/assets/authored/helicopter_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 2674,
+      "sha256": "072000febe07d411c45640e82b648e5dd41d284a034a399774f63db8517d13a2"
+    },
+    {
+      "path": "game/assets/authored/interiors/source_catalog.json",
+      "kind": "source_or_runbook",
+      "bytes": 358090,
+      "sha256": "4c7712dc08392741cdbf842212ec9adedfb65e4d7e2f68ee20f3cd9aa5981848"
+    },
+    {
+      "path": "game/assets/authored/interiors/supplemental_catalog.json",
+      "kind": "source_or_runbook",
+      "bytes": 9510,
+      "sha256": "d6749acae2093912e2465691d7c11082fb1fabceadc7ccfbf7fffb64bebd0d6d"
+    },
+    {
+      "path": "game/assets/authored/landmarks/city/README.md",
+      "kind": "source_or_runbook",
+      "bytes": 1477,
+      "sha256": "a7e580a91f4e4bd8774f3085ab2c945c85f53d39a0dcc1d7e02d5156487987f5"
+    },
+    {
+      "path": "game/assets/authored/landmarks/city/recipes.json",
+      "kind": "source_or_runbook",
+      "bytes": 972,
+      "sha256": "0a4b2fbff36a34a2fdf4a9b817de146739fd83c1d1749e7f7d46378450d73bf3"
+    },
+    {
+      "path": "game/assets/authored/landmarks/palace/README.md",
+      "kind": "source_or_runbook",
+      "bytes": 2048,
+      "sha256": "02e3e05ba6d4a7eae2cb285e83c65f5110d7f9797187472846ba4cbd7a90bf74"
+    },
+    {
+      "path": "game/assets/authored/landmarks/palace/recipes.json",
+      "kind": "source_or_runbook",
+      "bytes": 2021,
+      "sha256": "b36647ffcac6063d5a71d603dbc3d0eeedeb76fbe431de017d4294528204b83e"
+    },
+    {
+      "path": "game/assets/authored/museum_approach.json",
+      "kind": "source_or_runbook",
+      "bytes": 3001,
+      "sha256": "edf5ef47e19a0b05a07a107ecd0eade3aca8466db94d1946493d38e8c6367745"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_greenery.json",
+      "kind": "source_or_runbook",
+      "bytes": 165253,
+      "sha256": "cc2d16801bbc97eb5c70641250c590f02416530a9910373b038b8db91cd8ade6"
+    },
+    {
+      "path": "game/assets/authored/neighborhood_population.json",
+      "kind": "source_or_runbook",
+      "bytes": 79247,
+      "sha256": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2"
+    },
+    {
+      "path": "game/assets/authored/police_facility.json",
+      "kind": "source_or_runbook",
+      "bytes": 2615,
+      "sha256": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73"
+    },
+    {
+      "path": "game/assets/authored/police_headquarters.json",
+      "kind": "source_or_runbook",
+      "bytes": 1939,
+      "sha256": "fd550a2df6b79744191b4c3e4676c130c6d18c32a592cfa054606daba0fe6598"
+    },
+    {
+      "path": "game/assets/authored/police_patrol.json",
+      "kind": "source_or_runbook",
+      "bytes": 71687,
+      "sha256": "29e2832b96cd2873beaf63fc2a8d0e9dd4ede522c66963b5727b9a32ae8af630"
+    },
+    {
+      "path": "game/assets/authored/road_furniture.json",
+      "kind": "source_or_runbook",
+      "bytes": 613210,
+      "sha256": "c45959f107bd0231200962173ece6ec37d57a869cde12629c28b94fc75f12b14"
+    },
+    {
+      "path": "game/assets/authored/scooter_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 7523,
+      "sha256": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea"
+    },
+    {
+      "path": "game/assets/authored/shop_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 7085,
+      "sha256": "d6f7c1bbb4a988b846b6c9c0d9e2b3a5feef4f34d1cd44e1e46ed736afb63292"
+    },
+    {
+      "path": "game/assets/authored/street_businesses.json",
+      "kind": "source_or_runbook",
+      "bytes": 30238,
+      "sha256": "1e37a8697526c5a97b6c089e83543b41c75ea2b73a56b39bb4d6f20b2ac54152"
+    },
+    {
+      "path": "game/assets/authored/street_curbs.json",
+      "kind": "source_or_runbook",
+      "bytes": 12305,
+      "sha256": "3f20d1c3366dd29fa6d2393a5cc2a420ff25db903b0a0c13ed6d9787ab4d4bbc"
+    },
+    {
+      "path": "game/assets/authored/street_life.json",
+      "kind": "source_or_runbook",
+      "bytes": 2703,
+      "sha256": "6d6b34d895707c21aef639a134a6194590bf36fcc73d84f5ab04268240cff0b9"
+    },
+    {
+      "path": "game/assets/authored/street_pedestrians.json",
+      "kind": "source_or_runbook",
+      "bytes": 5872,
+      "sha256": "4f48536000261a66b3ae46e7b9a44e8aff3c69f705e600cdf56e7cc4d49bd07f"
+    },
+    {
+      "path": "game/assets/authored/subway_service.json",
+      "kind": "source_or_runbook",
+      "bytes": 9535,
+      "sha256": "5c6b6c7fe55d8b4955fdf40209acf505f180b38fc33054a1cb3b5178720c9341"
+    },
+    {
+      "path": "game/assets/authored/terrain_heightfield.json",
+      "kind": "source_or_runbook",
+      "bytes": 1045434,
+      "sha256": "ec3f6515da2da7d96a97d6a5a9733db3dee4cf7d04e767286bedefaf843cdd9e"
+    },
+    {
+      "path": "game/assets/generated/README.md",
+      "kind": "source_or_runbook",
+      "bytes": 365,
+      "sha256": "0407a820c69334fb90d84d5f9fa4559b22eb7585d9b46b0927ab9a7499fe2375"
+    },
+    {
+      "path": "game/assets/textures/seoul/palace_granite_albedo.png",
+      "kind": "source_or_runbook",
+      "bytes": 4409390,
+      "sha256": "57784a5b3843a63e0e822b3e10cf63707e39b49d1c1e604fb56b8f67545c025d"
+    },
+    {
+      "path": "game/assets/textures/seoul/palace_granite_albedo.png.import",
+      "kind": "source_or_runbook",
+      "bytes": 988,
+      "sha256": "1b587b0dcef239a7ca332c0275d0413ceaa7d2a2c79555dd5697916924c7fe0b"
+    },
+    {
+      "path": "game/assets/vendor/kenney_city_kit_commercial/License.txt",
+      "kind": "source_or_runbook",
+      "bytes": 708,
+      "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69"
+    },
+    {
+      "path": "game/assets/vendor/kenney_city_kit_commercial/Textures/colormap.png",
+      "kind": "source_or_runbook",
+      "bytes": 11002,
+      "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+    },
+    {
+      "path": "game/assets/vendor/kenney_city_kit_commercial/building-skyscraper-a.glb",
+      "kind": "source_or_runbook",
+      "bytes": 111336,
+      "sha256": "d8339bbb75944ff91d1ec9a70ec6dead71bd98b94a42d3dd0fc1f3b107ddbe85"
+    },
+    {
+      "path": "game/assets/vendor/kenney_city_kit_commercial/provenance.json",
+      "kind": "source_or_runbook",
+      "bytes": 1203,
+      "sha256": "866f3aae4b38f790b15253f3f38d414441c8cd8cb68cdb6636545277513f669d"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/LICENSE.CC0.md",
+      "kind": "source_or_runbook",
+      "bytes": 6962,
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/UPSTREAM_LICENSE_SCOPE.md",
+      "kind": "source_or_runbook",
+      "bytes": 3598,
+      "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/provenance.json",
+      "kind": "source_or_runbook",
+      "bytes": 27804,
+      "sha256": "acd1d1aedd226d8705eb3305999e1c4633cc264d3a8097bf5647ebf89a436005"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/swim_female.glb",
+      "kind": "source_or_runbook",
+      "bytes": 1144392,
+      "sha256": "697537a49ae569dcfbdaaa715e67769532b5e321864497a113dfb95e3c686c4a"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/swim_female.metadata.json",
+      "kind": "source_or_runbook",
+      "bytes": 126773,
+      "sha256": "83f1fdf161209a8b60dbbc732dfde1792c0b39bbf0cc90b7a6f1e6619996a314"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/swim_male.glb",
+      "kind": "source_or_runbook",
+      "bytes": 1178672,
+      "sha256": "bd3906d5fb021b896405827f22c92528d6e767f3eff62057a625e45548311294"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/swim_male.metadata.json",
+      "kind": "source_or_runbook",
+      "bytes": 127273,
+      "sha256": "c7be8db71a7de3f7b5d45f5235898ae03ee4d9ad794d66a67dc43723641d5bbd"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/textures/brown_eye.png",
+      "kind": "source_or_runbook",
+      "bytes": 610817,
+      "sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/textures/female_skin.png",
+      "kind": "source_or_runbook",
+      "bytes": 3884420,
+      "sha256": "1d82f782b7d2da732229633bd2d14754d873fff53cdb1d088977bcf67ae19dde"
+    },
+    {
+      "path": "game/assets/vendor/makehuman_swim/textures/male_skin.png",
+      "kind": "source_or_runbook",
+      "bytes": 3593099,
+      "sha256": "f50016a5507fc687dc8df06599c8ea48de950cd185de33a71cafc1319ddab4d5"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx",
+      "kind": "source_or_runbook",
+      "bytes": 591744,
+      "sha256": "e9b4b158bfa03cec7d314c3294836013e8d0e89c9ea80f1a4ad78eb93449dce8"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_body_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 4942782,
+      "sha256": "a9f02aa851a7e3c92c4821cfc13779b457ea1e621186f267954795d41a7a048d"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_body_normal.png",
+      "kind": "source_or_runbook",
+      "bytes": 5283910,
+      "sha256": "3a427684e0ed1526bcf97f3aa12c0843f57c5b3b28910474fdaa26bf5cc6f0b4"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_body_specular.png",
+      "kind": "source_or_runbook",
+      "bytes": 1004361,
+      "sha256": "b02db374bc5111f90c20e8e34f74e6183dca94b715c7170a0dca69946f55e1e1"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_head_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 5318541,
+      "sha256": "657a9fb3301fe81cd69153d1a2f6530772e13d3337530b360e6197c01e0f7518"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_head_normal.png",
+      "kind": "source_or_runbook",
+      "bytes": 3771858,
+      "sha256": "de3dc8d705d27b2c9d9847b6fd7679a05abf245e5cab7ee920c5797ecf714e84"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_head_specular.png",
+      "kind": "source_or_runbook",
+      "bytes": 2243676,
+      "sha256": "970d740fbfe4e5c1a9d51c80e1a6788adef03fc4e93ae48a6e8fcac07fc0e239"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/f007_opacity_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 4386061,
+      "sha256": "e63f1a1410c21340b35439bb1cd220374ef38236dc4250935a4330ce7d7c5f61"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/LICENSE.md",
+      "kind": "source_or_runbook",
+      "bytes": 1066,
+      "sha256": "17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx",
+      "kind": "source_or_runbook",
+      "bytes": 571296,
+      "sha256": "7e8faea854cc0d44287457f78d8eb52a07923095bcc47db322d179fea26e60fc"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_body_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 4785284,
+      "sha256": "aacf5473636cfbd0859e4d0faacf34d5882f955bc19d5fbad0ea21cb2227b40e"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_body_normal.png",
+      "kind": "source_or_runbook",
+      "bytes": 5486130,
+      "sha256": "8f399fa31928f1e39d8432e718fa7a7a2c37cba5cdd2ca0512ece0f2eca4c09f"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_body_specular.png",
+      "kind": "source_or_runbook",
+      "bytes": 1075982,
+      "sha256": "c343ccd8a9dac937c553f4542b39b29bb6b684fd7057341651368ab88e87f268"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_head_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 5196784,
+      "sha256": "57f14164393a3d5f3f2878a74e6b5df6c47d31d193dcdc1647bba5dff13c1558"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_head_normal.png",
+      "kind": "source_or_runbook",
+      "bytes": 3462622,
+      "sha256": "351a8f5a694a8461c4db9a1a39d1007b120f40ba37b35c0f47ddad17d3b53744"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_head_specular.png",
+      "kind": "source_or_runbook",
+      "bytes": 2495625,
+      "sha256": "505b251f21e4b238eaae037fc592b000b01df2f7af6c7f975f91ea7629c0f76e"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/m006_opacity_color.png",
+      "kind": "source_or_runbook",
+      "bytes": 5050439,
+      "sha256": "c131297aabd889761db285d41fa8e21485be56b1db0eaf0cbce66dbc9cc2ed5e"
+    },
+    {
+      "path": "game/assets/vendor/microsoft_rocketbox/PROVENANCE.json",
+      "kind": "source_or_runbook",
+      "bytes": 24395,
+      "sha256": "cc7692d6c267bcc8a82562d1b545e975404c2ac0680125d35f87635ea1ab28b8"
+    },
+    {
+      "path": "game/data/generated/public_walk.json",
+      "kind": "generated_runtime_input",
+      "bytes": 657998,
+      "sha256": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a"
+    },
+    {
+      "path": "game/data/generated/terrain_surface.json",
+      "kind": "generated_runtime_input",
+      "bytes": 10509215,
+      "sha256": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5"
+    },
+    {
+      "path": "game/data/generated/traffic.json",
+      "kind": "generated_runtime_input",
+      "bytes": 277933,
+      "sha256": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9"
+    },
+    {
+      "path": "game/project.godot",
+      "kind": "source_or_runbook",
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    {
+      "path": "game/resources/world_geometry/world.json",
+      "kind": "generated_runtime_input",
+      "bytes": 5037995,
+      "sha256": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078"
+    },
+    {
+      "path": "game/scenes/actors/player_slot.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 60,
+      "sha256": "735e185464f84c26cb336913b1f3966b2ded1c38fabcbcb7fa067e49ace0ecb6"
+    },
+    {
+      "path": "game/scenes/main.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 1699,
+      "sha256": "9605ab15ff72f3f0cb2a49976fdd9f58f5226d4603f7fb00bca2c8e1c15a8a32"
+    },
+    {
+      "path": "game/scenes/npc/pedestrian.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 1324,
+      "sha256": "9aa8f0688b4a43cb1d682b4631647be2ca317d9a1de432bb487f0a058897bf95"
+    },
+    {
+      "path": "game/scenes/npc/vehicle.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 1289,
+      "sha256": "cd2486ec30cac27e8e75d5b10c30d81a72d25dc1bf626bc07b920a3bdae3b8cc"
+    },
+    {
+      "path": "game/scenes/player/camera_rig.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 556,
+      "sha256": "9b3ff523fead324a4aec1145e2b0f35f4ceb6354d26adf2aca6c88f514389fa6"
+    },
+    {
+      "path": "game/scenes/player/player.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 938,
+      "sha256": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6"
+    },
+    {
+      "path": "game/scenes/tests/camera_test.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 593,
+      "sha256": "943fac140775d173e38fbcb133acda196dbbaef0c4e07cd8116d8d9819158784"
+    },
+    {
+      "path": "game/scenes/tests/collision_test.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 536,
+      "sha256": "c9153da4fb59b75ef756032ef51c9ec9193da754857cce96367af54d4d389d79"
+    },
+    {
+      "path": "game/scenes/tests/daehanmun_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 633,
+      "sha256": "b9468846f7bff4e67cb04047d173d943d645f49d759f190541a239c1091720c4"
+    },
+    {
+      "path": "game/scenes/tests/movement_test.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 756,
+      "sha256": "05ffd927c1825d3d92155dc0f2f1fa2aa8dfa323be33d74014f26ab39d180c99"
+    },
+    {
+      "path": "game/scenes/tests/player_fixture.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 6067,
+      "sha256": "6fc75704f2e89f5ecba6b790adabbb4d0d711f4d153802f637b7436bccd553e4"
+    },
+    {
+      "path": "game/scenes/tests/scale_view.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 1415,
+      "sha256": "847e920d64fe66a9c82b841281ced1dbe1d1ffd1737b0c98685c5f5841387acd"
+    },
+    {
+      "path": "game/scenes/world/base_world.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 376,
+      "sha256": "9e3d517d8021d35ffe1018065339fe45ecabad523a1c789d5e4a4756eeb4d963"
+    },
+    {
+      "path": "game/scenes/world/city_landmarks.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 454,
+      "sha256": "c29ad4e59237b27a85f7c4d026f8771b2a6d8ab4cd952a0d95dc1e6d09aeefa1"
+    },
+    {
+      "path": "game/scenes/world/collision_world.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 273,
+      "sha256": "d7f94a2a443a88a6e0deaaa5d23e06750b3520fe98737b0dfc125b0a8c6454fc"
+    },
+    {
+      "path": "game/scenes/world/daehanmun_connection.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 288,
+      "sha256": "d3a71176b243a39e2bfc3e033f567835dbde9aa5d49ecd0d0f2c716c20a71d87"
+    },
+    {
+      "path": "game/scenes/world/explore_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 589,
+      "sha256": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939"
+    },
+    {
+      "path": "game/scenes/world/palace_landmarks.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 452,
+      "sha256": "ab61da3a3ddc93b9e69bce9349438e09f2e0fa90a9011687ac9330ad6907730a"
+    },
+    {
+      "path": "game/scenes/world/palace_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 616,
+      "sha256": "a6cb0a8695cb78c4dafb8d47ea158f663eb34d6976601cf5712863f0934acb5c"
+    },
+    {
+      "path": "game/scenes/world/palace_world.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 272,
+      "sha256": "2f5270995fd739a1fe7cc253032818cb288be8a3e105d5cd9cc636c2cb2834d0"
+    },
+    {
+      "path": "game/scenes/world/pedestrian_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 350,
+      "sha256": "23b545651825bc653c9ae540a542199d7cfa8a35d77db630448de29e114653cc"
+    },
+    {
+      "path": "game/scenes/world/public_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 616,
+      "sha256": "81eea75e0965a90e39e41aae39f84a90e00614c7f43a5a2eb83f2e08165af328"
+    },
+    {
+      "path": "game/scenes/world/public_world.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 272,
+      "sha256": "e26e3029bd3811e2e1814a640ad3facc53155c1598cf3df5a38f9b6942b593a9"
+    },
+    {
+      "path": "game/scenes/world/traffic_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 498,
+      "sha256": "41d0d41ef210ce34a838b428ed6f5bbd433f929f892a82ff2adfae263ca9ccee"
+    },
+    {
+      "path": "game/scenes/world/v0_walk.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 259,
+      "sha256": "54d6507bf750ab5f3c2c857d8c6a8768e7cc405433717e06399d9a2cc13c93d8"
+    },
+    {
+      "path": "game/scenes/world/world_root.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 265,
+      "sha256": "fdc6fe0f36e5ff5abc7c754d55a8f611d50e8e1ddb4cdde821b1cbaaa9d391d8"
+    },
+    {
+      "path": "game/scripts/base_world.gd",
+      "kind": "source_or_runbook",
+      "bytes": 1624,
+      "sha256": "5cd8edc754ed310cdbe1ee67353da6893dbd9a02ca305b34aeaff7594be553c4"
+    },
+    {
+      "path": "game/scripts/building_exterior_identity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14993,
+      "sha256": "45769ecd558e791932902e3838d8f4ac05970be2e5ae2d669c3248b49b24a0f7"
+    },
+    {
+      "path": "game/scripts/building_interior_space.gd",
+      "kind": "source_or_runbook",
+      "bytes": 24014,
+      "sha256": "83eef95fa5e19615f6c0c43c54f075ec4663cb5a005cdfae57194d8773c54807"
+    },
+    {
+      "path": "game/scripts/building_names.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5162,
+      "sha256": "926118855ec1b9eccd9f8fbef9ca3e947ebc7f81bb394d86ffb373bf5cfebde7"
+    },
+    {
+      "path": "game/scripts/building_type_identity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9529,
+      "sha256": "4f4c5d193ffe2626540e0bf4667977bc80a94297375c2151c366afe85c189875"
+    },
+    {
+      "path": "game/scripts/building_visit_catalog.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8981,
+      "sha256": "6e78922df14418b89daa4b9434228f981d5771be34069969b27a453c89e99043"
+    },
+    {
+      "path": "game/scripts/camera_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3402,
+      "sha256": "85dac21a6d8e6a941b17fef83230fdb257811a3dbb3ec5415169552bda6dd063"
+    },
+    {
+      "path": "game/scripts/city_bike_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 40213,
+      "sha256": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4"
+    },
+    {
+      "path": "game/scripts/city_bus_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 59827,
+      "sha256": "1900e08ea6cd58d20c1648e3b11d8cdad9557319b7aecdb00a13cf1097a72e2f"
+    },
+    {
+      "path": "game/scripts/city_facades.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5197,
+      "sha256": "7a773f211214722c998fd4ac8ee344d76d2b9d740489e7baddfc0898e01975e4"
+    },
+    {
+      "path": "game/scripts/city_helicopter_rope.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11920,
+      "sha256": "13546a6ab88ce4b26babcfaf5cb7162de9aaceeb5b36ea17f72ae4b97b073fc2"
+    },
+    {
+      "path": "game/scripts/city_helicopter_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 42616,
+      "sha256": "3f02e5109a2d2c5782afe891c2470e7cfac867ff4080c24a49a6c1ac76d5b863"
+    },
+    {
+      "path": "game/scripts/city_hospital.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17431,
+      "sha256": "e41f362357b7221b35abc633a0a2e60be75c49cb4b931c8c746d84ab61bfd5b1"
+    },
+    {
+      "path": "game/scripts/city_landmark_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 574,
+      "sha256": "d9b6a6e3456e3216afba92f293791ebc871346f9256b0cd8f0dcdb98afc04f7a"
+    },
+    {
+      "path": "game/scripts/city_metric_overlay.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7195,
+      "sha256": "3693cdf958c5c15559a968d7e0b84e65f96969b53b07c3dd8cfcf1643f982006"
+    },
+    {
+      "path": "game/scripts/city_police_facility.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18631,
+      "sha256": "5bf92a31b70c88f867f90a822e268b75cee12a053dc109b806ad757813caed89"
+    },
+    {
+      "path": "game/scripts/city_police_headquarters.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18312,
+      "sha256": "edb7a4ef823d3b17a9f6c87f32e725b1d1c4133f2711f13c5cc3fbe35b2aa97e"
+    },
+    {
+      "path": "game/scripts/city_police_patrol.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17534,
+      "sha256": "40d35b8752cda0eb3a97311df6d3a0a45e34abec538acf84f821045758b883aa"
+    },
+    {
+      "path": "game/scripts/city_public_safety.gd",
+      "kind": "source_or_runbook",
+      "bytes": 41434,
+      "sha256": "557744354b5fd49c073deef56cb60fd7417d201888df92d797f5fb24b1ec97f1"
+    },
+    {
+      "path": "game/scripts/city_scooter_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12416,
+      "sha256": "f335b53bf45921d0b1e3b7a9950cbdbcf23cada6eeaf989ce9f11d6bc74d4f6d"
+    },
+    {
+      "path": "game/scripts/city_subway_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 39673,
+      "sha256": "cf7fca5413a1171ade741e1e9cfd1bea3b3806d273f04c92ec9410dbb850efe2"
+    },
+    {
+      "path": "game/scripts/city_vehicle_audio.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12019,
+      "sha256": "88b47c8594416bfd90b809e7a1e3ff7815c426889bb08291a952f07ef42e7ca0"
+    },
+    {
+      "path": "game/scripts/city_visuals.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5410,
+      "sha256": "dde6da1d14a623c6b565ab2d3db8745c55575c7ada06e826574fa11586c68f4d"
+    },
+    {
+      "path": "game/scripts/city_weather_emergency.gd",
+      "kind": "source_or_runbook",
+      "bytes": 41543,
+      "sha256": "dbf1d5aadf19d8eaa449c54c43f0833b388466b7e48a80153eeaec70be79ed46"
+    },
+    {
+      "path": "game/scripts/civic_facility_guidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3804,
+      "sha256": "de260c2caac20962c9286c2bf5f0e89455df2a5943ac66316daa697941fc8e73"
+    },
+    {
+      "path": "game/scripts/collision_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4252,
+      "sha256": "42b33663b364acd5c9cda67914dab39452d79b8f44ad518d9712038bdcb1d86f"
+    },
+    {
+      "path": "game/scripts/collision_world.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5311,
+      "sha256": "78ea28c07e6901b2b6096a298eef1b1ccb3185e9a1e87bc23cbda1f232421231"
+    },
+    {
+      "path": "game/scripts/daehanmun_connection.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8792,
+      "sha256": "dec55dd79bd5ac6a5b4696e44144cbe4ef47bc810816ad0354e2adec2810fd2d"
+    },
+    {
+      "path": "game/scripts/daehanmun_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3115,
+      "sha256": "cc97cc02fb46f093d2ab477c3ac03ebd43f87986c9663b0c80e70ef247ae7fdb"
+    },
+    {
+      "path": "game/scripts/drivable_car_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19853,
+      "sha256": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156"
+    },
+    {
+      "path": "game/scripts/elevator_cabin.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10417,
+      "sha256": "48b08944d9fe69cf6d775cf16230b03a6d8517894239b096487e6d1ea63b2fad"
+    },
+    {
+      "path": "game/scripts/entrance_wayfinding.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18512,
+      "sha256": "e94e6542d70bd810f629d87d3c57176e56d4f8c215f3b9dac7a9243ece802a4b"
+    },
+    {
+      "path": "game/scripts/exploration_overlay.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4268,
+      "sha256": "dc61b47691e62b212c629e15e2947d40fef05b5306960852df0af887720dcf35"
+    },
+    {
+      "path": "game/scripts/exploration_pedestrian_avoidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8540,
+      "sha256": "c011012edd261afc6282aea46ccdd7e5bc7c841381ba2543ee131cde339e23d2"
+    },
+    {
+      "path": "game/scripts/exploration_rooftop_access.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8351,
+      "sha256": "da61fd50af61c99440a7194761f2d9e3b918e3d51339791396df135f7c11cb11"
+    },
+    {
+      "path": "game/scripts/exploration_traffic.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3268,
+      "sha256": "4a91a4a0d153ef4a325b34db555e8f998065a52d3f301fbbb6a14c0ff88ce24d"
+    },
+    {
+      "path": "game/scripts/explore_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 66766,
+      "sha256": "6f5fe3843f61299155177252fa458a0574318dfcb06d7a5f2afea4e835ec3b89"
+    },
+    {
+      "path": "game/scripts/facility_activity_visuals.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14924,
+      "sha256": "f81147f07b95c439cf5899eb6a9504ed8ca2d93b9fc1849dc4689521d8c493ec"
+    },
+    {
+      "path": "game/scripts/facility_interaction.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19120,
+      "sha256": "b6a3c2525739f0ffbbadd3da2ec1ac0d2709124221757ef722101cc1500c1944"
+    },
+    {
+      "path": "game/scripts/fire_station_facility.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7864,
+      "sha256": "c341db3197fc77a5f619a0b1b2e8aac6d6f9f54b26bb7ad4747ffd2927d8a0a4"
+    },
+    {
+      "path": "game/scripts/game_basement_elevator_cabin.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2166,
+      "sha256": "643c86a529b45af0aebedbdecfcaf182131152fc8a39c9884cdc3963ca8d6df3"
+    },
+    {
+      "path": "game/scripts/game_underground_connections.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11485,
+      "sha256": "e70bbdc98414e05b1efe180211a466edd655e10f425f91485e1a2155d0d3ea45"
+    },
+    {
+      "path": "game/scripts/input_router.gd",
+      "kind": "source_or_runbook",
+      "bytes": 611,
+      "sha256": "f1c57c84bac6c7a2aac5412b596dea8775dcbfd0b405dc4c65a84cf833e709ff"
+    },
+    {
+      "path": "game/scripts/interior_detail_kit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 41359,
+      "sha256": "e03a9857244af29a64ad505aee8b9ebfebe0375bafb63d4e0af1927866798084"
+    },
+    {
+      "path": "game/scripts/interior_escalator.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9046,
+      "sha256": "cd75501f96c117d6ec09be878f143d14d7acd916a57d5bd90f6210822d0636a0"
+    },
+    {
+      "path": "game/scripts/interior_facility_kit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 28831,
+      "sha256": "6a2c08f605b528bc43f640d2b01e50d5f0db935d08b4e4ae3e92fc3cb83e93bd"
+    },
+    {
+      "path": "game/scripts/interior_population.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15737,
+      "sha256": "756dbc8baa22d4f3facb2577f7f9fb5fc5857a6a82f7dc9be6fdf812640588b2"
+    },
+    {
+      "path": "game/scripts/interior_room_access.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6488,
+      "sha256": "d655b16f5187ccd11975086c6b8c109c5a86869d4d250a220569357ad0a7bfb5"
+    },
+    {
+      "path": "game/scripts/interior_surface.gdshader",
+      "kind": "source_or_runbook",
+      "bytes": 2764,
+      "sha256": "84da5acadfa6180daf3ed4f16d395875b558e04cad7d6b2c18df98c5ead6027b"
+    },
+    {
+      "path": "game/scripts/interior_visit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 61421,
+      "sha256": "44e1525c94b0c6f40f719663262273ab65ad0820b22f8bf8a67ca402988642ac"
+    },
+    {
+      "path": "game/scripts/landmark_visuals.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5511,
+      "sha256": "75ef430d105b1d5640dbbc405fa38950bd8a428d90131ab64b31a604da62d8d7"
+    },
+    {
+      "path": "game/scripts/landmark_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 610,
+      "sha256": "f290413753f9ba0794794f4ab55b4a7327d09a4e6f7d536866c23f7a1326636c"
+    },
+    {
+      "path": "game/scripts/main.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9693,
+      "sha256": "0f0b1cda49df0350a0750445cb36ae7a05991dc5da3287d91f48b2af0a1cf054"
+    },
+    {
+      "path": "game/scripts/movement_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7854,
+      "sha256": "16ad475cd5f56ebfacc59d0fcfa009869fa3269415ea805f0c16a97672e7ba82"
+    },
+    {
+      "path": "game/scripts/museum_approach.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19426,
+      "sha256": "58516b9919a3d3fcabe81e5f5e4a6b0703459db8ca99da1e5e6368b36be7f070"
+    },
+    {
+      "path": "game/scripts/neighborhood_greenery.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13983,
+      "sha256": "dd9294f3a3f9efba77296df4faa13ffcd4197273f8ed6477ec60193bd6b1cb1d"
+    },
+    {
+      "path": "game/scripts/neighborhood_life.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10725,
+      "sha256": "690af26e362234b3fea26860f06e554d2755b0909233254012030a6cccdba50b"
+    },
+    {
+      "path": "game/scripts/neighborhood_population.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10592,
+      "sha256": "f627c04ae8a8ef38de5d7f63377acbfd3e481450bd261ead308dc17ee284fd0f"
+    },
+    {
+      "path": "game/scripts/neighborhood_traffic.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19459,
+      "sha256": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369"
+    },
+    {
+      "path": "game/scripts/npc/pedestrian.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13906,
+      "sha256": "5c0e5c4868a9ad97b048886e9cb2b48c2bef570543dbcf0d2cd4d32ae55fa275"
+    },
+    {
+      "path": "game/scripts/palace_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3009,
+      "sha256": "5c94a9f6481288c01d7255e0a744010f653fbd04199e3e515678cc6bd21a6653"
+    },
+    {
+      "path": "game/scripts/palace_world.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7757,
+      "sha256": "7f699af6a0f58b26edd03618085999a609ef4eaed319b6f4acf1c16a59a3866f"
+    },
+    {
+      "path": "game/scripts/pedestrian_corridor_avoidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14274,
+      "sha256": "69085e7ffd2640712f5bae45b202fe989bb5fc5ae3984f5e951d2555453dbfa4"
+    },
+    {
+      "path": "game/scripts/pedestrian_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6119,
+      "sha256": "56392feca1ad1c14b661cece60ac5c5f57a0ab5367016562770fb3e70cec409d"
+    },
+    {
+      "path": "game/scripts/photo_atmosphere.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4804,
+      "sha256": "df8e5c2c1694df1d2613ef2efcb0f655eda469416cf958d200b2f727fcc049ff"
+    },
+    {
+      "path": "game/scripts/photo_civic_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17379,
+      "sha256": "d40b345831b743e537f20cc0077fc0eacd6f25b419bf7a3b04eb76da45512a3b"
+    },
+    {
+      "path": "game/scripts/photo_palace_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17991,
+      "sha256": "60807a6c3e5cc445a8a34fb6dc3c60bb0bc5457a1abac7ca752f8c6e5d0357bc"
+    },
+    {
+      "path": "game/scripts/photo_wall_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2533,
+      "sha256": "d768f0aeefab5cf95350e1389d77a874cc23ccd7c1618f6fc1c9790b3976f925"
+    },
+    {
+      "path": "game/scripts/player/camera_rig.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5267,
+      "sha256": "25a99f87b979398476af6599bcca662c9b727929ea368b3ce60815c37b243390"
+    },
+    {
+      "path": "game/scripts/player/daehanmun_player.gd",
+      "kind": "source_or_runbook",
+      "bytes": 630,
+      "sha256": "82b417b5eb08507fd70750709341981c3751db8b41ecf78f8cbb77c287d2a3d1"
+    },
+    {
+      "path": "game/scripts/player/exploration_avatar.gd",
+      "kind": "source_or_runbook",
+      "bytes": 36721,
+      "sha256": "8ba53b4e1515df3cd125dfac093fe71f7553c9fa28fa811576b18ed73e693f0e"
+    },
+    {
+      "path": "game/scripts/player/exploration_camera.gd",
+      "kind": "source_or_runbook",
+      "bytes": 21856,
+      "sha256": "09ced41b7fa5ff953716133ad8ef8ce9e870b8b4627359774d060e1ce527459d"
+    },
+    {
+      "path": "game/scripts/player/free_roam_player.gd",
+      "kind": "source_or_runbook",
+      "bytes": 29659,
+      "sha256": "f1488ecd190e2126641ff90837dde27215eca5118f2ce8722286a1d337df0ef3"
+    },
+    {
+      "path": "game/scripts/player/human_activity_dimensions.gd",
+      "kind": "source_or_runbook",
+      "bytes": 253,
+      "sha256": "60ef0b366ee88d81af97ab37b47c7742c4762f64a3106a5e240e6004c1574e96"
+    },
+    {
+      "path": "game/scripts/player/human_gait_support.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6440,
+      "sha256": "aef3e0589bc6869232b3bfd760c51923c5f2165dc0992bc0e31db0f08d184be4"
+    },
+    {
+      "path": "game/scripts/player/human_surface_meshes.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5808,
+      "sha256": "0b501db6886106e66501a677758b5bfa053d4064085d95126073e543850e67c5"
+    },
+    {
+      "path": "game/scripts/player/idle_support.gd",
+      "kind": "source_or_runbook",
+      "bytes": 380,
+      "sha256": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec"
+    },
+    {
+      "path": "game/scripts/player/movement_controller.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3872,
+      "sha256": "ab9c88e0f43829ad780c93ffdf212ab9ad193646b191f661bb596abcd3f5ebe1"
+    },
+    {
+      "path": "game/scripts/player/palace_player.gd",
+      "kind": "source_or_runbook",
+      "bytes": 1001,
+      "sha256": "982c67376fab42b6ea257b61164a321a85d4de73e4a54ed51e0a099c8b639e8b"
+    },
+    {
+      "path": "game/scripts/player/public_player.gd",
+      "kind": "source_or_runbook",
+      "bytes": 780,
+      "sha256": "f28936571af6df6e3dee4ab83efdd86afbcc8a431df6e96a24398af6bc04afed"
+    },
+    {
+      "path": "game/scripts/player/textured_human_rig.gd",
+      "kind": "source_or_runbook",
+      "bytes": 34567,
+      "sha256": "152659db7a670b27d0727e8667d15020100373e427bee0c8b3eefe009bb92ced"
+    },
+    {
+      "path": "game/scripts/player/textured_human_surface.gd",
+      "kind": "source_or_runbook",
+      "bytes": 28280,
+      "sha256": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a"
+    },
+    {
+      "path": "game/scripts/player_fixture.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9533,
+      "sha256": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6"
+    },
+    {
+      "path": "game/scripts/pool_preparation_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14415,
+      "sha256": "371b60b63af9a02e3c53bb3a5c1c417fc67a977c62713e62aa346274c395994d"
+    },
+    {
+      "path": "game/scripts/public_boundary.gd",
+      "kind": "source_or_runbook",
+      "bytes": 304,
+      "sha256": "45ba308463fac36fec2f344cb68ea3d5d225e28250649758bf436033de6a1294"
+    },
+    {
+      "path": "game/scripts/public_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4298,
+      "sha256": "1607280fed1e5afac1f19f26e151e3b0e55c16a8963a2fc9f1673ba24c9fa19a"
+    },
+    {
+      "path": "game/scripts/public_world.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7868,
+      "sha256": "8e919bd972c4ed9a7866cb40103fc86566e619a7d07f49e43cbf516f5dd4d781"
+    },
+    {
+      "path": "game/scripts/rooftop_space.gd",
+      "kind": "source_or_runbook",
+      "bytes": 43285,
+      "sha256": "fc2cc5964afa8bb260414f9a616c597a53a7825bb5a29b78b8782de9b11ecef0"
+    },
+    {
+      "path": "game/scripts/scale_config.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4635,
+      "sha256": "1ffcfa62326a18425bdf6c0154dd6e4dfdcb42d37f2b60ceb327431dec3afa68"
+    },
+    {
+      "path": "game/scripts/scale_view.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11955,
+      "sha256": "c262d6d69a1e0c7c2b35978e0fed2adaf5368e17180c10252803575cafc73d22"
+    },
+    {
+      "path": "game/scripts/seoul_identity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 20751,
+      "sha256": "a1aa7c3009a89002cc3054db9e189b1ef32a31693199ef4a45655336d15906fd"
+    },
+    {
+      "path": "game/scripts/shop_visit_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 48220,
+      "sha256": "7b5694ee20b3e8b5133d5273120ec0d140fe3dbd53dbbbd6ca29843de259650e"
+    },
+    {
+      "path": "game/scripts/source_polygon_index.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5095,
+      "sha256": "977340fef92a9398e1f04016cdc3118e938167de03c2ac5f13071efc5a7186b1"
+    },
+    {
+      "path": "game/scripts/street_businesses.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12475,
+      "sha256": "e0585cd05f5dd29888a27e88e5ee8bb30a2c6529a412ea7d791a426e5f2c66cf"
+    },
+    {
+      "path": "game/scripts/street_curbs.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13184,
+      "sha256": "3dda9d29bd43e9825f51a7e6694ddcf639d42bce014d3aff013dd0d71d362cd6"
+    },
+    {
+      "path": "game/scripts/street_dog_model.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12535,
+      "sha256": "933f14f3e346e9df36f48670ce5d6a326819c84cfbf9253abf10fd7ebd733373"
+    },
+    {
+      "path": "game/scripts/street_life.gd",
+      "kind": "source_or_runbook",
+      "bytes": 25375,
+      "sha256": "dad11bc8cd90fa2492165b0087ea63f8b519300a925d37dec4ea4d3d8e510e89"
+    },
+    {
+      "path": "game/scripts/street_network_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 31130,
+      "sha256": "367f0e64a1fe00b91d9876645b3f5d150bc19c7adf2a9e36125364d1a1d163b5"
+    },
+    {
+      "path": "game/scripts/street_pedestrians.gd",
+      "kind": "source_or_runbook",
+      "bytes": 33392,
+      "sha256": "343685fef7c80ed6dc5020e1e26d1b48b663757ce9dfdc0f62b22cd186c6ef06"
+    },
+    {
+      "path": "game/scripts/street_tree_model.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6877,
+      "sha256": "c16f15150c0a75f99ede0620dadeac90560a0a99533133dd57e3feeeae800620"
+    },
+    {
+      "path": "game/scripts/terrain_geometry_warp.gd",
+      "kind": "source_or_runbook",
+      "bytes": 23521,
+      "sha256": "115f1330e2b39dcbaafec14349be4efe4ef630b986e637e1b8e0766e3b38ef68"
+    },
+    {
+      "path": "game/scripts/terrain_scene_binding.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6079,
+      "sha256": "92f6bb276ac75794c327ee1fc9d9660c2c416a8b9a94e9bc9f7c002fe4b42c8b"
+    },
+    {
+      "path": "game/scripts/terrain_surface.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7948,
+      "sha256": "edeb1449d77921548766bc5085fa2933895a144099dc7e4fce8ec2deda38c886"
+    },
+    {
+      "path": "game/scripts/traffic/exploration_vehicle.gd",
+      "kind": "source_or_runbook",
+      "bytes": 619,
+      "sha256": "c79954bdd2e95da51ea353297102b323a1c778ddf194118f02a5c4b0352eff08"
+    },
+    {
+      "path": "game/scripts/traffic/traffic_manager.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11805,
+      "sha256": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c"
+    },
+    {
+      "path": "game/scripts/traffic/vehicle.gd",
+      "kind": "source_or_runbook",
+      "bytes": 42676,
+      "sha256": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84"
+    },
+    {
+      "path": "game/scripts/traffic_car_takeover.gd",
+      "kind": "source_or_runbook",
+      "bytes": 28382,
+      "sha256": "181ec5c61cd5f92fab1838680118a38a476c63070e8e936ce01e5ea21c491e22"
+    },
+    {
+      "path": "game/scripts/traffic_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7874,
+      "sha256": "152d8a78702ca216d3b1ff7c6fc22c63569a955cdb28dab202fafd3cc303aec0"
+    },
+    {
+      "path": "game/scripts/transport_motion_policy.gd",
+      "kind": "source_or_runbook",
+      "bytes": 1765,
+      "sha256": "1b8018713bf578b4e04f21da833f9af51d9f0d6226f7b6b170fdf5fa8df7fee4"
+    },
+    {
+      "path": "game/scripts/v0_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15874,
+      "sha256": "0265608762ab42c3838129602a168ffdbc432749d83685966366d62306fd085c"
+    },
+    {
+      "path": "game/scripts/water_effect.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3299,
+      "sha256": "480b801e9aeb3da4a2ec11098befc6adb299962fde0b11b67e9b08d824331420"
+    },
+    {
+      "path": "game/scripts/world_config.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7882,
+      "sha256": "8b42120b0f3f860342972c66687c8fa93b2a1a4f364b56a718b56df254834f91"
+    },
+    {
+      "path": "requirements-data.txt",
+      "kind": "source_or_runbook",
+      "bytes": 144,
+      "sha256": "956fddf105aebac97777210bca8665cf7d79383f8d32d4841bac15afccc15585"
+    },
+    {
+      "path": "tests/engine_smoke/project.godot",
+      "kind": "source_or_runbook",
+      "bytes": 764,
+      "sha256": "fe0c4cca860fea620d43d20e3c88c81e904a50ea4afb887977d3db06f73f6d97"
+    },
+    {
+      "path": "tests/engine_smoke/startup.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4358,
+      "sha256": "2bfc6d8a77eb8373729864fc02af6167f891d293d72830c739313e05a89c7e5c"
+    },
+    {
+      "path": "tests/engine_smoke/startup.tscn",
+      "kind": "source_or_runbook",
+      "bytes": 160,
+      "sha256": "c68361de5e7a26397a91a100671f076bc0297fd26791befe9bb149a9e39bb027"
+    },
+    {
+      "path": "tests/game/check_bike_entry_reliability.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10135,
+      "sha256": "d7d65e2d1d5e1263abea4ef3f5e18c2492e3467913ea0b0a30b90549c8777e31"
+    },
+    {
+      "path": "tests/game/check_bike_visibility.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9268,
+      "sha256": "4014da12babe5386eb5d854eb6097f3012bde8ff96813394bf3f96fcfec29d3e"
+    },
+    {
+      "path": "tests/game/check_bounded_roof_lift.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7936,
+      "sha256": "2e7471d2ef990070507bbbcbbdfcbab33067042abf564940b8a196ff35e32291"
+    },
+    {
+      "path": "tests/game/check_building_exterior_identity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 25819,
+      "sha256": "c8ecc4904a23ef18692e19b4e4686973688b8b989eb4210c2c1d1aba93b66959"
+    },
+    {
+      "path": "tests/game/check_building_visits.gd",
+      "kind": "source_or_runbook",
+      "bytes": 29946,
+      "sha256": "e44a2d278784cc2639950d4a6ae00ea086b2e394ae12ad102946bba408d71921"
+    },
+    {
+      "path": "tests/game/check_bundle.gd",
+      "kind": "source_or_runbook",
+      "bytes": 234,
+      "sha256": "fca3db6fd2eae7fbcb277060d2e09bb946603ef3f126b07ff11c942c702a8c71"
+    },
+    {
+      "path": "tests/game/check_bus_stop_access.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11235,
+      "sha256": "f49649afde4304739bdcbaf54247ec6086fc3019f77b34c101a66474d1340eb0"
+    },
+    {
+      "path": "tests/game/check_camera_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15274,
+      "sha256": "fde9277571bc136e1eec19b7b24a1581428ac9cfd84d2ff234faa4f6c5bd28a7"
+    },
+    {
+      "path": "tests/game/check_city_action_freedom.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19895,
+      "sha256": "e245363b0ab51a5e1d9cf8389f87f4db4fc99378f44e788244dc3700695e3d3b"
+    },
+    {
+      "path": "tests/game/check_city_action_views.gd",
+      "kind": "source_or_runbook",
+      "bytes": 9542,
+      "sha256": "315a1afe8ee07095232f1914152d095756cde4c4ad7a1ce847305675dd1b6b9b"
+    },
+    {
+      "path": "tests/game/check_city_bike_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 16106,
+      "sha256": "9e968ff204d38b8d1e1e544fa3921718fab30d764cd364938d737f9b3d95eba3"
+    },
+    {
+      "path": "tests/game/check_city_bus_loop.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6442,
+      "sha256": "584f0be7fc49c52842d547237d13bc5ce4faeaf2f34a89ba1530df3b51e43bc5"
+    },
+    {
+      "path": "tests/game/check_city_bus_loop_native.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10789,
+      "sha256": "9b202d7e46a23c27ff435ad16190f7d04ba69a29daa12bc864fdcc7961e90343"
+    },
+    {
+      "path": "tests/game/check_city_bus_loop_safety.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10509,
+      "sha256": "863aaaa6a2920f2b7687e57b40f4085071f035021f566ade2d56d10bd5bc82f2"
+    },
+    {
+      "path": "tests/game/check_city_bus_presentation.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5217,
+      "sha256": "6f0006ac30f987820962671f917495642cec53256d6fd69d84eb861235103362"
+    },
+    {
+      "path": "tests/game/check_city_bus_ride_loop.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5124,
+      "sha256": "78f9f8cbde5744cfc8fe7bb3bcb263cee955bab2b658741a3b3721481e97ca5a"
+    },
+    {
+      "path": "tests/game/check_city_bus_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 16384,
+      "sha256": "cb07868c29173ecc8aa0e93b8c01fca7155499cd1d70363d4bd24a0bbc9d6d48"
+    },
+    {
+      "path": "tests/game/check_city_bus_stop_clearance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7416,
+      "sha256": "ac719ad91d98cca76fe2a60339e274eccdfef6650d19073a31c9c45d8a48a50d"
+    },
+    {
+      "path": "tests/game/check_city_helicopter.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19271,
+      "sha256": "2c66653cddeaec0f0f35ca64caaeb88b1fe9d73f50b274a92284ed730957e0fd"
+    },
+    {
+      "path": "tests/game/check_city_helicopter_rope.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18310,
+      "sha256": "5b76f28d0742a4c67fd9baa133059e7129cae98f6d3b3ce2eade419886b0a3f0"
+    },
+    {
+      "path": "tests/game/check_city_hospital.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13105,
+      "sha256": "c3e6d01a1e7f5522a5d453cd9ae87e52db75143e94af0e041a2ca457a934bc76"
+    },
+    {
+      "path": "tests/game/check_city_landmarks_views.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5009,
+      "sha256": "c29d0235c43d437c89652ced953699ffbb869cb8688f51e8f3b0460b309c04bd"
+    },
+    {
+      "path": "tests/game/check_city_landmarks_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3934,
+      "sha256": "6a0a154628f1043b50e5c971adcd3ea70bdd55bc121a78147432ddbb713909ba"
+    },
+    {
+      "path": "tests/game/check_city_life_integration.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18907,
+      "sha256": "c3c154c60a83c86ce3de778539b98d5ffc888352e55f22629f87f6c729c32616"
+    },
+    {
+      "path": "tests/game/check_city_public_safety.gd",
+      "kind": "source_or_runbook",
+      "bytes": 16948,
+      "sha256": "066907e7de33281676d1309b0b0e7b29ef742700927b57a7ed109f98c89ac652"
+    },
+    {
+      "path": "tests/game/check_city_sandbox_controls.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11390,
+      "sha256": "bc8099a100c854b84958f55b6c12dd2865e6efc18951f0779865fee61232a73a"
+    },
+    {
+      "path": "tests/game/check_city_scooter_service.gd",
+      "kind": "source_or_runbook",
+      "bytes": 23646,
+      "sha256": "6fe0c18933c18c95ebf4dbc687086e1eb0132490ab994e724d8ac0ccae74c0e3"
+    },
+    {
+      "path": "tests/game/check_city_subway.gd",
+      "kind": "source_or_runbook",
+      "bytes": 24138,
+      "sha256": "89379fc2279e4ec1acf710e613de3ea1f87d9a65b67c3e08ec82bb7baf684cf4"
+    },
+    {
+      "path": "tests/game/check_city_vehicle_audio.gd",
+      "kind": "source_or_runbook",
+      "bytes": 26539,
+      "sha256": "a0d67e58df4e50a4de57e0bcbb029ecf1c1ab621cead121e554260aab32e3e5d"
+    },
+    {
+      "path": "tests/game/check_city_weather_emergency.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14126,
+      "sha256": "45409415d8f3cc70a8f67da156783cd03c5b80ad5a5ad38e0152691d90ac787d"
+    },
+    {
+      "path": "tests/game/check_collision_mode.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3410,
+      "sha256": "fb164f0267dda5cb71fd6cd6300b4c344612f4cecc4e575016116e3c9395123c"
+    },
+    {
+      "path": "tests/game/check_collision_rejection.gd",
+      "kind": "source_or_runbook",
+      "bytes": 961,
+      "sha256": "c02c9ca6d10348c41295f1489a2b35196bded3969f858a49012427c8e0d4d2f9"
+    },
+    {
+      "path": "tests/game/check_collision_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19577,
+      "sha256": "41d6d0879cc30513bc460d861d62dbda2a79bb58ee7a3cda401442493dcff5ee"
+    },
+    {
+      "path": "tests/game/check_daehanmun_rejection.gd",
+      "kind": "source_or_runbook",
+      "bytes": 866,
+      "sha256": "82d3bf78f8ded1b8b2e078c6322f0f348e75152491435c3d62194c45543aae9b"
+    },
+    {
+      "path": "tests/game/check_daehanmun_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14848,
+      "sha256": "4cfd5828a47e32b2325ce2be558a9297f099a319105dbcdc53935449ef0ac1f4"
+    },
+    {
+      "path": "tests/game/check_direct_roof_lift.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17653,
+      "sha256": "8669232af331075ad00eb71fc4732d32dbd745698c495fd45b1e0dff5c2fd9d7"
+    },
+    {
+      "path": "tests/game/check_double_jump.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11538,
+      "sha256": "eff07dabf90b524738ca97afe5233c361381fc86d1f6c35adc3e700e1affcf42"
+    },
+    {
+      "path": "tests/game/check_drivable_car.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19174,
+      "sha256": "91e2abca2c0063a8988ecd3797ad2972159443a21a962f31e3eb3bd26346706c"
+    },
+    {
+      "path": "tests/game/check_entrance_guidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 27781,
+      "sha256": "d9512cf87a8a598f23a5da5cde8ec991aa3cf4034203a693e287c3b15df7531a"
+    },
+    {
+      "path": "tests/game/check_escalator_gym.gd",
+      "kind": "source_or_runbook",
+      "bytes": 16151,
+      "sha256": "57701ad324a594fb93ac8f5fa02903f0e2f5a4345b9839e1b611ef9fbdb16276"
+    },
+    {
+      "path": "tests/game/check_exploration.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17873,
+      "sha256": "23202ef79504b792539cc6e9f2485750ee9268177a4dd5d91700d2787bc76ddf"
+    },
+    {
+      "path": "tests/game/check_exploration_camera.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7959,
+      "sha256": "368477f37dba447af484af5711d776c0852619548548397346d9885eac728b70"
+    },
+    {
+      "path": "tests/game/check_exploration_motion.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19547,
+      "sha256": "4d60ebec9371a950cb3e27dd63369032a8e1346a1f401680f5a2762303850655"
+    },
+    {
+      "path": "tests/game/check_facility_faults.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5507,
+      "sha256": "b2c7a67aec39b3a25f8b1d630c707e16880a66a60bb9d5bbaadc54a73a354954"
+    },
+    {
+      "path": "tests/game/check_facility_interactions.gd",
+      "kind": "source_or_runbook",
+      "bytes": 38377,
+      "sha256": "78f82373c9ab251c9fe83c23460ab18c6c550250469868ec456b1ae8cde8556f"
+    },
+    {
+      "path": "tests/game/check_facility_targets.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13870,
+      "sha256": "06355abb8a78820f49e504d508ea8a169752bc0a1b6c2fa7f010173c2968056a"
+    },
+    {
+      "path": "tests/game/check_fast_exploration.gd",
+      "kind": "source_or_runbook",
+      "bytes": 21701,
+      "sha256": "c084d3c7e58bbf5e449108fc1ebc15275486930a8b3981634925df0f7356c9f1"
+    },
+    {
+      "path": "tests/game/check_game_underground_connections.gd",
+      "kind": "source_or_runbook",
+      "bytes": 23259,
+      "sha256": "74e9b1aaa6b0237184c9ab02f67fe9bd62ad28f5824a189f573b12295accbcfd"
+    },
+    {
+      "path": "tests/game/check_human_appearance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11398,
+      "sha256": "77925c1f4ca4887ad85d771058f8ebb85e9af17a50a3255d2ecfee06e1468de4"
+    },
+    {
+      "path": "tests/game/check_human_appearance_native.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11864,
+      "sha256": "2ebb732eb77d7957ff490e0b0e70aac58ddfd3b790522d3d314c780d8bcafd35"
+    },
+    {
+      "path": "tests/game/check_human_authored_actions.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7561,
+      "sha256": "4f73d2630621b3728b6fbb94c7bb873fc7d137306b1c3579dc8577984bd62048"
+    },
+    {
+      "path": "tests/game/check_human_city_integration.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6346,
+      "sha256": "0c0dabff36d47bd7956f781fd922f65d760cf3e6f8824213108903c5018f016f"
+    },
+    {
+      "path": "tests/game/check_human_gait_continuity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 26811,
+      "sha256": "b205ac49c4934259724a7d70b9d298670bb41cebe476be70a32891bb3aaf7d27"
+    },
+    {
+      "path": "tests/game/check_human_gait_support.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7547,
+      "sha256": "0038d33d486ab9997acea98c910b3c70e5fd2099aa037dcb906e729343cea4e3"
+    },
+    {
+      "path": "tests/game/check_human_gait_views.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17376,
+      "sha256": "55b4e11b31891f2e87b2d298c49a921b381da4a8cf36830b18bbe60e85dad69d"
+    },
+    {
+      "path": "tests/game/check_human_locomotion.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15684,
+      "sha256": "5e8fcd7bbe688d25af74bb5a095c296c6921aeba06c418e0dda00bec4d15dac4"
+    },
+    {
+      "path": "tests/game/check_human_presence_camera.gd",
+      "kind": "source_or_runbook",
+      "bytes": 56935,
+      "sha256": "acaa3bb78e81f66bed8e800f2ff7dece5da5aab1ebed73776be8c73863ca7308"
+    },
+    {
+      "path": "tests/game/check_human_presence_city.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13356,
+      "sha256": "2ec8dd27aa2bbec2d4ef6a0dbc0738e4bb335572351d081e3391cfbdba0ea3ab"
+    },
+    {
+      "path": "tests/game/check_human_scale_motion.gd",
+      "kind": "source_or_runbook",
+      "bytes": 21942,
+      "sha256": "025a4147282fee7375a8f49f616e5a49e2cdc66dbfbd2526f43c92c24ee09f0d"
+    },
+    {
+      "path": "tests/game/check_human_skin_gait.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15533,
+      "sha256": "a66a901c55e38a7b89e8d3b036156123f0df91c93aff1c3570b1ed8bc0b2a6a2"
+    },
+    {
+      "path": "tests/game/check_human_upper_gait.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13897,
+      "sha256": "d93075575b823c1db477d9f8b2e45c4f829b8d51ca127ae222c5926d068df418"
+    },
+    {
+      "path": "tests/game/check_hybrid_gait_join.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5331,
+      "sha256": "c0b5138b9997f61c623c3f63fa3d9f272b17cbaf718f23859186a1a7131a95d6"
+    },
+    {
+      "path": "tests/game/check_hybrid_neck_fit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7242,
+      "sha256": "ece68a04115c949302a29e1e936d120d24b0d519eb76d6280eff04084c98dfad"
+    },
+    {
+      "path": "tests/game/check_interior_access_population.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19488,
+      "sha256": "77bc9dbfef0a21cc892ce0cb4396af323cd79734a856d3f76b4511714d58ba4c"
+    },
+    {
+      "path": "tests/game/check_interior_facilities.gd",
+      "kind": "source_or_runbook",
+      "bytes": 25253,
+      "sha256": "6bef7a8a14def60c263ce9020a88358995afca5f1309bd27e229092834fd6968"
+    },
+    {
+      "path": "tests/game/check_interior_geometry.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2284,
+      "sha256": "a34d50f14ecfda0499c3af19ba6657c7bdf936fd3770691b1a1fb794e433084b"
+    },
+    {
+      "path": "tests/game/check_interior_identity.gd",
+      "kind": "source_or_runbook",
+      "bytes": 40083,
+      "sha256": "32e377af7d303a3e834ad4d9c7b934a5d3ca82c5b9c5e75360e952f08c29fcfc"
+    },
+    {
+      "path": "tests/game/check_interior_stairs_geometry.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2540,
+      "sha256": "c8dcb1ec9ef8d66d1c8f33bfdb9440dcadf1accdf459634612e7ead6c9fdb8bc"
+    },
+    {
+      "path": "tests/game/check_interior_visit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18193,
+      "sha256": "f6087e7920c17f1c9d97f0e31ff2e5fd8c5aeb7caa9bf26ba5a14bc7f7121b50"
+    },
+    {
+      "path": "tests/game/check_jump.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10299,
+      "sha256": "6b6287d6959d840257db6fe5679c4be73824885768ca38f94bd3607cd105b984"
+    },
+    {
+      "path": "tests/game/check_landmark_review.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7634,
+      "sha256": "5adca5ccea221d85fc83ed949e970d4aa03b1b11dc8bb0af91dc61071d958e7e"
+    },
+    {
+      "path": "tests/game/check_large_outdoor_pool.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15262,
+      "sha256": "64d9b0a6cf8e484c8d9873e3642bbb87f5cc9a4b490cd9573ac25c86efd8ce18"
+    },
+    {
+      "path": "tests/game/check_library_entry_contact.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10541,
+      "sha256": "585dbb976be17e5d024b43951e04ccd0ce971e5910c78472d734eed39b59b263"
+    },
+    {
+      "path": "tests/game/check_library_pool_life.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10080,
+      "sha256": "22c900a0a60ddd972ae4b1c40ebb1fe72a8d5cc2fa73d1b4425d213c4a0273be"
+    },
+    {
+      "path": "tests/game/check_lift_experience.gd",
+      "kind": "source_or_runbook",
+      "bytes": 25689,
+      "sha256": "4937a1ad98c95dd02b9b0f279402965bb88029ea861242830fe399d94a5d8ee7"
+    },
+    {
+      "path": "tests/game/check_lived_streets.gd",
+      "kind": "source_or_runbook",
+      "bytes": 33236,
+      "sha256": "51b3b343400c42eb3aa63286de59a53e71bffbf7c651fabff024059201e556e7"
+    },
+    {
+      "path": "tests/game/check_lotte_visit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12453,
+      "sha256": "62f025dde50250d1c0a810fb25dd9050cb174904702fac226a82427e094e9e46"
+    },
+    {
+      "path": "tests/game/check_mobility_distribution.gd",
+      "kind": "source_or_runbook",
+      "bytes": 30523,
+      "sha256": "cf2126060238453e751687e5d3c121db9e3fb8e764ef8ec22b73b40c3dfa0be4"
+    },
+    {
+      "path": "tests/game/check_movement_test.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13949,
+      "sha256": "ef35583c75ec1549bdcabcea7930f8e1c27233128bcaf14557dcbc81dfe2b0db"
+    },
+    {
+      "path": "tests/game/check_multifloor_escalator.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17736,
+      "sha256": "e2282b7fc5fd109489ab3fe898ce598f89a4e064237b5016c6be6b257978118c"
+    },
+    {
+      "path": "tests/game/check_neighborhood_coverage.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18850,
+      "sha256": "dfc7864ed819452b9b43255b23a0af127731ce8707945c0f190e11b84cd4516c"
+    },
+    {
+      "path": "tests/game/check_neighborhood_life.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7258,
+      "sha256": "08ea80117836a2173bd080cb21697b16ce4d92d739c077db5d58a0a6ccd1a42f"
+    },
+    {
+      "path": "tests/game/check_neighborhood_traffic.gd",
+      "kind": "source_or_runbook",
+      "bytes": 21097,
+      "sha256": "af7bbbc96c3af50858131e1e7a204227eb9fcef3f2aa8c542f45a0d87f0a7b9f"
+    },
+    {
+      "path": "tests/game/check_observation_exit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 425,
+      "sha256": "88359272b443a46126e2115756cea96dfd053502382342ade0ac69bce17542b3"
+    },
+    {
+      "path": "tests/game/check_outdoor_roof_jumping.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7486,
+      "sha256": "5fe51b3b6fec08c17075ce0cfeb8645af0477b5ec1b2bd2ec220c6109bd30bee"
+    },
+    {
+      "path": "tests/game/check_packaged_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3097,
+      "sha256": "141a3ec43373978e38b327685c034c8512e871087e45c426859ef857b3fcc0fd"
+    },
+    {
+      "path": "tests/game/check_painted_signal_traffic.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6941,
+      "sha256": "ca8b7ff9f36494af6654e2f40c62ca130b28db2d1c3097fc871ac03050c88e0f"
+    },
+    {
+      "path": "tests/game/check_palace_landmarks_views.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2944,
+      "sha256": "c2380903523e52f3ebcc2ba1eb416ced5ae3421a8d2fbc0a37936d274e737bcc"
+    },
+    {
+      "path": "tests/game/check_palace_landmarks_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3846,
+      "sha256": "e6fa7b4149e75b8f4fd4009390cdd1f829bec2ab9aaca901de966eebac84b4f4"
+    },
+    {
+      "path": "tests/game/check_palace_rejection.gd",
+      "kind": "source_or_runbook",
+      "bytes": 868,
+      "sha256": "e4cb14778859554ee582185e9c0551c74ac20a83088a5a859a1d0a66506a5abc"
+    },
+    {
+      "path": "tests/game/check_palace_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13496,
+      "sha256": "50740fba72206df715a5d7c28a96f5085380efd3cb7b071dde3e384dc094b01c"
+    },
+    {
+      "path": "tests/game/check_pedestrian_avoidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14500,
+      "sha256": "bd5c5fac5d03c45b2689e062dddb42e6cf625e79c25e651c393cf8a2a8bc3133"
+    },
+    {
+      "path": "tests/game/check_pedestrians.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10696,
+      "sha256": "6820fc24f0106cc2557695700af295954d5b0ec6d4699a9c35a52cc6e8491fed"
+    },
+    {
+      "path": "tests/game/check_photo_realism.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2648,
+      "sha256": "b968a50e220c5d128240ae82a86a342769a83a11a46583e63f234368b31078d5"
+    },
+    {
+      "path": "tests/game/check_player_fixture.gd",
+      "kind": "source_or_runbook",
+      "bytes": 5098,
+      "sha256": "ad7bbb90c259dd23f27dc8519b8cf3a927956b62a3590fae5665fecbfc16ea58"
+    },
+    {
+      "path": "tests/game/check_police_facility.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14211,
+      "sha256": "206c509bb3e310ade152f25ea235fc9eba44c3c33aa38a3644d473bb16113741"
+    },
+    {
+      "path": "tests/game/check_police_headquarters.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10629,
+      "sha256": "bc8fe9bd4a75342dd9fbc164f1033b9f2a62d75a2111a30171475f6e13cf3865"
+    },
+    {
+      "path": "tests/game/check_pool_preparation.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15967,
+      "sha256": "fe1a7df56e1659295a8715c954b560940d055565fe57eafadb31b4e5b2cca75a"
+    },
+    {
+      "path": "tests/game/check_project.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4409,
+      "sha256": "54d71f8519fd15e7bcfc46cb6d85017a1f2713384b8c280b1c985d313c7b1855"
+    },
+    {
+      "path": "tests/game/check_public_rejection.gd",
+      "kind": "source_or_runbook",
+      "bytes": 868,
+      "sha256": "d9b09ceb2acaa1a3aea0b09c79b4afb3a388e7d3d499f7a784212c1e3452e841"
+    },
+    {
+      "path": "tests/game/check_public_walk.gd",
+      "kind": "source_or_runbook",
+      "bytes": 16350,
+      "sha256": "04bbbd4d16540717ecd3e946550112d1233f8d4007628fde03aa1e569fe9436f"
+    },
+    {
+      "path": "tests/game/check_quality.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11278,
+      "sha256": "da49654037eaa65f939843b33b0378ebc861fe2525a94b67da9de1b579e52c4c"
+    },
+    {
+      "path": "tests/game/check_road_support.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7924,
+      "sha256": "ce1af0fa1523d7d97edf14d12bc5f00f7dbb960e13ac45b31343d19b0148f79d"
+    },
+    {
+      "path": "tests/game/check_road_surface_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15391,
+      "sha256": "18d804c913d09c93e6cec491d026a78076487e1beaec3975e9b2f8b683ad5ba2"
+    },
+    {
+      "path": "tests/game/check_rooftop_swimming.gd",
+      "kind": "source_or_runbook",
+      "bytes": 19189,
+      "sha256": "348eba62604079c08d4dda7e04baf46464198faba2c53db42a711fa752c03fd0"
+    },
+    {
+      "path": "tests/game/check_rooftops.gd",
+      "kind": "source_or_runbook",
+      "bytes": 23499,
+      "sha256": "880be26602427ad944fe5a8535a2a6705d236acb17e194c6538ed9adc8baa8bb"
+    },
+    {
+      "path": "tests/game/check_rooftops_bounded_regression.gd",
+      "kind": "source_or_runbook",
+      "bytes": 828,
+      "sha256": "a470f51eb6ec6bb584d707e050f33609a67666576115ee5bb55ab765dfdb3e8b"
+    },
+    {
+      "path": "tests/game/check_scale_bundle.gd",
+      "kind": "source_or_runbook",
+      "bytes": 522,
+      "sha256": "0e7117be1d633cc25053eb0a6ca18968cfa828598bc35b4fc99247a2896ead88"
+    },
+    {
+      "path": "tests/game/check_scale_view.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3532,
+      "sha256": "5399a5b217b2e7be4b92e7b3e7c8d71d620ed5bef27947d81ed34d8b27a67713"
+    },
+    {
+      "path": "tests/game/check_seoul_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18537,
+      "sha256": "c3125d5ea9569cef7501ad7f3aec35fdd577fb3c5832d5fa1d464c7172635128"
+    },
+    {
+      "path": "tests/game/check_shop_visit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 31127,
+      "sha256": "2de6b45e54e30a735e62c8fe51d4a2ab9bd279eed5f5cc6e39d6599b5cf50302"
+    },
+    {
+      "path": "tests/game/check_signal_visibility_cycle.gd",
+      "kind": "source_or_runbook",
+      "bytes": 14185,
+      "sha256": "eb4dbc490ce53361d5481cff4321481165e7de2873eb912d134af60fbb1e9aa3"
+    },
+    {
+      "path": "tests/game/check_stable_motion.gd",
+      "kind": "source_or_runbook",
+      "bytes": 13584,
+      "sha256": "867b8ccc8626b23279f998d1e666e2f54b8c255a8e37f144f27e4425c819d791"
+    },
+    {
+      "path": "tests/game/check_stolen_car_arrest.gd",
+      "kind": "source_or_runbook",
+      "bytes": 17245,
+      "sha256": "5d6291d00b6d14682c7c1636b213a9be1bd61cd459a908ffe9d2f143b0741c72"
+    },
+    {
+      "path": "tests/game/check_stolen_car_arrest_euljiro.gd",
+      "kind": "source_or_runbook",
+      "bytes": 286,
+      "sha256": "5d19d8ae3e174d54096ffb95d9f88d58bc191863a74b5357417f1f2c283b508d"
+    },
+    {
+      "path": "tests/game/check_street_scene.gd",
+      "kind": "source_or_runbook",
+      "bytes": 25791,
+      "sha256": "1ce16c86be68e2b2a58f5c586f3b997d53ba63bae41472a697a96cf44fd81244"
+    },
+    {
+      "path": "tests/game/check_street_transit.gd",
+      "kind": "source_or_runbook",
+      "bytes": 34364,
+      "sha256": "8834055ceedfb8dd228a7376f022ee8e73f8232aa8ad43f6ac97d758c173e203"
+    },
+    {
+      "path": "tests/game/check_terrain_actors.gd",
+      "kind": "source_or_runbook",
+      "bytes": 34799,
+      "sha256": "a50f9492aa2009c64487d473e954907bd028da038d666a818117bace6c2dc016"
+    },
+    {
+      "path": "tests/game/check_terrain_entries.gd",
+      "kind": "source_or_runbook",
+      "bytes": 30789,
+      "sha256": "06d1e491d82d358dab6dcf634f3e12040615d1c2e61ad76aafe992f342749d18"
+    },
+    {
+      "path": "tests/game/check_terrain_integration.gd",
+      "kind": "source_or_runbook",
+      "bytes": 18333,
+      "sha256": "dd4e909ae574843dfcd6d9484b0a90ac09399f0f001359217e56e82c2b2e6e75"
+    },
+    {
+      "path": "tests/game/check_terrain_projection_cache.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7865,
+      "sha256": "5293c38b8873b631411bced5473857df716eeee76ec40480db15e7e514575e26"
+    },
+    {
+      "path": "tests/game/check_textured_human_rig.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10054,
+      "sha256": "5e3e31d09484bb36e15d09e8c6c023727db4064e724acdc53012ed8ad242882b"
+    },
+    {
+      "path": "tests/game/check_traffic_car_takeover.gd",
+      "kind": "source_or_runbook",
+      "bytes": 20663,
+      "sha256": "7d59197bebf2f4290ac1311a2e5d0846d515f17e02af801c62730136120685b3"
+    },
+    {
+      "path": "tests/game/check_traffic_entry_cancel.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6480,
+      "sha256": "380d1750c66d895500b43f6f49c33c1d09723a881a6bff1b6a4a8b570391d497"
+    },
+    {
+      "path": "tests/game/check_transport_camera_stability.gd",
+      "kind": "source_or_runbook",
+      "bytes": 24937,
+      "sha256": "adbe0a7b80ad9e515e63d3ef4164f8be849313b40b05265055803af167385a58"
+    },
+    {
+      "path": "tests/game/check_transport_speed.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7817,
+      "sha256": "9c5bff0bd64c8d0a824a3234a253e7fb65614d83495dbb5e6e6faa9cfd383342"
+    },
+    {
+      "path": "tests/game/check_tree_detail.gd",
+      "kind": "source_or_runbook",
+      "bytes": 34603,
+      "sha256": "0771f4d9f26a5eecbc18c5fc7f0df3002f04d577c009088c42c5f200f90b67c6"
+    },
+    {
+      "path": "tests/game/check_urban_motion.gd",
+      "kind": "source_or_runbook",
+      "bytes": 21319,
+      "sha256": "0c8524501e0d28a432ba0580ff2a71e5b44e846d98cd0ee7a6e6b423deca6d17"
+    },
+    {
+      "path": "tests/game/check_vehicle_transition_pose.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7235,
+      "sha256": "1cef158d2b04c8f685f3b6febc2cbb07bf13b74b103965192c617349550fae8e"
+    },
+    {
+      "path": "tests/game/check_vehicles.gd",
+      "kind": "source_or_runbook",
+      "bytes": 11951,
+      "sha256": "adb258649ac1e3c164aa125d3aa17d1a688407f5210478286a94d78bf0efdb8a"
+    },
+    {
+      "path": "tests/game/check_walkable_milestone.gd",
+      "kind": "source_or_runbook",
+      "bytes": 10801,
+      "sha256": "78b0dc05ee82339e2f27d3f7d4eba273c4df0c64d859a4a923be7fd950049001"
+    },
+    {
+      "path": "tests/game/check_world.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4315,
+      "sha256": "91c491c57f2b93a3219251705d62c931f06916166d10d4126b9d91989ceb4799"
+    },
+    {
+      "path": "tests/game/city_visual_observation.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2839,
+      "sha256": "3e920ffd6308bdda19eaf3cf1483a4cf01f0d97a49cdea59a47b630a14b17e72"
+    },
+    {
+      "path": "tests/game/daehanmun_probe_input.gd",
+      "kind": "source_or_runbook",
+      "bytes": 885,
+      "sha256": "ff5074388a520d678225c009814359a07c265607731b6f97f3b236b3827a0221"
+    },
+    {
+      "path": "tests/game/inspect_city_reuse.gd",
+      "kind": "source_or_runbook",
+      "bytes": 2878,
+      "sha256": "ed3c241549bdcf472da03012c4c22034949dab0053064cb33774550cde3eed16"
+    },
+    {
+      "path": "tests/game/inspect_pedestrians.gd",
+      "kind": "source_or_runbook",
+      "bytes": 1169,
+      "sha256": "eb42a0896492b9f579046dab5cfe95823596808cc611eaef831c6dd720fe65b4"
+    },
+    {
+      "path": "tests/game/inspect_traffic.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3478,
+      "sha256": "e7060957b82a81fa202f0285ab44299437877bef368886d942e5fdeec1206d56"
+    },
+    {
+      "path": "tests/game/measure_performance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 15917,
+      "sha256": "0808db1a1671035f9212eae1383c970b6f98dd38dcf3ab0476368b5ef8fc3788"
+    },
+    {
+      "path": "tests/game/offline.sb",
+      "kind": "source_or_runbook",
+      "bytes": 44,
+      "sha256": "5c358b8d847211333e7ba22df82d84f796b5f30a41a2682209a949d783adbd08"
+    },
+    {
+      "path": "tests/game/package_dispatch.gd",
+      "kind": "source_or_runbook",
+      "bytes": 1617,
+      "sha256": "00b0f722b51c7f21a6cd42805369e432b4ae8d0d4ca0961b1bd495d07c6f7faf"
+    },
+    {
+      "path": "tests/game/palace_visual_observation.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3989,
+      "sha256": "2e133af10339f162f3968880c29c43b80ca036fbd2a16fa13aada52d7f35e11a"
+    },
+    {
+      "path": "tests/game/probe_terrain_path_block.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3339,
+      "sha256": "3dc2d1ad20fec16821e5cadfac4d63569c1e33c95c03ec9d6f0bcebca3492de2"
+    },
+    {
+      "path": "tests/game/probe_terrain_startup.gd",
+      "kind": "source_or_runbook",
+      "bytes": 771,
+      "sha256": "42dd57dab4d86c8045851ca32b27e495040d1aac392eb7307556f0fd61e63eb3"
+    },
+    {
+      "path": "tests/game/profile_terrain_runtime.gd",
+      "kind": "source_or_runbook",
+      "bytes": 3225,
+      "sha256": "dc7f530cd4fe90c899d96a82cce1f47b6daae6af86a59c839f77c1ef3f5d7b9d"
+    },
+    {
+      "path": "tests/game/profile_terrain_subsystems.gd",
+      "kind": "source_or_runbook",
+      "bytes": 4121,
+      "sha256": "9861c6551679842f4cba8ef1d2cedd6529d0ac86fbdca96ae3ed563e47cc4ddf"
+    },
+    {
+      "path": "tests/game/public_unbounded_player.gd",
+      "kind": "source_or_runbook",
+      "bytes": 436,
+      "sha256": "68a6a214f05acf2fc0c3bdea58644dcf031c21e674e5902a759ab237b40c2dc4"
+    },
+    {
+      "path": "tests/game/source_polygon_index_checks.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8398,
+      "sha256": "e3b276a7770c3b684e7d431387023efe43fa7aca688b135fc5df49e0e1e5203a"
+    },
+    {
+      "path": "tests/game/terrain_greenery_checks.gd",
+      "kind": "source_or_runbook",
+      "bytes": 12874,
+      "sha256": "463a056fda9bd05d92d6592589bf01b28a1c727e9097a475974fbd9a8063658a"
+    },
+    {
+      "path": "tests/game/urban_motion_guidance.gd",
+      "kind": "source_or_runbook",
+      "bytes": 8539,
+      "sha256": "1823ead091c320e6f1e3ddeeb59353466782dce03ebf4421207b9fefd9421031"
+    },
+    {
+      "path": "tools/acquire_supplemental.py",
+      "kind": "source_or_runbook",
+      "bytes": 9531,
+      "sha256": "6f1054a82d91be6c1ed98c1e266796ab452de9e9c76d45565026a653c5282745"
+    },
+    {
+      "path": "tools/audit_data_gaps.py",
+      "kind": "source_or_runbook",
+      "bytes": 8565,
+      "sha256": "b9ecc2ba6100688eb8273ffbc91647992c3c26c5de438788e0eb9433b670f18d"
+    },
+    {
+      "path": "tools/audit_real_scale.py",
+      "kind": "source_or_runbook",
+      "bytes": 6976,
+      "sha256": "72b95073c550cce38dbf229ab3a869ae28907b24baafe1fc1d9367058193355c"
+    },
+    {
+      "path": "tools/build_human_gait_contact_sheets.py",
+      "kind": "source_or_runbook",
+      "bytes": 5908,
+      "sha256": "3d73ab7f8886b107a42a1135b1c3237a0d434ba5756e12462b3770cd79f5c1e4"
+    },
+    {
+      "path": "tools/capture_pedestrians.py",
+      "kind": "source_or_runbook",
+      "bytes": 2480,
+      "sha256": "ad0dae29aa014fa188334b7ae68312d43cff543be8b03f28d46efc5262676319"
+    },
+    {
+      "path": "tools/capture_traffic.py",
+      "kind": "source_or_runbook",
+      "bytes": 3423,
+      "sha256": "d57412805e6d94f18a4796ac8135b5f1ba208af412058f4ba18e4df2010d247d"
+    },
+    {
+      "path": "tools/check_camera_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 6201,
+      "sha256": "818fb2d16a3b78ccd84d4d44bd6cbcedd3172dabdd6dae71ffa4bdf4ec4ebbc2"
+    },
+    {
+      "path": "tools/check_camera_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 17085,
+      "sha256": "f14051234d2eeb1545886d7f11e8f9edb5f6218d55de0e4d6e6f95eaf771862b"
+    },
+    {
+      "path": "tools/check_camera_guard_regression.py",
+      "kind": "source_or_runbook",
+      "bytes": 3415,
+      "sha256": "ae977db7c47684a9c52cb276ba03195028457c26081d3a89b853ac1967bfd176"
+    },
+    {
+      "path": "tools/check_checkout.py",
+      "kind": "source_or_runbook",
+      "bytes": 2180,
+      "sha256": "ae7ef4d5542639bf623d859330ecd11cc41b9893d738e5d2fc0461cf4a9fba22"
+    },
+    {
+      "path": "tools/check_city_landmarks_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 11695,
+      "sha256": "ec695bcb8837e93e1ab834b1c47a02346dc087859826a58c969d63e1347e3683"
+    },
+    {
+      "path": "tools/check_city_landmarks_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 31698,
+      "sha256": "fda4d67fae4f9bec3bfc54c1525c52506126b6cf4b3b46c612343373aa9c21cc"
+    },
+    {
+      "path": "tools/check_city_landmarks_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 3892,
+      "sha256": "2be9269ad5adeca812692f72f54854822fbe24e5cf66eb30b76c8fd4ae1e09c1"
+    },
+    {
+      "path": "tools/check_collision_bundle.py",
+      "kind": "source_or_runbook",
+      "bytes": 2420,
+      "sha256": "969cdcde44b29d02cc73329afcbfade61380d9a75fe50385d1ae84b5b9e42d08"
+    },
+    {
+      "path": "tools/check_collision_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 5898,
+      "sha256": "09b3d0cddd2ade891167b074d33018bd8da926cdc97435afca6f4a94b12bb361"
+    },
+    {
+      "path": "tools/check_collision_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 21260,
+      "sha256": "32433bf81b9d7b8c7edd122a027cd6b8df7dd611c7466f705bba7461cab02c4d"
+    },
+    {
+      "path": "tools/check_collision_rejections.py",
+      "kind": "source_or_runbook",
+      "bytes": 3399,
+      "sha256": "5f380b9d0fcea24f4738797a2824f9d7cf89af911640a1c3c4f939d6d256e2b8"
+    },
+    {
+      "path": "tools/check_coordinates.py",
+      "kind": "source_or_runbook",
+      "bytes": 13180,
+      "sha256": "1444e1e5985e3e16859dd31fb9a79d43889d87644acf16a57d4374fac572d952"
+    },
+    {
+      "path": "tools/check_daehanmun_bundle.py",
+      "kind": "source_or_runbook",
+      "bytes": 1865,
+      "sha256": "2d3ce51ca1f3b7d4224835e12ece41338deb23627ee736cb7cc2bc7bf6e24b39"
+    },
+    {
+      "path": "tools/check_daehanmun_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 6759,
+      "sha256": "49629d8de0d5e5a14d995cb2a1f8922ed6bbf2328e71d18f9d2990ef30af853d"
+    },
+    {
+      "path": "tools/check_daehanmun_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 27966,
+      "sha256": "10ac76d2c9b67d53653a7bcb99100ad839fbfa8cb0a6a60b385ddd8f3851fed4"
+    },
+    {
+      "path": "tools/check_daehanmun_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 2379,
+      "sha256": "36ed86e62e102c426376ecfca0ea8cce3df8de12f5987974fbe1c9ed71ef3e4b"
+    },
+    {
+      "path": "tools/check_daehanmun_rejections.py",
+      "kind": "source_or_runbook",
+      "bytes": 4124,
+      "sha256": "d28e3dfc26bb2ee48b383bff955b84871ba8ea9994ea80a14f707643c415fe2e"
+    },
+    {
+      "path": "tools/check_game_project.py",
+      "kind": "source_or_runbook",
+      "bytes": 10325,
+      "sha256": "2d305307e9d84477ba91d2cdcf766f87e6a3687a6c64bd55aefefff966039e0d"
+    },
+    {
+      "path": "tools/check_geometry.py",
+      "kind": "source_or_runbook",
+      "bytes": 17863,
+      "sha256": "09b66c74c39f694db6126279d15bf970fdbd6bfb6933c61d057dc4a9719b40b6"
+    },
+    {
+      "path": "tools/check_heights.py",
+      "kind": "source_or_runbook",
+      "bytes": 15708,
+      "sha256": "f8b0e4e241d77d41cae3779e8bcb1894fdac3e4a2ea6d6cc1435583efc1ce97b"
+    },
+    {
+      "path": "tools/check_landmark_review.py",
+      "kind": "source_or_runbook",
+      "bytes": 11712,
+      "sha256": "213730a9f55ded3a0f29979a44a7c7eec1c6c34d3ccb492526c32476cac18309"
+    },
+    {
+      "path": "tools/check_landmark_review_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 16521,
+      "sha256": "293b99040f7dc0ca0b5e10af86fcd68e81620b7f19d746d187949e45815c63ef"
+    },
+    {
+      "path": "tools/check_landmark_spec.py",
+      "kind": "source_or_runbook",
+      "bytes": 12770,
+      "sha256": "68894a17bf21c56f304844c8175f7456e946e6c082a17a48a39522e8a5b2b0ea"
+    },
+    {
+      "path": "tools/check_makehuman_swim_assets.gd",
+      "kind": "source_or_runbook",
+      "bytes": 6504,
+      "sha256": "91e940a05bb7ff5269b7c56e9334784ed35d98bfddce935653188e93b51a9d56"
+    },
+    {
+      "path": "tools/check_movement.py",
+      "kind": "source_or_runbook",
+      "bytes": 14596,
+      "sha256": "01d027938708198ebf649c1e7d06b3f667113dcfb30c11f67a11fa3d07fa7cc4"
+    },
+    {
+      "path": "tools/check_movement_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 6580,
+      "sha256": "2a1ea7097a2da81a79de68a2c9d140bd853da0b8a2f31f00fa1d3bf87f7e4157"
+    },
+    {
+      "path": "tools/check_movement_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 17170,
+      "sha256": "f08be84afd153dda9dccd8136735e1e6aee46b0d75bda422019dea7d0f98b5b8"
+    },
+    {
+      "path": "tools/check_package_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 21640,
+      "sha256": "2e0bb3ef4ee3300d6eef70f5944a8f7d37129a382b63bbeba8acd0da71fa30d4"
+    },
+    {
+      "path": "tools/check_palace_bundle.py",
+      "kind": "source_or_runbook",
+      "bytes": 1894,
+      "sha256": "78ff52e17a12b66332330733538f0ac4d65e4ebd8f17d87f47094a4cf90284d5"
+    },
+    {
+      "path": "tools/check_palace_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 11599,
+      "sha256": "a0cde796f3363ce465fc726a9bc947c7363c3ff38784e3c29a6ee066885cc50b"
+    },
+    {
+      "path": "tools/check_palace_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 31656,
+      "sha256": "d2c349cf7e6643f99f4d735bb8e9160e7f7122891e62bc0fbe43429a202ed430"
+    },
+    {
+      "path": "tools/check_palace_landmarks_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 10053,
+      "sha256": "82eec047de82a0c06b349c1d54569a24ee2901ff101812b9e5b0b770c6ab05ea"
+    },
+    {
+      "path": "tools/check_palace_landmarks_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 19220,
+      "sha256": "aae0434b78377a11698cd70be5e3923ac87e5c94e4784ce19c2bf009fe9b1068"
+    },
+    {
+      "path": "tools/check_palace_landmarks_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 3865,
+      "sha256": "cc28ef076217961963a841cc53902164caf361e051ff4ac05230b2a4babdaac9"
+    },
+    {
+      "path": "tools/check_palace_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 4215,
+      "sha256": "ebcc180693f4de1125bedc0b4b6784f4ebf2e5cd9face523d484112cf32e1412"
+    },
+    {
+      "path": "tools/check_palace_rejections.py",
+      "kind": "source_or_runbook",
+      "bytes": 6666,
+      "sha256": "8edbc890c13328d63fc97bbc918e6fc0283dcd8a347bd6daff4b99183bf75fc2"
+    },
+    {
+      "path": "tools/check_pedestrians_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 10775,
+      "sha256": "702aee1399686f768d57ea788e303f2d1a9916613670c35d7a1b2ea9e1fbed87"
+    },
+    {
+      "path": "tools/check_pedestrians_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 27155,
+      "sha256": "0fbf649810b54fec03468cbb724d23fb58787ba0ef8f50dc88c83578849ea683"
+    },
+    {
+      "path": "tools/check_pedestrians_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 3327,
+      "sha256": "bb3974ae2f5401a8ab4b989393bb504c493a498bb20f03e660c33a219429fd1c"
+    },
+    {
+      "path": "tools/check_pedestrians_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 5729,
+      "sha256": "9898c4667381966b0612acc4b7c4c20dfbf4ae94f767d92fbac105458b2c88de"
+    },
+    {
+      "path": "tools/check_performance_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 19643,
+      "sha256": "2e5aab88510a23ebd2e0e48145c3bf17e3007c341a6315619db0b492677daac8"
+    },
+    {
+      "path": "tools/check_player_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 5942,
+      "sha256": "100a12574ca012e081fe4f9bbad6a8450f3c2232d09743191a03bfadd37cb628"
+    },
+    {
+      "path": "tools/check_player_fixture.py",
+      "kind": "source_or_runbook",
+      "bytes": 10776,
+      "sha256": "63f14526916a74a0f7eab722876f2563fba0cf819f9bd528753634c80e1b7bc9"
+    },
+    {
+      "path": "tools/check_public_bundle.py",
+      "kind": "source_or_runbook",
+      "bytes": 1720,
+      "sha256": "897157a2fde60851ad9127f814ad70e5c4fc5b02ee69ef3e15eaeff1aac84887"
+    },
+    {
+      "path": "tools/check_public_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 12025,
+      "sha256": "f742edea81cdbaa90b8b26ba96367698086bf995b0b13b8cd57a5f77fb6eb3c4"
+    },
+    {
+      "path": "tools/check_public_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 39952,
+      "sha256": "d09c62f9976553272106499cd1b562b6de3bbc2d69eb6ae493366fa7a4c3a4b5"
+    },
+    {
+      "path": "tools/check_public_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 4469,
+      "sha256": "fa2f31c6ba29943b6adcdc379fce3918c6af44e3a8368e738b1fd35ddea39ecb"
+    },
+    {
+      "path": "tools/check_public_rejections.py",
+      "kind": "source_or_runbook",
+      "bytes": 7583,
+      "sha256": "64fd2ecab658744e94db7d7a1b2d9d48b95c3c88b4cefbfe0ad3d823490526d4"
+    },
+    {
+      "path": "tools/check_quality_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 20979,
+      "sha256": "f5d558e853f67ce72c58465bb92ac31ae6578ef968fe09927d6655944ea1674e"
+    },
+    {
+      "path": "tools/check_realism_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 2020,
+      "sha256": "c25f09543f9ce4ad7282771008f901df5dfcda44c65f6bf1b918adf2b27dcc2a"
+    },
+    {
+      "path": "tools/check_road_support.py",
+      "kind": "source_or_runbook",
+      "bytes": 15857,
+      "sha256": "de2518f743290a05f02fdece9ee0b4f9858d6fc4bc4cbd5a5b92d2f374415bdc"
+    },
+    {
+      "path": "tools/check_road_surface_plan.py",
+      "kind": "source_or_runbook",
+      "bytes": 6806,
+      "sha256": "f34deb9ad7f362db7611a045173ef806d503eb4a82fa9781e1942f68bbc4fa36"
+    },
+    {
+      "path": "tools/check_route_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 5082,
+      "sha256": "063232d43fa773732536f9270dbb7a6375ba5a4bf60e7793a974b8d443d4226d"
+    },
+    {
+      "path": "tools/check_route_rejections.py",
+      "kind": "source_or_runbook",
+      "bytes": 8740,
+      "sha256": "f71e5fba6c424d7c9404668d790fa9595253d24f21cd0d198f06b12c53dd5652"
+    },
+    {
+      "path": "tools/check_routes.py",
+      "kind": "source_or_runbook",
+      "bytes": 23565,
+      "sha256": "71d625ce89c2fa7323466920908130325f034125bc367fedb4acd87efc5b61ca"
+    },
+    {
+      "path": "tools/check_scale_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 10828,
+      "sha256": "88364a8876ae90dfe12901cd671e9ee87ccf4f776ecc300a33c57c2d9a6651c2"
+    },
+    {
+      "path": "tools/check_scale_view.py",
+      "kind": "source_or_runbook",
+      "bytes": 13319,
+      "sha256": "c5ff874f90abb306e671e26b7ae6351187854cc420278ca72d994155794df74a"
+    },
+    {
+      "path": "tools/check_street_detail_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 5261,
+      "sha256": "c79070a9f6a58f43e6f37ff2f8f739289a5fdc4a154de52c8afd498201647760"
+    },
+    {
+      "path": "tools/check_terrain_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 2478,
+      "sha256": "59ce43db10b4157e2e9af41e06261656b6f6293a9c0a9637fb69be3f5eb707bd"
+    },
+    {
+      "path": "tools/check_textured_human_palette.gd",
+      "kind": "source_or_runbook",
+      "bytes": 7449,
+      "sha256": "e4a4b9bd482413589469ccc21a8c4081b37d1e98f6568bd4fc4e37cdf050285a"
+    },
+    {
+      "path": "tools/check_traffic_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 9613,
+      "sha256": "5ce37a37fa706d72d2f9c019098b9d15a277ab436de90422954dd161991c26c9"
+    },
+    {
+      "path": "tools/check_tree_detail_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 2219,
+      "sha256": "c0d126093dc49bf3fe67251210602cddba89b7a2ac2ab843dc75fab6065365f5"
+    },
+    {
+      "path": "tools/check_urban_motion_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 10829,
+      "sha256": "4037a9d09fe65a502f61e1474ec2f24d76c87823475ea5994e701ea72e66ec30"
+    },
+    {
+      "path": "tools/check_urban_motion_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 48693,
+      "sha256": "624be5e0ed061ced4faa3ddba174daabec35c077a75885839c6421546753928b"
+    },
+    {
+      "path": "tools/check_urban_motion_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 7272,
+      "sha256": "d46a02fa5c7f86e2ba6620a70d5661a79cf9113637d37efd71028fd409ac9616"
+    },
+    {
+      "path": "tools/check_vehicles_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 12398,
+      "sha256": "69e48d883e051313caf7df80d5e5ebf081fa433cc32fa67664852286425b060c"
+    },
+    {
+      "path": "tools/check_vehicles_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 37644,
+      "sha256": "8ca04b130565ada28ee58d3de29690a9ddc4e35a9776130f84d349ffdf0e03f4"
+    },
+    {
+      "path": "tools/check_vehicles_handoff.py",
+      "kind": "source_or_runbook",
+      "bytes": 5811,
+      "sha256": "0be9602f3ac30e290dd56c1686085cd941973b2a0fb3d189f203f4b034f169ee"
+    },
+    {
+      "path": "tools/check_walkable_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 8800,
+      "sha256": "7d23ab0c32512b93e281e55e44ae11824e7e964195fdf16c3ce19676a2c34491"
+    },
+    {
+      "path": "tools/check_walkable_evidence.py",
+      "kind": "source_or_runbook",
+      "bytes": 37587,
+      "sha256": "aff4169340df1ee94e0f66c781a188dd4766ee2bd5359b59d67707ffd69ebb9d"
+    },
+    {
+      "path": "tools/check_walkable_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 8104,
+      "sha256": "9bd29ae68b3aa5512652959dad9f5cb0dce69864661f36ea4f4785adc46342d5"
+    },
+    {
+      "path": "tools/check_world_geometry.py",
+      "kind": "source_or_runbook",
+      "bytes": 20570,
+      "sha256": "e7eee4db16ed12852ce2b9c74b611ce27342f37d3018e054535d7f8104733220"
+    },
+    {
+      "path": "tools/check_world_overlaps.py",
+      "kind": "source_or_runbook",
+      "bytes": 3391,
+      "sha256": "b652174362227d62e1c85fbf52477788ae59230878343becc0fccbe7c7b10ca5"
+    },
+    {
+      "path": "tools/check_world_portability.py",
+      "kind": "source_or_runbook",
+      "bytes": 4409,
+      "sha256": "bf5618c6de4a8cf1d303c9b4e1684bb5c9b2d19c8360289787a4f1d1fa4af1f3"
+    },
+    {
+      "path": "tools/city_bus_stop_placement.py",
+      "kind": "source_or_runbook",
+      "bytes": 7001,
+      "sha256": "8eb677ef45356afdaaa11dd127b06f4a66386adfab55d1f5adfaab8036419109"
+    },
+    {
+      "path": "tools/coordinate_system.py",
+      "kind": "source_or_runbook",
+      "bytes": 2668,
+      "sha256": "ead3e59b3d060f50f4097a88816aed2516033f37d3bd739719517ab74ece6274"
+    },
+    {
+      "path": "tools/export_macos.py",
+      "kind": "source_or_runbook",
+      "bytes": 31729,
+      "sha256": "393c31e6b89eda3f2fe4c6359da48b3eab6e1881e0f8fe7f47a39532a1d6303d"
+    },
+    {
+      "path": "tools/make_busking_music.py",
+      "kind": "source_or_runbook",
+      "bytes": 1600,
+      "sha256": "297473cf82104d243477b3fcd05a3cd177c11f46509303727de7da30f4aa767c"
+    },
+    {
+      "path": "tools/make_city_vehicle_audio.py",
+      "kind": "source_or_runbook",
+      "bytes": 3681,
+      "sha256": "b1fcf04a3aad448ee79f860820f4406748b6517f9886cb3f49ab2ad02e724455"
+    },
+    {
+      "path": "tools/map_movement.py",
+      "kind": "source_or_runbook",
+      "bytes": 5586,
+      "sha256": "335776f1a435c5681da3206202ace39e27dd979ed266cad79b0d16598f25405e"
+    },
+    {
+      "path": "tools/map_routes.py",
+      "kind": "source_or_runbook",
+      "bytes": 5046,
+      "sha256": "bd7bded0b0ac661ccc6effd83434b16e03b77c868ba37c796e19511f8b50daf1"
+    },
+    {
+      "path": "tools/measure_performance.py",
+      "kind": "source_or_runbook",
+      "bytes": 36485,
+      "sha256": "ca830bfdc18359e3e1f07a5f6d5f0f2bc3d3cd7141acb3b8ffc3ed5e9c868a33"
+    },
+    {
+      "path": "tools/prepare_building_visits.py",
+      "kind": "source_or_runbook",
+      "bytes": 12245,
+      "sha256": "f46706925e4bc9a531db2d6d787bd69fd18971cbceb1e83aa8fb9bdd1ba172fa"
+    },
+    {
+      "path": "tools/prepare_city_authored.py",
+      "kind": "source_or_runbook",
+      "bytes": 17607,
+      "sha256": "b17ae0788cd87e10a81d0923fe27b4121cd00c974b9c3c55767c04bbee1e4ed6"
+    },
+    {
+      "path": "tools/prepare_city_bus_loop.py",
+      "kind": "source_or_runbook",
+      "bytes": 13747,
+      "sha256": "ead75ceccacf9963c4463d8aa70de4d1d15a72ea2e9437ad6db0d6e63ee6df20"
+    },
+    {
+      "path": "tools/prepare_city_landmarks.py",
+      "kind": "source_or_runbook",
+      "bytes": 12649,
+      "sha256": "8e2b05057b32502fadc897da9573d49c7fa836a16a811fdb050692a7d01bd4c5"
+    },
+    {
+      "path": "tools/prepare_collision.py",
+      "kind": "source_or_runbook",
+      "bytes": 6681,
+      "sha256": "ee7659dcc7fc34174d54d390c7ee4b49dc862b4d029494966c84b788d8da7108"
+    },
+    {
+      "path": "tools/prepare_daehanmun.py",
+      "kind": "source_or_runbook",
+      "bytes": 7694,
+      "sha256": "52e3640880533358f6544b9e135ec0ab4dcb48669260ec8629eafaa2c4e4ce6d"
+    },
+    {
+      "path": "tools/prepare_features.py",
+      "kind": "source_or_runbook",
+      "bytes": 21773,
+      "sha256": "58d3769759074befd119811a168fec980deb99bb47fcaa2d582919a77b9b13d5"
+    },
+    {
+      "path": "tools/prepare_game_data.py",
+      "kind": "source_or_runbook",
+      "bytes": 5230,
+      "sha256": "15fcc576b2c46aa08cad615731ffe97490378aeb6dcb652fd46e1e65ad7c8a43"
+    },
+    {
+      "path": "tools/prepare_heights.py",
+      "kind": "source_or_runbook",
+      "bytes": 13738,
+      "sha256": "1f3bcb545bdd08cd21bd6ec5c3808078ede707c86a644fe2df34fc23d02ec2de"
+    },
+    {
+      "path": "tools/prepare_landmark_spec.py",
+      "kind": "source_or_runbook",
+      "bytes": 7177,
+      "sha256": "ea6d777290000a9e08e47bc352d4c01b05177bc400e5ce26be3a422a16f00eba"
+    },
+    {
+      "path": "tools/prepare_local_terrain.py",
+      "kind": "source_or_runbook",
+      "bytes": 1453,
+      "sha256": "74442a6dba6535371957e408559d2a45cac2ca356a36bc3683abfb0a52924d1f"
+    },
+    {
+      "path": "tools/prepare_lotte_visit.py",
+      "kind": "source_or_runbook",
+      "bytes": 10350,
+      "sha256": "35d9332e30a28820f9286ab84eff9ccce78f0be71dcc676d226046fa40a666a1"
+    },
+    {
+      "path": "tools/prepare_makehuman_swim.py",
+      "kind": "source_or_runbook",
+      "bytes": 23144,
+      "sha256": "816bacc2b30ca05286d7c40f0e6745a1bbca59ff4108cc93535d4be9cb9c3c01"
+    },
+    {
+      "path": "tools/prepare_movement.py",
+      "kind": "source_or_runbook",
+      "bytes": 17738,
+      "sha256": "bd9ba5e7834c980f964dc1e006ebd300e0c51c6bc95ca3e1250bf87d4b656cbf"
+    },
+    {
+      "path": "tools/prepare_neighborhood_coverage.py",
+      "kind": "source_or_runbook",
+      "bytes": 12485,
+      "sha256": "7f0097f95a7971f0f4ca46b1de470748706bcc37bd1147b011503435aebed355"
+    },
+    {
+      "path": "tools/prepare_osm.py",
+      "kind": "source_or_runbook",
+      "bytes": 12381,
+      "sha256": "983a5a67b3ef4d82b6168308744a75e6c1520fe777ab3eef31677d3a542b6a9a"
+    },
+    {
+      "path": "tools/prepare_palace_landmarks.py",
+      "kind": "source_or_runbook",
+      "bytes": 23435,
+      "sha256": "f63017b3ee431ee936bab094dc174df55d04feea2b438c1dc57801666afbe732"
+    },
+    {
+      "path": "tools/prepare_palace_walk.py",
+      "kind": "source_or_runbook",
+      "bytes": 12947,
+      "sha256": "e85ac0a3560af5b592a14e33bdb5d7323de53d1098cd3059134530cc57ec074c"
+    },
+    {
+      "path": "tools/prepare_pedestrians.py",
+      "kind": "source_or_runbook",
+      "bytes": 3050,
+      "sha256": "395bd6d6a9d359cea7cf1afdcd5768f4526f83864eb8da1953b5d07a8314ee0e"
+    },
+    {
+      "path": "tools/prepare_public_walk.py",
+      "kind": "source_or_runbook",
+      "bytes": 16801,
+      "sha256": "dc28f18121db018494c44e75a28c65c5dbbb81e56c13906014175f716b4b79d3"
+    },
+    {
+      "path": "tools/prepare_road_furniture.py",
+      "kind": "source_or_runbook",
+      "bytes": 37882,
+      "sha256": "ce1762a109c9483587371dd253b7774c1c4884fd71b414eaaff069317a6333ce"
+    },
+    {
+      "path": "tools/prepare_routes.py",
+      "kind": "source_or_runbook",
+      "bytes": 13025,
+      "sha256": "0590eb450b206d05981c5f9b7ec07cd90e9a2bb91b1fcb90d05b6d6ef48f2520"
+    },
+    {
+      "path": "tools/prepare_runtime_terrain.py",
+      "kind": "source_or_runbook",
+      "bytes": 31310,
+      "sha256": "cdc75eff13db186f0cd41b246b144de88c2651f1420cb9878982ffde2a48c98c"
+    },
+    {
+      "path": "tools/prepare_scale_view.py",
+      "kind": "source_or_runbook",
+      "bytes": 3971,
+      "sha256": "db85abbe1c97cabbb24f6e0ae1bc5ac14acd690cad361f724700a024827dac74"
+    },
+    {
+      "path": "tools/prepare_seoul_terrain_sources.py",
+      "kind": "source_or_runbook",
+      "bytes": 17668,
+      "sha256": "74b0102422860ee650e0673d750b66fdd63b1a693e031842089e1640d0cfa0d8"
+    },
+    {
+      "path": "tools/prepare_street_businesses_exp16.py",
+      "kind": "source_or_runbook",
+      "bytes": 15014,
+      "sha256": "1ef19d719873c4d78061fd7878693275c1b7099ca47b3384c590087d6f6837fe"
+    },
+    {
+      "path": "tools/prepare_terrain_surface.py",
+      "kind": "source_or_runbook",
+      "bytes": 7233,
+      "sha256": "c02ca20940ae42dac65636991c01c790126e1b42659d890a94ec8ba19ac1f8b0"
+    },
+    {
+      "path": "tools/prepare_traffic.py",
+      "kind": "source_or_runbook",
+      "bytes": 4170,
+      "sha256": "bcbb236f4d48413815e1fe9a3ea762baa00040c8705bfa50d7205ceb2709d386"
+    },
+    {
+      "path": "tools/prepare_walkable_itinerary.py",
+      "kind": "source_or_runbook",
+      "bytes": 13733,
+      "sha256": "e42fdf3aef2e496aaca3dd618013b9af08d898f57d523480aa03bd1c6219cc8b"
+    },
+    {
+      "path": "tools/prepare_world.py",
+      "kind": "source_or_runbook",
+      "bytes": 15755,
+      "sha256": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b"
+    },
+    {
+      "path": "tools/relocate_package_manifest.py",
+      "kind": "source_or_runbook",
+      "bytes": 8833,
+      "sha256": "4d627b151b27857ca4f6bfeee30729a54d81eb880ea2e24ad1added13eafec1d"
+    },
+    {
+      "path": "tools/review_osm_extract.py",
+      "kind": "source_or_runbook",
+      "bytes": 14305,
+      "sha256": "debe7de4de831566c1a215af7ff736359d16ab60c6c3c4ebfacf408173d09f1b"
+    },
+    {
+      "path": "tools/review_supplemental.py",
+      "kind": "source_or_runbook",
+      "bytes": 17201,
+      "sha256": "9db02e889e2a2ed86a676b833f800be8ea5f9afe08bf10ed636f503f4c3f153f"
+    },
+    {
+      "path": "tools/run_camera_test.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1159,
+      "sha256": "831d616339c986e5b2093e7ae5d6ec6572c8656a950d0125c3bb4b3aabf30b4a"
+    },
+    {
+      "path": "tools/run_city_landmarks.sh",
+      "kind": "source_or_runbook",
+      "bytes": 961,
+      "sha256": "2da56b113ea2c2d83addc564a3c79521d23e039b21b343bb7e13c94c1c93a763"
+    },
+    {
+      "path": "tools/run_collision_test.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1313,
+      "sha256": "e094a60620ccc85a6b10d13f147ad6ef890982200a40794be6b8d5fe9514236b"
+    },
+    {
+      "path": "tools/run_daehanmun_walk.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1422,
+      "sha256": "69cbb65caedcfd637fc74dd7b157da891ab10824b68a5424d68183fbba3dbd17"
+    },
+    {
+      "path": "tools/run_engine_smoke.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1661,
+      "sha256": "15fe0532802603f662df5d0e4e08683d4b172ac6b38bb5eee5068eb7889a577f"
+    },
+    {
+      "path": "tools/run_exploration.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1248,
+      "sha256": "17b253c241a2eb6eea177c976b6470f27e11d1d49ef9ce63c6d9ac45a4281682"
+    },
+    {
+      "path": "tools/run_game.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1219,
+      "sha256": "52dd635887ecbfbda0a59b6949f4da2e407c0c93d8ee76807e8f35eef4c6ef30"
+    },
+    {
+      "path": "tools/run_movement_test.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1154,
+      "sha256": "56f6bfd199736e07548612231485cd0b4f03b22600a3ad0823f80b765e783e7e"
+    },
+    {
+      "path": "tools/run_palace_landmarks.sh",
+      "kind": "source_or_runbook",
+      "bytes": 899,
+      "sha256": "22de9cb9f1de471819959c725803b31c0dc5fcb15951ea996b21d1fb06db011c"
+    },
+    {
+      "path": "tools/run_palace_walk.sh",
+      "kind": "source_or_runbook",
+      "bytes": 785,
+      "sha256": "cf74271f340920d06460c9f55ac9cdf30e923c6d04319e00ed00810940782450"
+    },
+    {
+      "path": "tools/run_pedestrians.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1025,
+      "sha256": "93b6cc072f3375d217dad0db174ee9a2a5934921bec2bd3043d735a1d857db62"
+    },
+    {
+      "path": "tools/run_player_fixture.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1257,
+      "sha256": "4043c770dfbfd6d27bdddac5c0016bdf6b978f04d629acd7d15fb5b73be66028"
+    },
+    {
+      "path": "tools/run_public_walk.sh",
+      "kind": "source_or_runbook",
+      "bytes": 785,
+      "sha256": "58fe0ac8af0e6f695092215d100299787d89d10a91a492436b69c647bce45694"
+    },
+    {
+      "path": "tools/run_scale_view.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1327,
+      "sha256": "f06c8c4a7ff9ca17f7974124edd63f96c991602c0b89d0e5f2c9b95a2e9a0b96"
+    },
+    {
+      "path": "tools/run_terrain_validation.py",
+      "kind": "source_or_runbook",
+      "bytes": 3219,
+      "sha256": "95535bfe74041719d312a7f3e1b4199df89305e239df6da62e0af593677a4bd0"
+    },
+    {
+      "path": "tools/run_traffic.sh",
+      "kind": "source_or_runbook",
+      "bytes": 951,
+      "sha256": "26529b100373d3895ea95fb611021e17ee50d0dec3943c0ca6f27b3674304e6a"
+    },
+    {
+      "path": "tools/run_urban_transit_acceptance.py",
+      "kind": "source_or_runbook",
+      "bytes": 5869,
+      "sha256": "0e919fe5b375f8eb15f2822cb4901f2bf1430f693f4190adca17d181e2debef7"
+    },
+    {
+      "path": "tools/run_v0.sh",
+      "kind": "source_or_runbook",
+      "bytes": 936,
+      "sha256": "6bb23d3f8f9bdd0a22375e72d56cb9a912593f8d35c41ba16bf5a9a7d51b483b"
+    },
+    {
+      "path": "tools/run_walkable_milestone.sh",
+      "kind": "source_or_runbook",
+      "bytes": 258,
+      "sha256": "e1aaed6b8caee99c4535277b0bd96252d4cdb55443daa7053df30e3f7bd81dac"
+    },
+    {
+      "path": "tools/setup_mac.sh",
+      "kind": "source_or_runbook",
+      "bytes": 1765,
+      "sha256": "5b1b4cea17f6cf7f40b5df0eca32249ee071fec21f88ef45197c3674fed8ef21"
+    },
+    {
+      "path": "tools/terrain_mesh_conditioning.py",
+      "kind": "source_or_runbook",
+      "bytes": 8933,
+      "sha256": "dbf9e59311238aa821525900a8e0f361afa0c5a7e96eb71faf9e4449e270dd3e"
+    },
+    {
+      "path": "tools/test_geometry_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 5254,
+      "sha256": "5dde9875b46cb6574d7a71da4f410fcb1a35472b3e6dc2e011570a9c5f7d4040"
+    },
+    {
+      "path": "tools/test_height_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 5824,
+      "sha256": "87f1f6a3d61110b21a229ac8dfd08094c274d1cccb1f08b5ab2bc00aa5e58277"
+    },
+    {
+      "path": "tools/test_movement_contract.py",
+      "kind": "source_or_runbook",
+      "bytes": 6551,
+      "sha256": "fb934a05b0dcb9da5e8d0f42dc30871ec1cc9a666077ba9916366e2f306cd244"
+    }
+  ],
+  "scope": "Current source+inputs+actual selected engine runs,19nativepixels and bounded ordinary launch. Existing world/person/car IDs retained; no commercial game assets extracted or new dependency download."
+}

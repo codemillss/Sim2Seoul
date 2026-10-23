@@ -1,0 +1,74 @@
+{
+  "task": "EXP32_ACTION_FREEDOM_ROOT_SUBAGENT_PIXEL_REVIEW",
+  "reviewer": "sandbox_acceptance",
+  "result": "PASS_WITH_RECORDED_LIMITS",
+  "native_report": "data/reports/city_action_freedom/20261023/action_freedom_native_native01.json",
+  "native_report_sha256": "6a96813b75698bf62003a422e2ec08111a37a2177f5ac92de55fda9f66963872",
+  "review_method": "All seven original PNGs opened through view_image at full available resolution; no image edits or generated reference used.",
+  "reviewed_images": [
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_jab_left_intermediate.png",
+      "sha256": "cffacd431b6ccf102b61ef2c25c030669101b678bc6556a0727c3eff5a715d43"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_cross_right_intermediate.png",
+      "sha256": "e62f9c583c0d9c265336e331a34af3ccc9734b73ea433b45afe82dbe8c306b20"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_hook_left_intermediate.png",
+      "sha256": "6ffe6eaddb75901038c37445d545b255ca625bc765fdb7b6de8e49ee2b6caa6c"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_shove_intermediate.png",
+      "sha256": "c04482416917cd346b32ead9da95c9f79300f40c3a16120e806f2990b1b4a766"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_held_guard.png",
+      "sha256": "ae1e603ab737d7779f96d89f8dfa12160a512e585e45d75d9e100fef87ff2b64"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_original_car_driver_exit.png",
+      "sha256": "87c3d621c7afa0562460c3d3cf1a6c810562fca2290cd981491eddb02175b38c"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/city_action_freedom/20261023/action_freedom_native_native01_original_car_player_entry.png",
+      "sha256": "29efd0d13c103352f2ed519992593b83f3ad55d52c806ffa5e2cb5c82c5b069e"
+    }
+  ],
+  "findings": [
+    "The imported textured human remains visible and finite in all four attack poses, held guard and the two vehicle stages. Left/right arms produce distinct authored gestures without a detached limb or collapsed body in these selected images.",
+    "The same original blue traffic car remains visible beside the player through the driver-exit and player-entry boundaries. A separately authored adult driver stands outside on the opposite side. The production camera and street collision are retained.",
+    "Input, contact timing, wall exclusion, custody and same-body vehicle control claims rely on the accompanying actual engine assertions, not on single PNGs."
+  ],
+  "limitations": [
+    "These are seven selected stills, not a continuous motion capture or a subjective comfort/performance assessment.",
+    "Attack stills at about 0.2 seconds often show recovery. They are not claimed to be the exact punch contact instant.",
+    "The original imported hands remain open palms; finger curls and articulated closed fists are not implemented. Guard hands sit around the upper chest rather than fully covering the face.",
+    "Car doors are part of the original rigid monolithic vehicle model. Driver-exit and player-entry stills show actual stage boundaries; there is no articulated opening door or continuously animated in-car seat traversal."
+  ],
+  "source_hashes": {
+    "res://../tests/game/check_city_action_freedom.gd": "e245363b0ab51a5e1d9cf8389f87f4db4fc99378f44e788244dc3700695e3d3b",
+    "res://../tests/game/check_city_public_safety.gd": "066907e7de33281676d1309b0b0e7b29ef742700927b57a7ed109f98c89ac652",
+    "res://assets/authored/bike_service.json": "3ac1d65ce640b709aae77888c10cfc48f1f9f7a33306d542a8d8e0f6d0c932a4",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://assets/authored/police_facility.json": "67a0b33a1c6824ce641e3158ccf5087746b79d6f126abaa162de518ffcaf4e73",
+    "res://assets/authored/police_headquarters.json": "fd550a2df6b79744191b4c3e4676c130c6d18c32a592cfa054606daba0fe6598",
+    "res://assets/authored/police_patrol.json": "29e2832b96cd2873beaf63fc2a8d0e9dd4ede522c66963b5727b9a32ae8af630",
+    "res://assets/authored/scooter_service.json": "0ac0b74f62a6a633eabe85a940140184f02e76625949466230e0e1d891de34ea",
+    "res://data/generated/public_walk.json": "09fdea1f28b1e3bf3d3a38121ba79a8a8eb627c6f27634a67aaedcfdc2485e2a",
+    "res://data/generated/terrain_surface.json": "01715dcda28ca09c3ac30659dff039587358c029638b6ce8b2dee394983b46e5",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+    "res://scripts/city_police_facility.gd": "5bf92a31b70c88f867f90a822e268b75cee12a053dc109b806ad757813caed89",
+    "res://scripts/city_police_headquarters.gd": "edb7a4ef823d3b17a9f6c87f32e725b1d1c4133f2711f13c5cc3fbe35b2aa97e",
+    "res://scripts/city_police_patrol.gd": "40d35b8752cda0eb3a97311df6d3a0a45e34abec538acf84f821045758b883aa",
+    "res://scripts/city_public_safety.gd": "557744354b5fd49c073deef56cb60fd7417d201888df92d797f5fb24b1ec97f1",
+    "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "res://scripts/explore_walk.gd": "6f5fe3843f61299155177252fa458a0574318dfcb06d7a5f2afea4e835ec3b89",
+    "res://scripts/player/exploration_avatar.gd": "8ba53b4e1515df3cd125dfac093fe71f7553c9fa28fa811576b18ed73e693f0e",
+    "res://scripts/player/textured_human_rig.gd": "152659db7a670b27d0727e8667d15020100373e427bee0c8b3eefe009bb92ced",
+    "res://scripts/player/textured_human_surface.gd": "0bba349466b98c2b10863a7fc6e50798247677a21e38d8dab7c33ada358d3a9a",
+    "res://scripts/traffic/vehicle.gd": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84",
+    "res://scripts/traffic_car_takeover.gd": "181ec5c61cd5f92fab1838680118a38a476c63070e8e936ce01e5ea21c491e22"
+  }
+}

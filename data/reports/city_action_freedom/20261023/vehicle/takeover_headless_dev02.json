@@ -1,0 +1,1073 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "runtime_error": ""
+      },
+      "name": "production_setup14_original_actors_no_new_car",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "original_body_model_shape_route_identity_and_no_replacement",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "moving_actual_original_car_can_be_approached",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "native_wall_blocks_original_car_door_sight",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "minimum_request_speed_mps": 2.5
+      },
+      "name": "pending_fixture_revalidates_current_actual_car_speed",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "pending_stop_does_not_seat_player_or_allow_other_transport",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "pending_car_cannot_be_recycled_by_AI_manager",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "menu_pauses_pending_braking_without_moving_car",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "fresh_E_cancels_pending_and_resumes_only_original_AI",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "pending_or_cancelled_request_is_not_confirmed_vehicle_theft",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "traffic_setting_regression_has_actual_pending_candidate",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "after": [
+          79.0801467895508,
+          0.615362167358398,
+          -215.474899291992
+        ],
+        "before": [
+          79.0801467895508,
+          0.615362167358398,
+          -215.474899291992
+        ],
+        "events": [
+          {
+            "clock_s": 1.8,
+            "event": "takeover_stage_changed",
+            "evidence": {
+              "stage": "braking"
+            }
+          },
+          {
+            "clock_s": 1.8,
+            "event": "traffic_stop_requested",
+            "evidence": {
+              "body_id": 240551731019,
+              "initial_speed_mps": 2.70293578505516,
+              "route_id": "sejong_south_stream_1"
+            }
+          },
+          {
+            "clock_s": 2.03333333333334,
+            "event": "traffic_stop_cancelled",
+            "evidence": {
+              "body_id": 240551731019,
+              "current_traffic_enabled": true
+            }
+          },
+          {
+            "clock_s": 2.3,
+            "event": "takeover_stage_changed",
+            "evidence": {
+              "stage": "braking"
+            }
+          },
+          {
+            "clock_s": 2.3,
+            "event": "traffic_stop_requested",
+            "evidence": {
+              "body_id": 178408922501,
+              "initial_speed_mps": 3.44245880842209,
+              "route_id": "sejong_south"
+            }
+          },
+          {
+            "clock_s": 2.43333333333333,
+            "event": "traffic_stop_cancelled",
+            "evidence": {
+              "body_id": 178408922501,
+              "current_traffic_enabled": false
+            }
+          }
+        ],
+        "shortcut_cancelled": true
+      },
+      "name": "menu_traffic_OFF_then_validated_shortcut_cancel_keeps_original_AI_paused",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "actual_traffic_checkbox_ON_restores_unseized_AI_running",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "minimum_request_speed_mps": 2.5
+      },
+      "name": "moving_mount_revalidates_actual_speed_after_cancel_fixtures",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "snapshot": {
+          "actual_distance_m": 0.0,
+          "blocked_reason": "",
+          "cars": [
+            {
+              "ai_processing": false,
+              "body_id": 178408922501,
+              "identity_retained": true,
+              "position": [
+                79.0608520507812,
+                0.649106562137604,
+                -212.574752807617
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 178509585802,
+              "identity_retained": true,
+              "position": [
+                86.9552993774414,
+                -0.201109454035759,
+                8.57632637023926
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240551731019,
+              "identity_retained": true,
+              "position": [
+                78.0479736328125,
+                0.35431119799614,
+                -149.681106567383
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south_stream_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240669171536,
+              "identity_retained": true,
+              "position": [
+                76.1317749023438,
+                -1.27311837673187,
+                -85.8798065185547
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south_stream_2",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240786612053,
+              "identity_retained": true,
+              "position": [
+                89.6989822387695,
+                -1.00819754600525,
+                -76.340934753418
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north_stream_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240904052570,
+              "identity_retained": true,
+              "position": [
+                91.6875381469727,
+                -0.664371192455292,
+                -161.315765380859
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north_stream_2",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 750075798228,
+              "identity_retained": true,
+              "position": [
+                78.0701675415039,
+                0.916795670986176,
+                -380.811798095703
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_0_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 750646223604,
+              "identity_retained": true,
+              "position": [
+                79.3493041992188,
+                1.77530598640442,
+                -301.170532226562
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_0_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 751216648980,
+              "identity_retained": true,
+              "position": [
+                23.4381504058838,
+                1.44465005397797,
+                201.825637817383
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_1_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 751787074356,
+              "identity_retained": true,
+              "position": [
+                -13.5060386657715,
+                3.32451701164246,
+                317.13623046875
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_1_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 752357499732,
+              "identity_retained": true,
+              "position": [
+                262.887573242188,
+                -1.13881039619446,
+                -176.754821777344
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_2_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 752927925108,
+              "identity_retained": true,
+              "position": [
+                271.584838867188,
+                -0.143491119146347,
+                -303.120666503906
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_2_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 753498350484,
+              "identity_retained": true,
+              "position": [
+                289.738708496094,
+                0.456307619810104,
+                -90.1287155151367
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_3_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 754068775860,
+              "identity_retained": true,
+              "position": [
+                361.401580810547,
+                1.5737087726593,
+                -88.61669921875
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_3_car_1",
+              "seized": false
+            }
+          ],
+          "departed_drivers": [],
+          "driver_count": 0,
+          "driver_limit": 4,
+          "entry_control_owned": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 1.8,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 1.8,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 240551731019,
+                "initial_speed_mps": 2.70293578505516,
+                "route_id": "sejong_south_stream_1"
+              }
+            },
+            {
+              "clock_s": 2.03333333333334,
+              "event": "traffic_stop_cancelled",
+              "evidence": {
+                "body_id": 240551731019,
+                "current_traffic_enabled": true
+              }
+            },
+            {
+              "clock_s": 2.3,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 2.3,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 178408922501,
+                "initial_speed_mps": 3.44245880842209,
+                "route_id": "sejong_south"
+              }
+            },
+            {
+              "clock_s": 2.43333333333333,
+              "event": "traffic_stop_cancelled",
+              "evidence": {
+                "body_id": 178408922501,
+                "current_traffic_enabled": false
+              }
+            },
+            {
+              "clock_s": 4.66666666666666,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 4.66666666666666,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 178408922501,
+                "initial_speed_mps": 2.74940237402916,
+                "route_id": "sejong_south"
+              }
+            }
+          ],
+          "exit_requested": false,
+          "horn_count": 0,
+          "loaded": true,
+          "original_ai_car_count": 14,
+          "original_identities_retained": true,
+          "pending_actual_distance_m": 0.333213604986668,
+          "pending_elapsed_s": 0.133333333333333,
+          "pending_initial_speed_mps": 2.74940237402916,
+          "pending_pair_release_count": 0,
+          "pending_stage": "braking",
+          "pending_stage_elapsed_s": 0.133333333333333,
+          "pending_stop": true,
+          "riding": true,
+          "scope": "Original traffic-car bodies, original shape resources and original visible models retained; stopped along their original physical source route, exterior driver reaction and near-door timed player entry, then direct player car controls. Exterior authored textured drivers use swept native capsules; original monolithic car doors are not articulated. Seized cars remain parked and driveable; other original AI continues.",
+          "seized_car_count": 0,
+          "source_geometry_changed": false,
+          "spawned_replacement_cars": 0,
+          "speed_mps": 0.0
+        }
+      },
+      "name": "physical_E_requests_only_actual_nearby_car_braking",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "actual_stop_distance_m": 1.21186591032892,
+        "initial_speed_mps": 2.74940237402916,
+        "maximum_step_m": 0.0749528110027313,
+        "snapshot": {
+          "actual_distance_m": 0.0,
+          "blocked_reason": "",
+          "cars": [
+            {
+              "ai_processing": false,
+              "body_id": 178408922501,
+              "identity_retained": true,
+              "position": [
+                79.0550079345703,
+                0.6610107421875,
+                -211.69612121582
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 178509585802,
+              "identity_retained": true,
+              "position": [
+                88.3221969604492,
+                -0.724674642086029,
+                -20.0248870849609
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240551731019,
+              "identity_retained": true,
+              "position": [
+                77.1878509521484,
+                -0.463737308979034,
+                -121.042587280273
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south_stream_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240669171536,
+              "identity_retained": true,
+              "position": [
+                75.2728271484375,
+                -1.25949764251709,
+                -57.2807998657227
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_south_stream_2",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240786612053,
+              "identity_retained": true,
+              "position": [
+                90.3678741455078,
+                -0.656001031398773,
+                -104.924041748047
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north_stream_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 240904052570,
+              "identity_retained": true,
+              "position": [
+                92.737548828125,
+                0.0811646729707718,
+                -185.029556274414
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "sejong_north_stream_2",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 750075798228,
+              "identity_retained": true,
+              "position": [
+                78.1812438964844,
+                1.63055050373077,
+                -352.227813720703
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_0_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 750646223604,
+              "identity_retained": true,
+              "position": [
+                80.0030517578125,
+                1.49165678024292,
+                -272.596557617188
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_0_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 751216648980,
+              "identity_retained": true,
+              "position": [
+                14.4479084014893,
+                0.919785737991333,
+                229.012603759766
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_1_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 751787074356,
+              "identity_retained": true,
+              "position": [
+                -21.6163311004639,
+                2.73031711578369,
+                344.557647705078
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_1_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 752357499732,
+              "identity_retained": true,
+              "position": [
+                264.498992919922,
+                -2.12280416488647,
+                -194.040924072266
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_2_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 752927925108,
+              "identity_retained": true,
+              "position": [
+                272.596618652344,
+                -0.520715475082397,
+                -331.708526611328
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_2_car_1",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 753498350484,
+              "identity_retained": true,
+              "position": [
+                308.901550292969,
+                1.77414727210999,
+                -89.6217422485352
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_3_car_0",
+              "seized": false
+            },
+            {
+              "ai_processing": true,
+              "body_id": 754068775860,
+              "identity_retained": true,
+              "position": [
+                389.988647460938,
+                -0.0640527755022049,
+                -88.0037002563477
+              ],
+              "registered_with_ai_manager": true,
+              "route_id": "coverage_drive_3_car_1",
+              "seized": false
+            }
+          ],
+          "departed_drivers": [],
+          "driver_count": 0,
+          "driver_limit": 4,
+          "entry_control_owned": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 1.8,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 1.8,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 240551731019,
+                "initial_speed_mps": 2.70293578505516,
+                "route_id": "sejong_south_stream_1"
+              }
+            },
+            {
+              "clock_s": 2.03333333333334,
+              "event": "traffic_stop_cancelled",
+              "evidence": {
+                "body_id": 240551731019,
+                "current_traffic_enabled": true
+              }
+            },
+            {
+              "clock_s": 2.3,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 2.3,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 178408922501,
+                "initial_speed_mps": 3.44245880842209,
+                "route_id": "sejong_south"
+              }
+            },
+            {
+              "clock_s": 2.43333333333333,
+              "event": "traffic_stop_cancelled",
+              "evidence": {
+                "body_id": 178408922501,
+                "current_traffic_enabled": false
+              }
+            },
+            {
+              "clock_s": 4.66666666666666,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "braking"
+              }
+            },
+            {
+              "clock_s": 4.66666666666666,
+              "event": "traffic_stop_requested",
+              "evidence": {
+                "body_id": 178408922501,
+                "initial_speed_mps": 2.74940237402916,
+                "route_id": "sejong_south"
+              }
+            },
+            {
+              "clock_s": 5.56666666666666,
+              "event": "takeover_stage_changed",
+              "evidence": {
+                "stage": "approach"
+              }
+            }
+          ],
+          "exit_requested": false,
+          "horn_count": 0,
+          "loaded": true,
+          "original_ai_car_count": 14,
+          "original_identities_retained": true,
+          "pending_actual_distance_m": 1.21186591032892,
+          "pending_elapsed_s": 6.13333333333332,
+          "pending_initial_speed_mps": 2.74940237402916,
+          "pending_pair_release_count": 0,
+          "pending_stage": "approach",
+          "pending_stage_elapsed_s": 5.23333333333332,
+          "pending_stop": true,
+          "riding": true,
+          "scope": "Original traffic-car bodies, original shape resources and original visible models retained; stopped along their original physical source route, exterior driver reaction and near-door timed player entry, then direct player car controls. Exterior authored textured drivers use swept native capsules; original monolithic car doors are not articulated. Seized cars remain parked and driveable; other original AI continues.",
+          "seized_car_count": 0,
+          "source_geometry_changed": false,
+          "spawned_replacement_cars": 0,
+          "speed_mps": 0.0
+        }
+      },
+      "name": "moving_original_car_physically_decelerates_before_seat_handoff",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "confirmed_takeover_locks_capsule_and_other_transports",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "finished": {
+          "res://../tests/game/check_traffic_car_takeover.gd": "b730880913d3ecf23146ccbe051c4e77be8850c6bb2c3c0d0b63a33474b4a490",
+          "res://assets/authored/car_service.json": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+          "res://scripts/city_public_safety.gd": "f2d930820b4991d98895e7cb66f1b04bb3cbf7549a7c5eeb70cd660db2e2d2dd",
+          "res://scripts/city_weather_emergency.gd": "dbf1d5aadf19d8eaa449c54c43f0833b388466b7e48a80153eeaec70be79ed46",
+          "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+          "res://scripts/explore_walk.gd": "6f5fe3843f61299155177252fa458a0574318dfcb06d7a5f2afea4e835ec3b89",
+          "res://scripts/neighborhood_traffic.gd": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369",
+          "res://scripts/traffic/traffic_manager.gd": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c",
+          "res://scripts/traffic/vehicle.gd": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84",
+          "res://scripts/traffic_car_takeover.gd": "f577dcb85ab179605cbbe89d018fb886ab689209d6adbd986d0c9d0cf5560e18"
+        },
+        "loaded": {
+          "res://../tests/game/check_traffic_car_takeover.gd": "b730880913d3ecf23146ccbe051c4e77be8850c6bb2c3c0d0b63a33474b4a490",
+          "res://assets/authored/car_service.json": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2",
+          "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+          "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+          "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+          "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+          "res://scripts/city_public_safety.gd": "f2d930820b4991d98895e7cb66f1b04bb3cbf7549a7c5eeb70cd660db2e2d2dd",
+          "res://scripts/city_weather_emergency.gd": "dbf1d5aadf19d8eaa449c54c43f0833b388466b7e48a80153eeaec70be79ed46",
+          "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+          "res://scripts/explore_walk.gd": "6f5fe3843f61299155177252fa458a0574318dfcb06d7a5f2afea4e835ec3b89",
+          "res://scripts/neighborhood_traffic.gd": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369",
+          "res://scripts/traffic/traffic_manager.gd": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c",
+          "res://scripts/traffic/vehicle.gd": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84",
+          "res://scripts/traffic_car_takeover.gd": "f577dcb85ab179605cbbe89d018fb886ab689209d6adbd986d0c9d0cf5560e18"
+        }
+      },
+      "name": "runtime_inputs_unchanged_during_test",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "elapsed_ms": 18686,
+  "engine": "4.7.2-stable (official)",
+  "passed": 17,
+  "physics_hz": 30,
+  "police_controller_unit_fixture": {},
+  "recorded_at": "2026-10-23T18:04:16",
+  "result": "FAIL",
+  "scope": "Production original AI actors; original body/model/shape and traffic route identities. Physical KEY_E events device42, test-only held movement and source-supported player observer poses. After actual theft-report/wanted integration is proven, ONLY police physics is paused for remaining car-controller/all14 E checks, then restored on finish; complete live pursuit/capture/release is separately checked by check_stolen_car_arrest and its Euljiro variant. No car teleport, AI body/model replacement, real OS key, sustained-performance or human-comfort claim.",
+  "snapshot": {
+    "actual_distance_m": 0.0,
+    "blocked_reason": "",
+    "cars": [
+      {
+        "ai_processing": false,
+        "body_id": 178408922501,
+        "identity_retained": true,
+        "position": [
+          79.0550079345703,
+          0.6610107421875,
+          -211.69612121582
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_south",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 178509585802,
+        "identity_retained": true,
+        "position": [
+          88.3221969604492,
+          -0.724674642086029,
+          -20.0248870849609
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_north",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 240551731019,
+        "identity_retained": true,
+        "position": [
+          77.1878509521484,
+          -0.463737308979034,
+          -121.042587280273
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_south_stream_1",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 240669171536,
+        "identity_retained": true,
+        "position": [
+          75.2728271484375,
+          -1.25949764251709,
+          -57.2807998657227
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_south_stream_2",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 240786612053,
+        "identity_retained": true,
+        "position": [
+          90.3678741455078,
+          -0.656001031398773,
+          -104.924041748047
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_north_stream_1",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 240904052570,
+        "identity_retained": true,
+        "position": [
+          92.737548828125,
+          0.0811646729707718,
+          -185.029556274414
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "sejong_north_stream_2",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 750075798228,
+        "identity_retained": true,
+        "position": [
+          78.1812438964844,
+          1.63055050373077,
+          -352.227813720703
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_0_car_0",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 750646223604,
+        "identity_retained": true,
+        "position": [
+          80.0030517578125,
+          1.49165678024292,
+          -272.596557617188
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_0_car_1",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 751216648980,
+        "identity_retained": true,
+        "position": [
+          14.4479084014893,
+          0.919785737991333,
+          229.012603759766
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_1_car_0",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 751787074356,
+        "identity_retained": true,
+        "position": [
+          -21.6163311004639,
+          2.73031711578369,
+          344.557647705078
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_1_car_1",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 752357499732,
+        "identity_retained": true,
+        "position": [
+          264.498992919922,
+          -2.12280416488647,
+          -194.040924072266
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_2_car_0",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 752927925108,
+        "identity_retained": true,
+        "position": [
+          272.596618652344,
+          -0.520715475082397,
+          -331.708526611328
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_2_car_1",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 753498350484,
+        "identity_retained": true,
+        "position": [
+          308.901550292969,
+          1.77414727210999,
+          -89.6217422485352
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_3_car_0",
+        "seized": false
+      },
+      {
+        "ai_processing": true,
+        "body_id": 754068775860,
+        "identity_retained": true,
+        "position": [
+          389.988647460938,
+          -0.0640527755022049,
+          -88.0037002563477
+        ],
+        "registered_with_ai_manager": true,
+        "route_id": "coverage_drive_3_car_1",
+        "seized": false
+      }
+    ],
+    "departed_drivers": [],
+    "driver_count": 0,
+    "driver_limit": 4,
+    "entry_control_owned": false,
+    "error": "",
+    "events": [
+      {
+        "clock_s": 1.8,
+        "event": "takeover_stage_changed",
+        "evidence": {
+          "stage": "braking"
+        }
+      },
+      {
+        "clock_s": 1.8,
+        "event": "traffic_stop_requested",
+        "evidence": {
+          "body_id": 240551731019,
+          "initial_speed_mps": 2.70293578505516,
+          "route_id": "sejong_south_stream_1"
+        }
+      },
+      {
+        "clock_s": 2.03333333333334,
+        "event": "traffic_stop_cancelled",
+        "evidence": {
+          "body_id": 240551731019,
+          "current_traffic_enabled": true
+        }
+      },
+      {
+        "clock_s": 2.3,
+        "event": "takeover_stage_changed",
+        "evidence": {
+          "stage": "braking"
+        }
+      },
+      {
+        "clock_s": 2.3,
+        "event": "traffic_stop_requested",
+        "evidence": {
+          "body_id": 178408922501,
+          "initial_speed_mps": 3.44245880842209,
+          "route_id": "sejong_south"
+        }
+      },
+      {
+        "clock_s": 2.43333333333333,
+        "event": "traffic_stop_cancelled",
+        "evidence": {
+          "body_id": 178408922501,
+          "current_traffic_enabled": false
+        }
+      },
+      {
+        "clock_s": 4.66666666666666,
+        "event": "takeover_stage_changed",
+        "evidence": {
+          "stage": "braking"
+        }
+      },
+      {
+        "clock_s": 4.66666666666666,
+        "event": "traffic_stop_requested",
+        "evidence": {
+          "body_id": 178408922501,
+          "initial_speed_mps": 2.74940237402916,
+          "route_id": "sejong_south"
+        }
+      },
+      {
+        "clock_s": 5.56666666666666,
+        "event": "takeover_stage_changed",
+        "evidence": {
+          "stage": "approach"
+        }
+      }
+    ],
+    "exit_requested": false,
+    "horn_count": 0,
+    "loaded": true,
+    "original_ai_car_count": 14,
+    "original_identities_retained": true,
+    "pending_actual_distance_m": 1.21186591032892,
+    "pending_elapsed_s": 6.13333333333332,
+    "pending_initial_speed_mps": 2.74940237402916,
+    "pending_pair_release_count": 0,
+    "pending_stage": "approach",
+    "pending_stage_elapsed_s": 5.23333333333332,
+    "pending_stop": true,
+    "riding": true,
+    "scope": "Original traffic-car bodies, original shape resources and original visible models retained; stopped along their original physical source route, exterior driver reaction and near-door timed player entry, then direct player car controls. Exterior authored textured drivers use swept native capsules; original monolithic car doors are not articulated. Seized cars remain parked and driveable; other original AI continues.",
+    "seized_car_count": 0,
+    "source_geometry_changed": false,
+    "spawned_replacement_cars": 0,
+    "speed_mps": 0.0
+  },
+  "source_hashes": {
+    "res://../tests/game/check_traffic_car_takeover.gd": "b730880913d3ecf23146ccbe051c4e77be8850c6bb2c3c0d0b63a33474b4a490",
+    "res://assets/authored/car_service.json": "4555916b6b1867c56e1c90429462737b76e227e4dabb11b0feb16d6e9c8638c2",
+    "res://assets/authored/neighborhood_population.json": "dd91cb4dc452b5d17084a685e02657354d4f11c4d9d63fd89cf29df664be8be2",
+    "res://data/generated/traffic.json": "fa354ce5a76d6a0a6368c6050727b0cea1946834b9f009d9663ce6a694c283a9",
+    "res://resources/world_geometry/world.json": "adcb57d0a621a28ecca87b812ebdc751aa83d97871877658de23ecca8d8a1078",
+    "res://scripts/city_bike_service.gd": "5dae3499d25aae65111a11991d0316700555f7e5bc554b5994e2c4a1827064c4",
+    "res://scripts/city_public_safety.gd": "f2d930820b4991d98895e7cb66f1b04bb3cbf7549a7c5eeb70cd660db2e2d2dd",
+    "res://scripts/city_weather_emergency.gd": "dbf1d5aadf19d8eaa449c54c43f0833b388466b7e48a80153eeaec70be79ed46",
+    "res://scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "res://scripts/explore_walk.gd": "6f5fe3843f61299155177252fa458a0574318dfcb06d7a5f2afea4e835ec3b89",
+    "res://scripts/neighborhood_traffic.gd": "3b26369b8b79c5adc131b5b04345352b530d00e02de0ac686d81aec364097369",
+    "res://scripts/traffic/traffic_manager.gd": "4694f49ea0e7067e6cc73bc639dfffbc5e27c19417323d38db678fdba7b4a27c",
+    "res://scripts/traffic/vehicle.gd": "4603f9c58374b838d028452f8538b56e9aeb6e224b9ce3f1009cbf6821febe84",
+    "res://scripts/traffic_car_takeover.gd": "f577dcb85ab179605cbbe89d018fb886ab689209d6adbd986d0c9d0cf5560e18"
+  },
+  "task": "EXP27_traffic_car_takeover",
+  "total": 18
+}
