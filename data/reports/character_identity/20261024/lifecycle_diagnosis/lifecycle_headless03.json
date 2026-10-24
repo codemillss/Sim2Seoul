@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "body_id": 30064772583,
+        "capsule_id": -9223372006957775390,
+        "height_m": 1.70000004768372,
+        "player_scene": "res://scenes/player/player.tscn",
+        "radius_m": 0.300000011920929
+      },
+      "name": "retained_production_player_scene_and_capsule_are_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "accepted": true,
+        "body_visible": false,
+        "native_bones": 52
+      },
+      "name": "actual_production_avatar_hides_body_and_loads_native_skeleton",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "avatar_parent": "/root/AvatarLifecycleEvidence/Player/SamePlayerPresentationParent",
+        "fallback_visible": false,
+        "native_surface_loaded": true
+      },
+      "name": "live_avatar_reparent_keeps_original_fallback_hidden_after_idle",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "body_still_inside_tree": true,
+        "deleted_owned_nodes": 79,
+        "fallback_visible_before_idle": false
+      },
+      "name": "avatar_only_free_keeps_surviving_body_hidden_during_teardown",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "body_id": 30064772583,
+        "capsule_id": -9223372006957775390,
+        "fallback_visible_after_idle": true
+      },
+      "name": "next_idle_restores_original_body_mesh_material_and_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "fallback_hidden": true,
+        "reattached": true,
+        "same_capsule": true
+      },
+      "name": "reattached_production_avatar_uses_same_player_and_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "deleted_owned_nodes": 84,
+        "remaining_world_children": 0
+      },
+      "name": "whole_production_player_free_removes_all_owned_nodes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "deleted_owned_nodes": 83,
+        "native_bones": 52,
+        "original_capsule_material_was_null": true,
+        "production_avatar_loaded": true,
+        "remaining_world_children": 0
+      },
+      "name": "unmaterialized_capsule_reproducer_whole_free_is_safe",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "engine_error_count_at_completed_teardown": 0,
+        "engine_log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/lifecycle_diagnosis/lifecycle_headless03.log",
+        "source_hashes_unchanged": true
+      },
+      "name": "all_lifecycle_cases_have_no_engine_errors_and_sources_stay_frozen",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "engine": "4.7.2-stable (official)",
+  "engine_log": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/lifecycle_diagnosis/lifecycle_headless03.log",
+  "expected_checks": 9,
+  "passed": 9,
+  "result": "PASS",
+  "scope": "Actual production avatar/resources on retained production player scene plus original bare-CapsuleMesh renderer reproducer. Lifecycle/ownership evidence only;headless run is not native gameplay acceptance. No source/input/renderer state is modified by the fixture.",
+  "source_after": {
+    "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/lifecycle_diagnosis/check_avatar_lifecycle.gd": "0c1b519ece427c62efaceb1abbcbc3df8dd53a3291c59b3a22047f86f5b179ac",
+    "res://scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "res://scripts/player/exploration_avatar.gd": "107df173ebe7db3c569797cccdcd6914e127a5b6cdff222693205106fbde52b1",
+    "res://scripts/player/human_skin_materials.gd": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01",
+    "res://scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "res://scripts/player/textured_human_rig.gd": "02726f6b8f284373e7eac5dc6ebceb810dd354d65b1a926e3c8db7db71869f49",
+    "res://scripts/player/textured_human_surface.gd": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611"
+  },
+  "source_before": {
+    "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/lifecycle_diagnosis/check_avatar_lifecycle.gd": "0c1b519ece427c62efaceb1abbcbc3df8dd53a3291c59b3a22047f86f5b179ac",
+    "res://scenes/player/player.tscn": "9922915c7b494ec5226be0271da10077f830b5189455f5178818c2a3c7905ce6",
+    "res://scripts/player/exploration_avatar.gd": "107df173ebe7db3c569797cccdcd6914e127a5b6cdff222693205106fbde52b1",
+    "res://scripts/player/human_skin_materials.gd": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01",
+    "res://scripts/player/idle_support.gd": "47e17cdf60612b87851b98670d142c703906f586be52492150f5512052e4a8ec",
+    "res://scripts/player/textured_human_rig.gd": "02726f6b8f284373e7eac5dc6ebceb810dd354d65b1a926e3c8db7db71869f49",
+    "res://scripts/player/textured_human_surface.gd": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611"
+  },
+  "task": "EXP34_AVATAR_LIFECYCLE",
+  "total": 9
+}

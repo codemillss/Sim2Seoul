@@ -93,6 +93,7 @@ var draft: Dictionary={}
 var _camera_saved: Dictionary={}
 var _hud_saved: Array[Dictionary]=[]
 var _preview_back := false
+var _preview_view := "front"
 var _syncing := false
 
 func setup(owner_host: Node,path: String="user://sim2seoul_character.json") -> bool:
@@ -176,6 +177,8 @@ func _build_ui() -> void:
 	var view_row:=HBoxContainer.new();content.add_child(view_row)
 	front_button=Button.new();front_button.text="앞모습";front_button.pressed.connect(func()->void:_preview_camera(false));view_row.add_child(front_button)
 	back_button=Button.new();back_button.text="뒷모습";back_button.pressed.connect(func()->void:_preview_camera(true));view_row.add_child(back_button)
+	var side_button:=Button.new();side_button.name="SidePreview";side_button.text="옆모습";side_button.pressed.connect(func()->void:_set_preview_view("side"));view_row.add_child(side_button)
+	var face_button:=Button.new();face_button.name="FacePreview";face_button.text="얼굴";face_button.pressed.connect(func()->void:_set_preview_view("face"));view_row.add_child(face_button)
 	_add_label(content,"주민 모델")
 	model_option=InlineChoice.new();model_option.name="BodyType";model_option.add_item("남성형");model_option.add_item("여성형")
 	model_option.item_selected.connect(func(index: int)->void:_change("model_id",MODEL_IDS[index]));content.add_child(model_option)
@@ -205,7 +208,7 @@ func _layout() -> void:
 	var width:=minf(330.,viewport_size.x-24.)
 	panel.position=Vector2(viewport_size.x-width-12.,12.);panel.size=Vector2(width,maxf(150.,viewport_size.y-24.))
 	panel.custom_minimum_size=Vector2.ZERO
-	if ui_open:_preview_camera(_preview_back)
+	if ui_open:_set_preview_view(_preview_view)
 
 func _update_availability() -> void:
 	if not is_instance_valid(menu_button):return
@@ -239,23 +242,33 @@ func open_preview() -> bool:
 	draft=committed.duplicate(true);save_error=""
 	_camera_saved={}
 	for key: String in ["yaw","pitch","requested_distance","current_distance","pivot_height_m"]:_camera_saved[key]=host.rig.get(key)
-	_camera_saved.camera_h_offset=host.rig.camera.h_offset
+	_camera_saved.camera_h_offset=host.rig.camera.h_offset;_camera_saved.camera_fov=host.rig.camera.fov
 	ui_open=true;host.menu.visible=false;panel.visible=true
 	_hud_saved.clear();_hide_gameplay_hud()
 	_sync_options();_apply(draft,true);_preview_camera(false);_refresh_status();model_option.grab_focus();return true
 
 func _preview_camera(back: bool) -> void:
+	_set_preview_view("back" if back else "front")
+
+func _set_preview_view(view: String) -> void:
 	if not ui_open:return
-	_preview_back=back
-	host.rig.yaw=host.exploration_avatar.global_rotation.y+(0. if back else PI)
-	host.rig.pitch=deg_to_rad(-5.);host.rig.pivot_height_m=.95
-	host.rig.requested_distance=2.85;host.rig.current_distance=2.85;host.rig.snap_to_target_pose()
+	_preview_view=view;_preview_back=view=="back"
+	var portrait:=view=="face"
+	var pivot:=1.56 if portrait else .95
+	var distance:=1.95 if portrait else 2.85
+	# Keep the avatar beyond the ordinary camera near-body hiding threshold.
+	# A narrower lens supplies the close-up without entering first person.
+	host.rig.camera.fov=18. if portrait else float(_camera_saved.get("camera_fov",75.))
+	var offset:=0. if view=="back" else (PI*.5 if view=="side" else PI)
+	host.rig.yaw=host.exploration_avatar.global_rotation.y+offset
+	host.rig.pitch=0. if portrait else deg_to_rad(-5.);host.rig.pivot_height_m=pivot
+	host.rig.requested_distance=distance;host.rig.current_distance=distance;host.rig.snap_to_target_pose()
 	# Put the resident in the middle of the unobscured left region. h_offset
 	# changes projection only; the retained collision-solved camera stays put.
 	# Camera KEEP_HEIGHT uses a vertical FOV, so this also fits a 640x480 view.
 	var viewport_size:=get_viewport().get_visible_rect().size
 	var preview_center_x:=maxf(0.,panel.position.x-12.)*.5
-	var depth: float=maxf(.2,-host.rig.camera.to_local(host.exploration_avatar.global_position+Vector3.UP*.95).z)
+	var depth: float=maxf(.2,-host.rig.camera.to_local(host.exploration_avatar.global_position+Vector3.UP*pivot).z)
 	var view_height: float=2.*depth*tan(deg_to_rad(host.rig.camera.fov)*.5)
 	host.rig.camera.h_offset=(viewport_size.x*.5-preview_center_x)/maxf(1.,viewport_size.y)*view_height
 	# Neutral local preview fill only; keep the world's saved time and albedo.
@@ -309,8 +322,9 @@ func cancel_preview() -> void:
 func _close() -> void:
 	ui_open=false;panel.visible=false;preview_light.visible=false
 	for key: String in _camera_saved:
-		if key!="camera_h_offset":host.rig.set(key,_camera_saved[key])
+		if key not in ["camera_h_offset","camera_fov"]:host.rig.set(key,_camera_saved[key])
 	if _camera_saved.has("camera_h_offset"):host.rig.camera.h_offset=float(_camera_saved.camera_h_offset)
+	if _camera_saved.has("camera_fov"):host.rig.camera.fov=float(_camera_saved.camera_fov)
 	_restore_gameplay_hud()
 	host.rig.snap_to_target_pose();host.menu.visible=true;menu_button.grab_focus()
 

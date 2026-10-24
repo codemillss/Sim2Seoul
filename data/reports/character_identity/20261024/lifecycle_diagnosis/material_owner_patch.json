@@ -1,0 +1,24 @@
+{
+  "changed_at_utc": "2026-10-24T09:49:07.566062+00:00",
+  "before_source": "data/reports/character_identity/20261024/lifecycle_diagnosis/textured_human_surface_before_material_owner.gd.source",
+  "before_sha256": "e4ba4208bd60f35277f088a5d6d18316886aeb53329b57fd07de16d9ed9f84de",
+  "after_sha256": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611",
+  "hypothesis": "Four of eight custom override resources had only MeshInstance ownership; retain all in parent Surface until child render instances have completed deletion. No geometry, palette or sharing change.",
+  "validation": {
+    "same_fixture_ab": "material_owner_ab_headless01_02.json",
+    "before_material_null_occurrences": 12,
+    "after_material_null_occurrences": 0,
+    "ab_sandbox_startup_CA_errors_each": 1,
+    "clean_root_exact_fixture": "lifecycle_headless03.json",
+    "clean_root_checks": 9,
+    "clean_root_engine_errors": 0,
+    "current_native_authored": "../final/authored_resident_native_release06.json",
+    "current_native_authored_checks": 3730,
+    "current_native_authored_engine_errors": 0,
+    "full_selected_cohort": "../selected_runs.json",
+    "full_selected_runs": 11,
+    "full_selected_engine_errors": 0,
+    "historical_native04_material_errors": 32,
+    "conclusion": "Parent Surface ownership of all eight duplicated override materials resolves the teardown resource lifetime failure. Deferred fallback restoration alone did not solve it. No security settings were changed."
+  }
+}

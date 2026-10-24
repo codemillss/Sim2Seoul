@@ -1,5 +1,15 @@
 # 검증 계획과 완료 판정
 
+## EXP34 — 남녀 얼굴과 동작 (2026-10-24)
+
+현재 선택11실행은 [selected_runs.json](../data/reports/character_identity/20261024/selected_runs.json)의 정확한 분모3730/62/62/15/56/33/74/38/38/68/9, 합계4185개 assertion을 따른다. 12GLB 변형/접촉3730은 native release06을 선택하고 같은 headless 보조 결과를 중복 가산하지 않는다. 마지막9조건은 실제 아바타 재부착·기존 Body 복원·전체 해제·재질 수명의 lifecycle headless03이다. native220PNG는 얼굴32정적+32머리 동작·전신144·꾸미기12이며 시트/GIF는 원본 SHA를 확인한 검토용 파생물이다.
+
+[엄격 감사](../data/reports/character_identity/20261024/final/audit_current_release06.json)는 11실행의 실제 엔진 종료0·실행기 종료0·스크립트/엔진 ERROR0·소스 변경0, 257개 소스 연결의 현재 바이트 일치와220PNG를 확인한다. 실제 픽셀과 미술 한계는 [현재 peer 검토](../data/reports/character_identity/20261024/final/visual_review_peer.json)·[WORK_STATUS](WORK_STATUS.md)·[집계](../data/reports/character_identity/20261024/summary.json)를 따른다.
+
+첫 확대의 숨겨진 Visual·native02 입력 실패/배열 예외·palette 발행 전 캡처는 거절된 이력이다. 이전 headless materialnull16건 뒤 native renderer04에서도32건이 나와 Dummy 전용 추론을 철회했다. Body 복원 지연만으로는 해결되지 않아 부모 Surface가 복제 override 재질8개 모두를 보유하게 했다. 동일9조건 lifecycle01→02는 material 오류12→0이지만 각각 sandbox CA 오류1건으로8/9였고, 보안 설정 변경 없이 신뢰된 설치 엔진 환경에서 수행한 root03은9/9·ERROR0이다. 현재 선택 release06은 수정 소스로 재실행한 무오류 결과이며 이전 실패를 재사용하지 않는다.
+
+현재 확대는 실제 Visual/FoV와 취소 복원, 동작 캡처는 실제 RS palette 대조를 함께 검사한다. 일반 OS의 현재 release06에서 실제 마우스로 남녀 얼굴·여성 옆/뒤·취소를 확인한6장과 설정4파일 불변은 [일반 실행](../data/reports/character_identity/20261024/normal_launch.json)에 연결한다. 설치본과 바이트가 같은 캐시 엔진의 NFD 경로를 정확히 연결했고 남성 얼굴 패널을 열어 뒀다. 연속 OS 주행/편안함과 미형·실사·연속 자연스러움은 별도 미완료다.
+
 ## EXP33 — 자체 인체와 사건 현장까지의 경찰 출동
 
 추가 사용자 요청의 수영은 미준비·샤워만·수영복만·둘다 네 상태에서 실제 W 속도3.0/3.3/3.45/3.75m/s와 HUD/물 진입·출수·원래 제어를 확인한다. 샤워 완료/취소·90초 갱신/만료·메뉴 정지·장소 이탈/옷 복원을 따로 검사한다. 외형 설정은 실제 UI·체형/부위별 visible color·NPC 불변·적용/취소/저장/다시 읽기·작은 화면·수영복/상점 복귀를 검증한다. 시험은 별도 저장 경로를 사용해 원래 사용자 선호 파일을 보존한다.

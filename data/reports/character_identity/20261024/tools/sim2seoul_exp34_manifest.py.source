@@ -1,0 +1,39 @@
+from pathlib import Path
+import hashlib,json,datetime,subprocess
+r=Path.cwd();b=r/'data/reports/character_identity/20261024';rows=json.loads((b/'selected_runs.json').read_text())
+def read(p):return json.loads(p.read_text())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def rel(p):return p.relative_to(r).as_posix()
+runs=[]
+for selected in rows:
+ p=r/selected['report'];x=read(p);meta=p.with_name(p.stem+'.run.json');m=read(meta);n=selected['expected_checks'];checks=x.get('checks',[])
+ assert len(checks)==n and all(v.get('passed') is True for v in checks),(p,'check failure',len(checks),n)
+ assert m['returncode']==0 and m.get('actual_engine_returncode',0)==0 and not m.get('engine_errors',[]) and not m['script_errors'] and not m['source_changes_during_run'],(p,'engine failure')
+ for source,digest in m['source_sha256'].items():assert sha(r/source)==digest,(p,source,'source changed')
+ for source,digest in x.get('source_sha256',x.get('source_hashes',{})).items():
+  q=r/'game'/source.removeprefix('res://') if source.startswith('res://') else r/source
+  assert q.resolve().is_relative_to(r) and sha(q)==digest,(p,source,'report binding changed')
+ for capture in x.get('captures',[]):
+  q=Path(capture.get('path',capture.get('file','')));q=q if q.is_absolute() else r/q
+  assert q.resolve().is_relative_to(r) and sha(q)==capture['sha256'],(p,'image changed')
+ logs=[p.with_suffix('.log'),p.with_name(p.stem+'.console.log')]
+ assert all(q.is_file() for q in logs)
+ assert not any(marker in q.read_text(errors='replace') for q in logs for marker in ['ERROR:','Parse Error:','Failed to load script'])
+ runs.append({'report':rel(p),'metadata':rel(meta),'log':rel(logs[0]),'expected_checks':n,'actual_returncode':m.get('actual_engine_returncode',m['returncode']),'engine_errors':[],'script_errors':False,'captures':len(x.get('captures',[]))})
+normal=read(b/'normal_launch.json');assert normal['result']=='PASS_BOUNDED_OS' and normal['ready'] and normal['ordinary_process_alive_at_record'] and normal['preferences_unchanged'] and not normal['script_errors'] and not normal.get('engine_errors',[])
+assert normal['source_sha256']
+for source,digest in normal['source_sha256'].items():assert sha(r/source)==digest
+for cap in normal['captures']:assert sha(r/cap['path'])==cap['sha256']
+old=read(r/'data/reports/authored_character_combat/20261024/summary.json')
+files={v['path']:v['kind'] for v in old['files'] if v['kind'] in ['source_or_runbook','generated_runtime_input']}
+paths=subprocess.check_output(['git','diff','HEAD','--name-only','-z'],text=True).split('\0')+subprocess.check_output(['git','ls-files','--others','--exclude-standard','-z'],text=True).split('\0')
+for name in paths:
+ if name and name!=rel(b/'summary.json'):files[name]='evidence' if name.startswith('data/reports/') else 'source_or_runbook'
+for p in b.rglob('*'):
+ if p.is_file() and p!=b/'summary.json':files[rel(p)]='evidence'
+manifest=[]
+for name,kind in sorted(files.items()):
+ p=r/name;assert p.is_file(),name;manifest.append({'path':name,'kind':kind,'bytes':p.stat().st_size,'sha256':sha(p)})
+review=read(b/'visual_review_root.json')
+x={'schema_version':1,'task':'EXP34_AUTHORED_CHARACTER_IDENTITIES','client_task_date':'2026-10-24','recorded_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'result':'PASS','result_scope':'All11 selected current runs pass functional assertions, actual engine exit0, strict raw ERROR0 and source/capture integrity. Current ordinary release06 actual OS selection/side/back/cancel also passes within its recorded scope. Historical headless16/native04 32 teardown errors are preserved as resolved failures. Attractiveness and continuous naturalness remain separate incomplete art targets.','base_commit':'08ba5bfef6a5cd5f07ad94e6289eb67ee03db574','archive_branch':old['archive_branch'],'archive_commit':old['archive_commit'],'environment':{'engine':'Godot4.7.2.stable.official.ed1daf0bf','native':'Apple M5 Metal4 Forward+','production_physics_hz':30,'headless_fixed_fps':'120 accelerates tests only; not FPS acceptance'},'current_engine_reports':[v['report'] for v in runs],'current_engine_runs':runs,'results':{'runs':len(runs),'overlapping_assertions':sum(v['expected_checks'] for v in runs),'native_captures':sum(v['captures'] for v in runs),'failed':0},'visual_review':rel(b/'visual_review_root.json'),'art_disposition':review['art_disposition'],'full_art_target_met':False,'normal_launch':rel(b/'normal_launch.json'),'baseline':'data/reports/authored_character_combat/20261024/summary.json','log_diagnostics':{'classification':'PASS_CURRENT_STRICT_ERROR_FREE','selected_runs_observed_ERROR_occurrences':0,'historical_headless_material_null_occurrences':16,'historical_native_renderer04_material_error_occurrences':32,'resolved_cause':'Parent Surface must retain all eight duplicated material overrides until child render instances finish deletion. Deferred fallback restoration alone was insufficient.','lifecycle_ab':'data/reports/character_identity/20261024/lifecycle_diagnosis/material_owner_patch.json','strict_audit':'data/reports/character_identity/20261024/final/audit_current_release06.json','peer_review':'data/reports/character_identity/20261024/final/visual_review_peer.json'},'count_scope':'New reports alone comprise the current run count. Prior EXP33 and rejected candidates remain historical. Capture/integrity assertions are not an attractiveness or realism score.','files':manifest,'scope':'Original adult male/female head and hair geometry, numerical materials and own fictional image-generated skin paint; existing full body/52 bones/1.70m capsule, world source geometry and controls retained. No third-party game extraction or real-person likeness.'}
+(b/'summary.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'result':'PASS','runs':len(runs),'assertions':x['results']['overlapping_assertions'],'captures':x['results']['native_captures'],'files':len(manifest)}))

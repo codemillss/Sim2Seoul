@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Author Sim2Seoul residents from explicit anatomical/clothing profiles.
 
-No input mesh, scan, image, animation or body library is read. All positions,
-topology, skeletons, weights, UVs and small material textures originate below.
+No externally supplied mesh, scan, animation or body library is read. All
+positions, topology, skeletons, weights and UVs are project-authored. Optional
+face vertex albedo samples two original project-generated fictional paint PNGs;
+their exact source bytes and generation prompt record are declared in manifest.
 Python stdlib writes glTF2 GLB directly; Pillow is only used for our own noise
 and thread textures. Model coordinates are metres, +Y up, face +Z.
 """
@@ -12,11 +14,15 @@ from pathlib import Path
 from PIL import Image
 import numpy as np
 from anatomical_surface_fields import deform_points
+from resident_identity_mesh import build_identity_face, build_identity_hair, identity_contract
+import portrait_materials
+import portrait_paint_bake
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "game/assets/original/seoul_resident"
 TAU = math.tau
 BODY_PROFILES = ('standard','soft','athletic')
+USE_PORTRAIT_PAINT = True
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
 def sub(a,b): return tuple(x-y for x,y in zip(a,b))
@@ -95,7 +101,7 @@ class Mesh:
 class Resident:
     def __init__(self,female=False,swim=False,profile='standard'):
         assert profile in BODY_PROFILES
-        self.female=female;self.swim=swim;self.profile=profile;self.meshes=[Mesh() for _ in range(8)]
+        self.female=female;self.swim=swim;self.profile=profile;self.portrait_paint=USE_PORTRAIT_PAINT;self.meshes=[Mesh() for _ in range(8)]
         self.bones=[];self.ids={};self.global_rest=[];self.fingers={}
         self.body_seams={}
         self.swim_region_margin=None
@@ -411,153 +417,19 @@ class Resident:
                 self.meshes[1],boundary=self.meshes[1].clip_joint_plane(height,selector)
                 for side,sign in [('L',1),('R',-1)]:self.body_seams[(kind,side)]=[v for v in boundary if v['p'][0]*sign>0]
         # Neck is visible in every garment variant.
-        self.rings(1,[(1.408,0,-.002,.052,.042,.041),(1.44,0,0,.043,.039,.037),(1.48,0,-.002,.039,.038,.034),(1.505,0,-.003,.044,.043,.036)],32,self.trunk_weights,self.skin)
+        neck=self.rings(1,[(1.408,0,-.002,.052,.042,.041),(1.44,0,0,.043,.039,.037),(1.48,0,-.002,.039,.038,.034),(1.505,0,-.003,.044,.043,.036)],32,self.trunk_weights,self.skin)
+        self.identity_neck_ring=next(row for row in neck if abs(self.meshes[1].v[row[0]][1]-1.440)<1e-8)
+        # Preserve the exact lower-neck vertices/native influences. The new
+        # portrait continues from this ring through submental tissue and nape.
+        # Remove the old hidden upper-neck cap/surface, including the implicit
+        # bare-neck overlap; no body vertex below the boundary is moved.
+        skin=self.meshes[1]
+        skin.i=[index for k in range(0,len(skin.i),3) if all(skin.v[index][1]<=1.440+1e-8 for index in skin.i[k:k+3]) for index in skin.i[k:k+3]]
     def face(self):
-        # Broad cheekbones, a shallow brow/eyelid crease, individual nose,
-        # chin and jaw are sculpted into the own head topology, not painted
-        # onto a sphere. Facial detail scale stays within this 23cm head.
-        rows=[(1.458,0,.007,.023,.034,.033),(1.468,0,0,.036,.047,.038),(1.486,0,-.002,.052,.056,.047),(1.511,0,-.004,.062,.062,.059),(1.536,0,-.006,.067,.064,.067),(1.555,0,-.007,.065,.063,.071),(1.577,0,-.008,.064,.067,.073),(1.608,0,-.009,.064,.068,.074),(1.636,0,-.010,.060,.061,.068),(1.661,0,-.010,.049,.047,.052),(1.679,0,-.010,.027,.022,.024),(1.685,0,-.010,.005,.003,.003)]
-        if self.female:rows=[(y,x,z,w*.95,fd,bd) for y,x,z,w,fd,bd in rows]
-        def sculpt(p,t):
-            x,y,z=p;front=max(0,math.sin(t))**10
-            nose=.0065*gauss(x,0,.012)*gauss(y,1.547,.026)+.012*gauss(x,0,.012)*gauss(y,1.527,.010)
-            nose+=.006*(gauss(x,-.012,.007)+gauss(x,.012,.007))*gauss(y,1.520,.006)
-            cheek=.0045*(gauss(x,-.034,.019)+gauss(x,.034,.019))*gauss(y,1.529,.019)
-            sockets=-.004*(gauss(x,-.028,.015)+gauss(x,.028,.015))*gauss(y,1.574,.011)
-            lips=.004*gauss(x,0,.023)*(gauss(y,1.495,.004)+.7*gauss(y,1.488,.004))
-            philtrum=.0018*(gauss(x,-.004,.002)+gauss(x,.004,.002))*gauss(y,1.507,.007)
-            nasolabial=-.0011*(gauss(x,-.023,.0035)+gauss(x,.023,.0035))*gauss(y,1.509,.011)
-            nostril=-.0028*(gauss(x,-.011,.003)+gauss(x,.011,.003))*gauss(y,1.517,.0026)
-            return x,y,z+(nose+cheek+sockets+lips+philtrum+nasolabial+nostril)*front
-        head_sample=self.section_sampler(rows)
-        def face_z(x,y):
-            # Attach small anatomy to the same authored facial envelope.
-            _,cz,w,fd,_=head_sample(y)
-            theta=math.acos(clamp(x/max(w,.001),-1,1));z=cz+fd*math.sin(theta)
-            return sculpt((x,y,z),theta)[2]
-        def tone(p,t):
-            x,y,z=p;front=max(0,math.sin(t))**8
-            lip=gauss(y,1.492,.005)*gauss(x,0,.025)*front
-            cheek=gauss(y,1.526,.017)*(gauss(x,-.045,.02)+gauss(x,.045,.02))*front
-            base=mix(self.skin,(.47,.20,.17),lip*.48)
-            return mix(base,(.73,.36,.28),cheek*.15)
-        self.rings(1,rows,80,self.weight_head,tone,sculpt)
-        for side,s in [('L',1),('R',-1)]:
-            # Ears have an outer helix, inset concha and attached lobe.
-            ear=[]
-            for k in range(25):
-                a=TAU*k/24;ear.append((s*(.066+.006*(1+math.cos(a))),1.554+.026*math.sin(a),-.009+.006*math.cos(a)))
-            self.tube(1,ear,[.0036]*len(ear),mul(self.skin,.94),self.weight_head((0,0,0)),8)
-            self.rings(1,[(1.554+(y-1.542)*1.30,s*x,z,w,f,b) for y,x,z,w,f,b in [(1.524,.069,-.008,.004,.006,.004),(1.535,.071,-.009,.007,.008,.006),(1.55,.072,-.010,.006,.007,.006),(1.56,.069,-.01,.003,.005,.004)]],16,self.weight_head,mul(self.skin,.90))
-            # Almond eye, iris, lid and brow are geometry on the facial skin.
-            cx=s*.027;cy=1.572
-            upper=[];lower=[]
-            for k in range(25):
-                t=k/24;x=cx+(.0145*(2*t-1));arch=math.sin(math.pi*t)**.8
-                uy=cy+.0055*arch;ly=cy-.0042*arch
-                upper.append((x,uy,face_z(x,uy)+.0006))
-                lower.append((x,ly,face_z(x,ly)+.0007))
-            eye_rows=[]
-            for row in range(9):
-                t=row/8;line=[]
-                for k,(lo,up) in enumerate(zip(lower,upper)):
-                    x=lo[0];y=lo[1]+(up[1]-lo[1])*t
-                    line.append((x,y,face_z(x,y)+.00065+.0014*math.sin(math.pi*t)*math.sin(math.pi*k/24)))
-                eye_rows.append(line)
-            self.patch(7,eye_rows,(.77,.76,.69),self.weight_head)
-            iris=[]
-            for row in range(13):
-                y=cy-.0041+.0094*row/12;hw=.0051*math.sqrt(max(0,1-((y-cy-.0002)/.0051)**2))
-                lift=.0022+.00035*math.sqrt(max(0,1-((y-cy)/.0055)**2))
-                iris.append([(x,y,face_z(x,y)+lift) for x in [cx-hw,cx+hw]])
-            self.patch(7,iris,(.19,.095,.040),self.weight_head)
-            pupil=[]
-            for row in range(7):
-                y=cy-.0023+.0046*row/6;hw=.0022*math.sqrt(max(0,1-((y-cy)/.0023)**2))
-                pupil.append([(x,y,face_z(x,y)+.0028) for x in [cx-hw,cx+hw]])
-            self.patch(7,pupil,(.008,.006,.004),self.weight_head)
-            self.patch(7,[[(x,y,face_z(x,y)+.00295) for x in [cx-.0019,cx-.0011]] for y in [cy+.0014,cy+.0022]],(.88,.89,.86),self.weight_head)
-            self.tube(1,upper,.00165,mul(self.skin,.79),self.weight_head((0,0,0)),8)
-            self.tube(1,lower,.00105,mul(self.skin,.82),self.weight_head((0,0,0)),8)
-            for above in [True,False]:
-                hood=[]
-                rim=upper if above else lower
-                for row in range(6):
-                    phase=row/5;line=[]
-                    for k,(x,y,z) in enumerate(rim):
-                        arch=math.sin(math.pi*k/24)**.8
-                        yy=y+(1 if above else -1)*(.0055 if above else .0035)*phase*arch
-                        attached=face_z(x,yy)+.00015
-                        zz=z*(1-phase)+attached*phase+.0008*math.sin(math.pi*phase)*arch
-                        line.append((x,yy,zz))
-                    hood.append(line)
-                self.patch(1,hood,mul(self.skin,.98 if above else .96),self.weight_head)
-            crease=[(x,y+.0022,face_z(x,y+.0022)+.00035) for x,y,z in upper]
-            self.tube(1,crease,.0004,mul(self.skin,.90),self.weight_head((0,0,0)),6)
-            brow=[(cx+(.016*(2*t/24-1)),1.585+.003*math.sin(math.pi*t/24),face_z(cx+(.016*(2*t/24-1)),1.585+.003*math.sin(math.pi*t/24))+.0008) for t in range(25)]
-            self.tube(2,brow,[.0002+.0012*math.sin(math.pi*t/24)**.5 for t in range(25)],(.025,.018,.013),self.weight_head((0,0,0)),6)
-        mouth=[]
-        for k in range(25):
-            x=-.022+.044*k/24;y=1.491-.0015*gauss(x,0,.006);mouth.append((x,y,face_z(x,y)+.00045))
-        self.tube(1,mouth,.00038,(.34,.16,.14),self.weight_head((0,0,0)),6)
-        for upper_lip in [False,True]:
-            rows=[]
-            for row in range(7):
-                t=row/6;line=[]
-                for k in range(33):
-                    x=-.023+.046*k/32;shape=math.sin(math.pi*k/32)**.8
-                    height=(.0039 if upper_lip else -.0040)*shape
-                    cupid=(1-.28*gauss(x,0,.004)) if upper_lip else 1.
-                    y=1.491+height*t*cupid
-                    line.append((x,y,face_z(x,y)+.00025+.0011*math.sin(math.pi*t)*shape))
-                rows.append(line)
-            self.patch(1,rows,mix(self.skin,(.53,.28,.24),.58),self.weight_head)
-        # Nostrils are shallow depressions in the same face, rather than
-        # black wires sitting over the cheeks in an oblique view.
+        build_identity_face(self)
     def weight_head(self,p):return self.weight('Bip01 Head')
     def hair(self):
-        mesh=self.meshes[2];seg=96;nr=22
-        def cap_point(theta,t):
-            front=max(0.,math.sin(theta));cs=math.cos(theta)
-            if self.female:
-                bottom=1.598+.007*math.cos(theta*2) if front>.55 else 1.445+.014*math.cos(theta*3)+.004*math.sin(theta*7)
-            else:
-                # A swept fringe and tapered temples, rather than a level cap.
-                bottom=1.591+.012*cs+.003*math.cos(theta*5) if front>.20 else 1.535+.005*math.sin(theta*4)
-            y=bottom+(1.698-bottom)*math.sin(t*math.pi/2)
-            # Keep the exact crown height while making the cranial dome
-            # broader and rounder instead of a tall, narrow vertical cone.
-            skull=math.sqrt(max(0.,1-((y-1.615)/.083)**2)) if y>1.615 else 1.
-            width=(.071 if not self.female else .082)*skull
-            depth=(.076 if not self.female else .086)*skull
-            taper=1. if not self.female or y>1.53 else .84+.16*smooth(1.445,1.53,y)
-            x=width*cs*taper+.004*front*(1-t)+.004*math.sin(theta+.5)*gauss(y,1.653,.035)
-            z=-.012+depth*math.sin(theta)*taper-.003*front*(1-t)
-            return (x,y,z)
-        rings=[]
-        for row in range(nr+1):
-            t=row/nr;ring=[]
-            for j in range(seg+1):
-                theta=TAU*j/seg;p=cap_point(theta,t)
-                shade=.34+.022*math.sin(theta*15+p[1]*49)
-                ring.append(mesh.vertex(p,(j/seg,t),(.024*shade,.021*shade,.018*shade),self.weight_head(p)))
-            rings.append(ring)
-        for a,b in zip(rings,rings[1:]):
-            for j in range(seg):mesh.quad(a[j],b[j],b[j+1],a[j+1])
-        # Broad, softly raised swept locks follow the cap envelope. Their
-        # edges meet the cap, and their tips taper to zero height; they are
-        # never floating tubes or spikes on the crown.
-        for strand in range(15):
-            start=.14+TAU*.96*strand/14;rows=[]
-            for k in range(20):
-                phase=k/19;t=.025+.93*phase;sweep=(.34 if not self.female else .16)*(1-phase)
-                theta=start+sweep;row=[]
-                for edge in [-1.,0.,1.]:
-                    angle=theta+edge*.028;p=cap_point(angle,t)
-                    lift=.0018*math.sin(math.pi*phase)*(1-abs(edge))
-                    row.append(add(p,(math.cos(angle)*lift,0,math.sin(angle)*lift)))
-                rows.append(row)
-            self.patch(2,rows,(.0105,.0090,.0078),self.weight_head)
+        build_identity_hair(self)
     def thumb_web(self,palm_rings,palm_angles,wrist,side,path,radii,weights):
         """Branch the thumb from a real opening in the palm surface.
 
@@ -898,16 +770,17 @@ class Glb:
         for p in resident.global_rest:binds.append((1,0,0,0,0,1,0,0,0,0,1,0,-p[0],-p[1],-p[2],1))
         inverse=self.accessor(binds,'f',5126,'MAT4')
         textures=[];images=[]
-        for kind in ['fabric','skin','hair']:
-            images.append({'bufferView':self.view(png_texture(kind)),'mimeType':'image/png','name':'Authored_'+kind});textures.append({'sampler':0,'source':len(images)-1})
+        for kind in ['fabric','skin','hair','eye']:
+            payload=png_texture(kind) if kind=='fabric' else portrait_materials.texture_png(kind,female=resident.female)
+            images.append({'bufferView':self.view(payload),'mimeType':'image/png','name':'Authored_'+kind});textures.append({'sampler':0,'source':len(images)-1})
         jacket=(.11,.16,.21,1) if not resident.female else (.67,.62,.51,1)
         if resident.swim:jacket=(.12,.28,.36,1) if not resident.female else (.17,.25,.30,1)
         pants=(.29,.30,.29,1) if not resident.female else (.105,.12,.14,1)
         materials=[]
         for i,(name,color,tex,roughness) in enumerate([
-            ('Resident_Jacket_or_Swimwear',jacket,0,.85),('Resident_Authored_Skin',(1,1,1,1),1,.62),('Resident_Hair_and_Eye_Detail',(1,1,1,1),2,.78),('Resident_Articulated_Hands',(1,1,1,1),1,.68),('Resident_Trousers',pants,0,.86),('Resident_Sneakers',(1,1,1,1),0,.75),('Resident_Garment_and_Eye_Accents',(1,1,1,1),1,.65),('Resident_Original_Eye',(1,1,1,1),1,.20)]):
+            ('Resident_Jacket_or_Swimwear',jacket,0,.85),('Resident_Authored_Skin',(1,1,1,1),1,.62),('Resident_Hair_and_Eye_Detail',(1,1,1,1),2,.78),('Resident_Articulated_Hands',(1,1,1,1),1,.68),('Resident_Trousers',pants,0,.86),('Resident_Sneakers',(1,1,1,1),0,.75),('Resident_Garment_and_Eye_Accents',(1,1,1,1),1,.65),('Resident_Original_Eye',(1,1,1,1),3,.20)]):
             materials.append({'name':name,'doubleSided':True,'pbrMetallicRoughness':{'baseColorFactor':(*linear_color(color[:3]),color[3]),'baseColorTexture':{'index':tex},'metallicFactor':0,'roughnessFactor':roughness}})
-        document={'asset':{'version':'2.0','generator':'Sim2Seoul original anatomical profile author v1; no input assets','copyright':'Copyright 2026 Sim2Seoul contributors; original project authored geometry, rig and textures'},'scene':0,'scenes':[{'nodes':[0]}],'nodes':nodes,'meshes':[{'name':'SeoulResident_F01' if resident.female else 'SeoulResident_M01','primitives':primitives}],'skins':[{'name':'Original_52_Bone_Anatomy','inverseBindMatrices':inverse,'joints':[3+i for i in range(len(resident.bones))],'skeleton':3}],'materials':materials,'textures':textures,'images':images,'samplers':[{'magFilter':9729,'minFilter':9987,'wrapS':10497,'wrapT':10497}],'buffers':[{'byteLength':len(self.data)}],'bufferViews':self.views,'accessors':self.acc}
+        document={'asset':{'version':'2.0','generator':'Sim2Seoul original anatomy and portrait author v2; declared original project paint albedo inputs','copyright':'Copyright 2026 Sim2Seoul contributors; original project authored geometry, rig and textures'},'scene':0,'scenes':[{'nodes':[0]}],'nodes':nodes,'meshes':[{'name':'SeoulResident_F01' if resident.female else 'SeoulResident_M01','primitives':primitives}],'skins':[{'name':'Original_52_Bone_Anatomy','inverseBindMatrices':inverse,'joints':[3+i for i in range(len(resident.bones))],'skeleton':3}],'materials':materials,'textures':textures,'images':images,'samplers':[{'magFilter':9729,'minFilter':9987,'wrapS':10497,'wrapT':10497}],'buffers':[{'byteLength':len(self.data)}],'bufferViews':self.views,'accessors':self.acc}
         raw=json.dumps(document,separators=(',',':')).encode();raw+=b' '*((-len(raw))%4);self.data+=b'\0'*((-len(self.data))%4)
         payload=struct.pack('<III',0x46546c67,2,12+8+len(raw)+8+len(self.data))+struct.pack('<II',len(raw),0x4e4f534a)+raw+struct.pack('<II',len(self.data),0x004e4942)+self.data
         path.write_bytes(payload)
@@ -921,7 +794,7 @@ class Glb:
         for name,lo,hi in [('waist',1.03,1.12),('hips',.90,.98),('chest',1.25,1.35)]:
             points=[p for p in torso if lo<=p[1]<=hi]
             slices[name]={'height_band_m':[lo,hi],'width_m':max(p[0] for p in points)-min(p[0] for p in points),'depth_m':max(p[2] for p in points)-min(p[2] for p in points),'vertex_count':len(points),'torso_bone_weight_threshold':.5}
-        return {'path':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(payload).hexdigest(),'vertices':len(verts),'triangles':sum(len(m.i)//3 for m in resident.meshes),'bone_count':len(resident.bones),'bone_names':[b[0] for b in resident.bones],'neutral_rest_skinned_height_m':max(v[1] for v in verts)-min(v[1] for v in verts),'runtime_normalized_street_height_m':1.70,'bounds_m':{'min':[min(v[a] for v in verts) for a in range(3)],'max':[max(v[a] for v in verts) for a in range(3)]},'body_profile':resident.profile,'authored_torso_measurements':slices,'capsule_comparison':{'reference_radius_m':.30,'maximum_neutral_full_surface_radius_m':max(math.hypot(p[0],p[2]) for p in verts),'maximum_neutral_torso_surface_radius_m':max(math.hypot(p[0],p[2]) for p in torso),'scope':'Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged.'},'surface_semantics':[materials[i]['name'] for i,m in enumerate(resident.meshes) if m.i],'model_id':'SeoulResident_F01' if resident.female else 'SeoulResident_M01','variant':'swimwear' if resident.swim else 'street','source_assets_read':[]}
+        return {'path':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(payload).hexdigest(),'vertices':len(verts),'triangles':sum(len(m.i)//3 for m in resident.meshes),'bone_count':len(resident.bones),'bone_names':[b[0] for b in resident.bones],'neutral_rest_skinned_height_m':max(v[1] for v in verts)-min(v[1] for v in verts),'runtime_normalized_street_height_m':1.70,'bounds_m':{'min':[min(v[a] for v in verts) for a in range(3)],'max':[max(v[a] for v in verts) for a in range(3)]},'body_profile':resident.profile,'authored_torso_measurements':slices,'capsule_comparison':{'reference_radius_m':.30,'maximum_neutral_full_surface_radius_m':max(math.hypot(p[0],p[2]) for p in verts),'maximum_neutral_torso_surface_radius_m':max(math.hypot(p[0],p[2]) for p in torso),'scope':'Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged.'},'surface_semantics':[materials[i]['name'] for i,m in enumerate(resident.meshes) if m.i],'model_id':'SeoulResident_F01' if resident.female else 'SeoulResident_M01','variant':'swimwear' if resident.swim else 'street','source_assets_read':portrait_paint_bake.paint_contract()['sources'] if resident.portrait_paint else []}
 
 def main(residents=None):
     OUT.mkdir(parents=True,exist_ok=True);results=[]
@@ -930,7 +803,12 @@ def main(residents=None):
             for swim in [False,True]:
                 person=(residents or {}).get((profile,female,swim)) or Resident(female,swim,profile).build();name=('seoul_resident_f01' if female else 'seoul_resident_m01')+('' if profile=='standard' else '_'+profile)+('_swim' if swim else '_street')+'.glb'
                 result=Glb().write(person,OUT/name);results.append(result);print(json.dumps(result),flush=True)
-    manifest={'generator':'tools/authored_character/build_seoul_resident.py','generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'design':'Project-authored resident with continuous anatomical surface fields, shared wrist/ankle boundary attributes, shape-preserving cubic sections, articulated five-finger hands, street clothes and same-anatomy swimwear','provenance':'No external body, geometry, textures, scan or animation is loaded or adapted. All source values and topology are authored in the project generator.','coordinates':'+Y up; face +Z; metres; local bone bases identity','hand_contract':{'rest_finger_longitudinal':[0,-1,0],'palm_front_normal':[0,0,1],'flexion_axis':[-1,0,0],'knuckle_contact_wrist_local_m':[0,-.078,.022],'wrist_to_middle_fingertip_m':.132,'palm_breadth_m':.068,'upper_arm_length_m':math.sqrt(.054**2+.287**2),'forearm_length_m':math.sqrt(.027**2+.249**2+.004**2),'names':'Bip01 L/R Finger0, Finger01, Finger02 thumb; Finger1/11/12 index; Finger2/21/22 middle; Finger3/31/32 ring; Finger4/41/42 little'},'files':results}
+    manifest={'generator':'tools/authored_character/build_seoul_resident.py','generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'design':'Project-authored resident with continuous anatomical surface fields, shared wrist/ankle boundary attributes, shape-preserving cubic sections, articulated five-finger hands, street clothes and same-anatomy swimwear','provenance':'No externally supplied 3D body, geometry, scan or animation is loaded or adapted. Skeleton, topology, UVs and clothing are project-authored. Optional face vertex albedo samples original project-generated fictional portrait paint PNGs; source bytes and generation record are listed below, and are not claimed to be measured lighting-free albedo.','coordinates':'+Y up; face +Z; metres; local bone bases identity','hand_contract':{'rest_finger_longitudinal':[0,-1,0],'palm_front_normal':[0,0,1],'flexion_axis':[-1,0,0],'knuckle_contact_wrist_local_m':[0,-.078,.022],'wrist_to_middle_fingertip_m':.132,'palm_breadth_m':.068,'upper_arm_length_m':math.sqrt(.054**2+.287**2),'forearm_length_m':math.sqrt(.027**2+.249**2+.004**2),'names':'Bip01 L/R Finger0, Finger01, Finger02 thumb; Finger1/11/12 index; Finger2/21/22 middle; Finger3/31/32 ring; Finger4/41/42 little'},'files':results}
+    manifest['portrait_identity']=identity_contract()
+    manifest['portrait_paint']=portrait_paint_bake.paint_contract() if USE_PORTRAIT_PAINT else {'enabled':False,'method':'numerical_colour_geometry_control'}
+    manifest['generation_options']={'use_portrait_paint':USE_PORTRAIT_PAINT}
+    manifest['portrait_materials']=portrait_materials.material_contract()
+    manifest['portrait_modules']=[{'path':str(Path(__file__).with_name(name).relative_to(ROOT)),'sha256':hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()} for name in ['resident_identity_mesh.py','portrait_materials.py','portrait_paint_bake.py']]
     manifest['body_profiles']={'standard':'기본','soft':'통통','athletic':'근육'}
     manifest['body_profile_scope']='Project-authored game body volumes, not BMI classes, scanned persons or a measured Korean population distribution. All variants keep the same 52 rest bones and the 1.70m normalized game stature.'
     manifest['anatomical_surface_helper']={'path':'tools/authored_character/anatomical_surface_fields.py','sha256':hashlib.sha256(Path(__file__).with_name('anatomical_surface_fields.py').read_bytes()).hexdigest(),'method':'Pure numerical continuous anatomical field applied to original skin and garment vertices; skeletal attachment weights are retained with broad soft medial-pelvis support.'}
@@ -938,4 +816,9 @@ def main(residents=None):
     manifest['measurement_method']='Actual emitted vertex bands with >0.5 summed Pelvis/Spine/Spine1/Spine2 native weight; includes the displayed garment/skin. Width and depth are original metre-space distances, not circumference or medical measurements.'
     (OUT/'AUTHORED_MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--output-dir',type=Path);parser.add_argument('--candidate-standard',action='store_true');parser.add_argument('--without-portrait-paint',action='store_true');args=parser.parse_args()
+    if args.output_dir:OUT=args.output_dir.resolve()
+    if args.without_portrait_paint:USE_PORTRAIT_PAINT=False
+    if args.candidate_standard:BODY_PROFILES=('standard',)
+    main()

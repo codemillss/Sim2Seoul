@@ -7,14 +7,14 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUMMARY = ROOT / 'data/reports/authored_character_combat/20261024/summary.json'
+SUMMARY = ROOT / 'data/reports/character_identity/20261024/summary.json'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepared', action='store_true')
     parser.add_argument('--summary', type=Path, default=SUMMARY,
-                        help='Manifest to check; defaults to the authored character, dispatch and optional pool revision.')
+                        help='Manifest to check; defaults to the authored male/female character identity revision.')
     args = parser.parse_args()
     summary = args.summary.resolve()
     if not summary.is_relative_to(ROOT) or not summary.is_file():
@@ -74,6 +74,10 @@ def main():
                 code = next((metadata[key] for key in ('actual_returncode', 'returncode', 'actual_exit_code', 'executor_returncode') if key in metadata), None)
                 if code != 0:
                     failures.append({'path': relative, 'reason': 'actual_engine_returncode_not_zero'})
+                if metadata.get('engine_errors'):
+                    failures.append({'path': relative, 'reason': 'actual_engine_error_even_if_assertions_passed'})
+                if 'actual_engine_returncode' in metadata and metadata['actual_engine_returncode'] != 0:
+                    failures.append({'path': relative, 'reason': 'actual_engine_exit_not_zero'})
                 if metadata.get('source_changes_during_run'):
                     failures.append({'path': relative, 'reason': 'production_changed_during_run'})
                 for source, expected in metadata.get('source_sha256', {}).items():
@@ -86,8 +90,8 @@ def main():
                 failures.append({'path': binding['path'], 'reason': 'component_report_input_changed'})
         raw_log = gzip.decompress(log_path.read_bytes()) if log_path.suffix == '.gz' else log_path.read_bytes()
         log_text = raw_log.decode('utf-8', errors='replace')
-        if any(marker in log_text for marker in ['SCRIPT ERROR:', 'Parse Error:', 'Failed to load script']):
-            failures.append({'path': log_relative, 'reason': 'engine_script_error_even_if_report_passed'})
+        if any(marker in log_text for marker in ['ERROR:', 'Parse Error:', 'Failed to load script']):
+            failures.append({'path': log_relative, 'reason': 'engine_error_even_if_report_passed'})
     # Historical acceptance remains tied to its exact old UI sources. It must
     # never be counted as a fresh run after the ordinary-OS popup correction.
     if data.get('prior_functional_cohort'):
@@ -115,7 +119,7 @@ def main():
                     if not path.is_relative_to(ROOT) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != run[digest]:
                         failures.append({'path': run[field], 'reason': 'historical_report_or_metadata_changed'})
     normal_path = data.get('normal_launch')
-    if data.get('task') == 'EXP33_AUTHORED_CHARACTER_DISPATCH_OPTIONAL_POOL_CUSTOMIZATION':
+    if data.get('task') in ['EXP33_AUTHORED_CHARACTER_DISPATCH_OPTIONAL_POOL_CUSTOMIZATION', 'EXP34_AUTHORED_CHARACTER_IDENTITIES']:
         path = (ROOT / (normal_path or '')).resolve()
         if not path.is_relative_to(ROOT) or not path.is_file():
             failures.append({'path': normal_path, 'reason': 'ordinary_launch_missing'})
@@ -123,10 +127,16 @@ def main():
             normal = json.loads(path.read_text())
             if normal.get('result') != 'PASS_BOUNDED_OS' or not all(normal.get(key) for key in ['ready', 'ordinary_process_alive_at_record', 'preferences_unchanged']) or normal.get('script_errors'):
                 failures.append({'path': normal_path, 'reason': 'ordinary_launch_not_accepted'})
+            if not normal.get('source_sha256') or not normal.get('captures'):
+                failures.append({'path': normal_path, 'reason': 'ordinary_launch_bindings_or_captures_missing'})
             for source, expected in normal.get('source_sha256', {}).items():
                 path = (ROOT / source).resolve()
                 if not path.is_relative_to(ROOT) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                     failures.append({'path': source, 'reason': 'ordinary_launch_source_changed'})
+            for capture in normal.get('captures', []):
+                path = (ROOT / capture['path']).resolve()
+                if not path.is_relative_to(ROOT) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != capture['sha256']:
+                    failures.append({'path': capture['path'], 'reason': 'ordinary_launch_capture_changed'})
     print(json.dumps({'result': 'FAIL' if failures else 'PASS', 'files': len(data['files']), 'deferred': sorted(deferred), 'failures': failures, 'scope': 'Stored source, prepared inputs, current runs, explicitly preserved historical UI sources and bounded OS evidence integrity only. No new engine/OS run, other Mac/export, measured road accuracy or sustained performance acceptance.'}, ensure_ascii=False))
     raise SystemExit(1 if failures else 0)
 

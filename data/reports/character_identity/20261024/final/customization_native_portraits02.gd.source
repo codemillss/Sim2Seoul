@@ -1,0 +1,394 @@
+extends SceneTree
+## Production UI signals and displayed weighted meshes. All settings are isolated
+## under /private/tmp; this fixture never writes the normal player's preferences.
+const CUSTOMIZATION := preload("res://scripts/player/character_customization.gd")
+var scene: Node3D
+var service: Node
+var checks: Array[Dictionary]=[]
+var captures: Array[Dictionary]=[]
+var report_path:="/tmp/sim2seoul-character-customization.json"
+var settings_path:=""
+var started:=0
+var finished:=false
+var _source_ids: Dictionary={}
+var _capsule_id:=0
+var _original_asset_hashes: Dictionary={}
+var _source_hashes: Dictionary={}
+var _profile_geometry: Dictionary={}
+
+func _initialize() -> void:
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--report="):report_path=argument.trim_prefix("--report=")
+	settings_path="/private/tmp/sim2seoul-customization-test-"+str(OS.get_process_id())+".json"
+	started=Time.get_ticks_msec();Engine.max_fps=0
+	create_timer(240.,true,false,true).timeout.connect(func()->void:
+		if not finished:_check("bounded_timeout",false);_finish()
+	)
+	_run.call_deferred()
+
+func _check(title: String,passed: bool,evidence: Dictionary={}) -> void:
+	checks.append({"name":title,"passed":passed,"evidence":_json(evidence)});print("CUSTOMIZATION_CHECK ",title," ",passed)
+
+func _json(value: Variant) -> Variant:
+	if value is Color:return [value.r,value.g,value.b,value.a]
+	if value is Vector2:return [value.x,value.y]
+	if value is Vector3:return [value.x,value.y,value.z]
+	if value is Rect2:return {"position":_json(value.position),"size":_json(value.size)}
+	if value is AABB:return {"position":_json(value.position),"size":_json(value.size)}
+	if value is Dictionary:
+		var result: Dictionary={}
+		for key: Variant in value:result[str(key)]=_json(value[key])
+		return result
+	if value is Array:
+		var result: Array=[]
+		for item: Variant in value:result.append(_json(item))
+		return result
+	return value
+
+func _ticks(count: int) -> void:
+	for index: int in range(count):await physics_frame
+
+func _frames(count: int=2) -> void:
+	for index: int in range(count):await process_frame
+
+func _key(code: Key) -> void:
+	var event:=InputEventKey.new();event.keycode=code;event.physical_keycode=code;event.pressed=true;Input.parse_input_event(event);await _frames()
+	event=InputEventKey.new();event.keycode=code;event.physical_keycode=code;event.pressed=false;Input.parse_input_event(event);await _frames()
+
+func _click(control: Button) -> Dictionary:
+	var point:=control.get_global_rect().get_center()
+	var viewport:=control.get_viewport();var before: Control=viewport.gui_get_focus_owner()
+	var pressed_events: Array=[];var observer:=func()->void:pressed_events.append(true)
+	control.pressed.connect(observer)
+	# Headless has no OS pointer-enter event. Follow the public Viewport input
+	# contract in both modes: enter, motion, then local-coordinate button input.
+	viewport.notify_mouse_entered()
+	var motion:=InputEventMouseMotion.new();motion.position=point;motion.global_position=point
+	viewport.push_input(motion,true);await _frames()
+	var hovered: Control=viewport.gui_get_hovered_control()
+	var event:=InputEventMouseButton.new();event.position=point;event.global_position=point;event.button_index=MOUSE_BUTTON_LEFT;event.button_mask=MOUSE_BUTTON_MASK_LEFT;event.pressed=true;viewport.push_input(event,true);await _frames()
+	event=InputEventMouseButton.new();event.position=point;event.global_position=point;event.button_index=MOUSE_BUTTON_LEFT;event.pressed=false;viewport.push_input(event,true);await _frames()
+	control.pressed.disconnect(observer)
+	var after: Control=viewport.gui_get_focus_owner()
+	return {"dispatch":"same Viewport notify_mouse_entered,mouse motion,push_input press/release in local coordinates","control":str(control.get_path()),"control_rect":control.get_global_rect(),"event_position":point,"control_visible":control.is_visible_in_tree(),"viewport_rect":viewport.get_visible_rect(),"hovered_before_press":str(hovered.get_path()) if is_instance_valid(hovered) else "none","focus_before":str(before.get_path()) if is_instance_valid(before) else "none","focus_after":str(after.get_path()) if is_instance_valid(after) else "none","actual_pressed_signals":pressed_events.size()}
+
+func _asset_hashes() -> Dictionary:
+	var value: Dictionary={}
+	for filename: String in DirAccess.get_files_at("res://assets/original/seoul_resident"):
+		if filename.get_extension() in ["glb","png","json"]:
+			var path: String="res://assets/original/seoul_resident/"+filename;value[path]=FileAccess.get_sha256(path)
+	return value
+
+func _hashes() -> Dictionary:
+	var value: Dictionary=_asset_hashes()
+	for path: String in ["res://scripts/explore_walk.gd","res://scripts/player/character_customization.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/exploration_camera.gd","res://scripts/shop_visit_service.gd","res://../tests/game/check_character_customization.gd"]:value[path]=FileAccess.get_sha256(path)
+	return value
+
+func _capture(title: String) -> void:
+	if DisplayServer.get_name()=="headless":return
+	# A camera turn can leave this native renderer's cached option glyphs out
+	# of the first few readbacks even though text/rect/font state is unchanged.
+	# The isolated front/back probe preserved the transient 1/3-frame pixels
+	# and normal 10/30-frame pixels. Observe a settled real rendered frame;
+	# force_draw is not a completion barrier for that transition.
+	await _frames(10);await RenderingServer.frame_post_draw
+	var picture:=root.get_texture().get_image();var path: String=report_path.get_basename()+"_"+title+".png"
+	var error:=picture.save_png(path)
+	_check("native_capture_"+title,error==OK,{"file":path,"size":picture.get_size()})
+	var labels: Dictionary={}
+	for key: String in ["jacket","pants"]:
+		var option: CUSTOMIZATION.InlineChoice=service.color_options[key];labels[key]={"text":option.text,"selected":option.selected,"selected_item_text":option.get_item_text(option.selected)}
+	if error==OK:captures.append({"file":path,"sha256":FileAccess.get_sha256(path),"size":picture.get_size(),"render_settle_frames":10,"readback_barrier":"RenderingServer.frame_post_draw","selected_color_labels":labels,"session_time_fixture":scene.time_id,"preview_fill_visible":service.preview_light.visible,"scope":"Settled actual production avatar and main-canvas InlineChoice controls. Existing visual/state cases inject Button/selection signals;added Left/Right and arrow clicks use actual engine Input events. Session evening is a disclosed fixture,no time preference is saved. Screenshots require independent visual review;no ordinary OS interaction claim."})
+
+func _select(option: CUSTOMIZATION.InlineChoice,index: int) -> void:
+	option.select(index);option.item_selected.emit(index)
+
+func _surface() -> Node3D:
+	return scene.exploration_avatar._textured_surface
+
+func _role_arrays(surface: Node3D,role: String) -> Array:
+	for mesh: MeshInstance3D in surface.visible_meshes:
+		for index: int in range(mesh.mesh.get_surface_count()):
+			if surface._material_role(mesh,index)==role:return mesh.mesh.surface_get_arrays(index)
+	return []
+
+func _role_material(surface: Node3D,role: String) -> StandardMaterial3D:
+	for mesh: MeshInstance3D in surface.visible_meshes:
+		for index: int in range(mesh.mesh.get_surface_count()):
+			if surface._material_role(mesh,index)==role:return mesh.get_surface_override_material(index)
+	return null
+
+func _npc_signature(avatar: Node3D) -> Dictionary:
+	var surface: Node3D=avatar._textured_surface;var value: Dictionary={"model":surface.model_id,"meshes":[],"colors":[]}
+	for mesh: MeshInstance3D in surface.visible_meshes:
+		value.meshes.append(mesh.mesh.get_instance_id())
+		for index: int in range(mesh.mesh.get_surface_count()):value.colors.append(mesh.get_surface_override_material(index).albedo_color)
+	value["skin"]=_role_arrays(surface,"skin")[Mesh.ARRAY_COLOR]
+	value["hair"]=_role_arrays(surface,"hair")[Mesh.ARRAY_COLOR]
+	var eyes: Array=_role_arrays(surface,"eye");value["eye"]=eyes[Mesh.ARRAY_COLOR] if not eyes.is_empty() else []
+	return value
+
+func _native_mesh_count() -> int:
+	# The authored GLB includes a same-named nested mesh node; count actual
+	# presentation adapters, not matching display node names.
+	var count:=0
+	for node: Node in scene.exploration_avatar.find_children("*","Node3D",true,false):
+		if node.get_script()==_surface().get_script():count+=1
+	return count
+
+func _hud_visibility() -> Dictionary:
+	var value: Dictionary={}
+	for layer: CanvasLayer in scene.find_children("*","CanvasLayer",true,false):
+		if layer!=service.ui_layer:value[str(layer.get_instance_id())]=layer.visible
+	return value
+
+func _preview_rect() -> Rect2:
+	var bounds: AABB=_surface().refresh_bounds();var result:=Rect2();var first:=true
+	for index: int in range(8):
+		var point:=bounds.position+Vector3(bounds.size.x if index&1 else 0.,bounds.size.y if index&2 else 0.,bounds.size.z if index&4 else 0.)
+		var projected: Vector2=scene.rig.camera.unproject_position(scene.exploration_avatar.to_global(point))
+		result=Rect2(projected,Vector2.ZERO) if first else result.expand(projected);first=false
+	return result
+
+func _check_preview_clear(title: String) -> void:
+	var resident: Rect2=_preview_rect();var viewport_size: Vector2=root.get_visible_rect().size
+	var available:=Rect2(Vector2(4.,4.),Vector2(service.panel.position.x-12.,viewport_size.y-8.))
+	_check(title,available.encloses(resident) and resident.size.y>viewport_size.y*.35,{"resident_projected_actual_skinned_bounds":resident,"unobscured_preview_region":available,"camera_h_offset_m":scene.rig.camera.h_offset})
+
+func _geometry_measurements() -> Dictionary:
+	var hasher:=HashingContext.new();hasher.start(HashingContext.HASH_SHA256)
+	var bands: Dictionary={"waist":{"lo":1.03,"hi":1.12,"min":Vector2(INF,INF),"max":Vector2(-INF,-INF),"count":0},"chest":{"lo":1.25,"hi":1.35,"min":Vector2(INF,INF),"max":Vector2(-INF,-INF),"count":0}}
+	for mesh: MeshInstance3D in _surface().visible_meshes:
+		var arm_bindings:=PackedByteArray();arm_bindings.resize(mesh.skin.get_bind_count())
+		for bind_index: int in range(mesh.skin.get_bind_count()):
+			var title: String=mesh.skin.get_bind_name(bind_index)
+			if title.is_empty():title=_surface().skeleton.get_bone_name(mesh.skin.get_bind_bone(bind_index))
+			title=title.to_lower()
+			arm_bindings[bind_index]=1 if ["arm","shoulder","hand","thumb","index","middle","ring","pinky"].any(func(part: String)->bool:return part in title) else 0
+		for surface_index: int in range(mesh.mesh.get_surface_count()):
+			var arrays: Array=mesh.mesh.surface_get_arrays(surface_index);var vertices: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX];hasher.update(var_to_bytes(vertices))
+			if _surface()._material_role(mesh,surface_index)!="jacket":continue
+			var bones: PackedInt32Array=arrays[Mesh.ARRAY_BONES];var weights: PackedFloat32Array=arrays[Mesh.ARRAY_WEIGHTS]
+			for vertex_index: int in range(vertices.size()):
+				var point: Vector3=vertices[vertex_index];var arm_weight:=0.
+				for influence: int in range(4):
+					if arm_bindings[bones[vertex_index*4+influence]]==1:arm_weight+=weights[vertex_index*4+influence]
+				# Torso measurements must exclude hanging arm geometry by its real
+				# native skin weights, rather than clipping a spatial x rectangle.
+				if arm_weight>.05:continue
+				for band: Dictionary in bands.values():
+					if point.y>=float(band.lo) and point.y<=float(band.hi):
+						var xz:=Vector2(point.x,point.z);band.min=band.min.min(xz);band.max=band.max.max(xz);band.count+=1
+	var value: Dictionary={"sha256":hasher.finish().hex_encode(),"model":_surface().model_id,"profile":_surface().body_profile,"source":_surface().snapshot().active_glb_path}
+	for key: String in bands:
+		value[key+"_width_m"]=bands[key].max.x-bands[key].min.x;value[key+"_depth_m"]=bands[key].max.y-bands[key].min.y;value[key+"_samples"]=bands[key].count
+	return value
+
+func _run() -> void:
+	_original_asset_hashes=_asset_hashes();_source_hashes=_hashes()
+	if FileAccess.file_exists(settings_path):DirAccess.remove_absolute(settings_path)
+	scene=load("res://scenes/world/explore_walk.tscn").instantiate()
+	scene.character_settings_path=settings_path;scene.exploration_settings_path=settings_path+".explore";scene.quality_settings_path=settings_path+".quality"
+	root.add_child(scene);await _ticks(10)
+	service=scene.get("character_customization")
+	_check("production_setup",scene.runtime_ok and is_instance_valid(service),{"error":scene.exploration_error})
+	if not scene.runtime_ok or not is_instance_valid(service):_finish();return
+	for key: Variant in scene.city.source_nodes:_source_ids[str(key)]=scene.city.source_nodes[key].get_instance_id()
+	_capsule_id=scene.player.get_node("CollisionShape").shape.get_instance_id()
+	var npc: Node3D=scene.street_pedestrians.actors[0].avatar
+	var npc_before:=_npc_signature(npc)
+	var original_model: String=_surface().model_id
+	var original_mesh: ArrayMesh=_surface().visible_meshes[0].mesh
+	var original_skin: PackedColorArray=_role_arrays(_surface(),"skin")[Mesh.ARRAY_COLOR]
+	var original_hair: Array=_role_arrays(_surface(),"hair")
+	var original_eyes: Array=_role_arrays(_surface(),"eye")
+	var original_eye_color: Color=_role_material(_surface(),"eye").albedo_color if not original_eyes.is_empty() else Color.WHITE
+	_check("absent_file_preserves_original_mesh_and_colors",not FileAccess.file_exists(settings_path) and _surface()._custom_colors.is_empty() and _surface().visible_meshes[0].mesh==original_mesh)
+	# Reproduce the dark ordinary preview condition without saving a preference.
+	var original_time_id: String=scene.time_id;var evening_fixture: bool=scene.set_time_profile("evening")
+	if not scene.menu.visible:scene.toggle_menu()
+	var hidden_hud:=CanvasLayer.new();hidden_hud.name="TestOnlyInitiallyHiddenHUD";hidden_hud.visible=false;scene.add_child(hidden_hud)
+	var hud_before: Dictionary=_hud_visibility()
+	var camera_before: Dictionary={}
+	for key: String in ["yaw","pitch","requested_distance","current_distance","pivot_height_m"]:camera_before[key]=scene.rig.get(key)
+	scene.rig.camera.h_offset=.13;camera_before.camera_h_offset=scene.rig.camera.h_offset;camera_before.camera_fov=scene.rig.camera.fov
+	service.menu_button.pressed.emit();await _frames()
+	_check("actual_menu_button_opens_paused_live_preview",service.ui_open and service.panel.is_visible_in_tree() and paused and not scene.menu.visible and not scene.input_router.gameplay_enabled)
+	_check("dedicated_preview_layer_hides_every_existing_gameplay_HUD",service.ui_layer.layer==100 and _hud_visibility().size()==hud_before.size() and _hud_visibility().values().all(func(value: Variant)->bool:return value==false),{"layer":service.ui_layer.layer,"before":hud_before,"during":_hud_visibility()})
+	_check("preview_title_has_fixed_visible_header",service.title_label.text=="나의 서울 주민" and service.panel.get_global_rect().encloses(service.title_label.get_global_rect()) and not service.scroll.is_ancestor_of(service.title_label))
+	_check_preview_clear("wide_front_actual_skinned_resident_clear_of_editor")
+	var choices: Array[CUSTOMIZATION.InlineChoice]=[service.model_option,service.body_option]
+	for key: String in service.COLOR_KEYS:choices.append(service.color_options[key])
+	_check("all_seven_choices_are_inline_without_OptionButton_or_Window",choices.size()==7 and choices.all(func(choice: CUSTOMIZATION.InlineChoice)->bool:return choice.item_count>=2 and choice.find_children("*","Window",true,false).is_empty()) and service.panel.find_children("*","OptionButton",true,false).is_empty() and service.panel.find_children("*","Window",true,false).is_empty(),{"controls":choices.map(func(choice: CUSTOMIZATION.InlineChoice)->String:return String(choice.name)),"panel_window_descendants":service.panel.find_children("*","Window",true,false).size()})
+	_check("only_inline_choice_containers_take_keyboard_focus",choices.all(func(choice: CUSTOMIZATION.InlineChoice)->bool:return choice.focus_mode==Control.FOCUS_ALL and choice.previous_button.focus_mode==Control.FOCUS_NONE and choice.next_button.focus_mode==Control.FOCUS_NONE and choice.value_label.focus_mode==Control.FOCUS_NONE))
+	service.model_option.grab_focus();await _key(KEY_RIGHT)
+	var right_model: bool=service.draft.model_id=="SeoulResident_F01" and _surface().model_id=="SeoulResident_F01" and service.model_option.text=="여성형"
+	await _key(KEY_LEFT)
+	_check("actual_Right_Left_input_changes_visible_model_and_returns_without_popup",right_model and service.draft.model_id=="SeoulResident_M01" and _surface().model_id=="SeoulResident_M01" and service.model_option.text=="남성형" and root.gui_get_focus_owner()==service.model_option and paused)
+	service.body_option.grab_focus();await _key(KEY_RIGHT)
+	var right_profile: bool=service.draft.body_profile=="soft" and _surface().body_profile=="soft" and service.body_option.text=="통통"
+	await _key(KEY_LEFT);service.color_options.jacket.grab_focus();await _key(KEY_RIGHT)
+	var right_color: bool=service.draft.jacket=="navy" and _role_material(_surface(),"jacket").albedo_color.is_equal_approx(Color("263d56"))
+	await _key(KEY_LEFT)
+	_check("actual_Left_Right_profile_and_palette_input_apply_and_restore",right_profile and right_color and service.draft.body_profile=="standard" and _surface().body_profile=="standard" and service.draft.jacket=="default" and _surface()._custom_colors.is_empty() and paused)
+	service.scroll.scroll_vertical=0;await _frames();var next_click: Dictionary=await _click(service.model_option.next_button)
+	var clicked_model: bool=service.draft.model_id=="SeoulResident_F01" and root.gui_get_focus_owner()==service.model_option
+	var next_draft: Dictionary=service.draft.duplicate(true);var previous_click: Dictionary=await _click(service.model_option.previous_button)
+	_check("actual_inline_arrow_clicks_select_without_child_focus_or_popup",clicked_model and service.draft.model_id=="SeoulResident_M01" and root.gui_get_focus_owner()==service.model_option and service.panel.find_children("*","Window",true,false).is_empty(),{"clicked_model":clicked_model,"after_next_draft":next_draft,"after_previous_draft":service.draft.duplicate(true),"current_focus":str(root.gui_get_focus_owner().get_path()) if root.gui_get_focus_owner()!=null else "none","next_click":next_click,"previous_click":previous_click,"popup_window_descendants":service.panel.find_children("*","Window",true,false).size()})
+	_check("evening_preview_fill_is_neutral_local_and_keeps_original_albedo",evening_fixture and scene.time_id=="evening" and service.preview_light.visible and service.preview_light.light_color==Color.WHITE and service.preview_light.light_energy>0. and service.preview_light.light_energy<=2. and service.preview_light.omni_range<=6. and not service.preview_light.shadow_enabled and _surface()._custom_colors.is_empty() and _role_material(_surface(),"skin").albedo_color==Color.WHITE,{"time_id":scene.time_id,"light_energy":service.preview_light.light_energy,"range_m":service.preview_light.omni_range,"shadows":service.preview_light.shadow_enabled,"skin_albedo":_role_material(_surface(),"skin").albedo_color})
+	var front_light: Vector3=service.preview_light.global_position
+	service.back_button.pressed.emit();await _frames()
+	var back_light: Vector3=service.preview_light.global_position
+	var back_tracks: bool=back_light.is_equal_approx(scene.rig.camera.global_position+Vector3.UP*.7)
+	service.front_button.pressed.emit();await _frames()
+	_check("preview_fill_tracks_front_and_back_camera_without_time_change",back_tracks and back_light.distance_to(front_light)>1. and service.preview_light.global_position.is_equal_approx(scene.rig.camera.global_position+Vector3.UP*.7) and scene.time_id=="evening",{"front_light":front_light,"back_light":back_light,"time_id":scene.time_id})
+	var face_button: Button=service.panel.find_child("FacePreview",true,false) as Button
+	var face_click: Dictionary=await _click(face_button)
+	var face_point: Vector3=scene.exploration_avatar.global_position+Vector3.UP*1.56
+	var face_pixel: Vector2=scene.rig.camera.unproject_position(face_point)
+	var viewport_rect:=Rect2(Vector2.ZERO,root.get_visible_rect().size)
+	_check("actual_face_button_frames_head_without_changing_time_or_draft",service._preview_view=="face" and is_equal_approx(scene.rig.pivot_height_m,1.56) and is_equal_approx(scene.rig.requested_distance,1.95) and is_equal_approx(scene.rig.camera.fov,18.) and scene.player.get_node("Visual").is_visible_in_tree() and _surface().visible_meshes[0].is_visible_in_tree() and not scene.rig.camera.is_position_behind(face_point) and viewport_rect.has_point(face_pixel) and face_pixel.x<service.panel.position.x-12. and scene.time_id=="evening" and _surface()._custom_colors.is_empty(),{"click":face_click,"head_pixel":face_pixel,"pivot_m":scene.rig.pivot_height_m,"requested_distance_m":scene.rig.requested_distance,"actual_visual_visible":scene.player.get_node("Visual").is_visible_in_tree(),"actual_mesh_visible":_surface().visible_meshes[0].is_visible_in_tree(),"fov_degrees":scene.rig.camera.fov})
+	await _capture("face_closeup")
+	var side_button: Button=service.panel.find_child("SidePreview",true,false) as Button
+	var side_click: Dictionary=await _click(side_button)
+	_check("actual_side_button_changes_yaw_and_restores_full_body_framing",service._preview_view=="side" and absf(angle_difference(scene.rig.yaw,scene.exploration_avatar.global_rotation.y+PI*.5))<.0001 and is_equal_approx(scene.rig.pivot_height_m,.95) and is_equal_approx(scene.rig.requested_distance,2.85) and paused and scene.time_id=="evening",{"click":side_click,"yaw":scene.rig.yaw})
+	await _capture("side_profile")
+	service.front_button.pressed.emit();await _frames()
+	service.model_option.grab_focus()
+	await _key(KEY_TAB)
+	_check("Tab_moves_keyboard_focus_within_customization",root.gui_get_focus_owner()!=service.model_option and root.gui_get_focus_owner()!=null and service.panel.is_ancestor_of(root.gui_get_focus_owner()))
+	await _capture("original_front")
+	_select(service.color_options.skin,3);_select(service.color_options.hair,4);_select(service.color_options.jacket,2);_select(service.color_options.pants,3);_select(service.color_options.shoes,4)
+	await _frames()
+	_check("actual_visible_top_pants_shoes_follow_selected_colors",_role_material(_surface(),"jacket").albedo_color.is_equal_approx(Color("e6dfcc")) and _role_material(_surface(),"pants").albedo_color.is_equal_approx(Color("b9aa8b")) and _role_material(_surface(),"shoes").albedo_color.is_equal_approx(Color("587ea6")))
+	var skin_after: PackedColorArray=_role_arrays(_surface(),"skin")[Mesh.ARRAY_COLOR]
+	_check("actual_skin_vertices_changed_without_geometry_or_weights_change",skin_after!=original_skin and _role_arrays(_surface(),"skin")[Mesh.ARRAY_VERTEX]==original_mesh.surface_get_arrays(1)[Mesh.ARRAY_VERTEX] and _role_arrays(_surface(),"skin")[Mesh.ARRAY_WEIGHTS]==original_mesh.surface_get_arrays(1)[Mesh.ARRAY_WEIGHTS])
+	var hair_after: Array=_role_arrays(_surface(),"hair");var hair_changed:=0
+	for vertex: int in range(hair_after[Mesh.ARRAY_VERTEX].size()):
+		if hair_after[Mesh.ARRAY_VERTEX][vertex].y>1.59 and hair_after[Mesh.ARRAY_COLOR][vertex]!=original_hair[Mesh.ARRAY_COLOR][vertex]:hair_changed+=1
+	var eyes_after: Array=_role_arrays(_surface(),"eye")
+	var eyes_unchanged: bool=not original_eyes.is_empty() and not eyes_after.is_empty() and eyes_after[Mesh.ARRAY_VERTEX]==original_eyes[Mesh.ARRAY_VERTEX] and eyes_after[Mesh.ARRAY_COLOR]==original_eyes[Mesh.ARRAY_COLOR] and eyes_after[Mesh.ARRAY_WEIGHTS]==original_eyes[Mesh.ARRAY_WEIGHTS] and _role_material(_surface(),"eye").albedo_color.is_equal_approx(original_eye_color)
+	_check("hair_changes_preserve_original_eyes",hair_changed>100 and eyes_unchanged and eyes_after[Mesh.ARRAY_VERTEX].size()>10,{"changed_hair_vertices":hair_changed,"untinted_eye_vertices":eyes_after[Mesh.ARRAY_VERTEX].size() if not eyes_after.is_empty() else 0,"eye_source":"Resident_Original_Eye independent authored surface; every referenced eye color/vertex/weight stays unchanged by hair selection."})
+	_check("npc_meshes_and_colors_unchanged",_npc_signature(npc)==npc_before)
+	await _capture("m_custom_front")
+	_profile_geometry["male_standard"]=_geometry_measurements()
+	_select(service.body_option,1);await _frames();_profile_geometry["male_soft"]=_geometry_measurements();await _capture("m_soft_front")
+	_select(service.body_option,2);await _frames();_profile_geometry["male_athletic"]=_geometry_measurements();await _capture("m_athletic_front")
+	_check("three_male_profiles_use_distinct_actual_geometry",_surface().body_profile=="athletic" and _profile_geometry.male_standard.sha256!=_profile_geometry.male_soft.sha256 and _profile_geometry.male_standard.sha256!=_profile_geometry.male_athletic.sha256 and _profile_geometry.male_soft.sha256!=_profile_geometry.male_athletic.sha256,{"profiles":_profile_geometry})
+	_select(service.model_option,1);await _frames()
+	_check("actual_F_model_replaces_M_and_retains_separate_athletic_profile",_surface().model_id=="SeoulResident_F01" and _surface().body_profile=="athletic" and _surface().skeleton.get_bone_count()==52 and _native_mesh_count()==1,{"model":_surface().model_id,"profile":_surface().body_profile,"bones":_surface().skeleton.get_bone_count(),"native_count":_native_mesh_count(),"parent":String(_surface().get_parent().get_path())})
+	_profile_geometry["female_athletic"]=_geometry_measurements();await _capture("f_athletic_front")
+	_select(service.body_option,1);await _frames();_profile_geometry["female_soft"]=_geometry_measurements();await _capture("f_soft_front")
+	_select(service.body_option,0);await _frames();_profile_geometry["female_standard"]=_geometry_measurements()
+	_check("three_female_profiles_use_distinct_actual_geometry",_surface().body_profile=="standard" and _profile_geometry.female_standard.sha256!=_profile_geometry.female_soft.sha256 and _profile_geometry.female_standard.sha256!=_profile_geometry.female_athletic.sha256 and _profile_geometry.female_soft.sha256!=_profile_geometry.female_athletic.sha256,{"profiles":_profile_geometry})
+	for gender: String in ["male","female"]:
+		var standard: Dictionary=_profile_geometry[gender+"_standard"];var soft: Dictionary=_profile_geometry[gender+"_soft"];var athletic: Dictionary=_profile_geometry[gender+"_athletic"]
+		_check(gender+"_profile_geometry_minimum_distinguishes_wrong_same_asset",standard.waist_samples>10 and standard.chest_samples>10 and soft.waist_width_m>standard.waist_width_m+.008 and soft.waist_depth_m>standard.waist_depth_m+.008 and athletic.chest_width_m>standard.chest_width_m+.005 and athletic.chest_depth_m>standard.chest_depth_m+.005,{"standard":standard,"soft":soft,"athletic":athletic,"measurement_scope":"Actual jacket rest vertices with <=5% native arm/shoulder/hand skin weight; waist y1.03..1.12m and chest y1.25..1.35m. The predeclared 8mm/5mm minima only detect a wrong/same-asset load. They do not accept fat/muscular appearance, which requires separate authored-volume and front/side pixel review. No BMI or anatomical realism claim."})
+	await _capture("f_custom_front")
+	service.back_button.pressed.emit();await _capture("f_custom_back")
+	_check_preview_clear("wide_back_actual_skinned_resident_clear_of_editor")
+	service.cancel_button.pressed.emit();await _frames()
+	_check("cancel_restores_original_model_mesh_colors_and_camera",not service.ui_open and scene.menu.visible and _surface().model_id==original_model and _surface().body_profile=="standard" and _surface()._custom_colors.is_empty() and _surface().visible_meshes[0].mesh==original_mesh and not FileAccess.file_exists(settings_path) and scene.rig.yaw==float(camera_before.yaw) and scene.rig.pitch==float(camera_before.pitch) and scene.rig.pivot_height_m==float(camera_before.pivot_height_m) and scene.rig.requested_distance==float(camera_before.requested_distance) and scene.rig.current_distance==float(camera_before.current_distance) and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)) and is_equal_approx(scene.rig.camera.fov,float(camera_before.camera_fov)))
+	_check("cancel_restores_exact_existing_HUD_visibility",_hud_visibility()==hud_before,{"before":hud_before,"after":_hud_visibility()})
+	_check("closing_preview_hides_fill_and_preserves_world_time_and_albedo",not service.preview_light.visible and scene.time_id=="evening" and _surface()._custom_colors.is_empty() and _role_material(_surface(),"skin").albedo_color==Color.WHITE)
+	service.menu_button.pressed.emit();_select(service.model_option,1);_select(service.body_option,2);_select(service.color_options.skin,2);_select(service.color_options.hair,2);_select(service.color_options.jacket,3);_select(service.color_options.pants,2);_select(service.color_options.shoes,1)
+	service.save_button.pressed.emit();await _frames()
+	var saved: Variant=JSON.parse_string(FileAccess.get_file_as_string(settings_path))
+	_check("save_button_commits_strict_schema2_profile_local_file",not service.ui_open and saved is Dictionary and saved.size()==8 and saved.schema_version==2 and saved.model_id=="SeoulResident_F01" and saved.body_profile=="athletic" and saved.jacket=="sage" and saved.skin=="warm" and saved.hair=="brown" and saved.shoes=="white")
+	_check("save_restores_exact_existing_HUD_and_camera_offset",_hud_visibility()==hud_before and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)) and is_equal_approx(scene.rig.camera.fov,float(camera_before.camera_fov)))
+	var committed: Dictionary=service.committed.duplicate(true)
+	var saved_bytes:=FileAccess.get_file_as_bytes(settings_path)
+	service.menu_button.pressed.emit();_select(service.color_options.jacket,4)
+	var failed_path:=settings_path+".missing/character.json";service.settings_path=failed_path;service.save_button.pressed.emit();await _frames()
+	_check("save_failure_keeps_visible_unsaved_draft_and_previous_file",service.ui_open and not service.save_error.is_empty() and service.status_label.text.contains("저장되지 않음") and FileAccess.get_file_as_bytes(settings_path)==saved_bytes,{"ui_open":service.ui_open,"error":service.save_error,"notice":service.status_label.text})
+	service.settings_path=settings_path;service.save_button.pressed.emit();await _frames()
+	_check("retry_save_succeeds",not service.ui_open and service.committed.jacket=="red")
+	service.menu_button.pressed.emit();_select(service.model_option,0);scene.toggle_menu();await _frames()
+	_check("Esc_menu_hook_cancels_to_saved_F_and_preserves_pause",not service.ui_open and scene.menu.visible and paused and _surface().model_id=="SeoulResident_F01")
+	# Actual shop ownership: saved baseline must not recolour an equipped purchase.
+	var shop: Node3D=scene.shop_visit_service;var product: Dictionary=shop.shops[2].products[0]
+	shop.inventory[String(product.id)]=1;var equipped: bool=shop.equip_owned(String(product.id));_surface().sync_clothing()
+	var purchase_color:=Color(float(product.outfit.body[0]),float(product.outfit.body[1]),float(product.outfit.body[2]))
+	_check("owned_shop_top_takes_precedence_over_saved_baseline",equipped and _role_material(_surface(),"jacket").albedo_color.is_equal_approx(purchase_color))
+	service.menu_button.pressed.emit();_select(service.body_option,1);_select(service.color_options.jacket,2);service.cancel_button.pressed.emit();_surface().sync_clothing()
+	_check("cancel_body_profile_preview_preserves_equipped_owned_purchase",shop.equipped_item_id==String(product.id) and _surface().body_profile=="athletic" and _role_material(_surface(),"jacket").albedo_color.is_equal_approx(purchase_color))
+	service.menu_button.pressed.emit();_select(service.color_options.jacket,3);service.save_button.pressed.emit();_surface().sync_clothing()
+	_check("save_changed_baseline_returns_default_without_losing_inventory",shop.equipped_item_id.is_empty() and int(shop.inventory[product.id])==1 and _role_material(_surface(),"jacket").albedo_color.is_equal_approx(Color("7d967f")))
+	service.menu_button.pressed.emit();var previous_size:=root.size;var previous_scale:=root.content_scale_mode
+	root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED;root.size=Vector2i(640,480);await _frames(5);service._layout();await _frames()
+	var viewport:=Rect2(Vector2.ZERO,root.get_visible_rect().size)
+	_check("small_window_panel_and_scroll_stay_inside_viewport",viewport.encloses(service.panel.get_global_rect()) and service.scroll.vertical_scroll_mode!=ScrollContainer.SCROLL_MODE_DISABLED and service.save_button.focus_mode==Control.FOCUS_ALL,{"panel_position":service.panel.position,"panel_size":service.panel.size,"viewport":viewport.size})
+	service.front_button.pressed.emit();await _frames();_check_preview_clear("small_front_actual_skinned_resident_clear_of_editor")
+	service.back_button.pressed.emit();await _frames();_check_preview_clear("small_back_actual_skinned_resident_clear_of_editor");await _capture("small_window_back")
+	service.front_button.pressed.emit();await _frames()
+	service.scroll.scroll_vertical=int(service.scroll.get_v_scroll_bar().max_value);service.save_button.grab_focus();await _frames()
+	_check("keyboard_focus_reaches_fixed_save_and_cancel_remain_visible",root.gui_get_focus_owner()==service.save_button and viewport.encloses(service.save_button.get_global_rect()) and viewport.encloses(service.cancel_button.get_global_rect()) and not service.scroll.is_ancestor_of(service.save_button) and not service.scroll.is_ancestor_of(service.cancel_button),{"save":service.save_button.get_global_rect(),"cancel":service.cancel_button.get_global_rect(),"status":service.status_label.get_global_rect()})
+	_check("small_scrolled_options_keep_title_and_status_visible",service.title_label.is_visible_in_tree() and viewport.encloses(service.title_label.get_global_rect()) and viewport.encloses(service.status_label.get_global_rect()) and not service.scroll.is_ancestor_of(service.title_label) and not service.scroll.is_ancestor_of(service.status_label),{"header":service.title_label.get_global_rect(),"scroll_position":service.scroll.scroll_vertical})
+	await _capture("small_window_save")
+	_select(service.color_options.hair,4);service.reset_button.grab_focus();await _key(KEY_ENTER)
+	_check("Enter_resets_colors_without_changing_selected_body_profile",service.draft.hair=="default" and service.draft.jacket=="default" and service.draft.body_profile=="athletic" and service.ui_open)
+	root.content_scale_mode=previous_scale;root.size=previous_size;await _frames(3);service.cancel_button.pressed.emit()
+	scene.player.facility_control=true;service._update_availability()
+	_check("facility_owner_disables_customization_with_reason",service.menu_button.disabled and not service.menu_button.tooltip_text.is_empty() and not service.open_preview())
+	scene.player.facility_control=false
+	# Exercise the same retained player movement and native rig after M/F swaps.
+	scene.toggle_menu();await _ticks(5);var start_point: Vector3=scene.player.global_position
+	Input.action_press("move_forward");await _ticks(14)
+	var render_samples:=0;var render_finite:=true;var render_parent:=true;var contact_error:=0.;var max_local_origin_delta:=0.
+	var local_origin: Vector3=_surface().imported_root.position
+	for index: int in range(48):
+		await process_frame
+		var observation: Dictionary=_surface().rig.snapshot();render_samples+=1;render_finite=render_finite and observation.finite_bone_poses
+		render_parent=render_parent and _surface().get_parent()==scene.rig._avatar_proxy
+		contact_error=maxf(contact_error,float(observation.maximum_contact_error_m));max_local_origin_delta=maxf(max_local_origin_delta,_surface().imported_root.position.distance_to(local_origin))
+	Input.action_release("move_forward");await _ticks(12)
+	_check("F_walk_uses_retained_render_proxy_and_continuous_native_contacts",render_samples==48 and render_finite and render_parent and contact_error<.035 and max_local_origin_delta<.00001,{"render_samples":render_samples,"maximum_required_contact_error_m":contact_error,"maximum_imported_root_local_offset_change_m":max_local_origin_delta})
+	_check("retained_player_moves_and_stops_after_body_replacement",scene.player.global_position.distance_to(start_point)>.1 and scene.player.velocity.length()<.15 and _surface().get_parent()==scene.rig._avatar_proxy,{"distance_m":scene.player.global_position.distance_to(start_point),"velocity":scene.player.velocity,"presentation_parent":String(_surface().get_parent().get_path())})
+	var swim_started: bool=shop.begin_swimwear();var swim_source: String=_surface().snapshot().active_glb_path
+	var swim_profile: bool=swim_started and _surface()._swimwear_active and _surface().body_profile=="athletic" and swim_source.contains("f01_athletic_swim") and _surface()._custom_colors.skin==Color("c59370")
+	_check("active_swimwear_keeps_profile_and_rejects_customization_owner",swim_profile and not service.open_preview() and service.availability_reason().contains("수영복") and _surface().body_profile=="athletic")
+	var swim_ended: bool=shop.end_swimwear()
+	_check("saved_profile_skin_hair_survive_own_swim_and_street_transition",swim_profile and swim_ended and not _surface()._swimwear_active and _surface().model_id=="SeoulResident_F01" and _surface().body_profile=="athletic",{"swim_source":swim_source,"street_source":_surface().snapshot().active_glb_path})
+	if not scene.menu.visible:scene.toggle_menu()
+	# A fresh production service reloads the existing file; invalid data recovers
+	# without overwriting either the invalid file or any normal user save.
+	var reloader: Node=load("res://scripts/player/character_customization.gd").new();scene.add_child(reloader)
+	var reload_ok: bool=reloader.setup(scene,settings_path)
+	_check("new_service_loads_saved_actual_F_colors",reload_ok and reloader.committed==service.committed and _surface().model_id=="SeoulResident_F01" and _surface().body_profile=="athletic" and _role_material(_surface(),"jacket").albedo_color.is_equal_approx(Color("7d967f")),{"setup":reload_ok,"loaded":reloader.committed,"expected":service.committed,"model":_surface().model_id,"profile":_surface().body_profile,"jacket":_role_material(_surface(),"jacket").albedo_color})
+	reloader.panel.queue_free();reloader.menu_button.queue_free();reloader.queue_free();await _frames()
+	var legacy_path:=settings_path+".schema1";var legacy: Dictionary=service.committed.duplicate(true);legacy.erase("body_profile");legacy.schema_version=1
+	var legacy_file:=FileAccess.open(legacy_path,FileAccess.WRITE);legacy_file.store_string(JSON.stringify(legacy));legacy_file.close();var legacy_bytes:=FileAccess.get_file_as_bytes(legacy_path)
+	var migration: Node=load("res://scripts/player/character_customization.gd").new();scene.add_child(migration)
+	_check("schema1_migrates_in_memory_to_standard_without_overwrite",migration.setup(scene,legacy_path) and not migration.recovered and migration.committed.schema_version==2 and migration.committed.size()==8 and migration.committed.body_profile=="standard" and _surface().body_profile=="standard" and FileAccess.get_file_as_bytes(legacy_path)==legacy_bytes,{"migrated":migration.committed})
+	migration.menu_button.pressed.emit();_select(migration.body_option,1);migration.cancel_button.pressed.emit();await _frames()
+	_check("schema1_preview_cancel_preserves_original_file",FileAccess.get_file_as_bytes(legacy_path)==legacy_bytes and _surface().body_profile=="standard")
+	migration.menu_button.pressed.emit();_select(migration.body_option,1);migration.save_button.pressed.emit();await _frames()
+	var migrated_saved: Variant=JSON.parse_string(FileAccess.get_file_as_string(legacy_path))
+	_check("schema1_explicit_save_commits_schema2_chosen_profile",migrated_saved is Dictionary and migrated_saved.schema_version==2 and migrated_saved.size()==8 and migrated_saved.body_profile=="soft")
+	migration.panel.queue_free();migration.menu_button.queue_free();migration.queue_free();await _frames()
+	var invalid_path:=settings_path+".invalid";var invalid:=FileAccess.open(invalid_path,FileAccess.WRITE);invalid.store_string("{bad-json");invalid.close()
+	var recovery: Node=load("res://scripts/player/character_customization.gd").new();scene.add_child(recovery)
+	_check("invalid_file_recovers_without_overwriting",recovery.setup(scene,invalid_path) and recovery.recovered and FileAccess.get_file_as_string(invalid_path)=="{bad-json")
+	recovery.panel.queue_free();recovery.menu_button.queue_free();recovery.queue_free();await _frames()
+	service._apply(service.committed,false)
+	_check("original_source_ids_capsule_NPC_and_GLBS_preserved",scene.player.get_node("CollisionShape").shape.get_instance_id()==_capsule_id and _npc_signature(npc)==npc_before and _asset_hashes()==_original_asset_hashes)
+	var current_ids: Dictionary={}
+	for key: Variant in scene.city.source_nodes:current_ids[str(key)]=scene.city.source_nodes[key].get_instance_id()
+	_check("all_city_source_nodes_unchanged",current_ids==_source_ids)
+	for path: String in [settings_path,settings_path+".tmp",settings_path+".explore",settings_path+".quality",invalid_path,legacy_path]:
+		if FileAccess.file_exists(path):DirAccess.remove_absolute(path)
+	scene.set_time_profile(original_time_id)
+	_finish()
+
+func _finish() -> void:
+	if finished:return
+	finished=true;paused=false;_check("source_inputs_stable_during_actual_run",_hashes()==_source_hashes and not _source_hashes.values().has(""),{"before":_source_hashes,"after":_hashes()})
+	var passed: int=checks.filter(func(row: Dictionary)->bool:return row.passed).size()
+	var file:=FileAccess.open(report_path,FileAccess.WRITE)
+	if file==null:push_error("Cannot write customization report");quit(2);return
+	file.store_string(JSON.stringify(_json({"task":"character_customization","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"profile_geometry":_profile_geometry,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"elapsed_ms":Time.get_ticks_msec()-started,"original_asset_sha256":_original_asset_hashes,"source_sha256":_source_hashes,"settings_isolation":"Only process-specific /private/tmp files. Normal user preferences are neither read nor written.","scope":"Actual production scene, UI signals, selected standard/soft/athletic authored geometry and displayed mesh/material arrays. Injected movement and owner flags are labelled fixtures; screenshots need separate visual review. Assets are observed, never regenerated or edited by this fixture."}),"  "));file.close();print("CUSTOMIZATION_RESULT ",passed,"/",checks.size())
+	if is_instance_valid(scene):
+		for node: Node in scene.find_children("*","AudioStreamPlayer",true,false):node.stop()
+		for node: Node in scene.find_children("*","AudioStreamPlayer3D",true,false):node.stop()
+		root.remove_child(scene);scene.queue_free();scene=null;service=null
+	await process_frame;await create_timer(.2,true,false,true).timeout;quit(0 if passed==checks.size() else 1)

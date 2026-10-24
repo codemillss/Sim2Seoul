@@ -1,8 +1,8 @@
 {
   "generator": "tools/authored_character/build_seoul_resident.py",
-  "generator_sha256": "b080806cb7c61058eaf22c78f6744bed76f1f20a17f2337c45b810faa23376fd",
+  "generator_sha256": "4d5128031c6648a894cda153b2fa60082d8adcfe398591db4e9d95777d81ef81",
   "design": "Project-authored resident with continuous anatomical surface fields, shared wrist/ankle boundary attributes, shape-preserving cubic sections, articulated five-finger hands, street clothes and same-anatomy swimwear",
-  "provenance": "No external body, geometry, textures, scan or animation is loaded or adapted. All source values and topology are authored in the project generator.",
+  "provenance": "No externally supplied 3D body, geometry, scan or animation is loaded or adapted. Skeleton, topology, UVs and clothing are project-authored. Optional face vertex albedo samples original project-generated fictional portrait paint PNGs; source bytes and generation record are listed below, and are not claimed to be measured lighting-free albedo.",
   "coordinates": "+Y up; face +Z; metres; local bone bases identity",
   "hand_contract": {
     "rest_finger_longitudinal": [
@@ -34,9 +34,9 @@
   "files": [
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_street.glb",
-      "sha256": "8c8e008c0d7f1b5eaf7aeed0480e1aecd9f072a5c1e000aff203873a0ae60d03",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "29ef781167110e90970722b4990b54e10d99b05afbe2e806932fc50207a50c5b",
+      "vertices": 82188,
+      "triangles": 153836,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -157,13 +157,472 @@
       ],
       "model_id": "SeoulResident_M01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb",
-      "sha256": "8895111264ec4a7662e78e0ab8d59fa03e3889e2b59e1c33fa812dd57118fc74",
-      "vertices": 76198,
-      "triangles": 145857,
+      "sha256": "ed3c7e592d04e2ad9950a4b6c8013d85bda335e65cdaf8e4ba58cabdf86236f7",
+      "vertices": 106486,
+      "triangles": 203721,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -277,17 +736,477 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_M01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_street.glb",
-      "sha256": "181c2776951ee196e6bf7c7a1f4109fdf0f383e6ba679d2499d4ce149701dd01",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "4865888f1a877cdfb9eb63d12769b6c05f84ac6cabcf762d2414d8f0ac6d9391",
+      "vertices": 90638,
+      "triangles": 169004,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -408,13 +1327,472 @@
       ],
       "model_id": "SeoulResident_F01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_swim.glb",
-      "sha256": "7a349e8cbfb7996e4389613da4e786652fe6feebaf5766575671ac6f07c8d277",
-      "vertices": 76336,
-      "triangles": 146070,
+      "sha256": "379589a812157b8936c1f40a6ffbd0418f41b7550377b75369220c0e733ea803",
+      "vertices": 115072,
+      "triangles": 219100,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -528,17 +1906,477 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_F01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_soft_street.glb",
-      "sha256": "2a90c75cba33c008f6921bc795064c6e938fae27e2896574db77879b4ef09f11",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "57c6f668ff59562da2872c32aadaed2dcd1742855e202a9f371ad54c348b4fcc",
+      "vertices": 82188,
+      "triangles": 153836,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -659,13 +2497,472 @@
       ],
       "model_id": "SeoulResident_M01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_soft_swim.glb",
-      "sha256": "fa7bf485bd65a1376da253912a5cba3dd4daa9df5a09e6f49cb45b9c16683945",
-      "vertices": 76198,
-      "triangles": 145857,
+      "sha256": "9c3056605b3df25f47ce1c11cf884014d54919a5529559eab13fe53b94d7b46a",
+      "vertices": 106486,
+      "triangles": 203721,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -779,17 +3076,477 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_M01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_soft_street.glb",
-      "sha256": "14fb6d1d46c7843e7af2c92f6eacb158f351b515d3b8ccd78c4b97c8d5cd41f4",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "f040e662b9c4d06562ea56e0a24ef4cd50c5cf0b1de6c04fb7b9da07b2039201",
+      "vertices": 90638,
+      "triangles": 169004,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -910,13 +3667,472 @@
       ],
       "model_id": "SeoulResident_F01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_soft_swim.glb",
-      "sha256": "fdff4931844264d55fecbed7a8f9d3b0e744fbe9d6c23e638fe82ae054430b4f",
-      "vertices": 76336,
-      "triangles": 146070,
+      "sha256": "d453537dfd9892096723dbdc5f078294dc478296738f9d1c024cef5f1dd5f957",
+      "vertices": 115072,
+      "triangles": 219100,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -1030,17 +4246,477 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_F01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_athletic_street.glb",
-      "sha256": "4b5118738a51c32de6f3ab9b998e260e9863be9ef6dbffa57ecef1a829f0315e",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "cf4ddce4698635222ecbbf8cc59fd1f8bac8a2e67cf6cf5309c0ac2ea155c560",
+      "vertices": 82188,
+      "triangles": 153836,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -1161,13 +4837,472 @@
       ],
       "model_id": "SeoulResident_M01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_m01_athletic_swim.glb",
-      "sha256": "6c5fde8851b6cec46b40050f0a46249422adb7289d3d1c67a932910a09da430c",
-      "vertices": 76198,
-      "triangles": 145857,
+      "sha256": "960a646f1a20c003eed6ba3c64785bc8baeaae95f66bbf0d241bd30f0e17bc33",
+      "vertices": 106486,
+      "triangles": 203721,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -1281,17 +5416,477 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_M01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_athletic_street.glb",
-      "sha256": "d6b386d189923c212d15d4dc6cf17b3df60a879859d78430813f8aca1b47461f",
-      "vertices": 49791,
-      "triangles": 94674,
+      "sha256": "44a1958c8b9b1ed2b8e5dc6137fa310a52583388c0c4e59511531aaef08138f6",
+      "vertices": 90638,
+      "triangles": 169004,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -1412,13 +6007,472 @@
       ],
       "model_id": "SeoulResident_F01",
       "variant": "street",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "path": "game/assets/original/seoul_resident/seoul_resident_f01_athletic_swim.glb",
-      "sha256": "801c1c387be868ee568a2ebee07132a1a59f34f93688e06d86479d9cb757490d",
-      "vertices": 76336,
-      "triangles": 146070,
+      "sha256": "8bbf2662f5bfcdaeb6dbfe684c4ccae1866ef6317478a2b23cbcfb2c2f3cdb65",
+      "vertices": 115072,
+      "triangles": 219100,
       "bone_count": 52,
       "bone_names": [
         "Bip01 Pelvis",
@@ -1532,11 +6586,1097 @@
         "Resident_Authored_Skin",
         "Resident_Hair_and_Eye_Detail",
         "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
         "Resident_Original_Eye"
       ],
       "model_id": "SeoulResident_F01",
       "variant": "swimwear",
-      "source_assets_read": []
+      "source_assets_read": [
+        {
+          "identity": "m01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+          "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.8705882352941177,
+            0.6294117647058823,
+            0.47843137254901963
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                626,
+                1024
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.25
+              ],
+              "source_px": [
+                626,
+                813
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.424
+              ],
+              "source_px": [
+                626,
+                659
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.62
+              ],
+              "source_px": [
+                493,
+                493
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.406,
+                0.62
+              ],
+              "source_px": [
+                759,
+                493
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.406,
+                0.765
+              ],
+              "source_px": [
+                493,
+                425
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.406,
+                0.765
+              ],
+              "source_px": [
+                759,
+                425
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.25
+              ],
+              "source_px": [
+                531,
+                813
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.25
+              ],
+              "source_px": [
+                721,
+                813
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        },
+        {
+          "identity": "f01",
+          "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+          "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+          "size_px": [
+            1254,
+            1254
+          ],
+          "skin_swatch_median_srgb": [
+            0.9137254901960784,
+            0.6882352941176471,
+            0.5509803921568628
+          ],
+          "skin_swatches_px": [
+            [
+              455,
+              635
+            ],
+            [
+              795,
+              635
+            ],
+            [
+              548,
+              318
+            ],
+            [
+              704,
+              318
+            ],
+            [
+              559,
+              927
+            ],
+            [
+              694,
+              927
+            ]
+          ],
+          "landmarks": [
+            {
+              "name": "chin",
+              "target_normalized_xy": [
+                0.0,
+                0.0
+              ],
+              "source_px": [
+                628,
+                1018
+              ]
+            },
+            {
+              "name": "mouth",
+              "target_normalized_xy": [
+                0.0,
+                0.288
+              ],
+              "source_px": [
+                628,
+                817
+              ]
+            },
+            {
+              "name": "nose",
+              "target_normalized_xy": [
+                0.0,
+                0.451
+              ],
+              "source_px": [
+                627,
+                662
+              ]
+            },
+            {
+              "name": "eye_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.636
+              ],
+              "source_px": [
+                489,
+                505
+              ]
+            },
+            {
+              "name": "eye_r",
+              "target_normalized_xy": [
+                0.42,
+                0.636
+              ],
+              "source_px": [
+                762,
+                505
+              ]
+            },
+            {
+              "name": "brow_l",
+              "target_normalized_xy": [
+                -0.42,
+                0.781
+              ],
+              "source_px": [
+                491,
+                428
+              ]
+            },
+            {
+              "name": "brow_r",
+              "target_normalized_xy": [
+                0.42,
+                0.781
+              ],
+              "source_px": [
+                761,
+                428
+              ]
+            },
+            {
+              "name": "mouth_l",
+              "target_normalized_xy": [
+                -0.3,
+                0.288
+              ],
+              "source_px": [
+                532,
+                817
+              ]
+            },
+            {
+              "name": "mouth_r",
+              "target_normalized_xy": [
+                0.3,
+                0.288
+              ],
+              "source_px": [
+                723,
+                817
+              ]
+            },
+            {
+              "name": "cheek_l",
+              "target_normalized_xy": [
+                -0.64,
+                0.43
+              ],
+              "source_px": [
+                411,
+                687
+              ]
+            },
+            {
+              "name": "cheek_r",
+              "target_normalized_xy": [
+                0.64,
+                0.43
+              ],
+              "source_px": [
+                840,
+                687
+              ]
+            },
+            {
+              "name": "jaw_l",
+              "target_normalized_xy": [
+                -0.57,
+                0.11
+              ],
+              "source_px": [
+                456,
+                951
+              ]
+            },
+            {
+              "name": "jaw_r",
+              "target_normalized_xy": [
+                0.57,
+                0.11
+              ],
+              "source_px": [
+                796,
+                951
+              ]
+            },
+            {
+              "name": "temple_l",
+              "target_normalized_xy": [
+                -0.94,
+                0.74
+              ],
+              "source_px": [
+                332,
+                410
+              ]
+            },
+            {
+              "name": "temple_r",
+              "target_normalized_xy": [
+                0.94,
+                0.74
+              ],
+              "source_px": [
+                921,
+                410
+              ]
+            },
+            {
+              "name": "forehead",
+              "target_normalized_xy": [
+                0.0,
+                1.0
+              ],
+              "source_px": [
+                626,
+                300
+              ]
+            },
+            {
+              "name": "crown",
+              "target_normalized_xy": [
+                0.0,
+                1.3
+              ],
+              "source_px": [
+                626,
+                38
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "portrait_identity": {
+    "version": "EXP34 authored portrait geometry 6 with optional project-generated albedo paint",
+    "method": "Dedicated indexed facial cage with real orbital apertures, sewn eight-loop eyelids, independent curved eyeballs and connected craniofacial/auricle/upper-neck surface; individually lofted layered groom locks",
+    "protected_lower_neck_y_m": 1.44,
+    "eye_centres_m": {
+      "male": [
+        [
+          -0.028,
+          1.572
+        ],
+        [
+          0.028,
+          1.572
+        ]
+      ],
+      "female": [
+        [
+          -0.029,
+          1.575
+        ],
+        [
+          0.029,
+          1.575
+        ]
+      ]
+    },
+    "eye_atlas_square_m": 0.032,
+    "source_assets_read": [],
+    "quality_scope": "Original game identities. Appearance and motion require actual front/profile/rear native review; dimensions are not a realism or attractiveness score."
+  },
+  "portrait_paint": {
+    "version": "original_portrait_paint_bake_v2",
+    "used": true,
+    "source_kind": "Original image_gen fictional adult skin-paint references; NOT game screenshots or measured diffuse albedo.",
+    "sources": [
+      {
+        "identity": "m01",
+        "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+        "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+        "size_px": [
+          1254,
+          1254
+        ],
+        "skin_swatch_median_srgb": [
+          0.8705882352941177,
+          0.6294117647058823,
+          0.47843137254901963
+        ],
+        "skin_swatches_px": [
+          [
+            455,
+            635
+          ],
+          [
+            795,
+            635
+          ],
+          [
+            548,
+            318
+          ],
+          [
+            704,
+            318
+          ],
+          [
+            559,
+            927
+          ],
+          [
+            694,
+            927
+          ]
+        ],
+        "landmarks": [
+          {
+            "name": "chin",
+            "target_normalized_xy": [
+              0.0,
+              0.0
+            ],
+            "source_px": [
+              626,
+              1024
+            ]
+          },
+          {
+            "name": "mouth",
+            "target_normalized_xy": [
+              0.0,
+              0.25
+            ],
+            "source_px": [
+              626,
+              813
+            ]
+          },
+          {
+            "name": "nose",
+            "target_normalized_xy": [
+              0.0,
+              0.424
+            ],
+            "source_px": [
+              626,
+              659
+            ]
+          },
+          {
+            "name": "eye_l",
+            "target_normalized_xy": [
+              -0.406,
+              0.62
+            ],
+            "source_px": [
+              493,
+              493
+            ]
+          },
+          {
+            "name": "eye_r",
+            "target_normalized_xy": [
+              0.406,
+              0.62
+            ],
+            "source_px": [
+              759,
+              493
+            ]
+          },
+          {
+            "name": "brow_l",
+            "target_normalized_xy": [
+              -0.406,
+              0.765
+            ],
+            "source_px": [
+              493,
+              425
+            ]
+          },
+          {
+            "name": "brow_r",
+            "target_normalized_xy": [
+              0.406,
+              0.765
+            ],
+            "source_px": [
+              759,
+              425
+            ]
+          },
+          {
+            "name": "mouth_l",
+            "target_normalized_xy": [
+              -0.3,
+              0.25
+            ],
+            "source_px": [
+              531,
+              813
+            ]
+          },
+          {
+            "name": "mouth_r",
+            "target_normalized_xy": [
+              0.3,
+              0.25
+            ],
+            "source_px": [
+              721,
+              813
+            ]
+          },
+          {
+            "name": "cheek_l",
+            "target_normalized_xy": [
+              -0.64,
+              0.43
+            ],
+            "source_px": [
+              411,
+              687
+            ]
+          },
+          {
+            "name": "cheek_r",
+            "target_normalized_xy": [
+              0.64,
+              0.43
+            ],
+            "source_px": [
+              840,
+              687
+            ]
+          },
+          {
+            "name": "jaw_l",
+            "target_normalized_xy": [
+              -0.57,
+              0.11
+            ],
+            "source_px": [
+              456,
+              951
+            ]
+          },
+          {
+            "name": "jaw_r",
+            "target_normalized_xy": [
+              0.57,
+              0.11
+            ],
+            "source_px": [
+              796,
+              951
+            ]
+          },
+          {
+            "name": "temple_l",
+            "target_normalized_xy": [
+              -0.94,
+              0.74
+            ],
+            "source_px": [
+              332,
+              410
+            ]
+          },
+          {
+            "name": "temple_r",
+            "target_normalized_xy": [
+              0.94,
+              0.74
+            ],
+            "source_px": [
+              921,
+              410
+            ]
+          },
+          {
+            "name": "forehead",
+            "target_normalized_xy": [
+              0.0,
+              1.0
+            ],
+            "source_px": [
+              626,
+              300
+            ]
+          },
+          {
+            "name": "crown",
+            "target_normalized_xy": [
+              0.0,
+              1.3
+            ],
+            "source_px": [
+              626,
+              38
+            ]
+          }
+        ]
+      },
+      {
+        "identity": "f01",
+        "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+        "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+        "size_px": [
+          1254,
+          1254
+        ],
+        "skin_swatch_median_srgb": [
+          0.9137254901960784,
+          0.6882352941176471,
+          0.5509803921568628
+        ],
+        "skin_swatches_px": [
+          [
+            455,
+            635
+          ],
+          [
+            795,
+            635
+          ],
+          [
+            548,
+            318
+          ],
+          [
+            704,
+            318
+          ],
+          [
+            559,
+            927
+          ],
+          [
+            694,
+            927
+          ]
+        ],
+        "landmarks": [
+          {
+            "name": "chin",
+            "target_normalized_xy": [
+              0.0,
+              0.0
+            ],
+            "source_px": [
+              628,
+              1018
+            ]
+          },
+          {
+            "name": "mouth",
+            "target_normalized_xy": [
+              0.0,
+              0.288
+            ],
+            "source_px": [
+              628,
+              817
+            ]
+          },
+          {
+            "name": "nose",
+            "target_normalized_xy": [
+              0.0,
+              0.451
+            ],
+            "source_px": [
+              627,
+              662
+            ]
+          },
+          {
+            "name": "eye_l",
+            "target_normalized_xy": [
+              -0.42,
+              0.636
+            ],
+            "source_px": [
+              489,
+              505
+            ]
+          },
+          {
+            "name": "eye_r",
+            "target_normalized_xy": [
+              0.42,
+              0.636
+            ],
+            "source_px": [
+              762,
+              505
+            ]
+          },
+          {
+            "name": "brow_l",
+            "target_normalized_xy": [
+              -0.42,
+              0.781
+            ],
+            "source_px": [
+              491,
+              428
+            ]
+          },
+          {
+            "name": "brow_r",
+            "target_normalized_xy": [
+              0.42,
+              0.781
+            ],
+            "source_px": [
+              761,
+              428
+            ]
+          },
+          {
+            "name": "mouth_l",
+            "target_normalized_xy": [
+              -0.3,
+              0.288
+            ],
+            "source_px": [
+              532,
+              817
+            ]
+          },
+          {
+            "name": "mouth_r",
+            "target_normalized_xy": [
+              0.3,
+              0.288
+            ],
+            "source_px": [
+              723,
+              817
+            ]
+          },
+          {
+            "name": "cheek_l",
+            "target_normalized_xy": [
+              -0.64,
+              0.43
+            ],
+            "source_px": [
+              411,
+              687
+            ]
+          },
+          {
+            "name": "cheek_r",
+            "target_normalized_xy": [
+              0.64,
+              0.43
+            ],
+            "source_px": [
+              840,
+              687
+            ]
+          },
+          {
+            "name": "jaw_l",
+            "target_normalized_xy": [
+              -0.57,
+              0.11
+            ],
+            "source_px": [
+              456,
+              951
+            ]
+          },
+          {
+            "name": "jaw_r",
+            "target_normalized_xy": [
+              0.57,
+              0.11
+            ],
+            "source_px": [
+              796,
+              951
+            ]
+          },
+          {
+            "name": "temple_l",
+            "target_normalized_xy": [
+              -0.94,
+              0.74
+            ],
+            "source_px": [
+              332,
+              410
+            ]
+          },
+          {
+            "name": "temple_r",
+            "target_normalized_xy": [
+              0.94,
+              0.74
+            ],
+            "source_px": [
+              921,
+              410
+            ]
+          },
+          {
+            "name": "forehead",
+            "target_normalized_xy": [
+              0.0,
+              1.0
+            ],
+            "source_px": [
+              626,
+              300
+            ]
+          },
+          {
+            "name": "crown",
+            "target_normalized_xy": [
+              0.0,
+              1.3
+            ],
+            "source_px": [
+              626,
+              38
+            ]
+          }
+        ]
+      }
+    ],
+    "prompt_record": "data/reports/character_identity/20261024/imagegen_paint_sources.json",
+    "prompt_record_sha256": "735e32f374f79e485fce34a199dacb58a703efb004101890a9ff7c475351ca5f",
+    "alignment": "Manually declared eye/nose/mouth/chin/contour landmarks; exact thin-plate spline, skin-only area-prefiltered bilinear sampling.",
+    "coordinate_contract": "x=original head X/.069; y=(original head Y-1.458)/.184; sRGB output converted once by generator.",
+    "body_tone": "Subtract source skin-swatch channel medians, add bounded relative colour to unchanged BODY reference; no whole-face multiplicative darkening.",
+    "strength": 0.78,
+    "luminance_bounds_srgb": {
+      "skin": [
+        -0.045,
+        0.045
+      ],
+      "lip": [
+        -0.14,
+        0.055
+      ],
+      "nose_min_at_center": -0.03
+    },
+    "sampling": {
+      "source_png_modified": false,
+      "in_memory_lattice_step_px": 4,
+      "skin_area_radius_px": 8,
+      "lip_area_radius_px": 3,
+      "skin_relative_chroma_strength": 0.72
+    },
+    "passthrough_features": [
+      "back",
+      "brow",
+      "ear",
+      "ear_inner",
+      "eye",
+      "hair",
+      "head_back",
+      "neck"
+    ],
+    "fade": {
+      "neck_y": [
+        0.025,
+        0.18
+      ],
+      "side_abs_x": [
+        0.65,
+        0.98
+      ],
+      "front_cosine": [
+        0.35,
+        0.9
+      ],
+      "upper_head_y": [
+        1.03,
+        1.2
+      ]
+    },
+    "painted_eyes_and_brows_excluded": true,
+    "png_modified": false,
+    "scope": "Candidate skin-colour mapping only. Generated paint contains residual lighting; bounded transfer is not photogrammetry, anatomy or native-art acceptance."
+  },
+  "generation_options": {
+    "use_portrait_paint": true
+  },
+  "portrait_materials": {
+    "version": "original_portrait_materials_v3",
+    "source_assets_read": [],
+    "provenance": "Original numerical colour fields and PNGs;no photos,scans,game textures or third-party assets.",
+    "color_space": "Public RGB and PNG sRGB;convert vertex RGB once in Mesh.vertex;do not pre-linearise PNG.",
+    "skin_reference_m": [
+      0.69,
+      0.48,
+      0.36
+    ],
+    "skin_reference_f": [
+      0.77,
+      0.56,
+      0.44
+    ],
+    "skin_texture": "Neutral microvariation only;regional face/ear/lid/lip colour is vertex-authored,so shared body material gets no painted face.",
+    "eye": {
+      "atlas_diameter_m": 0.032,
+      "iris_radius_m": 0.0059,
+      "pupil_radius_m": 0.002,
+      "vertex_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_factor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "kind": "eye",
+      "material_semantic": "Resident_Original_Eye",
+      "baked_catchlights": false,
+      "requires_separate_atlas_from_skin": true
+    },
+    "hair": {
+      "uv": "U across one lock,Vroot-to-tip;scalp is separate geometry.",
+      "reference_srgb_m": [
+        0.20073211484783815,
+        0.1751463143140626,
+        0.1615086444767194
+      ],
+      "reference_srgb_f": [
+        0.17368689771957327,
+        0.151703719316242,
+        0.1412001184302158
+      ],
+      "reference_red_linear_m": 0.033333333333333326,
+      "reference_red_linear_f": 0.025490196078431372,
+      "vertex_buffer": "Linear RGB is truncated to uint8 by Godot RenderingServer;all authored lock/scalp samples retain red>green>=blue and blue>=3/255 after packing.",
+      "engine_source": "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/servers/rendering/rendering_server.cpp#L649-L662",
+      "customization_requires_source_reference": "Derive median original hair-mask vertex red per source;do not retain legacy .00048 divisor.",
+      "baked_specular_bands": false
+    },
+    "runtime": "No runtime code changed by this module. Existing skin/hair/eye roles remain;roughness,SSS and live highlights belong to the existing PBR helper.",
+    "scope": "Material authoring,not a realistic-human acceptance result. Geometry,UVintegration,lighting,allvariants and runtime controls need actual native review."
+  },
+  "portrait_modules": [
+    {
+      "path": "tools/authored_character/resident_identity_mesh.py",
+      "sha256": "588782de113dec190436eecef4ac1934759b8ae4e8514845e5d3fb595e722412"
+    },
+    {
+      "path": "tools/authored_character/portrait_materials.py",
+      "sha256": "4f964874537f61fb0694722f00ff27ff4628c11cbed0b15c883f63c43d310a3c"
+    },
+    {
+      "path": "tools/authored_character/portrait_paint_bake.py",
+      "sha256": "e4b63f16af151390800cb36f8813178d1e3d2f0feead68a9b3a9734fa94f0b4e"
     }
   ],
   "body_profiles": {

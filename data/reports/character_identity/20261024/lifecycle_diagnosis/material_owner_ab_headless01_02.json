@@ -1,0 +1,38 @@
+{
+  "task": "EXP34_MATERIAL_OWNER_ONE_VARIABLE_AB",
+  "written_at_utc": "2026-10-24T09:50:19.129261+00:00",
+  "runs": [
+    {
+      "tag": "lifecycle_headless01",
+      "result": "FAIL",
+      "passed": 8,
+      "total": 9,
+      "engine_exit": 1,
+      "material_null_errors": 12,
+      "system_certificate_startup_errors": 1,
+      "fixture_sha256": "0c1b519ece427c62efaceb1abbcbc3df8dd53a3291c59b3a22047f86f5b179ac",
+      "surface_sha256": "e4ba4208bd60f35277f088a5d6d18316886aeb53329b57fd07de16d9ed9f84de",
+      "source_changes_during_run": [],
+      "run_metadata_sha256": "353ed70f5e4bda3908c08b8b0a0ed88f72d227fb7ced2d1bec05f446d28b3d47"
+    },
+    {
+      "tag": "lifecycle_headless02",
+      "result": "FAIL",
+      "passed": 8,
+      "total": 9,
+      "engine_exit": 1,
+      "material_null_errors": 0,
+      "system_certificate_startup_errors": 1,
+      "fixture_sha256": "0c1b519ece427c62efaceb1abbcbc3df8dd53a3291c59b3a22047f86f5b179ac",
+      "surface_sha256": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611",
+      "source_changes_during_run": [],
+      "run_metadata_sha256": "42697934fed60c91c9faec45aa033a5ffb83d4da6cff99a9ac4b75dc9d82179d"
+    }
+  ],
+  "changed_production_file_only": "game/scripts/player/textured_human_surface.gd",
+  "change": "Parent surface strong-reference Array owns every duplicate override material, extending previous4rolehandles to all8surface roles.",
+  "fixture_unchanged": true,
+  "conclusion": "Material-null errors across avatar-only/whole-player/bare-host deletion changed12to0 after one material ownership change. All8functional lifecycle checks passed both runs. Strict overall result remains FAIL8/9 in02 because the separate macOS certificate startup ERROR persists;9/9 is not claimed.",
+  "source_edits_by_reviewer": 0,
+  "scope": "Controlled headless lifetime evidence. Native renderer fix acceptance belongs to root native A/B;system certificate environment remains unresolved."
+}

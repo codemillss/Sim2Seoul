@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""Read existing engine evidence without launching Godot or editing sources.
+
+Supply a JSON selection: {"runs": [{"report": "...json", "suite": "...",
+"mode": "native", "expected_checks": 74, "expected_captures": 64,
+"expected_task": "optional exact task", "expected_physics_hz": 60}]}.
+All relative paths are repository-relative. Default output is stdout only.
+An explicit --output writes this derived evidence review; no inputs are edited.
+Integrity PASS is never a visual/naturalness/ordinary-OS acceptance.
+"""
+from __future__ import annotations
+
+import argparse
+import datetime
+import hashlib
+import json
+from pathlib import Path
+import re
+import struct
+
+
+ERROR_MARKERS = (
+    "SCRIPT ERROR:", "Parse Error:", "Failed to load script", "ERROR:",
+    "SIGSEGV", "Segmentation fault", "handle_crash", "Fatal error:",
+)
+
+
+def digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def resolve(value: str, repository: Path) -> Path:
+    if value.startswith("res://"):
+        return (repository / "game" / value[6:]).resolve()
+    path = Path(value)
+    return path.resolve() if path.is_absolute() else (repository / path).resolve()
+
+
+def source_review(bindings: dict, repository: Path) -> dict:
+    invalid = []
+    for name, wanted in bindings.items():
+        path = resolve(name, repository)
+        actual = digest(path) if path.is_file() else None
+        if actual != wanted:
+            invalid.append({"file": str(path), "recorded_sha256": wanted,
+                            "actual_sha256": actual})
+    return {"recorded_bindings": len(bindings), "mismatches": invalid,
+            "all_current": bool(bindings) and not invalid}
+
+
+def png_size(path: Path) -> list[int]:
+    with path.open("rb") as handle:
+        header = handle.read(24)
+    if len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
+        raise ValueError("Not a PNG with an IHDR")
+    return list(struct.unpack(">II", header[16:24]))
+
+
+def recorded_size(row: dict) -> list[int] | None:
+    value = row.get("image_size", row.get("size_px", row.get("size")))
+    if isinstance(value, list) and len(value) == 2:
+        return [int(value[0]), int(value[1])]
+    if isinstance(value, str):
+        match = re.fullmatch(r"\(?\s*(\d+)\s*,\s*(\d+)\s*\)?", value)
+        if match:
+            return [int(match[1]), int(match[2])]
+    return None
+
+
+def review_run(spec: dict, repository: Path) -> tuple[dict, dict]:
+    path = resolve(spec["report"], repository)
+    result = {"report": str(path), "expected": spec, "gates": [], "captures": []}
+    gates = result["gates"]
+
+    def gate(name, passed, evidence=None):
+        gates.append({"name": name, "passed": bool(passed), "evidence": evidence})
+
+    gate("report.exists", path.is_file())
+    if not path.is_file():
+        result["result"] = "FAIL"
+        return result, {}
+    report = json.loads(path.read_text())
+    result["report_sha256"] = digest(path)
+    checks, captures = report.get("checks", []), report.get("captures", [])
+    failed = [row.get("name", row.get("check", "unnamed"))
+              for row in checks if row.get("passed") is not True]
+    result["actual"] = {"task": report.get("task"), "display": report.get("display"),
+                        "engine": report.get("engine"), "checks": len(checks),
+                        "passed_checks": len(checks) - len(failed),
+                        "failed_checks": failed, "captures": len(captures),
+                        "physics_hz": report.get("physics_hz")}
+    gate("report.PASS_and_every_check_true", report.get("result") == "PASS" and not failed)
+    gate("checks.exact_expected_denominator", len(checks) == spec["expected_checks"])
+    gate("captures.exact_expected_count", len(captures) == spec["expected_captures"])
+    summary = report.get("summary", {})
+    counters = {}
+    for key in ("checks", "failed"):
+        if key in summary:
+            counters["summary." + key] = summary[key] == (len(checks) if key == "checks" else len(failed))
+    if "total" in report:
+        counters["total"] = report["total"] == len(checks)
+    if "passed" in report and isinstance(report["passed"], int) and not isinstance(report["passed"], bool):
+        counters["passed"] = report["passed"] == len(checks) - len(failed)
+    for key in ("actual_images", "captures"):
+        if key in summary:
+            counters["summary." + key] = summary[key] == len(captures)
+    gate("report.recorded_counters_match_actual_rows", all(counters.values()), counters)
+    if "expected_task" in spec:
+        gate("report.exact_task", report.get("task") == spec["expected_task"])
+    if "expected_physics_hz" in spec:
+        gate("report.actual_physics_rate", report.get("physics_hz") == spec["expected_physics_hz"])
+    mode = spec["mode"]
+    gate("report.actual_display_matches_mode", bool(report.get("display")) and
+         ((report["display"] == "headless") == (mode == "headless")))
+    bindings = report.get("source_sha256", {})
+    report_sources = source_review(bindings, repository)
+    result["report_source_binding_review"] = report_sources
+    gate("report.source_bindings_if_declared_are_current", not bindings or report_sources["all_current"],
+         "Own bindings checked when declared; an empty report delegates source coverage to the mandatory broad runner binding below.")
+
+    metadata_path = path.with_suffix(".run.json")
+    gate("runner.metadata_exists", metadata_path.is_file())
+    metadata = json.loads(metadata_path.read_text()) if metadata_path.is_file() else {}
+    if metadata:
+        result["runner"] = {"file": str(metadata_path), "sha256": digest(metadata_path),
+                            "returncode": metadata.get("returncode"),
+                            "script_errors": metadata.get("script_errors"),
+                            "source_changes_during_run": metadata.get("source_changes_during_run"),
+                            "wall_seconds": metadata.get("wall_seconds")}
+        gate("runner.exit_zero_no_script_error_or_source_change",
+             metadata.get("returncode") == 0 and metadata.get("script_errors") is False
+             and metadata.get("source_changes_during_run") == [])
+        gate("runner.exact_suite_and_mode", metadata.get("suite") == spec["suite"]
+             and metadata.get("mode") == mode)
+        broad = source_review(metadata.get("source_sha256", {}), repository)
+        result["runner_source_binding_review"] = broad
+        gate("runner.broad_source_bindings_are_current", broad["all_current"])
+        argv = metadata.get("argv", [])
+        script = argv[argv.index("--script") + 1] if "--script" in argv else None
+        script_path = resolve(script, repository) if script else None
+        script_key = str(script_path.relative_to(repository)) if script_path and script_path.is_relative_to(repository) else None
+        gate("runner.executed_fixture_is_source_bound", script_key in metadata.get("source_sha256", {}), script)
+
+    logs = []
+    for suffix in (".log", ".console.log"):
+        log = path.with_suffix(suffix)
+        rows = log.read_text(errors="replace").splitlines() if log.is_file() else []
+        errors = [{"line": at + 1, "text": line} for at, line in enumerate(rows)
+                  if any(marker in line for marker in ERROR_MARKERS)]
+        logs.append({"file": str(log), "exists": log.is_file(),
+                     "sha256": digest(log) if log.is_file() else None,
+                     "error_lines": errors})
+    result["logs"] = logs
+    gate("logs.both_preserved_and_no_error_markers", all(row["exists"] and not row["error_lines"] for row in logs))
+
+    unique = set()
+    captures_valid = True
+    for at, capture in enumerate(captures):
+        value = capture.get("file", capture.get("path"))
+        image = resolve(value, repository) if value else None
+        actual_hash = digest(image) if image and image.is_file() else None
+        try:
+            dimensions = png_size(image) if image and image.is_file() else None
+        except ValueError:
+            dimensions = None
+        saved_dimensions = recorded_size(capture)
+        valid = bool(image) and actual_hash == capture.get("sha256") and bool(dimensions)
+        valid = valid and (saved_dimensions is None or dimensions == saved_dimensions)
+        valid = valid and capture.get("save_error", 0) == 0 and image not in unique
+        unique.add(image)
+        entry = {"index": at, "file": str(image) if image else None,
+                 "sha256": actual_hash, "recorded_sha256": capture.get("sha256"),
+                 "actual_png_size": dimensions, "recorded_size": saved_dimensions,
+                 "valid": bool(valid)}
+        asset_name = capture.get("actual_glb_path", capture.get("actual_glb"))
+        if asset_name:
+            asset = resolve(asset_name, repository)
+            current_asset = digest(asset) if asset.is_file() else None
+            asset_valid = current_asset == capture.get("actual_glb_sha256")
+            entry["actual_asset"] = {"file": str(asset), "sha256": current_asset,
+                                     "recorded_sha256": capture.get("actual_glb_sha256"),
+                                     "valid": asset_valid}
+            valid = valid and asset_valid
+            entry["valid"] = bool(valid)
+        captures_valid = captures_valid and bool(valid)
+        result["captures"].append(entry)
+    gate("captures.unique_existing_PNG_bytes_dimensions_and_displayed_asset_current", captures_valid)
+    result["result"] = "PASS_EVIDENCE_INTEGRITY" if all(row["passed"] for row in gates) else "FAIL"
+    return result, metadata.get("source_sha256", {})
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("selection", type=Path)
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[5])
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    repository = args.root.resolve()
+    selection = args.selection.resolve()
+    spec = json.loads(selection.read_text())
+    selected = spec if isinstance(spec, list) else spec.get("runs", [])
+    if not selected:
+        parser.error("Selection must explicitly name at least one completed run")
+    rows, union, conflicts = [], {}, []
+    for expected in selected:
+        for field in ("report", "suite", "mode", "expected_checks", "expected_captures"):
+            if field not in expected:
+                parser.error("Missing selection field: " + field)
+        if expected["mode"] not in ("headless", "native"):
+            parser.error("Each mode must be headless or native")
+        row, bindings = review_run(expected, repository)
+        rows.append(row)
+        for name, value in bindings.items():
+            if name in union and union[name] != value:
+                conflicts.append({"source": name, "earlier_sha256": union[name], "later_sha256": value,
+                                  "later_report": expected["report"]})
+            union[name] = value
+    passed = all(row["result"] == "PASS_EVIDENCE_INTEGRITY" for row in rows) and not conflicts
+    result = {"task": "EXP34_READONLY_FINAL_ENGINE_EVIDENCE_REVIEW",
+              "result": "PASS_EVIDENCE_INTEGRITY" if passed else "FAIL",
+              "reviewed_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "reviewer_tool": {"file": str(Path(__file__).resolve()), "sha256": digest(Path(__file__))},
+              "selection": {"file": str(selection), "sha256": digest(selection)},
+              "summary": {"selected_runs": len(rows),
+                          "actual_checks": sum(row.get("actual", {}).get("checks", 0) for row in rows),
+                          "expected_checks": sum(row["expected"]["expected_checks"] for row in rows),
+                          "actual_captures": sum(row.get("actual", {}).get("captures", 0) for row in rows),
+                          "expected_captures": sum(row["expected"]["expected_captures"] for row in rows),
+                          "cross_run_source_bindings": len(union), "cross_run_source_conflicts": len(conflicts)},
+              "runs": rows, "cross_run_source_conflicts": conflicts,
+              "visual_acceptance": "PENDING separate actual ordered pixel review; this tool does not open images.",
+              "scope": "Read-only integrity review of existing reports, exact denominators, native capture PNG bytes/dimensions, log errors, actual engine exit and current source hashes. No engine execution or production/source edits. PASS does not establish attractive/realistic/natural movement, ordinary OS interaction, comfort, performance, all-profile visual acceptance or unselected historical results."}
+    encoded = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+    if args.output:
+        args.output.resolve().write_text(encoded)
+        print(json.dumps({"result": result["result"], "summary": result["summary"], "output": str(args.output.resolve())}))
+    else:
+        print(encoded, end="")
+    raise SystemExit(0 if passed else 1)
+
+
+if __name__ == "__main__":
+    main()

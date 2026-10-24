@@ -1,0 +1,656 @@
+{
+  "generator": "tools/authored_character/build_seoul_resident.py",
+  "generator_sha256": "8c4060961add431c5b875a09ba1f1d4d40a48fd25edd09bd6b8d28145a8d4c54",
+  "design": "Project-authored resident with continuous anatomical surface fields, shared wrist/ankle boundary attributes, shape-preserving cubic sections, articulated five-finger hands, street clothes and same-anatomy swimwear",
+  "provenance": "No external body, geometry, textures, scan or animation is loaded or adapted. All source values and topology are authored in the project generator.",
+  "coordinates": "+Y up; face +Z; metres; local bone bases identity",
+  "hand_contract": {
+    "rest_finger_longitudinal": [
+      0,
+      -1,
+      0
+    ],
+    "palm_front_normal": [
+      0,
+      0,
+      1
+    ],
+    "flexion_axis": [
+      -1,
+      0,
+      0
+    ],
+    "knuckle_contact_wrist_local_m": [
+      0,
+      -0.078,
+      0.022
+    ],
+    "wrist_to_middle_fingertip_m": 0.132,
+    "palm_breadth_m": 0.068,
+    "upper_arm_length_m": 0.29203595669026783,
+    "forearm_length_m": 0.25049151682242654,
+    "names": "Bip01 L/R Finger0, Finger01, Finger02 thumb; Finger1/11/12 index; Finger2/21/22 middle; Finger3/31/32 ring; Finger4/41/42 little"
+  },
+  "files": [
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/seoul_resident_m01_street.glb",
+      "sha256": "0a62e27aa0c6602bf4cff568340315f3c9ee1b5fc3684e083a8e2c394cfdb947",
+      "vertices": 83294,
+      "triangles": 153308,
+      "bone_count": 52,
+      "bone_names": [
+        "Bip01 Pelvis",
+        "Bip01 Spine",
+        "Bip01 Spine1",
+        "Bip01 Spine2",
+        "Bip01 Neck",
+        "Bip01 Head",
+        "Bip01 L Clavicle",
+        "Bip01 L UpperArm",
+        "Bip01 L Forearm",
+        "Bip01 L Hand",
+        "Bip01 L Finger1",
+        "Bip01 L Finger11",
+        "Bip01 L Finger12",
+        "Bip01 L Finger2",
+        "Bip01 L Finger21",
+        "Bip01 L Finger22",
+        "Bip01 L Finger3",
+        "Bip01 L Finger31",
+        "Bip01 L Finger32",
+        "Bip01 L Finger4",
+        "Bip01 L Finger41",
+        "Bip01 L Finger42",
+        "Bip01 L Finger0",
+        "Bip01 L Finger01",
+        "Bip01 L Finger02",
+        "Bip01 L Thigh",
+        "Bip01 L Calf",
+        "Bip01 L Foot",
+        "Bip01 L Toe0",
+        "Bip01 R Clavicle",
+        "Bip01 R UpperArm",
+        "Bip01 R Forearm",
+        "Bip01 R Hand",
+        "Bip01 R Finger1",
+        "Bip01 R Finger11",
+        "Bip01 R Finger12",
+        "Bip01 R Finger2",
+        "Bip01 R Finger21",
+        "Bip01 R Finger22",
+        "Bip01 R Finger3",
+        "Bip01 R Finger31",
+        "Bip01 R Finger32",
+        "Bip01 R Finger4",
+        "Bip01 R Finger41",
+        "Bip01 R Finger42",
+        "Bip01 R Finger0",
+        "Bip01 R Finger01",
+        "Bip01 R Finger02",
+        "Bip01 R Thigh",
+        "Bip01 R Calf",
+        "Bip01 R Foot",
+        "Bip01 R Toe0"
+      ],
+      "neutral_rest_skinned_height_m": 1.692,
+      "runtime_normalized_street_height_m": 1.7,
+      "bounds_m": {
+        "min": [
+          -0.29300000000000004,
+          0.006,
+          -0.12356948912163093
+        ],
+        "max": [
+          0.29300000000000004,
+          1.698,
+          0.178
+        ]
+      },
+      "body_profile": "standard",
+      "authored_torso_measurements": {
+        "waist": {
+          "height_band_m": [
+            1.03,
+            1.12
+          ],
+          "width_m": 0.29571233992230855,
+          "depth_m": 0.2153184166619079,
+          "vertex_count": 1928,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "hips": {
+          "height_band_m": [
+            0.9,
+            0.98
+          ],
+          "width_m": 0.33747749930040155,
+          "depth_m": 0.23433006010558793,
+          "vertex_count": 2117,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "chest": {
+          "height_band_m": [
+            1.25,
+            1.35
+          ],
+          "width_m": 0.3474910749876474,
+          "depth_m": 0.23077068155098662,
+          "vertex_count": 1759,
+          "torso_bone_weight_threshold": 0.5
+        }
+      },
+      "capsule_comparison": {
+        "reference_radius_m": 0.3,
+        "maximum_neutral_full_surface_radius_m": 0.2930614270080592,
+        "maximum_neutral_torso_surface_radius_m": 0.23771216911300094,
+        "scope": "Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged."
+      },
+      "surface_semantics": [
+        "Resident_Jacket_or_Swimwear",
+        "Resident_Authored_Skin",
+        "Resident_Hair_and_Eye_Detail",
+        "Resident_Articulated_Hands",
+        "Resident_Trousers",
+        "Resident_Sneakers",
+        "Resident_Garment_and_Eye_Accents",
+        "Resident_Original_Eye"
+      ],
+      "model_id": "SeoulResident_M01",
+      "variant": "street",
+      "source_assets_read": []
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/seoul_resident_m01_swim.glb",
+      "sha256": "c23c0074f8f9ea2e84143be726c613355c745b34192fb31777e7d741d16adc82",
+      "vertices": 107592,
+      "triangles": 203193,
+      "bone_count": 52,
+      "bone_names": [
+        "Bip01 Pelvis",
+        "Bip01 Spine",
+        "Bip01 Spine1",
+        "Bip01 Spine2",
+        "Bip01 Neck",
+        "Bip01 Head",
+        "Bip01 L Clavicle",
+        "Bip01 L UpperArm",
+        "Bip01 L Forearm",
+        "Bip01 L Hand",
+        "Bip01 L Finger1",
+        "Bip01 L Finger11",
+        "Bip01 L Finger12",
+        "Bip01 L Finger2",
+        "Bip01 L Finger21",
+        "Bip01 L Finger22",
+        "Bip01 L Finger3",
+        "Bip01 L Finger31",
+        "Bip01 L Finger32",
+        "Bip01 L Finger4",
+        "Bip01 L Finger41",
+        "Bip01 L Finger42",
+        "Bip01 L Finger0",
+        "Bip01 L Finger01",
+        "Bip01 L Finger02",
+        "Bip01 L Thigh",
+        "Bip01 L Calf",
+        "Bip01 L Foot",
+        "Bip01 L Toe0",
+        "Bip01 R Clavicle",
+        "Bip01 R UpperArm",
+        "Bip01 R Forearm",
+        "Bip01 R Hand",
+        "Bip01 R Finger1",
+        "Bip01 R Finger11",
+        "Bip01 R Finger12",
+        "Bip01 R Finger2",
+        "Bip01 R Finger21",
+        "Bip01 R Finger22",
+        "Bip01 R Finger3",
+        "Bip01 R Finger31",
+        "Bip01 R Finger32",
+        "Bip01 R Finger4",
+        "Bip01 R Finger41",
+        "Bip01 R Finger42",
+        "Bip01 R Finger0",
+        "Bip01 R Finger01",
+        "Bip01 R Finger02",
+        "Bip01 R Thigh",
+        "Bip01 R Calf",
+        "Bip01 R Foot",
+        "Bip01 R Toe0"
+      ],
+      "neutral_rest_skinned_height_m": 1.692,
+      "runtime_normalized_street_height_m": 1.7,
+      "bounds_m": {
+        "min": [
+          -0.2929900902045406,
+          0.006,
+          -0.1304060085312403
+        ],
+        "max": [
+          0.29287522264662236,
+          1.698,
+          0.164
+        ]
+      },
+      "body_profile": "standard",
+      "authored_torso_measurements": {
+        "waist": {
+          "height_band_m": [
+            1.03,
+            1.12
+          ],
+          "width_m": 0.26425275357168787,
+          "depth_m": 0.1778736313926257,
+          "vertex_count": 2690,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "hips": {
+          "height_band_m": [
+            0.9,
+            0.98
+          ],
+          "width_m": 0.3274322603587405,
+          "depth_m": 0.23003967483589427,
+          "vertex_count": 2613,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "chest": {
+          "height_band_m": [
+            1.25,
+            1.35
+          ],
+          "width_m": 0.3281483156950916,
+          "depth_m": 0.19417179517662328,
+          "vertex_count": 3267,
+          "torso_bone_weight_threshold": 0.5
+        }
+      },
+      "capsule_comparison": {
+        "reference_radius_m": 0.3,
+        "maximum_neutral_full_surface_radius_m": 0.293059816656885,
+        "maximum_neutral_torso_surface_radius_m": 0.23664970983075587,
+        "scope": "Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged."
+      },
+      "surface_semantics": [
+        "Resident_Jacket_or_Swimwear",
+        "Resident_Authored_Skin",
+        "Resident_Hair_and_Eye_Detail",
+        "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
+        "Resident_Original_Eye"
+      ],
+      "model_id": "SeoulResident_M01",
+      "variant": "swimwear",
+      "source_assets_read": []
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/seoul_resident_f01_street.glb",
+      "sha256": "051aee09edad8a35ed6018e151ce2658e86fe382d05b1eaf157bb3d9c01edb3f",
+      "vertices": 91168,
+      "triangles": 168188,
+      "bone_count": 52,
+      "bone_names": [
+        "Bip01 Pelvis",
+        "Bip01 Spine",
+        "Bip01 Spine1",
+        "Bip01 Spine2",
+        "Bip01 Neck",
+        "Bip01 Head",
+        "Bip01 L Clavicle",
+        "Bip01 L UpperArm",
+        "Bip01 L Forearm",
+        "Bip01 L Hand",
+        "Bip01 L Finger1",
+        "Bip01 L Finger11",
+        "Bip01 L Finger12",
+        "Bip01 L Finger2",
+        "Bip01 L Finger21",
+        "Bip01 L Finger22",
+        "Bip01 L Finger3",
+        "Bip01 L Finger31",
+        "Bip01 L Finger32",
+        "Bip01 L Finger4",
+        "Bip01 L Finger41",
+        "Bip01 L Finger42",
+        "Bip01 L Finger0",
+        "Bip01 L Finger01",
+        "Bip01 L Finger02",
+        "Bip01 L Thigh",
+        "Bip01 L Calf",
+        "Bip01 L Foot",
+        "Bip01 L Toe0",
+        "Bip01 R Clavicle",
+        "Bip01 R UpperArm",
+        "Bip01 R Forearm",
+        "Bip01 R Hand",
+        "Bip01 R Finger1",
+        "Bip01 R Finger11",
+        "Bip01 R Finger12",
+        "Bip01 R Finger2",
+        "Bip01 R Finger21",
+        "Bip01 R Finger22",
+        "Bip01 R Finger3",
+        "Bip01 R Finger31",
+        "Bip01 R Finger32",
+        "Bip01 R Finger4",
+        "Bip01 R Finger41",
+        "Bip01 R Finger42",
+        "Bip01 R Finger0",
+        "Bip01 R Finger01",
+        "Bip01 R Finger02",
+        "Bip01 R Thigh",
+        "Bip01 R Calf",
+        "Bip01 R Foot",
+        "Bip01 R Toe0"
+      ],
+      "neutral_rest_skinned_height_m": 1.692,
+      "runtime_normalized_street_height_m": 1.7,
+      "bounds_m": {
+        "min": [
+          -0.29300000000000004,
+          0.006,
+          -0.12356948912163093
+        ],
+        "max": [
+          0.29300000000000004,
+          1.698,
+          0.178
+        ]
+      },
+      "body_profile": "standard",
+      "authored_torso_measurements": {
+        "waist": {
+          "height_band_m": [
+            1.03,
+            1.12
+          ],
+          "width_m": 0.29571234487720166,
+          "depth_m": 0.21531951348829942,
+          "vertex_count": 1928,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "hips": {
+          "height_band_m": [
+            0.9,
+            0.98
+          ],
+          "width_m": 0.33747749930040155,
+          "depth_m": 0.2343300601056384,
+          "vertex_count": 2117,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "chest": {
+          "height_band_m": [
+            1.25,
+            1.35
+          ],
+          "width_m": 0.3474910749876474,
+          "depth_m": 0.23369948489284104,
+          "vertex_count": 1759,
+          "torso_bone_weight_threshold": 0.5
+        }
+      },
+      "capsule_comparison": {
+        "reference_radius_m": 0.3,
+        "maximum_neutral_full_surface_radius_m": 0.2930614270080592,
+        "maximum_neutral_torso_surface_radius_m": 0.23771216911300094,
+        "scope": "Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged."
+      },
+      "surface_semantics": [
+        "Resident_Jacket_or_Swimwear",
+        "Resident_Authored_Skin",
+        "Resident_Hair_and_Eye_Detail",
+        "Resident_Articulated_Hands",
+        "Resident_Trousers",
+        "Resident_Sneakers",
+        "Resident_Garment_and_Eye_Accents",
+        "Resident_Original_Eye"
+      ],
+      "model_id": "SeoulResident_F01",
+      "variant": "street",
+      "source_assets_read": []
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/seoul_resident_f01_swim.glb",
+      "sha256": "3f5610aa4c7003be54c7144cf22ac5bd110353b9fbf9c7f5831a99d09efa3216",
+      "vertices": 115602,
+      "triangles": 218284,
+      "bone_count": 52,
+      "bone_names": [
+        "Bip01 Pelvis",
+        "Bip01 Spine",
+        "Bip01 Spine1",
+        "Bip01 Spine2",
+        "Bip01 Neck",
+        "Bip01 Head",
+        "Bip01 L Clavicle",
+        "Bip01 L UpperArm",
+        "Bip01 L Forearm",
+        "Bip01 L Hand",
+        "Bip01 L Finger1",
+        "Bip01 L Finger11",
+        "Bip01 L Finger12",
+        "Bip01 L Finger2",
+        "Bip01 L Finger21",
+        "Bip01 L Finger22",
+        "Bip01 L Finger3",
+        "Bip01 L Finger31",
+        "Bip01 L Finger32",
+        "Bip01 L Finger4",
+        "Bip01 L Finger41",
+        "Bip01 L Finger42",
+        "Bip01 L Finger0",
+        "Bip01 L Finger01",
+        "Bip01 L Finger02",
+        "Bip01 L Thigh",
+        "Bip01 L Calf",
+        "Bip01 L Foot",
+        "Bip01 L Toe0",
+        "Bip01 R Clavicle",
+        "Bip01 R UpperArm",
+        "Bip01 R Forearm",
+        "Bip01 R Hand",
+        "Bip01 R Finger1",
+        "Bip01 R Finger11",
+        "Bip01 R Finger12",
+        "Bip01 R Finger2",
+        "Bip01 R Finger21",
+        "Bip01 R Finger22",
+        "Bip01 R Finger3",
+        "Bip01 R Finger31",
+        "Bip01 R Finger32",
+        "Bip01 R Finger4",
+        "Bip01 R Finger41",
+        "Bip01 R Finger42",
+        "Bip01 R Finger0",
+        "Bip01 R Finger01",
+        "Bip01 R Finger02",
+        "Bip01 R Thigh",
+        "Bip01 R Calf",
+        "Bip01 R Foot",
+        "Bip01 R Toe0"
+      ],
+      "neutral_rest_skinned_height_m": 1.692,
+      "runtime_normalized_street_height_m": 1.7,
+      "bounds_m": {
+        "min": [
+          -0.2929900902045406,
+          0.006,
+          -0.1304060085312403
+        ],
+        "max": [
+          0.29287522264662236,
+          1.698,
+          0.164
+        ]
+      },
+      "body_profile": "standard",
+      "authored_torso_measurements": {
+        "waist": {
+          "height_band_m": [
+            1.03,
+            1.12
+          ],
+          "width_m": 0.24849791828898526,
+          "depth_m": 0.17784261333885715,
+          "vertex_count": 2574,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "hips": {
+          "height_band_m": [
+            0.9,
+            0.98
+          ],
+          "width_m": 0.3196701791408761,
+          "depth_m": 0.23003967483759427,
+          "vertex_count": 2452,
+          "torso_bone_weight_threshold": 0.5
+        },
+        "chest": {
+          "height_band_m": [
+            1.25,
+            1.35
+          ],
+          "width_m": 0.30910614032134764,
+          "depth_m": 0.19725077562566778,
+          "vertex_count": 3928,
+          "torso_bone_weight_threshold": 0.5
+        }
+      },
+      "capsule_comparison": {
+        "reference_radius_m": 0.3,
+        "maximum_neutral_full_surface_radius_m": 0.293059816656885,
+        "maximum_neutral_torso_surface_radius_m": 0.23433984646033904,
+        "scope": "Presentation-only rest surface comparison. Existing physical capsule and motion are unchanged."
+      },
+      "surface_semantics": [
+        "Resident_Jacket_or_Swimwear",
+        "Resident_Authored_Skin",
+        "Resident_Hair_and_Eye_Detail",
+        "Resident_Articulated_Hands",
+        "Resident_Garment_and_Eye_Accents",
+        "Resident_Original_Eye"
+      ],
+      "model_id": "SeoulResident_F01",
+      "variant": "swimwear",
+      "source_assets_read": []
+    }
+  ],
+  "portrait_identity": {
+    "version": "EXP34 authored portrait candidate 2",
+    "method": "Dedicated indexed facial cage with real orbital apertures, sewn eight-loop eyelids, independent curved eyeballs and connected craniofacial/auricle/upper-neck surface; individually lofted layered groom locks",
+    "protected_lower_neck_y_m": 1.44,
+    "eye_centres_m": {
+      "male": [
+        [
+          -0.028,
+          1.572
+        ],
+        [
+          0.028,
+          1.572
+        ]
+      ],
+      "female": [
+        [
+          -0.029,
+          1.575
+        ],
+        [
+          0.029,
+          1.575
+        ]
+      ]
+    },
+    "eye_atlas_square_m": 0.032,
+    "source_assets_read": [],
+    "quality_scope": "Original game identities. Appearance and motion require actual front/profile/rear native review; dimensions are not a realism or attractiveness score."
+  },
+  "portrait_materials": {
+    "version": "original_portrait_materials_v2",
+    "source_assets_read": [],
+    "provenance": "Original numerical colour fields and PNGs;no photos,scans,game textures or third-party assets.",
+    "color_space": "Public RGB and PNG sRGB;convert vertex RGB once in Mesh.vertex;do not pre-linearise PNG.",
+    "skin_reference_m": [
+      0.69,
+      0.48,
+      0.36
+    ],
+    "skin_reference_f": [
+      0.77,
+      0.56,
+      0.44
+    ],
+    "skin_texture": "Neutral microvariation only;regional face/ear/lid/lip colour is vertex-authored,so shared body material gets no painted face.",
+    "eye": {
+      "atlas_diameter_m": 0.032,
+      "iris_radius_m": 0.0052,
+      "pupil_radius_m": 0.002,
+      "vertex_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "base_color_factor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "kind": "eye",
+      "material_semantic": "Resident_Original_Eye",
+      "baked_catchlights": false,
+      "requires_separate_atlas_from_skin": true
+    },
+    "hair": {
+      "uv": "U across one lock,Vroot-to-tip;scalp is separate geometry.",
+      "reference_srgb_m": [
+        0.20073211484783815,
+        0.1751463143140626,
+        0.1615086444767194
+      ],
+      "reference_srgb_f": [
+        0.17368689771957327,
+        0.151703719316242,
+        0.1412001184302158
+      ],
+      "reference_red_linear_m": 0.033333333333333326,
+      "reference_red_linear_f": 0.025490196078431372,
+      "vertex_buffer": "Linear RGB is truncated to uint8 by Godot RenderingServer;all authored lock/scalp samples retain red>green>=blue and blue>=3/255 after packing.",
+      "engine_source": "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/servers/rendering/rendering_server.cpp#L649-L662",
+      "customization_requires_source_reference": "Derive median original hair-mask vertex red per source;do not retain legacy .00048 divisor.",
+      "baked_specular_bands": false
+    },
+    "runtime": "No runtime code changed by this module. Existing skin/hair/eye roles remain;roughness,SSS and live highlights belong to the existing PBR helper.",
+    "scope": "Material authoring,not a realistic-human acceptance result. Geometry,UVintegration,lighting,allvariants and runtime controls need actual native review."
+  },
+  "portrait_modules": [
+    {
+      "path": "tools/authored_character/resident_identity_mesh.py",
+      "sha256": "1d3d39f2e8e2472b138eeb82acf765d1bab5d4ee0e5e32aa25f4b6e6c6577401"
+    },
+    {
+      "path": "tools/authored_character/portrait_materials.py",
+      "sha256": "4d2d19d7b1415aabebada363f9c423d0464ccb38a8cf756bd765adae0f5fa483"
+    }
+  ],
+  "body_profiles": {
+    "standard": "기본",
+    "soft": "통통",
+    "athletic": "근육"
+  },
+  "body_profile_scope": "Project-authored game body volumes, not BMI classes, scanned persons or a measured Korean population distribution. All variants keep the same 52 rest bones and the 1.70m normalized game stature.",
+  "anatomical_surface_helper": {
+    "path": "tools/authored_character/anatomical_surface_fields.py",
+    "sha256": "6886b204ab37763898d04238344206f83755c8a55769debd3876e3e93c0d1cc0",
+    "method": "Pure numerical continuous anatomical field applied to original skin and garment vertices; skeletal attachment weights are retained with broad soft medial-pelvis support."
+  },
+  "surface_sampling": {
+    "bare_body_distance_field_pitch_m": 0.01,
+    "street_garment_distance_field_pitch_m": 0.014,
+    "scope": "Surface extraction density is not a quality rating. Native unclothed torso and joint contours must be visually reviewed."
+  },
+  "measurement_method": "Actual emitted vertex bands with >0.5 summed Pelvis/Spine/Spine1/Spine2 native weight; includes the displayed garment/skin. Width and depth are original metre-space distances, not circumference or medical measurements."
+}

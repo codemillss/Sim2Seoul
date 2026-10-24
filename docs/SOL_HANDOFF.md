@@ -1,5 +1,17 @@
 # Sol 작업 인수 안내
 
+## 2026-10-24 EXP34 — 현재 인수
+
+[WORK_STATUS](WORK_STATUS.md)·[첫 남녀 모델](CHARACTER_IDENTITIES.md)·[현재 집계](../data/reports/character_identity/20261024/summary.json)를 먼저 읽는다. 제작 모듈/원본 페인트와 프롬프트는 함께 보존한다. 일반 실행은 준비된12GLB를 import하며 재생성이 필요 없다. 선택 재생성은 NumPy/Pillow 환경과 저장된 두 자체 PNG를 사용한다.
+
+현재 선택은 **11실행·4185개 assertion·220PNG**다. native release06의 12GLB/변형·접촉3730, 남녀 상체 headless각62, 재질/꾸미기/통합 headless15/56/33, 얼굴 native74/64PNG·전신 native각38/144PNG·꾸미기 native68/12PNG, lifecycle headless03의9조건을 합한다. 같은3730 headless 보조 실행은 다시 더하지 않는다. [선택 목록](../data/reports/character_identity/20261024/selected_runs.json)과 [엄격 감사](../data/reports/character_identity/20261024/final/audit_current_release06.json)는 실제 엔진/실행기 종료0·스크립트/엔진 ERROR0·현재 소스 일치를 확인한다.
+
+이전 headless materialnull16건과 native renderer04의32건은 실패 이력이다. Dummy 전용 추론과 Body 복원 지연만으로 해결됐다는 설명을 사용하지 않는다. 부모 Surface가 복제 override 재질8개 모두의 참조를 보유하도록 고쳤다. 같은9조건 lifecycle01→02에서 material12→0을 확인했으나 sandbox CA 오류1건씩으로8/9였고, 보안 설정 변경 없는 신뢰된 설치 엔진 환경의 root03은9/9·ERROR0이다. 현재 release06은 수정 소스로 다시 수행한 무오류 결과다.
+
+Esc → 캐릭터 꾸미기의 앞/뒤/옆/얼굴과 팝업 없는7개 선택기를 유지한다. 얼굴은1.95m/18° 렌즈로1인칭 숨김을 피하고 취소/닫기 때 FoV·카메라/HUD를 복원한다. 현재 일반 창은 설치본과 바이트가 같은 캐시 엔진의 실제 NFD 경로에 연결해 마우스로 남녀 얼굴·여성 옆/뒤·취소를 확인했다. [새 OS 화면6장과 실행 기록](../data/reports/character_identity/20261024/normal_launch.json), 설정4파일 불변을 보존했고 남성 얼굴 확대 패널이 열려 있다. 연속 OS 주행/편안함 수용은 포함하지 않는다.
+
+현재 production12는v06표준4SHA와 같고 원래52rest/몸·손발·옷과12개LOD=false를 보존한다. capture fixture의 Skeleton NOTIFICATION_UPDATE_SKELETON 발행은 검사 프레임 정합용이며 생산 보행을 바꾸지 않는다. 4위상 GIF/전신8샘플의 일부 중복을 연속영상으로 표현하지 않는다. 얼굴·모발·표정과 자연스러운 동작의 미술 한계는 [현재 peer 검토](../data/reports/character_identity/20261024/final/visual_review_peer.json)에 남겼으며 실사 완성으로 인수하지 않는다. 아래 EXP33 이하는 이전 인수 이력이다.
+
 ## 현재 인수: 2026-10-24 EXP33 자체 인물·출동·선택 수영/외형
 
 [WORK_STATUS](WORK_STATUS.md)·[EXP33 안내](AUTHORED_CHARACTER_COMBAT.md)·[집계](../data/reports/authored_character_combat/20261024/summary.json)를 먼저 읽는다. 자체 generator/12GLB는 `tools/authored_character/`와 `game/assets/original/seoul_resident/`에 있다. 외부 모델은 역사 재현용이며 현재 표시 모델로 사용하지 않는다. 일반 실행은 준비된 GLB/PNG를 import하므로 generator 재생성이 필요 없다. 선택 재생성에는 NumPy/Pillow가 필요하다.

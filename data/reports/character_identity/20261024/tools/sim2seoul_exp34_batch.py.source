@@ -1,0 +1,21 @@
+from pathlib import Path
+import subprocess,sys,json,concurrent.futures,time
+r=Path.cwd();out=r/'data/reports/character_identity/20261024/final'
+# One native process at a time. Headless lanes are independent isolated fixtures.
+lanes=[ [('authored_resident','headless',[]),('upper_gait','headless',['--physics-hz','30']),('upper_gait','headless',['--female-model','--physics-hz','30'])], [('human_materials','headless',[]),('customization','headless',[]),('integration','headless',[])], [('character_identity','native',[]),('human_gait','native',[]),('human_gait','native',['--female-model']),('customization','native',[]),('authored_resident','native',[])] ]
+def lane(jobs):
+ results=[]
+ for suite,mode,extra in jobs:
+  tag='release06'+('_female' if '--female-model' in extra else '')
+  args=[sys.executable,'tools/run_urban_transit_acceptance.py',suite,mode,tag,'--output-dir',str(out.relative_to(r)),*extra]
+  if mode=='headless':args+=['--fixed-fps','120']
+  run=subprocess.run(args,cwd=r,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+  print(run.stdout,flush=True);report=f'{suite}_{mode}_{tag}.json';results.append({'report':report,'driver_returncode':run.returncode})
+  if run.returncode:break
+ return results
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+ results=sum(list(pool.map(lane,lanes)),[])
+expected=sum(len(a) for a in lanes);ok=len(results)==expected and all(v['driver_returncode']==0 for v in results)
+out.mkdir(parents=True,exist_ok=True);(out/'batch_result06.json').write_text(json.dumps({'result':'PASS' if ok else 'ATTENTION','expected_runs':expected,'completed_runs':len(results),'runs':results,'scope':'Engine run completion only; image/ordinary OS review is separate.'},ensure_ascii=False,indent=2)+'\n')
+print('BATCH',len(results),'/',expected,'PASS' if ok else 'ATTENTION',flush=True)
+sys.exit(0 if ok else 1)

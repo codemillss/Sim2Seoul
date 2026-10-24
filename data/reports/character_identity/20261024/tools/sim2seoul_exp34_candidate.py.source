@@ -1,0 +1,8 @@
+from pathlib import Path
+import subprocess,json,hashlib,datetime,time,sys
+r=Path.cwd();b=r/'data/reports/character_identity/20261024/candidates'/sys.argv[1];report=b/'native_preview.json';log=b/'native_preview.log'
+assert not report.exists(),report
+paths=[r/'tests/game/preview_authored_resident.gd',r/'game/scripts/player/human_skin_materials.gd',*list((r/'tools/authored_character').glob('*.py')),*list(b.glob('*.glb')),b/'AUTHORED_MANIFEST.json'];before={p.relative_to(r).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+args=['/Applications/Godot.app/Contents/MacOS/Godot','--path',str(r/'game'),'--log-file',str(log),'--script','res://../tests/game/preview_authored_resident.gd','--','--candidate-root='+str(b),'--report='+str(report)]
+started=datetime.datetime.now(datetime.timezone.utc).isoformat();t=time.monotonic();run=subprocess.run(args,cwd=r,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=180);raw=run.stdout.decode(errors='replace');(b/'native_preview.console.log').write_text(raw)
+changed=[p for p,h in before.items() if hashlib.sha256((r/p).read_bytes()).hexdigest()!=h];meta={'argv':args,'started_at_utc':started,'returncode':run.returncode,'wall_seconds':round(time.monotonic()-t,3),'source_sha256':before,'source_changes_during_run':changed,'script_errors':any(s in raw for s in ['SCRIPT ERROR:','Parse Error:','Failed to load script'])};(b/'native_preview.run.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n');print(raw[-2800:]);print(json.dumps({k:meta[k] for k in ['returncode','wall_seconds','source_changes_during_run','script_errors']}));assert run.returncode==0 and not changed and not meta['script_errors']

@@ -4,7 +4,7 @@
 
 ## EXP33 자체 제작 주민 (2026-10-24)
 
-현재 기본 인체는 [자체 generator](../tools/authored_character/build_seoul_resident.py)와 [파일별 생성 기록](../game/assets/original/seoul_resident/AUTHORED_MANIFEST.json)의 `SeoulResident_M01/F01` 남녀 기본형×기본/통통/근육×사복/수영복12GLB다. 프로젝트에서 작성한 해부 단면·SDF 연결 곡면·얼굴/머리·의복/손발·UV/절차 텍스처·52본/skin weights를 사용하며 외부 인체/얼굴/스캔/의복/모션 파일을 입력받지 않는다. Godot에서 추출한 동명 PNG와 import metadata도 같은 GLB에서 나온 자체 텍스처다. 모델 제작 원본과 실행 자산을 함께 보존한다.
+현재 기본 인체는 [자체 generator](../tools/authored_character/build_seoul_resident.py)와 [파일별 생성 기록](../game/assets/original/seoul_resident/AUTHORED_MANIFEST.json)의 `SeoulResident_M01/F01` 남녀 기본형×기본/통통/근육×사복/수영복12GLB다. 프로젝트에서 작성한 해부 단면·SDF 연결 곡면·얼굴/머리·의복/손발·UV·52본/skin weights를 사용한다. EXP34의 얼굴 피부색은 자체 수치 재질에 더해, 자체 v03 모델 화면만 참조하여 내장 이미지 생성 도구로 만든 가상 성인 남녀 PNG 두 장을 정렬·샘플링한다. 제3자 인체/게임 캐릭터/스캔/의복/모션 파일과 실존 인물 사진은 입력하지 않았다. [생성 프롬프트·원본 경로·SHA](../data/reports/character_identity/20261024/imagegen_paint_sources.json)와 [피부색 정렬 기록](../data/reports/character_identity/20261024/materials/paint_alignment_v02.json)을 함께 보존한다. 이 PNG는 제작용 색 원본이며 실제 Godot 화면이나 물리 기반 피부 스캔이 아니다. Godot에서 추출한 동명 PNG와 import metadata도 같은 GLB에서 나온 자체 텍스처다. 모델 제작 원본과 실행 자산을 함께 보존한다.
 
 흉곽/골반·근육 부착 방향·연부조직의 일반 관계는 [제작 안내의 공개 해부학 참고](AUTHORED_CHARACTER_COMBAT.md)를 따르며 그림이나 스캔 자료를 모델로 변환하지 않았다. 피부·천·머리의 미세 normal/roughness는 프로젝트가 생성하는 질감이다.
 

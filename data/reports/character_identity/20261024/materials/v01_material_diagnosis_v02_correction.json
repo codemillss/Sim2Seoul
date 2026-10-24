@@ -1,0 +1,166 @@
+{
+  "task": "EXP34_V01_PORTRAIT_MATERIAL_DIAGNOSIS",
+  "reviewed_at_utc": "2026-10-24T08:17:03.500894+00:00",
+  "art_result": "REWORK",
+  "native_engine_runs_by_reviewer": 0,
+  "images_directly_opened": [
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/native_preview_views/m01_standard_street_face.png",
+      "sha256": "fd365d3a352b4d91441520c7255e3353592f8c65cd20fb78a0a62dd01b95fbfc",
+      "read_by": "view_image; actual full original 960x600 opened by reviewer",
+      "result": "REWORK"
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/native_preview_views/m01_standard_street_face_side.png",
+      "sha256": "91c63ffb36b381b133f579885eea0c6561a3cae154d1f0f584711d525c833f7d",
+      "read_by": "view_image; actual full original 960x600 opened by reviewer",
+      "result": "REWORK"
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/native_preview_views/f01_standard_street_face.png",
+      "sha256": "810b80ec29ae382f64c966b1a0689925793ade2ba9447d3a409219527a9782a8",
+      "read_by": "view_image; actual full original 960x600 opened by reviewer",
+      "result": "REWORK"
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/native_preview_views/f01_standard_street_face_side.png",
+      "sha256": "acdd753a8219402973ebf55a65fc816c5d11aa047d6919b6b927ed5298c79357",
+      "read_by": "view_image; actual full original 960x600 opened by reviewer",
+      "result": "REWORK"
+    }
+  ],
+  "source_snapshot": {
+    "path": "data/reports/character_identity/20261024/candidates/v01/source/portrait_materials.py",
+    "sha256": "1ba3bbe3e4b1f84fd0da45723bdce0b3c6823fbc7a212074496b16b92a46ecf9"
+  },
+  "raw_gltf_hair": [
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/seoul_resident_m01_street.glb",
+      "sha256": "df4355dd15067cace143cc5e87b0e081e0670c538bf581bd1680d504f075f36a",
+      "hair_color_count": 14867,
+      "median_linear": [
+        0.007302084006369114,
+        0.004836361855268478,
+        0.0034033418633043766
+      ],
+      "median_after_actual_engine_uint8_truncation": [
+        1,
+        1,
+        0
+      ],
+      "packed_histogram": [
+        {
+          "rgb8": [
+            1,
+            1,
+            0
+          ],
+          "count": 13354
+        },
+        {
+          "rgb8": [
+            1,
+            0,
+            0
+          ],
+          "count": 1513
+        }
+      ],
+      "material": {
+        "name": "Resident_Hair_and_Eye_Detail",
+        "doubleSided": true,
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 2
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.78
+        }
+      }
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v01/seoul_resident_f01_street.glb",
+      "sha256": "023d7d63d52adae0d825a28e2b73710be9d3ae6ff85db38c8d865cba07db4c26",
+      "hair_color_count": 19105,
+      "median_linear": [
+        0.0061134351417422295,
+        0.003997292835265398,
+        0.0029418866615742445
+      ],
+      "median_after_actual_engine_uint8_truncation": [
+        1,
+        1,
+        0
+      ],
+      "packed_histogram": [
+        {
+          "rgb8": [
+            1,
+            1,
+            0
+          ],
+          "count": 13414
+        },
+        {
+          "rgb8": [
+            1,
+            0,
+            0
+          ],
+          "count": 5691
+        }
+      ],
+      "material": {
+        "name": "Resident_Hair_and_Eye_Detail",
+        "doubleSided": true,
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "baseColorTexture": {
+            "index": 2
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.78
+        }
+      }
+    }
+  ],
+  "diagnosis": {
+    "hair": "The v01 sRGB brown is correctly converted once to linear glTF COLOR_0. Godot ARRAY_COLOR packing truncates linear*255 to uint8: locks lose red/green separation and blue becomes zero, while darker scalp becomes red-only. The actual olive locks/red scalp agree with this deterministic colour loss. Grayscale hair PNG cannot introduce a green tint. No double-gamma fault is asserted.",
+    "engine_primary_source": "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/servers/rendering/rendering_server.cpp#L649-L662",
+    "lip_patch": "Geometry assigns upper/lower lip by a rectangular x/y branch. Constant feature pigmentation exposes that boundary. Geometry owner confirmed replacement with continuous lip-curve mask; current public material API remains unchanged.",
+    "separate_geometry_rework": [
+      "Eye sclera wedge/side exposure",
+      "Female locks obscure both eyes and cheeks",
+      "Rigid cap and floating groom",
+      "Bulbous nose and rectangular mouth shaping",
+      "Insufficient individual identity"
+    ]
+  },
+  "correction": {
+    "owned_module": "tools/authored_character/portrait_materials.py",
+    "sha256": "4d2d19d7b1415aabebada363f9c423d0464ccb38a8cf756bd765adae0f5fa483",
+    "version": "original_portrait_materials_v2",
+    "changes": [
+      "Hair bases retain red>green>=blue and blue>=3 linear byte levels for all sampled lock/scalp points.",
+      "Scalp relative gain .82 to .97 prevents separate red cap level.",
+      "Hair PNG remains neutral with narrow strand fields; skin/eye values and API unchanged."
+    ],
+    "self_check": "data/reports/character_identity/20261024/materials/v02_fields.json",
+    "self_check_counts": {
+      "passed": 26,
+      "total": 26
+    },
+    "scope": "Pure Python authoring and official engine packing evidence. New native candidate not yet reviewed; no appearance acceptance."
+  }
+}

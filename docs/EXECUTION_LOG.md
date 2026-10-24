@@ -1,5 +1,15 @@
 # 단계별 실행 이력
 
+## 2026-10-24 EXP34 — 남녀 얼굴 직접 제작과 실제 검토
+
+- 별도 branch에서 자체 얼굴/안구·눈꺼풀·귀·헤어와 색 제작을 구현했다. v01~v05의 실패 화면/GLB/정확 소스를 보존하고v06을 첫 gameplay pair로 선택했다. 자체 image_gen 피부 페인트2개와 전체 프롬프트/SHA는 별도 제작 원본이며 실제 게임 결과와 구분했다.
+- 기본/통통/근육×사복/수영복12개를 생성하고 표준4개 candidate byte일치·원래52rest/몸·손발·의복 배열/12LOD import 보존을 대조했다. 현재 선택은 release06의10실행+lifecycle headless03으로 **11실행·4185assertion·220nativePNG**다. native authored-resident3730과 lifecycle9를 포함하며 같은3730 headless 보조 실행은 중복 가산하지 않는다. [선택 목록](../data/reports/character_identity/20261024/selected_runs.json)·[엄격 감사](../data/reports/character_identity/20261024/final/audit_current_release06.json)·[집계](../data/reports/character_identity/20261024/summary.json)를 따른다.
+- 빈 얼굴 확대는 거리.68m가 원래카메라 숨김<1.5m에 들어간 것이었다.1.95m/18° FoV·실제 표시 상태·복원 검사로 수정했다. native02의 클릭누락 뒤 잘못된 모델 배열 접근을 원문 보존하고 실제hover/windowid·중간양보 없는 입력·실패checkpoint로 검사03에서해결했다.
+- 움직임 촬영은 CPU와RS skeleton palette 발행 시점이 달라72px 잘못된 상하 변위가 생겼다. 정확한4.7.2코드와실제RS전후값으로 원인을 좁혀 fixture publication후촬영으로 수정했다. 현재208개 얼굴/전신 캡처의 palette 사후 오차0을 확인했으며 게임보행 자체를 바꿨다고 기록하지 않는다.
+- 이전 headless 종료/해제 materialnull16건 뒤 같은 소스의 native renderer04에서도32건이 나왔다. Dummy 전용이라는 초기 추론을 철회하고 두 원문을 보존했다. 기존 Body 복원을 지연하는 수정만으로는 해결되지 않았다. 부모 Surface가 복제 override 재질8개 모두를 보유하도록 수명을 고친 뒤 동일9조건 lifecycle01→02에서 material 오류12→0을 확인했다. 두 실행은 별도의 sandbox CA 오류1건씩으로8/9여서 최종 PASS로 삼지 않았다.
+- 보안 설정을 바꾸지 않고 동일 fixture를 신뢰된 설치 엔진 환경에서 수행한 root03은9/9·ERROR0이었다. 최종 release06의 현재 선택11개는 실제 엔진/엄격 실행기 종료0, 스크립트/엔진 ERROR0, 실행 중 소스 변경0이며 현재257개 소스 연결과220원본 PNG를 대조했다. 실패 A/B와 이전 결과는 별도 이력으로 남기고 현재 검사에 섞지 않는다.
+- 현재 release06 일반 창은 설치 엔진과 바이트가 같은 캐시 번들의 실제 NFD 경로로 연결해 마우스 조작을 다시 검증했다. 남녀 얼굴 확대·여성 옆/뒤·취소 복귀와 재열기를 [OS 화면6장](../data/reports/character_identity/20261024/os_release06/)·[일반 실행 기록](../data/reports/character_identity/20261024/normal_launch.json)에 보존했다. 저장하지 않았고 설정4파일은 전후 같으며 남성 얼굴 확대 패널을 열어 뒀다. 실사/매력·표정/모발·연속 OS 주행과 사용자 편안함은 미완료다.
+
 현재 진도는 [WORK_STATUS](WORK_STATUS.md)를 따른다. 이 파일은 왜 시도했고 무엇을 바꿨으며 어떤 근거로 끝났는지 보존한다. 아래 초기 기록은 2026-10-12에 기존 파일·검증 보고서·Git 이력과 사용자 지시를 바탕으로 정리했다. 확인되지 않은 시각이나 과거 명령은 복원하지 않았다. 날짜는 한국 시간 기준이다.
 
 ## 2026-10-24 EXP33 실행과 실패 보존

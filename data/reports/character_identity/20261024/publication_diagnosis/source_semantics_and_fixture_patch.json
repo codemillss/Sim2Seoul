@@ -1,0 +1,138 @@
+{
+  "task": "EXP34_FIXTURE_RENDER_PUBLICATION_CAUSE_AND_PATCH",
+  "recorded_at_utc": "2026-10-24T09:20:03.752559+00:00",
+  "installed_version_evidence": {
+    "file": "/Applications/Godot.app/Contents/Info.plist",
+    "CFBundleShortVersionString": "4.7.2",
+    "CFBundleVersion": "4.7.2",
+    "native_report_engine": "4.7.2-stable (official)"
+  },
+  "official_primary_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/scene/3d/skeleton_3d.cpp",
+      "relevant_lines": [
+        [
+          295,
+          391
+        ],
+        [
+          787,
+          800
+        ],
+        [
+          877,
+          897
+        ],
+        [
+          998,
+          1016
+        ]
+      ],
+      "finding": "Pose setters queue a deferred update. CPU global-transform recalculation does not upload renderer palette. NOTIFICATION_UPDATE_SKELETON uploads each skin bind transform and clears the pending flags."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/doc/classes/RenderingServer.xml",
+      "relevant_lines": [
+        [
+          3684,
+          3690
+        ],
+        [
+          3725,
+          3729
+        ]
+      ],
+      "finding": "Public renderer palette getters return actual allocated bone transforms."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/doc/classes/MeshInstance3D.xml",
+      "relevant_lines": [
+        [
+          88,
+          93
+        ]
+      ],
+      "finding": "get_skin_reference returns the reference attached to the actual mesh instance."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/doc/classes/SkinReference.xml",
+      "relevant_lines": [
+        [
+          15,
+          19
+        ]
+      ],
+      "finding": "get_skeleton returns its RenderingServer RID."
+    }
+  ],
+  "previous_capture_symptom": {
+    "source_report": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/final/character_identity_native_portraits01.json",
+    "source_report_sha256": "91fdb41b6fe903057d14d742a901e84e1488e9155f1af9a2d32f8e9e0e902a28",
+    "actual_raw_files_opened": [
+      {
+        "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/final/character_identity_native_portraits01_SeoulResident_M01_run_3_5mps_head_front_01.png",
+        "sha256": "face6bb3e58a25dbb6e7ba03b515fc4b36792d58712bc324e522cebb8078e3ce",
+        "sample_index": 1,
+        "physics_frame": 409,
+        "camera_y_m": 1.60153675079346,
+        "reported_head_y_bounds_world_m": [
+          1.43546509742737,
+          1.68056762218475
+        ],
+        "reported_head_bounds_relative_camera_y_m": [
+          -0.16607165336608998,
+          0.07903087139129017
+        ],
+        "visually_observed_hair_top_y_px_approx": 207
+      },
+      {
+        "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/final/character_identity_native_portraits01_SeoulResident_M01_run_3_5mps_head_front_02.png",
+        "sha256": "8ae0bcd141938101acccf17388f54861f142845637bf0e75f86d7ec170aec964",
+        "sample_index": 2,
+        "physics_frame": 417,
+        "camera_y_m": 1.56667423248291,
+        "reported_head_y_bounds_world_m": [
+          1.40060472488403,
+          1.64570498466492
+        ],
+        "reported_head_bounds_relative_camera_y_m": [
+          -0.16606950759887984,
+          0.07903075218201017
+        ],
+        "visually_observed_hair_top_y_px_approx": 135
+      }
+    ],
+    "interpretation": "Camera-relative CPU head bounds are nearly equal while native hair top differs about72pixels. This demonstrates the old capture evidence mismatch; it does not prove game-camera vibration. Deferred palette publication is source-supported, with actual renderer before/after confirmation pending fresh native03."
+  },
+  "preserved_old_fixtures": [
+    {
+      "original": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_human_gait_views.gd",
+      "snapshot": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/publication_diagnosis/check_human_gait_views.gd.source",
+      "sha256": "fa028352fb62d43818ab03183284346424bc51dc9f53e674df7300df841bde70"
+    },
+    {
+      "original": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_character_identity_preview.gd",
+      "snapshot": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/character_identity/20261024/publication_diagnosis/check_character_identity_preview.gd.source",
+      "sha256": "97dddc4d79eba357288ccd7ced8f17fc5f9d81b1c9cd4cb66128c415678e49d2"
+    }
+  ],
+  "new_fixtures": [
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_human_gait_views.gd",
+      "sha256": "b96550e313a1642f34266675af7e6201a4ce050f110a48dc9c6cf88f8d5307cb"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_character_identity_preview.gd",
+      "sha256": "1d49bac93fd0cfbd1960ebea9062d45e0acc0e14b02defd6722ca74991bab764"
+    }
+  ],
+  "implemented_fixture_only_method": "Read actual renderer/CPU52bind matrices before, send public Skeleton3D update notification, read after, then update inspection camera and draw. Existing capture finite/uncropped gates also require after matrices agree. No authored pose, phase, player physics, mesh, material or gameplay rig is changed.",
+  "expected_denominators_unchanged": {
+    "character_identity_native": 74,
+    "character_identity_PNG": 64,
+    "human_gait_native_each": 38,
+    "human_gait_PNG_each": 72
+  },
+  "other_observation": "Old fullbody run views can have repeated physics-frame samples after a slow readback passes several phase targets. Recorded actual phase and duplicates remain disclosed; eight PNG files do not establish eight unique canonical poses or smooth continuous playback. The scheduler is unchanged by this minimal publication patch.",
+  "scope": "Official code investigation plus preserved old raw image symptom. Fresh native03 before/after palette values and actual pixel review are required before marking the publication correction verified. No production or engine execution by this reviewer."
+}

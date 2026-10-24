@@ -1,0 +1,890 @@
+{
+  "task": "EXP34_ORIGINAL_PAINT_ALIGNMENT",
+  "result": "PASS",
+  "passed": 15,
+  "total": 15,
+  "checks": [
+    {
+      "name": "m01.immutable_original_png_hash_and_size",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "m01.actual_landmark_alignment_is_subpixel",
+      "passed": true,
+      "evidence": {
+        "maximum_error_px": 3.966432592373965e-12,
+        "landmarks": 17
+      }
+    },
+    {
+      "name": "m01.body_neck_side_back_and_non_skin_are_unchanged",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "m01.painted_eyeballs_catchlights_and_brows_are_excluded",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "m01.skin_values_are_finite_bounded_and_spatially_varied",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "m01.transfer_is_visible_but_has_no_unbounded_shadow_bake",
+      "passed": true,
+      "evidence": {
+        "maximum_srgb_channel_change": 0.125324029020979,
+        "median_change": 0.01564549742593263
+      }
+    },
+    {
+      "name": "m01.vertex_sampling_reduces_source_pore_alias",
+      "passed": true,
+      "evidence": {
+        "source_1px_mean_rgb_difference": 0.01244654240296942,
+        "filtered_1px_mean_rgb_difference": 0.0005928245783910268,
+        "retained_fraction": 0.04762965964343595
+      }
+    },
+    {
+      "name": "f01.immutable_original_png_hash_and_size",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "f01.actual_landmark_alignment_is_subpixel",
+      "passed": true,
+      "evidence": {
+        "maximum_error_px": 3.109880860638025e-12,
+        "landmarks": 17
+      }
+    },
+    {
+      "name": "f01.body_neck_side_back_and_non_skin_are_unchanged",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "f01.painted_eyeballs_catchlights_and_brows_are_excluded",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "f01.skin_values_are_finite_bounded_and_spatially_varied",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "f01.transfer_is_visible_but_has_no_unbounded_shadow_bake",
+      "passed": true,
+      "evidence": {
+        "maximum_srgb_channel_change": 0.138301010108956,
+        "median_change": 0.018672484242491072
+      }
+    },
+    {
+      "name": "f01.vertex_sampling_reduces_source_pore_alias",
+      "passed": true,
+      "evidence": {
+        "source_1px_mean_rgb_difference": 0.012535302186718309,
+        "filtered_1px_mean_rgb_difference": 0.0006810800451867978,
+        "retained_fraction": 0.05433295783714184
+      }
+    },
+    {
+      "name": "sources_and_warps_are_shared_cached_without_repeated_decode",
+      "passed": true,
+      "evidence": {}
+    }
+  ],
+  "sampled_examples": [
+    {
+      "identity": "m01",
+      "region": "cheek",
+      "target_xy": [
+        -0.56,
+        0.44
+      ],
+      "actual_source_pixel": [
+        437.76793571208475,
+        666.4360669998995
+      ],
+      "raw_paint_srgb": [
+        0.8942826263374658,
+        0.6354590969257011,
+        0.4795064078587021
+      ],
+      "filtered_skin_srgb": [
+        0.8904587605020439,
+        0.6386221276046368,
+        0.48216180263902986
+      ],
+      "base_body_srgb": [
+        0.69,
+        0.48,
+        0.36
+      ],
+      "result_srgb": [
+        0.7035793909536767,
+        0.4875926438008459,
+        0.3645151135354552
+      ],
+      "source_sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a"
+    },
+    {
+      "identity": "m01",
+      "region": "nose",
+      "target_xy": [
+        0.0,
+        0.424
+      ],
+      "actual_source_pixel": [
+        626.0000000000006,
+        659.0000000000013
+      ],
+      "raw_paint_srgb": [
+        0.8901960784313583,
+        0.6509803921568365,
+        0.5254901960783788
+      ],
+      "filtered_skin_srgb": [
+        0.8859681372548982,
+        0.6344975490196035,
+        0.49381127450980017
+      ],
+      "base_body_srgb": [
+        0.69,
+        0.48,
+        0.36
+      ],
+      "result_srgb": [
+        0.7003883856470557,
+        0.48460720917646727,
+        0.3703883856470558
+      ],
+      "source_sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a"
+    },
+    {
+      "identity": "m01",
+      "region": "lip",
+      "target_xy": [
+        0.0,
+        0.25
+      ],
+      "actual_source_pixel": [
+        626.0000000000007,
+        813.0000000000011
+      ],
+      "raw_paint_srgb": [
+        0.5215686274510393,
+        0.23921568627455705,
+        0.19607843137257577
+      ],
+      "filtered_skin_srgb": [
+        0.6288602941176527,
+        0.33229166666667076,
+        0.2694852941176512
+      ],
+      "base_body_srgb": [
+        0.69,
+        0.48,
+        0.36
+      ],
+      "result_srgb": [
+        0.6066137080882378,
+        0.35684900220588145,
+        0.3129850316176477
+      ],
+      "source_sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a"
+    },
+    {
+      "identity": "m01",
+      "region": "forehead",
+      "target_xy": [
+        0.16,
+        0.94
+      ],
+      "actual_source_pixel": [
+        677.9641751025257,
+        332.0438752522843
+      ],
+      "raw_paint_srgb": [
+        0.8788789978178605,
+        0.6553688280217056,
+        0.502089695950514
+      ],
+      "filtered_skin_srgb": [
+        0.8688712493757588,
+        0.6338665443649847,
+        0.4843918628919202
+      ],
+      "base_body_srgb": [
+        0.69,
+        0.48,
+        0.36
+      ],
+      "result_srgb": [
+        0.6897458409227906,
+        0.4832119044710929,
+        0.364057511591114
+      ],
+      "source_sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a"
+    },
+    {
+      "identity": "f01",
+      "region": "cheek",
+      "target_xy": [
+        -0.56,
+        0.44
+      ],
+      "actual_source_pixel": [
+        437.97060490446404,
+        676.7588812829993
+      ],
+      "raw_paint_srgb": [
+        0.9069950257126256,
+        0.6550690699596815,
+        0.527723392350387
+      ],
+      "filtered_skin_srgb": [
+        0.9069848334271687,
+        0.6632064753965333,
+        0.5412619544370124
+      ],
+      "base_body_srgb": [
+        0.77,
+        0.56,
+        0.44
+      ],
+      "result_srgb": [
+        0.7618387275961588,
+        0.541568095843801,
+        0.4301664058141104
+      ],
+      "source_sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740"
+    },
+    {
+      "identity": "f01",
+      "region": "nose",
+      "target_xy": [
+        0.0,
+        0.451
+      ],
+      "actual_source_pixel": [
+        626.9999999999998,
+        662.0000000000006
+      ],
+      "raw_paint_srgb": [
+        0.9529411764705954,
+        0.7803921568627549,
+        0.682352941176483
+      ],
+      "filtered_skin_srgb": [
+        0.9409926470588234,
+        0.7429534313725485,
+        0.637561274509804
+      ],
+      "base_body_srgb": [
+        0.77,
+        0.56,
+        0.44
+      ],
+      "result_srgb": [
+        0.791669115764706,
+        0.5970855863529412,
+        0.49497970400000024
+      ],
+      "source_sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740"
+    },
+    {
+      "identity": "f01",
+      "region": "lip",
+      "target_xy": [
+        0.0,
+        0.288
+      ],
+      "actual_source_pixel": [
+        628.0000000000001,
+        817.000000000001
+      ],
+      "raw_paint_srgb": [
+        0.5764705882353557,
+        0.22745098039220188,
+        0.19215686274514754
+      ],
+      "filtered_skin_srgb": [
+        0.679227941176477,
+        0.32794117647059123,
+        0.2867647058823571
+      ],
+      "base_body_srgb": [
+        0.77,
+        0.56,
+        0.44
+      ],
+      "result_srgb": [
+        0.7335057117647086,
+        0.42385497647058734,
+        0.38362335882353027
+      ],
+      "source_sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740"
+    },
+    {
+      "identity": "f01",
+      "region": "forehead",
+      "target_xy": [
+        0.16,
+        0.94
+      ],
+      "actual_source_pixel": [
+        676.7206914138343,
+        335.79749577833644
+      ],
+      "raw_paint_srgb": [
+        0.9152646562157228,
+        0.7158670433882888,
+        0.5881861917320871
+      ],
+      "filtered_skin_srgb": [
+        0.9180858966143963,
+        0.7123815586449195,
+        0.5733130476334958
+      ],
+      "base_body_srgb": [
+        0.77,
+        0.56,
+        0.44
+      ],
+      "result_srgb": [
+        0.7767750567612631,
+        0.5778867946752521,
+        0.45686827183241285
+      ],
+      "source_sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740"
+    }
+  ],
+  "contract": {
+    "version": "original_portrait_paint_bake_v2",
+    "used": true,
+    "source_kind": "Original image_gen fictional adult skin-paint references; NOT game screenshots or measured diffuse albedo.",
+    "sources": [
+      {
+        "identity": "m01",
+        "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_m01_v01.png",
+        "sha256": "cb52bc58189849120d5f781d61543d686fd3d9e1014f23f997c577f20727bc2a",
+        "size_px": [
+          1254,
+          1254
+        ],
+        "skin_swatch_median_srgb": [
+          0.8705882352941177,
+          0.6294117647058823,
+          0.47843137254901963
+        ],
+        "skin_swatches_px": [
+          [
+            455,
+            635
+          ],
+          [
+            795,
+            635
+          ],
+          [
+            548,
+            318
+          ],
+          [
+            704,
+            318
+          ],
+          [
+            559,
+            927
+          ],
+          [
+            694,
+            927
+          ]
+        ],
+        "landmarks": [
+          {
+            "name": "chin",
+            "target_normalized_xy": [
+              0.0,
+              0.0
+            ],
+            "source_px": [
+              626,
+              1024
+            ]
+          },
+          {
+            "name": "mouth",
+            "target_normalized_xy": [
+              0.0,
+              0.25
+            ],
+            "source_px": [
+              626,
+              813
+            ]
+          },
+          {
+            "name": "nose",
+            "target_normalized_xy": [
+              0.0,
+              0.424
+            ],
+            "source_px": [
+              626,
+              659
+            ]
+          },
+          {
+            "name": "eye_l",
+            "target_normalized_xy": [
+              -0.406,
+              0.62
+            ],
+            "source_px": [
+              493,
+              493
+            ]
+          },
+          {
+            "name": "eye_r",
+            "target_normalized_xy": [
+              0.406,
+              0.62
+            ],
+            "source_px": [
+              759,
+              493
+            ]
+          },
+          {
+            "name": "brow_l",
+            "target_normalized_xy": [
+              -0.406,
+              0.765
+            ],
+            "source_px": [
+              493,
+              425
+            ]
+          },
+          {
+            "name": "brow_r",
+            "target_normalized_xy": [
+              0.406,
+              0.765
+            ],
+            "source_px": [
+              759,
+              425
+            ]
+          },
+          {
+            "name": "mouth_l",
+            "target_normalized_xy": [
+              -0.3,
+              0.25
+            ],
+            "source_px": [
+              531,
+              813
+            ]
+          },
+          {
+            "name": "mouth_r",
+            "target_normalized_xy": [
+              0.3,
+              0.25
+            ],
+            "source_px": [
+              721,
+              813
+            ]
+          },
+          {
+            "name": "cheek_l",
+            "target_normalized_xy": [
+              -0.64,
+              0.43
+            ],
+            "source_px": [
+              411,
+              687
+            ]
+          },
+          {
+            "name": "cheek_r",
+            "target_normalized_xy": [
+              0.64,
+              0.43
+            ],
+            "source_px": [
+              840,
+              687
+            ]
+          },
+          {
+            "name": "jaw_l",
+            "target_normalized_xy": [
+              -0.57,
+              0.11
+            ],
+            "source_px": [
+              456,
+              951
+            ]
+          },
+          {
+            "name": "jaw_r",
+            "target_normalized_xy": [
+              0.57,
+              0.11
+            ],
+            "source_px": [
+              796,
+              951
+            ]
+          },
+          {
+            "name": "temple_l",
+            "target_normalized_xy": [
+              -0.94,
+              0.74
+            ],
+            "source_px": [
+              332,
+              410
+            ]
+          },
+          {
+            "name": "temple_r",
+            "target_normalized_xy": [
+              0.94,
+              0.74
+            ],
+            "source_px": [
+              921,
+              410
+            ]
+          },
+          {
+            "name": "forehead",
+            "target_normalized_xy": [
+              0.0,
+              1.0
+            ],
+            "source_px": [
+              626,
+              300
+            ]
+          },
+          {
+            "name": "crown",
+            "target_normalized_xy": [
+              0.0,
+              1.3
+            ],
+            "source_px": [
+              626,
+              38
+            ]
+          }
+        ]
+      },
+      {
+        "identity": "f01",
+        "path": "game/assets/original/seoul_resident/portrait_sources/portrait_albedo_f01_v01.png",
+        "sha256": "071c642ba1cdf7e8dc4f25fdc311c98eea433576e2bd3c57aeaf0e234581c740",
+        "size_px": [
+          1254,
+          1254
+        ],
+        "skin_swatch_median_srgb": [
+          0.9137254901960784,
+          0.6882352941176471,
+          0.5509803921568628
+        ],
+        "skin_swatches_px": [
+          [
+            455,
+            635
+          ],
+          [
+            795,
+            635
+          ],
+          [
+            548,
+            318
+          ],
+          [
+            704,
+            318
+          ],
+          [
+            559,
+            927
+          ],
+          [
+            694,
+            927
+          ]
+        ],
+        "landmarks": [
+          {
+            "name": "chin",
+            "target_normalized_xy": [
+              0.0,
+              0.0
+            ],
+            "source_px": [
+              628,
+              1018
+            ]
+          },
+          {
+            "name": "mouth",
+            "target_normalized_xy": [
+              0.0,
+              0.288
+            ],
+            "source_px": [
+              628,
+              817
+            ]
+          },
+          {
+            "name": "nose",
+            "target_normalized_xy": [
+              0.0,
+              0.451
+            ],
+            "source_px": [
+              627,
+              662
+            ]
+          },
+          {
+            "name": "eye_l",
+            "target_normalized_xy": [
+              -0.42,
+              0.636
+            ],
+            "source_px": [
+              489,
+              505
+            ]
+          },
+          {
+            "name": "eye_r",
+            "target_normalized_xy": [
+              0.42,
+              0.636
+            ],
+            "source_px": [
+              762,
+              505
+            ]
+          },
+          {
+            "name": "brow_l",
+            "target_normalized_xy": [
+              -0.42,
+              0.781
+            ],
+            "source_px": [
+              491,
+              428
+            ]
+          },
+          {
+            "name": "brow_r",
+            "target_normalized_xy": [
+              0.42,
+              0.781
+            ],
+            "source_px": [
+              761,
+              428
+            ]
+          },
+          {
+            "name": "mouth_l",
+            "target_normalized_xy": [
+              -0.3,
+              0.288
+            ],
+            "source_px": [
+              532,
+              817
+            ]
+          },
+          {
+            "name": "mouth_r",
+            "target_normalized_xy": [
+              0.3,
+              0.288
+            ],
+            "source_px": [
+              723,
+              817
+            ]
+          },
+          {
+            "name": "cheek_l",
+            "target_normalized_xy": [
+              -0.64,
+              0.43
+            ],
+            "source_px": [
+              411,
+              687
+            ]
+          },
+          {
+            "name": "cheek_r",
+            "target_normalized_xy": [
+              0.64,
+              0.43
+            ],
+            "source_px": [
+              840,
+              687
+            ]
+          },
+          {
+            "name": "jaw_l",
+            "target_normalized_xy": [
+              -0.57,
+              0.11
+            ],
+            "source_px": [
+              456,
+              951
+            ]
+          },
+          {
+            "name": "jaw_r",
+            "target_normalized_xy": [
+              0.57,
+              0.11
+            ],
+            "source_px": [
+              796,
+              951
+            ]
+          },
+          {
+            "name": "temple_l",
+            "target_normalized_xy": [
+              -0.94,
+              0.74
+            ],
+            "source_px": [
+              332,
+              410
+            ]
+          },
+          {
+            "name": "temple_r",
+            "target_normalized_xy": [
+              0.94,
+              0.74
+            ],
+            "source_px": [
+              921,
+              410
+            ]
+          },
+          {
+            "name": "forehead",
+            "target_normalized_xy": [
+              0.0,
+              1.0
+            ],
+            "source_px": [
+              626,
+              300
+            ]
+          },
+          {
+            "name": "crown",
+            "target_normalized_xy": [
+              0.0,
+              1.3
+            ],
+            "source_px": [
+              626,
+              38
+            ]
+          }
+        ]
+      }
+    ],
+    "prompt_record": "data/reports/character_identity/20261024/imagegen_paint_sources.json",
+    "prompt_record_sha256": "735e32f374f79e485fce34a199dacb58a703efb004101890a9ff7c475351ca5f",
+    "alignment": "Manually declared eye/nose/mouth/chin/contour landmarks; exact thin-plate spline, skin-only area-prefiltered bilinear sampling.",
+    "coordinate_contract": "x=original head X/.069; y=(original head Y-1.458)/.184; sRGB output converted once by generator.",
+    "body_tone": "Subtract source skin-swatch channel medians, add bounded relative colour to unchanged BODY reference; no whole-face multiplicative darkening.",
+    "strength": 0.78,
+    "luminance_bounds_srgb": {
+      "skin": [
+        -0.045,
+        0.045
+      ],
+      "lip": [
+        -0.14,
+        0.055
+      ],
+      "nose_min_at_center": -0.03
+    },
+    "sampling": {
+      "source_png_modified": false,
+      "in_memory_lattice_step_px": 4,
+      "skin_area_radius_px": 8,
+      "lip_area_radius_px": 3,
+      "skin_relative_chroma_strength": 0.72
+    },
+    "passthrough_features": [
+      "back",
+      "brow",
+      "ear",
+      "ear_inner",
+      "eye",
+      "hair",
+      "head_back",
+      "neck"
+    ],
+    "fade": {
+      "neck_y": [
+        0.025,
+        0.18
+      ],
+      "side_abs_x": [
+        0.65,
+        0.98
+      ],
+      "front_cosine": [
+        0.35,
+        0.9
+      ],
+      "upper_head_y": [
+        1.03,
+        1.2
+      ]
+    },
+    "painted_eyes_and_brows_excluded": true,
+    "png_modified": false,
+    "scope": "Candidate skin-colour mapping only. Generated paint contains residual lighting; bounded transfer is not photogrammetry, anatomy or native-art acceptance."
+  },
+  "scope": "Source/format/alignment/colour bounds only; no engine run or game-art acceptance."
+}

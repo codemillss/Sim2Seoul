@@ -128,7 +128,38 @@ func _gait_track(view: String) -> void:
 	review_camera.look_at(rendered_origin+Vector3.UP*height)
 	review_camera.force_update_transform()
 
+func _gait_renderer_palette() -> Dictionary:
+	# Read the actual SkinReference held by the rendered MeshInstance3D.
+	# This neither registers a new binding nor assigns an authored pose.
+	var seen: Dictionary={};var count:=0;var finite:=true;var origin_error:=0.;var basis_error:=0.
+	for row: Dictionary in gait_surface._surfaces:
+		var mesh: MeshInstance3D=row.mesh
+		if seen.has(mesh.get_instance_id()):continue
+		seen[mesh.get_instance_id()]=true
+		var owner: Skeleton3D=row.skeleton
+		var reference: SkinReference=mesh.get_skin_reference()
+		if reference==null:finite=false;continue
+		var renderer: RID=reference.get_skeleton()
+		if RenderingServer.skeleton_get_bone_count(renderer)!=mesh.skin.get_bind_count():finite=false;continue
+		for index: int in range(mesh.skin.get_bind_count()):
+			var actual: Transform3D=RenderingServer.skeleton_bone_get_transform(renderer,index)
+			var expected: Transform3D=owner.get_bone_global_pose(row.bind_bones[index])*mesh.skin.get_bind_pose(index)
+			finite=finite and actual.is_finite() and expected.is_finite();count+=1
+			origin_error=maxf(origin_error,actual.origin.distance_to(expected.origin))
+			for axis: int in range(3):basis_error=maxf(basis_error,actual.basis[axis].distance_to(expected.basis[axis]))
+	return {"bind_matrices_read":count,"finite":finite,"maximum_origin_error_m":origin_error,"maximum_basis_column_error":basis_error,"matches_cpu":count>0 and finite and origin_error<.00002 and basis_error<.00002,"scope":"Actual RenderingServer SkinReference palette versus current CPU skeleton global pose times unchanged inverse bind. No frame/phase/pose is assigned."}
+
+func _gait_publish_skeleton() -> Dictionary:
+	var before:=_gait_renderer_palette()
+	# Godot4.7.2 force_update_all_bone_transforms only updates CPU globals.
+	# Its public update notification is the path that uploads the current
+	# palette before this same-process force_draw. No simulation advances.
+	gait_skeleton.notification(Skeleton3D.NOTIFICATION_UPDATE_SKELETON)
+	var after:=_gait_renderer_palette()
+	return {"method":"Skeleton3D.notification(NOTIFICATION_UPDATE_SKELETON)","notification":Skeleton3D.NOTIFICATION_UPDATE_SKELETON,"before":before,"after":after,"production_pose_assigned_by_fixture":false,"simulation_advanced_by_fixture":false,"scope":"Fixture-only pending render-palette publication before inspection-camera update and synchronous readback. Production rig/controller are unchanged."}
+
 func _gait_capture(title: String,view: String,index: int,target_phase: float,unwrapped_phase: float) -> Dictionary:
+	var publication:=_gait_publish_skeleton()
 	_gait_track(view)
 	# Called inside the late-priority observer, after the real avatar/rig renders.
 	# Drawing this existing pose does not advance or assign a gait phase.
@@ -141,6 +172,7 @@ func _gait_capture(title: String,view: String,index: int,target_phase: float,unw
 	row["production_camera_eye_world"]=rig.camera.global_position
 	row["production_camera_eye_over_physics_feet_m"]=rig.camera.global_position.y-player.global_position.y
 	row["native_head_joint_over_physics_feet_m"]=bones.actual_head_joint_world.y-player.global_position.y
+	row["skin_palette_publication"]=publication
 	row["inspection_camera_publication"]={"force_update_transform":true,"late_tracking_priority":3000,"view_established_before_12_physical_sample_settling":true,"first_image_requires_independent_view_direction_review":true}
 	gait_images.append(row)
 	return row
@@ -166,7 +198,7 @@ func _gait_view(title: String,view: String,speed: float,count: int) -> void:
 	var captured:=rows.size()==count;var finite:=not rows.is_empty();var phase_rows: Array=[]
 	for row: Dictionary in rows:
 		captured=captured and int(row.save_error)==OK and row.image_size==[768,480]
-		finite=finite and bool(row.skin.finite_linear_blend_skin_normals) and bool(row.bones.finite)
+		finite=finite and bool(row.skin.finite_linear_blend_skin_normals) and bool(row.bones.finite) and bool(row.skin_palette_publication.after.matches_cpu)
 		phase_rows.append({"target":row.target_stride_phase_radians,"actual":row.actual_stride_phase_radians,"overshoot":row.phase_overshoot_radians,"physics_frame":row.physics_frame,"file":row.file})
 	var record:={"gait":title,"view":view,"speed_mps":speed,"requested_phases":count,"actual_captures":rows.size(),"settled":steady,"phase_observations":phase_rows,"visual_acceptance":"PENDING independent actual-image review; image count and finite transforms do not establish natural hip/gait motion."}
 	gait_views.append(record)

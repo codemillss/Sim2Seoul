@@ -1,0 +1,61 @@
+{
+  "task": "EXP34_V05_ACTUAL_SKIN_PAINT_REVIEW",
+  "reviewed_at_utc": "2026-10-24T08:50:22.868840+00:00",
+  "art_result": "REWORK",
+  "images_directly_opened": [
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v05/native_preview_views/m01_standard_street_face.png",
+      "sha256": "9ffa191df74c094929e285d339e735242264c1a9a5f2a3567d094741bc7c98ef",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v05/native_preview_views/m01_standard_street_face_side.png",
+      "sha256": "8bc6603444a9907faf706f4b472c7b359ae4461144c4083c41a8785791f7ae43",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v05/native_preview_views/f01_standard_street_face.png",
+      "sha256": "085da1a9867605b36965673cea009b93a75437bc914a783d4b1dec3ab7a4b84a",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v05/native_preview_views/f01_standard_street_face_side.png",
+      "sha256": "0e9018ed0ba151de9bbf70c60f267e795bff4842a914af33d5998cc7b2b929b8",
+      "actual_original_opened": true
+    }
+  ],
+  "observations": [
+    "M/F front views show bright uneven skin patches on cheeks/forehead. The previous 1px sampling footprint can alias generated pore/light variation into vertex-sized patches.",
+    "Broken eyebrows and angular jaw/nose/ear transitions are separate geometry observations, not repaired by colour filtering.",
+    "Source paint has residual illumination; applying it does not establish measured albedo or photorealistic game appearance."
+  ],
+  "preserved_previous_helper": {
+    "path": "data/reports/character_identity/20261024/candidates/v05/source/portrait_paint_bake.py",
+    "sha256": "f66ac21c1a621e7d10700b6c97e45299807c4de6f077e3efafd8e17e0de192c0"
+  },
+  "bounded_material_correction": {
+    "path": "tools/authored_character/portrait_paint_bake.py",
+    "sha256": "e4b63f16af151390800cb36f8813178d1e3d2f0feead68a9b3a9734fa94f0b4e",
+    "version": "original_portrait_paint_bake_v2",
+    "api_changed": false,
+    "original_png_modified": false,
+    "sampling": "In-memory summed-area averages on4px lattice;skin area radius8px,lip3px;bilinear reads.",
+    "ordinary_skin_luminance_bound_before": [
+      -0.075,
+      0.075
+    ],
+    "ordinary_skin_luminance_bound_after": [
+      -0.045,
+      0.045
+    ],
+    "ordinary_skin_chroma_strength_after": 0.72,
+    "lip_tissue_colour_range_retained": true,
+    "evidence": "data/reports/character_identity/20261024/materials/paint_alignment_v02.json",
+    "self_checks": {
+      "passed": 15,
+      "total": 15
+    }
+  },
+  "new_engine_runs_by_reviewer": 0,
+  "v06_native_appearance": "PENDING; source/colour checks are not art acceptance."
+}

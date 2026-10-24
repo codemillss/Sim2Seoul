@@ -15,6 +15,9 @@ var _capsule_id:=0
 var _original_asset_hashes: Dictionary={}
 var _source_hashes: Dictionary={}
 var _profile_geometry: Dictionary={}
+var _click_observations: Array[Dictionary]=[]
+var _headless_pointer_entered:=false
+var _aborted_reason:=""
 
 func _initialize() -> void:
 	for argument: String in OS.get_cmdline_user_args():
@@ -28,6 +31,15 @@ func _initialize() -> void:
 
 func _check(title: String,passed: bool,evidence: Dictionary={}) -> void:
 	checks.append({"name":title,"passed":passed,"evidence":_json(evidence)});print("CUSTOMIZATION_CHECK ",title," ",passed)
+	if not evidence.is_empty():print("CUSTOMIZATION_EVIDENCE ",title," ",JSON.stringify(_json(evidence)))
+	_checkpoint()
+
+func _checkpoint() -> void:
+	# Keep the actual input evidence even if a later script error interrupts
+	# the run. An intermediate file is never reported as a completed PASS.
+	var file:=FileAccess.open(report_path+".partial.json",FileAccess.WRITE)
+	if file==null:return
+	file.store_string(JSON.stringify(_json({"task":"character_customization","status":"IN_PROGRESS" if not finished else "FINISHING","aborted_reason":_aborted_reason,"checks":checks,"click_observations":_click_observations,"captures":captures,"source_sha256":_source_hashes}),"  "));file.close()
 
 func _json(value: Variant) -> Variant:
 	if value is Color:return [value.r,value.g,value.b,value.a]
@@ -56,21 +68,36 @@ func _key(code: Key) -> void:
 	event=InputEventKey.new();event.keycode=code;event.physical_keycode=code;event.pressed=false;Input.parse_input_event(event);await _frames()
 
 func _click(control: Button) -> Dictionary:
-	var point:=control.get_global_rect().get_center()
-	var viewport:=control.get_viewport();var before: Control=viewport.gui_get_focus_owner()
+	await _frames()
+	var viewport:=control.get_viewport();var window: Window=control.get_window()
+	var before: Control=viewport.gui_get_focus_owner()
 	var pressed_events: Array=[];var observer:=func()->void:pressed_events.append(true)
 	control.pressed.connect(observer)
-	# Headless has no OS pointer-enter event. Follow the public Viewport input
-	# contract in both modes: enter, motion, then local-coordinate button input.
-	viewport.notify_mouse_entered()
-	var motion:=InputEventMouseMotion.new();motion.position=point;motion.global_position=point
-	viewport.push_input(motion,true);await _frames()
-	var hovered: Control=viewport.gui_get_hovered_control()
-	var event:=InputEventMouseButton.new();event.position=point;event.global_position=point;event.button_index=MOUSE_BUTTON_LEFT;event.button_mask=MOUSE_BUTTON_MASK_LEFT;event.pressed=true;viewport.push_input(event,true);await _frames()
-	event=InputEventMouseButton.new();event.position=point;event.global_position=point;event.button_index=MOUSE_BUTTON_LEFT;event.pressed=false;viewport.push_input(event,true);await _frames()
+	# Headless has no OS pointer-enter event. Native Window hover additionally
+	# depends on the receiving window ID; do not fake OS entry or move a cursor.
+	if DisplayServer.get_name()=="headless" and not _headless_pointer_entered:
+		viewport.notify_mouse_entered();_headless_pointer_entered=true
+	var point:=Vector2.ZERO;var trace: Array[Dictionary]=[];var hover_ready:=false
+	for attempt: int in range(8):
+		point=control.get_global_transform_with_canvas()*(control.size*.5)
+		var motion:=InputEventMouseMotion.new();motion.position=point;motion.global_position=point;motion.window_id=window.get_window_id()
+		viewport.push_input(motion,true)
+		var hovered: Control=viewport.gui_get_hovered_control()
+		hover_ready=hovered==control and control.is_hovered() and control.is_visible_in_tree() and not control.disabled
+		trace.append({"attempt":attempt,"point":point,"actual_hovered":str(hovered.get_path()) if is_instance_valid(hovered) else "none","button_is_hovered":control.is_hovered(),"viewport_mouse_position":viewport.get_mouse_position(),"window_has_focus":window.has_focus(),"hover_ready":hover_ready})
+		if hover_ready:
+			# Keep motion, press and release in one turn. Native window/layout
+			# cursor updates between process frames can replace synthetic hover.
+			var event:=InputEventMouseButton.new();event.position=point;event.global_position=point;event.window_id=window.get_window_id();event.button_index=MOUSE_BUTTON_LEFT;event.button_mask=MOUSE_BUTTON_MASK_LEFT;event.pressed=true;viewport.push_input(event,true)
+			event=InputEventMouseButton.new();event.position=point;event.global_position=point;event.window_id=window.get_window_id();event.button_index=MOUSE_BUTTON_LEFT;event.button_mask=0;event.pressed=false;viewport.push_input(event,true)
+			break
+		await _frames(1)
 	control.pressed.disconnect(observer)
+	await _frames()
 	var after: Control=viewport.gui_get_focus_owner()
-	return {"dispatch":"same Viewport notify_mouse_entered,mouse motion,push_input press/release in local coordinates","control":str(control.get_path()),"control_rect":control.get_global_rect(),"event_position":point,"control_visible":control.is_visible_in_tree(),"viewport_rect":viewport.get_visible_rect(),"hovered_before_press":str(hovered.get_path()) if is_instance_valid(hovered) else "none","focus_before":str(before.get_path()) if is_instance_valid(before) else "none","focus_after":str(after.get_path()) if is_instance_valid(after) else "none","actual_pressed_signals":pressed_events.size()}
+	var evidence: Dictionary={"dispatch":"Actual local Viewport mouse events with receiving window_id;bounded observed hover;motion/press/release back-to-back;no OS cursor manipulation or signal injection.","control":str(control.get_path()),"control_rect":control.get_global_rect(),"event_position":point,"control_visible":control.is_visible_in_tree(),"viewport_rect":viewport.get_visible_rect(),"event_window_id":window.get_window_id(),"embedding_subwindows":root.gui_embed_subwindows,"hover_ready":hover_ready,"hover_attempts":trace,"focus_before":str(before.get_path()) if is_instance_valid(before) else "none","focus_after":str(after.get_path()) if is_instance_valid(after) else "none","actual_pressed_signals":pressed_events.size()}
+	_click_observations.append(evidence);print("CUSTOMIZATION_CLICK ",JSON.stringify(_json(evidence)));_checkpoint()
+	return evidence
 
 func _asset_hashes() -> Dictionary:
 	var value: Dictionary={}
@@ -211,7 +238,7 @@ func _run() -> void:
 	var hud_before: Dictionary=_hud_visibility()
 	var camera_before: Dictionary={}
 	for key: String in ["yaw","pitch","requested_distance","current_distance","pivot_height_m"]:camera_before[key]=scene.rig.get(key)
-	scene.rig.camera.h_offset=.13;camera_before.camera_h_offset=scene.rig.camera.h_offset
+	scene.rig.camera.h_offset=.13;camera_before.camera_h_offset=scene.rig.camera.h_offset;camera_before.camera_fov=scene.rig.camera.fov
 	service.menu_button.pressed.emit();await _frames()
 	_check("actual_menu_button_opens_paused_live_preview",service.ui_open and service.panel.is_visible_in_tree() and paused and not scene.menu.visible and not scene.input_router.gameplay_enabled)
 	_check("dedicated_preview_layer_hides_every_existing_gameplay_HUD",service.ui_layer.layer==100 and _hud_visibility().size()==hud_before.size() and _hud_visibility().values().all(func(value: Variant)->bool:return value==false),{"layer":service.ui_layer.layer,"before":hud_before,"during":_hud_visibility()})
@@ -235,6 +262,9 @@ func _run() -> void:
 	var clicked_model: bool=service.draft.model_id=="SeoulResident_F01" and root.gui_get_focus_owner()==service.model_option
 	var next_draft: Dictionary=service.draft.duplicate(true);var previous_click: Dictionary=await _click(service.model_option.previous_button)
 	_check("actual_inline_arrow_clicks_select_without_child_focus_or_popup",clicked_model and service.draft.model_id=="SeoulResident_M01" and root.gui_get_focus_owner()==service.model_option and service.panel.find_children("*","Window",true,false).is_empty(),{"clicked_model":clicked_model,"after_next_draft":next_draft,"after_previous_draft":service.draft.duplicate(true),"current_focus":str(root.gui_get_focus_owner().get_path()) if root.gui_get_focus_owner()!=null else "none","next_click":next_click,"previous_click":previous_click,"popup_window_descendants":service.panel.find_children("*","Window",true,false).size()})
+	if service.draft.model_id!=original_model or _surface().model_id!=original_model:
+		_aborted_reason="Mouse model prerequisite failed;retained different model has different vertex counts. Stop with failed input evidence instead of comparing unequal arrays."
+		print("CUSTOMIZATION_ABORT ",_aborted_reason);_checkpoint();_finish();return
 	_check("evening_preview_fill_is_neutral_local_and_keeps_original_albedo",evening_fixture and scene.time_id=="evening" and service.preview_light.visible and service.preview_light.light_color==Color.WHITE and service.preview_light.light_energy>0. and service.preview_light.light_energy<=2. and service.preview_light.omni_range<=6. and not service.preview_light.shadow_enabled and _surface()._custom_colors.is_empty() and _role_material(_surface(),"skin").albedo_color==Color.WHITE,{"time_id":scene.time_id,"light_energy":service.preview_light.light_energy,"range_m":service.preview_light.omni_range,"shadows":service.preview_light.shadow_enabled,"skin_albedo":_role_material(_surface(),"skin").albedo_color})
 	var front_light: Vector3=service.preview_light.global_position
 	service.back_button.pressed.emit();await _frames()
@@ -242,6 +272,18 @@ func _run() -> void:
 	var back_tracks: bool=back_light.is_equal_approx(scene.rig.camera.global_position+Vector3.UP*.7)
 	service.front_button.pressed.emit();await _frames()
 	_check("preview_fill_tracks_front_and_back_camera_without_time_change",back_tracks and back_light.distance_to(front_light)>1. and service.preview_light.global_position.is_equal_approx(scene.rig.camera.global_position+Vector3.UP*.7) and scene.time_id=="evening",{"front_light":front_light,"back_light":back_light,"time_id":scene.time_id})
+	var face_button: Button=service.panel.find_child("FacePreview",true,false) as Button
+	var face_click: Dictionary=await _click(face_button)
+	var face_point: Vector3=scene.exploration_avatar.global_position+Vector3.UP*1.56
+	var face_pixel: Vector2=scene.rig.camera.unproject_position(face_point)
+	var viewport_rect:=Rect2(Vector2.ZERO,root.get_visible_rect().size)
+	_check("actual_face_button_frames_head_without_changing_time_or_draft",service._preview_view=="face" and is_equal_approx(scene.rig.pivot_height_m,1.56) and is_equal_approx(scene.rig.requested_distance,1.95) and is_equal_approx(scene.rig.camera.fov,18.) and scene.player.get_node("Visual").is_visible_in_tree() and _surface().visible_meshes[0].is_visible_in_tree() and not scene.rig.camera.is_position_behind(face_point) and viewport_rect.has_point(face_pixel) and face_pixel.x<service.panel.position.x-12. and scene.time_id=="evening" and _surface()._custom_colors.is_empty(),{"click":face_click,"head_pixel":face_pixel,"pivot_m":scene.rig.pivot_height_m,"requested_distance_m":scene.rig.requested_distance,"actual_visual_visible":scene.player.get_node("Visual").is_visible_in_tree(),"actual_mesh_visible":_surface().visible_meshes[0].is_visible_in_tree(),"fov_degrees":scene.rig.camera.fov})
+	await _capture("face_closeup")
+	var side_button: Button=service.panel.find_child("SidePreview",true,false) as Button
+	var side_click: Dictionary=await _click(side_button)
+	_check("actual_side_button_changes_yaw_and_restores_full_body_framing",service._preview_view=="side" and absf(angle_difference(scene.rig.yaw,scene.exploration_avatar.global_rotation.y+PI*.5))<.0001 and is_equal_approx(scene.rig.pivot_height_m,.95) and is_equal_approx(scene.rig.requested_distance,2.85) and paused and scene.time_id=="evening",{"click":side_click,"yaw":scene.rig.yaw})
+	await _capture("side_profile")
+	service.front_button.pressed.emit();await _frames()
 	service.model_option.grab_focus()
 	await _key(KEY_TAB)
 	_check("Tab_moves_keyboard_focus_within_customization",root.gui_get_focus_owner()!=service.model_option and root.gui_get_focus_owner()!=null and service.panel.is_ancestor_of(root.gui_get_focus_owner()))
@@ -252,11 +294,13 @@ func _run() -> void:
 	var skin_after: PackedColorArray=_role_arrays(_surface(),"skin")[Mesh.ARRAY_COLOR]
 	_check("actual_skin_vertices_changed_without_geometry_or_weights_change",skin_after!=original_skin and _role_arrays(_surface(),"skin")[Mesh.ARRAY_VERTEX]==original_mesh.surface_get_arrays(1)[Mesh.ARRAY_VERTEX] and _role_arrays(_surface(),"skin")[Mesh.ARRAY_WEIGHTS]==original_mesh.surface_get_arrays(1)[Mesh.ARRAY_WEIGHTS])
 	var hair_after: Array=_role_arrays(_surface(),"hair");var hair_changed:=0
-	for vertex: int in range(hair_after[Mesh.ARRAY_VERTEX].size()):
-		if hair_after[Mesh.ARRAY_VERTEX][vertex].y>1.59 and hair_after[Mesh.ARRAY_COLOR][vertex]!=original_hair[Mesh.ARRAY_COLOR][vertex]:hair_changed+=1
+	var comparable_hair: bool=hair_after[Mesh.ARRAY_VERTEX].size()==original_hair[Mesh.ARRAY_VERTEX].size() and hair_after[Mesh.ARRAY_COLOR].size()==original_hair[Mesh.ARRAY_COLOR].size()
+	if comparable_hair:
+		for vertex: int in range(hair_after[Mesh.ARRAY_VERTEX].size()):
+			if hair_after[Mesh.ARRAY_VERTEX][vertex].y>1.59 and hair_after[Mesh.ARRAY_COLOR][vertex]!=original_hair[Mesh.ARRAY_COLOR][vertex]:hair_changed+=1
 	var eyes_after: Array=_role_arrays(_surface(),"eye")
 	var eyes_unchanged: bool=not original_eyes.is_empty() and not eyes_after.is_empty() and eyes_after[Mesh.ARRAY_VERTEX]==original_eyes[Mesh.ARRAY_VERTEX] and eyes_after[Mesh.ARRAY_COLOR]==original_eyes[Mesh.ARRAY_COLOR] and eyes_after[Mesh.ARRAY_WEIGHTS]==original_eyes[Mesh.ARRAY_WEIGHTS] and _role_material(_surface(),"eye").albedo_color.is_equal_approx(original_eye_color)
-	_check("hair_changes_preserve_original_eyes",hair_changed>100 and eyes_unchanged and eyes_after[Mesh.ARRAY_VERTEX].size()>10,{"changed_hair_vertices":hair_changed,"untinted_eye_vertices":eyes_after[Mesh.ARRAY_VERTEX].size() if not eyes_after.is_empty() else 0,"eye_source":"Resident_Original_Eye independent authored surface; every referenced eye color/vertex/weight stays unchanged by hair selection."})
+	_check("hair_changes_preserve_original_eyes",comparable_hair and hair_changed>100 and eyes_unchanged and eyes_after[Mesh.ARRAY_VERTEX].size()>10,{"comparable_original_hair_arrays":comparable_hair,"changed_hair_vertices":hair_changed,"untinted_eye_vertices":eyes_after[Mesh.ARRAY_VERTEX].size() if not eyes_after.is_empty() else 0,"eye_source":"Resident_Original_Eye independent authored surface; every referenced eye color/vertex/weight stays unchanged by hair selection."})
 	_check("npc_meshes_and_colors_unchanged",_npc_signature(npc)==npc_before)
 	await _capture("m_custom_front")
 	_profile_geometry["male_standard"]=_geometry_measurements()
@@ -276,14 +320,14 @@ func _run() -> void:
 	service.back_button.pressed.emit();await _capture("f_custom_back")
 	_check_preview_clear("wide_back_actual_skinned_resident_clear_of_editor")
 	service.cancel_button.pressed.emit();await _frames()
-	_check("cancel_restores_original_model_mesh_colors_and_camera",not service.ui_open and scene.menu.visible and _surface().model_id==original_model and _surface().body_profile=="standard" and _surface()._custom_colors.is_empty() and _surface().visible_meshes[0].mesh==original_mesh and not FileAccess.file_exists(settings_path) and scene.rig.yaw==float(camera_before.yaw) and scene.rig.pitch==float(camera_before.pitch) and scene.rig.pivot_height_m==float(camera_before.pivot_height_m) and scene.rig.requested_distance==float(camera_before.requested_distance) and scene.rig.current_distance==float(camera_before.current_distance) and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)))
+	_check("cancel_restores_original_model_mesh_colors_and_camera",not service.ui_open and scene.menu.visible and _surface().model_id==original_model and _surface().body_profile=="standard" and _surface()._custom_colors.is_empty() and _surface().visible_meshes[0].mesh==original_mesh and not FileAccess.file_exists(settings_path) and scene.rig.yaw==float(camera_before.yaw) and scene.rig.pitch==float(camera_before.pitch) and scene.rig.pivot_height_m==float(camera_before.pivot_height_m) and scene.rig.requested_distance==float(camera_before.requested_distance) and scene.rig.current_distance==float(camera_before.current_distance) and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)) and is_equal_approx(scene.rig.camera.fov,float(camera_before.camera_fov)))
 	_check("cancel_restores_exact_existing_HUD_visibility",_hud_visibility()==hud_before,{"before":hud_before,"after":_hud_visibility()})
 	_check("closing_preview_hides_fill_and_preserves_world_time_and_albedo",not service.preview_light.visible and scene.time_id=="evening" and _surface()._custom_colors.is_empty() and _role_material(_surface(),"skin").albedo_color==Color.WHITE)
 	service.menu_button.pressed.emit();_select(service.model_option,1);_select(service.body_option,2);_select(service.color_options.skin,2);_select(service.color_options.hair,2);_select(service.color_options.jacket,3);_select(service.color_options.pants,2);_select(service.color_options.shoes,1)
 	service.save_button.pressed.emit();await _frames()
 	var saved: Variant=JSON.parse_string(FileAccess.get_file_as_string(settings_path))
 	_check("save_button_commits_strict_schema2_profile_local_file",not service.ui_open and saved is Dictionary and saved.size()==8 and saved.schema_version==2 and saved.model_id=="SeoulResident_F01" and saved.body_profile=="athletic" and saved.jacket=="sage" and saved.skin=="warm" and saved.hair=="brown" and saved.shoes=="white")
-	_check("save_restores_exact_existing_HUD_and_camera_offset",_hud_visibility()==hud_before and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)))
+	_check("save_restores_exact_existing_HUD_and_camera_offset",_hud_visibility()==hud_before and is_equal_approx(scene.rig.camera.h_offset,float(camera_before.camera_h_offset)) and is_equal_approx(scene.rig.camera.fov,float(camera_before.camera_fov)))
 	var committed: Dictionary=service.committed.duplicate(true)
 	var saved_bytes:=FileAccess.get_file_as_bytes(settings_path)
 	service.menu_button.pressed.emit();_select(service.color_options.jacket,4)
@@ -374,7 +418,7 @@ func _finish() -> void:
 	var passed: int=checks.filter(func(row: Dictionary)->bool:return row.passed).size()
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:push_error("Cannot write customization report");quit(2);return
-	file.store_string(JSON.stringify(_json({"task":"character_customization","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"snapshot":service.snapshot() if is_instance_valid(service) else {},"profile_geometry":_profile_geometry,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"elapsed_ms":Time.get_ticks_msec()-started,"original_asset_sha256":_original_asset_hashes,"source_sha256":_source_hashes,"settings_isolation":"Only process-specific /private/tmp files. Normal user preferences are neither read nor written.","scope":"Actual production scene, UI signals, selected standard/soft/athletic authored geometry and displayed mesh/material arrays. Injected movement and owner flags are labelled fixtures; screenshots need separate visual review. Assets are observed, never regenerated or edited by this fixture."}),"  "));file.close();print("CUSTOMIZATION_RESULT ",passed,"/",checks.size())
+	file.store_string(JSON.stringify(_json({"task":"character_customization","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"captures":captures,"aborted_reason":_aborted_reason,"click_observations":_click_observations,"snapshot":service.snapshot() if is_instance_valid(service) else {},"profile_geometry":_profile_geometry,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"elapsed_ms":Time.get_ticks_msec()-started,"original_asset_sha256":_original_asset_hashes,"source_sha256":_source_hashes,"settings_isolation":"Only process-specific /private/tmp files. Normal user preferences are neither read nor written.","scope":"Actual production scene, UI signals, selected standard/soft/athletic authored geometry and displayed mesh/material arrays. Injected movement and owner flags are labelled fixtures; screenshots need separate visual review. Assets are observed, never regenerated or edited by this fixture."}),"  "));file.close();print("CUSTOMIZATION_RESULT ",passed,"/",checks.size())
 	if is_instance_valid(scene):
 		for node: Node in scene.find_children("*","AudioStreamPlayer",true,false):node.stop()
 		for node: Node in scene.find_children("*","AudioStreamPlayer3D",true,false):node.stop()

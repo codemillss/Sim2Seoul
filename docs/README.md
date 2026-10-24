@@ -9,9 +9,10 @@
 | 현재 완료한 기능과 남은 작업 | [현재 작업 상태](WORK_STATUS.md) · [상세 작업 계획](IMPLEMENTATION_TASKS.md) |
 | 왜 이 장소·범위·표현을 골랐나 | [프로젝트 맥락과 결정](PROJECT_CONTEXT.md) · [전체 계획](MASTER_PLAN.md) |
 | GTA·The Sims에서 무엇을 참고하고 직접 만들 것인가 | [참조·RE 적용 범위와 자산 도입 기준](REFERENCE_DIRECTION.md) |
+| 남녀 얼굴·방향별 확인 | [캐릭터 제작·검토](CHARACTER_IDENTITIES.md) · [EXP34 실행 집계](../data/reports/character_identity/20261024/summary.json) |
 | 직접 만든 캐릭터·주먹·실제60초 경찰 출동 | [자체 원본과 사건 대응](AUTHORED_CHARACTER_COMBAT.md) · [EXP33 실행 집계](../data/reports/authored_character_combat/20261024/summary.json) |
 | 좌표·충돌·입력·지형의 구현 규칙 | [기술 계약](TECHNICAL_CONTRACTS.md) · [지형 통합](TERRAIN_INTEGRATION.md) |
-| 무엇을 어떻게 검증했나 | [검증 계획](VALIDATION_PLAN.md) · [현재 실행 집계](../data/reports/authored_character_combat/20261024/summary.json) |
+| 무엇을 어떻게 검증했나 | [검증 계획](VALIDATION_PLAN.md) · [현재 실행 집계](../data/reports/character_identity/20261024/summary.json) |
 | 실패·수정·개발 순서 | [실행 이력](EXECUTION_LOG.md) · [원시 증거 폴더](../data/reports/) |
 | 데이터와 모델의 출처·이용 조건 | [자료 출처](DATA_SOURCES.md) · [자료·자산 고지](ATTRIBUTION.md) |
 | 다른 기기에서 개발 이어가기 | [에이전트 시작 지침](../AGENTS.md) · [인수 안내](SOL_HANDOFF.md) |

@@ -1,0 +1,72 @@
+{
+  "task": "EXP34_V02_PORTRAIT_MATERIAL_VISUAL_REVIEW",
+  "reviewed_at_utc": "2026-10-24T08:21:07.561590+00:00",
+  "art_result": "REWORK",
+  "source_snapshot": {
+    "path": "data/reports/character_identity/20261024/candidates/v02/source/portrait_materials.py",
+    "sha256": "4d2d19d7b1415aabebada363f9c423d0464ccb38a8cf756bd765adae0f5fa483",
+    "preserved_before_correction": true
+  },
+  "images_directly_opened": [
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/native_preview_views/m01_standard_street_face.png",
+      "sha256": "32cff394c9dcd4d9671ece75ed3690940e65972b4c5877df3a5c6f01e4418a75",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/native_preview_views/m01_standard_street_face_side.png",
+      "sha256": "e5ab83191d6bc791f8ec6cc97bf226c8c0ff5e4644dd6a8d2e6ce72596a8aa01",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/native_preview_views/f01_standard_street_face.png",
+      "sha256": "ab3556581ebc26dd2d02975a36707636fb3a071325d6fc2b2ac9e2458db7ffbb",
+      "actual_original_opened": true
+    },
+    {
+      "path": "data/reports/character_identity/20261024/candidates/v02/native_preview_views/f01_standard_street_face_side.png",
+      "sha256": "0155e14bfafe42b6f3cc5b27c0a12296fbd8b2634eb85a98b54706fc12e2cff7",
+      "actual_original_opened": true
+    }
+  ],
+  "observations": {
+    "improved": [
+      "Olive locks and separate red scalp corrected to restrained brown.",
+      "Female hair no longer hides both eyes and cheeks.",
+      "Rectangular lip pigmentation boundary removed by continuous geometry mask."
+    ],
+    "remaining": [
+      "Small centred iris within long bright sclera retains bead/doll stare.",
+      "Side-view white wedge persists; eye skin hood must actually lie outside the globe.",
+      "Faces remain simplified game portraits; realistic-human and attractive-character acceptance incomplete."
+    ]
+  },
+  "joint_change_agreement": {
+    "geometry_owner": "original_character",
+    "material_owner": "police_response",
+    "iris_radius_before_m": 0.0052,
+    "iris_radius_after_m": 0.0059,
+    "pupil_radius_unchanged_m": 0.002,
+    "atlas_diameter_unchanged_m": 0.032,
+    "aperture_width_m": {
+      "m": 0.029,
+      "f": 0.031
+    },
+    "iris_diameter_fraction_of_aperture_width": {
+      "m": 0.4068965517241379,
+      "f": 0.38064516129032255
+    },
+    "rationale": "Art parameter to reduce tiny-centre stare. Upper lid must occlude the iris independently; the iris change cannot repair globe penetration or white wedges.",
+    "scope": "Fictional authored proportions; no human measurement or medical claim."
+  },
+  "new_module": {
+    "path": "tools/authored_character/portrait_materials.py",
+    "sha256": "4f964874537f61fb0694722f00ff27ff4628c11cbed0b15c883f63c43d310a3c",
+    "version": "original_portrait_materials_v3",
+    "self_check_path": "data/reports/character_identity/20261024/materials/v03_fields.json",
+    "passed": 28,
+    "total": 28,
+    "new_engine_runs_by_reviewer": 0,
+    "actual_v03_art_review": "PENDING"
+  }
+}

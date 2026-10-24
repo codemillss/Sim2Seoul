@@ -1,0 +1,26 @@
+{
+  "task": "EXP34_NATIVE02_CLICK_FIXTURE_CORRECTION",
+  "written_at_utc": "2026-10-24T09:22:58.684348+00:00",
+  "old_fixture": "data/reports/character_identity/20261024/final/customization_native_portraits02.gd.source",
+  "old_fixture_sha256": "bd1e7149d25507bc2f7d04f4c78fbaa57fce913019cfb7447f8f5b56cb1a8acc",
+  "new_fixture": "tests/game/check_character_customization.gd",
+  "new_fixture_sha256": "8e8f397f5018d390480c60bbcf42dd2fb557b4ead9e5c9822f856b2f3ac80d93",
+  "production_runtime_changes": false,
+  "engine_runs_by_agent": 0,
+  "observed_failure": "native02 misses arrow/face clicks;retained F model compared to original M hair arrays causes index18303 exception. Headless02 and native01 recorded identical logical target rectangles with successful clicks. Native02 did not persist click evidence before exception.",
+  "engine_mechanism": "Native Window mouse hover can use OS receiving-window/window_id state and cursor refresh. BaseButton requires actual hover for mouse press. Old fixture yielded process frames between motion/press/release. Exact native02 pointer/focus route was not logged, so the race is source-supported diagnosis rather than a measured native02 trace.",
+  "primary_sources": [
+    "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/main/viewport.cpp#L3012-L3035",
+    "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/main/window.cpp#L876-L890",
+    "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/gui/base_button.cpp#L222-L255"
+  ],
+  "correction": [
+    "Explicit receiving window_id and canvas-aware local control centre.",
+    "Up to8 observed hover attempts;when actual target is hovered,motion/press/release dispatch synchronously without intervening frames.",
+    "Native window never receives fake mouse entry or OS cursor movement;headless receives one explicit entry.",
+    "Every click trace and check evidence printed immediately and persisted to an IN_PROGRESS partial sidecar.",
+    "Wrong model prerequisite stops with failed report;unequal hair array lengths cannot cause out-of-bounds."
+  ],
+  "assertion_denominators": "Successful run check names/criteria preserved:56headless/68native. Early aborted run remains FAIL with actual observed subset;not a smaller successful suite.",
+  "source_status": "Frozen for root-run native03/headless03; no engine validation by agent."
+}

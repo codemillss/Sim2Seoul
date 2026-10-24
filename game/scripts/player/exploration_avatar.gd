@@ -626,5 +626,13 @@ func snapshot() -> Dictionary:
 		"joint_transforms":transforms,"feet_world":feet,"mesh_count":int(textured.visible_mesh_count),"hidden_pose_proxy_mesh_count":_meshes.size(),"body_bounds":body_bounds,"textured_model":textured,"textured_model_loaded":bool(textured.loaded),"original_body_hidden":is_instance_valid(_old_body) and not _old_body.visible,"uses_original_physics_capsule":true,"visual_forward":-global_basis.z,"facility_control":_facility_controlled() if is_instance_valid(player) else false,"activity_kind":_activity_kind,"activity_elapsed":_activity_elapsed,"avatar_hands_visible":bool(textured.loaded) and _activity_kind not in ["eat","weights"],
 		"appearance_scope":"Original Sim2Seoul SeoulResident skinned mesh, facial detail, clothing and articulated hands authored in this repository; retained invisible markers supply game contacts.","eye_height_m":1.581,"human_surface_version":"EXP33_ORIGINAL_SEOUL_RESIDENT_01","authored_adult_height_m":ADULT_VISUAL_HEIGHT_M,"head_height_m":HEAD_HEIGHT_M,"standing_hip_joint_height_m":HIP_Y,"hip_height_m":_hip_pose_y,"head_units":ADULT_VISUAL_HEIGHT_M/HEAD_HEIGHT_M,"stance_fraction":_stance_fraction,"cycle_distance_m":_cycle_distance_m,"represented_gait_speed_mps":_gait_speed_mps,"arcade_speed_excess_mps":maxf(0.,actual_speed_mps-_gait_speed_mps),"motion_scope":"Distance-driven game-contact markers and original combat keyposes drive the native weighted human. Not motion capture. Turbo speeds retain bounded cadence and can visibly exceed plausible limb travel."}
 
+func _enter_tree() -> void:
+	# Reparenting a live avatar can leave and re-enter within one frame.
+	# Queue the retained hidden state after any pending fallback restore.
+	if is_instance_valid(_old_body):_old_body.set_deferred("visible",false)
+
 func _exit_tree() -> void:
-	if is_instance_valid(_old_body):_old_body.visible=_old_body_visible
+	# The old body may be a sibling in the same player being destroyed.
+	# Restore a surviving fallback after teardown; a freed body discards the
+	# deferred write instead of rebuilding renderer dependencies mid-delete.
+	if is_instance_valid(_old_body):_old_body.set_deferred("visible",_old_body_visible)

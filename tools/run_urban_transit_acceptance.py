@@ -15,6 +15,7 @@ names.update({'character_preview':'preview_authored_resident','driver_reaction':
 names.update({'customization':'check_character_customization'})
 names.update({'human_materials':'check_human_skin_materials'})
 names.update({'swim_arm_skin':'check_swim_arm_skin'})
+names.update({'character_identity':'check_character_identity_preview'})
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('suite', choices=names)
 parser.add_argument('mode', choices=['headless','native'])
@@ -61,11 +62,14 @@ try:
 except subprocess.TimeoutExpired as e:
  code=124;output=(e.output or b'').decode(errors='replace')
 Path(str(base)+'.console.log').write_text(output)
+actual_engine_returncode=None if code==124 else code
 script_errors=any(marker in output for marker in ['SCRIPT ERROR:', 'Parse Error:', 'Failed to load script'])
-if script_errors:code=code or 2
+engine_errors=[line for line in output.splitlines() if 'ERROR:' in line or 'Parse Error:' in line or 'Failed to load script' in line]
+# Functional assertions cannot override a real renderer/resource error.
+if script_errors or engine_errors:code=code or 2
 bindings_after=source_bindings()
 changed_sources=[path for path in sorted(bindings_before.keys()|bindings_after.keys()) if bindings_before.get(path)!=bindings_after.get(path)]
-metadata={'suite':suite,'mode':mode,'headless_fixed_fps':opts.fixed_fps,'physics_hz':opts.physics_hz,'body_profile':opts.body_profile,'female_model':opts.female_model,'swim_body':opts.swim_body,'started_at':started,'finished_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'wall_seconds':round(time.monotonic()-now,3),'returncode':code,'script_errors':script_errors,'argv':args,'source_sha256':bindings_before,'source_changes_during_run':changed_sources,'scope':'Engine CLI test. OS keyboard and visual review are separate evidence. Source changes invalidate a final frozen-source acceptance claim.'}
+metadata={'suite':suite,'mode':mode,'headless_fixed_fps':opts.fixed_fps,'physics_hz':opts.physics_hz,'body_profile':opts.body_profile,'female_model':opts.female_model,'swim_body':opts.swim_body,'started_at':started,'finished_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'wall_seconds':round(time.monotonic()-now,3),'returncode':code,'actual_engine_returncode':actual_engine_returncode,'script_errors':script_errors,'engine_errors':engine_errors,'argv':args,'source_sha256':bindings_before,'source_changes_during_run':changed_sources,'scope':'Engine CLI test. OS keyboard and visual review are separate evidence. Source changes invalidate a final frozen-source acceptance claim.'}
 Path(str(base)+'.run.json').write_text(json.dumps(metadata,indent=2,ensure_ascii=False)+'\n')
 path=Path(str(base)+'.json')
 if path.exists():

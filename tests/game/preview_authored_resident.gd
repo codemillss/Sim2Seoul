@@ -9,6 +9,7 @@ var captures: Array[Dictionary]=[]
 var report_path:="/private/tmp/authored_resident_preview.json"
 var quick_body_preview:=false
 var single_face_preview:=false
+var candidate_root:=""
 
 func _initialize() -> void:call_deferred("_run")
 
@@ -31,6 +32,7 @@ func _run() -> void:
 		if argument.begins_with("--report="):report_path=argument.trim_prefix("--report=")
 		if argument=="--body-preview-quick":quick_body_preview=true
 		if argument=="--single-face-preview":single_face_preview=true;quick_body_preview=true
+		if argument.begins_with("--candidate-root="):candidate_root=argument.trim_prefix("--candidate-root=")
 	for index: int in range(args.size()-1):
 		if args[index]=="--report-path":report_path=args[index+1]
 	var directory:=report_path.get_basename()+"_views"
@@ -54,6 +56,9 @@ func _run() -> void:
 	var profiles: Array[String]=["standard","soft","athletic"]
 	var dresses: Array=["swim"] if quick_body_preview else ["street","swim"]
 	var angles: Array=["front","front_oblique","side","back","back_oblique","face","hands","pelvis"]
+	if not candidate_root.is_empty():
+		profiles=["standard"];dresses=["street"]
+		angles=["front","face","face_side","face_left","face45","face_back"]
 	var targeted: Dictionary={"m01_standard":["front","face","face_side","hands","hands_oblique","hands_back"],"f01_standard":["front","side","face","face_side"],"m01_soft":["side"],"m01_athletic":["front"]}
 	if single_face_preview:targeted={"m01_standard":["face","face_side"]}
 	for sex: String in ["m01","f01"]:
@@ -63,10 +68,17 @@ func _run() -> void:
 				if selected_angles.is_empty():continue
 				expected_captures+=selected_angles.size()
 				var asset:="res://assets/original/seoul_resident/seoul_resident_"+sex+("" if profile=="standard" else "_"+profile)+"_"+dress+".glb"
+				if not candidate_root.is_empty():asset=candidate_root.path_join("seoul_resident_"+sex+"_street.glb")
 				source_sha256[asset]=FileAccess.get_sha256(asset)
-				var packed: PackedScene=load(asset)
-				if packed==null:valid=false;continue
-				var person:=packed.instantiate();scene.add_child(person)
+				var person: Node3D
+				if candidate_root.is_empty():
+					var packed: PackedScene=load(asset)
+					if packed!=null:person=packed.instantiate()
+				else:
+					var document:=GLTFDocument.new();var state:=GLTFState.new()
+					if document.append_from_file(asset,state)==OK:person=document.generate_scene(state)
+				if person==null:valid=false;continue
+				scene.add_child(person)
 				var bone_names: Array[String]=[];var material_names: Array[String]=[];var mesh_names: Array[String]=[];var lod_counts: Array[int]=[];var cull_modes: Array[int]=[]
 				for node: Node in person.find_children("*","Skeleton3D",true,false):
 					for bone: int in range(node.get_bone_count()):bone_names.append(node.get_bone_name(bone))
@@ -92,6 +104,9 @@ func _run() -> void:
 						"back_oblique":camera.position=Vector3(-2.2,1.0,-2.2)
 						"face":camera.size=.36;camera.position=Vector3(.13,1.57,3);target=Vector3(0,1.57,0)
 						"face_side":camera.size=.36;camera.position=Vector3(3,1.57,.2);target=Vector3(0,1.57,0)
+						"face_left":camera.size=.36;camera.position=Vector3(-3,1.57,.2);target=Vector3(0,1.57,0)
+						"face45":camera.size=.36;camera.position=Vector3(2.1,1.57,2.1);target=Vector3(0,1.57,0)
+						"face_back":camera.size=.36;camera.position=Vector3(0,1.57,-3);target=Vector3(0,1.57,0)
 						"hands":camera.size=.30;camera.position=Vector3(.25,.80,3);target=Vector3(.25,.80,0)
 						"hands_oblique":camera.size=.30;camera.position=Vector3(2,.80,2);target=Vector3(.25,.80,0)
 						"hands_back":camera.size=.30;camera.position=Vector3(.25,.80,-3);target=Vector3(.25,.80,0)

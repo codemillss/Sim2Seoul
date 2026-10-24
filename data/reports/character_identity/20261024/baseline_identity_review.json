@@ -1,0 +1,101 @@
+{
+  "task": "EXP34_CHARACTER_IDENTITY_BASELINE_PIXEL_REVIEW",
+  "at_utc": "2026-10-24T07:54:41.286871+00:00",
+  "baseline_commit": "08ba5bfef6a5cd5f07ad94e6289eb67ee03db574",
+  "scope": "Eight actual native baseline raw images were opened: M/F standard street closeface/fullfront/fullside/fullback. No new engine capture or art-quality PASS. The old capture framing/lighting is not the final two-light portrait harness.",
+  "raw_images_actually_opened": [
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/m01_standard_street_face.png",
+      "sha256": "9df2eb5984759f4b5c936dadd55d901698a4850bfd90a572cd977ec36ccacbd6",
+      "sex": "m01",
+      "view": "face",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/m01_standard_street_front.png",
+      "sha256": "5909d74cbe786e38c86c0ee24ce37be699a828711ab403fa0fdd100c97abd68a",
+      "sex": "m01",
+      "view": "front",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/m01_standard_street_side.png",
+      "sha256": "07d273b0dda4480eaaa6e845b26049a1a713370c67f354bf0e1633aa74bb0d5e",
+      "sex": "m01",
+      "view": "side",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/m01_standard_street_back.png",
+      "sha256": "f1f36b3208effd755ef1230e335625b8af305ed0b188c4ac3da5e34636c8e9d1",
+      "sex": "m01",
+      "view": "back",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/f01_standard_street_face.png",
+      "sha256": "0fb7d274c1dddd42f038179d122d253562d4efaf0bae42864ce7a37d1a106862",
+      "sex": "f01",
+      "view": "face",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/f01_standard_street_front.png",
+      "sha256": "dfa67b49e43dd5891bfeadbb33e4613502e9cc22d81799d5d0812319585190d7",
+      "sex": "f01",
+      "view": "front",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/f01_standard_street_side.png",
+      "sha256": "c4d823d7c6e50289eb6179e3393039332edfe4c77d94f12e79d9b4b92d2cc50f",
+      "sex": "f01",
+      "view": "side",
+      "baseline_commit_image_matches": true
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release02/character_preview_native_body02_views/f01_standard_street_back.png",
+      "sha256": "4a08b4dacadb32e26b6f098d93f1d905300f66e7f3c6fb987dbfa22deac0fbac",
+      "sex": "f01",
+      "view": "back",
+      "baseline_commit_image_matches": true
+    }
+  ],
+  "observations": [
+    {
+      "area": "identity",
+      "finding": "Male/female facial contour and eye/nose/mouth placement are closely related; hair length carries much of the identity distinction."
+    },
+    {
+      "area": "eyes",
+      "finding": "Shallow socket/lid shape and hard white elliptical eye outlines against large flat skin planes read as a doll face in the raw closeups."
+    },
+    {
+      "area": "midface_jaw",
+      "finding": "Broad simple nose wedge, thin straight mouth line, planar cheeks and angular chin limit human facial form."
+    },
+    {
+      "area": "hair",
+      "finding": "Male crown reads as a tall dark helmet; female side/rear hair reads as a smooth dark plate with pointed ends rather than layered directional clumps."
+    },
+    {
+      "area": "neck_and_profile",
+      "finding": "Long straight neck tube and limited jaw-to-neck transition are visible in profile. New profile/rear portraits should inspect the actual skin/neck/hair joins rather than relying on front-face lighting."
+    }
+  ],
+  "targeted_harness": "tests/game/check_character_identity_preview.gd",
+  "planned_outputs": {
+    "static_portraits": 32,
+    "actual_W_walk_run_head_frames": 32,
+    "native_images_total": 64,
+    "lighting_setups": 2,
+    "static_views_per_model_per_light": 8,
+    "model_ids": [
+      "SeoulResident_M01",
+      "SeoulResident_F01"
+    ],
+    "profile": "standard",
+    "fullbody_motion": "Separate existing human_gait M/F fixtures observe all four angles and72raw frames each."
+  },
+  "acceptance_boundary": "Capture/finite/source/capsule/camera-settings checks do not establish attractive faces, natural motion, realism or subjective comfort. Those are separately reported only after inspecting native raw sequences."
+}

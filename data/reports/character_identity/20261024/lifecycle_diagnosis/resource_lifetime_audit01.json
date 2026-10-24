@@ -1,0 +1,34 @@
+{
+  "task": "EXP34_RESOURCE_LIFETIME_READONLY_AUDIT",
+  "written_at_utc": "2026-10-24T09:47:35.030907+00:00",
+  "observed_run": "lifecycle_headless01.run.json",
+  "observed_result": "FAIL",
+  "checks_passed": 8,
+  "checks_total": 9,
+  "raw_error_gate_preserved": true,
+  "material_errors": 12,
+  "startup_environment_errors": 1,
+  "native_renderer04_material_errors": 32,
+  "hypotheses": {
+    "old_body_visibility_defer": "Deferred restore and live reparent hiding satisfy8functional cases but do not remove material-null errors. Thus fallback visibility alone is not sufficient explanation/fix.",
+    "specific_material_ownership": "Eight native surfaces get duplicate per-instance override materials. Only4roles (jacket,skin,hands,pants) also have parent-surface material handles. The remaining4roles (hair,shoes,detail,eye) are owned only by MeshInstance override members. Each tested avatar destruction reports exactly4material dependency errors, even with a valid original fallback material. Godot releases derived-class material members before VisualInstance destructor frees its render instance RID. A parent-surface strong-reference array for every owned override is a minimal controlled fix candidate.",
+    "confidence": "Strong source/quantity match;await root one-variable A/B before declaring fixed."
+  },
+  "safe_fix_proposal": "Surface owner retains all created duplicate materials in a per-instance Array[StandardMaterial3D] until its child mesh instances are destroyed;no static material cache,no global leak,no colour/PBR change,no mesh detach/reparent special case.",
+  "reviewed_sources": [
+    {
+      "path": "game/scripts/player/textured_human_surface.gd",
+      "sha256": "e4ba4208bd60f35277f088a5d6d18316886aeb53329b57fd07de16d9ed9f84de"
+    },
+    {
+      "path": "game/scripts/player/human_skin_materials.gd",
+      "sha256": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01"
+    }
+  ],
+  "primary_engine_sources": [
+    "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/3d/mesh_instance_3d.cpp#L349-L357",
+    "https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/3d/visual_instance_3d.cpp#L194-L197"
+  ],
+  "production_edits_by_reviewer": 0,
+  "scope": "Lifecycle diagnosis;not game-art acceptance. Startup certificate error is separately recorded and not ignored by the ERROR gate."
+}

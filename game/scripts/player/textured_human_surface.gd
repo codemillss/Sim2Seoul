@@ -1,6 +1,7 @@
 extends Node3D
 ## Project-authored weighted residents. No imported vendor body/face is loaded.
-## The source generator defines every mesh, UV, texture, bone and skin weight.
+## The source generator defines every mesh, UV, bone and skin weight.
+## Skin paint samples our own fictional image-generated sources; provenance is saved.
 const RIG := preload("res://scripts/player/textured_human_rig.gd")
 const HUMAN_MATERIALS := preload("res://scripts/player/human_skin_materials.gd")
 const ORIGINAL := "res://assets/original/seoul_resident/"
@@ -25,6 +26,9 @@ var _body_material: StandardMaterial3D
 var _hand_material: StandardMaterial3D
 var _head_material: StandardMaterial3D
 var _pants_material: StandardMaterial3D
+# MeshInstance3D releases override refs before its render instance is freed.
+# Keep every per-instance override alive until this parent outlives its meshes.
+var _instance_materials: Array[StandardMaterial3D]=[]
 var _surfaces: Array[Dictionary]=[]
 var _base_colors: Dictionary={}
 var _actual_bounds:=AABB()
@@ -107,6 +111,7 @@ func _prepare_materials(meshes: Array[MeshInstance3D],colors: Dictionary) -> voi
 			var count: int=arrays[Mesh.ARRAY_VERTEX].size()
 			var tangent_ready: bool=arrays[Mesh.ARRAY_NORMAL]!=null and arrays[Mesh.ARRAY_NORMAL].size()==count and arrays[Mesh.ARRAY_TEX_UV]!=null and arrays[Mesh.ARRAY_TEX_UV].size()==count and arrays[Mesh.ARRAY_TANGENT]!=null and arrays[Mesh.ARRAY_TANGENT].size()==count*4
 			HUMAN_MATERIALS.apply_to(material,_material_role(mesh,index),tangent_ready)
+			_instance_materials.append(material)
 			mesh.set_surface_override_material(index,material)
 			colors[str(mesh.get_instance_id())+":"+str(index)]=material.albedo_color
 
@@ -175,9 +180,16 @@ func _sync_custom_vertex_colors() -> void:
 						for vertex: int in range(colors.size()):colors[vertex]=colors[vertex]*gain
 					else:
 						var mask:=_hair_mask(source,index);var target: Color=Color(_custom_colors.hair).srgb_to_linear()
+						# Normalize the authored groom's own colour variation. A fixed
+						# reference from an older black cap flattens every new lock.
+						var samples: Array[float]=[]
+						for vertex: int in range(colors.size()):
+							if mask[vertex]==1:samples.append(colors[vertex].r)
+						samples.sort()
+						var reference: float=maxf(.00001,samples[samples.size()/2]) if not samples.is_empty() else .00048
 						for vertex: int in range(colors.size()):
 							if mask[vertex]==1:
-								var shade:=clampf(colors[vertex].r/.00048,.65,1.35);colors[vertex]=Color(target.r*shade,target.g*shade,target.b*shade,1.)
+								var shade:=clampf(colors[vertex].r/reference,.65,1.35);colors[vertex]=Color(target.r*shade,target.g*shade,target.b*shade,1.)
 					arrays[Mesh.ARRAY_COLOR]=colors
 				result.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);result.surface_set_name(index,source.surface_get_name(index));result.surface_set_material(index,source.surface_get_material(index))
 			mesh.mesh=result
@@ -312,4 +324,4 @@ func snapshot(refresh_actual_bounds:=false) -> Dictionary:
 	var active_rig: Node3D=_swim_rig if _swimwear_active else rig
 	var active_skeleton: Skeleton3D=_swim_skeleton if _swimwear_active else skeleton
 	var rig_data: Dictionary=active_rig.snapshot() if is_instance_valid(active_rig) and active_rig.has_method("snapshot") else {}
-	return {"loaded":loaded,"error":load_error,"model_id":model_id,"body_profile":body_profile,"active_glb_path":_swim_asset_path if _swimwear_active else _street_asset_path,"active_glb_sha256":_swim_asset_sha256 if _swimwear_active else _street_asset_sha256,"street_glb_path":_street_asset_path,"swim_glb_path":_swim_asset_path,"normalized_rest_bounds_m":_normalized_rest_bounds,"requested_compatibility_alias":requested_model_alias,"visible_mesh_count":(visible_meshes+_swim_meshes).filter(func(mesh: MeshInstance3D)->bool:return mesh.is_visible_in_tree()).size(),"skeleton_bone_count":active_skeleton.get_bone_count() if is_instance_valid(active_skeleton) else 0,"actual_visible_bounds_m":_actual_bounds,"actual_height_m":_actual_bounds.size.y,"normalized_rest_height_m":REST_HEIGHT_M,"bounds_sampled_at_physics_tick":_bounds_tick,"surface_texture_uv_ready":_texture_uv_ready,"rig_contact_metrics":rig_data,"normalization_scale":_normalization_scale,"clothing_palette":{"body_gain_linear":1.,"texture_means":_garment_texture_means,"hands_use_separate_original_skin_material":true},"swimwear_active":_swimwear_active,"active_body_source":_active_body_source,"swim_skeleton_bone_count":_swim_skeleton.get_bone_count() if is_instance_valid(_swim_skeleton) and _swimwear_active else 0,"original_head_and_hair_preserved":true,"swim_head_cut":{},"swim_head_join":_swim_head_join if _swimwear_active else {},"legacy_geometry_rendered":false,"supplier":"Sim2Seoul project-authored anatomical profiles, facial sculpt, clothing, procedural textures, skeleton and skin weights","authored_generator":"tools/authored_character/build_seoul_resident.py","vendor_geometry_loaded":false,"scope":"Own weighted human, authored directly from numerical profiles. Bounds CPU-skin the actual referenced displayed vertices. Original vendor bodies, faces, textures and animations are not loaded."}
+	return {"loaded":loaded,"error":load_error,"model_id":model_id,"body_profile":body_profile,"active_glb_path":_swim_asset_path if _swimwear_active else _street_asset_path,"active_glb_sha256":_swim_asset_sha256 if _swimwear_active else _street_asset_sha256,"street_glb_path":_street_asset_path,"swim_glb_path":_swim_asset_path,"normalized_rest_bounds_m":_normalized_rest_bounds,"requested_compatibility_alias":requested_model_alias,"visible_mesh_count":(visible_meshes+_swim_meshes).filter(func(mesh: MeshInstance3D)->bool:return mesh.is_visible_in_tree()).size(),"skeleton_bone_count":active_skeleton.get_bone_count() if is_instance_valid(active_skeleton) else 0,"actual_visible_bounds_m":_actual_bounds,"actual_height_m":_actual_bounds.size.y,"normalized_rest_height_m":REST_HEIGHT_M,"bounds_sampled_at_physics_tick":_bounds_tick,"surface_texture_uv_ready":_texture_uv_ready,"rig_contact_metrics":rig_data,"normalization_scale":_normalization_scale,"clothing_palette":{"body_gain_linear":1.,"texture_means":_garment_texture_means,"hands_use_separate_original_skin_material":true},"swimwear_active":_swimwear_active,"active_body_source":_active_body_source,"swim_skeleton_bone_count":_swim_skeleton.get_bone_count() if is_instance_valid(_swim_skeleton) and _swimwear_active else 0,"original_head_and_hair_preserved":true,"swim_head_cut":{},"swim_head_join":_swim_head_join if _swimwear_active else {},"legacy_geometry_rendered":false,"supplier":"Sim2Seoul project-authored anatomy, facial sculpt, clothing, skeleton and weights; numerical materials plus own fictional image-generated skin paint","authored_generator":"tools/authored_character/build_seoul_resident.py","vendor_geometry_loaded":false,"scope":"Own weighted human authored from numerical profiles and own fictional skin-paint sources. Bounds CPU-skin the actual referenced displayed vertices. Third-party vendor bodies, faces, textures and animations are not loaded."}
