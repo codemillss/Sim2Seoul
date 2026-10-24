@@ -1,0 +1,24 @@
+{
+  "task": "EXP34_ARM_PATCH_DIAGNOSIS_CORRECTION",
+  "reviewed_at_utc": "2026-10-24T05:23:29.760369+00:00",
+  "volume_fixture_status": "INVALID_DIAGNOSTIC_DO_NOT_TREAT_AS_PRODUCTION_FAILURE",
+  "invalid_reports": [
+    "arm_volume_headless_broken2_dev01.json",
+    "arm_volume_headless_broken2_dev02.json"
+  ],
+  "reason": "Private radial guard selected one skin-material connected component and omitted actual textile patch faces on the arm. Its source-rest tube was incomplete, so neutral raycoverage9..11/16 failed before any posed-area comparison. A legitimate closed-volume test must union skin+cloth geometry and weld material boundaries. The private invalid fixture is NOT installed in tests/ or the runner and does not motivate a production weight/geometry change.",
+  "visual_inference_correction": "The dark oval was initially called background-through. Actual RGB18,34,50 matches swimsuit RGB18,33,49; actual background45,52,62. Original source indexed material classification establishes a textile patch on the inner arm, not a verified hole.",
+  "replacement_fixture": "tests/game/check_swim_arm_skin.gd",
+  "replacement_fixed_denominator": 46,
+  "independent_basis": "Actual indexed source-rest geometry across all material surfaces; native arm bone proximity and summed arm bind influence>.60. Production SDF/notch/rectangle formulas are not reused.",
+  "preserved_rejected_baseline": {
+    "report": "swim_arm_skin_rejected2_dev01.json",
+    "report_sha256": "2b33a6c0c98deebae9445cfdae4787cee558fac721279071393f97ef67d1db2f",
+    "status": "Expected FAIL8/12:4 actual arm textile failures;4 all-material arm geometry checks plus4 avatar/load checks pass.",
+    "scope": "Only two preserved rejectedfemale swimGLBs, loaded directly by GLTFDocument from body_release/visual_rejection_assets; no mixed current production asset used as baseline.",
+    "actual_fixture_source": "check_swim_arm_skin_rejected2.gd.txt",
+    "actual_fixture_sha256": "33a8a59fad8c7a5141c41535f29b7dcade27f6a5804f104061e1b2b9cc1f42ea",
+    "classifier_fixture_sha256": "253690cbb6325c000520c8004583316864d2b53040829eeb240efb466ff42218"
+  },
+  "production_weight_geometry_changes_from_this_diagnostic": false
+}

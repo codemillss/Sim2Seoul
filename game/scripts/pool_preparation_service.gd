@@ -2,11 +2,18 @@ extends Node3D
 ## One shared E dispatcher owns interactions. This controller never reads E.
 ## Roof-local rooms are authored game amenities, not surveyed hotel interiors.
 const SHOWER_SECONDS:=4.0
+const FRESHNESS_SECONDS:=90.0
+const SHOWER_CLEANLINESS_GAIN:=20.0
+const FRESH_SWIM_BONUS:=.10
+const SWIMWEAR_SWIM_BONUS:=.15
 var host: Node3D
 var loaded:=false
 var load_error:=""
 var pool_id:=""
 var showered:=false
+var freshness_remaining_s:=0.0
+var last_shower_cleanliness_gain:=0.0
+var total_shower_cleanliness_gain:=0.0
 var showering:=false
 var shower_elapsed:=0.0
 var completed_showers:=0
@@ -111,79 +118,83 @@ func handle_interact() -> bool:
 	var tick:=Engine.get_physics_frames()
 	if tick==_last_interact_tick:return true
 	_last_interact_tick=tick
-	if showering:_finish_shower(false);_tell("샤워가 취소됐습니다. 끝까지 샤워한 뒤 입장하세요.");return true
+	if showering:_finish_shower(false);_tell("샤워 취소 · 새 보상 없이 자유롭게 수영할 수 있습니다.");return true
 	var roof:=_at_roof();var id:=String(roof.spec.id)
 	if _near_bar(roof):
 		_tell(roof.interact_pool_bar(int(_bar_choice(roof).id)));_event("nonalcohol_bar_interaction",{"roof_id":id,"bar":roof.pool_bar()});return true
 	if _near_station(roof,"changing"):
+		pool_id=id;_roof=roof
 		if host.shop_visit_service.swimwear_active:
-			cancel_for_transition();_tell("원래 옷으로 갈아입었습니다. 다시 이용하려면 수영복과 샤워를 준비하세요.")
+			host.shop_visit_service.end_swimwear();_tell("원래 옷으로 갈아입었습니다 · 수영복 +15% 해제")
 		elif host.shop_visit_service.begin_swimwear():
-			pool_id=id;_roof=roof;showered=false;_last_safe=_safe_point(host.player.global_position);_tell("수영복으로 갈아입었습니다. 옆 샤워실에서 E를 눌러 샤워하세요.");_event("swimwear_changed")
+			_tell("수영복 착용 · 이 풀에서 수영 속도 +15% · 샤워는 선택입니다.");_event("swimwear_changed")
 		return true
 	if _near_station(roof,"shower"):
-		if pool_id!=id or not host.shop_visit_service.swimwear_active:_tell("탈의실에서 먼저 수영복으로 갈아입으세요.");return true
-		showered=false;showering=true;shower_elapsed=0.;_saved_facility=host.player.facility_control;host.player.set_facility_control(true);roof.set_pool_shower_running(true);_event("shower_started");return true
-	_tell("준비 완료 · 계단을 따라 입수하세요." if water_access_allowed(roof) else "탈의실 수영복 → 샤워실 샤워를 마친 뒤 입장할 수 있습니다.")
+		pool_id=id;_roof=roof;showering=true;shower_elapsed=0.;_saved_facility=host.player.facility_control;host.player.set_facility_control(true);roof.set_pool_shower_running(true);_event("shower_started",{"swimwear_required":false});return true
+	_tell("바로 입수할 수 있습니다 · 수영복 +15% / 샤워 상쾌함 +10%는 선택입니다.")
 	return true
 func interact() -> bool:return handle_interact()
 func _finish_shower(complete: bool) -> void:
 	if not showering:return
-	showering=false;showered=complete
-	if complete:completed_showers+=1
+	showering=false
+	if complete:
+		completed_showers+=1;freshness_remaining_s=FRESHNESS_SECONDS;showered=true
+		var wellbeing: Node3D=host.interior_visit.facility_interaction
+		last_shower_cleanliness_gain=minf(SHOWER_CLEANLINESS_GAIN,maxf(0.,100.-float(wellbeing.cleanliness)))
+		wellbeing.cleanliness+=last_shower_cleanliness_gain;total_shower_cleanliness_gain+=last_shower_cleanliness_gain
 	else:cancelled_showers+=1
 	if is_instance_valid(_roof):_roof.set_pool_shower_running(false)
-	host.exploration_avatar.set_activity("",0.);host.player.set_facility_control(_saved_facility);host.player.require_neutral_input();_event("shower_completed" if complete else "shower_cancelled")
+	host.exploration_avatar.set_activity("",0.);host.player.set_facility_control(_saved_facility);host.player.require_neutral_input();_event("shower_completed" if complete else "shower_cancelled",{"freshness_remaining_s":freshness_remaining_s,"cleanliness_gain":last_shower_cleanliness_gain if complete else 0.,"refreshes_duration_instead_of_stacking":true})
 func water_access_allowed(roof: Node3D) -> bool:
-	return loaded and is_instance_valid(roof) and pool_id==String(roof.spec.id) and showered and not showering and host.shop_visit_service.swimwear_active
+	return loaded and is_instance_valid(roof) and roof.profile_id=="outdoor_pool"
 func enforce_player_water_access() -> bool:
-	if not loaded or (host.has_method("_street_transport_riding") and host._street_transport_riding()):return true
-	for roof: Node3D in _roofs():
-		var region: Dictionary=roof.pool_water_region();var local: Vector3=roof.frame.affine_inverse()*host.player.global_position
-		if not region.rect.has_point(Vector2(local.x,local.z)) or local.y>float(region.surface_y)+.05 or local.y<float(region.floor_y)-.30:continue
-		if water_access_allowed(roof):return true
-		var safe: Dictionary={}
-		if is_instance_valid(_roof) and _roof==roof and not _last_safe.is_empty():safe=_safe_point(_last_safe.point)
-		if safe.is_empty():safe=_safe_point(roof.pool_preparation_points().arrival)
-		if safe.is_empty():safe=_safe_point(roof.pool_preparation_points().changing)
-		rejected_water_entries+=1;_tell("수영복과 샤워를 먼저 준비하세요. 안전한 준비 구역으로 돌아갑니다.")
-		if not safe.is_empty():
-			host.player.global_transform=Transform3D(Basis.IDENTITY,safe.point);host.player.velocity=Vector3.ZERO;host.player.last_direction=Vector3.ZERO;host.player.require_neutral_input();host.player.reset_physics_interpolation();host.player._water_contacting=false;host.player._swimming=false;host.player._water_jump_locked=false;host.player._air_jumps_used=0;host.rig.snap_to_target_pose()
-		else:host.player.recover("pool_preparation_required")
-		_event("unprepared_water_entry_rejected",{"safe_point":safe.get("point"),"scope":"Native current capsule support/overlap query; original source colliders retained."});return false
+	# Clothing and hygiene are optional activities. The original player owns
+	# physical water/float/exit validation; never relocate a casual-clothes swim.
 	return true
+func swimming_speed_multiplier() -> float:
+	var current:=_at_roof()
+	if not loaded or not is_instance_valid(current) or current!=_roof or pool_id!=String(current.spec.id):return 1.
+	return 1.+(FRESH_SWIM_BONUS if freshness_remaining_s>0. else 0.)+(SWIMWEAR_SWIM_BONUS if host.shop_visit_service.swimwear_active else 0.)
+func _benefits_text() -> String:
+	var parts: PackedStringArray=[]
+	if host.shop_visit_service.swimwear_active:parts.append("수영복 +15%")
+	if freshness_remaining_s>0.:parts.append("상쾌함 %d초 · 수영 +10%%"%ceili(freshness_remaining_s))
+	if parts.is_empty():parts.append("추가 효과 없음 · 준비 없이 입수 가능")
+	return " / ".join(parts)+" · 수영 %.2fm/s · 청결 %.0f/100"%[host.player.swimming_speed_limit_mps(),float(host.interior_visit.facility_interaction.cleanliness)]
 func cancel_for_transition() -> void:
 	if showering:_finish_shower(false)
-	if is_instance_valid(_roof):_roof.set_pool_access_authorized(false);_roof.set_pool_shower_running(false)
+	if is_instance_valid(_roof):_roof.set_pool_access_authorized(true);_roof.set_pool_shower_running(false)
 	if loaded and host.shop_visit_service.swimwear_active:host.shop_visit_service.end_swimwear()
 	if not pool_id.is_empty():_event("preparation_session_released")
-	pool_id="";showered=false;shower_elapsed=0.;_roof=null;_last_safe.clear()
+	pool_id="";showered=false;freshness_remaining_s=0.;shower_elapsed=0.;_roof=null;_last_safe.clear();_notice="";_notice_until=0.
 func prompt_text() -> String:
 	if _busy():return ""
-	if _clock<_notice_until:return _notice
-	if showering:return "샤워 중 · %d%%\nE · 취소 · 끝까지 씻으면 수영장 입장 가능"%mini(100,roundi(shower_elapsed/SHOWER_SECONDS*100.))
 	var roof:=_at_roof()
 	if not is_instance_valid(roof):return ""
+	var benefits:=_benefits_text()
+	if showering:return "샤워 중 · %d%% · E 취소\n완료 시 청결 +20(100 상한) · 상쾌함90초 수영 +10%%\n"%mini(100,roundi(shower_elapsed/SHOWER_SECONDS*100.))+benefits
+	if _clock<_notice_until:return _notice+"\n"+benefits
 	if _near_bar(roof):
 		var bar: Dictionary=roof.pool_bar()
-		return "바텐더가 음료 준비 중 · 잠시 기다려 주세요" if bar.stage=="preparing" else ("E · "+String(bar.drink)+" 받기 · 무알코올 · 무료" if bar.stage=="ready" else "E · "+String(_bar_choice(roof).title)+" 주문 · 무알코올 · 무료")
-	if _near_station(roof,"changing"):return "E · 원래 옷으로 갈아입기" if host.shop_visit_service.swimwear_active else "E · 수영복으로 갈아입기"
-	if _near_station(roof,"shower"):return "E · 샤워하기 · 4초" if host.shop_visit_service.swimwear_active and pool_id==String(roof.spec.id) else "탈의실에서 수영복으로 갈아입은 뒤 샤워하세요."
-	if _near_station(roof,"gate"):return "입장 가능 · 계단으로 입수 / Space 물 밖으로" if water_access_allowed(roof) else "입장 준비 · 탈의실 수영복 → 샤워실 샤워"
-	if host.player.is_swimming():return "수영 중 · WASD 이동 / Space 물 밖으로 점프\n이용 후 탈의실에서 E · 원래 옷"
+		return ("바텐더가 음료 준비 중 · 잠시 기다려 주세요" if bar.stage=="preparing" else ("E · "+String(bar.drink)+" 받기 · 무알코올 · 무료" if bar.stage=="ready" else "E · "+String(_bar_choice(roof).title)+" 주문 · 무알코올 · 무료"))+"\n"+benefits
+	if _near_station(roof,"changing"):return ("E · 원래 옷으로 갈아입기" if host.shop_visit_service.swimwear_active else "E · 수영복 착용 · 선택 · 수영 +15%")+"\n"+benefits
+	if _near_station(roof,"shower"):return "E · 샤워4초 · 복장 무관 · 청결 +20 / 상쾌함90초 수영 +10%\n"+benefits
+	if _near_station(roof,"gate"):return "바로 입수 가능 · 계단으로 입수 / Space 물 밖으로\n"+benefits
+	if host.player.is_swimming():return "수영 중 · WASD 이동 / Space 물 밖으로 점프\n"+benefits
 	if host.interior_visit._elevator_near() or is_instance_valid(host.interior_visit.outdoor_roof_lift_candidate()):return ""
-	return "수영장 준비 · 탈의실 → 샤워실 → 입장" if not water_access_allowed(roof) else "수영장 이용 가능 · 계단으로 입수 / Space 물 밖으로"
+	return "자유 입수 · 탈의/샤워는 선택 · E로 이용\n"+benefits
 func _physics_process(delta: float) -> void:
 	if not loaded:return
-	_clock+=delta
 	var current:=_at_roof()
 	if not pool_id.is_empty() and current!=_roof:cancel_for_transition()
+	if get_tree().paused or host.menu.visible:return
+	_clock+=delta;freshness_remaining_s=maxf(0.,freshness_remaining_s-delta);showered=freshness_remaining_s>0.
 	if showering:
 		if _busy() or not is_instance_valid(_roof):return
 		if not _near_station(_roof,"shower"):_finish_shower(false)
 		else:
 			shower_elapsed+=delta;host.exploration_avatar.set_activity("shower",shower_elapsed)
-			if shower_elapsed>=SHOWER_SECONDS:_finish_shower(true);_tell("샤워 완료 · 수영장 게이트가 열렸습니다.")
+			if shower_elapsed>=SHOWER_SECONDS:_finish_shower(true);_tell("샤워 완료 · 청결 +%.0f · 상쾌함90초 수영 +10%%"%last_shower_cleanliness_gain)
 	for roof: Node3D in _roofs():
 		roof.set_pool_access_authorized(water_access_allowed(roof))
 		if roof.has_method("update_pool_lounge"):roof.update_pool_lounge(String(host.get("time_id") if host.get("time_id")!=null else "day"),roof==current,delta)
@@ -196,4 +207,4 @@ func snapshot() -> Dictionary:
 	var rooms: Array=[]
 	if loaded:
 		for roof: Node3D in _roofs():rooms.append({"id":roof.spec.id,"points":roof.pool_preparation_points(),"authorized":water_access_allowed(roof),"gate_layer":roof._pool_gate_body.collision_layer,"shower_water_visible":roof._pool_shower_water.visible,"lounge":roof.pool_lounge_snapshot() if roof.has_method("pool_lounge_snapshot") else {}})
-	return {"loaded":loaded,"error":load_error,"pool_id":pool_id,"swimwear_active":host.shop_visit_service.swimwear_active if loaded else false,"showering":showering,"shower_elapsed_s":shower_elapsed,"showered":showered,"completed_showers":completed_showers,"cancelled_showers":cancelled_showers,"rejected_water_entries":rejected_water_entries,"rooms":rooms,"events":events.duplicate(true),"scope":"Authored roof-local changing/shower rooms and native gate; completed preparation required for actual water entry including jumps/falls. No real hotel amenity or surveyed interior claim."}
+	return {"loaded":loaded,"error":load_error,"pool_id":pool_id,"swimwear_active":host.shop_visit_service.swimwear_active if loaded else false,"showering":showering,"shower_elapsed_s":shower_elapsed,"showered":showered,"entry_requires_preparation":false,"freshness_remaining_s":freshness_remaining_s,"freshness_duration_s":FRESHNESS_SECONDS,"last_shower_cleanliness_gain":last_shower_cleanliness_gain,"total_shower_cleanliness_gain":total_shower_cleanliness_gain,"cleanliness":float(host.interior_visit.facility_interaction.cleanliness) if loaded else 0.,"swimming_speed_multiplier":swimming_speed_multiplier() if loaded else 1.,"swimming_speed_limit_mps":host.player.swimming_speed_limit_mps() if loaded else 0.,"completed_showers":completed_showers,"cancelled_showers":cancelled_showers,"rejected_water_entries":rejected_water_entries,"rooms":rooms,"events":events.duplicate(true),"scope":"Authored roof-local optional changing/shower benefits. Casual clothes may enter/swim directly; freshness90 game seconds gives +10% swim speed, swimsuit +15%, additive cap25%; completed shower gives capped cleanliness+20. Timed effects and outfit restore on leaving, cleanliness remains an existing session wellbeing stat. No real hotel amenity or surveyed interior claim."}

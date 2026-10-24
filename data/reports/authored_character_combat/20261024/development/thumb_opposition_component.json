@@ -1,0 +1,4750 @@
+{
+  "captures": [],
+  "checks": [
+    {
+      "evidence": {
+        "active_body_source": "sim2seoul_authored_resident_street",
+        "actual_height_m": 1.69999969005585,
+        "actual_visible_bounds_m": "[P: (-0.239885, 0.0, -0.178842), S: (0.47977, 1.7, 0.296329)]",
+        "authored_generator": "res://../tools/authored_character/build_seoul_resident.py",
+        "bounds_sampled_at_physics_tick": 1,
+        "clothing_palette": {
+          "body_gain_linear": 1.0,
+          "hands_use_separate_original_skin_material": true,
+          "texture_means": {
+            "jacket_linear": "(0.1, 0.14, 0.18, 1.0)",
+            "method": "authored_material_base_color_and_original_weave_texture",
+            "pants_linear": "(0.24, 0.25, 0.25, 1.0)"
+          }
+        },
+        "error": "",
+        "legacy_geometry_rendered": false,
+        "loaded": true,
+        "model_id": "SeoulResident_M01",
+        "normalization_scale": 1.00472811369973,
+        "normalized_rest_height_m": 1.7,
+        "original_head_and_hair_preserved": true,
+        "requested_compatibility_alias": "SeoulResident_M01",
+        "rig_contact_metrics": {
+          "bone_count": 52,
+          "contact_lean_degrees": 0.0,
+          "contact_mode": false,
+          "contacts": {
+            "LeftFoot": {
+              "actual_world": [
+                -0.0984633415937424,
+                0.105496630072594,
+                -0.00502362148836255
+              ],
+              "error_m": 0.000000179317694914971,
+              "required_contact": true,
+              "target_world": [
+                -0.098463349044323,
+                0.105496451258659,
+                -0.00502363266423345
+              ]
+            },
+            "LeftHand": {
+              "actual_world": [
+                -0.192565634846687,
+                0.813262820243835,
+                -0.0164082627743483
+              ],
+              "error_m": 0.0995666682720184,
+              "required_contact": false,
+              "target_world": [
+                -0.256762683391571,
+                0.737202346324921,
+                -0.0190660636872053
+              ]
+            },
+            "RightFoot": {
+              "actual_world": [
+                0.0984633415937424,
+                0.105496630072594,
+                -0.00502363825216889
+              ],
+              "error_m": 0.000000179317694914971,
+              "required_contact": true,
+              "target_world": [
+                0.098463349044323,
+                0.105496451258659,
+                -0.00502364942803979
+              ]
+            },
+            "RightHand": {
+              "actual_world": [
+                0.192565634846687,
+                0.813262820243835,
+                -0.0164082925766706
+              ],
+              "error_m": 0.0995666682720184,
+              "required_contact": false,
+              "target_world": [
+                0.256762683391571,
+                0.737202346324921,
+                -0.0190660636872053
+              ]
+            }
+          },
+          "finite_bone_poses": true,
+          "frames": 1,
+          "godot_bone_pose_includes_rest": true,
+          "ground_gait_common_pelvis": false,
+          "load_error": "",
+          "loaded": true,
+          "maximum_contact_error_m": 0.000000179317694914971,
+          "maximum_contact_lean_degrees": 25.0,
+          "maximum_marker_gap_m": 0.0995666682720184,
+          "maximum_unreachable_target_clamp_m": 0.0,
+          "pelvis_displacement_skeleton_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pelvis_roll_degrees": 0.0,
+          "pelvis_yaw_degrees": 0.0,
+          "physics_or_source_joints_modified": false,
+          "pose_owner": "textured_human_rig_render_priority_100",
+          "source_joint_count": 11,
+          "upper_body_reference_fit": {}
+        },
+        "scope": "Own weighted human, authored directly from numerical profiles. Bounds CPU-skin the actual referenced displayed vertices. Original vendor bodies, faces, textures and animations are not loaded.",
+        "skeleton_bone_count": 52,
+        "supplier": "Sim2Seoul project-authored anatomical profiles, facial sculpt, clothing, procedural textures, skeleton and skin weights",
+        "surface_texture_uv_ready": true,
+        "swim_head_cut": {},
+        "swim_head_join": {},
+        "swim_skeleton_bone_count": 0,
+        "swimwear_active": false,
+        "vendor_geometry_loaded": false,
+        "visible_mesh_count": 1
+      },
+      "name": "production_avatar_and_skin_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "jab_left_all_phases_native_bones_finite",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_segment_error_m": 0.000000357627868652344
+      },
+      "name": "jab_left_native_arms_never_stretch",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "jab_left_visual_weight_shift_never_moves_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "contact": {
+          "hand_world": [
+            -0.105000011622906,
+            1.47500014305115,
+            -0.534999907016754
+          ],
+          "kind": "jab_left",
+          "phase": 0.291666666666667,
+          "point": [
+            -0.105000011622906,
+            1.45289623737335,
+            -0.613368690013885
+          ],
+          "radius_m": 0.105,
+          "side": "Left",
+          "valid": true
+        }
+      },
+      "name": "jab_left_actual_native_contact_reaches_forward",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finger_index": 11,
+        "rotation": [
+          -1.48647248744965,
+          2.54671621322632,
+          -2.49772977828979
+        ]
+      },
+      "name": "jab_left_actual_original_finger_bone_is_closed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "scope": "Native articulated thumb landmark test; exposed skin still requires closeup visual review.",
+        "thumb_base_hand_local": [
+          -0.0330000147223473,
+          -0.0249999761581421,
+          0.00600004196166992
+        ],
+        "thumb_distal_hand_local": [
+          0.00418729335069656,
+          -0.0418428778648376,
+          0.0222263336181641
+        ]
+      },
+      "name": "jab_left_thumb_opposes_across_palm_instead_of_hanging_outward",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "cross_right_all_phases_native_bones_finite",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_segment_error_m": 0.000000387430191040039
+      },
+      "name": "cross_right_native_arms_never_stretch",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "cross_right_visual_weight_shift_never_moves_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "contact": {
+          "hand_world": [
+            -0.0150000033900142,
+            1.4650000333786,
+            -0.539999902248383
+          ],
+          "kind": "cross_right",
+          "phase": 0.344827586206897,
+          "point": [
+            -0.0227979924529791,
+            1.44289612770081,
+            -0.617979824542999
+          ],
+          "radius_m": 0.105,
+          "side": "Right",
+          "valid": true
+        }
+      },
+      "name": "cross_right_actual_native_contact_reaches_forward",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finger_index": 30,
+        "rotation": [
+          -1.48647248744965,
+          -2.54671621322632,
+          2.49772977828979
+        ]
+      },
+      "name": "cross_right_actual_original_finger_bone_is_closed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "scope": "Native articulated thumb landmark test; exposed skin still requires closeup visual review.",
+        "thumb_base_hand_local": [
+          0.0330000072717667,
+          -0.0250000357627869,
+          0.00600004196166992
+        ],
+        "thumb_distal_hand_local": [
+          -0.00418730825185776,
+          -0.0418428778648376,
+          0.0222263336181641
+        ]
+      },
+      "name": "cross_right_thumb_opposes_across_palm_instead_of_hanging_outward",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "hook_left_all_phases_native_bones_finite",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_segment_error_m": 0.000000298023223876953
+      },
+      "name": "hook_left_native_arms_never_stretch",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "hook_left_visual_weight_shift_never_moves_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "contact": {
+          "hand_world": [
+            0.10499994456768,
+            1.45500004291534,
+            -0.465000003576279
+          ],
+          "kind": "hook_left",
+          "phase": 0.363636363636364,
+          "point": [
+            0.163832455873489,
+            1.43289601802826,
+            -0.516772627830505
+          ],
+          "radius_m": 0.105,
+          "side": "Left",
+          "valid": true
+        }
+      },
+      "name": "hook_left_actual_native_contact_reaches_forward",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "finger_index": 11,
+        "rotation": [
+          -1.48647248744965,
+          2.54671621322632,
+          -2.49772977828979
+        ]
+      },
+      "name": "hook_left_actual_original_finger_bone_is_closed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "scope": "Native articulated thumb landmark test; exposed skin still requires closeup visual review.",
+        "thumb_base_hand_local": [
+          -0.0329999625682831,
+          -0.0249999463558197,
+          0.00600004196166992
+        ],
+        "thumb_distal_hand_local": [
+          0.00418734550476074,
+          -0.0418428182601929,
+          0.0222263336181641
+        ]
+      },
+      "name": "hook_left_thumb_opposes_across_palm_instead_of_hanging_outward",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "shove_all_phases_native_bones_finite",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "maximum_segment_error_m": 0.000000238418579101562
+      },
+      "name": "shove_native_arms_never_stretch",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "shove_visual_weight_shift_never_moves_capsule",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "contact": {
+          "hand_world": [
+            -0.18000003695488,
+            1.31000030040741,
+            -0.50000011920929
+          ],
+          "kind": "shove",
+          "phase": 0.323529411764706,
+          "point": [
+            -0.18000003695488,
+            1.38836896419525,
+            -0.522104144096375
+          ],
+          "radius_m": 0.105,
+          "side": "Left",
+          "valid": true
+        }
+      },
+      "name": "shove_actual_native_contact_reaches_forward",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "cancel_removes_combat_pose_owner",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "phase": 0.28448275862069,
+        "physical_current": 0.344827586206897,
+        "physical_previous": 0.224137931034483
+      },
+      "name": "render_phase_interpolates_combat_between_physical_ticks",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "rendered_pelvis_y": 0.940897166728973
+      },
+      "name": "render_keeps_combat_hip_drop_instead_of_gait_wave",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "physics_restore_removes_render_combat_metadata",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "cancel_does_not_resurrect_cached_render_attack",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "held_guard_has_explicit_render_owner",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "facility_takeover_discards_render_guard_owner",
+      "passed": true
+    }
+  ],
+  "passed": 30,
+  "result": "PASS",
+  "samples": [
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.189109355211258,
+        1.09251070022583,
+        0.0117266485467553
+      ],
+      "left_wrist": [
+        -0.197830080986023,
+        0.842244803905487,
+        -0.0134051023051143
+      ],
+      "pelvis": [
+        0.0,
+        0.93640661239624,
+        0.0
+      ],
+      "phase": 0.0,
+      "point": {
+        "hand_world": [
+          -0.197830080986023,
+          0.842244803905487,
+          -0.013405098579824
+        ],
+        "kind": "jab_left",
+        "phase": 0.0,
+        "point": [
+          -0.191937625408173,
+          0.766208648681641,
+          -0.0419363863766193
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.105496630072594,
+              -0.00502362148836255
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105496451258659,
+              -0.00502363266423345
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.192565634846687,
+              0.813262820243835,
+              -0.016408259049058
+            ],
+            "error_m": 0.0995666682720184,
+            "required_contact": false,
+            "target_world": [
+              -0.256762683391571,
+              0.737202346324921,
+              -0.019066059961915
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633415937424,
+              0.105496630072594,
+              -0.00502363825216889
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105496451258659,
+              -0.00502364942803979
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.192565634846687,
+              0.813262820243835,
+              -0.0164082925766706
+            ],
+            "error_m": 0.0995666682720184,
+            "required_contact": false,
+            "target_world": [
+              0.256762683391571,
+              0.737202346324921,
+              -0.019066059961915
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 4,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000179317694914971,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0995666682720184,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.189109355211258,
+        1.09251070022583,
+        0.0117266150191426
+      ],
+      "right_wrist": [
+        0.197830080986023,
+        0.842244803905487,
+        -0.0134051376953721
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.344661802053452,
+        1.14308369159698,
+        -0.129626035690308
+      ],
+      "left_wrist": [
+        -0.181599467992783,
+        1.32442283630371,
+        -0.191815420985222
+      ],
+      "pelvis": [
+        -0.00962099153548479,
+        0.914759397506714,
+        0.00801749248057604
+      ],
+      "phase": 0.075,
+      "point": {
+        "hand_world": [
+          -0.181599453091621,
+          1.324422955513,
+          -0.191815450787544
+        ],
+        "kind": "jab_left",
+        "phase": 0.075,
+        "point": [
+          -0.194924369454384,
+          1.40408658981323,
+          -0.202130988240242
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157006919384
+            ],
+            "error_m": 0.0000000372529029846191,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157044172287
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.179888784885406,
+              1.35273706912994,
+              -0.200305163860321
+            ],
+            "error_m": 0.159131094813347,
+            "required_contact": false,
+            "target_world": [
+              -0.0431165099143982,
+              1.30052411556244,
+              -0.262673884630203
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.110372491180897,
+              0.11464636027813
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.110372461378574,
+              0.11464636027813
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.15539339184761,
+              1.33373463153839,
+              -0.169307857751846
+            ],
+            "error_m": 0.164042919874191,
+            "required_contact": false,
+            "target_world": [
+              0.0149674424901605,
+              1.29106163978577,
+              -0.242585748434067
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 8,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000372529029846191,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.164042919874191,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.00957571808248758,
+          -0.0215453505516052,
+          -0.00797976274043322
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.322665154933929,
+        1.13793134689331,
+        -0.0739925056695938
+      ],
+      "right_wrist": [
+        0.155963018536568,
+        1.30548191070557,
+        -0.160467490553856
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.311370819807053,
+        1.24520540237427,
+        -0.275893419981003
+      ],
+      "left_wrist": [
+        -0.17354054749012,
+        1.45160174369812,
+        -0.234131276607513
+      ],
+      "pelvis": [
+        -0.0125654973089695,
+        0.908841133117676,
+        0.0084448866546154
+      ],
+      "phase": 0.15,
+      "point": {
+        "hand_world": [
+          -0.173540517687798,
+          1.45160186290741,
+          -0.234131261706352
+        ],
+        "kind": "jab_left",
+        "phase": 0.15,
+        "point": [
+          -0.194461077451706,
+          1.53005337715149,
+          -0.22797104716301
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206895887852
+            ],
+            "error_m": 0.0000000372529029846191,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.177026972174644,
+              1.48062121868134,
+              -0.238865464925766
+            ],
+            "error_m": 0.0296089667826891,
+            "required_contact": false,
+            "target_world": [
+              -0.17354054749012,
+              1.45160186290741,
+              -0.234131246805191
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633639454842,
+              0.114095486700535,
+              0.143659889698029
+            ],
+            "error_m": 0.0000000748774056091861,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856581687927,
+              1.45427823066711,
+              -0.219412207603455
+            ],
+            "error_m": 0.0296092070639133,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 12,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000748774056091861,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296092070639133,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0125063667073846,
+          -0.0274357795715332,
+          -0.00840514525771141
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.275836437940598,
+        1.21818912029266,
+        -0.187887474894524
+      ],
+      "right_wrist": [
+        0.134999856352806,
+        1.42500019073486,
+        -0.215000003576279
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.260259807109833,
+        1.47511899471283,
+        -0.33692130446434
+      ],
+      "left_wrist": [
+        -0.105000041425228,
+        1.47500002384186,
+        -0.534999847412109
+      ],
+      "pelvis": [
+        -0.0199999995529652,
+        0.901406586170197,
+        -0.0120000001043081
+      ],
+      "phase": 0.291666666666667,
+      "point": {
+        "hand_world": [
+          -0.105000011622906,
+          1.47500014305115,
+          -0.534999907016754
+        ],
+        "kind": "jab_left",
+        "phase": 0.291666666666667,
+        "point": [
+          -0.105000011622906,
+          1.45289623737335,
+          -0.613368690013885
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.116331316530704,
+              -0.118207052350044
+            ],
+            "error_m": 0.000000133280039449346,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.108114652335644,
+              1.47439730167389,
+              -0.56443840265274
+            ],
+            "error_m": 0.0296088252216578,
+            "required_contact": false,
+            "target_world": [
+              -0.104999966919422,
+              1.47500002384186,
+              -0.535000026226044
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984634459018707,
+              0.114095635712147,
+              0.143659844994545
+            ],
+            "error_m": 0.000000154857403344977,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856671094894,
+              1.45427787303925,
+              -0.219412177801132
+            ],
+            "error_m": 0.0296088494360447,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 16,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000154857403344977,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296088494360447,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0199058819562197,
+          -0.0348353385925293,
+          0.011943532153964
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.280894130468369,
+        1.22199940681458,
+        -0.1859090924263
+      ],
+      "right_wrist": [
+        0.134999886155128,
+        1.42499995231628,
+        -0.214999943971634
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.289462983608246,
+        1.44864082336426,
+        -0.334206640720367
+      ],
+      "left_wrist": [
+        -0.108753494918346,
+        1.47218525409698,
+        -0.507787883281708
+      ],
+      "pelvis": [
+        -0.0192493256181479,
+        0.902157306671143,
+        -0.0099356397986412
+      ],
+      "phase": 0.43,
+      "point": {
+        "hand_world": [
+          -0.10875342041254,
+          1.4721851348877,
+          -0.507788002490997
+        ],
+        "kind": "jab_left",
+        "phase": 0.43,
+        "point": [
+          -0.127930894494057,
+          1.45163607597351,
+          -0.584209322929382
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.116331376135349,
+              -0.118206933140755
+            ],
+            "error_m": 0.00000011944189282076,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.117263525724411,
+              1.47266161441803,
+              -0.536143660545349
+            ],
+            "error_m": 0.0296090357005596,
+            "required_contact": false,
+            "target_world": [
+              -0.108753457665443,
+              1.4721851348877,
+              -0.507787942886353
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.11409554630518,
+              0.143660023808479
+            ],
+            "error_m": 0.0000000921585936453084,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856730699539,
+              1.45427787303925,
+              -0.219412207603455
+            ],
+            "error_m": 0.029608853161335,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 20,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.00000011944189282076,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296090357005596,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0191587414592505,
+          -0.034088134765625,
+          0.00988888647407293
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.280383229255676,
+        1.22159421443939,
+        -0.186179876327515
+      ],
+      "right_wrist": [
+        0.134999975562096,
+        1.42499983310699,
+        -0.214999958872795
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.308191686868668,
+        1.29444777965546,
+        -0.315229177474976
+      ],
+      "left_wrist": [
+        -0.127023831009865,
+        1.45848214626312,
+        -0.375326365232468
+      ],
+      "pelvis": [
+        -0.0155952125787735,
+        0.905811309814453,
+        0.000113167807285208
+      ],
+      "phase": 0.6,
+      "point": {
+        "hand_world": [
+          -0.127023845911026,
+          1.45848214626312,
+          -0.37532639503479
+        ],
+        "kind": "jab_left",
+        "phase": 0.6,
+        "point": [
+          -0.194988131523132,
+          1.49232006072998,
+          -0.404756039381027
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.116331197321415,
+              -0.118206940591335
+            ],
+            "error_m": 0.0000000605288050792296,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.146446943283081,
+              1.47621476650238,
+              -0.388927310705185
+            ],
+            "error_m": 0.0296088792383671,
+            "required_contact": false,
+            "target_world": [
+              -0.127023935317993,
+              1.45848202705383,
+              -0.375326484441757
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.114095486700535,
+              0.143659994006157
+            ],
+            "error_m": 0.0000000846223286998793,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856849908829,
+              1.45427811145782,
+              -0.219412088394165
+            ],
+            "error_m": 0.0296090710908175,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 24,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000846223286998793,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296090710908175,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0155218243598938,
+          -0.0304512977600098,
+          -0.000112633904791437
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.277888834476471,
+        1.21968495845795,
+        -0.187264129519463
+      ],
+      "right_wrist": [
+        0.135000064969063,
+        1.42500007152557,
+        -0.214999809861183
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.314394116401672,
+        1.17523074150085,
+        -0.21482552587986
+      ],
+      "left_wrist": [
+        -0.158925086259842,
+        1.37269902229309,
+        -0.228105574846268
+      ],
+      "pelvis": [
+        -0.0107858208939433,
+        0.912391901016235,
+        0.0082617336884141
+      ],
+      "phase": 0.78,
+      "point": {
+        "hand_world": [
+          -0.15892505645752,
+          1.37269914150238,
+          -0.228105589747429
+        ],
+        "kind": "jab_left",
+        "phase": 0.78,
+        "point": [
+          -0.173186555504799,
+          1.45283317565918,
+          -0.23042955994606
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.114297151565552,
+              -0.105105124413967
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.114297166466713,
+              -0.10510515421629
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.158429607748985,
+              1.40155124664307,
+              -0.234738886356354
+            ],
+            "error_m": 0.101200431585312,
+            "required_contact": false,
+            "target_world": [
+              -0.0775982290506363,
+              1.36331105232239,
+              -0.282125622034073
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633639454842,
+              0.111762635409832,
+              0.126425325870514
+            ],
+            "error_m": 0.000000116620036294535,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.111762747168541,
+              0.126425296068192
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.146636933088303,
+              1.38237965106964,
+              -0.188278272747993
+            ],
+            "error_m": 0.104294493794441,
+            "required_contact": false,
+            "target_world": [
+              0.0567250140011311,
+              1.35333406925201,
+              -0.232431888580322
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 28,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000116620036294535,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.104294493794441,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0107350656762719,
+          -0.0239017009735107,
+          -0.0082228546962142
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.299781024456024,
+        1.16037881374359,
+        -0.129351928830147
+      ],
+      "right_wrist": [
+        0.147141575813293,
+        1.353515625,
+        -0.181697607040405
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "jab_left",
+      "left_elbow": [
+        -0.279587179422379,
+        1.12111008167267,
+        -0.0847689509391785
+      ],
+      "left_wrist": [
+        -0.25467985868454,
+        0.878886282444,
+        -0.0211447346955538
+      ],
+      "pelvis": [
+        -0.000664723105728626,
+        0.934911012649536,
+        0.000553935882635415
+      ],
+      "phase": 0.96,
+      "point": {
+        "hand_world": [
+          -0.254679918289185,
+          0.878886282444,
+          -0.0211447197943926
+        ],
+        "kind": "jab_left",
+        "phase": 0.96,
+        "point": [
+          -0.238736748695374,
+          0.800081670284271,
+          -0.00826418958604336
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633341431618,
+              0.105705246329308,
+              -0.0113835390657187
+            ],
+            "error_m": 0.000000150171246104946,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105705395340919,
+              -0.0113835502415895
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.245628699660301,
+              0.853155434131622,
+              -0.00962563790380955
+            ],
+            "error_m": 0.122350990772247,
+            "required_contact": false,
+            "target_world": [
+              -0.2200688123703,
+              0.739971041679382,
+              -0.0484296381473541
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.105294957756996,
+              0.00327794230543077
+            ],
+            "error_m": 0.000000238425855059177,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105294719338417,
+              0.00327794416807592
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.241237342357635,
+              0.851559221744537,
+              -0.00396229466423392
+            ],
+            "error_m": 0.121637850999832,
+            "required_contact": false,
+            "target_world": [
+              0.214336141943932,
+              0.739820778369904,
+              -0.0437945872545242
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 32,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000238425855059177,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.122350990772247,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.000661595084238797,
+          -0.00148856639862061,
+          -0.000551329110749066
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.296584129333496,
+        1.12158763408661,
+        -0.0550167858600616
+      ],
+      "right_wrist": [
+        0.252409726381302,
+        0.87736988067627,
+        -0.0132189812138677
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.189109355211258,
+        1.09251070022583,
+        0.0117266485467553
+      ],
+      "left_wrist": [
+        -0.197830080986023,
+        0.842244803905487,
+        -0.0134051023051143
+      ],
+      "pelvis": [
+        0.0,
+        0.93640661239624,
+        0.0
+      ],
+      "phase": 0.0,
+      "point": {
+        "hand_world": [
+          0.197830080986023,
+          0.842244744300842,
+          -0.0134051544591784
+        ],
+        "kind": "cross_right",
+        "phase": 0.0,
+        "point": [
+          0.191937610507011,
+          0.766208589076996,
+          -0.0419364422559738
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.105496630072594,
+              -0.00502362148836255
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105496451258659,
+              -0.00502363266423345
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.192565634846687,
+              0.813262820243835,
+              -0.016408259049058
+            ],
+            "error_m": 0.099566712975502,
+            "required_contact": false,
+            "target_world": [
+              -0.256762683391571,
+              0.737202286720276,
+              -0.0190660636872053
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633415937424,
+              0.105496630072594,
+              -0.00502363825216889
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105496451258659,
+              -0.00502364942803979
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.192565634846687,
+              0.813262760639191,
+              -0.0164083149284124
+            ],
+            "error_m": 0.0995666235685349,
+            "required_contact": false,
+            "target_world": [
+              0.256762683391571,
+              0.737202346324921,
+              -0.0190660636872053
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 40,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000179317694914971,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.099566712975502,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.189109355211258,
+        1.09251070022583,
+        0.0117266131564975
+      ],
+      "right_wrist": [
+        0.197830066084862,
+        0.842244744300842,
+        -0.0134051600471139
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.339355200529099,
+        1.14636397361755,
+        -0.144094288349152
+      ],
+      "left_wrist": [
+        -0.169943124055862,
+        1.3227573633194,
+        -0.203471764922142
+      ],
+      "pelvis": [
+        -0.00962099153548479,
+        0.914759397506714,
+        0.00801749248057604
+      ],
+      "phase": 0.075,
+      "point": {
+        "hand_world": [
+          0.161036506295204,
+          1.30294525623322,
+          -0.147783532738686
+        ],
+        "kind": "cross_right",
+        "phase": 0.075,
+        "point": [
+          0.178831025958061,
+          1.38152348995209,
+          -0.159576773643494
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157006919384
+            ],
+            "error_m": 0.0000000372529029846191,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157044172287
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.167752116918564,
+              1.35102677345276,
+              -0.211999818682671
+            ],
+            "error_m": 0.157363697886467,
+            "required_contact": false,
+            "target_world": [
+              -0.0394992865622044,
+              1.29604279994965,
+              -0.284741193056107
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.110372491180897,
+              0.11464636027813
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.110372461378574,
+              0.11464636027813
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.16094996035099,
+              1.33113551139832,
+              -0.156838551163673
+            ],
+            "error_m": 0.163957715034485,
+            "required_contact": false,
+            "target_world": [
+              0.013611645437777,
+              1.28946852684021,
+              -0.215468019247055
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 44,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000372529029846191,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.163957715034485,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.00957571808248758,
+          -0.0215453505516052,
+          -0.00797976274043322
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.328275233507156,
+        1.13592159748077,
+        -0.0613252855837345
+      ],
+      "right_wrist": [
+        0.161036476492882,
+        1.30294525623322,
+        -0.147783547639847
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.286502957344055,
+        1.24007058143616,
+        -0.281353741884232
+      ],
+      "left_wrist": [
+        -0.144999995827675,
+        1.44500029087067,
+        -0.244999960064888
+      ],
+      "pelvis": [
+        -0.0120354956015944,
+        0.909377038478851,
+        0.0099250664934516
+      ],
+      "phase": 0.15,
+      "point": {
+        "hand_world": [
+          0.151545971632004,
+          1.4166579246521,
+          -0.173536464571953
+        ],
+        "kind": "cross_right",
+        "phase": 0.15,
+        "point": [
+          0.160180598497391,
+          1.49718642234802,
+          -0.16511794924736
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.116331435739994,
+              -0.118206925690174
+            ],
+            "error_m": 0.000000179124100441186,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.144260555505753,
+              1.47422313690186,
+              -0.249708086252213
+            ],
+            "error_m": 0.0296091418713331,
+            "required_contact": false,
+            "target_world": [
+              -0.145000040531158,
+              1.44500005245209,
+              -0.245000034570694
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633639454842,
+              0.11409542709589,
+              0.143659994006157
+            ],
+            "error_m": 0.000000133488128994941,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.151523247361183,
+              1.44593620300293,
+              -0.177949354052544
+            ],
+            "error_m": 0.0296089760959148,
+            "required_contact": false,
+            "target_world": [
+              0.151545941829681,
+              1.4166579246521,
+              -0.173536494374275
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 48,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000179124100441186,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296091418713331,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119788590818644,
+          -0.0269023776054382,
+          -0.00987835973501205
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.289699792861938,
+        1.20629096031189,
+        -0.173636868596077
+      ],
+      "right_wrist": [
+        0.151545986533165,
+        1.4166579246521,
+        -0.173536449670792
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.282012313604355,
+        1.23469889163971,
+        -0.226513504981995
+      ],
+      "left_wrist": [
+        -0.14499993622303,
+        1.44500017166138,
+        -0.245000019669533
+      ],
+      "pelvis": [
+        -0.0300000011920929,
+        0.894406616687775,
+        -0.0280000008642673
+      ],
+      "phase": 0.344827586206897,
+      "point": {
+        "hand_world": [
+          -0.0150000033900142,
+          1.4650000333786,
+          -0.539999902248383
+        ],
+        "kind": "cross_right",
+        "phase": 0.344827586206897,
+        "point": [
+          -0.0227979924529791,
+          1.44289612770081,
+          -0.617979824542999
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.11633113771677,
+              -0.118206858634949
+            ],
+            "error_m": 0.000000140577270713038,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.144260495901108,
+              1.47422313690186,
+              -0.249708116054535
+            ],
+            "error_m": 0.0296091493219137,
+            "required_contact": false,
+            "target_world": [
+              -0.145000040531158,
+              1.44500005245209,
+              -0.245000034570694
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984632670879364,
+              0.114095367491245,
+              0.143659979104996
+            ],
+            "error_m": 0.000000204857101948619,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              -0.0148300677537918,
+              1.46439731121063,
+              -0.569602310657501
+            ],
+            "error_m": 0.0296089127659798,
+            "required_contact": false,
+            "target_world": [
+              -0.015000001527369,
+              1.4650000333786,
+              -0.540000021457672
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 52,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000204857101948619,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296091493219137,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0298588238656521,
+          -0.0418023467063904,
+          0.0278682392090559
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.178592309355736,
+        1.45237720012665,
+        -0.379677027463913
+      ],
+      "right_wrist": [
+        -0.0149999735876918,
+        1.46500015258789,
+        -0.539999842643738
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.281980454921722,
+        1.23455536365509,
+        -0.227966591715813
+      ],
+      "left_wrist": [
+        -0.144999891519547,
+        1.44500005245209,
+        -0.244999930262566
+      ],
+      "pelvis": [
+        -0.0295775812119246,
+        0.894758641719818,
+        -0.0271082296967506
+      ],
+      "phase": 0.43,
+      "point": {
+        "hand_world": [
+          -0.0114798014983535,
+          1.46406137943268,
+          -0.532373070716858
+        ],
+        "kind": "cross_right",
+        "phase": 0.43,
+        "point": [
+          -0.0143319144845009,
+          1.4416891336441,
+          -0.610613703727722
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633564949036,
+              0.11633125692606,
+              -0.118206903338432
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.144260466098785,
+              1.47422289848328,
+              -0.249707996845245
+            ],
+            "error_m": 0.0296088941395283,
+            "required_contact": false,
+            "target_world": [
+              -0.145000040531158,
+              1.44500005245209,
+              -0.245000034570694
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984634011983871,
+              0.114095635712147,
+              0.143659919500351
+            ],
+            "error_m": 0.000000101064593138744,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              -0.00987756904214621,
+              1.46351993083954,
+              -0.561933696269989
+            ],
+            "error_m": 0.0296089686453342,
+            "required_contact": false,
+            "target_world": [
+              -0.0114798555150628,
+              1.46406137943268,
+              -0.532373070716858
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 56,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000101064593138744,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296089686453342,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0294383931905031,
+          -0.0414519906044006,
+          0.0269806645810604
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.185994327068329,
+        1.4471195936203,
+        -0.377267837524414
+      ],
+      "right_wrist": [
+        -0.0114798918366432,
+        1.46406137943268,
+        -0.532373070716858
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.281509965658188,
+        1.23379790782928,
+        -0.254960209131241
+      ],
+      "left_wrist": [
+        -0.144999861717224,
+        1.44500052928925,
+        -0.24499998986721
+      ],
+      "pelvis": [
+        -0.0216076970100403,
+        0.901400208473206,
+        -0.010282913222909
+      ],
+      "phase": 0.6,
+      "point": {
+        "hand_world": [
+          0.0549358241260052,
+          1.44635033607483,
+          -0.38847216963768
+        ],
+        "kind": "cross_right",
+        "phase": 0.6,
+        "point": [
+          0.120580315589905,
+          1.464350938797,
+          -0.433160394430161
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633564949036,
+              0.116331018507481,
+              -0.118207015097141
+            ],
+            "error_m": 0.000000252551615176344,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.144260406494141,
+              1.47422337532043,
+              -0.249708041548729
+            ],
+            "error_m": 0.0296093728393316,
+            "required_contact": false,
+            "target_world": [
+              -0.145000040531158,
+              1.44500005245209,
+              -0.245000034570694
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463386297226,
+              0.114095635712147,
+              0.143659919500351
+            ],
+            "error_m": 0.0000000954139878217575,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.0742655619978905,
+              1.45929789543152,
+              -0.406786441802979
+            ],
+            "error_m": 0.029608741402626,
+            "required_contact": false,
+            "target_world": [
+              0.0549358613789082,
+              1.44635057449341,
+              -0.388472318649292
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 60,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000252551615176344,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296093728393316,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0215060152113438,
+          -0.0348416566848755,
+          0.0102345254272223
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.250221252441406,
+        1.30609834194183,
+        -0.314083099365234
+      ],
+      "right_wrist": [
+        0.0549358539283276,
+        1.44635033607483,
+        -0.388472080230713
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.312536150217056,
+        1.17185461521149,
+        -0.210625156760216
+      ],
+      "left_wrist": [
+        -0.160105735063553,
+        1.37189722061157,
+        -0.220044016838074
+      ],
+      "pelvis": [
+        -0.0111510530114174,
+        0.9121213555336,
+        0.00762021075934172
+      ],
+      "phase": 0.78,
+      "point": {
+        "hand_world": [
+          0.142524361610413,
+          1.35475671291351,
+          -0.192674681544304
+        ],
+        "kind": "cross_right",
+        "phase": 0.78,
+        "point": [
+          0.161731213331223,
+          1.43382132053375,
+          -0.195861592888832
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633639454842,
+              0.114297091960907,
+              -0.105105116963387
+            ],
+            "error_m": 0.0000000846223286998793,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.114297166466713,
+              -0.10510515421629
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.158060789108276,
+              1.40071666240692,
+              -0.226520925760269
+            ],
+            "error_m": 0.100802071392536,
+            "required_contact": false,
+            "target_world": [
+              -0.0755734071135521,
+              1.36338663101196,
+              -0.270830720663071
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633266925812,
+              0.11176273226738,
+              0.126425430178642
+            ],
+            "error_m": 0.00000013677447441296,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.111762747168541,
+              0.126425296068192
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.143792480230331,
+              1.38351786136627,
+              -0.199594661593437
+            ],
+            "error_m": 0.105394646525383,
+            "required_contact": false,
+            "target_world": [
+              0.0556127913296223,
+              1.35307681560516,
+              -0.248642757534981
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 64,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.00000013677447441296,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.105394646525383,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0110985785722733,
+          -0.024170994758606,
+          -0.00758435064926744
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.298491239547729,
+        1.16430187225342,
+        -0.14031058549881
+      ],
+      "right_wrist": [
+        0.142524316906929,
+        1.35475671291351,
+        -0.192674651741982
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "cross_right",
+      "left_elbow": [
+        -0.279587179422379,
+        1.12111008167267,
+        -0.0847689509391785
+      ],
+      "left_wrist": [
+        -0.25467985868454,
+        0.878886282444,
+        -0.0211447048932314
+      ],
+      "pelvis": [
+        -0.000664723105728626,
+        0.934911012649536,
+        0.000553935882635415
+      ],
+      "phase": 0.96,
+      "point": {
+        "hand_world": [
+          0.252409756183624,
+          0.87736976146698,
+          -0.0132189998403192
+        ],
+        "kind": "cross_right",
+        "phase": 0.96,
+        "point": [
+          0.230225086212158,
+          0.799262166023254,
+          -0.00711160060018301
+        ],
+        "radius_m": 0.105,
+        "side": "Right",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633341431618,
+              0.105705246329308,
+              -0.0113835390657187
+            ],
+            "error_m": 0.000000150171246104946,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105705395340919,
+              -0.0113835502415895
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.245628699660301,
+              0.853155434131622,
+              -0.00962562393397093
+            ],
+            "error_m": 0.122350998222828,
+            "required_contact": false,
+            "target_world": [
+              -0.2200688123703,
+              0.739971041679382,
+              -0.0484296455979347
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.105294957756996,
+              0.00327794230543077
+            ],
+            "error_m": 0.000000238425855059177,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105294719338417,
+              0.00327794416807592
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.241237342357635,
+              0.851559281349182,
+              -0.00396232353523374
+            ],
+            "error_m": 0.121637843549252,
+            "required_contact": false,
+            "target_world": [
+              0.214336141943932,
+              0.739820837974548,
+              -0.0437945984303951
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 68,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000238425855059177,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.122350998222828,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.000661595084238797,
+          -0.00148856639862061,
+          -0.000551329110749066
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.296584129333496,
+        1.12158763408661,
+        -0.0550167858600616
+      ],
+      "right_wrist": [
+        0.252409726381302,
+        0.87736988067627,
+        -0.0132190156728029
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.189109355211258,
+        1.09251070022583,
+        0.0117266485467553
+      ],
+      "left_wrist": [
+        -0.197830066084862,
+        0.842244744300842,
+        -0.0134051153436303
+      ],
+      "pelvis": [
+        0.0,
+        0.93640661239624,
+        0.0
+      ],
+      "phase": 0.0,
+      "point": {
+        "hand_world": [
+          -0.197830066084862,
+          0.842244744300842,
+          -0.01340511161834
+        ],
+        "kind": "hook_left",
+        "phase": 0.0,
+        "point": [
+          -0.191937610507011,
+          0.766208589076996,
+          -0.0419364012777805
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.105496630072594,
+              -0.00502362148836255
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105496451258659,
+              -0.00502363266423345
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.192565619945526,
+              0.813262760639191,
+              -0.0164082739502192
+            ],
+            "error_m": 0.0995666310191154,
+            "required_contact": false,
+            "target_world": [
+              -0.256762683391571,
+              0.737202346324921,
+              -0.0190660636872053
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633415937424,
+              0.105496630072594,
+              -0.00502363825216889
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105496451258659,
+              -0.00502364942803979
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.192565634846687,
+              0.813262820243835,
+              -0.0164082888513803
+            ],
+            "error_m": 0.0995666682720184,
+            "required_contact": false,
+            "target_world": [
+              0.256762683391571,
+              0.737202346324921,
+              -0.0190660525113344
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 76,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000179317694914971,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0995666682720184,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.189109355211258,
+        1.09251070022583,
+        0.0117266150191426
+      ],
+      "right_wrist": [
+        0.197830080986023,
+        0.842244803905487,
+        -0.0134051339700818
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.349477797746658,
+        1.1365966796875,
+        -0.104136757552624
+      ],
+      "left_wrist": [
+        -0.202429831027985,
+        1.31695604324341,
+        -0.199991032481194
+      ],
+      "pelvis": [
+        -0.00962099153548479,
+        0.914759397506714,
+        0.00801749248057604
+      ],
+      "phase": 0.075,
+      "point": {
+        "hand_world": [
+          -0.202429845929146,
+          1.3169561624527,
+          -0.199991032481194
+        ],
+        "kind": "hook_left",
+        "phase": 0.075,
+        "point": [
+          -0.215120702981949,
+          1.39700508117676,
+          -0.207824841141701
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157006919384
+            ],
+            "error_m": 0.0000000372529029846191,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157044172287
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.200841203331947,
+              1.34540832042694,
+              -0.208031088113785
+            ],
+            "error_m": 0.156724601984024,
+            "required_contact": false,
+            "target_world": [
+              -0.0766590982675552,
+              1.29850554466248,
+              -0.291346967220306
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.110372491180897,
+              0.11464636027813
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.110372461378574,
+              0.11464636027813
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.15539339184761,
+              1.33373463153839,
+              -0.169307857751846
+            ],
+            "error_m": 0.164042919874191,
+            "required_contact": false,
+            "target_world": [
+              0.0149674424901605,
+              1.29106163978577,
+              -0.242585748434067
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 80,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000372529029846191,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.164042919874191,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.00957571808248758,
+          -0.0215453505516052,
+          -0.00797976274043322
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.322665154933929,
+        1.13793134689331,
+        -0.0739925056695938
+      ],
+      "right_wrist": [
+        0.155963018536568,
+        1.30548191070557,
+        -0.160467490553856
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.347802311182022,
+        1.19169783592224,
+        -0.208736687898636
+      ],
+      "left_wrist": [
+        -0.256715178489685,
+        1.42505097389221,
+        -0.233030393719673
+      ],
+      "pelvis": [
+        -0.0120000001043081,
+        0.90940660238266,
+        0.00999999977648258
+      ],
+      "phase": 0.15,
+      "point": {
+        "hand_world": [
+          -0.256715267896652,
+          1.42505097389221,
+          -0.233030393719673
+        ],
+        "kind": "hook_left",
+        "phase": 0.15,
+        "point": [
+          -0.263311117887497,
+          1.50585031509399,
+          -0.225399732589722
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633266925812,
+              0.11633125692606,
+              -0.118206955492496
+            ],
+            "error_m": 0.0000000268634501310316,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.255975812673569,
+              1.45427393913269,
+              -0.237738445401192
+            ],
+            "error_m": 0.0296091437339783,
+            "required_contact": false,
+            "target_world": [
+              -0.256715476512909,
+              1.42505085468292,
+              -0.233030408620834
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984634011983871,
+              0.114095456898212,
+              0.143659934401512
+            ],
+            "error_m": 0.0000000999600260342959,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856790304184,
+              1.45427799224854,
+              -0.219412237405777
+            ],
+            "error_m": 0.0296089742332697,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 84,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000999600260342959,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296091437339783,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119435312226415,
+          -0.0268729329109192,
+          -0.00995294097810984
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.275456994771957,
+        1.2179194688797,
+        -0.187977939844131
+      ],
+      "right_wrist": [
+        0.135000020265579,
+        1.42499983310699,
+        -0.214999958872795
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.131912589073181,
+        1.47196769714355,
+        -0.381781697273254
+      ],
+      "left_wrist": [
+        0.104999870061874,
+        1.45500016212463,
+        -0.464999973773956
+      ],
+      "pelvis": [
+        -0.0000000000000000555111512312578,
+        0.884406566619873,
+        -0.00800000037997961
+      ],
+      "phase": 0.363636363636364,
+      "point": {
+        "hand_world": [
+          0.10499994456768,
+          1.45500004291534,
+          -0.465000003576279
+        ],
+        "kind": "hook_left",
+        "phase": 0.363636363636364,
+        "point": [
+          0.163832455873489,
+          1.43289601802826,
+          -0.516772627830505
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984634235501289,
+              0.116331227123737,
+              -0.11820700019598
+            ],
+            "error_m": 0.000000110006503462046,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              0.125042214989662,
+              1.45439720153809,
+              -0.486786097288132
+            ],
+            "error_m": 0.0296088717877865,
+            "required_contact": false,
+            "target_world": [
+              0.105000056326389,
+              1.45499992370605,
+              -0.465000003576279
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633564949036,
+              0.114095605909824,
+              0.143659889698029
+            ],
+            "error_m": 0.0000000745058059692383,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856700897217,
+              1.45427799224854,
+              -0.219412267208099
+            ],
+            "error_m": 0.0296089798212051,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 88,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000110006503462046,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296089798212051,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          -0.000000000696090962648555,
+          -0.0517553091049194,
+          0.00796235352754593
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.274336457252502,
+        1.22572875022888,
+        -0.15006086230278
+      ],
+      "right_wrist": [
+        0.13499990105629,
+        1.42499995231628,
+        -0.215000063180923
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.134338095784187,
+        1.4712815284729,
+        -0.381637364625931
+      ],
+      "left_wrist": [
+        0.103137262165546,
+        1.45492553710938,
+        -0.463360399007797
+      ],
+      "pelvis": [
+        -0.0000894144250196405,
+        0.884592890739441,
+        -0.00786587782204151
+      ],
+      "phase": 0.43,
+      "point": {
+        "hand_world": [
+          0.103137247264385,
+          1.45492553710938,
+          -0.463360518217087
+        ],
+        "kind": "hook_left",
+        "phase": 0.43,
+        "point": [
+          0.162912204861641,
+          1.43337547779083,
+          -0.514280140399933
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633266925812,
+              0.116331316530704,
+              -0.118206858634949
+            ],
+            "error_m": 0.0000000965705595490363,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              0.123450979590416,
+              1.45448613166809,
+              -0.484897673130035
+            ],
+            "error_m": 0.0296088308095932,
+            "required_contact": false,
+            "target_world": [
+              0.103137202560902,
+              1.45492565631866,
+              -0.463360726833344
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633713960648,
+              0.114095605909824,
+              0.14365990459919
+            ],
+            "error_m": 0.0000000682857006495396,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856760501862,
+              1.45427811145782,
+              -0.219412207603455
+            ],
+            "error_m": 0.0296090897172689,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 92,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000965705595490363,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296090897172689,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0000889929651748389,
+          -0.0515698790550232,
+          0.00782886240631342
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.274375826120377,
+        1.22565925121307,
+        -0.150359630584717
+      ],
+      "right_wrist": [
+        0.135000005364418,
+        1.42500007152557,
+        -0.214999988675117
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.242244988679886,
+        1.37316620349884,
+        -0.365172624588013
+      ],
+      "left_wrist": [
+        -0.0028556133620441,
+        1.4506858587265,
+        -0.370086938142776
+      ],
+      "pelvis": [
+        -0.00517707085236907,
+        0.895192205905914,
+        -0.000234394348808564
+      ],
+      "phase": 0.6,
+      "point": {
+        "hand_world": [
+          -0.00285567319951952,
+          1.4506858587265,
+          -0.370086908340454
+        ],
+        "kind": "hook_left",
+        "phase": 0.6,
+        "point": [
+          0.0723389089107513,
+          1.48192620277405,
+          -0.370361298322678
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.09846331179142,
+              0.116331048309803,
+              -0.118206784129143
+            ],
+            "error_m": 0.000000258095695926386,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              0.0217583440244198,
+              1.46565592288971,
+              -0.376923412084579
+            ],
+            "error_m": 0.0296088792383671,
+            "required_contact": false,
+            "target_world": [
+              -0.00285562896169722,
+              1.4506858587265,
+              -0.370087087154388
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.114095367491245,
+              0.143659949302673
+            ],
+            "error_m": 0.000000179588354853877,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.134856641292572,
+              1.45427799224854,
+              -0.219412207603455
+            ],
+            "error_m": 0.0296089723706245,
+            "required_contact": false,
+            "target_world": [
+              0.135000005364418,
+              1.42499995231628,
+              -0.215000063180923
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 96,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000258095695926386,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296089723706245,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0051527083851397,
+          -0.0410204529762268,
+          0.000233291779295541
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.275677978992462,
+        1.22186684608459,
+        -0.167172804474831
+      ],
+      "right_wrist": [
+        0.134999930858612,
+        1.42499971389771,
+        -0.214999988675117
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.311625510454178,
+        1.17839217185974,
+        -0.22145913541317
+      ],
+      "left_wrist": [
+        -0.151283442974091,
+        1.37224614620209,
+        -0.228657513856888
+      ],
+      "pelvis": [
+        -0.0101714031770825,
+        0.911736965179443,
+        0.00820170994848013
+      ],
+      "phase": 0.78,
+      "point": {
+        "hand_world": [
+          -0.151283442974091,
+          1.37224614620209,
+          -0.228657528758049
+        ],
+        "kind": "hook_left",
+        "phase": 0.78,
+        "point": [
+          -0.154471889138222,
+          1.4535870552063,
+          -0.226721942424774
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.114297062158585,
+              -0.105105102062225
+            ],
+            "error_m": 0.000000116857790999347,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.114297166466713,
+              -0.10510515421629
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.147422477602959,
+              1.40105795860291,
+              -0.234283998608589
+            ],
+            "error_m": 0.0988599136471748,
+            "required_contact": false,
+            "target_world": [
+              -0.0701191201806068,
+              1.36132490634918,
+              -0.281387686729431
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633564949036,
+              0.111762881278992,
+              0.12642528116703
+            ],
+            "error_m": 0.000000135141291934815,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.111762747168541,
+              0.126425296068192
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.146573260426521,
+              1.38226211071014,
+              -0.187966719269753
+            ],
+            "error_m": 0.104339301586151,
+            "required_contact": false,
+            "target_world": [
+              0.0567250140011311,
+              1.35333406925201,
+              -0.232431888580322
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 100,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000135141291934815,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.104339301586151,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0101235387846828,
+          -0.0245535373687744,
+          -0.00816311314702034
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.299876540899277,
+        1.1604517698288,
+        -0.12881126999855
+      ],
+      "right_wrist": [
+        0.147074624896049,
+        1.35339915752411,
+        -0.181380942463875
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "hook_left",
+      "left_elbow": [
+        -0.279587179422379,
+        1.12111008167267,
+        -0.0847689509391785
+      ],
+      "left_wrist": [
+        -0.254679828882217,
+        0.878886222839355,
+        -0.021144688129425
+      ],
+      "pelvis": [
+        -0.000664723105728626,
+        0.934911012649536,
+        0.000553935882635415
+      ],
+      "phase": 0.96,
+      "point": {
+        "hand_world": [
+          -0.254679888486862,
+          0.878886222839355,
+          -0.0211446508765221
+        ],
+        "kind": "hook_left",
+        "phase": 0.96,
+        "point": [
+          -0.238736718893051,
+          0.800081610679626,
+          -0.00826411042362452
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633341431618,
+              0.105705246329308,
+              -0.0113835390657187
+            ],
+            "error_m": 0.000000150171246104946,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105705395340919,
+              -0.0113835502415895
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.245628669857979,
+              0.853155374526978,
+              -0.00962556712329388
+            ],
+            "error_m": 0.122350953519344,
+            "required_contact": false,
+            "target_world": [
+              -0.2200688123703,
+              0.739971041679382,
+              -0.048429649323225
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.105294957756996,
+              0.00327794230543077
+            ],
+            "error_m": 0.000000238425855059177,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105294719338417,
+              0.00327794416807592
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.241237342357635,
+              0.851559221744537,
+              -0.00396229466423392
+            ],
+            "error_m": 0.121637850999832,
+            "required_contact": false,
+            "target_world": [
+              0.214336141943932,
+              0.739820778369904,
+              -0.0437945872545242
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 104,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000238425855059177,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.122350953519344,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.000661595084238797,
+          -0.00148856639862061,
+          -0.000551329110749066
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.296584129333496,
+        1.12158763408661,
+        -0.0550167858600616
+      ],
+      "right_wrist": [
+        0.252409726381302,
+        0.87736988067627,
+        -0.0132189812138677
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.189109355211258,
+        1.09251070022583,
+        0.0117266485467553
+      ],
+      "left_wrist": [
+        -0.197830066084862,
+        0.842244744300842,
+        -0.0134051153436303
+      ],
+      "pelvis": [
+        0.0,
+        0.93640661239624,
+        0.0
+      ],
+      "phase": 0.0,
+      "point": {
+        "hand_world": [
+          -0.197830066084862,
+          0.842244744300842,
+          -0.01340511161834
+        ],
+        "kind": "shove",
+        "phase": 0.0,
+        "point": [
+          -0.19193759560585,
+          0.766208589076996,
+          -0.0419363975524902
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.105496630072594,
+              -0.00502362148836255
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105496451258659,
+              -0.00502363266423345
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.192565619945526,
+              0.813262760639191,
+              -0.0164082739502192
+            ],
+            "error_m": 0.0995666310191154,
+            "required_contact": false,
+            "target_world": [
+              -0.256762683391571,
+              0.737202346324921,
+              -0.0190660636872053
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633415937424,
+              0.105496630072594,
+              -0.00502363825216889
+            ],
+            "error_m": 0.000000179317694914971,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105496451258659,
+              -0.00502364942803979
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.192565634846687,
+              0.813262760639191,
+              -0.0164083149284124
+            ],
+            "error_m": 0.0995666235685349,
+            "required_contact": false,
+            "target_world": [
+              0.256762683391571,
+              0.737202346324921,
+              -0.0190660636872053
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 112,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000179317694914971,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0995666310191154,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.189109355211258,
+        1.09251070022583,
+        0.0117266131564975
+      ],
+      "right_wrist": [
+        0.197830066084862,
+        0.842244744300842,
+        -0.0134051600471139
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.339355200529099,
+        1.14636397361755,
+        -0.144094288349152
+      ],
+      "left_wrist": [
+        -0.169943138957024,
+        1.3227573633194,
+        -0.20347173511982
+      ],
+      "pelvis": [
+        -0.00962099153548479,
+        0.914759397506714,
+        0.00801749248057604
+      ],
+      "phase": 0.075,
+      "point": {
+        "hand_world": [
+          -0.169943198561668,
+          1.3227573633194,
+          -0.20347173511982
+        ],
+        "kind": "shove",
+        "phase": 0.0749999999999998,
+        "point": [
+          -0.181693509221077,
+          1.40269136428833,
+          -0.213607922196388
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157006919384
+            ],
+            "error_m": 0.0000000372529029846191,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.11302687227726,
+              -0.096157044172287
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.167752116918564,
+              1.35102677345276,
+              -0.211999803781509
+            ],
+            "error_m": 0.157363682985306,
+            "required_contact": false,
+            "target_world": [
+              -0.0394993126392365,
+              1.29604279994965,
+              -0.284741193056107
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.110372491180897,
+              0.11464636027813
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.110372461378574,
+              0.11464636027813
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.155393317341805,
+              1.3337345123291,
+              -0.169307827949524
+            ],
+            "error_m": 0.164042845368385,
+            "required_contact": false,
+            "target_world": [
+              0.0149674424901605,
+              1.29106163978577,
+              -0.242585748434067
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 116,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000372529029846191,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.164042845368385,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.00957571808248758,
+          -0.0215453505516052,
+          -0.00797976274043322
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.322665125131607,
+        1.13793122768402,
+        -0.0739925354719162
+      ],
+      "right_wrist": [
+        0.155962944030762,
+        1.30548167228699,
+        -0.160467520356178
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.287717282772064,
+        1.23754072189331,
+        -0.280619382858276
+      ],
+      "left_wrist": [
+        -0.145564511418343,
+        1.44282269477844,
+        -0.249112918972969
+      ],
+      "pelvis": [
+        -0.0120000001043081,
+        0.90900331735611,
+        0.00943547580391169
+      ],
+      "phase": 0.15,
+      "point": {
+        "hand_world": [
+          -0.14556448161602,
+          1.44282269477844,
+          -0.249112978577614
+        ],
+        "kind": "shove",
+        "phase": 0.15,
+        "point": [
+          -0.152908563613892,
+          1.52357470989227,
+          -0.24166738986969
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.11633113771677,
+              -0.118206888437271
+            ],
+            "error_m": 0.000000127315573195119,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.144724145531654,
+              1.47205877304077,
+              -0.253721386194229
+            ],
+            "error_m": 0.0296091139316559,
+            "required_contact": false,
+            "target_world": [
+              -0.145564630627632,
+              1.44282257556915,
+              -0.249112918972969
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633415937424,
+              0.11409554630518,
+              0.14365990459919
+            ],
+            "error_m": 0.0000000333200098623365,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.135488897562027,
+              1.45243513584137,
+              -0.223924487829208
+            ],
+            "error_m": 0.0296090170741081,
+            "required_contact": false,
+            "target_world": [
+              0.135725930333138,
+              1.42314505577087,
+              -0.219596788287163
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 120,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000127315573195119,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296091139316559,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119435312226415,
+          -0.0272743105888367,
+          -0.00939107313752174
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.276311069726944,
+        1.2168060541153,
+        -0.187963232398033
+      ],
+      "right_wrist": [
+        0.135725796222687,
+        1.42314505577087,
+        -0.219596743583679
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.318317949771881,
+        1.21448767185211,
+        -0.312686830759048
+      ],
+      "left_wrist": [
+        -0.180000007152557,
+        1.31000018119812,
+        -0.500000059604645
+      ],
+      "pelvis": [
+        -0.0120000001043081,
+        0.884406566619873,
+        -0.0250000022351742
+      ],
+      "phase": 0.323529411764706,
+      "point": {
+        "hand_world": [
+          -0.18000003695488,
+          1.31000030040741,
+          -0.50000011920929
+        ],
+        "kind": "shove",
+        "phase": 0.323529411764706,
+        "point": [
+          -0.18000003695488,
+          1.38836896419525,
+          -0.522104144096375
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633415937424,
+              0.116331286728382,
+              -0.118206962943077
+            ],
+            "error_m": 0.0000000421468477895814,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.183114662766457,
+              1.3394387960434,
+              -0.500602960586548
+            ],
+            "error_m": 0.0296091753989458,
+            "required_contact": false,
+            "target_world": [
+              -0.180000066757202,
+              1.31000006198883,
+              -0.500000059604645
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633788466454,
+              0.114095486700535,
+              0.143659994006157
+            ],
+            "error_m": 0.0000000872068071089416,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.183114662766457,
+              1.33943867683411,
+              -0.500602722167969
+            ],
+            "error_m": 0.029609052464366,
+            "required_contact": false,
+            "target_world": [
+              0.180000066757202,
+              1.31000006198883,
+              -0.5
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 124,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000872068071089416,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296091753989458,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119435284286737,
+          -0.0517553091049194,
+          0.0248823575675488
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.264734119176865,
+        1.25696229934692,
+        -0.269028335809708
+      ],
+      "right_wrist": [
+        0.179999992251396,
+        1.31000018119812,
+        -0.49999988079071
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.319055438041687,
+        1.21124279499054,
+        -0.307519942522049
+      ],
+      "left_wrist": [
+        -0.178302317857742,
+        1.31654787063599,
+        -0.487631320953369
+      ],
+      "pelvis": [
+        -0.0120000001043081,
+        0.885619223117828,
+        -0.0233023539185524
+      ],
+      "phase": 0.43,
+      "point": {
+        "hand_world": [
+          -0.178302332758904,
+          1.31654787063599,
+          -0.487631320953369
+        ],
+        "kind": "shove",
+        "phase": 0.43,
+        "point": [
+          -0.180598631501198,
+          1.39479506015778,
+          -0.510044932365417
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633564949036,
+              0.11633125692606,
+              -0.118207007646561
+            ],
+            "error_m": 0.0000000759813119088903,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.181082978844643,
+              1.34602403640747,
+              -0.487969309091568
+            ],
+            "error_m": 0.0296087171882391,
+            "required_contact": false,
+            "target_world": [
+              -0.178302392363548,
+              1.31654810905457,
+              -0.487631410360336
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633341431618,
+              0.114095456898212,
+              0.143660023808479
+            ],
+            "error_m": 0.000000128400984067412,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.180624157190323,
+              1.34505116939545,
+              -0.486557573080063
+            ],
+            "error_m": 0.0296088755130768,
+            "required_contact": false,
+            "target_world": [
+              0.177817285060883,
+              1.31557810306549,
+              -0.486176282167435
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 128,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000128400984067412,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296088755130768,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119435284286737,
+          -0.0505483746528625,
+          0.023192698135972
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.27140212059021,
+        1.2503228187561,
+        -0.261845350265503
+      ],
+      "right_wrist": [
+        0.177817165851593,
+        1.31557810306549,
+        -0.486176162958145
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.312472999095917,
+        1.20000374317169,
+        -0.275952816009521
+      ],
+      "left_wrist": [
+        -0.162416249513626,
+        1.37782299518585,
+        -0.371890544891357
+      ],
+      "pelvis": [
+        -0.0120000001043081,
+        0.896966338157654,
+        -0.00741634890437126
+      ],
+      "phase": 0.6,
+      "point": {
+        "hand_world": [
+          -0.162416264414787,
+          1.37782299518585,
+          -0.371890604496002
+        ],
+        "kind": "shove",
+        "phase": 0.6,
+        "point": [
+          -0.180587768554688,
+          1.45651876926422,
+          -0.382236391305923
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633639454842,
+              0.116331227123737,
+              -0.118207007646561
+            ],
+            "error_m": 0.0000000833000228794845,
+            "required_contact": true,
+            "target_world": [
+              -0.0984633415937424,
+              0.11633125692606,
+              -0.118206933140755
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.161544740200043,
+              1.40740919113159,
+              -0.37265533208847
+            ],
+            "error_m": 0.0296092722564936,
+            "required_contact": false,
+            "target_world": [
+              -0.16241642832756,
+              1.37782263755798,
+              -0.371890485286713
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633192420006,
+              0.114095605909824,
+              0.143659979104996
+            ],
+            "error_m": 0.0000000833000228794845,
+            "required_contact": true,
+            "target_world": [
+              0.0984633564949036,
+              0.11409554630518,
+              0.143659934401512
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.156971991062164,
+              1.39736688137054,
+              -0.357730746269226
+            ],
+            "error_m": 0.0296090729534626,
+            "required_contact": false,
+            "target_world": [
+              0.157392472028732,
+              1.36777484416962,
+              -0.35681876540184
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 132,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000833000228794845,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.0296092722564936,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0119435293599963,
+          -0.0392546653747559,
+          0.00738144991919398
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.290042966604233,
+        1.21252679824829,
+        -0.209704577922821
+      ],
+      "right_wrist": [
+        0.157392337918282,
+        1.36777484416962,
+        -0.356818675994873
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.315307378768921,
+        1.1700793504715,
+        -0.209210827946663
+      ],
+      "left_wrist": [
+        -0.160984724760056,
+        1.36800301074982,
+        -0.227958455681801
+      ],
+      "pelvis": [
+        -0.0105830915272236,
+        0.911874234676361,
+        0.00781066017225385
+      ],
+      "phase": 0.78,
+      "point": {
+        "hand_world": [
+          -0.160984739661217,
+          1.36800301074982,
+          -0.227958455681801
+        ],
+        "kind": "shove",
+        "phase": 0.78,
+        "point": [
+          -0.170863255858421,
+          1.44881522655487,
+          -0.229390308260918
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633564949036,
+              0.114297151565552,
+              -0.10510515421629
+            ],
+            "error_m": 0.0000000166600049311683,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.114297166466713,
+              -0.10510515421629
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.15871462225914,
+              1.39688563346863,
+              -0.234068810939789
+            ],
+            "error_m": 0.0996164679527283,
+            "required_contact": false,
+            "target_world": [
+              -0.0806780233979225,
+              1.35902333259583,
+              -0.283060401678085
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.0984633564949036,
+              0.111762762069702,
+              0.126425325870514
+            ],
+            "error_m": 0.0000000341428503247698,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.111762747168541,
+              0.126425296068192
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.14756353199482,
+              1.37905204296112,
+              -0.19623176753521
+            ],
+            "error_m": 0.103717088699341,
+            "required_contact": false,
+            "target_world": [
+              0.0626727864146233,
+              1.34885954856873,
+              -0.247604995965958
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 136,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.0000000341428503247698,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.103717088699341,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.0105332899838686,
+          -0.0244169235229492,
+          -0.0077739036642015
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.302036583423615,
+        1.16010308265686,
+        -0.129631280899048
+      ],
+      "right_wrist": [
+        0.148441046476364,
+        1.35012853145599,
+        -0.189959332346916
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "kind": "shove",
+      "left_elbow": [
+        -0.279587179422379,
+        1.12111008167267,
+        -0.0847689509391785
+      ],
+      "left_wrist": [
+        -0.25467985868454,
+        0.878886282444,
+        -0.0211447346955538
+      ],
+      "pelvis": [
+        -0.000664723105728626,
+        0.934911012649536,
+        0.000553935882635415
+      ],
+      "phase": 0.96,
+      "point": {
+        "hand_world": [
+          -0.254679918289185,
+          0.878886282444,
+          -0.0211447197943926
+        ],
+        "kind": "shove",
+        "phase": 0.96,
+        "point": [
+          -0.238736748695374,
+          0.800081670284271,
+          -0.00826418958604336
+        ],
+        "radius_m": 0.105,
+        "side": "Left",
+        "valid": true
+      },
+      "rig": {
+        "bone_count": 52,
+        "contact_lean_degrees": 0.0,
+        "contact_mode": false,
+        "contacts": {
+          "LeftFoot": {
+            "actual_world": [
+              -0.0984633341431618,
+              0.105705246329308,
+              -0.0113835390657187
+            ],
+            "error_m": 0.000000150171246104946,
+            "required_contact": true,
+            "target_world": [
+              -0.098463349044323,
+              0.105705395340919,
+              -0.0113835502415895
+            ]
+          },
+          "LeftHand": {
+            "actual_world": [
+              -0.245628699660301,
+              0.853155434131622,
+              -0.00962563790380955
+            ],
+            "error_m": 0.122350998222828,
+            "required_contact": false,
+            "target_world": [
+              -0.220068797469139,
+              0.739971041679382,
+              -0.0484296455979347
+            ]
+          },
+          "RightFoot": {
+            "actual_world": [
+              0.098463349044323,
+              0.105294957756996,
+              0.00327794230543077
+            ],
+            "error_m": 0.000000238425855059177,
+            "required_contact": true,
+            "target_world": [
+              0.098463349044323,
+              0.105294719338417,
+              0.00327794416807592
+            ]
+          },
+          "RightHand": {
+            "actual_world": [
+              0.241237327456474,
+              0.851559281349182,
+              -0.00396230211481452
+            ],
+            "error_m": 0.121637850999832,
+            "required_contact": false,
+            "target_world": [
+              0.214336141943932,
+              0.739820837974548,
+              -0.0437945984303951
+            ]
+          }
+        },
+        "finite_bone_poses": true,
+        "frames": 140,
+        "godot_bone_pose_includes_rest": true,
+        "ground_gait_common_pelvis": false,
+        "load_error": "",
+        "loaded": true,
+        "maximum_contact_error_m": 0.000000238425855059177,
+        "maximum_contact_lean_degrees": 25.0,
+        "maximum_marker_gap_m": 0.122350998222828,
+        "maximum_unreachable_target_clamp_m": 0.0,
+        "pelvis_displacement_skeleton_m": [
+          0.000661595084238797,
+          -0.00148856639862061,
+          -0.000551329110749066
+        ],
+        "pelvis_roll_degrees": 0.0,
+        "pelvis_yaw_degrees": 0.0,
+        "physics_or_source_joints_modified": false,
+        "pose_owner": "textured_human_rig_render_priority_100",
+        "source_joint_count": 11,
+        "upper_body_reference_fit": {}
+      },
+      "right_elbow": [
+        0.296584129333496,
+        1.12158763408661,
+        -0.0550167858600616
+      ],
+      "right_wrist": [
+        0.252409726381302,
+        0.877369940280914,
+        -0.0132189923897386
+      ],
+      "root": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "scope": "Actual native production skeleton and original pose functions. Finite anatomy/unchanged capsule/contact reach checks plus full cycle front and side pixels; subjective visual review remains separate.",
+  "source_sha256": {
+    "res://../tests/game/check_authored_combat_pose.gd": "879bb7e45fa94fdda70bcf1c8571bb313df35f98445e2a387b652ea6c842d259",
+    "res://scripts/player/exploration_avatar.gd": "69a6df855db769cf4aba36132c931e11ee7af4e0de89b611c409ab7d5c2e56ee",
+    "res://scripts/player/exploration_camera.gd": "1084705e959a14f696f1e8d758d60430793776b5a5c7fae1017384b1abba93f7",
+    "res://scripts/player/human_combat_poses.gd": "225e2ec606b53a0259902838603647fba7f1c5428aa083790a434967e858a2fe",
+    "res://scripts/player/textured_human_rig.gd": "d4d778ec318e5003ef53aede1f8699cf3b00d4a6a77a81ab9cc9f8b1633c7f21",
+    "res://scripts/player/textured_human_surface.gd": "2e8133401a8dda521478c4839c17c9122d8c177e4d5fad676b44865e18201ee0"
+  },
+  "task": "EXP33_original_authored_combat_pose",
+  "total": 30
+}

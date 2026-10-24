@@ -1,0 +1,29 @@
+{
+  "review_scope": "Fixture measurement correction only; this failed engine run remains FAIL. New corrected native validation is owned by parent. No engine rerun or production change by reviewer.",
+  "failed_report": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_corrected_body02.json",
+  "failed_report_sha256": "a020106774589c4c82f77f074828e91d75387716fa05c9157adb73d7f6a2a8de",
+  "actual_engine_exit": 1,
+  "result": "FAIL",
+  "passed": 35,
+  "total": 36,
+  "failed_check": {
+    "evidence": {
+      "elapsed_game_s": 60.2333333333299,
+      "remaining_s": 0.0
+    },
+    "name": "pursuit_still_active_before60_real_game_seconds",
+    "passed": false
+  },
+  "cause": "_ticks awaits physics_frame then process_frame; native render scheduling can advance more than one physics update per observation. The fixed1790 observations advanced60.233333seconds, so it sampled after expiry instead of before60seconds.",
+  "authorized_fixture_change": "Observe unchanged service._clock with bounded single-observation loop until elapsed>=59.6, then require wanted and59.6<=elapsed<60. Retain subsequent35observations and the existing after60expiry/return assertion. All36checks retained.",
+  "thresholds_unchanged": {
+    "pre_expiry_upper_exclusive_s": 60,
+    "post_expiry_lower_inclusive_s": 60,
+    "visible_arrival_radius_exclusive_m": 6,
+    "actual_pre_F_displacement_exclusive_m": 1
+  },
+  "strengthened_pre_expiry_lower_inclusive_s": 59.6,
+  "new_fixture_sha256": "274b8f6d5892d9eeb1faafeb504c8aa9a7f7f902ff18283385e25e8ca1134a11",
+  "unchanged_production_safety_sha256": "9d0f7e9f14ef53f92f59c5d2268e7824782bf8b65331d1037c3394b7ca307c9e",
+  "validation": "git diff --check only; no new engine execution by sub-agent"
+}

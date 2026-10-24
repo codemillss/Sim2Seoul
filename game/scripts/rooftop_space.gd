@@ -450,7 +450,7 @@ func _build_pool_preparation(pool_front: float) -> void:
 		# The lift arrives behind these rooms. Give that approach its own
 		# outward-facing text instead of showing a mirrored sign back.
 		var rear_sign:=_sign(prefix+"RearSign",String(entry[2])+"\n입구는 반대편",Vector3(x,2.10,centre_z+1.375),22);rear_sign.pixel_size=.006;rear_sign.double_sided=false
-		var number:=_sign(prefix+"Step","1 · 갈아입기" if entry[0]=="Changing" else "2 · 샤워 후 입장",Vector3(x,1.4,centre_z+1.22),17);number.pixel_size=.004
+		var number:=_sign(prefix+"Step","선택 · 수영 +15%" if entry[0]=="Changing" else "선택 · 상쾌함90초",Vector3(x,1.4,centre_z+1.22),17);number.pixel_size=.004
 	for index: int in range(3):
 		var x:=changing.x-room_width*.31+index*room_width*.31
 		_box("PoolLocker",Vector3(room_width*.28,1.65,.34),Vector3(x,.825,centre_z+1.04),"steel",true)
@@ -468,17 +468,18 @@ func _build_pool_preparation(pool_front: float) -> void:
 		var angle:=TAU*index/13.;line.position=Vector3(shower.x+cos(angle)*.15,1.10,centre_z+.32+sin(angle)*.15);_pool_shower_water.add_child(line)
 	_pool_shower_water.visible=false
 	var gate_z:=pool_front+1.05
-	_pool_gate_visual=Node3D.new();_pool_gate_visual.name="PoolPreparationGate";_pool_gate_visual.position=Vector3(_pool_access_x-1.45,0,gate_z);add_child(_pool_gate_visual)
+	_pool_gate_visual=Node3D.new();_pool_gate_visual.name="PoolPreparationGate";_pool_gate_visual.rotation.y=-PI*.5;_pool_gate_visual.position=Vector3(_pool_access_x-1.45,0,gate_z);add_child(_pool_gate_visual)
 	var gate:=MeshInstance3D.new();gate.name="GatePanel";var gate_mesh:=BoxMesh.new();gate_mesh.size=Vector3(2.9,1.25,.10);gate.mesh=gate_mesh;gate.material_override=_materials.wood;gate.position=Vector3(1.45,.73,0);_pool_gate_visual.add_child(gate)
-	_pool_gate_body=StaticBody3D.new();_pool_gate_body.name="PoolPreparationGateBody";_pool_gate_body.position=Vector3(_pool_access_x,.73,gate_z);_pool_gate_body.collision_layer=1;var collider:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=gate_mesh.size;collider.shape=box;_pool_gate_body.add_child(collider);add_child(_pool_gate_body);bodies.append(_pool_gate_body)
-	var rules:=_sign("PoolPreparationRules","수영장 이용 순서\n1 탈의실 수영복 → 2 샤워실 → 3 입장\n물 밖으로 나온 뒤 탈의실 E · 원래 옷",Vector3(0,1.7,pool_front+3.0),19);rules.rotation.y=PI;rules.pixel_size=.0045;rules.double_sided=false
+	_pool_gate_body=StaticBody3D.new();_pool_gate_body.name="PoolPreparationGateBody";_pool_gate_body.position=Vector3(_pool_access_x,.73,gate_z);_pool_gate_body.collision_layer=0;var collider:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=gate_mesh.size;collider.shape=box;_pool_gate_body.add_child(collider);add_child(_pool_gate_body);bodies.append(_pool_gate_body)
+	var rules:=_sign("PoolPreparationRules","바로 입수할 수 있습니다\n수영복 선택 +15% · 샤워 선택90초 +10%\n함께 +25% · 탈의실 E 원래 옷",Vector3(0,1.7,pool_front+3.0),19);rules.rotation.y=PI;rules.pixel_size=.0045;rules.double_sided=false
 	_pool_preparation={"changing":frame*changing,"shower":frame*shower,"arrival":frame*Vector3(0,.08,pool_front+2.75),"gate":frame*Vector3(_pool_access_x,.08,gate_z+1.0),"changing_rect":Rect2(Vector2(changing.x-room_width*.5,centre_z-1.3),Vector2(room_width,2.6)),"shower_rect":Rect2(Vector2(shower.x-room_width*.5,centre_z-1.3),Vector2(room_width,2.6))}
-	features.append_array(["pool_changing_room_lockers_and_bench","private_shower_room_and_visible_water","required_swimwear_shower_gate"])
+	features.append_array(["pool_changing_room_lockers_and_bench","private_shower_room_and_visible_water","optional_swimwear_shower_benefits"])
 
 func pool_preparation_points() -> Dictionary:return _pool_preparation.duplicate()
-func set_pool_access_authorized(allowed: bool) -> void:
-	if is_instance_valid(_pool_gate_body):_pool_gate_body.collision_layer=0 if allowed else 1
-	if is_instance_valid(_pool_gate_visual):_pool_gate_visual.rotation.y=-PI*.5 if allowed else 0.
+func set_pool_access_authorized(_allowed: bool) -> void:
+	# Retained compatibility call; this entrance is always open.
+	if is_instance_valid(_pool_gate_body):_pool_gate_body.collision_layer=0
+	if is_instance_valid(_pool_gate_visual):_pool_gate_visual.rotation.y=-PI*.5
 func set_pool_shower_running(running: bool) -> void:
 	if is_instance_valid(_pool_shower_water):_pool_shower_water.visible=running
 

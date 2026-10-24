@@ -215,8 +215,8 @@ func _run() -> void:
 	var original_jacket: StandardMaterial3D=scene.exploration_avatar._materials.jacket
 	var original_jacket_color: Color=original_jacket.albedo_color
 	var actual_surface: Node3D=scene.exploration_avatar._textured_surface
-	var original_palette: int=hash(actual_surface.visible_meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR])
-	var actual_palettes: Array[int]=[]
+	var original_palette: Color=actual_surface._body_material.albedo_color
+	var actual_palettes: Array[Color]=[]
 	for product: Dictionary in service._current.products:
 		service.select_item(String(product.id));service._buy_button.pressed.emit();await _ticks(2);price_total+=int(product.price)
 		var parts: Array=service.outfit_snapshot().parts;var changed: int=parts.filter(func(part: Dictionary)->bool:return not part.original_material).size()
@@ -227,8 +227,14 @@ func _run() -> void:
 		outfit_checks.append({"id":product.id,"equipped":service.equipped_item_id,"changed_parts":changed,"torso_color":torso,"expected_color":expected_color,"details":service.outfit_snapshot().cosmetic_detail_count})
 		_check("purchase_equip_real_avatar_"+String(product.id),service.equipped_item_id==String(product.id) and int(service.inventory.get(String(product.id),0))==1 and changed>=9 and torso.is_equal_approx(expected_color) and service.outfit_snapshot().cosmetic_detail_count>0,outfit_checks.back())
 		service.close_picker();await _ticks(3)
-		var rendered_palette: int=hash(actual_surface.visible_meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_COLOR])
-		_check("purchase_updates_visible_weighted_clothing_"+String(product.id),actual_surface.visible_meshes[0].is_visible_in_tree() and rendered_palette!=original_palette and rendered_palette not in actual_palettes,{"original_palette":original_palette,"actual_rendered_palette":rendered_palette})
+		# Own GLB has semantic material surfaces instead of the old vendor's
+		# recoloured vertex atlas. Observe the actual displayed material and
+		# required product colour; changing a hidden proxy alone cannot pass.
+		var rendered_palette: Color=actual_surface._body_material.albedo_color
+		var material_attached:=false
+		for mesh: MeshInstance3D in actual_surface.visible_meshes:
+			for surface_index: int in range(mesh.mesh.get_surface_count()):material_attached=material_attached or (mesh.is_visible_in_tree() and mesh.get_surface_override_material(surface_index)==actual_surface._body_material)
+		_check("purchase_updates_visible_weighted_clothing_"+String(product.id),material_attached and rendered_palette.is_equal_approx(expected_color) and not rendered_palette.is_equal_approx(original_palette) and rendered_palette not in actual_palettes,{"original_palette":original_palette,"actual_rendered_palette":rendered_palette,"expected_product_color":expected_color,"actual_visible_material_attached":material_attached})
 		actual_palettes.append(rendered_palette);await _outfit_capture("outfit_"+String(product.id))
 		await _place(service._current.interactions[0].point);service.open_picker("ivory_cardigan");await _ticks(3)
 	_check("three_outfits_share_wallet_without_modifying_original_materials",service.balance==clothing_start_balance-price_total and service.transactions.size()==clothing_start_transactions+3 and scene.exploration_avatar._materials.jacket==original_jacket and original_jacket.albedo_color.is_equal_approx(original_jacket_color),{"outfits":outfit_checks,"balance":service.balance,"original_jacket_before":original_jacket_color,"original_jacket_after":original_jacket.albedo_color})

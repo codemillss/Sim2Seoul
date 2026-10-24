@@ -12,6 +12,8 @@ const SPEED_PROFILES := {
 }
 
 @export var exploration_settings_path := "user://sim2seoul_exploration.json"
+@export var character_settings_path := "user://sim2seoul_character.json"
+var character_customization: Node
 # This growing exploration scene uses30Hz fixed physics on the M1 baseline.
 # Rendering remains independent; validation may explicitly request60Hz stress.
 @export var exploration_physics_hz: int=30
@@ -259,6 +261,10 @@ func _ready() -> void:
 		_exploration_failure("건물 크기와 간격 비교 자료를 준비하지 못했습니다.");return
 	civic_facility_guidance=preload("res://scripts/civic_facility_guidance.gd").new();civic_facility_guidance.name="CivicFacilityGuidance";add_child(civic_facility_guidance);civic_facility_guidance.setup(self)
 	set_time_profile(_read_street_time())
+	character_customization=preload("res://scripts/player/character_customization.gd").new()
+	add_child(character_customization)
+	if not character_customization.setup(self,character_settings_path):
+		exploration_notice.text="캐릭터 설정을 준비하지 못했습니다."
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
 
@@ -374,6 +380,8 @@ func _visit_library_entrance() -> void:
 	_visit_city_life("library")
 
 func toggle_menu() -> void:
+	if is_instance_valid(character_customization) and character_customization.ui_open:
+		character_customization.cancel_preview();return
 	super.toggle_menu()
 	if menu.visible:
 		_sandbox_requests.clear()

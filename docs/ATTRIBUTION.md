@@ -2,6 +2,14 @@
 
 > 저장소 공개 상태: 2026-10-21 GitHub API에서 PUBLIC으로 확인했습니다. 아래 R03 등 과거 비공개 배포 관련 설명은 해당 버전 당시의 기록입니다. 데이터·외부 자산의 고지는 각각 유지합니다.
 
+## EXP33 자체 제작 주민 (2026-10-24)
+
+현재 기본 인체는 [자체 generator](../tools/authored_character/build_seoul_resident.py)와 [파일별 생성 기록](../game/assets/original/seoul_resident/AUTHORED_MANIFEST.json)의 `SeoulResident_M01/F01` 남녀 기본형×기본/통통/근육×사복/수영복12GLB다. 프로젝트에서 작성한 해부 단면·SDF 연결 곡면·얼굴/머리·의복/손발·UV/절차 텍스처·52본/skin weights를 사용하며 외부 인체/얼굴/스캔/의복/모션 파일을 입력받지 않는다. Godot에서 추출한 동명 PNG와 import metadata도 같은 GLB에서 나온 자체 텍스처다. 모델 제작 원본과 실행 자산을 함께 보존한다.
+
+흉곽/골반·근육 부착 방향·연부조직의 일반 관계는 [제작 안내의 공개 해부학 참고](AUTHORED_CHARACTER_COMBAT.md)를 따르며 그림이나 스캔 자료를 모델로 변환하지 않았다. 피부·천·머리의 미세 normal/roughness는 프로젝트가 생성하는 질감이다.
+
+기존 공급자 모델과 라이선스는 과거 재현 자료로 남긴다. 아래 EXP29 절은 당시 도입 범위이며 현재 기본 캐릭터가 그 모델을 읽는다는 설명이 아니다. 과거 선택 ID는 저장 호환 입력이고 실제 표시 snapshot은 자체 모델 출처를 기록한다. GTA/The Sims 코드·모델·모션을 추출한 자산은 추가하지 않았다. [현재 제작·한계](AUTHORED_CHARACTER_COMBAT.md)의 시각 검증과 자산 출처를 구분한다.
+
 ## EXP29 사람 모델과 수영복 전용 몸체 (2026-10-22)
 
 **Microsoft Rocketbox Avatar Library — MIT, Copyright (c) Microsoft Corporation.** [공식 저장소](https://github.com/microsoft/Microsoft-Rocketbox)의 고정 커밋 `0943055db6ec570bcef9f2c8b41c9e5467c808f9`에서 `Male_Adult_04`, `Female_Adult_07`의 FBX·텍스처를 도입했다. [라이선스 원문](../game/assets/vendor/microsoft_rocketbox/LICENSE.md)과 [파일별 원본 URL·SHA·변환 기록](../game/assets/vendor/microsoft_rocketbox/PROVENANCE.json)을 보존한다. TGA를 무손실 PNG로 바꾸고 FBX의 텍스처 확장자/경로를 맞췄으며, 게임에서 미터 높이·방향·자체 동작 리타게팅·의복 색을 적용한다. 선택한 두 FBX는 실제 검사에서 각각 81본과 가중치가 있는 단일 메시를 가졌다. 전체 라이브러리의 여러 LOD 설명을 이 두 파일에 그대로 적용하지 않는다.

@@ -1,0 +1,30 @@
+from pathlib import Path
+import concurrent.futures,subprocess,json,threading,datetime,time
+repo=Path('/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul')
+dest=repo/'data/reports/authored_character_combat/20261024/final'
+runner=repo/'tools/run_urban_transit_acceptance.py'
+py=repo/'.venv-data/bin/python'
+lanes=[
+ [('authored_resident','headless','final07',[]),('upper_gait','headless','male120_final03',['--physics-hz','120']),('stable_motion','headless','final02',[]),('human_actions','headless','final02',[]),('library_pool_life','headless','final01',[]),('integration','headless','final01',[]),('vehicle_pose','headless','final01',[]),('action_freedom','headless','final01',[])],
+ [('facilities','headless','final02',[]),('driver_reaction','headless','final04',[]),('takeover','headless','final01',[]),('entry_cancel','headless','final01',[]),('car_police','headless','final01',[]),('stolen_euljiro','headless','final01',[])],
+ [('authored_combat','native','final04',[]),('character_preview','native','final03',[]),('upper_gait','native','male30_final01',['--physics-hz','30']),('upper_gait','native','female30_final01',['--physics-hz','30','--female-model']),('human_gait','native','male_final01',[]),('human_gait','native','female_final01',['--female-model']),('shop','native','final01',[]),('pool','native','final01',[]),('human_presence_city','native','final01',[]),('police_dispatch','native','final01',[])]
+]
+lock=threading.Lock();stop=threading.Event();rows=[];started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def save():
+ data={'started_at_utc':started,'planned_runs':sum(map(len,lanes)),'completed':rows,'stopped_after_failure':stop.is_set(),'scope':'Independent engine suites; one native window at a time. Headless fixed fps is simulation acceleration, not performance.'}
+ temp=dest/'batch_progress.json.tmp';temp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n');temp.replace(dest/'batch_progress.json')
+def work(lane):
+ for suite,mode,tag,extra in lane:
+  if stop.is_set():return
+  args=[str(py),str(runner),suite,mode,tag,'--output-dir',str(dest.relative_to(repo)),*extra]
+  if mode=='headless' and suite!='stable_motion':args+=['--fixed-fps','120']
+  now=time.monotonic();result=subprocess.run(args,cwd=repo,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=660)
+  output=result.stdout.decode(errors='replace');row={'suite':suite,'mode':mode,'tag':tag,'returncode':result.returncode,'wall_seconds':round(time.monotonic()-now,3),'command':args}
+  with lock:
+   rows.append(row)
+   if result.returncode:stop.set()
+   save();print(output[-2500:],flush=True)
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+ list(pool.map(work,lanes))
+with lock:save()
+print('BATCH_COMPLETE',len(rows),'/',sum(map(len,lanes)),'PASS' if not stop.is_set() and len(rows)==sum(map(len,lanes)) else 'ATTENTION',flush=True)

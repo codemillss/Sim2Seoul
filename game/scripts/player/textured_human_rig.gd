@@ -403,11 +403,23 @@ func sync_pose() -> bool:
 	_apply_reference_fit_rest()
 	var player: Variant=avatar.get("player")
 	var activity:=String(avatar.get("_activity_kind"))
+	var combat: Dictionary=avatar.get_meta("render_sandbox_pose",avatar.get("_sandbox_authored_pose"))
+	var combat_active:=not combat.is_empty() and float(combat.get("weight",0.))>.00001
+	var combat_moving:=combat_active and float(avatar.get("walk_weight"))>.05
+	var combat_marker_frame:=_source_node("Pelvis").get_parent() as Node3D
+	var combat_frame:=skeleton.global_transform.affine_inverse()*combat_marker_frame.global_transform
 	_contact_mode=activity in ["eat","weights","cycle","rowing","study"] or (activity in ["","rope"] and is_instance_valid(player) and player.get("facility_control")==true)
 	var pelvis:=_find("Pelvis");var pelvis_pose:=_rest_global[pelvis]
 	_last_hip_delta=_source_pose(_source_node("Pelvis")).origin-_source_pelvis_reference
 	pelvis_pose.origin+=_last_hip_delta;_set_global(pelvis,pelvis_pose)
-	_prepare_ground_pelvis(pelvis)
+	if not combat_active or combat_moving:_prepare_ground_pelvis(pelvis)
+	if combat_active:
+		# Authored fighting stance owns visual pelvis and shoe contacts only.
+		# The simulation capsule and camera remain entirely outside this rig.
+		if not combat_moving:_ground_gait=false;_ground_feet.clear()
+		_pelvis_gait_turn=(_source_pose(_source_node("Pelvis")).basis*_source_reference.Pelvis.basis.inverse()).orthonormalized()
+		pelvis_pose=_rest_global[pelvis];pelvis_pose.origin+=_last_hip_delta;pelvis_pose.basis=_pelvis_gait_turn*pelvis_pose.basis
+		_set_global(pelvis,pelvis_pose)
 	var upper_pose:=_source_pose(_source_node("UpperBody"))
 	var upper_delta: Basis=(upper_pose.basis*_source_reference.UpperBody.basis.inverse()).orthonormalized()
 	var upper_gait: Dictionary={};var marker_basis:=Basis.IDENTITY
@@ -429,8 +441,8 @@ func sync_pose() -> bool:
 		# Ground gait carries one connected pelvis/spine/thigh anatomy through
 		# the small smooth support wave. Non-gait activities retain the existing
 		# independent upper-body target used by fixed equipment contacts.
-		if index==0 and not _ground_gait:spine_pose.origin=_rest_global[bone].origin+(upper_pose.origin-_source_reference.UpperBody.origin)
-		if _ground_gait:
+		if index==0 and not _ground_gait and not combat_active:spine_pose.origin=_rest_global[bone].origin+(upper_pose.origin-_source_reference.UpperBody.origin)
+		if _ground_gait or combat_active:
 			# First spine carries the thigh sockets: leave it with the pelvis.
 			# Higher absolute orientations distribute the counterturn once.
 			var twist:=0. if spine_bones.size()==1 else float(index)/float(spine_bones.size()-1)
@@ -439,7 +451,7 @@ func sync_pose() -> bool:
 		_set_global(bone,spine_pose)
 	var head:=_find("Head");var head_pose:=_source_pose(_source_node("Head"))
 	var target_head:=_global_poses[head];var base_head:=_rest_global[head] if _fitted_rest_global.is_empty() else _fitted_rest_global[head]
-	if _ground_gait:
+	if _ground_gait or combat_active:
 		# Keep the original neck/head connection as the chest turns. Gaze
 		# follows only a small part of that turn, plus independent NPC looks.
 		var relative_head: Basis=upper_pose.basis.inverse()*head_pose.basis
@@ -460,10 +472,10 @@ func sync_pose() -> bool:
 		# the upper body, using this model's true leg reach for the stance.
 		var thigh:=_find(side+"Thigh");var shin:=_find(side+"Shin")
 		var thigh_pose:=_global_poses[thigh]
-		if not _ground_gait:thigh_pose.origin=_rest_global[thigh].origin+_last_hip_delta
+		if not _ground_gait and not combat_active:thigh_pose.origin=_rest_global[thigh].origin+_last_hip_delta
 		var maximum_leg:=_rest_global[thigh].origin.distance_to(_rest_global[shin].origin)+_rest_global[shin].origin.distance_to(_rest_global[foot].origin)-.0002
 		var horizontal:=Vector2(thigh_pose.origin.x-foot_goal.x,thigh_pose.origin.z-foot_goal.z).length()
-		if not _ground_gait:thigh_pose.origin.y=minf(thigh_pose.origin.y,foot_goal.y+sqrt(maxf(.0001,maximum_leg*maximum_leg-horizontal*horizontal)))
+		if not _ground_gait and not combat_active:thigh_pose.origin.y=minf(thigh_pose.origin.y,foot_goal.y+sqrt(maxf(.0001,maximum_leg*maximum_leg-horizontal*horizontal)))
 		_set_global(thigh,thigh_pose)
 		var knee_hint:=_source_pose(_source_node(side+"Shin")).origin
 		if _ground_gait:
@@ -485,7 +497,32 @@ func sync_pose() -> bool:
 		var contact: Vector3=_hand_contacts[side]
 		var wrist_goal:=source_hand.origin-hand_basis*contact
 		var elbow_hint:=_source_pose(_source_node(side+"Forearm")).origin
-		if _contact_mode:_two_bone(side+"UpperArm",side+"Forearm",side+"Hand",wrist_goal,elbow_hint)
+		if combat_active:
+			var amount:=float(combat.weight)
+			# Enter and leave combat from the actual gait's FK wrist, rather
+			# than a reset arms-down rest pose. This also supplies one stable
+			# wrist rotation path through the folded, nearly 180-degree guard.
+			var gait_state: Dictionary=avatar.get_meta("render_gait_state",{})
+			var gait_phase:=float(gait_state.get("stride_phase",avatar.get("stride_phase")))
+			var gait_run:=float(gait_state.get("_run_weight",avatar.get("_run_weight")))
+			var gait_weight:=float(gait_state.get("walk_weight",avatar.get("walk_weight")))
+			var baseline: Dictionary=avatar.call("sample_upper_gait",gait_phase,gait_run,gait_weight)
+			var baseline_arm: Basis=combat_frame.basis.orthonormalized()*Basis.from_euler(Vector3(baseline[side].upper))
+			var baseline_forearm: Basis=baseline_arm*Basis.from_euler(Vector3(baseline[side].lower))
+			_set_rotation(_find(side+"UpperArm"),upper_delta*baseline_arm*_corrections[side+"UpperArm"])
+			_set_rotation(_find(side+"Forearm"),upper_delta*baseline_forearm*_corrections[side+"Forearm"])
+			var baseline_hand: Basis=(upper_delta*baseline_forearm*_corrections[side+"Hand"]).orthonormalized()
+			_set_rotation(hand,baseline_hand)
+			var neutral_wrist: Vector3=_global_poses[hand].origin
+			wrist_goal=neutral_wrist.lerp(combat_frame*Vector3(combat[side].wrist),amount)
+			elbow_hint=combat_frame*Vector3(combat[side].elbow)
+			_two_bone(side+"UpperArm",side+"Forearm",side+"Hand",wrist_goal,elbow_hint)
+			var from_rotation:=baseline_hand.get_rotation_quaternion()
+			var to_rotation: Quaternion=(combat_frame.basis*Basis(combat[side].basis)).orthonormalized().get_rotation_quaternion()
+			var relative:=from_rotation.inverse()*to_rotation
+			if relative.x<0.:to_rotation=Quaternion(-to_rotation.x,-to_rotation.y,-to_rotation.z,-to_rotation.w)
+			hand_basis=Basis(from_rotation.slerpni(to_rotation,amount))
+		elif _contact_mode:_two_bone(side+"UpperArm",side+"Forearm",side+"Hand",wrist_goal,elbow_hint)
 		else:
 			# Ordinary walking uses the real model's anatomical segment lengths,
 			# driven by the retained pose directions. The old long-arm marker is
@@ -493,12 +530,59 @@ func sync_pose() -> bool:
 			_set_rotation(_find(side+"UpperArm"),chest_turn*arm_pose*_corrections[side+"UpperArm"])
 			_set_rotation(_find(side+"Forearm"),chest_turn*forearm_pose*_corrections[side+"Forearm"])
 		_set_rotation(hand,hand_basis)
+		if combat_active:_close_authored_fist(side,float(combat.fist)*float(combat.weight))
 		_goals[side+"Hand"]={"index":hand,"target":source_hand.origin,"contact":contact,"required":_contact_mode}
 	_finite=true
 	for index: int in range(_poses.size()):
 		if not _poses[index].is_finite():_finite=false;return false
 		skeleton.set_bone_pose(index,_poses[index])
 	_frame_count+=1;return true
+
+func _close_authored_fist(side: String,amount: float) -> void:
+	# The new original hand's actual rest landmarks define flexion: -Y
+	# fingers close toward palm +Z. Derive that axis in each parent frame,
+	# preserving imported/rest bone offsets and all phalanx lengths.
+	var hand:=_find(side+"Hand")
+	var palm_normal:=_rest_global[hand].basis*Vector3.BACK
+	for finger: int in range(1,5):
+		var base_name:=side+"Finger"+str(finger)
+		for segment: int in range(3):
+			var semantic:=base_name+("" if segment==0 else str(segment));var index:=_find(semantic)
+			if index<0:continue
+			var next_index:=_find(base_name+str(segment+1)) if segment<2 else -1
+			var longitudinal:=(_rest_global[next_index].origin-_rest_global[index].origin).normalized() if next_index>=0 else _rest_global[index].basis*Vector3.DOWN
+			var axis_global:=longitudinal.cross(palm_normal).normalized()
+			var axis_local:=_rest_global[index].basis.inverse()*axis_global
+			var angle:=deg_to_rad([76.,94.,64.][segment])*amount
+			_poses[index].basis=_rest[index].basis*Basis(axis_local,angle);_rebuild_globals()
+	# Oppose the thumb at its base before bending the two small phalanges.
+	# Merely curling its diagonal neutral chain leaves a hanging thumbs-down
+	# shape after wrist pronation. The base crosses the palm and lays the tip
+	# over the outside of the bent index, rather than inside the fist.
+	for segment: int in range(3):
+		var semantic:=side+"Finger0"+("" if segment==0 else str(segment));var index:=_find(semantic)
+		if index<0:continue
+		var next_index:=_find(side+"Finger0"+str(segment+1)) if segment<2 else -1
+		var longitudinal:=(_rest_global[next_index].origin-_rest_global[index].origin).normalized() if next_index>=0 else Vector3.DOWN
+		if segment==0:
+			var thumb_side:=signf((_rest_global[hand].basis.inverse()*(_rest_global[index].origin-_rest_global[hand].origin)).x)
+			var desired_in_hand:=Vector3(-thumb_side*.86,-.45,.24).normalized()
+			var local_rest_direction:=_rest_global[index].basis.inverse()*longitudinal
+			var local_desired:=_rest_global[index].basis.inverse()*_rest_global[hand].basis*desired_in_hand
+			var opposition:=Quaternion.IDENTITY.slerp(Quaternion(local_rest_direction,local_desired),amount)
+			_poses[index].basis=_rest[index].basis*Basis(opposition)
+		else:
+			var axis_global:=longitudinal.cross(palm_normal).normalized()
+			var local_axis:=_rest_global[index].basis.inverse()*axis_global
+			_poses[index].basis=_rest[index].basis*Basis(local_axis,deg_to_rad(18. if segment==1 else 12.)*amount)
+		_rebuild_globals()
+
+func combat_contact_world(side: String) -> Dictionary:
+	var hand:=_find(side+"Hand")
+	if not loaded or hand<0:return {"valid":false,"point":Vector3.ZERO}
+	# This measured point is fixed to the original hand's closed knuckle row.
+	var local_knuckle:=Vector3(0.,-.078,.022)
+	return {"valid":true,"point":skeleton.global_transform*(_global_poses[hand]*local_knuckle),"hand_world":skeleton.global_transform*_global_poses[hand].origin}
 
 func snapshot() -> Dictionary:
 	var errors:={};var maximum:=0.;var required_maximum:=0.

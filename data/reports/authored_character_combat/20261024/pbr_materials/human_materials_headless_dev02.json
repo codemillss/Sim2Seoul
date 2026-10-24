@@ -1,0 +1,601 @@
+{
+  "cache": {
+    "albedo_changed_by_helper": false,
+    "external_source_images": false,
+    "image_bytes_with_mips": 262140,
+    "maps": {
+      "fabric": {
+        "height": 128,
+        "image_bytes_with_mips": 87380,
+        "normal_id": -9223372009306585628,
+        "roughness_id": -9223372009273031194,
+        "roughness_map_max": 1.0,
+        "roughness_map_min": 0.88,
+        "width": 128
+      },
+      "hair": {
+        "height": 128,
+        "image_bytes_with_mips": 87380,
+        "normal_id": -9223372009424026145,
+        "roughness_id": -9223372009390471711,
+        "roughness_map_max": 1.0,
+        "roughness_map_min": 0.9,
+        "width": 128
+      },
+      "skin": {
+        "height": 128,
+        "image_bytes_with_mips": 87380,
+        "normal_id": -9223372009541466662,
+        "roughness_id": -9223372009507912228,
+        "roughness_map_max": 1.0,
+        "roughness_map_min": 0.86,
+        "width": 128
+      }
+    },
+    "runtime_generation": "Once per skin/hair/fabric kind; no Node, timer, physics or render process.",
+    "shared_map_pairs": 3,
+    "shared_texture_count": 6,
+    "version": 1
+  },
+  "checks": [
+    {
+      "evidence": {
+        "engine": "4.7.2-stable (official)",
+        "rendering_method": "forward_plus",
+        "required": [
+          "roughness",
+          "roughness_texture",
+          "roughness_texture_channel",
+          "metallic_specular",
+          "normal_enabled",
+          "normal_texture",
+          "normal_scale",
+          "subsurf_scatter_enabled",
+          "subsurf_scatter_strength",
+          "subsurf_scatter_skin_mode",
+          "subsurf_scatter_transmittance_enabled",
+          "clearcoat_enabled"
+        ]
+      },
+      "name": "installed_ClassDB_supports_used_material_properties",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "helper_preserves_source_albedo_cull_and_opaque_policy",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "per_instance_materials_share_only_readonly_maps",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "normal_requires_actual_tangent_frame",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "eye_hair_cloth_skin_have_distinct_bounded_response",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_M01.actual_production_surface_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "eye_surfaces": 1,
+        "skin_and_hand_surfaces": 2
+      },
+      "name": "SeoulResident_M01.street.production_hook_keeps_opaque_tangent_skin_and_separate_eye",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "eye_surfaces": 1,
+        "skin_and_hand_surfaces": 2
+      },
+      "name": "SeoulResident_M01.swim.production_hook_keeps_opaque_tangent_skin_and_separate_eye",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_M01.palette_changes_preserve_actual_eye_surface",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_F01.actual_production_surface_loaded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "eye_surfaces": 1,
+        "skin_and_hand_surfaces": 2
+      },
+      "name": "SeoulResident_F01.street.production_hook_keeps_opaque_tangent_skin_and_separate_eye",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "eye_surfaces": 1,
+        "skin_and_hand_surfaces": 2
+      },
+      "name": "SeoulResident_F01.swim.production_hook_keeps_opaque_tangent_skin_and_separate_eye",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_F01.palette_changes_preserve_actual_eye_surface",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "albedo_changed_by_helper": false,
+        "external_source_images": false,
+        "image_bytes_with_mips": 262140,
+        "maps": {
+          "fabric": {
+            "height": 128,
+            "image_bytes_with_mips": 87380,
+            "normal_id": -9223372009306585628,
+            "roughness_id": -9223372009273031194,
+            "roughness_map_max": 1.0,
+            "roughness_map_min": 0.88,
+            "width": 128
+          },
+          "hair": {
+            "height": 128,
+            "image_bytes_with_mips": 87380,
+            "normal_id": -9223372009424026145,
+            "roughness_id": -9223372009390471711,
+            "roughness_map_max": 1.0,
+            "roughness_map_min": 0.9,
+            "width": 128
+          },
+          "skin": {
+            "height": 128,
+            "image_bytes_with_mips": 87380,
+            "normal_id": -9223372009541466662,
+            "roughness_id": -9223372009507912228,
+            "roughness_map_max": 1.0,
+            "roughness_map_min": 0.86,
+            "width": 128
+          }
+        },
+        "runtime_generation": "Once per skin/hair/fabric kind; no Node, timer, physics or render process.",
+        "shared_map_pairs": 3,
+        "shared_texture_count": 6,
+        "version": 1
+      },
+      "name": "shared_microtexture_cache_is_bounded",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "source_inputs_stable_during_material_probe",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "engine": "4.7.2-stable (official)",
+  "material_rows": [
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Jacket_or_Swimwear",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "street",
+      "role": "jacket",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 68380,
+      "transparency": 0,
+      "vertices": 17095
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Authored_Skin",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "street",
+      "role": "skin",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 23504,
+      "transparency": 0,
+      "vertices": 5876
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Hair_and_Eye_Detail",
+      "normal_enabled": true,
+      "normal_scale": 0.025000000372529,
+      "outfit": "street",
+      "role": "hair",
+      "roughness": 0.959999978542328,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 13924,
+      "transparency": 0,
+      "vertices": 3481
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Articulated_Hands",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "street",
+      "role": "hands",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 15120,
+      "transparency": 0,
+      "vertices": 3780
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Trousers",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "street",
+      "role": "pants",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 66460,
+      "transparency": 0,
+      "vertices": 16615
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Sneakers",
+      "normal_enabled": true,
+      "normal_scale": 0.140000000596046,
+      "outfit": "street",
+      "role": "shoes",
+      "roughness": 0.819999992847443,
+      "specular": 0.200000002980232,
+      "sss_strength": 0.0,
+      "tangents": 5600,
+      "transparency": 0,
+      "vertices": 1400
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Garment_and_Eye_Accents",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "street",
+      "role": "detail",
+      "roughness": 0.850000023841858,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 1032,
+      "transparency": 0,
+      "vertices": 258
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Original_Eye",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "street",
+      "role": "eye",
+      "roughness": 0.219999998807907,
+      "specular": 0.419999986886978,
+      "sss_strength": 0.0,
+      "tangents": 2072,
+      "transparency": 0,
+      "vertices": 518
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Jacket_or_Swimwear",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "swim",
+      "role": "jacket",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 42176,
+      "transparency": 0,
+      "vertices": 10544
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Authored_Skin",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "swim",
+      "role": "skin",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 217080,
+      "transparency": 0,
+      "vertices": 54270
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Hair_and_Eye_Detail",
+      "normal_enabled": true,
+      "normal_scale": 0.025000000372529,
+      "outfit": "swim",
+      "role": "hair",
+      "roughness": 0.959999978542328,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 13924,
+      "transparency": 0,
+      "vertices": 3481
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Articulated_Hands",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "swim",
+      "role": "hands",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 15120,
+      "transparency": 0,
+      "vertices": 3780
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_M01",
+      "name": "Resident_Original_Eye",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "swim",
+      "role": "eye",
+      "roughness": 0.219999998807907,
+      "specular": 0.419999986886978,
+      "sss_strength": 0.0,
+      "tangents": 2072,
+      "transparency": 0,
+      "vertices": 518
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Jacket_or_Swimwear",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "street",
+      "role": "jacket",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 68380,
+      "transparency": 0,
+      "vertices": 17095
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Authored_Skin",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "street",
+      "role": "skin",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 23504,
+      "transparency": 0,
+      "vertices": 5876
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Hair_and_Eye_Detail",
+      "normal_enabled": true,
+      "normal_scale": 0.025000000372529,
+      "outfit": "street",
+      "role": "hair",
+      "roughness": 0.959999978542328,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 13924,
+      "transparency": 0,
+      "vertices": 3481
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Articulated_Hands",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "street",
+      "role": "hands",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 15120,
+      "transparency": 0,
+      "vertices": 3780
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Trousers",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "street",
+      "role": "pants",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 66460,
+      "transparency": 0,
+      "vertices": 16615
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Sneakers",
+      "normal_enabled": true,
+      "normal_scale": 0.140000000596046,
+      "outfit": "street",
+      "role": "shoes",
+      "roughness": 0.819999992847443,
+      "specular": 0.200000002980232,
+      "sss_strength": 0.0,
+      "tangents": 5600,
+      "transparency": 0,
+      "vertices": 1400
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Garment_and_Eye_Accents",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "street",
+      "role": "detail",
+      "roughness": 0.850000023841858,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 1032,
+      "transparency": 0,
+      "vertices": 258
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Original_Eye",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "street",
+      "role": "eye",
+      "roughness": 0.219999998807907,
+      "specular": 0.419999986886978,
+      "sss_strength": 0.0,
+      "tangents": 2072,
+      "transparency": 0,
+      "vertices": 518
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Jacket_or_Swimwear",
+      "normal_enabled": true,
+      "normal_scale": 0.200000002980232,
+      "outfit": "swim",
+      "role": "jacket",
+      "roughness": 0.970000028610229,
+      "specular": 0.119999997317791,
+      "sss_strength": 0.0,
+      "tangents": 77428,
+      "transparency": 0,
+      "vertices": 19357
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Authored_Skin",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "swim",
+      "role": "skin",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 184164,
+      "transparency": 0,
+      "vertices": 46041
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Hair_and_Eye_Detail",
+      "normal_enabled": true,
+      "normal_scale": 0.025000000372529,
+      "outfit": "swim",
+      "role": "hair",
+      "roughness": 0.959999978542328,
+      "specular": 0.180000007152557,
+      "sss_strength": 0.0,
+      "tangents": 13924,
+      "transparency": 0,
+      "vertices": 3481
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Articulated_Hands",
+      "normal_enabled": true,
+      "normal_scale": 0.180000007152557,
+      "outfit": "swim",
+      "role": "hands",
+      "roughness": 0.819999992847443,
+      "specular": 0.300000011920929,
+      "sss_strength": 0.0350000001490116,
+      "tangents": 15120,
+      "transparency": 0,
+      "vertices": 3780
+    },
+    {
+      "cull_mode": 2,
+      "model": "SeoulResident_F01",
+      "name": "Resident_Original_Eye",
+      "normal_enabled": false,
+      "normal_scale": 0.0,
+      "outfit": "swim",
+      "role": "eye",
+      "roughness": 0.219999998807907,
+      "specular": 0.419999986886978,
+      "sss_strength": 0.0,
+      "tangents": 2072,
+      "transparency": 0,
+      "vertices": 518
+    }
+  ],
+  "passed": 15,
+  "result": "PASS",
+  "scope": "Installed ClassDB, real StandardMaterial3D resources, shared generated maps, and two standard authored production avatar instances in street/swim presentation. No physics or anatomy quality claim. Native front/face pixel review is separate; no performance/FPS claim.",
+  "source_sha256": {
+    "res://../tests/game/check_human_skin_materials.gd": "a6dbbb70b991268430b79b74d7d08d9963f4ec713bebec92232e1d450d589d5a",
+    "res://assets/original/seoul_resident/AUTHORED_MANIFEST.json": "3b5336342d8b221ddce94903bdd294c53724d9c92af054e8de86243c158ae542",
+    "res://assets/original/seoul_resident/seoul_resident_f01_athletic_street.glb": "460dbcacc2be38083065f61fe5e021d8d7c2a25da8ce8ff58bd2d3b7e4665261",
+    "res://assets/original/seoul_resident/seoul_resident_f01_athletic_swim.glb": "3a099447cedeae953298d1373bd2b2016b73dc4fe7f35937c453557da0d17fe7",
+    "res://assets/original/seoul_resident/seoul_resident_f01_soft_street.glb": "734bab4b4b0967f5de4d18362e00703cdc72b722665fe8ea66c5f11358dd6c24",
+    "res://assets/original/seoul_resident/seoul_resident_f01_soft_swim.glb": "b1db13559f3c4d91050eeacb56d64070b27ad8259da0080d7756515063552c66",
+    "res://assets/original/seoul_resident/seoul_resident_f01_street.glb": "ad9538086117da46bba86e56ff6d46cb42b4a7bb04734780c31ca404fe71eb65",
+    "res://assets/original/seoul_resident/seoul_resident_f01_swim.glb": "35c2254da39307644243068d0fe52f3ad939a8f31f095083a7c6e479e60c4b12",
+    "res://assets/original/seoul_resident/seoul_resident_m01_athletic_street.glb": "ef59c27e6e70401c6331bee05dbd8aa686c7ccfe2f72050735aadca10ec8ff91",
+    "res://assets/original/seoul_resident/seoul_resident_m01_athletic_swim.glb": "ded51747818b5eb7067d5ba4b32392f7ead6b51d047c74b0189b146d101c5247",
+    "res://assets/original/seoul_resident/seoul_resident_m01_soft_street.glb": "69aaba2384b657159595b7f0a7f45aaa10bf4ec781d21f9c168a2c885c332f57",
+    "res://assets/original/seoul_resident/seoul_resident_m01_soft_swim.glb": "958a4b410223e3e44dea7425b1589fea45d9dbc61f9471f3efe5683487a41589",
+    "res://assets/original/seoul_resident/seoul_resident_m01_street.glb": "c0b4923024675e02dbf1755d86564b26e3fbecad2c847ade86c1faadb2121580",
+    "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb": "b40456b38837706018327a8908ce0ac9f1c35bc9b57e474fc18b38545e7358ce",
+    "res://scripts/player/exploration_avatar.gd": "651c3facb3353f2322e1e85343187fc567c2822250e3ab3c18f9108e7711de47",
+    "res://scripts/player/human_skin_materials.gd": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01",
+    "res://scripts/player/textured_human_surface.gd": "16d6c6d56d490c65501d84c2f48ca18dcd7507056fe722889f52f98c33e60dad"
+  },
+  "task": "human_skin_materials",
+  "total": 15
+}

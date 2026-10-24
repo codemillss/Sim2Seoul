@@ -1,0 +1,31 @@
+from pathlib import Path
+import concurrent.futures,subprocess,json,threading,datetime,time
+repo=Path('/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul')
+dest=repo/'data/reports/authored_character_combat/20261024/body_release02'
+dest.mkdir(parents=True,exist_ok=True)
+runner=repo/'tools/run_urban_transit_acceptance.py'
+py=repo/'.venv-data/bin/python'
+lanes=[
+ [('authored_resident','headless','body02',[]),('swim_arm_skin','headless','body02',[]),('upper_gait','headless','male120_body02',['--physics-hz','120']),('stable_motion','headless','body02',[]),('human_actions','headless','body02',[]),('library_pool_life','headless','body02',[]),('integration','headless','body02',[]),('vehicle_pose','headless','body02',[]),('action_freedom','headless','body02',[])],
+ [('human_materials','headless','body02',[]),('customization','headless','body02',[]),('facilities','headless','body02',[]),('driver_reaction','headless','body02',[]),('takeover','headless','body02',[]),('entry_cancel','headless','body02',[]),('car_police','headless','body02',[]),('stolen_euljiro','headless','body02',[])],
+ [('customization','native','body02',[]),('authored_combat','native','body02',[]),('authored_combat','native','soft_male_body02',['--body-profile','soft']),('authored_combat','native','athletic_male_body02',['--body-profile','athletic']),('authored_combat','native','soft_female_swim_body02',['--body-profile','soft','--female-model','--swim-body']),('authored_combat','native','athletic_female_swim_body02',['--body-profile','athletic','--female-model','--swim-body']),('character_preview','native','body02',[]),('upper_gait','native','male30_body02',['--physics-hz','30']),('upper_gait','native','female30_body02',['--physics-hz','30','--female-model']),('human_gait','native','male_body02',[]),('human_gait','native','female_body02',['--female-model']),('human_gait','native','soft_male_body02',['--body-profile','soft']),('human_gait','native','athletic_male_body02',['--body-profile','athletic']),('human_gait','native','soft_female_body02',['--body-profile','soft','--female-model']),('human_gait','native','athletic_female_body02',['--body-profile','athletic','--female-model']),('shop','native','body02',[]),('human_presence_city','native','body02',[]),('police_dispatch','native','body02',[]),('pool','native','body02',[])]
+]
+lock=threading.Lock();stop=threading.Event();rows=[];started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def save():
+ data={'started_at_utc':started,'planned_runs':sum(map(len,lanes)),'completed':rows,'stopped_after_failure':stop.is_set(),'scope':'Independent engine suites; one native window at a time. Headless fixed fps is simulation acceleration, not performance.'}
+ temp=dest/'batch_progress.json.tmp';temp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n');temp.replace(dest/'batch_progress.json')
+def work(lane):
+ for suite,mode,tag,extra in lane:
+  if stop.is_set():return
+  args=[str(py),str(runner),suite,mode,tag,'--output-dir',str(dest.relative_to(repo)),*extra]
+  if mode=='headless' and suite!='stable_motion':args+=['--fixed-fps','120']
+  now=time.monotonic();result=subprocess.run(args,cwd=repo,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=660)
+  output=result.stdout.decode(errors='replace');row={'suite':suite,'mode':mode,'tag':tag,'returncode':result.returncode,'wall_seconds':round(time.monotonic()-now,3),'command':args}
+  with lock:
+   rows.append(row)
+   if result.returncode:stop.set()
+   save();print(output[-2500:],flush=True)
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+ list(pool.map(work,lanes))
+with lock:save()
+print('BATCH_COMPLETE',len(rows),'/',sum(map(len,lanes)),'PASS' if not stop.is_set() and len(rows)==sum(map(len,lanes)) else 'ATTENTION',flush=True)

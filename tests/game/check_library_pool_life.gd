@@ -51,7 +51,7 @@ func _bar() -> void:
 	scene._visit_street_detail("hotel_pool");await _ticks(8);roof=scene.exploration_rooftop_access.ensure_rooftop(scene.exploration_rooftop_access.REPRESENTATIVE_POOL_ID)
 	service=scene.pool_preparation_service
 	var lounge: Dictionary=roof.pool_lounge_snapshot()
-	_check("evening_shortcut_arrives_at_guarded_pool_with_four_lights",scene.time_id=="evening" and lounge.active_lights==4 and not scene.player.is_swimming() and roof._pool_gate_body.collision_layer==1,{"lounge":lounge,"position":scene.player.global_position})
+	_check("evening_shortcut_arrives_at_open_pool_with_four_lights",scene.time_id=="evening" and lounge.active_lights==4 and not scene.player.is_swimming() and roof._pool_gate_body.collision_layer==0,{"lounge":lounge,"position":scene.player.global_position})
 	_check("pool_has_actual_textured_bartender_and_nonalcohol_menu",lounge.bartender_textured and lounge.bar.nonalcoholic and lounge.bar.drinks.size()==3,lounge)
 	var view: Vector3=roof.pool_float_point()-scene.player.global_position;scene.rig.yaw=atan2(-view.x,-view.z);scene.rig.pitch=deg_to_rad(-22.);scene.rig.requested_distance=7.5;scene.rig.snap_to_target_pose()
 	await _capture("pool_evening_lights")
@@ -59,7 +59,7 @@ func _bar() -> void:
 	_check("bar_customer_point_is_actual_capsule_safe",not service._safe_point(chosen.use_point).is_empty())
 	_check("physical_walk_reaches_bar_customer_side",await _walk_to(chosen.use_point))
 	await _tap_e();await _ticks(3)
-	_check("fresh_E_orders_visible_cup_without_preparation_bypass",roof.pool_bar().stage=="preparing" and roof._bar_cup.visible and not service.showered and not scene.player.facility_control and not scene.shop_visit_service.swimwear_active,roof.pool_bar())
+	_check("fresh_E_orders_visible_cup_without_granting_optional_benefits",roof.pool_bar().stage=="preparing" and roof._bar_cup.visible and not service.showered and not scene.player.facility_control and not scene.shop_visit_service.swimwear_active,roof.pool_bar())
 	scene.toggle_menu();var progress: float=roof.pool_bar().elapsed_s
 	for index: int in range(12):await process_frame
 	_check("menu_freezes_bartender_order",is_equal_approx(float(roof.pool_bar().elapsed_s),progress))
@@ -70,7 +70,7 @@ func _bar() -> void:
 	_check("fresh_E_collects_one_free_nonalcohol_drink",roof.pool_bar().served==1 and roof.pool_bar().stage=="idle" and not roof._bar_cup.visible and roof.pool_bar().drink=="보리차" and scene.shop_visit_service.balance==credit_before,roof.pool_bar())
 	scene.set_time_profile("day");await _ticks(3);_check("day_profile_turns_all_pool_light_emission_off",roof.pool_lounge_snapshot().active_lights==0 and roof._glow_materials.all(func(m: StandardMaterial3D)->bool:return m.emission_energy_multiplier==0.))
 	scene.set_time_profile("evening");await _ticks(3)
-	_check("pool_original_changing_shower_gate_and_water_region_retained",roof.pool_preparation_points().has_all(["changing","shower","gate"]) and roof.pool_water_region().rect.get_area()>=72. and roof._pool_gate_body.collision_layer==1 and not service.water_access_allowed(roof))
+	_check("pool_original_changing_shower_gate_and_water_region_retained",roof.pool_preparation_points().has_all(["changing","shower","gate"]) and roof.pool_water_region().rect.get_area()>=72. and roof._pool_gate_body.collision_layer==0 and service.water_access_allowed(roof))
 	observations.append({"pool_lounge":roof.pool_lounge_snapshot(),"preparation":service.snapshot()})
 
 func _run() -> void:
@@ -87,7 +87,7 @@ func _finish() -> void:
 	_finished=true
 	_check("source_inputs_stable_during_run",_hashes==_source_hashes())
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size();var file:=FileAccess.open(report_path,FileAccess.WRITE)
-	file.store_string(JSON.stringify(_json({"task":"LIBRARY_AND_POOL_LIFE","result":"PASS" if passed==checks.size() else "FAIL","summary":{"checks":checks.size(),"failed":checks.size()-passed},"source_sha256":_hashes,"checks":checks,"observations":observations,"captures":captures,"elapsed_ms":Time.get_ticks_msec()-_started,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"scope":"Actual source-positioned city scene and native capsule. Library/bar scenario starts are explicit test placements; short approach walks and fresh physical E use production dispatcher. Study menu/input/exit, actual CPU skin height, pool evening lights/free nonalcohol order and unchanged preparation guards are checked. Full existing swim/Space-exit regression is separate; native image review and OS input/performance are separate."}),"  ")+"\n");file.close();print("LIBRARY_POOL_LIFE_RESULT ",passed,"/",checks.size());_teardown.call_deferred(0 if passed==checks.size() else 1)
+	file.store_string(JSON.stringify(_json({"task":"LIBRARY_AND_POOL_LIFE","result":"PASS" if passed==checks.size() else "FAIL","summary":{"checks":checks.size(),"failed":checks.size()-passed},"source_sha256":_hashes,"checks":checks,"observations":observations,"captures":captures,"elapsed_ms":Time.get_ticks_msec()-_started,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"scope":"Actual source-positioned city scene and native capsule. Library/bar scenario starts are explicit test placements; short approach walks and fresh physical E use production dispatcher. Study menu/input/exit, actual CPU skin height, pool evening lights/free nonalcohol order and optional open-pool policy are checked. Full existing swim/Space-exit regression is separate; native image review and OS input/performance are separate."}),"  ")+"\n");file.close();print("LIBRARY_POOL_LIFE_RESULT ",passed,"/",checks.size());_teardown.call_deferred(0 if passed==checks.size() else 1)
 
 func _teardown(exit_code: int) -> void:
 	# Let the awaited scenario frames unwind before releasing textured models.

@@ -1,0 +1,617 @@
+{
+  "task": "final_police_dispatch_native_pixel_review",
+  "reviewed_at": "2026-10-24T14:14:07.197056+09:00",
+  "reviewer": "police_response agent; direct view_image inspection of all three original native arrival PNGs",
+  "result": "FUNCTIONAL_PASS_OVERALL_CANDIDATE_REWORK",
+  "report": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_native_body01.json",
+  "report_sha256": "f902ca37237dc4548d06e54ea31ebb8a97b2b016ee9bbbefa70c272f3f14115d",
+  "run_metadata": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_native_body01.run.json",
+  "run_metadata_sha256": "3bf5d8a2ab79ac94291b7d5c7ad0f26efc139ae08544a147915f544264b78cb7",
+  "numeric_result": {
+    "result": "PASS",
+    "passed": 36,
+    "total": 36,
+    "expected_denominator": 36,
+    "denominator_matches": true,
+    "actual_returncode": 0,
+    "script_errors": false
+  },
+  "source_binding": {
+    "fixture_source_count": 76,
+    "fixture_mismatches": [],
+    "runner_source_count": 219,
+    "runner_mismatches": [],
+    "changes_during_run": []
+  },
+  "images_reviewed": [
+    {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_native_body01_arrival_stonewall_east.png",
+      "scope": "Actual production camera; test-only player starts disclosed.",
+      "sha256": "3cb2b6ca369257460137d7a0d1c0ec2cc8abab75c74091a3aa86fff9ccb12bd1",
+      "directly_inspected_original_pixels": true,
+      "current_sha256": "3cb2b6ca369257460137d7a0d1c0ec2cc8abab75c74091a3aa86fff9ccb12bd1",
+      "hash_matches_report": true,
+      "PNG_dimensions_px": [
+        1152,
+        720
+      ]
+    },
+    {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_native_body01_arrival_museum_slope.png",
+      "scope": "Actual production camera; test-only player starts disclosed.",
+      "sha256": "12433c98d210880e5126ff36276eacf1d20d03760ea75cc2c1090e9a621829cc",
+      "directly_inspected_original_pixels": true,
+      "current_sha256": "12433c98d210880e5126ff36276eacf1d20d03760ea75cc2c1090e9a621829cc",
+      "hash_matches_report": true,
+      "PNG_dimensions_px": [
+        1152,
+        720
+      ]
+    },
+    {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_native_body01_arrival_coverage_walk_01_0.png",
+      "scope": "Actual production camera; test-only player starts disclosed.",
+      "sha256": "da150bd2c668e58cbdf6e65ff6f29590a71a337144480afd3c962cb618644259",
+      "directly_inspected_original_pixels": true,
+      "current_sha256": "da150bd2c668e58cbdf6e65ff6f29590a71a337144480afd3c962cb618644259",
+      "hash_matches_report": true,
+      "PNG_dimensions_px": [
+        1152,
+        720
+      ]
+    }
+  ],
+  "observations": [
+    "A responding police officer is visibly present about five metres from the crime in each actual stonewall, museum-slope and outer-district capture.",
+    "Assault reason and chase countdown are readable in the gameplay HUD in all three captures.",
+    "The original adult target and player remain present at each stationary assault scene; render pixels are consistent with the recorded native 6m closure."
+  ],
+  "sectors": [
+    {
+      "sector": "stonewall_east",
+      "arrival_within_production_8m_radius_game_s": 8.9333333333333,
+      "native_player_movement_while_waiting_m": 0.0,
+      "initial_offense_responder_evidence": [
+        {
+          "clock_s": 3.38333333333333,
+          "event": "offense_reported",
+          "evidence": {
+            "at": [
+              -38.3572578430176,
+              0.904611051082611,
+              17.0233058929443
+            ],
+            "nearest_initial_responder_m": 39.1703491210938,
+            "reason": "폭행 신고",
+            "reset_chase_s": 60.0,
+            "responders": [
+              "GamePoliceOfficer7",
+              "GamePoliceOfficer15"
+            ]
+          }
+        }
+      ],
+      "visible6m_closure_passed": true,
+      "arriving_officer_displacement_after_post_dispatch_snapshot_m": 34.5035667419434,
+      "victim_physical_stagger_m": 0.128399699926376,
+      "trace": [
+        {
+          "game_s": 0.0,
+          "responders": [
+            {
+              "distance_m": 39.1703491210938,
+              "name": "GamePoliceOfficer7",
+              "pending_path": true,
+              "position": [
+                -46.4850692749023,
+                2.27343273162842,
+                55.3166656494141
+              ],
+              "travelled_m": 0.0
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 0.999999999999997,
+          "responders": [
+            {
+              "distance_m": 39.1703491210938,
+              "name": "GamePoliceOfficer7",
+              "pending_path": true,
+              "position": [
+                -46.4850692749023,
+                2.27343273162842,
+                55.3166656494141
+              ],
+              "travelled_m": 0.0
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 1.99999999999999,
+          "responders": [
+            {
+              "distance_m": 36.8360557556152,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -45.0936698913574,
+                2.19579553604126,
+                53.2151412963867
+              ],
+              "travelled_m": 2.71229648590088
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 2.99999999999999,
+          "responders": [
+            {
+              "distance_m": 31.5072498321533,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -45.0017509460449,
+                2.07398223876953,
+                47.7997589111328
+              ],
+              "travelled_m": 8.13084746897221
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 3.99999999999999,
+          "responders": [
+            {
+              "distance_m": 26.2204971313477,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -45.0003967285156,
+                1.86356246471405,
+                42.3701705932617
+              ],
+              "travelled_m": 13.5651047229767
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 4.99999999999998,
+          "responders": [
+            {
+              "distance_m": 23.4034976959229,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -44.9999809265137,
+                1.71360218524933,
+                39.44970703125
+              ],
+              "travelled_m": 18.994035422802
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 5.99999999999998,
+          "responders": [
+            {
+              "distance_m": 18.2583599090576,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -44.9998893737793,
+                1.50113248825073,
+                34.0199928283691
+              ],
+              "travelled_m": 24.4280888736248
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 6.99999999999998,
+          "responders": [
+            {
+              "distance_m": 13.3599739074707,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -44.9998664855957,
+                1.39243423938751,
+                28.6046123504639
+              ],
+              "travelled_m": 29.8445693999529
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 7.99999999999997,
+          "responders": [
+            {
+              "distance_m": 9.07433891296387,
+              "name": "GamePoliceOfficer7",
+              "pending_path": false,
+              "position": [
+                -44.999813079834,
+                1.30641150474548,
+                23.1924743652344
+              ],
+              "travelled_m": 35.2574006468058
+            },
+            {
+              "distance_m": 110.420700073242,
+              "name": "GamePoliceOfficer15",
+              "pending_path": true,
+              "position": [
+                -101.692344665527,
+                3.39672780036926,
+                -73.3934326171875
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sector": "museum_slope",
+      "arrival_within_production_8m_radius_game_s": 0.433333333333355,
+      "native_player_movement_while_waiting_m": 0.0,
+      "initial_offense_responder_evidence": [
+        {
+          "clock_s": 22.8833333333336,
+          "event": "offense_reported",
+          "evidence": {
+            "at": [
+              -237.435806274414,
+              3.70419883728027,
+              11.092866897583
+            ],
+            "nearest_initial_responder_m": 10.4212913513184,
+            "reason": "폭행 신고",
+            "reset_chase_s": 60.0,
+            "responders": [
+              "GamePoliceOfficer16",
+              "GamePoliceOfficer21"
+            ]
+          }
+        }
+      ],
+      "visible6m_closure_passed": true,
+      "arriving_officer_displacement_after_post_dispatch_snapshot_m": 1.08227133750916,
+      "victim_physical_stagger_m": 0.132978439331055,
+      "trace": [
+        {
+          "game_s": 0.0,
+          "responders": [
+            {
+              "distance_m": 6.9989914894104,
+              "name": "GamePoliceOfficer16",
+              "pending_path": false,
+              "position": [
+                -234.543594360352,
+                3.66947388648987,
+                17.4662322998047
+              ],
+              "travelled_m": 3.42316392064095
+            },
+            {
+              "distance_m": 122.587600708008,
+              "name": "GamePoliceOfficer21",
+              "pending_path": true,
+              "position": [
+                -340.860107421875,
+                8.37924575805664,
+                76.7379531860352
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sector": "coverage_walk_01_0",
+      "arrival_within_production_8m_radius_game_s": 4.7666666666664,
+      "native_player_movement_while_waiting_m": 0.0,
+      "initial_offense_responder_evidence": [
+        {
+          "clock_s": 37.6833333333338,
+          "event": "offense_reported",
+          "evidence": {
+            "at": [
+              415.885498046875,
+              -6.33974695205688,
+              -436.264892578125
+            ],
+            "nearest_initial_responder_m": 33.7783355712891,
+            "reason": "폭행 신고",
+            "reset_chase_s": 60.0,
+            "responders": [
+              "GamePoliceOfficer17",
+              "GamePoliceOfficer24"
+            ]
+          }
+        }
+      ],
+      "visible6m_closure_passed": true,
+      "arriving_officer_displacement_after_post_dispatch_snapshot_m": 24.4907379150391,
+      "victim_physical_stagger_m": 0.131378173828125,
+      "trace": [
+        {
+          "game_s": 0.0,
+          "responders": [
+            {
+              "distance_m": 30.3565006256104,
+              "name": "GamePoliceOfficer17",
+              "pending_path": false,
+              "position": [
+                446.232788085938,
+                -6.25625610351562,
+                -437.007995605469
+              ],
+              "travelled_m": 3.42184138298035
+            },
+            {
+              "distance_m": 264.067993164062,
+              "name": "GamePoliceOfficer24",
+              "pending_path": true,
+              "position": [
+                153.069808959961,
+                -1.24260783195496,
+                -411.088836669922
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 0.999999999999943,
+          "responders": [
+            {
+              "distance_m": 24.953104019165,
+              "name": "GamePoliceOfficer17",
+              "pending_path": false,
+              "position": [
+                440.8310546875,
+                -6.27996158599854,
+                -436.875610351562
+              ],
+              "travelled_m": 8.82525873184204
+            },
+            {
+              "distance_m": 264.067993164062,
+              "name": "GamePoliceOfficer24",
+              "pending_path": true,
+              "position": [
+                153.069808959961,
+                -1.24260783195496,
+                -411.088836669922
+              ],
+              "travelled_m": 0.0
+            }
+          ]
+        },
+        {
+          "game_s": 1.99999999999989,
+          "responders": [
+            {
+              "distance_m": 19.5502300262451,
+              "name": "GamePoliceOfficer17",
+              "pending_path": false,
+              "position": [
+                435.429840087891,
+                -6.30025053024292,
+                -436.743072509766
+              ],
+              "travelled_m": 14.2281482517719
+            },
+            {
+              "distance_m": 262.681457519531,
+              "name": "GamePoliceOfficer24",
+              "pending_path": false,
+              "position": [
+                154.344573974609,
+                -1.21827733516693,
+                -412.355377197266
+              ],
+              "travelled_m": 1.79715032875538
+            }
+          ]
+        },
+        {
+          "game_s": 2.99999999999983,
+          "responders": [
+            {
+              "distance_m": 14.1477432250977,
+              "name": "GamePoliceOfficer17",
+              "pending_path": false,
+              "position": [
+                430.028991699219,
+                -6.31710767745972,
+                -436.610900878906
+              ],
+              "travelled_m": 19.6306502819061
+            },
+            {
+              "distance_m": 258.553009033203,
+              "name": "GamePoliceOfficer24",
+              "pending_path": false,
+              "position": [
+                158.166137695312,
+                -1.19761180877686,
+                -416.166320800781
+              ],
+              "travelled_m": 7.19426825642586
+            }
+          ]
+        },
+        {
+          "game_s": 3.99999999999977,
+          "responders": [
+            {
+              "distance_m": 8.74605846405029,
+              "name": "GamePoliceOfficer17",
+              "pending_path": false,
+              "position": [
+                424.628936767578,
+                -6.32898187637329,
+                -436.478668212891
+              ],
+              "travelled_m": 25.0323477983475
+            },
+            {
+              "distance_m": 257.382843017578,
+              "name": "GamePoliceOfficer24",
+              "pending_path": true,
+              "position": [
+                158.98974609375,
+                -1.19634389877319,
+                -421.296966552734
+              ],
+              "travelled_m": 12.5940138399601
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "menu_pause_passed": true,
+  "actual_W_pursuit": {
+    "player_distance_m": 4.39847373962402,
+    "police_distance_m": 16.2868993282318
+  },
+  "fresh_offense_resets_60_passed": true,
+  "before_60_boundary": {
+    "elapsed_game_s": 59.6666666666633,
+    "remaining_s": 0.333333333334176
+  },
+  "after_60_boundary": {
+    "elapsed_game_s": 60.8333333333299,
+    "wanted": false,
+    "detained": false,
+    "officer_states": [
+      "posted",
+      "posted",
+      "posted",
+      "returning",
+      "returning",
+      "posted",
+      "posted",
+      "posted",
+      "posted",
+      "posted",
+      "posted",
+      "posted",
+      "posted",
+      "posted"
+    ]
+  },
+  "bounded_native_steps": {
+    "distance_m": 375.0402970016,
+    "maximum_step_m": 0.181879445910454
+  },
+  "victim_route_resumes": {
+    "distance_m": 2.43370938301086
+  },
+  "original_actor_identities_retained": true,
+  "test_disclosures": [
+    "Supported player-only starts approach the three existing adult actors at .88m; the ordinary people-pause setting keeps victims stationary for the comparison.",
+    "All responding police start at production-authored initial posts and retain native collision/physics. The museum officer is already posted close by (~10.42m at report), so its .433s arrival is not comparable to a long cross-city dispatch.",
+    "Arrival seconds use the production eight-metre report radius; visible closure is separately checked below six metres and shown in each image.",
+    "The sixty-second uncaught boundary alone uses an explicitly raised stationary test-player platform to prevent capture; this does not claim the player evaded officers on ordinary streets for sixty seconds.",
+    "Actual W movement, menu pause and refreshed offense are separate checks. No police relocation, clock override or disabled police physics is used.",
+    "This verifies the sampled three production sites and native step bounds, not every city path, subjective realism or OS keyboard input."
+  ],
+  "scope_from_engine_report": "Actual production city. Test-only supported player starts approach original stationary adults; ordinary people-pause setting is disclosed. Actual native knuckle contact starts police; all officers begin at real production posts and retain collision/physics. Three stationary assault sites, actual6m officer closure and bounded victim stagger/route restore; ordinary W pursuit, menu pause, refreshed offense and60 actual game seconds. Timeout alone uses an explicit raised test observer platform; no police/target teleport, clock override or disabled officer physics. Native images require separate pixel review; no OS input, universal route or realism claim.",
+  "candidate_scope": "body01 candidate only; root/combat independently rejected the overall character art for major upper-arm continuity defects. This functional/UI review does not accept the whole release or override that REWORK decision.",
+  "overall_art_decision_from_parent": "REWORK: upper-arm continuity, separate from face/hand improvements",
+  "candidate_scope_updated_at": "2026-10-24T14:14:42.430190+09:00"
+}

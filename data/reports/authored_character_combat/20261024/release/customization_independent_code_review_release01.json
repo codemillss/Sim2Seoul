@@ -1,0 +1,96 @@
+{
+  "task": "EXP33_independent_character_customization_source_review",
+  "reviewer": "combat_rework agent",
+  "reviewed_at_utc": "2026-10-24T03:55:26.317938+00:00",
+  "result": "NO_ADDITIONAL_CRITICAL_ISSUE_FOUND_IN_REVIEWED_PATHS",
+  "method": "Independent read-only review of implementation and existing fixture. This review did not execute tests or simulate disk failure independently.",
+  "source_sha256": {
+    "game/scripts/player/character_customization.gd": "f027ca445292b9807ddec4c32b7e437ef6724b854a0d6cc8657b572e27687532",
+    "game/scripts/player/exploration_avatar.gd": "8e1693915950898bad8505ad35e94d5e52d64d41f074eba9ba22074ace4d5f5c",
+    "game/scripts/player/textured_human_surface.gd": "94d269c8e9f4b430c7a0b9a93425691be2d7096621263062f98bb851e3dd300d",
+    "game/scripts/explore_walk.gd": "e05984f1e5a458116ace16d4cc405cff2a6425724839e5e422e8ddfbbb983c0b",
+    "tests/game/check_character_customization.gd": "c88ae14a41ada1493f4ca9699e1931f11c91ff8844930e2134a929203469f00f"
+  },
+  "reviewed_production_paths": [
+    "game/scripts/player/character_customization.gd",
+    "game/scripts/player/exploration_avatar.gd",
+    "game/scripts/player/textured_human_surface.gd",
+    "game/scripts/explore_walk.gd"
+  ],
+  "reviewed_fixture": "tests/game/check_character_customization.gd",
+  "reviewed_functions": {
+    "game/scripts/player/character_customization.gd": [
+      "setup",
+      "_valid_state",
+      "_apply",
+      "availability_reason",
+      "open_preview",
+      "_change",
+      "_write_state",
+      "save_preview",
+      "cancel_preview",
+      "_close"
+    ],
+    "game/scripts/player/exploration_avatar.gd": [
+      "set_authored_model"
+    ],
+    "game/scripts/player/textured_human_surface.gd": [
+      "_prepare_materials",
+      "set_customization",
+      "_hair_mask",
+      "_sync_custom_vertex_colors",
+      "sync_clothing",
+      "set_swimwear",
+      "_prepare_swim_body"
+    ],
+    "game/scripts/explore_walk.gd": [
+      "character_customization initialization",
+      "toggle_menu"
+    ]
+  },
+  "previous_critical_finding": {
+    "description": "Replacing the skin under the physics avatar would bypass the camera RenderProxy and split render-interpolated skin/source coordinates.",
+    "status": "FIXED_IN_REVIEWED_SOURCE",
+    "fix_observed": "Replacement retains old presentation parent, temporarily calibrates that parent at identity and restores it before returning; the fixture checks parent ownership and 48 rendered native-contact frames after a body swap.",
+    "execution_verification": "Separate release test reports owned by root/original_character; no passing runtime claim is made by this source review."
+  },
+  "findings": [
+    {
+      "area": "save_failure_and_cancel",
+      "assessment": "consistent",
+      "evidence": "Temporary file, flush/error and atomic rename precede committed-state mutation. Failure leaves preview open and old committed file/state intact. Cancel reapplies committed appearance and does not write a save."
+    },
+    {
+      "area": "paused_preview_and_Escape",
+      "assessment": "consistent",
+      "evidence": "Preview retains paused menu ownership. Escape routes to cancel, restores camera parameters and returns to the ordinary paused menu; later Escape uses the regular resume path."
+    },
+    {
+      "area": "resource_isolation",
+      "assessment": "consistent",
+      "evidence": "Custom colors use per-instance duplicated materials and fresh ArrayMesh color arrays; source positions, skin weights, indices and original GLB resources are not assigned new values. Fixture separately snapshots NPC geometry/colors and asset hashes."
+    },
+    {
+      "area": "shop_and_swim_ownership",
+      "assessment": "consistent",
+      "evidence": "Preview can show baseline clothes while committed cancel restores the purchased top. Saving a changed jacket restores default outfit but retains inventory. Other edits retain the shop top. Active swimwear blocks customization; saved skin/hair apply to swim and street bodies."
+    },
+    {
+      "area": "swap_lifetime_and_motion",
+      "assessment": "consistent_after_RenderProxy_fix",
+      "evidence": "Old native rig helpers stop processing and are detached/queued for deletion. Failed replacement cleans its helpers and retains the old skin. Player/capsule/source joints are reused and saved pose values are restored; gait fit refreshes against the replacement anatomy."
+    },
+    {
+      "area": "availability",
+      "assessment": "consistent",
+      "evidence": "Grounded state, facility, vehicle, custody, active shop/swim and current action owners reject customization."
+    }
+  ],
+  "remaining_critical_findings": [],
+  "limitations": [
+    "Read review cannot establish UI feel, real disk failure behavior, OS input or absence of frame jitter.",
+    "Rendered swap continuity and normal gameplay acceptance must use the frozen release fixtures and native visual evidence.",
+    "No claim of photoreal character quality is made."
+  ],
+  "production_test_or_runner_sources_modified_by_review": false
+}

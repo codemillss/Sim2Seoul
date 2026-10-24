@@ -5,6 +5,7 @@ const HUMAN_SURFACES := preload("res://scripts/player/human_surface_meshes.gd")
 const TEXTURED_SURFACE := preload("res://scripts/player/textured_human_surface.gd")
 const ACTIVITY_DIMENSIONS := preload("res://scripts/player/human_activity_dimensions.gd")
 const GAIT_SUPPORT := preload("res://scripts/player/human_gait_support.gd")
+const COMBAT_POSES := preload("res://scripts/player/human_combat_poses.gd")
 const TORSO_ROWS := [[.025,.160,.113,.106,0.],[.055,.174,.119,.114,0.],[.130,.170,.124,.119,0.],[.225,.178,.135,.121,0.],[.335,.197,.141,.121,0.],[.430,.205,.125,.111,0.],[.490,.206,.109,.101,0.],[.525,.205,.092,.085,0.],[.543,.164,.071,.066,0.],[.558,.061,.048,.045,0.]]
 const LEG_LENGTH := .43
 const STANDING_ANKLE_Y := .12
@@ -48,6 +49,7 @@ var _sandbox_remaining_s := 0.0
 var _sandbox_duration_s := 0.0
 var _sandbox_guarding := false
 var _sandbox_guard_weight := 0.0
+var _sandbox_authored_pose: Dictionary={}
 var _activity_kind := ""
 var _activity_elapsed := 0.0
 var _swim_mesh_defaults: Array[Dictionary]=[]
@@ -77,10 +79,13 @@ func setup(controlled_player: CharacterBody3D) -> bool:
 	if not _pose_proxy_only:
 		_textured_surface=TEXTURED_SURFACE.new();add_child(_textured_surface)
 		var requested:=String(player.get_meta("human_model_id",""))
-		if requested not in ["Male_Adult_04","Female_Adult_07"]:
+		if requested not in ["SeoulResident_M01","SeoulResident_F01","Male_Adult_04","Female_Adult_07"]:
 			var gender:=String(player.get_meta("human_gender","")).to_lower()
-			requested="Female_Adult_07" if gender=="female" or (gender!="male" and not player.has_method("set_facility_control") and absi(String(player.name).hash())%3==0) else "Male_Adult_04"
-		if not _textured_surface.setup(self,requested):_hide_pose_proxies();return false
+			requested="SeoulResident_F01" if gender=="female" or (gender!="male" and not player.has_method("set_facility_control") and absi(String(player.name).hash())%3==0) else "SeoulResident_M01"
+		var requested_profile:=String(player.get_meta("human_body_profile","standard"))
+		if requested_profile not in TEXTURED_SURFACE.BODY_PROFILES:requested_profile="standard"
+		if not _textured_surface.setup(self,requested,requested_profile):_hide_pose_proxies();return false
+		player.set_meta("human_model_id",_textured_surface.model_id);player.set_meta("human_body_profile",requested_profile)
 		_fit_gait_to_native(_textured_surface.rig)
 	_hide_pose_proxies()
 	return true
@@ -103,6 +108,44 @@ func _process(_delta: float) -> void:
 func textured_model_snapshot(refresh_actual_bounds:=true) -> Dictionary:
 	if is_instance_valid(_textured_surface):return _textured_surface.snapshot(refresh_actual_bounds)
 	return {"loaded":false,"error":"pose_proxy_fixture" if _pose_proxy_only else "weighted_human_unavailable","model_id":"","visible_mesh_count":0,"skeleton_bone_count":0,"surface_texture_uv_ready":false,"actual_visible_bounds_m":AABB(),"actual_height_m":0.,"normalized_rest_height_m":0.,"rig_contact_metrics":{},"legacy_geometry_rendered":false}
+
+func set_authored_model(model_id: String,body_profile: String="standard") -> bool:
+	# Replace presentation resources only. Reuse the same player, capsule,
+	# invisible game joints, wardrobe handles and camera interpolation owner.
+	if model_id not in ["SeoulResident_M01","SeoulResident_F01"] or body_profile not in TEXTURED_SURFACE.BODY_PROFILES or not _ready_avatar or not is_instance_valid(_textured_surface):return false
+	if _textured_surface.model_id==model_id and _textured_surface.body_profile==body_profile:return true
+	if _facility_controlled() or not _activity_kind.is_empty() or _textured_surface._swimwear_active or _sandbox_remaining_s>0.:return false
+	var old: Node3D=_textured_surface;var values: Dictionary={};var poses: Dictionary={}
+	for key: String in ["state","walk_weight","_air_weight","_run_weight","cadence_hz","_stance_fraction","_cycle_distance_m","_gait_speed_mps","_air_tuck","_hip_pose_y","_feet"]:
+		var value: Variant=get(key);values[key]=value.duplicate(true) if value is Dictionary else value
+	var nodes: Array=[self,_upper_body,_pelvis,find_child("Head",true,false)]
+	nodes.append_array(_joints.values());nodes.append_array(_hands)
+	for node: Node3D in nodes:
+		if is_instance_valid(node):poses[node]=node.transform
+	_rest_pose()
+	# The camera has moved drawable branches under its RenderProxy. Retain that
+	# presentation parent; putting the new skin under the simulation root would
+	# bypass render interpolation and split skin/source marker coordinate frames.
+	var presentation_parent: Node=old.get_parent()
+	var presentation_pose:=Transform3D.IDENTITY
+	if presentation_parent is Node3D:presentation_pose=presentation_parent.transform;presentation_parent.transform=Transform3D.IDENTITY
+	var replacement: Node3D=TEXTURED_SURFACE.new();presentation_parent.add_child(replacement)
+	var accepted: bool=replacement.setup(self,model_id,body_profile)
+	if accepted:accepted=replacement.set_customization(old._custom_colors,old._custom_preview_clothes)
+	if presentation_parent is Node3D:presentation_parent.transform=presentation_pose
+	for key: String in values:set(key,values[key])
+	for node: Node3D in poses:
+		if is_instance_valid(node):node.transform=poses[node]
+	if not accepted:
+		for helper: Variant in [replacement.rig,replacement._swim_rig]:
+			if is_instance_valid(helper):helper.get_parent().remove_child(helper);helper.queue_free()
+		presentation_parent.remove_child(replacement);replacement.queue_free();return false
+	_textured_surface=replacement;player.set_meta("human_model_id",model_id);player.set_meta("human_body_profile",body_profile)
+	for helper: Variant in [old.rig,old._swim_rig]:
+		if is_instance_valid(helper):helper.set_process(false);helper.get_parent().remove_child(helper);helper.queue_free()
+	old.visible=false;old.get_parent().remove_child(old);old.queue_free()
+	_fit_gait_to_native(replacement.rig);replacement.rig.sync_pose();_hide_pose_proxies()
+	return true
 
 func _make_materials() -> void:
 	var colors := {"jacket":Color(.12,.20,.25),"jacket_trim":Color(.17,.28,.33),"shirt":Color(.79,.80,.75),"trousers":Color(.20,.24,.27),"skin":Color(.67,.48,.35),"hair":Color(.065,.055,.045),"shoes":Color(.64,.67,.65),"sole":Color(.14,.17,.18),"eye":Color(.055,.042,.033),"eye_white":Color(.68,.66,.60),"lips":Color(.43,.24,.19),"seam":Color(.09,.14,.16)}
@@ -415,6 +458,22 @@ func play_sandbox_action(kind: String,seconds := .4) -> void:
 	if kind=="guard":set_sandbox_guarding(true);return
 	_sandbox_action=kind;_sandbox_remaining_s=maxf(.05,seconds);_sandbox_duration_s=_sandbox_remaining_s
 
+func sandbox_action_duration(kind: String) -> float:return COMBAT_POSES.duration(kind)
+func sandbox_contact_phase(kind: String) -> float:return COMBAT_POSES.contact_phase(kind)
+
+func get_sandbox_strike_contact(kind: String="") -> Dictionary:
+	if kind.is_empty():kind=_sandbox_action
+	var side:="Right" if kind in ["punch","cross_right"] else "Left"
+	var result:={"valid":false,"point":global_position,"radius_m":.105,"side":side,"kind":kind,"phase":0.}
+	if _sandbox_authored_pose.is_empty() or not is_instance_valid(_textured_surface):return result
+	var rig: Node3D=_textured_surface.active_native_rig()
+	if not is_instance_valid(rig) or not rig.has_method("combat_contact_world"):return result
+	# Safety runs after this avatar's physics pose. Read the same anatomical
+	# wrist/finger location that the renderer will display, never a remote ray.
+	rig.sync_pose();result=rig.combat_contact_world(side)
+	result.merge({"radius_m":.105,"side":side,"kind":kind,"phase":1.-_sandbox_remaining_s/maxf(.0001,_sandbox_duration_s)},true)
+	return result
+
 func set_sandbox_guarding(active: bool) -> void:
 	_sandbox_guarding=active
 
@@ -422,8 +481,10 @@ func cancel_sandbox_action(expected_kind: String="") -> void:
 	# Ownership can change after a newer vehicle pose has already started.
 	# A previous melee owner must never erase that new owner's animation.
 	if not expected_kind.is_empty() and _sandbox_action!=expected_kind:return
-	if _sandbox_action=="guard":_sandbox_guarding=false;_sandbox_guard_weight=0.
+	if expected_kind.is_empty() or _sandbox_action=="guard":_sandbox_guarding=false;_sandbox_guard_weight=0.
 	_sandbox_action="";_sandbox_remaining_s=0.;_sandbox_duration_s=0.
+	_sandbox_authored_pose.clear()
+	remove_meta("render_sandbox_pose")
 
 func _blend_arm_to(side_name: String,target: Vector3,amount: float) -> void:
 	var arm:=_joints[side_name+"UpperArm"] as Node3D
@@ -434,11 +495,37 @@ func _blend_arm_to(side_name: String,target: Vector3,amount: float) -> void:
 	forearm.basis=original_forearm.slerp(forearm.basis,amount)
 
 func _guard_pose(amount: float) -> void:
-	_blend_arm_to("Left",Vector3(-.18,1.32,-.28),amount)
-	_blend_arm_to("Right",Vector3(.17,1.28,-.32),amount)
-	_upper_body.rotation=_upper_body.rotation.lerp(Vector3(-.045,.045,-.015),amount)
+	_apply_authored_combat(COMBAT_POSES.sample("guard",0.,amount))
+
+func _apply_authored_combat(pose: Dictionary) -> void:
+	_sandbox_authored_pose=pose
+	var amount:=clampf(float(pose.weight),0.,1.)
+	var stance_amount:=amount*(1.-clampf(walk_weight,0.,1.))
+	_upper_body.rotation=_upper_body.rotation.lerp(Vector3(pose.torso),amount)
+	_pelvis.position=Vector3(0.,_pelvis.position.y,0.)+Vector3(pose.pelvis)*stance_amount
+	_pelvis.rotation=_pelvis.rotation.lerp(Vector3(pose.pelvis_rotation),amount)
+	for side: String in ["Left","Right"]:
+		var arm:=_joints[side+"UpperArm"] as Node3D;var forearm:=_joints[side+"Forearm"] as Node3D
+		var origin_arm:=arm.basis;var origin_forearm:=forearm.basis
+		var target: Vector3=pose[side].wrist;var elbow_hint: Vector3=pose[side].elbow
+		var offset:=target-arm.position;var distance:=clampf(offset.length(),.02,UPPER_ARM_LENGTH_M+FOREARM_LENGTH_M+.025-.001)
+		var direction:=offset.normalized();var pole:=elbow_hint-arm.position
+		pole=(pole-direction*pole.dot(direction)).normalized()
+		var forearm_reach:=FOREARM_LENGTH_M+.025
+		var along:=(UPPER_ARM_LENGTH_M*UPPER_ARM_LENGTH_M-forearm_reach*forearm_reach+distance*distance)/(2.*distance)
+		var elbow:=arm.position+direction*along+pole*sqrt(maxf(0.,UPPER_ARM_LENGTH_M*UPPER_ARM_LENGTH_M-along*along))
+		var desired_arm:=Basis(Quaternion(Vector3.DOWN,(elbow-arm.position).normalized()))
+		var desired_forearm:=desired_arm.inverse()*Basis(Quaternion(Vector3.DOWN,(arm.position+direction*distance-elbow).normalized()))
+		arm.basis=origin_arm.slerp(desired_arm,amount);forearm.basis=origin_forearm.slerp(desired_forearm,amount)
+		if stance_amount>.001:
+			var base: Vector3=_feet[side];var goal: Vector3=pose[side+"Foot"]
+			_feet[side]=base.lerp(goal,stance_amount);_leg_pose(side,_feet[side])
+			var thigh:=_joints[side+"Thigh"] as Node3D;var shin:=_joints[side+"Shin"] as Node3D
+			var contact_basis:=Basis(Vector3.UP,float(pose[side+"FootYaw"])*stance_amount)
+			(_joints[side+"Foot"] as Node3D).basis=(thigh.basis*shin.basis).inverse()*contact_basis
 
 func _sandbox_pose(delta: float) -> void:
+	_sandbox_authored_pose.clear()
 	_sandbox_guard_weight=lerpf(_sandbox_guard_weight,1. if _sandbox_guarding else 0.,1.-exp(-delta*16.))
 	if _sandbox_action=="guard" or _sandbox_remaining_s<=0.:
 		if _sandbox_guard_weight>.001:
@@ -448,42 +535,18 @@ func _sandbox_pose(delta: float) -> void:
 	_sandbox_remaining_s=maxf(0.,_sandbox_remaining_s-delta)
 	var phase:=1.0-_sandbox_remaining_s/_sandbox_duration_s
 	var weight:=sin(phase*PI)
-	if _sandbox_action=="punch":
-		_arm_to("Right",Vector3(.24,1.22,-.12-.52*weight))
-		_arm_to("Left",Vector3(-.23,1.17,-.25))
-	elif _sandbox_action=="flinch":_upper_body.rotation.x=.16*weight
+	if _sandbox_action=="flinch":_upper_body.rotation.x=.16*weight
 	elif _sandbox_action in ["vehicle_enter","vehicle_exit"]:
 		var direction:=1. if _sandbox_action=="vehicle_enter" else -1.
 		_upper_body.rotation=Vector3(.16*weight,direction*.15*weight,direction*.075*weight)
 		_blend_arm_to("Left",Vector3(-.29,1.21,-.34-.18*weight),weight)
 		_blend_arm_to("Right",Vector3(.26,1.08,-.16-.16*weight),weight)
 	else:
-		# Windup, extension and recovery use the same duration fractions as the
-		# contact service. Only the upper pose changes; feet remain grounded.
-		var contact:=.18/.64
-		match _sandbox_action:
-			"jab_left":contact=.10/.42
-			"cross_right":contact=.14/.48
-			"hook_left":contact=.20/.56
-		var extension:=smoothstep(contact*.40,contact,phase)*(1.-smoothstep(contact,1.,phase))
-		var amount:=smoothstep(0.,contact*.50,phase)*smoothstep(0.,.20,1.-phase)
-		_guard_pose(amount)
-		match _sandbox_action:
-			"jab_left":
-				_blend_arm_to("Left",Vector3(-.19,1.31,-.28-.39*extension),amount)
-				_upper_body.rotation.y=-.10*extension
-			"cross_right":
-				_blend_arm_to("Right",Vector3(.13,1.33,-.28-.40*extension),amount)
-				_upper_body.rotation.y=.21*extension
-			"hook_left":
-				_blend_arm_to("Left",Vector3(lerpf(-.43,.12,extension),1.32,-.32-.18*extension),amount)
-				_upper_body.rotation.y=-.26*extension
-			"shove":
-				for side_name: String in ["Left","Right"]:_blend_arm_to(side_name,Vector3(-.17 if side_name=="Left" else .17,1.23,-.27-.40*extension),amount)
-				_upper_body.rotation.x=-.085*extension
+		_apply_authored_combat(COMBAT_POSES.sample(_sandbox_action,phase))
 
 func _physics_process(delta: float) -> void:
 	if not _ready_avatar or not is_instance_valid(player) or delta<=0.0:return
+	_sandbox_authored_pose.clear();_pelvis.position.x=0.;_pelvis.position.z=0.
 	var movement: Vector3=player.global_position-_last_position
 	_last_position=player.global_position
 	measured_displacement_m=Vector2(movement.x,movement.z).length()
@@ -561,7 +624,7 @@ func snapshot() -> Dictionary:
 	if bool(textured.loaded):body_bounds=global_transform*textured.actual_visible_bounds_m
 	return {"ready":_ready_avatar,"state":state,"clock":clock,"stride_phase":stride_phase,"cadence_hz":cadence_hz,"cadence_cap_hz":MAX_CADENCE_HZ,"actual_speed_mps":actual_speed_mps,"measured_displacement_m":measured_displacement_m,"walk_weight":walk_weight,"air_weight":_air_weight,"run_weight":_run_weight,
 		"joint_transforms":transforms,"feet_world":feet,"mesh_count":int(textured.visible_mesh_count),"hidden_pose_proxy_mesh_count":_meshes.size(),"body_bounds":body_bounds,"textured_model":textured,"textured_model_loaded":bool(textured.loaded),"original_body_hidden":is_instance_valid(_old_body) and not _old_body.visible,"uses_original_physics_capsule":true,"visual_forward":-global_basis.z,"facility_control":_facility_controlled() if is_instance_valid(player) else false,"activity_kind":_activity_kind,"activity_elapsed":_activity_elapsed,"avatar_hands_visible":bool(textured.loaded) and _activity_kind not in ["eat","weights"],
-		"appearance_scope":"Textured weighted Microsoft Rocketbox human (MIT) driven by retained invisible game-contact markers; no procedural geometry is rendered.","eye_height_m":1.581,"human_surface_version":"EXP29_TEXTURED_ROCKETBOX_01","authored_adult_height_m":ADULT_VISUAL_HEIGHT_M,"head_height_m":HEAD_HEIGHT_M,"standing_hip_joint_height_m":HIP_Y,"hip_height_m":_hip_pose_y,"head_units":ADULT_VISUAL_HEIGHT_M/HEAD_HEIGHT_M,"stance_fraction":_stance_fraction,"cycle_distance_m":_cycle_distance_m,"represented_gait_speed_mps":_gait_speed_mps,"arcade_speed_excess_mps":maxf(0.,actual_speed_mps-_gait_speed_mps),"motion_scope":"Distance-driven game-contact markers retarget the original weighted human. Not motion capture. Turbo speeds retain bounded cadence and can visibly exceed plausible limb travel."}
+		"appearance_scope":"Original Sim2Seoul SeoulResident skinned mesh, facial detail, clothing and articulated hands authored in this repository; retained invisible markers supply game contacts.","eye_height_m":1.581,"human_surface_version":"EXP33_ORIGINAL_SEOUL_RESIDENT_01","authored_adult_height_m":ADULT_VISUAL_HEIGHT_M,"head_height_m":HEAD_HEIGHT_M,"standing_hip_joint_height_m":HIP_Y,"hip_height_m":_hip_pose_y,"head_units":ADULT_VISUAL_HEIGHT_M/HEAD_HEIGHT_M,"stance_fraction":_stance_fraction,"cycle_distance_m":_cycle_distance_m,"represented_gait_speed_mps":_gait_speed_mps,"arcade_speed_excess_mps":maxf(0.,actual_speed_mps-_gait_speed_mps),"motion_scope":"Distance-driven game-contact markers and original combat keyposes drive the native weighted human. Not motion capture. Turbo speeds retain bounded cadence and can visibly exceed plausible limb travel."}
 
 func _exit_tree() -> void:
 	if is_instance_valid(_old_body):_old_body.visible=_old_body_visible

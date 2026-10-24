@@ -1,0 +1,68 @@
+extends SceneTree
+var scene: Node3D
+var service: Node
+var rows: Array=[]
+var report_path:="/private/tmp/customization-label-probe.json"
+var settings_path:=""
+func _initialize() -> void:
+ for arg: String in OS.get_cmdline_user_args():
+  if arg.begins_with("--report="):report_path=arg.trim_prefix("--report=")
+ settings_path="/private/tmp/customization-label-probe-"+str(OS.get_process_id())+".json"
+ _run.call_deferred()
+func _json(v: Variant) -> Variant:
+ if v is Vector2:return [v.x,v.y]
+ if v is Color:return [v.r,v.g,v.b,v.a]
+ if v is Rect2:return {"position":_json(v.position),"size":_json(v.size)}
+ if v is Dictionary:
+  var out: Dictionary={}
+  for k: Variant in v:out[str(k)]=_json(v[k])
+  return out
+ if v is Array:
+  var out: Array=[]
+  for item: Variant in v:out.append(_json(item))
+  return out
+ return v
+func _frames(n: int) -> void:
+ for i: int in range(n):await process_frame
+func _select(option: OptionButton,index: int) -> void:
+ option.select(index);option.item_selected.emit(index)
+func _state() -> Dictionary:
+ var result: Dictionary={}
+ for key: String in ["skin","hair","jacket","pants","shoes"]:
+  var option: OptionButton=service.color_options[key];var parents: Array=[];var parent: Node=option.get_parent()
+  while parent!=null and parent!=scene:
+   if parent is Control:parents.append({"name":str(parent.name),"rect":parent.get_global_rect(),"clip_contents":parent.clip_contents,"visible":parent.is_visible_in_tree()})
+   parent=parent.get_parent()
+  result[key]={"selected":option.selected,"text":option.text,"selected_item_text":option.get_item_text(option.selected),"rect":option.get_global_rect(),"visible":option.is_visible_in_tree(),"disabled":option.disabled,"hovered":option.is_hovered(),"draw_mode":option.get_draw_mode(),"modulate":option.modulate,"self_modulate":option.self_modulate,"font_color":option.get_theme_color("font_color"),"font_hover_color":option.get_theme_color("font_hover_color"),"font_pressed_color":option.get_theme_color("font_pressed_color"),"font_id":option.get_theme_font("font").get_instance_id(),"clip_contents":option.clip_contents,"parents":parents}
+ return {"options":result,"draft":service.draft.duplicate(true),"scroll":service.scroll.scroll_vertical,"camera_yaw":scene.rig.yaw,"camera_h_offset":scene.rig.camera.h_offset,"process_frame":Engine.get_process_frames()}
+func _capture(label: String,force_draw: bool=false) -> void:
+ var state: Dictionary=_state()
+ if force_draw:RenderingServer.force_draw()
+ else:await RenderingServer.frame_post_draw
+ var path:=report_path.get_basename()+"_"+label+".png";var picture:=root.get_texture().get_image();var error:=picture.save_png(path)
+ rows.append({"label":label,"force_draw":force_draw,"file":path,"sha256":FileAccess.get_sha256(path),"size":picture.get_size(),"error":error,"state":state})
+ print("LABEL_PROBE ",label," ",error)
+func _run() -> void:
+ scene=load("res://scenes/world/explore_walk.tscn").instantiate();scene.character_settings_path=settings_path;scene.exploration_settings_path=settings_path+".explore";scene.quality_settings_path=settings_path+".quality";root.add_child(scene)
+ for i: int in range(10):await physics_frame
+ service=scene.character_customization
+ if not scene.runtime_ok or not is_instance_valid(service):push_error("probe setup failed");quit(2);return
+ if not scene.menu.visible:scene.toggle_menu()
+ service.menu_button.pressed.emit();await _frames(3)
+ _select(service.color_options.skin,3);_select(service.color_options.hair,4);_select(service.color_options.jacket,2);_select(service.color_options.pants,3);_select(service.color_options.shoes,4)
+ _select(service.model_option,1);await _frames(3)
+ service.front_button.pressed.emit();await _frames(3);await _capture("front_postdraw")
+ service.back_button.pressed.emit();await _frames(1);await _capture("back_1_postdraw")
+ await _frames(2);await _capture("back_3_force",true)
+ await _frames(7);await _capture("back_10_postdraw")
+ await _frames(20);await _capture("back_30_postdraw")
+ service.front_button.pressed.emit();await _frames(3);await _capture("front_return_postdraw")
+ service.cancel_button.pressed.emit()
+ var f:=FileAccess.open(report_path,FileAccess.WRITE);f.store_string(JSON.stringify(_json({"task":"customization_back_label_probe","display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"observations":rows,"scope":"One actual production customization UI, stationary player and identical selected colors. Only the front/back camera Button signals and OptionButton signals are fixture injected; no source edits or OS interaction claim."}),"  "));f.close()
+ paused=false
+ for node: Node in scene.find_children("*","AudioStreamPlayer",true,false):node.stop()
+ for node: Node in scene.find_children("*","AudioStreamPlayer3D",true,false):node.stop()
+ root.remove_child(scene);scene.queue_free();await _frames(3)
+ for path: String in [settings_path,settings_path+".explore",settings_path+".quality"]:
+  if FileAccess.file_exists(path):DirAccess.remove_absolute(path)
+ quit(0)

@@ -1,0 +1,452 @@
+{
+  "task": "BODY02_FINAL_OPTIONAL_POOL_NATIVE_REVIEW",
+  "reviewed_at": "2026-10-24T05:44:26.666798+00:00",
+  "result": "FUNCTIONAL_POOL_PASS_PHOTOREALISM_AND_STROKE_ANIMATION_NOT_CLAIMED",
+  "report": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02.json",
+  "report_sha256": "452f91002b4fc3571451bf68c7d4807d4f9855f80a422021b67a98956c45a570",
+  "runner": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02.run.json",
+  "runner_sha256": "2dbbfc5af342a8f1fbcd5a7a1c6b0ae6e04121638d84a231348b2d67622d4cc8",
+  "actual_engine_exit": 0,
+  "script_errors": false,
+  "source_changes_during_run": [],
+  "actual_denominator": {
+    "passed": 40,
+    "total": 40,
+    "functional_checks": 36,
+    "captures": 4,
+    "historical_expected41_explanation": "The stale shower-notice absence condition is already part of different_pool_transition_clears_timed_bonus_and_restores_outfit. No assertion was removed or relaxed;41was a planning double count."
+  },
+  "direct_source_binding": {
+    "count": 11,
+    "current_mismatches": []
+  },
+  "runner_broad_source_binding": {
+    "count": 219,
+    "current_mismatches": []
+  },
+  "actual_captures": [
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02_casual_without_shower_actual_swimming.png",
+      "directly_opened_original_png": true,
+      "sha256": "1a425d01875c7f7461daed949be450545ce5288103d0bad673626dd798935c36",
+      "recorded_sha256": "1a425d01875c7f7461daed949be450545ce5288103d0bad673626dd798935c36",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Actual casual dark shirt is visible above the water; HUD explicitly says preparation is optional,3.00m/s,cleanliness30/100."
+    },
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02_shower_only_actual_swimming.png",
+      "directly_opened_original_png": true,
+      "sha256": "9696c6ff02432ed1d09ee4e5352c17eb9319c7eaeb99a71af239ce0ab9e9c47b",
+      "recorded_sha256": "9696c6ff02432ed1d09ee4e5352c17eb9319c7eaeb99a71af239ce0ab9e9c47b",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Same casual shirt remains after optional shower; HUD shows cleanliness+20,freshness89seconds,+10%,3.30m/s,cleanliness50/100."
+    },
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02_shower_and_swimwear_actual_swimming.png",
+      "directly_opened_original_png": true,
+      "sha256": "7ddf552fd3942daa78ab2abdbee22979741082f94ed733540b20ac7647a06259",
+      "recorded_sha256": "7ddf552fd3942daa78ab2abdbee22979741082f94ed733540b20ac7647a06259",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Bare upper torso/swimwear variant is visible; HUD states optional shower,+15%swimwear and+10%freshness,3.75m/s."
+    },
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/pool_native_final_body02_swimwear_only_actual_swimming.png",
+      "directly_opened_original_png": true,
+      "sha256": "5a74c4c25ef95b69b6ecbffc599c81d1703b1f4d45c85a1b3b2e6ba8e4276714",
+      "recorded_sha256": "5a74c4c25ef95b69b6ecbffc599c81d1703b1f4d45c85a1b3b2e6ba8e4276714",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Swimwear remains after freshness expiry; HUD has no freshness bonus and displays+15%,3.45m/s."
+    }
+  ],
+  "actual_held_input_speeds": [
+    {
+      "case": "casual_without_shower_actual_input_speed_and_buoyancy",
+      "min_mps": 3.0,
+      "max_mps": 3.0,
+      "expected_mps": 3.0,
+      "method": "Actual held right input from disclosed identical player-only central-water start; body/collision/buoyancy remain production."
+    },
+    {
+      "case": "shower_only_actual_input_speed_and_buoyancy",
+      "min_mps": 3.29999995231628,
+      "max_mps": 3.29999995231628,
+      "expected_mps": 3.3,
+      "method": "Actual held right input from disclosed identical player-only central-water start; body/collision/buoyancy remain production."
+    },
+    {
+      "case": "shower_and_swimwear_actual_input_speed_and_buoyancy",
+      "min_mps": 3.75000023841858,
+      "max_mps": 3.75000023841858,
+      "expected_mps": 3.75,
+      "method": "Actual held right input from disclosed identical player-only central-water start; body/collision/buoyancy remain production."
+    },
+    {
+      "case": "swimwear_only_actual_input_speed_and_buoyancy",
+      "min_mps": 3.45000004768372,
+      "max_mps": 3.45000004768372,
+      "expected_mps": 3.45,
+      "method": "Actual held right input from disclosed identical player-only central-water start; body/collision/buoyancy remain production."
+    }
+  ],
+  "boundary_evidence": {
+    "freshness_remains_active_until_actual90s_boundary": {
+      "evidence": {
+        "elapsed_since_completion_s": 89.8999999999955,
+        "remaining_s": 0.100000000002548
+      },
+      "name": "freshness_remains_active_until_actual90s_boundary",
+      "passed": true
+    },
+    "freshness_expires_after_actual90_game_seconds_without_clock_override": {
+      "evidence": {
+        "elapsed_since_completion_s": 90.1666666666621,
+        "snapshot": {
+          "cancelled_showers": 1,
+          "cleanliness": 50.0,
+          "completed_showers": 1,
+          "entry_requires_preparation": false,
+          "error": "",
+          "events": [
+            {
+              "clock_s": 21.1833333333335,
+              "details": {
+                "swimwear_required": false
+              },
+              "event": "shower_started",
+              "pool_id": "osm:way:233593619:building"
+            },
+            {
+              "clock_s": 22.3500000000003,
+              "details": {
+                "cleanliness_gain": 0.0,
+                "freshness_remaining_s": 0.0,
+                "refreshes_duration_instead_of_stacking": true
+              },
+              "event": "shower_cancelled",
+              "pool_id": "osm:way:233593619:building"
+            },
+            {
+              "clock_s": 22.5833333333336,
+              "details": {
+                "swimwear_required": false
+              },
+              "event": "shower_started",
+              "pool_id": "osm:way:233593619:building"
+            },
+            {
+              "clock_s": 26.6166666666672,
+              "details": {
+                "cleanliness_gain": 20.0,
+                "freshness_remaining_s": 90.0,
+                "refreshes_duration_instead_of_stacking": true
+              },
+              "event": "shower_completed",
+              "pool_id": "osm:way:233593619:building"
+            },
+            {
+              "clock_s": 33.8500000000006,
+              "details": {},
+              "event": "swimwear_changed",
+              "pool_id": "osm:way:233593619:building"
+            }
+          ],
+          "freshness_duration_s": 90.0,
+          "freshness_remaining_s": 0.0,
+          "last_shower_cleanliness_gain": 20.0,
+          "loaded": true,
+          "pool_id": "osm:way:233593619:building",
+          "rejected_water_entries": 0,
+          "rooms": [
+            {
+              "authorized": true,
+              "gate_layer": 0,
+              "id": "osm:way:233593619:building",
+              "lounge": {
+                "active_lights": 4,
+                "bar": {
+                  "approach_point": [
+                    153.039413452148,
+                    88.3120346069336,
+                    54.6010131835938
+                  ],
+                  "bartender_point": [
+                    150.66276550293,
+                    88.2320327758789,
+                    54.3487091064453
+                  ],
+                  "cost_game_credits": 0,
+                  "counter_point": [
+                    151.706893920898,
+                    89.3020324707031,
+                    54.4595527648926
+                  ],
+                  "drink": "유자에이드",
+                  "drink_options": [
+                    {
+                      "cost_game_credits": 0,
+                      "id": 0,
+                      "title": "유자에이드",
+                      "use_point": [
+                        152.587493896484,
+                        88.3120346069336,
+                        53.6479797363281
+                      ]
+                    },
+                    {
+                      "cost_game_credits": 0,
+                      "id": 1,
+                      "title": "보리차",
+                      "use_point": [
+                        152.492477416992,
+                        88.3120346069336,
+                        54.5429496765137
+                      ]
+                    },
+                    {
+                      "cost_game_credits": 0,
+                      "id": 2,
+                      "title": "탄산수",
+                      "use_point": [
+                        152.397476196289,
+                        88.3120346069336,
+                        55.4379196166992
+                      ]
+                    }
+                  ],
+                  "drinks": [
+                    "유자에이드",
+                    "보리차",
+                    "탄산수"
+                  ],
+                  "elapsed_s": 0.0,
+                  "nonalcoholic": true,
+                  "selected_drink_index": 0,
+                  "served": 0,
+                  "stage": "idle",
+                  "use_point": [
+                    152.492477416992,
+                    88.3120346069336,
+                    54.5429496765137
+                  ]
+                },
+                "bar_cup_visible": false,
+                "bartender_textured": true,
+                "emissive_fixture_count": 8,
+                "light_budget": 4,
+                "light_nodes": 4,
+                "time_id": "evening"
+              },
+              "points": {
+                "arrival": [
+                  165.035614013672,
+                  88.3120346069336,
+                  57.7349090576172
+                ],
+                "changing": [
+                  160.386566162109,
+                  88.3120346069336,
+                  58.9006423950195
+                ],
+                "changing_rect": {
+                  "position": [
+                    -6.0,
+                    4.74197292327881
+                  ],
+                  "size": [
+                    3.0,
+                    2.59999990463257
+                  ]
+                },
+                "gate": [
+                  177.599319458008,
+                  88.3120346069336,
+                  58.3647270202637
+                ],
+                "shower": [
+                  169.336273193359,
+                  88.3120346069336,
+                  59.8507347106934
+                ],
+                "shower_rect": {
+                  "position": [
+                    3.0,
+                    4.74197292327881
+                  ],
+                  "size": [
+                    3.0,
+                    2.59999990463257
+                  ]
+                }
+              },
+              "shower_water_visible": false
+            },
+            {
+              "authorized": true,
+              "gate_layer": 0,
+              "id": "osm:way:233593644:building",
+              "lounge": {
+                "active_lights": 0,
+                "bar": {
+                  "approach_point": [
+                    284.475769042969,
+                    92.0054016113281,
+                    -63.5152549743652
+                  ],
+                  "bartender_point": [
+                    284.593322753906,
+                    91.9253997802734,
+                    -65.9023666381836
+                  ],
+                  "cost_game_credits": 0,
+                  "counter_point": [
+                    284.541687011719,
+                    92.9953994750977,
+                    -64.8536376953125
+                  ],
+                  "drink": "유자에이드",
+                  "drink_options": [
+                    {
+                      "cost_game_credits": 0,
+                      "id": 0,
+                      "title": "유자에이드",
+                      "use_point": [
+                        285.401733398438,
+                        92.0054016113281,
+                        -64.0203323364258
+                      ]
+                    },
+                    {
+                      "cost_game_credits": 0,
+                      "id": 1,
+                      "title": "보리차",
+                      "use_point": [
+                        284.502838134766,
+                        92.0054016113281,
+                        -64.0645904541016
+                      ]
+                    },
+                    {
+                      "cost_game_credits": 0,
+                      "id": 2,
+                      "title": "탄산수",
+                      "use_point": [
+                        283.603912353516,
+                        92.0054016113281,
+                        -64.1088485717773
+                      ]
+                    }
+                  ],
+                  "drinks": [
+                    "유자에이드",
+                    "보리차",
+                    "탄산수"
+                  ],
+                  "elapsed_s": 0.0,
+                  "nonalcoholic": true,
+                  "selected_drink_index": 0,
+                  "served": 0,
+                  "stage": "idle",
+                  "use_point": [
+                    284.502838134766,
+                    92.0054016113281,
+                    -64.0645904541016
+                  ]
+                },
+                "bar_cup_visible": false,
+                "bartender_textured": true,
+                "emissive_fixture_count": 8,
+                "light_budget": 4,
+                "light_nodes": 4,
+                "time_id": "evening"
+              },
+              "points": {
+                "arrival": [
+                  282.025115966797,
+                  92.0054016113281,
+                  -51.3610687255859
+                ],
+                "changing": [
+                  280.598388671875,
+                  92.0054016113281,
+                  -55.936767578125
+                ],
+                "changing_rect": {
+                  "position": [
+                    -6.0,
+                    2.63374733924866
+                  ],
+                  "size": [
+                    3.0,
+                    2.59999990463257
+                  ]
+                },
+                "gate": [
+                  282.106567382812,
+                  92.0054016113281,
+                  -38.7818412780762
+                ],
+                "shower": [
+                  280.155792236328,
+                  92.0054016113281,
+                  -46.9476585388184
+                ],
+                "shower_rect": {
+                  "position": [
+                    3.0,
+                    2.63374733924866
+                  ],
+                  "size": [
+                    3.0,
+                    2.59999990463257
+                  ]
+                }
+              },
+              "shower_water_visible": false
+            }
+          ],
+          "scope": "Authored roof-local optional changing/shower benefits. Casual clothes may enter/swim directly; freshness90 game seconds gives +10% swim speed, swimsuit +15%, additive cap25%; completed shower gives capped cleanliness+20. Timed effects and outfit restore on leaving, cleanliness remains an existing session wellbeing stat. No real hotel amenity or surveyed interior claim.",
+          "shower_elapsed_s": 4.03333333333333,
+          "showered": false,
+          "showering": false,
+          "swimming_speed_limit_mps": 3.0,
+          "swimming_speed_multiplier": 1.0,
+          "swimwear_active": false,
+          "total_shower_cleanliness_gain": 20.0
+        }
+      },
+      "name": "freshness_expires_after_actual90_game_seconds_without_clock_override",
+      "passed": true
+    }
+  },
+  "confirmed_behaviors": [
+    "Physically walk through the open gate/steps and swim in casual clothes without a shower.",
+    "Optional shower gives no effect before completion; cancellation releases control; menu pauses shower and freshness clocks.",
+    "Completed4second shower adds20cleanliness capped100 and90game-second freshness;+10%swim speed.",
+    "Optional swimsuit adds15%;combined speed bonus capped25%;repeated showers refresh duration without stacking.",
+    "Changing back restores exact outfit;different pool transition clears freshness,swimwear and stale shower notice;cleanliness remains an existing session statistic.",
+    "Original30people,14AIcars and player native capsule/mask retained."
+  ],
+  "limits": [
+    "First entry is actual walking;the four controlled speed cases use disclosed identical player-only central-water starts with production collision and buoyancy.",
+    "Native Input actions are exercised,not OS keyboard acceptance.",
+    "Frames show an upright/treading presentation;this review does not accept natural human swim strokes or photorealism.",
+    "The90second check in this run actually sampled89.9seconds and90.1666667seconds;the nominal observation strategy is retained as recorded,not assumed from frame count.",
+    "This functional review does not establish general anatomy/art acceptance or real hotel hygiene policy."
+  ]
+}

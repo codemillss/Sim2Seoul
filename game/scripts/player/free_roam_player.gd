@@ -234,6 +234,12 @@ func set_outdoor_water_region(region: Dictionary, bounds: AABB, walkable_rect: R
 
 func is_swimming() -> bool:return _swimming
 
+func swimming_speed_limit_mps() -> float:
+	var multiplier := 1.0
+	if is_instance_valid(pool_preparation_guard) and pool_preparation_guard.has_method("swimming_speed_multiplier"):
+		multiplier = clampf(float(pool_preparation_guard.swimming_speed_multiplier()),1.0,1.25)
+	return SWIM_SPEED_MPS*multiplier
+
 func _submerged(point: Vector3) -> bool:
 	if _water_region.is_empty() or not point.is_finite():return false
 	var local: Vector3 = _water_region.frame.affine_inverse()*point
@@ -246,7 +252,7 @@ func water_snapshot() -> Dictionary:
 	return {"registered":registered,"id":_water_region.get("id",""),"swimming":_swimming,"under_surface":_submerged(global_position),
 		"depth_m":maxf(0.0,float(_water_region.get("surface_y",0.0))-local.y) if registered else 0.0,"surface_y_world":float(_water_region.get("surface_y",0.0))+(_water_region.frame.origin.y if registered else 0.0),
 		"float_target_foot_y_world":float(_water_region.get("surface_y",0.0))-FLOAT_DEPTH_M+(_water_region.frame.origin.y if registered else 0.0),
-		"horizontal_speed_mps":Vector2(velocity.x,velocity.z).length(),"vertical_speed_mps":velocity.y,"swim_speed_limit_mps":SWIM_SPEED_MPS,
+		"horizontal_speed_mps":Vector2(velocity.x,velocity.z).length(),"vertical_speed_mps":velocity.y,"swim_speed_limit_mps":swimming_speed_limit_mps(),
 		"entry_count":_water_entries,"exit_count":_water_exits,"water_jump_count":_water_jumps,"exit_jump_locked":_water_jump_locked}
 
 func relocate_interior_region(point: Vector3, bounds: AABB, frame := Transform3D.IDENTITY, rect := Rect2(),ceiling_unbounded := false) -> bool:
@@ -333,8 +339,8 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		physics_stepped.emit(delta)
 		return
-	# The retained controller owns actual water entry. A jump or fall cannot
-	# bypass roof-local swimwear/shower preparation through the visual gate.
+	# The pool service maintains optional preparation effects and roof ownership.
+	# Water access itself does not require a shower or swimwear.
 	if is_instance_valid(pool_preparation_guard) and not pool_preparation_guard.enforce_player_water_access():
 		physics_stepped.emit(delta);return
 	if not global_position.is_finite() or global_position.y<_current_fall_limit_y():
@@ -372,7 +378,7 @@ func _physics_process(delta: float) -> void:
 	if not submerged:_water_jump_locked = false
 	_swimming = submerged and not _water_jump_locked
 	var speed := run_speed_mps if fast else walk_speed_mps
-	if submerged:speed = SWIM_SPEED_MPS
+	if submerged:speed = swimming_speed_limit_mps()
 	var grounded := is_on_floor()
 	_apply_horizontal_motion(last_direction*speed,intent,grounded and not submerged,delta)
 	if grounded:

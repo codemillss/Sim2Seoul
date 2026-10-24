@@ -1,0 +1,313 @@
+{
+  "task": "EXP34_independent_numeric_anatomical_field_contract",
+  "scope": "Pure numeric helper contract/continuity/protected contact and skin-garment equality. Uniform coordinate stencil is not actual mesh, visual realism, medical validity or final runtime acceptance. Actual 12GLB/516pose deformation and native human-shape review remain required.",
+  "source_sha256": {
+    "tools/authored_character/anatomical_surface_fields.py": "9ec0903bb350bbd3b97647bb10d3cbadef66cea0e8f511d4ef2f4f0b02e63041"
+  },
+  "checks": [
+    {
+      "name": "standard.row_count_and_no_mutation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.garment_skin_identical",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_native_bone_1",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_native_bone_2",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_native_bone_3",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_native_bone_4",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_native_bone_5",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0, 0, 0)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0.098, 0.111, 0.005)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0.098, 0.041, 0.15)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0.259, 0.849, 0.006)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0.268, 0.72, 0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.protected_contact_(0, 1.685, -0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "standard.finite_nonfolding_coordinate_field",
+      "passed": true,
+      "evidence": {
+        "grid_samples": 1782,
+        "minimum_numeric_jacobian_determinant": 0.7531514531309893,
+        "maximum_numeric_jacobian_determinant": 1.820161570054018,
+        "minimum_location_m": [
+          0.22500000000000003,
+          1.2999999999999998,
+          -0.09
+        ],
+        "maximum_sampled_displacement_m": 0.012299957116307205
+      }
+    },
+    {
+      "name": "soft.row_count_and_no_mutation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.garment_skin_identical",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_native_bone_1",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_native_bone_2",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_native_bone_3",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_native_bone_4",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_native_bone_5",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0, 0, 0)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0.098, 0.111, 0.005)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0.098, 0.041, 0.15)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0.259, 0.849, 0.006)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0.268, 0.72, 0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.protected_contact_(0, 1.685, -0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "soft.finite_nonfolding_coordinate_field",
+      "passed": false,
+      "evidence": {
+        "grid_samples": 1782,
+        "minimum_numeric_jacobian_determinant": -0.0674167702360681,
+        "maximum_numeric_jacobian_determinant": 2.7988683129969596,
+        "minimum_location_m": [
+          0.22500000000000003,
+          1.0,
+          0.135
+        ],
+        "maximum_sampled_displacement_m": 0.052217022959526696
+      }
+    },
+    {
+      "name": "athletic.row_count_and_no_mutation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.garment_skin_identical",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_native_bone_1",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_native_bone_2",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_native_bone_3",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_native_bone_4",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_native_bone_5",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0, 0, 0)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0.098, 0.111, 0.005)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0.098, 0.041, 0.15)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0.259, 0.849, 0.006)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0.268, 0.72, 0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.protected_contact_(0, 1.685, -0.01)",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "athletic.finite_nonfolding_coordinate_field",
+      "passed": true,
+      "evidence": {
+        "grid_samples": 1782,
+        "minimum_numeric_jacobian_determinant": 0.27795215411464397,
+        "maximum_numeric_jacobian_determinant": 2.3626084353415036,
+        "minimum_location_m": [
+          0.22500000000000003,
+          1.2999999999999998,
+          -0.09
+        ],
+        "maximum_sampled_displacement_m": 0.028269263865199925
+      }
+    }
+  ],
+  "observations": {
+    "standard": {
+      "grid_samples": 1782,
+      "minimum_numeric_jacobian_determinant": 0.7531514531309893,
+      "maximum_numeric_jacobian_determinant": 1.820161570054018,
+      "minimum_location_m": [
+        0.22500000000000003,
+        1.2999999999999998,
+        -0.09
+      ],
+      "maximum_sampled_displacement_m": 0.012299957116307205
+    },
+    "soft": {
+      "grid_samples": 1782,
+      "minimum_numeric_jacobian_determinant": -0.0674167702360681,
+      "maximum_numeric_jacobian_determinant": 2.7988683129969596,
+      "minimum_location_m": [
+        0.22500000000000003,
+        1.0,
+        0.135
+      ],
+      "maximum_sampled_displacement_m": 0.052217022959526696
+    },
+    "athletic": {
+      "grid_samples": 1782,
+      "minimum_numeric_jacobian_determinant": 0.27795215411464397,
+      "maximum_numeric_jacobian_determinant": 2.3626084353415036,
+      "minimum_location_m": [
+        0.22500000000000003,
+        1.2999999999999998,
+        -0.09
+      ],
+      "maximum_sampled_displacement_m": 0.028269263865199925
+    }
+  },
+  "passed": 41,
+  "total": 42,
+  "wall_seconds": 1.0408002500189468,
+  "design_contract": {
+    "version": "authored_anatomical_surface_field_v1",
+    "coordinates": "+Y up; +Z anterior; metres; immutable native skeleton",
+    "profiles": [
+      "standard",
+      "soft",
+      "athletic"
+    ],
+    "method": "shared continuous coordinate displacement; tilted rib and pelvic frames; directed muscle attachments; distributed soft tissue",
+    "preserved": [
+      "skeleton",
+      "rest bones",
+      "indices",
+      "weights",
+      "UVs",
+      "protected head/hand/finger/foot/toe positions"
+    ],
+    "garment_and_skin_geometry_field_identical": true,
+    "references": [
+      "https://openstax.org/books/anatomy-and-physiology/pages/11-6-appendicular-muscles-of-the-pelvic-girdle-and-lower-limbs",
+      "https://openstax.org/books/anatomy-and-physiology/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+      "https://openstax.org/books/anatomy-and-physiology-2e/pages/8-3-the-pelvic-girdle-and-pelvis"
+    ],
+    "reference_use": "General surface relationships only; no image, diagram, mesh or measured data is copied or loaded.",
+    "scope": "Project-authored game anatomy and fat distribution. Not a medical/anthropometric model, body scan, photorealism or completed visual acceptance."
+  }
+}

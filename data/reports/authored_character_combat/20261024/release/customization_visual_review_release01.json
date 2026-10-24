@@ -1,0 +1,100 @@
+{
+  "task": "character_customization_pixel_review",
+  "run": "customization_native_release01",
+  "reviewed_at": "2026-10-24T12:56:11.655959+09:00",
+  "reviewer": "original_character agent, direct view_image inspection of all five actual captured PNGs",
+  "numeric_result": {
+    "passed": 33,
+    "total": 33,
+    "result": "PASS"
+  },
+  "visual_result": "NEEDS_UI_FIX",
+  "images_reviewed": [
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/release/customization_native_release01_original_front.png",
+      "scope": "Actual production avatar and customization controls. Button/OptionButton signals are injected by this fixture. Screenshots require independent visual review; no ordinary OS interaction claim.",
+      "sha256": "762fe8ffaf62a10a640899e2bfa8ff887f303827997dba5a23914875d92e5290",
+      "size": "(1152, 720)"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/release/customization_native_release01_m_custom_front.png",
+      "scope": "Actual production avatar and customization controls. Button/OptionButton signals are injected by this fixture. Screenshots require independent visual review; no ordinary OS interaction claim.",
+      "sha256": "db957b82b14a151eaa815298edd923c43668be21d7a0c4b3817422ba9a4a1b50",
+      "size": "(1152, 720)"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/release/customization_native_release01_f_custom_front.png",
+      "scope": "Actual production avatar and customization controls. Button/OptionButton signals are injected by this fixture. Screenshots require independent visual review; no ordinary OS interaction claim.",
+      "sha256": "c31b3f9e89daba7c134e4072413a1f1e3d14b12c0e5dbe0e0ac1993cb5f41124",
+      "size": "(1152, 720)"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/release/customization_native_release01_f_custom_back.png",
+      "scope": "Actual production avatar and customization controls. Button/OptionButton signals are injected by this fixture. Screenshots require independent visual review; no ordinary OS interaction claim.",
+      "sha256": "a0e67a47017ec5b08eb0dd949fb037f54fdf210b8a7289cbfad5cb2c66752c60",
+      "size": "(1152, 720)"
+    },
+    {
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/release/customization_native_release01_small_window_save.png",
+      "scope": "Actual production avatar and customization controls. Button/OptionButton signals are injected by this fixture. Screenshots require independent visual review; no ordinary OS interaction claim.",
+      "sha256": "3cfb777019de1217f168e0e699271f2d4ff56c5403dc46c4d5e4c8f282f7d5c3",
+      "size": "(640, 480)"
+    }
+  ],
+  "observations": [
+    {
+      "view": "original_front",
+      "accepted": [
+        "Actual full standing default resident is visible.",
+        "Controls and Korean option labels are legible."
+      ],
+      "issues": [
+        "Existing combat HUD overlaps the customization title at the top right. Title is not readable."
+      ]
+    },
+    {
+      "view": "m_custom_front",
+      "accepted": [
+        "Jacket changes from dark navy to light ivory in the actual scene.",
+        "Trousers change to sand, shoes to blue, hair to visibly lighter silver grey.",
+        "Dark irises remain dark; hair selection does not visibly tint the eyes."
+      ],
+      "limits": [
+        "Existing shadow and hair texture make silver appear dark grey blue, rather than a plain flat swatch."
+      ]
+    },
+    {
+      "view": "f_custom_front",
+      "accepted": [
+        "Actual female selected model and same selected palette are visible.",
+        "Hands remain connected to sleeve cuffs."
+      ],
+      "limits": [
+        "Female silhouette and frontal face difference are subtle in the existing authored prototype. No photorealistic quality claim."
+      ]
+    },
+    {
+      "view": "f_custom_back",
+      "accepted": [
+        "Female bob silhouette is visible from behind.",
+        "The actual rear trouser and jacket palette match the selected sand and ivory.",
+        "No giant triangle tear or disconnected wrist is visible in this neutral pose."
+      ]
+    },
+    {
+      "view": "small_window_save",
+      "accepted": [
+        "The scrolled Save, Cancel and Reset buttons are fully visible and legible."
+      ],
+      "issues": [
+        "The right editor panel covers almost all of the centered avatar, preventing a useful small-window preview.",
+        "Combat HUD also overlaps panel text at this resolution."
+      ]
+    }
+  ],
+  "requested_minimal_fix": [
+    "Place customization controls on an explicit CanvasLayer above gameplay HUD.",
+    "Temporarily offset the preview camera horizontally so the resident is in the available left portion; restore camera offset on cancel/save."
+  ],
+  "scope": "Independent visual review of engine-generated pixels. Injected fixture UI signals are not an OS keyboard acceptance claim. Original anatomy/GLB assets remain frozen."
+}

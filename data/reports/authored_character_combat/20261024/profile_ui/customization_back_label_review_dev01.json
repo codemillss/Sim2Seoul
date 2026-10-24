@@ -1,0 +1,61 @@
+{
+  "task": "customization_back_label_timing_review",
+  "reviewed_at": "2026-10-24T13:20:04.345641+09:00",
+  "reviewer": "police_response agent, direct view_image inspection of all six original PNGs",
+  "actual_returncode": 0,
+  "production_ui_changed": false,
+  "production_ui_sha256": "04dfeca835e28f4cfd330b150dc02240ad95a79655a3a42e30401d120bc577a1",
+  "option_state_identical_across_all_observations": {
+    "jacket": true,
+    "pants": true
+  },
+  "pixel_observations": [
+    {
+      "label": "front_postdraw",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_front_postdraw.png",
+      "sha256": "1923a8f4eee7d4c66110bab1d306071ed2a3bdccbdc95309e1fcf7905fa11ee5",
+      "process_frame": 9,
+      "jacket_and_pants_text_visible": true
+    },
+    {
+      "label": "back_1_postdraw",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_back_1_postdraw.png",
+      "sha256": "0af09c9cbf80c1eda34745cd883e12b12d94f0923ef5de1f9cca7c00baebab3c",
+      "process_frame": 10,
+      "jacket_and_pants_text_visible": false
+    },
+    {
+      "label": "back_3_force",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_back_3_force.png",
+      "sha256": "7b6d067798ee5208348f6ae091f18fed5c9d066bd8103b56cc955fd9301595e4",
+      "process_frame": 12,
+      "jacket_and_pants_text_visible": false
+    },
+    {
+      "label": "back_10_postdraw",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_back_10_postdraw.png",
+      "sha256": "5169ef355399777f2c152bc2ec6f36c7f5e9cc74cc66a15814fec65a8bad2d5d",
+      "process_frame": 19,
+      "jacket_and_pants_text_visible": true
+    },
+    {
+      "label": "back_30_postdraw",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_back_30_postdraw.png",
+      "sha256": "9f394e337f8f77dee2352435a45f5e15d26bd7d69cafbdfc03141163481b8e62",
+      "process_frame": 39,
+      "jacket_and_pants_text_visible": true
+    },
+    {
+      "label": "front_return_postdraw",
+      "file": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/profile_ui/customization_back_labels_dev01_front_return_postdraw.png",
+      "sha256": "ab555a05650b9d86d2942685981b515c30251d713d6cafd12da160fc4a69ef98",
+      "process_frame": 42,
+      "jacket_and_pants_text_visible": false
+    }
+  ],
+  "diagnosis": "The selected strings/current indices, actual rectangles, visibility, clipping parents, draw mode, modulation, theme font colors, font instance and scroll position remain identical. Text disappears only in early camera-transition readbacks and is present in the later 10/30-frame rear observations. This rules out a rear-specific UI state or clipping change in this reproduced case; the precise native renderer/cache cause is not established.",
+  "fixture_change": "Capture waits ten actual render process frames, then awaits RenderingServer.frame_post_draw before reading the viewport; forced drawing is removed. Capture metadata records the settling frames, barrier and selected labels.",
+  "acceptance_scope": "Steady rendered UI readability after a settled frame. The transient early pixels remain preserved. This does not assert that every ordinary OS-display transition frame is free of missing glyphs, or that force_draw alone caused the issue. No full suite rerun during ongoing authored-asset work.",
+  "report_sha256": "5db9739b1b5e7daa2f62216713123b86868d3b32c43db202698977796249350e",
+  "probe_source_sha256": "856c3babc475fe664a3b921259ed51fdee3dcbcd47a671e457689f4ad353e04c"
+}

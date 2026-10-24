@@ -1,6 +1,20 @@
 # Sol 작업 인수 안내
 
-## 현재 인수: 2026-10-23 EXP32 도시 액션
+## 현재 인수: 2026-10-24 EXP33 자체 인물·출동·선택 수영/외형
+
+[WORK_STATUS](WORK_STATUS.md)·[EXP33 안내](AUTHORED_CHARACTER_COMBAT.md)·[집계](../data/reports/authored_character_combat/20261024/summary.json)를 먼저 읽는다. 자체 generator/12GLB는 `tools/authored_character/`와 `game/assets/original/seoul_resident/`에 있다. 외부 모델은 역사 재현용이며 현재 표시 모델로 사용하지 않는다. 일반 실행은 준비된 GLB/PNG를 import하므로 generator 재생성이 필요 없다. 선택 재생성에는 NumPy/Pillow가 필요하다.
+
+실제 손 접촉과 피격 임시 소유/원래 controller 복귀, 초기14경찰/가까운2명 출동·연결 경로/막힘 대응·60초 시계를 유지한다. 원래 개체/도시/1.70m 캡슐은 바꾸지 않는다. 모델/수영복은 같은52본 자체 몸을 사용한다. 자동 LOD는 끄며 `game/assets/original/seoul_resident/*.import` 설정도 Git과 현재 해시에 포함한다. `.godot` 캐시는 공유하지 않는다. 작은 겨드랑이 틈과 얼굴/옷의 프로토타입 한계는 후속 과제다.
+
+수영은 미준비도 허용하며 샤워/수영복은 각각 실제 속도 보너스다. 외형 설정은 별도 저장, 적용/취소와 상점/수영복 복귀를 구분한다. 새 검사는 `authored_resident`, `authored_combat`, `police_dispatch`, `driver_reaction`, `customization`, `human_materials`, `swim_arm_skin`, 갱신된 `pool`이다. 정확한 인수/분모/결과는 집계의 `.run.json`을 따른다. 저장 무결성 기본 집계는 EXP33이고 새 엔진 실행·픽셀 검토·일반 OS 입력·주관적 조작감은 서로 다른 판정이다.
+
+현재 선택은 UI 수정 뒤4실행179개(54/64/33/28)다. 앞선36실행5560개는 실제 OS popup 종료를 놓친 UI 수정 전 이력이며, 정확한 옛 두 UI 소스와 SHA를 별도 보존했다. 두 UI 파일 이외의 결합 소스/자산은 동일하다. 현재7개 선택기는 같은 패널 좌우 버튼과 방향키를 사용하고 PopupMenu를 만들지 않는다. 편집 전용 fill은 닫을 때 숨긴다. 일반 OS 마우스/방향키 선택·뒤 보기·취소·복귀는 별도 normal_launch 기록을 따른다. 실제 사용자 설정 Save와 지속 주행 수용으로 확대하지 않는다.
+
+기존 새 창은 코드 변경을 자동 반영하지 않는다. 최신 일반 실행기로 다시 열고 Esc의 외형/보행/야외 풀 메뉴와 F/X/G를 체험한다. 기존 속도/해질녘 저장은 보존한다. 아래 인수 안내는 각각 당시 이력이다.
+
+최신 외형 목표는 몸 크기 구분뿐 아니라 매력적인 얼굴과 평범/성숙/투박한 인상을 모두 설득력 있게 만드는 것이다. [미술 방향 제안](REFERENCE_DIRECTION.md#2026-10-24-캐릭터-미술-방향--매력과-개성)의 제작 방식/고정 조명 비교부터 시작한다. 현재 얼굴의 단면 반경을 반복 조절하거나 프리셋 숫자만 늘리는 방식으로 완료 처리하지 않는다. 새 얼굴/헤어스타일은 아직 미구현이다.
+
+## 이전 인수: 2026-10-23 EXP32 도시 액션
 
 [WORK_STATUS](WORK_STATUS.md)·[EXP32 summary](../data/reports/city_action_freedom/20261023/summary.json)·[조작/구현 범위](CITY_ACTION_FREEDOM.md)를 먼저 읽는다. F 세 연속 동작/X 밀기/G 방어 자세와 원래 도로 차14대의 staged E 진입/H 경적이 추가됐다. `city_public_safety.gd`가 접촉 시 실제 성인/벽을 검사하고, avatar의 matching cancel은 지난 동작이 새 탑승/구금 제어를 덮지 않게 한다. `traffic_car_takeover.gd`는 본래 차의 AI/FIFO→player 제어를 성공 시 인계하고 player_enter 취소와 체포 소유권을 구분한다.
 

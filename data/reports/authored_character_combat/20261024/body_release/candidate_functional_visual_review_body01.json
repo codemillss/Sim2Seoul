@@ -1,0 +1,69 @@
+{
+  "task": "body01_candidate_UI_police_pool_readonly_review",
+  "reviewed_at": "2026-10-24T14:18:05.043368+09:00",
+  "result": "FUNCTIONAL_EVIDENCE_COMPLETE_OVERALL_ART_REWORK",
+  "parent_art_decision": "REWORK for major upper-arm continuity defects, independently identified by root/combat. These functional reports do not accept the overall character or release.",
+  "reviewed_reports": [
+    {
+      "review": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/customization_visual_review_body01.json",
+      "review_sha256": "03a0065d91d4053471900dd951add1934531d498328d0f4351fd45be52dde239",
+      "result": "FUNCTIONAL_PASS_OVERALL_CANDIDATE_REWORK",
+      "images_directly_inspected": 10
+    },
+    {
+      "review": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/police_dispatch_visual_review_body01.json",
+      "review_sha256": "37bfc215f4756ebf53f8ea001a614a46bbca89dc48524e88e4b3583bd741560d",
+      "result": "FUNCTIONAL_PASS_OVERALL_CANDIDATE_REWORK",
+      "images_directly_inspected": 3
+    },
+    {
+      "review": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/authored_character_combat/20261024/body_release/pool_visual_review_body01.json",
+      "review_sha256": "016ba99c807af4805a725e84c22c3a51a333ef8914ebd733716d44758c56408b",
+      "result": "FUNCTIONAL_PASS_OVERALL_CANDIDATE_REWORK",
+      "images_directly_inspected": 4
+    }
+  ],
+  "total_original_images_directly_inspected": 17,
+  "numeric_reports_checked": [
+    {
+      "suite": "customization_headless",
+      "passed": 46,
+      "total": 46,
+      "actual_returncode": 0
+    },
+    {
+      "suite": "customization_native",
+      "passed": 56,
+      "total": 56,
+      "actual_returncode": 0
+    },
+    {
+      "suite": "human_materials_headless",
+      "passed": 15,
+      "total": 15,
+      "actual_returncode": 0
+    },
+    {
+      "suite": "police_dispatch_native",
+      "passed": 36,
+      "total": 36,
+      "actual_returncode": 0
+    },
+    {
+      "suite": "pool_native",
+      "passed": 40,
+      "total": 40,
+      "actual_returncode": 0
+    }
+  ],
+  "pool_denominator_correction": "40 actual=36 functional+4 capture. Planned41 double-counted an already integrated stale-prompt predicate at fixture line152; no assertion/threshold/source changed. Original expected41 planning artifact is retained by parent.",
+  "source_and_image_binding": "Each detailed review compared recorded runtime/runner hashes and PNG hashes against current files at review time; all mismatches were empty. This is a time-scoped observation, not a claim that these hashes remain current after body02 rework.",
+  "parent_batch_progress_observation": {
+    "completed_runs_recorded": 35,
+    "all_recorded_returncodes_zero": true,
+    "stopped_after_failure": false,
+    "scope": "Read of the parent batch manifest; suites outside the five numeric reports above are reviewed by their respective owners."
+  },
+  "next_candidate": "Parent will regenerate/fix upper-arm geometry and run body_release02 with corrected pool denominator40. New candidate images/source bindings require a new review.",
+  "actions_in_this_review": "Read reports, hashed current files, directly opened original PNGs, and wrote review JSON only. No engine process was started and no production source was changed."
+}

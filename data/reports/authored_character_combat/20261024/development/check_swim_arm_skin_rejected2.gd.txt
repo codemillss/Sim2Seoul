@@ -1,0 +1,21 @@
+extends "res://../tests/game/check_swim_arm_skin.gd"
+## Preserved rejected GLBs; never replace current production assets.
+func _run() -> void:
+	for profile: String in ["soft","athletic"]:
+		var path: String="res://../data/reports/authored_character_combat/20261024/body_release/visual_rejection_assets/seoul_resident_f01_"+profile+"_swim.glb";source_hashes[path]=FileAccess.get_sha256(path)
+		var player:=CharacterBody3D.new();var visual:=Node3D.new();visual.name="Visual";player.add_child(visual);var original:=MeshInstance3D.new();original.name="Body";original.mesh=CapsuleMesh.new();visual.add_child(original);root.add_child(player)
+		var avatar: Node3D=load("res://scripts/player/exploration_avatar.gd").new();visual.add_child(avatar);_check(profile+".actual_avatar_ready",avatar.setup(player));avatar.set_physics_process(false)
+		var doc:=GLTFDocument.new();var state:=GLTFState.new();var error:=doc.append_from_file(ProjectSettings.globalize_path(path),state)
+		_check(profile+".preserved_rejected_GLBS_load",error==OK,{"path":path,"sha256":source_hashes[path]})
+		var model: Node3D=doc.generate_scene(state);avatar.add_child(model);model.rotation.y=PI;var skeleton:=model.find_child("Skeleton3D",true,false) as Skeleton3D
+		var helper: Node3D=load("res://scripts/player/textured_human_rig.gd").new();avatar.add_child(helper);helper.setup(avatar,model,skeleton)
+		var surface: Node3D=load("res://scripts/player/textured_human_surface.gd").new();surface.avatar=avatar
+		for node: Node in model.find_children("*","MeshInstance3D",true,false):surface._cache_mesh_surfaces(node,skeleton)
+		for side: String in ["Left","Right"]:
+			var result:=_arm_materials(surface,helper,side)
+			_check(profile+"."+side+".actual_all_material_arm_geometry_observed",result.finite and result.actual_all_material_arm_triangles>100 and result.actual_all_material_arm_area_m2>.005,result)
+			_check(profile+"."+side+".exposed_arm_not_assigned_to_swim_textile",result.actual_textile_arm_area_m2<=MAX_CLOTH_ARM_AREA_M2,result)
+			material_cases.append({"asset":path,"asset_sha256":source_hashes[path],"profile":profile,"observation":result})
+		surface.free();player.queue_free();await process_frame
+	var failed:=checks.filter(func(row: Dictionary)->bool:return not row.passed).size();var f:=FileAccess.open(report_path,FileAccess.WRITE)
+	f.store_string(JSON.stringify(_json({"task":"EXP34_REJECTED_TWO_GLBS_SWIM_ARM_CLASSIFICATION_BASELINE","result":"FAIL" if failed>0 else "PASS","summary":{"checks":checks.size(),"failed":failed,"preserved_assets":2},"checks":checks,"material_cases":material_cases,"source_sha256":source_hashes,"scope":"Direct load of preserved rejected2GLBs, same independent actual indexed swim arm/textile classifier as final fixture. No source geometry or production asset replaced; this failure is material membership, not a hole/volume claim."}),"  ")+"\n");f.close();print("REJECTED_SWIM_ARM_SKIN_RESULT ",checks.size()-failed,"/",checks.size());quit(0 if failed==0 else 1)

@@ -85,7 +85,9 @@ func _record_station(group: Dictionary) -> void:
 func _physics_process(delta: float) -> void:
 	if not loaded or delta<=0.:return
 	for group: Dictionary in groups:
-		var actor: CharacterBody3D=group.members[0].body;var enabled: bool=running and actor._running
+		var actor: CharacterBody3D=group.members[0].body
+		if preload("res://scripts/actor_hit_reaction.gd").owns(actor):continue
+		var enabled: bool=running and actor._running
 		actor._physics_steps+=1
 		var target:=actor.global_position
 		if enabled:

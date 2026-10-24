@@ -1,0 +1,49 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+SCRIPT ERROR: Parse Error: Cannot infer the type of "shop_owned" variable because the value doesn't have a set type.
+   at: GDScript::reload (res://scripts/player/textured_human_surface.gd:242)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://../tests/game/check_pool_preparation.gd:101)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/player/exploration_avatar.gd:0)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://../tests/game/check_pool_preparation.gd:101)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/explore_walk.gd:0)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://../tests/game/check_pool_preparation.gd:101)
+ERROR: Failed to load script "res://scripts/explore_walk.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://../tests/game/check_pool_preparation.gd:101)
+W03_READY active=687 city=572.949m wall=413.510m boundary=W03-play-boundary-v1
+L02_READY landmarks=6 components=401 new_collision=0
+L03_READY landmarks=4 components=18 new_collision=0
+N02_READY pedestrians=2 vehicles=0 inherited_static=687
+N03_READY pedestrians=2 vehicles=2 original_active=687 new_vehicle_supports=2 total_active=689
+V0_READY quality=standard pedestrians=2 vehicles=2
+EXTERIORS_READY buildings=616 materials=32
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: setup (res://scripts/player/exploration_avatar.gd:80)
+   GDScript backtrace (most recent call first):
+       [0] setup (res://scripts/player/exploration_avatar.gd:80)
+       [1] _ready (res://scripts/explore_walk.gd:108)
+       [2] _run (res://../tests/game/check_pool_preparation.gd:101)
+ERROR: 탐험 캐릭터와 걷기 동작을 준비하지 못했습니다.
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _exploration_failure (res://scripts/explore_walk.gd:832)
+       [1] _ready (res://scripts/explore_walk.gd:109)
+       [2] _run (res://../tests/game/check_pool_preparation.gd:101)
+SCRIPT ERROR: Invalid access to property or key 'load_error' on a base object of type 'Nil'.
+   at: _run (res://../tests/game/check_pool_preparation.gd:103)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://../tests/game/check_pool_preparation.gd:103)
+       [1] _ticks (res://../tests/game/check_pool_preparation.gd:49)
+       [2] _solve_pose (res://scripts/player/exploration_camera.gd:369)
+       [3] _physics_process (res://scripts/player/exploration_camera.gd:143)
+POOL_PREPARATION_CHECK bounded_timeout false
+POOL_PREPARATION_CHECK source_inputs_stable_during_run true
+POOL_PREPARATION_RESULT 1/2

@@ -1,0 +1,39 @@
+{
+  "task": "HEADLESS_INLINE_MOUSE_FIXTURE_DISPATCH_CORRECTION",
+  "recorded_at": "2026-10-24T06:09:39.334998+00:00",
+  "failed_report": "data/reports/authored_character_combat/20261024/final_ui/customization_headless_ui_final01.json",
+  "failed_report_sha256": "e0b409361b8d19f0e1cf2a30c2522bf9dbb80cf1a3b471648e3369c3873b4456",
+  "failed_actual_engine_exit": 1,
+  "failed_result": "FAIL",
+  "failed_passed": 53,
+  "failed_total": 54,
+  "failed_checks": [
+    {
+      "evidence": {},
+      "name": "actual_inline_arrow_clicks_select_without_child_focus_or_popup",
+      "passed": false
+    }
+  ],
+  "same_production_native_control_case": {
+    "report": "data/reports/authored_character_combat/20261024/final_ui/customization_native_ui_final01.json",
+    "passed": 64,
+    "total": 64,
+    "actual_mouse_case": {
+      "evidence": {},
+      "name": "actual_inline_arrow_clicks_select_without_child_focus_or_popup",
+      "passed": true
+    }
+  },
+  "diagnosis_limit": "Original failed mouse assertion had empty evidence. Exact previous pointer/hover/focus cannot be reconstructed;missing pointer-enter/motion is a test-dispatch defect consistent with headless-only failure,not a proven production UI bug.",
+  "official_contract": "https://docs.godotengine.org/en/stable/classes/class_viewport.html#class-viewport-method-notify-mouse-entered",
+  "fixture_correction": "For both native and headless,use the actual control viewport;notify_mouse_entered,send mouse motion,then push_input press/release in explicit viewport-local coordinates. No direct pressed signal or selection injection for this case. Record actual target rect,click point,hovered node,focus,pressed signal count and both drafts.",
+  "predicate_unchanged": true,
+  "expected_denominators": {
+    "headless": 54,
+    "native": 64
+  },
+  "production_ui_sha256_unchanged": "eb59ea4f73114a63753a5bd423508c13ecf572ca7b80180efdcbbb088736093a",
+  "new_fixture_sha256": "8f6cfe967424b5b98c146bc4caf69d191f81b983b210b5af499e914970cfa7fe",
+  "reviewer_engine_runs": 0,
+  "status": "FIXTURE_CHANGED_AWAITING_PARENT_CURRENT_RUN"
+}

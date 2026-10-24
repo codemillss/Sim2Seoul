@@ -1,0 +1,68 @@
+extends SceneTree
+var scene: Node3D
+var report_path:="/private/tmp/police_post_traffic33.json"
+func _initialize() -> void:
+	Engine.max_fps=0
+	for arg: String in OS.get_cmdline_user_args():
+		if arg.begins_with("--report="):report_path=arg.trim_prefix("--report=")
+	run.call_deferred()
+func ticks(count: int) -> void:
+	for i: int in range(count):await physics_frame;await process_frame
+func safe(value: Variant) -> Variant:
+	if value is Vector3:return [value.x,value.y,value.z]
+	if value is Dictionary:
+		var result: Dictionary={}
+		for key: Variant in value:result[str(key)]=safe(value[key])
+		return result
+	if value is Array:
+		var result: Array=[]
+		for item: Variant in value:result.append(safe(item))
+		return result
+	return value
+func run() -> void:
+	scene=load("res://scenes/world/explore_walk.tscn").instantiate();scene.exploration_settings_path="/private/tmp/post-traffic33-"+str(OS.get_process_id())+".json";scene.quality_settings_path=scene.exploration_settings_path+".quality.json";scene.exploration_physics_hz=30;root.add_child(scene);await ticks(8)
+	if scene.menu.visible:scene.toggle_menu()
+	var safety: Node3D=scene.city_public_safety
+	var cars: Array=[];cars.append_array(scene.vehicles);cars.append_array(scene.neighborhood_population.traffic.vehicles)
+	var rows: Array=[];var categories: Dictionary={};var managers: Array=[]
+	var car_start: Dictionary={}
+	for car: CharacterBody3D in cars:
+		car_start[str(car.get_path())]=car._distance_m
+		if not managers.has(car._manager):managers.append(car._manager)
+	for officer: Dictionary in safety.officers:
+		var local: Vector3=scene.city.to_local(officer.home);var point:=Vector2(local.x,local.z)
+		var walk: bool=scene.city_bike_service._walk_index.contains(point);var road: bool=scene.city_bike_service._road_index.contains(point)
+		var category:="both" if walk and road else ("walk_only" if walk else ("road_only" if road else "neither"))
+		categories[category]=int(categories.get(category,0))+1
+		var risk: Array=[];var minimum_route_distance:=INF;var native_overlap: Array=[]
+		for car: CharacterBody3D in cars:
+			var shape: CollisionShape3D=car.get_node("CollisionShape");var size: Vector3=shape.shape.size
+			for segment: int in range(car._points.size()-1):
+				var a3: Vector3=car._points[segment];var b3: Vector3=car._points[segment+1]
+				var a:=Vector2(a3.x,a3.z);var b:=Vector2(b3.x,b3.z);var direction: Vector2=(b-a).normalized();var normal:=Vector2(-direction.y,direction.x)
+				var delta:=Vector2(officer.home.x,officer.home.z)-a;var along: float=delta.dot(direction);var side: float=delta.dot(normal);var length: float=a.distance_to(b)
+				var closest: Vector2=a+direction*clampf(along,0.,length);minimum_route_distance=minf(minimum_route_distance,closest.distance_to(Vector2(officer.home.x,officer.home.z)))
+				var lateral_gap:=maxf(0.,absf(side)-size.x*.5);var longitudinal_gap:=maxf(0.,maxf(-size.z*.5-along,along-length-size.z*.5))
+				var projected_gap:=Vector2(lateral_gap,longitudinal_gap).length()
+				if projected_gap>.27+.003:continue
+				var t:=clampf(along/maxf(.0001,length),0.,1.);var at: Vector3=a3.lerp(b3,t);var tangent:=Vector3(direction.x,0,direction.y);var yaw:=atan2(-tangent.x,-tangent.z)
+				var pose: Transform3D=car._terrain_pose(at,yaw) if car._terrain_enabled else Transform3D(Basis(Vector3.UP,yaw),at)
+				var query:=PhysicsShapeQueryParameters3D.new();query.shape=shape.shape;query.transform=pose*shape.transform;query.collision_mask=4;query.margin=.003
+				var overlapped:=false
+				for hit: Dictionary in scene.get_world_3d().direct_space_state.intersect_shape(query,64):
+					if hit.collider==officer.body:overlapped=true
+				risk.append({"car":str(car.get_path()),"route_id":car.get_route_id(),"segment":segment,"car_size_m":size,"route_centerline_distance_m":closest.distance_to(Vector2(officer.home.x,officer.home.z)),"projected_capsule_to_swept_box_gap_m":projected_gap-.27,"native_full_box_overlaps_posted_officer":overlapped,"tested_car_feet":pose.origin})
+				if overlapped:native_overlap.append({"route":car.get_route_id(),"segment":segment})
+		var crossings: Array=[]
+		for manager: Node in managers:
+			for human: Dictionary in manager.human_rows:
+				if str(human.get("id",""))!=str(officer.body.get_path()):continue
+				if bool(human.get("inside_crossing",false)) or not human.get("crossings",[]).is_empty():crossings.append({"manager":str(manager.get_path()),"human_row":human})
+		rows.append({"officer":str(officer.body.name),"original_post":str(officer.body.name) in ["GamePoliceOfficer1","GamePoliceOfficer3","GamePoliceOfficer5","GamePoliceOfficer7"],"home":officer.home,"walk":walk,"road":road,"category":category,"minimum_original_car_centerline_distance_m":minimum_route_distance,"projected_route_box_risks":risk,"native_full_box_overlaps":native_overlap,"holds_actual_traffic_human_priority_crossing":crossings})
+	await ticks(180)
+	var progress: Array=[]
+	for car: CharacterBody3D in cars:progress.append({"route_id":car.get_route_id(),"position":car.global_position,"distance_in6game_s_m":car._distance_m-float(car_start[str(car.get_path())]),"state":car._state,"blocked_reason":car._blocked_reason,"obstacle":car._obstacle})
+	var report:={"task":"EXP33_POLICE_POST_TRAFFIC_DIAGNOSIS","scope":"Production initial14 posts classified against actual source walk/road indices and all14 retained original vehicle route polylines/full native box shapes. Projected swept rectangles are conservative2D, confirmed risk separately queries actual full3D vehicle shape against posted officer capsule. No actor/control/state/source relocation. Six game seconds of ordinary traffic also observed; not a full-route throughput acceptance.","categories":categories,"officer_count":rows.size(),"original_car_count":cars.size(),"posts":rows,"traffic_after6game_s":progress,"source_sha256":{"safety":FileAccess.get_sha256("res://scripts/city_public_safety.gd"),"world":FileAccess.get_sha256("res://resources/world_geometry/world.json"),"fixture":FileAccess.get_sha256("/private/tmp/probe_police_post_traffic33.gd")}}
+	var file:=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(safe(report),"  ")+"\n");file.close();print("POST_TRAFFIC33 ",JSON.stringify(categories)," rows=",rows.size())
+	if is_instance_valid(scene.neighborhood_life.audio):scene.neighborhood_life.audio.stop();scene.neighborhood_life.audio.stream=null
+	scene.queue_free();await process_frame;await process_frame;quit()

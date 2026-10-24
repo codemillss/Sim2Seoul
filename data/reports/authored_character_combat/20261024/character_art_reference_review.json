@@ -1,0 +1,54 @@
+{
+  "task_date": "2026-10-24",
+  "recorded_at_utc": "2026-10-24T05:33:04.390863+00:00",
+  "method": "Official published still images opened in background CUA browser and visually inspected; no gameplay/asset extraction; no images downloaded or embedded in repository.",
+  "observed": [
+    {
+      "publisher": "Rockstar Games official Xbox manual",
+      "page": "https://dlassets-ssl.xboxlive.com/public/content/4f0a3089-ba2c-4f3d-9e38-102a41cbd885/GameManual/9dfeb637-1cb0-46c8-b7d7-0c58cf990494/en-GB/index.html",
+      "images": [
+        "assets/2/mike_s.jpg",
+        "assets/2/frank_s.jpg",
+        "assets/2/trev_s.jpg"
+      ],
+      "opened": 3,
+      "limits": "Small stills, different framing/lighting, Franklin helmet occlusion; no engine topology or animation inference."
+    },
+    {
+      "publisher": "KRAFTON PUBG official news",
+      "pages": [
+        "https://pubg.com/en-asia/news/8467?category=notice",
+        "https://www.pubg.com/en-asia/news/9265"
+      ],
+      "images": [
+        "https://wstatic-prod-boc.krafton.com/common/news/20250406/Y73niGvn.jpg",
+        "https://wstatic-prod-boc.krafton.com/common/news/20251001/lD8LdLp2.jpg"
+      ],
+      "opened": 2,
+      "limits": "Marketing stills; no in-game all-angle/animation acceptance."
+    }
+  ],
+  "failed_browser_access": [
+    "https://www.rockstargames.com/gta-v",
+    "https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_Enhanced/"
+  ],
+  "proposal": "docs/REFERENCE_DIRECTION.md",
+  "status": "Art direction proposal, not implemented face diversity or completed realistic humans.",
+  "current_gap": [
+    "simplified head/face geometry",
+    "solid hair silhouette",
+    "limited expressions",
+    "angular close joint surfaces"
+  ],
+  "decision": "Finish current functional/source-bound checkpoint as prototype; do not present it as user-accepted realistic/attractive character art.",
+  "image_observer": "root; actual five browser screenshots opened",
+  "independent_document_review": {
+    "reviewer": "original_character",
+    "scope": "Read proposal and JSON only; did not independently open the five reference images.",
+    "adopted": [
+      "Decide sculpt/retopology/expression production pipeline before face variants.",
+      "Fix neutral expression, front/45/side and2-3 lighting setups for comparative review.",
+      "No numeric attractiveness rating."
+    ]
+  }
+}

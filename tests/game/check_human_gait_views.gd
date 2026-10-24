@@ -24,16 +24,25 @@ var gait_native: Node3D
 var gait_skeleton: Skeleton3D
 var gait_started_camera_current := false
 var gait_active_view := ""
+var gait_body_profile := "standard"
+
+func _build() -> void:
+	super._build()
+	# StableMotion creates the production avatar after this inherited player
+	# build returns. Select geometry before its first native rig calibration.
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--body-profile="):gait_body_profile=argument.trim_prefix("--body-profile=")
+	player.set_meta("human_body_profile",gait_body_profile)
 
 func _observe_physics(_delta: float) -> void:pass
 func _observe_render(_delta: float) -> void:pass
 
 func _gait_bind_sources() -> void:
-	for path: String in ["res://project.godot","res://scripts/player/free_roam_player.gd","res://scripts/player/public_player.gd","res://scripts/player/movement_controller.gd","res://scripts/player/idle_support.gd","res://scripts/player/human_surface_meshes.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_activity_dimensions.gd","res://scripts/player/exploration_camera.gd","res://scripts/player/camera_rig.gd","res://scripts/input_router.gd","res://scenes/player/camera_rig.tscn","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://assets/vendor/microsoft_rocketbox/PROVENANCE.json","res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx","res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx","res://assets/vendor/makehuman_swim/provenance.json","res://assets/vendor/makehuman_swim/swim_male.glb","res://assets/vendor/makehuman_swim/swim_female.glb","res://../tests/game/check_human_gait_views.gd","res://../tests/game/check_human_appearance_native.gd","res://../tests/game/check_human_scale_motion.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_jump.gd"]:
+	for path: String in ["res://project.godot","res://scripts/player/free_roam_player.gd","res://scripts/player/public_player.gd","res://scripts/player/movement_controller.gd","res://scripts/player/idle_support.gd","res://scripts/player/human_surface_meshes.gd","res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_activity_dimensions.gd","res://scripts/player/exploration_camera.gd","res://scripts/player/camera_rig.gd","res://scripts/input_router.gd","res://scenes/player/camera_rig.tscn","res://scripts/drivable_car_service.gd","res://scripts/city_bike_service.gd","res://assets/original/seoul_resident/AUTHORED_MANIFEST.json","res://assets/original/seoul_resident/seoul_resident_m01_street.glb","res://assets/original/seoul_resident/seoul_resident_f01_street.glb","res://assets/original/seoul_resident/AUTHORED_MANIFEST.json","res://assets/original/seoul_resident/seoul_resident_m01_swim.glb","res://assets/original/seoul_resident/seoul_resident_f01_swim.glb","res://../tests/game/check_human_gait_views.gd","res://../tests/game/check_human_appearance_native.gd","res://../tests/game/check_human_scale_motion.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_jump.gd"]:
 		source_hashes[path]=FileAccess.get_sha256(path)
-	for folder: String in ["res://assets/vendor/microsoft_rocketbox/Male_Adult_04/textures/","res://assets/vendor/microsoft_rocketbox/Female_Adult_07/textures/","res://assets/vendor/makehuman_swim/textures/"]:
+	for folder: String in ["res://assets/original/seoul_resident/"]:
 		for file: String in DirAccess.get_files_at(folder):
-			if file.ends_with(".png"):source_hashes[folder+file]=FileAccess.get_sha256(folder+file)
+			if file.ends_with(".png") or file.ends_with(".glb"):source_hashes[folder+file]=FileAccess.get_sha256(folder+file)
 
 func _gait_bone_observations() -> Dictionary:
 	var rows: Array=[];var finite:=true
@@ -128,7 +137,7 @@ func _gait_capture(title: String,view: String,index: int,target_phase: float,unw
 	var path:=report_path.get_basename()+"_"+title+"_"+view+"_"+str(index).pad_zeros(2)+".png"
 	var code:=pixels.save_png(path)
 	var skin:=_gait_skin_observations();var bones:=_gait_bone_observations();var sample: Dictionary=avatar.snapshot()
-	var row:={"file":path,"sha256":FileAccess.get_sha256(path) if code==OK else "","save_error":code,"image_size":[pixels.get_width(),pixels.get_height()],"view":view,"sample_index":index,"target_stride_phase_radians":fposmod(target_phase,TAU),"actual_stride_phase_radians":sample.stride_phase,"actual_unwrapped_phase_radians":unwrapped_phase,"phase_overshoot_radians":unwrapped_phase-target_phase,"physics_frame":Engine.get_physics_frames(),"process_frame":Engine.get_process_frames(),"frames_drawn":Engine.get_frames_drawn(),"render_interpolation_fraction":Engine.get_physics_interpolation_fraction(),"elapsed_wall_seconds":float(Time.get_ticks_usec()-gait_started_usec)/1000000.,"player_position":player.global_position,"velocity":player.velocity,"camera":review_camera.global_transform,"avatar_world":avatar.global_transform,"skin":skin,"bones":bones,"capture_method":"Late-priority actual process observer then RenderingServer.force_draw; actual production W gait, no pose/phase assignment."}
+	var row:={"file":path,"body_profile":gait_body_profile,"actual_glb_path":gait_surface._street_asset_path,"actual_glb_sha256":gait_surface._street_asset_sha256,"sha256":FileAccess.get_sha256(path) if code==OK else "","save_error":code,"image_size":[pixels.get_width(),pixels.get_height()],"view":view,"sample_index":index,"target_stride_phase_radians":fposmod(target_phase,TAU),"actual_stride_phase_radians":sample.stride_phase,"actual_unwrapped_phase_radians":unwrapped_phase,"phase_overshoot_radians":unwrapped_phase-target_phase,"physics_frame":Engine.get_physics_frames(),"process_frame":Engine.get_process_frames(),"frames_drawn":Engine.get_frames_drawn(),"render_interpolation_fraction":Engine.get_physics_interpolation_fraction(),"elapsed_wall_seconds":float(Time.get_ticks_usec()-gait_started_usec)/1000000.,"player_position":player.global_position,"velocity":player.velocity,"camera":review_camera.global_transform,"avatar_world":avatar.global_transform,"skin":skin,"bones":bones,"capture_method":"Late-priority actual process observer then RenderingServer.force_draw; actual production W gait, no pose/phase assignment."}
 	row["production_camera_eye_world"]=rig.camera.global_position
 	row["production_camera_eye_over_physics_feet_m"]=rig.camera.global_position.y-player.global_position.y
 	row["native_head_joint_over_physics_feet_m"]=bones.actual_head_joint_world.y-player.global_position.y
@@ -172,6 +181,7 @@ func _run() -> void:
 	_setup_stable();_metric_scene();await _full_ticks(15)
 	gait_surface=avatar._textured_surface;gait_native=gait_surface.rig;gait_skeleton=gait_surface.skeleton
 	_check("startup.actual_textured_weighted_human_ready",gait_surface.loaded and gait_native.loaded and gait_skeleton.get_bone_count()>40)
+	_check("startup.actual_requested_body_profile_loaded",gait_surface.body_profile==gait_body_profile and String(player.get_meta("human_body_profile",""))==gait_body_profile,gait_surface.snapshot(false))
 	if not gait_surface.loaded or not gait_native.loaded:_finish();return
 	_gait_skin_observations(true)
 	gait_late=GaitLateFrame.new();gait_late.test=self;gait_late.process_priority=3000;fixture.add_child(gait_late)
@@ -193,7 +203,7 @@ func _finish() -> void:
 	if is_instance_valid(review_camera):review_camera.current=false
 	if is_instance_valid(rig):rig.camera.current=gait_started_camera_current
 	var failed:=checks.filter(func(row: Dictionary)->bool:return not row.passed).size()
-	var result:={"task":"EXP29_ACTUAL_HUMAN_GAIT_VIEWS","result":"PASS" if failed==0 else "FAIL","summary":{"checks":checks.size(),"failed":failed,"actual_images":gait_images.size()},"started_at_local":started_at,"elapsed_wall_seconds":float(Time.get_ticks_usec()-gait_started_usec)/1000000.,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"female_model_requested":"--female-model" in OS.get_cmdline_user_args(),"source_sha256":source_hashes,"checks":checks,"views":gait_views,"captures":gait_images,"scope":"Isolated daylight metre fixture, actual production controller/avatar/weighted rig and engine W action.768x480 native tracking cameras show front/back/left/right8canonical stride targets and rear hip close4targets for each of1.4/3.5mps. Observed actual physics phases and late-render geometry are recorded, not injected. Numeric PASS is capture/finite/settling integrity only; independent full-sequence pixel review is required for hips/gait naturalness. No OS keyboard, motion capture, city navigation, sustained FPS or user comfort claim."}
+	var result:={"task":"EXP29_ACTUAL_HUMAN_GAIT_VIEWS","result":"PASS" if failed==0 else "FAIL","summary":{"checks":checks.size(),"failed":failed,"actual_images":gait_images.size()},"started_at_local":started_at,"elapsed_wall_seconds":float(Time.get_ticks_usec()-gait_started_usec)/1000000.,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),"female_model_requested":"--female-model" in OS.get_cmdline_user_args(),"body_profile_requested":gait_body_profile,"active_native_body":gait_surface.snapshot(false) if is_instance_valid(gait_surface) else {},"source_sha256":source_hashes,"checks":checks,"views":gait_views,"captures":gait_images,"scope":"Isolated daylight metre fixture, actual production controller/avatar/weighted rig and engine W action.768x480 native tracking cameras show front/back/left/right8canonical stride targets and rear hip close4targets for each of1.4/3.5mps. Observed actual physics phases and late-render geometry are recorded, not injected. Numeric PASS is capture/finite/settling integrity only; independent full-sequence pixel review is required for hips/gait naturalness. No OS keyboard, motion capture, city navigation, sustained FPS or user comfort claim."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:push_error("Cannot write human gait view report");quit(2);return
 	file.store_string(JSON.stringify(_json(result),"  ")+"\n");file.close()

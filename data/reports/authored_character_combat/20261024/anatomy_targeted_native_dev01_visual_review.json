@@ -1,0 +1,97 @@
+{
+  "review_of": "data/reports/authored_character_combat/20261024/anatomy_targeted_native_dev01.json",
+  "reviewed_capture_count": 12,
+  "reviewed_all_actual_pixels": true,
+  "capture_result": "PASS",
+  "source_sha256": {
+    "res://../tests/game/preview_authored_resident.gd": "6887e3f2c0c3ec395bb8cc7a8c9f3a55b216a8cfaed6eca6b9e2a523c0537b2d",
+    "res://../tools/authored_character/anatomical_surface_fields.py": "6886b204ab37763898d04238344206f83755c8a55769debd3876e3e93c0d1cc0",
+    "res://../tools/authored_character/build_seoul_resident.py": "71657a9ffcdcadbade9fcae390f86ee075fd99551608b9a59769a26da6f23b84",
+    "res://assets/original/seoul_resident/AUTHORED_MANIFEST.json": "d06e18f9c8b08f7634ca891ff52db4052da7a7dbf1731e255d3ca88d807d5275",
+    "res://assets/original/seoul_resident/seoul_resident_f01_swim.glb": "a92ac2d4bcec9871120dd9057167ffe068773c0001d2efc0b8017c02f4c65921",
+    "res://assets/original/seoul_resident/seoul_resident_m01_athletic_swim.glb": "cc111234254c1e58ecbe541e113aa5727937690371163059344d731195e959a9",
+    "res://assets/original/seoul_resident/seoul_resident_m01_soft_swim.glb": "86c156791353624b9969f28905cf844be5558605952fc35203ab8c7d52cc4d8d",
+    "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb": "265dedab9968dd56cf15320bf802aaf4e5b2ca71c70a97c4823cb3380589386f",
+    "res://scripts/player/human_skin_materials.gd": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01",
+    "res://scripts/player/textured_human_surface.gd": "16d6c6d56d490c65501d84c2f48ca18dcd7507056fe722889f52f98c33e60dad"
+  },
+  "inspection_lighting": {
+    "ambient_energy": 0.55,
+    "key_energy": 1.2,
+    "key_rotation_degrees": [
+      -28,
+      -30,
+      0
+    ],
+    "rear_fill_energy": 0.5,
+    "rear_fill_rotation_degrees": [
+      -22,
+      145,
+      0
+    ],
+    "scope": "Static geometry inspection studio only; not gameplay lighting."
+  },
+  "scope": "Static native geometry inspection. Capture PASS is not a realism-quality or gameplay acceptance claim. Earlier preview lighting differed, so this is not a controlled lighting A/B.",
+  "observations": {
+    "m01_standard_swim_front": [
+      "Wrist and ankle cap bands are no longer visible at whole-body scale.",
+      "Crown silhouette is rounder but the opaque hair still reads as a shaped shell.",
+      "Torso and limbs remain a stylized authored surface rather than lifelike skin/anatomy."
+    ],
+    "m01_standard_swim_side": [
+      "Calf contour is elongated with a higher posterior peak rather than the earlier low round bulge.",
+      "Ribcage-to-abdomen profile still has limited anatomical detail."
+    ],
+    "m01_standard_swim_back": [
+      "Rear fill makes scapula/waist and glute-to-thigh silhouettes readable.",
+      "Full-body wrist/ankle joins show no detached cap bands."
+    ],
+    "m01_standard_swim_face": [
+      "Crown roundness is improved.",
+      "Neutral expression, simple eyes/nose/lips and solid hair prevent a realistic-human quality claim."
+    ],
+    "m01_standard_swim_hands": [
+      "Forearm-to-wrist surface meets continuously in actual close-up.",
+      "Thumb/palm junction, fingertips and separate finger surfaces remain visibly coarse."
+    ],
+    "m01_standard_swim_ankles": [
+      "Calf-to-foot visible cap and width step are removed.",
+      "Foot/toe geometry is still coarse and faceted at close range."
+    ],
+    "f01_standard_swim_front": [
+      "Torso garment is opaque and body-profile silhouette is visible.",
+      "The shoulder straps remain separate fixed curves."
+    ],
+    "f01_standard_swim_side": [
+      "One shoulder/back swimsuit strap visibly floats above the new anatomical surface; unresolved."
+    ],
+    "f01_standard_swim_face": [
+      "Same remaining simplified face and opaque hair-shell limitations as male source."
+    ],
+    "m01_soft_swim_side": [
+      "Abdomen/back volume differs from standard without whole-character scaling.",
+      "Surface continuity is improved but is not measured-person anatomy reconstruction."
+    ],
+    "m01_soft_swim_back": [
+      "Wider waist/hip silhouette is visible.",
+      "Detailed gluteal/skin morphology remains limited."
+    ],
+    "m01_athletic_swim_front": [
+      "Pectoral/waist and shoulder contours differ locally from standard.",
+      "Muscle surface is still stylized; no completed-realism claim."
+    ]
+  },
+  "source_changes_after_capture": {
+    "res://../tests/game/preview_authored_resident.gd": false,
+    "res://../tools/authored_character/anatomical_surface_fields.py": false,
+    "res://../tools/authored_character/build_seoul_resident.py": false,
+    "res://assets/original/seoul_resident/AUTHORED_MANIFEST.json": false,
+    "res://assets/original/seoul_resident/seoul_resident_f01_swim.glb": false,
+    "res://assets/original/seoul_resident/seoul_resident_m01_athletic_swim.glb": false,
+    "res://assets/original/seoul_resident/seoul_resident_m01_soft_swim.glb": false,
+    "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb": false,
+    "res://scripts/player/human_skin_materials.gd": false,
+    "res://scripts/player/textured_human_surface.gd": false
+  },
+  "status": "Targeted geometric improvements observed. Art quality remains in progress; root acceptance and animated/contact regression are separate."
+}

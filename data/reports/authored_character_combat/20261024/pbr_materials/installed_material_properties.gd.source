@@ -1,0 +1,9 @@
+extends SceneTree
+func _initialize() -> void:
+ var names: Array=[]
+ for row: Dictionary in ClassDB.class_get_property_list("BaseMaterial3D",false):
+  if ["normal","roughness","subsurf","specular","anisotropy","detail","metallic","cull","transparency","uv1"].any(func(part: String)->bool:return part in str(row.name)):names.append(row)
+ var m:=StandardMaterial3D.new()
+ print("MATERIAL_PROPERTIES ",JSON.stringify(names))
+ print("ACTUAL_RENDER_METHOD ",RenderingServer.get_current_rendering_method());print("MATERIAL_DEFAULTS ",JSON.stringify({"roughness":m.roughness,"metallic_specular":m.metallic_specular,"normal_enabled":m.normal_enabled,"normal_scale":m.normal_scale,"roughness_texture_channel":m.roughness_texture_channel,"subsurf_scatter_enabled":m.subsurf_scatter_enabled,"subsurf_scatter_strength":m.subsurf_scatter_strength,"subsurf_scatter_skin_mode":m.subsurf_scatter_skin_mode,"cull_mode":m.cull_mode,"transparency":m.transparency,"uv1_scale":str(m.uv1_scale)}))
+ quit()

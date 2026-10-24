@@ -1,0 +1,68 @@
+from pathlib import Path
+import hashlib,json,datetime,subprocess
+r=Path.cwd();b=r/'data/reports/authored_character_combat/20261024';release=b/'body_release02'
+def read(p):return json.loads(p.read_text())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def rel(p):return p.relative_to(r).as_posix()
+rows=read(b/'current_expected_denominators.json');assert len(rows)==4
+runs=[];previews=[]
+for relative,n in rows.items():
+ p=b/relative;stem=p.stem;release=p.parent;x=read(p);checks=x.get('checks',[])
+ assert len(checks)==n and all(v.get('passed') is True for v in checks),(stem,'denominator',len(checks),n)
+ meta=release/(stem+'.run.json');m=read(meta);assert m['returncode']==0 and not m['script_errors'] and not m.get('source_changes_during_run'),(stem,'run failure')
+ logs=[release/(stem+'.log'),release/(stem+'.console.log')]
+ assert all(q.is_file() for q in logs)
+ assert not any(marker in q.read_text(errors='replace') for q in logs for marker in ['SCRIPT ERROR:','Parse Error:','Failed to load script'])
+ for k,expected in m['source_sha256'].items():assert sha(r/k)==expected,(stem,k,'run binding changed')
+ for k,expected in x.get('source_sha256',x.get('source_hashes',{})).items():
+  q=r/'game'/k.removeprefix('res://') if k.startswith('res://') else r/k
+  assert q.resolve().is_relative_to(r) and sha(q)==expected,(stem,k,'report binding changed')
+ for cap in x.get('captures',[]):
+  q=Path(cap.get('file',cap.get('path','')));q=q if q.is_absolute() else r/q
+  assert q.is_file() and sha(q)==cap['sha256'],(stem,q,'capture changed')
+ row={'report':rel(p),'metadata':rel(meta),'log':rel(logs[0]),'expected_checks':n,'actual_returncode':m['returncode'],'display':x.get('display'),'script_errors':False,'captures':len(x.get('captures',[]))}
+ runs.append(row)
+ if n==0:
+  assert x['result']=='PASS' and len(x['captures'])==96
+  previews.append(rel(p))
+prior=read(b/'pre_popup_functional_cohort.json')
+assert len(prior['runs'])==36 and prior['overlapping_assertions']==5560
+changed_prior=[]
+for source,expected in prior['source_sha256_before_ui_fix'].items():
+ if sha(r/source)!=expected:
+  snapshot=prior['preserved_ui_sources'].get(source)
+  assert snapshot and sha(r/snapshot)==expected,(source,'prior binding not preserved')
+  changed_prior.append(source)
+assert set(changed_prior)=={'game/scripts/player/character_customization.gd','tests/game/check_character_customization.gd'}
+for row in prior['runs']:
+ q=r/row['report'];m=r/row['metadata'];x=read(q);meta=read(m)
+ assert sha(q)==row['report_sha256'] and sha(m)==row['metadata_sha256']
+ assert len(x.get('checks',[]))==row['expected_checks'] and all(v['passed'] for v in x.get('checks',[]))
+ assert meta['returncode']==0 and not meta['script_errors'] and not meta['source_changes_during_run']
+ for source,expected in meta['source_sha256'].items():assert prior['source_sha256_before_ui_fix'][source]==expected
+ for cap in x.get('captures',[]):
+  image=Path(cap.get('file',cap.get('path','')));image=image if image.is_absolute() else r/image
+  assert image.resolve().is_relative_to(r) and sha(image)==cap['sha256'],(row['report'],'historical capture changed')
+normal=read(b/'normal_launch.json')
+assert normal['result']=='PASS_BOUNDED_OS' and normal['ready'] and normal['ordinary_process_alive_at_record']
+assert normal['preferences_unchanged'] and not normal['script_errors']
+assert normal['source_sha256']
+for source,expected in normal['source_sha256'].items():assert sha(r/source)==expected,(source,'ordinary launch binding changed')
+for cap in normal['captures']:
+ assert sha(r/cap['path'])==cap['sha256'],('ordinary OS capture changed',cap['path'])
+old=read(r/'data/reports/city_action_freedom/20261023/summary.json')
+files={v['path']:v['kind'] for v in old['files'] if v['kind'] in ['source_or_runbook','generated_runtime_input']}
+changed=subprocess.check_output(['git','diff','HEAD','--name-only','-z'],cwd=r).decode().split('\0')
+new=subprocess.check_output(['git','ls-files','--others','--exclude-standard','-z'],cwd=r).decode().split('\0')
+for s in changed+new:
+ if not s or s==rel(b/'summary.json'):continue
+ if s.startswith('data/reports/'):files[s]='evidence'
+ else:files[s]='source_or_runbook'
+for q in b.rglob('*'):
+ if q.is_file() and q!=b/'summary.json':files[rel(q)]='evidence'
+manifest=[]
+for s,kind in sorted(files.items()):
+ q=r/s;assert q.is_file(),s;manifest.append({'path':s,'kind':kind,'bytes':q.stat().st_size,'sha256':sha(q)})
+x={'schema_version':1,'task':'EXP33_AUTHORED_CHARACTER_DISPATCH_OPTIONAL_POOL_CUSTOMIZATION','client_task_date':'2026-10-24','recorded_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'result':'PASS','result_scope':'Current inline customization/UI ownership regression and bounded ordinary OS use; historical36-suite cohort preserved separately across an explicit UI-only patch. Not realistic-human art completion.','art_acceptance':'Surface/joint improvements reviewed separately; photoreal anatomy, facial expression and hair remain unfinished.','base_commit':'58aa5bf0feb7465c2234ea12caa4acabbcc5ce64','archive_branch':old['archive_branch'],'archive_commit':old['archive_commit'],'environment':{'engine':'Godot4.7.2.stable.official.ed1daf0bf','native':'Apple M5 Metal4 Forward+','headless':'fixed-fps120 simulation acceleration except stable_motion; no performance claim','production_physics_hz':30,'upper_motion_test_physics_hz':[30,120],'date_scope':'Client task date folder; raw engine/system timestamps retained.'},'features':['Twelve project-authored bodies (two base models, three surface anatomy profiles, street/swim) with continuous thoracic/pelvic and directed muscular/soft-tissue fields, face/hands/clothes/textures and52bone skin; no vendor geometry or animation input','Native closed fists and opposed outside thumb, wrist/elbow/torso/pelvis/feet and interpolated full-body windup/contact/recovery; moving gait and camera retained','Actual native knuckle/palm contact sweep, original adult capsule stagger and route ownership recovery, dogs/remote/wall excluded','14 initial district police including original4; nearest2 reachable physical responders,60game-second fresh-offense reset/menu pause/expiry return, no offense-time officer teleport/spawn','Unprepared casual-clothes water entry at3.0m/s; optional shower cleanliness+20 cap100 and90game-second swim+10%, optional swimsuit+15%, combinedmax3.75m/s','Separate original eye surface and per-instance human material responses; shared own procedural micro normal/roughness maps, unchanged albedo and NPC color ownership','Player-only base model/anatomy profile/skin/hair/top/trousers/shoes customization with apply/cancel/default/save and shop/swim ownership restore; separate local preferences','Seven same-panel inline choices with real mouse/keyboard input replace the crashing embedded PopupMenu path; editor-only neutral fill follows front/back preview and hides on close'], 'prior_functional_cohort':{'path':rel(b/'pre_popup_functional_cohort.json'),'runs':36,'overlapping_assertions':5560,'native_captures':prior['native_captures'],'replaced_bindings':changed_prior,'scope':'Before ordinary popup failure and UI-only control replacement; exact old UI sources preserved. Historical, excluded from current assertion total.'},'current_engine_reports':[v['report'] for v in runs if v['expected_checks']>0],'current_engine_runs':runs,'current_native_previews':previews,'results':{'runs':len(runs),'assertion_runs':len(runs)-len(previews),'static_preview_runs':len(previews),'overlapping_assertions':sum(v['expected_checks'] for v in runs),'failed':0,'native_captures':sum(v['captures'] for v in runs)},'visual_review':'data/reports/authored_character_combat/20261024/visual_review_root.json','normal_launch':'data/reports/authored_character_combat/20261024/normal_launch.json','count_scope':'Current four runs exclude the historical36-suite cohort. Assertions overlap. Native capture/integrity assertions are not unique features or a visual quality score. Historical static preview has96captures and zero numeric assertions; current UI native run has10captures. Actual opened pixels and OS controls are separately recorded.','history':['Ordinary UI exposed an embedded PopupMenu focus crash twice. A memory-only native-window candidate opened safely but actual selection could not be accepted through CUA. Final UI uses same-panel inline choices and preview-only fill light, with fresh UI/owner checks and actual OS verification. Earlier36functional runs remain historical across exact UI/fixture snapshots rather than being relabelled current.','A second police fixture wait assumed1790 rendered-yield iterations equalled59.667game seconds, but actual native catchup was60.233s; final fixture observes the unchanged game clock directly at59.6..<60s, retaining36checks and actual post60 expiry.','body02 police36-check run returned35/36 because the displacement baseline was recorded after the actual officer had already travelled4.325m and reached5.923m. The correction records actual positions before F; the original6m and >1m thresholds and36denominator remain. Failed run retained;33unchanged successful runs plus corrected police and two previously unstarted runs are explicitly selected.','Rejected native source candidates, raw parse/source-change and mesh edge failures retained. Broad binding changes from later optional-pool/customization work make earlier runs historical; body_release02 folder reruns the integrated frozen sources after the later anatomy correction.','The35-run body01 cohort completed5514overlapping assertions but actual female swim upper-arm pixels showed a release-blocking dark patch, initially misread as collapse; exact failed GLBs/source preserved. Pixel/material inspection found wrong textile assignment, so base body weights remained and an independent swim-arm skin/material guard and garment ownership correction were added. Planned pool41 was duplicate accounting of an already-combined notice condition; actual native40 retained.','Old action fixture compared FK axis identity incompatible with new IK/pronated wrists, expected non-responding posted officer to catch, and attempted a .88m shove beyond the actual palm reach. New checks observe native bone length/neck/sole/contact/guard plus explicit .88m miss and .76m physical contact. No reach inflation or victim relocation.','The19mm wrist/cuff gap was corrected by connected hand geometry. User rejected later bulk-only profile changes; the generator was subsequently rebuilt with shared anatomical surface fields and detailed hands/face. Earlier15 and profile-only candidates remain historical.','Initial district post traffic probe uses full2D swept car footprint rejection; distant candidates require no3D query. Original14car progress measured separately.'], 'limits':['Original stylized prototype: simplified face/hair and garment construction; surface anatomy is project-authored game art, not a scan or medically validated human; not photoreal/GTA/mocap character quality','Procedural motion and open palms during ordinary running remain; G is a pose, no health/ragdoll/invulnerability system','Original car door remains monolithic with exterior driver actor and staged entry','14posts coverage is initial straight-line population coverage, not proof of every possible map route','OtherMac/export, sustained FPS, subjective user comfort and full-city OS gameplay remain unmeasured'], 'files':manifest,'scope':'Current source+prepared inputs+actual selected engine runs and bounded ordinary launch. Original source geometry/person/car IDs and1.70m capsule retained; no commercial game extraction.'}
+(b/'summary.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'result':'PASS','runs':len(runs),'assertions':x['results']['overlapping_assertions'],'files':len(manifest),'evidence_mb':round(sum(v['bytes'] for v in manifest if v['kind']=='evidence')/1e6,2)}))

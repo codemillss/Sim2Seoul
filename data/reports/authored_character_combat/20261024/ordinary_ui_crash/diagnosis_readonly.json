@@ -1,0 +1,69 @@
+{
+  "task": "ORDINARY_OS_CUSTOMIZATION_CRASH_READ_ONLY_DIAGNOSIS",
+  "recorded_at": "2026-10-24T05:52:36.191063+00:00",
+  "result": "UNRESOLVED_CRASH_WITH_BOUNDED_UNVERIFIED_WORKAROUND_PROPOSAL",
+  "source_changes": false,
+  "engine_executions_by_reviewer": 0,
+  "original_log": "data/reports/authored_character_combat/20261024/ordinary_ui_crash/normal_game_crash_original.log",
+  "original_log_sha256": "973b481b2941740c5b735efd4df808fd12904ef40ee0678e27e4e297d3bade73",
+  "normal_log_was_read_before_relaunch": true,
+  "ordinary_screenshot": {
+    "file": "data/reports/authored_character_combat/20261024/ordinary_os_customization_front.png",
+    "sha256": "49b1fdb7b4b67814fd4652ddde8d85ed9f900d366b424ebd3e7103c65cbf400f",
+    "directly_opened_original_png": true,
+    "pixels": "Customization preview is open with original masculine model selected and focused;all visible option labels render,avatar is in left region. This single frame predates the crash and does not prove the dropdown worked."
+  },
+  "observed_log": {
+    "engine": "4.7.2.stable.official.ed1daf0bf001b61586d9930840f2f1394092c079",
+    "ready": "EXPLORATION_READY speed=turbo free_roam=true time=evening",
+    "first_error": "Condition index == -1 is true at _sub_window_grab_focus(scene/main/viewport.cpp:480)",
+    "termination": "signal11",
+    "backtrace_limit": "Native backtrace lacks useful per-function symbols;there is no GDScript bounds error or named customization callback frame. The first error and later SIGSEGV are temporally adjacent,but exact direct cause is not proven."
+  },
+  "code_findings": [
+    "Seven OptionButtons(two model/profile plus five palette choices) are created once and retain their internal PopupMenus.",
+    "Customization does not remove/free/reparent its PopupMenu;only ordinary Controls/CanvasLayer visibility and avatar geometry are changed.",
+    "Opening preview sets model_option.grab_focus after populating selections;model/profile selection callbacks change the avatar but do not close or reconstruct the UI.",
+    "The fixture selects via option.select(index) and item_selected.emit(index),so prior46/56PASS never exercised the ordinary OS dropdown open/keyboard focus path.",
+    "Default project settings do not override embedded subwindows;popup paths therefore use standard engine defaults."
+  ],
+  "official_sources": [
+    {
+      "url": "https://docs.godotengine.org/en/stable/classes/class_optionbutton.html#class-optionbutton-method-get-popup",
+      "supports": "OptionButton owns a required internal PopupMenu;do not remove/free it."
+    },
+    {
+      "url": "https://docs.godotengine.org/en/stable/classes/class_window.html#class-window-property-force-native",
+      "supports": "force_native forces an OS Window regardless of parent viewport or project embed setting."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf001b61586d9930840f2f1394092c079/scene/main/viewport.cpp",
+      "supports": "Embedded subwindow focus looks up the target in the registered subwindow list and reports an invalid index if absent. This identifies the failing subsystem but does not alone prove the SIGSEGV root cause."
+    }
+  ],
+  "known_issue_status": "No exact Godot GitHub duplicate was confirmed by this focused search. Do not describe this as an already-known fixed issue. Unrelated fullscreen macOS reports were excluded.",
+  "hypothesis": "Native OS input or accessibility focus changed embedded PopupMenu focus registration while opening/selecting. The log is consistent with an engine embedded-subwindow focus failure;the exact triggering key is unknown.",
+  "minimum_candidate_not_applied": {
+    "scope": "Customization only,on macOS;keep all7OptionButtons,selection contracts,labels,layout and save schema.",
+    "candidate": "Set each OptionButton.get_popup().force_native=true while building the UI,before it is shown.",
+    "purpose": "Bypass the failing embedded subwindow focus list without a project-wide window setting or deletion of internal nodes.",
+    "risks": [
+      "Unverified until actual OS key/mouse cycles complete.",
+      "Native popup becomes a separate transient OS window;root viewport screenshots do not capture that separate window,so ordinary OS screenshot is necessary.",
+      "Popup position,scale,focus return and menu-paused interaction require actual checking at normal and640x480size."
+    ],
+    "fallback_if_still_crashes": "Replace only customization dropdowns with in-panel segmented/radio or previous/next Button controls;this removes PopupMenu/Window focus entirely,but has a larger UI/API/test footprint. Do not switch engine versions or global project embedding merely to suppress the symptom."
+  },
+  "proposed_acceptance": [
+    "Ordinary app launch→Esc→Customize;Return opens actual model popup,Down moves to woman,Return commits draft and popupcloses;verify visible model,label and app remains alive.",
+    "Mouse-select model/profile/palette through actual popup,including soft/athletic profile and color.",
+    "Repeat open/select/Esc/click-outside,front/back,Save/Cancel and menu return;verify focus/HUD/restored outfits/preferences.",
+    "Use fresh log and OS screenshots;require no embedded focus error or signal11.",
+    "Only after workaround accepted rerun affected customization headless/native suite and reselect report bindings honestly;previous overall ordinary launch acceptance remains failed."
+  ],
+  "source_sha256": {
+    "game/scripts/player/character_customization.gd": "04dfeca835e28f4cfd330b150dc02240ad95a79655a3a42e30401d120bc577a1",
+    "tests/game/check_character_customization.gd": "ddf01213b7262379aeb26d803f139965b6941970727cb5d5e0724591084cdd31",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+  }
+}

@@ -48,7 +48,7 @@ func _capture(name: String) -> void:
 	await _ticks(3);await RenderingServer.frame_post_draw;var image:=root.get_texture().get_image();var path:=report_path.get_basename()+"_"+name+".png";var error:=image.save_png(path)
 	_check("capture_"+name,error==OK,{"path":path,"size":[image.get_width(),image.get_height()]})
 	if error==OK:captures.append({"path":path,"sha256":FileAccess.get_sha256(path),"scope":"Actual production camera; test-only player starts disclosed."})
-func _place_near(body: CharacterBody3D,range_m:=1.25) -> bool:
+func _place_near(body: CharacterBody3D,range_m:=.88) -> bool:
 	for index: int in range(16):
 		var angle:=float(index)*TAU/16.;var point:=body.global_position+Vector3(sin(angle),0,cos(angle))*range_m
 		var floor: Dictionary=service._supported(point,true)

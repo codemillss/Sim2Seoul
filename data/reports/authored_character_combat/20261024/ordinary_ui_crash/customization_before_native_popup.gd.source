@@ -1,0 +1,254 @@
+extends Node
+## Local, optional presentation settings. The original authored GLBs stay immutable.
+const MODEL_IDS := ["SeoulResident_M01","SeoulResident_F01"]
+const BODY_PROFILES := ["standard","soft","athletic"]
+const COLOR_KEYS := ["skin","hair","jacket","pants","shoes"]
+const LABELS := {"skin":"피부", "hair":"머리", "jacket":"상의", "pants":"하의", "shoes":"신발"}
+const PALETTES := {
+	"skin":[["default","원래 피부", ""],["light","밝은 베이지","dfb99a"],["warm","따뜻한 베이지","c59370"],["tan","구릿빛","966647"],["deep","깊은 갈색","68432f"]],
+	"hair":[["default","원래 머리", ""],["black","검정","17191c"],["brown","짙은 갈색","483022"],["chestnut","밤색","764c32"],["silver","은회색","a6a9af"]],
+	"jacket":[["default","원래 상의", ""],["navy","네이비","263d56"],["ivory","아이보리","e6dfcc"],["sage","세이지","7d967f"],["red","버건디","8e3842"]],
+	"pants":[["default","원래 하의", ""],["charcoal","차콜","363a42"],["denim","데님 블루","415c7b"],["sand","샌드","b9aa8b"],["black","검정","20232a"]],
+	"shoes":[["default","원래 신발", ""],["white","오프화이트","e8e5dc"],["black","검정","25282b"],["tan","베이지","ad9274"],["blue","블루","587ea6"]]
+}
+var host: Node
+var settings_path := "user://sim2seoul_character.json"
+var ui_open := false
+var recovered := false
+var save_error := ""
+var menu_button: Button
+var panel: PanelContainer
+var scroll: ScrollContainer
+var status_label: Label
+var title_label: Label
+var model_option: OptionButton
+var body_option: OptionButton
+var ui_layer: CanvasLayer
+var color_options: Dictionary={}
+var save_button: Button
+var cancel_button: Button
+var reset_button: Button
+var front_button: Button
+var back_button: Button
+var committed: Dictionary={}
+var draft: Dictionary={}
+var _camera_saved: Dictionary={}
+var _hud_saved: Array[Dictionary]=[]
+var _preview_back := false
+var _syncing := false
+
+func setup(owner_host: Node,path: String="user://sim2seoul_character.json") -> bool:
+	host=owner_host;settings_path=path;name="CharacterCustomization";process_mode=Node.PROCESS_MODE_ALWAYS
+	if not is_instance_valid(host) or not is_instance_valid(host.get("exploration_avatar")):return false
+	committed=_defaults(String(host.exploration_avatar._textured_surface.model_id),String(host.player.get_meta("human_body_profile","standard")))
+	if FileAccess.file_exists(settings_path):
+		var parser:=JSON.new();var error:=parser.parse(FileAccess.get_file_as_string(settings_path));var parsed: Variant=parser.data
+		var normalized: Dictionary=_normalize_state(parsed) if error==OK else {}
+		if not normalized.is_empty():committed=normalized
+		else:recovered=true
+	# An absent/invalid file leaves exactly the existing authored appearance.
+	if not _apply(committed,false):return false
+	_build_ui();_update_availability();return true
+
+func _defaults(model_id: String="SeoulResident_M01",body_profile: String="standard") -> Dictionary:
+	var value: Dictionary={"schema_version":2,"model_id":model_id,"body_profile":body_profile}
+	for key: String in COLOR_KEYS:value[key]="default"
+	return value
+
+func _valid_state(value: Variant) -> bool:
+	if not value is Dictionary or value.size()!=8 or value.get("schema_version")!=2 or value.get("model_id") not in MODEL_IDS or value.get("body_profile") not in BODY_PROFILES:return false
+	for key: String in COLOR_KEYS:
+		var found:=false
+		for preset: Array in PALETTES[key]:
+			if value.get(key)==preset[0]:found=true;break
+		if not found:return false
+	return true
+
+func _normalize_state(value: Variant) -> Dictionary:
+	if _valid_state(value):
+		var normalized: Dictionary=value.duplicate(true);normalized.schema_version=2;return normalized
+	# Read the original seven-key save without writing it. A later explicit
+	# Save commits schema 2; opening/cancelling never rewrites a player's file.
+	if not value is Dictionary or value.size()!=7 or value.get("schema_version")!=1:return {}
+	var migrated: Dictionary=value.duplicate(true);migrated.schema_version=2;migrated.body_profile="standard"
+	return migrated if _valid_state(migrated) else {}
+
+func _colors(value: Dictionary) -> Dictionary:
+	var colors: Dictionary={}
+	for key: String in COLOR_KEYS:
+		for preset: Array in PALETTES[key]:
+			if value[key]==preset[0] and preset[0]!="default":colors[key]=Color.from_string(preset[2],Color.WHITE)
+	return colors
+
+func _apply(value: Dictionary,preview: bool) -> bool:
+	if not _valid_state(value):return false
+	if not host.exploration_avatar.set_authored_model(String(value.model_id),String(value.body_profile)):return false
+	return host.exploration_avatar._textured_surface.set_customization(_colors(value),preview)
+
+func availability_reason() -> String:
+	if not is_instance_valid(host) or not host.runtime_ok:return "도시를 준비하고 있습니다."
+	if host.player.facility_control:return "시설 이용을 마친 뒤 꾸밀 수 있습니다."
+	if not host.player.is_on_floor():return "지면에 선 뒤 꾸밀 수 있습니다."
+	if host._street_transport_riding():return "탈것에서 내린 뒤 꾸밀 수 있습니다."
+	if host._sandbox_detained():return "조사가 끝난 뒤 꾸밀 수 있습니다."
+	if is_instance_valid(host.shop_visit_service):
+		if host.shop_visit_service.swimwear_active:return "수영복을 갈아입고 나간 뒤 꾸밀 수 있습니다."
+		if host.shop_visit_service.active or host.shop_visit_service.ui_open:return "쇼핑을 마친 뒤 꾸밀 수 있습니다."
+	if not String(host.exploration_avatar._activity_kind).is_empty() or float(host.exploration_avatar._sandbox_remaining_s)>0.:return "동작을 마친 뒤 꾸밀 수 있습니다."
+	return ""
+
+func _build_ui() -> void:
+	menu_button=Button.new();menu_button.name="CustomizeCharacter";menu_button.text="캐릭터 꾸미기";menu_button.pressed.connect(open_preview)
+	host.exploration_menu_content.add_child(menu_button)
+	host.exploration_menu_content.move_child(menu_button,1)
+	host._queue_menu_layout()
+	panel=PanelContainer.new();panel.name="CharacterCustomizationPanel";panel.visible=false
+	var style:=StyleBoxFlat.new();style.bg_color=Color(.055,.075,.105,.97);style.corner_radius_top_left=16;style.corner_radius_bottom_left=16
+	style.content_margin_left=20;style.content_margin_right=20;style.content_margin_top=18;style.content_margin_bottom=18
+	panel.add_theme_stylebox_override("panel",style);panel.mouse_filter=Control.MOUSE_FILTER_STOP
+	ui_layer=CanvasLayer.new();ui_layer.name="CharacterCustomizationUI";ui_layer.layer=100;add_child(ui_layer);ui_layer.add_child(panel)
+	var shell:=VBoxContainer.new();shell.add_theme_constant_override("separation",12);panel.add_child(shell)
+	title_label=Label.new();title_label.text="나의 서울 주민";title_label.add_theme_font_size_override("font_size",23);shell.add_child(title_label)
+	scroll=ScrollContainer.new();scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true;scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;shell.add_child(scroll)
+	var content:=VBoxContainer.new();content.size_flags_horizontal=Control.SIZE_EXPAND_FILL;content.add_theme_constant_override("separation",10);scroll.add_child(content)
+	var description:=Label.new();description.text="체형과 기본 옷 색상을 미리 봅니다.\n취소하면 이전 모습으로 돌아갑니다.";description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;content.add_child(description)
+	var view_row:=HBoxContainer.new();content.add_child(view_row)
+	front_button=Button.new();front_button.text="앞모습";front_button.pressed.connect(func()->void:_preview_camera(false));view_row.add_child(front_button)
+	back_button=Button.new();back_button.text="뒷모습";back_button.pressed.connect(func()->void:_preview_camera(true));view_row.add_child(back_button)
+	_add_label(content,"주민 모델")
+	model_option=OptionButton.new();model_option.name="BodyType";model_option.add_item("남성형");model_option.add_item("여성형")
+	model_option.item_selected.connect(func(index: int)->void:_change("model_id",MODEL_IDS[index]));content.add_child(model_option)
+	_add_label(content,"체형")
+	body_option=OptionButton.new();body_option.name="BodyProfile"
+	for caption: String in ["기본","통통","근육"]:body_option.add_item(caption)
+	body_option.item_selected.connect(func(index: int)->void:_change("body_profile",BODY_PROFILES[index]));content.add_child(body_option)
+	for key: String in COLOR_KEYS:
+		_add_label(content,LABELS[key]);var option:=OptionButton.new();option.name=key.capitalize()+"Color";option.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		for preset: Array in PALETTES[key]:option.add_item(preset[1])
+		option.item_selected.connect(_color_selected.bind(key));content.add_child(option);color_options[key]=option
+	var wardrobe:=Label.new();wardrobe.text="상의 색을 바꿔 저장하면 기본 옷으로 갈아입습니다.\n구매한 옷은 소지품에 남습니다.";wardrobe.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;wardrobe.add_theme_font_size_override("font_size",12);content.add_child(wardrobe)
+	reset_button=Button.new();reset_button.name="ResetAppearance";reset_button.text="원래 색상으로";reset_button.pressed.connect(reset_draft);content.add_child(reset_button)
+	var footer:=VBoxContainer.new();footer.add_theme_constant_override("separation",8);shell.add_child(footer)
+	status_label=Label.new();status_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;status_label.add_theme_color_override("font_color",Color(.94,.78,.43));footer.add_child(status_label)
+	save_button=Button.new();save_button.name="SaveAppearance";save_button.text="저장하고 돌아가기";save_button.pressed.connect(save_preview);footer.add_child(save_button)
+	cancel_button=Button.new();cancel_button.name="CancelAppearance";cancel_button.text="취소 · 이전 모습으로";cancel_button.pressed.connect(cancel_preview);footer.add_child(cancel_button)
+	get_viewport().size_changed.connect(_layout)
+	_layout()
+
+func _add_label(parent: Node,text: String) -> void:
+	var label:=Label.new();label.text=text;label.add_theme_font_size_override("font_size",14);parent.add_child(label)
+
+func _layout() -> void:
+	if not is_instance_valid(panel):return
+	var viewport_size:=get_viewport().get_visible_rect().size
+	var width:=minf(330.,viewport_size.x-24.)
+	panel.position=Vector2(viewport_size.x-width-12.,12.);panel.size=Vector2(width,maxf(150.,viewport_size.y-24.))
+	panel.custom_minimum_size=Vector2.ZERO
+	if ui_open:_preview_camera(_preview_back)
+
+func _update_availability() -> void:
+	if not is_instance_valid(menu_button):return
+	var reason:=availability_reason();menu_button.disabled=not reason.is_empty();menu_button.tooltip_text=reason
+	menu_button.text="캐릭터 꾸미기" if reason.is_empty() else "캐릭터 꾸미기 · 이용 종료 후"
+
+func _process(_delta: float) -> void:
+	_update_availability()
+	if ui_open:
+		for row: Dictionary in _hud_saved:
+			if is_instance_valid(row.layer):row.layer.visible=false
+
+func _hide_gameplay_hud() -> void:
+	for layer: CanvasLayer in host.find_children("*","CanvasLayer",true,false):
+		if layer==ui_layer:continue
+		var known:=false
+		for row: Dictionary in _hud_saved:
+			if row.layer==layer:known=true;break
+		if not known:_hud_saved.append({"layer":layer,"visible":layer.visible})
+		layer.visible=false
+
+func _restore_gameplay_hud() -> void:
+	for row: Dictionary in _hud_saved:
+		if is_instance_valid(row.layer):row.layer.visible=bool(row.visible)
+	_hud_saved.clear()
+
+func open_preview() -> bool:
+	if ui_open or not availability_reason().is_empty():return false
+	if not host.menu.visible:host.toggle_menu()
+	if not host.menu.visible:return false
+	draft=committed.duplicate(true);save_error=""
+	_camera_saved={}
+	for key: String in ["yaw","pitch","requested_distance","current_distance","pivot_height_m"]:_camera_saved[key]=host.rig.get(key)
+	_camera_saved.camera_h_offset=host.rig.camera.h_offset
+	ui_open=true;host.menu.visible=false;panel.visible=true
+	_hud_saved.clear();_hide_gameplay_hud()
+	_sync_options();_apply(draft,true);_preview_camera(false);_refresh_status();model_option.grab_focus();return true
+
+func _preview_camera(back: bool) -> void:
+	if not ui_open:return
+	_preview_back=back
+	host.rig.yaw=host.exploration_avatar.global_rotation.y+(0. if back else PI)
+	host.rig.pitch=deg_to_rad(-5.);host.rig.pivot_height_m=.95
+	host.rig.requested_distance=2.85;host.rig.current_distance=2.85;host.rig.snap_to_target_pose()
+	# Put the resident in the middle of the unobscured left region. h_offset
+	# changes projection only; the retained collision-solved camera stays put.
+	# Camera KEEP_HEIGHT uses a vertical FOV, so this also fits a 640x480 view.
+	var viewport_size:=get_viewport().get_visible_rect().size
+	var preview_center_x:=maxf(0.,panel.position.x-12.)*.5
+	var depth: float=maxf(.2,-host.rig.camera.to_local(host.exploration_avatar.global_position+Vector3.UP*.95).z)
+	var view_height: float=2.*depth*tan(deg_to_rad(host.rig.camera.fov)*.5)
+	host.rig.camera.h_offset=(viewport_size.x*.5-preview_center_x)/maxf(1.,viewport_size.y)*view_height
+
+func _sync_options() -> void:
+	_syncing=true;model_option.select(MODEL_IDS.find(draft.model_id));body_option.select(BODY_PROFILES.find(draft.body_profile))
+	for key: String in COLOR_KEYS:
+		for index: int in range(PALETTES[key].size()):
+			if draft[key]==PALETTES[key][index][0]:color_options[key].select(index);break
+	_syncing=false
+
+func _color_selected(index: int,key: String) -> void:
+	_change(key,String(PALETTES[key][index][0]))
+
+func _change(key: String,value: String) -> void:
+	if _syncing or not ui_open:return
+	var previous: Dictionary=draft.duplicate(true);draft[key]=value
+	if not _apply(draft,true):draft=previous;_sync_options();save_error="외형을 표시하지 못했습니다. 다른 선택을 시도해주세요."
+	else:save_error=""
+	_refresh_status()
+
+func reset_draft() -> void:
+	if not ui_open:return
+	draft=_defaults(String(committed.model_id),String(committed.body_profile));_sync_options();_apply(draft,true);save_error="";_refresh_status()
+
+func _refresh_status() -> void:
+	status_label.text="저장되지 않음 · "+save_error if not save_error.is_empty() else ("미리보기 · 저장 전" if draft!=committed else "현재 저장된 모습" )
+	if recovered and save_error.is_empty():status_label.text+="\n이전 설정을 읽지 못해 원래 모습으로 열었습니다."
+
+func _write_state(value: Dictionary) -> bool:
+	var temp:=settings_path+".tmp";var file:=FileAccess.open(temp,FileAccess.WRITE)
+	if file==null:save_error="저장 위치에 쓸 수 없습니다. 다시 저장하거나 취소해주세요.";return false
+	file.store_string(JSON.stringify(value,"\t")+"\n");file.flush();var error:=file.get_error();file.close()
+	if error!=OK:save_error="파일을 저장하지 못했습니다. 다시 시도해주세요.";return false
+	if DirAccess.rename_absolute(ProjectSettings.globalize_path(temp),ProjectSettings.globalize_path(settings_path))!=OK:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(temp));save_error="설정을 교체하지 못했습니다. 다시 시도해주세요.";return false
+	return true
+
+func save_preview() -> bool:
+	if not ui_open or not _valid_state(draft):return false
+	if not _write_state(draft):_refresh_status();return false
+	if draft.jacket!=committed.jacket and is_instance_valid(host.shop_visit_service):host.shop_visit_service.restore_default_outfit()
+	committed=draft.duplicate(true);recovered=false;save_error="";_apply(committed,false);_close();return true
+
+func cancel_preview() -> void:
+	if not ui_open:return
+	_apply(committed,false);draft=committed.duplicate(true);save_error="";_close()
+
+func _close() -> void:
+	ui_open=false;panel.visible=false
+	for key: String in _camera_saved:
+		if key!="camera_h_offset":host.rig.set(key,_camera_saved[key])
+	if _camera_saved.has("camera_h_offset"):host.rig.camera.h_offset=float(_camera_saved.camera_h_offset)
+	_restore_gameplay_hud()
+	host.rig.snap_to_target_pose();host.menu.visible=true;menu_button.grab_focus()
+
+func snapshot() -> Dictionary:
+	return {"ui_open":ui_open,"settings_path":settings_path,"committed":committed.duplicate(true),"draft":draft.duplicate(true),"save_error":save_error,"recovered":recovered,"availability_reason":availability_reason(),"preview_layer":ui_layer.layer if is_instance_valid(ui_layer) else -1,"hidden_hud_count":_hud_saved.size(),"preview_h_offset_m":host.rig.camera.h_offset if is_instance_valid(host) else 0.,"original_assets_modified":false}

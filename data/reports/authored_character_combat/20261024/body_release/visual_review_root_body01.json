@@ -1,0 +1,106 @@
+{
+  "task": "EXP33_BODY01_ROOT_NATIVE_REVIEW",
+  "recorded_at_utc": "2026-10-24T05:13:01.317636+00:00",
+  "decision": "REWORK",
+  "opened": [
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/character_preview_native_body01_views/m01_standard_swim_front.png",
+      "sha256": "b73701d189de8ac5c8eda4742dab55ae3bb9999650073bbf9a25a91ef901258b",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/character_preview_native_body01_views/m01_standard_swim_back.png",
+      "sha256": "ba224ba66238a17ca1c4a6ade00b3efcfffda581548b2d49a4a0b796daa0903c",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/character_preview_native_body01_views/m01_standard_swim_side.png",
+      "sha256": "178887b655bb5141baeaa54c85d2559ae3c0a59a8255a48f7ddbeaa6d8e46714",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/character_preview_native_body01_views/f01_soft_swim_front_oblique.png",
+      "sha256": "f4b895645ed91cfdef53061eaa84a7f383d34e7e0221c5d0f6eaeb8571a28056",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/character_preview_native_body01_views/m01_athletic_street_front_oblique.png",
+      "sha256": "f14bbaf08486dd76ec41dd5ce1079c0614519e253c475db9d158f493e26377ba",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/customization_native_body01_m_soft_front.png",
+      "sha256": "0ffcf4da86441c6d010ce606af5f2acf59c4c280e982fdd5d6a98f9c61b48a66",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/anatomy_three_views.png",
+      "sha256": "567a0b5f87680a80154f8cefc3649566d1391f3a870c778ab02c1acc1e2290dd",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_body01_jab_left_contact_hands.png",
+      "sha256": "292cb3c7e5b8e2c8cd7b57d727be21a611e88ed57bff14ee0efa9e257fc738d0",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_body01_cross_right_side_3.png",
+      "sha256": "105ae1fdf8c8215009998a96a40999f38fc5816d01095e837defa01c3e4bb136",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_soft_female_swim_body01_shove_contact_hands.png",
+      "sha256": "9a7e2eb7cff6f047c665ef66f520e05f3b6c71f21d32b494cf59ecbf873555fb",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_soft_female_swim_body01_jab_left_contact_hands.png",
+      "sha256": "73688340b1f0fac7a361fb64bdc9cfbcc3283f8500abedbd241d1fc4a798c9da",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_athletic_female_swim_body01_jab_left_contact_hands.png",
+      "sha256": "e22d6fba2c7a05434ab106a0dc56c3b541adc288afc19ebe98c6e06506b6acfe",
+      "opened_as_actual_pixels": true
+    },
+    {
+      "path": "data/reports/authored_character_combat/20261024/body_release/authored_combat_native_soft_female_swim_body01_jab_left_side_3.png",
+      "sha256": "4d0f1dc8578e6baeb817579317918a915923574a2f762e1a61f5785c55f43e5d",
+      "opened_as_actual_pixels": true
+    }
+  ],
+  "observations": [
+    "Wrist and ankle joins no longer show the former horizontal caps/steps in static views; abdomen and calves are smoother.",
+    "Thumb base is connected to the palm, and facial eyes follow the actual envelope. Female strapless design removes the floating shoulder straps.",
+    "Customization controls and actual body stay separately visible in the opened normal-size frame.",
+    "Rejected: female soft/athletic swim jab contains a large upper-arm void. Side jab shows the upper arm collapsing into a thin plate. This is larger than a small underarm crease and cannot be waived as a prototype detail.",
+    "Street bent sleeve has a smaller crease/edge; face/hair/finger-tip detail remains stylized."
+  ],
+  "numeric_scope": "The body01 edge-length and pose assertions do not test cross-sectional volume or self-folding. Numeric PASS is not this visual acceptance.",
+  "followup": "Read-only cause analysis during remaining body01 runs; preserve raw failed GLBs and generator; add an independent actual skinned arm-volume guard, fix structural weighting/surface ownership, then rerun a frozen body02 candidate.",
+  "diagnosis_correction": {
+    "recorded_at_utc": "2026-10-24T05:20:39.811936+00:00",
+    "initial_inference": "The dark upper-arm oval was interpreted as background showing through a folded surface.",
+    "actual_pixel_evidence": {
+      "background_rgb": [
+        45,
+        52,
+        62
+      ],
+      "oval_rgb": [
+        18,
+        34,
+        50
+      ],
+      "torso_swimsuit_rgb": [
+        18,
+        33,
+        49
+      ]
+    },
+    "corrected_cause": "Rectangular swimsuit clipping assigned upper-arm skin triangles to opaque textile. The source contains1904arm-dominated cloth triangles (~.0239026m2) in rejected soft female swim. This is not evidence of a topological void.",
+    "volume_probe_status": "Initial skin-only ray selection excluded actual cloth triangles; neutral baseline was invalid. Do not force this invalid diagnostic to fail the old model.",
+    "revised_followup": "Keep base body geometry and weighting functions, correct garment region semantics, add independent actual cloth/bone-shaft regression, then rerun frozen body02.",
+    "visual_rework_still_required": true
+  }
+}

@@ -21,7 +21,9 @@ func _ticks(count: int) -> void:
 
 func _hashes() -> Dictionary:
 	var result:=super._hashes()
-	for path: String in ["res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/traffic/vehicle.gd","res://../tests/game/check_city_action_freedom.gd"]:result[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_combat_poses.gd","res://scripts/traffic/vehicle.gd","res://../tests/game/check_city_action_freedom.gd"]:result[path]=FileAccess.get_sha256(path)
+	for file: String in DirAccess.get_files_at("res://assets/original/seoul_resident"):
+		if file.get_extension() in ["glb","png","json"]:result["res://assets/original/seoul_resident/"+file]=FileAccess.get_sha256("res://assets/original/seoul_resident/"+file)
 	return result
 
 func _event(code: int,down: bool,echo:=false) -> void:
@@ -54,14 +56,21 @@ func _city_inventory() -> Dictionary:
 func _pose() -> Dictionary:
 	var human: Node3D=scene.exploration_avatar._textured_surface.rig
 	var skeleton: Skeleton3D=scene.exploration_avatar._textured_surface.skeleton
-	var points: Dictionary={};var finite:=true;var error:=0.
+	var points: Dictionary={};var finite:=true;var length_error:=0.;var neck_error:=0.;var fists: Dictionary={};var knuckles: Dictionary={}
 	for semantic: String in ["LeftUpperArm","LeftForearm","LeftHand","RightUpperArm","RightForearm","RightHand"]:
 		var bone: Transform3D=skeleton.get_bone_global_pose(human._find(semantic));finite=finite and bone.is_finite()
-		var source: String=semantic.replace("Hand","Forearm")
-		var expected: Basis=human._source_pose(human._source_node(source)).basis*human._corrections[semantic]
-		error=maxf(error,maxf(bone.basis.x.normalized().distance_to(expected.x.normalized()),maxf(bone.basis.y.normalized().distance_to(expected.y.normalized()),bone.basis.z.normalized().distance_to(expected.z.normalized()))))
 		if semantic.ends_with("Hand"):points[semantic]=scene.player.get_node("Visual").global_transform.affine_inverse()*(skeleton.global_transform*bone.origin)
-	return {"points":points,"finite":finite,"source_axis_error":error,"combat":_combat()}
+	for side: String in ["Left","Right"]:
+		for pair: Array in [["UpperArm","Forearm"],["Forearm","Hand"],["Thigh","Shin"],["Shin","Foot"]]:
+			var a: int=human._find(side+pair[0]);var b: int=human._find(side+pair[1])
+			var actual: float=skeleton.get_bone_global_pose(a).origin.distance_to(skeleton.get_bone_global_pose(b).origin)
+			var rest: float=human._rest_global[a].origin.distance_to(human._rest_global[b].origin)
+			length_error=maxf(length_error,absf(actual-rest))
+		var finger: int=human._find(side+"Finger11");fists[side]=skeleton.get_bone_pose_rotation(finger).get_angle()
+		var knuckle: Dictionary=human.combat_contact_world(side)
+		knuckles[side]=scene.player.get_node("Visual").global_transform.affine_inverse()*Vector3(knuckle.point)
+	var neck: int=human._find("Neck");neck_error=skeleton.get_bone_pose(neck).origin.distance_to(human._rest[neck].origin)
+	return {"points":points,"knuckles":knuckles,"finger_middle_angles_radians":fists,"finite":finite,"maximum_native_segment_length_error_m":length_error,"neck_local_translation_error_m":neck_error,"foot_contact_error_m":human.snapshot().maximum_contact_error_m,"combat":_combat()}
 
 func _capture_now(title: String) -> void:
 	if DisplayServer.get_name()=="headless":return
@@ -74,21 +83,22 @@ func _exercise_action(code: int,expected: String) -> void:
 	var before:=_count("melee_started");var hits_before: int=service.hits
 	# The down/up pair arrives between physics ticks, proving queued short taps.
 	_event(code,true);_event(code,false);await _ticks(1)
-	var starting:=_combat();var samples: Array=[];var finite:=true;var error:=0.;var minimum_left:=Vector3(INF,INF,INF);var maximum_left:=Vector3(-INF,-INF,-INF);var minimum_right:=minimum_left;var maximum_right:=maximum_left;var phases: Array=[];var captured:=false
+	var starting:=_combat();var samples: Array=[];var finite:=true;var length_error:=0.;var neck_error:=0.;var foot_error:=0.;var minimum_knuckle_z:=INF;var minimum_left:=Vector3(INF,INF,INF);var maximum_left:=Vector3(-INF,-INF,-INF);var minimum_right:=minimum_left;var maximum_right:=maximum_left;var phases: Array=[];var captured:=false
 	_check(expected+".short_physical_edge_starts_windup_without_immediate_hit",_count("melee_started")==before+1 and starting.get("action","")==expected and starting.get("phase","")=="windup" and service.hits==hits_before,{"combat":starting})
 	for tick: int in range(30):
 		await _ticks(1)
 		var state:=_combat();var phase:=String(state.get("phase",""))
 		if phase=="idle":break
 		if not phases.has(phase):phases.append(phase)
-		var pose:=_pose();finite=finite and pose.finite;error=maxf(error,pose.source_axis_error)
+		var pose:=_pose();finite=finite and pose.finite;length_error=maxf(length_error,pose.maximum_native_segment_length_error_m);neck_error=maxf(neck_error,pose.neck_local_translation_error_m);foot_error=maxf(foot_error,pose.foot_contact_error_m)
+		minimum_knuckle_z=minf(minimum_knuckle_z,minf(Vector3(pose.knuckles.Left).z,Vector3(pose.knuckles.Right).z))
 		minimum_left=minimum_left.min(pose.points.LeftHand);maximum_left=maximum_left.max(pose.points.LeftHand);minimum_right=minimum_right.min(pose.points.RightHand);maximum_right=maximum_right.max(pose.points.RightHand)
 		if samples.size()<5 and (tick%3)==0:samples.append({"tick":tick,"phase":phase,"left":pose.points.LeftHand,"right":pose.points.RightHand})
 		if not captured and tick==4:await _capture_now(expected+"_intermediate");captured=true
 		if tick==6:_event(KEY_F,true);_event(KEY_F,false)
 	var left_range:=maximum_left.distance_to(minimum_left);var right_range:=maximum_right.distance_to(minimum_right)
-	var row:={"action":expected,"left_hand_excursion_m":left_range,"right_hand_excursion_m":right_range,"maximum_source_native_axis_error":error,"phases":phases,"samples":samples,"native_finite":finite};observations.append(row)
-	_check(expected+".actual_imported_arms_follow_authored_pose_and_move",finite and error<.001 and maxf(left_range,right_range)>.07,row)
+	var row:={"action":expected,"left_hand_excursion_m":left_range,"right_hand_excursion_m":right_range,"maximum_native_segment_length_error_m":length_error,"maximum_neck_local_translation_error_m":neck_error,"maximum_foot_contact_error_m":foot_error,"minimum_actual_knuckle_forward_z_m":minimum_knuckle_z,"phases":phases,"samples":samples,"native_finite":finite};observations.append(row)
+	_check(expected+".actual_native_anatomy_and_authored_hand_motion",finite and length_error<.00002 and neck_error<.0005 and foot_error<.01 and maxf(left_range,right_range)>.25 and minimum_knuckle_z<-.39,row)
 	_check(expected+".fresh_recovery_press_does_not_queue_an_extra_action",_combat().get("phase","")=="idle" and _count("melee_started")==before+1,{"combat":_combat(),"phases":phases})
 
 func _car_observer(body: CharacterBody3D,farther:=false) -> bool:
@@ -178,7 +188,7 @@ func _run() -> void:
 	await _idle();_event(KEY_G,true);await _ticks(4)
 	var guard:=_combat();count=_count("melee_started");await _tap(KEY_F);await _tap(KEY_X);await _ticks(5)
 	_check("held_G_guard_is_visible_and_rejects_attack_edges",guard.get("guarding",false) and _combat().get("guarding",false) and _count("melee_started")==count,{"combat":_combat()});await _capture_now("held_guard")
-	var guard_pose:=_pose();_check("held_G_actual_native_arms_follow_authored_guard",guard_pose.finite and guard_pose.source_axis_error<.001,{"pose":guard_pose})
+	var guard_pose:=_pose();_check("held_G_actual_native_high_guard_and_closed_fingers",guard_pose.finite and guard_pose.maximum_native_segment_length_error_m<.00002 and guard_pose.neck_local_translation_error_m<.0005 and Vector3(guard_pose.points.LeftHand).y>1.30 and Vector3(guard_pose.points.RightHand).y>1.30 and float(guard_pose.finger_middle_angles_radians.Left)>.8 and float(guard_pose.finger_middle_angles_radians.Right)>.8,{"pose":guard_pose})
 	_event(KEY_G,false);await _ticks(3);_check("physical_G_release_clears_guard",not _combat().get("guarding",true))
 	scene.toggle_menu();count=_count("melee_started");_event(KEY_F,true);_event(KEY_G,true);await _ticks(3);scene.toggle_menu();_event(KEY_F,true,true);_event(KEY_G,true,true);await _ticks(24)
 	_check("menu_held_attack_guard_cannot_activate_after_resume",_count("melee_started")==count and not _combat().get("guarding",true));_event(KEY_F,false);_event(KEY_G,false)
@@ -193,14 +203,29 @@ func _run() -> void:
 	_check("all_original_dogs_remain_outside_adult_contact_targets",original_dogs.size()==2 and not target_ids.has(original_dogs[0]) and not target_ids.has(original_dogs[1]))
 	# Confirm delayed real contact and existing wanted integration last, then
 	# let the actual police catch prove custody key gating and automatic release.
-	near=await _place_near(target.body);hits_before=service.hits;await _tap(KEY_X)
+	# The original EXP32 cone accepted every action at one common range.
+	# Actual open palms stop at z~-.52m and x~+/-.18m: at .88m their sphere
+	# stays outside the adult torso, while a jab's farther knuckles can reach.
+	# Assert that real miss first, then approach with only the player capsule.
+	near=await _place_near(target.body,.88);hits_before=service.hits;await _tap(KEY_X);await _idle()
+	_check("physical_shove_at88cm_respects_actual_open_palm_reach",near and service.hits==hits_before and not service.wanted,{"player_world":scene.player.global_position,"target_world":target.body.global_position,"events":service.events.slice(maxi(0,service.events.size()-3)),"scope":"Original adult remains unmoved; actual palms, not the old remote cone, determine contact."})
+	near=await _place_near(target.body,.76);hits_before=service.hits
+	var contact_start:={"target_world":target.body.global_position,"player_world":scene.player.global_position,"visual_forward":-scene.player.get_node("Visual").global_basis.z,"target_path":str(target.body.get_path()),"horizontal_gap_m":Vector2(target.body.global_position.x-scene.player.global_position.x,target.body.global_position.z-scene.player.global_position.z).length()}
+	await _tap(KEY_X)
 	_check("physical_shove_does_not_hit_during_windup",near and service.hits==hits_before)
-	await _idle();_check("physical_shove_contacts_original_adult_and_reports_police",service.hits==hits_before+1 and service.wanted,{"events":service.events.slice(maxi(0,service.events.size()-5))})
-	var officer_near:=await _place_near(service.officers[0].body,1.15)
+	await _idle();_check("physical_shove_contacts_original_adult_and_reports_police",service.hits==hits_before+1 and service.wanted,{"start":contact_start,"target_after_world":target.body.global_position,"player_after_world":scene.player.global_position,"native_pose":_pose(),"events":service.events.slice(maxi(0,service.events.size()-5))})
+	# Dispatch selects actual nearby responders, not officer-array index zero.
+	# Only move the supported player observer near one already pursuing body;
+	# do not change officer placement, state or selection to force a capture.
+	var responder: Dictionary={}
+	for row: Dictionary in service.officers:
+		if row.state=="pursuing":responder=row;break
+	_check("custody_fixture_uses_actual_dispatched_responder",not responder.is_empty(),{"responders":service.snapshot().officers})
+	var officer_near:=await _place_near(responder.body,1.15) if not responder.is_empty() else false
 	for tick: int in range(120):
 		if service.detained:break
 		await _ticks(1)
-	_check("actual_police_capture_enters_reversible_custody",officer_near and service.detained)
+	_check("actual_police_capture_enters_reversible_custody",officer_near and service.detained,{"selected_responder":str(responder.body.get_path()) if not responder.is_empty() else "","snapshot":service.snapshot()})
 	if service.detained:
 		count=_count("melee_started");_event(KEY_F,true);_event(KEY_X,true);_event(KEY_G,true);await _ticks(4)
 		_check("custody_blocks_melee_and_guard",_count("melee_started")==count and not _combat().get("guarding",true))
@@ -218,4 +243,4 @@ func _finish() -> void:
 	_check("runtime_source_bindings_stable",source_hashes==_hashes())
 	var passed:=checks.filter(func(row: Dictionary)->bool:return row.passed).size();var file:=FileAccess.open(report_path,FileAccess.WRITE)
 	if file==null:quit(2);return
-	file.store_string(JSON.stringify(_json({"task":"EXP32_CITY_ACTION_FREEDOM","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"observations":observations,"captures":captures,"source_hashes":source_hashes,"display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Production ordinary scene; physical keycode F/X/G/E/H edges device42, short taps/hold/echo/menu/custody, actual imported native bone directions and hand travel, delayed actual adult contact and police, original moving-car stop/driver exit/player entry and horn/ride ownership. Test-only supported player observer starts, original pedestrian pause option and named static LOS blocker are disclosed. No source actor transform replacement, no real OS input/performance or subjective realism claim."}),"  ")+"\n");file.close();print("CITY_ACTION_FREEDOM_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)
+	file.store_string(JSON.stringify(_json({"task":"EXP33_CITY_AUTHORED_ACTION_FREEDOM","result":"PASS" if passed==checks.size() else "FAIL","passed":passed,"total":checks.size(),"checks":checks,"observations":observations,"captures":captures,"source_hashes":source_hashes,"display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"elapsed_ms":Time.get_ticks_msec()-started,"scope":"Production ordinary scene; physical keycode F/X/G/E/H edges device42, short taps/hold/echo/menu/custody, actual native anatomical segment/neck integrity, foot contacts, closed high guard and forward knuckle/hand travel. Actual open-palm shove misses at88cm and connects at76cm; player-only supported observer placements disclose this anatomical contact range. Custody uses an already dispatched original responder rather than array-index0. Delayed adult contact/police, original moving-car stop/driver exit/player entry, horn and ride ownership remain exercised. Original pedestrian pause option and named static LOS blocker are disclosed. No source actor transform/state replacement, no real OS input/performance or subjective realism claim."}),"  ")+"\n");file.close();print("CITY_ACTION_FREEDOM_RESULT ",passed,"/",checks.size());quit(0 if passed==checks.size() else 1)

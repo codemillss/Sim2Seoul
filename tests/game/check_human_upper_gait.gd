@@ -117,7 +117,7 @@ func _transition(mode: String,speed: float) -> void:
 func _run() -> void:
 	for file: String in DirAccess.get_files_at("res://scripts/player/"):
 		if file.ends_with(".gd"):var path:="res://scripts/player/"+file;source_hashes[path]=FileAccess.get_sha256(path)
-	for path: String in ["res://../tests/game/check_human_upper_gait.gd","res://../tests/game/check_human_gait_continuity.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_jump.gd","res://assets/vendor/microsoft_rocketbox/Male_Adult_04/Export/Male_Adult_04.fbx","res://assets/vendor/microsoft_rocketbox/Female_Adult_07/Export/Female_Adult_07.fbx"]:source_hashes[path]=FileAccess.get_sha256(path)
+	for path: String in ["res://../tests/game/check_human_upper_gait.gd","res://../tests/game/check_human_gait_continuity.gd","res://../tests/game/check_stable_motion.gd","res://../tests/game/check_jump.gd","res://assets/original/seoul_resident/seoul_resident_m01_street.glb","res://assets/original/seoul_resident/seoul_resident_f01_street.glb"]:source_hashes[path]=FileAccess.get_sha256(path)
 	_setup_stable();await _wait_steps(20);await _place(Vector3(0,.08,0))
 	surface=avatar._textured_surface;human=surface.rig;skeleton=surface.skeleton
 	_prepare_skin_patches();await _trial("walk",1.4);await _trial("run",3.5)

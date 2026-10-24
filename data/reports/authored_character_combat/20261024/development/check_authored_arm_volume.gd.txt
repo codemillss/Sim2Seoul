@@ -1,0 +1,140 @@
+extends "res://../tests/game/check_textured_human_rig.gd"
+## Independent actual indexed-surface collapse guard; not anatomical validation.
+## Source shaft is connected geometry, not only high-weight arm vertices: low
+## arm-weight inner skin must remain visible to this test.
+const PLANES: Array[float]=[.35,.55,.75]
+const RAYS:=16
+var measurements: Array=[]
+
+func _posed_vertices(surface: Node3D,row: Dictionary,selected: Dictionary={},source_rest:=false) -> PackedVector3Array:
+	var matrices: Array[Transform3D]=surface._skin_matrices(row.mesh,row.bind_bones,row.skeleton)
+	if source_rest:
+		var frame: Transform3D=surface.avatar.global_transform.affine_inverse()*row.skeleton.global_transform
+		for binding: int in range(row.bind_bones.size()):matrices[binding]=frame*row.skeleton.get_bone_global_rest(row.bind_bones[binding])*row.mesh.skin.get_bind_pose(binding)
+	var result:=PackedVector3Array();result.resize(row.vertices.size())
+	var referenced: Variant=row.referenced if selected.is_empty() else selected.keys()
+	for index: int in referenced:
+		for slot: int in range(4):
+			var weight: float=row.weights[index*4+slot]
+			if weight>0.:result[index]+=(matrices[row.bones[index*4+slot]]*row.vertices[index])*weight
+	return result
+
+func _axis(skeleton: Skeleton3D,helper: Node3D,side: String,source_rest:=false) -> Array[Vector3]:
+	var frame: Transform3D=helper.avatar.global_transform.affine_inverse()*skeleton.global_transform
+	var upper: Transform3D=skeleton.get_bone_global_rest(helper._find(side+"UpperArm")) if source_rest else skeleton.get_bone_global_pose(helper._find(side+"UpperArm"))
+	var lower: Transform3D=skeleton.get_bone_global_rest(helper._find(side+"Forearm")) if source_rest else skeleton.get_bone_global_pose(helper._find(side+"Forearm"))
+	return [frame*upper.origin,frame*lower.origin]
+
+func _shaft(surface: Node3D,row: Dictionary,skeleton: Skeleton3D,helper: Node3D,side: String) -> Dictionary:
+	var vertices:=_posed_vertices(surface,row,{},true);var ax:=_axis(skeleton,helper,side,true);var direction: Vector3=(ax[1]-ax[0]).normalized();var length: float=ax[0].distance_to(ax[1])
+	var outward:=Vector3(signf(ax[0].x),0.,0.);var candidate: Dictionary={};var adjacency: Dictionary={};var source_faces: Array=[];var best_seed:=-1;var best_score:=-INF
+	var arm_bind: Dictionary={}
+	for binding: int in range(row.bind_bones.size()):
+		var title:=String(skeleton.get_bone_name(row.bind_bones[binding]))
+		if title in (["Bip01 L UpperArm","Bip01 L Forearm"] if side=="Left" else ["Bip01 R UpperArm","Bip01 R Forearm"]):arm_bind[binding]=true
+	for index: int in row.referenced:
+		var delta: Vector3=vertices[index]-ax[0];var u: float=delta.dot(direction)/length;var radial: Vector3=delta-direction*delta.dot(direction)
+		# The source armpit join is above this strip. Its slit separates the
+		# arm tube from the torso; the graph then selects the outer arm seed.
+		if u<.27 or u>.94 or radial.length()>.095:continue
+		candidate[index]=true;var arm_weight:=0.
+		for slot: int in range(4):
+			if arm_bind.has(row.bones[index*4+slot]):arm_weight+=row.weights[index*4+slot]
+		var score: float=radial.dot(outward)-absf(u-.55)*.03
+		if arm_weight>=.8 and score>best_score:best_seed=index;best_score=score
+	var indices: PackedInt32Array=row.mesh.mesh.surface_get_arrays(int(row.surface))[Mesh.ARRAY_INDEX]
+	for at: int in range(0,indices.size(),3):
+		var a:=indices[at];var b:=indices[at+1];var c:=indices[at+2]
+		if not(candidate.has(a) and candidate.has(b) and candidate.has(c)):continue
+		source_faces.append([a,b,c])
+		for edge: Array in [[a,b],[b,c],[c,a]]:
+			if not adjacency.has(edge[0]):adjacency[edge[0]]=[]
+			if not adjacency.has(edge[1]):adjacency[edge[1]]=[]
+			adjacency[edge[0]].append(edge[1]);adjacency[edge[1]].append(edge[0])
+	var connected: Dictionary={};var stack: Array=[]
+	if best_seed>=0 and adjacency.has(best_seed):stack.append(best_seed);connected[best_seed]=true
+	while not stack.is_empty():
+		var index: int=stack.pop_back()
+		for other: int in adjacency.get(index,[]):
+			if not connected.has(other):connected[other]=true;stack.append(other)
+	var faces: Array=[]
+	for face: Array in source_faces:
+		if connected.has(face[0]) and connected.has(face[1]) and connected.has(face[2]):faces.append(face)
+	return {"row":row,"faces":faces,"referenced":connected,"source_vertices":vertices,"selection":{"surface":int(row.surface),"side":side,"candidate_vertices":candidate.size(),"connected_vertices":connected.size(),"connected_faces":faces.size(),"seed_index":best_seed,"neutral_axis":ax,"source_strip_fraction":[.27,.94],"cross_section_fractions":PLANES,"max_source_axis_radius_m":.095,"method":"Geometric neutral shaft strip and indexed connected component from outward arm-dominant seed; mixed-weight inner skin retained."}}
+
+func _section(vertices: PackedVector3Array,faces: Array,ax: Array[Vector3],fraction: float) -> Dictionary:
+	var direction: Vector3=(ax[1]-ax[0]).normalized();var center: Vector3=ax[0].lerp(ax[1],fraction)
+	var first: Vector3=direction.cross(Vector3.FORWARD).normalized()
+	if first.length_squared()<.1:first=direction.cross(Vector3.RIGHT).normalized()
+	var second: Vector3=direction.cross(first).normalized();var segments: Array=[]
+	for face: Array in faces:
+		var points: Array[Vector3]=[vertices[face[0]],vertices[face[1]],vertices[face[2]]];var cut: Array[Vector2]=[]
+		var distances: Array[float]=[(points[0]-center).dot(direction),(points[1]-center).dot(direction),(points[2]-center).dot(direction)]
+		if minf(distances[0],minf(distances[1],distances[2]))>0. or maxf(distances[0],maxf(distances[1],distances[2]))<0.:continue
+		for edge: int in range(3):
+			var following: int=(edge+1)%3;var a: float=distances[edge];var b: float=distances[following]
+			if (a<0.)==(b<0.) or absf(a-b)<1e-10:continue
+			var point: Vector3=points[edge].lerp(points[following],a/(a-b))-center
+			cut.append(Vector2(point.dot(first),point.dot(second)))
+		if cut.size()==2 and cut[0].distance_squared_to(cut[1])>1e-14:segments.append(cut)
+	var radii: Array[float]=[];var covered:=0;var minimum:=INF;var maximum:=0.
+	for angle: int in range(RAYS):
+		var ray:=Vector2(cos(TAU*angle/RAYS),sin(TAU*angle/RAYS));var radius:=INF
+		for segment: Array in segments:
+			var start: Vector2=segment[0];var edge: Vector2=segment[1]-start;var determinant: float=ray.cross(edge)
+			if absf(determinant)<1e-10:continue
+			var distance: float=start.cross(edge)/determinant;var segment_fraction: float=start.cross(ray)/determinant
+			if distance>.00001 and distance<.16 and segment_fraction>=-.00001 and segment_fraction<=1.00001:radius=minf(radius,distance)
+		if is_finite(radius):covered+=1;minimum=minf(minimum,radius);maximum=maxf(maximum,radius);radii.append(radius)
+		else:radii.append(-1.)
+	var area:=0.
+	if covered==RAYS:
+		for at: int in range(RAYS):area+=.5*sin(TAU/RAYS)*radii[at]*radii[(at+1)%RAYS]
+	return {"fraction":fraction,"axis_center":center,"axis_direction":direction,"rays":RAYS,"covered_rays":covered,"radius_m":radii,"minimum_radius_m":minimum if is_finite(minimum) else 0.,"maximum_radius_m":maximum,"radial_polygon_area_m2":area,"cut_segments":segments.size()}
+
+func _measure(cache: Dictionary,surface: Node3D,skeleton: Skeleton3D,helper: Node3D,side: String,source_rest:=false) -> Array:
+	var points:=_posed_vertices(surface,cache.row,cache.referenced,source_rest);var ax:=_axis(skeleton,helper,side,source_rest);var result: Array=[]
+	for fraction: float in PLANES:result.append(_section(points,cache.faces,ax,fraction))
+	return result
+
+func _run() -> void:
+	for path: String in ["res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_combat_poses.gd","res://../tools/authored_character/build_seoul_resident.py","res://assets/original/seoul_resident/AUTHORED_MANIFEST.json"]:source_hashes[path]=FileAccess.get_sha256(path)
+	var variants:=0
+	for id: String in ["SeoulResident_M01","SeoulResident_F01"]:
+		var player:=CharacterBody3D.new();player.set_meta("human_model_id",id);var visual:=Node3D.new();visual.name="Visual";player.add_child(visual);var original:=MeshInstance3D.new();original.name="Body";original.mesh=CapsuleMesh.new();visual.add_child(original);root.add_child(player)
+		var avatar: Node3D=load("res://scripts/player/exploration_avatar.gd").new();visual.add_child(avatar);_check(id+".production_avatar_setup",avatar.setup(player));avatar.set_physics_process(false)
+		for profile: String in ["standard","soft","athletic"]:
+			_check(id+profile+".profile_ready",avatar.set_authored_model(id,profile));var surface: Node3D=avatar._textured_surface
+			for clothing: String in ["street","swim"]:
+				var label_: String=id+"_"+profile+"_"+clothing;surface.set_swimwear(clothing=="swim");avatar._rest_pose();var helper: Node3D=surface.active_native_rig();helper.sync_pose();var skeleton: Skeleton3D=helper.skeleton;variants+=1
+				var active: Dictionary=surface.snapshot();source_hashes[active.active_glb_path]=active.active_glb_sha256
+				var chosen: Dictionary={};var baseline: Dictionary={}
+				for side: String in ["Left","Right"]:
+					var best: Dictionary={}
+					for row: Dictionary in surface._surfaces:
+						if row.skeleton!=skeleton:continue
+						var cache:=_shaft(surface,row,skeleton,helper,side)
+						if best.is_empty() or cache.faces.size()>best.faces.size():best=cache
+					chosen[side]=best;baseline[side]=_measure(best,surface,skeleton,helper,side,true)
+					var valid: bool=best.faces.size()>100
+					for section: Dictionary in baseline[side]:valid=valid and section.covered_rays==RAYS and section.minimum_radius_m>=.012 and section.maximum_radius_m<=.10
+					_check(label_+"."+side+".source_rest_has_closed_valid_source_shaft",valid,{"selection":best.selection,"sections":baseline[side]})
+				for action: String in ["jab_left","cross_right","hook_left"]:
+					avatar._rest_pose();avatar._sandbox_action=action;avatar._sandbox_duration_s=avatar.sandbox_action_duration(action);avatar._sandbox_remaining_s=avatar._sandbox_duration_s*(1.-avatar.sandbox_contact_phase(action));avatar._sandbox_pose(0.);helper.sync_pose()
+					for side: String in ["Left","Right"]:
+						var sections:=_measure(chosen[side],surface,skeleton,helper,side);var valid:=true
+						for index: int in range(PLANES.size()):
+							var section: Dictionary=sections[index];var rest: Dictionary=baseline[side][index]
+							section["neutral_radius_ratio"]=section.minimum_radius_m/maxf(rest.minimum_radius_m,.000001);section["neutral_area_ratio"]=section.radial_polygon_area_m2/maxf(rest.radial_polygon_area_m2,.000001)
+							valid=valid and section.covered_rays==RAYS and section.neutral_radius_ratio>=.45 and section.neutral_area_ratio>=.45
+						_check(label_+"."+action+"."+side+".actual_surface_retains_transverse_thickness",valid,{"sections":sections,"criteria":"all16 rays intersect actual connected source shaft; min radius and radial polygon area >=45% of valid neutral baseline; selected bone-axis fractions .35,.55,.75; geometry collapse guard only"})
+						measurements.append({"name":label_,"action":action,"side":side,"asset":active.active_glb_path,"asset_sha256":active.active_glb_sha256,"sections":sections})
+				avatar.cancel_sandbox_action();avatar._rest_pose()
+			surface.set_swimwear(false)
+		player.free();await process_frame
+	_check("all12variants_exercised",variants==12,{"variants":variants})
+	var same:=true
+	for path: String in source_hashes:same=same and FileAccess.get_sha256(path)==source_hashes[path]
+	_check("actual_assets_and_production_sources_unchanged",same)
+	var failed:=checks.filter(func(row: Dictionary)->bool:return not row.passed).size();var f:=FileAccess.open(report_path,FileAccess.WRITE)
+	f.store_string(JSON.stringify(_json({"task":"EXP34_ACTUAL_ARM_SHAFT_COLLAPSE_GUARD","result":"PASS" if failed==0 else "FAIL","summary":{"checks":checks.size(),"failed":failed,"variants":variants,"posed_arm_cases":measurements.size()},"checks":checks,"measurements":measurements,"source_sha256":source_hashes,"scope":"Actual production CPU skinned indexed connected arm shaft, neutral baseline first;16 planar radial rays at35/55/75% UpperArm-to-Forearm. Independent collapse guard motivated by observed swim upper-arm fold despite45mm/6x upper-edge integrity pass. Does not certify anatomical realism, source manifoldness or visual comfort."}),"  ")+"\n");f.close();print("ARM_VOLUME_RESULT ",checks.size()-failed,"/",checks.size());quit(0 if failed==0 else 1)

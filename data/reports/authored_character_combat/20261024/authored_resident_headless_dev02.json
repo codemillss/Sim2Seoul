@@ -1,0 +1,47 @@
+{
+  "cases": [],
+  "checks": [
+    {
+      "evidence": {},
+      "name": "SeoulResident_M01.production_avatar_setup",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_M01.own_surface_loaded",
+      "passed": false
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_F01.production_avatar_setup",
+      "passed": true
+    },
+    {
+      "evidence": {},
+      "name": "SeoulResident_F01.own_surface_loaded",
+      "passed": false
+    },
+    {
+      "evidence": {},
+      "name": "production_and_fixture_sources_unchanged",
+      "passed": true
+    }
+  ],
+  "display": "headless",
+  "engine": "4.7.2-stable (official)",
+  "result": "FAIL",
+  "scope": "Production original resident street/swim GLBs, valid actual indexed mesh/normals/skin/bone contacts/anatomy and wardrobe ownership. Old vendor models and dual-body neck fitting are not the runtime under test. Does not establish natural appearance, OS control, city support or performance; native visual review is separate.",
+  "source_sha256": {
+    "res://../tests/game/check_authored_resident.gd": "7a0a3fa60ad17f8e2608082f62af668ea98b4aff1dd5e4ecb8d97857c40dbe86",
+    "res://../tests/game/check_textured_human_rig.gd": "5e3e31d09484bb36e15d09e8c6c023727db4064e724acdc53012ed8ad242882b",
+    "res://../tools/authored_character/build_seoul_resident.py": "986a58a317375f4e90ec6b664d9ab983579a3f6dfeea3b6dc041d3025b3842c9",
+    "res://scripts/player/exploration_avatar.gd": "2fe3e47f1bb58d23b53f213c6e1b4616dd9b121e6ca34ea6a299330cce8b809e",
+    "res://scripts/player/textured_human_rig.gd": "b347f49a54500957da71230100583c7c4f940c766d341f0e14fbbcf737051658",
+    "res://scripts/player/textured_human_surface.gd": "2e8133401a8dda521478c4839c17c9122d8c177e4d5fad676b44865e18201ee0"
+  },
+  "summary": {
+    "checks": 5,
+    "failed": 2
+  },
+  "task": "EXP33_AUTHORED_RESIDENT_CONTRACT"
+}

@@ -1,0 +1,61 @@
+{
+  "baseline_archive": "/private/tmp/sim2seoul_anatomy_targeted_baseline_before_final_features.tar.gz",
+  "scope": "Original authored art changes only. Exact native geometry/contact regression and the final 12-variant visual review are delegated to the root final batch. No completed-realism claim.",
+  "feature_candidate": {
+    "report": "anatomy_features_native_dev01.json",
+    "actual_capture_count": 12,
+    "all_12_pixels_opened": true,
+    "status": "Historical intermediate; retained without overwriting after the side-eye defect was observed.",
+    "observations": [
+      "Thumb/palm opening and native indexed thenar web remove the visibly cut-off rod-like thumb root in actual front/back/oblique hand images.",
+      "Female fixed shoulder straps are replaced by a strapless opaque garment clipped from the actual anatomical torso.",
+      "Raised eye/orbit/lid/brow region and larger brown iris improve the front-view feature balance.",
+      "Male and female side views exposed an existing absolute-Z eyelid/eye plate protruding off the curved face. This intermediate was not accepted."
+    ]
+  },
+  "relative_eye_correction": {
+    "report": "anatomy_relative_eye_single_native_dev01.json",
+    "actual_capture_count": 2,
+    "all_2_pixels_opened": true,
+    "views": [
+      "m01_standard_swim_face.png",
+      "m01_standard_swim_face_side.png"
+    ],
+    "source_sha256": {
+      "res://../tests/game/preview_authored_resident.gd": "0b150a0eeb8c16963b87e74a5cca9df0ca3da13612108de1a031187b0f71596f",
+      "res://../tools/authored_character/anatomical_surface_fields.py": "6886b204ab37763898d04238344206f83755c8a55769debd3876e3e93c0d1cc0",
+      "res://../tools/authored_character/build_seoul_resident.py": "75b80562291fbdf7015d9b5a8e2178bbeb2b14c815b176290e6cd50afade313b",
+      "res://assets/original/seoul_resident/AUTHORED_MANIFEST.json": "722b650bfa5249557f5a582f887cdf8c826887b6d363bb09b15a6fee93a0ef29",
+      "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb": "8895111264ec4a7662e78e0ab8d59fa03e3889e2b59e1c33fa812dd57118fc74",
+      "res://scripts/player/human_skin_materials.gd": "5b526ea02bc063f352f2811c87cbda856ead21b1b8aa959be46374a70f2d8f01",
+      "res://scripts/player/textured_human_surface.gd": "16d6c6d56d490c65501d84c2f48ca18dcd7507056fe722889f52f98c33e60dad"
+    },
+    "observations": [
+      "All eye rim/sclera/iris/pupil/lid points follow face_z at each actual x/y.",
+      "The visible floating outer canthus/eye plate is absent in the actual side view.",
+      "Eye height stays 1.572m and the source opening remains 9.7mm; the eye region rise is an authored game-art proportion choice, not a medical measurement.",
+      "Pupil lift is 2.8mm, catchlight lift2.95mm; mouth/nose, skeleton/rest, physical capsule and distal hand contacts are preserved."
+    ],
+    "same_single_model_sha_in_final_12_variants": true
+  },
+  "final_assets": {
+    "count": 12,
+    "all_sha_match_manifest": true,
+    "actual_bone_counts": [
+      52
+    ],
+    "raw_y_bounds": [
+      [
+        0.006,
+        1.698
+      ]
+    ],
+    "full_variant_visual_and_animated_acceptance": "Pending root final batch; the single-model two-view result alone does not establish all variants and combat poses."
+  },
+  "remaining_art_limitations": [
+    "Neutral simplified expression and facial landmarks remain stylized.",
+    "Opaque shaped hair and imperfect strand-flow UV detail remain.",
+    "Finger/toe tips, nails and some joint anatomy remain coarse at close range.",
+    "No claim of lifelike/AAA/photorealistic character completion."
+  ]
+}

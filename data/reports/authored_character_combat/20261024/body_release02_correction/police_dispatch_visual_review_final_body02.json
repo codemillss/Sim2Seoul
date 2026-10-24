@@ -1,0 +1,198 @@
+{
+  "task": "BODY02_FINAL_POLICE_DISPATCH_NATIVE_REVIEW",
+  "reviewed_at": "2026-10-24T05:47:47.160554+00:00",
+  "result": "FUNCTIONAL_POLICE_DISPATCH_PASS_GENERAL_ART_AND_UNIVERSAL_NAVIGATION_NOT_CLAIMED",
+  "report": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_final_body02.json",
+  "report_sha256": "eca786b47b897027853baff809b92bf8a8c6b12065ae5ce45786a360604be221",
+  "runner": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_final_body02.run.json",
+  "runner_sha256": "19f183b546569d6ae50ccd3aa3513e659597d798367238a04d39e920921c48e6",
+  "actual_engine_exit": 0,
+  "script_errors": false,
+  "source_changes_during_run": [],
+  "actual_denominator": {
+    "passed": 36,
+    "total": 36,
+    "captures": 3,
+    "predicate_thresholds": "Same36checks;visible officer<6m plus actual displacement>1m;arrival<45seconds at8m report radius;unchanged60second production clock. Pre-expiry observation additionally requires elapsed>=59.6seconds."
+  },
+  "direct_source_binding": {
+    "count": 76,
+    "current_mismatches": []
+  },
+  "runner_broad_source_binding": {
+    "count": 219,
+    "current_mismatches": []
+  },
+  "fixture_sha256": "274b8f6d5892d9eeb1faafeb504c8aa9a7f7f902ff18283385e25e8ca1134a11",
+  "unchanged_production_safety_sha256": "9d0f7e9f14ef53f92f59c5d2268e7824782bf8b65331d1037c3394b7ca307c9e",
+  "actual_captures": [
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_final_body02_arrival_stonewall_east.png",
+      "directly_opened_original_png": true,
+      "sha256": "a77137a593ff704d6514e4015e46e18c20900123fdd7b707439790cecfcff465",
+      "recorded_sha256": "a77137a593ff704d6514e4015e46e18c20900123fdd7b707439790cecfcff465",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Police officer is visibly approaching the stonewall assault site from the road beside the retained car; HUD says assault report,police5m,52seconds until give-up."
+    },
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_final_body02_arrival_museum_slope.png",
+      "directly_opened_original_png": true,
+      "sha256": "eed8eee2eda7f16bbb241cea36cb1a60011a25b86b01820c42a447da15830385",
+      "recorded_sha256": "eed8eee2eda7f16bbb241cea36cb1a60011a25b86b01820c42a447da15830385",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Officer is visibly approaching along the museum slope path behind the original civilian; HUD shows assault report,police5m,60seconds. The nearby posted officer is only about10m from this site at report time;subsecond8marrival is not a city-wide response claim."
+    },
+    {
+      "file": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_final_body02_arrival_coverage_walk_01_0.png",
+      "directly_opened_original_png": true,
+      "sha256": "e7ae1015430219d5b701d778614e7942396ce503de211cfe08ccffaedb4b9de0",
+      "recorded_sha256": "e7ae1015430219d5b701d778614e7942396ce503de211cfe08ccffaedb4b9de0",
+      "hash_match": true,
+      "dimensions": [
+        1152,
+        720
+      ],
+      "observed_pixels": "Officer is visibly behind the civilian on the outer plaza grass; HUD shows assault report,police5m,55seconds. Lighting is darker here but police cap/yellow band remain distinguishable."
+    }
+  ],
+  "actual_stationary_assault_sectors": [
+    {
+      "sector": "stonewall_east",
+      "actual_report_radius8m_arrival_s": 8.33333333333331,
+      "stationary_player_movement_m": 0.0,
+      "positions_measured_before_actual_F": true,
+      "actual_pre_F_officer_displacement_to_visible6m_m": 34.4329872131348,
+      "visible_below6m": true,
+      "victim_native_stagger_m": 0.128406405448914,
+      "route_restore_check_passed": true
+    },
+    {
+      "sector": "museum_slope",
+      "actual_report_radius8m_arrival_s": 0.366666666666685,
+      "stationary_player_movement_m": 0.0,
+      "positions_measured_before_actual_F": true,
+      "actual_pre_F_officer_displacement_to_visible6m_m": 4.14390325546265,
+      "visible_below6m": true,
+      "victim_native_stagger_m": 0.132976531982422,
+      "route_restore_check_passed": true
+    },
+    {
+      "sector": "coverage_walk_01_0",
+      "actual_report_radius8m_arrival_s": 4.83333333333306,
+      "stationary_player_movement_m": 0.0,
+      "positions_measured_before_actual_F": true,
+      "actual_pre_F_officer_displacement_to_visible6m_m": 28.2727012634277,
+      "visible_below6m": true,
+      "victim_native_stagger_m": 0.131378173828125,
+      "route_restore_check_passed": true
+    }
+  ],
+  "actual_W_pursuit": {
+    "evidence": {
+      "player_distance_m": 4.39843797683716,
+      "police_distance_m": 16.2857686728239
+    },
+    "name": "officers_continue_physical_pursuit_during_actual_w",
+    "passed": true
+  },
+  "real_60_game_second_boundary": {
+    "pre_expiry_check": {
+      "evidence": {
+        "awaited_observation_steps": 1789,
+        "elapsed_game_s": 59.6333333333299,
+        "remaining_s": 0.366666666667509,
+        "sampling": "bounded actual game clock observation, no clock override"
+      },
+      "name": "pursuit_still_active_before60_real_game_seconds",
+      "passed": true
+    },
+    "post_expiry_check_evidence": {
+      "elapsed_game_s": 60.7999999999965
+    },
+    "new_offense_event_clock_s": 65.5833333333322,
+    "escaped_event_clock_s": 125.616666666662,
+    "observed_actual_expiry_game_seconds_after_offense": 60.03333333332979,
+    "after_expiry_states": [
+      "posted",
+      "returning"
+    ],
+    "menu_pause_passed": true,
+    "new_offense_reset_to60_passed": true
+  },
+  "native_motion_bound": {
+    "evidence": {
+      "distance_m": 372.327316313982,
+      "maximum_step_m": 0.181791841983795
+    },
+    "name": "all_officer_steps_native_bounded",
+    "passed": true
+  },
+  "source_entities_and_recovery": {
+    "adult_and_police_identities_retained": true,
+    "original_victim_walk_resumed": {
+      "evidence": {
+        "distance_m": 2.67734980583191
+      },
+      "name": "original_victim_route_controller_resumes_physical_walking",
+      "passed": true
+    },
+    "legacy_hit_route_recovery_passed": true,
+    "remote125cm_hit_and_dispatch_rejected": true,
+    "officers_initial_post_count": 14
+  },
+  "historical_failed_runs_remain_failed": [
+    {
+      "report": "data/reports/authored_character_combat/20261024/body_release02/police_dispatch_native_body02.json",
+      "report_sha256": "34b116bd8fff8769648a07b03708d6a01955c47437d08988ed44873fc36b163f",
+      "actual_engine_exit": 1,
+      "result": "FAIL",
+      "passed": 35,
+      "total": 36,
+      "failed_checks": [
+        {
+          "name": "officer_physically_closes_to_visible6m_museum_slope",
+          "evidence": {
+            "arriving_officer_displacement_m": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "report": "data/reports/authored_character_combat/20261024/body_release02_correction/police_dispatch_native_corrected_body02.json",
+      "report_sha256": "a020106774589c4c82f77f074828e91d75387716fa05c9157adb73d7f6a2a8de",
+      "actual_engine_exit": 1,
+      "result": "FAIL",
+      "passed": 35,
+      "total": 36,
+      "failed_checks": [
+        {
+          "name": "pursuit_still_active_before60_real_game_seconds",
+          "evidence": {
+            "elapsed_game_s": 60.2333333333299,
+            "remaining_s": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "authorized_fixture_corrections": [
+    "Officer displacement origin moved before actual F,after normal24tick settling. The former18tick post-contact snapshot could measure already-arrived officers as0m;threshold>1m unchanged.",
+    "Before60seconds samples now observe the unchanged actual game clock with bounded one-observation waits;fixed1790awaits did not imply59.666seconds under native physics catch-up. No production clock override/time forgiveness or reduced threshold."
+  ],
+  "limits": [
+    "Only three disclosed stationary assault sites and original adults were sampled;ordinary people-pause setting used to isolate response.",
+    "All officers retain production posts and native collision/paths;only player test starts are relocated. No police incident teleport.",
+    "Explicit raised test player platform isolates timeout from catching;this does not prove an ordinary street player survives60seconds.",
+    "Native Input actions,not OS keyboard acceptance. Screenshots are arrival frames,not a continuous animation-quality acceptance.",
+    "Police14posts consist of4prior+10added fictional district coverage officers;no real Seoul deployment or police procedure claim.",
+    "Functional checks and visible approach do not establish photorealism,GTA quality,all-route safety or finished character anatomy."
+  ]
+}

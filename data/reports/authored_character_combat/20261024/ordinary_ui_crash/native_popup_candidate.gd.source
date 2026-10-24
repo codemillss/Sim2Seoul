@@ -1,0 +1,105 @@
+extends SceneTree
+## Read-only production candidate: full normal city, only seven customization
+## popup windows use force_native in memory. All preference writes are isolated.
+var scene: Node3D
+var service: Node
+var report_path := "/private/tmp/sim2seoul-native-popup-candidate-status.json"
+var observations: Array[Dictionary] = []
+var preference_guard: Dictionary = {}
+var source_guard: Dictionary = {}
+var ready := false
+var isolated_directory := ""
+
+func _initialize() -> void:
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--candidate-report="):
+			report_path = argument.trim_prefix("--candidate-report=")
+	_run.call_deferred()
+
+func _file_hash(path: String) -> String:
+	return FileAccess.get_sha256(path) if FileAccess.file_exists(path) else "absent"
+
+func _copy_preference(original_path: String, target_path: String) -> bool:
+	preference_guard[original_path] = _file_hash(original_path)
+	if not FileAccess.file_exists(original_path):
+		return true
+	var input := FileAccess.open(original_path, FileAccess.READ)
+	var output := FileAccess.open(target_path, FileAccess.WRITE)
+	if input == null or output == null:
+		return false
+	output.store_buffer(input.get_buffer(input.get_length()))
+	output.close()
+	input.close()
+	return _file_hash(original_path) == _file_hash(target_path)
+
+func _isolate_preferences() -> bool:
+	isolated_directory = "/private/tmp/sim2seoul-native-popup-candidate-" + str(OS.get_process_id())
+	if DirAccess.make_dir_recursive_absolute(isolated_directory) != OK:
+		return false
+	for property_name: String in ["character_settings_path", "exploration_settings_path", "quality_settings_path"]:
+		var original_path: String = scene.get(property_name)
+		var target_path: String = isolated_directory + "/" + original_path.get_file()
+		if not _copy_preference(original_path, target_path):
+			return false
+		if property_name == "exploration_settings_path":
+			if not _copy_preference(original_path + ".time.json", target_path + ".time.json"):
+				return false
+		scene.set(property_name, target_path)
+	return true
+
+func _run() -> void:
+	for path: String in ["res://scripts/player/character_customization.gd", "res://../tests/game/check_character_customization.gd", "res://project.godot"]:
+		source_guard[path] = _file_hash(path)
+	scene = load("res://scenes/world/explore_walk.tscn").instantiate()
+	if not _isolate_preferences():
+		push_error("CANDIDATE_PREFERENCE_ISOLATION_FAILED")
+		quit(2)
+		return
+	root.add_child(scene)
+	for tick: int in range(8):
+		await physics_frame
+	service = scene.get("character_customization")
+	if not scene.runtime_ok or not is_instance_valid(service):
+		push_error("CANDIDATE_NORMAL_CITY_SETUP_FAILED")
+		_write_report()
+		quit(2)
+		return
+	var options: Array[OptionButton] = [service.model_option, service.body_option]
+	for key: String in service.COLOR_KEYS:
+		options.append(service.color_options[key])
+	for option: OptionButton in options:
+		var popup := option.get_popup()
+		popup.force_native = true
+		popup.visibility_changed.connect(_popup_visibility.bind(option))
+		option.item_selected.connect(_item_selected.bind(option))
+		observations.append({"event": "candidate_popup_configured", "option": str(option.name), "force_native": popup.force_native, "items": option.item_count})
+	ready = options.size() == 7 and options.all(func(option: OptionButton) -> bool: return option.get_popup().force_native)
+	root.title = "Sim2Seoul - Native Popup Candidate (DEBUG)"
+	_write_report()
+	print("NATIVE_POPUP_CANDIDATE_READY options=", options.size(), " ready=", ready, " isolated_preferences=", isolated_directory)
+	print("CANDIDATE_SCOPE actual normal scene; manual OS input required; no source changes; no automatic acceptance verdict")
+
+func _popup_visibility(option: OptionButton) -> void:
+	var popup := option.get_popup()
+	observations.append({"event": "actual_popup_visibility", "at_ms": Time.get_ticks_msec(), "option": str(option.name), "visible": popup.visible, "force_native": popup.force_native, "embedded": popup.is_embedded(), "window_id": popup.get_window_id(), "selected": option.selected, "text": option.text})
+	_write_report()
+	print("NATIVE_POPUP_CANDIDATE_VISIBILITY option=", option.name, " visible=", popup.visible, " embedded=", popup.is_embedded(), " window_id=", popup.get_window_id())
+
+func _item_selected(index: int, option: OptionButton) -> void:
+	observations.append({"event": "actual_option_item_selected", "at_ms": Time.get_ticks_msec(), "option": str(option.name), "index": index, "text": option.get_item_text(index)})
+	_write_report()
+	print("NATIVE_POPUP_CANDIDATE_SELECTED option=", option.name, " index=", index, " text=", option.get_item_text(index))
+
+func _write_report() -> void:
+	var current_sources: Dictionary = {}
+	for path: String in source_guard:
+		current_sources[path] = _file_hash(path)
+	var current_preferences: Dictionary = {}
+	for path: String in preference_guard:
+		current_preferences[path] = _file_hash(path)
+	var state: Dictionary = service.snapshot() if is_instance_valid(service) else {}
+	var value: Dictionary = {"task": "ORDINARY_OS_NATIVE_POPUP_MEMORY_CANDIDATE", "ready": ready, "acceptance": "PENDING_MANUAL_OS_VERIFICATION", "production_source_modified": false, "source_sha256_before": source_guard, "source_sha256_current": current_sources, "sources_unchanged": current_sources == source_guard, "original_preference_sha256_before": preference_guard, "original_preference_sha256_current": current_preferences, "original_preferences_unchanged": current_preferences == preference_guard, "isolated_preference_directory": isolated_directory, "candidate": "Only seven customization PopupMenu.force_native values changed in memory. Same normal city, current preferences copied byte-for-byte before setup; no injected UI input or selection.", "display": DisplayServer.get_name(), "engine": Engine.get_version_info().string, "customization": state, "observations": observations}
+	var file := FileAccess.open(report_path, FileAccess.WRITE)
+	if file != null:
+		file.store_string(JSON.stringify(value, "  ") + "\n")
+		file.close()

@@ -303,6 +303,11 @@ func _move_departed_drivers(delta: float) -> void:
 	for row: Dictionary in drivers:
 		var actor: CharacterBody3D=row.body
 		if not is_instance_valid(actor):continue
+		if preload("res://scripts/actor_hit_reaction.gd").owns(actor):
+			# The reaction moves the retained capsule earlier in this tick.
+			# Publish both render endpoints even while route control yields.
+			row.previous=row.current;row.current=row.visual.global_transform
+			continue
 		row.previous=row.visual.global_transform
 		var toward: Vector3=row.goal-actor.global_position;toward.y=0.
 		var motion:=toward.limit_length(1.35*delta) if row.state=="leaving" else Vector3.ZERO

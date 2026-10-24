@@ -1,0 +1,13 @@
+extends "res://../tests/game/check_police_dispatch_response.gd"
+func _run() -> void:
+ source_hashes=_hashes();scene=load('res://scenes/world/explore_walk.tscn').instantiate();scene.exploration_settings_path='/private/tmp/legacy-reaction33.json';root.add_child(scene);await _ticks(8);service=scene.city_public_safety
+ if scene.menu.visible:scene.toggle_menu()
+ scene.set_pedestrians_running(false)
+ var target: CharacterBody3D=scene.pedestrians[0]
+ var placed:=await _place_near(target,.88);await _ticks(24)
+ var hits: int=service.hits;var before: Vector3=target.global_position
+ await _tap_f();await _ticks(20)
+ var stagger: float=target.global_position.distance_to(before)
+ scene.set_pedestrians_running(true);var route_start: Vector3=target.global_position;await _ticks(40);scene.set_pedestrians_running(false)
+ _check('actual_legacy_f_contact_and_physical_stagger_then_original_adapter_route',placed and service.hits==hits+1 and stagger>.005 and not preload('res://scripts/actor_hit_reaction.gd').owns(target) and target.get('_state')!='off_route' and target.global_position.distance_to(route_start)>.05,{'stagger_m':stagger,'walk_m':target.global_position.distance_to(route_start),'snapshot':target.snapshot(),'events':service.events})
+ _finish()

@@ -1,0 +1,156 @@
+extends "res://../tests/game/check_textured_human_rig.gd"
+## New original asset contract. Old vendor/dual-body fixtures remain historical.
+## Numeric integrity and functional contacts do not establish visual quality.
+
+func _sample(label_: String,avatar: Node3D,helper: Node3D,skeleton: Skeleton3D,model: Node3D) -> void:
+	super._sample(label_,avatar,helper,skeleton,model)
+	var surface: Node3D=avatar._textured_surface
+	var bad_edges:=0;var maximum_edge:=0.;var maximum_excursion:=0.;var bad_examples: Array=[]
+	for row: Dictionary in surface._surfaces:
+		var matrices: Array[Transform3D]=surface._skin_matrices(row.mesh,row.bind_bones,row.skeleton)
+		var posed:=PackedVector3Array();posed.resize(row.vertices.size())
+		for index: int in row.referenced:
+			for slot: int in range(4):
+				var weight: float=row.weights[index*4+slot]
+				if weight>0.:posed[index]+=(matrices[row.bones[index*4+slot]]*row.vertices[index])*weight
+		var indices: PackedInt32Array=row.mesh.mesh.surface_get_arrays(int(row.surface))[Mesh.ARRAY_INDEX]
+		for index: int in range(0,indices.size(),3):
+			for edge: int in range(3):
+				var a: int=indices[index+edge];var b: int=indices[index+(edge+1)%3]
+				var rest_length: float=Vector3(row.vertices[a]).distance_to(row.vertices[b])*surface._normalization_scale
+				var length: float=posed[a].distance_to(posed[b]);maximum_edge=maxf(maximum_edge,length);maximum_excursion=maxf(maximum_excursion,length-rest_length)
+				# A tiny authored triangle becoming a visible spear is invalid,
+				# even while every bone length and normalized weight stays valid.
+				if length>maxf(.045,rest_length*6.):
+					bad_edges+=1
+					if bad_examples.size()<12:bad_examples.append({"surface":int(row.surface),"rest_a":row.vertices[a],"rest_b":row.vertices[b],"posed_a":posed[a],"posed_b":posed[b],"rest_m":rest_length,"posed_m":length})
+	_check(label_+".actual_deformed_triangles_do_not_form_long_skinning_spikes",bad_edges==0,{"bad_edges":bad_edges,"maximum_deformed_edge_m":maximum_edge,"maximum_edge_growth_m":maximum_excursion,"bad_examples":bad_examples,"limit":"edge <= max(45mm, six times original edge); integrity guard, visual review remains separate"})
+
+func _mesh_integrity(surface: Node3D,skel: Skeleton3D,label_: String) -> void:
+	var valid:=true;var maximum_weight_error:=0.;var vertices:=0;var normals:=0;var no_lods:=true
+	for row: Dictionary in surface._surfaces:
+		var native_mesh: Dictionary=RenderingServer.mesh_get_surface(row.mesh.mesh.get_rid(),int(row.surface))
+		no_lods=no_lods and not native_mesh.is_empty() and native_mesh.get("lods",[]).is_empty()
+		var arrays: Array=row.mesh.mesh.surface_get_arrays(int(row.surface))
+		var normal: PackedVector3Array=arrays[Mesh.ARRAY_NORMAL]
+		for index: int in row.referenced:
+			vertices+=1;var total:=0.
+			valid=valid and row.vertices[index].is_finite() and normal[index].is_finite()
+			if normal[index].length_squared()>.5:normals+=1
+			for slot: int in range(4):
+				var weight: float=row.weights[index*4+slot];var bind: int=row.bones[index*4+slot]
+				total+=weight
+				valid=valid and weight>=0. and bind>=0 and bind<row.bind_bones.size() and int(row.bind_bones[bind])>=0 and int(row.bind_bones[bind])<skel.get_bone_count()
+			maximum_weight_error=maxf(maximum_weight_error,absf(total-1.))
+	_check(label_+".referenced_geometry_normals_and_normalized_weights",valid and vertices>10000 and normals==vertices and maximum_weight_error<.0001,{"vertices":vertices,"nonzero_normals":normals,"maximum_weight_sum_error":maximum_weight_error})
+	_check(label_+".runtime_mesh_keeps_original_fingers_and_underarm_topology",no_lods,{"automatic_mesh_lods_empty":no_lods,"active_surfaces":surface._surfaces.size()})
+
+func _body_metrics(surface: Node3D) -> Dictionary:
+	# Sum all torso influences. A single-largest Spine2 weight can still be
+	# only .4 against .6 combined arm weights and wrongly include a deltoid.
+	# Restrict the anatomical section as well: clavicles/hips are not waist.
+	var waist:=AABB();var chest:=AABB();var waist_count:=0;var chest_count:=0;var maximum_radius:=0.;var full_surface_radius:=0.
+	for row: Dictionary in surface._surfaces:
+		var matrices: Array[Transform3D]=surface._skin_matrices(row.mesh,row.bind_bones,row.skeleton)
+		var torso_bindings: Dictionary={}
+		for binding: int in range(row.bind_bones.size()):
+			if String(row.skeleton.get_bone_name(row.bind_bones[binding])) in ["Bip01 Pelvis","Bip01 Spine","Bip01 Spine1","Bip01 Spine2"]:torso_bindings[binding]=true
+		for index: int in row.referenced:
+			var point:=Vector3.ZERO;var torso_influence:=0.
+			for slot: int in range(4):
+				var weight: float=row.weights[index*4+slot];var binding: int=row.bones[index*4+slot]
+				if weight>0.:point+=(matrices[binding]*row.vertices[index])*weight
+				if torso_bindings.has(binding):torso_influence+=weight
+			full_surface_radius=maxf(full_surface_radius,Vector2(point.x,point.z).length())
+			if torso_influence<.85:continue
+			maximum_radius=maxf(maximum_radius,Vector2(point.x,point.z).length())
+			if point.y>=1.03 and point.y<=1.12:
+				waist=AABB(point,Vector3.ZERO) if waist_count==0 else waist.expand(point);waist_count+=1
+			if point.y>=1.24 and point.y<=1.34:
+				chest=AABB(point,Vector3.ZERO) if chest_count==0 else chest.expand(point);chest_count+=1
+	return {"waist_bounds":waist,"chest_bounds":chest,"waist_width_m":waist.size.x,"waist_depth_m":waist.size.z,"chest_width_m":chest.size.x,"chest_depth_m":chest.size.z,"waist_vertices":waist_count,"chest_vertices":chest_count,"torso_weight_sum_threshold":.85,"waist_height_band_m":[1.03,1.12],"chest_height_band_m":[1.24,1.34],"maximum_torso_horizontal_radius_m":maximum_radius,"maximum_full_surface_horizontal_radius_m":full_surface_radius,"controller_radius_m":.30,"torso_radial_overhang_m":maxf(0.,maximum_radius-.30),"full_surface_radial_overhang_m":maxf(0.,full_surface_radius-.30),"scope":"Actual neutral CPU-skinned vertices; section requires summed pelvis/spine influence >=.85 to exclude arm junctions. Section measurements and full-surface radial envelope are separate; neither establishes realistic anatomy or a gameplay collision-policy acceptance."}
+
+func _run() -> void:
+	for path: String in ["res://scripts/player/exploration_avatar.gd","res://scripts/player/textured_human_rig.gd","res://scripts/player/textured_human_surface.gd","res://scripts/player/human_combat_poses.gd","res://../tools/authored_character/build_seoul_resident.py","res://assets/original/seoul_resident/AUTHORED_MANIFEST.json","res://../tests/game/check_authored_resident.gd","res://../tests/game/check_textured_human_rig.gd"]:source_hashes[path]=FileAccess.get_sha256(path)
+	var dimensions: Dictionary={};var variants:=0
+	for id: String in ["SeoulResident_M01","SeoulResident_F01"]:
+		var player:=CharacterBody3D.new();player.set_meta("human_model_id",id)
+		var collision:=CollisionShape3D.new();collision.name="CollisionShape";var capsule:=CapsuleShape3D.new();capsule.radius=.30;capsule.height=1.70;collision.shape=capsule;player.add_child(collision)
+		var capsule_id:=capsule.get_instance_id()
+		var visual:=Node3D.new();visual.name="Visual";player.add_child(visual)
+		var original:=MeshInstance3D.new();original.name="Body";original.mesh=CapsuleMesh.new();visual.add_child(original);root.add_child(player)
+		var avatar: Node3D=load("res://scripts/player/exploration_avatar.gd").new();visual.add_child(avatar)
+		_check(id+".production_avatar_setup",avatar.setup(player));avatar.set_physics_process(false)
+		var standard_rest: Array=[]
+		for profile: String in ["standard","soft","athletic"]:
+			var title:=id+"_"+profile
+			var changed: bool=avatar.set_authored_model(id,profile)
+			_check(title+".same_player_profile_replacement",changed and avatar.player==player and collision.shape.get_instance_id()==capsule_id and is_equal_approx(capsule.radius,.30) and is_equal_approx(capsule.height,1.70),{"accepted":changed,"capsule_id_unchanged":collision.shape.get_instance_id()==capsule_id,"actual_radius_m":capsule.radius,"actual_height_m":capsule.height})
+			if not changed:continue
+			var surface: Node3D=avatar._textured_surface
+			if not is_instance_valid(surface) or not surface.loaded:_check(title+".own_surface_loaded",false);continue
+			var snapshot: Dictionary=surface.snapshot(true)
+			_check(title+".truthful_project_authored_profile_identity",snapshot.model_id==id and snapshot.body_profile==profile and String(player.get_meta("human_body_profile",""))==profile and snapshot.vendor_geometry_loaded==false and snapshot.supplier.begins_with("Sim2Seoul"),snapshot)
+			if profile=="standard":standard_rest=surface.rig._rest_global.duplicate()
+			var maximum_profile_rest_error:=0.
+			for index: int in range(surface.rig._rest_global.size()):
+				var actual: Transform3D=surface.rig._rest_global[index];var expected: Transform3D=standard_rest[index]
+				maximum_profile_rest_error=maxf(maximum_profile_rest_error,actual.origin.distance_to(expected.origin));maximum_profile_rest_error=maxf(maximum_profile_rest_error,actual.basis.x.distance_to(expected.basis.x));maximum_profile_rest_error=maxf(maximum_profile_rest_error,actual.basis.y.distance_to(expected.basis.y));maximum_profile_rest_error=maxf(maximum_profile_rest_error,actual.basis.z.distance_to(expected.basis.z))
+			_check(title+".profile_keeps_standard_rest_anatomy",maximum_profile_rest_error<.000001,{"maximum_rest_transform_error":maximum_profile_rest_error})
+			for clothing: String in ["street","swim"]:
+				var prefix: String="seoul_resident_f01" if id=="SeoulResident_F01" else "seoul_resident_m01"
+				if profile!="standard":prefix+="_"+profile
+				var path: String="res://assets/original/seoul_resident/"+prefix+"_"+clothing+".glb";source_hashes[path]=FileAccess.get_sha256(path)
+				surface.set_swimwear(clothing=="swim");avatar._rest_pose()
+				var helper: Node3D=surface.active_native_rig()
+				var skeleton: Skeleton3D=surface._swim_skeleton if clothing=="swim" else surface.skeleton
+				var model: Node3D=surface._swim_root if clothing=="swim" else surface.imported_root
+				if not is_instance_valid(helper) or not is_instance_valid(skeleton):_check(title+"_"+clothing+".active_profile_body_loaded",false);continue
+				variants+=1;expected_bones=skeleton.get_bone_count();var label_: String=title+"_"+clothing
+				var active: Dictionary=surface.snapshot()
+				_check(label_+".actual_profile_GLBS_match_requested_asset",active.active_glb_path==path and active.active_glb_sha256==source_hashes[path] and active.body_profile==profile,{"snapshot":active,"expected_asset":path,"expected_sha256":source_hashes[path]})
+				var fingers:=true
+				for side: String in ["Left","Right"]:
+					for digit: int in range(5):
+						for segment: String in ["","1","2"]:fingers=fingers and helper._find(side+"Finger"+str(digit)+segment)>=0
+				_check(label_+".own_five_digit_three_joint_hands",fingers and expected_bones==52,{"bone_count":expected_bones})
+				_mesh_integrity(surface,skeleton,label_)
+				_sample(label_+"_neutral",avatar,helper,skeleton,model)
+				var neutral: AABB=surface.refresh_bounds();var metrics:=_body_metrics(surface);dimensions[label_]=metrics
+				_check(label_+".actual_visible_1_70m_and_one_body",absf(neutral.size.y-1.70)<.025 and absf(neutral.position.y)<.025 and surface.snapshot().visible_mesh_count==1,{"actual_skin_bounds":neutral,"body_metrics":metrics,"snapshot":surface.snapshot()})
+				_check(label_+".actual_torso_sections_have_geometry",metrics.waist_vertices>100 and metrics.chest_vertices>100 and metrics.waist_width_m>.15 and metrics.chest_width_m>.20,metrics)
+				if profile!="standard":
+					var baseline: Dictionary=dimensions[id+"_standard_"+clothing]
+					var actual_ratio: float=metrics.waist_width_m/baseline.waist_width_m if profile=="soft" else metrics.chest_width_m/baseline.chest_width_m
+					_check(label_+".actual_body_silhouette_differs_from_standard",actual_ratio>=(1.12 if profile=="soft" else 1.08),{"measured_section":"waist" if profile=="soft" else "chest","actual_width_ratio":actual_ratio,"profile_metrics":metrics,"standard_metrics":baseline,"scope":"Mesh width difference; does not establish aesthetic realism."})
+				if clothing=="swim":
+					var max_rest_error:=0.
+					for index: int in range(expected_bones):max_rest_error=maxf(max_rest_error,helper._rest_global[index].origin.distance_to(surface.rig._rest_global[index].origin))
+					_check(label_+".same_own_head_body_anatomy_across_clothes",max_rest_error<.000001 and surface._swim_head_cut.is_empty(),{"maximum_rest_joint_error_m":max_rest_error})
+				for phase: float in [0.,.25,.5,.75]:
+					avatar._rest_pose();var feet:={}
+					for side: String in ["Left","Right"]:feet[side]=avatar._gait_foot(-1. if side=="Left" else 1.,phase*TAU+(PI if side=="Right" else 0.),.32,.14)
+					avatar._supported_hips(feet)
+					for side: String in ["Left","Right"]:avatar._leg_pose(side,feet[side])
+					_sample(label_+"_gait_"+str(phase),avatar,helper,skeleton,model)
+				for activity: String in ["eat","weights","cycle","rowing","study","swim"]:
+					for elapsed: float in [.3,.9,1.8]:avatar.set_activity(activity,elapsed);_sample(label_+"_"+activity+"_"+str(elapsed),avatar,helper,skeleton,model)
+				avatar.set_activity("",0.)
+				for action: String in ["jab_left","cross_right","hook_left","shove"]:
+					for phase: float in [0.,.13,avatar.sandbox_contact_phase(action),.62,1.]:
+						avatar._rest_pose();avatar._sandbox_action=action;avatar._sandbox_duration_s=avatar.sandbox_action_duration(action);avatar._sandbox_remaining_s=avatar._sandbox_duration_s*(1.-phase);avatar._sandbox_pose(0.)
+						_sample(label_+"_"+action+"_phase_"+str(phase),avatar,helper,skeleton,model)
+				avatar.cancel_sandbox_action();avatar._rest_pose()
+			surface.set_swimwear(false)
+			_check(title+".street_profile_restored_without_new_physics_shapes",not surface.snapshot().swimwear_active and surface.body_profile==profile and collision.shape.get_instance_id()==capsule_id and avatar.find_children("*","CollisionObject3D",true,false).is_empty())
+		var before: Node3D=avatar._textured_surface
+		_check(id+".invalid_profile_rejected_without_replacing_current_body",not avatar.set_authored_model(id,"unsupported") and avatar._textured_surface==before and collision.shape.get_instance_id()==capsule_id)
+		_check(id+".all_profiles_can_return_to_standard",avatar.set_authored_model(id,"standard") and avatar._textured_surface.body_profile=="standard" and collision.shape.get_instance_id()==capsule_id)
+		player.free();await process_frame
+	_check("all_twelve_gender_profile_clothing_variants_exercised",variants==12,{"actual_variants":variants})
+	var same:=true
+	for path: String in source_hashes:same=same and FileAccess.get_sha256(path)==source_hashes[path]
+	_check("production_and_fixture_sources_unchanged",same)
+	var failed:=checks.filter(func(row: Dictionary)->bool:return not row.passed).size()
+	var file:=FileAccess.open(report_path,FileAccess.WRITE)
+	file.store_string(JSON.stringify(_json({"task":"EXP34_AUTHORED_RESIDENT_BODY_PROFILE_CONTRACT","result":"PASS" if failed==0 else "FAIL","checks":checks,"cases":cases,"body_profile_dimensions":dimensions,"summary":{"checks":checks.size(),"failed":failed,"variants":variants},"source_sha256":source_hashes,"display":DisplayServer.get_name(),"engine":Engine.get_version_info().string,"scope":"Production original resident M/F x standard/soft/athletic x street/swim GLBs. Actual indexed geometry/normals/weights, native contact anatomy, all combat windup/contact/recovery/neutral, activities and triangle-deformation integrity. Same .30m capsule retained; torso radial overhang is measured for a separate gameplay collision-policy decision. Does not establish natural appearance, OS control, city support or performance; native visual review is separate."}),"  ")+"\n");file.close();print("AUTHORED_RESIDENT_RESULT ",checks.size()-failed,"/",checks.size());quit(0 if failed==0 else 1)

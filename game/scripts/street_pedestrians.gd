@@ -338,6 +338,7 @@ func _block(group: Dictionary,direction: int,distance: float) -> String:
 
 func _step_member(row: Dictionary,target: Vector3,speed: float,delta: float,direction: Vector3) -> void:
 	var body: CharacterBody3D=row.body;var before:=body.global_position
+	if preload("res://scripts/actor_hit_reaction.gd").owns(body):return
 	row["physical_step_blocked"]=false
 	var support:=_ground(target)
 	if support.is_empty():row.physical_step_blocked=true;body.velocity=Vector3.ZERO;return
