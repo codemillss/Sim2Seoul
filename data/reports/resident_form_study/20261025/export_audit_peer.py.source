@@ -1,0 +1,243 @@
+"""Read-only stdlib audit of the EXP35 v04 GLB. Writes only its peer JSON."""
+from pathlib import Path
+import bisect
+import datetime
+import hashlib
+import json
+import math
+import struct
+
+ROOT = Path(__file__).resolve().parents[4]
+OUT = Path(__file__).with_name('export_audit_peer.json')
+GLB = ROOT/'game/assets/original/resident_study/resident_form_m01.glb'
+BLEND = ROOT/'art/characters/resident_form_m01.blend'
+CANDIDATE = Path(__file__).parent/'candidates/v04'
+CANONICAL_MANIFEST = ROOT/'game/assets/original/resident_study/FORM_STUDY_MANIFEST.json'
+SOURCES = sorted((ROOT/'tools/sculpted_character').glob('*.py'))
+EXPECTED_POSES = {'a_pose': [0., 0., 0.], 'arm_raise': [1., 0., 0.],
+                  'deep_squat': [0., 1., 1.], 'single_support': [0., .2, .2]}
+EXPECTED_MORPHS = ['StudyShoulderSupport', 'StudyHipCompression', 'StudyKneeCompression']
+EXPECTED_BONES = ['root', 'pelvis', 'spine', 'chest', 'neck', 'head'] + [
+    part+'.'+side for side in ('L', 'R') for part in
+    ('clavicle', 'upper_arm', 'forearm', 'hand', 'thigh', 'shin', 'foot', 'toe')]
+checks = []
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def check(name, condition, evidence):
+    checks.append({'name': name, 'passed': bool(condition), 'evidence': evidence})
+
+
+def relative(path):
+    return str(path.relative_to(ROOT))
+
+
+def binding(paths):
+    return {relative(p): {'bytes': p.stat().st_size, 'sha256': digest(p)} for p in paths}
+
+
+bound_paths = [GLB, BLEND, CANONICAL_MANIFEST, CANDIDATE/'resident_form_m01.glb', CANDIDATE/'resident_form_m01.blend',
+               CANDIDATE/'FORM_STUDY_MANIFEST.json', *SOURCES, Path(__file__).resolve()]
+before = binding(bound_paths)
+payload = GLB.read_bytes()
+magic, version, declared_length = struct.unpack_from('<4sII', payload)
+offset, chunks = 12, []
+while offset < len(payload):
+    size, kind = struct.unpack_from('<II', payload, offset)
+    offset += 8
+    chunk = payload[offset:offset+size]
+    if len(chunk) != size:
+        raise ValueError('Truncated GLB chunk')
+    chunks.append((kind, chunk));offset += size
+check('glb2_header_chunks_and_length', magic == b'glTF' and version == 2 and
+      declared_length == len(payload) == offset and [k for k, _ in chunks] == [0x4E4F534A, 0x004E4942],
+      {'magic': magic.decode(), 'version': version, 'declared_bytes': declared_length,
+       'actual_bytes': len(payload), 'chunk_types': [k for k, _ in chunks]})
+gltf = json.loads(chunks[0][1].decode('utf-8'))
+binary = chunks[1][1]
+buffers, views, accessors = gltf.get('buffers', []), gltf.get('bufferViews', []), gltf.get('accessors', [])
+check('one_embedded_buffer_without_external_uri', len(buffers) == 1 and not buffers[0].get('uri') and
+      buffers[0]['byteLength'] <= len(binary) <= buffers[0]['byteLength']+3,
+      {'buffers': buffers, 'padded_bin_bytes': len(binary)})
+check('every_buffer_view_within_declared_buffer', all(v.get('buffer', 0) == 0 and
+      0 <= v.get('byteOffset', 0) <= v.get('byteOffset', 0)+v['byteLength'] <= buffers[0]['byteLength'] for v in views),
+      {'buffer_view_count': len(views)})
+COMPONENTS = {5120: ('b', 1), 5121: ('B', 1), 5122: ('h', 2), 5123: ('H', 2), 5125: ('I', 4), 5126: ('f', 4)}
+ARITY = {'SCALAR': 1, 'VEC2': 2, 'VEC3': 3, 'VEC4': 4, 'MAT2': 4, 'MAT3': 9, 'MAT4': 16}
+decoded = {}
+
+
+def layout(kind, size):
+    # glTF matrices pad each column to four bytes, including 8/16-bit MAT2/3.
+    if kind.startswith('MAT'):
+        n = int(kind[-1]);column_stride = ((n*size+3)//4)*4
+        return [c*column_stride+r*size for c in range(n) for r in range(n)], n*column_stride
+    return [i*size for i in range(ARITY[kind])], ARITY[kind]*size
+
+
+def raw_rows(view_id, byte_offset, count, component, kind):
+    view = views[view_id];fmt, size = COMPONENTS[component]
+    elements, packed_size = layout(kind, size)
+    stride = view.get('byteStride', packed_size)
+    if stride < packed_size:
+        raise ValueError('Accessor stride smaller than element')
+    final = byte_offset+(count-1)*stride+packed_size if count else byte_offset
+    if byte_offset < 0 or final > view['byteLength']:
+        raise ValueError('Accessor exceeds its buffer view')
+    start = view.get('byteOffset', 0)+byte_offset
+    return [tuple(struct.unpack_from('<'+fmt, binary, start+i*stride+e)[0] for e in elements) for i in range(count)]
+
+
+def read(index):
+    if index in decoded:
+        return decoded[index]
+    a = accessors[index]
+    rows = raw_rows(a['bufferView'], a.get('byteOffset', 0), a['count'], a['componentType'], a['type']) if 'bufferView' in a else [tuple(0 for _ in range(ARITY[a['type']])) for _ in range(a['count'])]
+    if 'sparse' in a:
+        sparse = a['sparse'];ix, values = sparse['indices'], sparse['values']
+        indices = raw_rows(ix['bufferView'], ix.get('byteOffset', 0), sparse['count'], ix['componentType'], 'SCALAR')
+        replacements = raw_rows(values['bufferView'], values.get('byteOffset', 0), sparse['count'], a['componentType'], a['type'])
+        last = -1
+        for (i,), value in zip(indices, replacements):
+            if not last < i < len(rows):
+                raise ValueError('Invalid or unordered sparse index')
+            rows[i] = value;last = i
+    if a.get('normalized') and a['componentType'] != 5126:
+        component = a['componentType']
+        scale = {5120: 127., 5121: 255., 5122: 32767., 5123: 65535., 5125: 4294967295.}[component]
+        rows = [tuple(max(-1., v/scale) if component in (5120, 5122) else v/scale for v in row) for row in rows]
+    decoded[index] = rows
+    return rows
+
+
+for index in range(len(accessors)):
+    read(index)
+check('all_accessor_components_finite_and_in_bounds', all(math.isfinite(value) for rows in decoded.values() for row in rows for value in row),
+      {'accessor_count': len(accessors), 'decoded_components': sum(len(r) for rows in decoded.values() for r in rows),
+       'sparse_accessor_count': sum('sparse' in a for a in accessors)})
+nodes, skins, meshes = gltf.get('nodes', []), gltf.get('skins', []), gltf.get('meshes', [])
+joint_nodes = skins[0]['joints'] if len(skins) == 1 else []
+bone_names = [nodes[i].get('name') for i in joint_nodes]
+check('one_skin_22_expected_named_joints', len(skins) == 1 and len(joint_nodes) == 22 and len(set(joint_nodes)) == 22 and set(bone_names) == set(EXPECTED_BONES),
+      {'skin_count': len(skins), 'joint_node_indices': joint_nodes, 'bone_names_in_skin_order': bone_names})
+inverse_bind = read(skins[0]['inverseBindMatrices'])
+check('inverse_bind_matrices_match_22_joints', len(inverse_bind) == len(joint_nodes) and all(len(row) == 16 for row in inverse_bind),
+      {'matrix_count': len(inverse_bind), 'components_each': len(inverse_bind[0])})
+mesh_nodes = [i for i, n in enumerate(nodes) if 'mesh' in n]
+check('one_actual_mesh_node_uses_expected_skin', len(meshes) == 1 and len(mesh_nodes) == 1 and nodes[mesh_nodes[0]].get('skin') == 0,
+      {'mesh_count': len(meshes), 'mesh_node_indices': mesh_nodes, 'mesh_node_skin': [nodes[i].get('skin') for i in mesh_nodes]})
+primitive_reports = []
+for mi, mesh in enumerate(meshes):
+    names = mesh.get('extras', {}).get('targetNames', [])
+    check('three_named_morph_targets_mesh_'+str(mi), names == EXPECTED_MORPHS and len(mesh.get('weights', [])) in (0, 3),
+          {'target_names': names, 'default_weights': mesh.get('weights', 'implicit zeros')})
+    for pi, primitive in enumerate(mesh['primitives']):
+        tag = str(mi)+'_'+str(pi);attributes = primitive['attributes']
+        positions, normals = read(attributes['POSITION']), read(attributes['NORMAL'])
+        joints, weights = read(attributes['JOINTS_0']), read(attributes['WEIGHTS_0'])
+        indices = [row[0] for row in read(primitive['indices'])]
+        count = len(positions)
+        check('basis_attributes_matching_vec3_count_'+tag, count == len(normals) == len(joints) == len(weights) and count > 0 and
+              all(len(p) == len(n) == 3 for p, n in zip(positions, normals)), {'vertices': count, 'normal_count': len(normals), 'joints_count': len(joints), 'weights_count': len(weights)})
+        normal_error = max(abs(math.sqrt(sum(v*v for v in n))-1.) for n in normals)
+        check('basis_normals_finite_nonzero_and_unit_'+tag, normal_error < .001, {'maximum_unit_length_error': normal_error})
+        check('triangle_indices_integral_and_in_vertex_range_'+tag, primitive.get('mode', 4) == 4 and len(indices) % 3 == 0 and
+              all(isinstance(i, int) and 0 <= i < count for i in indices), {'index_count': len(indices), 'triangles': len(indices)//3, 'minimum_index': min(indices), 'maximum_index': max(indices)})
+        sum_error = max(abs(sum(row)-1.) for row in weights)
+        check('skin_four_slots_no_extra_weight_sets_'+tag, all(len(j) == len(w) == 4 for j, w in zip(joints, weights)) and
+              not any(k.startswith(('JOINTS_', 'WEIGHTS_')) and k not in ('JOINTS_0', 'WEIGHTS_0') for k in attributes), {'attribute_names': list(attributes), 'slots_per_vertex': 4})
+        check('skin_weights_nonnegative_normalized_'+tag, sum_error < .0002 and all(0. <= value <= 1. for row in weights for value in row),
+              {'maximum_weight_sum_error': sum_error, 'minimum_weight': min(v for row in weights for v in row), 'maximum_weight': max(v for row in weights for v in row),
+               'maximum_positive_influences': max(sum(v > 1e-7 for v in row) for row in weights)})
+        check('skin_every_joint_slot_references_actual_22_joint_palette_'+tag, all(isinstance(v, int) and 0 <= v < len(joint_nodes) for row in joints for v in row),
+              {'minimum_joint_index': min(v for row in joints for v in row), 'maximum_joint_index': max(v for row in joints for v in row)})
+        targets = primitive.get('targets', []);morph_rows = []
+        for ti, target in enumerate(targets):
+            data = {semantic: read(ai) for semantic, ai in target.items()}
+            valid = 'POSITION' in data and all(len(rows) == count and all(len(row) == 3 for row in rows) for rows in data.values())
+            maximum = max(math.sqrt(sum(v*v for v in row)) for row in data['POSITION'])
+            check('morph_same_basis_topology_and_nonzero_delta_'+tag+'_'+str(ti), valid and maximum > 0.,
+                  {'name': names[ti], 'semantics': list(data), 'counts': {k: len(v) for k, v in data.items()}, 'maximum_position_delta_m': maximum})
+            morph_rows.append({'name': names[ti], 'maximum_position_delta_m': maximum, 'vertex_count': len(data['POSITION'])})
+        check('exactly_three_primitive_morphs_'+tag, len(targets) == 3, {'target_count': len(targets)})
+        primitive_reports.append({'mesh_index': mi, 'primitive_index': pi, 'vertices': count, 'triangles': len(indices)//3,
+                                  'local_basis_bounds': {'min': [min(v[d] for v in positions) for d in range(3)], 'max': [max(v[d] for v in positions) for d in range(3)]}, 'morphs': morph_rows})
+
+
+def sample(values, times, width, interpolation, when):
+    flat = [v for row in values for v in row]
+    multiplier = 3 if interpolation == 'CUBICSPLINE' else 1
+    if len(flat) != len(times)*width*multiplier:
+        raise ValueError('Animation sample dimensions disagree')
+    def value(i):
+        start = (i*multiplier+(1 if multiplier == 3 else 0))*width
+        return flat[start:start+width]
+    left = max(0, min(len(times)-1, bisect.bisect_right(times, when)-1))
+    if left == len(times)-1 or interpolation == 'STEP' or when <= times[0]:
+        return value(left)
+    right = left+1;t = (when-times[left])/(times[right]-times[left])
+    if interpolation != 'LINEAR':
+        raise ValueError('Audit expected LINEAR/STEP, not cubic interpolation at selected hold')
+    return [a+(b-a)*t for a, b in zip(value(left), value(right))]
+
+
+animations = gltf.get('animations', [])
+check('exactly_four_named_exported_nla_clips', len(animations) == 4 and {a.get('name') for a in animations} == set(EXPECTED_POSES), {'clip_names': [a.get('name') for a in animations]})
+animation_reports = []
+for animation in animations:
+    times_all, target_paths, channel_valid, shape_values = [], {}, True, []
+    for channel in animation['channels']:
+        sampler = animation['samplers'][channel['sampler']]
+        times = [r[0] for r in read(sampler['input'])];values = read(sampler['output'])
+        path = channel['target']['path'];node = channel['target']['node']
+        width = {'translation': 3, 'rotation': 4, 'scale': 3, 'weights': 3}[path]
+        multiplier = 3 if sampler.get('interpolation') == 'CUBICSPLINE' else 1
+        channel_valid &= 0 <= node < len(nodes) and bool(times) and all(b > a for a, b in zip(times, times[1:])) and len(values)*len(values[0]) == len(times)*width*multiplier
+        target_paths[path] = target_paths.get(path, 0)+1;times_all.extend(times)
+        if path == 'weights':
+            shape_values.append(sample(values, times, width, sampler.get('interpolation', 'LINEAR'), 1.0))
+    expected = EXPECTED_POSES[animation['name']]
+    check('valid_animation_channels_and_actual_1s_corrective_hold_'+animation['name'], channel_valid and max(times_all) >= 1.0 and
+          len(shape_values) == 1 and all(abs(a-b) < 1e-5 for a, b in zip(shape_values[0], expected)) and
+          target_paths == {'translation': 22, 'rotation': 22, 'scale': 22, 'weights': 1},
+          {'channel_counts_by_path': target_paths, 'first_time_s': min(times_all), 'last_time_s': max(times_all), 'sample_time_s': 1., 'observed_morph_values': shape_values, 'expected_morph_values': expected})
+    animation_reports.append({'name': animation['name'], 'channel_counts_by_path': target_paths, 'duration_s': max(times_all), 'morph_values_at_1s': shape_values[0]})
+
+check('canonical_glb_exactly_matches_v04_candidate', digest(GLB) == digest(CANDIDATE/'resident_form_m01.glb'), {'canonical_sha256': digest(GLB), 'v04_sha256': digest(CANDIDATE/'resident_form_m01.glb')})
+check('editable_blend_exactly_matches_v04_candidate', digest(BLEND) == digest(CANDIDATE/'resident_form_m01.blend'), {'canonical_sha256': digest(BLEND), 'v04_sha256': digest(CANDIDATE/'resident_form_m01.blend')})
+manifest = json.loads((CANDIDATE/'FORM_STUDY_MANIFEST.json').read_text())
+canonical_manifest_matches = digest(CANONICAL_MANIFEST) == digest(CANDIDATE/'FORM_STUDY_MANIFEST.json')
+builder_lines = (ROOT/'tools/sculpted_character/build_resident_study.py').read_text().splitlines()
+level_lines = [{'line': i+1, 'text': line.strip()} for i, line in enumerate(builder_lines) if "if modifier.type=='SUBSURF':modifier.levels=2;modifier.render_levels=2" in line]
+assign_line = next(i+1 for i, line in enumerate(builder_lines) if 'rig,rig_info=assign_rig(cage,info)' in line)
+level_two_contract = manifest.get('export_subdivision_level') == 2 and len(level_lines) == 1 and level_lines[0]['line'] < assign_line and sum(p['vertices'] for p in primitive_reports) == manifest['export_surface_vertices'] == 53654 and canonical_manifest_matches
+source_matches = {}
+for path in SOURCES:
+    snapshot = CANDIDATE/'source'/path.name
+    source_matches[relative(path)] = {'current': digest(path), 'candidate_snapshot': digest(snapshot), 'match': digest(path) == digest(snapshot)}
+check('all_four_authored_builder_sources_match_v04_snapshot', len(source_matches) == 4 and all(r['match'] for r in source_matches.values()) and level_two_contract, {'sources': source_matches, 'same_level_2_support_render_export_contract': level_two_contract, 'manifest_export_subdivision_level': manifest.get('export_subdivision_level'), 'canonical_manifest_matches_candidate': canonical_manifest_matches, 'actual_source_override': level_lines, 'rig_assignment_source_line': assign_line})
+after = binding(bound_paths)
+check('read_only_audit_kept_all_bound_asset_and_source_bytes_unchanged', before == after, {'bound_file_count': len(bound_paths)})
+passed = sum(c['passed'] for c in checks)
+report = {'task': 'EXP35_INDEPENDENT_STDLIB_GLB_EXPORT_AUDIT', 'created_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          'status': 'PASS' if passed == len(checks) else 'FAIL', 'passed': passed, 'total': len(checks),
+          'method': 'Python standard library reads GLB JSON and BIN, decoding every accessor including normalized components, byte stride and sparse replacements. No Blender/Godot engine was launched; no production or asset bytes changed.',
+          'bound_files_before': before, 'bound_files_after': after, 'checks': checks,
+          'primitives': primitive_reports, 'animations': animation_reports,
+          'subdivision_contract': {'selected_candidate': 'v04', 'level': manifest.get('export_subdivision_level'), 'same_level_2_support_render_export': level_two_contract, 'support_evaluation_before_rig_assignment': level_lines, 'rig_assignment_source_line': assign_line, 'source_and_manifest_evidence_scope': 'The builder sets viewport and render levels to 2 before assign_rig evaluates sole support and before export baking. The GLB basis and all three morphs contain the declared 53,654 vertices. The binary stores the baked result, not the Blender modifier level itself.'},
+          'preserved_v03_audit': {'report_path': relative(Path(__file__).with_name('export_audit_peer_v03.json')), 'report_sha256': digest(Path(__file__).with_name('export_audit_peer_v03.json')), 'script_path': relative(Path(__file__).with_name('export_audit_peer_v03.py.source')), 'script_sha256': digest(Path(__file__).with_name('export_audit_peer_v03.py.source')), 'scope': 'Historical lower-level v03 export audit; not current v04 level-2 acceptance.'},
+          'source_authorship_scope': {'binary_establishes_no_reuse': False,
+              'manifest_claims': {'source_assets_read': manifest.get('source_assets_read'), 'old_resident_geometry_read': manifest.get('old_resident_geometry_read'), 'image_paint_used': manifest.get('image_paint_used')},
+              'basis': 'Source freeze equality and explicit authored builder source/manifest claims support the declared construction inputs. Binary topology/finite/skin checks alone do not prove authorship, anatomical accuracy or absence of reuse.',
+              'historical_asset_comparison_performed': False},
+          'full_art_target_met': False,
+          'limits': ['This is a neutral editable clay prototype; validation of file structure, finite data and pose export is not acceptance of human realism.',
+                     'Evaluated Blender heel/toe contact is separately recorded in the v04 manifest; this audit does not run gameplay or independently render the GLB.',
+                     'The separate Godot native integration/visual review belongs to the root run and is not claimed by this stdlib audit.']}
+OUT.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+print(json.dumps({'report': relative(OUT), 'status': report['status'], 'passed': passed, 'total': len(checks),
+                  'vertices': sum(p['vertices'] for p in primitive_reports), 'triangles': sum(p['triangles'] for p in primitive_reports)}, ensure_ascii=False))
+raise SystemExit(0 if passed == len(checks) else 1)

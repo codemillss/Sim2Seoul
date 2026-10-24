@@ -1,0 +1,447 @@
+{
+  "task": "EXP35_RESIDENT_FORM_STUDY_FINAL02_PEER_VISUAL_REVIEW",
+  "created_at_utc": "2026-10-24T16:37:09.646128+00:00",
+  "selected_cohort": "v04 subdivision_level2 export + original-rest-only previous comparator + paused-entry ownership fix / final02",
+  "reviewer": "combat_rework peer",
+  "engine_run_by_peer_for_this_review": false,
+  "source_or_game_mutated_by_this_review": false,
+  "counts": {
+    "headless_checks": 56,
+    "native_checks": 71,
+    "total_assertions": 127,
+    "native_original_pngs": 11,
+    "actually_opened_current_original_pngs": 11,
+    "new_original_pngs": 7,
+    "previous_original_rest_pngs": 4,
+    "native_pose_snapshots": 5
+  },
+  "disposition": {
+    "read_only_integrity_audit": "PASS",
+    "separate_clay_review_scene_functional_integrity": "PASS",
+    "clay_first_gate_scope": "REVIEWABLE_ORIGINAL_FORM_AND_DIAGNOSTIC_HOLDS_ONLY",
+    "new_form_visual_status": "PROTOTYPE_REQUIRES_FURTHER_SCULPT_REVIEW",
+    "previous_comparator": "ACTUAL_ORIGINAL_REST_ONLY_NO_FORCED_POSE",
+    "fully_realistic_character": false,
+    "anatomical_realism_acceptance": false,
+    "art_acceptance": false,
+    "user_art_acceptance": false,
+    "continuous_motion_acceptance": false,
+    "same_scene_functional_integrity": "PASS_INCLUDING_PAUSED_ENTRY",
+    "ordinary_os_acceptance": "ROOT_RECORD_REVIEWED_PASS_BOUNDED"
+  },
+  "selected_evidence": [
+    "data/reports/resident_form_study/20261025/study_headless_final02.json",
+    "data/reports/resident_form_study/20261025/study_native_final02.json"
+  ],
+  "audit_file": "data/reports/resident_form_study/20261025/peer_readonly_audit_final02.json",
+  "audit_sha256": "66bcc78c628a8e1760cffc8e939cafee56bcb465ff38fa083dbc9b6e2a19777a",
+  "run_bindings": [
+    {
+      "mode": "headless",
+      "report_sha256": "820d35147a06a64f399e0b79b9b5718fa5f2de45396d73ac51e81924d1aad884",
+      "wrapper_sha256": "6b2168e8707467039bd8a876aea61c9a71520f926e3028924fa2b231e4726b7b",
+      "actual_engine_returncode": 0,
+      "strict_returncode": 0,
+      "checks_all_true": true,
+      "wrapper_engine_errors": [],
+      "console_and_engine_log_errors": {
+        "data/reports/resident_form_study/20261025/study_headless_final02.console.log": [],
+        "data/reports/resident_form_study/20261025/study_headless_final02.log": []
+      },
+      "current_source_mismatches": [],
+      "internal_before_after_same": true,
+      "source_changes_during_run": [],
+      "verified_text_snapshot_files": 13,
+      "paused_entry_actual_check": {
+        "evidence": {
+          "entered_from_paused_menu": true,
+          "tree_paused_after_ready": false
+        },
+        "name": "default_is_new_original_in_separate_scene",
+        "passed": true
+      }
+    },
+    {
+      "mode": "native",
+      "report_sha256": "c8e1e4d3bed1b4a4e0e2d742ce1074927bf88c8afae862b284d0284f6850e165",
+      "wrapper_sha256": "b0b6a4236e24a7f4d1d1c9e2e3538c27c87e37b4f97a10c710fe64739cebcc99",
+      "actual_engine_returncode": 0,
+      "strict_returncode": 0,
+      "checks_all_true": true,
+      "wrapper_engine_errors": [],
+      "console_and_engine_log_errors": {
+        "data/reports/resident_form_study/20261025/study_native_final02.console.log": [],
+        "data/reports/resident_form_study/20261025/study_native_final02.log": []
+      },
+      "current_source_mismatches": [],
+      "internal_before_after_same": true,
+      "source_changes_during_run": [],
+      "verified_text_snapshot_files": 13,
+      "paused_entry_actual_check": {
+        "evidence": {
+          "entered_from_paused_menu": true,
+          "tree_paused_after_ready": false
+        },
+        "name": "default_is_new_original_in_separate_scene",
+        "passed": true
+      }
+    }
+  ],
+  "current_source_sha256": {
+    "art/characters/resident_form_m01.blend": "2f9e88d6a6a175d8c1dca8dd090f705478d96f7e01da82dbe3847918c6c616ce",
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763",
+    "game/assets/original/resident_study/resident_form_m01.glb": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160",
+    "game/assets/original/resident_study/resident_form_m01.glb.import": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20",
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb": "ed3c7e592d04e2ad9950a4b6c8013d85bda335e65cdaf8e4ba58cabdf86236f7",
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "game/scenes/study/resident_form_study.tscn": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9",
+    "game/scripts/explore_walk.gd": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd",
+    "game/scripts/study/resident_form_study.gd": "4287098ab32dce39f88667e8e667126b8102c08f071b998e05e51b8cf03942b3",
+    "tests/game/check_resident_form_study.gd": "974630a822b0264160f2f258a0ef4365990a6e91d55fe799755d850333ebbf88",
+    "tools/run_resident_form_study_acceptance.py": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911",
+    "tools/sculpted_character/build_body_cage.py": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3",
+    "tools/sculpted_character/build_head_extremities.py": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac",
+    "tools/sculpted_character/build_resident_study.py": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4",
+    "tools/sculpted_character/build_study_rig.py": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+  },
+  "all_11_captures_match_recorded_sha_dimensions_current_asset_palette_and_unobscured_frame": true,
+  "same_camera_light_base_view_pairs": [
+    {
+      "pose": "source_base_poses_are_different_and_preserved",
+      "view": "front",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "source_base_poses_are_different_and_preserved",
+      "view": "right",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "source_base_poses_are_different_and_preserved",
+      "view": "back",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "source_base_poses_are_different_and_preserved",
+      "view": "oblique",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    }
+  ],
+  "previous_source_rest_confirmation": {
+    "actual_bones": 52,
+    "maximum_absolute_local_transform_component_difference_from_imported_rest": 0.0,
+    "reported_strategy": "actual_imported_original_rest_no_pose_adapter",
+    "imported_animations": [],
+    "unsupported_api_and_disabled_control_checks": {
+      "previous.arm_raise.unsupported_pose_api_rejected": true,
+      "previous.arm_raise.rejected_request_preserves_actual_bones_morphs_and_base_selection": true,
+      "previous.deep_squat.unsupported_pose_api_rejected": true,
+      "previous.deep_squat.rejected_request_preserves_actual_bones_morphs_and_base_selection": true,
+      "previous.single_support.unsupported_pose_api_rejected": true,
+      "previous.single_support.rejected_request_preserves_actual_bones_morphs_and_base_selection": true,
+      "previous.all_native_bones_equal_actual_imported_source_rest": true,
+      "previous.special_pose_controls_disabled": true,
+      "previous.native_injected_mouse_on_disabled_pose_preserves_original_rest": true
+    }
+  },
+  "material_scope": {
+    "same_actual_gray_override_on_both": true,
+    "actual_roughness": 0.720000028610229,
+    "no_albedo_or_normal_texture": true,
+    "vertex_color_albedo": false,
+    "source_material_properties_unchanged_in_all_five_snapshots": true,
+    "scope": "Actual gray override is visible in the opened PNGs. Source material resource/byte preservation is established by report/current hash checks, not by image appearance alone."
+  },
+  "actual_opened_original_files": [
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_front.png",
+      "sha256": "de168a5cb91c6f4c89408055866be6123a775b8293c5e7f019674d7beaeaf343",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "front",
+      "observation": "전신과 모든 손끝·발끝이 상단 UI 아래에 들어온다. 무채색 연속 외피와 A자 팔 간격은 읽히지만 돌출된 눈·단순한 하관, 상완/대퇴의 균일한 원통형 윤곽이 아직 사람 원형으로 충분하지 않다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_right.png",
+      "sha256": "b0a4f84e5c2ee0c27af78be70a1111e8e90e612676fd798a89f2022793aa59cf",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "right",
+      "observation": "측면에서 전신이 잘리지 않고 목→몸통 및 손목·발목에 큰 분리 틈은 보이지 않는다. 발은 길고 매끈한 윤곽이며 종아리/발목/뒤꿈치 랜드마크 구분이 약하다. 1m 표식은 몸통 뒤에서 일부 가려진다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_back.png",
+      "sha256": "5c44a9a4223cddaa147c5a239c7bbd5629d0be9958f9e07cdd2d420d66b0b43f",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "back",
+      "observation": "후면 실루엣이 온전히 보인다. 고정 세계 조명 때문에 후면 표면이 어둡고, 견갑·척추주변·둔근 볼륨은 매우 단순하다. 피부나 근육의 사실성 수용 근거가 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_oblique.png",
+      "sha256": "c04b4a13bd5e4670a8e277466af381dc189b4222b4b7e620784211e413a6d577",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "oblique",
+      "observation": "45도에서 목·어깨·팔·골반의 연속 연결을 전신 배율로 관찰할 수 있다. 얼굴 눈/입 주변의 단순한 돌출과 작은 머리 대비 매끈한 몸통이 남으며 실사 미형으로 수용하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_arm_raise_front.png",
+      "sha256": "ff894abdbb8c8c3ead17e5878af46d1bb10ae14bc1595820f5d25feb93bf1f83",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "front",
+      "observation": "양손 끝까지 UI 아래에 들어오고 두 팔 올림은 명확하다. 어깨에서 상완으로 이어지는 면에 전신 배율의 큰 이탈은 못 봤다. 손은 edge-on이고 작아서 손바닥/손가락 해부나 손목 비틀림의 세부 수용은 하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_deep_squat_right.png",
+      "sha256": "a0a40378f6d8d45557a40c59dfc266cf0ed0b6203bdcf0a67fe8532045f6e404",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "right",
+      "observation": "양팔이 앞쪽에 있고 골반 하강·무릎 굴곡·바닥에 닿은 발이 구분된다. 큰 표면 찢김은 이 전신 측면에서 못 봤다. 무릎/대퇴 볼륨이 단순하며 단일 hold로 연속 앉기 동작을 검증한 것은 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_new_single_support_front.png",
+      "sha256": "f41ccc8e11c75c09a4aadd85804a3a1111aa374ebd7a3ff398688845d0f580bf",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "new",
+      "pose": "single_support",
+      "view": "front",
+      "observation": "한쪽 지지 발과 들린 발이 분명하고 골반/다리 자세 차이가 보인다. 이 전신 배율에서 큰 삼각형 표면 이탈은 관찰하지 못했다. 지지 균형의 자연스러움·근육 부착·연속 체중 이동 수용은 별도다. 미수용된 old 특수 pose의 파손을 새 원형 우월 근거로 쓰지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_front.png",
+      "sha256": "576fb55d6c7bd4d1191bbf46e1ce0af1abe61c88294e97e500f514b5fbbde0f2",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "front",
+      "observation": "기존 원본의 팔을 내린 기본자세가 표시되고 상단 상태가 원본 기본자세 비교임을 명시한다. 세 특수 pose 버튼은 회색 비활성으로 보인다. 실제 키와 수영복 형상이 유지되며 새 A-pose로 강제 맞추지 않았다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_right.png",
+      "sha256": "86d26525fbc963d08d9e1c4051a13c4aea15fe6a0723067ecd55122842c18933",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "right",
+      "observation": "원본 기본자세의 전신 측면이 온전히 보인다. 목·손목·발목에 이 배율의 큰 분리 틈은 못 봤다. 새 모델과 팔 각도/키/rig/topology가 다르므로 동일관절 변형 비교로 해석하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_back.png",
+      "sha256": "e47d38ce6c369916dabd52486214f055dd1099383bf22d76c1f84be8c25fbbc2",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "back",
+      "observation": "기존 원본의 팔을 내린 후면과 손발이 온전히 보인다. 수영복 형상이 남고 고정 세계 조명으로 후면은 어둡다. 실제 기본자세의 재질 override 화면이며 원본 재질 파일 불변은 SHA와 property 검사가 보완한다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_oblique.png",
+      "sha256": "70af2d6e9b71940de1ad43542e44a1ee803c383c7b07448fd9ae8d4288d974eb",
+      "actual_original_opened_in_this_final02_review": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "oblique",
+      "observation": "기존 원본 기본자세의 45도 화면이다. 몸통/수영복/손발이 보이며 특수 pose 강제 변형은 없다. 새 원형의 A-pose와 원본 휴식자세 차이를 숨기지 않고 형상 참고용으로만 비교한다."
+    }
+  ],
+  "current_art_limits": [
+    {
+      "region": "head_and_face",
+      "observation": "정면/45도에서 돌출된 눈, 단순한 입·하관과 작은 머리의 인상이 남는다. 무채색 원형 수준이며 실사 인체나 미형 완성으로 수용하지 않는다."
+    },
+    {
+      "region": "body_landmarks",
+      "observation": "상완·전완·대퇴가 전반적으로 매끈하고 균일한 원통처럼 보이고, 견갑·흉곽/골반 구분·둔근/종아리 랜드마크가 약하다. 형태 개선이 필요한 clay prototype이다."
+    },
+    {
+      "region": "hands_and_feet",
+      "observation": "전신 배율에서 목/손목/발목의 큰 분리 틈은 못 봤지만 근접 접합 품질을 증명하지는 않는다. 올린 손은 edge-on으로 작고, 발은 길고 매끈해 보이며 손가락·발가락/뒤꿈치 세부 수용은 하지 않는다."
+    },
+    {
+      "region": "lighting_and_frame",
+      "observation": "모든 전신/올린 손끝은 상단 UI 밖에서 보인다. 고정 세계 빛 때문에 후면이 어둡고 1m 표식은 측면에서 몸통 뒤에 일부 가려진다. 뒤쪽 표면의 세부 조형 판단은 제한된다."
+    }
+  ],
+  "historical_rejection": {
+    "file": "data/reports/resident_form_study/20261025/visual_review_peer_dev02_legacy_rejected.json",
+    "sha256": "1d2d33e9b3fa5fac276252cf3f3cdf2cd88764da585acfeda531baa34ad7a07a",
+    "reason": "dev02 previous single-support used a new rest-based adapter and showed a large triangular/angular leg fold. That unfair deformation comparator was removed; no claim of new-model superiority is based on the rejected image. The original dev02 PNGs/reports and byte-bound review remain preserved.",
+    "current_resolution": "All legacy aiming/IK/pose-adapter functions removed. Previous model displays actual imported rest only; all52 local bone transforms equal source rest with maximum component difference0, unsupported APIs and disabled button injection leave bones/morphs unchanged."
+  },
+  "scope": "Same standalone native gallery and unretouched viewport originals. Four source-base views per model plus three diagnostic holds of only the new original, actual NLA/morph palette and conservative full-body projected envelope checked. Base cameras/lens/world light/clay match; original heights, rest arm angles, skeletons, topology and swimwear shape intentionally differ. No continuous walk/run/transition, close-up anatomy, textured skin, production avatar replacement, ordinary OS interaction or user comfort is accepted by this peer review. Numeric success does not override observed art limits. Final02 screenshots were all opened anew in this review. Final01 OS-pause rejection and dev02 unfair legacy-deformation rejection remain preserved separately.",
+  "current_selection": true,
+  "cohort_status": "CURRENT_FINAL02_AUTOMATED_PAUSED_ENTRY_AND_PIXEL_REVIEW",
+  "paused_entry_review": {
+    "source_read": "study._ready explicitly releases the outgoing menu pause and makes the mouse visible; final02 fixture sets paused=true before adding the same actual study scene.",
+    "headless_and_native_recorded_entry": {
+      "entered_from_paused_menu": true,
+      "tree_paused_after_ready": false
+    },
+    "input_scope": "Native fixture control checks use injected viewport mouse events. Ordinary OS actions were performed by root and reviewed separately through the source/capture/log-bound normal_launch.json record; peer did not operate OS inputs.",
+    "scope": "Current automated paused-entry regression is covered, while final01 automated unpaused entry had missed the actual menu-state bug."
+  },
+  "historical_os_pause_rejection": {
+    "file": "data/reports/resident_form_study/20261025/visual_review_peer_final01_os_pause_rejected.json",
+    "sha256": "31b20a57d20288f8fd331fb477694162ede97827aa6d88e722af97fea42fbcdf",
+    "selected_as_current": false,
+    "reason": "Final01 gallery displayed after the world menu scene change but inherited SceneTree.paused=true, so actual OS buttons/Escape did not process. Root found the integration bug; the rejected source and11 raw screenshots remain historical.",
+    "current_resolution": "Fresh final02 source-bound56/56+71/71 starts with paused=true and records paused=false after actual scene ready. No final01 functional result is reused as current."
+  },
+  "ordinary_os_root_record_review": {
+    "record": "data/reports/resident_form_study/20261025/normal_launch.json",
+    "record_sha256": "e0d5a83d03c14780e01567df6bc1d9e3937877229de5fab98cf149dec1beb357",
+    "record_status": "PASS",
+    "record_operator": "root",
+    "peer_scope": "Read the root-authored actual OS action record and verified current source hashes,8 JPEG screenshot hashes/sizes/signatures,2 immutable log hashes/error scans and recorded preference equality. JPEG byte hashes equal the earlier misnamed .png bindings, confirming rename without re-encoding. Peer did not perform OS clicks or claim live process verification.",
+    "reviewed_at_utc": "2026-10-24T16:43:20.580524+00:00",
+    "source_binding_current_mismatches": [],
+    "recorded_pid": 18027,
+    "recorded_process_alive": true,
+    "recorded_game_ready": true,
+    "actual_os_actions_reported_by_root": [
+      "Observed ordinary world menu and clicked 인체 원형 비교 · 무채색.",
+      "Observed new rest front; clicked side and deep squat; observed pose and status changed.",
+      "Clicked front and arm raise; observed raised arms and status.",
+      "Selected previous model; attempted disabled special pose; original rest retained.",
+      "Clicked previous back and observed rear view.",
+      "Clicked return to street. Tool response timed out; next actual OS screenshot confirmed ordinary world returned.",
+      "Pressed Escape, observed menu, reentered comparison and selected new oblique rest; left gallery open."
+    ],
+    "screenshot_bindings": [
+      {
+        "file": "data/reports/resident_form_study/20261025/os/final_open_oblique.jpg",
+        "sha256": "d21ce95908df6f0d93d31e5e0fa27bab5767b9b09c844ed7a68f6220ed7d1f50",
+        "recorded_sha256": "d21ce95908df6f0d93d31e5e0fa27bab5767b9b09c844ed7a68f6220ed7d1f50",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/menu_entry.jpg",
+        "sha256": "b0e17c7d22c24913bd9572b997082e419c59ee49e7cf84aa6eea1cb5ff9f8095",
+        "recorded_sha256": "b0e17c7d22c24913bd9572b997082e419c59ee49e7cf84aa6eea1cb5ff9f8095",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/new_arm_raise_front.jpg",
+        "sha256": "3e082e89db00737a7d55866e1598f93f9ada3997eab102efa03c1670c9b41ab8",
+        "recorded_sha256": "3e082e89db00737a7d55866e1598f93f9ada3997eab102efa03c1670c9b41ab8",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/new_front.jpg",
+        "sha256": "a7af0c7bacc207908af0822b31c636c422540974d93447c304e382391167881d",
+        "recorded_sha256": "a7af0c7bacc207908af0822b31c636c422540974d93447c304e382391167881d",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/new_squat_side.jpg",
+        "sha256": "a425fd8aa716d3d1142ad82039a494a66b648d1206195bf43f9bb37d570e660a",
+        "recorded_sha256": "a425fd8aa716d3d1142ad82039a494a66b648d1206195bf43f9bb37d570e660a",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/previous_original_back.jpg",
+        "sha256": "91099598efec16b1c4b8feaaa5e8424c5d90d4add7d22655de55d6350f175125",
+        "recorded_sha256": "91099598efec16b1c4b8feaaa5e8424c5d90d4add7d22655de55d6350f175125",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/previous_original_front.jpg",
+        "sha256": "a98557f4f900835fd67bc200a0930a129357cc5685b20a2d5389f9a332c21293",
+        "recorded_sha256": "a98557f4f900835fd67bc200a0930a129357cc5685b20a2d5389f9a332c21293",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/os/returned_world.jpg",
+        "sha256": "56f64e282d129e21ce5c888b46a38c716f4c0522a10572ab25aa769d0197213b",
+        "recorded_sha256": "56f64e282d129e21ce5c888b46a38c716f4c0522a10572ab25aa769d0197213b",
+        "bytes_match": true,
+        "sha_matches": true,
+        "actual_signature": "JPEG",
+        "extension_matches_actual_signature": true,
+        "byte_identical_to_prior_misnamed_png_binding": true
+      }
+    ],
+    "log_bindings": [
+      {
+        "file": "data/reports/resident_form_study/20261025/normal_game.log",
+        "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d",
+        "recorded_sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d",
+        "bytes_match": true,
+        "sha_matches": true,
+        "error_lines": []
+      },
+      {
+        "file": "data/reports/resident_form_study/20261025/normal_game.console.log",
+        "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d",
+        "recorded_sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d",
+        "bytes_match": true,
+        "sha_matches": true,
+        "error_lines": []
+      }
+    ],
+    "recorded_preferences_before_after_equal": true,
+    "recorded_preference_keys": [
+      "sim2seoul_character.json",
+      "sim2seoul_exploration.json",
+      "sim2seoul_exploration.json.time.json",
+      "sim2seoul_quality.json"
+    ],
+    "bounded_acceptance": "Root record supports ordinary menu→gallery entry, new/source/view/pose controls, disabled previous special poses, return-to-street, reentry and left-open oblique scene. Actual root pixels/OS actions are separate from the11 native fixture pixels opened by peer.",
+    "art_acceptance": false,
+    "continuous_motion_acceptance": false,
+    "user_comfort_acceptance": false,
+    "image_format_note": "CUA returned original JPEG bytes. Current eight screenshots are named .jpg according to actual signature, without re-encoding. Earlier failed-attempt .png filenames are historical mislabeled JPEG byte originals.",
+    "rename_without_reencoding_verified_against_prior_hashes": true,
+    "native_fixture_images_are_separate_11_actual_pngs_and_unchanged": true
+  }
+}

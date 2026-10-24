@@ -1,0 +1,625 @@
+{
+  "task": "EXP35_INDEPENDENT_STDLIB_GLB_EXPORT_AUDIT",
+  "created_at_utc": "2026-10-24T16:19:31.554608+00:00",
+  "status": "PASS",
+  "passed": 27,
+  "total": 27,
+  "method": "Python standard library reads GLB JSON and BIN, decoding every accessor including normalized components, byte stride and sparse replacements. No Blender/Godot engine was launched; no production or asset bytes changed.",
+  "bound_files_before": {
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 1372292,
+      "sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 3696377,
+      "sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 1372292,
+      "sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 3696377,
+      "sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148360,
+      "sha256": "d36cfd5d091edfd87ed1477f5682abfd2ad058d78dd1576b7b1b86b400016d18"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12106,
+      "sha256": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer.py.source": {
+      "bytes": 16782,
+      "sha256": "6ffa86a4c6acc8f51e02361f35a9494fdf888bb7958c6263ee039cde8d0fd40d"
+    }
+  },
+  "bound_files_after": {
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 1372292,
+      "sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 3696377,
+      "sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 1372292,
+      "sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 3696377,
+      "sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148360,
+      "sha256": "d36cfd5d091edfd87ed1477f5682abfd2ad058d78dd1576b7b1b86b400016d18"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12106,
+      "sha256": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer.py.source": {
+      "bytes": 16782,
+      "sha256": "6ffa86a4c6acc8f51e02361f35a9494fdf888bb7958c6263ee039cde8d0fd40d"
+    }
+  },
+  "checks": [
+    {
+      "name": "glb2_header_chunks_and_length",
+      "passed": true,
+      "evidence": {
+        "magic": "glTF",
+        "version": 2,
+        "declared_bytes": 1372292,
+        "actual_bytes": 1372292,
+        "chunk_types": [
+          1313821514,
+          5130562
+        ]
+      }
+    },
+    {
+      "name": "one_embedded_buffer_without_external_uri",
+      "passed": true,
+      "evidence": {
+        "buffers": [
+          {
+            "byteLength": 1314304
+          }
+        ],
+        "padded_bin_bytes": 1314304
+      }
+    },
+    {
+      "name": "every_buffer_view_within_declared_buffer",
+      "passed": true,
+      "evidence": {
+        "buffer_view_count": 200
+      }
+    },
+    {
+      "name": "all_accessor_components_finite_and_in_bounds",
+      "passed": true,
+      "evidence": {
+        "accessor_count": 194,
+        "decoded_components": 531872,
+        "sparse_accessor_count": 6
+      }
+    },
+    {
+      "name": "one_skin_22_expected_named_joints",
+      "passed": true,
+      "evidence": {
+        "skin_count": 1,
+        "joint_node_indices": [
+          21,
+          20,
+          11,
+          10,
+          1,
+          0,
+          5,
+          4,
+          3,
+          2,
+          9,
+          8,
+          7,
+          6,
+          15,
+          14,
+          13,
+          12,
+          19,
+          18,
+          17,
+          16
+        ],
+        "bone_names_in_skin_order": [
+          "root",
+          "pelvis",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "clavicle.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "clavicle.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ]
+      }
+    },
+    {
+      "name": "inverse_bind_matrices_match_22_joints",
+      "passed": true,
+      "evidence": {
+        "matrix_count": 22,
+        "components_each": 16
+      }
+    },
+    {
+      "name": "one_actual_mesh_node_uses_expected_skin",
+      "passed": true,
+      "evidence": {
+        "mesh_count": 1,
+        "mesh_node_indices": [
+          22
+        ],
+        "mesh_node_skin": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "three_named_morph_targets_mesh_0",
+      "passed": true,
+      "evidence": {
+        "target_names": [
+          "StudyShoulderSupport",
+          "StudyHipCompression",
+          "StudyKneeCompression"
+        ],
+        "default_weights": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "basis_attributes_matching_vec3_count_0_0",
+      "passed": true,
+      "evidence": {
+        "vertices": 13418,
+        "normal_count": 13418,
+        "joints_count": 13418,
+        "weights_count": 13418
+      }
+    },
+    {
+      "name": "basis_normals_finite_nonzero_and_unit_0_0",
+      "passed": true,
+      "evidence": {
+        "maximum_unit_length_error": 1.2055473597172295e-07
+      }
+    },
+    {
+      "name": "triangle_indices_integral_and_in_vertex_range_0_0",
+      "passed": true,
+      "evidence": {
+        "index_count": 80472,
+        "triangles": 26824,
+        "minimum_index": 0,
+        "maximum_index": 13417
+      }
+    },
+    {
+      "name": "skin_four_slots_no_extra_weight_sets_0_0",
+      "passed": true,
+      "evidence": {
+        "attribute_names": [
+          "POSITION",
+          "NORMAL",
+          "JOINTS_0",
+          "WEIGHTS_0"
+        ],
+        "slots_per_vertex": 4
+      }
+    },
+    {
+      "name": "skin_weights_nonnegative_normalized_0_0",
+      "passed": true,
+      "evidence": {
+        "maximum_weight_sum_error": 1.1245720088481903e-07,
+        "minimum_weight": 0.0,
+        "maximum_weight": 1.0,
+        "maximum_positive_influences": 4
+      }
+    },
+    {
+      "name": "skin_every_joint_slot_references_actual_22_joint_palette_0_0",
+      "passed": true,
+      "evidence": {
+        "minimum_joint_index": 0,
+        "maximum_joint_index": 21
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_0",
+      "passed": true,
+      "evidence": {
+        "name": "StudyShoulderSupport",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 13418,
+          "NORMAL": 13418
+        },
+        "maximum_position_delta_m": 0.0041013691366010895
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_1",
+      "passed": true,
+      "evidence": {
+        "name": "StudyHipCompression",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 13418,
+          "NORMAL": 13418
+        },
+        "maximum_position_delta_m": 0.00576890917820386
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_2",
+      "passed": true,
+      "evidence": {
+        "name": "StudyKneeCompression",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 13418,
+          "NORMAL": 13418
+        },
+        "maximum_position_delta_m": 0.00436469167470932
+      }
+    },
+    {
+      "name": "exactly_three_primitive_morphs_0_0",
+      "passed": true,
+      "evidence": {
+        "target_count": 3
+      }
+    },
+    {
+      "name": "exactly_four_named_exported_nla_clips",
+      "passed": true,
+      "evidence": {
+        "clip_names": [
+          "a_pose",
+          "arm_raise",
+          "deep_squat",
+          "single_support"
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_a_pose",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_arm_raise",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "expected_morph_values": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_deep_squat",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_single_support",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            0.20000000298023224,
+            0.20000000298023224
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "name": "canonical_glb_exactly_matches_v03_candidate",
+      "passed": true,
+      "evidence": {
+        "canonical_sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0",
+        "v03_sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+      }
+    },
+    {
+      "name": "editable_blend_exactly_matches_v03_candidate",
+      "passed": true,
+      "evidence": {
+        "canonical_sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046",
+        "v03_sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+      }
+    },
+    {
+      "name": "all_four_authored_builder_sources_match_v03_snapshot",
+      "passed": true,
+      "evidence": {
+        "tools/sculpted_character/build_body_cage.py": {
+          "current": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3",
+          "candidate_snapshot": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3",
+          "match": true
+        },
+        "tools/sculpted_character/build_head_extremities.py": {
+          "current": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac",
+          "candidate_snapshot": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac",
+          "match": true
+        },
+        "tools/sculpted_character/build_resident_study.py": {
+          "current": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5",
+          "candidate_snapshot": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5",
+          "match": true
+        },
+        "tools/sculpted_character/build_study_rig.py": {
+          "current": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140",
+          "candidate_snapshot": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140",
+          "match": true
+        }
+      }
+    },
+    {
+      "name": "read_only_audit_kept_all_bound_asset_and_source_bytes_unchanged",
+      "passed": true,
+      "evidence": {
+        "bound_file_count": 10
+      }
+    }
+  ],
+  "primitives": [
+    {
+      "mesh_index": 0,
+      "primitive_index": 0,
+      "vertices": 13418,
+      "triangles": 26824,
+      "local_basis_bounds": {
+        "min": [
+          -0.5284969806671143,
+          0.0061507211066782475,
+          -0.12194976955652237
+        ],
+        "max": [
+          0.5284969806671143,
+          1.7797324657440186,
+          0.19689351320266724
+        ]
+      },
+      "morphs": [
+        {
+          "name": "StudyShoulderSupport",
+          "maximum_position_delta_m": 0.0041013691366010895,
+          "vertex_count": 13418
+        },
+        {
+          "name": "StudyHipCompression",
+          "maximum_position_delta_m": 0.00576890917820386,
+          "vertex_count": 13418
+        },
+        {
+          "name": "StudyKneeCompression",
+          "maximum_position_delta_m": 0.00436469167470932,
+          "vertex_count": 13418
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "a_pose",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "arm_raise",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "deep_squat",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "single_support",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        0.20000000298023224,
+        0.20000000298023224
+      ]
+    }
+  ],
+  "source_authorship_scope": {
+    "binary_establishes_no_reuse": false,
+    "manifest_claims": {
+      "source_assets_read": [],
+      "old_resident_geometry_read": false,
+      "image_paint_used": false
+    },
+    "basis": "Source freeze equality and explicit authored builder source/manifest claims support the declared construction inputs. Binary topology/finite/skin checks alone do not prove authorship, anatomical accuracy or absence of reuse.",
+    "historical_asset_comparison_performed": false
+  },
+  "full_art_target_met": false,
+  "limits": [
+    "This is a neutral editable clay prototype; validation of file structure, finite data and pose export is not acceptance of human realism.",
+    "Evaluated Blender heel/toe contact is separately recorded in the v03 manifest; this audit does not run gameplay or independently render the GLB.",
+    "The separate Godot native integration/visual review belongs to the root run and is not claimed by this stdlib audit."
+  ]
+}

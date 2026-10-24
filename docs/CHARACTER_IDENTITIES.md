@@ -1,3 +1,24 @@
+## EXP35 인체 원형 비교 · 2026-10-25
+
+무채색 성인 남성 원형 한 명을 1.78m 기준으로 새로 제작했다. [편집 가능한 Blender 원본](../art/characters/resident_form_m01.blend)은 직접 작성한 제어 메시와 Subsurf를 유지하며, 수동 브러시 조각을 수행한 결과로 표현하지 않는다.
+새 22본 골격과 총 3,270개 제어 정점으로 구성했다. 몸체는 829개 제어 정점의 사각면 cage이고, 머리·손·발을 별도로 직접 작성해 연결했다.
+외부 인체·스캔·이미지 입력은 0개이며, 기존 주민의 SDF·정점·52본 위치를 재사용하지 않았다. 원본은 [새 제작 모듈](../tools/sculpted_character/)과 manifest로 추적한다.
+Subsurf와 세 가지 자세 보정 shape를 사용해 A 자세·팔 올림·깊게 앉기·한발 지지의 네 자세를 검토한다. 자세 보정은 측정한 연조직 시뮬레이션을 뜻하지 않는다.
+게임 메뉴의 ‘인체 원형 비교’와 [독립 검토 씬](../game/scenes/study/resident_form_study.tscn)에서 비교한다. 기존 생산 캐릭터 12종을 교체한 결과가 아니며 도시와 플레이어 충돌 캡슐은 유지한다.
+목·손목·눈·발 pitch 및 촬영의 초기 실패는 [v01](../data/reports/resident_form_study/20261025/candidates/v01/)·[v02](../data/reports/resident_form_study/20261025/candidates/v02/) 이력으로 보존한다. [v03](../data/reports/resident_form_study/20261025/candidates/v03/)에서 제작 화면과 내보내기 분할 단계가 달랐던 점을 고쳐, 실제 자세 평가·화면·내보내기를 모두 Subsurf 2로 맞춘 [v04](../data/reports/resident_form_study/20261025/candidates/v04/)를 선택했다. 현재도 prototype 검토용이며 최종 미술 수용은 미완료다.
+몸의 큰 면이 여전히 매끈하고 겨드랑이·고관절 형태도 단순하다. 신규 실행 검사와 수치 결과는 현재 검증을 묶는 [WORK_STATUS](WORK_STATUS.md)를 따른다.
+
+재생성은 별도 후보 폴더에 출력한다. 공식 Blender4.5.15LTS의 `Blender` 실행 파일을 사용해 저장소 루트에서 다음을 실행한다. 게임을 실행할 때는 재생성이 필요 없다.
+
+```sh
+Blender --background --factory-startup \
+  --python tools/sculpted_character/build_resident_study.py -- \
+  --output-dir /private/tmp/sim2seoul-form-candidate \
+  --render-dir /private/tmp/sim2seoul-form-candidate/blender_views
+```
+
+현재 기능 검사는 `python3 tools/run_resident_form_study_acceptance.py headless <새태그>`와 `native <새태그>`로 실행한다. 원본 인수 무결성은 `python3 tools/check_resident_form_handoff.py`로 확인한다. 검사 숫자가 미술 수용을 대신하지 않는다.
+
 # 주민 얼굴·헤어 제작 기록
 
 **EXP34 첫 남녀 모델 적용 · 2026-10-24 · 기능/방향별 검토와 최종 미술 수용을 구분**

@@ -301,6 +301,8 @@ func _build_ui() -> void:
 	human_view.pressed.connect(_human_eye_selected);options.add_child(human_view)
 	var natural_walk:=Button.new();natural_walk.name="NaturalWalkPreview";natural_walk.text="자연스러운 걷기·달리기 체험"
 	natural_walk.pressed.connect(_preview_human_presence);options.add_child(natural_walk)
+	var form_study:=Button.new();form_study.name="ResidentFormStudy";form_study.text="인체 원형 비교 · 무채색"
+	form_study.pressed.connect(func()->void:get_tree().change_scene_to_file("res://scenes/study/resident_form_study.tscn"));options.add_child(form_study)
 	var time_row:=HBoxContainer.new()
 	var time_caption:=Label.new();time_caption.text="시간대"
 	time_caption.add_theme_color_override("font_color",Color(.08,.12,.16))

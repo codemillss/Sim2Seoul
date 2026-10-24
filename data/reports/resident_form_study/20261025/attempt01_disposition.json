@@ -1,0 +1,8 @@
+{
+  "actual_os_result": "FAIL_GALLERY_INPUT_BLOCKED",
+  "observed": "Menu scene change opened gallery but view/pose mouse clicks left state unchanged.",
+  "cause": "player_fixture menu pauses SceneTree; new independent gallery inherited paused tree.",
+  "fix": "Gallery _ready clears departed menu pause and makes mouse visible; same paused-entry prerequisite added to current fixture without increasing denominator.",
+  "source_before": "study_native_final01_source/game/scripts/study/resident_form_study.gd",
+  "preserve": "Engine56/71 numerical PASS and old actual screenshots retained as history, not current OS acceptance."
+}

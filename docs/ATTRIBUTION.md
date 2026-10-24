@@ -1,3 +1,9 @@
+## EXP35 무채색 인체 원형 · 2026-10-25
+
+새 [Blender 제어 메시 원본](../art/characters/resident_form_m01.blend)·22본 리그·세 자세 보정과 [GLB](../game/assets/original/resident_study/resident_form_m01.glb)는 [별도 제작 모듈](../tools/sculpted_character/)로 작성했다. 제작 입력으로 외부 인체·스캔·모션·이미지나 기존 주민 몸 정점을 읽지 않는다. 이는 스크립트로 구성한 편집 가능한 제어 메시이며 수동 브러시 조각·수동 리토폴로지 완료 또는 실사 수용을 뜻하지 않는다. 이전 캐릭터는 검토 화면의 실제 원본 기본 자세 비교용으로만 읽는다.
+
+제작 도구는 공식 배포본 Blender 4.5.15 LTS이며 [취득·공식 체크섬 기록](../data/reports/resident_form_study/20261025/blender_runtime.json)을 남겼다. 앱/설치 파일은 저장소에 포함하지 않는다. 새 원형의 원본·파생 바이트와 제작 소스는 [manifest](../game/assets/original/resident_study/FORM_STUDY_MANIFEST.json)에 연결하며, 외부 도구의 라이선스를 프로젝트 전체 자산에 일괄 적용하지 않는다. 아래는 기존 자산별 고지다.
+
 # 포함한 자료의 출처
 
 > 저장소 공개 상태: 2026-10-21 GitHub API에서 PUBLIC으로 확인했습니다. 아래 R03 등 과거 비공개 배포 관련 설명은 해당 버전 당시의 기록입니다. 데이터·외부 자산의 고지는 각각 유지합니다.

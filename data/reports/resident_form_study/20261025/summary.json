@@ -1,0 +1,1241 @@
+{
+  "task": "EXP35_SINGLE_GRAY_RESIDENT_FORM_STUDY",
+  "created_at_utc": "2026-10-24T16:41:21.176324+00:00",
+  "result": "PASS_BOUNDED_TECHNICAL_REVIEW",
+  "base_commit": "d0944481ec1f5651eace2c0c1374d77be6fc2e4f",
+  "selected_candidate": "v04",
+  "selected_cohort": "final02",
+  "deliverables": {
+    "editable_blender": "art/characters/resident_form_m01.blend",
+    "production_glb": "game/assets/original/resident_study/resident_form_m01.glb",
+    "study_scene": "game/scenes/study/resident_form_study.tscn",
+    "game_menu": "Esc → 인체 원형 비교 · 무채색",
+    "normal_game_player_replaced": false
+  },
+  "authorship": {
+    "method": "Script-authored explicit editable control cage in Blender, new rig and three corrective morphs. Not manual brush sculpting or completed manual retopology.",
+    "external_body_scan_animation_or_image_input": false,
+    "old_sdf_or_body_geometry_input": false,
+    "old_model_used_only_for_actual_rest_comparison": true
+  },
+  "art_acceptance": false,
+  "realistic_human_acceptance": false,
+  "attractiveness_acceptance": false,
+  "continuous_motion_acceptance": false,
+  "user_art_acceptance": false,
+  "scope": "Editable gray form study and functional comparison/pose diagnostics. Technical assertions and integrity checks do not measure anatomical realism, attractiveness or natural continuous movement.",
+  "selected_runs": [
+    {
+      "report": "data/reports/resident_form_study/20261025/study_headless_final02.json",
+      "runner": "data/reports/resident_form_study/20261025/study_headless_final02.run.json",
+      "expected_checks": 56,
+      "captures": 0
+    },
+    {
+      "report": "data/reports/resident_form_study/20261025/study_native_final02.json",
+      "runner": "data/reports/resident_form_study/20261025/study_native_final02.run.json",
+      "expected_checks": 71,
+      "captures": 11
+    }
+  ],
+  "counts": {
+    "engine_runs": 2,
+    "overlapping_engine_assertions": 127,
+    "native_original_png": 11,
+    "blender_studio_png": 16,
+    "independent_glb_checks": 27,
+    "control_vertices": 3270,
+    "export_vertices": 53654,
+    "export_triangles": 107296,
+    "new_bones": 22,
+    "pose_clips": 4,
+    "corrective_morphs": 3,
+    "actual_os_jpeg": 8
+  },
+  "studio_capture_scope": "16 actual Blender renders from v04; separate from Godot gameplay PNG and OS captures.",
+  "export_audit_file": "data/reports/resident_form_study/20261025/export_audit_peer.json",
+  "normal_launch_file": "data/reports/resident_form_study/20261025/normal_launch.json",
+  "visual_review_file": "data/reports/resident_form_study/20261025/visual_review_peer.json",
+  "source_freeze_file": "data/reports/resident_form_study/20261025/candidates/v04/source_freeze.json",
+  "failed_or_rejected_history": [
+    {
+      "candidate": "v01",
+      "reason": "Neck, wrist join, eye projection, foot orientation and raised-arm framing required correction; exact original outputs retained, not selected."
+    },
+    {
+      "candidate": "v02",
+      "reason": "Floor/camera occluded feet and rebuilt mesh smooth flags were lost; original outputs retained, not selected."
+    },
+    {
+      "candidate": "v03",
+      "reason": "Export subdivision1 differed from studio2; superseded by v04 with uniform level2 actual evaluation/export/render."
+    },
+    {
+      "cohort": "dev01",
+      "reason": "Four checks failed; exact source snapshots/logs and physical/float/framing criteria fixes retained."
+    },
+    {
+      "cohort": "dev02",
+      "reason": "Numerical pass did not catch unfair legacy forced-pose deformation. Adapter removed; old model now actual original rest only."
+    },
+    {
+      "cohort": "final01",
+      "reason": "56/71 numerical pass rejected by actual OS entry: inherited paused SceneTree blocked controls. Exact sources/reports/logs retained; fixed entry ownership and tested paused prerequisite in final02."
+    }
+  ],
+  "remaining_art_work": [
+    "Facial planes and eye sockets are simplified.",
+    "Shoulder/armpit, ribcage/pelvis/gluteal and hand/foot forms remain mannequin-like.",
+    "Four held diagnostic poses do not establish walking/running realism.",
+    "Do not expand variants or replace normal player before this form is visually accepted."
+  ],
+  "bound_files": {
+    ".gitattributes": {
+      "bytes": 3884,
+      "sha256": "6d7ddfefeff10fa782765df29f8fdf11119736509139c7da68f9135d45f7ff01"
+    },
+    ".gitignore": {
+      "bytes": 1868,
+      "sha256": "2e1f7e1e52c7c4da55ea9f575cea70a6bcf194e301375ebd7fe1ecc42e112a6c"
+    },
+    "README.md": {
+      "bytes": 29715,
+      "sha256": "d9d0b2690981c1c406ddcab8f66f11b77c3939ae5d5fa5fc550bb4a292a9279a"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 10533209,
+      "sha256": "2f9e88d6a6a175d8c1dca8dd090f705478d96f7e01da82dbe3847918c6c616ce"
+    },
+    "data/reports/resident_form_study/20261025/attempt01_disposition.json": {
+      "bytes": 631,
+      "sha256": "f7874e72a087e4536bd751911cd80f49aa5c54754bc384e6345fef34949ae0ac"
+    },
+    "data/reports/resident_form_study/20261025/attempt01_normal_game.console.log": {
+      "bytes": 7712,
+      "sha256": "15b993fb6786b56b5f48eede1361acc0e6e5b0adfe10ffdf7fe9a7deb702041f"
+    },
+    "data/reports/resident_form_study/20261025/attempt01_normal_game.log": {
+      "bytes": 7712,
+      "sha256": "15b993fb6786b56b5f48eede1361acc0e6e5b0adfe10ffdf7fe9a7deb702041f"
+    },
+    "data/reports/resident_form_study/20261025/attempt01_normal_process_started.json": {
+      "bytes": 589,
+      "sha256": "fe4bc37f478bc036330d34d4507dffaa21a9a5703b88bf5fbc43189f00b1b5c6"
+    },
+    "data/reports/resident_form_study/20261025/blender-4.5.15.official.sha256": {
+      "bytes": 880,
+      "sha256": "513b7a1a9c7f21b6cba3a5f544f5e1bd2c979dcdf9ea3a45e68e717d0187c0b9"
+    },
+    "data/reports/resident_form_study/20261025/blender_runtime.json": {
+      "bytes": 703,
+      "sha256": "075570ddfb4fefc677c8d1eafa7345cdab2b01732f1c145d683a47c0a3c7584c"
+    },
+    "data/reports/resident_form_study/20261025/build_v01.log": {
+      "bytes": 10288,
+      "sha256": "4a953aaab11948cbc245c8b42cf8bf5c0c2778a2ca493041747664fe55e07e7a"
+    },
+    "data/reports/resident_form_study/20261025/build_v02.log": {
+      "bytes": 10328,
+      "sha256": "587e0d4de51839eda0208e4d58666d052dcb76e3215cc2287c2b5926f9f40b55"
+    },
+    "data/reports/resident_form_study/20261025/build_v03.log": {
+      "bytes": 10329,
+      "sha256": "f5fc1c4904f1a9030df5f57c8f79132ffdb8915962b7967e45382427b02223d3"
+    },
+    "data/reports/resident_form_study/20261025/build_v04.log": {
+      "bytes": 10329,
+      "sha256": "82e4db6d6fed59681bf930206a481b5346ff61142be6db55909b11a6f6930025"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/FORM_STUDY_MANIFEST.json": {
+      "bytes": 135989,
+      "sha256": "878117e9452b5c331a63e3eda8db58e3cc08ad7e638839946cc0a1fa1d91f647"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/a_pose_back.png": {
+      "bytes": 772845,
+      "sha256": "a908a9facf9c245a12e2ef81148c9577b147424075499877c0fa552a0570808f"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/a_pose_front.png": {
+      "bytes": 772626,
+      "sha256": "ea400c647cd55470a0bb959fcdc13fe37e942f84f00b7a4059c9b0a8d5ce097d"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/a_pose_front45.png": {
+      "bytes": 793575,
+      "sha256": "3313ff700d158993b0bcfb43dc5f397a881becd32e8ca1aaca64ad89a77a5e1e"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/a_pose_right.png": {
+      "bytes": 748717,
+      "sha256": "c2690f8edceb31cd19d1c7f493a62ceb6276e47656e72c1a72df874b35161b62"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/arm_raise_back.png": {
+      "bytes": 765912,
+      "sha256": "4bf6199de37443358a45f756ebaf751945399702e4dd9637a2e0e669c8356b15"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/arm_raise_front.png": {
+      "bytes": 764109,
+      "sha256": "2fa09028996b9bdc9f3eff73d5e759094d162380276b1855af580b7264cdac5b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/arm_raise_front45.png": {
+      "bytes": 785159,
+      "sha256": "5c6c6e0e2f11806334c0dc202c679cc1cb2d73cb43a1210acf307cde221d2cc3"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/arm_raise_right.png": {
+      "bytes": 741667,
+      "sha256": "104c02f6e6c23ab75c607a23e6edbfc468ddf3eb3ad24c7c9063de783cc1625d"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/deep_squat_back.png": {
+      "bytes": 765714,
+      "sha256": "45ea17bc0e959bd60c376973294274f9f9cadc2f573ab8ad50d16e086a4dbe58"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/deep_squat_front.png": {
+      "bytes": 773854,
+      "sha256": "62edfcd6de7a7adc8be04203cb77ce6941dbbbf4f3a30b75d73e8a982f844bbd"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/deep_squat_front45.png": {
+      "bytes": 803838,
+      "sha256": "045581b7f0125cc82cca88fc38ac35af81060e778c63db8c11e9c8ced289089a"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/deep_squat_right.png": {
+      "bytes": 773756,
+      "sha256": "5bd9c97370e73deda753ed2aead391fd00386924f29c72e6b69cff374a856405"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/single_support_back.png": {
+      "bytes": 781042,
+      "sha256": "6abc7db9dec73f5049b15117722567fc23c3f7386134b25d01c88b02e5ba6d6a"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/single_support_front.png": {
+      "bytes": 777793,
+      "sha256": "fa9eed9241f5155e0921ef43a8b3560bb72903db500a372607148cfac982a059"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/single_support_front45.png": {
+      "bytes": 800180,
+      "sha256": "ffab606585657742ed72431eb89ac07bf0f45935b874608959d192869e32dea7"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/blender_views/single_support_right.png": {
+      "bytes": 769438,
+      "sha256": "cd6fde5a03b012c9d0f88120ffd277420e3561dd13d582c9400530ba93082c3c"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/development_disposition.json": {
+      "bytes": 664,
+      "sha256": "96fe7895d6a179b68f54f8f10bf62fd3e5224dee0bce173d72a7ab9047650e6e"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/resident_form_m01.blend": {
+      "bytes": 1359505,
+      "sha256": "147cf06486ef770c367815b73b291c218edf5eebcd524020e1b8acf8554941df"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v01/resident_form_m01.glb": {
+      "bytes": 1355944,
+      "sha256": "7e18bf72bbbde96f27eabedd93c8a8a1beeb32b8126e1044e9ac43c23042c238"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148360,
+      "sha256": "1a99ad73857c65982e5f412a9dc9c1e91714840f4dc7aedbd5d660fb00068fb6"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/a_pose_back.png": {
+      "bytes": 619613,
+      "sha256": "22286e59eff7e58ca00e3b93a5cd1417707f7a7ce7382e99f88894ee1e91b14f"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/a_pose_front.png": {
+      "bytes": 618199,
+      "sha256": "2c435233405e7ade1d7f60a544f53336cd7abcee87b5777b9210efe0f18c7358"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/a_pose_front45.png": {
+      "bytes": 612406,
+      "sha256": "ab68bc7a1f7cd73e6b5da35afd5594d095cd436897283e3074a66a2ba44373e6"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/a_pose_right.png": {
+      "bytes": 582677,
+      "sha256": "b14966c05ddd2e3b51b018dab0310d500d1e8cc3a8b6dfde01b6ac640545b1d1"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/arm_raise_back.png": {
+      "bytes": 622597,
+      "sha256": "6af9710d87764b6090f244d6e53827f091379a7fc138524e410d2b081075ab86"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/arm_raise_front.png": {
+      "bytes": 620364,
+      "sha256": "3191bb1dd19b85e910320c92ff92f4dc3b2a39174c3f124712a769dbe4dd2ba5"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/arm_raise_front45.png": {
+      "bytes": 620084,
+      "sha256": "3ebbe3baa0b7de1fe93a50d1ec763ee2edfd8115dfdae6a5df26f7ab1bdd59d9"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/arm_raise_right.png": {
+      "bytes": 591375,
+      "sha256": "03b89ad62aba3dedfb53b9255ef3b8bc958db71a75b4e530e20751bf1b29408e"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/deep_squat_back.png": {
+      "bytes": 596034,
+      "sha256": "79e98ad8bdc076a4edf3a66d221d89e452de0570c6669759db8580532322d591"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/deep_squat_front.png": {
+      "bytes": 599088,
+      "sha256": "6405b2b28cfb4341a65a22ded3aae6794e283ec6001fac27dc920436331e3bca"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/deep_squat_front45.png": {
+      "bytes": 604401,
+      "sha256": "654090ed297a1e7bcaa79ff2860e422ddc8dcc47d6de68b6f9d57a616b3019ec"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/deep_squat_right.png": {
+      "bytes": 598719,
+      "sha256": "f47b45ef9bc37b46e99c51ca2d60c8a6f5af0d4d6111e6cbe30e827820119f98"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/single_support_back.png": {
+      "bytes": 625820,
+      "sha256": "df15265f0bb7a33262a525cdcb44f2bc874a81548d73e40d60cf497f24d724fa"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/single_support_front.png": {
+      "bytes": 621698,
+      "sha256": "3caa1ed9b32c5127db858de2bc05f4dc3eee18e0793c7d2a254e9ce1540d4d7b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/single_support_front45.png": {
+      "bytes": 615781,
+      "sha256": "8a6d6d9a4db4dfd5bfd3689aec02617318dab68199d8f4cb97568a173b80b3f4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/blender_views/single_support_right.png": {
+      "bytes": 602633,
+      "sha256": "41ba6d9c228d57c2d792a93773f36e09711a39501a550a397b4b6844e2fde9c2"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/development_disposition.json": {
+      "bytes": 644,
+      "sha256": "4ae10269e56b7359026e099c61346803cfe0edbed85d8cd50d9f1a7662088f87"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/resident_form_m01.blend": {
+      "bytes": 3713519,
+      "sha256": "6b653bf62d3c4779aac34d5b11ac8029f72f77ea77fe1d8071b99f7c1dff7c96"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/resident_form_m01.glb": {
+      "bytes": 4592668,
+      "sha256": "ea98fbb3e3cc11b7d76792f726c90a9d3d6b2ff812cfab0249c4937f29bb142f"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/source/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/source/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/source/build_resident_study.py": {
+      "bytes": 12045,
+      "sha256": "43d6e10b0b25cd0bb8785082852f61f755e914308aa2c9a9bf502f77fe98eb7b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/source/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v02/source_freeze.json": {
+      "bytes": 1328,
+      "sha256": "d02af96d8251bab266a7b48009ae4552770682eb3fb519f4184c01167491b29e"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148360,
+      "sha256": "d36cfd5d091edfd87ed1477f5682abfd2ad058d78dd1576b7b1b86b400016d18"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/a_pose_back.png": {
+      "bytes": 596593,
+      "sha256": "e1a88b6eac9de9a5ab61806c1c9038e718e16f8cae0e516b0cc942c20667fb55"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/a_pose_front.png": {
+      "bytes": 595596,
+      "sha256": "6758f9b9a51635d257a2f38cc4c495829b3754cb1f919110a3d66147712196f0"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/a_pose_front45.png": {
+      "bytes": 592348,
+      "sha256": "4444d0130609ed99cf9412c03c0dee3a074529e043b082262eda85182b12a171"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/a_pose_right.png": {
+      "bytes": 560612,
+      "sha256": "a68e868ba945b2592bd7e6034e36064b06036cba23a649a20004d31e31db65fb"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/arm_raise_back.png": {
+      "bytes": 599625,
+      "sha256": "aa516b8d537a9cf815cdd2f0c519ce32d3fd7498c0dac1ac66895250ddabcd5e"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/arm_raise_front.png": {
+      "bytes": 597763,
+      "sha256": "ce51a0d2da22004dd29877bbc0e0a1c0cbe73456297fc346e12a270501d1b257"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/arm_raise_front45.png": {
+      "bytes": 599770,
+      "sha256": "060ff7035fe7e29b3a7abb76cc976a5db3b5f387429ca31f14e8ba53e9849c17"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/arm_raise_right.png": {
+      "bytes": 568016,
+      "sha256": "6344c8e2294c3d187d43645cb89e1b4163e8bcd857b760ea8061024ce0f03f4c"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/deep_squat_back.png": {
+      "bytes": 571331,
+      "sha256": "cd9d2422358e89d7a13c918a3bf10185edf269d6c74453684202052ab38dcaa3"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/deep_squat_front.png": {
+      "bytes": 577588,
+      "sha256": "6d1bf9f0879073e280b5f0f2f774b880b638296f68caea39fb6e72d5df1261ab"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/deep_squat_front45.png": {
+      "bytes": 582746,
+      "sha256": "4ec05bb1e3b72ba9b5335567f70f3e2dcd1de792c49b46d8da7cbb36967d63ee"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/deep_squat_right.png": {
+      "bytes": 570044,
+      "sha256": "e99ca94386b14779728a30d292292f67641a977e5e0ed7ead6ac6077a868ff20"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/single_support_back.png": {
+      "bytes": 600065,
+      "sha256": "d14ba8cbcb4f69e56d0fb1ce2a9c9bcbd1ea551c81922098f0699740bb4d92d1"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/single_support_front.png": {
+      "bytes": 597488,
+      "sha256": "5a0a0e31b0b1bd2f4ef694a75f45ecf22c79fa1b487f203450620921c9f171ed"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/single_support_front45.png": {
+      "bytes": 591882,
+      "sha256": "3570f2d98e6f6532c5978e4bf94759a523ab42f905069f1e933c5388829c4dfc"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/blender_views/single_support_right.png": {
+      "bytes": 577705,
+      "sha256": "2bf24ee0898a44fc41da731d3b13fd553e3c9d1c6685b8e488b59a1c9c83d6c1"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 3696377,
+      "sha256": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 1372292,
+      "sha256": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/source/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/source/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/source/build_resident_study.py": {
+      "bytes": 12106,
+      "sha256": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/source/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v03/source_freeze.json": {
+      "bytes": 1263,
+      "sha256": "1727aa3a741411451c74f7b546178a89ef17cefa8af8639d6c14a1daa1e90d8b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_back.png": {
+      "bytes": 597040,
+      "sha256": "17c7ff27bfcfa1cac49c2423013a6e3359921e46a3523f5c4373cf76ae1bb488"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front.png": {
+      "bytes": 595304,
+      "sha256": "335c4cee0612007c2d7b05676c943d4957035aaf59ed5f23d0b35e04b31d55f4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front45.png": {
+      "bytes": 592158,
+      "sha256": "524f2cc97cb736f5a82cdfc879bb4dddbf532db66b508be58efd92d92b43f441"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_right.png": {
+      "bytes": 560775,
+      "sha256": "d11291f7ea7ff3ae105a4b46eda32ded91360c35dbb2933d43a3c5984f002aa4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_back.png": {
+      "bytes": 599812,
+      "sha256": "54569fd431530d07924779aba94236609279dad89006c52cce22eb70ccd42b87"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front.png": {
+      "bytes": 597640,
+      "sha256": "3ea58ff3a072e42984b22d81173a475c296a6c149a940b0d9446d43bc3901cdd"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front45.png": {
+      "bytes": 599436,
+      "sha256": "116877cc7de2e86360abaaecea9617c5f825b481a1f507a876276964e87084a5"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_right.png": {
+      "bytes": 567597,
+      "sha256": "0301bd12f35b7503d810112908d620b40087df037ca4db458fa5b15432d6fd5b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_back.png": {
+      "bytes": 571385,
+      "sha256": "96eb2e82efaf5e9ea6d91841a72be8ab049a671d7d8f4f3ca4b706671375a5c7"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front.png": {
+      "bytes": 577470,
+      "sha256": "b325a66cd824df17b3c556ce6634acd7a8a002c47604b1f3bf38dfdc5ad881a9"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front45.png": {
+      "bytes": 582591,
+      "sha256": "65ddd62eb0e5e38e28073e2c0f54b786d903080f9808323ba4f58bb5025cad40"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_right.png": {
+      "bytes": 569957,
+      "sha256": "10ea221a494dd2e6e726754a5ce600b0b6c0f3c9e34f3cffa1e7e7d88ceec8dc"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_back.png": {
+      "bytes": 600180,
+      "sha256": "22866f74befa8a3a68e28d0bdfd445574f47bda917b1e42cda377d427b66fb44"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front.png": {
+      "bytes": 597382,
+      "sha256": "beae4fb5f0218bb19fe0fc2e791f430dd875c4ac3440572752a2f12c1ddc6cad"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front45.png": {
+      "bytes": 591918,
+      "sha256": "1888db1850566a94214a55f9bac0b577a2f6bb030e0ef6efbfc02c5c8ef48ac7"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_right.png": {
+      "bytes": 577855,
+      "sha256": "c2269d539b39d82e1d4b93f8f31d52812a5b39b756700a825feb35b2b4d24b9a"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/resident_form_m01.blend": {
+      "bytes": 10533209,
+      "sha256": "2f9e88d6a6a175d8c1dca8dd090f705478d96f7e01da82dbe3847918c6c616ce"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/resident_form_m01.glb": {
+      "bytes": 5070984,
+      "sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/source/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/source/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/source/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/source/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/source_freeze.json": {
+      "bytes": 1306,
+      "sha256": "9997c37e0abefbf27e1af7ff8c4366dcbfc2dc19ad136b4f92ef52f3198341dd"
+    },
+    "data/reports/resident_form_study/20261025/development_source_before_dev02/bindings.json": {
+      "bytes": 1240,
+      "sha256": "5472f2a08bba32e6405678ad8faad0bcac4cb2a7828bb16efd8c915e9c7b5238"
+    },
+    "data/reports/resident_form_study/20261025/development_source_before_dev02/check_resident_form_study.gd.source": {
+      "bytes": 12878,
+      "sha256": "76c8dfb03766ab1c26212551d3af436fc532b2332dc47c7fc6901a0cd66b0773"
+    },
+    "data/reports/resident_form_study/20261025/development_source_before_dev02/resident_form_study.gd.source": {
+      "bytes": 26992,
+      "sha256": "3cf5da116e7686cf3f069d29f9f4e7d43a63b9c1ae2acc43603bb8dc5cc9d834"
+    },
+    "data/reports/resident_form_study/20261025/development_source_before_dev02/resident_form_study.tscn.source": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_study/20261025/development_source_before_dev03/run_resident_form_study_acceptance.py.source": {
+      "bytes": 3555,
+      "sha256": "fecd1cd3827f66737c2249d823f3dca566be2a3590f40c2f94427590de0f5ffc"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer.json": {
+      "bytes": 19307,
+      "sha256": "e1a854a55bd34679eb8b616a57d6c58b03391c7061c662a3abf71d020376a83a"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer.py.source": {
+      "bytes": 19014,
+      "sha256": "fefe8da2db429d477e117edfe21653ca3535132a1da1ad41c70bd318030a89b0"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer_v03.json": {
+      "bytes": 17321,
+      "sha256": "fa514e36ab55253c7506438b480a15ac5d5576ec5afd5595077961d8c3369341"
+    },
+    "data/reports/resident_form_study/20261025/export_audit_peer_v03.py.source": {
+      "bytes": 16782,
+      "sha256": "6ffa86a4c6acc8f51e02361f35a9494fdf888bb7958c6263ee039cde8d0fd40d"
+    },
+    "data/reports/resident_form_study/20261025/import_candidate03.log": {
+      "bytes": 2808,
+      "sha256": "24299f4d4f808c722138681c12612c39a077b341d7cee872591bbc976f708795"
+    },
+    "data/reports/resident_form_study/20261025/import_candidate04.log": {
+      "bytes": 2808,
+      "sha256": "24299f4d4f808c722138681c12612c39a077b341d7cee872591bbc976f708795"
+    },
+    "data/reports/resident_form_study/20261025/import_dev01.log": {
+      "bytes": 8047,
+      "sha256": "4bf90616785fd4e8b3e3b1c31bf10f470206f5f1cdcb08c56c7f0f6a95836b12"
+    },
+    "data/reports/resident_form_study/20261025/normal_game.console.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_form_study/20261025/normal_game.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_form_study/20261025/normal_launch.json": {
+      "bytes": 7018,
+      "sha256": "e0d5a83d03c14780e01567df6bc1d9e3937877229de5fab98cf149dec1beb357"
+    },
+    "data/reports/resident_form_study/20261025/normal_process_started.json": {
+      "bytes": 533,
+      "sha256": "fb46c4a3d0203889fee0295ab81f62e868bb186d4aef34cf10366f32509ef39c"
+    },
+    "data/reports/resident_form_study/20261025/os/final_open_oblique.jpg": {
+      "bytes": 69899,
+      "sha256": "d21ce95908df6f0d93d31e5e0fa27bab5767b9b09c844ed7a68f6220ed7d1f50"
+    },
+    "data/reports/resident_form_study/20261025/os/menu_entry.jpg": {
+      "bytes": 172842,
+      "sha256": "b0e17c7d22c24913bd9572b997082e419c59ee49e7cf84aa6eea1cb5ff9f8095"
+    },
+    "data/reports/resident_form_study/20261025/os/new_arm_raise_front.jpg": {
+      "bytes": 65538,
+      "sha256": "3e082e89db00737a7d55866e1598f93f9ada3997eab102efa03c1670c9b41ab8"
+    },
+    "data/reports/resident_form_study/20261025/os/new_front.jpg": {
+      "bytes": 71437,
+      "sha256": "a7af0c7bacc207908af0822b31c636c422540974d93447c304e382391167881d"
+    },
+    "data/reports/resident_form_study/20261025/os/new_squat_side.jpg": {
+      "bytes": 63740,
+      "sha256": "a425fd8aa716d3d1142ad82039a494a66b648d1206195bf43f9bb37d570e660a"
+    },
+    "data/reports/resident_form_study/20261025/os/previous_original_back.jpg": {
+      "bytes": 68014,
+      "sha256": "91099598efec16b1c4b8feaaa5e8424c5d90d4add7d22655de55d6350f175125"
+    },
+    "data/reports/resident_form_study/20261025/os/previous_original_front.jpg": {
+      "bytes": 70876,
+      "sha256": "a98557f4f900835fd67bc200a0930a129357cc5685b20a2d5389f9a332c21293"
+    },
+    "data/reports/resident_form_study/20261025/os/returned_world.jpg": {
+      "bytes": 165834,
+      "sha256": "56f64e282d129e21ce5c888b46a38c716f4c0522a10572ab25aa769d0197213b"
+    },
+    "data/reports/resident_form_study/20261025/os_attempt01_paused_entry/menu_entry.png": {
+      "bytes": 175979,
+      "sha256": "b6e17d626ce60867d86fc864e494557ead2113cc75ea73ddabce4dc1e670cd83"
+    },
+    "data/reports/resident_form_study/20261025/os_attempt01_paused_entry/new_front.png": {
+      "bytes": 71398,
+      "sha256": "bc6ba0d617d878e5cf37d6e179edaa8028d4d7686daa3f68a65d746bd67df989"
+    },
+    "data/reports/resident_form_study/20261025/peer_readonly_audit_dev02.json": {
+      "bytes": 9609,
+      "sha256": "93b0d7d1344cdec03514e7df39412dd2612bd361683ff617654f0ec67e181009"
+    },
+    "data/reports/resident_form_study/20261025/peer_readonly_audit_final01.json": {
+      "bytes": 13821,
+      "sha256": "a46fc298a82385a309287283177ae382944b74a7662879f7272dbcf384825c96"
+    },
+    "data/reports/resident_form_study/20261025/peer_readonly_audit_final02.json": {
+      "bytes": 14414,
+      "sha256": "66bcc78c628a8e1760cffc8e939cafee56bcb465ff38fa083dbc9b6e2a19777a"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev01.console.log": {
+      "bytes": 5282,
+      "sha256": "2e49a25cc22822e69bca1a63ff22ce47dba3abefede8a9529e1706480a528852"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev01.json": {
+      "bytes": 823044,
+      "sha256": "ad8a63df23e561e5e0ace375ab4e162de135cc0fb751bd8c8e0c416c0df3c2fc"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev01.log": {
+      "bytes": 5282,
+      "sha256": "2e49a25cc22822e69bca1a63ff22ce47dba3abefede8a9529e1706480a528852"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev01.run.json": {
+      "bytes": 3090,
+      "sha256": "ffd7d4a313cbaf4dc2d77d13c3ff4d5e12fae92bf9a9f8cac88cdfb6854c7489"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev02.console.log": {
+      "bytes": 5278,
+      "sha256": "cadc1c9febc5d7a006a517f093f3c01186c70cfc0c1281eb6e993c2164abb848"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev02.json": {
+      "bytes": 827286,
+      "sha256": "1337939efde567b770e67da12d5c526378c77567c084824af8f7b6d3270b1f27"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev02.log": {
+      "bytes": 5278,
+      "sha256": "cadc1c9febc5d7a006a517f093f3c01186c70cfc0c1281eb6e993c2164abb848"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_dev02.run.json": {
+      "bytes": 3090,
+      "sha256": "6930bc7f2f8e21de0f48b90a9002051709a806b6ec93d3ee39dbff23dd1a946f"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01.console.log": {
+      "bytes": 4189,
+      "sha256": "1f099c190890e99f8679dc11d0a9330137fafbfd2e44defad528f00de4022ca3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01.json": {
+      "bytes": 760566,
+      "sha256": "4600315ec36eb7f4bbf2ca966d14faaf7a428936436ad4ecfd5d20c881908a7b"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01.log": {
+      "bytes": 4189,
+      "sha256": "1f099c190890e99f8679dc11d0a9330137fafbfd2e44defad528f00de4022ca3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01.run.json": {
+      "bytes": 3195,
+      "sha256": "61c36eba9c8a38b9eb0e781f872ee2d6734369429fac211cdd2191a9ff8d2e2a"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": {
+      "bytes": 1216,
+      "sha256": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 24800,
+      "sha256": "91b732b94e490d1579a439f08540036394eaa10d64efaabcabf18d162a312c20"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 15039,
+      "sha256": "aef08044ab4548b5e29aec78796420f11a0fdd60ee57f106539ac3d18e2b498e"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 3865,
+      "sha256": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02.console.log": {
+      "bytes": 4189,
+      "sha256": "1f099c190890e99f8679dc11d0a9330137fafbfd2e44defad528f00de4022ca3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02.json": {
+      "bytes": 760656,
+      "sha256": "820d35147a06a64f399e0b79b9b5718fa5f2de45396d73ac51e81924d1aad884"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02.log": {
+      "bytes": 4189,
+      "sha256": "1f099c190890e99f8679dc11d0a9330137fafbfd2e44defad528f00de4022ca3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02.run.json": {
+      "bytes": 3194,
+      "sha256": "6b2168e8707467039bd8a876aea61c9a71520f926e3028924fa2b231e4726b7b"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": {
+      "bytes": 1216,
+      "sha256": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 25019,
+      "sha256": "4287098ab32dce39f88667e8e667126b8102c08f071b998e05e51b8cf03942b3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 15186,
+      "sha256": "974630a822b0264160f2f258a0ef4365990a6e91d55fe799755d850333ebbf88"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 3865,
+      "sha256": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "data/reports/resident_form_study/20261025/study_headless_final02_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02.console.log": {
+      "bytes": 6912,
+      "sha256": "4670eb82232067392dea7c1236308e67c0c7d57b8f684c8f64cf9122232bf7a7"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02.json": {
+      "bytes": 875256,
+      "sha256": "d3a9e8ba913386a891888b146cfe3874530a0eec18dac7265728d1f5aad1522f"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02.log": {
+      "bytes": 6912,
+      "sha256": "4670eb82232067392dea7c1236308e67c0c7d57b8f684c8f64cf9122232bf7a7"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02.run.json": {
+      "bytes": 3066,
+      "sha256": "9a38e080bbbef9b2f7fedd6657d3fcaf557c282cedf8d79e4f3120a6dd9f63a7"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_back.png": {
+      "bytes": 66349,
+      "sha256": "ae66b51e142c55384c76f31b9d15e0a3d2cc2e23d8716b10affe626432f66eba"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_front.png": {
+      "bytes": 67674,
+      "sha256": "4d43021aab4b79cd3f03aeb2ca2759d31cddced58b39ec992ba0a4a3f1452d9a"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_oblique.png": {
+      "bytes": 63732,
+      "sha256": "d7d6d93ae2668050b3934c4a7e73c4112435c19372311470a50050b728f403d1"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_right.png": {
+      "bytes": 49941,
+      "sha256": "bfc0f8df5bacdacb6bb6d6fa0be3cd8d8b0760627a6e7ead35e89c4776adabfe"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_arm_raise_front.png": {
+      "bytes": 54909,
+      "sha256": "ac2ff1a8ddd557a212ce58866abda7c56f4ab9d9414b7123679ebf7357292d76"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_deep_squat_right.png": {
+      "bytes": 54519,
+      "sha256": "abbc6d42840124de378ffbdaed8f547951563f6ea924dc2080dad9754d9a19f0"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_new_single_support_front.png": {
+      "bytes": 66894,
+      "sha256": "660c080353433f61e392ec6f13cf20c9ffe22708e30e8175d249c20d822f2a08"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_back.png": {
+      "bytes": 70844,
+      "sha256": "0d7f0e6d799e7d9858c149d7145edf4a7d0b8d2eaa4a17878edd7b0df10cccc9"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_front.png": {
+      "bytes": 73849,
+      "sha256": "ae49903ac36d50ce5eebba640573f1d7a8f6cc202aaa325a625a5d872e07c5c1"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_oblique.png": {
+      "bytes": 70193,
+      "sha256": "d08bbad48083eb75b4157e6da2ce9a21b2c9e573a4c943a4416d1d96977f52d3"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_right.png": {
+      "bytes": 54749,
+      "sha256": "cb48f17245b0a840e10870388bb46c7d2b457e1d59f215188d51643453f5197f"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_arm_raise_front.png": {
+      "bytes": 61713,
+      "sha256": "a482d70bc36ab6b6f5002bd4f36db008e2f474115cb58a78050ac27700a39909"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_deep_squat_right.png": {
+      "bytes": 60149,
+      "sha256": "4344ff95ad23f0b872d495b8685acd3b06b3bb841a768ef9fb80cc4f4bf612e0"
+    },
+    "data/reports/resident_form_study/20261025/study_native_dev02_previous_single_support_front.png": {
+      "bytes": 71557,
+      "sha256": "214adbbbdd94568e17326b743761d6335602238816ea9a4a3d38654ea5a61f26"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01.console.log": {
+      "bytes": 5596,
+      "sha256": "981f9331175de72c77bc3598be309137be866b4139e1fd6f7ea1ad7dc7a6cc68"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01.json": {
+      "bytes": 798453,
+      "sha256": "0d17d24a537b64ae7461d12603d2d5d1e70bc755f7ad09a7abb701bb6eb5be89"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01.log": {
+      "bytes": 5596,
+      "sha256": "981f9331175de72c77bc3598be309137be866b4139e1fd6f7ea1ad7dc7a6cc68"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01.run.json": {
+      "bytes": 3168,
+      "sha256": "288041438073ab2afeb15d19f5a8280bb26ddb5fc9d8b2bdbc036af1f7a01e20"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_a_pose_back.png": {
+      "bytes": 66528,
+      "sha256": "5c44a9a4223cddaa147c5a239c7bbd5629d0be9958f9e07cdd2d420d66b0b43f"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_a_pose_front.png": {
+      "bytes": 67966,
+      "sha256": "de168a5cb91c6f4c89408055866be6123a775b8293c5e7f019674d7beaeaf343"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_a_pose_oblique.png": {
+      "bytes": 64148,
+      "sha256": "c04b4a13bd5e4670a8e277466af381dc189b4222b4b7e620784211e413a6d577"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_a_pose_right.png": {
+      "bytes": 50199,
+      "sha256": "b0a4f84e5c2ee0c27af78be70a1111e8e90e612676fd798a89f2022793aa59cf"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_arm_raise_front.png": {
+      "bytes": 55088,
+      "sha256": "ff894abdbb8c8c3ead17e5878af46d1bb10ae14bc1595820f5d25feb93bf1f83"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_deep_squat_right.png": {
+      "bytes": 54782,
+      "sha256": "a0a40378f6d8d45557a40c59dfc266cf0ed0b6203bdcf0a67fe8532045f6e404"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_new_single_support_front.png": {
+      "bytes": 67076,
+      "sha256": "f41ccc8e11c75c09a4aadd85804a3a1111aa374ebd7a3ff398688845d0f580bf"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_previous_a_pose_back.png": {
+      "bytes": 67067,
+      "sha256": "e47d38ce6c369916dabd52486214f055dd1099383bf22d76c1f84be8c25fbbc2"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_previous_a_pose_front.png": {
+      "bytes": 69697,
+      "sha256": "576fb55d6c7bd4d1191bbf46e1ce0af1abe61c88294e97e500f514b5fbbde0f2"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_previous_a_pose_oblique.png": {
+      "bytes": 66427,
+      "sha256": "70af2d6e9b71940de1ad43542e44a1ee803c383c7b07448fd9ae8d4288d974eb"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_previous_a_pose_right.png": {
+      "bytes": 54036,
+      "sha256": "86d26525fbc963d08d9e1c4051a13c4aea15fe6a0723067ecd55122842c18933"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": {
+      "bytes": 1216,
+      "sha256": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 24800,
+      "sha256": "91b732b94e490d1579a439f08540036394eaa10d64efaabcabf18d162a312c20"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 15039,
+      "sha256": "aef08044ab4548b5e29aec78796420f11a0fdd60ee57f106539ac3d18e2b498e"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 3865,
+      "sha256": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02.console.log": {
+      "bytes": 5596,
+      "sha256": "981f9331175de72c77bc3598be309137be866b4139e1fd6f7ea1ad7dc7a6cc68"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02.json": {
+      "bytes": 798543,
+      "sha256": "c8e1e4d3bed1b4a4e0e2d742ce1074927bf88c8afae862b284d0284f6850e165"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02.log": {
+      "bytes": 5596,
+      "sha256": "981f9331175de72c77bc3598be309137be866b4139e1fd6f7ea1ad7dc7a6cc68"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02.run.json": {
+      "bytes": 3169,
+      "sha256": "b0b6a4236e24a7f4d1d1c9e2e3538c27c87e37b4f97a10c710fe64739cebcc99"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_back.png": {
+      "bytes": 66528,
+      "sha256": "5c44a9a4223cddaa147c5a239c7bbd5629d0be9958f9e07cdd2d420d66b0b43f"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_front.png": {
+      "bytes": 67966,
+      "sha256": "de168a5cb91c6f4c89408055866be6123a775b8293c5e7f019674d7beaeaf343"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_oblique.png": {
+      "bytes": 64148,
+      "sha256": "c04b4a13bd5e4670a8e277466af381dc189b4222b4b7e620784211e413a6d577"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_a_pose_right.png": {
+      "bytes": 50199,
+      "sha256": "b0a4f84e5c2ee0c27af78be70a1111e8e90e612676fd798a89f2022793aa59cf"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_arm_raise_front.png": {
+      "bytes": 55088,
+      "sha256": "ff894abdbb8c8c3ead17e5878af46d1bb10ae14bc1595820f5d25feb93bf1f83"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_deep_squat_right.png": {
+      "bytes": 54782,
+      "sha256": "a0a40378f6d8d45557a40c59dfc266cf0ed0b6203bdcf0a67fe8532045f6e404"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_new_single_support_front.png": {
+      "bytes": 67076,
+      "sha256": "f41ccc8e11c75c09a4aadd85804a3a1111aa374ebd7a3ff398688845d0f580bf"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_back.png": {
+      "bytes": 67067,
+      "sha256": "e47d38ce6c369916dabd52486214f055dd1099383bf22d76c1f84be8c25fbbc2"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_front.png": {
+      "bytes": 69697,
+      "sha256": "576fb55d6c7bd4d1191bbf46e1ce0af1abe61c88294e97e500f514b5fbbde0f2"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_oblique.png": {
+      "bytes": 66427,
+      "sha256": "70af2d6e9b71940de1ad43542e44a1ee803c383c7b07448fd9ae8d4288d974eb"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_previous_a_pose_right.png": {
+      "bytes": 54036,
+      "sha256": "86d26525fbc963d08d9e1c4051a13c4aea15fe6a0723067ecd55122842c18933"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": {
+      "bytes": 1216,
+      "sha256": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 25019,
+      "sha256": "4287098ab32dce39f88667e8e667126b8102c08f071b998e05e51b8cf03942b3"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 15186,
+      "sha256": "974630a822b0264160f2f258a0ef4365990a6e91d55fe799755d850333ebbf88"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 3865,
+      "sha256": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "data/reports/resident_form_study/20261025/study_native_final02_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    },
+    "data/reports/resident_form_study/20261025/user_preferences_after.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_form_study/20261025/user_preferences_before.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_form_study/20261025/visual_review_peer.json": {
+      "bytes": 26653,
+      "sha256": "3da9a3ab591896b1f5ec59e1b4926f59484cd086eb9d67a5872c3fcbf9135099"
+    },
+    "data/reports/resident_form_study/20261025/visual_review_peer_dev02_legacy_rejected.json": {
+      "bytes": 16454,
+      "sha256": "1d2d33e9b3fa5fac276252cf3f3cdf2cd88764da585acfeda531baa34ad7a07a"
+    },
+    "data/reports/resident_form_study/20261025/visual_review_peer_final01_os_pause_rejected.json": {
+      "bytes": 16913,
+      "sha256": "31b20a57d20288f8fd331fb477694162ede97827aa6d88e722af97fea42fbcdf"
+    },
+    "docs/ATTRIBUTION.md": {
+      "bytes": 29324,
+      "sha256": "0422eaec9305738ca509966dda79968596f25b58ae7ccfc6ded7363102a79cf9"
+    },
+    "docs/CHARACTER_IDENTITIES.md": {
+      "bytes": 10231,
+      "sha256": "f4e4d51ab5da14e0fc95708df0c881ca1274e5599263987c9e09de9441d18237"
+    },
+    "docs/EXECUTION_LOG.md": {
+      "bytes": 360836,
+      "sha256": "d3ba35a64283961f6593084da1affd0fe6f44ed143e439d6ef9f88c36ba7a272"
+    },
+    "docs/IMPLEMENTATION_TASKS.md": {
+      "bytes": 92001,
+      "sha256": "0775b0814feb26268e0a96405866b2338e1efc84a38e2e5edad8c80fc782e547"
+    },
+    "docs/PROJECT_CONTEXT.md": {
+      "bytes": 68834,
+      "sha256": "72d025cefbc3f7f2ac60596a2d736540b1c23c87cd28ae9fae880f3ca177fcf2"
+    },
+    "docs/README.md": {
+      "bytes": 4068,
+      "sha256": "0d348b0f9d410db1fa1b9bbc41a860329865c65b9e52336c36b4686d6b5d3585"
+    },
+    "docs/RUN_GUIDE.md": {
+      "bytes": 58009,
+      "sha256": "06c2dea13620034af75ff49ff05c78ffc613ab683b3eaa99fa25018f2f14c670"
+    },
+    "docs/SOL_HANDOFF.md": {
+      "bytes": 55187,
+      "sha256": "3a8726032d5db4a043b076a228d3698a9f05dc54942e53c446342dda506a3f25"
+    },
+    "docs/VALIDATION_PLAN.md": {
+      "bytes": 133693,
+      "sha256": "d9f393da79e478727ae12cfc467acc8d1d9ba8f49f7d3e001cf39d442f72f52e"
+    },
+    "docs/WORK_STATUS.md": {
+      "bytes": 149140,
+      "sha256": "23cbe441f2657390c2ba90f1807876650e3e3dbd2ce69a4c5eca5d5c27610607"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 5070984,
+      "sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb": {
+      "bytes": 10228992,
+      "sha256": "ed3c7e592d04e2ad9950a4b6c8013d85bda335e65cdaf8e4ba58cabdf86236f7"
+    },
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": {
+      "bytes": 1216,
+      "sha256": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c"
+    },
+    "game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "game/scenes/world/explore_walk.tscn": {
+      "bytes": 589,
+      "sha256": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939"
+    },
+    "game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "game/scripts/player_fixture.gd": {
+      "bytes": 9533,
+      "sha256": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6"
+    },
+    "game/scripts/study/resident_form_study.gd": {
+      "bytes": 25019,
+      "sha256": "4287098ab32dce39f88667e8e667126b8102c08f071b998e05e51b8cf03942b3"
+    },
+    "tests/game/check_resident_form_study.gd": {
+      "bytes": 15186,
+      "sha256": "974630a822b0264160f2f258a0ef4365990a6e91d55fe799755d850333ebbf88"
+    },
+    "tools/check_resident_form_handoff.py": {
+      "bytes": 18761,
+      "sha256": "b3564b1bf15cff11bcaf9a302c22f7961495d4b4fb61028cb2b108c8cf363d6b"
+    },
+    "tools/run_resident_form_study.sh": {
+      "bytes": 455,
+      "sha256": "22c0f3a9fbdb2e56be7bf2962170b4f50e8825a1b59214300700925eb804c633"
+    },
+    "tools/run_resident_form_study_acceptance.py": {
+      "bytes": 3865,
+      "sha256": "3d6c171172768c731c4167c015517c12b97ad4c8e2f999d301c7067fc3e6c911"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 18289,
+      "sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 12293,
+      "sha256": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12400,
+      "sha256": "ea780eab71ebaf851352f6e4f8d192aa05c82e5d2eaf66a504562472a25320e4"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 26427,
+      "sha256": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+    }
+  },
+  "integrity_checker_scope": "Current file sizes/SHA, selected stored engine evidence, GLB audit and bounded root OS record only. No new engine execution or visual acceptance.",
+  "os_image_format_note": "Eight actual CUA screenshots are original JPEG bytes with .jpg filenames. No re-encoding or pixel edits. Previous failed OS attempt retains original misnamed .png/JPEG history.",
+  "evidence_frozen_at_utc": "2026-10-24T16:43:39.014591+00:00"
+}

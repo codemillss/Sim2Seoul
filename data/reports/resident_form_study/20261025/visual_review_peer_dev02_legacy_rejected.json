@@ -1,0 +1,311 @@
+{
+  "task": "EXP35_RESIDENT_FORM_STUDY_PEER_VISUAL_REVIEW",
+  "created_at_utc": "2026-10-24T16:23:57.711603+00:00",
+  "reviewer": "combat_rework peer",
+  "source_frozen": true,
+  "engine_run_by_peer": false,
+  "source_or_game_mutated_by_review": false,
+  "selected_evidence": [
+    "data/reports/resident_form_study/20261025/study_headless_dev02.json",
+    "data/reports/resident_form_study/20261025/study_native_dev02.json"
+  ],
+  "counts": {
+    "headless_checks": 69,
+    "native_checks": 86,
+    "total_assertions": 155,
+    "native_original_pngs": 14,
+    "actually_opened_original_pngs": 14,
+    "native_hold_pose_observations": 8
+  },
+  "disposition": {
+    "read_only_integrity_audit": "PASS",
+    "same_scene_functional_integrity": "PASS",
+    "new_form_static_and_three_diagnostic_holds": "BOUNDED_REVIEW_ONLY",
+    "legacy_single_support_deformation": "REWORK",
+    "anatomical_realism_acceptance": false,
+    "fully_realistic_character": false,
+    "art_acceptance": false,
+    "user_art_acceptance": false
+  },
+  "audit_file": "data/reports/resident_form_study/20261025/peer_readonly_audit_dev02.json",
+  "audit_sha256": "93b0d7d1344cdec03514e7df39412dd2612bd361683ff617654f0ec67e181009",
+  "run_bindings": [
+    {
+      "mode": "headless",
+      "report_sha256": "1337939efde567b770e67da12d5c526378c77567c084824af8f7b6d3270b1f27",
+      "wrapper_sha256": "6930bc7f2f8e21de0f48b90a9002051709a806b6ec93d3ee39dbff23dd1a946f",
+      "actual_engine_returncode": 0,
+      "strict_returncode": 0,
+      "checks_all_true": true,
+      "wrapper_engine_errors": [],
+      "console_and_engine_log_errors": {
+        "data/reports/resident_form_study/20261025/study_headless_dev02.console.log": [],
+        "data/reports/resident_form_study/20261025/study_headless_dev02.log": []
+      },
+      "source_mismatches": [],
+      "internal_before_after_same": true,
+      "source_changes_during_run": []
+    },
+    {
+      "mode": "native",
+      "report_sha256": "d3a9e8ba913386a891888b146cfe3874530a0eec18dac7265728d1f5aad1522f",
+      "wrapper_sha256": "9a38e080bbbef9b2f7fedd6657d3fcaf557c282cedf8d79e4f3120a6dd9f63a7",
+      "actual_engine_returncode": 0,
+      "strict_returncode": 0,
+      "checks_all_true": true,
+      "wrapper_engine_errors": [],
+      "console_and_engine_log_errors": {
+        "data/reports/resident_form_study/20261025/study_native_dev02.console.log": [],
+        "data/reports/resident_form_study/20261025/study_native_dev02.log": []
+      },
+      "source_mismatches": [],
+      "internal_before_after_same": true,
+      "source_changes_during_run": []
+    }
+  ],
+  "source_sha256": {
+    "art/characters/resident_form_m01.blend": "5019fcfce262f12482d42a44e065dd6ba0a6ee3d6bd8a744eba33ec645723046",
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": "d36cfd5d091edfd87ed1477f5682abfd2ad058d78dd1576b7b1b86b400016d18",
+    "game/assets/original/resident_study/resident_form_m01.glb": "c15945c0288e50a10ba0604f2fc1adca8b97b85ac1c879bae3d1a5c184c1feb0",
+    "game/assets/original/resident_study/resident_form_m01.glb.import": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20",
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb": "ed3c7e592d04e2ad9950a4b6c8013d85bda335e65cdaf8e4ba58cabdf86236f7",
+    "game/assets/original/seoul_resident/seoul_resident_m01_swim.glb.import": "019f65c0527e1f985a0cd9f9a65e61eaa88f237ceab70c302e7987749fb7f76c",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "game/scenes/study/resident_form_study.tscn": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9",
+    "game/scripts/explore_walk.gd": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd",
+    "game/scripts/study/resident_form_study.gd": "a3fc6ee7698a682a8e7701cd42ce5d06f0da8fa170d0659b53570d9f0b8f580c",
+    "tests/game/check_resident_form_study.gd": "b197e9f430f95e063b297adc28acca2154e642b3ec8a9e0c463143dcc3855b77",
+    "tools/run_resident_form_study_acceptance.py": "fecd1cd3827f66737c2249d823f3dca566be2a3590f40c2f94427590de0f5ffc",
+    "tools/sculpted_character/build_body_cage.py": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3",
+    "tools/sculpted_character/build_head_extremities.py": "bf339339e266a0571f88611324efeba61bcc0a65c970b46072a28e0f09666eac",
+    "tools/sculpted_character/build_resident_study.py": "f6ea5fdefcbf358e8f7c3f95275c250d0d2fd35c7b6b76c04e195abb64288cc5",
+    "tools/sculpted_character/build_study_rig.py": "45fdbce6059fb28078a71c2cede321abb1dd0c0f5d292b76214a628a040ba140"
+  },
+  "all_captures_match_recorded_hash_dimensions_actual_glb_palette_and_unobscured_frame": true,
+  "comparison_camera_light_pairs": [
+    {
+      "pose": "a_pose",
+      "view": "front",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "a_pose",
+      "view": "right",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "a_pose",
+      "view": "back",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "a_pose",
+      "view": "oblique",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "arm_raise",
+      "view": "front",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "deep_squat",
+      "view": "right",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    },
+    {
+      "pose": "single_support",
+      "view": "front",
+      "camera_equal": true,
+      "fov_equal": true,
+      "framing_equal": true,
+      "lighting_equal": true
+    }
+  ],
+  "material_observation": {
+    "measured_roughness": 0.720000028610229,
+    "same_clay_on_both": true,
+    "albedo": [
+      0.519999980926514,
+      0.519999980926514,
+      0.519999980926514
+    ],
+    "albedo_texture": false,
+    "normal_texture": false,
+    "vertex_color_albedo": false,
+    "source_material_properties_unchanged_in_all_eight_pose_snapshots": true,
+    "scope": "Screen shows uniform gray override; actual unchanged base resources and exported/source bytes are verified independently by report/current-SHA audit, not inferred from appearance."
+  },
+  "actual_opened_original_files": [
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_front.png",
+      "sha256": "4d43021aab4b79cd3f03aeb2ca2759d31cddced58b39ec992ba0a4a3f1452d9a",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "front",
+      "observation": "전신과 모든 손끝·발끝이 상단 UI 아래에 들어온다. 무채색 연속 외피와 A자 팔 간격은 읽히지만 돌출된 눈·단순한 하관, 상완/대퇴의 균일한 원통형 윤곽이 아직 사람 원형으로 충분하지 않다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_right.png",
+      "sha256": "bfc0f8df5bacdacb6bb6d6fa0be3cd8d8b0760627a6e7ead35e89c4776adabfe",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "right",
+      "observation": "측면에서 전신이 잘리지 않고 목→몸통 및 손목·발목에 큰 분리 틈은 보이지 않는다. 발은 길고 매끈한 윤곽이며 종아리/발목/뒤꿈치 랜드마크 구분이 약하다. 1m 표식은 몸통 뒤에서 일부 가려진다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_back.png",
+      "sha256": "ae66b51e142c55384c76f31b9d15e0a3d2cc2e23d8716b10affe626432f66eba",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "back",
+      "observation": "후면 실루엣이 온전히 보인다. 고정 세계 조명 때문에 후면 표면이 어둡고, 견갑·척추주변·둔근 볼륨은 매우 단순하다. 피부나 근육의 사실성 수용 근거가 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_a_pose_oblique.png",
+      "sha256": "d7d6d93ae2668050b3934c4a7e73c4112435c19372311470a50050b728f403d1",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "oblique",
+      "observation": "45도에서 목·어깨·팔·골반의 연속 연결을 전신 배율로 관찰할 수 있다. 얼굴 눈/입 주변의 단순한 돌출과 작은 머리 대비 매끈한 몸통이 남으며 실사 미형으로 수용하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_arm_raise_front.png",
+      "sha256": "ac2ff1a8ddd557a212ce58866abda7c56f4ab9d9414b7123679ebf7357292d76",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "front",
+      "observation": "양손 끝까지 UI 아래에 들어오고 두 팔 올림은 명확하다. 어깨에서 상완으로 이어지는 면에 전신 배율의 큰 이탈은 못 봤다. 손은 edge-on이고 작아서 손바닥/손가락 해부나 손목 비틀림의 세부 수용은 하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_deep_squat_right.png",
+      "sha256": "abbc6d42840124de378ffbdaed8f547951563f6ea924dc2080dad9754d9a19f0",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "right",
+      "observation": "양팔이 앞쪽에 있고 골반 하강·무릎 굴곡·바닥에 닿은 발이 구분된다. 큰 표면 찢김은 이 전신 측면에서 못 봤다. 무릎/대퇴 볼륨이 단순하며 단일 hold로 연속 앉기 동작을 검증한 것은 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_new_single_support_front.png",
+      "sha256": "660c080353433f61e392ec6f13cf20c9ffe22708e30e8175d249c20d822f2a08",
+      "opened_actual_original": true,
+      "model": "new",
+      "pose": "single_support",
+      "view": "front",
+      "observation": "한쪽 지지 발과 들린 발이 분명하고 골반/다리의 자세 차이가 보인다. 이전 모델에 보이는 큰 삼각형 다리 접힘은 이 새 원형 원본에서는 관찰하지 못했다. 지지 균형·근육 부착·연속 체중 이동 수용은 별도다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_front.png",
+      "sha256": "ae49903ac36d50ce5eebba640573f1d7a8f6cc202aaa325a625a5d872e07c5c1",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "front",
+      "observation": "같은 무채색 조건에서 이전 모델의 흉곽/어깨 굴곡과 수영복 경계 형상이 남아 보인다. 새 원형보다 실제 원본 키가 작으며 비교를 위해 스케일 정규화하지 않았다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_right.png",
+      "sha256": "cb48f17245b0a840e10870388bb46c7d2b457e1d59f215188d51643453f5197f",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "right",
+      "observation": "전신 측면이 온전히 보인다. 이전 수영복 경계와 기존 하체 실루엣을 관찰할 수 있으나 새 원형과 동일한 topology/rig가 아니므로 모양 차이만으로 새 rig 우수성을 일반화하지 않는다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_back.png",
+      "sha256": "0d7f0e6d799e7d9858c149d7145edf4a7d0b8d2eaa4a17878edd7b0df10cccc9",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "back",
+      "observation": "기존 후면과 손발이 온전히 보이며 수영복 형상도 유지된다. 후면 조명은 새 모델처럼 어둡다. 화면에서 이전 재질 원본이 불변인지를 단독 증명할 수는 없고 실제 재질/파일 검사가 보완한다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_a_pose_oblique.png",
+      "sha256": "d08bbad48083eb75b4157e6da2ce9a21b2c9e573a4c943a4416d1d96977f52d3",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "oblique",
+      "observation": "기존 머리·어깨·흉곽 및 의복 경계가 같은 렌즈/빛에서 보인다. 이전 모델의 독립 surface 경계와 새 원형의 연속 외피 차이를 관찰할 수 있지만 피부 렌더링 비교는 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_arm_raise_front.png",
+      "sha256": "a482d70bc36ab6b6f5002bd4f36db008e2f474115cb58a78050ac27700a39909",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "front",
+      "observation": "두 팔 올림이 온전히 보인다. 기존 adapter는 손바닥이 정면에 더 많이 보이고 팔 각도도 새 NLA와 다르다. 공통 의미 자세 비교이며 정확히 동일한 관절 회전 비교는 아니다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_deep_squat_right.png",
+      "sha256": "4344ff95ad23f0b872d495b8685acd3b06b3bb841a768ef9fb80cc4f4bf612e0",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "right",
+      "observation": "기존 adapter로 골반 하강과 무릎 굴곡이 보인다. 팔 각도와 무릎/허벅지 형상은 새 NLA hold와 같지 않으며 수영복 형상이 유지된다."
+    },
+    {
+      "file": "data/reports/resident_form_study/20261025/study_native_dev02_previous_single_support_front.png",
+      "sha256": "214adbbbdd94568e17326b743761d6335602238816ea9a4a3d38654ea5a61f26",
+      "opened_actual_original": true,
+      "model": "previous",
+      "pose": "single_support",
+      "view": "front",
+      "observation": "명확한 시각 문제: 화면 오른쪽 다리의 대퇴~정강이(대략 x605–635,y410–595)에 큰 삼각형/각진 접힘이 보인다. 실제 indexed body의 원인 또는 legacy adapter 가정의 원인 여부는 아직 확정하지 않았으며, 이 pose의 기존 모델 변형 미술은 REWORK로 남긴다."
+    }
+  ],
+  "issues": [
+    {
+      "severity": "visual_rework",
+      "model": "previous",
+      "pose": "single_support",
+      "region_px": [
+        605,
+        410,
+        635,
+        595
+      ],
+      "observation": "Large angular/triangular fold on the screen-right thigh/shin under the disclosed legacy adapter. Root notified before any repair.",
+      "cause": "UNCONFIRMED: source skinning versus diagnostic legacy adapter; do not blame the new study rig from this image.",
+      "acceptance_effect": "No claim that all fourteen images are deformation-artifact-free. Legacy single-support form comparison remains visually rejected."
+    },
+    {
+      "severity": "art_prototype_limit",
+      "model": "new",
+      "observation": "Bulbous eye/short simplified lower face; uniform tubular arms and thighs; weak shoulder-blade/glute/calf landmarks; long smooth foot silhouette. The new model remains a clay prototype, not a human-realism completion."
+    },
+    {
+      "severity": "review_coverage_limit",
+      "observation": "Fixed world light makes rear surface darker. Edge-on raised hands and full-body capture size do not establish detailed fingers or palms."
+    }
+  ],
+  "scope": "Four base views plus three sparse diagnostic holds per model, actual native viewport originals. No continuous walking/running/transition, skin shading, close-up anatomy, ordinary OS input or user comfort acceptance is inferred. New model uses its actual imported NLA/morphs; old swim model uses a disclosed rest-based adapter and retains swimwear geometry. All seven paired cameras/FOV/per-pose framing/lights match, but source heights/rigs/topologies and exact joint angles differ. Numeric PASS is scene/capture/pose integrity and does not overrule observed art problems."
+}

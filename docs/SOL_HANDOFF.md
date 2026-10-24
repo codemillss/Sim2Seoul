@@ -1,5 +1,12 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP35 — 현재 인수: 단일 인체 원형
+
+[WORK_STATUS](WORK_STATUS.md)·[제작 설명](CHARACTER_IDENTITIES.md)·[EXP35 집계](../data/reports/resident_form_study/20261025/summary.json)를 먼저 읽는다. 새 `.blend`는 `art/characters/`에 있고 게임에는 준비된 GLB만 포함한다. 다른 Mac의 일반 실행에 Blender 재설치는 필요 없다. 선택 재생성은 체크섬을 확인한 공식 Blender4.5.15LTS와 `tools/sculpted_character/build_resident_study.py`를 사용한다.
+
+게임 Esc → 인체 원형 비교 · 무채색으로 들어간다. 새 원형 네 자세/네 방향, 이전 모델은 원본 rest 네 방향만 지원한다. 원형 비교의 이전 모델 특수 pose adapter는 왜곡 때문에 제거했고, 이전 native dev02 수치PASS14PNG는 현재 시각 수용으로 세지 않는다. 현재 selected 실행과 실제 OS 입력/복귀는 집계의 정확 소스·로그/PNG 해시를 따른다. 기존 플레이어/NPC를 새 원형으로 갈아끼우지 않는다. 다음 행동은 한 명의 큰 면 조형이며 미술 수용 이전에 파생 인물/기능을 늘리지 않는다. 아래 EXP34 이하는 이전 인수 이력이다.
+
+
 ## 2026-10-24 EXP34 — 현재 인수
 
 [WORK_STATUS](WORK_STATUS.md)·[첫 남녀 모델](CHARACTER_IDENTITIES.md)·[현재 집계](../data/reports/character_identity/20261024/summary.json)를 먼저 읽는다. 제작 모듈/원본 페인트와 프롬프트는 함께 보존한다. 일반 실행은 준비된12GLB를 import하며 재생성이 필요 없다. 선택 재생성은 NumPy/Pillow 환경과 저장된 두 자체 PNG를 사용한다.
