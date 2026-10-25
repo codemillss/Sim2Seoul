@@ -1,5 +1,15 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP39 — 현재 인수: delivery01 게시·운영212개 PASS
+
+[현재 상태](WORK_STATUS.md) → [EXP39 원본/실패/측정](../data/reports/web_sites/20261025/performance01/README.md) → [최종 게시](../data/reports/web_sites/20261025/performance01/delivery01_deployment.json)·[운영 검사](../data/reports/web_sites/20261025/performance01/deployed_asset_check.json)를 읽는다. 최종 릴리스는 performance01_build04_delivery01, Site 소스 `c67bf053417cf836106e99e900858c0cef0eaff1`이며 소유자 전용을 유지했다. 실제212개 조각·manifest/loader·전체 WASM/PCK SHA가 모두 첫 시도31.938초에 PASS다.
+
+게임 runtime은 build04와 같고 PCK180,846,148B·전송94,781,218B·212조각이다. 기존211개 전송의 PCK0만두512KiB로 나눴으며 전체 게임/다른 압축 바이트는 유지한다. native raw SHA 경로와 Web의 명시적 attestation/실제 scene15·texture49 검사를 구분한다. [최종 로컬 시작](../data/reports/web_sites/20261025/performance01/delivery01_runtime_dom.txt)은210cache/2network1,043,828B·16.505초다. 실제 드래그·W/Shift+W·메뉴·신/구 갤러리·도시 복귀를 확인했고 IAB의 마우스 잠금 거절은 드래그 대안으로 대응했다.
+
+짧은6표본 중앙값30.25FPS와 후속18표본26.15/최저8.2FPS를 구분한다. 저하가 남고 완전 통제 비교·전구역60FPS·모든 기기 보장이 아니다. 물리30Hz를 유지한다. build01 낮은 FPS·build02 fatal overlay·build03 import 실패·두 운영 PCK0 시간 초과를 삭제하지 않는다. 인증 후 운영 지속 플레이·청취·저장 재접속·장시간 성능은 별도 수용이다.
+
+사용자가 공동 도시 방향을 확정했지만 현재 게임은 단일 플레이다. [서버 원형](../tools/web/multiplayer/README.md)은 로컬 HTTP/SQLite14검사·yaw 경계 왕복만 완료한 게임 미연결·미호스팅이다.8명 정책/2Hz polling을 수용 인원·최종 동기화로 안내하지 않는다. 다음은 NPC 물리 계산과 지원 서버 배포 경로, 두 허용 계정의 상대 표시/이동·퇴장/재접속·지연 검증이다. 작업 브랜치 `codex/shared-city-performance-20261025`는 main `a1f6134`에서 시작했다. 아래 EXP38은 이전 이력이다.
+
 ## 2026-10-25 EXP38 recovery01 — 현재 인수: 운영94% 로딩 복구
 
 작업 브랜치는 `codex/web-loading-recovery-20261025`, 시작 main은 `65f6f7f`다. [사건 기록](../data/reports/web_sites/20261025/recovery01/incident.json)과 [복구 결합 검사](../data/reports/web_sites/20261025/recovery01/artifact_and_browser_check.json)를 먼저 읽는다. 실제 운영 `pck-005.gz`500/40.115초 읽기 시간 초과의 근본 원인은 미확정이다. 이전42조각 성공 기록으로 현재 운영 문제를 덮지 않는다.

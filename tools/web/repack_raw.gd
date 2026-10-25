@@ -1,6 +1,7 @@
 extends SceneTree
 ## Preserve the exporter's imported resources and add raw originals used by
 ## FileAccess integrity/audio code. Imported remaps stay intact.
+## Raw authoring GLBs are omitted; build-verified provenance and compiled models remain.
 var entries:Array[String]=[]
 func walk(path:String) -> void:
 	var dir:=DirAccess.open(path)
@@ -17,6 +18,7 @@ func _initialize() -> void:
 	var pack:=PCKPacker.new();var failures:Array=[]
 	var error:=pack.pck_start(args[1]);assert(error==OK)
 	for path:String in entries:
+		if path.ends_with(".glb"):continue
 		error=pack.add_file(path,path)
 		if error!=OK:failures.append({"path":path,"error":error})
 	var raw:Array=[]

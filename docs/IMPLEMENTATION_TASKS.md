@@ -1,5 +1,21 @@
 # Sol 실행 작업 계획
 
+## EXP39 — Web 개선판과 공동 도시 첫 통합 (2026-10-25)
+
+- [x] 공동 도시 목표 확정과 현재 단일 플레이 구현을 구분한다.
+- [x] Web raw GLB15개 중복 제외·명시적 attestation·실제 scene15/texture49·raw202/폰트 검사를 완료하고 native raw 경로를 유지한다.
+- [x] build01 낮은 FPS·build02 입력 실패·build03 Parse Error·두 운영 PCK0 시간 초과를 보존한다.
+- [x] visual LOD·XZ/route endpoint·선택 내부 이웃 재사용 뒤 build04 실제 빌드4단계와 드래그·W/Shift+W·메뉴·신/구 갤러리·도시 복귀를 확인한다.
+- [x] 마우스 잠금 거절만 비치명 처리하는 actual JS22검사·단일 조각 재분할6검사를 통과한다.
+- [x] delivery01 최종 게시·실제 운영212개 응답/개별·전체 SHA·manifest/loader 일치(31.938초)를 확인한다. 게임 runtime04/전체 SHA는 유지한다.
+- [x] 최종 로컬212개 조립/도시 준비와 기존 runtime04 warm18표본 중앙값26.15FPS·최저8.2의 저하를 기록한다.
+- [x] 로컬 HTTP 두 클라이언트+SQLite14검사에 yaw 경계 snapshot/sync 왕복을 포함한다. sandbox listen EPERM 실패 원문도 보존한다.
+- [ ] NPC 물리 계산 부담을 줄이고 같은 실제 조건에서 지속 플레이·프레임을 다시 측정한다. 전구역60FPS를 보장하지 않는다.
+- [ ] 지원 실시간 방 서버 배포 경로와 두 허용 계정의 Godot 상대 표시·이동·퇴장/재접속·지연을 검증한다.
+- [ ] 두 사람 통합 뒤4명, 이후8명 입장 정책 순서로 측정한다. 통과 전 수용 인원을 확정하지 않는다.
+
+[현재 상태](WORK_STATUS.md)·[실패/최종 판정](../data/reports/web_sites/20261025/performance01/README.md)·[서버 원형 범위](../tools/web/multiplayer/README.md)를 따른다. 게시/전송 PASS는 멀티플레이·인증 후 운영 지속 조작/청취/저장 수용과 구분한다. 아래 EXP38은 이전 이력이다.
+
 ## EXP38 recovery01 — 운영 로딩 정지 복구 (2026-10-25)
 
 - [x] 실제 운영94%·41/42 뒤 특정 조각 HTTP500과 서비스 읽기 시간 초과를 기록한다. 근본 원인은 미확정으로 남긴다.

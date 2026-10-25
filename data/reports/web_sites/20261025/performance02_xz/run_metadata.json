@@ -1,0 +1,37 @@
+{
+  "task": "EXACT_STATION_PROJECTION_XZ",
+  "frozen_runtime_files": [
+    "game/scripts/street_pedestrians.gd",
+    "game/scripts/exploration_pedestrian_avoidance.gd"
+  ],
+  "source_sha256": {
+    "game/scripts/street_pedestrians.gd": "126dfccfc76c4653bdd0f7598d6a0869acd47e6a64545eb892fff045e0d7fceb",
+    "game/scripts/exploration_pedestrian_avoidance.gd": "c85079982e0480a4c3633f0d06e116ae3addf39df66afad27335df8ed2119692",
+    "tests/game/check_station_projection_xz.gd": "8e9c34c372edf23a60289f724bdf99c4b8a57a5374107f2a4ef4a2647bce3795"
+  },
+  "attempts": [
+    {
+      "log": "xz_projection_test_attempt01.log",
+      "actual_exit_code": 1,
+      "engine_error_lines": 2944,
+      "script_error_lines": 2940,
+      "sha256": "02a9405e83442d4abf3c370c07561b7ae64e239931b3b2cf329bc895baa5add7"
+    },
+    {
+      "log": "xz_projection_test.log",
+      "actual_exit_code": 0,
+      "engine_error_lines": 0,
+      "script_error_lines": 0,
+      "sha256": "7120c277900051cd71cdc48f3427e9b175b916ab064c020886201cac17adab69"
+    }
+  ],
+  "selected_result": "xz_projection_check.json",
+  "selected_log": "xz_projection_test.log",
+  "selected_actual_exit_code": 0,
+  "selected_errors": 0,
+  "git_diff_check_exit_code": 0,
+  "verification": "Small headless script only. No city scene, native gameplay window, browser or performance benchmark launched.",
+  "initial_failure_and_repair": "Attempt01 fixture used an untyped empty Array in a typed conditional, read global transforms before SceneTree entry, and used an output path relative to game. Fixed fixture with deferred run, explicit typed array initialization, and absolute output path. Attempt01 also contains sandbox log/certificate initialization errors; final bounded run used explicit temporary engine logfile and normal certificate access. Production optimization was unchanged after attempt01.",
+  "behavior_contract": "Only station reprojection reads cached exact shifted arc-endpoint XZ. Original _at, current ground queries, movement/sweeps, physics frequency and gameplay/action state are untouched. Height-only terrain refresh retains XZ cache; live _at terrain Y tested independently.",
+  "performance_limit": "Avoided-call count is from controlled fixtures and is not a measured frame-time or browser FPS result."
+}

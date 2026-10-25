@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#111a21">
   <title>서울에서 시작하기 — Sim2Seoul</title>
   <link rel="stylesheet" href="site.css">
-  <script src="game-loader.js" defer></script>
+  <script src="game-loader.js?v=performance01" defer></script>
 </head>
 <body class="play-page">
   <main class="game-shell" id="gameShell" data-game-state="idle" aria-label="Sim2Seoul 게임">
@@ -14,7 +14,7 @@
     <header class="play-toolbar">
       <a class="play-brand" href="index.html" aria-label="소개로 돌아가기">Sim2Seoul<span class="brand-dot" aria-hidden="true"></span></a>
       <span class="toolbar-location">시청 · 덕수궁</span>
-      <div class="toolbar-actions"><button type="button" id="helpButton" aria-expanded="false" aria-controls="playHelp">조작 안내</button><button type="button" id="fullscreenButton">전체 화면</button><button type="button" id="reloadButton">다시 실행</button><a href="index.html">소개로 <span aria-hidden="true">↗</span></a></div>
+      <div class="toolbar-actions"><span id="performanceInfo" aria-label="실제 렌더링 프레임 속도"></span><label class="quality-control" for="qualitySelect">화질 <select id="qualitySelect" aria-label="게임 화질"><option value="fast">빠르게</option><option value="balanced">균형</option><option value="clear">멀리 보기</option></select></label><button type="button" id="helpButton" aria-expanded="false" aria-controls="playHelp">조작 안내</button><button type="button" id="fullscreenButton">전체 화면</button><button type="button" id="reloadButton">다시 실행</button><a href="index.html">소개로 <span aria-hidden="true">↗</span></a></div>
     </header>
     <aside class="play-help" id="playHelp" hidden>
       <h2>거리에서 사용하는 키</h2>

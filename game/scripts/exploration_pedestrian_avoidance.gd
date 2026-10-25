@@ -74,8 +74,9 @@ func set_running(enabled: bool) -> void:
 func _record_station(group: Dictionary) -> void:
 	var actor: CharacterBody3D=group.members[0].body;var p:=Vector2(actor.global_position.x,actor.global_position.z)
 	var best:=INF;var station: float=group.station
+	var projection_points: Array[Vector3]=street._station_projection_points(group)
 	for index in range(1,group.points.size()):
-		var a: Vector3=street._at(group,group.arc[index-1]);var b: Vector3=street._at(group,group.arc[index])
+		var a: Vector3=projection_points[index-1];var b: Vector3=projection_points[index]
 		var q:=Geometry2D.get_closest_point_to_segment(p,Vector2(a.x,a.z),Vector2(b.x,b.z));var distance:=q.distance_to(p)
 		if distance>=best:continue
 		best=distance;station=lerpf(group.arc[index-1],group.arc[index],q.distance_to(Vector2(a.x,a.z))/maxf(.0001,Vector2(b.x-a.x,b.z-a.z).length()))

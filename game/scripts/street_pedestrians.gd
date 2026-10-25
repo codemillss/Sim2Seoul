@@ -96,6 +96,25 @@ func _at(group: Dictionary,station: float,side_extra := 0.0) -> Vector3:
 		return _terrain_point(a.lerp(b,(s-group.arc[index-1])/(group.arc[index]-group.arc[index-1])))
 	return _terrain_point(group.points.back())
 
+func _station_projection_points(group: Dictionary) -> Array[Vector3]:
+	# Route XZ, arcs and miter offsets are immutable after setup. Station
+	# reprojection discards Y, so retain the exact _at interpolation arithmetic
+	# once without querying terrain. Physical targets still use _at/_ground.
+	if group.has("_station_projection_points"):return group._station_projection_points
+	var result: Array[Vector3]=[]
+	for station: float in group.arc:
+		var s:=clampf(station,0.,group.length)
+		var point: Vector3=group.points.back()
+		for index in range(1,group.points.size()):
+			if s>group.arc[index] and index<group.points.size()-1:continue
+			var a: Vector3=group.points[index-1];var b: Vector3=group.points[index]
+			var offset: float=float(group.record.side_offset_m)
+			a+=group.sides[index-1]*offset;b+=group.sides[index]*offset
+			point=a.lerp(b,(s-group.arc[index-1])/(group.arc[index]-group.arc[index-1]));break
+		result.append(point)
+	group["_station_projection_points"]=result
+	return result
+
 func _tangent(group: Dictionary,station: float) -> Vector3:
 	var offset:=_at(group,minf(station+.05,group.length))-_at(group,maxf(station-.05,0.));offset.y=0.;return offset.normalized()
 
@@ -412,8 +431,9 @@ func _physics_process(delta: float) -> void:
 			_step_member(row,target,float(_design.policy.maximum_dog_speed_mps) if row.kind=="dog" and speed>0. else speed,delta,motion_direction.normalized() if motion_direction.length()>.0001 else direction)
 			if row.get("physical_step_blocked",false):group["avoidance_preview_wait_s"]=0.0
 		var human: Dictionary=group.members[0];var closest:=INF;var station: float=group.station
+		var projection_points:=_station_projection_points(group)
 		for index in range(1,group.points.size()):
-			var a:=_at(group,group.arc[index-1]);var b:=_at(group,group.arc[index]);var p: Vector3=human.body.global_position
+			var a: Vector3=projection_points[index-1];var b: Vector3=projection_points[index];var p: Vector3=human.body.global_position
 			var q:=Geometry2D.get_closest_point_to_segment(Vector2(p.x,p.z),Vector2(a.x,a.z),Vector2(b.x,b.z));var error:=q.distance_to(Vector2(p.x,p.z))
 			if error<closest:
 				closest=error

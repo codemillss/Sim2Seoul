@@ -1,0 +1,165 @@
+{
+  "selected_release": "performance01_build04_delivery01",
+  "scope": "Local IAB, fast profile, full exploration city. Window samples are not instantaneous FPS or a capacity/load test. Different times and view/input sequences; not a controlled causal benchmark. Background native game unchanged.",
+  "files": {
+    "cold_runtime_dom.txt": {
+      "sha256": "82c830734c03bee9b92b2f606891dadd364702d3ff6aefa567e1b7c6e97590e2",
+      "boot": [],
+      "sample_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "render_fps_min": 14.5,
+      "render_fps_median": 16.8,
+      "render_fps_max": 17.6,
+      "physics_ms_median": 25.0
+    },
+    "build02_update_runtime_dom.txt": {
+      "sha256": "b475a66821ad1ad58166a8a42021dd52e89ab69f0b560c85cba62520c863a957",
+      "boot": [
+        {
+          "ready_ms": 16581,
+          "quality": "fast",
+          "cached_chunks": 177,
+          "total_chunks": 211,
+          "cached_bytes": 73801545,
+          "network_bytes": 20979605
+        }
+      ],
+      "sample_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "render_fps_min": 24.6,
+      "render_fps_median": 28.85,
+      "render_fps_max": 33.0,
+      "physics_ms_median": 24.65
+    },
+    "build04_runtime_dom.txt": {
+      "sha256": "9ea081ade488ef9999082ce164dc8a5725cf3a2827c2937e8eba8fe6ebcd2282",
+      "boot": [
+        {
+          "ready_ms": 17028,
+          "quality": "fast",
+          "cached_chunks": 68,
+          "total_chunks": 211,
+          "cached_bytes": 41322392,
+          "network_bytes": 53458812
+        }
+      ],
+      "sample_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "render_fps_min": 16.1,
+      "render_fps_median": 30.25,
+      "render_fps_max": 32.0,
+      "physics_ms_median": 24.65
+    },
+    "build04_warm_runtime_dom.txt": {
+      "sha256": "d8f8d9aa962477907806e0f4e16f5c2da68b17530649d164b5b186f552d85a50",
+      "boot": [
+        {
+          "ready_ms": 16599,
+          "quality": "fast",
+          "cached_chunks": 211,
+          "total_chunks": 211,
+          "cached_bytes": 94781204,
+          "network_bytes": 0
+        }
+      ],
+      "sample_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "render_fps_min": 8.2,
+      "render_fps_median": 26.15,
+      "render_fps_max": 33.9,
+      "physics_ms_median": 25.55
+    }
+  },
+  "delivery": {
+    "previous_bytes": 141196835,
+    "selected_bytes": 94781218,
+    "reduction_percent": 32.872986848465835,
+    "selected_chunks": 212,
+    "pck_bytes": 180846148,
+    "wasm_bytes": 39514754
+  },
+  "limits": [
+    "Frame drops remain, including camera change and later idle samples. Do not claim smooth all-city play or60FPS.",
+    "Cached game chunks0network bytes excludes manifest/config/engine JS and Godot initialization; cold transfer still about95MB.",
+    "Actual production engine play could not be checked through the automation account login gate. Same packaged city was checked locally; production assets checked separately.",
+    "Multiplayer14localtests is an unhosted prototype, not integrated Godot or verified player capacity."
+  ],
+  "source_sha256": {
+    "tools/web/site/game-loader.js": "6d40c73054ab1736349b7810e11cb9e8e872212fa56ad9c4e2499f37b199df60",
+    "tools/web/site/play.html": "90c8b0d89ecc8e4ae63135b6b826079865c4c3b4cc267b61bcffefcee10a68a2",
+    "tools/web/site/site.css": "bbadd67b6f99cb47baa45876c29dca10040a9149f05c58a8c8c722dcda23c0a4",
+    "game/scripts/player/camera_rig.gd": "ea542f2c13e969f92e42166b1f3fe8e9c5cc7a878ff7964cfb0edf4dcc6b565a"
+  },
+  "delivery_repair": {
+    "release": "performance01_build04_delivery01",
+    "transfer_bytes": 94781218,
+    "chunks": 212,
+    "delta_bytes": 14,
+    "whole_game_sha256_unchanged": true,
+    "other_compressed_chunks_unchanged": true,
+    "production_pass": true,
+    "production_verified_chunks": 212,
+    "production_seconds": 31.938,
+    "native_publish_receipt": "delivery01_deployment.json",
+    "source_sha256": "cd181353a676335576551a76f98b264fd5c25ef23993bd9cba9543a6c619ad23",
+    "local_browser": {
+      "log": "delivery01_runtime_dom.txt",
+      "log_sha256": "08dd76a065007f7128aae7851ec8f3fb7b03cc85534eabaf012b48763a317fc7",
+      "boot": [
+        {
+          "ready_ms": 16505,
+          "quality": "fast",
+          "cached_chunks": 210,
+          "total_chunks": 212,
+          "cached_bytes": 93737390,
+          "network_bytes": 1043828
+        }
+      ],
+      "scope": "Local actual engine boot and city from split manifest; same full game PCK; this is not production browser gameplay or a second controlled FPS benchmark."
+    }
+  },
+  "game_build": "performance01_build04",
+  "game_build04_delivery_before_repair": {
+    "previous_bytes": 141196835,
+    "selected_bytes": 94781204,
+    "reduction_percent": 32.87299676370225,
+    "selected_chunks": 211,
+    "pck_bytes": 180846148,
+    "wasm_bytes": 39514754
+  }
+}

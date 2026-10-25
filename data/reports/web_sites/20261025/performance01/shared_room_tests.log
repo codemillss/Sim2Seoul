@@ -1,0 +1,21 @@
+✔ two signed-in players join the same actual SQL room and observe accepted movement (12.302334ms)
+✔ authentication, room invite, account binding and exact origin all gate access (1.855458ms)
+✔ build mismatches and unrecognized avatar/state fields cannot enter the room (2.2915ms)
+✔ snapshot and movement share the two-Hz mutation limit; stale/reordered sequences are rejected (1.451583ms)
+✔ atomic admission remains within policy cap when nine guests join concurrently (4.377375ms)
+✔ TTL removes silent players and expired room cannot be revived (2.9445ms)
+✔ rejoin rotates session, prevents duplicate accounts, and observes join cooldown (1.831792ms)
+✔ movement speed, finite coordinates and coarse bounds reject invalid state without advancing sequence (1.393875ms)
+✔ optimistic SQL update allows only one concurrent state writer per player (0.879583ms)
+✔ room owner can close, members can leave, and creation has cooldown and an active-room cap (1.839083ms)
+✔ snapshots contain only pseudonymous public state; credentials are hashed in storage (0.813667ms)
+✔ oversized/malformed bodies, unknown routes and unavailable database fail without leaking internals (0.557375ms)
+✔ loopback HTTP smoke: two separate clients create, join, move and see the same room (19.98775ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.006375

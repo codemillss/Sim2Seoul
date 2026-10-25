@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: last of 42 headers may never settle even after abort; only that chunk retries
+ok 1 - last of 42 headers may never settle even after abort; only that chunk retries
+  ---
+  duration_ms: 220.222208
+  type: 'test'
+  ...
+# Subtest: partial final body and cancel both never settle; three bounded attempts stop honestly
+ok 2 - partial final body and cancel both never settle; three bounded attempts stop honestly
+  ---
+  duration_ms: 246.940959
+  type: 'test'
+  ...
+# Subtest: HTTP 500 HTML is a transient delivery error, not a login response
+ok 3 - HTTP 500 HTML is a transient delivery error, not a login response
+  ---
+  duration_ms: 117.456667
+  type: 'test'
+  ...
+# Subtest: body idle deadline resets on real compressed-byte progress
+ok 4 - body idle deadline resets on real compressed-byte progress
+  ---
+  duration_ms: 188.664875
+  type: 'test'
+  ...
+# Subtest: valid gzip with corrupted raw hash exhausts retries without verifying it
+ok 5 - valid gzip with corrupted raw hash exhausts retries without verifying it
+  ---
+  duration_ms: 143.709959
+  type: 'test'
+  ...
+# Subtest: transfer length and decompressed length remain enforced
+ok 6 - transfer length and decompressed length remain enforced
+  ---
+  duration_ms: 282.303333
+  type: 'test'
+  ...
+# Subtest: whole-file SHA still blocks engine even when every chunk SHA passes
+ok 7 - whole-file SHA still blocks engine even when every chunk SHA passes
+  ---
+  duration_ms: 44.945042
+  type: 'test'
+  ...
+# Subtest: successful HTML auth redirect stops with login advice and no gzip retries
+ok 8 - successful HTML auth redirect stops with login advice and no gzip retries
+  ---
+  duration_ms: 41.214917
+  type: 'test'
+  ...
+# Subtest: metadata headers and bodies have finite deadlines
+ok 9 - metadata headers and bodies have finite deadlines
+  ---
+  duration_ms: 215.069792
+  type: 'test'
+  ...
+# Subtest: engine script has a finite deadline after all chunks finish
+ok 10 - engine script has a finite deadline after all chunks finish
+  ---
+  duration_ms: 115.280917
+  type: 'test'
+  ...
+# Subtest: peer request ignored abort is detached when another request fails auth
+ok 11 - peer request ignored abort is detached when another request fails auth
+  ---
+  duration_ms: 74.725
+  type: 'test'
+  ...
+# Subtest: download and engine start alone never fake EXPLORATION_READY
+ok 12 - download and engine start alone never fake EXPLORATION_READY
+  ---
+  duration_ms: 47.137042
+  type: 'test'
+  ...
+# Subtest: optional web release distinguishes frontend from native base commit
+ok 13 - optional web release distinguishes frontend from native base commit
+  ---
+  duration_ms: 40.911667
+  type: 'test'
+  ...
+# Subtest: cold verified chunks persist and warm boot uses zero chunk network requests
+ok 14 - cold verified chunks persist and warm boot uses zero chunk network requests
+  ---
+  duration_ms: 85.620417
+  type: 'test'
+  ...
+# Subtest: warm cache still runs final whole-file SHA before engine
+ok 15 - warm cache still runs final whole-file SHA before engine
+  ---
+  duration_ms: 80.949042
+  type: 'test'
+  ...
+# Subtest: cached gzip with valid lengths but wrong SHA is deleted, re-fetched and replaced
+ok 16 - cached gzip with valid lengths but wrong SHA is deleted, re-fetched and replaced
+  ---
+  duration_ms: 144.790958
+  type: 'test'
+  ...
+# Subtest: unverified network bytes are never written to persistent cache
+ok 17 - unverified network bytes are never written to persistent cache
+  ---
+  duration_ms: 144.4375
+  type: 'test'
+  ...
+# Subtest: cache pruning affects only this game's dedicated cache and current manifest
+ok 18 - cache pruning affects only this game's dedicated cache and current manifest
+  ---
+  duration_ms: 46.974666
+  type: 'test'
+  ...
+# Subtest: cache API denied, quota failures and hangs stay optional for every operation
+ok 19 - cache API denied, quota failures and hangs stay optional for every operation
+  ---
+  duration_ms: 1026.168667
+  type: 'test'
+  ...
+# Subtest: web quality selects bounded DPR and passes only game user arguments after --
+ok 20 - web quality selects bounded DPR and passes only game user arguments after --
+  ---
+  duration_ms: 120.591792
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3471.740708

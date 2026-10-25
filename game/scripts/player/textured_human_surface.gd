@@ -4,6 +4,7 @@ extends Node3D
 ## Skin paint samples our own fictional image-generated sources; provenance is saved.
 const RIG := preload("res://scripts/player/textured_human_rig.gd")
 const HUMAN_MATERIALS := preload("res://scripts/player/human_skin_materials.gd")
+const ASSET_PROVENANCE := preload("res://scripts/web_asset_provenance.gd")
 const ORIGINAL := "res://assets/original/seoul_resident/"
 const REST_HEIGHT_M := 1.70
 const BODY_PROFILES := ["standard","soft","athletic"]
@@ -64,7 +65,8 @@ func setup(source_avatar: Node3D,selected_model: String,selected_profile: String
 	_street_asset_path=authored_asset_path("street");_swim_asset_path=authored_asset_path("swim")
 	var packed: PackedScene=load(_street_asset_path)
 	if packed==null:return _fail("missing_authored_resident_"+model_id+"_"+body_profile)
-	_street_asset_sha256=FileAccess.get_sha256(_street_asset_path)
+	_street_asset_sha256=ASSET_PROVENANCE.source_sha256(_street_asset_path)
+	if OS.has_feature("web") and _street_asset_sha256.is_empty():return _fail("invalid_web_authored_source_provenance")
 	imported_root=packed.instantiate();imported_root.name="Sim2SeoulAuthoredResident";add_child(imported_root)
 	for node: Node in imported_root.find_children("*","Skeleton3D",true,false):skeleton=node as Skeleton3D;break
 	if skeleton==null:return _fail("missing_authored_skeleton")
@@ -303,7 +305,8 @@ func set_swimwear(enabled: bool) -> void:
 func _prepare_swim_body() -> bool:
 	var packed: PackedScene=load(_swim_asset_path)
 	if packed==null:return false
-	_swim_asset_sha256=FileAccess.get_sha256(_swim_asset_path)
+	_swim_asset_sha256=ASSET_PROVENANCE.source_sha256(_swim_asset_path)
+	if OS.has_feature("web") and _swim_asset_sha256.is_empty():return false
 	_swim_root=packed.instantiate();_swim_root.name="Sim2SeoulAuthoredSwimwear";add_child(_swim_root)
 	# Exactly the same authored rest anatomy and bind matrices as streetwear.
 	# Preserve scale and origin across clothing, not a separate body fit.
@@ -324,4 +327,4 @@ func snapshot(refresh_actual_bounds:=false) -> Dictionary:
 	var active_rig: Node3D=_swim_rig if _swimwear_active else rig
 	var active_skeleton: Skeleton3D=_swim_skeleton if _swimwear_active else skeleton
 	var rig_data: Dictionary=active_rig.snapshot() if is_instance_valid(active_rig) and active_rig.has_method("snapshot") else {}
-	return {"loaded":loaded,"error":load_error,"model_id":model_id,"body_profile":body_profile,"active_glb_path":_swim_asset_path if _swimwear_active else _street_asset_path,"active_glb_sha256":_swim_asset_sha256 if _swimwear_active else _street_asset_sha256,"street_glb_path":_street_asset_path,"swim_glb_path":_swim_asset_path,"normalized_rest_bounds_m":_normalized_rest_bounds,"requested_compatibility_alias":requested_model_alias,"visible_mesh_count":(visible_meshes+_swim_meshes).filter(func(mesh: MeshInstance3D)->bool:return mesh.is_visible_in_tree()).size(),"skeleton_bone_count":active_skeleton.get_bone_count() if is_instance_valid(active_skeleton) else 0,"actual_visible_bounds_m":_actual_bounds,"actual_height_m":_actual_bounds.size.y,"normalized_rest_height_m":REST_HEIGHT_M,"bounds_sampled_at_physics_tick":_bounds_tick,"surface_texture_uv_ready":_texture_uv_ready,"rig_contact_metrics":rig_data,"normalization_scale":_normalization_scale,"clothing_palette":{"body_gain_linear":1.,"texture_means":_garment_texture_means,"hands_use_separate_original_skin_material":true},"swimwear_active":_swimwear_active,"active_body_source":_active_body_source,"swim_skeleton_bone_count":_swim_skeleton.get_bone_count() if is_instance_valid(_swim_skeleton) and _swimwear_active else 0,"original_head_and_hair_preserved":true,"swim_head_cut":{},"swim_head_join":_swim_head_join if _swimwear_active else {},"legacy_geometry_rendered":false,"supplier":"Sim2Seoul project-authored anatomy, facial sculpt, clothing, skeleton and weights; numerical materials plus own fictional image-generated skin paint","authored_generator":"tools/authored_character/build_seoul_resident.py","vendor_geometry_loaded":false,"scope":"Own weighted human authored from numerical profiles and own fictional skin-paint sources. Bounds CPU-skin the actual referenced displayed vertices. Third-party vendor bodies, faces, textures and animations are not loaded."}
+	return {"loaded":loaded,"error":load_error,"model_id":model_id,"body_profile":body_profile,"active_glb_path":_swim_asset_path if _swimwear_active else _street_asset_path,"active_glb_sha256":_swim_asset_sha256 if _swimwear_active else _street_asset_sha256,"source_provenance":ASSET_PROVENANCE.evidence(_swim_asset_path if _swimwear_active else _street_asset_path),"street_glb_path":_street_asset_path,"swim_glb_path":_swim_asset_path,"normalized_rest_bounds_m":_normalized_rest_bounds,"requested_compatibility_alias":requested_model_alias,"visible_mesh_count":(visible_meshes+_swim_meshes).filter(func(mesh: MeshInstance3D)->bool:return mesh.is_visible_in_tree()).size(),"skeleton_bone_count":active_skeleton.get_bone_count() if is_instance_valid(active_skeleton) else 0,"actual_visible_bounds_m":_actual_bounds,"actual_height_m":_actual_bounds.size.y,"normalized_rest_height_m":REST_HEIGHT_M,"bounds_sampled_at_physics_tick":_bounds_tick,"surface_texture_uv_ready":_texture_uv_ready,"rig_contact_metrics":rig_data,"normalization_scale":_normalization_scale,"clothing_palette":{"body_gain_linear":1.,"texture_means":_garment_texture_means,"hands_use_separate_original_skin_material":true},"swimwear_active":_swimwear_active,"active_body_source":_active_body_source,"swim_skeleton_bone_count":_swim_skeleton.get_bone_count() if is_instance_valid(_swim_skeleton) and _swimwear_active else 0,"original_head_and_hair_preserved":true,"swim_head_cut":{},"swim_head_join":_swim_head_join if _swimwear_active else {},"legacy_geometry_rendered":false,"supplier":"Sim2Seoul project-authored anatomy, facial sculpt, clothing, skeleton and weights; numerical materials plus own fictional image-generated skin paint","authored_generator":"tools/authored_character/build_seoul_resident.py","vendor_geometry_loaded":false,"scope":"Own weighted human authored from numerical profiles and own fictional skin-paint sources. Bounds CPU-skin the actual referenced displayed vertices. Third-party vendor bodies, faces, textures and animations are not loaded."}

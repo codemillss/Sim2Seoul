@@ -1,0 +1,30 @@
+✔ last of 42 headers may never settle even after abort; only that chunk retries (230.291584ms)
+✔ partial final body and cancel both never settle; three bounded attempts stop honestly (238.5555ms)
+✔ HTTP 500 HTML is a transient delivery error, not a login response (102.711459ms)
+✔ body idle deadline resets on real compressed-byte progress (168.298167ms)
+✔ valid gzip with corrupted raw hash exhausts retries without verifying it (141.857791ms)
+✔ transfer length and decompressed length remain enforced (278.490875ms)
+✔ whole-file SHA still blocks engine even when every chunk SHA passes (38.964584ms)
+✔ successful HTML auth redirect stops with login advice and no gzip retries (41.828875ms)
+✔ metadata headers and bodies have finite deadlines (205.124792ms)
+✔ engine script has a finite deadline after all chunks finish (102.153417ms)
+✔ peer request ignored abort is detached when another request fails auth (67.47625ms)
+✔ download and engine start alone never fake EXPLORATION_READY (37.506875ms)
+✔ optional web release distinguishes frontend from native base commit (40.696584ms)
+✔ cold verified chunks persist and warm boot uses zero chunk network requests (78.714708ms)
+✔ warm cache still runs final whole-file SHA before engine (79.475667ms)
+✔ cached gzip with valid lengths but wrong SHA is deleted, re-fetched and replaced (141.076125ms)
+✔ unverified network bytes are never written to persistent cache (133.894292ms)
+✔ cache pruning affects only this game's dedicated cache and current manifest (44.5265ms)
+✔ cache API denied, quota failures and hangs stay optional for every operation (973.831666ms)
+✔ web quality selects bounded DPR and passes only game user arguments after -- (107.953792ms)
+✔ pointer lock rejection stays local to optional mouse capture (77.964833ms)
+✔ unrelated runtime rejections still stop the game (36.082042ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3419.989375

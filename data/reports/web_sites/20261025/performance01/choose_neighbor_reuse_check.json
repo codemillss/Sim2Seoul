@@ -1,0 +1,166 @@
+{
+  "cases": [
+    {
+      "clear": true,
+      "name": "open",
+      "native_sweeps": 2,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 1,
+      "radius_reads_after": 1,
+      "radius_reads_before": 2,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "paced_preview",
+      "native_sweeps": 1,
+      "neighbors_after": 1,
+      "neighbors_before": 2,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 1,
+      "radius_reads_before": 1,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "new_passing_plan",
+      "native_sweeps": 23,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 23,
+      "radius_reads_after": 1,
+      "radius_reads_before": 24,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "all_lanes_protected",
+      "native_sweeps": 3,
+      "neighbors_after": 1,
+      "neighbors_before": 6,
+      "radius_cache_hits": 3,
+      "radius_reads_after": 1,
+      "radius_reads_before": 4,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "keeper_dog_pair",
+      "native_sweeps": 89,
+      "neighbors_after": 1,
+      "neighbors_before": 6,
+      "radius_cache_hits": 90,
+      "radius_reads_after": 1,
+      "radius_reads_before": 91,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "waypoint_pop",
+      "native_sweeps": 1,
+      "neighbors_after": 1,
+      "neighbors_before": 2,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 1,
+      "radius_reads_before": 1,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "plan_completion",
+      "native_sweeps": 2,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 1,
+      "radius_reads_after": 1,
+      "radius_reads_before": 2,
+      "reason": ""
+    },
+    {
+      "clear": false,
+      "name": "missing_floor",
+      "native_sweeps": 0,
+      "neighbors_after": 1,
+      "neighbors_before": 5,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 0,
+      "radius_reads_before": 0,
+      "reason": "floor_or_protected_boundary"
+    },
+    {
+      "clear": false,
+      "name": "missing_capped_step",
+      "native_sweeps": 0,
+      "neighbors_after": 1,
+      "neighbors_before": 1,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 0,
+      "radius_reads_before": 0,
+      "reason": "missing_step_support"
+    },
+    {
+      "clear": false,
+      "name": "native_wall_stuck_replan",
+      "native_sweeps": 1,
+      "neighbors_after": 1,
+      "neighbors_before": 2,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 0,
+      "radius_reads_before": 0,
+      "reason": "occupied_passing_corridor"
+    },
+    {
+      "clear": true,
+      "name": "initial_overlap_escape",
+      "native_sweeps": 2,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 1,
+      "radius_reads_after": 1,
+      "radius_reads_before": 2,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "other_height_ignored",
+      "native_sweeps": 2,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 0,
+      "radius_reads_after": 0,
+      "radius_reads_before": 0,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "dog_radius",
+      "native_sweeps": 23,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 23,
+      "radius_reads_after": 1,
+      "radius_reads_before": 24,
+      "reason": ""
+    },
+    {
+      "clear": true,
+      "name": "missing_capsule_fallback",
+      "native_sweeps": 23,
+      "neighbors_after": 1,
+      "neighbors_before": 3,
+      "radius_cache_hits": 23,
+      "radius_reads_after": 1,
+      "radius_reads_before": 24,
+      "reason": ""
+    }
+  ],
+  "checks": 128,
+  "engine": "4.7.2-stable (official)",
+  "failures": [],
+  "optimized_sha256": "a5cb15b129a618f9f90231e7f6d2ca48f389f187d7a5c5415c4912ee1a1f8298",
+  "reference_sha256": "69085e7ffd2640712f5bae45b202fe989bb5fc5ae3984f5e951d2555453dbfa4",
+  "result": "PASS",
+  "scope": "Saved pre-change production script vs production reuse. Tiny real native physics world; controlled route/support/permission callbacks. Exact decisions, full group state and ordered native sweep inputs, call counts and fresh reverse/next-call membership/radii. No city launch, real terrain, sustained walk or browser performance acceptance.",
+  "task": "CHOOSE_NEIGHBOR_REUSE_EQUALITY"
+}

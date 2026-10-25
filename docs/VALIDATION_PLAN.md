@@ -1,5 +1,17 @@
 # 검증 계획과 완료 판정
 
+## EXP39 — 전송·프레임·공동 도시의 독립 판정 (2026-10-25)
+
+선택 게임 build04의 [실제 PCK](../data/reports/web_sites/20261025/performance01_build04/pack_integrity.json)는 raw202파일·compiled scene15/texture49·폰트 PASS다. Web raw GLB15개 제외는 원본/변환 결과의 명시적 **빌드 attestation**이며 runtime raw SHA를 직접 읽었다는 의미가 아니다. 최종 delivery01 재분할6검사는 전체 WASM/PCK SHA·다른 압축 바이트 보존과 실패 처리를 검사한다.
+
+[최종 게시](../data/reports/web_sites/20261025/performance01/delivery01_deployment.json)는 succeeded, [실제 운영 검사](../data/reports/web_sites/20261025/performance01/deployed_asset_check.json)는212/212개·manifest/loader·전체 WASM/PCK SHA PASS(모두 첫 시도31.938초)다. 이전 두 PCK0 시간 초과/별도 probe는 실패 이력으로 보존한다. 한 차례 전체 수신 성공을 서버 수용량·모든 지역/기기의 영구 안정성으로 일반화하지 않는다. 인증된 운영 브라우저의 게임 실행은 HTTP 바이트 검사와 구분한다.
+
+[최종 로컬 실행](../data/reports/web_sites/20261025/performance01/delivery01_runtime_dom.txt)은210cache/2network1,043,828B·EXPLORATION_READY16.505초다. runtime04 짧은 비정지 표본2~7은16.1~32.0FPS/중앙값30.25, 후속 warm 표본2~19의18개는8.2~33.9/중앙값26.15다. 드래그/후반 저하를 제외하지 않고 최초 준비·일시정지 표본은 플레이 성능에 넣지 않는다. 구도/이동이 완전히 통제된 비교가 아니며 전구역60FPS·장시간·모든 기기를 수용하지 않았다. 실제 물리30Hz와 cache 조각0B/엔진 초기화를 구분한다.
+
+실제 드래그·W/Shift+W·메뉴·신/구 갤러리·도시 복귀는 화면으로 확인했다. IAB의 자유 마우스 캡처는 거절돼 성공으로 세지 않고 드래그 대안을 확인했다. actual JS22검사·Cache API15하위조건·LOD25/외벽45/선택128 fixture는 각각 제한된 검사다. 실제 GPU/인체 미술·운영 지속 플레이·청취·저장 수용을 대신하지 않는다.
+
+[서버 원형 최종14검사](../data/reports/web_sites/20261025/performance01/shared_room_tests_final.log)는 로컬 HTTP/SQLite 두 클라이언트·yaw ±π/인접 방향 왕복이며 sandbox listen EPERM 실패와 구분한다. Godot 미연결·미호스팅이고8명 정책/2Hz polling은 검증된 성능이 아니다. 두 허용 계정의 같은 방 상대 표시/동작·퇴장/재접속·RTT/snapshot 나이/프레임·10분 이동 뒤2→4→8명 측정이 필요하다. NPC/차량/전투 공유 결과는 현재 원형 밖이다.
+
 ## EXP38 recovery01 — 조각 전송 복구 판정 (2026-10-25)
 
 게시 결과: [수정본 succeeded](../data/reports/web_sites/20261025/recovery01/deployment.json), [실제 운영332개 HTTP200·개별/전체 SHA 일치](../data/reports/web_sites/20261025/recovery01/deployed_asset_check.json). 서비스 HTTP 검사를 운영 브라우저 게임 시작으로 확대하지 않는다.

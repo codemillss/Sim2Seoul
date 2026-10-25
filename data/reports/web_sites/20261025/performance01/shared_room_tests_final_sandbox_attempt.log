@@ -1,0 +1,37 @@
+✔ two signed-in players join the same actual SQL room and observe accepted movement (12.021583ms)
+✔ authentication, room invite, account binding and exact origin all gate access (1.8805ms)
+✔ build mismatches and unrecognized avatar/state fields cannot enter the room (1.38225ms)
+✔ snapshot and movement share the two-Hz mutation limit; stale/reordered sequences are rejected (1.301291ms)
+✔ accepted yaw endpoints and adjacent headings survive create/snapshot/sync round trips (4.173ms)
+✔ atomic admission remains within policy cap when nine guests join concurrently (5.805625ms)
+✔ TTL removes silent players and expired room cannot be revived (1.7605ms)
+✔ rejoin rotates session, prevents duplicate accounts, and observes join cooldown (1.517292ms)
+✔ movement speed, finite coordinates and coarse bounds reject invalid state without advancing sequence (1.445042ms)
+✔ optimistic SQL update allows only one concurrent state writer per player (1.435167ms)
+✔ room owner can close, members can leave, and creation has cooldown and an active-room cap (1.747958ms)
+✔ snapshots contain only pseudonymous public state; credentials are hashed in storage (1.04625ms)
+✔ oversized/malformed bodies, unknown routes and unavailable database fail without leaking internals (0.641333ms)
+✖ loopback HTTP smoke: two separate clients create, join, move and see the same room (5.178833ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 109.522875
+
+✖ failing tests:
+
+test at tools/web/multiplayer/room-api.test.mjs:250:1
+✖ loopback HTTP smoke: two separate clients create, join, move and see the same room (5.178833ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

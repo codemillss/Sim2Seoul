@@ -20,6 +20,14 @@ var choose_ground_calls: int=0
 var choose_ground_cache_hits: int=0
 var static_preview_calls: int=0
 var static_preview_skipped: int=0
+var reuse_neighbors_within_choose: bool=OS.has_feature("web")
+var _choose_neighbors_cache: Array=[]
+var _choose_neighbors_loaded: bool=false
+var _choose_radius_cache: Dictionary={}
+var choose_neighbor_callbacks: int=0
+var choose_neighbor_cache_hits: int=0
+var choose_radius_reads: int=0
+var choose_radius_cache_hits: int=0
 
 func setup(owner_node: Node3D, route_point: Callable, floor_point: Callable, allowed: Callable, bodies: Callable) -> void:
 	host=owner_node;point_at=route_point;ground_at=floor_point;allowed_at=allowed;neighbors=bodies
@@ -34,6 +42,7 @@ func _floor_query(point: Vector3) -> Dictionary:
 
 func _choice_result(result: Dictionary,failed: bool=false,group: Dictionary={}) -> Dictionary:
 	_choose_queries_active=false
+	_choose_neighbors_cache.clear();_choose_radius_cache.clear();_choose_neighbors_loaded=false
 	if failed and not group.is_empty():group["avoidance_preview_wait_s"]=0.0
 	return result
 
@@ -42,10 +51,32 @@ func _flat(value: Vector3) -> Vector2:return Vector2(value.x,value.z)
 func radius(row: Dictionary) -> float:
 	return .45 if row.kind=="dog" else float(row.collider.shape.radius)
 
+func _neighbor_query(group: Dictionary) -> Array:
+	# Production neighbors depend on fixed player/actor membership and group.id.
+	# choose is synchronous and mutates neither bodies nor those collections.
+	# Keep live positions and every support/sweep validation at their old sites.
+	var reuse:=_choose_queries_active and reuse_neighbors_within_choose
+	if reuse and _choose_neighbors_loaded:
+		choose_neighbor_cache_hits+=1;return _choose_neighbors_cache
+	if _choose_queries_active:choose_neighbor_callbacks+=1
+	var result: Array=neighbors.call(group)
+	if reuse:
+		# Never clear or expose a caller-owned Array when this choice finishes.
+		_choose_neighbors_cache=result.duplicate();_choose_neighbors_loaded=true
+		return _choose_neighbors_cache
+	return result
+
 func _other_radius(body: CharacterBody3D) -> float:
-	if body.get_meta("street_actor_kind","")=="dog":return .45
-	var shape: CollisionShape3D=body.get_node_or_null("CollisionShape")
-	return float(shape.shape.radius) if shape!=null and shape.shape is CapsuleShape3D else .35
+	var reuse:=_choose_queries_active and reuse_neighbors_within_choose
+	if reuse and _choose_radius_cache.has(body):
+		choose_radius_cache_hits+=1;return float(_choose_radius_cache[body])
+	if _choose_queries_active:choose_radius_reads+=1
+	var result:=.45
+	if body.get_meta("street_actor_kind","")!="dog":
+		var shape: CollisionShape3D=body.get_node_or_null("CollisionShape")
+		result=float(shape.shape.radius) if shape!=null and shape.shape is CapsuleShape3D else .35
+	if reuse:_choose_radius_cache[body]=result
+	return result
 
 func _excluded(group: Dictionary) -> Array[RID]:
 	var result: Array[RID]=[]
@@ -151,7 +182,7 @@ func _build_plan(group: Dictionary, lane: float, obstacle_distance: float) -> Ar
 		var count:=maxi(1,int(ceil(a.distance_to(b)/SAMPLE_M)))
 		for step in range(1,count+1):
 			var point:=a.lerp(b,float(step)/count);plan.append({"station":point.x,"offset":point.y})
-	var starts:=_positions(group);var others: Array=neighbors.call(group)
+	var starts:=_positions(group);var others: Array=_neighbor_query(group)
 	for waypoint: Dictionary in plan:
 		var supports:=_supports(group,waypoint.station,waypoint.offset)
 		if supports.is_empty():return []
@@ -169,7 +200,7 @@ func _obstacle_distance(group: Dictionary) -> float:
 	if ahead.is_zero_approx():return 1.0
 	ahead=ahead.normalized();var result:=LOOK_AHEAD_M;var excluded:=_excluded(group)
 	for row: Dictionary in group.members:
-		for other: CharacterBody3D in neighbors.call(group):
+		for other: CharacterBody3D in _neighbor_query(group):
 			if not is_instance_valid(other) or excluded.has(other.get_rid()) or absf(other.global_position.y-row.body.global_position.y)>1.8:continue
 			var difference: Vector3=other.global_position-row.body.global_position;difference.y=0.
 			var along:=difference.dot(ahead);var across: float=(difference-ahead*along).length()
@@ -192,6 +223,7 @@ func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
 	# Vector3 floor query within this one call; never carry native hits to the
 	# next actor move or physics tick.
 	_choose_ground_cache.clear();_choose_queries_active=true
+	_choose_neighbors_cache.clear();_choose_radius_cache.clear();_choose_neighbors_loaded=false
 	if not group.has("avoidance_plan"):group.avoidance_plan=[];group.avoidance_retry_s=0.;group.avoidance_lane_m=0.;group.avoidance_count=0;group.avoidance_preview_wait_s=0.0
 	if not group.has("avoidance_preview_wait_s"):group.avoidance_preview_wait_s=0.0
 	if int(group.get("avoidance_preview_direction",group.direction))!=int(group.direction):group.avoidance_preview_wait_s=0.0
@@ -217,7 +249,7 @@ func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
 				# current-step sweep below remain checked on EVERY physics tick.
 				var look_s: float=clampf(group.station+group.direction*.9,0.,group.length)
 				var look_supports:=_supports(group,look_s,0.)
-				obstructed=look_supports.is_empty() or not segment_clear(group,_positions(group),_centres(look_supports),look_supports,neighbors.call(group))
+				obstructed=look_supports.is_empty() or not segment_clear(group,_positions(group),_centres(look_supports),look_supports,_neighbor_query(group))
 				static_preview_calls+=1
 				# Reserve one step so30Hz quantization cannot postpone the
 				# preview beyond the stated0.15s maximum.
@@ -241,7 +273,7 @@ func choose(group: Dictionary, delta: float, speed: float) -> Dictionary:
 		var support: Dictionary=_floor_query(point)
 		if support.is_empty():return _choice_result({"clear":false,"reason":"missing_step_support","targets":starts},true,group)
 		ends[index]=support.point;supports[index]=support
-	if not segment_clear(group,starts,ends,supports,neighbors.call(group)):
+	if not segment_clear(group,starts,ends,supports,_neighbor_query(group)):
 		group.avoidance_stuck_s=float(group.get("avoidance_stuck_s",0.))+delta
 		if group.avoidance_stuck_s>.45 and group.avoidance_retry_s<=0.:
 			# Replan from the current physical offset if the old lane changed.
@@ -254,4 +286,7 @@ func can_reverse(group: Dictionary, distance: float) -> bool:
 	var target:=clampf(float(group.station)-float(group.direction)*distance,0.,float(group.length))
 	if absf(target-float(group.station))<distance*.9:return false
 	var supports:=_supports(group,target,_offset(group))
-	return not supports.is_empty() and segment_clear(group,_positions(group),_centres(supports),supports,neighbors.call(group))
+	return not supports.is_empty() and segment_clear(group,_positions(group),_centres(supports),supports,_neighbor_query(group))
+
+func neighbor_reuse_snapshot() -> Dictionary:
+	return {"enabled":reuse_neighbors_within_choose,"neighbor_callbacks":choose_neighbor_callbacks,"neighbor_cache_hits":choose_neighbor_cache_hits,"radius_reads":choose_radius_reads,"radius_cache_hits":choose_radius_cache_hits,"scope":"One synchronous choose only. Actor positions, supports and native sweeps remain live; can_reverse and later choices fetch fresh membership/radii."}

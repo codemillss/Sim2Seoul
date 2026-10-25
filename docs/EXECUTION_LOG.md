@@ -1,5 +1,25 @@
 # 단계별 실행 이력
 
+## EXP39 — Web 성능 개선·전송 수정 게시·공동 도시 원형 · 2026-10-25
+
+main `a1f6134`에서 `codex/shared-city-performance-20261025`로 시작했다. 사용자가 Web 지연 개선과 여러 사람이 같은 도시에 만나 플레이하는 방향을 명시했다. 현재 완료 범위는 Web 전송/국소 성능 향상·실제 조작 검증이며 공동 도시 게임은 미연결이다. Site의 소유자 전용 범위와 실행 중 native 게임을 유지했다.
+
+초기 PCK 감사를 토대로 Web 중복 raw GLB15개126,659,912B를 제외하고 실제 scene15개/texture49개와 참조·원본 출처를 검사했다. Web은 명시적 빌드 attestation, native는 기존 raw SHA 경로를 유지한다. build01은 PCK180,837,780B·전송94,778,532B/211조각, 실제 cold/warm에서 도시/211cache·조각0B를 확인했지만 비정지 약5~18FPS라 미수용했다. 일시정지 약90FPS 전후와 재개 저하를 기록해 업데이트/물리 경로를 추적했다. GPU 병목 부재나 단일 함수 원인을 확정하지 않았다.
+
+인물 visual LOD·동일 XZ/route endpoint·선택 내부 이웃/반경 재사용을 적용했다. build02 실제4단계 exit0·ERROR0, PCK180,845,828B·전송94,781,150B/211조각이다. update177cache/34network20,979,605B·16.581초, warm211cache/0B·16.680초, 비정지 안정 표본2~7은24.6~33FPS였다. W2.5초에서 대한문15→10m와 약31FPS를 확인했다. 이는 짧은 관찰로 지속/전구역 성능 수용이 아니다.
+
+[build02 pointer-lock 실패](../data/reports/web_sites/20261025/performance01/build02_pointerlock_failure_dom.txt)는 Chromium API Promise 거절이 전체 fatal overlay로 번진 결함이었다. canvas API 경계에서 이 선택 기능 실패만 경고로 처리하고 관계없는 runtime rejection은 계속 중단하는 actual JS22검사를 통과했다. 드래그 대안 build03은 타입 추론 Parse Error가 실제 import에 나와 엄격 검사가 거절했다. 원문을 보존하고 `web_drag: bool`로 고쳤다.
+
+선택 runtime04의 import/export/repack/PCK 읽기는 각 exit0·ERROR0, raw202/scene15/texture49/font PASS다. PCK180,846,148B·전송94,781,204B/211조각이었다. 실제 update68cache/143network53,458,812B·17.028초, 비정지6표본 중앙값30.25/최저16.1FPS, 후속 warm211cache/0B·16.599초와18표본 중앙값26.15/최저8.2를 보존했다. 실제 드래그·W/Shift+W·메뉴·신/구 갤러리·도시 복귀를 확인했다. IAB의 자유 마우스 캡처는 거절돼 scoped 경고와 드래그 대안을 확인했다. 물리30Hz이며 구도/입력 완전 통제 비교·전구역60FPS·사용자 기기 보장은 아니다.
+
+211조각 게시 [이전 receipt](../data/reports/web_sites/20261025/performance01/deployment.json)는2026-10-25T11:07:07Z succeeded/Site 소스 `cd424763e8dc27ee9e20844bc0a707deedcb5046`다. 그러나 [운영 검사1](../data/reports/web_sites/20261025/performance01/deployed_asset_check_attempt01.json)·[검사2](../data/reports/web_sites/20261025/performance01/deployed_asset_check_attempt02.json)는 manifest/loader 일치·WASM38개 뒤 같은 PCK0 시간 초과로 실패했다(64.699/65.346초). [probe](../data/reports/web_sites/20261025/performance01/production_probe.json)는 다른 PCK도200인데 PCK0만15.026초 시간 초과였다. 빈 worker 오류 이벤트로 실패를 부정하지 않았으며 용량/edge 근본 원인은 단정하지 않았다.
+
+[단일 조각 재분할](../data/reports/web_sites/20261025/performance01/delivery_rechunk.json)은 PCK0만 두524,288B 조각으로 바꾸고 전체 WASM/PCK SHA·다른 압축 파일 바이트를 보존했다. 최종 delivery01은212조각·14B 증가한94,781,218B다. utility 최종6검사는 실제 적용/운영 검사와 구분한다. [최종 로컬 실행](../data/reports/web_sites/20261025/performance01/delivery01_runtime_dom.txt)은210cache/2network1,043,828B·16.505초, [실제 도시·한국어 HUD](../data/reports/web_sites/20261025/performance01/delivery01_city.jpg)를 확인했다. runtime04와 같은 게임이므로 새 FPS 개선처럼 다시 합산하지 않는다.
+
+[최종 게시](../data/reports/web_sites/20261025/performance01/delivery01_deployment.json)는2026-10-25T11:21:30Z succeeded/Site 소스 `c67bf053417cf836106e99e900858c0cef0eaff1`다. [실제 운영 검사](../data/reports/web_sites/20261025/performance01/deployed_asset_check.json)는212/212조각·manifest/loader·전체 WASM/PCK SHA가 모두 첫 시도31.938초에 PASS다. 두 이전 실패·로컬 실행·운영 HTTP를 구분하며 인증 후 운영 지속 플레이/청취/저장·수용 인원은 확정하지 않는다.
+
+로컬 HTTP 두 클라이언트+SQLite 방 원형은 yaw ±π를4자리 반올림한 snapshot 재전송의400 결함을 고치고 경계/인접 방향 create→snapshot→sync를 추가했다. [최종14검사](../data/reports/web_sites/20261025/performance01/shared_room_tests_final.log)는 exit0·14PASS, [sandbox 시도](../data/reports/web_sites/20261025/performance01/shared_room_tests_final_sandbox_attempt.log)는13PASS/1listen EPERM이며 초기13검사는 과거 원문으로 보존했다. Godot 미연결·미호스팅이며8명 정책/2Hz polling을 성능으로 주장하지 않는다. 다음은 NPC 물리 계산 부담과 지원되는 실시간 서버 배포/두 계정 Godot 통합이다. [전체 원본/측정/재현](../data/reports/web_sites/20261025/performance01/README.md)을 따른다.
+
 ## EXP38 recovery01 — 운영 조각 HTTP500과 재시도 복구 · 2026-10-25
 
 시작 main은 `65f6f7f`, 작업 브랜치는 `codex/web-loading-recovery-20261025`다. 사용자가 실제 운영 로딩94%·126.7/134.6MiB·41/42 이후8,238,241B `pck-005.gz`의 HTTP500을 보고했다. 같은 파일의 서비스 HTTP 검사도40.115초에 읽기 시간 초과였다. [사건](../data/reports/web_sites/20261025/recovery01/incident.json)·[응답 검사](../data/reports/web_sites/20261025/recovery01/old_asset_http.json)를 보존한다. worker 로그가 비어 있었으며 근본 저장/edge 원인은 확정하지 않는다.

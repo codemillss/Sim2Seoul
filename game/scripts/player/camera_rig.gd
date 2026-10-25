@@ -61,7 +61,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	var simulated_capture := automatic_probe and DisplayServer.get_name()=="headless"
-	if not input_enabled or (Input.mouse_mode!=Input.MOUSE_MODE_CAPTURED and not simulated_capture):return
+	# Embedded browsers may refuse pointer lock. A held drag still supplies
+	# relative motion, so retain a usable view control without capture.
+	var web_drag: bool = OS.has_feature("web") and event is InputEventMouseMotion and (event.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0
+	if not input_enabled or (Input.mouse_mode!=Input.MOUSE_MODE_CAPTURED and not simulated_capture and not web_drag):return
 	# Reproducible injected events in automatic probes; native human input in normal play.
 	if automatic_probe and event.device!=42:return
 	if event is InputEventMouseMotion:

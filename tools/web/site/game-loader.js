@@ -17,6 +17,7 @@
     engineVersion: null, buildCommit: null, downloadedBytes: 0, totalTransferBytes: 0,
     verifiedChunks: 0, totalChunks: 0, engineErrorCount: 0, logs: [],
     startedAt: null, readyAt: null, fetchAdapterActive: false,
+    cachedChunks: 0, cachedBytes: 0, networkBytes: 0, cacheAvailable: false, quality: "fast",
   };
   let started = false;
   let failed = false;
@@ -28,6 +29,59 @@
   const REQUEST_IDLE_MS = 30000;
   const CHUNK_ATTEMPTS = 3;
   const activeChunks = new Map();
+  let assetCache = null;
+  let cacheReads = true;
+  let cacheWrites = true;
+  const CACHE_NAME = "sim2seoul-verified-assets-v1";
+  const qualitySelect = $("qualitySelect");
+  function readQuality() {
+    const requested = new URLSearchParams(location.search).get("quality");
+    let saved; try { saved = localStorage.getItem("sim2seoul-web-quality"); } catch { /* Optional preference. */ }
+    return ["fast", "balanced", "clear"].includes(requested) ? requested : ["fast", "balanced", "clear"].includes(saved) ? saved : "fast";
+  }
+  qa.quality = readQuality();
+  if (qualitySelect) {
+    qualitySelect.value = qa.quality;
+    qualitySelect.addEventListener("change", () => {
+      if (!["fast", "balanced", "clear"].includes(qualitySelect.value)) return;
+      try { localStorage.setItem("sim2seoul-web-quality", qualitySelect.value); } catch { /* Optional preference. */ }
+      if (!started) { qa.quality = qualitySelect.value; resizeCanvas(); }
+      else showStatus("화질 선택을 저장했습니다. 다시 실행하면 적용됩니다.");
+    });
+  }
+
+  function optionalCacheOperation(operation, fallback = null) {
+    let timer;
+    return Promise.race([
+      // Invoke inside the promise boundary: storage may throw synchronously
+      // (private mode, security policy, quota), as well as reject or stall.
+      Promise.resolve().then(operation).catch(() => fallback),
+      new Promise((resolve) => { timer = setTimeout(() => resolve(fallback), 1500); }),
+    ]).finally(() => clearTimeout(timer));
+  }
+
+  async function openAssetCache(files) {
+    assetCache = await optionalCacheOperation(() => window.caches?.open(CACHE_NAME));
+    qa.cacheAvailable = Boolean(assetCache);
+    if (!assetCache) { log("CACHE_UNAVAILABLE; network verification remains enabled."); return; }
+    log("CACHE_OPEN; only verified compressed game assets are reused. No account or save data is cached here.");
+    const allowed = new Set(files.flatMap((file) => file.chunks.map((chunk) => chunk.url.href)));
+    // Keep this game's cache bounded to the current release; never clear other
+    // applications, authenticated documents, or Godot's user save storage.
+    optionalCacheOperation(() => assetCache.keys(), []).then((keys) => {
+      for (const key of keys) if (!allowed.has(key.url)) optionalCacheOperation(() => assetCache.delete(key));
+    });
+  }
+
+  async function saveVerifiedChunk(chunk, pieces) {
+    if (!assetCache || !cacheWrites || !pieces.length) return;
+    const stored = await optionalCacheOperation(async () => {
+      const response = new Response(new Blob(pieces), { headers: { "Content-Type": "application/gzip", "Content-Length": String(chunk.transferBytes) } });
+      await assetCache.put(chunk.url.href, response);
+      return true;
+    }, false);
+    if (!stored) { cacheWrites = false; log("CACHE_WRITE_UNAVAILABLE; current game continues without persistent writes.", "warning"); }
+  }
 
   function resizeCanvas() {
     canvasResizeQueued = false;
@@ -42,7 +96,8 @@
     const rect = ui.canvas.getBoundingClientRect();
     if (rect.width <= 0 || rect.height <= 0) return;
     const deviceRatio = window.devicePixelRatio || 1;
-    const renderRatio = Math.min(2, Math.max(1, deviceRatio));
+    const pixelCap = { fast: 1, balanced: 1.25, clear: 2 }[qa.quality] || 1;
+    const renderRatio = Math.min(pixelCap, Math.max(1, deviceRatio));
     const width = Math.max(1, Math.round(rect.width * renderRatio));
     const height = Math.max(1, Math.round(rect.height * renderRatio));
     if (ui.canvas.width !== width) ui.canvas.width = width;
@@ -50,7 +105,7 @@
     qa.canvasResize = {
       policy: 0, cssRect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
       intrinsicWidth: ui.canvas.width, intrinsicHeight: ui.canvas.height,
-      devicePixelRatio: deviceRatio, renderPixelRatio: renderRatio, maxRenderPixelRatio: 2,
+      devicePixelRatio: deviceRatio, renderPixelRatio: renderRatio, maxRenderPixelRatio: pixelCap,
       toolbarBottom, toolbarDoesNotOverlap: rect.top >= toolbarBottom - 0.5,
       aspectError: Math.abs(width / height - rect.width / rect.height),
     };
@@ -102,7 +157,7 @@
     const pct = qa.totalTransferBytes ? Math.min(100, qa.downloadedBytes / qa.totalTransferBytes * 100) : 0;
     ui.percent.textContent = `${pct.toFixed(0)}%`;
     ui.bytes.textContent = `${formatBytes(qa.downloadedBytes)} / ${formatBytes(qa.totalTransferBytes)}`;
-    ui.verified.textContent = `자료 확인 ${qa.verifiedChunks}/${qa.totalChunks}`;
+    ui.verified.textContent = `자료 확인 ${qa.verifiedChunks}/${qa.totalChunks}${qa.cachedChunks ? ` · 저장본 ${qa.cachedChunks}` : ""}`;
   }
 
   function queueProgress() {
@@ -287,8 +342,17 @@
     let reader;
     let verified = false;
     let written = 0;
+    let fromCache = false;
+    const compressedPieces = [];
     try {
-      const response = await fetchResponse(chunk.url, scope, attempt > 1);
+      let response = null;
+      if (assetCache && cacheReads && attempt === 1) {
+        response = await optionalCacheOperation(() => assetCache.match(chunk.url.href), false);
+        if (response === false) { cacheReads = false; log("CACHE_READ_UNAVAILABLE; current game continues with network verification.", "warning"); }
+        fromCache = Boolean(response);
+      }
+      if (!response) response = await fetchResponse(chunk.url, scope, attempt > 1);
+      if (fromCache && qa.cachedChunks % 20 === 0) log(`CHUNK_CACHE ${chunk.path}; cached=${qa.cachedChunks}/${qa.totalChunks}`);
       if (!response.body) throw new LoadError("NETWORK", "게임 자료 응답이 비어 있습니다.", chunk.path);
       scope.arm("자료 본문 대기");
       const tracked = response.body.pipeThrough(new TransformStream({
@@ -296,7 +360,12 @@
           if (scope.signal.aborted) throw abortReason(scope.signal);
           if (transferred + bytes.byteLength > chunk.transferBytes) throw new LoadError("TRANSFER_SIZE", "내려받은 자료가 배포 기록보다 큽니다.", chunk.path);
           transferred += bytes.byteLength;
-          qa.downloadedBytes += bytes.byteLength; queueProgress();
+          qa.downloadedBytes += bytes.byteLength;
+          if (!fromCache) {
+            qa.networkBytes += bytes.byteLength;
+            if (assetCache && cacheWrites) compressedPieces.push(bytes.slice());
+          }
+          queueProgress();
           scope.arm("자료 본문 또는 압축 해제 대기");
           controller.enqueue(bytes);
         },
@@ -313,8 +382,13 @@
       scope.arm("자료 확인 대기");
       await untilAborted(checkHash(file.buffer.subarray(chunk.offset, chunk.offset + written), chunk.sha256, chunk.path), scope.signal);
       verified = true;
-      qa.verifiedChunks += 1; queueProgress();
+      qa.verifiedChunks += 1;
+      if (fromCache) { qa.cachedChunks += 1; qa.cachedBytes += transferred; }
+      queueProgress();
+      scope.close();
+      if (!fromCache) await saveVerifiedChunk(chunk, compressedPieces);
     } catch (error) {
+      if (fromCache && assetCache) optionalCacheOperation(() => assetCache.delete(chunk.url.href));
       if (scope.signal.aborted) throw abortReason(scope.signal);
       if (error instanceof LoadError || error.name === "AbortError") throw error;
       throw new LoadError("CHUNK_SIZE", "게임 자료의 압축을 해제하지 못했습니다.", `${chunk.path}: ${error.message}`);
@@ -330,7 +404,7 @@
       for (let attempt = 1; attempt <= CHUNK_ATTEMPTS; attempt += 1) {
         if (aborter.signal.aborted) throw abortReason(aborter.signal);
         activeChunks.set(chunk.path, { path: chunk.path, attempt }); showActiveChunks();
-        log(`CHUNK_REQUEST ${chunk.path} attempt=${attempt}/${CHUNK_ATTEMPTS}`);
+        if (attempt > 1 || qa.verifiedChunks % 20 === 0) log(`CHUNK_REQUEST ${chunk.path} attempt=${attempt}/${CHUNK_ATTEMPTS}; verified=${qa.verifiedChunks}/${qa.totalChunks}`);
         try { await readChunkAttempt(file, chunk, attempt); return; }
         catch (error) {
           if (aborter.signal.aborted || error.name === "AbortError" || error.code === "AUTH") throw error;
@@ -355,6 +429,7 @@
     qa.totalChunks = jobs.length;
     qa.totalTransferBytes = jobs.reduce((sum, job) => sum + job.chunk.transferBytes, 0);
     renderProgress();
+    await openAssetCache(files);
     let cursor = 0;
     // At most two compressed responses/decompressors are active at once.
     const worker = async () => {
@@ -396,6 +471,7 @@
     if (failed || qa.ready) return;
     qa.ready = true; qa.readySignal = line; qa.readyAt = new Date().toISOString();
     clearTimeout(readyTimer); setState("ready", "도시 준비 완료");
+    log("WEB_BOOT " + JSON.stringify({ ready_ms: Date.parse(qa.readyAt) - Date.parse(qa.startedAt), quality: qa.quality, cached_chunks: qa.cachedChunks, total_chunks: qa.totalChunks, cached_bytes: qa.cachedBytes, network_bytes: qa.networkBytes }));
     resizeCanvas();
     ui.overlay.hidden = true; ui.spinner.hidden = true;
     ui.canvas.focus({ preventScroll: true });
@@ -404,6 +480,9 @@
 
   function enginePrint(...args) {
     const line = args.map(String).join(" "); log(line); console.info("[Godot]", ...args);
+    if (line.startsWith("WEB_PERF ")) {
+      try { const sample = JSON.parse(line.slice(9)); const badge = $("performanceInfo"); if (badge) badge.textContent = `${sample.paused ? "일시정지 · " : ""}${Math.round(sample.render_fps)} FPS`; } catch { /* Diagnostics must not interrupt gameplay. */ }
+    }
     if (/(?:\bSCRIPT ERROR\b|\bParse Error\b|\bERROR:)/i.test(line)) {
       qa.engineErrorCount += 1; fail(new LoadError("ENGINE_OUTPUT", "도시를 준비하는 중 게임 오류가 발생했습니다.", line)); return;
     }
@@ -464,10 +543,10 @@
     readyTimer = setTimeout(() => fail(new LoadError("READY_TIMEOUT", "도시 준비 응답이 오래 걸리고 있습니다.")), 180000);
     // startGame() would fetch a large PCK URL again. These are the original
     // assembled bytes in Godot's own filesystem, with the actual city entry.
-    await engine.start({ args: ["--main-pack", "index.pck", ...(Array.isArray(config.args) ? config.args : [])] });
+    await engine.start({ args: ["--main-pack", "index.pck", ...(Array.isArray(config.args) ? config.args : []), "--", `--web-quality=${qa.quality}`] });
     resizeCanvas();
     pck.buffer = null;
-    log("Engine start() returned; visibility still requires actual EXPLORATION_READY.");
+    log(`Engine start() returned; actual EXPLORATION_READY required. CACHE_SUMMARY cached=${qa.cachedChunks}/${qa.totalChunks} network_bytes=${qa.networkBytes} quality=${qa.quality}`);
   }
 
   async function boot() {
@@ -485,7 +564,7 @@
       qa.engineVersion = manifest.engineVersion; qa.buildCommit = manifest.buildCommit;
       qa.webRelease = typeof manifest.webRelease === "string" ? manifest.webRelease : null;
       ui.build.textContent = `Godot ${manifest.engineVersion} · 원본 ${manifest.buildCommit.slice(0, 12)}${qa.webRelease ? ` · 웹 ${qa.webRelease}` : ""}`;
-      setState("downloading", "도시 자료 내려받는 중");
+      setState("downloading", "도시 자료 준비 중");
       await Promise.all([loadFiles(files), loadEngineScript()]);
       if (failed) return;
       setState("initializing", "3D 실행기 준비 중");
@@ -519,6 +598,24 @@
     if (toolbar) resizeObserver.observe(toolbar);
   }
   resizeCanvas();
+  // Godot's Web cursor bridge ignores requestPointerLock's returned Promise.
+  // A browser may reject this optional input request (including an embedded
+  // Chromium failure) while the city and keyboard input continue to run.
+  // Catch at the API boundary; unrelated runtime rejections still fail below.
+  if (typeof ui.canvas.requestPointerLock === "function") {
+    const requestPointerLock = ui.canvas.requestPointerLock.bind(ui.canvas);
+    const pointerLockFailed = (error) => {
+      qa.pointerLockError = error?.message || String(error);
+      log(`POINTER_LOCK_UNAVAILABLE: ${qa.pointerLockError}`, "warning");
+      showStatus("마우스 고정을 지원하지 않아 드래그로 시야를 돌릴 수 있습니다. 자유로운 마우스 조작은 외부 브라우저에서 열어 주세요.", 12000);
+    };
+    ui.canvas.requestPointerLock = (...args) => {
+      try {
+        const result = requestPointerLock(...args);
+        return result && typeof result.catch === "function" ? result.catch(pointerLockFailed) : result;
+      } catch (error) { pointerLockFailed(error); }
+    };
+  }
   ui.canvas.addEventListener("pointerdown", () => ui.canvas.focus({ preventScroll: true }));
   window.addEventListener("error", (event) => { if (started && !failed) fail(new LoadError("BROWSER_RUNTIME", "브라우저에서 실행 오류가 발생했습니다.", event.message || "Script error")); });
   window.addEventListener("unhandledrejection", (event) => { if (started && !failed) fail(new LoadError("BROWSER_RUNTIME", "게임 실행 요청을 완료하지 못했습니다.", event.reason?.message || String(event.reason))); });

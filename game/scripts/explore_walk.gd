@@ -267,6 +267,9 @@ func _ready() -> void:
 		exploration_notice.text="캐릭터 설정을 준비하지 못했습니다."
 	_layout_v0.call_deferred()
 	print("EXPLORATION_READY speed=",speed_id," free_roam=",free_roam_enabled," time=",time_id)
+	if OS.has_feature("web"):
+		var web_profile:=preload("res://scripts/web_runtime_profile.gd").new()
+		web_profile.name="WebRuntimeProfile";add_child(web_profile);web_profile.setup(self)
 
 func _build_ui() -> void:
 	super._build_ui()

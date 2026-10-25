@@ -1,5 +1,17 @@
 # 실제 작업 상태와 다음 행동
 
+## 2026-10-25 EXP39 — Web 개선판 게시·운영 자원 검증 완료
+
+최종 Web 릴리스는 **performance01_build04_delivery01**, 게임 runtime은 **performance01_build04**다. [Sites 게시](../data/reports/web_sites/20261025/performance01/delivery01_deployment.json)는2026-10-25T11:21:30Z `succeeded`, Site 소스는 `c67bf053417cf836106e99e900858c0cef0eaff1`이다. [운영 자원 검사](../data/reports/web_sites/20261025/performance01/deployed_asset_check.json)는 실제 **212/212조각·manifest/loader·전체 WASM/PCK SHA PASS**, 전부 첫 시도·31.938초다. 소유자 전용 접근 범위는 유지했다. 인증된 운영 브라우저의 지속 플레이는 이 HTTP 검사와 구분한다.
+
+전송은94,781,218B(약94.8MB)·212조각으로 이전 recovery01의141,196,835B보다 약32.8730% 줄었다. runtime PCK180,846,148B는 [실제 빌드4단계](../data/reports/web_sites/20261025/performance01_build04/build.json) exit0·ERROR0, [raw202파일·scene15/texture49·한글 폰트](../data/reports/web_sites/20261025/performance01_build04/pack_integrity.json) PASS다. Web raw GLB15개126,659,912B 중복은 명시적 **빌드 attestation**으로 출처를 연결하며 native 원본/직접 SHA 경로는 유지한다. 두 차례 운영 시간 초과가 난 PCK0만 두512KiB로 나눴고 전체 게임 SHA/다른 압축 바이트는 같다. 기존211조각과 최종212조각을 구분한다.
+
+[최종 로컬 실행](../data/reports/web_sites/20261025/performance01/delivery01_runtime_dom.txt)은210/212cache+2network1,043,828B·준비16.505초이며 [실제 도시·한국어 HUD](../data/reports/web_sites/20261025/performance01/delivery01_city.jpg)를 확인했다. 같은 runtime04에서 실제 드래그·W/Shift+W 이동·Esc 메뉴·신/구 원형 갤러리·도시 복귀를 확인했다. IAB 마우스 잠금 거절은 경고로 남기고 왼쪽 드래그 대안을 사용했다. actual JS22검사와 재분할6검사는 각각 제한된 기능 검사다.
+
+프레임 향상은 확인했지만 저하가 남는다. runtime04의 짧은 비정지6표본 중앙값30.25FPS/최저16.1, 후속 warm18표본 중앙값26.15/최저8.2FPS다. 구도·입력이 완전히 통제된 비교가 아니며 전구역60FPS·모든 기기 성능을 보장하지 않는다. 물리 주기는30Hz다. build01 낮은 FPS, build02 pointer-lock fatal overlay, build03 import Parse Error, 두 운영 PCK0 시간 초과는 [원문·실패·최종 판정](../data/reports/web_sites/20261025/performance01/README.md)에 보존한다.
+
+사용자는 **여러 사람이 같은 도시에 들어와 만나 함께 플레이**하는 방향을 확정했다. 현재 게임은 단일 플레이며 [서버 원형](../tools/web/multiplayer/README.md)은 실제 로컬 HTTP 두 클라이언트+SQLite14검사만 완료한 Godot 미연결·미호스팅 상태다.8명은 입장 정책,2Hz는 탐색용 polling으로 수용 인원/부드러운 동기화를 검증하지 않았다. 다음은 NPC 물리 계산 부담을 줄이고 지원되는 실시간 방 서버 배포/두 허용 계정의 Godot 연결을 검증하는 것이다. 브랜치는 `codex/shared-city-performance-20261025`, 시작 main은 `a1f6134`다. 아래 EXP38은 이전 이력이다.
+
 ## 2026-10-25 EXP38 recovery01 — 94% 로딩 정지 복구
 
 실제 배포본에서 사용자가 **94%·41/42조각** 뒤 `chunks/pck-005.gz`의 **HTTP500**을 보고했다. 같은 배포 파일을 서비스 경로로 읽는 검사도40.115초에 시간 초과됐다. 저장소/edge의 근본 원인은 미확정이며 빈 worker 로그로 실제500을 부정하지 않는다. [사건 기록](../data/reports/web_sites/20261025/recovery01/incident.json)·[기존 파일 응답](../data/reports/web_sites/20261025/recovery01/old_asset_http.json)을 보존했다.

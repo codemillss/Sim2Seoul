@@ -1,5 +1,6 @@
 extends Node3D
 const GAIT_SUPPORT := preload("res://scripts/player/human_gait_support.gd")
+const WEB_VISUAL_LOD := preload("res://scripts/player/web_human_visual_lod.gd")
 ## Presentation-only bridge from the retained game IK markers to a skinned
 ## human. No player pose, capsule, source joint or import rest is ever changed.
 ## Godot4 bone poses include their rest transforms; set complete local poses.
@@ -40,6 +41,7 @@ var _sole_contacts: Dictionary={}
 var _ground_feet: Dictionary={}
 var _support_profile_cache: Dictionary={}
 var _support_base:=0.
+var _web_visual_lod: RefCounted
 const MAX_CONTACT_LEAN_RADIANS:=PI*25./180.
 
 func setup(source_avatar: Node3D,imported_root: Node3D,imported_skeleton: Skeleton3D,original_head_skeleton: Skeleton3D=null) -> bool:
@@ -90,6 +92,9 @@ func setup(source_avatar: Node3D,imported_root: Node3D,imported_skeleton: Skelet
 	if is_instance_valid(reference_skeleton) and not _prepare_reference_fit():return _fail("invalid_reference_upper_body_fit")
 	_poses=_rest.duplicate();_global_poses=_rest_global.duplicate();loaded=true
 	_sole_contacts=GAIT_SUPPORT.calibrate(self)
+	if OS.has_feature("web"):
+		_web_visual_lod=WEB_VISUAL_LOD.new();_web_visual_lod.configure(self,avatar,visual_root)
+		add_to_group("web_human_visual_rigs")
 	sync_pose();return _finite
 
 func _fail(reason: String) -> bool:
@@ -227,7 +232,12 @@ func _hand_contact(index: int) -> Vector3:
 	return _rest_global[index].affine_inverse()*palm
 
 func _process(_delta: float) -> void:
-	if loaded:sync_pose()
+	if not loaded:return
+	if _web_visual_lod!=null and not _web_visual_lod.should_update(Time.get_ticks_usec()):return
+	sync_pose()
+
+func web_visual_lod_snapshot() -> Dictionary:
+	return _web_visual_lod.snapshot() if _web_visual_lod!=null else {}
 
 func _rebuild_globals() -> void:
 	for index: int in range(_poses.size()):_global_poses[index]=_poses[index] if _parents[index]<0 else _global_poses[_parents[index]]*_poses[index]
@@ -399,6 +409,7 @@ func _prepare_ground_pelvis(pelvis: int) -> void:
 
 func sync_pose() -> bool:
 	if not loaded or not is_instance_valid(avatar) or not is_instance_valid(skeleton):return false
+	var web_started_usec:=Time.get_ticks_usec() if _web_visual_lod!=null else 0
 	_poses=_rest.duplicate();_global_poses=_rest_global.duplicate();_goals.clear();_maximum_reach_clamp_m=0.
 	_apply_reference_fit_rest()
 	var player: Variant=avatar.get("player")
@@ -536,7 +547,9 @@ func sync_pose() -> bool:
 	for index: int in range(_poses.size()):
 		if not _poses[index].is_finite():_finite=false;return false
 		skeleton.set_bone_pose(index,_poses[index])
-	_frame_count+=1;return true
+	_frame_count+=1
+	if _web_visual_lod!=null:_web_visual_lod.record_sync(web_started_usec,Time.get_ticks_usec())
+	return true
 
 func _close_authored_fist(side: String,amount: float) -> void:
 	# The new original hand's actual rest landmarks define flexion: -Y

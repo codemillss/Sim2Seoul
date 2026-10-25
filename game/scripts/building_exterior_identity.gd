@@ -202,12 +202,20 @@ func _flush() -> void:
 	for key: String in _parts:
 		var transforms: Array=_parts[key]
 		if transforms.is_empty():continue
+		if OS.has_feature("web"):
+			for cell: MultiMeshInstance3D in preload("res://scripts/web_runtime_profile.gd").create_facade_batches(key,transforms,box,_materials[key]):
+				add_child(cell);batches.append(cell)
+			continue
 		var mesh:=MultiMesh.new();mesh.transform_format=MultiMesh.TRANSFORM_3D;mesh.mesh=box;mesh.instance_count=transforms.size()
 		for index in range(transforms.size()):mesh.set_instance_transform(index,transforms[index])
 		var node:=MultiMeshInstance3D.new();node.name="Exterior_"+key.replace(":","_");node.multimesh=mesh;node.material_override=_materials[key]
 		# One native batch per material; no scene node or collision per window.
 		node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		add_child(node);batches.append(node)
+	if OS.has_feature("web"):
+		var retained_instances:=0
+		for batch: MultiMeshInstance3D in batches:retained_instances+=batch.multimesh.instance_count
+		print("WEB_FACADE_BATCHES source_instances=",piece_count," retained_instances=",retained_instances," cells=",batches.size()," cell_size_m=80")
 	_parts.clear()
 
 func destination(id: String) -> Dictionary:

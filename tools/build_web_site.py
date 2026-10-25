@@ -4,6 +4,7 @@ The native checkout is not rewritten. Outputs and editor caches stay ignored.
 """
 from pathlib import Path
 import argparse,subprocess,shutil,hashlib,json,gzip,re,datetime,os
+from web_asset_provenance import write_web_provenance
 ROOT=Path(__file__).resolve().parents[1]
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def run(argv,log):
@@ -51,11 +52,12 @@ def main():
  (project/'export_presets.cfg').write_text(preset)
  out=stage/'export';out.mkdir();engine=Path(os.environ.get('SIM2SEOUL_GODOT','/Applications/Godot.app/Contents/MacOS/Godot'))
  imported=run([engine,'--headless','--editor','--path',project,'--rendering-method','gl_compatibility','--import','--quit'],reports/'import.log')
+ provenance=write_web_provenance(project)
  settings.write_text(settings.read_text()+'\n[gui]\ntheme/custom_font="res://assets/fonts/NotoSansKR.ttf"\n')
  exported=run([engine,'--headless','--path',project,'--rendering-method','gl_compatibility','--export-release','Web',out/'index.html'],reports/'export.log')
  expected={}
  for p in project.rglob('*'):
-  if p.is_file() and '.godot' not in p.parts and p.suffix in ['.gd','.json','.glb','.wav','.tres']:expected['res://'+str(p.relative_to(project))]=digest(p)
+  if p.is_file() and '.godot' not in p.parts and p.suffix in ['.gd','.json','.wav','.tres']:expected['res://'+str(p.relative_to(project))]=digest(p)
  expected_path=reports/'expected_raw.json';expected_path.write_text(json.dumps(expected,indent=2)+'\n')
  original=out/'index.imported.pck';(out/'index.pck').rename(original)
  repacked=run([engine,'--headless','--main-pack',original,'--script',ROOT/'tools/web/repack_raw.gd','--',project,out/'index.pck',expected_path,reports/'repack.json'],reports/'repack.log')
@@ -67,14 +69,17 @@ def main():
  html=(out/'index.html').read_text();m=re.search(r'(?:const|var) GODOT_CONFIG\s*=\s*',html);assert m,'export config not found';config,_=json.JSONDecoder().raw_decode(html[m.end():])
  (game/'engine-config.json').write_text(json.dumps(config,indent=2)+'\n')
  for p in out.glob('*.js'):shutil.copyfile(p,game/p.name)
- manifest={'engineVersion':'4.7.2','buildCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'files':{}}
+ manifest={'webRelease':a.tag,'chunkBytes':WEB_CHUNK_BYTES,'engineVersion':'4.7.2','buildCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'files':{}}
  for kind,filename in [('wasm','index.wasm'),('pck','index.pck')]:
   manifest['files'][kind]=chunk_file(out/filename,kind,chunks)
+ desired={Path(chunk['path']).name for file in manifest['files'].values() for chunk in file['chunks']}
+ for obsolete in chunks.glob('*.gz'):
+  if obsolete.name not in desired:obsolete.unlink()
  (game/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  images=dist/'images';images.mkdir(exist_ok=True);shutil.copyfile(ROOT/'data/reports/resident_face_joints/20261025/os/01_world.jpg',images/'seoul.jpg')
  legal=dist/'legal';shutil.copytree(project/'resources/legal',legal,dirs_exist_ok=True)
  (legal/'index.html').write_text('<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Sim2Seoul 출처와 라이선스</title><style>body{font:17px/1.8 system-ui;max-width:850px;margin:60px auto;padding:20px}a{color:#145c48}li{margin:10px}</style><h1>출처와 라이선스</h1><p>이 도시는 공개 공간정보와 직접 작성한 게임용 시설을 함께 사용합니다. 원본 위치·형태와 게임 해석을 구분합니다.</p><ul>'+''.join('<li><a href="'+p.name+'">'+p.name+'</a></li>' for p in sorted(legal.iterdir()) if p.is_file())+'</ul><p><a href="../">돌아가기</a></p></html>')
  source={str(p.relative_to(ROOT)):{'bytes':p.stat().st_size,'sha256':digest(p)} for p in sorted((ROOT/'game').rglob('*')) if p.is_file() and '.godot' not in p.parts and p.name!='.DS_Store' and not any(x in p.parts for x in ('microsoft_rocketbox','makehuman_swim'))}
- record={'task':'WEB_SITES_EXPORT','at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':source,'staged_project':str(project.relative_to(ROOT)),'staged_project_config_sha256':digest(settings),'preset':preset,'import':imported,'export':exported,'repack':repacked,'pack_integrity':checked,'build_script_sha256':digest(Path(__file__)),'files':manifest['files'],'excluded_vendor_reason':'No active scripts/resources load obsolete Microsoft Rocketbox or MakeHuman original rigs. Their source checkout remains intact. Kenney actual active building retained.','native_project_config_unchanged':digest(ROOT/'game/project.godot'),'scope':'Complete exploration scene export, not overview or replacement demo. Browser behavior still requires actual QA.'}
+ record={'task':'WEB_SITES_EXPORT','at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':source,'staged_project':str(project.relative_to(ROOT)),'staged_project_config_sha256':digest(settings),'preset':preset,'import':imported,'export':exported,'repack':repacked,'pack_integrity':checked,'glb_provenance':{'source_assets':len(provenance['assets']),'source_bytes_omitted':sum(row['source_bytes'] for row in provenance['assets'].values()),'contract':'Raw GLB source SHA validated during build; all imported scene/texture resources included and checked. Raw GLB files omitted only in Web. Native raw-file checks retained.'},'build_script_sha256':digest(Path(__file__)),'files':manifest['files'],'excluded_vendor_reason':'No active scripts/resources load obsolete Microsoft Rocketbox or MakeHuman original rigs. Their source checkout remains intact. Kenney actual active building retained.','native_project_config_unchanged':digest(ROOT/'game/project.godot'),'scope':'Complete exploration scene export, not overview or replacement demo. Browser behavior still requires actual QA.'}
  (reports/'build.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'build':str(reports.relative_to(ROOT)),'pck_bytes':manifest['files']['pck']['bytes'],'wasm_bytes':manifest['files']['wasm']['bytes'],'transfer_bytes':sum(c['transferBytes'] for f in manifest['files'].values() for c in f['chunks'])}))
 if __name__=='__main__':main()
