@@ -1,5 +1,18 @@
 # Sol 실행 작업 계획
 
+## EXP37 — 얼굴·관절과 확대 비교 (2026-10-25)
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+- [x] 동결 EXP36 v03 GLB/manifest를 비교 기준으로 보존하고 양쪽의 원본 네 자세를 사용하도록 연결한다.
+- [x] 갤러리에 전체·얼굴·어깨·골반 확대와 동일 pose/focus/view 카메라 계약을 구현한다.
+- [x] 전체 프레임과 실제 관심 정점 ROI 검사를 나누고 새 EXP37 실행기/저장 무결성 검사를 준비한다. 최종 실행 결과는 아래의 현재 소스 기록과 구분한다.
+- [x] v01의 귀/코판과 v02의 남은 코판을 거절하고 v03을 다음 검토 원형으로 선택했다. 현재 원본44장을 직접 열어 미술 한계를 기록했다.
+- [x] root의 실제 OS 메뉴·확대·모델/자세 선택·도시 복귀/재진입과 설정4파일 보존 기록을 peer에 SHA로 결합했다. 복귀 도구 시간초과 후 다음 실제 화면 확인과 성능 미수용을 함께 남겼다.
+- [ ] 인체 미술·실사·연속 보행을 별도 기준으로 수용한다. 독립 원형을 생산 캐릭터로 교체한 상태가 아니다.
+
+현재 제작/검증 상태는 [WORK_STATUS](WORK_STATUS.md)를 따른다. 아래 계획은 각 EXP 당시의 이력이다.
+
 ## EXP36 — 원형 큰 면과 관절 전이 (2026-10-25)
 
 - [x] 흉곽·골반·팔/다리의 큰 면을 다듬고, 실패한 경계 가중치는 복원해 자세 보정 범위를 제한한다.

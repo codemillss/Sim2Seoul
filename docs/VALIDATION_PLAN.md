@@ -1,5 +1,15 @@
 # 검증 계획과 완료 판정
 
+## EXP37 — 얼굴·관절 확대의 공정한 비교 (2026-10-25)
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+현재 실행 결과는 final01의 정확한 동결 소스에 연결한다. 전체는 신구 두 모델×네 자세×정면/옆면/후면/45도, 확대는 각 모델의 기본 얼굴 정면/옆면·팔올림 어깨 정면/후면·깊은앉기 골반 옆면/후면을 검토한다. 두 모델 모두 자체 native clip/morph를 사용하며 같은 pose/focus/view의 실제 카메라·렌즈·조명·회색 재질을 대조한다. 비교 기준은 동결 EXP36 v03이다.
+
+전체 영상은 실제 indexed morph→skin 몸 전체가 UI 아래 화면에 들어오는지 검사한다. 확대는 원본 rest에서 고른 관심 정점의 실제 변형 경계를 따로 검사한다. 얼굴은 목 상단 위 실제 정점의 전체 가로/깊이를 포함해 새 귀·안와를 옛 머리 폭으로 잘라내지 않는다. 확대에서 관심 부위 밖 몸의 잘림은 의도이며 전체 프레임 합격으로 표현하지 않는다. 확대 조작 전후 본·모프와 원본 재질이 변하지 않는지도 확인한다.
+
+실제 native 원본을 직접 열어 접합·관절 접힘·코/귀의 판 모양과 뒤쪽 판독성을 검토한다. 메뉴 진입·확대 버튼·모델/자세 전환·도시 복귀·기존 설정4파일 보존은 일반 OS 기록으로 구분한다. 최종 실행/소스·원본 SHA·실패 이력은 [이번 증거 폴더](../data/reports/resident_face_joints/20261025/)에 보존하며, 저장 무결성 checker는 새 엔진 실행이나 실사/연속 동작 수용을 대신하지 않는다.
+
 ## EXP36 — 큰 면 변경의 동일 조건 비교 (2026-10-25)
 
 이전 v04를 바이트 그대로 비교 자산으로 사용한다. 신/구 각각의 manifest·본22·네 clip·모프3·실제 GLB SHA를 연결하고, 두 모델 모두 원본 애니메이션을 재생한다. 2모델×4자세×4방향의 실제32 PNG에서 palette·전체 형태의 화면 포함과 같은 per-pose 카메라·조명·재질을 대조한다. 제어 메시의 열린/nonmanifold 경계·지지발의 실제 평가 표면과 GLB morph/normal/weight를 직접 확인한다.

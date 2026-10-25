@@ -1,3 +1,13 @@
+## EXP37 얼굴·관절 형태와 확대 비교 · 2026-10-25
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+같은 원형의 두개·안와·볼/상악·인중/코·입술·귀와 겨드랑이·골반 전이를 수정했다. 기존 EXP36 v03 GLB/manifest를 바이트 기준 비교 원본으로 보존한다. 제작 방식은 직접 작성한 편집 제어 메시와 형태 보정이며 외부 인체·스캔·상용 게임 메시/모션을 입력하지 않는다. 수동 조각·실사 완성이나 생산 플레이어/NPC 교체를 완료한 것은 아니다.
+
+v01은 판 같은 귀/코, v02는 남은 코판 때문에 미술 후보에서 거절했다. v03은 귀 뿌리 연결을 유지하며 상악·인중의 넓은 면과 작게 안쪽에 붙은 콧구멍을 작성했다. 확대 원본에서는 눈/입술의 단순한 테두리, 두꺼운 타원 귀, 턱–목의 수평 단차와 큰 둔부/관절 면이 남아 있다. [OpenStax 두개 구조](https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull)와 [NIH 외이 구조](https://elementsofmorphology.nih.gov/anatomy-ear.shtml)는 구조 설명 참고이며 그림/기하/정점의 제작 입력이 아니다.
+
+갤러리 둘째 줄의 **전체·얼굴·어깨·골반**으로 같은 원본 자세와 방향을 가까이 비교한다. 모델을 바꿔도 카메라 조건을 유지하며 확대에서 나머지 몸의 잘림은 의도다. 기본 얼굴 정면/옆면, 팔올림 어깨 정면/후면, 깊은앉기 골반 옆면/후면을 전신 비교와 분리해 확인한다. v03은 다음 검토 원형이며 root 일반 OS 기록의 정확 SHA를 peer에 결합했다. [이번 원본·보고서 폴더](../data/reports/resident_face_joints/20261025/)와 [WORK_STATUS](WORK_STATUS.md)를 따른다. 아래 EXP36 이하는 이전 제작 기록이다.
+
 ## EXP36 인체 원형의 큰 면과 손발 · 2026-10-25
 
 같은 성인 원형에서 흉근·흉곽 아래·배·장골·둔부와 대퇴/무릎/종아리의 큰 면을 다듬었다. 몸체의397개 제어점을 수정하고 기존829정점/794사각면·관절 위치·목/손목/발목 경계를 유지했다. [소스 비교 감사](../data/reports/resident_form_refinement/20261025/body_source_audit.json)는 순수 제어 좌표/위상 검사이며 실제 렌더나 미술 수용을 뜻하지 않는다.

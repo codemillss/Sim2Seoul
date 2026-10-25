@@ -1,5 +1,15 @@
 # Sim2Seoul 개인용 앱 실행 안내
 
+## EXP37 현재 원형 — 얼굴·어깨·골반 확대
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+현재 v03의 엔진·native 비교와 root의 실제 일반 OS 조작/복귀 기록을 마쳤습니다. 기록 시 새 얼굴45도 창을 열어 두었습니다. 일반 게임의 **Esc → 인체 원형 비교 · 무채색**으로 들어갑니다. 첫 줄의 **새 원형/이전 원형(EXP36)**은 새 후보와 동결 EXP36 v03을 선택합니다. 둘째 줄의 방향 버튼 오른쪽에 **전체·얼굴·어깨·골반**이 있으며, 셋째 줄에서 기본 자세·팔 올림·깊은 앉기·한발 지지를 고릅니다. 모델을 바꿔도 자세·방향·확대 부위를 유지해 같은 렌즈·거리·조명으로 비교합니다.
+
+얼굴은 기본 자세 정면/옆면, 어깨는 팔 올림 정면/후면, 골반은 깊은 앉기 옆면/후면을 권장 비교 조합으로 사용합니다. 확대는 자동 둘러보기를 멈추며 관심 부위 밖 몸이 잘릴 수 있습니다. **전체**로 전신 화면, **거리로 돌아가기** 또는 Esc로 도시로 돌아갑니다. 독립 원형은 기존 플레이어/NPC 외형이나 저장 속도 설정을 바꾸지 않습니다.
+
+직접 실행은 `sh tools/run_resident_form_study.sh`, 최종 저장 증거 확인은 `python3 tools/check_resident_face_joints_handoff.py`입니다. 일반 실행에 Blender는 필요 없습니다. [이번 증거 폴더](../data/reports/resident_face_joints/20261025/)와 [현재 상태](WORK_STATUS.md)를 확인합니다. 실사 미술·연속 동작 수용은 별도이며, 아래 EXP36 이하는 당시 사용법/실행 이력입니다.
+
 ## 무채색 인체 원형 비교
 
 일반 게임에서 Esc → **인체 원형 비교 · 무채색**으로 들어갑니다. 새 원형은 정면·옆면·후면·45도와 기본 자세·팔 올림·깊은 앉기·한발 지지를 확인할 수 있습니다. 이전 EXP35 v04도 원본 네 자세로 비교합니다. 신/구 모델을 선택한 뒤 같은 방향/자세 버튼을 누르면 됩니다. **거리로 돌아가기** 또는 Esc로 탐험에 복귀합니다. 저장된 캐릭터나 속도 설정은 바꾸지 않습니다.

@@ -1,0 +1,183 @@
+"""EXP37 body source comparison. Execute with Python; no Blender is launched.
+
+Only the numeric BodyCage construction is evaluated, using a small Vector
+substitute. bpy mesh, subdivision, rig, asset writing and rendering are not
+called. The adjacent JSON is a source contract, not visual art acceptance.
+"""
+from pathlib import Path
+import ast
+import collections
+import datetime
+import hashlib
+import json
+import math
+import subprocess
+import sys
+import types
+
+ROOT = Path(__file__).resolve().parents[4]
+SOURCE = Path('tools/sculpted_character/build_body_cage.py')
+
+
+class Vector:
+    def __init__(self, coordinates):
+        self.coordinates = tuple(float(x) for x in coordinates)
+
+    def __iter__(self):
+        return iter(self.coordinates)
+
+    def __add__(self, other):
+        return Vector(a+b for a,b in zip(self, other))
+
+    def __sub__(self, other):
+        return Vector(a-b for a,b in zip(self, other))
+
+    def __mul__(self, amount):
+        return Vector(a*amount for a in self)
+
+    def __neg__(self):
+        return self*-1
+
+    def dot(self, other):
+        return sum(a*b for a,b in zip(self, other))
+
+    def cross(self, other):
+        a,b,c = self
+        x,y,z = other
+        return Vector((b*z-c*y, c*x-a*z, a*y-b*x))
+
+    def normalized(self):
+        return self*(1/math.sqrt(self.dot(self)))
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def git(*arguments):
+    return subprocess.check_output(['git', *arguments], cwd=ROOT)
+
+
+def construct(source):
+    namespace = {}
+    ast.parse(source)
+    exec(compile(source, str(SOURCE), 'exec'), namespace)
+    cage = namespace['BodyCage']()
+    cage.torso()
+    cage.arms()
+    cage.legs()
+    cage.sculpt_primary_planes()
+    return cage
+
+
+def landmark_ast(source):
+    function = next(node for node in ast.parse(source).body
+                    if isinstance(node, ast.FunctionDef) and node.name == 'build_body')
+    selected = []
+    for node in function.body:
+        assignment = (isinstance(node, ast.Assign) and
+                      any(isinstance(t, ast.Name) and t.id == 'landmarks'
+                          for t in node.targets))
+        update_loop = (isinstance(node, ast.For) and
+                       any(isinstance(child, ast.Call) and
+                           isinstance(child.func, ast.Attribute) and
+                           isinstance(child.func.value, ast.Name) and
+                           child.func.value.id == 'landmarks' and
+                           child.func.attr == 'update' for child in ast.walk(node)))
+        if assignment or update_loop:
+            selected.append(ast.dump(node, include_attributes=False))
+    if not selected:
+        raise ValueError('No landmark source definitions found')
+    return selected
+
+
+def corner_normal(cage, face):
+    a,b,_,d = (Vector(cage.vertices[i]) for i in face)
+    return (b-a).cross(d-a)
+
+
+def main():
+    current = (ROOT/SOURCE).read_bytes()
+    current_sha = sha(current)
+    baseline_commit = git('rev-parse', 'HEAD').decode().strip()
+    baseline = git('show', baseline_commit+':'+str(SOURCE))
+    # Neither source is run inside Blender. build_body() is never called.
+    sys.modules['bpy'] = types.ModuleType('bpy')
+    mathutils = types.ModuleType('mathutils')
+    mathutils.Vector = Vector
+    sys.modules['mathutils'] = mathutils
+    before, after = construct(baseline), construct(current)
+    reversed_corners, zero_corners = [], []
+    for index, face in enumerate(after.faces):
+        normal = corner_normal(after, face)
+        if normal.dot(corner_normal(before, face)) < 0:
+            reversed_corners.append(index)
+        if normal.dot(normal) < 1e-16:
+            zero_corners.append(index)
+    edges = collections.Counter(tuple(sorted((face[j], face[(j+1)%4])))
+                                for face in after.faces for j in range(4))
+    actual_boundary = {edge for edge, count in edges.items() if count == 1}
+    expected_boundary = set()
+    for boundary in after.boundaries.values():
+        ids = boundary['indices']
+        expected_boundary.update(tuple(sorted((ids[j], ids[(j+1)%len(ids)])))
+                                 for j in range(len(ids)))
+    nonmanifold = [list(edge) for edge, count in edges.items() if count > 2]
+    joins = {key: before.boundaries.get(key) == value
+             for key, value in after.boundaries.items()}
+    same_landmark_ast = landmark_ast(current) == landmark_ast(baseline)
+    same_faces = before.faces == after.faces
+    same_regions = before.regions == after.regions
+    stable = current_sha == sha((ROOT/SOURCE).read_bytes())
+    moved = [{'id': i, 'before': list(a), 'after': list(b)}
+             for i, (a,b) in enumerate(zip(before.vertices, after.vertices)) if a != b]
+    conditions = {
+        'face_index_lists_exactly_preserved': same_faces,
+        'vertex_region_ids_exactly_preserved': same_regions,
+        'five_join_boundaries_metadata_ids_coordinates_exactly_preserved': joins,
+        'landmark_definition_ast_exactly_preserved': same_landmark_ast,
+        'all_faces_are_quads': all(len(face) == 4 for face in after.faces),
+        'all_coordinates_finite': all(math.isfinite(v) for p in after.vertices for v in p),
+        'no_corner_normal_reversal_against_baseline': not reversed_corners,
+        'no_zero_area_first_corners': not zero_corners,
+        'no_edge_used_by_more_than_two_faces': not nonmanifold,
+        'open_edges_exactly_equal_five_join_boundaries': actual_boundary == expected_boundary,
+        'source_unchanged_during_audit': stable,
+    }
+    passed = all(value if not isinstance(value, dict) else all(value.values())
+                 for value in conditions.values())
+    report = {
+        'task': 'EXP37_BODY_SOURCE_CONTRACT',
+        'created_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'result': 'SOURCE_CONTRACT_PASS_ONLY' if passed else 'SOURCE_CONTRACT_FAIL',
+        'method': 'Executed pure Python BodyCage construction with a numerical Vector substitute; no bpy mesh/modifier/rig/export/render API called.',
+        'command': 'python3 data/reports/resident_face_joints/20261025/body_source_audit.py.source',
+        'source_path': str(SOURCE), 'source_sha256': current_sha,
+        'baseline_commit': baseline_commit, 'baseline_source_sha256': sha(baseline),
+        'audit_script_sha256': sha(Path(__file__).read_bytes()),
+        'control_vertices': len(after.vertices), 'control_quads': len(after.faces),
+        'moved_control_vertices': len(moved), 'conditions': conditions,
+        'corner_normal_reversal_faces': reversed_corners,
+        'zero_area_first_corner_faces': zero_corners,
+        'nonmanifold_edges': nonmanifold, 'boundary_edge_count': len(actual_boundary),
+        'new_semantic_loop_aliases': {key: ids for key, ids in after.loops.items()
+                                     if key not in before.loops},
+        'moved_vertices': moved,
+        'blender_launched': False, 'rendered_candidate_reviewed': False,
+        'full_anatomy_art_acceptance': False,
+        'limitations': [
+            'This compares source coordinates/connectivity and landmark AST, not evaluated Blender subdivision or exported assets.',
+            'First-corner normals do not prove quad planarity, a globally embedded surface or absence of posed self-intersection.',
+            'The isolated body retains five intentional open join loops. Closed integrated manifold acceptance requires the root head/hands/feet build.',
+            'Shape, silhouettes, armature/pose correctives and joint folds require fresh actual candidate images and engine checks.',
+        ],
+    }
+    output = Path(__file__).with_name('body_source_audit.json')
+    output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+    print(report['result'], 'vertices', len(after.vertices), 'quads', len(after.faces),
+          'moved', len(moved), 'sha256', current_sha)
+    return 0 if passed else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

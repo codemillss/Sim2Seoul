@@ -1,4 +1,4 @@
-"""EXP35/36 editable, independently authored human body control cage.
+"""EXP35/36/37 editable, independently authored human body control cage.
 
 Run inside Blender. This is an explicit quad cage, not an isosurface, an old
 resident mesh deformation, or a body asset import. The low-resolution loops
@@ -285,6 +285,10 @@ class BodyCage:
 
         # Anterior clavicle and pectoral sheets. The inferior pectoral rows
         # rise toward the anterior axillary fold instead of horizontal bands.
+        # EXP37 narrows the lower socket around the actual shoulder pivot.
+        # The former wide/low chest panel made a long, nearly planar web to
+        # the first arm section. Anterior and posterior folds now turn around
+        # a higher, shallower axillary floor; the exterior deltoid stays round.
         torso_planes = {
             'acromion_clavicle': [
                 (0,(.207,.001,1.490)), (19,(.194,-.024,1.486)),
@@ -295,21 +299,21 @@ class BodyCage:
                 (5,(0,.068,1.483))],
             'pectorals_scapula': [
                 (0,(.202,-.001,1.405)), (19,(.190,-.036,1.402)),
-                (18,(.163,-.088,1.402)), (17,(.113,-.123,1.405)),
+                (18,(.180,-.079,1.414)), (17,(.113,-.123,1.405)),
                 (16,(.056,-.122,1.402)), (15,(0,-.100,1.399)),
-                (1,(.192,.028,1.412)), (2,(.166,.067,1.414)),
+                (1,(.192,.028,1.412)), (2,(.179,.062,1.421)),
                 (3,(.120,.104,1.403)), (4,(.058,.108,1.397)),
                 (5,(0,.080,1.405))],
             'axilla_lower': [
-                (0,(.184,-.002,1.320)), (19,(.177,-.040,1.331)),
-                (18,(.153,-.104,1.340)), (17,(.112,-.147,1.320)),
+                (0,(.179,-.002,1.350)), (19,(.176,-.037,1.357)),
+                (18,(.165,-.072,1.370)), (17,(.112,-.136,1.329)),
                 (16,(.056,-.151,1.306)), (15,(0,-.110,1.305)),
-                (1,(.176,.033,1.330)), (2,(.151,.078,1.330)),
+                (1,(.174,.032,1.358)), (2,(.162,.063,1.370)),
                 (3,(.108,.113,1.328)), (4,(.054,.102,1.320)),
                 (5,(0,.083,1.320))],
             'lower_pectorals': [
-                (0,(.177,-.002,1.270)), (19,(.168,-.039,1.284)),
-                (18,(.145,-.087,1.300)), (17,(.103,-.119,1.279)),
+                (0,(.173,-.002,1.282)), (19,(.164,-.037,1.290)),
+                (18,(.145,-.081,1.305)), (17,(.103,-.119,1.279)),
                 (16,(.052,-.122,1.265)), (15,(0,-.108,1.263)),
                 (1,(.168,.026,1.265)), (2,(.145,.066,1.268)),
                 (3,(.100,.097,1.270)), (4,(.050,.096,1.269)),
@@ -354,11 +358,11 @@ class BodyCage:
                 (3,(.110,.130,.948)), (4,(.060,.145,.935)),
                 (5,(0,.108,.956))],
             'pelvic_exit': [
-                (0,(.170,.004,.915)), (19,(.160,-.028,.910)),
-                (18,(.136,-.058,.899)), (17,(.099,-.083,.885)),
-                (16,(.052,-.100,.876)), (15,(0,-.096,.875)),
-                (1,(.162,.042,.918)), (2,(.140,.090,.912)),
-                (3,(.100,.131,.895)), (4,(.048,.143,.882)),
+                (0,(.168,.004,.920)), (19,(.158,-.030,.919)),
+                (18,(.136,-.064,.910)), (17,(.099,-.090,.898)),
+                (16,(.052,-.104,.886)), (15,(0,-.098,.880)),
+                (1,(.160,.044,.921)), (2,(.139,.089,.913)),
+                (3,(.100,.128,.896)), (4,(.048,.139,.883)),
                 (5,(0,.100,.864))],
             # Distinct anterior throat/SCM attachment and posterior trapezius.
             'trapezius_neck': [
@@ -387,8 +391,15 @@ class BodyCage:
             # Deltoid/acromion to the separate anterior biceps and posterior
             # triceps planes. The inner elbow narrows; it is not a scaled tube.
             for row, index, p in [
-                (0,11,(.238,-.078,1.413)), (0,5,(.238,.065,1.408)),
-                (0,8,(.305,-.001,1.448)),
+                # Twelve points follow the shoulder's oblique section. The
+                # deep side of the axilla joins the lower socket without a
+                # long radial membrane; the front/back folds are distinct.
+                (0,0,(.199,-.049,1.403)), (0,1,(.186,-.027,1.394)),
+                (0,2,(.181,-.001,1.390)), (0,3,(.187,.025,1.395)),
+                (0,4,(.202,.045,1.405)), (0,5,(.238,.061,1.415)),
+                (0,6,(.274,.043,1.430)), (0,7,(.286,.023,1.437)),
+                (0,8,(.291,-.001,1.441)), (0,9,(.285,-.025,1.438)),
+                (0,10,(.272,-.046,1.432)), (0,11,(.238,-.071,1.420)),
                 (1,11,(.268,-.074,1.346)), (1,5,(.268,.065,1.340)),
                 (2,11,(.300,-.067,1.267)), (2,5,(.300,.052,1.250)),
                 (3,11,(.319,-.054,1.211)), (3,5,(.319,.037,1.198)),
@@ -399,20 +410,24 @@ class BodyCage:
                 limb_point(side,'arm',row,index,p)
 
             # Posterior gluteal fold and the anterior inguinal/adductor slope
-            # meet the thigh at different heights; no round pelvis sausage.
+            # meet the thigh at different heights. EXP37 moves the first two
+            # sections along the femoral attachment, rather than continuing
+            # the pelvic rim as a flat skirt or a high sharp V. Front points
+            # turn gradually into the proximal thigh; the posterior fold
+            # remains lower than the lateral greater-trochanter transition.
             for row, index, p in [
-                (0,0,(.022,-.042,.832)), (0,1,(.049,-.074,.843)),
-                (0,2,(.092,-.086,.853)), (0,3,(.132,-.075,.864)),
-                (0,4,(.162,-.042,.871)), (0,5,(.172,.001,.874)),
-                (0,6,(.159,.057,.874)), (0,7,(.127,.105,.865)),
-                (0,8,(.092,.128,.857)), (0,9,(.051,.104,.846)),
-                (0,10,(.023,.055,.838)), (0,11,(.009,.001,.833)),
-                (1,0,(.025,-.043,.793)), (1,1,(.052,-.078,.805)),
-                (1,2,(.095,-.096,.815)), (1,3,(.137,-.084,.823)),
-                (1,4,(.165,-.046,.820)), (1,5,(.177,.002,.812)),
-                (1,6,(.166,.048,.812)), (1,7,(.139,.078,.813)),
-                (1,8,(.095,.092,.808)), (1,9,(.051,.078,.800)),
-                (1,10,(.025,.046,.789)), (1,11,(.014,.004,.787)),
+                (0,0,(.023,-.063,.843)), (0,1,(.050,-.090,.853)),
+                (0,2,(.094,-.100,.864)), (0,3,(.133,-.087,.875)),
+                (0,4,(.157,-.050,.884)), (0,5,(.166,.001,.886)),
+                (0,6,(.156,.054,.883)), (0,7,(.128,.101,.874)),
+                (0,8,(.094,.120,.863)), (0,9,(.052,.103,.851)),
+                (0,10,(.024,.063,.842)), (0,11,(.009,.001,.833)),
+                (1,0,(.026,-.051,.800)), (1,1,(.052,-.084,.810)),
+                (1,2,(.096,-.101,.819)), (1,3,(.137,-.086,.828)),
+                (1,4,(.164,-.047,.825)), (1,5,(.174,.002,.818)),
+                (1,6,(.164,.049,.817)), (1,7,(.137,.080,.816)),
+                (1,8,(.096,.094,.811)), (1,9,(.052,.082,.802)),
+                (1,10,(.026,.050,.792)), (1,11,(.014,.004,.787)),
                 # Vastus lateralis is higher than the medial teardrop; the
                 # adductor plane flattens rather than bulging equally around.
                 (2,2,(.096,-.090,.750)), (2,3,(.139,-.074,.759)),
@@ -456,6 +471,15 @@ class BodyCage:
         for side in ('L','R'):
             self.loops['gluteal_fold.'+side] = [self.loops['leg.%s.00' % side][i]
                                               for i in (6,7,8,9,10)]
+            # Metadata identifies the existing connected fold strips. These
+            # are not added geometry, skin patches or a separate inner shell.
+            socket = self.loops['shoulder_socket.'+side]
+            self.loops['axillary_floor.'+side] = socket[:5]
+            self.loops['anterior_axillary_fold.'+side] = [socket[0],socket[11],
+                self.loops['arm.%s.00' % side][11]]
+            self.loops['posterior_axillary_fold.'+side] = [socket[4],socket[5],
+                self.loops['arm.%s.00' % side][5]]
+            self.loops['proximal_thigh_transition.'+side] = self.loops['leg.%s.00' % side]
 
 
 def build_body(collection=None):
@@ -489,7 +513,7 @@ def build_body(collection=None):
     subdivision.render_levels = 2
     obj['authored_source'] = 'tools/sculpted_character/build_body_cage.py'
     obj['method'] = 'explicit connected quad control cage; no SDF/body import'
-    obj['study_status'] = 'EXP36 anatomical-plane candidate; visual review required'
+    obj['study_status'] = 'EXP37 joint-transition candidate; visual review required'
     obj['units'] = 'metres'
     obj['front_axis'] = '-Y'
     obj['body_height_including_separate_head_target_m'] = 1.78
@@ -521,7 +545,7 @@ def build_body(collection=None):
         'anatomy_reference_pages': list(PROVENANCE),
         'notes': ['All-quads connected torso/limbs; five open join boundaries.',
                   'Manually editable cage and unapplied subdivision remain source.',
-                  'EXP36 explicit anatomical-plane candidate; not an anatomical measurement.',
+                  'EXP37 explicit axillary/hip transition candidate; not an anatomical measurement.',
                   'Fixed join loop IDs and landmark positions do not imply visual acceptance.'],
     }
     return obj, info

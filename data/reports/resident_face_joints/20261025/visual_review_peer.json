@@ -1,0 +1,748 @@
+{
+  "task": "EXP37_RESIDENT_FACE_JOINTS_PEER_VISUAL_REVIEW",
+  "reviewed_at_utc": "2026-10-25T04:35:51.411830+00:00",
+  "reviewer": "combat_rework peer; actual raw image viewing in this review; no engine or OS input performed",
+  "current_selection": true,
+  "selected_candidate": "v03; next isolated clay review prototype only",
+  "counts": {
+    "headless_checks": 85,
+    "native_checks": 141,
+    "native_original_pngs": 44,
+    "actually_opened_current_original_pngs": 44,
+    "whole_body_original_pngs": 32,
+    "focused_detail_original_pngs": 12
+  },
+  "disposition": {
+    "technical_scene_capture_integrity": "PASS_BOUNDED",
+    "form_review_disposition": "NEXT_PROTOTYPE_WITH_EXPLICIT_ART_LIMITS",
+    "art_acceptance": false,
+    "fully_realistic_character": false,
+    "continuous_motion_acceptance": false,
+    "normal_game_avatar_replaced": false,
+    "user_art_acceptance_claimed": false
+  },
+  "current_source_sha256": {
+    "art/characters/resident_form_m01.blend": "f32fab3e61c5e9f8f7bc22f20be09f68f30d6600fb28df268ccec035bafb9bb2",
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508",
+    "game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766",
+    "game/assets/original/resident_study/resident_form_m01.glb": "06e62f58ff3745e2da4399b443cc41b04e7d11dfa8ebcbd3a262ecc313dcf8c2",
+    "game/assets/original/resident_study/resident_form_m01.glb.import": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90",
+    "game/assets/original/resident_study/resident_form_m01_previous.glb": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b",
+    "game/assets/original/resident_study/resident_form_m01_previous.glb.import": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4",
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "game/scenes/study/resident_form_study.tscn": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9",
+    "game/scripts/explore_walk.gd": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd",
+    "game/scripts/study/resident_form_study.gd": "8fe895d39d0d027974b36acfe256bf586029ce79818129610650c8ad7e23d772",
+    "tests/game/check_resident_form_study.gd": "3d7f8b583d2ed52f92f9eafee814b392f2da42abdf639eaad6c1171b9ee70ac6",
+    "tools/run_resident_form_study_acceptance.py": "6d4c71767646f3d556b03dcca78d51e2a06c82da7249934b8fb0b873a49bb231",
+    "tools/sculpted_character/build_body_cage.py": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916",
+    "tools/sculpted_character/build_head_extremities.py": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e",
+    "tools/sculpted_character/build_resident_study.py": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f",
+    "tools/sculpted_character/build_study_rig.py": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+  },
+  "run_bindings": [
+    {
+      "mode": "headless",
+      "report": "data/reports/resident_face_joints/20261025/face_joints_headless_final01.json",
+      "wrapper": "data/reports/resident_face_joints/20261025/face_joints_headless_final01.run.json",
+      "report_sha256": "3d4661a54dba33932c9db7088444129d5465a7b5cf8f371bf053a66081bd925b",
+      "wrapper_sha256": "636333d754e6cbe385fc69b62e96730e1d47beaee9d447e0c5018d8254f1d513",
+      "actual_engine_returncode": 0,
+      "checks": 85,
+      "captures": 0
+    },
+    {
+      "mode": "native",
+      "report": "data/reports/resident_face_joints/20261025/face_joints_native_final01.json",
+      "wrapper": "data/reports/resident_face_joints/20261025/face_joints_native_final01.run.json",
+      "report_sha256": "a1c4aadcdc0c35d03375b62e9935d5e18148e12e72e58c5df80c27bf215e391f",
+      "wrapper_sha256": "a5a7cb3dd8d44482e7c338511e7e362bf6c044d1f63e7a2915a0cd871f6ce2bc",
+      "actual_engine_returncode": 0,
+      "checks": 141,
+      "captures": 44
+    }
+  ],
+  "run_integrity_readonly_audit": [
+    {
+      "mode": "headless",
+      "all_selected_checks_passed": true,
+      "actual_exit_zero": true,
+      "engine_errors": [],
+      "capture_errors": [],
+      "source_changes": [],
+      "wrapper_and_current_source_match": true,
+      "text_snapshots_match": true,
+      "logs_error_zero": true
+    },
+    {
+      "mode": "native",
+      "all_selected_checks_passed": true,
+      "actual_exit_zero": true,
+      "engine_errors": [],
+      "capture_errors": [],
+      "source_changes": [],
+      "wrapper_and_current_source_match": true,
+      "text_snapshots_match": true,
+      "logs_error_zero": true
+    }
+  ],
+  "actual_asset_bindings": {
+    "new": {
+      "glb": "res://assets/original/resident_study/resident_form_m01.glb",
+      "sha256": "06e62f58ff3745e2da4399b443cc41b04e7d11dfa8ebcbd3a262ecc313dcf8c2",
+      "manifest": "res://assets/original/resident_study/FORM_STUDY_MANIFEST.json",
+      "manifest_sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+    },
+    "previous": {
+      "glb": "res://assets/original/resident_study/resident_form_m01_previous.glb",
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b",
+      "manifest": "res://assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json",
+      "manifest_sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    }
+  },
+  "comparison_conditions": {
+    "same_pose_focus_view_camera_pairs": 22,
+    "exact_actual_camera_lens_and_focus_readback_match": true,
+    "exact_actual_lighting_contract_match": true,
+    "all_eight_pose_snapshots_same_untextured_clay": true,
+    "native_original_dimensions_px": [
+      1152,
+      720
+    ],
+    "palette_publication_and_visibility_all_44": true,
+    "whole_body_captures_fully_inside_unobscured_frame": 32,
+    "focused_captures_only_actual_roi_required_inside_frame": 12,
+    "body_cutoff_in_detail_intentional": true,
+    "no_legacy_retarget_or_forced_baseline_pose": true,
+    "previous_source": "Frozen EXP36 v03 native GLB; same 22 bones/four authored clip holds/three morph contract, no per-model camera adjustment"
+  },
+  "actual_opened_original_files": [
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_front.png",
+      "sha256": "249e2a5d93bcb3c0e24ca225a09d3bf2295bbf8dd868f0390c1c4d518cd47319",
+      "bytes": 73539,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_right.png",
+      "sha256": "df75d22e5f58767d477adf7c32553137a531fbede253b9ad8f4caa712c37ccc3",
+      "bytes": 56017,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_back.png",
+      "sha256": "dced7e4f17afc0f73a1c93b306a22291e13e32b8907112e580817631a27ea4fb",
+      "bytes": 73498,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_oblique.png",
+      "sha256": "1fecd73955480f690cfb540032177d6929c920f50cb18ced0408424d04e0ed10",
+      "bytes": 69569,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_front.png",
+      "sha256": "687b3698aee5fb4c228fe481cfdfb2d8f4246da3e1d66f58142cea58b255b474",
+      "bytes": 60477,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_right.png",
+      "sha256": "93632a632a515e38def8e9d5d747bfeeb722680fa288398a91f124c797292d02",
+      "bytes": 50297,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_back.png",
+      "sha256": "8263c3e3f98ba4b51c17640b41b9e25ba5dfae2933da4f9a86b50bed29f9bc82",
+      "bytes": 62373,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_oblique.png",
+      "sha256": "8d22e9ac6c0bb895f7dedc37d33bbb5f64b04576ebd19df8a47a8cb36aad9a8d",
+      "bytes": 59316,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_front.png",
+      "sha256": "31532c1705e83d1ee1d453cdd2e2bfc7573f7eae3cab77206e45311480cab6af",
+      "bytes": 66275,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_right.png",
+      "sha256": "0bf572a8bedcc87098b88023702332fbc1abbcf825d9d6d1574542d6d90af25f",
+      "bytes": 60791,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_back.png",
+      "sha256": "53921c0974fc5c6a35e45ac50b37727c4abe509080fd5f0b5061941b99cd1a2a",
+      "bytes": 66409,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_oblique.png",
+      "sha256": "60cebd3ff1d1c70b130c57b82d013d3a1c58952a0fee5cc42961e90ab92562ba",
+      "bytes": 66323,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_front.png",
+      "sha256": "ee04d4184d7e7a9d13bdc8107c658065708c75c00762614207bf1745bb2a955d",
+      "bytes": 72796,
+      "model": "new",
+      "pose": "single_support",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_right.png",
+      "sha256": "f089b310e25acd2fbff4bf81aeed5811c7b682b8a0c79da0a09bb9b7a6c25710",
+      "bytes": 61475,
+      "model": "new",
+      "pose": "single_support",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_back.png",
+      "sha256": "1ebddb48c3f344947e4ffdaebcf39cb1be3477f4ae71e0e90cbc59a10aa115a2",
+      "bytes": 73870,
+      "model": "new",
+      "pose": "single_support",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_oblique.png",
+      "sha256": "ecaa8c5ef9dac0ab59df563c2b4d3d101e6fc9ff19e00729a18427be87ac2070",
+      "bytes": 69627,
+      "model": "new",
+      "pose": "single_support",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_front_detail_face.png",
+      "sha256": "f8282e46ee0e5b3216ff3cfac42c0ca416e227c40b38938c3ceea64255f93183",
+      "bytes": 66472,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "front",
+      "focus": "face",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_right_detail_face.png",
+      "sha256": "6599481cf8b4f89c2f31e1a92ae8135cd76970bce62ad173e195de0e1c947fb6",
+      "bytes": 55962,
+      "model": "new",
+      "pose": "a_pose",
+      "view": "right",
+      "focus": "face",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_front_detail_shoulders.png",
+      "sha256": "c56f5f3306f4b6f02729a3dbee135638c58aef453ccbb7a4fffdae4fe2ddb7b9",
+      "bytes": 79085,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "front",
+      "focus": "shoulders",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_back_detail_shoulders.png",
+      "sha256": "71f1a99c10fc0545d052d21627b41874fadb6dcba783264f5681602bdb1234ee",
+      "bytes": 73785,
+      "model": "new",
+      "pose": "arm_raise",
+      "view": "back",
+      "focus": "shoulders",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_right_detail_pelvis.png",
+      "sha256": "cecd3ec0665ac9fdce93091b6ad39af08670bba88f28036e73461db27d6c7313",
+      "bytes": 82709,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "right",
+      "focus": "pelvis",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_back_detail_pelvis.png",
+      "sha256": "bb9d5a8704157e1b4cd3d7926f70686b9dc213964a0d2d91579509535ee44bcb",
+      "bytes": 74095,
+      "model": "new",
+      "pose": "deep_squat",
+      "view": "back",
+      "focus": "pelvis",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_front.png",
+      "sha256": "e07b35a67f60f9bc8b81744b16eab001e9db39654cf320636a61f1521d9a6ed7",
+      "bytes": 75178,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_right.png",
+      "sha256": "e0326aa88b0a5c85b83b5a24677c1a36e9d76f2585677dc97ab3b894848e86d0",
+      "bytes": 57282,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_back.png",
+      "sha256": "68276f28b30df11c7ee9ca83d87366324f0d248b41e18a23de15ec3d4fb31a25",
+      "bytes": 74907,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_oblique.png",
+      "sha256": "109e09b359dc99a1b274f6640222dbc1682dff47d7e17b8762b35e246b64d6be",
+      "bytes": 70946,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_front.png",
+      "sha256": "5a510b28407e92a127c68b3f99593572e044042ce3af8ad4387786d8ce7a41ae",
+      "bytes": 62203,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_right.png",
+      "sha256": "f7d16dcd76b6b0699fcdd4e179b5e9bcd3aac054864ae85cc93ccdce5384be6a",
+      "bytes": 51819,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_back.png",
+      "sha256": "637c0dc0f5c4c8cfcc6009e85f7725eee6b4305bae2bc762ed8baf08ff195f9a",
+      "bytes": 64062,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_oblique.png",
+      "sha256": "5a9f3021bfc54a0ed297f121682114248571ac3ea4d87a7b1b8417241af9743a",
+      "bytes": 61062,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_front.png",
+      "sha256": "39dd7047163dcea9409a53a8842021d19a91d17310b471dd3e4e47bf69f0f627",
+      "bytes": 67645,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_right.png",
+      "sha256": "355e3f04d4188cae747c17b02f91c5f1e7a6f28432ef43125555a1678527aad9",
+      "bytes": 62243,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_back.png",
+      "sha256": "e8b836f950644511ec91c3249774fcfaafff33ff06a220a9e03fbc953168871d",
+      "bytes": 67517,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_oblique.png",
+      "sha256": "be7f7cebb87e1651ca8f1daa537bccac46ff3859eeb07738f5acffdc5dffb129",
+      "bytes": 67818,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_front.png",
+      "sha256": "6eab4072aa7f69b04595961496faedcf4a774611e70fa211d9bdbe749d389b11",
+      "bytes": 74518,
+      "model": "previous",
+      "pose": "single_support",
+      "view": "front",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_right.png",
+      "sha256": "48da1de912f77d51917e444f0930f260fe2a78c80e555f8581772de1940d619a",
+      "bytes": 62894,
+      "model": "previous",
+      "pose": "single_support",
+      "view": "right",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_back.png",
+      "sha256": "eb9c2be7e5e7470fdde81a7794ea0a58c52b84999150d84f19dddcccff3df19c",
+      "bytes": 75218,
+      "model": "previous",
+      "pose": "single_support",
+      "view": "back",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_oblique.png",
+      "sha256": "6be69871aabe5d619175e56eb958952e9fd6b362fe9f9f273f3a847f9db0174d",
+      "bytes": 71344,
+      "model": "previous",
+      "pose": "single_support",
+      "view": "oblique",
+      "focus": "whole",
+      "capture_kind": "whole_body",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_front_detail_face.png",
+      "sha256": "6429329e7061af9b1a87e8fcbd32fdecd8f7c698e6a506c1a987462f36e562ca",
+      "bytes": 64861,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "front",
+      "focus": "face",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_right_detail_face.png",
+      "sha256": "d485c713e0108b37a2fc70f57d5aaf7ea075a280ef6fb0a3bf6be0257cf197ed",
+      "bytes": 55110,
+      "model": "previous",
+      "pose": "a_pose",
+      "view": "right",
+      "focus": "face",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_front_detail_shoulders.png",
+      "sha256": "014e3380e9a0f98da1cf0f37439dc1d3e5dd97f05235dd5ea94c7e88d09c5923",
+      "bytes": 80239,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "front",
+      "focus": "shoulders",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_back_detail_shoulders.png",
+      "sha256": "1b2748d6c5ee4c4a6699bd3090cd9c3c04d69cb5fe23706e97f19b6a4eace278",
+      "bytes": 75658,
+      "model": "previous",
+      "pose": "arm_raise",
+      "view": "back",
+      "focus": "shoulders",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_right_detail_pelvis.png",
+      "sha256": "74a60d7bb3a7744faf907754edf1ddd70b26b3f1341c66d475158d98263c3392",
+      "bytes": 84364,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "right",
+      "focus": "pelvis",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    },
+    {
+      "file": "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_back_detail_pelvis.png",
+      "sha256": "5adebe31cf5d76d864a8d06115d73c28670a2d9d1e069afcdedc06f4e93d9f99",
+      "bytes": 75400,
+      "model": "previous",
+      "pose": "deep_squat",
+      "view": "back",
+      "focus": "pelvis",
+      "capture_kind": "focused_detail",
+      "actual_original_opened_in_this_review": true
+    }
+  ],
+  "visual_observations": [
+    {
+      "region": "whole body / all four holds",
+      "observation": "Both sources remain inside the whole-body frame in front/right/back/oblique captures. Native raised arms, squat and single-support holds are distinct and readable. No gross new spike or missing body patch was seen in these stills. Overall silhouette changes are small; these are not substantially different realistic bodies.",
+      "scope": "32 actual original full-body stills; no continuous transition or biomechanical acceptance"
+    },
+    {
+      "region": "new face front/profile vs previous",
+      "observation": "New nostril/alar detail, orbital rim and visible external ear are more legible than the previous smooth nose/indistinct ear. The new cheek/maxillary transitions remain angular and mask-like. Eyelid outlines read as separate small oval loops; lips remain a short horizontal tube/bar. The profile ear is a thick oval rim/pad rather than fine auricular folds. The lower jaw meets the neck with a conspicuous nearly horizontal ledge. These do not establish a photorealistic or attractive identity.",
+      "evidence": [
+        "face_joints_native_final01_new_a_pose_front_detail_face.png",
+        "face_joints_native_final01_new_a_pose_right_detail_face.png",
+        "face_joints_native_final01_previous_a_pose_front_detail_face.png",
+        "face_joints_native_final01_previous_a_pose_right_detail_face.png"
+      ],
+      "approximate_pixel_regions_new": {
+        "eye_rims_front": [
+          520,
+          387,
+          631,
+          426
+        ],
+        "nose_lip_front": [
+          538,
+          431,
+          611,
+          490
+        ],
+        "ear_right_profile": [
+          577,
+          389,
+          618,
+          463
+        ],
+        "jaw_neck_profile": [
+          540,
+          492,
+          654,
+          515
+        ]
+      },
+      "caution": "Visible ledge/rim is an appearance observation, not proof of open topology or a skin hole."
+    },
+    {
+      "region": "raised shoulder / axilla front and back",
+      "observation": "The upper torso and arm silhouettes are readable under shared front/fill lighting and the new chest-to-axilla plane differs only subtly from EXP36. Both still show broad smooth web-like shoulder contours, straight/angular inner upper-arm bends and weak scapular/deltoid separation. No large background-through tear or long blade was visible. Hands extend behind the top UI in this intentional shoulder detail; full-arm inclusion is separately checked in whole-body captures.",
+      "evidence": [
+        "face_joints_native_final01_new_arm_raise_front_detail_shoulders.png",
+        "face_joints_native_final01_new_arm_raise_back_detail_shoulders.png",
+        "face_joints_native_final01_previous_arm_raise_front_detail_shoulders.png",
+        "face_joints_native_final01_previous_arm_raise_back_detail_shoulders.png"
+      ]
+    },
+    {
+      "region": "deep-squat pelvis side/back",
+      "observation": "The shared detail camera makes the hip-thigh fold and buttock boundary inspectable. New and previous forms are close; any smoothing is modest. Both retain broad inflated buttock lobes, simple lower glute/thigh attachment and a rounded knee fold. Fine iliac/sacral planes, soft-tissue compression and joint landmarks remain underdeveloped. No claim of anatomical accuracy or natural moving hips is made.",
+      "evidence": [
+        "face_joints_native_final01_new_deep_squat_right_detail_pelvis.png",
+        "face_joints_native_final01_new_deep_squat_back_detail_pelvis.png",
+        "face_joints_native_final01_previous_deep_squat_right_detail_pelvis.png",
+        "face_joints_native_final01_previous_deep_squat_back_detail_pelvis.png"
+      ]
+    },
+    {
+      "region": "shadow / capture limits",
+      "observation": "The diagonal dark hand-shaped stripe across the front squat appears in both sources under the unchanged key and is treated as cast self-shadow, not a new missing-surface diagnosis. Rear planes remain distinguishable from background. Face and pelvis views intentionally crop unselected body regions; the scale label can be partly off-screen or behind the body in detail. This review accepts neither complete-body inclusion in detail nor fine hand/foot quality beyond what these originals actually show."
+    }
+  ],
+  "ordinary_os_root_record_review": {
+    "status": "ROOT_SAVED_RECORD_REVIEWED",
+    "record": "data/reports/resident_face_joints/20261025/normal_launch.json",
+    "record_sha256": "f1aee2b2d242d2a91a5e72dee25de1130c01f3e4e35921922106ab34895ce54f",
+    "review_scope": "Peer read the root-authored ordinary OS record and verified current source SHA17, all11 JPEG byte/hash/signature bindings, two immutable ERROR0 logs and four preference states before/after. Peer did not perform OS input and does not claim to have separately opened these eleven OS images. The44 selected native originals were actually opened separately as listed.",
+    "root_actual_os_jpegs": 11,
+    "root_record_pid_at_record": 48203,
+    "recorded_final_open_view": {
+      "model": "new",
+      "pose": "a_pose",
+      "focus": "face",
+      "view": "oblique"
+    },
+    "current_source_matches_selected_runs": true,
+    "preferences_before_after_equal": true,
+    "immutable_log_count": 2,
+    "engine_errors": [],
+    "os_tool_limitations": [
+      {
+        "action": "Escape world return",
+        "tool_result": "timeoutReached",
+        "tool_wall_seconds": 16.6981,
+        "following_observation": "10_return_world.jpg verifies completed world; process remains alive",
+        "loading_performance_accepted": false
+      }
+    ],
+    "world_return_evidence": "Root following actual os/10_return_world.jpg confirms completed return after Escape tool timeout16.6981s; loading smoothness/performance is not accepted.",
+    "os_screenshot_bindings": {
+      "data/reports/resident_face_joints/20261025/os/01_world.jpg": {
+        "bytes": 165244,
+        "sha256": "e4c1e74dfeabc3a45b54cae1b9b72aeb70ebeb12c3a05d2f26b3ba79f08d1841"
+      },
+      "data/reports/resident_face_joints/20261025/os/02_new_whole.jpg": {
+        "bytes": 74748,
+        "sha256": "f7c7dea00cf0ef292e3f9fdad9b63413984e7e79d0c971fdcd0499e08e6becdf"
+      },
+      "data/reports/resident_face_joints/20261025/os/03_new_face_front.jpg": {
+        "bytes": 64276,
+        "sha256": "d0216eb8e2441bae33937357d6d7a3bd8e0e44b35c0e06ce7ebc9d13a88efac2"
+      },
+      "data/reports/resident_face_joints/20261025/os/04_new_face_side.jpg": {
+        "bytes": 59910,
+        "sha256": "14f582173b46332d6640d33961a3d4502c665d72a37df2ea4d75b75ff53952d8"
+      },
+      "data/reports/resident_face_joints/20261025/os/05_previous_face_side.jpg": {
+        "bytes": 60820,
+        "sha256": "e0017ed397a68fcd39969dd64349292401aee94f8e38ab8c6df97d8a4a8cf783"
+      },
+      "data/reports/resident_face_joints/20261025/os/06_new_shoulders_raise_back.jpg": {
+        "bytes": 69252,
+        "sha256": "ca7fdbbfee0077dddf54cf8e143d2e41e2e859b42e333deffa473ca01d75d639"
+      },
+      "data/reports/resident_face_joints/20261025/os/07_new_pelvis_squat_side.jpg": {
+        "bytes": 71747,
+        "sha256": "7aed1a91b94386c746a32e6c9ef0024f98681a05a3c37b6d8ce70b4b2c08edf6"
+      },
+      "data/reports/resident_face_joints/20261025/os/08_new_pelvis_squat_back.jpg": {
+        "bytes": 70513,
+        "sha256": "5280ae3e489a0e64141e38a500179d08d99df9d251e2770a93b37478c52b5b4f"
+      },
+      "data/reports/resident_face_joints/20261025/os/09_single_support_whole.jpg": {
+        "bytes": 72927,
+        "sha256": "fe87aa7f3f57055daf859b4b57525b4b4efcf26bf888cd9c4aee04bbc5b36680"
+      },
+      "data/reports/resident_face_joints/20261025/os/10_return_world.jpg": {
+        "bytes": 164717,
+        "sha256": "719d9a63cf51e81dafcb020379fb56e1899c6f0fb8676aa92b4db82e85ffd1c3"
+      },
+      "data/reports/resident_face_joints/20261025/os/11_final_open_face_oblique.jpg": {
+        "bytes": 62958,
+        "sha256": "c5187e47f30ae3916cae69999ea6d253654376e0bf2722dda37776377f359db5"
+      }
+    }
+  },
+  "scope": "Read-only saved report/current-source/capture-byte audit plus actual opening of every selected native original. Technical checks and image existence do not substitute for clay art, anatomical accuracy, attractiveness, production avatar replacement or continuous walking/running comfort."
+}

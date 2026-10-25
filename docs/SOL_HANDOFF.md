@@ -1,5 +1,15 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP37 — 현재 인수: 얼굴·관절과 확대 비교
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+[WORK_STATUS](WORK_STATUS.md)·[제작 설명](CHARACTER_IDENTITIES.md)·[이번 증거 폴더](../data/reports/resident_face_joints/20261025/)를 먼저 읽는다. 현재 기술 검증과 원본 검토를 완료했으며 이전 EXP36 실행을 현재 변경 소스의 합격 결과로 재사용하지 않는다. 비교 자산 `resident_form_m01_previous.glb`와 `FORM_STUDY_PREVIOUS_MANIFEST.json`은 동결 EXP36 v03이다. 기존 EXP35 v04 비교는 아래 과거 인수 기록이다.
+
+갤러리 첫 줄에서 **새 원형/이전 원형(EXP36)**, 둘째 줄에서 방향과 **전체·얼굴·어깨·골반**, 셋째 줄에서 네 자세를 선택한다. 모델 교체 시 포즈·방향·확대를 유지한다. 확대는 관심 부위만 포함하며 나머지 몸의 잘림은 의도된 것이다. **전체**로 전신 복귀, **거리로 돌아가기/Esc**로 도시 복귀한다. 실제 일반 OS 입력과 복귀는 최종 normal_launch 기록으로 따로 확인해야 한다.
+
+일반 실행은 준비된 GLB를 import하고 Blender 재생성을 요구하지 않는다. 새 인체는 독립 회색 검토 원형이며 생산 플레이어/NPC·도시·캡슐을 교체하지 않는다. 실사/매력·연속 보행 수용도 별도 후속이다. 저장 증거 검사는 `tools/check_resident_face_joints_handoff.py`를 사용하며, 현재 원본과 root 일반 OS 기록의 정확 SHA를 peer에 결합했다. 기록 시 PID48203은 새 얼굴45도로 열려 있다.
+
 ## 2026-10-25 EXP36 — 현재 인수: 원형 큰 면 다듬기
 
 [WORK_STATUS](WORK_STATUS.md)와 [EXP36 집계](../data/reports/resident_form_refinement/20261025/summary.json)를 먼저 읽는다. 새 원형과 이전 EXP35 v04를 같은 화면에서 각각 네 자세로 비교한다. canonical `resident_form_m01_previous.glb`와 `FORM_STUDY_PREVIOUS_MANIFEST.json`은 v04 바이트 원본이다. 다른 Mac에서는 준비된 GLB만 import하면 되며 일반 실행에 Blender가 필요 없다. 제작 원본은 `art/characters/resident_form_m01.blend`, 생성 소스는 `tools/sculpted_character/`다. 기존 EXP35 수치는 현재 변경 소스에 대한 회귀 실행으로 해석하지 않는다. 기존 플레이어 적용·여성/체형 확장·연속 보행은 원형 수용 후 작업이다.

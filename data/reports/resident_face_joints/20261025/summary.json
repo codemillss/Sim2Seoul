@@ -1,0 +1,1162 @@
+{
+  "task": "EXP37_RESIDENT_FACE_JOINTS",
+  "recorded_at_utc": "2026-10-25T04:43:58.020975+00:00",
+  "base_commit": "a553ba58fd8fbe993f6dda11a765f287a007f80a",
+  "selected_candidate": "v03",
+  "selected_tag": "final01",
+  "selected_runs": [
+    {
+      "report": "data/reports/resident_face_joints/20261025/face_joints_headless_final01.json",
+      "runner": "data/reports/resident_face_joints/20261025/face_joints_headless_final01.run.json",
+      "expected_checks": 85,
+      "captures": 0
+    },
+    {
+      "report": "data/reports/resident_face_joints/20261025/face_joints_native_final01.json",
+      "runner": "data/reports/resident_face_joints/20261025/face_joints_native_final01.run.json",
+      "expected_checks": 141,
+      "captures": 44
+    }
+  ],
+  "counts": {
+    "engine_runs": 2,
+    "overlapping_engine_assertions": 226,
+    "native_original_png": 44,
+    "whole_body_original_png": 32,
+    "focused_detail_original_png": 12,
+    "independent_glb_checks": 42,
+    "actual_os_jpeg": 11,
+    "studio_selected_whole_body_png": 16,
+    "studio_selected_detail_png": 10,
+    "studio_baseline_detail_png": 10
+  },
+  "export_audit_file": "data/reports/resident_face_joints/20261025/export_audit_peer.json",
+  "normal_launch_file": "data/reports/resident_face_joints/20261025/normal_launch.json",
+  "visual_review_file": "data/reports/resident_face_joints/20261025/visual_review_peer.json",
+  "studio_visual_review_file": "data/reports/resident_face_joints/20261025/studio_visual_review_peer.json",
+  "body_source_audit_file": "data/reports/resident_face_joints/20261025/body_source_audit.json",
+  "art_acceptance": false,
+  "continuous_motion_acceptance": false,
+  "normal_game_avatar_replaced": false,
+  "baseline": "Byte-identical EXP36 v03 actual native22-bone4clip3morph GLB/manifest; no forced legacy52 retargeting.",
+  "rejected_candidates": [
+    {
+      "candidate": "v01",
+      "reason": "Rectangular auricle root and plate-like nasal aperture, actual face detail renders."
+    },
+    {
+      "candidate": "v02",
+      "reason": "Nasal wing plate remains despite rounded auricle root; actual detail renders."
+    }
+  ],
+  "scope": "Editable neutral clay face/joint prototype only. Full-body and referenced deformed interest-region inclusion are distinct. Overlapping assertions are not unique features or an art score. Whole body outside detail ROI is intentionally cropped. Plain body/eyelid/ear/lip/neck and limited pose holds do not establish attractive human realism or continuous gait.",
+  "known_limits": [
+    "Regular ring-like auricle, simplified eyes and lip band, wedge-like nose and horizontal jaw-neck transition remain.",
+    "Wide smooth axillary web, large symmetrical gluteal forms and compressed hip ridges remain; local body change is subtle.",
+    "Official Blender exporter emitted three RuntimeWarnings in each candidate. Actual stored finite/bounds checks passed; warning cause and universal harmlessness are not proven.",
+    "Escape world-return OS call timed out16.6981s; next actual screenshot confirmed completed return. Loading performance is unaccepted.",
+    "Native Godot Forward+ project has not been exported to web or deployed to ChatGPT Sites."
+  ],
+  "archive_branch_preserved": {
+    "ref": "codex/archive-before-real-scale-20261022",
+    "sha256_commit": "69db9ca0a214c7d27e9b03f9646b37f486724944"
+  },
+  "bound_files": {
+    ".gitattributes": {
+      "bytes": 4223,
+      "sha256": "fd91362946041f53a51777a8f319c745e47c2e8c7009c4d7601abe7cffd173ad"
+    },
+    "README.md": {
+      "bytes": 29786,
+      "sha256": "2f8faaf2d0af326ee16089968cbc23f4939fd4c3f4fccfcfd555885bdb3be880"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 19323041,
+      "sha256": "f32fab3e61c5e9f8f7bc22f20be09f68f30d6600fb28df268ccec035bafb9bb2"
+    },
+    "data/reports/resident_face_joints/20261025/baseline.json": {
+      "bytes": 724,
+      "sha256": "2db36466adaa5e2d0f93f6e1c29c3a15de05545f833208d6ff2bc69f117b4dca"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details.log": {
+      "bytes": 5435,
+      "sha256": "90b6e030c6e070f742df673bc8b480df41fa87dccbcbf8efe1c91f14348c6b06"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/ear_left.png": {
+      "bytes": 657433,
+      "sha256": "c391dcc65223793daf446d43f783c2d27e3105c4a6431ae9a2481ef9ae63f3b0"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/face_front.png": {
+      "bytes": 543019,
+      "sha256": "82da2594bf34ab2c8d6aba93964c0fa1e1a2094c4e1474e90fae009d970115dc"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/face_front45.png": {
+      "bytes": 548094,
+      "sha256": "34ac2340cd22c7d05054763fa2349d5e4a50c80f9c8d40d281b321f535337767"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/face_right.png": {
+      "bytes": 546154,
+      "sha256": "b207ae18ecfa95c72c32912596c93f70ff3db181b6a8687c572288afa445d2e5"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/foot_left_oblique.png": {
+      "bytes": 717034,
+      "sha256": "bdb6a40c2dfc7ef918c4bc81306c27624657536d5f791b5ca1e97abf980d6154"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/hand_left_front.png": {
+      "bytes": 519951,
+      "sha256": "381d0be9f59e44ecfd0cb223833eec3a3324998bae21e5e8418ad162f0e0d6bf"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_back.png": {
+      "bytes": 615318,
+      "sha256": "06b2a763bf138603b8bccd53a9a896af1c78a1a8d4149640529c1f6ffa344b6c"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_right.png": {
+      "bytes": 597592,
+      "sha256": "92b6ca839b5c9477fb77e1e7f9a3624433e3327d40e66e257be533c030a5dd6e"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/renders.json": {
+      "bytes": 6230,
+      "sha256": "7e9d5b3a28cfb8de86bcb73ac80b011761c1d373fbdec19547ededcf2c8f9a9d"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_back.png": {
+      "bytes": 610804,
+      "sha256": "2776ee81d94181edaa7752b47ed40d8ca3d998833dc633c77fba5b654e99f6bf"
+    },
+    "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_front.png": {
+      "bytes": 610768,
+      "sha256": "1629bacda5a0c9bcae5ae9eedec1145dd19d0693e927e458733b23a91d0ebb98"
+    },
+    "data/reports/resident_face_joints/20261025/body_source_audit.json": {
+      "bytes": 22577,
+      "sha256": "e2e6778bc6ee78d1b25d2b6e79bbba3122767b98630056aeb2ce8fe1134e3638"
+    },
+    "data/reports/resident_face_joints/20261025/body_source_audit.py.source": {
+      "bytes": 7977,
+      "sha256": "3662ae1b0f2204717154c774dffaecbe7324819454f302df60c81838e269da54"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "8ec39d0630189df9d8d0e4e949f102c40f16adcd1f0308431d00f476b57e5018"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/a_pose_back.png": {
+      "bytes": 598081,
+      "sha256": "62e8b743457ec1eb24a095010e256cfdc401eec878924bbcf7fd488af5d207cd"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/a_pose_front.png": {
+      "bytes": 597145,
+      "sha256": "080e380eb59dac0ec58c58a54871d40354201d05a7920fd26a73c12ceee19b19"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/a_pose_front45.png": {
+      "bytes": 594674,
+      "sha256": "b4763eae6199d24eec490390d5341cfd536c8c7f7ed03b976f8590657cf959d1"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/a_pose_right.png": {
+      "bytes": 562046,
+      "sha256": "af444f090b3f72088b20eaf0ec7081a1a799b0eb6faf876ca647fa18d23d7663"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/arm_raise_back.png": {
+      "bytes": 600515,
+      "sha256": "10492b316c56531cb4f50267434cef20f0ce04f06a93b85d4ca3e16538ec1831"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/arm_raise_front.png": {
+      "bytes": 599092,
+      "sha256": "0c07cbc72dab89d5d91fc908e4df0b23081c84332de293bd6ae9cf6cf7158603"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/arm_raise_front45.png": {
+      "bytes": 601934,
+      "sha256": "b0887576d9f671b1fd1a3e62cd98c802d3f2b548380d9df6a725ca8a2bad00e5"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/arm_raise_right.png": {
+      "bytes": 569218,
+      "sha256": "9dd8d25b30fff6de56139d41d0b1651a07ec674bceae0c521ad10c21cf200833"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/deep_squat_back.png": {
+      "bytes": 572195,
+      "sha256": "c82e581990a33c74e0d42c1ecf9f2b56309b1132ef25e8ba8cfc7509c9a5f83a"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/deep_squat_front.png": {
+      "bytes": 578570,
+      "sha256": "bdd51f9c32576d78e744eef060e5231e079a7cd363c39f2aff9978b0b13ce6f2"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/deep_squat_front45.png": {
+      "bytes": 583934,
+      "sha256": "442c46b1c4a8bf2bb2d506bea5ce767f4a39940ce553b8297c8e2acbdd4d313b"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/deep_squat_right.png": {
+      "bytes": 570543,
+      "sha256": "137643871fcc9325feaae76bc0d7762fecb2d1aa04ed9267d4be84b294ccedf3"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/single_support_back.png": {
+      "bytes": 602092,
+      "sha256": "777375ce81057998190e6fd0daf105905ee564b21befc98822090def97e385ca"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/single_support_front.png": {
+      "bytes": 598864,
+      "sha256": "0a936cc63ced28c3d1568bab9fc9af973d67a2835263e52b0703b60b072ba003"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/single_support_front45.png": {
+      "bytes": 594131,
+      "sha256": "846aa7fab8ded8c7cf5e2e25c2539822f2b2ea998eb5fcdf8de3035422486e00"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/blender_views/single_support_right.png": {
+      "bytes": 578955,
+      "sha256": "46a41cc0a88664fa0af142487164e49b63a2111f45c0c7f418ef84e81da47d01"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/build.log": {
+      "bytes": 10475,
+      "sha256": "04e0e224b2fda5968813c541c048c7caad8b01944b86c152f56a2fe9ddc53d67"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details.log": {
+      "bytes": 5571,
+      "sha256": "04b6ccee2c1ca377f2f8337aa9351e7346dbe8064f965db2d78fd4c0123af3be"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/ear_left.png": {
+      "bytes": 684102,
+      "sha256": "68458ae8fc8bc6997da36d967019d53845163822d5540ff2be591446d3bf4fd2"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/face_front.png": {
+      "bytes": 548308,
+      "sha256": "f046aff321bfcec5c5f187cc8dee213bbc7620e0b65a85d53c74fb42fa694533"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/face_front45.png": {
+      "bytes": 554461,
+      "sha256": "d8246fffe2cbb9e8bc30e0b0a7b020465ea995637b640b2b1127c66e02430408"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/face_right.png": {
+      "bytes": 556312,
+      "sha256": "b0462bbff1f0559c7faf9ed74fd6f7acc23244c4d01dff6b7d29f508ad603b6e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/foot_left_oblique.png": {
+      "bytes": 717143,
+      "sha256": "67a98efdde9711a35367f8a9616e6f72ef6ce9b9ec6ec110a8f06692831867c4"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/hand_left_front.png": {
+      "bytes": 519901,
+      "sha256": "9150d8d2deccfeafa85845eeda5115123421fd87dc06b72f245a103e224e36d5"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/pelvis_squat_back.png": {
+      "bytes": 613436,
+      "sha256": "31e36b4922144176b3b7c8f8c8d136320a5f7aad01c1192c8fe10da24b34152e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/pelvis_squat_right.png": {
+      "bytes": 596807,
+      "sha256": "aeb5a80338e8290c1bd22f1f21efa84df3b66a9bd963b3217b16923265a3460c"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/renders.json": {
+      "bytes": 6282,
+      "sha256": "2e930e3267c58498588f96ffc876bad8bef13fe699d8b59a2800254be0c2c2fb"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/shoulder_raise_back.png": {
+      "bytes": 608979,
+      "sha256": "393d67ffd83f811266d31924a98f9a2ec6f89c9e94c4d19db86c53d408e60cb9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/details/shoulder_raise_front.png": {
+      "bytes": 609720,
+      "sha256": "81d30e613d69afe9e69b9b471aaf6ed1ebd3ff6b048c2ea2e374461b26173430"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/disposition.json": {
+      "bytes": 212,
+      "sha256": "4cf57041a7d27a9ceffbca1489446a091f4f31777e5c1aadf2727cd102f9972d"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/resident_form_m01.blend": {
+      "bytes": 19323041,
+      "sha256": "2788709f121bb5e01bd46f055fc0c8b140a23ba2d8f60579aaa90ebe7672f5f3"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/resident_form_m01.glb": {
+      "bytes": 8509380,
+      "sha256": "4cd4ce42decc78fd0ef452926aa46a3dfee62f9a6009c1f4efc7f49bac84fefa"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/source/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/source/build_head_extremities.py": {
+      "bytes": 20589,
+      "sha256": "d8efc816b2378fe763a7de5995a99d2b578d279e9635547d55faffbb95c11d6e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/source/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/source/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v01/source_freeze.json": {
+      "bytes": 1114,
+      "sha256": "26e66d445c55d09e36d0635ca5504c817c01b1d8c5ade56a656b727e1fe94e33"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "db32f71c0806d99dde43cf496a225386242cd312952c5503f3a7ae4f0d39dc8e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/a_pose_back.png": {
+      "bytes": 598042,
+      "sha256": "1d4612d4aad196a5745423e20ec28ae7151aa689da5a1e0331e536be85ec5f84"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/a_pose_front.png": {
+      "bytes": 597351,
+      "sha256": "5c4c22c750ebc21827a08ea4e19be748e544488de53cc1af969206a46fab59f4"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/a_pose_front45.png": {
+      "bytes": 594305,
+      "sha256": "e556bb50fade3e17d6850b1c13d8e959514db097a2b5167600e474acdd753e07"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/a_pose_right.png": {
+      "bytes": 561850,
+      "sha256": "1008330b120fc377aa3e6c9190ff7f51a3b09d3e5a528faaecbeaf1ed6e4224d"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/arm_raise_back.png": {
+      "bytes": 600487,
+      "sha256": "b39c015cdbbc79ad901dcb203d1acb7472911e8268e8675e49dad3ce611399df"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/arm_raise_front.png": {
+      "bytes": 598933,
+      "sha256": "73c0cdf66beacfc023738c7d85dd64acb5807afeda593e1821e7803a9dc84df5"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/arm_raise_front45.png": {
+      "bytes": 601815,
+      "sha256": "fa66f1b580cacc9a603b15f70d3aa5c88e263d80ffb0ff94bea93d158d4855a9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/arm_raise_right.png": {
+      "bytes": 569269,
+      "sha256": "8f067b91d411337395b1741e56ec1991f69684035c2df3d26e6bf93ceaf0672d"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/deep_squat_back.png": {
+      "bytes": 572343,
+      "sha256": "c2868d76b1c642f8e9311b0822354e86d379deb3b58a6543e31eef438d2a9862"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/deep_squat_front.png": {
+      "bytes": 578448,
+      "sha256": "fa7231099faf82e267bff611063b77cb4f87294eaf2f053742a7e6662b7621aa"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/deep_squat_front45.png": {
+      "bytes": 583838,
+      "sha256": "3567638c49a444cfe5b16f7681dcd455ed81365dcab522398558f18356f6b974"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/deep_squat_right.png": {
+      "bytes": 570333,
+      "sha256": "94025d3afd4fbd8e3db7efdca8c96871d68612b7f09d42bb9a898314789db973"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/single_support_back.png": {
+      "bytes": 601936,
+      "sha256": "ac3a70c1e0835eb83f658a8dcb1ad6ee43bf46c15470d75dca0622fc77f25249"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/single_support_front.png": {
+      "bytes": 598772,
+      "sha256": "d7ce6b22ba2ad76845c4640805c9b9e370136eade55e7a0bfd821f326bd624e9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/single_support_front45.png": {
+      "bytes": 593944,
+      "sha256": "f9374be3c736a45993f38c318f76e3fb97fee034c5f53a7fbe9dd95f412f5964"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/blender_views/single_support_right.png": {
+      "bytes": 578627,
+      "sha256": "bc92aff7b982678d77aca014ebc17a2f8bbe6d192962ba5383c1c378828951e3"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/build.log": {
+      "bytes": 10475,
+      "sha256": "3c0b9fa350072f60c78ea662d8269402a18bfb299e1261a6e2f283fd863e4a26"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details.log": {
+      "bytes": 5571,
+      "sha256": "6c7186e125a1e36d445658a077387e4d4f9ce928e04c14d154e0c3388ea2b6f1"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/ear_left.png": {
+      "bytes": 676117,
+      "sha256": "d0a4a2ba4429b1fd6c77d3628e50f531f804640cc4cef3c264dca2d8f676f8c9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/face_front.png": {
+      "bytes": 546044,
+      "sha256": "739ab39425cbbfaaeea05a9fc46bc0b57b32e1bd96280fc5435d09962f44b99d"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/face_front45.png": {
+      "bytes": 553135,
+      "sha256": "63c5ac98c97342e94916dc013ef33b84774ce8f9f2b1feb0cde827c37cb13d45"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/face_right.png": {
+      "bytes": 554411,
+      "sha256": "18c20dccb62a68cd8d60e4e7eec656ea57adbbcbccdfa2d382e27781592f0078"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/foot_left_oblique.png": {
+      "bytes": 717143,
+      "sha256": "379e24ca8df406e9bedcbce84b2c5ffecb1fbb1898583109c27d12bab60bead9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/hand_left_front.png": {
+      "bytes": 519901,
+      "sha256": "902fa80cc180c1a214f41474bb3eb3f444e1e52559907953693e7d036867a890"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/pelvis_squat_back.png": {
+      "bytes": 613383,
+      "sha256": "80adb776722d7cefb6b8373b2ca2bd5e84e71044859824b2a43d5c2c7fb89ec1"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/pelvis_squat_right.png": {
+      "bytes": 596804,
+      "sha256": "693122a8ea8f689f521edfb2bcc10a7c68d16a2efb761ff1d9ae4a8f78e4e6f8"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/renders.json": {
+      "bytes": 6282,
+      "sha256": "669f23b68fb981df23d63f56c0ce92b14f2cfc11f11722c123780c6ad366c557"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/shoulder_raise_back.png": {
+      "bytes": 608545,
+      "sha256": "22f87575264e441bf04fd3992f1caf90f9491ea98b116ae111a35107e8d10074"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/details/shoulder_raise_front.png": {
+      "bytes": 608980,
+      "sha256": "16d64f014b45fe8c44bc085ba77279f36795f9f89768fd51c967a9640e75d19d"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/disposition.json": {
+      "bytes": 221,
+      "sha256": "fb4d3b921c03ab5edca6663936c1719dfc052dc13a2ba4cc9e36f102c9e54357"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/resident_form_m01.blend": {
+      "bytes": 19323041,
+      "sha256": "757c220600363b70a0098c008b7089fdedf2476c1a7a2625b79be00dd07df2cb"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/resident_form_m01.glb": {
+      "bytes": 8508948,
+      "sha256": "919da72a308e5f1addc018b7927f1e21e09a5ea25bfcccdab9af27c9a8bafa32"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/source/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/source/build_head_extremities.py": {
+      "bytes": 21107,
+      "sha256": "aa00faa6ac9db9d84f42e6f3f6ea0cb5b1e7029cb3dae1b1d2f64d18e93c74a7"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/source/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/source/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v02/source_freeze.json": {
+      "bytes": 1114,
+      "sha256": "121bd9b21fd72493083b5c3e4b6332533fe76fcd61224347a5b4991d43726875"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_back.png": {
+      "bytes": 598032,
+      "sha256": "94555d43dcf2d086830d349366fecdf975956eeafcda413888bfd4adb9e0b697"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_front.png": {
+      "bytes": 597071,
+      "sha256": "c1347fbc1c17df574137bb5a6059905c049a4704fbd337c045f75501a65d6d09"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_front45.png": {
+      "bytes": 594298,
+      "sha256": "5b5abc4aa023b52fb2c9d289f37a2e778f52f3b18a90b077ac119e26c330ce3a"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_right.png": {
+      "bytes": 562018,
+      "sha256": "51f72f16a41aaed77bdc88c03a3855289e10c482d6eeb45cd9ab8a3158766534"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_back.png": {
+      "bytes": 600414,
+      "sha256": "1044208df3d0e8da145e044bc0ed80b59774f129e3ce94ca2c2fa8073b4b73c9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_front.png": {
+      "bytes": 598915,
+      "sha256": "db300852c5778bc879b38c239df504a80fb98503892214233d81b0a58058aafe"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_front45.png": {
+      "bytes": 601813,
+      "sha256": "ea89a3fcbecad46f2c0aaf78ba007ed15e18c47262596567a36c8b326bd64763"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_right.png": {
+      "bytes": 569231,
+      "sha256": "5d2df33065edfc8a24b62542ce163b1d862f2c68a1787da33b5d57c01c5408f3"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_back.png": {
+      "bytes": 572295,
+      "sha256": "b767232d92386d82c1a5017c57244d949a1eb78a41edc33b96c21f81575f3bc1"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_front.png": {
+      "bytes": 578475,
+      "sha256": "bc3438fd23f4431f0e4be3dc4a572004f2e53159cfd1846727a01357eae20733"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_front45.png": {
+      "bytes": 583836,
+      "sha256": "50183854176f3cf0ece5c6f6b85c3dd4a53a1619953c9017838ec8da175bdb9e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_right.png": {
+      "bytes": 570300,
+      "sha256": "938e0aefdcf2c1cdc224c7396959022ba03c60b1854569cffedf986b54213e76"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_back.png": {
+      "bytes": 601996,
+      "sha256": "f48d343b5c971f7b1a8900cd6a953b13b625d5a4bc7fa39d2864e490f8ce3c18"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_front.png": {
+      "bytes": 598798,
+      "sha256": "1bc757ff55dcfafd081d33cee99d1878a25dd9630464abb358f7f8298acd6274"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_front45.png": {
+      "bytes": 594023,
+      "sha256": "81d732f38ab184eebff2d5522697e31b1fcdbe4b66374177697736018f86f17e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_right.png": {
+      "bytes": 578696,
+      "sha256": "69907aaa18387a9953d64ec8b0fe1fb0e1ae643bfd41d1d714c1a9555004f542"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/build.log": {
+      "bytes": 10475,
+      "sha256": "ac17800c32c9953256b029c5cd00d9261bb40ab36fafece4fc47522d6d4a8ba9"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details.log": {
+      "bytes": 5571,
+      "sha256": "689b0bc88d8f87b8d44eea1ae6deda8af6315ec101ed56ae6e4f262f5b70b16a"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/ear_left.png": {
+      "bytes": 676270,
+      "sha256": "f67dc6851af7244f64fe7eab7655b6affd0ba1c30f265bb8a6cc6681730f3f38"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front.png": {
+      "bytes": 545033,
+      "sha256": "899f86971e08b795de1ace54b50469e0f6fea185d52a89c5c90561c7fa33840e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front45.png": {
+      "bytes": 553085,
+      "sha256": "ee5f9cd70b8ddf764781ca4b70072d36cea492ed37680359b40b584cf42992a5"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/face_right.png": {
+      "bytes": 554316,
+      "sha256": "06f1e80cc43b7598f5efa8ffb7c4abcc4dadc80c95d9598d7d69ef6d8e15d00b"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/foot_left_oblique.png": {
+      "bytes": 717143,
+      "sha256": "80fe2235ca976088f0c720709481ff403b05986dd36fefd025c04e292a17d82c"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/hand_left_front.png": {
+      "bytes": 519901,
+      "sha256": "7b2a00dd0382e7cb3af3bfc4f9b1f9184700f98004e2f1074d6babc855312d6b"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_back.png": {
+      "bytes": 613328,
+      "sha256": "228b9e6c6cd28926169af45498ab3d8125a7c7fd14a38fb2c7ab0b2b16c7438b"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_right.png": {
+      "bytes": 596733,
+      "sha256": "d162cc1459925bc233b6464c122c9ad3b0b4fff28723973213e1c09822786b8f"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/renders.json": {
+      "bytes": 6282,
+      "sha256": "c0595981ba9b807058f97d4e7afbfa69458c8a3146b3934da69f1835f096ff75"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_back.png": {
+      "bytes": 608764,
+      "sha256": "5c56a0c0e199fc71ffcf6c5b685dcbcf7e7f578b8f0f13644661cfc8e35039e7"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_front.png": {
+      "bytes": 608988,
+      "sha256": "0bcd9398160796e4d4e2f876530bb763beaee5fe6b07d59d929a6f74fb612549"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/disposition.json": {
+      "bytes": 966,
+      "sha256": "425bbf27fe349611a890124efabf450573e0677531bb16da69b76b560c4c24b7"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 19323041,
+      "sha256": "f32fab3e61c5e9f8f7bc22f20be09f68f30d6600fb28df268ccec035bafb9bb2"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 8513316,
+      "sha256": "06e62f58ff3745e2da4399b443cc41b04e7d11dfa8ebcbd3a262ecc313dcf8c2"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/source/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/source/build_head_extremities.py": {
+      "bytes": 21108,
+      "sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/source/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/source/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    },
+    "data/reports/resident_face_joints/20261025/candidates/v03/source_freeze.json": {
+      "bytes": 1114,
+      "sha256": "390e132d843114b6f6657c2d63e56113cd912643ac7fd86c123271a75aff6e47"
+    },
+    "data/reports/resident_face_joints/20261025/deployment_feasibility.json": {
+      "bytes": 953,
+      "sha256": "e267215a88ba6ae466ddacaa5cffa57dae9b5fddc957d2bccdbb0f413baf93dd"
+    },
+    "data/reports/resident_face_joints/20261025/export_audit_peer.json": {
+      "bytes": 79781,
+      "sha256": "35c9ce3d5664369bf3fa131d9d85367748fe12873bf66f17d153b31febf2ba93"
+    },
+    "data/reports/resident_face_joints/20261025/export_audit_peer.py.source": {
+      "bytes": 36951,
+      "sha256": "6996528315827fa1bf95dceac02295734f9913fca8895f61502a62e77e0f7e79"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01.console.log": {
+      "bytes": 6954,
+      "sha256": "947c330dc52037c1cf1c6c09203d69bcaae2e676d689739a5e042303e554b994"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01.json": {
+      "bytes": 1837805,
+      "sha256": "3d4661a54dba33932c9db7088444129d5465a7b5cf8f371bf053a66081bd925b"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01.log": {
+      "bytes": 6954,
+      "sha256": "947c330dc52037c1cf1c6c09203d69bcaae2e676d689739a5e042303e554b994"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01.run.json": {
+      "bytes": 3581,
+      "sha256": "636333d754e6cbe385fc69b62e96730e1d47beaee9d447e0c5018d8254f1d513"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 32416,
+      "sha256": "8fe895d39d0d027974b36acfe256bf586029ce79818129610650c8ad7e23d772"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 20817,
+      "sha256": "3d7f8b583d2ed52f92f9eafee814b392f2da42abdf639eaad6c1171b9ee70ac6"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 5613,
+      "sha256": "6d4c71767646f3d556b03dcca78d51e2a06c82da7249934b8fb0b873a49bb231"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 21108,
+      "sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_headless_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01.console.log": {
+      "bytes": 12858,
+      "sha256": "3cbad1c6cce5ad458399c720bfd4a4e090056737032acabdb47683ff401e229a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01.json": {
+      "bytes": 2149967,
+      "sha256": "a1c4aadcdc0c35d03375b62e9935d5e18148e12e72e58c5df80c27bf215e391f"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01.log": {
+      "bytes": 12858,
+      "sha256": "3cbad1c6cce5ad458399c720bfd4a4e090056737032acabdb47683ff401e229a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01.run.json": {
+      "bytes": 3561,
+      "sha256": "a5a7cb3dd8d44482e7c338511e7e362bf6c044d1f63e7a2915a0cd871f6ce2bc"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_back.png": {
+      "bytes": 73498,
+      "sha256": "dced7e4f17afc0f73a1c93b306a22291e13e32b8907112e580817631a27ea4fb"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_front.png": {
+      "bytes": 73539,
+      "sha256": "249e2a5d93bcb3c0e24ca225a09d3bf2295bbf8dd868f0390c1c4d518cd47319"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_front_detail_face.png": {
+      "bytes": 66472,
+      "sha256": "f8282e46ee0e5b3216ff3cfac42c0ca416e227c40b38938c3ceea64255f93183"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_oblique.png": {
+      "bytes": 69569,
+      "sha256": "1fecd73955480f690cfb540032177d6929c920f50cb18ced0408424d04e0ed10"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_right.png": {
+      "bytes": 56017,
+      "sha256": "df75d22e5f58767d477adf7c32553137a531fbede253b9ad8f4caa712c37ccc3"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_a_pose_right_detail_face.png": {
+      "bytes": 55962,
+      "sha256": "6599481cf8b4f89c2f31e1a92ae8135cd76970bce62ad173e195de0e1c947fb6"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_back.png": {
+      "bytes": 62373,
+      "sha256": "8263c3e3f98ba4b51c17640b41b9e25ba5dfae2933da4f9a86b50bed29f9bc82"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_back_detail_shoulders.png": {
+      "bytes": 73785,
+      "sha256": "71f1a99c10fc0545d052d21627b41874fadb6dcba783264f5681602bdb1234ee"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_front.png": {
+      "bytes": 60477,
+      "sha256": "687b3698aee5fb4c228fe481cfdfb2d8f4246da3e1d66f58142cea58b255b474"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_front_detail_shoulders.png": {
+      "bytes": 79085,
+      "sha256": "c56f5f3306f4b6f02729a3dbee135638c58aef453ccbb7a4fffdae4fe2ddb7b9"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_oblique.png": {
+      "bytes": 59316,
+      "sha256": "8d22e9ac6c0bb895f7dedc37d33bbb5f64b04576ebd19df8a47a8cb36aad9a8d"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_arm_raise_right.png": {
+      "bytes": 50297,
+      "sha256": "93632a632a515e38def8e9d5d747bfeeb722680fa288398a91f124c797292d02"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_back.png": {
+      "bytes": 66409,
+      "sha256": "53921c0974fc5c6a35e45ac50b37727c4abe509080fd5f0b5061941b99cd1a2a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_back_detail_pelvis.png": {
+      "bytes": 74095,
+      "sha256": "bb9d5a8704157e1b4cd3d7926f70686b9dc213964a0d2d91579509535ee44bcb"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_front.png": {
+      "bytes": 66275,
+      "sha256": "31532c1705e83d1ee1d453cdd2e2bfc7573f7eae3cab77206e45311480cab6af"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_oblique.png": {
+      "bytes": 66323,
+      "sha256": "60cebd3ff1d1c70b130c57b82d013d3a1c58952a0fee5cc42961e90ab92562ba"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_right.png": {
+      "bytes": 60791,
+      "sha256": "0bf572a8bedcc87098b88023702332fbc1abbcf825d9d6d1574542d6d90af25f"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_deep_squat_right_detail_pelvis.png": {
+      "bytes": 82709,
+      "sha256": "cecd3ec0665ac9fdce93091b6ad39af08670bba88f28036e73461db27d6c7313"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_back.png": {
+      "bytes": 73870,
+      "sha256": "1ebddb48c3f344947e4ffdaebcf39cb1be3477f4ae71e0e90cbc59a10aa115a2"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_front.png": {
+      "bytes": 72796,
+      "sha256": "ee04d4184d7e7a9d13bdc8107c658065708c75c00762614207bf1745bb2a955d"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_oblique.png": {
+      "bytes": 69627,
+      "sha256": "ecaa8c5ef9dac0ab59df563c2b4d3d101e6fc9ff19e00729a18427be87ac2070"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_new_single_support_right.png": {
+      "bytes": 61475,
+      "sha256": "f089b310e25acd2fbff4bf81aeed5811c7b682b8a0c79da0a09bb9b7a6c25710"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_back.png": {
+      "bytes": 74907,
+      "sha256": "68276f28b30df11c7ee9ca83d87366324f0d248b41e18a23de15ec3d4fb31a25"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_front.png": {
+      "bytes": 75178,
+      "sha256": "e07b35a67f60f9bc8b81744b16eab001e9db39654cf320636a61f1521d9a6ed7"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_front_detail_face.png": {
+      "bytes": 64861,
+      "sha256": "6429329e7061af9b1a87e8fcbd32fdecd8f7c698e6a506c1a987462f36e562ca"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_oblique.png": {
+      "bytes": 70946,
+      "sha256": "109e09b359dc99a1b274f6640222dbc1682dff47d7e17b8762b35e246b64d6be"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_right.png": {
+      "bytes": 57282,
+      "sha256": "e0326aa88b0a5c85b83b5a24677c1a36e9d76f2585677dc97ab3b894848e86d0"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_a_pose_right_detail_face.png": {
+      "bytes": 55110,
+      "sha256": "d485c713e0108b37a2fc70f57d5aaf7ea075a280ef6fb0a3bf6be0257cf197ed"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_back.png": {
+      "bytes": 64062,
+      "sha256": "637c0dc0f5c4c8cfcc6009e85f7725eee6b4305bae2bc762ed8baf08ff195f9a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_back_detail_shoulders.png": {
+      "bytes": 75658,
+      "sha256": "1b2748d6c5ee4c4a6699bd3090cd9c3c04d69cb5fe23706e97f19b6a4eace278"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_front.png": {
+      "bytes": 62203,
+      "sha256": "5a510b28407e92a127c68b3f99593572e044042ce3af8ad4387786d8ce7a41ae"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_front_detail_shoulders.png": {
+      "bytes": 80239,
+      "sha256": "014e3380e9a0f98da1cf0f37439dc1d3e5dd97f05235dd5ea94c7e88d09c5923"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_oblique.png": {
+      "bytes": 61062,
+      "sha256": "5a9f3021bfc54a0ed297f121682114248571ac3ea4d87a7b1b8417241af9743a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_arm_raise_right.png": {
+      "bytes": 51819,
+      "sha256": "f7d16dcd76b6b0699fcdd4e179b5e9bcd3aac054864ae85cc93ccdce5384be6a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_back.png": {
+      "bytes": 67517,
+      "sha256": "e8b836f950644511ec91c3249774fcfaafff33ff06a220a9e03fbc953168871d"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_back_detail_pelvis.png": {
+      "bytes": 75400,
+      "sha256": "5adebe31cf5d76d864a8d06115d73c28670a2d9d1e069afcdedc06f4e93d9f99"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_front.png": {
+      "bytes": 67645,
+      "sha256": "39dd7047163dcea9409a53a8842021d19a91d17310b471dd3e4e47bf69f0f627"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_oblique.png": {
+      "bytes": 67818,
+      "sha256": "be7f7cebb87e1651ca8f1daa537bccac46ff3859eeb07738f5acffdc5dffb129"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_right.png": {
+      "bytes": 62243,
+      "sha256": "355e3f04d4188cae747c17b02f91c5f1e7a6f28432ef43125555a1678527aad9"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_deep_squat_right_detail_pelvis.png": {
+      "bytes": 84364,
+      "sha256": "74a60d7bb3a7744faf907754edf1ddd70b26b3f1341c66d475158d98263c3392"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_back.png": {
+      "bytes": 75218,
+      "sha256": "eb9c2be7e5e7470fdde81a7794ea0a58c52b84999150d84f19dddcccff3df19c"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_front.png": {
+      "bytes": 74518,
+      "sha256": "6eab4072aa7f69b04595961496faedcf4a774611e70fa211d9bdbe749d389b11"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_oblique.png": {
+      "bytes": 71344,
+      "sha256": "6be69871aabe5d619175e56eb958952e9fd6b362fe9f9f273f3a847f9db0174d"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_previous_single_support_right.png": {
+      "bytes": 62894,
+      "sha256": "48da1de912f77d51917e444f0930f260fe2a78c80e555f8581772de1940d619a"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 32416,
+      "sha256": "8fe895d39d0d027974b36acfe256bf586029ce79818129610650c8ad7e23d772"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 20817,
+      "sha256": "3d7f8b583d2ed52f92f9eafee814b392f2da42abdf639eaad6c1171b9ee70ac6"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 5613,
+      "sha256": "6d4c71767646f3d556b03dcca78d51e2a06c82da7249934b8fb0b873a49bb231"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 21108,
+      "sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "data/reports/resident_face_joints/20261025/face_joints_native_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    },
+    "data/reports/resident_face_joints/20261025/handoff_integrity_attempt01.json": {
+      "bytes": 1049,
+      "sha256": "1c12d0f23d89f1fe86a5345c3d32ae430a3a6fd054e157dbc2de6718418e6acb"
+    },
+    "data/reports/resident_face_joints/20261025/import01.log": {
+      "bytes": 3260,
+      "sha256": "1b3b9e97135e9f5cb395cb19ff35322f59fa42cd740394422afda29daeea7432"
+    },
+    "data/reports/resident_face_joints/20261025/normal_game.console.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_face_joints/20261025/normal_game.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_face_joints/20261025/normal_launch.json": {
+      "bytes": 8014,
+      "sha256": "f1aee2b2d242d2a91a5e72dee25de1130c01f3e4e35921922106ab34895ce54f"
+    },
+    "data/reports/resident_face_joints/20261025/normal_process_started.json": {
+      "bytes": 669,
+      "sha256": "affe6d256eb2e8ed8148a92632f3721b4fdea8675986d1c8f0ee29da85bdcb1e"
+    },
+    "data/reports/resident_face_joints/20261025/os/01_world.jpg": {
+      "bytes": 165244,
+      "sha256": "e4c1e74dfeabc3a45b54cae1b9b72aeb70ebeb12c3a05d2f26b3ba79f08d1841"
+    },
+    "data/reports/resident_face_joints/20261025/os/02_new_whole.jpg": {
+      "bytes": 74748,
+      "sha256": "f7c7dea00cf0ef292e3f9fdad9b63413984e7e79d0c971fdcd0499e08e6becdf"
+    },
+    "data/reports/resident_face_joints/20261025/os/03_new_face_front.jpg": {
+      "bytes": 64276,
+      "sha256": "d0216eb8e2441bae33937357d6d7a3bd8e0e44b35c0e06ce7ebc9d13a88efac2"
+    },
+    "data/reports/resident_face_joints/20261025/os/04_new_face_side.jpg": {
+      "bytes": 59910,
+      "sha256": "14f582173b46332d6640d33961a3d4502c665d72a37df2ea4d75b75ff53952d8"
+    },
+    "data/reports/resident_face_joints/20261025/os/05_previous_face_side.jpg": {
+      "bytes": 60820,
+      "sha256": "e0017ed397a68fcd39969dd64349292401aee94f8e38ab8c6df97d8a4a8cf783"
+    },
+    "data/reports/resident_face_joints/20261025/os/06_new_shoulders_raise_back.jpg": {
+      "bytes": 69252,
+      "sha256": "ca7fdbbfee0077dddf54cf8e143d2e41e2e859b42e333deffa473ca01d75d639"
+    },
+    "data/reports/resident_face_joints/20261025/os/07_new_pelvis_squat_side.jpg": {
+      "bytes": 71747,
+      "sha256": "7aed1a91b94386c746a32e6c9ef0024f98681a05a3c37b6d8ce70b4b2c08edf6"
+    },
+    "data/reports/resident_face_joints/20261025/os/08_new_pelvis_squat_back.jpg": {
+      "bytes": 70513,
+      "sha256": "5280ae3e489a0e64141e38a500179d08d99df9d251e2770a93b37478c52b5b4f"
+    },
+    "data/reports/resident_face_joints/20261025/os/09_single_support_whole.jpg": {
+      "bytes": 72927,
+      "sha256": "fe87aa7f3f57055daf859b4b57525b4b4efcf26bf888cd9c4aee04bbc5b36680"
+    },
+    "data/reports/resident_face_joints/20261025/os/10_return_world.jpg": {
+      "bytes": 164717,
+      "sha256": "719d9a63cf51e81dafcb020379fb56e1899c6f0fb8676aa92b4db82e85ffd1c3"
+    },
+    "data/reports/resident_face_joints/20261025/os/11_final_open_face_oblique.jpg": {
+      "bytes": 62958,
+      "sha256": "c5187e47f30ae3916cae69999ea6d253654376e0bf2722dda37776377f359db5"
+    },
+    "data/reports/resident_face_joints/20261025/prior_process_stop.json": {
+      "bytes": 667,
+      "sha256": "302fd61e422a82bcbbbaf215d46022375460c6237d35f3fc596fdcfceb77d2fe"
+    },
+    "data/reports/resident_face_joints/20261025/reference_observation.json": {
+      "bytes": 817,
+      "sha256": "0fc5641bbba63b9459d4f6aacdb683dcdf939c188ac46c713595ec87b4427e21"
+    },
+    "data/reports/resident_face_joints/20261025/render_resident_form_details.py.source": {
+      "bytes": 3757,
+      "sha256": "35213704e5f6ac242b836a1dd903c64d763581dfe964bef857e0a08849549c63"
+    },
+    "data/reports/resident_face_joints/20261025/repository_review.json": {
+      "bytes": 349,
+      "sha256": "a5a48ce4a86c2d76a34f7da5dd69c58ff74fbf1e307aa38a82a0b28b3034d41c"
+    },
+    "data/reports/resident_face_joints/20261025/studio_visual_review_peer.json": {
+      "bytes": 37880,
+      "sha256": "e36e4e6f4b955c9e8497e8e6ab7f0fd2c2a6217039aa83bc1a3791f3fc7e7c65"
+    },
+    "data/reports/resident_face_joints/20261025/user_preferences_after.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_face_joints/20261025/user_preferences_before.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_face_joints/20261025/visual_review_peer.json": {
+      "bytes": 33373,
+      "sha256": "48db4070257c1bcd7d21fb9471101c99dbf040e5bdf090e8ec697e11305e45b3"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "docs/ATTRIBUTION.md": {
+      "bytes": 32221,
+      "sha256": "62d96c9730bb5f8aefd9d2b4ba1f178fad7ad33984b7e01b16e5441e4bf444e8"
+    },
+    "docs/CHARACTER_IDENTITIES.md": {
+      "bytes": 15232,
+      "sha256": "4bfae221dd3f19b437d8135ef5e0471deae6f34c43a77db5c5e26be19e71f5dd"
+    },
+    "docs/EXECUTION_LOG.md": {
+      "bytes": 366725,
+      "sha256": "1e89ba10970206d250cf22ead18df14cb68f031eada18596f650b1dd93c7350c"
+    },
+    "docs/IMPLEMENTATION_TASKS.md": {
+      "bytes": 94820,
+      "sha256": "1abb854b4ca6f46609a83f97c55714ce3b6970fcfa8d5857fc3b6e8d1c96ebf2"
+    },
+    "docs/PROJECT_CONTEXT.md": {
+      "bytes": 72246,
+      "sha256": "8be6b7f136e4d3b671d81f9020031fc2051b68146335630ac3118833ccd40cde"
+    },
+    "docs/README.md": {
+      "bytes": 5987,
+      "sha256": "5dfc7e5e259ce4662ec340d38b2e7149eba480775044e3eb4b6048c7c1cdc4fb"
+    },
+    "docs/RUN_GUIDE.md": {
+      "bytes": 60941,
+      "sha256": "49d632414e87cf2c4c0ab9ba50a84523064ae8923f33a5abbcf03f5c65e4f1c9"
+    },
+    "docs/SOL_HANDOFF.md": {
+      "bytes": 58560,
+      "sha256": "fb2893dbf40fde38e8ee7569c4c2921323a2396e268a6ee51348b218deb0d81b"
+    },
+    "docs/VALIDATION_PLAN.md": {
+      "bytes": 137278,
+      "sha256": "d1a1d2b42921a9052f31a82762735ee5770e25f9c07fa835d1fea92c16c96ebf"
+    },
+    "docs/WORK_STATUS.md": {
+      "bytes": 153878,
+      "sha256": "8220034642102211c14bc0257a2352ae8fe05c9e38d84d7d5710e282082c1cce"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 206671,
+      "sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 8513316,
+      "sha256": "06e62f58ff3745e2da4399b443cc41b04e7d11dfa8ebcbd3a262ecc313dcf8c2"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "game/scripts/player/exploration_avatar.gd": {
+      "bytes": 42580,
+      "sha256": "107df173ebe7db3c569797cccdcd6914e127a5b6cdff222693205106fbde52b1"
+    },
+    "game/scripts/player/textured_human_rig.gd": {
+      "bytes": 40584,
+      "sha256": "02726f6b8f284373e7eac5dc6ebceb810dd354d65b1a926e3c8db7db71869f49"
+    },
+    "game/scripts/player/textured_human_surface.gd": {
+      "bytes": 20807,
+      "sha256": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611"
+    },
+    "game/scripts/study/resident_form_study.gd": {
+      "bytes": 32416,
+      "sha256": "8fe895d39d0d027974b36acfe256bf586029ce79818129610650c8ad7e23d772"
+    },
+    "tests/game/check_resident_form_study.gd": {
+      "bytes": 20817,
+      "sha256": "3d7f8b583d2ed52f92f9eafee814b392f2da42abdf639eaad6c1171b9ee70ac6"
+    },
+    "tools/check_resident_face_joints_handoff.py": {
+      "bytes": 21709,
+      "sha256": "7aa6bb45695f3d7138e411f88fae6c79fa47a791c2ec96b73071dd153a485659"
+    },
+    "tools/check_resident_form_handoff.py": {
+      "bytes": 18761,
+      "sha256": "b3564b1bf15cff11bcaf9a302c22f7961495d4b4fb61028cb2b108c8cf363d6b"
+    },
+    "tools/render_resident_form_details.py": {
+      "bytes": 3757,
+      "sha256": "35213704e5f6ac242b836a1dd903c64d763581dfe964bef857e0a08849549c63"
+    },
+    "tools/run_resident_form_study_acceptance.py": {
+      "bytes": 5613,
+      "sha256": "6d4c71767646f3d556b03dcca78d51e2a06c82da7249934b8fb0b873a49bb231"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 27911,
+      "sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 21108,
+      "sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12413,
+      "sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 37807,
+      "sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6"
+    }
+  },
+  "manifest_repair_history": {
+    "first_saved_check": "data/reports/resident_face_joints/20261025/handoff_integrity_attempt01.json",
+    "reason": "Three unchanged player helper sources used by CPU skin/camera evidence were verified by the checker but absent from initial bound_files. Added exact current bytes without changing engine/model/tests. No technical/visual criterion was relaxed."
+  }
+}

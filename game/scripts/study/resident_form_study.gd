@@ -21,6 +21,26 @@ const FRAMING := {
 	"deep_squat": {"target":Vector3(0, .75, .10), "distance":4.7},
 	"single_support": {"target":Vector3(0, 1., 0), "distance":4.9}
 }
+# Shared targets are authored against the frozen EXP36 metre-scale holds.
+# Both sources use the exact same camera for a given pose/focus/view.
+const FOCUS_FRAMING := {
+ "face": {
+  "a_pose":{"target":Vector3(0,1.70,.015),"distance":1.2},
+  "arm_raise":{"target":Vector3(0,1.70,.015),"distance":1.2},
+  "deep_squat":{"target":Vector3(0,1.30,-.025),"distance":1.2},
+  "single_support":{"target":Vector3(.08,1.69,.015),"distance":1.2}},
+ "shoulders": {
+  "a_pose":{"target":Vector3(0,1.43,0),"distance":2.2},
+  "arm_raise":{"target":Vector3(0,1.57,0),"distance":2.4},
+  "deep_squat":{"target":Vector3(0,1.06,-.05),"distance":2.2},
+  "single_support":{"target":Vector3(.08,1.42,0),"distance":2.2}},
+ "pelvis": {
+  "a_pose":{"target":Vector3(0,.96,0),"distance":1.8},
+  "arm_raise":{"target":Vector3(0,.96,0),"distance":1.8},
+  "deep_squat":{"target":Vector3(0,.65,-.10),"distance":1.8},
+  "single_support":{"target":Vector3(.08,.95,0),"distance":1.8}}
+}
+const FOCUS_BITS := {"face":1, "shoulders":2, "pelvis":4}
 const CORRECTIVES := {
 	"a_pose": [0., 0., 0.], "arm_raise": [1., 0., 0.],
 	"deep_squat": [0., 1., 1.], "single_support": [0., .2, .2]
@@ -29,6 +49,7 @@ const CORRECTIVE_NAMES: Array[String] = ["StudyShoulderSupport", "StudyHipCompre
 var selected_model := "new"
 var selected_pose := "a_pose"
 var selected_view := "front"
+var selected_focus := "whole"
 var loaded := false
 var load_error := ""
 var review_mode := false
@@ -63,6 +84,9 @@ var _surface_cache: Array[Dictionary] = []
 var _posed_bounds := AABB()
 var _posed_vertices := 0
 var _posed_finite := false
+var _focus_bounds: Dictionary = {}
+var _focus_counts: Dictionary = {}
+var _face_lower_y := 1.49
 var _panel: PanelContainer
 
 func _ready() -> void:
@@ -158,7 +182,7 @@ func _make_ui() -> void:
 	var source_row := HBoxContainer.new(); column.add_child(source_row)
 	var title := Label.new(); title.text = "인체 원형 비교"; source_row.add_child(title)
 	_button(source_row, "model_new", "새 원형", select_model.bind("new"))
-	_button(source_row, "model_previous", "이전 원형(v04)", select_model.bind("previous"))
+	_button(source_row, "model_previous", "이전 원형(EXP36)", select_model.bind("previous"))
 	status = Label.new(); status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT; source_row.add_child(status)
 	_button(source_row, "return_city", "거리로 돌아가기", _return_city)
@@ -166,6 +190,9 @@ func _make_ui() -> void:
 	for entry: Array in [["front", "정면"], ["right", "옆면"], ["back", "후면"], ["oblique", "45도"]]:
 		_button(views, "view_"+entry[0], entry[1], set_view.bind(entry[0]))
 	_button(views, "turntable", "자동 둘러보기", _toggle_automatic)
+	views.add_child(VSeparator.new())
+	for entry: Array in [["whole", "전체"], ["face", "얼굴"], ["shoulders", "어깨"], ["pelvis", "골반"]]:
+		_button(views, "focus_"+entry[0], entry[1], set_focus.bind(entry[0]))
 	var poses := HBoxContainer.new(); column.add_child(poses)
 	for entry: Array in [["a_pose", "기본 자세"], ["arm_raise", "팔 올림"], ["deep_squat", "깊은 앉기"], ["single_support", "한발 지지"]]:
 		_button(poses, "pose_"+entry[0], entry[1], apply_pose.bind(entry[0]))
@@ -192,9 +219,29 @@ func _process(delta: float) -> void:
 		_angle += delta*deg_to_rad(20.)
 		_place_camera()
 
+func framing_contract() -> Dictionary:
+	var source: Dictionary = FRAMING[selected_pose] if selected_focus == "whole" else FOCUS_FRAMING[selected_focus][selected_pose]
+	return {"focus":selected_focus, "pose":selected_pose, "target":source.target, "distance":source.distance, "fov_deg":CAMERA_FOV_DEG, "scope":"Same pose/focus/view camera for both original sources; no per-model framing adjustment."}
+
+func set_focus(title: String) -> bool:
+	if title != "whole" and not FOCUS_FRAMING.has(title): return false
+	selected_focus = title; automatic = false
+	_place_camera()
+	_update_status()
+	selection_changed.emit()
+	return true
+
+func _update_status() -> void:
+	if not is_instance_valid(status): return
+	var source := "새 원형" if selected_model == "new" else "이전 원형(EXP36)"
+	var pose := String({"a_pose":"기본 자세", "arm_raise":"팔 올림", "deep_squat":"깊은 앉기", "single_support":"한발 지지"}[selected_pose])
+	var focus := String({"whole":"전체", "face":"얼굴", "shoulders":"어깨", "pelvis":"골반"}[selected_focus])
+	status.text = source+" / "+pose+" / "+focus
+
 func _place_camera() -> void:
-	var target: Vector3 = FRAMING[selected_pose].target
-	camera.position = target + Vector3(sin(_angle), 0, cos(_angle))*float(FRAMING[selected_pose].distance)
+	var contract := framing_contract()
+	var target: Vector3 = contract.target
+	camera.position = target + Vector3(sin(_angle), 0, cos(_angle))*float(contract.distance)
 	camera.look_at(target, Vector3.UP)
 
 func set_view(title: String) -> bool:
@@ -215,7 +262,7 @@ func select_model(title: String) -> bool:
 	loaded = false; load_error = ""; meshes.clear(); _rest_local.clear(); _rest_world.clear(); _materials.clear(); _surface_cache.clear()
 	model_root = null; skeleton = null; animation_player = null; selected_model = title
 	_source_sha = ""; _manifest.clear(); _manifest_sha = ""; _clip = ""; _strategy = ""; _pose_application_ok = false
-	_posed_vertices = 0; _posed_finite = false
+	_posed_vertices = 0; _posed_finite = false; _focus_bounds.clear(); _focus_counts.clear()
 	var path: String = SOURCES[title]
 	if not FileAccess.file_exists(path): return _load_failure("새 원형을 준비 중입니다." if title == "new" else "이전 모델을 찾지 못했습니다.")
 	_source_sha = FileAccess.get_sha256(path)
@@ -248,6 +295,8 @@ func select_model(title: String) -> bool:
 	for mesh: MeshInstance3D in meshes:
 		var bounds := mesh.global_transform*mesh.get_aabb()
 		_rest_bounds = bounds if not initialized else _rest_bounds.merge(bounds); initialized = true
+	var neck := _bone("neck")
+	_face_lower_y = _rest_world[neck].origin.y-.04 if neck >= 0 else 1.49
 	_cache_geometry()
 	loaded = true
 	var result := apply_pose(selected_pose)
@@ -294,12 +343,20 @@ func apply_pose(title: String) -> bool:
 	publish_skin_state()
 	_refresh_pose_bounds()
 	_place_camera()
-	status.text = ("새 원형 / " if selected_model == "new" else "이전 원형(v04) / ")+String({"a_pose":"기본 자세", "arm_raise":"팔 올림", "deep_squat":"깊은 앉기", "single_support":"한발 지지"}[title])
+	_update_status()
 	selection_changed.emit()
 	return _pose_application_ok
 
 func _cache_geometry() -> void:
 	for mesh: MeshInstance3D in meshes:
+		var rest_palette: Array[Transform3D] = []
+		var owner := mesh.get_node_or_null(mesh.skeleton) as Skeleton3D
+		if mesh.skin != null and owner != null:
+			for binding: int in range(mesh.skin.get_bind_count()):
+				var title := mesh.skin.get_bind_name(binding)
+				var bone := owner.find_bone(title) if not title.is_empty() else mesh.skin.get_bind_bone(binding)
+				if bone < 0: continue
+				rest_palette.append(owner.global_transform*owner.get_bone_global_rest(bone)*mesh.skin.get_bind_pose(binding))
 		for surface: int in range(mesh.mesh.get_surface_count()):
 			var arrays := mesh.mesh.surface_get_arrays(surface)
 			var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
@@ -309,8 +366,26 @@ func _cache_geometry() -> void:
 				for index: int in range(vertices.size()): referenced[index] = true
 			else:
 				for index: int in indices: referenced[index] = true
+			var masks := PackedByteArray(); masks.resize(vertices.size())
+			var bones: PackedInt32Array = arrays[Mesh.ARRAY_BONES] if arrays[Mesh.ARRAY_BONES] != null else PackedInt32Array()
+			var weights: PackedFloat32Array = arrays[Mesh.ARRAY_WEIGHTS] if arrays[Mesh.ARRAY_WEIGHTS] != null else PackedFloat32Array()
+			var slots: int = bones.size()/vertices.size() if not vertices.is_empty() else 0
+			for index: int in referenced:
+				var rest_point := mesh.global_transform*vertices[index]
+				if not rest_palette.is_empty():
+					rest_point = Vector3.ZERO
+					for slot: int in range(slots):
+						var binding: int = bones[index*slots+slot]
+						if binding >= 0 and binding < rest_palette.size(): rest_point += (rest_palette[binding]*vertices[index])*weights[index*slots+slot]
+				var mask := 0
+				# Face uses all horizontal/depth extents above upper-neck rest:
+				# larger rebuilt ears/orbits are not clipped by a fixed old head width.
+				if rest_point.y >= _face_lower_y: mask |= 1
+				if rest_point.y >= 1.18 and rest_point.y <= 1.59 and absf(rest_point.x) <= .36: mask |= 2
+				if rest_point.y >= .69 and rest_point.y <= 1.09 and absf(rest_point.x) <= .29: mask |= 4
+				masks[index] = mask
 			var morphs: Array = mesh.mesh.surface_get_blend_shape_arrays(surface)
-			_surface_cache.append({"mesh":mesh, "vertices":vertices, "bones":arrays[Mesh.ARRAY_BONES], "weights":arrays[Mesh.ARRAY_WEIGHTS], "referenced":referenced.keys(), "morphs":morphs})
+			_surface_cache.append({"mesh":mesh, "vertices":vertices, "bones":arrays[Mesh.ARRAY_BONES], "weights":arrays[Mesh.ARRAY_WEIGHTS], "referenced":referenced.keys(), "morphs":morphs, "focus_masks":masks})
 
 func _refresh_pose_bounds() -> void:
 	# The installed renderer's skeleton.glsl applies absolute morph targets
@@ -319,6 +394,8 @@ func _refresh_pose_bounds() -> void:
 	# not a mesh-quality or pixel-level GPU position acceptance.
 	# https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/servers/rendering/renderer_rd/shaders/skeleton.glsl
 	_posed_vertices = 0; _posed_finite = true
+	for title: String in FOCUS_BITS:
+		_focus_bounds[title] = AABB(); _focus_counts[title] = 0
 	for row: Dictionary in _surface_cache:
 		var mesh: MeshInstance3D = row.mesh
 		var matrices: Array[Transform3D] = []
@@ -354,18 +431,34 @@ func _refresh_pose_bounds() -> void:
 			_posed_finite = _posed_finite and world.is_finite()
 			_posed_bounds = AABB(world, Vector3.ZERO) if _posed_vertices == 0 else _posed_bounds.expand(world)
 			_posed_vertices += 1
+			for title: String in FOCUS_BITS:
+				if (int(row.focus_masks[index]) & int(FOCUS_BITS[title])) == 0: continue
+				var old_bounds: AABB = _focus_bounds[title]
+				_focus_bounds[title] = AABB(world, Vector3.ZERO) if _focus_counts[title] == 0 else old_bounds.expand(world)
+				_focus_counts[title] += 1
 
 func projected_frame() -> Dictionary:
+	return _project_bounds(_posed_bounds, _posed_vertices, "Whole indexed morphed/skinned body; all body endpoints must remain inside the unobscured frame.")
+
+func focus_frame() -> Dictionary:
+	if selected_focus == "whole": return projected_frame()
+	var frame := _project_bounds(_focus_bounds.get(selected_focus, AABB()), int(_focus_counts.get(selected_focus, 0)), "Selected source-rest interest region after actual morph/skin only. Other body regions may intentionally leave the viewport; this is not a whole-body framing claim.")
+	frame["focus"] = selected_focus
+	frame["source_rest_roi"] = {"face_lower_y_m":_face_lower_y, "face_xy_scope":"All source head/upper-neck horizontal and depth extents, without fixed-width clipping.", "shoulders_y_m":[1.18,1.59], "shoulders_abs_x_m":.36, "pelvis_y_m":[.69,1.09], "pelvis_abs_x_m":.29}
+	frame["intentional_cutoff"] = "Remaining body outside the selected interest region is intentionally cropped. The full-body frame check is not applied to this detail."
+	return frame
+
+func _project_bounds(bounds: AABB, vertices: int, scope: String) -> Dictionary:
 	var minimum := Vector2(INF, INF); var maximum := Vector2(-INF, -INF); var front := true
 	for corner: int in range(8):
-		var point := _posed_bounds.get_endpoint(corner)
+		var point := bounds.get_endpoint(corner)
 		front = front and not camera.is_position_behind(point)
 		var pixel := camera.unproject_position(point)
 		minimum = minimum.min(pixel); maximum = maximum.max(pixel)
 	var viewport := get_viewport().get_visible_rect().size
 	var top := _panel.get_global_rect().end.y+10. if ui.visible else 10.
-	var inside := _posed_finite and _posed_vertices > 0 and front and minimum.x >= 10. and maximum.x <= viewport.x-10. and minimum.y >= top and maximum.y <= viewport.y-10.
-	return {"inside_unobscured_frame":inside, "projected_min_px":minimum, "projected_max_px":maximum, "ui_bottom_plus_margin_px":top, "viewport_size":viewport, "actual_morphed_skinned_world_aabb":_posed_bounds, "referenced_vertices":_posed_vertices, "finite":_posed_finite, "scope":"Project all8 corners of the actual indexed morph-then-skin CPU envelope; conservative whole-body inclusion. Bone/rest AABB alone is not used. Renderer palette is checked separately."}
+	var inside := _posed_finite and vertices > 0 and front and minimum.x >= 10. and maximum.x <= viewport.x-10. and minimum.y >= top and maximum.y <= viewport.y-10.
+	return {"inside_unobscured_frame":inside, "projected_min_px":minimum, "projected_max_px":maximum, "ui_bottom_plus_margin_px":top, "viewport_size":viewport, "actual_morphed_skinned_world_aabb":bounds, "referenced_vertices":vertices, "finite":_posed_finite, "scope":scope}
 
 func _joint(index: int) -> Transform3D:
 	return skeleton.global_transform*skeleton.get_bone_global_pose(index)
@@ -444,4 +537,4 @@ func snapshot() -> Dictionary:
 		for role: String in ["upper_arm", "forearm", "hand", "thigh", "shin", "foot"]:
 			var index := _bone(role, side)
 			if index >= 0: joint_positions[role+"."+side] = _joint(index).origin
-	return {"loaded":loaded, "error":load_error, "model":selected_model, "pose":selected_pose, "view":selected_view, "asset_path":SOURCES.get(selected_model, ""), "asset_sha256":_source_sha, "manifest_path":MANIFESTS[selected_model], "manifest_sha256":_manifest_sha, "manifest_contract":manifest_contract(), "enabled_pose_controls":POSES.filter(func(pose: String) -> bool: return not (_buttons["pose_"+pose] as Button).disabled), "pose_application_ok":_pose_application_ok, "pose_strategy":_strategy, "actual_animation":_clip, "sample_time_s":SAMPLE_TIME_S, "imported_animation_names":animation_player.get_animation_list() if animation_player != null else [], "actual_mesh_count":meshes.size(), "visible_mesh_count":visible, "same_clay_material":same_material, "clay_properties":clay_properties, "source_materials_unchanged":source_materials_unchanged, "model_anchor_transform":model_anchor.transform, "rest_mesh_aabb_world":_rest_bounds, "rest_mesh_aabb_scope":"Imported native mesh AABB at load; not a CPU-skinned or corrective-morph posed-bound claim.", "finite_bones":finite, "bones":bones, "long_bone_links":links, "joints":joint_positions, "blend_shapes":blend_shapes, "camera_transform":camera.global_transform, "camera_fov":camera.fov, "camera_distance_m":camera.global_position.distance_to(Vector3(FRAMING[selected_pose].target)), "shared_pose_framing":FRAMING[selected_pose], "projected_frame":projected_frame(), "lighting_contract":lighting_contract(), "fixed_key_transform":key_light.global_transform, "fixed_key_shadow":key_light.shadow_enabled, "ruler_size_m":(ruler.mesh as BoxMesh).size, "automatic":automatic, "review_mode":review_mode, "scope":"Separate metre-scale clay review only. EXP36 compares the refinement with frozen v04 under identical per-pose camera/light/material, each using actual imported native NLA/morphs. No legacy52 retargeting or forced pose adapter. Numerical pose/visibility checks are not realistic anatomy, cloth simulation or art acceptance."}
+	return {"loaded":loaded, "error":load_error, "model":selected_model, "pose":selected_pose, "view":selected_view, "focus":selected_focus, "shared_focus_framing":framing_contract(), "focus_frame":focus_frame(), "asset_path":SOURCES.get(selected_model, ""), "asset_sha256":_source_sha, "manifest_path":MANIFESTS[selected_model], "manifest_sha256":_manifest_sha, "manifest_contract":manifest_contract(), "enabled_pose_controls":POSES.filter(func(pose: String) -> bool: return not (_buttons["pose_"+pose] as Button).disabled), "pose_application_ok":_pose_application_ok, "pose_strategy":_strategy, "actual_animation":_clip, "sample_time_s":SAMPLE_TIME_S, "imported_animation_names":animation_player.get_animation_list() if animation_player != null else [], "actual_mesh_count":meshes.size(), "visible_mesh_count":visible, "same_clay_material":same_material, "clay_properties":clay_properties, "source_materials_unchanged":source_materials_unchanged, "model_anchor_transform":model_anchor.transform, "rest_mesh_aabb_world":_rest_bounds, "rest_mesh_aabb_scope":"Imported native mesh AABB at load; not a CPU-skinned or corrective-morph posed-bound claim.", "finite_bones":finite, "bones":bones, "long_bone_links":links, "joints":joint_positions, "blend_shapes":blend_shapes, "camera_transform":camera.global_transform, "camera_fov":camera.fov, "camera_distance_m":camera.global_position.distance_to(Vector3(framing_contract().target)), "shared_pose_framing":FRAMING[selected_pose], "projected_frame":projected_frame(), "lighting_contract":lighting_contract(), "fixed_key_transform":key_light.global_transform, "fixed_key_shadow":key_light.shadow_enabled, "ruler_size_m":(ruler.mesh as BoxMesh).size, "automatic":automatic, "review_mode":review_mode, "scope":"Separate metre-scale clay review only. EXP37 compares face/joint refinement with frozen EXP36 under identical per-pose camera/light/material, each using actual imported native NLA/morphs. No legacy52 retargeting or forced pose adapter. Numerical pose/visibility checks are not realistic anatomy, cloth simulation or art acceptance."}

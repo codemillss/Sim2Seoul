@@ -1,5 +1,17 @@
 # 단계별 실행 이력
 
+## EXP37 — 얼굴·관절을 가까이 검토하는 후속 · 2026-10-25
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+사용자가 EXP36 다음 얼굴과 관절 형태 다듬기를 승인했다. 동결 EXP36 v03을 canonical 이전 원형으로 보존했다. 갤러리의 전체·얼굴·어깨·골반 버튼과 관심 정점 기반 프레이밍, 양쪽 원본 네 자세/같은 카메라·조명 비교, EXP37 실행기와 저장 무결성 checker를 준비했다. 현재 엔진·native 원본 검토와 root의 일반 OS 입력/복귀 기록을 마쳤다. 실제 마지막 창은 PID48203의 새 얼굴45도다. Esc 복귀 도구의16.698초 시간초과는 다음 실제 거리 화면으로 완료를 확인했으며 매끄러운 로딩의 합격으로 세지 않는다.
+
+미술 후보 v01의 귀 slab/코판은 거절했다. v02는 귀 뿌리 연결이 나아졌지만 코판이 남아 거절했고, v03은 넓게 이어지는 상악·인중 면과 작은 내장 콧구멍을 작성해 후속 검토용으로 선택했다. 후보·실패와 최종 선택은 [이번 증거 폴더](../data/reports/resident_face_joints/20261025/)에 분리한다. OpenStax 두개 구조와 NIH 외이 구조를 참고해 직접 좌표/면을 작성하며 그림·메시를 복사하지 않는다. 독립 원형의 개선이며 실제 게임 캐릭터 교체나 실사/연속 동작 수용은 아니다. 아래 이력은 당시 소스에 대한 기록이다.
+
+Blender 원본은 선택 전신16장·선택 상세10장·동일 조건 이전 상세10장을 실제 열어 별도 [studio 검토](../data/reports/resident_face_joints/20261025/studio_visual_review_peer.json)를 남겼다. [독립 GLB 감사](../data/reports/resident_face_joints/20261025/export_audit_peer.json)는42/42·actual exit0, 103,702정점/207,392삼각면·22본/4clip/3morph와 실제 범위/값을 읽어 확인했다. zero-area 삼각면0·NaN/Inf0은 인체 조형이나 자체 교차가 없다는 증명이 아니다.
+
+세 후보의 공식 Blender glTF exporter는 `primitive_extract.py:73`에서 divide-by-zero/overflow/invalid RuntimeWarning을 각각3개 출력했다. 원문을 보존했고 v01/v02/v03 저장 accessor와 선택GLB의 실제 값을 검사한 범위에는 비유한값이 없었다. 경고 원인이나 모든 exporter 동작의 무해함을 단정하지 않는다. 실제 Godot import01과 선택 두 엔진 실행은 exit0/ERROR0이다.
+
 ## EXP36 — 인체 원형 큰 면/손발/관절 개선 · 2026-10-25
 
 선택 v03은 실제 Blender 전신 16장·상세 5장과 이전 원형의 같은 21장 비교를 거쳤다. 최종 native final02는 신구 2개 × 4자세 × 4방향의 원본 32장이다. 현재 소스로 headless 73개/native 109개 검사를 통과했고 실제 exit 0·ERROR 0·capture 오류 0·source 변경 0이다. 독립 GLB 35조건은 별도 구조 감사로 구분한다. 실제 OS JPEG 8장에서 신구의 같은 앉기 자세·새 팔 올림/뒤보기·Esc 거리 복귀·메뉴 재진입/45도를 확인했다. 복귀 때 도구 응답은 시간초과였으나 다음 실제 화면에서 거리 복귀를 확인했다. 이를 연속 동작이나 복귀 성능 수용으로 확대하지 않는다. 설정 4파일은 전후 동일하며 PID 40688은 비교 화면으로 유지했다.

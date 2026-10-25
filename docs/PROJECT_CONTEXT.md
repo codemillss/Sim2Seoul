@@ -1,5 +1,15 @@
 # 프로젝트 맥락과 결정
 
+## 2026-10-25 EXP37 — 얼굴과 관절을 실제로 가까이 비교
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+EXP36 뒤 사용자는 얼굴과 관절 형태의 현실감을 더 다듬는 방향을 승인했다. 같은 성인 원형의 두개·안와·볼/상악·인중/코·입술·귀와 겨드랑이·골반 전이를 다시 작성한다. 비교 기준은 동결한 EXP36 v03의 원본 GLB/manifest다. 같은22본·네 원본 자세·세 보정 형태를 유지하고, 독립 갤러리에 **전체·얼굴·어깨·골반** 확대를 추가해 동일 방향/자세/렌즈/조명에서 신구를 비교한다.
+
+현재 선택은 후속 검토용 v03 원형이다. v01의 판 같은 귀/코와 v02에 남은 코판은 미술 검토에서 거절했다. v03은 상악·인중의 넓은 면과 작게 안쪽에 붙은 콧구멍을 작성했다. 눈/입술·타원형 귀·턱과 목 전이는 여전히 단순한 프로토타입이다. 직접 작성한 편집 제어 메시이며 수동 조각·실사 완성 또는 기존 플레이어/NPC 교체를 뜻하지 않는다. [이번 원본·보고서 폴더](../data/reports/resident_face_joints/20261025/)와 [현재 상태](WORK_STATUS.md)를 따르며 아래 EXP36 이하는 이력이다.
+
+웹 배포 질문은 [공식 Sites 안내](https://learn.chatgpt.com/docs/sites)의 기능 범위까지 확인했으며 실제 이식·내보내기·배포는 수행하지 않았다. 현재 프로젝트는 Forward+를 사용한다. [Godot 4.7 웹 내보내기 안내](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_for_web.html)에 따르면 브라우저는 Compatibility/WebGL2가 필요하므로 렌더링 전환·성능·입력·음향 검증을 거친 별도 작업으로 다룬다.
+
 ## 2026-10-25 EXP36 — 원형의 큰 면과 관절 전이 개선
 
 사용자가 EXP35 이후의 다음 조형 단계를 승인했다. 같은 원형 한 명의 흉곽·골반·관절·얼굴·손발을 다듬는다. 키/22본·도시/게임 캐릭터는 유지하고, EXP35 v04 GLB를 바이트 그대로 보존해 두 원형 모두의 실제 네 자세를 같은 렌즈/조명/회색 재질에서 비교한다. 이전 형태를 강제 리타게팅하거나 피부색으로 차이를 가리지 않는다. 스크립트로 편집 가능한 제어 메시를 다듬는 작업이며 수동 조각·실사 완성을 뜻하지 않는다. 현재 판정은 [WORK_STATUS](WORK_STATUS.md)를 따른다.

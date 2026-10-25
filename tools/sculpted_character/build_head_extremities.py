@@ -1,4 +1,4 @@
-"""Authored editable clay head/hands/feet, EXP36, Blender Z-up/front -Y.
+"""Authored editable clay head/hands/feet, EXP37, Blender Z-up/front -Y.
 
 This is an explicit control mesh: landmark rings, orbital edge loops and
 branching finger loops are editable in the saved .blend. No former body,
@@ -60,122 +60,188 @@ def _align(cage,a,b):
     return best[1]
 
 
+def _rect_boundary(grid,ka,kb,ja,jb):
+    return (grid[ka][ja:jb]+[grid[k][jb] for k in range(ka,kb)]
+            +list(reversed(grid[kb][ja+1:jb+1]))+[grid[k][ja] for k in range(kb,ka,-1)])
+
+
+def _eye_globe(cage,center,region):
+    """Closed ocular surface with an inset pupil/iris relief, no image paint."""
+    cx,cy,cz=center;rx,ry,rz=.0160,.0126,.0122
+    previous=None
+    angles=[.08,.15,.20,.32,.37,.46,.63,.82,1.04,1.29,1.57,1.85,2.14,2.43,2.70,2.94,3.06]
+    for p in angles:
+        inset=.0015 if p<=.15 else (.0003 if p==.20 else (-.00025 if p in (.32,.37) else 0.))
+        ring=cage.ring([(cx+rx*math.sin(p)*math.cos(math.tau*j/40),
+                          cy-ry*math.cos(p)+inset,
+                          cz+rz*math.sin(p)*math.sin(math.tau*j/40)) for j in range(40)],region)
+        if previous is None:cage.cap(ring,(cx,cy-ry+.0018,cz),region)
+        else:cage.bridge(previous,ring)
+        previous=ring
+    cage.cap(previous,(cx,cy+ry,cz),region)
+
+
 def build_head(cage,info):
-    """Cranial silhouette, jaw planes and actual open orbits, no face paint."""
+    """EXP37 connected facial apertures and auricular folds, original cage."""
     region='head'
-    # z / halfwidth / front depth / back depth / chin-nose sculpt at centre.
-    # Deliberately low-resolution editable planes; Subdivision refines these.
-    rows=[(1.558,.030,.065,.041,.004),(1.569,.044,.073,.049,.005),
-          (1.582,.054,.073,.059,.001),(1.591,.058,.071,.064,.001),
-          (1.598,.061,.073,.067,.002),(1.605,.064,.073,.069,.001),
-          (1.615,.068,.074,.073,.013),(1.625,.073,.075,.078,.028),
-          (1.637,.075,.075,.081,.022),(1.650,.075,.074,.083,.014),
-          (1.660,.074,.073,.084,.012),(1.671,.073,.076,.085,.010),
-          (1.682,.072,.082,.085,.007),(1.696,.071,.082,.084,.002),
-          (1.718,.069,.080,.080,0.),(1.742,.061,.070,.071,0.),
-          (1.764,.045,.052,.052,0.),(1.777,.022,.025,.026,0.)]
-    count=48;grid=[]
-    # Head centre +Y is posterior; its front plane is landmark shaped.
-    for k,(z,w,fd,bd,nose) in enumerate(rows):
+    # Named height / halfwidth / front depth / back depth / nasal projection.
+    # These are authored art landmarks, not a scan or population measurements.
+    rows=[('chin',1.558,.029,.066,.043,0.),
+          ('chin_plane',1.567,.041,.074,.050,0.),
+          ('jaw',1.578,.052,.075,.058,0.),
+          ('lower_lip_wall',1.587,.058,.071,.063,0.),
+          ('oral_low',1.591,.060,.071,.066,0.),
+          ('oral_middle',1.598,.062,.073,.068,0.),
+          ('oral_high',1.607,.064,.078,.071,0.),
+          ('philtrum',1.613,.067,.079,.074,.004),
+          ('nasal_base',1.618,.069,.079,.077,.012),
+          ('alar_middle',1.623,.071,.079,.079,.024),
+          ('alar_high',1.629,.073,.078,.081,.029),
+          ('nasal_tip',1.635,.075,.075,.082,.026),
+          ('malar',1.643,.076,.075,.084,.020),
+          ('orbit_low',1.651,.076,.074,.085,.014),
+          ('orbit_lower_mid',1.658,.075,.074,.086,.010),
+          ('eye_mid',1.665,.074,.075,.086,.007),
+          ('orbit_upper_mid',1.674,.073,.079,.086,.003),
+          ('orbit_high',1.683,.073,.084,.086,0.),
+          ('brow',1.690,.073,.085,.085,0.),
+          ('forehead',1.707,.072,.084,.084,0.),
+          ('vault',1.726,.067,.078,.079,0.),
+          ('crown_low',1.746,.059,.067,.069,0.),
+          ('crown',1.765,.043,.050,.052,0.),
+          ('pole',1.777,.021,.024,.026,0.)]
+    count=96;grid=[];index={row[0]:k for k,row in enumerate(rows)}
+    for name,z,width,front,back,nose in rows:
         points=[]
         for j in range(count):
-            a=-math.pi+math.tau*j/count;s=math.sin(a);co=math.cos(a)
-            x=w*s;y=.006-(fd if co>=0 else bd)*co
-            aa=abs(a)
+            a=-math.pi+math.tau*j/count;si,co=math.sin(a),math.cos(a)
+            x=width*si;y=.006-(front if co>=0 else back)*co;zz=z
             if co>0:
-                # These are named cage-column offsets, not a noise/depth field.
-                nose_profile=max(0.,1-(aa/.39)**2)**2
-                y-=nose*nose_profile
-                # Broad cheek/zygomatic plane, separate from the central
-                # muzzle: keep the eye-to-jaw transition out of a sphere.
-                cheek=max(0.,1-abs(z-1.635)/.040)
-                y-=.0055*cheek*max(0.,1-abs(aa-.64)/.42)
-                if 1.587<=z<=1.607:
-                    # Upper/lower lip volume around an actual recessed seam.
-                    lip=max(0.,1-aa/.34)**2
-                    y-=({3:.002,4:.0045,5:.001}.get(k,0))*lip
-                    if k==3:y+=.0025*max(0.,1-aa/.32)
-                if k in (8,9,10,11):
-                    # Supraorbital/zygomatic wall and inset medial eye plane.
-                    if .26<aa<.79:y+=.006 if k in (9,10) else .001
-                    if .65<aa<1.10:y-=.006 if k in (8,9) else .002
-                if k in (3,4):
-                    y-=.0035*max(0.,1-aa/.40)
-                # Distinct gonial jaw angle, cheek and temporal silhouette.
-                if k<4 and .8<aa<1.9:x*=1.045
-            zz=z
-            if k==0:
-                zz+=.036*(1-co)*.5
-            if k in (7,8,9,10,11,12) and 1.30<aa<1.95:
-                # Connected auricle folds, authored into temporal control rows.
-                ear=[.001,.006,.010,.009,.006,.002][k-7]
-                x+=math.copysign(ear,a)
-                if k in (9,10) and 1.48<aa<1.75:x-=math.copysign(.005,a)
+                bridge_width=.010 if z>=1.643 else .019
+                nasal=max(0.,1-(x/bridge_width)**2)**2
+                y-=nose*nasal
+                # Zygomatic support below the orbit; a flatter central
+                # maxillary plane and shallow submalar hollow beside it.
+                malar=max(0.,1-abs(z-1.645)/.030)*max(0.,1-abs(abs(x)-.046)/.026)
+                y-=.006*malar
+                hollow=max(0.,1-abs(z-1.612)/.025)*max(0.,1-abs(abs(x)-.046)/.024)
+                y+=.0025*hollow
+                if 1.651<=z<=1.674:
+                    y+=.004*max(0.,1-abs(abs(x)-.032)/.020)
+                if 1.683<=z<=1.707:
+                    y-=.0025*max(0.,1-abs(abs(x)-.033)/.025)
+                if 1.613<=z<=1.629:
+                    alar=max(0.,1-abs(abs(x)-.013)/.009)*max(0.,1-abs(z-1.623)/.011)
+                    y-=.0080*alar
+                if 1.591<=z<=1.613:
+                    # Philtral columns are a subtle pair of planes; the
+                    # vermilion itself is constructed at the aperture below.
+                    y-=.0013*max(0.,1-abs(abs(x)-.0045)/.0035)
+                if z<=1.587 and .70<abs(a)<1.90:x*=1.035
+            if name=='chin':zz+=.036*(1-co)*.5
             points.append((x,y,zz))
         grid.append(cage.ring(points,region))
-    # Orbit bounds are exact cage indices: theta15..45 degrees, z1.650..1.682.
-    def is_hole(k,j):
-        a=-math.pi+math.tau*(j+.5)/count
-        return (9<=k<12 and math.radians(15)<abs(a)<math.radians(45)) or (3<=k<5 and 21<=j<27)
-    for k,(a,b) in enumerate(zip(grid,grid[1:])):
+    cuts=[(index['orbit_low'],index['orbit_high'],52,60),
+          (index['orbit_low'],index['orbit_high'],36,44),
+          (index['oral_low'],index['oral_high'],42,54),
+          (index['nasal_base'],index['alar_high'],49,52),
+          (index['nasal_base'],index['alar_high'],44,47),
+          (index['nasal_base'],index['orbit_high'],69,75),
+          (index['nasal_base'],index['orbit_high'],21,27)]
+    for k,(lo,hi) in enumerate(zip(grid,grid[1:])):
         for j in range(count):
-            if not is_hole(k,j):cage.f.append((a[j],a[(j+1)%count],b[(j+1)%count],b[j]))
-    # Front centre is index24. Right/left orbital rectangles are sewn to lids.
-    for side in (-1,1):
-        ja=26 if side>0 else 18;jb=30 if side>0 else 22
-        ka,kb=9,12
-        boundary=(grid[ka][ja:jb]+[grid[k][jb] for k in range(ka,kb)]
-                  +list(reversed(grid[kb][ja+1:jb+1]))+[grid[k][ja] for k in range(kb,ka,-1)])
-        # A sphere must sit behind the orbital face, not merely behind its
-        # lid rim. The earlier -62.5mm centre left its upper/lower hemisphere
-        # protruding through the exterior skin as an exposed pill.
-        cx=side*.032;cy=-.0495;cz=1.665
-        # Map rectangular perimeter to its eye-shaped angular loop by actual
-        # radial position. Two concentric fleshy rims preserve lid thickness.
-        angles=[math.atan2((cage.v[i][2]-cz)/.012,(cage.v[i][0]-cx)/.018) for i in boundary]
+            if not any(ka<=k<kb and ja<=j<jb for ka,kb,ja,jb in cuts):
+                cage.f.append((lo[j],lo[(j+1)%count],hi[(j+1)%count],hi[j]))
+    # Lids follow the ocular surface. Aperture corners are tapered and the
+    # lower lid is shallower than the upper lid, rather than two round bumps.
+    for side,cut in [(1,cuts[0]),(-1,cuts[1])]:
+        boundary=_rect_boundary(grid,*cut);cx,cy,cz=side*.032,-.0505,1.666
+        angles=[math.atan2((cage.v[v][2]-cz)/.012,(cage.v[v][0]-cx)/.018) for v in boundary]
         previous=boundary
+        for stage in range(4):
+            u=(stage+1)/4;points=[]
+            for vid,a in zip(boundary,angles):
+                px=cx+.0143*math.cos(a);si=math.sin(a)
+                pz=cz+(.0049 if si>0 else .0032)*si+side*(px-cx)*.055
+                dx=(px-cx)/.016;dz=(pz-cz)/.0122
+                py=cy-.0126*math.sqrt(max(.035,1-dx*dx-dz*dz))-.00045
+                q=Vector(cage.v[vid]).lerp(Vector((px,py,pz)),u)
+                if stage==2:q.y-=.00055
+                points.append(q)
+            rim=cage.ring(points,region);cage.bridge(previous,rim);previous=rim
+        cavity=cage.ring([(cx+(cage.v[v][0]-cx)*.85,cy+.017,cz+(cage.v[v][2]-cz)*1.25) for v in previous],region)
+        cage.bridge(previous,cavity);cage.cap(cavity,(cx,cy+.021,cz),region)
+        _eye_globe(cage,(cx,cy,cz),region)
+    # Rolled upper/lower lip and narrow relaxed oral fissure. Curved mouth
+    # corners turn into the face instead of projecting as a flat oval plate.
+    boundary=_rect_boundary(grid,*cuts[2]);previous=boundary
+    angles=[math.atan2((cage.v[v][2]-1.598)/.008,cage.v[v][0]/.027) for v in boundary]
+    for stage in range(4):
+        u=(stage+1)/4;points=[]
+        for vid,a in zip(boundary,angles):
+            x=.026*math.cos(a);si=math.sin(a);edge=abs(x)/.026
+            cupid=.0006*max(0.,1-abs(abs(x)-.007)/.007) if si>0 else 0.
+            z=1.598+(.00055 if si>0 else .00035)*si+cupid
+            target=Vector((x,-.0725+.007*edge**2,z))
+            q=Vector(cage.v[vid]).lerp(target,u)
+            if stage in (1,2):q.y-=.0010*(1-edge**2)
+            points.append(q)
+        rim=cage.ring(points,region);cage.bridge(previous,rim);previous=rim
+    inner=cage.ring([(cage.v[v][0]*.94,-.060,1.598+(cage.v[v][2]-1.598)*.65) for v in previous],region)
+    cage.bridge(previous,inner);cage.cap(inner,(0,-.054,1.598),region)
+    # Slanted nostril rims, each sewn to the alar base, with closed cavities.
+    for side,cut in [(1,cuts[3]),(-1,cuts[4])]:
+        boundary=_rect_boundary(grid,*cut);cx=side*.0105;previous=boundary
+        angles=[math.atan2((cage.v[v][2]-1.622)/.005,(cage.v[v][0]-cx)/.006) for v in boundary]
         for stage in range(3):
             u=(stage+1)/3;points=[]
             for vid,a in zip(boundary,angles):
-                px=cx+.0144*math.cos(a);pz=cz+(.0053 if math.sin(a)>=0 else .0037)*math.sin(a)+side*(px-cx)*.045
-                dx=(px-cx)/.0162;dz=(pz-cz)/.0125
-                py=cy-.0128*math.sqrt(max(.035,1-dx*dx-dz*dz))-.00065
-                outer=Vector(cage.v[vid]);target=Vector((px,py,pz))
-                q=outer.lerp(target,u)
-                if stage==1:q.y-=.00065
+                target=Vector((cx+.0033*math.cos(a),-.0805+.0020*math.sin(a),1.6225+.0018*math.sin(a)))
+                q=Vector(cage.v[vid]).lerp(target,u)
+                if stage==1:q.y-=.0004
                 points.append(q)
             rim=cage.ring(points,region);cage.bridge(previous,rim);previous=rim
-        cavity=cage.ring([(cx+(cage.v[i][0]-cx)*.82,cy+.019,cz+(cage.v[i][2]-cz)*1.35) for i in previous],region)
-        cage.bridge(previous,cavity);cage.cap(cavity,(cx,cy+.024,cz),region)
-        _ellipsoid(cage,(cx,cy,cz),(.0162,.0128,.0125),region,32,16)
-    # A real narrow oral opening and rolled lip rim replaces a blurred
-    # bump in the face rows. The closed cavity carries no teeth or paint.
-    ka,kb,ja,jb=3,5,21,27
-    boundary=(grid[ka][ja:jb]+[grid[k][jb] for k in range(ka,kb)]
-              +list(reversed(grid[kb][ja+1:jb+1]))+[grid[k][ja] for k in range(kb,ka,-1)])
-    angles=[math.atan2((cage.v[i][2]-1.597)/.008,cage.v[i][0]/.026) for i in boundary]
-    previous=boundary
-    for stage in range(3):
-        u=(stage+1)/3;points=[]
+        inner=cage.ring([(cx+(cage.v[v][0]-cx)*.8,cage.v[v][1]+.006,cage.v[v][2]+.006) for v in previous],region)
+        cage.bridge(previous,inner);cage.cap(inner,(cx,-.076,1.631),region)
+    # A true auricular patch: attached root, helix, recessed scapha,
+    # antihelix and concha. It replaces the old temporal-side lump.
+    for side,cut in [(1,cuts[5]),(-1,cuts[6])]:
+        boundary=_rect_boundary(grid,*cut);previous=boundary
+        angles=[math.atan2((cage.v[v][2]-1.651)/.030,(cage.v[v][1]-.004)/.016) for v in boundary]
+        # Round the sewn boundary itself. A rectangular temporal opening
+        # otherwise leaves a slab visible around the curved auricle.
         for vid,a in zip(boundary,angles):
-            x=.0255*math.cos(a);s=math.sin(a)
-            cupid=.00045*max(0.,1-abs(abs(x)-.008)/.008) if s>0 else 0.
-            z=1.597+(.0005 if s>0 else .0003)*s+cupid
-            target=Vector((x,-.071+.002*(abs(x)/.0255)**2,z))
-            q=Vector(cage.v[vid]).lerp(target,u)
-            if stage==1:q.y-=.0008
-            points.append(q)
-        rim=cage.ring(points,region);cage.bridge(previous,rim);previous=rim
-    inner=cage.ring([(cage.v[i][0]*.9,-.060,1.597+(cage.v[i][2]-1.597)*.75) for i in previous],region)
-    cage.bridge(previous,inner);cage.cap(inner,(0,-.055,1.597),region)
-    # Neck and jaw are one cage, including the low anterior chin and high nape.
-    n=_boundary(info,'neck');neck=_sort_theta(cage,n['indices'],n['center'])
-    # grid theta uses x=sin, y=-cos; shift order to body's +X polar convention.
-    jaw=sorted(grid[0],key=lambda i:math.atan2(cage.v[i][1]-.006,cage.v[i][0]))
-    cage.bridge(_align(cage,neck,jaw),jaw)
-    cage.cap(grid[-1],(0,.006,1.780),region)
-    info['head_landmarks']={'top':[0,.006,1.780],'chin':[0,-.062,1.558],
-                            'left_eye':[.032,-.0495,1.665],'right_eye':[-.032,-.0495,1.665]}
+            z=1.651+.030*math.sin(a);y=.004+.016*math.cos(a)+.002*math.sin(a)
+            k=min(range(len(rows)),key=lambda i:abs(rows[i][1]-z))
+            width,depth=rows[k][2],rows[k][3] if y<.006 else rows[k][4]
+            x=width*math.sqrt(max(.6,1-((y-.006)/depth)**2))
+            cage.v[vid]=(side*x,y,z)
+        for stage,(yr,zr,xdepth) in enumerate([(.015,.029,.074),(.014,.028,.082),(.012,.025,.079),(.0095,.021,.081),(.007,.016,.075)]):
+            points=[]
+            for a in angles:
+                co,si=math.cos(a),math.sin(a)
+                y=.004+yr*co+.003*si;z=1.651+zr*si
+                # Lower lobule is full and smooth; the anterior concha has
+                # a small tragal rise rather than a uniformly concentric ring.
+                depth=xdepth+(.0012 if si<-.65 else 0.)-.0025*max(0.,si)
+                if stage==3 and co<-.3:depth+=.0015
+                target=Vector((side*depth,y,z))
+                if stage==0:
+                    target=Vector(cage.v[boundary[len(points)]]).lerp(target,.75)
+                points.append(target)
+            ring=cage.ring(points,region);cage.bridge(previous,ring);previous=ring
+        inner=cage.ring([(side*.070,.004+(cage.v[v][1]-.004)*.65,1.651+(cage.v[v][2]-1.651)*.7) for v in previous],region)
+        cage.bridge(previous,inner);cage.cap(inner,(side*.068,.004,1.651),region)
+    neck_info=_boundary(info,'neck');neck=_sort_theta(cage,neck_info['indices'],neck_info['center'])
+    jaw=sorted(grid[0],key=lambda v:math.atan2(cage.v[v][1]-.006,cage.v[v][0]))
+    cage.bridge(_align(cage,neck,jaw),jaw);cage.cap(grid[-1],(0,.006,1.780),region)
+    info['head_landmarks']={'top':[0,.006,1.780],'chin':[0,-.060,1.558],
+                            'left_eye':[.032,-.0505,1.666],'right_eye':[-.032,-.0505,1.666]}
+    info['face_construction']={'angular_columns':count,'named_height_rows':[r[0] for r in rows],
+        'connected_apertures':['two lid rims','two slanted nostril cavities','relaxed oral fissure','two auricular root patches'],
+        'eye_surface':'Closed neutral ocular surface with geometric iris/pupil relief; no paint or realistic optical claim.',
+        'reference_urls':['https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull','https://elementsofmorphology.nih.gov/anatomy-ear.shtml'],
+        'source_assets_read':[],'anatomical_or_art_acceptance':False}
 
 
 def _ellipsoid(cage,center,radii,region,segments=16,rings=8):
@@ -306,6 +372,6 @@ def extend_anatomy(obj,info):
     build_head(cage,info)
     for side in (-1,1):build_hand(cage,info,side);build_foot(cage,info,side)
     info.setdefault('vertex_regions',{}).update(cage.finish())
-    info['additional_authorship']='EXP36 revised facial planes, cupped metacarpal/palm surface, knuckle/finger transitions and five-toe dorsal/plantar foot cage. No imported body or image input.'
+    info['additional_authorship']='EXP37 connected eyelids, nasal apertures, rolled lips and auricular folds; EXP36 editable hands and feet retained. No imported body or image input.'
     info['extremity_reference_urls']=['https://openstax.org/books/anatomy-and-physiology-2e/pages/8-2-bones-of-the-upper-limb','https://openstax.org/books/anatomy-and-physiology-2e/pages/8-4-bones-of-the-lower-limb']
     return obj,info

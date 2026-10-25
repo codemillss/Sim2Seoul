@@ -1,0 +1,673 @@
+{
+  "task": "EXP37_STUDIO_VISUAL_REVIEW_PEER",
+  "created_at_utc": "2026-10-25T04:41:26.911886+00:00",
+  "result": "STUDIO_REVIEWED_PROTOTYPE_ONLY_ART_TARGET_NOT_MET",
+  "selected_candidate": "v03",
+  "reviewer": "original_character subagent; authored body cage, separate read-only review phase; not an external independent art reviewer",
+  "scope": {
+    "actual_originals_opened": 36,
+    "selected_whole_body": 16,
+    "selected_details": 10,
+    "baseline_details": 10,
+    "all_36_opened_individually": true,
+    "engine_launched_by_reviewer": false,
+    "source_edits_during_review": false,
+    "runtime_or_OS_images_reviewed_in_this_artifact": false,
+    "continuous_motion_reviewed": false
+  },
+  "source_binding": {
+    "tools/sculpted_character/build_body_cage.py": {
+      "candidate_snapshot": "data/reports/resident_face_joints/20261025/candidates/v03/source/build_body_cage.py",
+      "frozen_sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916",
+      "snapshot_current_sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916",
+      "live_current_sha256": "783cd921d768dcda10c4db163dee5f75d3e0f87cdef09d88268be5d5f61ce916",
+      "snapshot_and_live_equal_frozen": true
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "candidate_snapshot": "data/reports/resident_face_joints/20261025/candidates/v03/source/build_head_extremities.py",
+      "frozen_sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e",
+      "snapshot_current_sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e",
+      "live_current_sha256": "a40ac94a1ab32037a8343d5da45109e281278d06057ab9c4dbc44d5c79389a0e",
+      "snapshot_and_live_equal_frozen": true
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "candidate_snapshot": "data/reports/resident_face_joints/20261025/candidates/v03/source/build_resident_study.py",
+      "frozen_sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f",
+      "snapshot_current_sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f",
+      "live_current_sha256": "20508be71d081e5719d3634590cd3c3492694367e46753ea3e4c747d26b02e9f",
+      "snapshot_and_live_equal_frozen": true
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "candidate_snapshot": "data/reports/resident_face_joints/20261025/candidates/v03/source/build_study_rig.py",
+      "frozen_sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6",
+      "snapshot_current_sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6",
+      "live_current_sha256": "619de0ee089ab771955a598614d5753d5b5f6b6589900e6fd3be0e27db1109a6",
+      "snapshot_and_live_equal_frozen": true
+    }
+  },
+  "candidate_manifest": {
+    "path": "data/reports/resident_face_joints/20261025/candidates/v03/FORM_STUDY_MANIFEST.json",
+    "sha256": "d4f6bb415b3b8c7a90d330624dbc0b9018ca2e736ca459e429e8021b38ac1508"
+  },
+  "render_conditions": {
+    "evidence_type": "Actual Blender EEVEE gray/clay orthographic studio PNGs, not generated illustration or Godot gameplay.",
+    "condition_basis": "Candidate manifest labels fixed studio render; corresponding baseline detail file names and framing were compared.",
+    "limitation": "Exact camera/light equality across baseline/candidate was not independently remeasured here. Body/head and bounded rig corrective changes coexist, so this visual comparison does not isolate a single numerical cause."
+  },
+  "comparative_findings": [
+    {
+      "topic": "face",
+      "observed_change": "Nasal openings/bridge, eye-center relief and a distinct auricle patch read more clearly than the nearly featureless baseline.",
+      "remaining": "Rectangular ear base in front, concentric washer-like auricle from side, pinched/wedge nose and simplified brow/cheek/jaw/neck. These are prototype sculpt issues, not solved human likeness."
+    },
+    {
+      "topic": "axilla",
+      "observed_change": "At most a subtle local floor/crease contour adjustment; no large transformation in the 10-detail A/B.",
+      "remaining": "Broad U-shaped web to neck/chest and long flat side planes remain under raised arms. Do not claim axillary anatomy solved."
+    },
+    {
+      "topic": "hip",
+      "observed_change": "Small contour/crease shifts in the proximal thigh attachment.",
+      "remaining": "Visible diagonal hip ridge in squat, rounded paired buttock masses/central V and rigid lower torso remain. No natural pose art acceptance."
+    },
+    {
+      "topic": "hand_and_foot",
+      "observed_change": "The same five-finger and five-toe shapes are retained visually.",
+      "remaining": "Thumb-root triangular highlight/step, flat hand planes, blunt finger/toe tips and round heel remain. Not new improvements in EXP37."
+    }
+  ],
+  "source_readonly_head_review": {
+    "file": "tools/sculpted_character/build_head_extremities.py",
+    "reviewed_scope": "Cage bridge/rectangular boundary, build_head cut patches and eye/lip/nasal/auricular loops read without running bpy.",
+    "finding": "Eye/mouth/nasal/ear rectangles use disjoint grid sectors; surrounding face and inset cavities are explicitly bridged/capped. No obvious indexing omission was identified in this read-through. This is not an independent manifold or ocular self-intersection test.",
+    "plausibility_limit": "The ear code uses several nearly concentric elliptical stages and a regular patch root, consistent with the observed washer/rectangular-base appearance. Named loops and closed topology alone do not establish plausible anatomy."
+  },
+  "rejected_history": [
+    {
+      "candidate": "v01",
+      "selected": false,
+      "basis": "Read candidates/v01/disposition.json; not newly reopened in this 36-original review.",
+      "reason": "Rectangular auricle attachment and plate-like nostril rim rejected; prior raw render/source evidence retained."
+    },
+    {
+      "candidate": "v02",
+      "selected": false,
+      "basis": "Read candidates/v02/disposition.json; not newly reopened in this 36-original review.",
+      "reason": "Rounded root did not remove projecting nasal wing plates; v03 changes surrounding maxillary/philtral plane and embeds smaller rim."
+    }
+  ],
+  "art_acceptance": {
+    "full_anatomy_art_target_met": false,
+    "photorealism_accepted": false,
+    "attractiveness_accepted": false,
+    "natural_motion_accepted": false,
+    "normal_avatar_replacement_accepted": false,
+    "prototype_comparison_only": true
+  },
+  "observations_vs_inference": {
+    "direct": "Per-image observations above are actual viewed pixels. Hashes/dimensions are file reads. Current/frozen source equality was recomputed.",
+    "inference": "Potential causes from loop geometry are a read-through interpretation. Black creases/noisy shading were not labeled holes or topology failures from color alone.",
+    "not_claimed": "No fresh engine test, numeric contact/volume proof, global self-intersection proof, continuous movement quality, user comfort or human resemblance acceptance."
+  },
+  "images": [
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_front.png",
+      "sha256": "c1347fbc1c17df574137bb5a6059905c049a4704fbd337c045f75501a65d6d09",
+      "bytes": 597071,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "전신은 연결된 사람 윤곽이지만 긴 평면 몸통·단순한 어깨 캡·얇은 발 말단이 남는다. 작은 얼굴에서 귀 기저가 양옆 직사각 돌출로 읽힌다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_right.png",
+      "sha256": "51f72f16a41aaed77bdc88c03a3855289e10c482d6eeb45cd9ab8a3158766534",
+      "bytes": 562018,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "가슴-복부-둔부 측면 굴곡은 읽힌다. 흉곽/복부 큰 면은 매끈한 곡면으로 단순하고 둔부 후방 볼륨이 상대적으로 강하다. 턱 밑-목의 수평 전환과 귀 고리가 눈에 띈다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_back.png",
+      "sha256": "94555d43dcf2d086830d349366fecdf975956eeafcda413888bfd4adb9e0b697",
+      "bytes": 598032,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "후면 전체와 팔다리는 연속해 보인다. 견갑·척추·천골 면이 약하고 후두 아래 가로 단차가 남는다. 이 한 방향으로 실제 인체 미술 수용을 판단하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/a_pose_front45.png",
+      "sha256": "5b5abc4aa023b52fb2c9d289f37a2e778f52f3b18a90b077ac119e26c330ce3a",
+      "bytes": 594298,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "가슴과 팔의 전환·허리·골반은 읽히지만 겨드랑이의 어두운 작은 꺾임과 평평한 옆가슴 면이 남는다. 귀의 독립 고리 인상이 보인다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_front.png",
+      "sha256": "db300852c5778bc879b38c239df504a80fb98503892214233d81b0a58058aafe",
+      "bytes": 598915,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "큰 치마형 sheet나 분리된 팔은 보이지 않는다. 그러나 양 겨드랑이 바닥부터 목/가슴으로 넓은 고무막 같은 U자 면이 이어져 인체의 앞/뒤 주름 구분은 약하다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_right.png",
+      "sha256": "5d2df33065edfc8a24b62542ce163b1d862f2c68a1787da33b5d57c01c5408f3",
+      "bytes": 569231,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "옆에서 팔-몸통 실루엣은 연결되지만 상완과 옆흉곽의 구분이 매우 매끈하다. 유의미한 새 근육/관절 자연스러움으로 판정하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_back.png",
+      "sha256": "1044208df3d0e8da145e044bc0ed80b59774f129e3ce94ca2c2fa8073b4b73c9",
+      "bytes": 600414,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "후면 옆가슴에서 팔 안쪽으로 긴 사선 음영/면이 남고 견갑 구조가 단순하다. 전신 윤곽 파열은 이 원본에서 보이지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/arm_raise_front45.png",
+      "sha256": "ea89a3fcbecad46f2c0aaf78ba007ed15e18c47262596567a36c8b326bd64763",
+      "bytes": 601813,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "팔 안쪽의 긴 평면과 몸통 상부의 당겨진 면이 여전히 읽힌다. 넓은 겨드랑이 web이 해결됐다는 주장에는 충분하지 않다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_front.png",
+      "sha256": "bc3438fd23f4431f0e4be3dc4a572004f2e53159cfd1846727a01357eae20733",
+      "bytes": 578475,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "양 무릎과 발은 자세를 이루지만 허벅지 위쪽 경계와 가랑이 압축 면이 단순하다. 옆가슴에서 허리까지 사선으로 나뉜 큰 음영 면이 보인다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_right.png",
+      "sha256": "938e0aefdcf2c1cdc224c7396959022ba03c60b1854569cffedf986b54213e76",
+      "bytes": 570300,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "고관절 앞/바깥에 대각선 능선이 남고 무릎 뒤는 깊고 좁게 접힌다. 변화가 있더라도 큰 동작의 자연스러움은 아직 확보되지 않았다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_back.png",
+      "sha256": "b767232d92386d82c1a5017c57244d949a1eb78a41edc33b96c21f81575f3bc1",
+      "bytes": 572295,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "둔부 두 덩어리와 중앙 V자 경계는 여전히 강하게 읽힌다. 후면 허리와 천골의 넓은 매끈한 면이 남는다. 이 원본에는 늘어진 치마형 대퇴 sheet가 보이지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/deep_squat_front45.png",
+      "sha256": "50183854176f3cf0ece5c6f6b85c3dd4a53a1619953c9017838ec8da175bdb9e",
+      "bytes": 583836,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "옆허리-상부대퇴 접합의 사선 경계가 분명하고 복부가 크게 평면적으로 당겨진다. 팔/어깨와 고관절이 완전히 자연스러워졌다는 근거는 아니다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_front.png",
+      "sha256": "1bc757ff55dcfafd081d33cee99d1878a25dd9630464abb358f7f8298acd6274",
+      "bytes": 598798,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "한쪽 발이 든 서로 다른 지지 자세는 읽힌다. 올라간 허벅지의 골반 경계가 급하고 상체가 비교적 곧게 고정되어 있어 균형 동작으로는 기계적이다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_right.png",
+      "sha256": "69907aaa18387a9953d64ec8b0fe1fb0e1ae643bfd41d1d714c1a9555004f542",
+      "bytes": 578696,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "든 발과 지지 발이 구분되고 고관절/무릎의 굽힘도 읽힌다. 대퇴-골반 상부의 전환과 몸통의 강직함은 남는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_back.png",
+      "sha256": "f48d343b5c971f7b1a8900cd6a953b13b625d5a4bc7fa39d2864e490f8ce3c18",
+      "bytes": 601996,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "지지 쪽 다리와 올라간 쪽 다리는 구별된다. 둔부-대퇴 뒤쪽이 넓고 매끈한 면으로 이어지며 골반의 자연스러운 기울기/하중 변화를 이 정지 샘플로 수용하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/blender_views/single_support_front45.png",
+      "sha256": "81d732f38ab184eebff2d5522697e31b1fcdbe4b66374177697736018f86f17e",
+      "bytes": 594023,
+      "dimensions_px": [
+        900,
+        1100
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_whole_body",
+      "observation": "든 발의 측면과 무릎-골반 방향이 읽힌다. 골반 앞쪽의 경계선과 인공적인 매끈한 큰 면이 남고 이 정지 자세는 연속 동작 검사가 아니다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/face_front.png",
+      "sha256": "82da2594bf34ab2c8d6aba93964c0fa1e1a2094c4e1474e90fae009d970115dc",
+      "bytes": 543019,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "눈은 비어 있는 흰 타원으로 읽히고 코/귀가 거의 표식 없는 큰 면에 묻혀 있다. 입은 짧고 평평한 가로 틈, 머리-목 경계는 수평이다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front.png",
+      "sha256": "899f86971e08b795de1ace54b50469e0f6fea185d52a89c5c90561c7fa33840e",
+      "bytes": 545033,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "콧등/콧구멍과 눈 중심 형상이 전보다 분명하다. 다만 양 귀 기저는 직사각으로 돌출되고 눈 중심은 조형된 원형 자국처럼 보인다. 높은 매끈한 두상·직선 입·평면 볼/턱으로 여전히 인공적이다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/face_right.png",
+      "sha256": "b207ae18ecfa95c72c32912596c93f70ff3db181b6a8687c572288afa445d2e5",
+      "bytes": 546154,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "코가 단순한 삼각 투영으로 보이고 귀는 넓은 흐릿한 돌기다. 후두-목과 턱-목의 경계가 평면적으로 끊긴다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_right.png",
+      "sha256": "06f1e80cc43b7598f5efa8ffb7c4abcc4dadc80c95d9598d7d69ef6d8e15d00b",
+      "bytes": 554316,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "비공의 어두운 틈과 콧등/인중 전환이 보이지만 코끝 하부는 쐐기형이고 입/턱의 꺾임은 단순하다. 귀가 두 개의 규칙적 타원 띠처럼 읽혀 실제 귓바퀴 인상에는 미달한다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/face_front45.png",
+      "sha256": "34ac2340cd22c7d05054763fa2349d5e4a50c80f9c8d40d281b321f535337767",
+      "bytes": 548094,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "눈·코·입은 있으나 안와/콧방울/귀의 독립 구조가 약하고 큰 매끈한 얼굴면에 묻힌다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front45.png",
+      "sha256": "ee5f9cd70b8ddf764781ca4b70072d36cea492ed37680359b40b584cf42992a5",
+      "bytes": 553085,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "비공/콧등·입술 경계·눈 중심은 더 읽힌다. 코 아래 흰 작은 판 모양의 림과 규칙적인 귀 고리가 남으며 안와·광대·턱 조화는 아직 단순한 원형이다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/ear_left.png",
+      "sha256": "c391dcc65223793daf446d43f783c2d27e3105c4a6431ae9a2481ef9ae63f3b0",
+      "bytes": 657433,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "귀 위치에 넓은 매끈한 융기만 보여 귓바퀴/귓구멍 구분이 사실상 없다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/ear_left.png",
+      "sha256": "f67dc6851af7244f64fe7eab7655b6affd0ba1c30f265bb8a6cc6681730f3f38",
+      "bytes": 676270,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "기저에 붙은 림과 안쪽 오목면이 새로 읽힌다. 그러나 거의 동심 타원 고리/와셔이며 상부와 하부·이주/대이주·귓불의 비대칭 조직 구분이 약하다. 자연스러운 귀 미술로 수용하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_front.png",
+      "sha256": "1629bacda5a0c9bcae5ae9eedec1145dd19d0693e927e458733b23a91d0ebb98",
+      "bytes": 610768,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "겨드랑이 바닥이 높은 U자/가로에 가까운 넓은 면으로 가슴/목과 이어져 고무막처럼 읽힌다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_front.png",
+      "sha256": "0bcd9398160796e4d4e2f876530bb763beaee5fe6b07d59d929a6f74fb612549",
+      "bytes": 608988,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "socket 하단의 경사가 국소적으로 조금 정돈된 정도다. 전후 비교에서 큰 인상이 바뀌지는 않았고 넓은 U자 web/평면 앞가슴이 여전히 남는다. 해결 완료로 판정하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_back.png",
+      "sha256": "2776ee81d94181edaa7752b47ed40d8ca3d998833dc633c77fba5b654e99f6bf",
+      "bytes": 610804,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "겨드랑이에서 등/팔 안쪽으로 긴 사선 면이 이어지고 후면 견갑 면은 매우 약하다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_back.png",
+      "sha256": "5c56a0c0e199fc71ffcf6c5b685dcbcf7e7f578b8f0f13644661cfc8e35039e7",
+      "bytes": 608764,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "후면 겨드랑이의 긴 사선 경계/음영이 여전히 보인다. 변화는 작아 완전한 근육/피부 접힘 개선으로 부를 수 없다. 앞/뒤 접힘 조직의 구분은 후속 과제다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_right.png",
+      "sha256": "92b6ca839b5c9477fb77e1e7f9a3624433e3327d40e66e257be533c030a5dd6e",
+      "bytes": 597592,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "골반 앞/바깥에서 상부대퇴로 깊은 대각선 능선이 이어지며 옆허리 아래 큰 평면과 둔부가 분리돼 읽힌다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_right.png",
+      "sha256": "d162cc1459925bc233b6464c122c9ad3b0b4fff28723973213e1c09822786b8f",
+      "bytes": 596733,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "능선의 모양/바닥 곡률은 약간 달라졌지만 대각선 crease는 선명하게 남는다. 골반-허벅지의 자연스러운 압축이나 부드러운 면 전이 완료로 수용하지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_back.png",
+      "sha256": "06b2a763bf138603b8bccd53a9a896af1c78a1a8d4149640529c1f6ffa344b6c",
+      "bytes": 615318,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "둔부가 두 둥근 덩어리와 가운데 V자로 강하게 나뉘고 천골/요추 아래 면은 매끈하다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_back.png",
+      "sha256": "228b9e6c6cd28926169af45498ab3d8125a7c7fd14a38fb2c7ab0b2b16c7438b",
+      "bytes": 613328,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "전후 차이는 작고 둥근 둔부 두 덩어리/중앙 V자와 상부의 넓은 면은 남는다. 치마처럼 늘어진 큰 sheet는 이 원본에서 보이지 않으나 자연스러움의 증거는 아니다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/hand_left_front.png",
+      "sha256": "381d0be9f59e44ecfd0cb223833eec3a3324998bae21e5e8418ad162f0e0d6bf",
+      "bytes": 519951,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "길이 차이가 있는 다섯 손가락이 보이지만 손등은 평평하고 엄지 기저에 작은 밝은 삼각형 패치/턱이 남는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/hand_left_front.png",
+      "sha256": "7b2a00dd0382e7cb3af3bfc4f9b1f9184700f98004e2f1074d6babc855312d6b",
+      "bytes": 519901,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "이전과 실질적으로 같은 손 형상으로 보인다. 손가락/손등의 단순함과 엄지 기저의 밝은 삼각형 전환이 남아 있고 이 작업의 신규 손 개선으로 세지 않는다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/baseline_details/foot_left_oblique.png",
+      "sha256": "bdb6a40c2dfc7ef918c4bc81306c27624657536d5f791b5ca1e97abf980d6154",
+      "bytes": 717034,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "exp36_baseline_detail",
+      "observation": "다섯 발가락과 발등/뒤꿈치는 읽히지만 발가락은 둥근 덩어리형이고 발톱/관절 면은 단순하다."
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/details/foot_left_oblique.png",
+      "sha256": "80fe2235ca976088f0c720709481ff403b05986dd36fefd025c04e292a17d82c",
+      "bytes": 717143,
+      "dimensions_px": [
+        900,
+        900
+      ],
+      "actually_opened": true,
+      "inspection_tool": "tools.view_image via functions.exec; individual original PNG",
+      "cohort": "selected_v03_detail",
+      "observation": "이전과 실질적으로 같은 발 형상으로 보인다. 독립 발가락은 유지되지만 발등·둥근 뒤꿈치·말단 단순화가 남아 있으며 이 작업의 신규 발 개선으로 세지 않는다."
+    }
+  ],
+  "detail_comparisons": [
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/face_front.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front.png",
+      "baseline_sha256": "82da2594bf34ab2c8d6aba93964c0fa1e1a2094c4e1474e90fae009d970115dc",
+      "candidate_sha256": "899f86971e08b795de1ace54b50469e0f6fea185d52a89c5c90561c7fa33840e",
+      "comparison": "콧등/콧구멍과 눈 중심 형상이 전보다 분명하다. 다만 양 귀 기저는 직사각으로 돌출되고 눈 중심은 조형된 원형 자국처럼 보인다. 높은 매끈한 두상·직선 입·평면 볼/턱으로 여전히 인공적이다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/face_right.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_right.png",
+      "baseline_sha256": "b207ae18ecfa95c72c32912596c93f70ff3db181b6a8687c572288afa445d2e5",
+      "candidate_sha256": "06f1e80cc43b7598f5efa8ffb7c4abcc4dadc80c95d9598d7d69ef6d8e15d00b",
+      "comparison": "비공의 어두운 틈과 콧등/인중 전환이 보이지만 코끝 하부는 쐐기형이고 입/턱의 꺾임은 단순하다. 귀가 두 개의 규칙적 타원 띠처럼 읽혀 실제 귓바퀴 인상에는 미달한다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/face_front45.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/face_front45.png",
+      "baseline_sha256": "34ac2340cd22c7d05054763fa2349d5e4a50c80f9c8d40d281b321f535337767",
+      "candidate_sha256": "ee5f9cd70b8ddf764781ca4b70072d36cea492ed37680359b40b584cf42992a5",
+      "comparison": "비공/콧등·입술 경계·눈 중심은 더 읽힌다. 코 아래 흰 작은 판 모양의 림과 규칙적인 귀 고리가 남으며 안와·광대·턱 조화는 아직 단순한 원형이다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/ear_left.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/ear_left.png",
+      "baseline_sha256": "c391dcc65223793daf446d43f783c2d27e3105c4a6431ae9a2481ef9ae63f3b0",
+      "candidate_sha256": "f67dc6851af7244f64fe7eab7655b6affd0ba1c30f265bb8a6cc6681730f3f38",
+      "comparison": "기저에 붙은 림과 안쪽 오목면이 새로 읽힌다. 그러나 거의 동심 타원 고리/와셔이며 상부와 하부·이주/대이주·귓불의 비대칭 조직 구분이 약하다. 자연스러운 귀 미술로 수용하지 않는다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_front.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_front.png",
+      "baseline_sha256": "1629bacda5a0c9bcae5ae9eedec1145dd19d0693e927e458733b23a91d0ebb98",
+      "candidate_sha256": "0bcd9398160796e4d4e2f876530bb763beaee5fe6b07d59d929a6f74fb612549",
+      "comparison": "socket 하단의 경사가 국소적으로 조금 정돈된 정도다. 전후 비교에서 큰 인상이 바뀌지는 않았고 넓은 U자 web/평면 앞가슴이 여전히 남는다. 해결 완료로 판정하지 않는다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/shoulder_raise_back.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/shoulder_raise_back.png",
+      "baseline_sha256": "2776ee81d94181edaa7752b47ed40d8ca3d998833dc633c77fba5b654e99f6bf",
+      "candidate_sha256": "5c56a0c0e199fc71ffcf6c5b685dcbcf7e7f578b8f0f13644661cfc8e35039e7",
+      "comparison": "후면 겨드랑이의 긴 사선 경계/음영이 여전히 보인다. 변화는 작아 완전한 근육/피부 접힘 개선으로 부를 수 없다. 앞/뒤 접힘 조직의 구분은 후속 과제다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_right.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_right.png",
+      "baseline_sha256": "92b6ca839b5c9477fb77e1e7f9a3624433e3327d40e66e257be533c030a5dd6e",
+      "candidate_sha256": "d162cc1459925bc233b6464c122c9ad3b0b4fff28723973213e1c09822786b8f",
+      "comparison": "능선의 모양/바닥 곡률은 약간 달라졌지만 대각선 crease는 선명하게 남는다. 골반-허벅지의 자연스러운 압축이나 부드러운 면 전이 완료로 수용하지 않는다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/pelvis_squat_back.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/pelvis_squat_back.png",
+      "baseline_sha256": "06b2a763bf138603b8bccd53a9a896af1c78a1a8d4149640529c1f6ffa344b6c",
+      "candidate_sha256": "228b9e6c6cd28926169af45498ab3d8125a7c7fd14a38fb2c7ab0b2b16c7438b",
+      "comparison": "전후 차이는 작고 둥근 둔부 두 덩어리/중앙 V자와 상부의 넓은 면은 남는다. 치마처럼 늘어진 큰 sheet는 이 원본에서 보이지 않으나 자연스러움의 증거는 아니다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/hand_left_front.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/hand_left_front.png",
+      "baseline_sha256": "381d0be9f59e44ecfd0cb223833eec3a3324998bae21e5e8418ad162f0e0d6bf",
+      "candidate_sha256": "7b2a00dd0382e7cb3af3bfc4f9b1f9184700f98004e2f1074d6babc855312d6b",
+      "comparison": "이전과 실질적으로 같은 손 형상으로 보인다. 손가락/손등의 단순함과 엄지 기저의 밝은 삼각형 전환이 남아 있고 이 작업의 신규 손 개선으로 세지 않는다."
+    },
+    {
+      "baseline": "data/reports/resident_face_joints/20261025/baseline_details/foot_left_oblique.png",
+      "candidate": "data/reports/resident_face_joints/20261025/candidates/v03/details/foot_left_oblique.png",
+      "baseline_sha256": "bdb6a40c2dfc7ef918c4bc81306c27624657536d5f791b5ca1e97abf980d6154",
+      "candidate_sha256": "80fe2235ca976088f0c720709481ff403b05986dd36fefd025c04e292a17d82c",
+      "comparison": "이전과 실질적으로 같은 발 형상으로 보인다. 독립 발가락은 유지되지만 발등·둥근 뒤꿈치·말단 단순화가 남아 있으며 이 작업의 신규 발 개선으로 세지 않는다."
+    }
+  ],
+  "records_read": [
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/source_freeze.json",
+      "sha256": "390e132d843114b6f6657c2d63e56113cd912643ac7fd86c123271a75aff6e47"
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v03/disposition.json",
+      "sha256": "425bbf27fe349611a890124efabf450573e0677531bb16da69b76b560c4c24b7"
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v01/disposition.json",
+      "sha256": "4cf57041a7d27a9ceffbca1489446a091f4f31777e5c1aadf2727cd102f9972d"
+    },
+    {
+      "path": "data/reports/resident_face_joints/20261025/candidates/v02/disposition.json",
+      "sha256": "fb4d3b921c03ab5edca6663936c1719dfc052dc13a2ba4cc9e36f102c9e54357"
+    }
+  ],
+  "no_source_or_previous_report_modified": true
+}

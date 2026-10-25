@@ -1,5 +1,13 @@
 # Sim2Seoul 문서 안내
 
+## EXP37 — 현재 얼굴·관절 검토 경로
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+[현재 작업 상태](WORK_STATUS.md) → [원형 제작과 한계](CHARACTER_IDENTITIES.md) → [전체/얼굴/어깨/골반 사용법](RUN_GUIDE.md) → [이번 원본·보고서 폴더](../data/reports/resident_face_joints/20261025/) 순으로 확인합니다. 현재 v03의 엔진·native 검증과 root 일반 OS 기록의 peer 결합을 마쳤습니다. 같은22본/네 자세의 새 원형과 동결 EXP36 v03을 같은 조건에서 비교하며, 확대에서는 관심 부위와 전체 프레임의 판정을 구분합니다.
+
+실사 인체·매력·연속 보행을 수용하거나 기존 플레이어/NPC를 교체한 단계가 아닙니다. 저장 증거의 현재 경로는 `tools/check_resident_face_joints_handoff.py`이며, 아래 목록의 EXP36 이하 집계는 각 당시 소스의 이력으로 보존합니다.
+
 [프로젝트 소개와 플레이 화면](../README.md)에서 시작하고, 필요한 내용에 따라 아래 문서를 선택하세요. 현재 구현의 기준은 WORK_STATUS이며, 과거 실행 기록은 당시 소스의 이력입니다.
 
 | 알고 싶은 내용 | 읽을 문서 |

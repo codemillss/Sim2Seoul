@@ -10,7 +10,7 @@ import math
 import bpy
 from mathutils import Matrix, Quaternion, Vector
 
-VERSION = "exp36_study_rig_v5_bounded_pose_supports"
+VERSION = "exp37_study_rig_v6_local_fold_relief"
 POSE_KEYS = ("a_pose", "arm_raise", "deep_squat", "single_support")
 FPS = 24
 POSE_FRAME = 24
@@ -263,20 +263,85 @@ def _linear_skin_rotation(obj, rig, vertex):
     return rotation
 
 
-def _make_correctives(objects, anchors, rig):
+def _fold_regions(obj, info, anchors):
+    """Select actual connected fold strips, never a whole-limb spatial field."""
+    loops = info.get("anatomy_loops", {})
+    neighbours = {v.index: set() for v in obj.data.vertices}
+    for edge in obj.data.edges:
+        a, b = edge.vertices
+        neighbours[a].add(b);neighbours[b].add(a)
+    masks = {name: {} for name in CORRECTIVES}
+    selected = {name: [] for name in CORRECTIVES}
+    for side in ("L", "R"):
+        shoulder_names = [name+"."+side for name in ("axillary_floor", "anterior_axillary_fold", "posterior_axillary_fold")]
+        if not any(name in loops for name in shoulder_names):
+            shoulder_names = ["shoulder_socket."+side, "arm."+side+".00"]
+        hip_names = ["pelvic_exit", "proximal_thigh_transition."+side, "gluteal_fold."+side]
+        for key, names in ((CORRECTIVES[0], shoulder_names), (CORRECTIVES[1], hip_names)):
+            core = set()
+            for name in names:
+                for vid in loops.get(name, []):
+                    if not 0 <= vid < len(obj.data.vertices):
+                        raise ValueError("Stale fold vertex ID in "+name)
+                    point = obj.matrix_world@obj.data.vertices[vid].co
+                    if (point.x >= 0.) != (side == "L"):
+                        continue
+                    if key == CORRECTIVES[0] and point.z > anchors["shoulder."+side].z+.020:
+                        continue
+                    if key == CORRECTIVES[1] and (abs(point.x) < .055 or abs(point.z-anchors["hip."+side].z) > .135):
+                        continue  # Leave perineal/midline compression untouched.
+                    core.add(vid)
+            for vid in core:
+                masks[key][vid] = 1.
+            for vid in core:
+                for adjacent in neighbours[vid]:
+                    if key == CORRECTIVES[1] and abs((obj.matrix_world@obj.data.vertices[adjacent].co).x) < .040:
+                        continue
+                    masks[key][adjacent] = max(masks[key].get(adjacent, 0.), .35)
+            selected[key].append({"side": side, "source_loop_names": names, "core_vertex_ids": sorted(core)})
+    return masks, neighbours, selected
+
+
+def _local_fold_relief(obj, vertex, posed_points, rotation, neighbours, amount):
+    """Relax only pose-created curvature, retaining the authored rest bend.
+
+    For a rigidly transformed neighbourhood the two Laplacians cancel. The
+    residue therefore describes skin deformation, not the original sculpt's
+    fold or a desired muscle shape. One small step avoids iterative shrink.
+    """
+    rest_lap, posed_lap, total = Vector(), Vector(), 0.
+    for adjacent in neighbours[vertex.index]:
+        offset = obj.data.vertices[adjacent].co-vertex.co
+        weight = 1./max(offset.length, .002)
+        rest_lap += offset*weight
+        posed_lap += (posed_points[adjacent]-posed_points[vertex.index])*weight
+        total += weight
+    if not total:
+        return Vector()
+    residual = posed_lap/total-obj.matrix_world.to_3x3()@(rotation@(rest_lap/total))
+    relief = residual*(.20*amount)
+    cap = .0025*amount
+    if relief.length > cap:
+        relief *= cap/relief.length
+    return relief
+
+
+def _make_correctives(objects, anchors, rig, info):
     """Bake bounded, pose-observed volume supports into existing three keys.
 
     The observed LBS-to-preserved-volume difference supplies a direction;
     authored surface masks and 6/8/6mm bind-space caps limit the amount. This
     is not an anatomy measurement, muscle simulation or runtime DQS switch.
     """
-    rows, blocks = [], {}
-    for obj in objects:
+    rows, blocks, folds = [], {}, {}
+    for index, obj in enumerate(objects):
         if obj.data.shape_keys is None:
             obj.shape_key_add(name="Basis")
         blocks[obj] = {name: obj.data.shape_keys.key_blocks.get(name) or obj.shape_key_add(name=name) for name in CORRECTIVES}
+        folds[obj] = _fold_regions(obj, info if index == 0 else {}, anchors)
     measurements = {obj: {"object": obj.name, "keys": list(CORRECTIVES), "maximum_rest_delta_m": {},
-                         "observed_target_delta_m": {}, "supported_control_vertices": {}, "skipped_singular_blends": {}} for obj in objects}
+                         "observed_target_delta_m": {}, "supported_control_vertices": {}, "skipped_singular_blends": {},
+                         "fold_relief": {}} for obj in objects}
     for pose, keys in (("arm_raise", (CORRECTIVES[0],)), ("deep_squat", CORRECTIVES[1:])):
         apply_study_pose(rig, pose, objects)
         for obj in objects:
@@ -286,21 +351,30 @@ def _make_correctives(objects, anchors, rig):
         for obj in objects:
             linear, preserved = _control_pose_samples(obj, rig)
             inverse = obj.matrix_world.to_3x3().inverted()
+            fold_masks, neighbours, fold_selection = folds[obj]
             for name in keys:
                 cap = .008 if name == CORRECTIVES[1] else .006
                 maximum, target_maximum, supported, singular = 0., 0., 0, 0
+                fold_examples = []
                 for vertex in obj.data.vertices:
                     point = obj.matrix_world@vertex.co
                     side = "L" if point.x >= 0. else "R"
                     amount = _support_mask(name, point, side, anchors)
-                    if amount < 1e-4:
+                    fold_amount = fold_masks[name].get(vertex.index, 0.)
+                    if amount < 1e-4 and not fold_amount:
                         continue
                     target = (preserved[vertex.index]-linear[vertex.index])*(.45*amount)
-                    target_maximum = max(target_maximum, target.length)
                     rotation = _linear_skin_rotation(obj, rig, vertex)
                     if abs(rotation.determinant()) < .08:
                         singular += 1
                         continue
+                    if fold_amount:
+                        relief = _local_fold_relief(obj, vertex, linear, rotation, neighbours, fold_amount)
+                        target += relief
+                        if relief.length > 1e-7:
+                            fold_examples.append({"vertex": vertex.index, "rest_world_m": list(point), "mask": fold_amount,
+                                                  "posed_relief_world_m": list(relief), "posed_relief_length_m": relief.length})
+                    target_maximum = max(target_maximum, target.length)
                     delta = rotation.inverted()@(inverse@target)
                     world_length = (obj.matrix_world.to_3x3()@delta).length
                     if world_length > cap:
@@ -313,10 +387,15 @@ def _make_correctives(objects, anchors, rig):
                 measurements[obj]["observed_target_delta_m"][name] = target_maximum
                 measurements[obj]["supported_control_vertices"][name] = supported
                 measurements[obj]["skipped_singular_blends"][name] = singular
+                measurements[obj]["fold_relief"][name] = {
+                    "selected_strips": fold_selection[name], "masked_vertices": len(fold_masks[name]),
+                    "actually_adjusted_vertices": len(fold_examples), "maximum_posed_relief_m": max((r["posed_relief_length_m"] for r in fold_examples), default=0.),
+                    "largest_examples": sorted(fold_examples, key=lambda r: r["posed_relief_length_m"], reverse=True)[:5]}
     apply_study_pose(rig, "a_pose", objects)
     for obj in objects:
         row = measurements[obj]
-        row.update({"method": "Same authored cage/actual target pose: bounded45% masked LBS-to-preserve-volume evaluation difference, inverse-linear-skinned into bind-space morph; export remains LBS.",
+        row.update({"method": "Same authored cage/actual target pose: bounded45% masked LBS-to-preserve-volume difference plus one local20% rest-curvature-relative fold relief, inverse-linear-skinned into bind-space morph; export remains LBS.",
+                    "fold_relief_policy": "Only connected semantic axillary/proximal-thigh strips and35% one-ring fade; posed cap2.5mm inside the unchanged total6/8/6mm bind-space caps. Base weights/rest/pose stay frozen; no global field or iterative smoothing.",
                     "bind_space_caps_m": dict(zip(CORRECTIVES, (.006, .008, .006))),
                     "scope": "Small supports for observed joint compression only; no muscle-size sculpt, measured soft tissue or accepted realism."})
         rows.append(row)
@@ -623,7 +702,7 @@ def assign_rig(objects, info):
         bone.align_roll(reference);bone.use_deform = True
     bpy.ops.object.mode_set(mode="OBJECT")
     weight_rows = _bind_weights(objects, info, rig, anchors)
-    corrective_rows = _make_correctives(objects, anchors, rig)
+    corrective_rows = _make_correctives(objects, anchors, rig, info)
     poses = _make_actions(rig, objects)
     metadata = {"version": VERSION, "armature_object": rig.name, "bone_count": len(data.bones),
                 "coordinates": "Blender+Zup/front-Y/left+X;metres;new1.78m adult study rest.",

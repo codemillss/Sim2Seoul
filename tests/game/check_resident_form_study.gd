@@ -2,12 +2,22 @@ extends SceneTree
 ## Exercises the same standalone review scene used by a person. A numerical
 ## PASS means scene/pose/capture integrity; form quality requires pixel review.
 const SCENE := preload("res://scenes/study/resident_form_study.tscn")
+const DETAIL_VIEWS := [
+	{"focus":"face", "pose":"a_pose", "view":"front"},
+	{"focus":"face", "pose":"a_pose", "view":"right"},
+	{"focus":"shoulders", "pose":"arm_raise", "view":"front"},
+	{"focus":"shoulders", "pose":"arm_raise", "view":"back"},
+	{"focus":"pelvis", "pose":"deep_squat", "view":"right"},
+	{"focus":"pelvis", "pose":"deep_squat", "view":"back"}
+]
 var study: Node3D
 var checks: Array = []
 var captures: Array = []
 var pose_observations: Array = []
+var focus_observations: Array = []
+var focus_reference: Dictionary = {}
 var source_before: Dictionary = {}
-var report_path := "/private/tmp/resident_form_refinement.json"
+var report_path := "/private/tmp/resident_face_joints.json"
 var native := false
 
 func _initialize() -> void:
@@ -17,7 +27,7 @@ func _initialize() -> void:
 
 func _check(title: String, passed: bool, evidence: Dictionary = {}) -> void:
 	checks.append({"name":title, "passed":passed, "evidence":evidence})
-	print("FORM_REFINEMENT ", title, " ", passed)
+	print("FACE_JOINTS ", title, " ", passed)
 
 func _json(value: Variant) -> Variant:
 	if value is Vector3: return [value.x, value.y, value.z]
@@ -127,16 +137,48 @@ func _rest_anchor_observations() -> Dictionary:
 		anchors.append({"bone":bone.name, "declared_blender_head_m":source, "expected_godot_m":expected, "actual_imported_rest_m":actual, "error_m":error})
 	return {"valid":valid, "maximum_error_m":maximum, "anchors":anchors, "scope":"Actual imported rest heads versus each source manifest in metres, Blender(x,y,z)→Godot(x,z,-y). This is not anatomy accuracy."}
 
-func _capture(model: String, pose: String, view: String) -> void:
+func _capture(model: String, pose: String, view: String, focus := "whole") -> void:
 	study.set_view(view); await _settle()
 	var palette: Dictionary = study.publish_skin_state()
 	RenderingServer.force_draw(false)
 	var image := root.get_texture().get_image()
-	var path := report_path.get_basename()+"_"+model+"_"+pose+"_"+view+".png"
+	var suffix := "" if focus == "whole" else "_detail_"+focus
+	var path := report_path.get_basename()+"_"+model+"_"+pose+"_"+view+suffix+".png"
 	var code := image.save_png(path)
 	var row: Dictionary = study.snapshot()
-	captures.append({"file":path, "sha256":FileAccess.get_sha256(path) if code == OK else "", "image_size":image.get_size(), "save_error":code, "model":model, "pose":pose, "view":view, "actual_glb_path":row.asset_path, "actual_glb_sha256":row.asset_sha256, "actual_manifest_path":row.manifest_path, "actual_manifest_sha256":row.manifest_sha256, "actual_animation":row.actual_animation, "sample_time_s":row.sample_time_s, "camera":row.camera_transform, "camera_fov":row.camera_fov, "shared_pose_framing":row.shared_pose_framing, "projected_frame":row.projected_frame, "lighting":row.fixed_key_transform, "lighting_contract":row.lighting_contract, "palette":palette, "actual_visible_meshes":row.visible_mesh_count, "readback":"same production study scene controls, actual GPU viewport; fixed world lighting/lens and common per-pose framing, no image retouch", "scope":"Capture and skeleton publication integrity only; no form/realism/art acceptance."})
-	_check(model+"."+pose+"."+view+".actual_native_capture_visible_uncropped_and_palette_published", code == OK and not image.is_empty() and row.visible_mesh_count > 0 and palette.valid and row.projected_frame.inside_unobscured_frame)
+	var frame: Dictionary = row.projected_frame if focus == "whole" else row.focus_frame
+	captures.append({"file":path, "sha256":FileAccess.get_sha256(path) if code == OK else "", "image_size":image.get_size(), "save_error":code, "model":model, "pose":pose, "view":view, "focus":focus, "capture_kind":"whole_body" if focus == "whole" else "focused_detail", "actual_glb_path":row.asset_path, "actual_glb_sha256":row.asset_sha256, "actual_manifest_path":row.manifest_path, "actual_manifest_sha256":row.manifest_sha256, "actual_animation":row.actual_animation, "sample_time_s":row.sample_time_s, "camera":row.camera_transform, "camera_fov":row.camera_fov, "shared_pose_framing":row.shared_pose_framing, "shared_focus_framing":row.shared_focus_framing, "projected_frame":row.projected_frame, "focus_frame":row.focus_frame, "lighting":row.fixed_key_transform, "lighting_contract":row.lighting_contract, "palette":palette, "actual_visible_meshes":row.visible_mesh_count, "readback":"Same interactive study scene controls and actual GPU viewport; shared pose/focus camera and world lighting, no image retouch.", "scope":"Whole captures include the entire body. Focused captures include only the measured source-rest interest region; other body cutoffs are intentional. Neither is form/realism/art acceptance."})
+	_check(model+"."+pose+"."+view+"."+focus+".actual_native_capture_visible_interest_region_and_palette_published", code == OK and not image.is_empty() and row.visible_mesh_count > 0 and palette.valid and frame.inside_unobscured_frame)
+
+func _focus_condition(row: Dictionary, before: Dictionary, key: String, lighting: Dictionary) -> bool:
+	var frame: Dictionary = row.focus_frame
+	var size: Vector2 = frame.projected_max_px-frame.projected_min_px
+	var framing: Dictionary = row.shared_focus_framing
+	var paired := {"camera":row.camera_transform, "framing":framing, "lighting":row.lighting_contract, "clay":row.clay_properties}
+	var equal_pair := true
+	if focus_reference.has(key): equal_pair = focus_reference[key] == paired
+	else: focus_reference[key] = paired
+	return row.focus != "whole" and frame.inside_unobscured_frame and frame.referenced_vertices > 100 and size.y > 120. and size.x > 40. and row.finite_bones and row.bones == before.bones and row.blend_shapes == before.blend_shapes and row.source_materials_unchanged and row.lighting_contract == lighting and row.same_clay_material and is_equal_approx(row.camera_fov, study.CAMERA_FOV_DEG) and absf(row.camera_distance_m-float(framing.distance)) < .0001 and equal_pair
+
+func _details(model: String, lighting: Dictionary) -> void:
+	var previous_focus := ""
+	for config: Dictionary in DETAIL_VIEWS:
+		study.apply_pose(config.pose); study.set_view(config.view); await _settle()
+		if native and config.focus != previous_focus:
+			await _click("focus_"+String(config.focus))
+			_check(model+"."+String(config.focus)+".native_injected_mouse_selects_focus", study.selected_focus == config.focus and study.selected_model == model)
+		previous_focus = config.focus
+		var before: Dictionary = study.snapshot()
+		study.set_focus(config.focus); await _settle()
+		var row: Dictionary = study.snapshot()
+		var key := String(config.focus)+"/"+String(config.pose)+"/"+String(config.view)
+		focus_observations.append({"model":model, "configuration":config, "snapshot":row})
+		_check(model+"."+key+".actual_interest_region_fits_shared_focus_without_pose_mutation", _focus_condition(row, before, key, lighting), {"actual_interest_frame":row.focus_frame, "shared_focus_framing":row.shared_focus_framing, "whole_body_cutoff_intentional":true, "bone_and_morph_state_unchanged_by_focus":row.bones == before.bones and row.blend_shapes == before.blend_shapes})
+		if native: await _capture(model, config.pose, config.view, config.focus)
+	if native:
+		await _click("focus_whole")
+		_check(model+".native_injected_mouse_returns_to_whole_body_camera", study.selected_focus == "whole" and study.framing_contract().target == study.FRAMING[study.selected_pose].target and is_equal_approx(study.framing_contract().distance, study.FRAMING[study.selected_pose].distance))
+	else: study.set_focus("whole")
 
 func _click(key: String) -> void:
 	var rectangles: Dictionary = study.control_rects()
@@ -158,6 +200,7 @@ func _run() -> void:
 	_check("default_is_new_original_in_separate_scene", study.selected_model == "new" and study.get_parent() == root and study.review_mode and not study.automatic and not paused, {"entered_from_paused_menu":true,"tree_paused_after_ready":paused})
 	_check("all_exact_inputs_exist_and_are_hashed", not source_before.values().has(""), {"source_sha256":source_before})
 	for model: String in ["new", "previous"]:
+		study.set_focus("whole")
 		var loaded: bool = study.select_model(model); await _settle()
 		if loaded:
 			study.apply_pose("a_pose")
@@ -187,6 +230,7 @@ func _run() -> void:
 			_check(model+"."+pose+".actual_morphed_skinned_body_fits_unobscured_frame", row.projected_frame.inside_unobscured_frame, {"actual_projection":row.projected_frame})
 			if native:
 				for view: String in ["front", "right", "back", "oblique"]: await _capture(model, pose, view)
+		await _details(model, lighting_before)
 		if native and model == "previous":
 			await _click("pose_arm_raise")
 			_check("previous.native_injected_mouse_replays_actual_frozen_native_pose", study.selected_model == "previous" and study.selected_pose == "arm_raise" and _pose_criterion(study.snapshot()) and _corrective_criterion(study.snapshot()))
@@ -198,10 +242,10 @@ func _run() -> void:
 		await _click("pose_arm_raise"); _check("native_injected_mouse_changes_actual_bone_pose", study.selected_pose == "arm_raise" and _pose_criterion(study.snapshot()))
 	_check("all_input_and_production_source_bytes_unchanged", _hashes() == source_before)
 	var failed: int = checks.filter(func(row: Dictionary) -> bool: return not row.passed).size()
-	var report := {"task":"EXP36_RESIDENT_FORM_REFINEMENT", "result":"PASS" if failed == 0 else "FAIL", "engine":Engine.get_version_info().string, "display":DisplayServer.get_name(), "physics_hz":Engine.physics_ticks_per_second, "summary":{"checks":checks.size(), "failed":failed, "captures":captures.size()}, "checks":checks, "pose_observations":pose_observations, "captures":captures, "source_sha256":source_before, "source_after":_hashes(), "visual_acceptance":"PENDING actual clay form and deformation pixel review", "scope":"Same separate study scene as interactive gallery. Actual imported bones/animation/morph weights and visible clay/camera/light inputs are inspected. The previous model is frozen v04 and both models use their own actual native NLA/morphs under identical per-pose framing, light and gray material. No old52 retargeting is used. Headless cannot establish rendered shape quality. Native images and sparse pose holds are not continuous animation, surveyed anatomy, realistic skin, new production avatar or user art acceptance."}
+	var report := {"task":"EXP37_RESIDENT_FACE_JOINTS", "result":"PASS" if failed == 0 else "FAIL", "engine":Engine.get_version_info().string, "display":DisplayServer.get_name(), "physics_hz":Engine.physics_ticks_per_second, "summary":{"checks":checks.size(), "failed":failed, "captures":captures.size(), "whole_body_captures":captures.filter(func(row: Dictionary) -> bool: return row.capture_kind == "whole_body").size(), "focused_detail_captures":captures.filter(func(row: Dictionary) -> bool: return row.capture_kind == "focused_detail").size()}, "checks":checks, "pose_observations":pose_observations, "focus_observations":focus_observations, "detail_capture_scope":{"configurations_per_model":DETAIL_VIEWS, "expected_whole_body_captures":32, "expected_focused_detail_captures":12, "roi":"Actually indexed source-rest interest vertices, then actual corrective morph and native skin deformation. Face includes full source head width/depth above upper neck.", "cutoff":"Only focus ROI must fit focused views. Remaining body may intentionally be cropped; whole-body inclusion is tested separately."}, "captures":captures, "source_sha256":source_before, "source_after":_hashes(), "visual_acceptance":"PENDING actual clay face/joint form and deformation pixel review", "scope":"Same separate interactive gallery, comparing the new EXP37 model with frozen EXP36. Both use their own actual native NLA/morphs and identical pose/focus/view camera, lighting and gray material. No old52 retargeting. Headless and native pose holds do not establish continuous animation, surveyed anatomy, realistic skin, production avatar replacement or user art acceptance."}
 	var file := FileAccess.open(report_path, FileAccess.WRITE)
 	if file == null: push_error("Cannot save form study report"); quit(2); return
 	file.store_string(JSON.stringify(_json(report), "  ")+"\n"); file.close()
-	print("RESIDENT_FORM_REFINEMENT_RESULT ", checks.size()-failed, "/", checks.size(), " captures=", captures.size())
+	print("RESIDENT_FACE_JOINTS_RESULT ", checks.size()-failed, "/", checks.size(), " captures=", captures.size())
 	study.queue_free(); await process_frame; await process_frame
 	quit(0 if failed == 0 else 1)

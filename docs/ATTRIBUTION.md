@@ -1,3 +1,11 @@
+## EXP37 얼굴·관절 검토 원형 · 2026-10-25
+
+**현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
+
+자체 편집 cage의 머리/얼굴·귀와 몸/관절 전이를 직접 수정했다. 구조 참고는 [OpenStax Anatomy and Physiology 2e의 두개 설명](https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull)과 [NIH Elements of Morphology의 외이 설명](https://elementsofmorphology.nih.gov/anatomy-ear.shtml)이다. 설명을 읽고 독립 좌표/면을 작성하며 교재 그림·사진·메시·스캔·상용 게임 자산은 복사하거나 제작 입력으로 읽지 않는다.
+
+동결 EXP36 v03 GLB/manifest는 비교 자산으로 보존하고, 새 원형도 같은 회색 재질/렌즈/조명에서 네 원본 자세로 검토한다. 피부 페인트로 조형 차이를 가리는 작업이 아니다. [이번 원본·보고서 폴더](../data/reports/resident_face_joints/20261025/)는 현재 v03의 제작/기술 검증을 보존하며, 직접 제작은 실사·의학적 정확도·수동 조각 완료의 증거가 아니다. 생산 플레이어/NPC 자산은 교체하지 않는다. 아래 EXP36 이하는 당시 출처 고지다.
+
 ## EXP36 원형 형태 다듬기 · 2026-10-25
 
 편집 가능한 자체 제어 cage·손발/머리·리그 보정을 수정했다. 외부 인체·스캔·모션·그림은 제작 입력으로 읽지 않는다. [OpenStax Anatomy and Physiology 2e 구조 설명](../data/reports/resident_form_refinement/20261025/reference_observation.json)을 읽고 참고했으며, 해당 교재 그림·기하를 복사한 파생 자산은 포함하지 않았다. 이전 v04 GLB/manifest는 같은 원본 자세의 비교용으로 바이트 그대로 보존한다. 새 원형과 Blender 실제 상세 렌더/게임 화면은 [현재 집계](../data/reports/resident_form_refinement/20261025/summary.json)에 구분했다. 아래 EXP35 이하는 당시 출처 고지다.
