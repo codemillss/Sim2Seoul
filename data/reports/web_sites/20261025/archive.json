@@ -14,6 +14,10 @@
     "file_count": 69
   },
   "backend_container_hash_equals_local_tar": false,
-  "container_note": "Sites returns its own stored tar metadata, which differs from the local gzip/tar container. Do not equate container hashes. Saved-version source commit exactly matches the verified pushed source; save/deploy used the unchanged helper archive.",
-  "local_regular_files": 144
+  "container_note": "macOS packaging added75 AppleDouble metadata files. All69 payload files exactly match the pushed Site commit; hosting.json is relocated by the official packaging helper to dist/.openai/hosting.json. Sites reports69 stored files and a separate tar-container hash. Do not equate its container hash with the local gzip/tar hash.",
+  "local_regular_files": 144,
+  "local_appledouble_metadata_files": 75,
+  "regular_payload_files": 69,
+  "payload_bytes_match_exact_pushed_source_commit": true,
+  "backend_file_count_matches_payload_count": true
 }

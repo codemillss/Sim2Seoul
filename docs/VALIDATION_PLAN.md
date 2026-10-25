@@ -8,7 +8,7 @@
 | import·export·repack·실제 PCK 읽기 | 선택 attempt04 각 exit0·ERROR0; PCK 원본213파일 SHA 일치, 한글 FontFile 존재 |
 | 브라우저 자원/화면 | 실제42조각+전체 WASM/PCK SHA 검증 뒤 EXPLORATION_READY; 대한문 도시·한국어 HUD·전체 Esc 메뉴·갤러리 표시 |
 | 실제 입력 | 메뉴/갤러리 선택과 Q 호출 표시 확인. 지속 보행/탑승 성공은 확정하지 않음 |
-| 사이트 게시 | terminal succeeded와 실제 URL, 해당 URL에서 게임 시작을 별도로 확인해야 완료 |
+| 사이트 게시 | [terminal succeeded·실제 URL](../data/reports/web_sites/20261025/deployment.json) 확인. 배포 URL은 로그인 게이트까지 관찰; 인증 후 게임 시작은 별도 미확인 |
 | 미수용 | 음향 실제 청취·저장 후 재접속·모바일·장시간 성능·캐릭터 실사/연속 동작 미술 |
 
 PCK 원본213파일 합격은 원본 바이트 보존 검사다. 도로/동작/시설213종의 기능 검사로 표현하지 않는다. runtime 로그의 음향 준비 표시는 실제 청취 증거가 아니며, `walk`/`movement` 파일명만으로 지속 보행 성공을 판정하지 않는다. [선택 build](../data/reports/web_sites/20261025/attempt04/build.json), [PCK 판정](../data/reports/web_sites/20261025/attempt04/pack_integrity.json), [실제 브라우저 로그](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)와 원본 화면을 함께 사용한다.
