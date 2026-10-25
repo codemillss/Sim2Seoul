@@ -47,9 +47,19 @@ func reset_orientation() -> void:
 func set_capture(enabled: bool) -> void:
 	input_enabled = enabled
 	skip_motion = true
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if enabled else Input.MOUSE_MODE_VISIBLE
+	# Browsers only grant pointer lock during a real click. The initial async
+	# city load and an Escape-menu return must wait for that gesture.
+	if OS.has_feature("web") and enabled and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if enabled else Input.MOUSE_MODE_VISIBLE
 
 func _unhandled_input(event: InputEvent) -> void:
+	if OS.has_feature("web") and input_enabled and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		skip_motion = true
+		get_viewport().set_input_as_handled()
+		return
 	var simulated_capture := automatic_probe and DisplayServer.get_name()=="headless"
 	if not input_enabled or (Input.mouse_mode!=Input.MOUSE_MODE_CAPTURED and not simulated_capture):return
 	# Reproducible injected events in automatic probes; native human input in normal play.

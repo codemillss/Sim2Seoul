@@ -1,5 +1,14 @@
 # 실제 작업 상태와 다음 행동
 
+## 2026-10-25 EXP38 — 실제 탐험 게임의 Web/Sites 배포
+
+현재 선택은 **attempt04**다. 기존 도시 탐험 장면을 Godot4.7.2의 단일 스레드 WebGL2/Compatibility로 내보냈으며, 소개 화면과 실제 게임 실행 화면을 연결했다. 원본 `game/project.godot`는 바꾸지 않고 별도 캐시 프로젝트에서만 Web 설정을 적용한다. 실행 중이던 Mac 게임은 그대로 두었다. 인체 원형과 생산 캐릭터의 관계·미술 한계는 아래 EXP37 기록을 유지한다.
+
+실제 내보낸 PCK를 다시 읽어 **원본213파일 SHA 일치·한글 폰트 존재**를 확인했다. import/export/repack/pack 검사는 모두 exit0·ERROR0이다. 브라우저에서42개 압축 조각과 전체 WASM/PCK 해시를 확인한 뒤 **실제 대한문 도시·한글 HUD·완전한 Esc 메뉴·인체 원형 갤러리·Q 킥보드 호출 표시**를 확인했다. [선택 빌드](../data/reports/web_sites/20261025/attempt04/build.json)·[PCK 검사](../data/reports/web_sites/20261025/attempt04/pack_integrity.json)·[실제 실행 로그](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)·[도시 화면](../data/reports/web_sites/20261025/local_final_world_complete.jpg)·[메뉴 화면](../data/reports/web_sites/20261025/local_final_menu_complete.jpg)을 구분한다.
+
+**Sites 배포 성공**: [Sim2Seoul 실행](https://sim2seoul-play-20261025-e7d4.rocky-lily-7307.chatgpt.site). [게시 결과](../data/reports/web_sites/20261025/deployment.json)의 실제 terminal `succeeded`와 URL을 확인했다. 소유자 전용이며 공개 범위는 변경하지 않았다. 배포 주소에서 ChatGPT 로그인 화면까지 확인했으나 브라우저 로그인 세션이 없어 **인증 후 배포본 게임 시작은 미확인**이다. 같은 정적 파일의 실제 로컬 게임 시작과 구분한다. 다음 수용은 소유자 로그인 후 배포본 지속 이동·음향·저장 재접속 확인이다.
+
+첫 전송은141,134,734B(약141MB), 압축 해제한 WASM39.5MB/PCK307.4MB다. PC 키보드·마우스와 WebGL2가 대상이다. 지속 보행/탑승 조작·실제 청취 음향·저장 후 재접속·모바일·장시간 성능은 수용하지 않았다. 이번 Web 결과가 native 전체 회귀나 캐릭터 실사/동작 미술 검증을 대신하지 않는다. 캐시·export 바이너리·Site 소스 체크아웃·자격 증명은 main Git에 포함하지 않는다. 실패와 수정은 [EXP38 실행 이력](EXECUTION_LOG.md#exp38--실제-게임-web-내보내기와-sites-배포--2026-10-25)을 따른다.
 
 ## 2026-10-25 EXP37 — 얼굴·겨드랑이·골반 접합과 부위 확대
 

@@ -1,0 +1,6 @@
+{
+  "observed": "Actual browser downloaded and verified42/42 chunks then failed RangeError Invalid string length before Godot output.",
+  "diagnosis": "Official Engine.preloadFile looks up fileSizes[file]; passing a307MB Uint8Array coerces numeric data to a giant string. Pass the documented ArrayBuffer rather than Uint8Array.",
+  "changed": "tools/web/site/game-loader.js uses pck.buffer.buffer; real browser rerun required.",
+  "engine_or_art_test_relaxed": false
+}

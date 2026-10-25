@@ -2,6 +2,7 @@ extends Node3D
 ## Stylized background exteriors, not surveyed facades or factual shopfronts.
 ## Only material overrides change. Source vertices, bodies and landmarks stay intact.
 const FACADE_SHADER: Shader = preload("res://shaders/city_facade.gdshader")
+const WEB_FACADE_SHADER: Shader = preload("res://shaders/city_facade_web.gdshader")
 const WALL_COLORS := [
 	Color(0.73, 0.72, 0.67), Color(0.64, 0.67, 0.67),
 	Color(0.77, 0.74, 0.67), Color(0.61, 0.60, 0.57),
@@ -14,6 +15,7 @@ var material_count := 0
 var load_error := ""
 var loaded := false
 var _materials := {}
+var _web_materials: Array[ShaderMaterial] = []
 var _city: Node3D
 var identity_profiles: Dictionary={}
 
@@ -66,21 +68,33 @@ func setup(city: Node3D) -> bool:
 		var cache_key := palette_index * 4 + style
 		if not _materials.has(cache_key):
 			_materials[cache_key] = _make_material(palette_index, style)
-		source.material_override = _materials[cache_key]
+		if OS.has_feature("web"):
+			# GLES3 reserves sixteen UBO slots per instance, even for two values.
+			# Own one ordinary-uniform material per building, retaining its seed.
+			var own: ShaderMaterial = (_materials[cache_key] as ShaderMaterial).duplicate()
+			_web_materials.append(own)
+			source.material_override = own
+			source.set_meta("web_facade_uniforms",true)
+		else:
+			source.material_override = _materials[cache_key]
 		var base_y: float = source.to_global(Vector3(0.0, target.bottom, 0.0)).y
 		var top_y: float = source.to_global(Vector3(0.0, target.top, 0.0)).y
-		source.set_instance_shader_parameter("height_limits_m", Vector2(base_y, top_y))
-		source.set_instance_shader_parameter("facade_seed", float(seed % 997))
+		if OS.has_feature("web"):
+			(source.material_override as ShaderMaterial).set_shader_parameter("height_limits_m", Vector2(base_y,top_y))
+			(source.material_override as ShaderMaterial).set_shader_parameter("facade_seed", float(seed % 997))
+		else:
+			source.set_instance_shader_parameter("height_limits_m", Vector2(base_y, top_y))
+			source.set_instance_shader_parameter("facade_seed", float(seed % 997))
 		source.set_meta("v0_stylized_facade", true)
 		source.set_meta("v0_facade_structural_style",style)
 		building_count += 1
-	material_count = _materials.size()
+	material_count = _materials.size()+_web_materials.size()
 	loaded = true
 	return true
 
 func _make_material(palette_index: int, style: int) -> ShaderMaterial:
 	var material := ShaderMaterial.new()
-	material.shader = FACADE_SHADER
+	material.shader = WEB_FACADE_SHADER if OS.has_feature("web") else FACADE_SHADER
 	material.set_shader_parameter("wall_tint", WALL_COLORS[palette_index])
 	material.set_shader_parameter("glass_tint", Color(0.16,0.27,0.31) if style>=2 else Color(0.21,0.27,0.28))
 	material.set_shader_parameter("floor_height_m", [3.0,3.25,3.7,4.05][style])
@@ -98,7 +112,7 @@ func set_identity_profile(id: String,profile: String,wall_color: Color) -> bool:
 		_materials[key]=material
 	source.material_override=_materials[key]
 	source.set_meta("v0_facade_identity_profile",profile);identity_profiles[id]=profile
-	material_count=_materials.size()
+	material_count=_materials.size()+_web_materials.size()
 	return true
 
 func _number(value: Variant) -> bool:

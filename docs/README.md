@@ -1,5 +1,11 @@
 # Sim2Seoul 문서 안내
 
+## EXP38 — Web/Sites 체험 경로
+
+기존 도시 탐험 게임의 단일 스레드 WebGL2 버전을 만들고 실제 로컬 브라우저에서 대한문 도시·한국어·메뉴·원형 갤러리·Q 호출 표시를 확인했다. Site 게시 상태와 실제 URL 확인은 [현재 상태](WORK_STATUS.md), 실행은 [Web 안내](RUN_GUIDE.md#exp38-web-체험과-재생성), 실패/수정은 [EXP38 이력](EXECUTION_LOG.md#exp38--실제-게임-web-내보내기와-sites-배포--2026-10-25)을 따른다. 최초 전송은 약141MB이며 PC 키보드/마우스가 대상이다. 실제 지속 주행·음향 청취·저장 재접속·모바일 수용은 미완료다.
+
+[선택 빌드](../data/reports/web_sites/20261025/attempt04/build.json)·[실제 PCK 원본213파일 검사](../data/reports/web_sites/20261025/attempt04/pack_integrity.json)·[최종 브라우저 원문](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)·[출처 고지](ATTRIBUTION.md)를 구분해 확인한다. 아래 EXP37 이하의 수치는 해당 native 소스의 과거 검사이며 Web 기능/미술 점수로 합산하지 않는다.
+
 ## EXP37 — 현재 얼굴·관절 검토 경로
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

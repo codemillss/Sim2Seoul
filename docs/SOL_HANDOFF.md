@@ -1,5 +1,15 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP38 — 현재 인수: Web/Sites 실제 게임 배포
+
+게시 완료: [실제 URL](https://sim2seoul-play-20261025-e7d4.rocky-lily-7307.chatgpt.site) · [native Sites 성공 응답](../data/reports/web_sites/20261025/deployment.json). 현재 소유자 전용이다. 배포 브라우저는 ChatGPT 로그인 게이트까지 확인했으며 인증 후 게임 시작·지속 조작이 다음 수용이다.
+
+[현재 상태](WORK_STATUS.md) → [선택 attempt04 빌드](../data/reports/web_sites/20261025/attempt04/build.json) → [Site 식별/실제 게시 상태](../data/reports/web_sites/20261025/site_identity.json)를 먼저 읽는다. 프로젝트는 `appgprj_6adda788b5208191a1d18a536bbcff80`이며 소유자 전용으로 한 번 생성했다. 새 Site를 중복 생성하거나 예상 URL만으로 게시 완료를 판단하지 않는다. 배포/원격 전송의 최종 결과는 root가 기록한다.
+
+현재 브랜치는 `codex/web-sites-20261025`, 시작 native 커밋은 `6825154`다. `tools/build_web_site.py`와 `tools/web/`가 Web 제작 소스다. `data/cache/sites/sim2seoul-web-20261025`는 별도 관리되는 Site 체크아웃이며 `.openai/hosting.json`의 동일 project_id를 유지한다. `data/cache/web-export/`·공식 export template·PCK/WASM/chunks·자격 증명은 main Git에 넣지 않는다. 원본 `game/project.godot`와 실행 중이던 Mac 게임은 유지했다.
+
+실제 로컬 브라우저에서 대한문 도시/한국어/메뉴/갤러리/Q 호출을 확인했고42조각 및 전체 해시·PCK 원본213파일 검사가 통과했다. 지속 이동 입력은 자동화 도중 메뉴가 열리는 문제로 확정하지 못했다. 이름에 walk/movement가 들어간 저장 화면을 보행 성공 증거로 해석하지 않는다. 청취 음향·저장 재접속·모바일·장시간 성능도 미검증이다. Web 시작은 사용자 클릭 이후 마우스 잠금, 캔버스는 상단 도구막대54px 아래 policy0 크기를 유지한다. 기존 native/EXP37 수치를 현재 변경의 전체 회귀 합격으로 합산하지 않는다.
+
 ## 2026-10-25 EXP37 — 현재 인수: 얼굴·관절과 확대 비교
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

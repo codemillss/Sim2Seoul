@@ -61,3 +61,11 @@ data/reports/resident_form_refinement/20261025/**/*.log -text -eol whitespace=-b
 
 # EXP37 preserves raw candidate, import and engine evidence.
 data/reports/resident_face_joints/20261025/**/*.log -text -eol whitespace=-blank-at-eof,-blank-at-eol
+
+# EXP38 preserves original export/repack/runtime evidence, including failures.
+data/reports/web_sites/20261025/**/*.log -text -eol whitespace=-blank-at-eof,-blank-at-eol
+
+# EXP38 retains upstream license bytes and their original whitespace.
+game/assets/fonts/OFL.txt -text -eol whitespace=-blank-at-eof,-blank-at-eol
+game/resources/legal/*.txt -text -eol whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+game/resources/legal/MAKEHUMAN_LICENSE_SCOPE.txt -diff -merge

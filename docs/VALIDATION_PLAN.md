@@ -1,5 +1,20 @@
 # 검증 계획과 완료 판정
 
+## EXP38 — 실제 Web 게임과 배포 완료 판정 (2026-10-25)
+
+| 판정 | 현재 증거와 범위 |
+|---|---|
+| 공식 template | [취득/체크섬](../data/reports/web_sites/20261025/export_templates.json)의 동일4.7.2 원본 |
+| import·export·repack·실제 PCK 읽기 | 선택 attempt04 각 exit0·ERROR0; PCK 원본213파일 SHA 일치, 한글 FontFile 존재 |
+| 브라우저 자원/화면 | 실제42조각+전체 WASM/PCK SHA 검증 뒤 EXPLORATION_READY; 대한문 도시·한국어 HUD·전체 Esc 메뉴·갤러리 표시 |
+| 실제 입력 | 메뉴/갤러리 선택과 Q 호출 표시 확인. 지속 보행/탑승 성공은 확정하지 않음 |
+| 사이트 게시 | terminal succeeded와 실제 URL, 해당 URL에서 게임 시작을 별도로 확인해야 완료 |
+| 미수용 | 음향 실제 청취·저장 후 재접속·모바일·장시간 성능·캐릭터 실사/연속 동작 미술 |
+
+PCK 원본213파일 합격은 원본 바이트 보존 검사다. 도로/동작/시설213종의 기능 검사로 표현하지 않는다. runtime 로그의 음향 준비 표시는 실제 청취 증거가 아니며, `walk`/`movement` 파일명만으로 지속 보행 성공을 판정하지 않는다. [선택 build](../data/reports/web_sites/20261025/attempt04/build.json), [PCK 판정](../data/reports/web_sites/20261025/attempt04/pack_integrity.json), [실제 브라우저 로그](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)와 원본 화면을 함께 사용한다.
+
+최종 캔버스는1280×800 PC 화면에서 상단54px를 제외한1280×746로 표시되며 도구막대가 게임 메뉴를 가리지 않는 것을 확인했다. Web 변경이 포함된 native 전체 회귀는 이번에 새로 수행하지 않았다. 아래 EXP37 수치는 당시 동결 소스의 결과로 유지한다.
+
 ## EXP37 — 얼굴·관절 확대의 공정한 비교 (2026-10-25)
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

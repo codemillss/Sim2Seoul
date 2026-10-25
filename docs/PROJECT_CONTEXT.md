@@ -1,5 +1,13 @@
 # 프로젝트 맥락과 결정
 
+## 2026-10-25 EXP38 — 설치 없이 현재 도시를 체험하는 배포 경로
+
+사용자가 현재 게임을 ChatGPT 웹사이트로 배포하도록 요청했다. 기존 탐험 도시 전체를 Web 대상으로 내보내고, 소개/실행/출처 화면을 갖춘 Sites 프로젝트로 게시한다. 모형이나 소개 영상으로 기능을 대신하지 않는다. 사이트는 소유자 전용 기본 범위를 유지하며 공개 공유 변경은 이번 요청 범위에 포함하지 않았다. 현재 게시 여부와 실제 URL 검증은 [WORK_STATUS](WORK_STATUS.md)를 따른다.
+
+native의 Forward+ 설정과 기존 실행 창은 유지한다. 별도 프로젝트 복사본만 Compatibility·단일 스레드 WebGL2로 전환한다. GLES3의 instance-uniform 할당 한계는 Web 전용 보통 uniform 재질로 대응하고, 경찰청의 원본 SHA 입력3개는 Web PCK 내부로 복사한다. 실제 외형·시설·지형 투영 자원을 보존하며 필요 없는 과거 외부 인체 리그만 Web 산출물에서 제외한다. 한국어는 OFL Noto Sans KR을 동봉한다.
+
+Web 최초 전송 약141MB와 메모리 부담, PC 키보드/마우스 입력을 현재 기본안으로 삼는다. 모바일 지원·지속 주행·실제 청취·저장 지속성·장시간 성능은 후속 검증 대상이다. Web 기술 대응과 배포가 기존 인체 미술의 실사 수용을 의미하지 않는다. [검증 기준](VALIDATION_PLAN.md)·[실행 이력](EXECUTION_LOG.md)을 함께 확인한다.
+
 ## 2026-10-25 EXP37 — 얼굴과 관절을 실제로 가까이 비교
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

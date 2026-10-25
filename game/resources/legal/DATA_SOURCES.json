@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "purpose": "Public offer and file identifiers for geographic source data and reproducible modifications; not a whole-project licence.",
+  "repository": "https://github.com/codemillss/Sim2Seoul",
+  "free_machine_readable_archive": "https://github.com/codemillss/Sim2Seoul/archive/refs/heads/main.zip",
+  "version_note": "main is mutable. Compare the SHA-256 values below and the deployment version record; this bundle does not claim a fixed repository commit.",
+  "sources": [
+    {
+      "id": "openstreetmap",
+      "provider": "OpenStreetMap contributors via Geofabrik",
+      "license": "ODbL-1.0",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "source_url": "https://download.geofabrik.de/asia/south-korea.html",
+      "timestamp": "2026-10-09T20:21:04Z",
+      "files": [
+        {
+          "path": "data/raw/deoksugung_cityhall-v2.osm.pbf",
+          "bytes": 188346,
+          "sha256": "a3079892dc8249697f1eed506c37c404a0bd98258da35b2e465b1e5ec2999cea",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/deoksugung_cityhall-v2.osm.pbf"
+        }
+      ],
+      "modifications": [
+        "Regional extraction",
+        "EPSG:32652 and fixed local-origin transform",
+        "Footprint/road/barrier classification and cleanup",
+        "Estimated widths/heights, paths/supports and authored visual geometry"
+      ]
+    },
+    {
+      "id": "overture",
+      "provider": "OpenStreetMap contributors, Overture Maps Foundation",
+      "license": "ODbL-1.0; preserve upstream CC-BY-4.0 attribution",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "source_url": "https://docs.overturemaps.org/attribution/",
+      "release": "2026-09-23.1",
+      "upstream_credit": {
+        "author": "Qian Shi et al.",
+        "title": "A First High-quality Vector Data of Buildings in East Asian Countries Based on a Comprehensive Large-scale Mapping Framework",
+        "date": "2023-07-22",
+        "doi": "10.5281/zenodo.8174931",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "files": [
+        {
+          "path": "data/raw/supplemental/overture/2026-09-23.1/buildings.geojson",
+          "bytes": 497524,
+          "sha256": "a2fde8f851624b70b0759dea913a45f47797dac96d5f1361a171fd58d666d6e4",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/overture/2026-09-23.1/buildings.geojson"
+        }
+      ],
+      "modifications": [
+        "Regional query and intersection classification",
+        "Coordinate transformation and visual simplification; source attribution retained"
+      ]
+    },
+    {
+      "id": "seoul_terrain",
+      "provider": "서울특별시 도시공간본부 도시계획상임기획과",
+      "title": "서울시 경사도 — 표고점·등고선",
+      "license": "KOGL-Type-1",
+      "license_url": "https://www.kogl.or.kr/info/licenseType1.do",
+      "source_url": "https://data.seoul.go.kr/dataList/OA-22241/F/1/datasetView.do",
+      "file_modified": "2025-03-20",
+      "source_description": "국토지리정보원 2023년 기준 수치지형도",
+      "files": [
+        {
+          "path": "data/raw/supplemental/seoul_terrain/20261018/contours_wgs84.geojson",
+          "bytes": 600825,
+          "sha256": "4f7bfc7fb008312dde8e825267fdd8099956fff8cc025baa11578ae7ff5572dc",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/seoul_terrain/20261018/contours_wgs84.geojson"
+        },
+        {
+          "path": "data/raw/supplemental/seoul_terrain/20261018/spot_heights_wgs84.geojson",
+          "bytes": 104483,
+          "sha256": "426f3e42d8a6a73e5e236116d73417dc97622a9363b718038d25ad6185274815",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/seoul_terrain/20261018/spot_heights_wgs84.geojson"
+        },
+        {
+          "path": "data/raw/supplemental/seoul_terrain/20261018/terrain_source_controls_local.json",
+          "bytes": 701173,
+          "sha256": "61ba9af516bf52704440a58c2e9beb9a806e93a955d2ea79bdac27602f8a8f4c",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/seoul_terrain/20261018/terrain_source_controls_local.json"
+        },
+        {
+          "path": "data/raw/supplemental/seoul_terrain/20261018/manifest.json",
+          "bytes": 6975,
+          "sha256": "0fa3873f3e12e39222ed8b570b8acfb7d6e927c70ed6bbdcd58e5a1ad4e69136",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/seoul_terrain/20261018/manifest.json"
+        },
+        {
+          "path": "data/raw/supplemental/seoul_terrain/20261018/source_license.json",
+          "bytes": 1934,
+          "sha256": "07af8dda880ea509e440f21c4cfff756e9af09e546153fa3f7eccf5f30099895",
+          "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/raw/supplemental/seoul_terrain/20261018/source_license.json"
+        }
+      ],
+      "modifications": [
+        "Clip to current region and 200m surroundings",
+        "EPSG:5174 to EPSG:32652/fixed game origin",
+        "Interpolation and game building-foundation transitions; not a measured DEM or established vertical datum"
+      ]
+    }
+  ],
+  "alteration_entry_points": [
+    {
+      "path": "config/region.json",
+      "bytes": 949,
+      "sha256": "4d246ebdca18a80882d7d4587881516fe275fb8c85a0d748a2f0d0d798282834",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/config/region.json"
+    },
+    {
+      "path": "config/height_rules.json",
+      "bytes": 2072,
+      "sha256": "84d219530c8f8596415395b9f20044e4129b61ab1896b09837f9f7a526b0326d",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/config/height_rules.json"
+    },
+    {
+      "path": "config/movement_rules.json",
+      "bytes": 1734,
+      "sha256": "f405642fdc95dfd8edeba2dee71edf351229d5fb2457417ca4b725e81f37e488",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/config/movement_rules.json"
+    },
+    {
+      "path": "tools/prepare_osm.py",
+      "bytes": 12381,
+      "sha256": "983a5a67b3ef4d82b6168308744a75e6c1520fe777ab3eef31677d3a542b6a9a",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_osm.py"
+    },
+    {
+      "path": "tools/prepare_features.py",
+      "bytes": 21773,
+      "sha256": "58d3769759074befd119811a168fec980deb99bb47fcaa2d582919a77b9b13d5",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_features.py"
+    },
+    {
+      "path": "tools/prepare_heights.py",
+      "bytes": 13738,
+      "sha256": "1f3bcb545bdd08cd21bd6ec5c3808078ede707c86a644fe2df34fc23d02ec2de",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_heights.py"
+    },
+    {
+      "path": "tools/prepare_movement.py",
+      "bytes": 17738,
+      "sha256": "bd9ba5e7834c980f964dc1e006ebd300e0c51c6bc95ca3e1250bf87d4b656cbf",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_movement.py"
+    },
+    {
+      "path": "tools/prepare_world.py",
+      "bytes": 15755,
+      "sha256": "00c80264c2b34fd3debce146c709d615e6098b62e452929f078487eed174e60b",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_world.py"
+    },
+    {
+      "path": "tools/prepare_game_data.py",
+      "bytes": 5230,
+      "sha256": "15fcc576b2c46aa08cad615731ffe97490378aeb6dcb652fd46e1e65ad7c8a43",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_game_data.py"
+    },
+    {
+      "path": "tools/prepare_seoul_terrain_sources.py",
+      "bytes": 17668,
+      "sha256": "74b0102422860ee650e0673d750b66fdd63b1a693e031842089e1640d0cfa0d8",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_seoul_terrain_sources.py"
+    },
+    {
+      "path": "tools/prepare_local_terrain.py",
+      "bytes": 1453,
+      "sha256": "74442a6dba6535371957e408559d2a45cac2ca356a36bc3683abfb0a52924d1f",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_local_terrain.py"
+    },
+    {
+      "path": "tools/prepare_terrain_surface.py",
+      "bytes": 7233,
+      "sha256": "c02ca20940ae42dac65636991c01c790126e1b42659d890a94ec8ba19ac1f8b0",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_terrain_surface.py"
+    },
+    {
+      "path": "tools/prepare_runtime_terrain.py",
+      "bytes": 31310,
+      "sha256": "cdc75eff13db186f0cd41b246b144de88c2651f1420cb9878982ffde2a48c98c",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/tools/prepare_runtime_terrain.py"
+    }
+  ],
+  "manual_adjustments": [
+    {
+      "path": "data/manual/daehanmun_connection.json",
+      "bytes": 1608,
+      "sha256": "f30d7702b187b2670959d9bae90132e5ebc28bb9bbff93c5ce4876f08cd44b05",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/daehanmun_connection.json"
+    },
+    {
+      "path": "data/manual/escalator_gym_design.json",
+      "bytes": 2386,
+      "sha256": "28884785fc6e31822c0493c94e1876be8d2cffc0e05c4e91f143141720d20de4",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/escalator_gym_design.json"
+    },
+    {
+      "path": "data/manual/exploration_motion_design.json",
+      "bytes": 2058,
+      "sha256": "d6cf0d2150361ba640cc169f93ec8b0f5c6ebc8d2cd3dad4973c01fdc40f0425",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/exploration_motion_design.json"
+    },
+    {
+      "path": "data/manual/facility_interactions_design.json",
+      "bytes": 3143,
+      "sha256": "3ad77c10b4ee022e1b717c9b9faf30f720794ddd8bf194e16196e1704119f7af",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/facility_interactions_design.json"
+    },
+    {
+      "path": "data/manual/height_review_decisions.json",
+      "bytes": 1476,
+      "sha256": "901b8569c6d52f5d306afe4561d778a4b37b6268b998be9cac910fa27be57cb4",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/height_review_decisions.json"
+    },
+    {
+      "path": "data/manual/interior_facilities_design.json",
+      "bytes": 2262,
+      "sha256": "44ffc05579afcb0db37f799a7635cc5916bd478371511f44e7a1bffb8220b105",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/interior_facilities_design.json"
+    },
+    {
+      "path": "data/manual/interior_identity_references.json",
+      "bytes": 7525,
+      "sha256": "b247383b36f5981ee4375c2ebfec23601f0830603aa64ab993fd0da5a6f146d5",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/interior_identity_references.json"
+    },
+    {
+      "path": "data/manual/l03_city_decisions.json",
+      "bytes": 3241,
+      "sha256": "8ea2731adfd9dc849b6e5c4e3eec39c1a7adf36a8ed2b8ffd33991ca91b318eb",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/l03_city_decisions.json"
+    },
+    {
+      "path": "data/manual/landmark_plan.json",
+      "bytes": 15692,
+      "sha256": "d24e3212cfb9af453e080541c80c957c0779e4894edac29eb8fb92aa824b09b7",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/landmark_plan.json"
+    },
+    {
+      "path": "data/manual/landmark_references.json",
+      "bytes": 11275,
+      "sha256": "fd55296369d1ef115334555ab6f2f57cbcbd53d8cda8afe589f8308a38660b9e",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/landmark_references.json"
+    },
+    {
+      "path": "data/manual/landmark_review_plan.json",
+      "bytes": 8297,
+      "sha256": "a976b32d76904abd3204c79a0d422d95b2579b548d62f1d2850ab12824994cf0",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/landmark_review_plan.json"
+    },
+    {
+      "path": "data/manual/movement_review.json",
+      "bytes": 3398,
+      "sha256": "5c0034c82d3b238f68490e7b9ce29a0e67d897803e06d272abd6b9a696a47758",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/movement_review.json"
+    },
+    {
+      "path": "data/manual/neighborhood_life_design.json",
+      "bytes": 2129,
+      "sha256": "17bf2ee1091b030d1d5e8f33c47a4210227051895e436c7881fe78f57ec591cc",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/neighborhood_life_design.json"
+    },
+    {
+      "path": "data/manual/palace_walk.json",
+      "bytes": 1465,
+      "sha256": "462a9cd337b392f52232a466afb5f157978a91309a1a7425d78bf22481e0e553",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/palace_walk.json"
+    },
+    {
+      "path": "data/manual/photo_realism_references.json",
+      "bytes": 4932,
+      "sha256": "a275a6cfcd22c4eddd2344d717471a6651dc105ef3ddf09c8195e7193a0f16c3",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/photo_realism_references.json"
+    },
+    {
+      "path": "data/manual/public_walk.json",
+      "bytes": 2749,
+      "sha256": "e046507e7541eafb57f187da5fb45bde7bf61e581d60f84e7789384b7185f73c",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/public_walk.json"
+    },
+    {
+      "path": "data/manual/review_queue.json",
+      "bytes": 15162,
+      "sha256": "47a2325d85754188ec74f3c7f0675046adbaec4b16f9b044da5f635d8b84f2b9",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/review_queue.json"
+    },
+    {
+      "path": "data/manual/rooftop_design.json",
+      "bytes": 8550,
+      "sha256": "640ec2e427c74cea0809925225984c0e05abf99b7c53f591f5ab16f79257a924",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/rooftop_design.json"
+    },
+    {
+      "path": "data/manual/stable_motion_design.json",
+      "bytes": 1730,
+      "sha256": "37349318e991d6971efcfc552d1e53d116cce4cfe4f7e369e57b48625d5a31e5",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/stable_motion_design.json"
+    },
+    {
+      "path": "data/manual/urban_routes.json",
+      "bytes": 3934,
+      "sha256": "10b38711fde0d7fe71db9eba644896668a1316fb37679b0b7d5f2497fe6344e4",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/urban_routes.json"
+    },
+    {
+      "path": "data/manual/walkable_milestone.json",
+      "bytes": 2287,
+      "sha256": "d8c1a7e62af0f46b7da77238f6a128b067691df8e92cad30f8f2d0c35185bced",
+      "raw_url": "https://raw.githubusercontent.com/codemillss/Sim2Seoul/main/data/manual/walkable_milestone.json"
+    }
+  ],
+  "additional_reproduction_paths": {
+    "all_preparation_tools": "https://github.com/codemillss/Sim2Seoul/tree/main/tools",
+    "all_config": "https://github.com/codemillss/Sim2Seoul/tree/main/config",
+    "manual_inputs": "https://github.com/codemillss/Sim2Seoul/tree/main/data/manual",
+    "data_manifests": "https://github.com/codemillss/Sim2Seoul/tree/main/data/reports",
+    "runtime_generator_entry": "tools/run_exploration.sh"
+  },
+  "notes": [
+    "Geographic database notices and conditions are retained; no whole-project ODbL/MIT/CC0 declaration.",
+    "Copernicus DSM is a non-runtime reference and is not bundled with the game.",
+    "Preserve the public data/method offer with the deployed Produced Work."
+  ]
+}

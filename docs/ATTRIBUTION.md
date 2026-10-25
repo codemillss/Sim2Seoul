@@ -1,3 +1,11 @@
+## EXP38 Web 배포 폰트·실행 고지 · 2026-10-25
+
+Web 한국어 표시에 **Noto Sans KR** 원본 variable font를 동봉한다. [Google Fonts 공식 원본](https://github.com/google/fonts/tree/main/ofl/notosanskr)에서 받은 [폰트](../game/assets/fonts/NotoSansKR.ttf)와 [SIL Open Font License1.1 원문](../game/assets/fonts/OFL.txt)을 함께 보존하며 원본 폰트를 변형하지 않았다. 파일 SHA와 취득 URL은 [배포 고지 manifest](../game/resources/legal/BUNDLE_MANIFEST.json)에 있다. 폰트 조건은 프로젝트 코드/지도 전체의 라이선스를 대신하지 않는다.
+
+[실행 고지15파일](../game/resources/legal/)은 Godot4.7.2 MIT/third-party, Noto OFL, OSM/Overture ODbL 출처·공식 전문 링크, 지역 지형 공공누리1유형과 현재 자산별 조건/변경 범위를 연결한다. 이 파일들을 게임 출처 메뉴와 웹 출처 화면에 포함한다. ODbL은 전체 전문을 취득한 것으로 표현하지 않고 공식 URI 고지를 제공한다. [자료별 제공/변경 범위](../game/resources/legal/DATA_SOURCES.json)는 소스 저장소와 지역 자료 경로를 가리킨다.
+
+Web PCK는 사용 중인 자체 캐릭터·원형·Kenney 건물을 포함하고, 더 이상 활성 모델로 읽지 않는 과거 Rocketbox/MakeHuman 원본 리그는 제외한다. 저장소의 이전 공급자 고지는 역사 재현 범위로 보존한다. 사이트 출처 고지가 실제 기능·실사 품질·전체 재배포 법률 검토의 수용 증명서는 아니다. 공식 export template의 실제 취득/체크섬은 [이번 기록](../data/reports/web_sites/20261025/export_templates.json)을 따른다.
+
 ## EXP37 얼굴·관절 검토 원형 · 2026-10-25
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

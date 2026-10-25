@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111a21">
+  <title>서울에서 시작하기 — Sim2Seoul</title>
+  <link rel="stylesheet" href="site.css">
+  <script src="game-loader.js" defer></script>
+</head>
+<body class="play-page">
+  <main class="game-shell" id="gameShell" data-game-state="idle" aria-label="Sim2Seoul 게임">
+    <canvas id="gameCanvas" tabindex="0" aria-label="서울 3D 탐험. 키보드 WASD 이동, 마우스 시야, E 이용, Esc 메뉴.">이 게임은 WebGL 2를 지원하는 브라우저가 필요합니다.</canvas>
+    <header class="play-toolbar">
+      <a class="play-brand" href="index.html" aria-label="소개로 돌아가기">Sim2Seoul<span class="brand-dot" aria-hidden="true"></span></a>
+      <span class="toolbar-location">시청 · 덕수궁</span>
+      <div class="toolbar-actions"><button type="button" id="helpButton" aria-expanded="false" aria-controls="playHelp">조작 안내</button><button type="button" id="fullscreenButton">전체 화면</button><button type="button" id="reloadButton">다시 실행</button><a href="index.html">소개로 <span aria-hidden="true">↗</span></a></div>
+    </header>
+    <aside class="play-help" id="playHelp" hidden>
+      <h2>거리에서 사용하는 키</h2>
+      <dl><div><dt>WASD · 마우스</dt><dd>이동 · 시야</dd></div><div><dt>Shift · Space</dt><dd>달리기 · 점프</dd></div><div><dt>E · V</dt><dd>이용/탑승 · 시점</dd></div><div><dt>Q · Esc</dt><dd>킥보드 호출 · 게임 메뉴</dd></div></dl>
+      <p>화면을 클릭해 키보드 입력을 게임으로 옮기세요. 브라우저의 Esc는 마우스 잠금을 먼저 풀 수 있습니다. 게임 메뉴가 열리지 않으면 한 번 더 누르세요.</p>
+      <a href="legal/index.html" target="_blank" rel="noopener noreferrer">자료 출처 · 이용 조건 ↗</a>
+    </aside>
+    <div class="loading-overlay" id="loadingOverlay">
+      <section class="loading-card" aria-labelledby="loadingTitle">
+        <p class="eyebrow">YOUR NEXT STEP IS SEOUL</p>
+        <div class="loading-symbol" aria-hidden="true"><span>S</span><span class="loading-spinner" id="loadingSpinner" hidden></span></div>
+        <h1 id="loadingTitle">서울에서 만나요.</h1>
+        <p id="loadingDescription">실제 3D 도시를 브라우저에 준비합니다.<br>첫 실행은 자료를 내려받아 조금 걸릴 수 있습니다.</p>
+        <p class="device-notice">PC 키보드와 마우스를 권장합니다. 모바일용 터치 조작은 제공하지 않습니다.</p>
+        <button class="button button-primary start-button" id="startButton" type="button">도시 시작하기 <span aria-hidden="true">↗</span></button>
+        <div class="download-panel" id="downloadPanel" hidden>
+          <div class="progress-label"><strong id="phaseLabel">준비 중</strong><span id="progressPercent">0%</span></div>
+          <progress id="downloadProgress" max="1" value="0" aria-label="게임 자료 다운로드 진행률"></progress>
+          <div class="progress-detail"><span id="downloadBytes">자료 크기 확인 중</span><span id="verifyCount"></span></div>
+          <p class="load-hint" id="loadHint">이 탭을 열어 두세요. 준비가 끝나면 도시가 나타납니다.</p>
+        </div>
+        <section class="load-error" id="errorPanel" role="alert" hidden>
+          <h2 id="errorTitle">도시를 열지 못했습니다.</h2><p id="errorMessage"></p><p id="errorAdvice"></p>
+          <button type="button" class="button button-primary" id="retryButton">다시 시도하기</button>
+          <a class="quiet-link" href="index.html">소개로 돌아가기</a>
+        </section>
+        <details class="load-debug" id="debugPanel"><summary>실행 정보</summary><p id="buildInfo">게임 빌드를 아직 불러오지 않았습니다.</p><pre id="debugLog" aria-label="최근 게임 실행 메시지"></pre></details>
+        <p class="loading-footer">WASD 이동 <span>·</span> E 이용 <span>·</span> Esc 게임 메뉴</p>
+      </section>
+    </div>
+    <p class="game-status" id="gameStatus" role="status" aria-live="polite">시작 버튼을 누르면 게임 자료를 불러옵니다.</p>
+  </main>
+</body>
+</html>

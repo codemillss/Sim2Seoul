@@ -1,5 +1,19 @@
 # Sim2Seoul 개인용 앱 실행 안내
 
+## EXP38 Web 체험과 재생성
+
+현재 사이트의 실제 게시 여부와 주소는 [현재 상태](WORK_STATUS.md) 및 [Site 게시 기록](../data/reports/web_sites/20261025/site_identity.json)을 따른다. 소유자 전용으로 생성한 Site이며 공개 공유 범위는 변경하지 않았다. [배포된 Sim2Seoul](https://sim2seoul-play-20261025-e7d4.rocky-lily-7307.chatgpt.site)에서 소유자 ChatGPT 계정으로 로그인하고 플레이 버튼을 누른다. 현재 자동 브라우저에서는 로그인 화면까지 확인했으며 인증 후 배포본 게임 시작은 아직 수용하지 않았다.
+
+PC 키보드·마우스와 WebGL2 지원 브라우저가 대상이다. 소개 화면에서 게임 실행으로 들어가 시작 버튼을 누른다. 첫 실행은 약141MB를 받으므로 로딩 상태를 기다린다. 준비 뒤 게임 화면을 클릭하면 마우스 시점 조작을 시작한다. **WASD** 이동·**Shift** 달리기·**Space** 점프·**E** 가까운 상호작용·**Q** 킥보드 호출·**Esc** 메뉴를 사용하며, 실제 기능은 화면의 안내도 따른다. 전체 화면/도움말은 위쪽 도구막대에 있다. 지속 보행/탑승·청취 음향·재접속 저장은 이번 브라우저 수용을 마치지 않았다. 모바일 터치 조작은 제공하지 않는다.
+
+선택 Web 산출물을 다시 만들 때는 같은4.7.2 공식 engine/template과 로컬 runtime 데이터 준비를 먼저 확인한다. 다음 명령은 캐시에 별도 프로젝트와 정적 Site 파일을 만들며 native 설정을 고치지 않는다. 태그는 이전 증거를 덮어쓰지 않도록 매번 새 값으로 고른다.
+
+```sh
+python3 tools/build_web_site.py --site data/cache/sites/sim2seoul-web-20261025 --tag attempt05
+```
+
+`tools/web/site/`는 소개/게임 실행 화면, `tools/web/repack_raw.gd`는 FileAccess용 raw 자산 보존, `tests/game/check_web_pack.gd`는 실제 PCK 읽기 검사다. 빌드 뒤 실제 브라우저의 도시 표시·입력과 게시 URL을 따로 검증한다. `data/cache/`와 바이너리·압축 조각·자격 증명은 main Git에 추가하지 않는다. 현재 [attempt04 빌드](../data/reports/web_sites/20261025/attempt04/build.json)와 [실제 로그](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)를 참고한다. 아래는 Mac 실행/이전 버전 안내다.
+
 ## EXP37 현재 원형 — 얼굴·어깨·골반 확대
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

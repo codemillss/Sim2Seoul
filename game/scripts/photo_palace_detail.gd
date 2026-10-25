@@ -233,6 +233,7 @@ func _add_nameboard(item: Dictionary, eave: float) -> void:
 	label.text = "大漢門"
 	var font := SystemFont.new()
 	font.font_names = PackedStringArray(["Songti SC", "Songti TC", "Hiragino Mincho ProN", "Noto Serif CJK SC", "serif"])
+	if OS.has_feature("web"): font.fallbacks = [load("res://assets/fonts/NotoSansKR.ttf")]
 	label.font = font
 	label.font_size = 72
 	label.pixel_size = 0.0075

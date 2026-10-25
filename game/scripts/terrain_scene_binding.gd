@@ -30,8 +30,13 @@ func _visit(node: Node) -> void:
 		if is_finite(base):
 			_rigid(node,base)
 			if node is MeshInstance3D:
-				var limits: Variant=node.get_instance_shader_parameter("height_limits_m")
-				if limits is Vector2:node.set_instance_shader_parameter("height_limits_m",limits+Vector2(base,base))
+				if OS.has_feature("web") and node.get_meta("web_facade_uniforms",false) and node.material_override is ShaderMaterial:
+					var material:=node.material_override as ShaderMaterial
+					var limits:Variant=material.get_shader_parameter("height_limits_m")
+					if limits is Vector2:material.set_shader_parameter("height_limits_m",limits+Vector2(base,base))
+				else:
+					var limits: Variant=node.get_instance_shader_parameter("height_limits_m")
+					if limits is Vector2:node.set_instance_shader_parameter("height_limits_m",limits+Vector2(base,base))
 			return
 		if node.get_meta("authored_game_placement",false):
 			_rigid(node,terrain.ground_y_world(node.global_position));return

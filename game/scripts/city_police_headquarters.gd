@@ -21,7 +21,7 @@ func setup(scene: Node3D,controller: Node3D) -> bool:
 	if not raw is Dictionary:load_error="게임 경찰청사 자료가 없습니다.";return false
 	design=raw
 	for path: String in design.source_inputs:
-		if FileAccess.get_sha256("res://../"+path)!=design.source_inputs[path]:load_error="게임 경찰청사 원본 부지 자료가 바뀌었습니다.";return false
+		if FileAccess.get_sha256(("res://web_source/" if OS.has_feature("web") else "res://../")+path)!=design.source_inputs[path]:load_error="게임 경찰청사 원본 부지 자료가 바뀌었습니다.";return false
 	_materials={"stone":_mat(Color(.76,.78,.76)),"white":_mat(Color(.91,.93,.92)),"blue":_mat(Color(.025,.16,.39)),"cyan":_mat(Color(.05,.42,.66)),"metal":_mat(Color(.31,.37,.40)),"glass":_mat(Color(.09,.24,.32)),"black":_mat(Color(.04,.06,.08)),"wood":_mat(Color(.43,.30,.18)),"paper":_mat(Color(.95,.93,.87)),"gold":_mat(Color(.87,.69,.26))}
 	if not _preflight_site():return false
 	facade=Node3D.new();facade.name="FictionalFullScalePoliceCampus";add_child(facade);facade.global_position=Vector3(design.center_xz[0],foundation_y,design.center_xz[1]);outward=Vector3.BACK

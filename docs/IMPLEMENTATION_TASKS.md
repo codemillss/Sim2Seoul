@@ -1,5 +1,18 @@
 # Sol 실행 작업 계획
 
+## EXP38 — 실제 탐험 게임의 Web/Sites 배포 (2026-10-25)
+
+- [x] 공식4.7.2 export template의 체크섬을 확인하고, 원본 native 설정을 유지한 별도 Compatibility/단일 스레드 Web 프로젝트를 만든다.
+- [x] 현재 탐험 장면·지형/모델·원본 파일 접근·한국어 폰트를 실제 PCK에 포함하고 원본213파일 SHA를 검사한다.
+- [x] GLES3 instance-uniform 문제, ArrayBuffer 전달 오류와 상단 도구막대/캔버스 겹침을 실제 브라우저 실패를 보존하며 수정한다.
+- [x] 42개 gzip 조각의 전송·복원·SHA 검증, 실제 EXPLORATION_READY를 기다리는 실행 화면, 출처15파일을 연결한다.
+- [x] 로컬 실제 도시·Esc 메뉴·인체 원형 갤러리·Q 킥보드 호출 표시를 확인한다.
+- [x] 동일 소유자 전용 Site의 terminal 배포 성공과 실제 URL·로그인 게이트를 기록한다.
+- [ ] 소유자 로그인 후 실제 배포본 게임 시작·지속 이동·음향·저장 재접속을 수용한다.
+- [ ] 지속 보행/탑승·음향 청취·저장 재접속·장시간 성능을 별도로 수용한다. 모바일 지원은 미완료다.
+
+선택 증거는 [attempt04](../data/reports/web_sites/20261025/attempt04/)이며 게시 결과와 다음 행동의 기준은 [WORK_STATUS](WORK_STATUS.md)다. 아래 EXP37 이하는 당시 소스의 기록이다.
+
 ## EXP37 — 얼굴·관절과 확대 비교 (2026-10-25)
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.

@@ -1,5 +1,17 @@
 # 단계별 실행 이력
 
+## EXP38 — 실제 게임 Web 내보내기와 Sites 배포 · 2026-10-25
+
+- 입력/범위: 시작 native `6825154`, 브랜치 `codex/web-sites-20261025`. 기존 `explore_walk.tscn` 전체를 WebGL2/Compatibility·단일 스레드로 내보낸다. [공식4.7.2 template 취득/체크섬](../data/reports/web_sites/20261025/export_templates.json)을 확인했다. native `game/project.godot`는 수정하지 않고 실행 중이던 Mac 창도 유지했다.
+- 실제 변경: 별도 캐시 프로젝트/공식 exporter, Noto Sans KR 동봉, 경찰청 SHA 입력3개를 PCK 내부 경로로 복사, Web 전용 일반 uniform 외벽 재질을 추가했다. 실제 runtime 지형 투영 `.res`4,694개와 자체 인물·원형·Kenney 건물을 보존한다. 원본 raw WAV/GLB25개를 official PCKPacker로 추가하되 선택 exporter의5,095개 기존 entry를 유지했다.
+- attempt01 실패: 최초 font import 전에 global FontFile을 설정해 exit0에도 ERROR2가 발생했다. 엄격 빌드가 거절했고 초기 import 뒤 폰트를 설정하도록 바꿨다. [원문](../data/reports/web_sites/20261025/attempt01/import.log)과 [판정](../data/reports/web_sites/20261025/attempt01/disposition.json)을 보존한다.
+- attempt02 실패: export만으로 원본 WAV/GLB25개가 PCK에서 빠져 실제 raw 검사에 실패했다. imported resource는 보존하고 FileAccess/SHA가 읽는 원본25개만 추가했다. [실패 판정](../data/reports/web_sites/20261025/attempt02/pack_integrity.json)을 현재 PASS로 바꾸지 않았다.
+- attempt03 실패:42조각을 검증한 브라우저가 `RangeError Invalid string length`로 엔진 시작 전 실패했다. `preloadFile`에 큰 Uint8Array 대신 문서의 ArrayBuffer를 전달했다. 이후 실제 GLES3에서 instance shader 변수 할당 오류를 확인해 Web만 건물별 보통 uniform 재질을 사용하고 native instance 경로를 유지했다. [ArrayBuffer 원인](../data/reports/web_sites/20261025/attempt03/browser_failure_repair.json)·[실제 shader 오류](../data/reports/web_sites/20261025/local_attempt03_shader_logs.json)를 보존했다.
+- attempt04 선택: import/export/repack/PCK 읽기 모두 exit0·ERROR0, [원본213파일 SHA·폰트 존재 PASS](../data/reports/web_sites/20261025/attempt04/pack_integrity.json). WASM39,514,754B/PCK307,439,668B를8MiB 단위42개 gzip 조각으로 전송하며 압축 전송은141,134,734B다. 브라우저는 조각·전체 SHA 뒤 실제 EXPLORATION_READY를 확인해 로딩 화면을 닫는다.
+- UI 후속 수정: Godot canvas policy2가 CSS top/height를 덮어써 메뉴를 도구막대 뒤로 가렸다. policy0와 실제 표시 크기 관찰로 바꾸고1280×800 화면에서 top54/height746의 캔버스와 전체 메뉴를 확인했다. [최종 도시](../data/reports/web_sites/20261025/local_final_world_complete.jpg)·[최종 메뉴](../data/reports/web_sites/20261025/local_final_menu_complete.jpg)·[최종 실제 로그](../data/reports/web_sites/20261025/local_final_runtime_dom.txt)를 보존한다.
+- 실제 조작/한계: Esc 메뉴·원형 갤러리·거리 복귀·Q 킥보드 호출 표시를 확인했다. 지속 이동 입력은 자동화 중 메뉴가 열려 확정하지 못했고, 이름에 walk/movement가 있는 화면은 그 자체로 주행 증거가 아니다. 음향 청취·저장 재접속·모바일·장시간 성능·native 전체 회귀는 미검증이다. 별도 인체 미술의 실사 수용도 하지 않았다.
+- 출처/게시: OFL 폰트와 [법적 고지15파일](../game/resources/legal/)을 게임/사이트에 연결했다. 새 소유자 전용 Site의 식별자를 [즉시 저장](../data/reports/web_sites/20261025/site_identity.json)했으며 자격 증명은 파일에 저장하지 않았다. Site 소스 최초 push2회는 요청 용량 제한으로 거절되어 원본을 보존하고9MiB 이하 추가분의 정상 push19단계로 업로드했다. 최종 트리는 검증한 전체 원본과 같다. [게시 결과](../data/reports/web_sites/20261025/deployment.json)는 `succeeded`이며 실제 URL을 반환했다. 배포 URL에서 로그인 게이트까지 확인했고 인증 세션 부재로 배포본 게임 시작은 확인하지 못했다. 캐시·빌드·Site 체크아웃은 main Git에서 제외한다.
+
 ## EXP37 — 얼굴·관절을 가까이 검토하는 후속 · 2026-10-25
 
 **현재 기술 검증:** final01 headless **85/85**, native **141/141**, 원본 **44 PNG(전체32·확대12)**이며 두 실행 모두 actual exit0·ERROR0·capture 오류0·source 변경0이다. [headless 원문](../data/reports/resident_face_joints/20261025/face_joints_headless_final01.json)·[native 원문](../data/reports/resident_face_joints/20261025/face_joints_native_final01.json)·[44장 직접 열람 peer 검토](../data/reports/resident_face_joints/20261025/visual_review_peer.json)를 구분한다. [root의 일반 OS 기록](../data/reports/resident_face_joints/20261025/normal_launch.json)은 실제 JPEG11장·ERROR0 로그2개·설정4파일 동일을 보존했다. 메뉴/확대/신구/자세·거리 복귀/재진입을 확인했으며, peer는 이 저장 기록을 읽기 검토했다. 복귀 도구는16.698초에 시간초과였지만 다음 실제 화면에서 거리 복귀를 확인했다. 로딩 성능 수용은 포함하지 않는다. 실사 미술·연속 동작 수용은 false다.
