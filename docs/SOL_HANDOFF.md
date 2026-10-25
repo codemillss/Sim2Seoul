@@ -1,5 +1,11 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP38 recovery01 — 현재 인수: 운영94% 로딩 복구
+
+작업 브랜치는 `codex/web-loading-recovery-20261025`, 시작 main은 `65f6f7f`다. [사건 기록](../data/reports/web_sites/20261025/recovery01/incident.json)과 [복구 결합 검사](../data/reports/web_sites/20261025/recovery01/artifact_and_browser_check.json)를 먼저 읽는다. 실제 운영 `pck-005.gz`500/40.115초 읽기 시간 초과의 근본 원인은 미확정이다. 이전42조각 성공 기록으로 현재 운영 문제를 덮지 않는다.
+
+기존 게임 WASM/PCK 바이트는 유지하고1MiB332조각/새 내용 해시 파일명으로 바꿨다. `tools/rechunk_web_site.py`는 이미 검증한 export를 재분할하며 native 재생성은 필요 없다. loader의30초 무진행·최대3시도 복구와 검증 조각 유지, 실제 JS13검사·로컬500주입→실제 도시 준비를 구분한다. [재게시 성공](../data/reports/web_sites/20261025/recovery01/deployment.json) 및 [운영332개 HTTP200·크기·개별/전체 SHA 일치](../data/reports/web_sites/20261025/recovery01/deployed_asset_check.json)를 기록했으며 중복 Site 생성이나 공유 범위 변경을 하지 않는다. 단일 플레이와 최대 동시접속 미검증을 유지한다. 아래 인수는 최초 배포 이력이다.
+
 ## 2026-10-25 EXP38 — 현재 인수: Web/Sites 실제 게임 배포
 
 게시 완료: [실제 URL](https://sim2seoul-play-20261025-e7d4.rocky-lily-7307.chatgpt.site) · [native Sites 성공 응답](../data/reports/web_sites/20261025/deployment.json). 현재 소유자 전용이다. 배포 브라우저는 ChatGPT 로그인 게이트까지 확인했으며 인증 후 게임 시작·지속 조작이 다음 수용이다.

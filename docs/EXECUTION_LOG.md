@@ -1,5 +1,13 @@
 # 단계별 실행 이력
 
+## EXP38 recovery01 — 운영 조각 HTTP500과 재시도 복구 · 2026-10-25
+
+시작 main은 `65f6f7f`, 작업 브랜치는 `codex/web-loading-recovery-20261025`다. 사용자가 실제 운영 로딩94%·126.7/134.6MiB·41/42 이후8,238,241B `pck-005.gz`의 HTTP500을 보고했다. 같은 파일의 서비스 HTTP 검사도40.115초에 읽기 시간 초과였다. [사건](../data/reports/web_sites/20261025/recovery01/incident.json)·[응답 검사](../data/reports/web_sites/20261025/recovery01/old_asset_http.json)를 보존한다. worker 로그가 비어 있었으며 근본 저장/edge 원인은 확정하지 않는다.
+
+게임을 다시 만들지 않고 기존 WASM/PCK SHA를 대조한 뒤1MiB332개로 재분할하고 내용 해시가 포함된 새 파일명으로 전환했다. 전체 전송141,196,835B·최대 조각1,048,914B다. [재분할 원문](../data/reports/web_sites/20261025/recovery01/rechunk.json)과 이전 manifest를 보존한다. 실제 loader에는30초 무진행 제한·최대3시도/간격·실패 전송량 rollback·현재 검증한 조각 유지, metadata/엔진 스크립트 제한과 인증 HTML/HTTP500 구분을 추가했다.
+
+[실제 JS 고장 검사](../data/reports/web_sites/20261025/recovery01/fault_tests.log)는 real gzip/WebStreams/SHA와 제어된 시계에서13/13 통과했다. 별도 로컬 브라우저는 새 `pck1m005` 조각에500을 한 번 주입해 재시도1/3 안내 뒤332조각·전체 해시와 실제 도시 준비를 확인했다. [검사 결합](../data/reports/web_sites/20261025/recovery01/artifact_and_browser_check.json)·[화면](../data/reports/web_sites/20261025/recovery01/local_retry_ready.jpg)·[실행 로그](../data/reports/web_sites/20261025/recovery01/local_runtime_dom.txt)는 로컬 실패 주입 증거이며 운영 엔진 수용으로 확대하지 않는다. 같은 Site 재게시가 성공했다([배포 응답](../data/reports/web_sites/20261025/recovery01/deployment.json)). [실제 운영 검사](../data/reports/web_sites/20261025/recovery01/deployed_asset_check.json)는104.946초에332개 실제 HTTP200·크기·개별/전체 SHA를 확인했고 loader/manifest도 일치한다. 기존 서비스 접근만 사용하고 토큰은 저장하지 않았다. 인증 후 운영 엔진 시작은 자동 브라우저 로그인 세션 부재로 별도 미수용이다. 공개 범위·native 게임·멀티플레이를 변경하지 않았고 최대 동시접속은 미확인이다.
+
 ## EXP38 — 실제 게임 Web 내보내기와 Sites 배포 · 2026-10-25
 
 - 입력/범위: 시작 native `6825154`, 브랜치 `codex/web-sites-20261025`. 기존 `explore_walk.tscn` 전체를 WebGL2/Compatibility·단일 스레드로 내보낸다. [공식4.7.2 template 취득/체크섬](../data/reports/web_sites/20261025/export_templates.json)을 확인했다. native `game/project.godot`는 수정하지 않고 실행 중이던 Mac 창도 유지했다.

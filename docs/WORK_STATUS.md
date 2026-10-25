@@ -1,5 +1,13 @@
 # 실제 작업 상태와 다음 행동
 
+## 2026-10-25 EXP38 recovery01 — 94% 로딩 정지 복구
+
+실제 배포본에서 사용자가 **94%·41/42조각** 뒤 `chunks/pck-005.gz`의 **HTTP500**을 보고했다. 같은 배포 파일을 서비스 경로로 읽는 검사도40.115초에 시간 초과됐다. 저장소/edge의 근본 원인은 미확정이며 빈 worker 로그로 실제500을 부정하지 않는다. [사건 기록](../data/reports/web_sites/20261025/recovery01/incident.json)·[기존 파일 응답](../data/reports/web_sites/20261025/recovery01/old_asset_http.json)을 보존했다.
+
+기존 WASM/PCK의 **전체 바이트·SHA를 그대로 유지**하고8MiB42조각을 **1MiB332조각**으로 다시 나눴다. 전송141,196,835B, 가장 큰 압축 조각1,048,914B다.30초 무진행 제한·최대3회 시도/간격·실패 조각의 진행량 되돌림을 추가했고 현재 로딩에서 이미 검증한 조각은 유지한다. 실제 배포 JS를 사용하는 고장 검사 **13/13**이 통과했다. 로컬 브라우저에서 특정 새 조각에500을 한 번 주입해 재시도 안내→332조각 검증→EXPLORATION_READY→도시 화면을 확인했다. [결합 검사](../data/reports/web_sites/20261025/recovery01/artifact_and_browser_check.json)·[로컬 복구 화면](../data/reports/web_sites/20261025/recovery01/local_retry_ready.jpg)은 운영 환경 화면과 구분한다.
+
+**수정본 재배포 완료**: [게시 성공 응답](../data/reports/web_sites/20261025/recovery01/deployment.json)과 [실제 운영 자원 검사](../data/reports/web_sites/20261025/recovery01/deployed_asset_check.json)를 기록했다. 배포된 loader/manifest가 선택본과 같고, 실제332개 조각을 내려받아 크기·개별 SHA·전체 WASM/PCK SHA를 모두 확인했다(104.946초). 기존 탭을 새로고침하면 자료 수332와 웹 릴리스 `20261025-recovery01`을 확인할 수 있다. 이 HTTP 검사는 기존 지원 서비스 접근을 사용했고 자격 증명을 생성·변경·저장하지 않았다. 자동 브라우저는 여전히 로그인 게이트여서 인증 후 운영 엔진 시작·지속 플레이 수용과 구분한다. 사이트 공개 범위는 변경하지 않았고 현재 게임은 브라우저별 단일 플레이이며 멀티플레이·최대 동시접속 수는 구현/검증하지 않았다. 아래 EXP38 본문은 최초 배포 이력이다.
+
 ## 2026-10-25 EXP38 — 실제 탐험 게임의 Web/Sites 배포
 
 현재 선택은 **attempt04**다. 기존 도시 탐험 장면을 Godot4.7.2의 단일 스레드 WebGL2/Compatibility로 내보냈으며, 소개 화면과 실제 게임 실행 화면을 연결했다. 원본 `game/project.godot`는 바꾸지 않고 별도 캐시 프로젝트에서만 Web 설정을 적용한다. 실행 중이던 Mac 게임은 그대로 두었다. 인체 원형과 생산 캐릭터의 관계·미술 한계는 아래 EXP37 기록을 유지한다.

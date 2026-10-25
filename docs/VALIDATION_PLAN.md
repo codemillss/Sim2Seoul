@@ -1,5 +1,13 @@
 # 검증 계획과 완료 판정
 
+## EXP38 recovery01 — 조각 전송 복구 판정 (2026-10-25)
+
+게시 결과: [수정본 succeeded](../data/reports/web_sites/20261025/recovery01/deployment.json), [실제 운영332개 HTTP200·개별/전체 SHA 일치](../data/reports/web_sites/20261025/recovery01/deployed_asset_check.json). 서비스 HTTP 검사를 운영 브라우저 게임 시작으로 확대하지 않는다.
+
+기존 운영 HTTP500을 보존하고 새332조각을 압축 해제·조립한 **전체 WASM/PCK SHA가 기존 선택 파일과 같은지** 확인한다. 실제 배포 JS의13개 고장 검사는 중단되지 않는 header/body·재시도 한도·무진행 제한 갱신·전송/압축 해제 길이·조각/전체 SHA·인증 HTML·엔진 준비 전 숨김 금지를 포함하며13/13이다. 제어된 시계의 검사를 실제30초 운영 지연 수용과 혼동하지 않는다. [검사 원문](../data/reports/web_sites/20261025/recovery01/fault_tests.log)을 따른다.
+
+로컬 브라우저에서 한 조각500주입→재시도1/3 표시→332검증→EXPLORATION_READY·실제 도시를 확인했다. [결합 검사](../data/reports/web_sites/20261025/recovery01/artifact_and_browser_check.json)와 [실제 로컬 화면](../data/reports/web_sites/20261025/recovery01/local_retry_ready.jpg)을 보존한다. **운영 주소의332개 응답·해시, 게시 terminal 결과, 인증 후 운영 엔진 시작은 각각 별도 판정**이다. 운영 후자는 아직 수용 전이다. 지속 조작·청취·저장·장시간 성능·최대 동시접속도 이번 로컬 복구 증거로 합격 처리하지 않는다. 아래는 최초42조각 검증 이력이다.
+
 ## EXP38 — 실제 Web 게임과 배포 완료 판정 (2026-10-25)
 
 | 판정 | 현재 증거와 범위 |

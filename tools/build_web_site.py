@@ -13,6 +13,22 @@ def run(argv,log):
  errors=[s for s in text.splitlines() if any(t in s for t in ('ERROR:','SCRIPT ERROR:','Parse Error:'))]
  if result.returncode or errors:raise RuntimeError(str(log)+': '+str(result.returncode)+' '+str(errors[:8]))
  return {'argv':[str(a) for a in argv],'exit':result.returncode,'errors':errors,'log_sha256':digest(log)}
+WEB_CHUNK_BYTES = 1024 * 1024
+
+def chunk_file(path, kind, chunks):
+ chunks.mkdir(parents=True, exist_ok=True)
+ row={'path':'game/index.'+kind,'bytes':path.stat().st_size,'sha256':digest(path),'chunks':[]}
+ with path.open('rb') as source:
+  index=0
+  while data:=source.read(WEB_CHUNK_BYTES):
+   sha=hashlib.sha256(data).hexdigest()
+   name=f'{kind}-1m-{index:03d}-{sha[:16]}.gz'
+   compressed=gzip.compress(data,compresslevel=6,mtime=0)
+   (chunks/name).write_bytes(compressed)
+   row['chunks'].append({'path':'chunks/'+name,'bytes':len(data),'transferBytes':len(compressed),'sha256':sha,'encoding':'gzip'})
+   index+=1
+ return row
+
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--site',type=Path,required=True);ap.add_argument('--tag',required=True);a=ap.parse_args()
  if not re.fullmatch(r'[a-zA-Z0-9_-]+',a.tag):ap.error('simple fresh tag required')
@@ -53,13 +69,7 @@ def main():
  for p in out.glob('*.js'):shutil.copyfile(p,game/p.name)
  manifest={'engineVersion':'4.7.2','buildCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'files':{}}
  for kind,filename in [('wasm','index.wasm'),('pck','index.pck')]:
-  p=out/filename;row={'path':'game/'+filename,'bytes':p.stat().st_size,'sha256':digest(p),'chunks':[]}
-  with p.open('rb') as f:
-   i=0
-   while data:=f.read(8*1024*1024):
-    name=f'{kind}-{i:03d}.gz';compressed=gzip.compress(data,compresslevel=6,mtime=0);(chunks/name).write_bytes(compressed)
-    row['chunks'].append({'path':'chunks/'+name,'bytes':len(data),'transferBytes':len(compressed),'sha256':hashlib.sha256(data).hexdigest(),'encoding':'gzip'});i+=1
-  manifest['files'][kind]=row
+  manifest['files'][kind]=chunk_file(out/filename,kind,chunks)
  (game/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  images=dist/'images';images.mkdir(exist_ok=True);shutil.copyfile(ROOT/'data/reports/resident_face_joints/20261025/os/01_world.jpg',images/'seoul.jpg')
  legal=dist/'legal';shutil.copytree(project/'resources/legal',legal,dirs_exist_ok=True)

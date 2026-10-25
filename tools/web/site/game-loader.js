@@ -25,6 +25,9 @@
   let quietTimer = null;
   let renderQueued = false;
   let canvasResizeQueued = false;
+  const REQUEST_IDLE_MS = 30000;
+  const CHUNK_ATTEMPTS = 3;
+  const activeChunks = new Map();
 
   function resizeCanvas() {
     canvasResizeQueued = false;
@@ -121,6 +124,7 @@
     ui.error.hidden = false; ui.debug.open = true;
     ui.title.textContent = "도시를 열지 못했습니다.";
     ui.description.textContent = "아래 안내를 확인한 뒤 다시 시도해 주세요.";
+    ui.hint.textContent = "자료 준비를 멈췄습니다. 아래 오류와 실행 정보를 확인한 뒤 다시 시도해 주세요.";
     ui.errorMessage.textContent = error.message || "게임 자료를 준비하는 중 문제가 발생했습니다.";
     ui.advice.textContent = adviceFor(code);
     log(`${code}: ${detail}`, "error");
@@ -131,7 +135,8 @@
     if (["WEBGL2", "WASM", "DECOMPRESSION", "WEB_CRYPTO", "FEATURES"].includes(code)) {
       return "최신 Chrome 또는 Edge에서 열어 주세요. WebGL 2와 하드웨어 가속을 켜고, HTTPS 주소로 접속해야 합니다.";
     }
-    if (["NETWORK", "HTTP", "MANIFEST", "CONFIG", "SCRIPT_LOAD"].includes(code)) {
+    if (code === "AUTH") return "로그인이 만료되었거나 이 사이트의 접근 권한이 없습니다. 사이트에 다시 로그인한 뒤 실행해 주세요.";
+    if (["NETWORK", "HTTP", "REQUEST_TIMEOUT", "MANIFEST", "CONFIG", "SCRIPT_LOAD"].includes(code)) {
       return "네트워크 연결을 확인한 뒤 다시 시도하세요. 계속 같다면 배포된 게임 자료가 빠졌을 수 있습니다. 아래 실행 정보를 함께 전달해 주세요.";
     }
     if (["HASH", "CHUNK_SIZE", "TRANSFER_SIZE"].includes(code)) {
@@ -159,21 +164,81 @@
     return url;
   }
 
-  async function fetchResponse(url) {
+  function abortReason(signal) {
+    return signal.reason instanceof Error ? signal.reason : new DOMException("다운로드를 취소했습니다.", "AbortError");
+  }
+
+  // Race the operation itself, because some fetch/body implementations do not
+  // settle promptly after abort. Cleanup never awaits a potentially stuck cancel.
+  function untilAborted(operation, signal) {
+    if (signal.aborted) { Promise.resolve(operation).catch(() => {}); return Promise.reject(abortReason(signal)); }
+    return new Promise((resolve, reject) => {
+      const onAbort = () => { cleanup(); reject(abortReason(signal)); };
+      const cleanup = () => signal.removeEventListener("abort", onAbort);
+      signal.addEventListener("abort", onAbort, { once: true });
+      Promise.resolve(operation).then((value) => { cleanup(); resolve(value); }, (error) => { cleanup(); reject(error); });
+    });
+  }
+
+  function requestScope(label) {
+    const controller = new AbortController();
+    const parent = aborter.signal;
+    let timer;
+    const forwardAbort = () => controller.abort(abortReason(parent));
+    if (parent.aborted) forwardAbort();
+    else parent.addEventListener("abort", forwardAbort, { once: true });
+    return {
+      signal: controller.signal,
+      arm(stage) {
+        clearTimeout(timer);
+        if (!controller.signal.aborted) timer = setTimeout(() => controller.abort(new LoadError("REQUEST_TIMEOUT", "게임 자료 응답이 30초 동안 없어 요청을 중단했습니다.", `${label}: ${stage}`)), REQUEST_IDLE_MS);
+      },
+      close() { clearTimeout(timer); parent.removeEventListener("abort", forwardAbort); },
+      abort() { if (!controller.signal.aborted) controller.abort(new DOMException("요청을 정리했습니다.", "AbortError")); },
+    };
+  }
+
+  function cancelReader(reader) {
+    // A broken stream may never settle cancel(). Its completion is not needed
+    // to retry another request; observe rejection without waiting for it.
+    try { Promise.resolve(reader.cancel()).catch(() => {}); } catch { /* Already closed. */ }
+  }
+
+  function retryDelay(milliseconds) {
+    const signal = aborter.signal;
+    if (signal.aborted) return Promise.reject(abortReason(signal));
+    return new Promise((resolve, reject) => {
+      const finish = () => { signal.removeEventListener("abort", onAbort); resolve(); };
+      const onAbort = () => { clearTimeout(timer); signal.removeEventListener("abort", onAbort); reject(abortReason(signal)); };
+      const timer = setTimeout(finish, milliseconds);
+      signal.addEventListener("abort", onAbort, { once: true });
+    });
+  }
+
+  async function fetchResponse(url, scope, retry = false) {
     let response;
-    try { response = await fetch(url, { signal: aborter.signal, credentials: "same-origin" }); }
+    scope.arm("응답 헤더 대기");
+    try { response = await untilAborted(fetch(url, { signal: scope.signal, credentials: "same-origin", cache: retry ? "reload" : "default" }), scope.signal); }
     catch (error) {
-      if (error.name === "AbortError") throw error;
+      if (scope.signal.aborted) throw abortReason(scope.signal);
       throw new LoadError("NETWORK", "게임 자료에 연결하지 못했습니다.", `${url}: ${error.message}`);
+    }
+    if ([401, 403].includes(response.status) || (response.ok && /(?:text\/html|application\/xhtml\+xml)/i.test(response.headers.get("Content-Type") || ""))) {
+      throw new LoadError("AUTH", "게임 자료 대신 로그인 또는 접근 권한 안내가 도착했습니다.", `${url}: HTTP ${response.status}`);
     }
     if (!response.ok) throw new LoadError("HTTP", `게임 자료 요청이 실패했습니다 (${response.status}).`, String(url));
     return response;
   }
 
   async function fetchJSON(path, code) {
-    const response = await fetchResponse(assetURL(path));
-    try { return await response.json(); }
-    catch { throw new LoadError(code, "게임 배포 정보를 읽을 수 없습니다.", path); }
+    const scope = requestScope(path);
+    try {
+      const response = await fetchResponse(assetURL(path), scope);
+      scope.arm("배포 정보 본문 대기");
+      const text = await untilAborted(response.text(), scope.signal);
+      try { return JSON.parse(text); }
+      catch { throw new LoadError(code, "게임 배포 정보를 읽을 수 없습니다.", path); }
+    } finally { scope.close(); scope.abort(); }
   }
 
   function validBytes(value) { return Number.isSafeInteger(value) && value > 0; }
@@ -209,35 +274,74 @@
     if (actual !== expected.toLowerCase()) throw new LoadError("HASH", "게임 자료의 확인 값이 일치하지 않습니다.", label);
   }
 
-  async function readChunk(file, chunk) {
-    const response = await fetchResponse(chunk.url);
-    if (!response.body) throw new LoadError("NETWORK", "게임 자료 응답이 비어 있습니다.", chunk.path);
+  function showActiveChunks() {
+    qa.pendingChunks = Array.from(activeChunks.values());
+    if (!failed) ui.hint.textContent = qa.pendingChunks.length
+      ? `자료 요청 중 · ${qa.pendingChunks.map((entry) => `${entry.path} (${entry.attempt}/${CHUNK_ATTEMPTS}회${entry.retryDelayMs ? ` 실패 · ${entry.retryDelayMs / 1000}초 후 재시도` : ""})`).join(" · ")} · 30초간 응답이 없으면 해당 자료만 다시 요청합니다.`
+      : "확인한 자료를 유지하고 다음 자료를 준비하고 있습니다.";
+  }
+
+  async function readChunkAttempt(file, chunk, attempt) {
+    const scope = requestScope(`${chunk.path} (${attempt}/${CHUNK_ATTEMPTS}회)`);
     let transferred = 0;
-    const tracked = response.body.pipeThrough(new TransformStream({
-      transform(bytes, controller) {
-        transferred += bytes.byteLength;
-        qa.downloadedBytes += bytes.byteLength; queueProgress();
-        controller.enqueue(bytes);
-      },
-    }));
-    const reader = tracked.pipeThrough(new DecompressionStream("gzip")).getReader();
+    let reader;
+    let verified = false;
     let written = 0;
     try {
+      const response = await fetchResponse(chunk.url, scope, attempt > 1);
+      if (!response.body) throw new LoadError("NETWORK", "게임 자료 응답이 비어 있습니다.", chunk.path);
+      scope.arm("자료 본문 대기");
+      const tracked = response.body.pipeThrough(new TransformStream({
+        transform(bytes, controller) {
+          if (scope.signal.aborted) throw abortReason(scope.signal);
+          if (transferred + bytes.byteLength > chunk.transferBytes) throw new LoadError("TRANSFER_SIZE", "내려받은 자료가 배포 기록보다 큽니다.", chunk.path);
+          transferred += bytes.byteLength;
+          qa.downloadedBytes += bytes.byteLength; queueProgress();
+          scope.arm("자료 본문 또는 압축 해제 대기");
+          controller.enqueue(bytes);
+        },
+      }));
+      reader = tracked.pipeThrough(new DecompressionStream("gzip")).getReader();
       while (true) {
-        const { done, value } = await reader.read();
+        const { done, value } = await untilAborted(reader.read(), scope.signal);
         if (done) break;
         if (written + value.byteLength > chunk.bytes) throw new LoadError("CHUNK_SIZE", "압축 해제된 자료가 기록보다 큽니다.", chunk.path);
         file.buffer.set(value, chunk.offset + written); written += value.byteLength;
       }
+      if (written !== chunk.bytes) throw new LoadError("CHUNK_SIZE", "게임 자료가 완전히 내려받아지지 않았습니다.", chunk.path);
+      if (transferred !== chunk.transferBytes) throw new LoadError("TRANSFER_SIZE", "내려받은 자료 크기가 배포 기록과 다릅니다.", `${chunk.path}: ${transferred}/${chunk.transferBytes}`);
+      scope.arm("자료 확인 대기");
+      await untilAborted(checkHash(file.buffer.subarray(chunk.offset, chunk.offset + written), chunk.sha256, chunk.path), scope.signal);
+      verified = true;
+      qa.verifiedChunks += 1; queueProgress();
     } catch (error) {
-      try { await reader.cancel(); } catch { /* Preserve the original failure. */ }
+      if (scope.signal.aborted) throw abortReason(scope.signal);
       if (error instanceof LoadError || error.name === "AbortError") throw error;
       throw new LoadError("CHUNK_SIZE", "게임 자료의 압축을 해제하지 못했습니다.", `${chunk.path}: ${error.message}`);
-    } finally { reader.releaseLock(); }
-    if (written !== chunk.bytes) throw new LoadError("CHUNK_SIZE", "게임 자료가 완전히 내려받아지지 않았습니다.", chunk.path);
-    if (transferred !== chunk.transferBytes) throw new LoadError("TRANSFER_SIZE", "내려받은 자료 크기가 배포 기록과 다릅니다.", `${chunk.path}: ${transferred}/${chunk.transferBytes}`);
-    await checkHash(file.buffer.subarray(chunk.offset, chunk.offset + written), chunk.sha256, chunk.path);
-    qa.verifiedChunks += 1; queueProgress();
+    } finally {
+      scope.close(); scope.abort();
+      if (reader) { if (!verified) cancelReader(reader); try { reader.releaseLock(); } catch { /* Pending reads are already detached. */ } }
+      if (!verified) { qa.downloadedBytes = Math.max(0, qa.downloadedBytes - transferred); queueProgress(); }
+    }
+  }
+
+  async function readChunk(file, chunk) {
+    try {
+      for (let attempt = 1; attempt <= CHUNK_ATTEMPTS; attempt += 1) {
+        if (aborter.signal.aborted) throw abortReason(aborter.signal);
+        activeChunks.set(chunk.path, { path: chunk.path, attempt }); showActiveChunks();
+        log(`CHUNK_REQUEST ${chunk.path} attempt=${attempt}/${CHUNK_ATTEMPTS}`);
+        try { await readChunkAttempt(file, chunk, attempt); return; }
+        catch (error) {
+          if (aborter.signal.aborted || error.name === "AbortError" || error.code === "AUTH") throw error;
+          log(`CHUNK_FAILED ${chunk.path} attempt=${attempt}/${CHUNK_ATTEMPTS} ${error.code || error.name}: ${error.detail || error.message}`, "warning");
+          if (attempt === CHUNK_ATTEMPTS) throw new LoadError(error.code || "NETWORK", `게임 자료를 ${CHUNK_ATTEMPTS}회 요청했지만 준비하지 못했습니다.`, `${chunk.path}: ${error.message}; ${error.detail || ""}`);
+          log(`CHUNK_RETRY ${chunk.path}; verified=${qa.verifiedChunks}/${qa.totalChunks}; previously verified chunks retained.`);
+          activeChunks.set(chunk.path, { path: chunk.path, attempt, retryDelayMs: attempt * 1000 }); showActiveChunks();
+          await retryDelay(attempt * 1000);
+        }
+      }
+    } finally { activeChunks.delete(chunk.path); showActiveChunks(); }
   }
 
   async function loadFiles(files) {
@@ -258,7 +362,8 @@
         const job = jobs[cursor++]; await readChunk(job.file, job.chunk);
       }
     };
-    await Promise.all([worker(), worker()]);
+    try { await Promise.all([worker(), worker()]); }
+    catch (error) { aborter.abort(error); throw error; }
     setState("verifying", "내려받은 도시 자료 확인 중");
     ui.hint.textContent = "전체 자료가 제작 기록과 같은지 확인하고 있습니다.";
     for (const file of files) await checkHash(file.buffer, file.sha256, file.path);
@@ -269,10 +374,21 @@
     if (typeof window.Engine === "function") return Promise.resolve();
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
+      const signal = aborter.signal;
+      let settled = false;
+      const finish = (error) => {
+        if (settled) return;
+        settled = true; clearTimeout(timer); signal.removeEventListener("abort", onAbort);
+        script.onload = null; script.onerror = null;
+        if (error) { script.remove(); reject(error); } else resolve();
+      };
+      const onAbort = () => finish(abortReason(signal));
+      const timer = setTimeout(() => finish(new LoadError("SCRIPT_LOAD", "게임 실행기 응답이 30초 동안 없어 요청을 중단했습니다.", "game/index.js")), REQUEST_IDLE_MS);
       script.src = assetURL("game/index.js").href;
-      script.onload = () => typeof window.Engine === "function" ? resolve() : reject(new LoadError("SCRIPT_LOAD", "게임 실행기를 읽지 못했습니다."));
-      script.onerror = () => reject(new LoadError("SCRIPT_LOAD", "게임 실행기를 내려받지 못했습니다.", script.src));
-      document.head.appendChild(script);
+      script.onload = () => finish(typeof window.Engine === "function" ? null : new LoadError("SCRIPT_LOAD", "게임 실행기를 읽지 못했습니다."));
+      script.onerror = () => finish(new LoadError("SCRIPT_LOAD", "게임 실행기를 내려받지 못했습니다.", script.src));
+      if (signal.aborted) onAbort();
+      else { signal.addEventListener("abort", onAbort, { once: true }); document.head.appendChild(script); }
     });
   }
 
@@ -367,7 +483,8 @@
       if (!config || typeof config !== "object" || Array.isArray(config)) throw new LoadError("CONFIG", "게임 실행 설정이 올바르지 않습니다.");
       const files = validateManifest(manifest);
       qa.engineVersion = manifest.engineVersion; qa.buildCommit = manifest.buildCommit;
-      ui.build.textContent = `Godot ${manifest.engineVersion} · build ${manifest.buildCommit.slice(0, 12)}`;
+      qa.webRelease = typeof manifest.webRelease === "string" ? manifest.webRelease : null;
+      ui.build.textContent = `Godot ${manifest.engineVersion} · 원본 ${manifest.buildCommit.slice(0, 12)}${qa.webRelease ? ` · 웹 ${qa.webRelease}` : ""}`;
       setState("downloading", "도시 자료 내려받는 중");
       await Promise.all([loadFiles(files), loadEngineScript()]);
       if (failed) return;

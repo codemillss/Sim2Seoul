@@ -1,0 +1,21 @@
+✔ last of 42 headers may never settle even after abort; only that chunk retries (224.495292ms)
+✔ partial final body and cancel both never settle; three bounded attempts stop honestly (234.783ms)
+✔ HTTP 500 HTML is a transient delivery error, not a login response (106.375209ms)
+✔ body idle deadline resets on real compressed-byte progress (172.671334ms)
+✔ valid gzip with corrupted raw hash exhausts retries without verifying it (140.65ms)
+✔ transfer length and decompressed length remain enforced (279.004833ms)
+✔ whole-file SHA still blocks engine even when every chunk SHA passes (40.941875ms)
+✔ successful HTML auth redirect stops with login advice and no gzip retries (37.436166ms)
+✔ metadata headers and bodies have finite deadlines (204.627291ms)
+✔ engine script has a finite deadline after all chunks finish (105.13575ms)
+✔ peer request ignored abort is detached when another request fails auth (68.6525ms)
+✔ download and engine start alone never fake EXPLORATION_READY (38.627167ms)
+✔ optional web release distinguishes frontend from native base commit (40.107042ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1755.652542
