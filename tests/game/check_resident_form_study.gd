@@ -7,7 +7,7 @@ var checks: Array = []
 var captures: Array = []
 var pose_observations: Array = []
 var source_before: Dictionary = {}
-var report_path := "/private/tmp/resident_form_study.json"
+var report_path := "/private/tmp/resident_form_refinement.json"
 var native := false
 
 func _initialize() -> void:
@@ -17,7 +17,7 @@ func _initialize() -> void:
 
 func _check(title: String, passed: bool, evidence: Dictionary = {}) -> void:
 	checks.append({"name":title, "passed":passed, "evidence":evidence})
-	print("FORM_STUDY ", title, " ", passed)
+	print("FORM_REFINEMENT ", title, " ", passed)
 
 func _json(value: Variant) -> Variant:
 	if value is Vector3: return [value.x, value.y, value.z]
@@ -41,7 +41,7 @@ func _json(value: Variant) -> Variant:
 
 func _hashes() -> Dictionary:
 	var result := {}
-	for path: String in ["res://scripts/study/resident_form_study.gd", "res://scenes/study/resident_form_study.tscn", "res://../tests/game/check_resident_form_study.gd", "res://scripts/player/exploration_avatar.gd", "res://scripts/player/textured_human_surface.gd", "res://scripts/player/textured_human_rig.gd", "res://assets/original/resident_study/resident_form_m01.glb", "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb"]:
+	for path: String in ["res://scripts/study/resident_form_study.gd", "res://scenes/study/resident_form_study.tscn", "res://../tests/game/check_resident_form_study.gd", "res://scripts/player/exploration_avatar.gd", "res://scripts/player/textured_human_surface.gd", "res://scripts/player/textured_human_rig.gd", "res://assets/original/resident_study/resident_form_m01.glb", "res://assets/original/resident_study/resident_form_m01_previous.glb", "res://assets/original/resident_study/FORM_STUDY_MANIFEST.json", "res://assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json"]:
 		result[path] = FileAccess.get_sha256(path) if FileAccess.file_exists(path) else ""
 	for name_: String in DirAccess.get_files_at("res://assets/original/resident_study"):
 		if name_.get_extension() in ["json", "blend"]:
@@ -73,7 +73,7 @@ func _pose_criterion(row: Dictionary) -> bool:
 		"deep_squat":
 			var rest_pelvis: Vector3 = Vector3.ZERO
 			for bone: Dictionary in row.bones:
-				if bone.name in ["pelvis", "Bip01 Pelvis"]:
+				if bone.name == "pelvis":
 					var index: int = study.skeleton.find_bone(bone.name)
 					rest_pelvis = study._rest_world[index].origin
 			return joints.pelvis.y < rest_pelvis.y-.22 and joints["shin.L"].z > joints["foot.L"].z+.05 and joints["shin.R"].z > joints["foot.R"].z+.05
@@ -84,8 +84,6 @@ func _pose_criterion(row: Dictionary) -> bool:
 	return false
 
 func _corrective_criterion(row: Dictionary) -> bool:
-	if row.model == "previous":
-		return row.blend_shapes.all(func(shape: Dictionary) -> bool: return absf(shape.value) < .0001)
 	var observed := {}
 	for shape: Dictionary in row.blend_shapes: observed[String(shape.name)] = float(shape.value)
 	var expected: Array = study.CORRECTIVES[row.pose]
@@ -93,6 +91,41 @@ func _corrective_criterion(row: Dictionary) -> bool:
 		var title: String = study.CORRECTIVE_NAMES[index]
 		if not observed.has(title) or absf(float(observed[title])-float(expected[index])) > .0001: return false
 	return true
+
+func _manifest_criterion(row: Dictionary) -> bool:
+	var declared: Dictionary = row.manifest_contract
+	if row.manifest_sha256.is_empty() or source_before.get(row.manifest_path, "") != row.manifest_sha256: return false
+	if declared.declared_asset_sha256 != row.asset_sha256: return false
+	if int(declared.bone_count) != study.NEW_BONES.size() or declared.bone_names.size() != study.NEW_BONES.size(): return false
+	for title: String in study.NEW_BONES:
+		if title not in declared.bone_names: return false
+	if declared.nla_track_names.size() != study.POSES.size(): return false
+	var native_clips: Array = []
+	for title: String in row.imported_animation_names: native_clips.append(title.get_file())
+	for title: String in study.POSES:
+		if title not in declared.nla_track_names or title not in native_clips: return false
+	if declared.corrective_names.size() != study.CORRECTIVE_NAMES.size(): return false
+	for title: String in study.CORRECTIVE_NAMES:
+		if title not in declared.corrective_names: return false
+	return int(declared.declared_export_vertices) > 0 and int(declared.declared_export_faces) > 0
+
+func _rest_anchor_observations() -> Dictionary:
+	var rig: Dictionary = study._manifest.get("rig", {})
+	var anchors: Array = []
+	var maximum := 0.
+	var valid: bool = rig.get("bones", []).size() == study.NEW_BONES.size()
+	for bone: Dictionary in rig.get("bones", []):
+		var index: int = study.skeleton.find_bone(String(bone.get("name", "")))
+		var source: Array = bone.get("head_m", [])
+		if index < 0 or source.size() != 3:
+			valid = false
+			continue
+		var expected := Vector3(float(source[0]), float(source[2]), -float(source[1]))
+		var actual: Vector3 = study._rest_world[index].origin
+		var error := actual.distance_to(expected)
+		maximum = maxf(maximum, error)
+		anchors.append({"bone":bone.name, "declared_blender_head_m":source, "expected_godot_m":expected, "actual_imported_rest_m":actual, "error_m":error})
+	return {"valid":valid, "maximum_error_m":maximum, "anchors":anchors, "scope":"Actual imported rest heads versus each source manifest in metres, Blender(x,y,z)→Godot(x,z,-y). This is not anatomy accuracy."}
 
 func _capture(model: String, pose: String, view: String) -> void:
 	study.set_view(view); await _settle()
@@ -102,7 +135,7 @@ func _capture(model: String, pose: String, view: String) -> void:
 	var path := report_path.get_basename()+"_"+model+"_"+pose+"_"+view+".png"
 	var code := image.save_png(path)
 	var row: Dictionary = study.snapshot()
-	captures.append({"file":path, "sha256":FileAccess.get_sha256(path) if code == OK else "", "image_size":image.get_size(), "save_error":code, "model":model, "pose":pose, "view":view, "actual_glb_path":row.asset_path, "actual_glb_sha256":row.asset_sha256, "actual_animation":row.actual_animation, "sample_time_s":row.sample_time_s, "camera":row.camera_transform, "camera_fov":row.camera_fov, "shared_pose_framing":row.shared_pose_framing, "projected_frame":row.projected_frame, "lighting":row.fixed_key_transform, "palette":palette, "actual_visible_meshes":row.visible_mesh_count, "readback":"same production study scene controls, actual GPU viewport; fixed world lighting/lens and common per-pose framing, no image retouch", "scope":"Capture and skeleton publication integrity only; no form/realism/art acceptance."})
+	captures.append({"file":path, "sha256":FileAccess.get_sha256(path) if code == OK else "", "image_size":image.get_size(), "save_error":code, "model":model, "pose":pose, "view":view, "actual_glb_path":row.asset_path, "actual_glb_sha256":row.asset_sha256, "actual_manifest_path":row.manifest_path, "actual_manifest_sha256":row.manifest_sha256, "actual_animation":row.actual_animation, "sample_time_s":row.sample_time_s, "camera":row.camera_transform, "camera_fov":row.camera_fov, "shared_pose_framing":row.shared_pose_framing, "projected_frame":row.projected_frame, "lighting":row.fixed_key_transform, "lighting_contract":row.lighting_contract, "palette":palette, "actual_visible_meshes":row.visible_mesh_count, "readback":"same production study scene controls, actual GPU viewport; fixed world lighting/lens and common per-pose framing, no image retouch", "scope":"Capture and skeleton publication integrity only; no form/realism/art acceptance."})
 	_check(model+"."+pose+"."+view+".actual_native_capture_visible_uncropped_and_palette_published", code == OK and not image.is_empty() and row.visible_mesh_count > 0 and palette.valid and row.projected_frame.inside_unobscured_frame)
 
 func _click(key: String) -> void:
@@ -121,6 +154,7 @@ func _run() -> void:
 	paused = true # Same entry state as the real exploration menu.
 	study = SCENE.instantiate(); root.add_child(study); study.set_review_mode(true)
 	await _settle()
+	var lighting_before: Dictionary = study.lighting_contract()
 	_check("default_is_new_original_in_separate_scene", study.selected_model == "new" and study.get_parent() == root and study.review_mode and not study.automatic and not paused, {"entered_from_paused_menu":true,"tree_paused_after_ready":paused})
 	_check("all_exact_inputs_exist_and_are_hashed", not source_before.values().has(""), {"source_sha256":source_before})
 	for model: String in ["new", "previous"]:
@@ -131,49 +165,31 @@ func _run() -> void:
 		var row: Dictionary = study.snapshot()
 		_check(model+".actual_requested_native_asset_loaded", loaded and row.loaded and row.asset_path == study.SOURCES[model] and row.asset_sha256 == source_before[row.asset_path], {"snapshot":row})
 		if not loaded: continue
+		_check(model+".source_manifest_binds_actual_asset_native_clips_bones_and_morphs", _manifest_criterion(row), {"manifest_path":row.manifest_path, "manifest_sha256":row.manifest_sha256, "declared_contract":row.manifest_contract, "actual_glb_sha256":row.asset_sha256})
 		var names: Array = row.bones.map(func(bone: Dictionary) -> String: return bone.name)
-		var bone_contract: bool = names.size() == (22 if model == "new" else 52)
-		if model == "new":
-			for name_: String in study.NEW_BONES: bone_contract = bone_contract and name_ in names
+		var bone_contract: bool = names.size() == study.NEW_BONES.size()
+		for name_: String in study.NEW_BONES: bone_contract = bone_contract and name_ in names
 		_check(model+".actual_imported_bone_contract", bone_contract, {"names":names})
 		var bounds: AABB = row.rest_mesh_aabb_world
-		_check(model+".source_metres_preserved_without_rescaling", row.model_anchor_transform == Transform3D.IDENTITY and bounds.size.y > (1.75 if model == "new" else 1.67) and bounds.size.y < (1.81 if model == "new" else 1.73) and absf(bounds.position.y) < .015, {"rest_mesh_aabb":bounds})
+		var anchors := _rest_anchor_observations()
+		_check(model+".source_metres_preserved_without_rescaling", row.model_anchor_transform == Transform3D.IDENTITY and bounds.size.y > 1.75 and bounds.size.y < 1.81 and absf(bounds.position.y) < .015 and anchors.valid and anchors.maximum_error_m < .002, {"rest_mesh_aabb":bounds, "source_rest_anchor_observations":anchors})
 		_check(model+".real_visible_mesh_uses_same_untextured_clay", row.visible_mesh_count == row.actual_mesh_count and row.visible_mesh_count > 0 and row.same_clay_material and not study.clay.vertex_color_use_as_albedo and study.clay.albedo_texture == null and study.clay.normal_texture == null and is_equal_approx(study.clay.roughness, .72), {"actual_clay":row.clay_properties, "visible_meshes":row.visible_mesh_count, "all_meshes":row.actual_mesh_count, "same_instance_material":row.same_clay_material})
-		var allowed_poses: Array[String] = ["a_pose"]
-		if model == "new": allowed_poses = study.POSES
-		for pose: String in allowed_poses:
+		_check(model+".all_four_native_pose_controls_enabled", row.enabled_pose_controls.size() == study.POSES.size())
+		for pose: String in study.POSES:
 			var applied: bool = study.apply_pose(pose); await _settle(); row = study.snapshot()
 			pose_observations.append(row)
-			_check(model+"."+pose+".actual_pose_loaded_with_disclosed_strategy", applied and row.pose_application_ok and (not row.actual_animation.is_empty() if model == "new" else row.pose_strategy == "actual_imported_original_rest_no_pose_adapter"), {"actual_animation":row.actual_animation, "strategy":row.pose_strategy, "blend_shapes":row.blend_shapes})
+			_check(model+"."+pose+".actual_pose_loaded_with_disclosed_strategy", applied and row.pose_application_ok and (not row.actual_animation.is_empty() and row.pose_strategy == "actual_imported_NLA_animation_and_corrective_morph"), {"actual_animation":row.actual_animation, "strategy":row.pose_strategy, "blend_shapes":row.blend_shapes})
 			_check(model+"."+pose+".actual_native_bone_transforms_finite", row.finite_bones)
 			_check(model+"."+pose+".long_bone_lengths_preserved", row.long_bone_links.size() == 8 and row.long_bone_links.all(func(link: Dictionary) -> bool: return link.error_m < .0002), {"actual_links":row.long_bone_links})
 			_check(model+"."+pose+".measured_pose_has_requested_joint_motion", _pose_criterion(row), {"joints":row.joints})
-			_check(model+"."+pose+".source_materials_shared_pose_camera_light_and_reference_unchanged", row.source_materials_unchanged and is_equal_approx(row.camera_fov, 32.) and absf(row.camera_distance_m-float(study.FRAMING[pose].distance)) < .0001 and row.fixed_key_shadow and row.ruler_size_m == Vector3(.012, 1., .012))
+			_check(model+"."+pose+".source_materials_shared_pose_camera_light_and_reference_unchanged", row.source_materials_unchanged and is_equal_approx(row.camera_fov, 32.) and absf(row.camera_distance_m-float(study.FRAMING[pose].distance)) < .0001 and row.fixed_key_shadow and row.ruler_size_m == Vector3(.012, 1., .012) and row.lighting_contract == lighting_before, {"actual_lighting_contract":row.lighting_contract, "initial_actual_lighting_contract":lighting_before, "actual_clay":row.clay_properties, "shared_pose_framing":row.shared_pose_framing})
 			_check(model+"."+pose+".corrective_morph_values_match_authored_hold_contract", _corrective_criterion(row), {"actual_shapes":row.blend_shapes})
 			_check(model+"."+pose+".actual_morphed_skinned_body_fits_unobscured_frame", row.projected_frame.inside_unobscured_frame, {"actual_projection":row.projected_frame})
 			if native:
-				if pose == "a_pose":
-					for view: String in ["front", "right", "back", "oblique"]: await _capture(model, pose, view)
-				else: await _capture(model, pose, "right" if pose == "deep_squat" else "front")
-		if model == "previous":
-			for unsupported: String in ["arm_raise", "deep_squat", "single_support"]:
-				var before: Dictionary = study.snapshot()
-				var accepted: bool = study.apply_pose(unsupported)
-				await _settle()
-				var after: Dictionary = study.snapshot()
-				_check("previous."+unsupported+".unsupported_pose_api_rejected", not accepted)
-				_check("previous."+unsupported+".rejected_request_preserves_actual_bones_morphs_and_base_selection", before.bones == after.bones and before.blend_shapes == after.blend_shapes and after.pose == "a_pose" and after.actual_animation.is_empty(), {"strategy":after.pose_strategy})
-			row = study.snapshot()
-			_check("previous.all_native_bones_equal_actual_imported_source_rest", row.bones.all(func(bone: Dictionary) -> bool: return bone.pose_local.is_equal_approx(bone.source_rest_local)), {"bones":row.bones, "scope":"Imported source local rest, not a forced A-pose or retargeted deformation."})
-			var disabled := true
-			for unsupported: String in ["arm_raise", "deep_squat", "single_support"]:
-				disabled = disabled and (study._buttons["pose_"+unsupported] as Button).disabled
-			_check("previous.special_pose_controls_disabled", disabled and not (study._buttons.pose_a_pose as Button).disabled)
-			if native:
-				var before: Dictionary = study.snapshot()
-				await _click("pose_arm_raise")
-				var after: Dictionary = study.snapshot()
-				_check("previous.native_injected_mouse_on_disabled_pose_preserves_original_rest", after.model == "previous" and after.pose == "a_pose" and before.bones == after.bones and before.blend_shapes == after.blend_shapes)
+				for view: String in ["front", "right", "back", "oblique"]: await _capture(model, pose, view)
+		if native and model == "previous":
+			await _click("pose_arm_raise")
+			_check("previous.native_injected_mouse_replays_actual_frozen_native_pose", study.selected_model == "previous" and study.selected_pose == "arm_raise" and _pose_criterion(study.snapshot()) and _corrective_criterion(study.snapshot()))
 		study.apply_pose("a_pose"); await _settle()
 		_check(model+".pose_can_return_to_base", study.selected_pose == "a_pose" and _pose_criterion(study.snapshot()))
 	if native and study.loaded:
@@ -182,10 +198,10 @@ func _run() -> void:
 		await _click("pose_arm_raise"); _check("native_injected_mouse_changes_actual_bone_pose", study.selected_pose == "arm_raise" and _pose_criterion(study.snapshot()))
 	_check("all_input_and_production_source_bytes_unchanged", _hashes() == source_before)
 	var failed: int = checks.filter(func(row: Dictionary) -> bool: return not row.passed).size()
-	var report := {"task":"EXP35_ISOLATED_RESIDENT_FORM_STUDY", "result":"PASS" if failed == 0 else "FAIL", "engine":Engine.get_version_info().string, "display":DisplayServer.get_name(), "physics_hz":Engine.physics_ticks_per_second, "summary":{"checks":checks.size(), "failed":failed, "captures":captures.size()}, "checks":checks, "pose_observations":pose_observations, "captures":captures, "source_sha256":source_before, "source_after":_hashes(), "visual_acceptance":"PENDING actual clay form and deformation pixel review", "scope":"Same separate study scene as interactive gallery. Actual imported bones/animation/morph weights and visible clay/camera/light inputs are inspected. The previous model is its original imported rest only; unsupported diagnostic APIs and buttons are rejected without bone changes. Headless cannot establish rendered shape quality. Native images and sparse pose holds are not continuous animation, surveyed anatomy, realistic skin, new production avatar or user art acceptance."}
+	var report := {"task":"EXP36_RESIDENT_FORM_REFINEMENT", "result":"PASS" if failed == 0 else "FAIL", "engine":Engine.get_version_info().string, "display":DisplayServer.get_name(), "physics_hz":Engine.physics_ticks_per_second, "summary":{"checks":checks.size(), "failed":failed, "captures":captures.size()}, "checks":checks, "pose_observations":pose_observations, "captures":captures, "source_sha256":source_before, "source_after":_hashes(), "visual_acceptance":"PENDING actual clay form and deformation pixel review", "scope":"Same separate study scene as interactive gallery. Actual imported bones/animation/morph weights and visible clay/camera/light inputs are inspected. The previous model is frozen v04 and both models use their own actual native NLA/morphs under identical per-pose framing, light and gray material. No old52 retargeting is used. Headless cannot establish rendered shape quality. Native images and sparse pose holds are not continuous animation, surveyed anatomy, realistic skin, new production avatar or user art acceptance."}
 	var file := FileAccess.open(report_path, FileAccess.WRITE)
 	if file == null: push_error("Cannot save form study report"); quit(2); return
 	file.store_string(JSON.stringify(_json(report), "  ")+"\n"); file.close()
-	print("RESIDENT_FORM_STUDY_RESULT ", checks.size()-failed, "/", checks.size(), " captures=", captures.size())
+	print("RESIDENT_FORM_REFINEMENT_RESULT ", checks.size()-failed, "/", checks.size(), " captures=", captures.size())
 	study.queue_free(); await process_frame; await process_frame
 	quit(0 if failed == 0 else 1)

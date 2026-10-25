@@ -1,0 +1,18 @@
+{
+  "task": "EXP36_INITIAL_IMPORT_REJECTION",
+  "actual_engine_exit": 0,
+  "strict_errors": 6,
+  "error": "UVs are required to generate tangents.",
+  "source_before": {
+    "game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "source_copy": "data/reports/resident_form_refinement/20261025/import_v03_error_source/resident_form_m01_previous.glb.import",
+      "sha256": "e72ebea8293b3cc3f89bf00cef63e18d993c787ea1caff46b3181c9406e3eb4a"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "source_copy": "data/reports/resident_form_refinement/20261025/import_v03_error_source/resident_form_m01.glb.import",
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    }
+  },
+  "fix": "Both original clay GLBs have normals and no UV/normal-map input. Disable unnecessary tangent generation for both comparison assets. Source GLB/geometry unchanged.",
+  "historical_note": "EXP35 import_candidate04.log already contains3 same errors; retained unchanged rather than reinterpreted as clean import."
+}

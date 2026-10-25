@@ -1,3 +1,7 @@
+## EXP36 원형 형태 다듬기 · 2026-10-25
+
+편집 가능한 자체 제어 cage·손발/머리·리그 보정을 수정했다. 외부 인체·스캔·모션·그림은 제작 입력으로 읽지 않는다. [OpenStax Anatomy and Physiology 2e 구조 설명](../data/reports/resident_form_refinement/20261025/reference_observation.json)을 읽고 참고했으며, 해당 교재 그림·기하를 복사한 파생 자산은 포함하지 않았다. 이전 v04 GLB/manifest는 같은 원본 자세의 비교용으로 바이트 그대로 보존한다. 새 원형과 Blender 실제 상세 렌더/게임 화면은 [현재 집계](../data/reports/resident_form_refinement/20261025/summary.json)에 구분했다. 아래 EXP35 이하는 당시 출처 고지다.
+
 ## EXP35 무채색 인체 원형 · 2026-10-25
 
 새 [Blender 제어 메시 원본](../art/characters/resident_form_m01.blend)·22본 리그·세 자세 보정과 [GLB](../game/assets/original/resident_study/resident_form_m01.glb)는 [별도 제작 모듈](../tools/sculpted_character/)로 작성했다. 제작 입력으로 외부 인체·스캔·모션·이미지나 기존 주민 몸 정점을 읽지 않는다. 이는 스크립트로 구성한 편집 가능한 제어 메시이며 수동 브러시 조각·수동 리토폴로지 완료 또는 실사 수용을 뜻하지 않는다. 이전 캐릭터는 검토 화면의 실제 원본 기본 자세 비교용으로만 읽는다.

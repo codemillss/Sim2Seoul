@@ -1,0 +1,162 @@
+"""Read-only EXP36 control-cage source comparison; no Blender is launched.
+
+The Vector substitute evaluates only the mathematical BodyCage construction.
+It does not simulate Blender subdivision, armature deformation or rendering.
+Usage: python3 <this file>; writes the adjacent body_source_audit.json.
+"""
+from pathlib import Path
+import ast
+import datetime
+import hashlib
+import json
+import math
+import subprocess
+import sys
+import types
+
+ROOT = Path(__file__).resolve().parents[4]
+SOURCE = Path('tools/sculpted_character/build_body_cage.py')
+
+
+class Vector:
+    def __init__(self, coordinates):
+        self.coordinates = tuple(float(v) for v in coordinates)
+
+    def __iter__(self):
+        return iter(self.coordinates)
+
+    def __add__(self, other):
+        return Vector(a+b for a,b in zip(self.coordinates,other.coordinates))
+
+    def __sub__(self, other):
+        return Vector(a-b for a,b in zip(self.coordinates,other.coordinates))
+
+    def __mul__(self, amount):
+        return Vector(a*amount for a in self.coordinates)
+
+    def __neg__(self):
+        return self*-1
+
+    def dot(self, other):
+        return sum(a*b for a,b in zip(self.coordinates,other.coordinates))
+
+    def cross(self, other):
+        a,b,c = self.coordinates
+        x,y,z = other.coordinates
+        return Vector((b*z-c*y,c*x-a*z,a*y-b*x))
+
+    def normalized(self):
+        return self*(1/math.sqrt(self.dot(self)))
+
+
+def git(*arguments):
+    return subprocess.check_output(['git',*arguments],cwd=ROOT)
+
+
+def construct(source):
+    namespace = {}
+    exec(compile(source,str(SOURCE),'exec'),namespace)
+    cage = namespace['BodyCage']()
+    cage.torso()
+    cage.arms()
+    cage.legs()
+    cage.sculpt_primary_planes()
+    return cage, namespace
+
+
+def landmark_definitions(source):
+    function = next(node for node in ast.parse(source).body
+                    if isinstance(node,ast.FunctionDef) and node.name=='build_body')
+    selected = []
+    for node in function.body:
+        if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='landmarks'
+                                               for t in node.targets):
+            selected.append(ast.dump(node,include_attributes=False))
+        if isinstance(node,ast.For) and any(isinstance(child,ast.Call)
+               and isinstance(child.func,ast.Attribute)
+               and isinstance(child.func.value,ast.Name)
+               and child.func.value.id=='landmarks' and child.func.attr=='update'
+               for child in ast.walk(node)):
+            selected.append(ast.dump(node,include_attributes=False))
+    return selected
+
+
+def corner_normal(cage, face):
+    a,b,_,d = (Vector(cage.vertices[i]) for i in face)
+    return (b-a).cross(d-a)
+
+
+def main():
+    current = (ROOT/SOURCE).read_bytes()
+    current_sha = hashlib.sha256(current).hexdigest()
+    baseline = git('show','HEAD:'+str(SOURCE))
+    baseline_commit = git('rev-parse','HEAD').decode().strip()
+    ast.parse(current)
+    # Only imports are substituted. build_body(), bpy mesh creation, modifiers,
+    # render operators and asset saving are intentionally never called.
+    sys.modules['bpy'] = types.ModuleType('bpy')
+    mathutils = types.ModuleType('mathutils')
+    mathutils.Vector = Vector
+    sys.modules['mathutils'] = mathutils
+    before,_ = construct(baseline)
+    after,namespace = construct(current)
+    same_faces = after.faces==before.faces
+    same_regions = after.regions==before.regions
+    joins = {key: before.boundaries.get(key)==value
+             for key,value in after.boundaries.items()}
+    reversed_corners = []
+    zero_area_corners = []
+    for index,face in enumerate(after.faces):
+        old_normal = corner_normal(before,face)
+        normal = corner_normal(after,face)
+        if old_normal.dot(normal)<0:
+            reversed_corners.append(index)
+        if normal.dot(normal)<1e-16:
+            zero_area_corners.append(index)
+    same_landmark_ast = landmark_definitions(current)==landmark_definitions(baseline)
+    source_unchanged = current_sha==hashlib.sha256((ROOT/SOURCE).read_bytes()).hexdigest()
+    source_contract = (same_faces and same_regions and all(joins.values())
+                       and same_landmark_ast and not reversed_corners
+                       and not zero_area_corners and source_unchanged)
+    report = {
+        'task':'EXP36_BODY_SOURCE_CONTRACT',
+        'created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'result':'SOURCE_CONTRACT_PASS_ONLY' if source_contract else 'SOURCE_CONTRACT_FAIL',
+        'method':'Pure Python evaluation of explicit control-cage source; numerical Vector operations substituted for mathutils.Vector. No bpy mesh/modifier/armature operation was evaluated.',
+        'baseline_commit':baseline_commit,
+        'baseline_source_sha256':hashlib.sha256(baseline).hexdigest(),
+        'source_path':str(SOURCE),
+        'source_sha256':current_sha,
+        'audit_script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'control_vertices':len(after.vertices),
+        'control_quads':len(after.faces),
+        'moved_control_vertices':sum(a!=b for a,b in zip(before.vertices,after.vertices)),
+        'face_index_lists_exactly_preserved':same_faces,
+        'vertex_region_ids_exactly_preserved':same_regions,
+        'five_join_boundaries_metadata_ids_coordinates_exactly_preserved':joins,
+        'landmark_definition_ast_exactly_preserved':same_landmark_ast,
+        'control_face_first_corner_normals_reversed_against_baseline':reversed_corners,
+        'zero_area_control_face_first_corners':zero_area_corners,
+        'source_unchanged_during_audit':source_unchanged,
+        'anatomy_reference_pages_read':list(namespace['PROVENANCE']),
+        'external_geometry_or_image_input_count':0,
+        'blender_launched':False,
+        'rendered_pixels_reviewed_for_this_candidate':False,
+        'full_anatomy_art_acceptance':False,
+        'limitations':[
+            'This audit checks source coordinates and connectivity, not actual Blender evaluation or export.',
+            'A corner-normal test is not a proof that every quad is planar or that the subdivided surface has no self-intersection.',
+            'Unchanged body connectivity retains its five intentionally open join boundaries; complete closed-manifold acceptance belongs to the integrated head/hands/feet mesh audit.',
+            'Armature motion, corrective poses, surface volume, silhouettes, lighting and human realism require fresh actual candidate evaluation.'
+        ],
+    }
+    output = Path(__file__).with_name('body_source_audit.json')
+    output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    print(json.dumps({key:report[key] for key in ['result','source_sha256',
+        'control_vertices','control_quads','moved_control_vertices',
+        'blender_launched','rendered_pixels_reviewed_for_this_candidate']}))
+    return 0 if source_contract else 1
+
+
+if __name__=='__main__':
+    raise SystemExit(main())

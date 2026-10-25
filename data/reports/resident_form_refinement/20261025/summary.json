@@ -1,0 +1,1468 @@
+{
+  "task": "EXP36_SINGLE_RESIDENT_FORM_REFINEMENT",
+  "created_at_utc": "2026-10-25T03:55:02.440717+00:00",
+  "result": "PASS_BOUNDED_TECHNICAL_REVIEW_ART_PENDING",
+  "base_commit": "51482e2275081849b3c5a31e0a1a32c96cab592d",
+  "selected_candidate": "v03",
+  "selected_cohort": "final02",
+  "art_acceptance": false,
+  "fully_realistic_character": false,
+  "attractiveness_acceptance": false,
+  "continuous_motion_acceptance": false,
+  "user_art_acceptance": false,
+  "deliverables": {
+    "editable_blender": "art/characters/resident_form_m01.blend",
+    "current_glb": "game/assets/original/resident_study/resident_form_m01.glb",
+    "previous_unmodified_v04_glb": "game/assets/original/resident_study/resident_form_m01_previous.glb",
+    "scene": "game/scenes/study/resident_form_study.tscn",
+    "game_menu": "Esc → 인체 원형 비교 · 무채색",
+    "normal_game_avatar_replaced": false
+  },
+  "authorship": "Original script-authored editable cage refinement. No external body/scan/animation/image input. No claim of manual brush sculpting or completed manual retopology. Educational structural reading is separate from copied assets. EXP35 v04 is loaded only as a byte-preserved comparison.",
+  "selected_runs": [
+    {
+      "report": "data/reports/resident_form_refinement/20261025/refinement_headless_final02.json",
+      "runner": "data/reports/resident_form_refinement/20261025/refinement_headless_final02.run.json",
+      "expected_checks": 73,
+      "captures": 0
+    },
+    {
+      "report": "data/reports/resident_form_refinement/20261025/refinement_native_final02.json",
+      "runner": "data/reports/resident_form_refinement/20261025/refinement_native_final02.run.json",
+      "expected_checks": 109,
+      "captures": 32
+    }
+  ],
+  "counts": {
+    "engine_runs": 2,
+    "overlapping_engine_assertions": 182,
+    "native_original_png": 32,
+    "actual_os_jpeg": 8,
+    "independent_glb_checks": 35,
+    "selected_blender_fullbody_png": 16,
+    "selected_blender_detail_png": 5,
+    "baseline_blender_fullbody_png": 16,
+    "baseline_blender_detail_png": 5,
+    "control_vertices": 3918,
+    "export_vertices": 64854,
+    "export_triangles": 129696,
+    "new_bones": 22,
+    "pose_clips": 4,
+    "corrective_morphs": 3
+  },
+  "export_audit_file": "data/reports/resident_form_refinement/20261025/export_audit_peer.json",
+  "normal_launch_file": "data/reports/resident_form_refinement/20261025/normal_launch.json",
+  "visual_review_file": "data/reports/resident_form_refinement/20261025/visual_review_peer.json",
+  "studio_visual_review_file": "data/reports/resident_form_refinement/20261025/studio_visual_review_peer.json",
+  "source_freeze_file": "data/reports/resident_form_refinement/20261025/candidates/v03/source_freeze.json",
+  "import_final_file": "data/reports/resident_form_refinement/20261025/import_v03_fixed.run.json",
+  "reference_observation_file": "data/reports/resident_form_refinement/20261025/reference_observation.json",
+  "studio_capture_scope": "Actual neutral Blender renders of saved source. Not Godot gameplay. Native32 PNG and actual OS8 JPEG are separate cohorts. No image retouch or re-encoding.",
+  "lighting_contract": "New and previous share actual fixed key1.15/fill0.55/ambient0.30, per-pose camera/lens and matte gray. Actual getters, native palette and conservative morph-then-skin frame are recorded per capture.",
+  "failed_or_rejected_history": [
+    {
+      "candidate": "v01",
+      "reason": "New hip medial gate retained inner-thigh pelvis weights far below hip, making a skirt-like sheet. Eye spheres protruded around lids. Exact candidate/source/render/log and binary skin diagnosis preserved."
+    },
+    {
+      "candidate": "v02",
+      "reason": "Restored hip removes sheet, but new shoulder field still produces a sharp axillary wing and lip seam projects as parallel plates. Rejected; restored original shoulder weights and narrowed/recessed oral rim."
+    },
+    {
+      "import": "import_v03.log",
+      "actual_exit": 0,
+      "errors": 6,
+      "reason": "Unneeded tangent generation requested on non-UV clay GLBs. Both imports set ensure_tangents=false; exact preceding import sources/error log retained. Final import actualexit0/errors[]."
+    },
+    {
+      "cohort": "final01",
+      "reason": "73/109 numeric checks passed but rear light was insufficient to judge large forms. Native32 and partial OS6 JPEG are historical rejection; final02 reruns identical models under matched stronger fill/ambient."
+    }
+  ],
+  "remaining_limits": [
+    "Torso, back, pelvis and joint forms remain smooth/simplified.",
+    "Raised axilla and squat hip retain broad folded/web planes; this is not anatomical deformation acceptance.",
+    "Finger/toe geometry is individual but22-bone rig has no independent finger/toe articulation.",
+    "Cranium, ears, expression, iris and hair are unfinished.",
+    "No normal-game avatar replacement or walking/running integration/acceptance."
+  ],
+  "bound_files": {
+    ".gitattributes": {
+      "bytes": 4059,
+      "sha256": "00063ccc97b04a4243cae44cea48f6a43f34867761beab27f5eff907fb8e45ae"
+    },
+    "README.md": {
+      "bytes": 29737,
+      "sha256": "7d5d5ded82d2554fdb9db48d680a210cae05d324885c468fb36b009c55d422d0"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline.json": {
+      "bytes": 581,
+      "sha256": "37edd00a0c6089db8d46d6513976a82059d02d5b12c76cc8e71a1237940105a4"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/face_front.png": {
+      "bytes": 542026,
+      "sha256": "3673a03a1016f8cbb12ff4b3b4129d0c98785467e0f3ea31a7db3ec935b8a7ff"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/face_right.png": {
+      "bytes": 546186,
+      "sha256": "b3d7be11ad06a7bfd4cc3bb67ebe67bf3cbdcec2c8c47f44d1bf2d43a4b25728"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/foot_left_oblique.png": {
+      "bytes": 705347,
+      "sha256": "5e6b17e7803f3ac5cd42baa723289887e30e1c2a7333b249d0d7a14e82ed3229"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/hand_left_front.png": {
+      "bytes": 515258,
+      "sha256": "46c85a089b43066df1768e5f0c31254a32a2b28ca7352145bed21abe40052d1d"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/pelvis_back.png": {
+      "bytes": 615604,
+      "sha256": "ff7f8982c9cff41f6143b57c12174033c7f5a6fddb9e90ccafbe8a7a28f6966d"
+    },
+    "data/reports/resident_form_refinement/20261025/baseline_details/renders.json": {
+      "bytes": 3203,
+      "sha256": "576a848ac953b36d2276bc63d5b764f972f29eede6ca9558667a61f4078fef9a"
+    },
+    "data/reports/resident_form_refinement/20261025/body_source_audit.json": {
+      "bytes": 2425,
+      "sha256": "1a6e9aad54d88a4eedfd748af4d556e7a4011d37f9b63e506f552f75de16516e"
+    },
+    "data/reports/resident_form_refinement/20261025/body_source_audit.py.source": {
+      "bytes": 6993,
+      "sha256": "28551217c85401d8da162b7f37ead8217304c5e69c28236122f2e3a96926a8a7"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v01.log": {
+      "bytes": 10419,
+      "sha256": "dd54a885ff3ee44bd4236faac1f23694486fa0cb6e0dc7a359ce5ec44f79c499"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v01.run.json": {
+      "bytes": 1024,
+      "sha256": "d75047bcfabbf6c9647859bdc8068dce943e668e8ad46a6b46d54decd9802fe7"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v02.log": {
+      "bytes": 10479,
+      "sha256": "166105efd2c3f76217c9bdf1d30d120697253bca77f835d76829641fdbfb6d8d"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v02.run.json": {
+      "bytes": 921,
+      "sha256": "76be377da6f7894dbaf654a03e5967cee26ac7fefc3e9b98d7ab9523abdfb581"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v03.log": {
+      "bytes": 10479,
+      "sha256": "088f88d7c47ad8ca898696f02e50e6cbf6a70bf4034f78d1e7ebf38778c82823"
+    },
+    "data/reports/resident_form_refinement/20261025/build_v03.run.json": {
+      "bytes": 921,
+      "sha256": "8ad02b365182af369933387215ff0f7d5e136f0861be4a46f218de96765f43a4"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/FORM_STUDY_MANIFEST.json": {
+      "bytes": 162030,
+      "sha256": "29cc520c2822c90a053abbcac61cb56f844ed6bdc8b6da0524e03b84b5c5192b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/a_pose_back.png": {
+      "bytes": 598771,
+      "sha256": "50c23063e1aa05a87f7bd6e31164c71379ab0a6a6d9240665d08f7c86f6369c7"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/a_pose_front.png": {
+      "bytes": 597711,
+      "sha256": "77bc0b7509b6278cb958bd87dab604bb7e6f1a2678af6219677b629a096cde84"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/a_pose_front45.png": {
+      "bytes": 594657,
+      "sha256": "0eeac2c9fed812f6122d722182102e1485cc62dfb62744c12acd7651364314a8"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/a_pose_right.png": {
+      "bytes": 561722,
+      "sha256": "9fac94d7d3cdac10b00e774353fa973119507f9a172a6682f7f76e6740b20311"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/arm_raise_back.png": {
+      "bytes": 603759,
+      "sha256": "d6e0c9e7b552900abd6393a1ec84b100211f6c5f275416461c876a0e53a99653"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/arm_raise_front.png": {
+      "bytes": 601665,
+      "sha256": "4b144bee63611061acdbef8c65158d92d41dc8f59ff711e783f2096338e2d49f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/arm_raise_front45.png": {
+      "bytes": 603368,
+      "sha256": "06666abeac86bb5fefb53ae569d0ce0e349d51594dde381b91af8d394356aa9e"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/arm_raise_right.png": {
+      "bytes": 570339,
+      "sha256": "803de2e872154f23549635d72639f3cb6f3db393427f15e9998343a88e515492"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/deep_squat_back.png": {
+      "bytes": 574292,
+      "sha256": "02f1c237d4214c788ae5efbef8dab9324540d0c6995db5a421f4594f2a54ed0b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/deep_squat_front.png": {
+      "bytes": 581422,
+      "sha256": "517fcbd8e6554d58d99bd0fb0cde257abbee12a78a2469d7d92dd99ff2b004e6"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/deep_squat_front45.png": {
+      "bytes": 585482,
+      "sha256": "a185e02c665723f52e84935c14a35349859520a64558e3cd71554cded7e3b7f0"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/deep_squat_right.png": {
+      "bytes": 575307,
+      "sha256": "41812147a21e0785ad8f895d7c647ebc0f56666e8a46c2eda5481abec80a87e9"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/single_support_back.png": {
+      "bytes": 603492,
+      "sha256": "8fbfcdfc89343a51927361f2292a3397451ae6673b6d6134c62c394feb781001"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/single_support_front.png": {
+      "bytes": 598853,
+      "sha256": "f41f7a0d995436399be7803f7614ce9c19ce2e45908d4076f5a4da3be324c376"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/single_support_front45.png": {
+      "bytes": 594454,
+      "sha256": "792ce535e8e9ef7e07f57e9b879a5b8bf928f54c3841bbf017fbb1d3ee790aea"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/single_support_right.png": {
+      "bytes": 578300,
+      "sha256": "9f479c194c476b1a5bf55b48e169321f7293bd97057465e45e2aac6e7f72407a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/face_front.png": {
+      "bytes": 543012,
+      "sha256": "5d2888320f074c63d8476fbe7e70d7ca04c1d62899d367b56aab5b6520778e29"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/face_right.png": {
+      "bytes": 545806,
+      "sha256": "a18bcffdef6b463c790b53eb9ade9b6b881e111a72169c44d54bbb9c535580c2"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/foot_left_oblique.png": {
+      "bytes": 717072,
+      "sha256": "7bf5dd0c130ac84fe7f98fd01ab841d311f621e844e33493146f52359f24c599"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/hand_left_front.png": {
+      "bytes": 519894,
+      "sha256": "a82eb619c82ee4b3af3e0c12728abdf76b92c5a65697b4b43cb4619e99a6d415"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/pelvis_back.png": {
+      "bytes": 619705,
+      "sha256": "303f14bd347b61639ba27be3a8593980fa1c6c0120a852680eac71fd6e3e7f8c"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/details/renders.json": {
+      "bytes": 3238,
+      "sha256": "300477e30f8f369f74b0408130b0bd5dd009c6d79fe066c0950d74d32902ff23"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/disposition.json": {
+      "bytes": 1145,
+      "sha256": "2f302ea47862d963520bca7ab8819295e0f0aafcb10fb61728b5155733beff83"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/resident_form_m01.blend": {
+      "bytes": 12377847,
+      "sha256": "93f7638a6981db68ca1a3c09ca7ee48aed0c771045caa81a30eb14ffc7815980"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/resident_form_m01.glb": {
+      "bytes": 4556048,
+      "sha256": "776cafd0863ac19f63a5a7f1b43d60b20e4a55e240d9f5e91334fc576c37b959"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/source/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/source/build_head_extremities.py": {
+      "bytes": 15688,
+      "sha256": "2f86267a1d4d2664a5dbc6019f7f36b09e03dcc2dbc4c42c40e18f769d223d10"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/source/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/source/build_study_rig.py": {
+      "bytes": 34255,
+      "sha256": "014cfe2127da22e3a3f7864558b97ddde0b037348606c5d4b2ffcf606b0dba1f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v01/source_freeze.json": {
+      "bytes": 1329,
+      "sha256": "2d7e3a492ea54adb44eb8cbd17a02c03675c332e18f97d830a95ee64eec1bf1f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/FORM_STUDY_MANIFEST.json": {
+      "bytes": 162965,
+      "sha256": "3426b45eb983976acfc6d42b422216f348558de72f48a51447e6da6daae2f8f6"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/a_pose_back.png": {
+      "bytes": 598755,
+      "sha256": "7622be7f330f202e5e16af6b70154d7648e47ab7f6c410111ef36099db001f93"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/a_pose_front.png": {
+      "bytes": 597702,
+      "sha256": "2d099818fd045f0a13e94982396977832d68d238e75c9a5811862b4d68813574"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/a_pose_front45.png": {
+      "bytes": 594469,
+      "sha256": "8c5da8d24e593906027f9f9d1d0fbdccfe76a05bbcf491ffc03684f3cb95108d"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/a_pose_right.png": {
+      "bytes": 561786,
+      "sha256": "a04e4b6a4a1eb37cc5f7f48e14eda46391376c8b579b9d4d05ccb8123cc62bed"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/arm_raise_back.png": {
+      "bytes": 603659,
+      "sha256": "f53fdd8ea168e3adb5f609bc1759e1088362805f10449b55c5c61262170e9389"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/arm_raise_front.png": {
+      "bytes": 601749,
+      "sha256": "b78705af6f1f02a40e6716d8075ad39075347daac669dcf927f0ce387e1b2eef"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/arm_raise_front45.png": {
+      "bytes": 603382,
+      "sha256": "e23a1a21cff5d66e89a969c4c5ac6c47202d311de68a7ccb6046c301865b7124"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/arm_raise_right.png": {
+      "bytes": 570374,
+      "sha256": "9357e8f49fbc05cc56822ecad17afdaddc660942333b11e4655c419c324aff59"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/deep_squat_back.png": {
+      "bytes": 572257,
+      "sha256": "c40a8c47bc3c417264af11a8891329450a686ffa3a6f2b183770c4fa3a0cad6b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/deep_squat_front.png": {
+      "bytes": 578250,
+      "sha256": "ad2239b382088217f638de8483d9e39f2abbc2726636e9b0ee70627992d36ab1"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/deep_squat_front45.png": {
+      "bytes": 583874,
+      "sha256": "6ae9a27e0ee39b184ae99c3a44f6f26b7c0501ce1c6529263af123bed77a0c25"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/deep_squat_right.png": {
+      "bytes": 570611,
+      "sha256": "48f1e61005c65ff3033f39e605ab6bbabd789e4dd61807f823a22a0e69d12342"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/single_support_back.png": {
+      "bytes": 602011,
+      "sha256": "f550fccb083330165b34e5d6f282e1fa1b6532b7d8926980ecc1a23784e435b3"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/single_support_front.png": {
+      "bytes": 599572,
+      "sha256": "eb2fa49bd16055b497f3e5021676b35c0ca2d2e179733f369c266cd800e1816d"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/single_support_front45.png": {
+      "bytes": 594093,
+      "sha256": "044ed33fb5469559c89dabace842c9e4d80fa7efd2a85fdd09b874728ea52644"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/single_support_right.png": {
+      "bytes": 578756,
+      "sha256": "b96246dafc143860c6a81094f85dc58df8e0717740716ff854955e7e9d0b0ac0"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/face_front.png": {
+      "bytes": 543506,
+      "sha256": "3066918ae8cdad7e7d0876046411d2d614e499f8f401b355e19923f08ee9209e"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/face_right.png": {
+      "bytes": 545991,
+      "sha256": "119896b458596a451c412aba776f8b765f9dc25841d8b07c7504da2c4e93f1aa"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/foot_left_oblique.png": {
+      "bytes": 717034,
+      "sha256": "087ed9ea119ad4314861906daee5dc12c670d5a753c11135ef5bb77471bfe8d5"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/hand_left_front.png": {
+      "bytes": 519951,
+      "sha256": "13096750ec49ac79ab067988b96d402fcf36fd8190c306a689cbe087797277ff"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/pelvis_back.png": {
+      "bytes": 619852,
+      "sha256": "c6305b040f1b36ddf9fbb9fa0d3ea9439c29e9fd1e83127b82e6a1e092473803"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/details/renders.json": {
+      "bytes": 3238,
+      "sha256": "9c37e7753deff9e4c4695a976ffe9f13711d6b3a8c97665bfed56211411e9114"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/disposition.json": {
+      "bytes": 876,
+      "sha256": "88f8dd1678cf4475fd1ef2484c68d6af4f5c96854ea239883fb564fe10766dd3"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/resident_form_m01.blend": {
+      "bytes": 12538676,
+      "sha256": "d887495fc4025e1290fd031788ee9169442f97bb560091e74bef303849f540a5"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/resident_form_m01.glb": {
+      "bytes": 4600848,
+      "sha256": "fa322ffe79f671f3f71b7e4727ebc754f66356d557a014dc577029af38a92023"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/source/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/source/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "a64eec1d3ffd9f7bf7d374417f2641c69a448b5883f00bcac7dd543a0961929f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/source/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/source/build_study_rig.py": {
+      "bytes": 33930,
+      "sha256": "2293a6344c511f9e6d63d9398197b19a8e953b03a4ca2be2c21a587b2a231c97"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/source_freeze.json": {
+      "bytes": 1344,
+      "sha256": "6a6c124367446ff6150a279c64d415a3b2f279762416df5f8bf478464789e276"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_back.png": {
+      "bytes": 598772,
+      "sha256": "5ea99fd4608e8ac1792aa16d580b0826e419dc46b21eb202948e171655e65ebd"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front.png": {
+      "bytes": 597697,
+      "sha256": "87197ea14ba64138dcd050812a3baa0fc286e30821e928969d03ea224faa343f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front45.png": {
+      "bytes": 594451,
+      "sha256": "104e61d0c76a5117440960d5b399d89ea40e20e8c47248c18d744fd3c1f2dc87"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_right.png": {
+      "bytes": 561795,
+      "sha256": "22917e36579e39c9149159fd10dc774984ec2e2bcd1fce5ce53566ba6d0aca3f"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_back.png": {
+      "bytes": 601141,
+      "sha256": "294c4384cc6dab2e9ce064eebceff5d0d0a06cac12889cb9395dde5a2ca0807a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front.png": {
+      "bytes": 599223,
+      "sha256": "dac36e3db1f0dc75df795b0066d227d89d6570db1bff906893e13638cae81209"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front45.png": {
+      "bytes": 602232,
+      "sha256": "04a31620e4d3eeaef4f577bfea535e660fa4c02ec1d01f29c33c8ba3b449c1ab"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_right.png": {
+      "bytes": 569580,
+      "sha256": "0563804cd5d1cd583bb2015e0d4923cfde4aa646c9081b138362e89ff8d58cf9"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_back.png": {
+      "bytes": 572474,
+      "sha256": "bfef598c1a90bdaa28ae21c9134f73c79c6f10808f2235c257b14c8b7dfadaf7"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front.png": {
+      "bytes": 578779,
+      "sha256": "07df9bf07d53136c4b669c6055bdeda5c843ac1bb9b97eaa42adaac86ef569b2"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front45.png": {
+      "bytes": 583906,
+      "sha256": "2f26bd9706fabd127c3c9fe86b03f09436a40884d66a31a4b46cc276b22839de"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_right.png": {
+      "bytes": 570153,
+      "sha256": "37f5f84213113dff7954429e874b3de3f7b8e9b2be82f1d56e9941bca0c02713"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_back.png": {
+      "bytes": 602094,
+      "sha256": "673ffc55923ff7dbe5ab96408bf3544a9037373d6cf7a7c1664cc935e19738a6"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front.png": {
+      "bytes": 599465,
+      "sha256": "de7adb06f37c73cd07682c34975ed5a072525bdbf2f9eb977192c44c9f9fa78c"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front45.png": {
+      "bytes": 594005,
+      "sha256": "97bf4cf31f12bb67bc9d318c4500c3d366185e0373503f9340ed31abfb9125af"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_right.png": {
+      "bytes": 578838,
+      "sha256": "8774f0d164bead3bb939985368c79abe028d1e87f010d18fb2f9538d11f8244b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_front.png": {
+      "bytes": 543019,
+      "sha256": "f685d636979458a104b66eec1416f7a0c0447528847dd7cfdd3019f7372b9ad0"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_right.png": {
+      "bytes": 546154,
+      "sha256": "6759fed1b1d23d90ae9a303f4cf557ff41a5e46a9d51e0fec389d247663559b7"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/foot_left_oblique.png": {
+      "bytes": 717034,
+      "sha256": "c4a38bb7b7527419d5313fac0323ad04cafc02b8cad85cd28218ca873e25875e"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/hand_left_front.png": {
+      "bytes": 519951,
+      "sha256": "10cb990da935dd0dca52c90e4eaa279cb374891d0c2ba8fc8635d4a0fcb04d27"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/pelvis_back.png": {
+      "bytes": 619805,
+      "sha256": "237e4dfd8304db6ca83489d527b5da2edcf899d2e89f22d759785921b876aae4"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/details/renders.json": {
+      "bytes": 3238,
+      "sha256": "17e0d02fbfb215fa8b27f448917a42cd8672a1e495dfde7790d7d39d16642f7a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/disposition.json": {
+      "bytes": 1021,
+      "sha256": "8f45515d0d40a6ca6f317c17ebe3e9f104e2a7086d2f0c13432705b128f4ad63"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source_freeze.json": {
+      "bytes": 1359,
+      "sha256": "4e7bdd2fa7757b8a1c2c3490f2a87ac3b5047b9eab8458afeba72f44491265d2"
+    },
+    "data/reports/resident_form_refinement/20261025/details_previous.log": {
+      "bytes": 2871,
+      "sha256": "97ad556c0078592627f3dacf9f0d6398e9d3cee29e4d5851abca21d68c9cd107"
+    },
+    "data/reports/resident_form_refinement/20261025/details_previous.run.json": {
+      "bytes": 867,
+      "sha256": "7ea00b68781322ebffaeb786c5a10131dce3ce41c9709c822fc7c62595103b05"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v01.log": {
+      "bytes": 2906,
+      "sha256": "3f082eac834729145045f7063dd699d454238631580ae2e85f9e854f255a1cef"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v01.run.json": {
+      "bytes": 878,
+      "sha256": "4e585cbf63d3e66cc3c456fb2c9e692e23e7c6e18e1215a9e2faaef5f5f3f551"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v02.log": {
+      "bytes": 2906,
+      "sha256": "250ac7151e0ac1eaada43117f9829239e72d11cd2e90d47c49e5a589e32a6c4c"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v02.run.json": {
+      "bytes": 878,
+      "sha256": "1761e1d32bde1ccd3c7186c6708fa5b44b325f519d9bdd1909a9edc171cff79b"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v03.log": {
+      "bytes": 2906,
+      "sha256": "7ae29e0e05e9d2c74af400e792480b393c0ce8916ec6d6f30466d34749c416db"
+    },
+    "data/reports/resident_form_refinement/20261025/details_v03.run.json": {
+      "bytes": 878,
+      "sha256": "10ec0e7851336a013832aa414c28d5782f5e096f759fbf16d1b68c862f4e6644"
+    },
+    "data/reports/resident_form_refinement/20261025/export_audit_peer.json": {
+      "bytes": 46707,
+      "sha256": "0ad202b87c5e950a0250b80dd47216350b87d30a14105c05e7d9e9d1fcb2a442"
+    },
+    "data/reports/resident_form_refinement/20261025/export_audit_peer.py.source": {
+      "bytes": 26891,
+      "sha256": "51810274d9b8652d8d9fb051728a0493c1a83fd58373132868b139d41254cb57"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03.log": {
+      "bytes": 4213,
+      "sha256": "854e265321b72fd318198a9a1d7fbd54354e10fba9b0cfd002ee8bd4892c00a6"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03_error_source/resident_form_m01.glb.import": {
+      "bytes": 1198,
+      "sha256": "3600f6270f4ff5fb09e95f35ec8fadb1dbf4188c8e34610fe581d0b0d3bfba20"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03_error_source/resident_form_m01_previous.glb.import": {
+      "bytes": 1225,
+      "sha256": "e72ebea8293b3cc3f89bf00cef63e18d993c787ea1caff46b3181c9406e3eb4a"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03_fixed.log": {
+      "bytes": 3260,
+      "sha256": "1b3b9e97135e9f5cb395cb19ff35322f59fa42cd740394422afda29daeea7432"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03_fixed.run.json": {
+      "bytes": 277,
+      "sha256": "b68b2085437c9a9d9db24c838d616255c59f1bc6b99c04e3a25f5d2fb54a307e"
+    },
+    "data/reports/resident_form_refinement/20261025/import_v03_rejection.json": {
+      "bytes": 1089,
+      "sha256": "d35f05c6b817e5a3921052c4049992bea7dd199cccfb5d9e7ec787de934d28d9"
+    },
+    "data/reports/resident_form_refinement/20261025/lighting01_disposition.json": {
+      "bytes": 1677,
+      "sha256": "f0759be3fb13cf905bef4d567495e5dd27ed4d08349bed920f0b1fb54aae1890"
+    },
+    "data/reports/resident_form_refinement/20261025/lighting01_normal_game.console.log": {
+      "bytes": 7712,
+      "sha256": "15b993fb6786b56b5f48eede1361acc0e6e5b0adfe10ffdf7fe9a7deb702041f"
+    },
+    "data/reports/resident_form_refinement/20261025/lighting01_normal_game.log": {
+      "bytes": 7712,
+      "sha256": "15b993fb6786b56b5f48eede1361acc0e6e5b0adfe10ffdf7fe9a7deb702041f"
+    },
+    "data/reports/resident_form_refinement/20261025/lighting01_normal_process_started.json": {
+      "bytes": 593,
+      "sha256": "8a4636170abb5099bc6db8b62ff4b8779e08da164271935dcf737a9bf8144aab"
+    },
+    "data/reports/resident_form_refinement/20261025/normal_game.console.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_form_refinement/20261025/normal_game.log": {
+      "bytes": 15285,
+      "sha256": "df5a7bc3ccfe36fbe3c9e6bf7940468a46cbb3707a20b081c41fbc29729fff9d"
+    },
+    "data/reports/resident_form_refinement/20261025/normal_launch.json": {
+      "bytes": 7028,
+      "sha256": "096f629bc20bcb2649868988b4980373c638f286f30fc7e1dad739d333a42fcd"
+    },
+    "data/reports/resident_form_refinement/20261025/normal_process_started.json": {
+      "bytes": 538,
+      "sha256": "cac7c5dc3f27751fdb994382c0669f94cbc694ce634d08ec52d4a779d6cb7fdd"
+    },
+    "data/reports/resident_form_refinement/20261025/os/final_open_oblique.jpg": {
+      "bytes": 70883,
+      "sha256": "8e61a220bd908b38a21baff24d828552ac52cfd1b59dab2f38d0597761c47dad"
+    },
+    "data/reports/resident_form_refinement/20261025/os/menu_entry.jpg": {
+      "bytes": 173028,
+      "sha256": "32733fe5a1a3cc35e0ffcf7cfca0cfe07d14ca5eeb6c65075bf739006b5f4524"
+    },
+    "data/reports/resident_form_refinement/20261025/os/new_arm_raise_front.jpg": {
+      "bytes": 66037,
+      "sha256": "e43a5282770d9f6f97f4f57ba3f2f899456c4aa24c7feb0781dcf71d8214c566"
+    },
+    "data/reports/resident_form_refinement/20261025/os/new_back.jpg": {
+      "bytes": 70669,
+      "sha256": "95e7a7eaa620aa869fecf129e996c8a486733d5ba2fdbeba8a62ee299d323c4d"
+    },
+    "data/reports/resident_form_refinement/20261025/os/new_front.jpg": {
+      "bytes": 72170,
+      "sha256": "790909654505ef9c2bc836029bab3fbb1aebfbf2c7da933195049de67e616f4e"
+    },
+    "data/reports/resident_form_refinement/20261025/os/new_squat_side.jpg": {
+      "bytes": 64753,
+      "sha256": "c9a7b00db4e35d2477502bb7509b33c36f5eb281609bef75807a73ada34a8a79"
+    },
+    "data/reports/resident_form_refinement/20261025/os/previous_squat_side.jpg": {
+      "bytes": 65477,
+      "sha256": "00e10accfebf759ec9f2fc55c1fda32172682783d1f6c21e3542a676eb238c09"
+    },
+    "data/reports/resident_form_refinement/20261025/os/returned_world.jpg": {
+      "bytes": 164786,
+      "sha256": "92dd74014fdbe44e3f8318d3b8f46fd68764b763b5b530e96efd188898515fa7"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/menu_entry.jpg": {
+      "bytes": 173036,
+      "sha256": "c339331336c609a85468045b83a120a52313251313333ee677bdc819c7030d94"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/new_arm_raise_front.jpg": {
+      "bytes": 65603,
+      "sha256": "a02911c45a0952feb42a332c0d88b9c31c20ae915387c282053d9978143213ed"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/new_back.jpg": {
+      "bytes": 68214,
+      "sha256": "380fcd7946168cb97376790516179e51ac62cfca08cfbc0b32d98e30d552c17f"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/new_front.jpg": {
+      "bytes": 71680,
+      "sha256": "572e4f28cd6b8a85848e1ac9c9d62fdcdfc6ec2f860070f6bfacd9825d55148f"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/new_squat_side.jpg": {
+      "bytes": 63595,
+      "sha256": "c9eefd3c8599290d97045da05fd9b1d36659131abbf885a942d978b8ba158230"
+    },
+    "data/reports/resident_form_refinement/20261025/os_lighting01_rejected/previous_squat_side.jpg": {
+      "bytes": 64347,
+      "sha256": "826992c9ee4f64b53daaa7de1d2fa161290ea41313509143f8644722721f8112"
+    },
+    "data/reports/resident_form_refinement/20261025/reference_observation.json": {
+      "bytes": 1081,
+      "sha256": "fc73f201786d9706a537f6193625b50a909cffdb3d09e9716e96308ddb05f6e8"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01.console.log": {
+      "bytes": 5944,
+      "sha256": "c1e11462a1971e9027efadebd86bc3b5872089ff695cf09a7c008f3b513f6819"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01.json": {
+      "bytes": 802298,
+      "sha256": "03f95dcf7278d43b245dee449b48208b25dc1aeef4f718fd7b5ef0e572d4cff7"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01.log": {
+      "bytes": 5944,
+      "sha256": "c1e11462a1971e9027efadebd86bc3b5872089ff695cf09a7c008f3b513f6819"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01.run.json": {
+      "bytes": 3455,
+      "sha256": "af5297b2e9f2bfe36628378f5f02527669901ccede5cfe51890b1a73010b7510"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 26040,
+      "sha256": "f412068277babdd59ae2e44bedbe1fb4af9fcf1183abc754d03136defebda5f3"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 16358,
+      "sha256": "e22a0ae498110ca5e8a76588d6ca626a83fe6bb4f997bbac83ce0ff834fbdf6c"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 4495,
+      "sha256": "8d0e0a54ae02fc241d896d4078f9d747d1ebc77ebf7e664071fe61195f466be0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02.console.log": {
+      "bytes": 5944,
+      "sha256": "c1e11462a1971e9027efadebd86bc3b5872089ff695cf09a7c008f3b513f6819"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02.json": {
+      "bytes": 860780,
+      "sha256": "06a3e0a8e2315a082779e0e399917830b4a9ef3857a42588c45faa76dbd916ae"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02.log": {
+      "bytes": 5944,
+      "sha256": "c1e11462a1971e9027efadebd86bc3b5872089ff695cf09a7c008f3b513f6819"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02.run.json": {
+      "bytes": 3455,
+      "sha256": "cb3e8c90102475b1f304cfb2868c491afd610dc697a090fc71ff68303cd3757b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 26915,
+      "sha256": "c2761580b5a73e43840b195366f6939a3a1911e246de02a477cf9fc6e06c2503"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 16693,
+      "sha256": "5e963be7aa3ee093b87d940b7a8436a3c94316b79c21ca83e4e3ccaf35903234"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 4495,
+      "sha256": "8d0e0a54ae02fc241d896d4078f9d747d1ebc77ebf7e664071fe61195f466be0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_headless_final02_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01.console.log": {
+      "bytes": 9692,
+      "sha256": "b8d83251fa83cf88df10a04bbfa36e774c5cbe2b6065f7bcd886b94b28afa130"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01.json": {
+      "bytes": 919056,
+      "sha256": "d55e83b1d2297f6bfe81c881ec68f2e0c45b987cca46ab6ad5b5828b6cea49d3"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01.log": {
+      "bytes": 9692,
+      "sha256": "b8d83251fa83cf88df10a04bbfa36e774c5cbe2b6065f7bcd886b94b28afa130"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01.run.json": {
+      "bytes": 3432,
+      "sha256": "1a3e71b987dca711bb195051adbb9102b276da444a1713dd3e8f248c8abc6703"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_a_pose_back.png": {
+      "bytes": 67912,
+      "sha256": "ebf2f629d1cf1c1c44600bda8f3a65f40f7cd85ee840a7ac7291855674143d62"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_a_pose_front.png": {
+      "bytes": 69401,
+      "sha256": "4fa04eb9a1bc6665e8a166e81968a00bd40a06d7a1e511189b5f53b7ff6c8ff6"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_a_pose_oblique.png": {
+      "bytes": 66042,
+      "sha256": "a64b0e27db6527fb759613cfd595c6fcb07da760c44dd7a1bb9f80685d22fd71"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_a_pose_right.png": {
+      "bytes": 51523,
+      "sha256": "ee6cc7128706b9fc7bf47fcc620707d512fafc6b61a3544c6ef1b0de15bab201"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_arm_raise_back.png": {
+      "bytes": 57231,
+      "sha256": "da0018c9c89f5b01e0b6787af9c3eed56f5acd1f1c9a2a3e65a2da75d70aa90b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_arm_raise_front.png": {
+      "bytes": 56308,
+      "sha256": "aa5441187bfaa4a45a0fcbdb839c392f031572d92d28d8da678b90a4ca2fa1a5"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_arm_raise_oblique.png": {
+      "bytes": 56111,
+      "sha256": "992ffc7b413bdb05b0fae18f31505864c57a5a29afe6037a4b13157fe4a8b3fc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_arm_raise_right.png": {
+      "bytes": 46524,
+      "sha256": "80a481481a49eee2802b31b2e499f3c8bfc80b834b2f5fe442686cc77c701bcc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_deep_squat_back.png": {
+      "bytes": 60927,
+      "sha256": "a1c99c0ba47544ed7efd5b48cbe93e63f3342e79e81f6c8f856ee2cc7ce53f19"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_deep_squat_front.png": {
+      "bytes": 61622,
+      "sha256": "bb8ce42c6ac79cc059a156361cd6562363e3a1277dd77828174c6d573bc22e31"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_deep_squat_oblique.png": {
+      "bytes": 63513,
+      "sha256": "a1f455c8c5ef3ecd577172341994531b836c2f7d44714a7bfa5b259e70bc9009"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_deep_squat_right.png": {
+      "bytes": 55317,
+      "sha256": "9011ef3612fc5272986aaffbca4a2b625c5dd37a00f8ee0ba999f270bac55660"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_single_support_back.png": {
+      "bytes": 67933,
+      "sha256": "3b1291cabff79c92dc1e7b62b0cae877900eb656b9f9226a9689177100fbc1ac"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_single_support_front.png": {
+      "bytes": 68633,
+      "sha256": "625a088835714c4fd6487c289582fb9c5d9a8e6f9cc020e2b25b2d089c1f61eb"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_single_support_oblique.png": {
+      "bytes": 66280,
+      "sha256": "05d232ccf59db4ce11ee1fcc240a6297635b69ba0c656eccfea070588fc8b714"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_new_single_support_right.png": {
+      "bytes": 56558,
+      "sha256": "f4d4d95b11d360490b09a91f8a825325e8f814499548f1b5afb0a7947a2f9d1c"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_a_pose_back.png": {
+      "bytes": 67639,
+      "sha256": "3d17c2814c82e9b2952b6328b973ae32beb1fe2c89f95fcd92175136469a4994"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_a_pose_front.png": {
+      "bytes": 69144,
+      "sha256": "4eee716883f111e833a3121267024ebc5012ad9228ea20b161b2d6b6eb1d83cd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_a_pose_oblique.png": {
+      "bytes": 65274,
+      "sha256": "af518710dbcb967836b714971cdb8a89fe4b2718f9ce136b12b4f922d773f043"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_a_pose_right.png": {
+      "bytes": 51288,
+      "sha256": "eada4c20059401a538ee86bd17c6a260b9117262b846444a98de5ebe22ac68cd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_arm_raise_back.png": {
+      "bytes": 57583,
+      "sha256": "325cde90b10bd155d42f74b5d4573918322b88d8a07c19df834ebc1f5b76741f"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_arm_raise_front.png": {
+      "bytes": 56205,
+      "sha256": "ba22997c2601c075bdbfb33cbfb6587285dd6fb751a6da6ccfcd631f6f165613"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_arm_raise_oblique.png": {
+      "bytes": 55533,
+      "sha256": "f06246561abe66dea29e93aef6b94a052c53e7d4f85b1e1290f9601c592735cc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_arm_raise_right.png": {
+      "bytes": 46647,
+      "sha256": "fa71ab3a41755d5035a154b31e1e102af8c4595cdc1d8118ecaf9e5b7a61ff79"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_deep_squat_back.png": {
+      "bytes": 61448,
+      "sha256": "ed1012c88a2bf2bc6a027dabfb5a0940a3feef163153ba90db748ee5b6d2a0f7"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_deep_squat_front.png": {
+      "bytes": 61600,
+      "sha256": "0269bf97c5d14c156ce2f9dee94c5c5278abca4a6ae374ec011d0ebdbba3132c"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_deep_squat_oblique.png": {
+      "bytes": 63054,
+      "sha256": "3f2672391372eb6c28b1e4d8529bbdb07865f627e3944ac4d7515851486d6633"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_deep_squat_right.png": {
+      "bytes": 55869,
+      "sha256": "fb1bf6d39c582a204b7d13588e73c0b159b264972db0a3436ef3846d53cd71a3"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_single_support_back.png": {
+      "bytes": 67982,
+      "sha256": "e2a6042668c91b94a7fc28656d8239c0f4650588895740fbebd0379823ab75a6"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_single_support_front.png": {
+      "bytes": 68174,
+      "sha256": "e9836a06749476f865aeb05d3b6e6f7b84f5d921c7b250b045e3e9629050cd1d"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_single_support_oblique.png": {
+      "bytes": 66093,
+      "sha256": "d46639a991058783a06b6d96e5ccec744c75ebe47cc7645c341eaa65684a65a9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_previous_single_support_right.png": {
+      "bytes": 56340,
+      "sha256": "0bc39c342c70de87e598435f11af4b3a3ef41da1b2a01a263853b33e308cd6d0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 26040,
+      "sha256": "f412068277babdd59ae2e44bedbe1fb4af9fcf1183abc754d03136defebda5f3"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 16358,
+      "sha256": "e22a0ae498110ca5e8a76588d6ca626a83fe6bb4f997bbac83ce0ff834fbdf6c"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 4495,
+      "sha256": "8d0e0a54ae02fc241d896d4078f9d747d1ebc77ebf7e664071fe61195f466be0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final01_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02.console.log": {
+      "bytes": 9692,
+      "sha256": "b8d83251fa83cf88df10a04bbfa36e774c5cbe2b6065f7bcd886b94b28afa130"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02.json": {
+      "bytes": 1039874,
+      "sha256": "276ff73a11a43d0b70d04b89a3549eb8ea0437537e09e42806374ef8260d80cc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02.log": {
+      "bytes": 9692,
+      "sha256": "b8d83251fa83cf88df10a04bbfa36e774c5cbe2b6065f7bcd886b94b28afa130"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02.run.json": {
+      "bytes": 3433,
+      "sha256": "138ec8e8d419d5c1561d581e6b24d52e0e212119c41432838a4dd7451587ecfc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_a_pose_back.png": {
+      "bytes": 70317,
+      "sha256": "8ad01c238d8509ab414a9839bd4d7fd99edd60aa8fa898496b9bf41dc31aec51"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_a_pose_front.png": {
+      "bytes": 70385,
+      "sha256": "7e58c3a00ce7b461f8989cc325c72d4d670900705c7750d1c1749c99229cb64e"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_a_pose_oblique.png": {
+      "bytes": 66200,
+      "sha256": "7d88d3bbef115bef78f44b537eccc27f2410966022f97b63c053e4032cd235ea"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_a_pose_right.png": {
+      "bytes": 52314,
+      "sha256": "dd2e3ccaf259d5222e8d4ee9ff56e4da65fb2c3e23674d36df8f3d2c62dec8e2"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_arm_raise_back.png": {
+      "bytes": 58899,
+      "sha256": "281e1cdad1ac4a8a10d12c8502447746367497d1e7968402cb0c4ab4578b744e"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_arm_raise_front.png": {
+      "bytes": 57207,
+      "sha256": "881536081777506964b56795803dc825104d5cef19ed78fe9648fa3bebf5ed90"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_arm_raise_oblique.png": {
+      "bytes": 56085,
+      "sha256": "79ce9cb140732dbd09af06ae27452bd9a7cf51fc9c5389991c1a639e743951f6"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_arm_raise_right.png": {
+      "bytes": 46917,
+      "sha256": "803a07f4b216a37b95d1319ce20c4455cb2018ec010383070cf78e483cd5161d"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_deep_squat_back.png": {
+      "bytes": 62628,
+      "sha256": "ca5597ecb267d7d8ce646b4b1216b3aef655860b676d05a84ea61a6a63567311"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_deep_squat_front.png": {
+      "bytes": 63201,
+      "sha256": "80895f9e010085efba9ab1984f05215aea40091438cc4b034ee1cc6b97e0c194"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_deep_squat_oblique.png": {
+      "bytes": 63448,
+      "sha256": "33fd6cdd8a37fac1421b7ede58b366c8db42eafce01df6323d8ec26696ac37e9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_deep_squat_right.png": {
+      "bytes": 57223,
+      "sha256": "e170482f24253a93010437c56dd9bdfa52cd657229ec8822ada140a21e9beeb7"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_single_support_back.png": {
+      "bytes": 70503,
+      "sha256": "c48faec2ec1e2aaf8da929347e444ac91637ef085cc6a8836f23ae872c664ab2"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_single_support_front.png": {
+      "bytes": 69479,
+      "sha256": "ff1b50b0e7b9ad1256fc4a7c3a7573618d22448f50419282c9455b6df91bd7d4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_single_support_oblique.png": {
+      "bytes": 66372,
+      "sha256": "34689754ffdd9549388d9e2590315942f00e510e0fb9fe946f39313c559bacb8"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_new_single_support_right.png": {
+      "bytes": 57711,
+      "sha256": "402a02851c3420cb026730a47c63557c42a60439844810e6a44b6e37073ae0c4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_a_pose_back.png": {
+      "bytes": 70177,
+      "sha256": "c05aca4e3cf85eb759d7e0642dd112a9e0f3e063addf7932c7f4a521299fd9ef"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_a_pose_front.png": {
+      "bytes": 70463,
+      "sha256": "bda616c1ced9455be7e35169bd609c7c100d7754caec571c20fc041c33254be7"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_a_pose_oblique.png": {
+      "bytes": 65286,
+      "sha256": "534942b4e4607cdc8c285e36eb9f11127d23ec10489187ce51427b1fc3fe8020"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_a_pose_right.png": {
+      "bytes": 52205,
+      "sha256": "86ae7f2fe6e98664e468cbfc96f4ae581fe8b64e359cf543f4268bd11cdb5e75"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_arm_raise_back.png": {
+      "bytes": 59195,
+      "sha256": "11459479de2feae5accac2136a4819d0b3302eea0c90276e72aa541578c7296b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_arm_raise_front.png": {
+      "bytes": 57476,
+      "sha256": "769d6df39c2270badbec42f1f0f8aa5ed1d3e3ea1dd2e2c2dc8ee9db09fca38e"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_arm_raise_oblique.png": {
+      "bytes": 55732,
+      "sha256": "b8962f9528f30eb7e496217029fdb9e6abc20f0f478ac7148e82603d1cbc10fc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_arm_raise_right.png": {
+      "bytes": 47370,
+      "sha256": "add19497e9af7024868d89aa0c35829f14c8955a878091943f2a6fd7b26b68a7"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_deep_squat_back.png": {
+      "bytes": 63176,
+      "sha256": "6429cfd3136c7178dedd2e60fe0a96bc954dc47aca78105821c4cadcbbf07d99"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_deep_squat_front.png": {
+      "bytes": 63405,
+      "sha256": "a39bdc6d428f0dbb25e77889d507e046dd4b7bc8842c11dfd2ce2f2021498afc"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_deep_squat_oblique.png": {
+      "bytes": 62978,
+      "sha256": "d178aa7443fd9ed347e1968123c179841bd794789bcb552dd0d224964ad54bd0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_deep_squat_right.png": {
+      "bytes": 57763,
+      "sha256": "1925bde370ce985d01040b4ec5040ff700f328e4aabaccf87877731cc29fa1e4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_single_support_back.png": {
+      "bytes": 70792,
+      "sha256": "943e3e9bf71772faefb63b53ca98f681177fea9eeeab43bd6286dfc3a6c4395b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_single_support_front.png": {
+      "bytes": 69690,
+      "sha256": "c2c95cd4b3e59ca6038c31b578363ee483fa206861e86cdff12fefb71a1e09ac"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_single_support_oblique.png": {
+      "bytes": 65813,
+      "sha256": "3c497f13fa19b84bf4ec7c6e4f54b9f93012dd7d10aa45a9b70eaaab4b1d0759"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_previous_single_support_right.png": {
+      "bytes": 57688,
+      "sha256": "1bb65ba98efd6b886c74cc0da0dd70b292a7af2c3d498c00b6e7a834d8828c3a"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/game/scripts/study/resident_form_study.gd": {
+      "bytes": 26915,
+      "sha256": "c2761580b5a73e43840b195366f6939a3a1911e246de02a477cf9fc6e06c2503"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tests/game/check_resident_form_study.gd": {
+      "bytes": 16693,
+      "sha256": "5e963be7aa3ee093b87d940b7a8436a3c94316b79c21ca83e4e3ccaf35903234"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tools/run_resident_form_study_acceptance.py": {
+      "bytes": 4495,
+      "sha256": "8d0e0a54ae02fc241d896d4078f9d747d1ebc77ebf7e664071fe61195f466be0"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/refinement_native_final02_source/tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/studio_visual_review_peer.json": {
+      "bytes": 38879,
+      "sha256": "d0752f30c6d777f2042332f7b5ca026b3f85edcbd5c02b39d397059abcd9001f"
+    },
+    "data/reports/resident_form_refinement/20261025/user_preferences_after.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_form_refinement/20261025/user_preferences_before.json": {
+      "bytes": 439,
+      "sha256": "947f862067ee36ab4b50de83e955c86225c320e4c1d3d7f7d0bef20ac1d1d6b2"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.json": {
+      "bytes": 5219,
+      "sha256": "cace5353c291e81850ee80a420da56154fe2a389bc375fa6580d2e48a70e47a6"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.py.source": {
+      "bytes": 4633,
+      "sha256": "e68b074667f7e3b0f4069a405c489265a42c0949dfc2a4ca61358d4042d4d6a4"
+    },
+    "data/reports/resident_form_refinement/20261025/visual_review_peer.json": {
+      "bytes": 46509,
+      "sha256": "19131beb3e96c2317c63191ab452cfecbe61a76e8957c77ef5379b1436959427"
+    },
+    "data/reports/resident_form_refinement/20261025/visual_review_peer_final01_rear_lighting_rejected.json": {
+      "bytes": 37135,
+      "sha256": "89f102215a8bb2143603b0bde014376081e015b6166f4511cba92ad5540536f4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_back.png": {
+      "bytes": 597040,
+      "sha256": "17c7ff27bfcfa1cac49c2423013a6e3359921e46a3523f5c4373cf76ae1bb488"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front.png": {
+      "bytes": 595304,
+      "sha256": "335c4cee0612007c2d7b05676c943d4957035aaf59ed5f23d0b35e04b31d55f4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front45.png": {
+      "bytes": 592158,
+      "sha256": "524f2cc97cb736f5a82cdfc879bb4dddbf532db66b508be58efd92d92b43f441"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_right.png": {
+      "bytes": 560775,
+      "sha256": "d11291f7ea7ff3ae105a4b46eda32ded91360c35dbb2933d43a3c5984f002aa4"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_back.png": {
+      "bytes": 599812,
+      "sha256": "54569fd431530d07924779aba94236609279dad89006c52cce22eb70ccd42b87"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front.png": {
+      "bytes": 597640,
+      "sha256": "3ea58ff3a072e42984b22d81173a475c296a6c149a940b0d9446d43bc3901cdd"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front45.png": {
+      "bytes": 599436,
+      "sha256": "116877cc7de2e86360abaaecea9617c5f825b481a1f507a876276964e87084a5"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_right.png": {
+      "bytes": 567597,
+      "sha256": "0301bd12f35b7503d810112908d620b40087df037ca4db458fa5b15432d6fd5b"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_back.png": {
+      "bytes": 571385,
+      "sha256": "96eb2e82efaf5e9ea6d91841a72be8ab049a671d7d8f4f3ca4b706671375a5c7"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front.png": {
+      "bytes": 577470,
+      "sha256": "b325a66cd824df17b3c556ce6634acd7a8a002c47604b1f3bf38dfdc5ad881a9"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front45.png": {
+      "bytes": 582591,
+      "sha256": "65ddd62eb0e5e38e28073e2c0f54b786d903080f9808323ba4f58bb5025cad40"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_right.png": {
+      "bytes": 569957,
+      "sha256": "10ea221a494dd2e6e726754a5ce600b0b6c0f3c9e34f3cffa1e7e7d88ceec8dc"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_back.png": {
+      "bytes": 600180,
+      "sha256": "22866f74befa8a3a68e28d0bdfd445574f47bda917b1e42cda377d427b66fb44"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front.png": {
+      "bytes": 597382,
+      "sha256": "beae4fb5f0218bb19fe0fc2e791f430dd875c4ac3440572752a2f12c1ddc6cad"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front45.png": {
+      "bytes": 591918,
+      "sha256": "1888db1850566a94214a55f9bac0b577a2f6bb030e0ef6efbfc02c5c8ef48ac7"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_right.png": {
+      "bytes": 577855,
+      "sha256": "c2269d539b39d82e1d4b93f8f31d52812a5b39b756700a825feb35b2b4d24b9a"
+    },
+    "docs/ATTRIBUTION.md": {
+      "bytes": 30080,
+      "sha256": "7e04cb5c1561898a824fe5167c028929882853ca612059b48e4b5440692d8995"
+    },
+    "docs/CHARACTER_IDENTITIES.md": {
+      "bytes": 12429,
+      "sha256": "0af2fbedfdc35a3052fd5805928f55ae690c3ef014e9b6d0d8b183fbbcfedfe8"
+    },
+    "docs/EXECUTION_LOG.md": {
+      "bytes": 363329,
+      "sha256": "d1bcdf7be39894f4babec3d4e16e425e7b8e91a51868b3bb0b03cb0cee343587"
+    },
+    "docs/IMPLEMENTATION_TASKS.md": {
+      "bytes": 92589,
+      "sha256": "2a55d98cec1e2f8ba596e66f2716ff86c466109eaaadcf85e881b972599662a7"
+    },
+    "docs/PROJECT_CONTEXT.md": {
+      "bytes": 69527,
+      "sha256": "a95179617394373f0e6a6416c25292b0816363e3d183000988067b1149ec94a2"
+    },
+    "docs/README.md": {
+      "bytes": 4089,
+      "sha256": "4d6a24a5a968a3cdadd9909c2bef4ef010b073cfa9e3d8a726af8d2a8fdcb910"
+    },
+    "docs/RUN_GUIDE.md": {
+      "bytes": 58323,
+      "sha256": "fc384283a87c7a9fcf6e23d94ac6ac463de3d43f2cdfe8910f94058c1efe92c3"
+    },
+    "docs/SOL_HANDOFF.md": {
+      "bytes": 55994,
+      "sha256": "7eae68b4385b8696cc5f456acaab99caf8b720908ff2989c5fed577036ff41f4"
+    },
+    "docs/VALIDATION_PLAN.md": {
+      "bytes": 134666,
+      "sha256": "b5989e56a656be04c5bb580f5358c71b58435a6abbeed23c9993569fa39cbb57"
+    },
+    "docs/WORK_STATUS.md": {
+      "bytes": 150967,
+      "sha256": "3db6bb4b53da4893366a5baa27290a5bc2b13b5af3539b313103521e20303273"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "game/assets/original/resident_study/resident_form_m01.glb.import": {
+      "bytes": 1199,
+      "sha256": "ac9c83cd1569a77911978bf19ff65205a879724d86d86edac188fc36ed4c0a90"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb": {
+      "bytes": 5070984,
+      "sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb.import": {
+      "bytes": 1226,
+      "sha256": "93273bfaa4c8a2af12642adff16b8ee6fb43a489f382e8b92e7dfa1add2df3f4"
+    },
+    "game/project.godot": {
+      "bytes": 1349,
+      "sha256": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec"
+    },
+    "game/scenes/study/resident_form_study.tscn": {
+      "bytes": 205,
+      "sha256": "6b4102d4da2cde4d42ed2904204a7d094439c5829b1f99c6493a00eb06a4a8a9"
+    },
+    "game/scenes/world/explore_walk.tscn": {
+      "bytes": 589,
+      "sha256": "55377d0e234551da1b561c03dd08f335a609e6708036827a420a5814cfe67939"
+    },
+    "game/scripts/explore_walk.gd": {
+      "bytes": 67549,
+      "sha256": "4ee617cd4a966d055c1e1b22a34c42f617877976161fd2daa17d98aa749ab4fd"
+    },
+    "game/scripts/player/exploration_avatar.gd": {
+      "bytes": 42580,
+      "sha256": "107df173ebe7db3c569797cccdcd6914e127a5b6cdff222693205106fbde52b1"
+    },
+    "game/scripts/player/textured_human_rig.gd": {
+      "bytes": 40584,
+      "sha256": "02726f6b8f284373e7eac5dc6ebceb810dd354d65b1a926e3c8db7db71869f49"
+    },
+    "game/scripts/player/textured_human_surface.gd": {
+      "bytes": 20807,
+      "sha256": "a53e7dc380da10af50113a44f22a3e31a74426c3accbf732cab25724bfc82611"
+    },
+    "game/scripts/player_fixture.gd": {
+      "bytes": 9533,
+      "sha256": "462df234fbbe5cc14b2c7d5317d837075efd1e7424771417e370532aada91be6"
+    },
+    "game/scripts/study/resident_form_study.gd": {
+      "bytes": 26915,
+      "sha256": "c2761580b5a73e43840b195366f6939a3a1911e246de02a477cf9fc6e06c2503"
+    },
+    "tests/game/check_resident_form_study.gd": {
+      "bytes": 16693,
+      "sha256": "5e963be7aa3ee093b87d940b7a8436a3c94316b79c21ca83e4e3ccaf35903234"
+    },
+    "tools/check_resident_form_handoff.py": {
+      "bytes": 18761,
+      "sha256": "b3564b1bf15cff11bcaf9a302c22f7961495d4b4fb61028cb2b108c8cf363d6b"
+    },
+    "tools/check_resident_form_refinement_handoff.py": {
+      "bytes": 18594,
+      "sha256": "6469e7c5c3921380bf5ebe200527048339e9cc7f5214dff3c1db1fbe7ab44176"
+    },
+    "tools/render_resident_form_details.py": {
+      "bytes": 2850,
+      "sha256": "0bede65967ea65e39fa98d4467312878a0b677703561ac5fdfda4827666d812c"
+    },
+    "tools/run_resident_form_study_acceptance.py": {
+      "bytes": 4495,
+      "sha256": "8d0e0a54ae02fc241d896d4078f9d747d1ebc77ebf7e664071fe61195f466be0"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    }
+  },
+  "integrity_checker_scope": "Read stored evidence/current sizes and SHA only. No fresh engine, OS, gameplay or human art acceptance."
+}

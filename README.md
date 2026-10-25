@@ -40,16 +40,16 @@
 
 [조작과 실제 검증·남은 한계](docs/HUMAN_GAIT_AND_LIFE.md)에서 현재 범위를 확인할 수 있습니다.
 
-## 무채색 인체 원형 검토 · 2026-10-25
+## 무채색 인체 원형 다듬기 · 2026-10-25
 
-기존 캐릭터의 형태에 대한 피드백을 받아, **편집 가능한 Blender 인체 원형 한 명과 새 골격**을 별도로 만들었습니다. Esc 메뉴의 **인체 원형 비교 · 무채색**에서 앞·옆·뒤·45도와 팔 올림·앉기·한발 지지를 확인합니다. 이전 모델은 원본 기본 자세로 같은 조명·재질에서 비교합니다.
+흉곽·골반·팔/다리의 큰 면, 손바닥과 관절, 발등·아치·개별 발가락을 **편집 가능한 Blender 원본**에서 다듬었습니다. Esc 메뉴의 **인체 원형 비교 · 무채색**에서 개선 원형과 이전 v04를 앞·옆·뒤·45도 및 팔 올림·앉기·한발 지지로 비교합니다. 두 모델 모두 원본 자세를 같은 조명·재질에서 재생합니다.
 
-현재는 스크립트로 작성한 제어 메시의 형태 검토 단계입니다. 얼굴·어깨·골반·손발의 조형은 여전히 단순하며 실사 캐릭터 완성이나 자연스러운 연속 보행을 수용한 결과는 아닙니다. 기존 플레이 캐릭터는 유지합니다. [Blender 원본](art/characters/resident_form_m01.blend) · [현재 검사·실패 기록](data/reports/resident_form_study/20261025/summary.json) · [제작 방식과 남은 과제](docs/CHARACTER_IDENTITIES.md)
+현재는 인체 형태를 검토하는 단계입니다. 얼굴·어깨/골반 관절·손발의 조형과 연속 보행은 더 작업해야 하며, 기존 플레이 캐릭터는 유지합니다. 새 가중치 실험에서 나온 대퇴/겨드랑이 변형 실패도 보존했습니다. [Blender 원본](art/characters/resident_form_m01.blend) · [현재 검사·실패 기록](data/reports/resident_form_refinement/20261025/summary.json) · [제작 방식과 한계](docs/CHARACTER_IDENTITIES.md)
 
 <details>
-<summary>실제 게임에서 연 무채색 검토 화면</summary>
+<summary>실제 게임에서 연 무채색 비교 화면</summary>
 
-![일반 게임 메뉴에서 직접 연 새 인체 원형의 사선 검토 화면](data/reports/resident_form_study/20261025/os/final_open_oblique.jpg)
+![실제 게임 메뉴에서 연 개선 인체 원형의 사선 검토 화면](data/reports/resident_form_refinement/20261025/os/final_open_oblique.jpg)
 
 </details>
 

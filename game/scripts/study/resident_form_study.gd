@@ -4,7 +4,11 @@ extends Node3D
 signal selection_changed
 const SOURCES := {
 	"new": "res://assets/original/resident_study/resident_form_m01.glb",
-	"previous": "res://assets/original/seoul_resident/seoul_resident_m01_swim.glb"
+	"previous": "res://assets/original/resident_study/resident_form_m01_previous.glb"
+}
+const MANIFESTS := {
+	"new": "res://assets/original/resident_study/FORM_STUDY_MANIFEST.json",
+	"previous": "res://assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json"
 }
 const POSES: Array[String] = ["a_pose", "arm_raise", "deep_squat", "single_support"]
 const VIEWS := {"front": 0., "right": 90., "back": 180., "oblique": 45.}
@@ -31,6 +35,7 @@ var review_mode := false
 var automatic := false
 var camera: Camera3D
 var key_light: DirectionalLight3D
+var fill_light: DirectionalLight3D
 var environment: Environment
 var model_anchor: Node3D
 var model_root: Node3D
@@ -48,6 +53,8 @@ var _rest_world: Array[Transform3D] = []
 var _materials: Array[Dictionary] = []
 var _rest_bounds := AABB()
 var _source_sha := ""
+var _manifest: Dictionary = {}
+var _manifest_sha := ""
 var _clip := ""
 var _strategy := ""
 var _buttons: Dictionary = {}
@@ -98,7 +105,7 @@ func _make_stage() -> void:
 	environment.background_color = Color(.22, .22, .22)
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color.WHITE
-	environment.ambient_light_energy = .20
+	environment.ambient_light_energy = .30
 	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	environment.tonemap_exposure = 1.
 	environment.ssao_enabled = true
@@ -109,10 +116,10 @@ func _make_stage() -> void:
 	key_light.light_color = Color.WHITE; key_light.light_energy = 1.15
 	key_light.shadow_enabled = true; key_light.directional_shadow_max_distance = 12.
 	add_child(key_light)
-	var fill := DirectionalLight3D.new()
-	fill.name = "FixedNeutralFill"; fill.rotation_degrees = Vector3(-20, 130, 0)
-	fill.light_color = Color.WHITE; fill.light_energy = .18; fill.shadow_enabled = false
-	add_child(fill)
+	fill_light = DirectionalLight3D.new()
+	fill_light.name = "FixedNeutralFill"; fill_light.rotation_degrees = Vector3(-20, 130, 0)
+	fill_light.light_color = Color.WHITE; fill_light.light_energy = .55; fill_light.shadow_enabled = false
+	add_child(fill_light)
 	clay = _make_material(Color(.52, .52, .52), .72)
 	clay.resource_name = "StudyOnlyMatteGray"
 	clay.vertex_color_use_as_albedo = false
@@ -151,7 +158,7 @@ func _make_ui() -> void:
 	var source_row := HBoxContainer.new(); column.add_child(source_row)
 	var title := Label.new(); title.text = "인체 원형 비교"; source_row.add_child(title)
 	_button(source_row, "model_new", "새 원형", select_model.bind("new"))
-	_button(source_row, "model_previous", "이전 모델", select_model.bind("previous"))
+	_button(source_row, "model_previous", "이전 원형(v04)", select_model.bind("previous"))
 	status = Label.new(); status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT; source_row.add_child(status)
 	_button(source_row, "return_city", "거리로 돌아가기", _return_city)
@@ -162,7 +169,7 @@ func _make_ui() -> void:
 	var poses := HBoxContainer.new(); column.add_child(poses)
 	for entry: Array in [["a_pose", "기본 자세"], ["arm_raise", "팔 올림"], ["deep_squat", "깊은 앉기"], ["single_support", "한발 지지"]]:
 		_button(poses, "pose_"+entry[0], entry[1], apply_pose.bind(entry[0]))
-	var note := Label.new(); note.text = "동일 렌즈·조명·무채색 / 이전 모델은 원본 기본자세·수영복 형상 유지"
+	var note := Label.new(); note.text = "동일 렌즈·조명·무채색 / 양쪽 원형의 원본 자세·모프 재생"
 	note.add_theme_font_size_override("font_size", 13); poses.add_child(note)
 
 func _toggle_automatic() -> void:
@@ -196,9 +203,7 @@ func set_view(title: String) -> bool:
 	return true
 
 func _role_name(role: String, side := "") -> String:
-	if selected_model == "new": return role+("."+side if not side.is_empty() else "")
-	var aliases := {"pelvis":"Pelvis", "spine":"Spine", "chest":"Spine2", "neck":"Neck", "head":"Head", "clavicle":"Clavicle", "upper_arm":"UpperArm", "forearm":"Forearm", "hand":"Hand", "thigh":"Thigh", "shin":"Calf", "foot":"Foot", "toe":"Toe0"}
-	return "Bip01 "+(side+" " if not side.is_empty() else "")+String(aliases.get(role, role))
+	return role+("."+side if not side.is_empty() else "")
 
 func _bone(role: String, side := "") -> int:
 	return skeleton.find_bone(_role_name(role, side)) if is_instance_valid(skeleton) else -1
@@ -208,15 +213,17 @@ func select_model(title: String) -> bool:
 	if is_instance_valid(model_root):
 		model_root.visible = false; model_root.get_parent().remove_child(model_root); model_root.queue_free()
 	loaded = false; load_error = ""; meshes.clear(); _rest_local.clear(); _rest_world.clear(); _materials.clear(); _surface_cache.clear()
-	if title == "previous": selected_pose = "a_pose"
-	for pose: String in POSES:
-		(_buttons["pose_"+pose] as Button).disabled = title == "previous" and pose != "a_pose"
 	model_root = null; skeleton = null; animation_player = null; selected_model = title
-	_source_sha = ""; _clip = ""; _strategy = ""; _pose_application_ok = false
+	_source_sha = ""; _manifest.clear(); _manifest_sha = ""; _clip = ""; _strategy = ""; _pose_application_ok = false
 	_posed_vertices = 0; _posed_finite = false
 	var path: String = SOURCES[title]
 	if not FileAccess.file_exists(path): return _load_failure("새 원형을 준비 중입니다." if title == "new" else "이전 모델을 찾지 못했습니다.")
 	_source_sha = FileAccess.get_sha256(path)
+	var manifest_path: String = MANIFESTS[title]
+	if FileAccess.file_exists(manifest_path):
+		_manifest_sha = FileAccess.get_sha256(manifest_path)
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(manifest_path))
+		if parsed is Dictionary: _manifest = parsed
 	var packed: PackedScene = load(path)
 	if packed == null: return _load_failure("모델을 불러오지 못했습니다.")
 	model_root = packed.instantiate(); model_anchor.add_child(model_root)
@@ -271,28 +278,23 @@ func _find_clip(title: String) -> String:
 
 func apply_pose(title: String) -> bool:
 	if not loaded or title not in POSES: return false
-	# The old resident is an original-rest visual reference, not a retargeted
-	# deformation benchmark. Reject unsupported calls before any pose mutation.
-	if selected_model == "previous" and title != "a_pose": return false
 	selected_pose = title; load_error = ""; _reset_pose(); _clip = ""; _pose_application_ok = false
-	if selected_model == "new":
-		_strategy = "actual_imported_NLA_animation_and_corrective_morph"
-		_clip = _find_clip(title)
-		if _clip.is_empty(): return _load_failure("이 자세의 자료를 찾지 못했습니다.")
-		var animation := animation_player.get_animation(_clip)
-		if animation.length < SAMPLE_TIME_S-.0001: return _load_failure("자세 기록의 길이가 부족합니다.")
-		animation_player.play(_clip)
-		animation_player.seek(SAMPLE_TIME_S, true)
-		animation_player.advance(0.)
-		animation_player.pause()
-		_pose_application_ok = true
-	else:
-		_strategy = "actual_imported_original_rest_no_pose_adapter"
-		_pose_application_ok = true
+	# Both sides use their own exported native NLA/morph tracks. No forced
+	# bone retargeting, legacy adapter or vertex-count normalization is used.
+	_strategy = "actual_imported_NLA_animation_and_corrective_morph"
+	_clip = _find_clip(title)
+	if _clip.is_empty(): return _load_failure("이 자세의 자료를 찾지 못했습니다.")
+	var animation := animation_player.get_animation(_clip)
+	if animation.length < SAMPLE_TIME_S-.0001: return _load_failure("자세 기록의 길이가 부족합니다.")
+	animation_player.play(_clip)
+	animation_player.seek(SAMPLE_TIME_S, true)
+	animation_player.advance(0.)
+	animation_player.pause()
+	_pose_application_ok = true
 	publish_skin_state()
 	_refresh_pose_bounds()
 	_place_camera()
-	status.text = "새 원형 / "+String({"a_pose":"기본 자세", "arm_raise":"팔 올림", "deep_squat":"깊은 앉기", "single_support":"한발 지지"}[title]) if selected_model == "new" else "이전 모델은 원본 기본자세로 비교"
+	status.text = ("새 원형 / " if selected_model == "new" else "이전 원형(v04) / ")+String({"a_pose":"기본 자세", "arm_raise":"팔 올림", "deep_squat":"깊은 앉기", "single_support":"한발 지지"}[title])
 	selection_changed.emit()
 	return _pose_application_ok
 
@@ -397,6 +399,21 @@ func control_rects() -> Dictionary:
 	for key: String in _buttons: result[key] = (_buttons[key] as Button).get_global_rect()
 	return result
 
+func lighting_contract() -> Dictionary:
+	# Actual scene readback, shared by both selected source models. This
+	# records rear-reading conditions without changing lens, clay or rig.
+	return {"key":{"color":key_light.light_color, "energy":key_light.light_energy, "transform":key_light.global_transform, "shadows":key_light.shadow_enabled}, "fill":{"color":fill_light.light_color, "energy":fill_light.light_energy, "transform":fill_light.global_transform, "shadows":fill_light.shadow_enabled}, "ambient":{"source":environment.ambient_light_source, "color":environment.ambient_light_color, "energy":environment.ambient_light_energy}, "background_color":environment.background_color, "tonemap_mode":environment.tonemap_mode, "exposure":environment.tonemap_exposure}
+
+func manifest_contract() -> Dictionary:
+	var rig: Dictionary = _manifest.get("rig", {})
+	var names: Array = []
+	for bone: Dictionary in rig.get("bones", []): names.append(String(bone.get("name", "")))
+	var corrective_names: Array = []
+	for group: Dictionary in rig.get("correctives", []):
+		for title: String in group.get("keys", []):
+			if title not in corrective_names: corrective_names.append(title)
+	return {"declared_asset_sha256":_manifest.get("files", {}).get("resident_form_m01.glb", {}).get("sha256", ""), "bone_count":rig.get("bone_count", 0), "bone_names":names, "nla_track_names":rig.get("animation", {}).get("nla_track_names", []), "corrective_names":corrective_names, "declared_export_vertices":_manifest.get("export_surface_vertices", 0), "declared_export_faces":_manifest.get("export_surface_faces", 0), "declared_export_subdivision_level":_manifest.get("export_subdivision_level", -1), "scope":"Declared source contract, not a mesh-quality score. Import seam splits can differ from source vertex counts."}
+
 func snapshot() -> Dictionary:
 	var bones: Array = []; var links: Array = []; var blend_shapes: Array = []
 	var clay_properties := {"roughness":clay.roughness, "albedo":clay.albedo_color, "vertex_color_use_as_albedo":clay.vertex_color_use_as_albedo, "has_albedo_texture":clay.albedo_texture != null, "has_normal_texture":clay.normal_texture != null}
@@ -427,4 +444,4 @@ func snapshot() -> Dictionary:
 		for role: String in ["upper_arm", "forearm", "hand", "thigh", "shin", "foot"]:
 			var index := _bone(role, side)
 			if index >= 0: joint_positions[role+"."+side] = _joint(index).origin
-	return {"loaded":loaded, "error":load_error, "model":selected_model, "pose":selected_pose, "view":selected_view, "asset_path":SOURCES.get(selected_model, ""), "asset_sha256":_source_sha, "pose_application_ok":_pose_application_ok, "pose_strategy":_strategy, "actual_animation":_clip, "sample_time_s":SAMPLE_TIME_S if selected_model == "new" else 0., "imported_animation_names":animation_player.get_animation_list() if animation_player != null else [], "actual_mesh_count":meshes.size(), "visible_mesh_count":visible, "same_clay_material":same_material, "clay_properties":clay_properties, "source_materials_unchanged":source_materials_unchanged, "model_anchor_transform":model_anchor.transform, "rest_mesh_aabb_world":_rest_bounds, "rest_mesh_aabb_scope":"Imported native mesh AABB at load; not a CPU-skinned or corrective-morph posed-bound claim.", "finite_bones":finite, "bones":bones, "long_bone_links":links, "joints":joint_positions, "blend_shapes":blend_shapes, "camera_transform":camera.global_transform, "camera_fov":camera.fov, "camera_distance_m":camera.global_position.distance_to(Vector3(FRAMING[selected_pose].target)), "shared_pose_framing":FRAMING[selected_pose], "projected_frame":projected_frame(), "fixed_key_transform":key_light.global_transform, "fixed_key_shadow":key_light.shadow_enabled, "ruler_size_m":(ruler.mesh as BoxMesh).size, "automatic":automatic, "review_mode":review_mode, "scope":"Separate metre-scale clay review only. Same camera/light/material for base-pose views; the old model retains its exact imported rest and swimwear shape, with no pose adapter or unsupported diagnostic deformations. Numerical pose/visibility checks are not realistic anatomy, cloth simulation or art acceptance."}
+	return {"loaded":loaded, "error":load_error, "model":selected_model, "pose":selected_pose, "view":selected_view, "asset_path":SOURCES.get(selected_model, ""), "asset_sha256":_source_sha, "manifest_path":MANIFESTS[selected_model], "manifest_sha256":_manifest_sha, "manifest_contract":manifest_contract(), "enabled_pose_controls":POSES.filter(func(pose: String) -> bool: return not (_buttons["pose_"+pose] as Button).disabled), "pose_application_ok":_pose_application_ok, "pose_strategy":_strategy, "actual_animation":_clip, "sample_time_s":SAMPLE_TIME_S, "imported_animation_names":animation_player.get_animation_list() if animation_player != null else [], "actual_mesh_count":meshes.size(), "visible_mesh_count":visible, "same_clay_material":same_material, "clay_properties":clay_properties, "source_materials_unchanged":source_materials_unchanged, "model_anchor_transform":model_anchor.transform, "rest_mesh_aabb_world":_rest_bounds, "rest_mesh_aabb_scope":"Imported native mesh AABB at load; not a CPU-skinned or corrective-morph posed-bound claim.", "finite_bones":finite, "bones":bones, "long_bone_links":links, "joints":joint_positions, "blend_shapes":blend_shapes, "camera_transform":camera.global_transform, "camera_fov":camera.fov, "camera_distance_m":camera.global_position.distance_to(Vector3(FRAMING[selected_pose].target)), "shared_pose_framing":FRAMING[selected_pose], "projected_frame":projected_frame(), "lighting_contract":lighting_contract(), "fixed_key_transform":key_light.global_transform, "fixed_key_shadow":key_light.shadow_enabled, "ruler_size_m":(ruler.mesh as BoxMesh).size, "automatic":automatic, "review_mode":review_mode, "scope":"Separate metre-scale clay review only. EXP36 compares the refinement with frozen v04 under identical per-pose camera/light/material, each using actual imported native NLA/morphs. No legacy52 retargeting or forced pose adapter. Numerical pose/visibility checks are not realistic anatomy, cloth simulation or art acceptance."}

@@ -1,5 +1,10 @@
 # Sol 작업 인수 안내
 
+## 2026-10-25 EXP36 — 현재 인수: 원형 큰 면 다듬기
+
+[WORK_STATUS](WORK_STATUS.md)와 [EXP36 집계](../data/reports/resident_form_refinement/20261025/summary.json)를 먼저 읽는다. 새 원형과 이전 EXP35 v04를 같은 화면에서 각각 네 자세로 비교한다. canonical `resident_form_m01_previous.glb`와 `FORM_STUDY_PREVIOUS_MANIFEST.json`은 v04 바이트 원본이다. 다른 Mac에서는 준비된 GLB만 import하면 되며 일반 실행에 Blender가 필요 없다. 제작 원본은 `art/characters/resident_form_m01.blend`, 생성 소스는 `tools/sculpted_character/`다. 기존 EXP35 수치는 현재 변경 소스에 대한 회귀 실행으로 해석하지 않는다. 기존 플레이어 적용·여성/체형 확장·연속 보행은 원형 수용 후 작업이다.
+
+
 ## 2026-10-25 EXP35 — 현재 인수: 단일 인체 원형
 
 [WORK_STATUS](WORK_STATUS.md)·[제작 설명](CHARACTER_IDENTITIES.md)·[EXP35 집계](../data/reports/resident_form_study/20261025/summary.json)를 먼저 읽는다. 새 `.blend`는 `art/characters/`에 있고 게임에는 준비된 GLB만 포함한다. 다른 Mac의 일반 실행에 Blender 재설치는 필요 없다. 선택 재생성은 체크섬을 확인한 공식 Blender4.5.15LTS와 `tools/sculpted_character/build_resident_study.py`를 사용한다.

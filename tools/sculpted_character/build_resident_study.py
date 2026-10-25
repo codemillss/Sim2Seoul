@@ -1,4 +1,4 @@
-"""Build the original editable EXP35 clay study using Blender 4.5 LTS.
+"""Build the editable EXP36 clay-form refinement using Blender 4.5 LTS.
 
 Usage: Blender --background --factory-startup --python this.py --
        --output-dir game/assets/original/resident_study --render-dir ...
@@ -181,7 +181,7 @@ def main():
                 area.spaces.active.region_3d.view_location=(0,0,.95)
                 area.spaces.active.region_3d.view_distance=3.0
     bpy.ops.wm.save_as_mainfile(filepath=str(blend))
-    result={'task':'EXP35_RESIDENT_FORM_STUDY','created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+    result={'task':'EXP36_RESIDENT_FORM_REFINEMENT','created_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'blender':bpy.app.version_string,'coordinate_contract':'Blender Zup/front-Y/left+X/soleZ0/target1.78m;GLB glTF Yup conversion.',
             'authors':'Sim2Seoul contributors; authored explicit control vertices/loops and original rig. Scripted cage modelling, not manual brush sculpting.',
             'source_assets_read':[],'old_resident_geometry_read':False,'image_paint_used':False,
@@ -192,7 +192,7 @@ def main():
             'captures':captures,'full_art_target_met':False,
             'scope':'One neutral adult male form study. Body/face/pose art requires actual review. No replacement of normal game characters, no mocap or photoreal result claim.'}
     write_json(destination/'FORM_STUDY_MANIFEST.json',result)
-    print('EXP35_FORM_STUDY_READY',json.dumps({'control_vertices':result['topology']['control_vertices'],'export_vertices':result['export_surface_vertices'],'bones':rig_info['bone_count'],'glb':str(glb)}))
+    print('EXP36_FORM_REFINEMENT_READY',json.dumps({'control_vertices':result['topology']['control_vertices'],'export_vertices':result['export_surface_vertices'],'bones':rig_info['bone_count'],'glb':str(glb)}))
 
 
 if __name__=='__main__':main()

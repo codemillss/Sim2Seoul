@@ -1,4 +1,4 @@
-"""Original EXP35 Blender rig for the editable 1.78m study cage.
+"""Original EXP35/36 Blender rig for the editable 1.78m study cage.
 
 Blender4.5LTS, metres, +Z up, front -Y, character left +X. No previous
 52-bone rest, imported body, mocap or external armature is read. This module
@@ -10,7 +10,7 @@ import math
 import bpy
 from mathutils import Matrix, Quaternion, Vector
 
-VERSION = "exp35_study_rig_v2_evaluated_support"
+VERSION = "exp36_study_rig_v5_bounded_pose_supports"
 POSE_KEYS = ("a_pose", "arm_raise", "deep_squat", "single_support")
 FPS = 24
 POSE_FRAME = 24
@@ -124,6 +124,9 @@ def _weights(point, region, anchors):
         distance = (point-hip).dot((knee-hip).normalized())
         thigh_length = (knee-hip).length
         shin = _smooth(thigh_length-.060, thigh_length+.060, distance)
+        # Preserve the verified EXP35 LOCAL proximal attachment. A lateral
+        # midline gate must never hold the medial thigh to the pelvis all the
+        # way down to the knee (the rejected EXP36v01 sheet regression).
         pelvis = (1.-_smooth(.015, .090, distance))*.45
         foot = 1.-_smooth(.115, .185, point.z)
         return {"pelvis": pelvis, "thigh."+side: (1.-shin)*(1.-pelvis),
@@ -133,7 +136,8 @@ def _weights(point, region, anchors):
     neck = _smooth(1.485, 1.555, point.z)
     values = {"pelvis": 1.-spine, "spine": spine*(1.-chest),
               "chest": spine*chest*(1.-neck), "neck": neck}
-    # Shared armhole vertices belong to torso but blend into the local arm.
+    # The EXP35 attachment is retained after actual EXP36 raised-arm views
+    # rejected the wider spatial transfer's axilla ridge/web regression.
     side = "L" if point.x >= 0. else "R"
     shoulder = anchors["shoulder."+side]
     support = math.exp(-.5*((point-shoulder).length/.065)**2)*_smooth(.12, .205, abs(point.x))
@@ -152,7 +156,7 @@ def _bind_weights(objects, info, rig, anchors):
     rows = []
     for object_index, obj in enumerate(objects):
         groups = {bone.name: obj.vertex_groups.get(bone.name) or obj.vertex_groups.new(name=bone.name) for bone in rig.data.bones}
-        histogram, maximum_error, invalid = {}, 0., 0
+        histogram, maximum_error, invalid, assigned, labels = {}, 0., 0, {}, {}
         for vertex in obj.data.vertices:
             point = obj.matrix_world@vertex.co
             named = regions.get(vertex.index) if object_index == 0 else None
@@ -165,6 +169,8 @@ def _bind_weights(objects, info, rig, anchors):
                 values, total = [("pelvis", 1.)], 1.
             for key, value in values:
                 groups[key].add([vertex.index], value/total, "REPLACE")
+            assigned[vertex.index] = {key: value/total for key, value in values}
+            labels[vertex.index] = region
             maximum_error = max(maximum_error, abs(sum(value/total for _, value in values)-1.))
             histogram[region] = histogram.get(region, 0)+1
         modifier = obj.modifiers.new("StudySkinning", "ARMATURE")
@@ -173,38 +179,147 @@ def _bind_weights(objects, info, rig, anchors):
         matrix = obj.matrix_world.copy()
         obj.parent = rig
         obj.matrix_world = matrix
+        transitions = []
+        for edge in obj.data.edges:
+            a, b = edge.vertices
+            if labels[a] == labels[b] or "torso" not in (labels[a], labels[b]):
+                continue
+            other = labels[b] if labels[a] == "torso" else labels[a]
+            if not other.startswith(("arm.", "leg.")):
+                continue
+            keys = assigned[a].keys()|assigned[b].keys()
+            transitions.append({"vertices": [a, b], "regions": [labels[a], labels[b]],
+                                "weight_l1_difference": sum(abs(assigned[a].get(k, 0.)-assigned[b].get(k, 0.)) for k in keys)})
         rows.append({"object": obj.name, "vertices": len(obj.data.vertices), "regions": histogram,
                      "maximum_weight_sum_error": maximum_error, "unassigned_vertices": invalid,
-                     "maximum_influences": 4, "topology_changed": False})
+                     "maximum_influences": 4, "topology_changed": False,
+                     "shoulder_attachment_policy": "Frozen EXP35 attachment weights restored after actual EXP36v01/v02 raised-arm axilla ridge/web rejection; bounded pose support is recomputed from current cage.",
+                     "hip_attachment_policy": "Frozen EXP35 local proximal pelvis/thigh blend restored; no lateral/midline gate on the medial thigh. EXP36v01 sheet regression rejected.",
+                     "torso_limb_edge_weight_transitions": {"edge_count": len(transitions),
+                         "mean_l1": sum(r["weight_l1_difference"] for r in transitions)/len(transitions) if transitions else 0.,
+                         "maximum_l1": max((r["weight_l1_difference"] for r in transitions), default=0.),
+                         "largest_edges": sorted(transitions, key=lambda r: r["weight_l1_difference"], reverse=True)[:8]}})
     return rows
 
 
-def _make_correctives(objects, anchors):
-    rows = []
+def _control_pose_samples(obj, rig):
+    """Evaluate this same cage once with LBS and once with volume preservation.
+
+    Subdivision is temporarily hidden ONLY for the one-to-one control-vertex
+    comparison. It is restored before any sole-support/pose evaluation. The
+    export armature remains linear; the comparison is not an export setting.
+    """
+    subdivisions = [(m, m.show_viewport) for m in obj.modifiers if m.type == "SUBSURF"]
+    skins = [(m, m.use_deform_preserve_volume) for m in obj.modifiers if m.type == "ARMATURE" and m.object == rig]
+    try:
+        for modifier, _ in subdivisions:
+            modifier.show_viewport = False
+        for modifier, _ in skins:
+            modifier.use_deform_preserve_volume = False
+        linear = [p for _, p, _ in _evaluated_points(obj)]
+        for modifier, _ in skins:
+            modifier.use_deform_preserve_volume = True
+        preserved = [p for _, p, _ in _evaluated_points(obj)]
+        if len(linear) != len(obj.data.vertices) or len(preserved) != len(linear):
+            raise ValueError("Pose corrective control topology changed: "+obj.name)
+        return linear, preserved
+    finally:
+        for modifier, value in skins:
+            modifier.use_deform_preserve_volume = value
+        for modifier, value in subdivisions:
+            modifier.show_viewport = value
+        bpy.context.view_layer.update()
+
+
+def _support_mask(name, point, side, anchors):
+    if name == CORRECTIVES[0]:
+        joint = anchors["shoulder."+side]
+        # Deltoid outside only. Do not inflate the inner axilla web or neck.
+        return (math.exp(-.5*((point-joint).length/.105)**2)*_smooth(.135, .225, abs(point.x))
+                *(1.-_smooth(1.500, 1.555, point.z)))
+    if name == CORRECTIVES[1]:
+        joint = anchors["hip."+side]
+        # Posterior gluteal support; leave the anterior groin compression.
+        return math.exp(-.5*((point-joint).length/.125)**2)*_smooth(.025, .080, abs(point.x))*_smooth(-.025, .070, point.y-joint.y)
+    joint = anchors["knee."+side]
+    # The front knee retains its cap. The compressed popliteal fold is not
+    # filled with an arbitrary outward lump.
+    return math.exp(-.5*((point-joint).length/.085)**2)*_smooth(-.020, .040, joint.y-point.y)
+
+
+def _linear_skin_rotation(obj, rig, vertex):
+    to_rig = rig.matrix_world.inverted()@obj.matrix_world
+    from_rig = to_rig.inverted()
+    rotation = Matrix(((0., 0., 0.), (0., 0., 0.), (0., 0., 0.)))
+    for group in vertex.groups:
+        name = obj.vertex_groups[group.group].name
+        bone = rig.pose.bones.get(name)
+        if bone is None:
+            continue
+        skin = (from_rig@bone.matrix@bone.bone.matrix_local.inverted()@to_rig).to_3x3()
+        for r in range(3):
+            for c in range(3):
+                rotation[r][c] += group.weight*skin[r][c]
+    return rotation
+
+
+def _make_correctives(objects, anchors, rig):
+    """Bake bounded, pose-observed volume supports into existing three keys.
+
+    The observed LBS-to-preserved-volume difference supplies a direction;
+    authored surface masks and 6/8/6mm bind-space caps limit the amount. This
+    is not an anatomy measurement, muscle simulation or runtime DQS switch.
+    """
+    rows, blocks = [], {}
     for obj in objects:
         if obj.data.shape_keys is None:
             obj.shape_key_add(name="Basis")
-        blocks = {name: obj.shape_key_add(name=name) for name in CORRECTIVES}
-        maximum = {name: 0. for name in CORRECTIVES}
-        inverse = obj.matrix_world.to_3x3().inverted()
-        for vertex in obj.data.vertices:
-            p = obj.matrix_world@vertex.co
-            side = "L" if p.x >= 0. else "R"
-            shoulder, hip, knee = (anchors[key+"."+side] for key in ("shoulder", "hip", "knee"))
-            axis = (anchors["elbow."+side]-shoulder).normalized()
-            rel = p-shoulder
-            radial = rel-axis*rel.dot(axis)
-            shoulder_weight = math.exp(-.5*(rel.length/.085)**2)
-            shoulder_delta = radial.normalized()*min(.009, radial.length*.12)*shoulder_weight if radial.length > 1e-6 else Vector()
-            hip_weight = math.exp(-.5*((p-hip).length/.115)**2)*_smooth(.025, .075, abs(p.x))
-            hip_delta = Vector((math.copysign(.004, p.x), .006, 0.))*hip_weight
-            knee_weight = math.exp(-.5*((p-knee).length/.065)**2)
-            knee_delta = Vector((0., -.006 if p.y < knee.y else -.003, 0.))*knee_weight
-            for name, delta in zip(CORRECTIVES, (shoulder_delta, hip_delta, knee_delta)):
-                blocks[name].data[vertex.index].co = vertex.co+inverse@delta
-                maximum[name] = max(maximum[name], delta.length)
-        rows.append({"object": obj.name, "keys": list(CORRECTIVES), "maximum_rest_delta_m": maximum,
-                     "scope": "Small authored pose supports, not measured soft-tissue simulation."})
+        blocks[obj] = {name: obj.data.shape_keys.key_blocks.get(name) or obj.shape_key_add(name=name) for name in CORRECTIVES}
+    measurements = {obj: {"object": obj.name, "keys": list(CORRECTIVES), "maximum_rest_delta_m": {},
+                         "observed_target_delta_m": {}, "supported_control_vertices": {}, "skipped_singular_blends": {}} for obj in objects}
+    for pose, keys in (("arm_raise", (CORRECTIVES[0],)), ("deep_squat", CORRECTIVES[1:])):
+        apply_study_pose(rig, pose, objects)
+        for obj in objects:
+            for block in blocks[obj].values():
+                block.value = 0.
+        bpy.context.view_layer.update()
+        for obj in objects:
+            linear, preserved = _control_pose_samples(obj, rig)
+            inverse = obj.matrix_world.to_3x3().inverted()
+            for name in keys:
+                cap = .008 if name == CORRECTIVES[1] else .006
+                maximum, target_maximum, supported, singular = 0., 0., 0, 0
+                for vertex in obj.data.vertices:
+                    point = obj.matrix_world@vertex.co
+                    side = "L" if point.x >= 0. else "R"
+                    amount = _support_mask(name, point, side, anchors)
+                    if amount < 1e-4:
+                        continue
+                    target = (preserved[vertex.index]-linear[vertex.index])*(.45*amount)
+                    target_maximum = max(target_maximum, target.length)
+                    rotation = _linear_skin_rotation(obj, rig, vertex)
+                    if abs(rotation.determinant()) < .08:
+                        singular += 1
+                        continue
+                    delta = rotation.inverted()@(inverse@target)
+                    world_length = (obj.matrix_world.to_3x3()@delta).length
+                    if world_length > cap:
+                        delta *= cap/world_length
+                        world_length = cap
+                    blocks[obj][name].data[vertex.index].co = vertex.co+delta
+                    maximum = max(maximum, world_length)
+                    supported += world_length > 1e-7
+                measurements[obj]["maximum_rest_delta_m"][name] = maximum
+                measurements[obj]["observed_target_delta_m"][name] = target_maximum
+                measurements[obj]["supported_control_vertices"][name] = supported
+                measurements[obj]["skipped_singular_blends"][name] = singular
+    apply_study_pose(rig, "a_pose", objects)
+    for obj in objects:
+        row = measurements[obj]
+        row.update({"method": "Same authored cage/actual target pose: bounded45% masked LBS-to-preserve-volume evaluation difference, inverse-linear-skinned into bind-space morph; export remains LBS.",
+                    "bind_space_caps_m": dict(zip(CORRECTIVES, (.006, .008, .006))),
+                    "scope": "Small supports for observed joint compression only; no muscle-size sculpt, measured soft tissue or accepted realism."})
+        rows.append(row)
     return rows
 
 
@@ -508,7 +623,7 @@ def assign_rig(objects, info):
         bone.align_roll(reference);bone.use_deform = True
     bpy.ops.object.mode_set(mode="OBJECT")
     weight_rows = _bind_weights(objects, info, rig, anchors)
-    corrective_rows = _make_correctives(objects, anchors)
+    corrective_rows = _make_correctives(objects, anchors, rig)
     poses = _make_actions(rig, objects)
     metadata = {"version": VERSION, "armature_object": rig.name, "bone_count": len(data.bones),
                 "coordinates": "Blender+Zup/front-Y/left+X;metres;new1.78m adult study rest.",

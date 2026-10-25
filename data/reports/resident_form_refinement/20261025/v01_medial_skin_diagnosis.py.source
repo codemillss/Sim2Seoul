@@ -1,0 +1,48 @@
+from pathlib import Path
+import json,struct,bisect,math,hashlib
+p=Path('data/reports/resident_form_refinement/20261025/candidates/v01/resident_form_m01.glb');b=p.read_bytes();jlen=struct.unpack_from('<I',b,12)[0];g=json.loads(b[20:20+jlen]);bs=20+jlen;blen=struct.unpack_from('<I',b,bs)[0];buf=b[bs+8:bs+8+blen]
+fmt={5120:('b',1),5121:('B',1),5122:('h',2),5123:('H',2),5125:('I',4),5126:('f',4)};arity={'SCALAR':1,'VEC2':2,'VEC3':3,'VEC4':4,'MAT4':16};cache={}
+def raw(vi,off,count,component,kind):
+ v=g['bufferViews'][vi];f,size=fmt[component];n=arity[kind];stride=v.get('byteStride',n*size);start=v.get('byteOffset',0)+off
+ return [list(struct.unpack_from('<'+f*n,buf,start+i*stride)) for i in range(count)]
+def read(i):
+ if i in cache:return cache[i]
+ a=g['accessors'][i];r=raw(a['bufferView'],a.get('byteOffset',0),a['count'],a['componentType'],a['type']) if 'bufferView' in a else [[0.]*arity[a['type']] for _ in range(a['count'])]
+ if 'sparse' in a:
+  s=a['sparse'];ix=s['indices'];v=s['values'];ids=raw(ix['bufferView'],ix.get('byteOffset',0),s['count'],ix['componentType'],'SCALAR');vals=raw(v['bufferView'],v.get('byteOffset',0),s['count'],a['componentType'],a['type'])
+  for (n,),value in zip(ids,vals):r[n]=value
+ if a.get('normalized'):
+  scale={5120:127,5121:255,5122:32767,5123:65535,5125:4294967295}[a['componentType']];r=[[max(-1,v/scale) for v in row] for row in r]
+ cache[i]=r;return r
+def mm(a,b):return [[sum(a[r][k]*b[k][c] for k in range(4)) for c in range(4)] for r in range(4)]
+def mv(a,p):return [sum(a[r][k]*([*p,1.][k]) for k in range(4)) for r in range(3)]
+def trs(n):
+ if 'matrix' in n:return [[n['matrix'][c*4+r] for c in range(4)] for r in range(4)]
+ x,y,z,w=n.get('rotation',[0,0,0,1]);sx,sy,sz=n.get('scale',[1,1,1]);tx,ty,tz=n.get('translation',[0,0,0])
+ return [[(1-2*y*y-2*z*z)*sx,(2*x*y-2*z*w)*sy,(2*x*z+2*y*w)*sz,tx],[(2*x*y+2*z*w)*sx,(1-2*x*x-2*z*z)*sy,(2*y*z-2*x*w)*sz,ty],[(2*x*z-2*y*w)*sx,(2*y*z+2*x*w)*sy,(1-2*x*x-2*y*y)*sz,tz],[0,0,0,1]]
+nodes=[dict(n) for n in g['nodes']];anim=next(a for a in g['animations'] if a['name']=='deep_squat');morph=[0,0,0]
+for c in anim['channels']:
+ s=anim['samplers'][c['sampler']];times=[r[0] for r in read(s['input'])];vals=read(s['output']);path=c['target']['path'];width={'rotation':4,'translation':3,'scale':3,'weights':3}[path];flat=[v for row in vals for v in row];rows=[flat[i*width:(i+1)*width] for i in range(len(times))];i=max(0,min(len(times)-1,bisect.bisect_right(times,1.)-1));q=rows[i]
+ if i<len(times)-1:
+  t=(1.-times[i])/(times[i+1]-times[i]);q=[v+(w-v)*t for v,w in zip(q,rows[i+1])]
+ if path=='weights':morph=q
+ else:nodes[c['target']['node']][path]=q
+parent={child:i for i,n in enumerate(nodes) for child in n.get('children',[])};glob={}
+def world(i):
+ if i not in glob:glob[i]=mm(world(parent[i]),trs(nodes[i])) if i in parent else trs(nodes[i])
+ return glob[i]
+skin=g['skins'][0];ibm=read(skin['inverseBindMatrices']);names=[nodes[i].get('name') for i in skin['joints']];matrices=[mm(world(n),[[ibm[j][c*4+r] for c in range(4)] for r in range(4)]) for j,n in enumerate(skin['joints'])]
+pr=g['meshes'][0]['primitives'][0];pos=read(pr['attributes']['POSITION']);joints=read(pr['attributes']['JOINTS_0']);weights=read(pr['attributes']['WEIGHTS_0']);deltas=[read(t['POSITION']) for t in pr['targets']];pelvis=names.index('pelvis');thigh=names.index('thigh.L');picked=[]
+for i,v in enumerate(pos):
+ if not(0<v[0]<.045 and .60<v[1]<.79):continue
+ pw=sum(w for j,w in zip(joints[i],weights[i]) if j==pelvis)
+ if pw<.5:continue
+ p0=[v[k]+sum(morph[m]*deltas[m][i][k] for m in range(3)) for k in range(3)];actual=[0.,0.,0.]
+ for j,w in zip(joints[i],weights[i]):
+  q=mv(matrices[j],p0)
+  for k in range(3):actual[k]+=w*q[k]
+ target=mv(matrices[thigh],p0);deviation=math.sqrt(sum((a-b)**2 for a,b in zip(actual,target)))
+ picked.append({'vertex':i,'rest_gltf_yup_m':v,'actual_squat_1s_yup_m':actual,'same_vertex_if_thigh_bound_yup_m':target,'distance_from_thigh_skin_m':deviation,'weights':{names[j]:w for j,w in zip(joints[i],weights[i]) if w>1e-7}})
+picked.sort(key=lambda r:r['distance_from_thigh_skin_m'],reverse=True)
+out={'source_glb':str(p),'sha256':hashlib.sha256(b).hexdigest(),'method':'stdlib actual GLB decode including sparse morphs; sample deep_squat channels at1s; weighted globalJoint*inverseBind matrices, glTFYup. Pure-thigh coordinates are a counterfactual diagnostic, not accepted anatomy.','morph_at1s':morph,'medial_vertices_with_pelvis_over_50pct':len(picked),'worst_examples':picked[:8]}
+Path('/private/tmp/exp36_medial_skin_diagnosis_v01.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))

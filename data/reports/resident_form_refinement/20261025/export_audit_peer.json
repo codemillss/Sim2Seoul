@@ -1,0 +1,1435 @@
+{
+  "task": "EXP36_INDEPENDENT_STDLIB_GLB_EXPORT_AUDIT",
+  "created_at_utc": "2026-10-25T03:38:58.446000+00:00",
+  "status": "PASS",
+  "passed": 35,
+  "total": 35,
+  "method": "Python standard library reads GLB JSON and BIN, decoding every accessor including normalized components, byte stride and sparse replacements. No Blender/Godot engine was launched; no production or asset bytes changed.",
+  "bound_files_before": {
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source_freeze.json": {
+      "bytes": 1359,
+      "sha256": "4e7bdd2fa7757b8a1c2c3490f2a87ac3b5047b9eab8458afeba72f44491265d2"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb": {
+      "bytes": 5070984,
+      "sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.json": {
+      "bytes": 5219,
+      "sha256": "cace5353c291e81850ee80a420da56154fe2a389bc375fa6580d2e48a70e47a6"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.py.source": {
+      "bytes": 4633,
+      "sha256": "e68b074667f7e3b0f4069a405c489265a42c0949dfc2a4ca61358d4042d4d6a4"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/disposition.json": {
+      "bytes": 876,
+      "sha256": "88f8dd1678cf4475fd1ef2484c68d6af4f5c96854ea239883fb564fe10766dd3"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/export_audit_peer.py.source": {
+      "bytes": 26891,
+      "sha256": "51810274d9b8652d8d9fb051728a0493c1a83fd58373132868b139d41254cb57"
+    }
+  },
+  "bound_files_after": {
+    "game/assets/original/resident_study/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "art/characters/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.glb": {
+      "bytes": 4591188,
+      "sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/resident_form_m01.blend": {
+      "bytes": 12538021,
+      "sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/FORM_STUDY_MANIFEST.json": {
+      "bytes": 163039,
+      "sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source_freeze.json": {
+      "bytes": 1359,
+      "sha256": "4e7bdd2fa7757b8a1c2c3490f2a87ac3b5047b9eab8458afeba72f44491265d2"
+    },
+    "game/assets/original/resident_study/resident_form_m01_previous.glb": {
+      "bytes": 5070984,
+      "sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160"
+    },
+    "game/assets/original/resident_study/FORM_STUDY_PREVIOUS_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_study/20261025/candidates/v04/FORM_STUDY_MANIFEST.json": {
+      "bytes": 148392,
+      "sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.json": {
+      "bytes": 5219,
+      "sha256": "cace5353c291e81850ee80a420da56154fe2a389bc375fa6580d2e48a70e47a6"
+    },
+    "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.py.source": {
+      "bytes": 4633,
+      "sha256": "e68b074667f7e3b0f4069a405c489265a42c0949dfc2a4ca61358d4042d4d6a4"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v02/disposition.json": {
+      "bytes": 876,
+      "sha256": "88f8dd1678cf4475fd1ef2484c68d6af4f5c96854ea239883fb564fe10766dd3"
+    },
+    "tools/sculpted_character/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "tools/sculpted_character/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "tools/sculpted_character/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "tools/sculpted_character/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_body_cage.py": {
+      "bytes": 26144,
+      "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_head_extremities.py": {
+      "bytes": 17071,
+      "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_resident_study.py": {
+      "bytes": 12411,
+      "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968"
+    },
+    "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_study_rig.py": {
+      "bytes": 33018,
+      "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a"
+    },
+    "data/reports/resident_form_refinement/20261025/export_audit_peer.py.source": {
+      "bytes": 26891,
+      "sha256": "51810274d9b8652d8d9fb051728a0493c1a83fd58373132868b139d41254cb57"
+    }
+  },
+  "checks": [
+    {
+      "name": "glb2_header_chunks_and_length",
+      "passed": true,
+      "evidence": {
+        "magic": "glTF",
+        "version": 2,
+        "declared_bytes": 4591188,
+        "actual_bytes": 4591188,
+        "chunk_types": [
+          1313821514,
+          5130562
+        ]
+      }
+    },
+    {
+      "name": "one_embedded_buffer_without_external_uri",
+      "passed": true,
+      "evidence": {
+        "buffers": [
+          {
+            "byteLength": 4533016
+          }
+        ],
+        "padded_bin_bytes": 4533016
+      }
+    },
+    {
+      "name": "every_buffer_view_within_declared_buffer",
+      "passed": true,
+      "evidence": {
+        "buffer_view_count": 200
+      }
+    },
+    {
+      "name": "all_accessor_components_finite_and_in_bounds",
+      "passed": true,
+      "evidence": {
+        "accessor_count": 194,
+        "decoded_components": 2486440,
+        "sparse_accessor_count": 6
+      }
+    },
+    {
+      "name": "one_skin_22_expected_named_joints",
+      "passed": true,
+      "evidence": {
+        "skin_count": 1,
+        "joint_node_indices": [
+          21,
+          20,
+          11,
+          10,
+          1,
+          0,
+          5,
+          4,
+          3,
+          2,
+          9,
+          8,
+          7,
+          6,
+          15,
+          14,
+          13,
+          12,
+          19,
+          18,
+          17,
+          16
+        ],
+        "bone_names_in_skin_order": [
+          "root",
+          "pelvis",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "clavicle.L",
+          "upper_arm.L",
+          "forearm.L",
+          "hand.L",
+          "clavicle.R",
+          "upper_arm.R",
+          "forearm.R",
+          "hand.R",
+          "thigh.L",
+          "shin.L",
+          "foot.L",
+          "toe.L",
+          "thigh.R",
+          "shin.R",
+          "foot.R",
+          "toe.R"
+        ]
+      }
+    },
+    {
+      "name": "inverse_bind_matrices_match_22_joints",
+      "passed": true,
+      "evidence": {
+        "matrix_count": 22,
+        "components_each": 16
+      }
+    },
+    {
+      "name": "one_actual_mesh_node_uses_expected_skin",
+      "passed": true,
+      "evidence": {
+        "mesh_count": 1,
+        "mesh_node_indices": [
+          22
+        ],
+        "mesh_node_skin": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "three_named_morph_targets_mesh_0",
+      "passed": true,
+      "evidence": {
+        "target_names": [
+          "StudyShoulderSupport",
+          "StudyHipCompression",
+          "StudyKneeCompression"
+        ],
+        "default_weights": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "basis_attributes_matching_vec3_count_0_0",
+      "passed": true,
+      "evidence": {
+        "vertices": 64854,
+        "normal_count": 64854,
+        "joints_count": 64854,
+        "weights_count": 64854
+      }
+    },
+    {
+      "name": "basis_normals_finite_nonzero_and_unit_0_0",
+      "passed": true,
+      "evidence": {
+        "maximum_unit_length_error": 1.1233321339787494e-07
+      }
+    },
+    {
+      "name": "triangle_indices_integral_and_in_vertex_range_0_0",
+      "passed": true,
+      "evidence": {
+        "index_count": 389088,
+        "triangles": 129696,
+        "minimum_index": 0,
+        "maximum_index": 64853
+      }
+    },
+    {
+      "name": "skin_four_slots_no_extra_weight_sets_0_0",
+      "passed": true,
+      "evidence": {
+        "attribute_names": [
+          "POSITION",
+          "NORMAL",
+          "JOINTS_0",
+          "WEIGHTS_0"
+        ],
+        "slots_per_vertex": 4
+      }
+    },
+    {
+      "name": "skin_weights_nonnegative_normalized_0_0",
+      "passed": true,
+      "evidence": {
+        "maximum_weight_sum_error": 1.0710209608078003e-07,
+        "minimum_weight": 0.0,
+        "maximum_weight": 1.0,
+        "maximum_positive_influences": 4
+      }
+    },
+    {
+      "name": "skin_every_joint_slot_references_actual_22_joint_palette_0_0",
+      "passed": true,
+      "evidence": {
+        "minimum_joint_index": 0,
+        "maximum_joint_index": 21
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_0",
+      "passed": true,
+      "evidence": {
+        "name": "StudyShoulderSupport",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 64854,
+          "NORMAL": 64854
+        },
+        "maximum_position_delta_m": 0.004109654743927535
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_1",
+      "passed": true,
+      "evidence": {
+        "name": "StudyHipCompression",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 64854,
+          "NORMAL": 64854
+        },
+        "maximum_position_delta_m": 0.002679887021919129
+      }
+    },
+    {
+      "name": "morph_same_basis_topology_and_nonzero_delta_0_0_2",
+      "passed": true,
+      "evidence": {
+        "name": "StudyKneeCompression",
+        "semantics": [
+          "POSITION",
+          "NORMAL"
+        ],
+        "counts": {
+          "POSITION": 64854,
+          "NORMAL": 64854
+        },
+        "maximum_position_delta_m": 0.005084363705929839
+      }
+    },
+    {
+      "name": "exactly_three_primitive_morphs_0_0",
+      "passed": true,
+      "evidence": {
+        "target_count": 3
+      }
+    },
+    {
+      "name": "exactly_four_named_exported_nla_clips",
+      "passed": true,
+      "evidence": {
+        "clip_names": [
+          "a_pose",
+          "arm_raise",
+          "deep_squat",
+          "single_support"
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_a_pose",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_arm_raise",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "expected_morph_values": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_deep_squat",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "name": "valid_animation_channels_and_actual_1s_corrective_hold_single_support",
+      "passed": true,
+      "evidence": {
+        "channel_counts_by_path": {
+          "translation": 22,
+          "rotation": 22,
+          "scale": 22,
+          "weights": 1
+        },
+        "first_time_s": 0.0416666679084301,
+        "last_time_s": 1.5,
+        "sample_time_s": 1.0,
+        "observed_morph_values": [
+          [
+            0.0,
+            0.20000000298023224,
+            0.20000000298023224
+          ]
+        ],
+        "expected_morph_values": [
+          0.0,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "name": "canonical_glb_exactly_matches_v03_candidate",
+      "passed": true,
+      "evidence": {
+        "canonical_sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b",
+        "v04_sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b"
+      }
+    },
+    {
+      "name": "editable_blend_exactly_matches_v03_candidate",
+      "passed": true,
+      "evidence": {
+        "canonical_sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b",
+        "v04_sha256": "1899c16179c3fb34ff49d6f44e271133f49b99762639e13dec04485b63fcc86b"
+      }
+    },
+    {
+      "name": "all_four_authored_builder_sources_match_v03_snapshot",
+      "passed": true,
+      "evidence": {
+        "sources": {
+          "tools/sculpted_character/build_body_cage.py": {
+            "current": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+            "candidate_snapshot": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+            "match": true
+          },
+          "tools/sculpted_character/build_head_extremities.py": {
+            "current": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+            "candidate_snapshot": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+            "match": true
+          },
+          "tools/sculpted_character/build_resident_study.py": {
+            "current": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+            "candidate_snapshot": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+            "match": true
+          },
+          "tools/sculpted_character/build_study_rig.py": {
+            "current": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+            "candidate_snapshot": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+            "match": true
+          }
+        },
+        "same_level_2_support_render_export_contract": true,
+        "manifest_export_subdivision_level": 2,
+        "canonical_manifest_matches_candidate": true,
+        "actual_source_override": [
+          {
+            "line": 152,
+            "text": "if modifier.type=='SUBSURF':modifier.levels=2;modifier.render_levels=2"
+          }
+        ],
+        "rig_assignment_source_line": 160
+      }
+    },
+    {
+      "name": "original_exp35_v04_baseline_bytes_unchanged",
+      "passed": true,
+      "evidence": {
+        "baseline_glb_sha256": "77c808291fe41669ce15ec4f37ad221a8142b24dcf56aa15f510d597c6edb160",
+        "baseline_manifest_sha256": "9f7f435fd77b159eaeeafb713cd821719c988c72458f76e8137d6da0c66d8763",
+        "scope": "Byte identity to selected original EXP35 v04; no forced pose or geometry edits."
+      }
+    },
+    {
+      "name": "control_cage_manifold_metadata_matches_declared_face_counts",
+      "passed": true,
+      "evidence": {
+        "control_topology": {
+          "control_vertices": 3918,
+          "control_edges": 8106,
+          "control_faces": 4194,
+          "quad_faces": 3630,
+          "triangle_faces": 564,
+          "boundary_edges": 0,
+          "nonmanifold_nonboundary_edges": 0,
+          "loose_vertices": 0,
+          "authorship": "Explicit editable cage with stitched boundaries and orbital/finger loops; no isosurface/scan/old mesh read."
+        },
+        "scope": "Manifest of actual Blender control-mesh evaluation; the stdlib binary audit does not rerun Blender manifold analysis."
+      }
+    },
+    {
+      "name": "bounded_pose_support_caps_match_manifest_and_actual_morph_deltas",
+      "passed": true,
+      "evidence": {
+        "caps_m": {
+          "StudyShoulderSupport": 0.006,
+          "StudyHipCompression": 0.008,
+          "StudyKneeCompression": 0.006
+        },
+        "actual_manifest_correctives": [
+          {
+            "object": "ResidentStudy_EditableCage",
+            "keys": [
+              "StudyShoulderSupport",
+              "StudyHipCompression",
+              "StudyKneeCompression"
+            ],
+            "maximum_rest_delta_m": {
+              "StudyShoulderSupport": 0.006,
+              "StudyHipCompression": 0.004334053408057175,
+              "StudyKneeCompression": 0.006
+            },
+            "observed_target_delta_m": {
+              "StudyShoulderSupport": 0.014545691799568447,
+              "StudyHipCompression": 0.003838578769703493,
+              "StudyKneeCompression": 0.008930086465345677
+            },
+            "supported_control_vertices": {
+              "StudyShoulderSupport": 120,
+              "StudyHipCompression": 155,
+              "StudyKneeCompression": 79
+            },
+            "skipped_singular_blends": {
+              "StudyShoulderSupport": 0,
+              "StudyHipCompression": 0,
+              "StudyKneeCompression": 0
+            },
+            "method": "Same authored cage/actual target pose: bounded45% masked LBS-to-preserve-volume evaluation difference, inverse-linear-skinned into bind-space morph; export remains LBS.",
+            "bind_space_caps_m": {
+              "StudyShoulderSupport": 0.006,
+              "StudyHipCompression": 0.008,
+              "StudyKneeCompression": 0.006
+            },
+            "scope": "Small supports for observed joint compression only; no muscle-size sculpt, measured soft tissue or accepted realism."
+          }
+        ],
+        "actual_binary_morphs": [
+          [
+            {
+              "name": "StudyShoulderSupport",
+              "maximum_position_delta_m": 0.004109654743927535,
+              "vertex_count": 64854
+            },
+            {
+              "name": "StudyHipCompression",
+              "maximum_position_delta_m": 0.002679887021919129,
+              "vertex_count": 64854
+            },
+            {
+              "name": "StudyKneeCompression",
+              "maximum_position_delta_m": 0.005084363705929839,
+              "vertex_count": 64854
+            }
+          ]
+        ],
+        "scope": "Finite bounded authored supports, not acceptance of soft-tissue or muscle realism."
+      }
+    },
+    {
+      "name": "actual_level2_evaluated_sole_observations_present_finite_and_support_aligned",
+      "passed": true,
+      "evidence": {
+        "pose_observations": [
+          {
+            "pose": "a_pose",
+            "support_sides": [
+              "L",
+              "R"
+            ],
+            "after": {
+              "L": {
+                "available": true,
+                "minimum_z_m": 6.51925802230835e-09,
+                "heel_min_z_m": 6.51925802230835e-09,
+                "toe_min_z_m": 4.801107570528984e-05,
+                "heel_center_m": [
+                  0.10742270201444626,
+                  0.025357473641633987,
+                  0.0026192583609372377
+                ],
+                "toe_center_m": [
+                  0.10855849832296371,
+                  -0.16654115915298462,
+                  0.006172862369567156
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              },
+              "R": {
+                "available": true,
+                "minimum_z_m": 5.587935447692871e-09,
+                "heel_min_z_m": 5.587935447692871e-09,
+                "toe_min_z_m": 4.800967872142792e-05,
+                "heel_center_m": [
+                  -0.10742268711328506,
+                  0.025357475504279137,
+                  0.0026192576624453068
+                ],
+                "toe_center_m": [
+                  -0.10855849832296371,
+                  -0.16654115915298462,
+                  0.006172863766551018
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              }
+            }
+          },
+          {
+            "pose": "arm_raise",
+            "support_sides": [
+              "L",
+              "R"
+            ],
+            "after": {
+              "L": {
+                "available": true,
+                "minimum_z_m": 6.51925802230835e-09,
+                "heel_min_z_m": 6.51925802230835e-09,
+                "toe_min_z_m": 4.801107570528984e-05,
+                "heel_center_m": [
+                  0.10742270201444626,
+                  0.025357473641633987,
+                  0.0026192583609372377
+                ],
+                "toe_center_m": [
+                  0.10855849832296371,
+                  -0.16654115915298462,
+                  0.006172862369567156
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              },
+              "R": {
+                "available": true,
+                "minimum_z_m": 5.587935447692871e-09,
+                "heel_min_z_m": 5.587935447692871e-09,
+                "toe_min_z_m": 4.800967872142792e-05,
+                "heel_center_m": [
+                  -0.10742268711328506,
+                  0.025357475504279137,
+                  0.0026192576624453068
+                ],
+                "toe_center_m": [
+                  -0.10855849832296371,
+                  -0.16654115915298462,
+                  0.006172863766551018
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              }
+            }
+          },
+          {
+            "pose": "deep_squat",
+            "support_sides": [
+              "L",
+              "R"
+            ],
+            "after": {
+              "L": {
+                "available": true,
+                "minimum_z_m": 4.190951585769653e-09,
+                "heel_min_z_m": 3.8255006074905396e-05,
+                "toe_min_z_m": 4.146061837673187e-05,
+                "heel_center_m": [
+                  0.10742194950580597,
+                  0.025393979623913765,
+                  0.002672686008736491
+                ],
+                "toe_center_m": [
+                  0.10855785012245178,
+                  -0.1665053367614746,
+                  0.006151002831757069
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              },
+              "R": {
+                "available": true,
+                "minimum_z_m": 1.2246891856193542e-07,
+                "heel_min_z_m": 3.8389116525650024e-05,
+                "toe_min_z_m": 4.1575636714696884e-05,
+                "heel_center_m": [
+                  -0.10742189735174179,
+                  0.02539397031068802,
+                  0.0026728252414613962
+                ],
+                "toe_center_m": [
+                  -0.10855784267187119,
+                  -0.16650530695915222,
+                  0.006151113193482161
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              }
+            }
+          },
+          {
+            "pose": "single_support",
+            "support_sides": [
+              "L"
+            ],
+            "after": {
+              "L": {
+                "available": true,
+                "minimum_z_m": 2.561137080192566e-08,
+                "heel_min_z_m": 3.827735781669617e-05,
+                "toe_min_z_m": 4.148203879594803e-05,
+                "heel_center_m": [
+                  0.1074226051568985,
+                  0.025395186617970467,
+                  0.0026727067306637764
+                ],
+                "toe_center_m": [
+                  0.10855843126773834,
+                  -0.16650429368019104,
+                  0.006151024717837572
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              },
+              "R": {
+                "available": true,
+                "minimum_z_m": 0.14100006222724915,
+                "heel_min_z_m": 0.14100006222724915,
+                "toe_min_z_m": 0.14104805886745453,
+                "heel_center_m": [
+                  -0.16242271661758423,
+                  -0.07464268803596497,
+                  0.14361926913261414
+                ],
+                "toe_center_m": [
+                  -0.16355860233306885,
+                  -0.2665410339832306,
+                  0.1471727192401886
+                ],
+                "heel_samples": 627,
+                "toe_samples": 1784,
+                "foot_samples": 5658
+              }
+            }
+          }
+        ],
+        "support_height_tolerance_m": 0.001,
+        "scope": "These are recorded actual Blender evaluated heel/toe pads, not ankle-only claims or a new gameplay contact test."
+      }
+    },
+    {
+      "name": "selected_source_freeze_current_snapshot_and_build_manifest_all_match",
+      "passed": true,
+      "evidence": [
+        {
+          "live_source": "tools/sculpted_character/build_body_cage.py",
+          "frozen_source": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_body_cage.py",
+          "sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+          "match": true
+        },
+        {
+          "live_source": "tools/sculpted_character/build_head_extremities.py",
+          "frozen_source": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_head_extremities.py",
+          "sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+          "match": true
+        },
+        {
+          "live_source": "tools/sculpted_character/build_resident_study.py",
+          "frozen_source": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_resident_study.py",
+          "sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+          "match": true
+        },
+        {
+          "live_source": "tools/sculpted_character/build_study_rig.py",
+          "frozen_source": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_study_rig.py",
+          "sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+          "match": true
+        }
+      ]
+    },
+    {
+      "name": "bone_pose_attachment_and_support_rules_restored_to_frozen_exp35",
+      "passed": true,
+      "evidence": {
+        "functions_ast_equal": {
+          "_weights": true,
+          "_bone_specs": true,
+          "_leg_to": true,
+          "_fit_support": true,
+          "apply_study_pose": true
+        },
+        "scope": "Only comments are excluded. Corrective construction and new authored geometry differ; base attachment/pose/rest/support rules are unchanged."
+      }
+    },
+    {
+      "name": "actual_binary_rest_heads_match_manifest_and_original_bone_lengths",
+      "passed": true,
+      "evidence": {
+        "maximum_actual_rest_head_error_m": 2.3362406092686907e-07,
+        "joints": [
+          {
+            "name": "root",
+            "actual_glb_rest_head_yup_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              0.0,
+              -0.0
+            ],
+            "error_m": 0.0,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "pelvis",
+            "actual_glb_rest_head_yup_m": [
+              0.0,
+              0.9449999332427979,
+              -0.004000000189989805
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              0.9449999928474426,
+              -0.004000000189989805
+            ],
+            "error_m": 5.960464477539063e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "spine",
+            "actual_glb_rest_head_yup_m": [
+              5.796004157847988e-17,
+              1.1049999971889648,
+              -0.0019999990452488035
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.1050000190734863,
+              -0.0020000000949949026
+            ],
+            "error_m": 2.19096839181861e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "chest",
+            "actual_glb_rest_head_yup_m": [
+              3.781800665996289e-17,
+              1.3450000038799048,
+              1.3830590606249322e-09
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.3450000286102295,
+              -0.0
+            ],
+            "error_m": 2.4768968710748514e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "neck",
+            "actual_glb_rest_head_yup_m": [
+              -3.1157678067373584e-18,
+              1.529999891525451,
+              -0.006999998845963136
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.5299999713897705,
+              -0.007000000216066837
+            ],
+            "error_m": 7.987607107045003e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "head",
+            "actual_glb_rest_head_yup_m": [
+              2.3868169918529928e-17,
+              1.6149999195503233,
+              -0.006999998494960715
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.6150000095367432,
+              -0.007000000216066837
+            ],
+            "error_m": 9.000287755125471e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "clavicle.L",
+            "actual_glb_rest_head_yup_m": [
+              1.057855531164118e-16,
+              1.4699999675448192,
+              3.473972534038683e-09
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.4700000286102295,
+              -0.0
+            ],
+            "error_m": 6.116414651013908e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "upper_arm.L",
+            "actual_glb_rest_head_yup_m": [
+              0.20500005234638805,
+              1.4449999867443841,
+              2.9630807197462578e-09
+            ],
+            "manifest_head_yup_m": [
+              0.20499999821186066,
+              1.4450000524520874,
+              -0.0
+            ],
+            "error_m": 8.518702467546099e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "forearm.L",
+            "actual_glb_rest_head_yup_m": [
+              0.3320001016535478,
+              1.1649998897524518,
+              0.012000001790990505
+            ],
+            "manifest_head_yup_m": [
+              0.3319999873638153,
+              1.1649999618530273,
+              0.012000000104308128
+            ],
+            "error_m": 1.3514244649187572e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "hand.L",
+            "actual_glb_rest_head_yup_m": [
+              0.44500013094944146,
+              0.9149998956729103,
+              0.02500000829047674
+            ],
+            "manifest_head_yup_m": [
+              0.4449999928474426,
+              0.9150000214576721,
+              0.02500000037252903
+            ],
+            "error_m": 1.869670085520547e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "clavicle.R",
+            "actual_glb_rest_head_yup_m": [
+              1.057855531164118e-16,
+              1.4699999675448192,
+              3.473972534038683e-09
+            ],
+            "manifest_head_yup_m": [
+              0.0,
+              1.4700000286102295,
+              -0.0
+            ],
+            "error_m": 6.116414651013908e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "upper_arm.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.20500003782341114,
+              1.4449999907776352,
+              3.0708417887123375e-09
+            ],
+            "manifest_head_yup_m": [
+              -0.20499999821186066,
+              1.4450000524520874,
+              -0.0
+            ],
+            "error_m": 7.336377209967838e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "forearm.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.3320000605041404,
+              1.1649998817452725,
+              0.012000002627318353
+            ],
+            "manifest_head_yup_m": [
+              -0.3319999873638153,
+              1.1649999618530273,
+              0.012000000104308128
+            ],
+            "error_m": 1.0850403275227141e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "hand.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.4450001082063628,
+              0.9149998482890038,
+              0.025000005223497462
+            ],
+            "manifest_head_yup_m": [
+              -0.4449999928474426,
+              0.9150000214576721,
+              0.02500000037252903
+            ],
+            "error_m": 2.0813120871631389e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "thigh.L",
+            "actual_glb_rest_head_yup_m": [
+              0.09499999881931503,
+              0.9250000135430915,
+              -0.0039999986488711
+            ],
+            "manifest_head_yup_m": [
+              0.0949999988079071,
+              0.925000011920929,
+              -0.004000000189989805
+            ],
+            "error_m": 2.2375406655138753e-09,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "shin.L",
+            "actual_glb_rest_head_yup_m": [
+              0.09999997414882061,
+              0.5150000470710948,
+              0.01800006198647545
+            ],
+            "manifest_head_yup_m": [
+              0.10000000149011612,
+              0.5149999856948853,
+              0.017999999225139618
+            ],
+            "error_m": 9.19433021776803e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "foot.L",
+            "actual_glb_rest_head_yup_m": [
+              0.10499991647611875,
+              0.10500017771197173,
+              1.2402975065196091e-07
+            ],
+            "manifest_head_yup_m": [
+              0.10499999672174454,
+              0.10499999672174454,
+              -0.0
+            ],
+            "error_m": 2.3362406092686907e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "toe.L",
+            "actual_glb_rest_head_yup_m": [
+              0.10500006204578685,
+              0.06200016497101203,
+              0.1750001171373271
+            ],
+            "manifest_head_yup_m": [
+              0.10499999672174454,
+              0.06199999898672104,
+              0.17499999701976776
+            ],
+            "error_m": 2.1504939763493867e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "thigh.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.0949999987964994,
+              0.9250000135489409,
+              -0.003999999116824818
+            ],
+            "manifest_head_yup_m": [
+              -0.0949999988079071,
+              0.925000011920929,
+              -0.004000000189989805
+            ],
+            "error_m": 1.949932339126307e-09,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "shin.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.09999997989197523,
+              0.5150000472875168,
+              0.018000064045455764
+            ],
+            "manifest_head_yup_m": [
+              -0.10000000149011612,
+              0.5149999856948853,
+              0.017999999225139618
+            ],
+            "error_m": 9.198807170686608e-08,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "foot.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.10499992139764218,
+              0.10500017805729987,
+              1.230139087434475e-07
+            ],
+            "manifest_head_yup_m": [
+              -0.10499999672174454,
+              0.10499999672174454,
+              -0.0
+            ],
+            "error_m": 2.3170827729972983e-07,
+            "same_head_tail_as_baseline": true
+          },
+          {
+            "name": "toe.R",
+            "actual_glb_rest_head_yup_m": [
+              -0.10500006781044639,
+              0.06200016209024162,
+              0.1750001150617079
+            ],
+            "manifest_head_yup_m": [
+              -0.10499999672174454,
+              0.06199999898672104,
+              0.17499999701976776
+            ],
+            "error_m": 2.135187616778519e-07,
+            "same_head_tail_as_baseline": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "rejected_medial_sheet_and_axilla_history_remains_separate_and_byte_bound",
+      "passed": true,
+      "evidence": {
+        "v01_actual_glb_sha256": "776cafd0863ac19f63a5a7f1b43d60b20e4a55e240d9f5e91334fc576c37b959",
+        "diagnosis_file": "data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.json",
+        "diagnosis_sha256": "cace5353c291e81850ee80a420da56154fe2a389bc375fa6580d2e48a70e47a6",
+        "medial_vertices_with_pelvis_over_50pct": 105,
+        "v02_rejection_file": "data/reports/resident_form_refinement/20261025/candidates/v02/disposition.json",
+        "v02_rejection_sha256": "88f8dd1678cf4475fd1ef2484c68d6af4f5c96854ea239883fb564fe10766dd3",
+        "v02_selected": false,
+        "scope": "Actual rejected v01/v02 evidence remains historical; it is not reused as current acceptance."
+      }
+    },
+    {
+      "name": "read_only_audit_kept_all_bound_asset_and_source_bytes_unchanged",
+      "passed": true,
+      "evidence": {
+        "bound_file_count": 22
+      }
+    }
+  ],
+  "primitives": [
+    {
+      "mesh_index": 0,
+      "primitive_index": 0,
+      "vertices": 64854,
+      "triangles": 129696,
+      "local_basis_bounds": {
+        "min": [
+          -0.5332599878311157,
+          0.006000000052154064,
+          -0.1352146565914154
+        ],
+        "max": [
+          0.5332600474357605,
+          1.7797324657440186,
+          0.19723905622959137
+        ]
+      },
+      "morphs": [
+        {
+          "name": "StudyShoulderSupport",
+          "maximum_position_delta_m": 0.004109654743927535,
+          "vertex_count": 64854
+        },
+        {
+          "name": "StudyHipCompression",
+          "maximum_position_delta_m": 0.002679887021919129,
+          "vertex_count": 64854
+        },
+        {
+          "name": "StudyKneeCompression",
+          "maximum_position_delta_m": 0.005084363705929839,
+          "vertex_count": 64854
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "a_pose",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "arm_raise",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "deep_squat",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "single_support",
+      "channel_counts_by_path": {
+        "translation": 22,
+        "rotation": 22,
+        "scale": 22,
+        "weights": 1
+      },
+      "duration_s": 1.5,
+      "morph_values_at_1s": [
+        0.0,
+        0.20000000298023224,
+        0.20000000298023224
+      ]
+    }
+  ],
+  "subdivision_contract": {
+    "selected_candidate": "v03",
+    "level": 2,
+    "same_level_2_support_render_export": true,
+    "support_evaluation_before_rig_assignment": [
+      {
+        "line": 152,
+        "text": "if modifier.type=='SUBSURF':modifier.levels=2;modifier.render_levels=2"
+      }
+    ],
+    "rig_assignment_source_line": 160,
+    "source_and_manifest_evidence_scope": "The builder sets viewport and render levels to 2 before assign_rig evaluates sole support and before export baking. The GLB basis and all three morphs contain the manifest-declared vertices. The binary stores the baked result, not the Blender modifier level itself."
+  },
+  "source_authorship_scope": {
+    "binary_establishes_no_reuse": false,
+    "manifest_claims": {
+      "source_assets_read": [],
+      "old_resident_geometry_read": false,
+      "image_paint_used": false
+    },
+    "basis": "Source freeze equality and explicit authored builder source/manifest claims support the declared construction inputs. Binary topology/finite/skin checks alone do not prove authorship, anatomical accuracy or absence of reuse.",
+    "historical_asset_comparison_performed": false
+  },
+  "full_art_target_met": false,
+  "limits": [
+    "This is a neutral editable clay prototype; validation of file structure, finite data and pose export is not acceptance of human realism.",
+    "Evaluated Blender heel/toe contact is separately recorded in the v04 manifest; this audit does not run gameplay or independently render the GLB.",
+    "The separate Godot native integration/visual review belongs to the root run and is not claimed by this stdlib audit."
+  ]
+}

@@ -1,0 +1,784 @@
+{
+  "task": "EXP36_STUDIO_VISUAL_COMPARISON_PEER",
+  "created_at_utc": "2026-10-25T03:43:27.603017+00:00",
+  "result": "STUDIO_COMPARISON_REVIEWED_PROTOTYPE_ONLY",
+  "reviewer": "original_character subagent; body author, therefore a separate scoped visual read rather than external independent art approval",
+  "selected_candidate": "v03",
+  "baseline_candidate": "EXP35_v04",
+  "source_snapshot": [
+    {
+      "live_path": "tools/sculpted_character/build_body_cage.py",
+      "frozen_path": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_body_cage.py",
+      "expected_sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+      "live_sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+      "frozen_sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+      "matches": true
+    },
+    {
+      "live_path": "tools/sculpted_character/build_head_extremities.py",
+      "frozen_path": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_head_extremities.py",
+      "expected_sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+      "live_sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+      "frozen_sha256": "05e888a8962b6ffe77bfa4887313974e47d9b5d6f45fead8b91136da3ad7b26b",
+      "matches": true
+    },
+    {
+      "live_path": "tools/sculpted_character/build_resident_study.py",
+      "frozen_path": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_resident_study.py",
+      "expected_sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+      "live_sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+      "frozen_sha256": "926c3dbc60bf588ce3ea26065f0d745698125e9f64929855c63c8e37fa108968",
+      "matches": true
+    },
+    {
+      "live_path": "tools/sculpted_character/build_study_rig.py",
+      "frozen_path": "data/reports/resident_form_refinement/20261025/candidates/v03/source/build_study_rig.py",
+      "expected_sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+      "live_sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+      "frozen_sha256": "e638e1eca7fac978d783951dcdb15426469e04d7a4264ea931845e68471edc0a",
+      "matches": true
+    }
+  ],
+  "all_selected_source_hashes_match_live": true,
+  "selected_manifest_sha256": "a4616d26fc9fe8fd33f1cd2583969a74ecbebd44cccb157241c7f21c6ee8c766",
+  "selected_glb_sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b",
+  "canonical_glb_sha256": "a31f13eddf53b954c954aa2397d7591ed3b065b8d194e8704bb60bece603da7b",
+  "canonical_matches_selected": true,
+  "scope": {
+    "selected_studio_images_opened": 16,
+    "selected_detail_images_opened": 5,
+    "baseline_studio_images_opened": 16,
+    "baseline_detail_images_opened": 5,
+    "rejected_history_images_opened": 5,
+    "total_original_png_files_opened": 47,
+    "all_21_selected_studio_and_detail_images_opened": true,
+    "native_game_images_reviewed": 0,
+    "continuous_animation_or_gameplay_reviewed": false,
+    "method": "Existing original PNG files were displayed individually, paired baseline/current. No image generation, scene changes, engine launch or pixel editing occurred in this review. An unsupported low-detail display attempt returned no pixels; those attempts were excluded and each affected file was subsequently displayed successfully at standard/high detail.",
+    "comparison_limit": "Both manifests describe fixed orthographic clay studio renders. Camera/light equality was not independently measured here. Body/head/extremity/rig changes coexist, so the visible changes are observations, not an isolated causal measurement."
+  },
+  "observations_by_image_pair": [
+    {
+      "view": "a_pose_front",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front.png",
+      "observed_changes": [
+        "가슴 하연의 호와 가슴-배의 면 차이가 이전보다 보인다. 다섯 발가락이 분리되어 발끝을 식별할 수 있다."
+      ],
+      "remaining_art_limits": [
+        "쇄골·갈비뼈·배와 무릎의 세부 면은 여전히 약하고 전체 몸은 매끈한 원형으로 읽힌다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "a_pose_right",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_right.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_right.png",
+      "observed_changes": [
+        "가슴 전면과 배의 굴곡, 뒤쪽 둔부 돌출 및 종아리 윤곽이 이전보다 구별된다. 발은 둥근 신발 덩어리에서 발등/뒤꿈치/발끝을 가진 형태로 바뀌었다."
+      ],
+      "remaining_art_limits": [
+        "둔부의 둥근 돌출과 허리 전이가 과장되어 보일 여지가 있고 어깨·무릎의 뼈 기준점은 약하다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "a_pose_back",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_back.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_back.png",
+      "observed_changes": [
+        "둔부 두 면과 하부 전이 및 종아리 윤곽 변화가 보인다."
+      ],
+      "remaining_art_limits": [
+        "등/견갑은 넓고 매끈하며 요추·천골·둔부 경계의 해부 형태가 충분히 읽히지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "a_pose_front45",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front45.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front45.png",
+      "observed_changes": [
+        "가슴 아래의 비스듬한 면과 옆 골반/허벅지의 부피 전환이 이전보다 구별된다."
+      ],
+      "remaining_art_limits": [
+        "목·어깨·가슴의 전이가 아직 단순하며 흉곽/장골 표면이 실제 인체 수준으로 정리됐다고 보기 어렵다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "arm_raise_front",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front.png",
+      "observed_changes": [
+        "가슴 하연이 이전보다 읽히며, 별도로 본 rejected v02의 날카로운 겨드랑이 날개 형태는 선택 v03에서 보이지 않는다."
+      ],
+      "remaining_art_limits": [
+        "양쪽 겨드랑이가 넓고 매끈한 web/U자 모서리로 이어진다. 자연스러운 접힌 살과 어깨 관절면으로 수용하지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "arm_raise_right",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_right.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_right.png",
+      "observed_changes": [
+        "전면 흉곽 돌출과 배의 차이 및 새 발 윤곽을 확인했다."
+      ],
+      "remaining_art_limits": [
+        "겨드랑이가 큰 채워진 면으로 보이고 상완/어깨와 갈비뼈 연결이 단순하다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "arm_raise_back",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_back.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_back.png",
+      "observed_changes": [
+        "둔부/하퇴 윤곽 변화는 유지되며 별도의 큰 sheet나 분리된 팔은 이 화면에서 보이지 않는다."
+      ],
+      "remaining_art_limits": [
+        "등과 겨드랑이가 넓고 고르게 늘어난 면처럼 보인다. 후면 견갑 움직임의 해부학적 자연스러움은 확인되지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "arm_raise_front45",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front45.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front45.png",
+      "observed_changes": [
+        "가슴과 앞 겨드랑이의 면 차이가 읽히고 rejected v02의 날개처럼 솟은 모서리가 크게 줄었다."
+      ],
+      "remaining_art_limits": [
+        "겨드랑이의 넓고 평평한 전이와 팔의 매끈한 장축이 남아 있다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "deep_squat_front",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front.png",
+      "observed_changes": [
+        "가슴 하연과 새 눈/입/발끝이 보인다. rejected v01의 큰 치마 같은 중앙 sheet는 선택 v03에서 보이지 않는다."
+      ],
+      "remaining_art_limits": [
+        "기준 원형과 비슷한 넓은 옆구리 대각면/허벅지 덩어리가 남아 있어 자세 변형이 자연스러워졌다고 판정하지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "deep_squat_right",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_right.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_right.png",
+      "observed_changes": [
+        "가슴 전면/허리/둔부의 실루엣과 발등/뒤꿈치 구분을 확인했다. rejected v01의 허벅지 밑으로 늘어진 sheet는 없다."
+      ],
+      "remaining_art_limits": [
+        "옆구리에서 허벅지로 이어지는 V자 능선, 크게 늘어난 측면과 무릎 뒤의 급한 접힘이 남는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "deep_squat_back",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_back.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_back.png",
+      "observed_changes": [
+        "둔부 부피와 새 뒤꿈치 형태가 보이며 두 다리는 구별된다."
+      ],
+      "remaining_art_limits": [
+        "둔부 하연이 넓고 매끈하게 압축되고 고관절·무릎 주변의 실제 살 접힘/부피 보존은 충분히 읽히지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "deep_squat_front45",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front45.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front45.png",
+      "observed_changes": [
+        "발가락과 가슴 아래 면을 식별할 수 있고 큰 중앙 치마 형태는 보이지 않는다."
+      ],
+      "remaining_art_limits": [
+        "몸통 옆의 넓은 대각면, 골반-대퇴 능선과 무릎의 단순한 굽힘이 남아 있다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "single_support_front",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front.png",
+      "observed_changes": [
+        "가슴 아래 면과 새 발가락/손가락 윤곽이 식별된다."
+      ],
+      "remaining_art_limits": [
+        "들린 허벅지의 상단 모서리와 사타구니 압축이 단순하고, 정지 한발 자세만으로 체중 이동·자연 동작을 수용할 수 없다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "single_support_right",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_right.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_right.png",
+      "observed_changes": [
+        "둔부 돌출과 하퇴의 굴곡, 새 발등/뒤꿈치 실루엣이 이전보다 구별된다."
+      ],
+      "remaining_art_limits": [
+        "고관절 전이와 무릎 굽힘이 여전히 매끈한 튜브와 각진 경계처럼 읽힌다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "single_support_back",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_back.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_back.png",
+      "observed_changes": [
+        "둔부 두 면과 종아리 윤곽 변화가 유지된다."
+      ],
+      "remaining_art_limits": [
+        "들린 다리 뒤의 어두운 압축 영역과 둔부-대퇴 경계는 여전히 단순하며 부피 변형의 자연스러움은 미수용이다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "single_support_front45",
+      "baseline": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front45.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front45.png",
+      "observed_changes": [
+        "가슴의 아래 면, 골반 옆 볼륨 및 발의 구분이 이전보다 보인다."
+      ],
+      "remaining_art_limits": [
+        "허벅지 상단의 능선과 손을 편 채 유지하는 자세가 남아 있고 균형 잡는 연속 움직임은 이 정지 화면의 범위 밖이다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "face_front",
+      "baseline": "data/reports/resident_form_refinement/20261025/baseline_details/face_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_front.png",
+      "observed_changes": [
+        "이전의 pill처럼 솟은 안구 노출이 줄고 눈꺼풀 안쪽의 안구/개구부 및 실제 입 slit이 구별된다."
+      ],
+      "remaining_art_limits": [
+        "눈에 홍채·시선·표정이 없고 이마/볼/턱·귀가 매끈하다. 입은 여전히 얇고 인공적인 테두리로 읽히며 미형/실사 얼굴로 수용하지 않는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "face_right",
+      "baseline": "data/reports/resident_form_refinement/20261025/baseline_details/face_right.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_right.png",
+      "observed_changes": [
+        "눈 표면이 외부로 크게 튀어나오던 모습이 줄고 코 돌출이 완화됐다. rejected v02의 두꺼운 평행 lip plate보다 입 돌출과 개구가 작아졌다."
+      ],
+      "remaining_art_limits": [
+        "코/콧방울/인중·귀/턱밑과 목 연결이 단순하고 작은 입술 돌출은 남는다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "hand_left_front",
+      "baseline": "data/reports/resident_form_refinement/20261025/baseline_details/hand_left_front.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/details/hand_left_front.png",
+      "observed_changes": [
+        "손가락 길이/폭의 차이와 완만한 마디 면이 이전보다 구별된다. 손바닥-손목은 연결되어 보인다."
+      ],
+      "remaining_art_limits": [
+        "엄지 기저에 밝은 삼각 패치 경계가 남고 손등/손바닥이 평평하다. 손끝과 마디는 매끈한 막대 형태이며 독립 관절 자연스러움을 검증하지 않았다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "foot_left_oblique",
+      "baseline": "data/reports/resident_form_refinement/20261025/baseline_details/foot_left_oblique.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/details/foot_left_oblique.png",
+      "observed_changes": [
+        "기준 원형의 둥근 신발 같은 발끝 대신 다섯 발가락, 전족부/발등과 뒤꿈치를 식별할 수 있다."
+      ],
+      "remaining_art_limits": [
+        "발가락은 단순한 둥근 갈래이고 뒤꿈치가 원형 돌출처럼 보인다. 발목 뼈/힘줄/발바닥 압축과 각 발가락 관절 움직임은 미수용이다."
+      ],
+      "realistic_anatomy_accepted": false
+    },
+    {
+      "view": "pelvis_back",
+      "baseline": "data/reports/resident_form_refinement/20261025/baseline_details/pelvis_back.png",
+      "selected": "data/reports/resident_form_refinement/20261025/candidates/v03/details/pelvis_back.png",
+      "observed_changes": [
+        "둔부 두 면의 볼륨과 하연 전이가 기준 원형보다 구별된다."
+      ],
+      "remaining_art_limits": [
+        "천골/둔부 사이의 면과 중심 cleft는 여전히 부드럽고 단순하며 사타구니 부근에 넓고 어두운 압축이 남는다."
+      ],
+      "realistic_anatomy_accepted": false
+    }
+  ],
+  "rejected_history": {
+    "v01": {
+      "selected": false,
+      "disposition_path": "data/reports/resident_form_refinement/20261025/candidates/v01/disposition.json",
+      "observed": [
+        "deep_squat_right has a large hanging skirt-like inner-thigh sheet below the thighs.",
+        "arm_raise_front45 has a sharp protruding axillary wing."
+      ],
+      "selected_v03_comparison": "The large hanging squat sheet and sharp axillary wing are not visible in the corresponding selected v03 samples. Broad simplified axillary/hip planes remain."
+    },
+    "v02": {
+      "selected": false,
+      "disposition_path": "data/reports/resident_form_refinement/20261025/candidates/v02/disposition.json",
+      "observed": [
+        "arm_raise_front45 retains the sharp axillary wing.",
+        "face_front and face_right show separated, projecting parallel lip plates."
+      ],
+      "selected_v03_comparison": "Selected v03 has a narrower, less projecting oral slit and a smoother raised-arm junction, but these are still prototype surfaces."
+    },
+    "selection_does_not_erase_rejections": true
+  },
+  "overall": {
+    "visible_improvements": [
+      "Pectoral lower fan/costal-to-abdominal change and posterior pelvic/lower-leg silhouette are more legible in several front/side/45 views.",
+      "Individual toe/forefoot/heel structure replaces the smooth shoe-like foot; fingers differ in length and segment contour.",
+      "Eyes are recessed within orbital apertures and the oral slit is explicit with less projecting lip plates than rejected v02."
+    ],
+    "remaining_limits": [
+      "Large torso/back planes remain too smooth; acromial/clavicular/scapular and sacral anatomy is insufficiently resolved.",
+      "Raised-arm axilla is still a broad web; squat hip/thigh and lateral torso retain simple stretched planes and sharp creases.",
+      "Thumb-base highlight/patch, smooth finger shafts, blunt toes and rounded heel remain stylized; independent digit articulation was not reviewed.",
+      "Head/ears/nose/jaw/neck and expression remain simplified; no iris, gaze, hair or character identity acceptance."
+    ],
+    "photorealism_accepted": false,
+    "attractiveness_accepted": false,
+    "natural_motion_accepted": false,
+    "full_anatomy_art_target_met": false,
+    "selection_scope": "A better specified editable form study for further inspection, not a realistic resident or natural-motion release."
+  },
+  "actual_opened_files": [
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front.png",
+      "sha256": "335c4cee0612007c2d7b05676c943d4957035aaf59ed5f23d0b35e04b31d55f4",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front.png",
+      "sha256": "87197ea14ba64138dcd050812a3baa0fc286e30821e928969d03ea224faa343f",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_right.png",
+      "sha256": "d11291f7ea7ff3ae105a4b46eda32ded91360c35dbb2933d43a3c5984f002aa4",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_right.png",
+      "sha256": "22917e36579e39c9149159fd10dc774984ec2e2bcd1fce5ce53566ba6d0aca3f",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_back.png",
+      "sha256": "17c7ff27bfcfa1cac49c2423013a6e3359921e46a3523f5c4373cf76ae1bb488",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_back.png",
+      "sha256": "5ea99fd4608e8ac1792aa16d580b0826e419dc46b21eb202948e171655e65ebd",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/a_pose_front45.png",
+      "sha256": "524f2cc97cb736f5a82cdfc879bb4dddbf532db66b508be58efd92d92b43f441",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/a_pose_front45.png",
+      "sha256": "104e61d0c76a5117440960d5b399d89ea40e20e8c47248c18d744fd3c1f2dc87",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front.png",
+      "sha256": "3ea58ff3a072e42984b22d81173a475c296a6c149a940b0d9446d43bc3901cdd",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front.png",
+      "sha256": "dac36e3db1f0dc75df795b0066d227d89d6570db1bff906893e13638cae81209",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_right.png",
+      "sha256": "0301bd12f35b7503d810112908d620b40087df037ca4db458fa5b15432d6fd5b",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_right.png",
+      "sha256": "0563804cd5d1cd583bb2015e0d4923cfde4aa646c9081b138362e89ff8d58cf9",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_back.png",
+      "sha256": "54569fd431530d07924779aba94236609279dad89006c52cce22eb70ccd42b87",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_back.png",
+      "sha256": "294c4384cc6dab2e9ce064eebceff5d0d0a06cac12889cb9395dde5a2ca0807a",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/arm_raise_front45.png",
+      "sha256": "116877cc7de2e86360abaaecea9617c5f825b481a1f507a876276964e87084a5",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/arm_raise_front45.png",
+      "sha256": "04a31620e4d3eeaef4f577bfea535e660fa4c02ec1d01f29c33c8ba3b449c1ab",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front.png",
+      "sha256": "b325a66cd824df17b3c556ce6634acd7a8a002c47604b1f3bf38dfdc5ad881a9",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front.png",
+      "sha256": "07df9bf07d53136c4b669c6055bdeda5c843ac1bb9b97eaa42adaac86ef569b2",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_right.png",
+      "sha256": "10ea221a494dd2e6e726754a5ce600b0b6c0f3c9e34f3cffa1e7e7d88ceec8dc",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_right.png",
+      "sha256": "37f5f84213113dff7954429e874b3de3f7b8e9b2be82f1d56e9941bca0c02713",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_back.png",
+      "sha256": "96eb2e82efaf5e9ea6d91841a72be8ab049a671d7d8f4f3ca4b706671375a5c7",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_back.png",
+      "sha256": "bfef598c1a90bdaa28ae21c9134f73c79c6f10808f2235c257b14c8b7dfadaf7",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/deep_squat_front45.png",
+      "sha256": "65ddd62eb0e5e38e28073e2c0f54b786d903080f9808323ba4f58bb5025cad40",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/deep_squat_front45.png",
+      "sha256": "2f26bd9706fabd127c3c9fe86b03f09436a40884d66a31a4b46cc276b22839de",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front.png",
+      "sha256": "beae4fb5f0218bb19fe0fc2e791f430dd875c4ac3440572752a2f12c1ddc6cad",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front.png",
+      "sha256": "de7adb06f37c73cd07682c34975ed5a072525bdbf2f9eb977192c44c9f9fa78c",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_right.png",
+      "sha256": "c2269d539b39d82e1d4b93f8f31d52812a5b39b756700a825feb35b2b4d24b9a",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_right.png",
+      "sha256": "8774f0d164bead3bb939985368c79abe028d1e87f010d18fb2f9538d11f8244b",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_back.png",
+      "sha256": "22866f74befa8a3a68e28d0bdfd445574f47bda917b1e42cda377d427b66fb44",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_back.png",
+      "sha256": "673ffc55923ff7dbe5ab96408bf3544a9037373d6cf7a7c1664cc935e19738a6",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_study/20261025/candidates/v04/blender_views/single_support_front45.png",
+      "sha256": "1888db1850566a94214a55f9bac0b577a2f6bb030e0ef6efbfc02c5c8ef48ac7",
+      "width": 900,
+      "height": 1100,
+      "group": "baseline_EXP35_v04",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/blender_views/single_support_front45.png",
+      "sha256": "97bf4cf31f12bb67bc9d318c4500c3d366185e0373503f9340ed31abfb9125af",
+      "width": 900,
+      "height": 1100,
+      "group": "selected_EXP36_v03_studio",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/baseline_details/face_front.png",
+      "sha256": "3673a03a1016f8cbb12ff4b3b4129d0c98785467e0f3ea31a7db3ec935b8a7ff",
+      "width": 900,
+      "height": 900,
+      "group": "baseline_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_front.png",
+      "sha256": "f685d636979458a104b66eec1416f7a0c0447528847dd7cfdd3019f7372b9ad0",
+      "width": 900,
+      "height": 900,
+      "group": "selected_EXP36_v03_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/baseline_details/face_right.png",
+      "sha256": "b3d7be11ad06a7bfd4cc3bb67ebe67bf3cbdcec2c8c47f44d1bf2d43a4b25728",
+      "width": 900,
+      "height": 900,
+      "group": "baseline_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/details/face_right.png",
+      "sha256": "6759fed1b1d23d90ae9a303f4cf557ff41a5e46a9d51e0fec389d247663559b7",
+      "width": 900,
+      "height": 900,
+      "group": "selected_EXP36_v03_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/baseline_details/hand_left_front.png",
+      "sha256": "46c85a089b43066df1768e5f0c31254a32a2b28ca7352145bed21abe40052d1d",
+      "width": 900,
+      "height": 900,
+      "group": "baseline_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/details/hand_left_front.png",
+      "sha256": "10cb990da935dd0dca52c90e4eaa279cb374891d0c2ba8fc8635d4a0fcb04d27",
+      "width": 900,
+      "height": 900,
+      "group": "selected_EXP36_v03_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/baseline_details/foot_left_oblique.png",
+      "sha256": "5e6b17e7803f3ac5cd42baa723289887e30e1c2a7333b249d0d7a14e82ed3229",
+      "width": 900,
+      "height": 900,
+      "group": "baseline_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/details/foot_left_oblique.png",
+      "sha256": "c4a38bb7b7527419d5313fac0323ad04cafc02b8cad85cd28218ca873e25875e",
+      "width": 900,
+      "height": 900,
+      "group": "selected_EXP36_v03_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/baseline_details/pelvis_back.png",
+      "sha256": "ff7f8982c9cff41f6143b57c12174033c7f5a6fddb9e90ccafbe8a7a28f6966d",
+      "width": 900,
+      "height": 900,
+      "group": "baseline_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v03/details/pelvis_back.png",
+      "sha256": "237e4dfd8304db6ca83489d527b5da2edcf899d2e89f22d759785921b876aae4",
+      "width": 900,
+      "height": 900,
+      "group": "selected_EXP36_v03_details",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/arm_raise_front45.png",
+      "sha256": "06666abeac86bb5fefb53ae569d0ce0e349d51594dde381b91af8d394356aa9e",
+      "width": 900,
+      "height": 1100,
+      "group": "rejected_history",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v01/blender_views/deep_squat_right.png",
+      "sha256": "41812147a21e0785ad8f895d7c647ebc0f56666e8a46c2eda5481abec80a87e9",
+      "width": 900,
+      "height": 1100,
+      "group": "rejected_history",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v02/blender_views/arm_raise_front45.png",
+      "sha256": "e23a1a21cff5d66e89a969c4c5ac6c47202d311de68a7ccb6046c301865b7124",
+      "width": 900,
+      "height": 1100,
+      "group": "rejected_history",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v02/details/face_front.png",
+      "sha256": "3066918ae8cdad7e7d0876046411d2d614e499f8f401b355e19923f08ee9209e",
+      "width": 900,
+      "height": 900,
+      "group": "rejected_history",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    },
+    {
+      "path": "data/reports/resident_form_refinement/20261025/candidates/v02/details/face_right.png",
+      "sha256": "119896b458596a451c412aba776f8b765f9dc25841d8b07c7504da2c4e93f1aa",
+      "width": 900,
+      "height": 900,
+      "group": "rejected_history",
+      "actually_opened": true,
+      "viewer": "tools.view_image standard/high; successful pixel output"
+    }
+  ],
+  "non_mutation": {
+    "source_files_modified": false,
+    "existing_reports_modified": false,
+    "engines_launched": false,
+    "only_new_review_json_written": true
+  }
+}

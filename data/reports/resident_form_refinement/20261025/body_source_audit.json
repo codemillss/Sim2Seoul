@@ -1,0 +1,42 @@
+{
+  "task": "EXP36_BODY_SOURCE_CONTRACT",
+  "created_at_utc": "2026-10-25T03:28:18.883617+00:00",
+  "result": "SOURCE_CONTRACT_PASS_ONLY",
+  "method": "Pure Python evaluation of explicit control-cage source; numerical Vector operations substituted for mathutils.Vector. No bpy mesh/modifier/armature operation was evaluated.",
+  "baseline_commit": "51482e2275081849b3c5a31e0a1a32c96cab592d",
+  "baseline_source_sha256": "a5c812a3772e3cd2ca77b936e5168bf0c36f261afa7a398ad3de4b80430cbdc3",
+  "source_path": "tools/sculpted_character/build_body_cage.py",
+  "source_sha256": "375ffcddf41b24c6f67479ddafaac61c40618a626870518baea7272ae4593987",
+  "audit_script_sha256": "28551217c85401d8da162b7f37ead8217304c5e69c28236122f2e3a96926a8a7",
+  "control_vertices": 829,
+  "control_quads": 794,
+  "moved_control_vertices": 397,
+  "face_index_lists_exactly_preserved": true,
+  "vertex_region_ids_exactly_preserved": true,
+  "five_join_boundaries_metadata_ids_coordinates_exactly_preserved": {
+    "neck": true,
+    "wrist.L": true,
+    "wrist.R": true,
+    "ankle.L": true,
+    "ankle.R": true
+  },
+  "landmark_definition_ast_exactly_preserved": true,
+  "control_face_first_corner_normals_reversed_against_baseline": [],
+  "zero_area_control_face_first_corners": [],
+  "source_unchanged_during_audit": true,
+  "anatomy_reference_pages_read": [
+    "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs",
+    "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-6-appendicular-muscles-of-the-pelvic-girdle-and-lower-limbs",
+    "https://openstax.org/books/anatomy-and-physiology-2e/pages/8-3-the-pelvic-girdle-and-pelvis"
+  ],
+  "external_geometry_or_image_input_count": 0,
+  "blender_launched": false,
+  "rendered_pixels_reviewed_for_this_candidate": false,
+  "full_anatomy_art_acceptance": false,
+  "limitations": [
+    "This audit checks source coordinates and connectivity, not actual Blender evaluation or export.",
+    "A corner-normal test is not a proof that every quad is planar or that the subdivided surface has no self-intersection.",
+    "Unchanged body connectivity retains its five intentionally open join boundaries; complete closed-manifold acceptance belongs to the integrated head/hands/feet mesh audit.",
+    "Armature motion, corrective poses, surface volume, silhouettes, lighting and human realism require fresh actual candidate evaluation."
+  ]
+}

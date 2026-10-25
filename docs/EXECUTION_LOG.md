@@ -1,5 +1,16 @@
 # 단계별 실행 이력
 
+## EXP36 — 인체 원형 큰 면/손발/관절 개선 · 2026-10-25
+
+선택 v03은 실제 Blender 전신 16장·상세 5장과 이전 원형의 같은 21장 비교를 거쳤다. 최종 native final02는 신구 2개 × 4자세 × 4방향의 원본 32장이다. 현재 소스로 headless 73개/native 109개 검사를 통과했고 실제 exit 0·ERROR 0·capture 오류 0·source 변경 0이다. 독립 GLB 35조건은 별도 구조 감사로 구분한다. 실제 OS JPEG 8장에서 신구의 같은 앉기 자세·새 팔 올림/뒤보기·Esc 거리 복귀·메뉴 재진입/45도를 확인했다. 복귀 때 도구 응답은 시간초과였으나 다음 실제 화면에서 거리 복귀를 확인했다. 이를 연속 동작이나 복귀 성능 수용으로 확대하지 않는다. 설정 4파일은 전후 동일하며 PID 40688은 비교 화면으로 유지했다.
+
+v01의 새 hip field에서 측방 gate를 대퇴 전체에 적용해 안쪽 대퇴 정점에 골반 가중치가 과도하게 남았다. [실제 GLB 진단](../data/reports/resident_form_refinement/20261025/v01_medial_skin_diagnosis.json)을 남기고 원래 국소 hip 귀속으로 복원했다. v02의 shoulder field가 만든 겨드랑이 wing도 원래 방식으로 복원했다. v01의 안구 돌출은 구체를 안와 뒤로 넣어 고쳤으며, v02의 입술판은 돌출과 틈을 줄였다.
+
+첫 Godot import는 exit 0이어도 UV 없는 gray GLB에서 tangent 생성 ERROR 6건이 나와 거절했다. 양쪽 import에서 불필요한 tangent 생성을 끈 뒤 exit 0/ERROR 0을 다시 확인했다. final01의 73/109 PASS도 후면 판독성이 부족해 시각 수용에서 제외했다. 신구 모두 같은 fill .55/ambient .30을 사용하고 실제 값을 기록한 final02로 재실행했다. 실패 원본·소스·로그는 모두 보존한다.
+
+EXP35 v04를 원본 GLB·manifest로 별도 보존하고 신형의 같은22본/네clip/세morph와 비교하도록 검토 씬을 확장했다. 이전 SDF/외부 인체·이미지/모션 입력 없이 기존 편집 cage의 큰 면과 머리/손발을 수정한다. 교육 자료의 구조 읽기와 외부 그림/기하 복사를 구분해 [참조 기록](../data/reports/resident_form_refinement/20261025/reference_observation.json)을 남긴다. 후보 생성·실제 화면 검토/실패·최종 선택은 [집계](../data/reports/resident_form_refinement/20261025/summary.json)에 묶는다. 미술 수용은 기술 검사와 구분해 기록한다.
+
+
 ## 2026-10-25 EXP35 — 독립 무채색 원형과 제작 방식 전환
 
 최종 선택은 v04 + final02다. headless56/56·native71/71·실제11PNG, actual exit0·ERROR0·소스변경0이며 독립 GLB 감사27/27과 현재 원본11장 peer 검토를 별도로 기록했다. 실제 OS에서는 메뉴→새 원형→측면/앉기→정면/팔올림→이전 기본/뒤→거리 복귀→메뉴 재진입→새45도를 확인했다. 복귀 클릭의 도구 응답은 시간초과였지만 다음 실제 화면에서 정상 거리 복귀를 확인했다. 설정4파일 전후 동일, 현재PID18027은 새 원형 비교 화면으로 유지했다. 이는 자세 hold와 비교 화면의 기능 수용이며 인체 미술·연속 동작 수용은 false다.

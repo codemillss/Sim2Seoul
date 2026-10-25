@@ -1,0 +1,30 @@
+; Sim2Seoul native project. Coordinate source: config/region.json, prepared offline.
+config_version=5
+
+[application]
+config/name="Sim2Seoul"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")
+
+[display]
+window/size/viewport_width=1152
+window/size/viewport_height=720
+window/size/window_width_override=1152
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[input]
+move_forward={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":87),Object(InputEventKey,"physical_keycode":4194320)]}
+move_backward={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":83),Object(InputEventKey,"physical_keycode":4194322)]}
+move_left={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":65),Object(InputEventKey,"physical_keycode":4194319)]}
+move_right={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":68),Object(InputEventKey,"physical_keycode":4194321)]}
+move_fast={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":4194325)]}
+toggle_menu={"deadzone":0.2,"events":[Object(InputEventKey,"physical_keycode":4194305)]}
+
+[physics]
+common/physics_ticks_per_second=60
+
+[rendering]
+renderer/rendering_method="forward_plus"
+rendering_device/driver.macos="metal"
+environment/defaults/default_clear_color=Color(0.06, 0.09, 0.13, 1)
