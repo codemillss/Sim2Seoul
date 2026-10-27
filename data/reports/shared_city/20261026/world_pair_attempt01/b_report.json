@@ -1,0 +1,252 @@
+{
+  "ai_seconds_after_ready": 27.4333333333339,
+  "cases": [
+    {
+      "name": "full_production_city_terrain_and_manager_ready",
+      "passed": true
+    },
+    {
+      "name": "actual_city_ai_and_physical_player_remain_enabled",
+      "passed": true
+    },
+    {
+      "name": "actual_manager_client_bootstrap",
+      "passed": true
+    },
+    {
+      "name": "fake_test_invite_received_in_memory",
+      "passed": true
+    },
+    {
+      "name": "manager_client_join_started",
+      "passed": true
+    },
+    {
+      "name": "production_remote_resident_real_skin_loaded",
+      "passed": true
+    },
+    {
+      "name": "remote_remains_noncolliding_presentation",
+      "passed": true
+    },
+    {
+      "name": "both_full_games_have_peer",
+      "passed": true
+    },
+    {
+      "name": "both_ready_for_physical_input",
+      "passed": true
+    },
+    {
+      "name": "ordinary_controller_input_moves_actual_capsule",
+      "passed": true
+    },
+    {
+      "name": "both_physical_input_sequences_finished",
+      "passed": true
+    },
+    {
+      "name": "peer_accepted_position_changes_after_real_input",
+      "passed": true
+    },
+    {
+      "name": "peer_display_interpolates_to_accepted_position",
+      "passed": true
+    },
+    {
+      "name": "peer_leave_completes",
+      "passed": true
+    },
+    {
+      "name": "owner_confirmed_remote_removal",
+      "passed": true
+    },
+    {
+      "name": "peer_rejoin_started",
+      "passed": true
+    },
+    {
+      "name": "peer_rejoin_new_self_and_real_remote",
+      "passed": true
+    },
+    {
+      "name": "owner_confirmed_recreated_remote",
+      "passed": true
+    },
+    {
+      "name": "full_city_ai_and_physics_advanced",
+      "passed": true
+    },
+    {
+      "name": "actual_user_settings_bytes_unchanged",
+      "passed": true
+    },
+    {
+      "name": "isolated_missing_settings_remain_unwritten",
+      "passed": true
+    }
+  ],
+  "checks": 21,
+  "diagnostic": {
+    "available": true,
+    "connected": false,
+    "last_http_code": 200,
+    "last_http_result": 0,
+    "last_request_error": 0,
+    "last_response_bytes": 838,
+    "participants": 2,
+    "received_snapshots": 12,
+    "remote_count": 0,
+    "round_trip_ms": 1091,
+    "sequence": 4,
+    "sign_in_required": false,
+    "state": "leaving",
+    "transport": "http-presence",
+    "ui_open": false
+  },
+  "elapsed_ms": 57425,
+  "engine": "4.7.2-stable (official)",
+  "failed": 0,
+  "movement": {
+    "direct_fixture_position_writes": 0,
+    "horizontal_metres": 1.31994497776031,
+    "input_steps": [
+      {
+        "action": "move_left",
+        "after": [
+          50.0478668212891,
+          -0.558634638786316,
+          14.8352327346802
+        ],
+        "before": [
+          50.4530029296875,
+          -0.555848836898804,
+          13.5790004730225
+        ],
+        "metres": 1.31994497776031,
+        "physics_steps": 42,
+        "pressed_ms": 1065
+      }
+    ],
+    "local_end": [
+      50.0478668212891,
+      -0.558634638786316,
+      14.8352327346802
+    ],
+    "local_start": [
+      50.4530029296875,
+      -0.555848836898804,
+      13.5790004730225
+    ]
+  },
+  "physics_steps_after_ready": 822,
+  "remote_after": {
+    "accepted_position": [
+      49.5400009155273,
+      -0.625,
+      11.4580001831055
+    ],
+    "accepted_sequence": 8,
+    "bones": 52,
+    "collision_layer": 0,
+    "collision_mask": 0,
+    "displayed_position": [
+      49.5400009155273,
+      -0.625,
+      11.4580001831055
+    ],
+    "instance_id": 3355443235924,
+    "physics_processing": false,
+    "ready": true,
+    "skin_loaded": true
+  },
+  "remote_before": {
+    "accepted_position": [
+      49.0530014038086,
+      -0.629000008106232,
+      13.5790004730225
+    ],
+    "accepted_sequence": 5,
+    "bones": 52,
+    "collision_layer": 0,
+    "collision_mask": 0,
+    "displayed_position": [
+      49.0530014038086,
+      -0.629000008106232,
+      13.5790004730225
+    ],
+    "instance_id": 3355443235924,
+    "physics_processing": false,
+    "ready": true,
+    "skin_loaded": true
+  },
+  "remote_rejoin": {
+    "accepted_position": [
+      49.5400009155273,
+      -0.625,
+      11.4580001831055
+    ],
+    "accepted_sequence": 13,
+    "bones": 52,
+    "collision_layer": 0,
+    "collision_mask": 0,
+    "displayed_position": [
+      49.5400009155273,
+      -0.625,
+      11.4580001831055
+    ],
+    "instance_id": 7354728877139,
+    "physics_processing": false,
+    "ready": true,
+    "skin_loaded": true
+  },
+  "result": "PASS",
+  "role": "b",
+  "scope": "One of two independent full explore_walk game processes with actual terrain, AI and physical controller. Input actions only; production manager owns join placement. Fake loopback coordinator relays invite only in memory. Both processes headless: no pixel/GUI acceptance, shared NPC/vehicle/combat simulation, production identity or performance claim. No bearer/cookie/invite is written.",
+  "task": "EXP40_FULL_SHARED_CITY_WORLD",
+  "user_settings_after": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "user_settings_before": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "world_counts": {
+    "collision_objects": 2091,
+    "distributed_actors": 20,
+    "physics_hz": 30,
+    "player_capsule": true,
+    "source_meshes": 1233,
+    "street_actors": 8
+  },
+  "world_scene": "res://scenes/world/explore_walk.tscn"
+}

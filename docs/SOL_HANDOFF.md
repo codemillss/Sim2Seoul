@@ -1,5 +1,25 @@
 # Sol 작업 인수 안내
 
+## 2026-10-27 EXP40 — 현재 인수: version6·운영 로그인 폼 진입까지
+
+현재 선택은 **exp40_shared_city02_delivery01 / version6**다. [게시](../data/reports/shared_city/20261027/site_publication.json) `succeeded`/Site 소스 `005a64485430aa82ed60b10192864a2c5c78d016`·[운영212개/전체 SHA](../data/reports/shared_city/20261027/deployed_asset_check.json) PASS/17.795초·[익명 API200/401](../data/reports/shared_city/20261027/deployed_api_check.json)을 먼저 읽는다. PCK180,883,704B·전송94,792,406B/212조각이며 같은 URL/public 범위를 유지했다.
+
+[운영 실제 브라우저](../data/reports/shared_city/20261027/deployed_browser_check.json)는 도시 ready→Esc 함께 걷기→로그인 안내→공식 `auth.openai.com/log-in` 정상 폼까지 PASS·engine ERROR0이다. **계정 정보를 입력하지 않았다. 로그인한 방 DB 작업/서로 다른 두 계정 플레이·수용 인원은 미검증**이다.21.757초 준비는 단일 cache 실행 관찰이며 성능 보장이 아니다.
+
+version5는 실제 압축 API에서 `StreamPeerGZIP` 오류가 났다. [원인과 수정](../data/reports/shared_city/20261027/browser_gzip_fix_diagnosis.json)은 Web Fetch가 이미 해제한 본문에 대한 중복 decoder를 Web-only `accept_gzip=false`로 막고 native 기본값을 유지한다. [최신36검사](../data/reports/shared_city/20261027/client_gzip01/summary.json)와 [실제 Web gzip 검사](../data/reports/shared_city/20261027/gzip_browser_check.json)를 통과했다. 이전03/04 전체게임 source/settings 불변은 각 실행 내부 판정이며 이 수정 전 client다. 합산/최신 runtime 동일 판정을 하지 않는다.
+
+사용자 지시 **최적화보다 기능 개발 먼저**를 유지한다. 다음은 실제 로그인/두 계정의 방 생성·상대 이동 수용이다. NPC/차량/전투 공유·2Hz 최종 액션화·4/8명·FPS 해결은 아직 범위 밖이다. version5 receipt/자원 PASS와 gzip 실패 원문을 모두 유지한다. 아래26일 인수는 이전 시도다. [함께 걷기](SHARED_CITY_WALK.md)를 따른다.
+
+## 2026-10-26 EXP40 — 현재 인수: 함께 걷기 version5 게시
+
+[현재 상태](WORK_STATUS.md) → [함께 걷기 실행/증거](SHARED_CITY_WALK.md) → [두 전체 게임](../data/reports/shared_city/20261026/world_pair_attempt03/summary.json)·[교차 대조](../data/reports/shared_city/20261026/world_pair_attempt03_crosscheck.json)를 먼저 읽는다. 사용자 최신 우선순위는 **최적화보다 기능 개발**이다. NPC 계산 개선을 다음 첫 작업으로 되돌리지 않는다. 현재 브랜치 `codex/shared-city-gameplay-20261026`는 main `ce010e5`에서 시작했다.
+
+실제 게임은 RoomPresenceClient → SharedCityWalk 메뉴/생명주기 → 충돌 없는 RemoteResident로 연결한다. 초대 생성/참가·가까운 안전 위치 배치·승인 외형/600ms 보간·퇴장/재참가를 구현했다. 실내/탈것 전환과 늦은 참가 응답은 현재 활동의 제어권을 보존하며 방을 나간다. 메뉴 포커스 상실로 패널이 닫히는 경우를 막았다. 로컬 움직임/카메라/충돌은 원래 플레이어가 소유하며 원격 actor는 AI/충돌/피격/상점/탑승 판정에 참여하지 않는다.
+
+선택 로컬 검사는 client31, Remote84/87+3PNG, 개발서버8, 두 전체 headless 게임 A24/B22·exit0/ERROR0·51.079초다. native 일반 메뉴의 방 생성/퇴장/Esc 복귀와 설정2파일 불변도 기록했다. [native04 GPU owner+headless guest](../data/reports/shared_city/20261026/world_pair_attempt04_native_crosscheck.json)는 별도58조건·각 exit0/ERROR0·원본PNG2장 확인이며 headless03의46조건과 합산하지 않는다. fixture 카메라/표식과 실제 제품 UI를 구분한다. 초기 JSON 파싱/조기 HTTP timeout·전체게임 두 번의 cleanup ERROR는 실패 원문을 유지한다. 최종 pair03의 정리 ERROR는0이며 원래 orphan 클래스는 확정하지 않았다.
+
+현재 Site는 public으로 조회됐고 이번 작업에서 audience를 바꾸지 않았다. 기존 project_id/URL을 보존하는 정적→Vinext/D1 소스 준비와 로컬 자산/스키마/HTTP 검증이 완료됐다. 새 Web 후보는 **exp40_shared_city01_delivery01**, PCK180,883,576B/전송94,792,341B/212조각이다. [게시 receipt](../data/reports/shared_city/20261026/site_publication.json)는 version5·2026-10-26T12:18:18Z `succeeded`/Site 소스 `0efcc19eea238e6972212ceb3ab8893d79d023a9`다. [운영 검사](../data/reports/shared_city/20261026/deployed_asset_check.json)는212/212·전체 SHA·manifest/loader PASS/34.231초, [익명 API](../data/reports/shared_city/20261026/deployed_api_check.json)는 status200/로그인 필요·create401이다. 초기 UA403 실패와 재검사 성공을 유지하며 브라우저 원인을 단정하지 않는다. [실제 checkout preview12조건/238자산](../data/reports/shared_city/20261026/site_preview_8776_check.json)과 [로컬 Web 방 생성/퇴장](../data/reports/shared_city/20261026/web_room_browser_check.json)은 운영 인증과 구분한다. **운영 브라우저 시작·로그인한 두 계정 게임 수용은 대기**다. anonymous solo와 방 로그인 경계를 유지하고 개발용 cookie/mock identity를 운영에 넣지 않는다. 캐시·PCK/WASM·Site 체크아웃·자격 증명은 main Git에 넣지 않는다.
+
 ## 2026-10-25 EXP39 — 현재 인수: delivery01 게시·운영212개 PASS
 
 [현재 상태](WORK_STATUS.md) → [EXP39 원본/실패/측정](../data/reports/web_sites/20261025/performance01/README.md) → [최종 게시](../data/reports/web_sites/20261025/performance01/delivery01_deployment.json)·[운영 검사](../data/reports/web_sites/20261025/performance01/deployed_asset_check.json)를 읽는다. 최종 릴리스는 performance01_build04_delivery01, Site 소스 `c67bf053417cf836106e99e900858c0cef0eaff1`이며 소유자 전용을 유지했다. 실제212개 조각·manifest/loader·전체 WASM/PCK SHA가 모두 첫 시도31.938초에 PASS다.

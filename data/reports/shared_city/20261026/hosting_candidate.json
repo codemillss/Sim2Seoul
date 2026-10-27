@@ -1,0 +1,86 @@
+{
+  "result": "PASS",
+  "candidate": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/cache/shared-city-vinext-20261026",
+  "local_only": true,
+  "frozen": true,
+  "source_site_checkout_untouched": true,
+  "existing_project_id_preserved": true,
+  "hosting_manifest": {
+    "project_id": "appgprj_6adda788b5208191a1d18a536bbcff80",
+    "d1": "DB",
+    "r2": null
+  },
+  "whole_file_asset_checks": {
+    "passed": 714,
+    "total": 714,
+    "files_per_copy": 238,
+    "unchanged_game_and_site_bytes": 95528490,
+    "scope": "Every original public asset verified in source Site dist, candidate public and final dist/client."
+  },
+  "worker": {
+    "path": "dist/server/index.js",
+    "bytes": 209460,
+    "sha256": "c9098b59b230dbe507ac12a5b8993675a087fbe01044e3c9c931567feed7cd77",
+    "config_sha256": "9656e1049bb3f27046abf381849675463a4cf57b24979df690c60a47844d9d6d"
+  },
+  "api_source_sha256": "6cdc1c3d7ac23dcec1c8fa889c041e6bce474cabed420a01a47bdb94bb120d1d",
+  "migration": {
+    "path": "drizzle/0000_mighty_may_parker.sql",
+    "sha256": "23a8823a59fd02f9ec80b57f96f0d188a02ed64903b7effddbe491d639ad4257",
+    "journal_sha256": "f8175915c2efa40014880426d1c4e8c429bc92423891f7f4e8708cf0b6c73495",
+    "snapshot_sha256": "1f0d12ce1e5694a308a4713c75ff16f539ea37475240be417e55657140bb08da",
+    "local_only_applied": true
+  },
+  "actual_command_exit_codes": {
+    "official_setup": 0,
+    "official_dependency_install": 0,
+    "db_generate": 0,
+    "official_final_build": 0,
+    "local_D1_apply_final": 0,
+    "local_D1_inspect": 0,
+    "development_HTTP_check": 0,
+    "built_Worker_HTTP_check_final": 0
+  },
+  "verification": {
+    "schema_equivalence": {
+      "passed": 14,
+      "total": 14,
+      "report": "hosting_schema_equivalence.json"
+    },
+    "development_HTTP": {
+      "passed": 13,
+      "total": 13,
+      "report": "hosting_http_check.json"
+    },
+    "built_Worker_HTTP": {
+      "passed": 10,
+      "total": 10,
+      "report": "hosting_built_http_check.json"
+    }
+  },
+  "repairs": {
+    "local_migration": "First command used an unverified generated filename and failed before DB access; corrected to actual generated file. Second attempt hit sandbox loopback EPERM; authorized local-only rerun succeeded. Attempts preserved in hosting_db_apply_attempt01/02.log.",
+    "dev_gzip": "Vite DEV adds Content-Encoding:gzip to application gzip payload files. Added DEV-only rawGameChunks middleware suppressing that header; exact-byte HTTP check now passes. Production assets already preserve bytes.",
+    "stale_built_preview": "Rebuilding while Wrangler preview ran invalidated its asset read state and produced empty responses. Clean restart of final built preview restored exact bytes; failure JSON retained as hosting_built_http_check_stale_preview.json."
+  },
+  "production_identity_contract": "No production identity injection or dev-session endpoint authored. API delegates unchanged room-api.mjs using Worker env.DB; status is available:true/apiVersion:1/mode:sites. Official starter mock sign-in exists only in portable dev preview. Built Worker tested to reject missing dispatch identity.",
+  "missing_conditions": [
+    "Hosted Sites dispatch identity has not been exercised.",
+    "Hosted D1 has not been provisioned or migrated.",
+    "Existing game asset bytes are preserved from current Site; EXP40 shared-client game re-export/integration remains root-owned.",
+    "No browser/gameplay/concurrency acceptance or publication performed.",
+    "Candidate remains ignored local fixture; adoption/source synchronization and deployment remain root-owned."
+  ],
+  "logs": [
+    "hosting_setup.log",
+    "hosting_install.log",
+    "hosting_db_generate.log",
+    "hosting_build_final.log",
+    "hosting_db_apply.log",
+    "hosting_db_inspect.log",
+    "hosting_http_check.log",
+    "hosting_built_http_check.log",
+    "hosting_preview.log",
+    "hosting_built_preview_final.log"
+  ]
+}

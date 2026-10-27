@@ -1,0 +1,38 @@
+{
+  "task": "LOOPBACK_GZIP_STATUS_PROXY_QA",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "upstream_status",
+      "passed": true,
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites",
+        "signInRequired": true
+      }
+    },
+    {
+      "name": "upstream_manifest",
+      "passed": true,
+      "release": "exp40_shared_city02_delivery01"
+    },
+    {
+      "name": "proxy_status_is_single_gzip",
+      "passed": true,
+      "wire_bytes": 83,
+      "decoded_bytes": 70
+    },
+    {
+      "name": "raw_asset_bytes_preserved",
+      "passed": true,
+      "bytes": 519366,
+      "upstream_sha256": "c7d70f2b157089283a86b51127c9987643e39724c46ed78de7cdaa8532b62f96",
+      "proxy_sha256": "c7d70f2b157089283a86b51127c9987643e39724c46ed78de7cdaa8532b62f96",
+      "upstream_encoding": null,
+      "proxy_encoding": null
+    }
+  ],
+  "scope": "Only127.0.0.1:8776/8777. No identity headers/cookies/tokens retained, no production request, source edit, or deployment."
+}

@@ -1,0 +1,122 @@
+✖ two real HTTP cookie clients create, join, sync, observe and leave one SQLite room (4.976416ms)
+✖ public local status, idempotent bootstrap and valid-cookie identity binding (1.511834ms)
+✖ unissued cookies, untrusted identity headers and bootstrap account fields cannot authenticate (0.577667ms)
+✖ exact Origin, Host, request target and cookie ambiguity gates are enforced without CORS (0.346584ms)
+✖ session expiry and bounded bootstrap capacity retain server-issued session semantics (0.284958ms)
+✖ bootstrap and room body limits apply to declared and chunked HTTP bodies (0.2645ms)
+✖ static whitelist serves exact gzip bytes and HEAD while rejecting traversal, sources and symlink escapes (4.910334ms)
+✖ API-only host exposes no static files and startup rejects an invalid export or port (0.314584ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 59.352958
+
+✖ failing tests:
+
+test at tools/web/multiplayer/dev-server.test.mjs:53:1
+✖ two real HTTP cookie clients create, join, sync, observe and leave one SQLite room (4.976416ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:79:1
+✖ public local status, idempotent bootstrap and valid-cookie identity binding (1.511834ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:92:1
+✖ unissued cookies, untrusted identity headers and bootstrap account fields cannot authenticate (0.577667ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:103:1
+✖ exact Origin, Host, request target and cookie ambiguity gates are enforced without CORS (0.346584ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:117:1
+✖ session expiry and bounded bootstrap capacity retain server-issued session semantics (0.284958ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:128:1
+✖ bootstrap and room body limits apply to declared and chunked HTTP bodies (0.2645ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:139:1
+✖ static whitelist serves exact gzip bytes and HEAD while rejecting traversal, sources and symlink escapes (4.910334ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }
+
+test at tools/web/multiplayer/dev-server.test.mjs:159:1
+✖ API-only host exposes no static files and startup rejects an invalid export or port (0.314584ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2302:21)
+      at listenInCluster (node:net:2433:12)
+      at node:net:2662:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

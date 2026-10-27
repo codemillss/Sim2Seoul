@@ -1,0 +1,53 @@
+{
+  "issue": "Production Web room menu failed while reading compressed status JSON.",
+  "evidence": {
+    "productionResponse": "data/reports/shared_city/20261027/production_compression_header.json",
+    "engineFailure": "data/reports/shared_city/20261026/deployed_browser_attempt02.txt",
+    "engineFailureLocation": "core/io/stream_peer_gzip.cpp:117",
+    "responseContentEncoding": "gzip",
+    "decodedStatusSignInRequired": true
+  },
+  "cause": "HTTPRequest default accept_gzip=true creates a StreamPeerGZIP decoder from Content-Encoding. The shipped Web transport uses Fetch Response.body, which is already HTTP-decoded while response headers still retain Content-Encoding. Applying gzip a second time to JSON causes inflate to fail before the client completion parser.",
+  "officialSources": [
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf/platform/web/http_client_web.cpp",
+      "lines": "145-154",
+      "supports": "Web response body is uncompressed regardless of Content-Encoding."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf/scene/main/http_request.cpp",
+      "lines": "314-325",
+      "supports": "accept_gzip gates the gzip/deflate decoder construction."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/master/platform/web/js/libs/library_godot_fetch.js",
+      "lines": "44-65,182-197",
+      "supports": "Fetch body reader and response headers are passed through."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/godotengine/godot/ed1daf0bf/core/io/stream_peer_gzip.cpp",
+      "lines": "104-110",
+      "supports": "inflate fails when return is neither Z_OK nor Z_STREAM_END."
+    }
+  ],
+  "fix": {
+    "file": "game/scripts/multiplayer/room_presence_client.gd",
+    "sha256": "8df882cd049ca2e9c8e7e1c6a3888ba7b262b1e01fbff42eb3bcd3990445934f",
+    "line": 47,
+    "change": "if OS.has_feature(\"web\"):_http.accept_gzip=false",
+    "scope": "Web only. Native HTTPRequest gzip default retained. No manager/loader/status/API/auth changes."
+  },
+  "verificationBoundary": "Official upstream sources corroborate the mechanism; production failure/headers bind this incident. Native HTTP fixtures emulate the decoded Fetch boundary; post-export actual browser confirmation is a separate root-owned check.",
+  "nativeEngine": "4.7.2.stable.official.ed1daf0bf",
+  "regression": {
+    "result": "PASS",
+    "passed": 36,
+    "total": 36,
+    "elapsedMs": 10465,
+    "engineExit": 0,
+    "engineErrors": 0,
+    "sourceUnchanged": true,
+    "summary": "data/reports/shared_city/20261027/client_gzip01/summary.json",
+    "summarySha256": "ed6201c3b6d0bd570832b8dc3e0c8fe1461550904851bf1e3146b938e4549063"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "release": "exp40_shared_city02_delivery01",
+  "url": "http://127.0.0.1:8777/play.html?quality=fast",
+  "method": "actual CUA browser inputs; real single gzip response from loopback proxy; Godot Web accepts browser-decoded body",
+  "observed": [
+    "EXPLORATION_READY",
+    "Esc together-walk menu opened",
+    "ChatGPT login-required guidance and button visible after compressed status response",
+    "Esc returns to game menu and shell remains ready"
+  ],
+  "error_lines": [],
+  "evidence": [
+    "gzip_browser_login.png",
+    "gzip_browser_log.txt",
+    "gzip_proxy_qa.json"
+  ],
+  "scope": "real Web gzip regression; anonymous local Worker identity branch; not production login or authenticated two accounts"
+}

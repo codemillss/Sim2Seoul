@@ -1,0 +1,83 @@
+{
+  "result": "FAIL",
+  "passed": 4,
+  "total": 10,
+  "checks": [
+    {
+      "path": "play.html",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "site.css",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "game/index.js",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "game/manifest.json",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "chunks/pck-1m-000-da2a16e8df832836-part0-05c1dfb0906ae98b.gz",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contentEncoding": "gzip",
+      "passed": false
+    },
+    {
+      "path": "/play?quality=fast",
+      "status": 307,
+      "location": "http://127.0.0.1:8775/play.html?quality=fast",
+      "passed": true
+    },
+    {
+      "path": "/",
+      "status": 307,
+      "location": "http://127.0.0.1:8775/index.html",
+      "passed": true
+    },
+    {
+      "path": "/api/multiplayer/status",
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites"
+      },
+      "passed": true
+    },
+    {
+      "path": "/api/multiplayer/rooms",
+      "status": 401,
+      "passed": true
+    }
+  ],
+  "scope": "Actual built Worker served locally through official Wrangler preview. No fake identity headers, no hosted identity/database/publication/browser/game checks."
+}

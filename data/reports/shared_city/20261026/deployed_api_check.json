@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "path": "/api/multiplayer/status",
+      "method": "GET",
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites",
+        "signInRequired": true
+      },
+      "cache_control": "no-store"
+    },
+    {
+      "path": "/api/multiplayer/rooms",
+      "method": "POST",
+      "status": 401,
+      "body": {
+        "error": "sign_in_required"
+      },
+      "cache_control": "no-store"
+    }
+  ],
+  "scope": "actual production public anonymous HTTP; does not prove authenticated D1 CRUD or two accounts"
+}

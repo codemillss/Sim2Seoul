@@ -1,0 +1,23 @@
+{
+  "task": "LOOPBACK_GZIP_STATUS_PROXY_QA",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "upstream_status",
+      "passed": true,
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites",
+        "signInRequired": true
+      }
+    },
+    {
+      "name": "upstream_manifest",
+      "passed": true,
+      "release": "exp40_shared_city02_delivery01"
+    }
+  ],
+  "scope": "Only127.0.0.1:8776/8777. No identity headers/cookies/tokens retained, no production request, source edit, or deployment."
+}

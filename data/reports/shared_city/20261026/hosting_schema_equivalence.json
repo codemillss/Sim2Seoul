@@ -1,0 +1,426 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "multiplayer_rooms_columns_types_required_defaults_primarykey",
+      "passed": true,
+      "expected": [
+        [
+          "id",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "owner_key",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "invite_hash",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "build_id",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_x",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_y",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_z",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "created_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "expires_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ],
+      "actual": [
+        [
+          "id",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "owner_key",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "invite_hash",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "build_id",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_x",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_y",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "spawn_z",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "created_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "expires_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ]
+    },
+    {
+      "check": "multiplayer_rooms_indexes_and_uniqueness",
+      "passed": true
+    },
+    {
+      "check": "multiplayer_rooms_foreignkeys",
+      "passed": true
+    },
+    {
+      "check": "multiplayer_players_columns_types_required_defaults_primarykey",
+      "passed": true,
+      "expected": [
+        [
+          "id",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "room_id",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "user_key",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "token_hash",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "avatar_json",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "sequence",
+          "integer",
+          1,
+          "0",
+          0
+        ],
+        [
+          "x",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "y",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "z",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "yaw",
+          "real",
+          1,
+          "0",
+          0
+        ],
+        [
+          "motion",
+          "text",
+          1,
+          "'idle'",
+          0
+        ],
+        [
+          "last_action_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "last_position_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "last_seen_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ],
+      "actual": [
+        [
+          "id",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "room_id",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "user_key",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "token_hash",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "avatar_json",
+          "text",
+          1,
+          null,
+          0
+        ],
+        [
+          "sequence",
+          "integer",
+          1,
+          "0",
+          0
+        ],
+        [
+          "x",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "y",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "z",
+          "real",
+          1,
+          null,
+          0
+        ],
+        [
+          "yaw",
+          "real",
+          1,
+          "0",
+          0
+        ],
+        [
+          "motion",
+          "text",
+          1,
+          "'idle'",
+          0
+        ],
+        [
+          "last_action_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "last_position_ms",
+          "integer",
+          1,
+          null,
+          0
+        ],
+        [
+          "last_seen_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ]
+    },
+    {
+      "check": "multiplayer_players_indexes_and_uniqueness",
+      "passed": true
+    },
+    {
+      "check": "multiplayer_players_foreignkeys",
+      "passed": true
+    },
+    {
+      "check": "multiplayer_rate_limits_columns_types_required_defaults_primarykey",
+      "passed": true,
+      "expected": [
+        [
+          "key",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "last_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ],
+      "actual": [
+        [
+          "key",
+          "text",
+          1,
+          null,
+          1
+        ],
+        [
+          "last_ms",
+          "integer",
+          1,
+          null,
+          0
+        ]
+      ]
+    },
+    {
+      "check": "multiplayer_rate_limits_indexes_and_uniqueness",
+      "passed": true
+    },
+    {
+      "check": "multiplayer_rate_limits_foreignkeys",
+      "passed": true
+    },
+    {
+      "check": "unique_room_account_rejects_duplicate",
+      "passed": true
+    },
+    {
+      "check": "room_delete_cascades_players",
+      "passed": true
+    },
+    {
+      "check": "unique_room_account_rejects_duplicate",
+      "passed": true
+    },
+    {
+      "check": "room_delete_cascades_players",
+      "passed": true
+    },
+    {
+      "check": "schema_only_migration",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "scope": "Actual originalSQL and generatedDrizzleDDL applied to separate SQLite databases. Column order/type/NOTNULL/default/PK, index/unique signatures, foreignkeys and duplicate/cascade behavior compared. HostedD1 not applied."
+}

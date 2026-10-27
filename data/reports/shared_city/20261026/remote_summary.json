@@ -1,0 +1,72 @@
+{
+  "at_utc": "2026-10-26T11:25:23.627972+00:00",
+  "task": "EXP40_REMOTE_RESIDENT_COMPONENT",
+  "selected_runs": {
+    "remote_headless_final02": {
+      "engine_exit": 0,
+      "errors": 0,
+      "checks": 84,
+      "report": "data/reports/shared_city/20261026/remote_headless_final02.json",
+      "report_sha256": "d19398c4944ad22ad4ce147c171a1cbd13ede2e5a3406fb3b2cb471258f474a3",
+      "log": "data/reports/shared_city/20261026/remote_headless_final02.log",
+      "log_sha256": "34d5ee52ab3c17bd57d84d5de484e7f1195ce0ab2921c0eaf14d39c3dd015dde"
+    },
+    "remote_native_final02": {
+      "engine_exit": 0,
+      "errors": 0,
+      "checks": 87,
+      "report": "data/reports/shared_city/20261026/remote_native_final02.json",
+      "report_sha256": "d20b6bfcbbb164c17425588c678f4e7bae421cd07ff261b40145f70798749a11",
+      "log": "data/reports/shared_city/20261026/remote_native_final02.log",
+      "log_sha256": "7819f3083d1d6fe53c4f2500318481486e1fc8286bf83f92297aafa7f985247a"
+    }
+  },
+  "native_images": [
+    {
+      "path": "data/reports/shared_city/20261026/remote_native_final02/remote_pair_0.png",
+      "bytes": 19790,
+      "sha256": "13ab33d4d8707153179fc95f6ac5df6b8965081a66c57ec2f0f0fa3ae38d07af"
+    },
+    {
+      "path": "data/reports/shared_city/20261026/remote_native_final02/remote_pair_1.png",
+      "bytes": 16205,
+      "sha256": "c2a1db82793cfc1fc981488208e0461a619ee92af3a5c5f7fbed926a18f6fe45"
+    },
+    {
+      "path": "data/reports/shared_city/20261026/remote_native_final02/remote_pair_2.png",
+      "bytes": 21226,
+      "sha256": "b0ebfa5813866fc3b121dd4e06d26357e2d81dd2c6ccf78d299c49c0d12104c2"
+    }
+  ],
+  "source_sha256": {
+    "res://../tests/game/check_remote_resident.gd": "49dc3513c52f98513f3b18d4d5440e1b45887eb96a7cb696ed655edbdaa911d5",
+    "res://scripts/multiplayer/remote_resident.gd": "293651112b2111963466738653fd3d8e5108727695d9e7ea3616be2070a4114e",
+    "res://scripts/player/exploration_avatar.gd": "356c8fc3a9a426da284d7e7670f504c3a7c22078a264488287229b451b945732"
+  },
+  "api": "CharacterBody3D setup(row, serverNowMs, recvMs=-1)->bool; ingest same signature; avatar/visual; sample_at, presentation_snapshot. Add to tree before setup.",
+  "rendering": "600ms approved snapshot interpolation, shortest angle; first pose immediate; no extrapolation. No collision shapes/layers/masks/AI membership or gameplay decisions.",
+  "idle_timestamp_contract": "updatedAtMs is last position mutation, not membership liveness; active idle snapshots can be old. Relative sequence/timestamp reversal and future timestamps rejected; manager removes actors absent from approved room listings.",
+  "failure_history": [
+    {
+      "run": "remote_headless_attempt01",
+      "engine_exit": 1,
+      "cause": "Null default get_meta emitted4 engine errors; Godot re-enabled declared actor physics callback after _init. Replaced absent-meta reads with has_meta and disabled callbacks in _ready.",
+      "checks": "82/83"
+    },
+    {
+      "runs": [
+        "remote_headless_final01",
+        "remote_native_final01"
+      ],
+      "selected": false,
+      "cause": "Technical checks passed but used incorrect15second last-position age cutoff. Removed it after checking server heartbeat semantics; final02 explicitly checks old idle position timestamps."
+    }
+  ],
+  "visual_review": {
+    "opened_original_images": 3,
+    "observed": "Actual authored male standard and female athletic skin visible from back/side/front. Distinct hair/clothes and intact silhouette at this small framing; no visible fallback boxes.",
+    "scope": "Tiny fixed display fixture; not anatomy/art acceptance, continuous motion, city integration, hosted multiplayer or user comfort."
+  },
+  "swimwear_scope": "Actual F soft swim GLB loaded/visible and street/athletic replacement tested; no new swimming stroke animation.",
+  "git_mutations": false
+}

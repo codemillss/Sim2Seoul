@@ -31,9 +31,12 @@ def chunk_file(path, kind, chunks):
  return row
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--site',type=Path,required=True);ap.add_argument('--tag',required=True);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--site',type=Path,required=True);ap.add_argument('--tag',required=True);ap.add_argument('--report-date',default='20261025');a=ap.parse_args()
  if not re.fullmatch(r'[a-zA-Z0-9_-]+',a.tag):ap.error('simple fresh tag required')
- reports=ROOT/'data/reports/web_sites/20261025'/a.tag;reports.mkdir(parents=True,exist_ok=False)
+ if not re.fullmatch(r'[0-9]{8}',a.report_date):ap.error('report-date must be YYYYMMDD')
+ try:datetime.datetime.strptime(a.report_date,'%Y%m%d')
+ except ValueError:ap.error('invalid report-date')
+ reports=ROOT/'data/reports/web_sites'/a.report_date/a.tag;reports.mkdir(parents=True,exist_ok=False)
  stage=ROOT/'data/cache/web-export'/a.tag;stage.mkdir(parents=True,exist_ok=False);project=stage/'game'
  def ignored(folder,names):
   skip={'.godot','.DS_Store','__pycache__'}

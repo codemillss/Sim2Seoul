@@ -1,0 +1,291 @@
+{
+  "cases": [
+    {
+      "name": "two_production_clients_configure",
+      "passed": true
+    },
+    {
+      "name": "actual_bootstrap_completes_with_scene_tree_paused",
+      "passed": true
+    },
+    {
+      "name": "actual_status_then_dev_session_cookie_both_ready",
+      "passed": true
+    },
+    {
+      "name": "native_cookie_has_only_server_name_value",
+      "passed": true
+    },
+    {
+      "name": "independent_server_cookie_identities",
+      "passed": true
+    },
+    {
+      "name": "create_request_started",
+      "passed": true
+    },
+    {
+      "name": "actual_create_returns_connected_owner",
+      "passed": true
+    },
+    {
+      "name": "join_request_started",
+      "passed": true
+    },
+    {
+      "name": "both_clients_observe_two_participants",
+      "passed": true
+    },
+    {
+      "name": "same_room_distinct_self_ids",
+      "passed": true
+    },
+    {
+      "name": "both_start_at_same_server_spawn",
+      "passed": true
+    },
+    {
+      "name": "actual_550ms_sync_both_observe_peer_one_metre_walk",
+      "passed": true
+    },
+    {
+      "name": "repeated_production_snapshots_continue",
+      "passed": true
+    },
+    {
+      "name": "observed_live_sync_before_cancel_leave",
+      "passed": true
+    },
+    {
+      "name": "cancel_then_leave_completes_ready",
+      "passed": true
+    },
+    {
+      "name": "owner_observes_departed_peer_removed",
+      "passed": true
+    },
+    {
+      "name": "leave_clears_room_bearer_and_invite_memory",
+      "passed": true
+    },
+    {
+      "name": "rejoin_request_started",
+      "passed": true
+    },
+    {
+      "name": "actual_rejoin_rotates_self_and_room_session",
+      "passed": true
+    },
+    {
+      "name": "mutual_snapshots_resume_after_rejoin",
+      "passed": true
+    },
+    {
+      "name": "current_public_snapshot_valid",
+      "passed": true
+    },
+    {
+      "name": "ten_malformed_snapshot_fixtures_rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid_snapshot_not_published_as_accepted_state",
+      "passed": true
+    },
+    {
+      "name": "malformed_429_retry_values_never_cast_unsafely",
+      "passed": true
+    },
+    {
+      "name": "unsupported_status_keeps_solo_available_with_no_session_memory",
+      "passed": true
+    },
+    {
+      "name": "empty_nonjson_malformed_and_transport_failures_stay_in_state",
+      "passed": true
+    },
+    {
+      "name": "unavailable_loopback_endpoint_configures",
+      "passed": true
+    },
+    {
+      "name": "actual_unavailable_endpoint_records_transport_and_preserves_solo",
+      "passed": true
+    },
+    {
+      "name": "all_real_bearers_cookies_invites_excluded_from_diagnostic",
+      "passed": true
+    }
+  ],
+  "checks": 29,
+  "client_sha256": "c852feca5772ebd043ef723b0022c48feef5621934e82573291bebc566974610",
+  "elapsed_ms": 9187,
+  "engine": "4.7.2-stable (official)",
+  "failed": 0,
+  "result": "PASS",
+  "scope": "Actual status, native development cookie, create/join, 550ms accepted movement in both directions, in-flight sync cancellation followed by leave, peer removal and credential-rotating rejoin. Negative snapshot/retry/status fixtures are injected and labelled. No two-GUI-game, 3D remote actor, public hosting, production identity or concurrency/performance acceptance. Credentials and invite codes are never written to this report.",
+  "task": "EXP40_PRODUCTION_PRESENCE_CLIENT",
+  "timeline": [
+    {
+      "a": {
+        "available": true,
+        "connected": false,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 52,
+        "participants": 0,
+        "received_snapshots": 0,
+        "round_trip_ms": 133,
+        "sequence": 0,
+        "state": "ready",
+        "transport": "http-presence"
+      },
+      "b": {
+        "available": true,
+        "connected": false,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 52,
+        "participants": 0,
+        "received_snapshots": 0,
+        "round_trip_ms": 132,
+        "sequence": 0,
+        "state": "ready",
+        "transport": "http-presence"
+      },
+      "elapsed_ms": 237,
+      "stage": "ready"
+    },
+    {
+      "a": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 774,
+        "participants": 2,
+        "received_snapshots": 2,
+        "round_trip_ms": 133,
+        "sequence": 1,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "b": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 201,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 840,
+        "participants": 2,
+        "received_snapshots": 1,
+        "round_trip_ms": 131,
+        "sequence": 0,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "elapsed_ms": 1054,
+      "stage": "joined"
+    },
+    {
+      "a": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 777,
+        "participants": 2,
+        "received_snapshots": 8,
+        "round_trip_ms": 133,
+        "sequence": 7,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "b": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 777,
+        "participants": 2,
+        "received_snapshots": 8,
+        "round_trip_ms": 133,
+        "sequence": 7,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "elapsed_ms": 5620,
+      "stage": "mutual_walk"
+    },
+    {
+      "a": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 565,
+        "participants": 1,
+        "received_snapshots": 10,
+        "round_trip_ms": 131,
+        "sequence": 9,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "b": {
+        "available": true,
+        "connected": false,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 13,
+        "participants": 0,
+        "received_snapshots": 8,
+        "round_trip_ms": 118,
+        "sequence": 8,
+        "state": "ready",
+        "transport": "http-presence"
+      },
+      "elapsed_ms": 6604,
+      "stage": "peer_left"
+    },
+    {
+      "a": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 778,
+        "participants": 2,
+        "received_snapshots": 13,
+        "round_trip_ms": 133,
+        "sequence": 12,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "b": {
+        "available": true,
+        "connected": true,
+        "last_http_code": 200,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 778,
+        "participants": 2,
+        "received_snapshots": 12,
+        "round_trip_ms": 133,
+        "sequence": 3,
+        "state": "connected",
+        "transport": "http-presence"
+      },
+      "elapsed_ms": 9003,
+      "stage": "rejoined"
+    }
+  ],
+  "transport": "Two actual production Node HTTPRequest clients, one headless Godot process, root-owned loopback host and actual SQLite adapter"
+}

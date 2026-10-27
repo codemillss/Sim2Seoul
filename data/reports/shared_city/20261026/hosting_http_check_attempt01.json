@@ -1,0 +1,92 @@
+{
+  "result": "FAIL",
+  "passed": 12,
+  "total": 13,
+  "checks": [
+    {
+      "name": "http_static_site.css",
+      "passed": true,
+      "status": 200,
+      "bytes": 15888,
+      "sha256": "bbadd67b6f99cb47baa45876c29dca10040a9149f05c58a8c8c722dcda23c0a4",
+      "contentEncoding": null
+    },
+    {
+      "name": "http_static_game/manifest.json",
+      "passed": true,
+      "status": 200,
+      "bytes": 55799,
+      "sha256": "6e1bf2996718a481af3a26dc2d232f05b1f6c5e697efd6f0f77e336b2388230a",
+      "contentEncoding": null
+    },
+    {
+      "name": "http_static_chunks/pck-1m-000-da2a16e8df832836-part0-05c1dfb0906ae98b.gz",
+      "passed": false,
+      "status": 200,
+      "bytes": 524288,
+      "sha256": "05c1dfb0906ae98bdbfe2828f5384dfa84c8591dbac7fc2c18b40dd97cbfbaa1",
+      "contentEncoding": "gzip"
+    },
+    {
+      "name": "http_page_/play.html",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "http_page_/index.html",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "play_alias_preserves_query",
+      "passed": true,
+      "status": 307,
+      "location": "http://127.0.0.1:8774/play.html?quality=fast"
+    },
+    {
+      "name": "sites_status_contract",
+      "passed": true,
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites"
+      }
+    },
+    {
+      "name": "anonymous_room_create_rejected",
+      "passed": true,
+      "status": 401,
+      "error": "sign_in_required"
+    },
+    {
+      "name": "official_template_mock_signin",
+      "passed": true,
+      "status": 302,
+      "hasDevelopmentCookie": true
+    },
+    {
+      "name": "local_D1_authenticated_create",
+      "passed": true,
+      "status": 201,
+      "players": 1
+    },
+    {
+      "name": "local_D1_snapshot",
+      "passed": true,
+      "status": 200,
+      "players": 1
+    },
+    {
+      "name": "bearer_without_dispatch_identity_rejected",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "local_D1_owner_close",
+      "passed": true,
+      "status": 200
+    }
+  ],
+  "scope": "Actual loopback Vinext development HTTP and local D1 with official template mock sign-in. No browser/game launch, hosted identity, production D1, Site publication or concurrency measurement. Cookies and room credentials kept in process memory and omitted from evidence."
+}

@@ -1,0 +1,41 @@
+{
+  "task": "EXP40_LOCAL_DEV_HOST",
+  "recorded_at_utc": "2026-10-26T11:18:33.257542+00:00",
+  "result": "PASS",
+  "test_command": [
+    "node",
+    "--test",
+    "tools/web/multiplayer/dev-server.test.mjs"
+  ],
+  "node_version": "v26.7.0",
+  "exit_code": 0,
+  "tests": 8,
+  "passed": 8,
+  "failed": 0,
+  "source_sha256": {
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/dev-server.test.mjs": "f0bdb258fad4e580c7d9ca335ac666339da9483f659bdac315c9a19aac86de12",
+    "tools/web/multiplayer/room-api.mjs": "6cdc1c3d7ac23dcec1c8fa889c041e6bce474cabed420a01a47bdb94bb120d1d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "484071c5b223421d00b49340f888f42b5a28af7ddbb5315cdb9ec79316ae0594"
+  },
+  "raw_log": "dev_server_tests.log",
+  "sandbox_attempt_log": "dev_server_tests_sandbox_attempt.log",
+  "transport": "Actual HTTP listeners bound exclusively to 127.0.0.1 on temporary test ports; all listeners closed by test cleanup.",
+  "coverage": [
+    "two distinct cookie clients create/join/sync/snapshot/leave in one actual SQLite database",
+    "public local availability status",
+    "HttpOnly SameSite=Strict port-specific cookie; stable bootstrap identity; server-side cookie lookup",
+    "untrusted identity header and unissued cookie rejection",
+    "same-origin POST, Host and request-target gates, absent CORS",
+    "session TTL and bounded capacity",
+    "declared and chunked body limits",
+    "static whitelist, literal gzip bytes, HEAD, traversal and symlink rejection",
+    "API-only and invalid startup configuration",
+    "valid chunked room-create request traverses actual Node-to-Web Request bridge"
+  ],
+  "scope": "Local development authentication and tiny static fixtures only. No browser/native Godot game acceptance, production identity proof, hosted D1, Sites deployment, public access or concurrency/performance claim.",
+  "raw_log_sha256": "c71c7d7debce33baeb711a1c480c55df5bf791686b7ba9a5c8a30a79d7605608",
+  "duration_ms": 124.413208,
+  "independent_source_review": "No blocking authentication, HTTP bridge or static-containment finding; port-specific cookie matches native Set-Cookie parser."
+}

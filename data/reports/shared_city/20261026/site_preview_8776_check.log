@@ -1,0 +1,92 @@
+{
+  "result": "PASS",
+  "passed": 12,
+  "total": 12,
+  "assetFiles": 238,
+  "assetBytes": 95539567,
+  "checks": [
+    {
+      "name": "anonymous_status",
+      "passed": true,
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites",
+        "signInRequired": true
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "name": "status_no_identity",
+      "passed": true
+    },
+    {
+      "name": "anonymous_create_denied",
+      "passed": true,
+      "status": 401,
+      "body": {
+        "error": "sign_in_required"
+      }
+    },
+    {
+      "name": "redirect_/",
+      "passed": true,
+      "status": 307,
+      "location": "http://127.0.0.1:8776/index.html"
+    },
+    {
+      "name": "redirect_/play?quality=fast",
+      "passed": true,
+      "status": 307,
+      "location": "http://127.0.0.1:8776/play.html?quality=fast"
+    },
+    {
+      "name": "manifest_exact",
+      "passed": true,
+      "sha256": "3eabef82570db0d7f39700683bdc2b0152d9426b05ef4b8f415828ebbe99e293",
+      "webRelease": "exp40_shared_city01_delivery01"
+    },
+    {
+      "name": "http_gzip_whole_wasm",
+      "passed": true,
+      "chunks": 38,
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+      "expectedSha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+    },
+    {
+      "name": "http_gzip_whole_pck",
+      "passed": true,
+      "chunks": 174,
+      "bytes": 180883576,
+      "sha256": "81301d937bf4b63dbd9343ca7be65b524d4ce672baa60fde29a4a3d1b57fac63",
+      "expectedSha256": "81301d937bf4b63dbd9343ca7be65b524d4ce672baa60fde29a4a3d1b57fac63"
+    },
+    {
+      "name": "all_public_assets_exact",
+      "passed": true,
+      "files": 238,
+      "bytes": 95539567,
+      "rawGzipFiles": 212
+    },
+    {
+      "name": "frozen_site_sources_unchanged",
+      "passed": true,
+      "files": 358,
+      "changed": []
+    },
+    {
+      "name": "local_d1_tables_present",
+      "passed": true,
+      "migration": "drizzle/0000_mighty_may_parker.sql",
+      "localOnly": true
+    },
+    {
+      "name": "official_build_log_complete",
+      "passed": true,
+      "path": "site_build.log",
+      "sha256": "8b42b05e366bba502ed42b9192d46f8e557f06a87808f08c3be488929b2421a7"
+    }
+  ]
+}

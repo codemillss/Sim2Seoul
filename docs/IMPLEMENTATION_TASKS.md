@@ -1,5 +1,37 @@
 # Sol 실행 작업 계획
 
+## EXP40 후속 — 운영 gzip 수정과 version6 (2026-10-27)
+
+- [x] version5 실제 운영 압축 API의 `StreamPeerGZIP` 실패를 보존하고 Fetch/Godot 중복 해제 원인을 확인한다.
+- [x] Web-only `accept_gzip=false`·native 기본값 유지로 수정하고 최신 client36조건 actual exit0/ERROR0·실제 로컬 Web gzip 응답을 통과한다.
+- [x] 새 exp40_shared_city02 build4단계·PCK raw205/scene15/texture49/폰트와212개 조각을 검증한다.
+- [x] 같은 Site version6 게시 succeeded·운영212개/manifest/loader/전체 SHA PASS(17.795초)·익명 status200/로그인 필요/create401을 확인한다.
+- [x] 실제 운영 HTTPS 도시 ready·Esc 방 패널·로그인 안내와 버튼→공식 정상 로그인 폼까지 확인한다. 계정 정보는 입력하지 않는다.
+- [ ] 실제 계정 로그인 후 방 DB 작업과 서로 다른 두 계정의 같은 방 이동·퇴장/재참가를 수용한다.
+- [ ] RTT/snapshot 나이·10분 이동/단절·4명/8명은 이후 측정한다.8명 정책을 수용량으로 확정하지 않는다.
+
+[최신 운영 증거](../data/reports/shared_city/20261027/deployed_browser_check.json)·[수정/36검사](../data/reports/shared_city/20261027/browser_gzip_fix_diagnosis.json)를 따른다. 아래26일03/04 전체 게임은 수정 전 client이며 source/settings 불변은 해당 실행 내부에 한정한다. 기능 개발 우선순위를 유지하고 FPS 완전 해결/완전 멀티플레이를 주장하지 않는다.
+
+## EXP40 — 같은 도시에서 함께 걷기 (2026-10-26)
+
+사용자 최신 지시 **최적화보다 개발 먼저**를 따른다. EXP39의 NPC 계산 개선은 후속이며 현재 첫 완료 대상은 함께 걷기의 실제 게임/운영 연결이다.
+
+- [x] 실제 탐험 장면에 방 생성·초대 코드 참가·수동 퇴장·로그인/연결 상태와 Esc 메뉴 복귀를 연결한다.
+- [x] 자체 남녀×세 체형·사복/수영복을 승인 목록에서만 표시하고600ms 보간/각도 경계/외삽 금지/실패 시 기존 표시 유지를 검사한다.
+- [x] 야외 보행만 공유하고 실내/탈것/구금 전환 및 늦은 참가 응답에서 기존 활동 제어를 보존한다.
+- [x] 실제 client31조건, Remote headless84/native87·3PNG, 개발 HTTP8조건을 각각 통과한다.
+- [x] 두 독립 전체 headless 게임의 실제 입력 이동·상대52본 표시·퇴장/재참가·설정/소스 불변을 A24/B22조건·각 exit0/ERROR0으로 확인한다.
+- [x] native 일반 메뉴 버튼으로 방 생성·퇴장·Esc 복귀와 설정2파일 불변을 확인한다.
+- [x] native GPU owner+headless guest58조건·각 exit0/ERROR0·설정/소스 불변과 원본PNG2장 표시를 확인한다. headless03의46조건과 합산하지 않는다.
+- [x] 같은 Site를 보존하는 Vinext/D1 소스 준비 fixture23조건과 후보 자산714/스키마14/개발HTTP13/빌드HTTP10조건을 통과한다.
+- [x] 새 전체 Web 게임4단계 exit0/ERROR0·PCK raw205/scene15/texture49/폰트와212조각 재분할의 전체 SHA 보존을 확인한다.
+- [x] 같은 Site version5 게시 succeeded와 실제 운영212개 자원·manifest/loader·전체 SHA PASS(34.231초)를 확인한다.
+- [x] 실제 Site checkout 로컬 preview12조건/238자산과 실제 로컬 Web 방 생성1명 표시/퇴장을 확인한다. 운영 익명 status200/로그인 필요·방 생성401 경계를 확인한다.
+- [ ] 운영 익명 단일 플레이·로그인/방 생성 경계와 서로 다른 두 계정의 같은 방 표시/이동·퇴장/재참가를 검증한다.
+- [ ] 실제 RTT·snapshot 나이·10분 보행과 연결 단절을 측정한 뒤4명/8명 순서로 수용 범위를 넓힌다.8명은 입장 정책이다.
+
+[함께 걷기 범위/증거](SHARED_CITY_WALK.md)를 따른다.2Hz presence는 최종 액션 통신이 아니며 NPC/차량/전투 공유는 후속 개발이다. 아래 EXP39는 이전 이력이다.
+
 ## EXP39 — Web 개선판과 공동 도시 첫 통합 (2026-10-25)
 
 - [x] 공동 도시 목표 확정과 현재 단일 플레이 구현을 구분한다.

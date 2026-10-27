@@ -564,6 +564,11 @@ func _physics_process(delta: float) -> void:
 	if movement.length()>2.0:
 		state="idle";actual_speed_mps=0.0;measured_displacement_m=0.0;_rest_pose();return
 	var grounded: bool=player.is_on_floor()
+	# Remote room displays have no collider/move_and_slide or native floor.
+	# Only their isolated presentation adapter may interpret approved motion as
+	# grounded; the actual local player/controller always keeps native contact.
+	if bool(player.get_meta("shared_city_remote",false)) and adapter_walked and player.collision_layer==0 and player.collision_mask==0 and not player.has_method("set_facility_control"):
+		grounded=String(player.get_meta("shared_city_motion","idle")) in ["idle","walk","run"]
 	var moving := grounded and actual_speed_mps>.08 and Vector2(player.velocity.x,player.velocity.z).length()>.08
 	var blend := 1.0-exp(-delta*14.0)
 	walk_weight=lerpf(walk_weight,minf(1.0,actual_speed_mps/.75) if moving else 0.0,blend)

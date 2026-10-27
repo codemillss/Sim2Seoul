@@ -1,0 +1,163 @@
+{
+  "task": "EXP40_TWO_FULL_GAME_PROCESSES",
+  "started_at_utc": "2026-10-26T11:56:45.375Z",
+  "result": "PASS",
+  "timeout_ms": 90000,
+  "timed_out": false,
+  "failure": null,
+  "source_sha256_before": {
+    "tests/game/check_shared_city_world.gd": "9fffa2193a0ab8affb6f1420adc77328f4c9dc0b9fe708f781bca98a705bf3ff",
+    "game/scripts/explore_walk.gd": "b166cf2ce0c7da0a64fa811ceec0eb0a4f20d46e4f86aa44e9700421f72e0548",
+    "game/scripts/multiplayer/shared_city_walk.gd": "e69a1e99fde1ae53c708f1dc358d2d1964338d87fc8c3129db2c08313575e150",
+    "game/scripts/multiplayer/remote_resident.gd": "293651112b2111963466738653fd3d8e5108727695d9e7ea3616be2070a4114e",
+    "game/scripts/multiplayer/room_presence_client.gd": "2b37bb6f99f35b92ffdbf7110a2324f31eb72ec87c4e75acf497024b1c6cbb96",
+    "tools/web/multiplayer/check-game-pair.mjs": "4159a238858bcc89190d4acd3ea4f0f3b8a37cfd1e1eeb2b4f7ace8283402627",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "6cdc1c3d7ac23dcec1c8fa889c041e6bce474cabed420a01a47bdb94bb120d1d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "484071c5b223421d00b49340f888f42b5a28af7ddbb5315cdb9ec79316ae0594"
+  },
+  "source_sha256_after": {
+    "tests/game/check_shared_city_world.gd": "9fffa2193a0ab8affb6f1420adc77328f4c9dc0b9fe708f781bca98a705bf3ff",
+    "game/scripts/explore_walk.gd": "b166cf2ce0c7da0a64fa811ceec0eb0a4f20d46e4f86aa44e9700421f72e0548",
+    "game/scripts/multiplayer/shared_city_walk.gd": "e69a1e99fde1ae53c708f1dc358d2d1964338d87fc8c3129db2c08313575e150",
+    "game/scripts/multiplayer/remote_resident.gd": "293651112b2111963466738653fd3d8e5108727695d9e7ea3616be2070a4114e",
+    "game/scripts/multiplayer/room_presence_client.gd": "2b37bb6f99f35b92ffdbf7110a2324f31eb72ec87c4e75acf497024b1c6cbb96",
+    "tools/web/multiplayer/check-game-pair.mjs": "4159a238858bcc89190d4acd3ea4f0f3b8a37cfd1e1eeb2b4f7ace8283402627",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "6cdc1c3d7ac23dcec1c8fa889c041e6bce474cabed420a01a47bdb94bb120d1d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "484071c5b223421d00b49340f888f42b5a28af7ddbb5315cdb9ec79316ae0594"
+  },
+  "scope": "Two independent full production explore_walk Godot processes with real city, AI and player physics, both headless. No GUI/pixels, hosted-production authentication, public access, remote shared physics or performance acceptance. Root-owned server8766 is not used or stopped.",
+  "api_origin": "http://127.0.0.1:56213",
+  "coordinator_origin": "http://127.0.0.1:56214",
+  "cleanup_errors": [],
+  "coordination": {
+    "invite_published": true,
+    "a": {
+      "stage": "done",
+      "stages": [
+        "ready",
+        "created",
+        "peer_loaded",
+        "input_ready",
+        "moved",
+        "absence_seen",
+        "done"
+      ]
+    },
+    "b": {
+      "stage": "done",
+      "stages": [
+        "ready",
+        "peer_loaded",
+        "input_ready",
+        "moved",
+        "left",
+        "rejoined",
+        "done"
+      ]
+    }
+  },
+  "source_unchanged": true,
+  "games": [
+    {
+      "role": "a",
+      "pid": 77772,
+      "command": [
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game",
+        "--log-file",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_engine.log",
+        "--script",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_shared_city_world.gd",
+        "--",
+        "--room-server=http://127.0.0.1:56213",
+        "--test-role=a",
+        "--test-coord=http://127.0.0.1:56214",
+        "--test-report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_report.json"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "error_count": 0,
+      "engine_error_count": 0,
+      "report_result": "PASS",
+      "passed": true,
+      "files": {
+        "stdout": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_stdout.log",
+          "bytes": 7704,
+          "sha256": "853e154c6760bf6259e7444e89c856f1ddcee4878c8adab18720fbbfb8fb724d"
+        },
+        "stderr": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "engine": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_engine.log",
+          "bytes": 7704,
+          "sha256": "853e154c6760bf6259e7444e89c856f1ddcee4878c8adab18720fbbfb8fb724d"
+        },
+        "report": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/a_report.json",
+          "bytes": 6520,
+          "sha256": "abba1f084ce28fb4f3aced80905c21956bbf04f00e4ae23a1952ce38812c4272"
+        }
+      }
+    },
+    {
+      "role": "b",
+      "pid": 77773,
+      "command": [
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game",
+        "--log-file",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_engine.log",
+        "--script",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_shared_city_world.gd",
+        "--",
+        "--room-server=http://127.0.0.1:56213",
+        "--test-role=b",
+        "--test-coord=http://127.0.0.1:56214",
+        "--test-report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_report.json"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "error_count": 0,
+      "engine_error_count": 0,
+      "report_result": "PASS",
+      "passed": true,
+      "files": {
+        "stdout": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_stdout.log",
+          "bytes": 7704,
+          "sha256": "d338e4f9eecd3d03459ec92686e8edca94cd739cbf507b50bd028415c8badbb2"
+        },
+        "stderr": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "engine": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_engine.log",
+          "bytes": 7704,
+          "sha256": "d338e4f9eecd3d03459ec92686e8edca94cd739cbf507b50bd028415c8badbb2"
+        },
+        "report": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt03/b_report.json",
+          "bytes": 6319,
+          "sha256": "38e649a61563850f82bae4baf8ae05759a8f163427206595c1fb38496134f974"
+        }
+      }
+    }
+  ],
+  "elapsed_ms": 51079
+}

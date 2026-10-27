@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "path": "/api/multiplayer/status",
+      "status": 200,
+      "body": {
+        "available": true,
+        "apiVersion": 1,
+        "mode": "sites",
+        "signInRequired": true
+      },
+      "cache_control": "no-store"
+    },
+    {
+      "path": "/api/multiplayer/rooms",
+      "status": 401,
+      "body": {
+        "error": "sign_in_required"
+      },
+      "cache_control": "no-store"
+    }
+  ],
+  "scope": "production anonymous status and create rejection only; authenticated database CRUD and two accounts unverified"
+}

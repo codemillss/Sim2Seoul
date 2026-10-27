@@ -1,0 +1,78 @@
+
+ ⛅️ wrangler 4.92.0 (update available 4.152.0)
+──────────────────────────────────────────────
+Resource location: local 
+
+Use --remote if you want to access the remote instance.
+
+🌀 Executing on local database DB (00000000-0000-4000-8000-000000000000) from .wrangler/state/v3/d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 3 commands executed successfully.
+[
+  {
+    "results": [
+      {
+        "name": "multiplayer_players",
+        "type": "table"
+      },
+      {
+        "name": "multiplayer_players_room_id_user_key_unique",
+        "type": "index"
+      },
+      {
+        "name": "multiplayer_players_room_presence",
+        "type": "index"
+      },
+      {
+        "name": "multiplayer_rate_limits",
+        "type": "table"
+      },
+      {
+        "name": "multiplayer_rooms",
+        "type": "table"
+      },
+      {
+        "name": "multiplayer_rooms_expiry",
+        "type": "index"
+      },
+      {
+        "name": "multiplayer_rooms_owner_expiry",
+        "type": "index"
+      }
+    ],
+    "success": true,
+    "meta": {
+      "duration": 1
+    }
+  },
+  {
+    "results": [
+      {
+        "id": 0,
+        "seq": 0,
+        "table": "multiplayer_rooms",
+        "from": "room_id",
+        "to": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE",
+        "match": "NONE"
+      }
+    ],
+    "success": true,
+    "meta": {
+      "duration": 0
+    }
+  },
+  {
+    "results": [
+      {
+        "remaining_rooms": 0,
+        "remaining_players": 0
+      }
+    ],
+    "success": true,
+    "meta": {
+      "duration": 0
+    }
+  }
+]

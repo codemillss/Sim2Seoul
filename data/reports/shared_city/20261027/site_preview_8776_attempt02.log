@@ -1,0 +1,319 @@
+
+> site-creator-vinext-starter@0.1.0 start
+> node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0 --port 8776
+
+
+ ⛅️ wrangler 4.92.0
+───────────────────
+Your Worker has access to the following bindings:
+Binding                       Resource         Mode
+env.DB (site-creator-d1)      D1 Database      local
+
+Attaching additional modules:
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬──────┬────────────┐
+│ Name                                                                                                            │ Type │ Size       │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ __vite_rsc_assets_manifest.js                                                                                   │ esm  │ 1.98 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-page-cache-DLdVLtbQ.js                                                                         │ esm  │ 5.07 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-page-cache-finalizer-DWh57xlL.js                                                               │ esm  │ 3.40 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-page-cache-render-CE6c-g-B.js                                                                  │ esm  │ 1.87 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-page-stream-yLurqiyf.js                                                                        │ esm  │ 9.69 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-prerender-endpoints-0-RzkF8D.js                                                                │ esm  │ 1.96 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-prerender-static-params-BknzfVa9.js                                                            │ esm  │ 0.17 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-route-handler-dispatch-pWkeiMrq.js                                                             │ esm  │ 25.46 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-segment-config-B_02aQjx.js                                                                     │ esm  │ 15.23 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/app-static-generation-DbmTuUMJ.js                                                                  │ esm  │ 0.89 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/cache-headers-NAqH6Jht.js                                                                          │ esm  │ 47.04 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/framework~index-CsrRoMSe.js                                                                        │ esm  │ 0.18 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/framework~index~app-route-handler-dispatch-Cdi-C3zp.js                                             │ esm  │ 55.28 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/framework~index~layout~app-page-cache-render~app-page-cache~app-route-handler-dispatch-13z4MiRr.js │ esm  │ 5.98 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/implicit-tags-B-Dtcx_o.js                                                                          │ esm  │ 1.63 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/isr-cache-C0Oxf36q.js                                                                              │ esm  │ 4.81 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/navigation-runtime-CYsVUqAP.js                                                                     │ esm  │ 0.78 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/record-Crmk5sem.js                                                                                 │ esm  │ 4.85 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/rolldown-runtime-DUnMT5BP.js                                                                       │ esm  │ 0.68 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/root-params-0DVgYa50.js                                                                            │ esm  │ 1.21 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/route-BBhkgZgz.js                                                                                  │ esm  │ 0.11 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/route-BRH6waxT.js                                                                                  │ esm  │ 0.11 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/route-BUv2d5Re.js                                                                                  │ esm  │ 10.43 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/route-DIhMq3I1.js                                                                                  │ esm  │ 0.26 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ _next/static/text-stream-CRAPaQC2.js                                                                            │ esm  │ 18.96 KiB  │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/__vite_rsc_assets_manifest.js                                                                               │ esm  │ 1.98 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/app-prefetch-fetch-queue-BTKEsFpn.js                                                           │ esm  │ 0.00 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/app-router-scroll-CAnSvlwI.js                                                                  │ esm  │ 2.49 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/error-boundary-mJ-SsUww.js                                                                     │ esm  │ 5.27 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/layout-segment-context-DpkjgvEb.js                                                             │ esm  │ 0.37 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/static.edge-IqRtACPa.js                                                                        │ esm  │ 0.16 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/_next/static/streamed-icons-C-LGb6Fs.js                                                                     │ esm  │ 0.67 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/index.js                                                                                                    │ esm  │ 271.67 KiB │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ ssr/vinext-client-assets.js                                                                                     │ esm  │ 1.21 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ vinext-client-assets.js                                                                                         │ esm  │ 1.21 KiB   │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────┼────────────┤
+│ Total (35 modules)                                                                                              │      │ 503.05 KiB │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴──────┴────────────┘
+⎔ Starting local server...
+[wrangler:info] ✨ Parsed 1 valid header rule.
+[wrangler:info] Ready on http://127.0.0.1:8776
+[wrangler:info] GET /api/multiplayer/status 200 OK (45ms)
+[wrangler:info] GET /game/manifest.json 200 OK (4ms)
+[wrangler:info] GET /api/multiplayer/status 200 OK (2ms)
+[wrangler:info] GET /game/manifest.json 200 OK (1ms)
+[wrangler:info] GET /api/multiplayer/status 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-000-46e047d3cf3ff5f2-part0-b4f56613030cb425.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-000-46e047d3cf3ff5f2-part0-b4f56613030cb425.gz 200 OK (2ms)
+[wrangler:info] GET /play.html 200 OK (5ms)
+[wrangler:info] GET /site.css 200 OK (4ms)
+[wrangler:info] GET /game-loader.js 200 OK (3ms)
+[wrangler:info] GET /favicon.ico 404 Not Found (31ms)
+[wrangler:info] GET /game/manifest.json 200 OK (11ms)
+[wrangler:info] GET /game/engine-config.json 200 OK (11ms)
+[wrangler:info] GET /game/index.js 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-000-938a4f1b5579f2d6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-001-399f81019e4e733b.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/wasm-1m-002-44115ec7d7080091.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-003-250afb05e6c4e6aa.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/wasm-1m-004-c73d9c0198cb19c6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-005-3086cbfa8a65310e.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-006-d65ad9497c544828.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-007-68a05a8b32799ad9.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-008-09367f5998cfb946.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/wasm-1m-009-19367c55567b5e01.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-010-c72ea0b25bc5dc00.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-011-d30ef3b3d96139a6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-012-1be5d24ce3d19fa2.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-013-d8f617bfb5d87c50.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-014-8571df796bbddfa3.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-015-3ab6a420d50e3065.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-016-f9f6106f834c37f8.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-017-a0aa1e2dcc54f844.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-018-4d0c591c9e8d4d1a.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/wasm-1m-019-b0f180decc5a6185.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-020-f54ca803b391a97b.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-021-714bcbc87d4c7d18.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/wasm-1m-022-9260b4ae7ef4b6f9.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-023-a2754c45e641eb27.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-024-326d975d33a2acd1.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-025-e4c649807aaf8681.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-026-76b7ba4fb261bbc6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-027-e0149e14c0fac909.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-028-3a93dfd7b8c98c77.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-029-ce3ecf07a7ecda66.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-030-32c91f3f1f8784c2.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-031-7bc258b911586b3b.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/wasm-1m-032-d01bbdfe71645492.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-033-7137b94a87a23cde.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-034-a5168bf2fcbb7c43.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/wasm-1m-035-570231c82d8bd1e2.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-036-8f1366131fc4ee50.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/wasm-1m-037-42277a134e7ec40c.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-000-46e047d3cf3ff5f2-part0-b4f56613030cb425.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-000-46e047d3cf3ff5f2-part1-b00bc295b0563ca3.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/pck-1m-001-267f0bdc71b24ec0.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-002-67d7c45f5633a80c.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-003-b03ce44a7aee834e.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-004-b60f28caaa088c97.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-005-614eb028fb3d3e26.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-006-64eea10047c7b67f.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-007-15aaee9a7ce6600a.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-008-89bf0a238be939c2.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-009-9298b6cc1ca29157.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-010-3f9670613c11a128.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-011-9bcae8694c63f8b4.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-012-a22830cc60d37e85.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-013-7a2b223f581807db.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-014-09cdaaf2f6c7398b.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-015-b825b337e39aa4c2.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-016-9a234ffbe8e45c82.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-017-e1ecba552301f245.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-018-0a95f65f1d330511.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-019-e757ed339d9771ff.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-020-ceea072981b47358.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-021-bc2df2e04edcd6f7.gz 200 OK (7ms)
+[wrangler:info] GET /chunks/pck-1m-022-f336eb235d95009c.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-023-f83be3a6a129b39f.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-024-96a8d4e62f426715.gz 200 OK (8ms)
+[wrangler:info] GET /chunks/pck-1m-025-b69d03ed70a3668f.gz 200 OK (10ms)
+[wrangler:info] GET /chunks/pck-1m-026-8e15995c094b5331.gz 200 OK (8ms)
+[wrangler:info] GET /chunks/pck-1m-027-38c0684b780f0e94.gz 200 OK (7ms)
+[wrangler:info] GET /chunks/pck-1m-028-c36f82c0e8ef1f68.gz 200 OK (9ms)
+[wrangler:info] GET /chunks/pck-1m-029-4f90307c71c34a58.gz 200 OK (13ms)
+[wrangler:info] GET /chunks/pck-1m-030-72db7065ce3c1b4d.gz 200 OK (11ms)
+[wrangler:info] GET /chunks/pck-1m-031-4b360f370f6e8693.gz 200 OK (10ms)
+[wrangler:info] GET /chunks/pck-1m-032-7010e4bcc3df4aec.gz 200 OK (8ms)
+[wrangler:info] GET /chunks/pck-1m-033-59a5a2cafba439eb.gz 200 OK (7ms)
+[wrangler:info] GET /chunks/pck-1m-034-fd2dfd4505c8f1ce.gz 200 OK (7ms)
+[wrangler:info] GET /chunks/pck-1m-035-645577b08923d564.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/pck-1m-036-3390a741fbfb9adc.gz 200 OK (8ms)
+[wrangler:info] GET /chunks/pck-1m-037-2b81c81dbdd10d15.gz 200 OK (7ms)
+[wrangler:info] GET /chunks/pck-1m-038-fdfef691edbea21a.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/pck-1m-039-01db5b3596dda712.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-040-6c408628517c6634.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-041-b2f102579d68bd9a.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-042-710535476c70735c.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-043-95bd99f64f1e5cd8.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-044-b60fcc9ffe602380.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-045-1dc45dc3bb384f2b.gz 200 OK (9ms)
+[wrangler:info] GET /chunks/pck-1m-046-bc90df6cc6bce625.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-047-7fcb4404a70757ff.gz 200 OK (13ms)
+[wrangler:info] GET /chunks/pck-1m-048-733a4512d2d23b83.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-049-8c078f9ef337227d.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-050-4d5287402655bade.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-051-2797ee33a275f422.gz 200 OK (13ms)
+[wrangler:info] GET /chunks/pck-1m-052-c3b4a6964d7f753c.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-053-fcab5e082e43341b.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-054-3b754745ec187a52.gz 200 OK (9ms)
+[wrangler:info] GET /chunks/pck-1m-055-f3f2fa62495c0eaa.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/pck-1m-056-4af1d2d9107f4785.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-057-03e4793e2d8e630d.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-058-1e7a60ce82a72c5c.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-059-7738481fc928520b.gz 200 OK (6ms)
+[wrangler:info] GET /chunks/pck-1m-060-6162226d2e5b1146.gz 200 OK (5ms)
+[wrangler:info] GET /chunks/pck-1m-061-cabd423d14a3613d.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-062-4e71fee5d263897c.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-063-f987344fd0552fbb.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-064-2ae997b1352be7a6.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-065-5ca58f5f06390253.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-066-98a3e644e57275a5.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-067-6ae8a62de4307af0.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-068-6448ea7bae2e81f9.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-069-1268760c6e591c0b.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-070-9e924d0d30802e78.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-071-617c419a3bccc2d7.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-072-0e72e9360ac9cf08.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-073-3ff7bb29d4cc0737.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-074-f773603aca9f448d.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-075-2fc58a74fe772c63.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-076-cea733a50642a244.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-077-c42430846cccba7e.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-078-f1aebde0361e6dfb.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-079-72d49e8241f55386.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-080-2d647a9dd77c50f8.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-081-831dbd275662adce.gz 200 OK (13ms)
+[wrangler:info] GET /chunks/pck-1m-082-46f5d4ac8dbb411c.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-083-cfb6a48588b3408e.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-084-0eeda064d1b01ff2.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-085-bb84448aa9990171.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-086-c6ab6f3f2ff8dd00.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-087-ee0e1f284520f12e.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-088-52a2333084fcc2be.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-089-be90bfbc1bd4485b.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-090-e75b6217ccdefca2.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-091-69cefb53c59255a2.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-092-d91a9f3039cb8de8.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-093-b95c891aea0b7039.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-094-1c0ebed88554865a.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-095-0cd00cc49bbed0ed.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-096-c52fa879ec87ae8c.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-097-8ce5d4fa74422b54.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-098-75df771b8fe6d0a1.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-099-c7dfc2db9886d461.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-100-8fe5b181877fdd5e.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-101-9eb9fe5bbda912c1.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-102-c6434625796291f8.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-103-5aa9dd12fe98908e.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-104-16539d6b51934695.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-105-aa9f9bdff5323e95.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-106-2543d8acca7c125c.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-107-139a51698ef91735.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-108-fd1af7c5bed0663a.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-109-cddaf45ab1d36c29.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-110-81fa024fd0ff6564.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-111-75d5c09601f4699e.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-112-83d930a9d36a8035.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-113-b669e01f3939585e.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-114-5ac755dddf7a19db.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-115-619770b9a3c094c7.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-116-1fba29f3ea8f22f3.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-117-f3cecf3fc1cf3c9e.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-118-2f687d108256daa5.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-119-071cb0f119bbb6e3.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-120-b7ebaeb149b6872f.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-121-9575c04c6905c30a.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-122-2387f8f23b9f4c2a.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-123-0376600cbae1f9e3.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-124-b168567a6966223d.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-125-15bca5a9a7a5a1b4.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-126-eef2868bcbab1983.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-127-7f4c7e8f0d630a47.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-128-110d9235f3c1c8d2.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-129-bc2742a1542dc220.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-130-f8272e53bfa0a7a7.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-131-ccff598d3c358e84.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-132-0ca9db7dd4e3dfd6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-133-ce2945225ebf014b.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-134-5af9d39441d96fb7.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-135-9eaa491db7f74257.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-136-e43fd40962b0eed0.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-137-02dea30955862442.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-138-7de12923a0a90bf6.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-139-a825f4d76f6c4051.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-140-f1b776b396106afa.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-141-87f34ec1a7cc6073.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-142-765c31331df9c86f.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-143-e97f63e4ee68d167.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-144-348af253e2f7a404.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-145-208ddbfbe4999b33.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-146-2768b434bfbbf418.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-147-6e8dcdd6e200c000.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-148-75fb04b8cf937f4b.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-149-6e9da2e297e291b1.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-150-fdfcb55b89a84ddd.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-151-8c06d35c92900b0e.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-152-1f00447032ceac8b.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-153-2f12d4566a83711a.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-154-5a77bec7a8e192af.gz 200 OK (4ms)
+[wrangler:info] GET /chunks/pck-1m-155-5b3c3008e650891a.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-156-fb93f53a7067b831.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-157-ec0627ae378ba245.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-158-a0b2b413609d1546.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-159-ce0c20f2bfb04bec.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-160-d011cc8f1dfdd284.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-161-243f77c1a97efab8.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-162-14f675add1b03c65.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-163-3860e99e60e3b12c.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-164-34755fe4f9f33916.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-165-6f682f7a3f4daf90.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-166-25531f34ce012d37.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-167-e2b9588c231450f8.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-168-e8dbee33b0a7f5fa.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-169-66abb70a605baa6a.gz 200 OK (1ms)
+[wrangler:info] GET /chunks/pck-1m-170-55d7356f5bbdf331.gz 200 OK (3ms)
+[wrangler:info] GET /chunks/pck-1m-171-030056937398a322.gz 200 OK (2ms)
+[wrangler:info] GET /chunks/pck-1m-172-a2c08b5584c2ea1e.gz 200 OK (3ms)
+[wrangler:info] GET /game/index.audio.position.worklet.js 200 OK (5ms)
+[wrangler:info] GET /game/index.audio.worklet.js 200 OK (6ms)
+[wrangler:info] GET /api/multiplayer/status 200 OK (4ms)

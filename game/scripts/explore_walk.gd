@@ -79,6 +79,7 @@ var sandbox_status: Label
 var _sandbox_held: Dictionary={}
 var _sandbox_requests: Dictionary={}
 var _sandbox_custody_transfer:=false
+var shared_city_walk: Node
 
 func _ready() -> void:
 	assert(exploration_physics_hz in [30,60])
@@ -270,6 +271,9 @@ func _ready() -> void:
 	if OS.has_feature("web"):
 		var web_profile:=preload("res://scripts/web_runtime_profile.gd").new()
 		web_profile.name="WebRuntimeProfile";add_child(web_profile);web_profile.setup(self)
+	shared_city_walk=preload("res://scripts/multiplayer/shared_city_walk.gd").new()
+	shared_city_walk.name="SharedCityWalk";add_child(shared_city_walk)
+	if not shared_city_walk.setup(self):exploration_notice.text="함께 걷기를 준비하지 못했습니다. 혼자 탐험은 계속할 수 있습니다."
 
 func _build_ui() -> void:
 	super._build_ui()
@@ -385,6 +389,8 @@ func _visit_library_entrance() -> void:
 	_visit_city_life("library")
 
 func toggle_menu() -> void:
+	if is_instance_valid(shared_city_walk) and shared_city_walk.ui_open:
+		shared_city_walk.close_panel();return
 	if is_instance_valid(character_customization) and character_customization.ui_open:
 		character_customization.cancel_preview();return
 	super.toggle_menu()
@@ -396,6 +402,12 @@ func toggle_menu() -> void:
 		input_router.gameplay_enabled=false
 		rig.set_capture(false)
 		shop_visit_service.focus_current_ui()
+
+func focus_changed(focused: bool) -> void:
+	# Focus loss already pauses the game. Preserve the open room dialog rather
+	# than interpreting focus loss as an Escape press and closing that dialog.
+	if is_instance_valid(shared_city_walk) and shared_city_walk.ui_open:return
+	super.focus_changed(focused)
 
 func _visit_city_life(kind: String) -> void:
 	# Resolve and check the exterior destination before releasing an indoor

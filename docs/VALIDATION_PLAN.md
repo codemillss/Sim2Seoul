@@ -1,5 +1,35 @@
 # 검증 계획과 완료 판정
 
+## EXP40 최종 현재 판정 — version6 (2026-10-27)
+
+| 경계 | 실제 결과 | 미수용 범위 |
+|---|---|---|
+| 압축 응답 수정 | [원인](../data/reports/shared_city/20261027/browser_gzip_fix_diagnosis.json)·[최신36조건](../data/reports/shared_city/20261027/client_gzip01/summary.json) actual exit0/ERROR0. Web-only decoder 비활성·native 기본값 유지 | native fixture를 실제 브라우저 검증으로 세지 않음 |
+| 실제 Web 회귀 | [로컬 gzip 응답](../data/reports/shared_city/20261027/gzip_browser_check.json)에서 도시/방 로그인 안내·Esc 복귀·ERROR0 | 운영 SSO/두 계정 아님 |
+| 새 전체 export | [02 build](../data/reports/web_sites/20261027/exp40_shared_city02/build.json)4단계0/ERROR0·[PCK raw205/scene15/texture49/폰트](../data/reports/web_sites/20261027/exp40_shared_city02/pack_integrity.json) PASS | 물리/인체 미술 전체 회귀 아님 |
+| 게시/운영 자료 | [version6 succeeded](../data/reports/shared_city/20261027/site_publication.json)·[212/212/전체 SHA/manifest·loader](../data/reports/shared_city/20261027/deployed_asset_check.json) PASS·17.795초 | 영구 안정성/동시 수용량 아님 |
+| 익명 운영 API | [status200/로그인 필요·create401](../data/reports/shared_city/20261027/deployed_api_check.json) | 인증된 DB 작업 미검증 |
+| 실제 운영 브라우저 | [HTTPS 도시 ready→Esc 방→로그인 안내→공식 정상 로그인 폼](../data/reports/shared_city/20261027/deployed_browser_check.json)·[화면](../data/reports/shared_city/20261027/deployed_browser_login.png) PASS/engine ERROR0 | 계정 정보 미입력. 인증된 방/두 계정 플레이·지속 성능 미검증 |
+
+준비21.757초는 기존 cache를 사용한 단일 실행 관찰이다. version5의 게시/자원 PASS는 보존하되 실제 운영 gzip 실패로 최종 수용하지 않는다. 아래26일 전체게임03/04는 수정 전 client의 검사이며 source/settings 불변은 각각 실행 내부 판정이다. 최신36조건과 이들 조건을 전체 품질 점수로 합산하지 않는다. 다음은 실제 로그인·두 계정의 상대 이동/퇴장/재참가이며4/8명·FPS·10분 지속성은 이후 별도 수용한다.
+
+## EXP40 — 함께 걷기 수용 경계 (2026-10-26)
+
+| 판정 | 현재 실제 증거 | 수용하지 않은 범위 |
+|---|---|---|
+| HTTP 게임 client | [attempt03:31조건](../data/reports/shared_city/20261026/client_attempt03_report.json)·[실제 exit0/ERROR0](../data/reports/shared_city/20261026/client_attempt03_run.json). 실제 두 HTTPRequest client의 입퇴장/550ms 갱신·재참가와 별도 잘못된 응답 fixture | 두 GUI/운영 로그인·최종 액션 동기화 |
+| Remote 표현 | [headless84/native87·3PNG](../data/reports/shared_city/20261026/remote_summary.json). 승인 snapshot600ms 보간/±π/외삽 금지·허용 외형·충돌0·로컬 접지 guard·실패 복원 | 인체 미술 완성·연속 동작 체감·원격 충돌/피격 |
+| 실제 도시 두 프로세스 | [pair03](../data/reports/shared_city/20261026/world_pair_attempt03/summary.json) A24/B22조건·각 exit0/ERROR0·51.079초, [교차 대조](../data/reports/shared_city/20261026/world_pair_attempt03_crosscheck.json) 실제 입력 이동과 상대 승인 위치·52본·퇴장/재참가·설정/소스 불변 | headless이므로 픽셀/GUI·운영 인증·공유 NPC/차량/전투·성능 |
+| native 전체게임 표시 | [native04](../data/reports/shared_city/20261026/world_pair_attempt04_native_crosscheck.json) GPU owner+headless guest58조건·각 exit0/ERROR0·설정/소스 불변·원본PNG2장 확인. headless03의46조건과 합산하지 않음 | fixture 카메라/표식은 제품 UI 아님. 두 GUI/운영 계정·성능 |
+| 일반 native 메뉴 | [manual03](../data/reports/shared_city/20261026/manual_preview03.json)·[실제 패널](../data/reports/shared_city/20261026/room_menu_ready.png)·[메뉴 복귀](../data/reports/shared_city/20261026/room_menu_back.png). 실제 방 생성/퇴장/Esc와 설정2파일 불변 | 두 사람의 운영 브라우저 보행 |
+| 로컬 호스팅 경계 | [개발 HTTP8](../data/reports/shared_city/20261026/dev_server_check.json), [이행 fixture23](../data/reports/shared_city/20261026/hosting_prepare_fixtures.json), 후보 [자산714](../data/reports/shared_city/20261026/hosting_asset_final_checks.json)/[스키마14](../data/reports/shared_city/20261026/hosting_schema_equivalence.json)/[개발13](../data/reports/shared_city/20261026/hosting_http_check.json)/[빌드10](../data/reports/shared_city/20261026/hosting_built_http_check.json) | 운영 D1/dispatch identity·게시·동시 수용량 |
+| 새 전체 Web 게임 | [4단계 exit0/ERROR0](../data/reports/web_sites/20261026/exp40_shared_city01/build.json), [raw205/scene15/texture49/폰트](../data/reports/web_sites/20261026/exp40_shared_city01/pack_integrity.json), [212조각 전체 SHA 보존](../data/reports/shared_city/20261026/web_delivery.json) | 운영 실제 로그인/두 계정 게임 조작은 대기 |
+| 같은 Site 게시·운영 바이트 | [version5 succeeded](../data/reports/shared_city/20261026/site_publication.json)·[운영212/212/전체 SHA/manifest·loader](../data/reports/shared_city/20261026/deployed_asset_check.json) PASS·34.231초 | 초기 Python UA403/명시 UA 재검사 성공으로 브라우저 원인·영구 안정성을 단정하지 않음 |
+| 운영 API 인증 경계 | [익명 status200/로그인 필요·create401](../data/reports/shared_city/20261026/deployed_api_check.json) | 실제 로그인/D1 CRUD·두 계정 |
+| 로컬 Web 실행/방 | [실제 checkout preview12조건·238자산](../data/reports/shared_city/20261026/site_preview_8776_check.json), [CUA 방 생성1명 표시·퇴장](../data/reports/shared_city/20261026/web_room_browser_check.json) | 운영 SSO·두 브라우저 계정 |
+
+초기 JSON/HTTP timeout과 pair01/02의 cleanup ERROR는 최종 성공과 구분해 원문을 유지한다. pause/짧은 대기 결과를 장시간 성능으로 세지 않는다. 방당8명은 정책이며 현재2Hz presence/600ms 보간을 최종 액션 네트워크라고 부르지 않는다. 다음 수용은 운영 브라우저 엔진 시작·실제 로그인/서로 다른 두 계정의 상대 이동이다. 게시 receipt·운영 자원·익명 API·로컬 Web 방의 서로 다른 경계를 합쳐 운영 게임 수용으로 세지 않는다. 이후 RTT/snapshot 나이·10분 이동·단절/재참가를 측정한다. 현재 개발 우선순위를 NPC 최적화로 바꾸지 않는다. [실행/제약](SHARED_CITY_WALK.md)을 따른다.
+
 ## EXP39 — 전송·프레임·공동 도시의 독립 판정 (2026-10-25)
 
 선택 게임 build04의 [실제 PCK](../data/reports/web_sites/20261025/performance01_build04/pack_integrity.json)는 raw202파일·compiled scene15/texture49·폰트 PASS다. Web raw GLB15개 제외는 원본/변환 결과의 명시적 **빌드 attestation**이며 runtime raw SHA를 직접 읽었다는 의미가 아니다. 최종 delivery01 재분할6검사는 전체 WASM/PCK SHA·다른 압축 바이트 보존과 실패 처리를 검사한다.

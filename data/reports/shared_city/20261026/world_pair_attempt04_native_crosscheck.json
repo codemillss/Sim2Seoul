@@ -1,0 +1,85 @@
+{
+  "task": "EXP40_NATIVE_OWNER_FULL_GAME_PAIR_CROSSCHECK",
+  "result": "PASS",
+  "actual_game_processes": 2,
+  "render_modes": {
+    "a": "native_graphical",
+    "b": "headless"
+  },
+  "pids": [
+    84843,
+    84844
+  ],
+  "combined_checks": 58,
+  "physical_input_metres": {
+    "a": 2.10125780105591,
+    "b": 1.31994497776031
+  },
+  "cross_process_pose_match": {
+    "a_physical_end_to_b_accepted_metres": 0.00035068141374607525,
+    "b_physical_end_to_a_accepted_metres": 0.0004532921126131905
+  },
+  "real_loaded_remote_bones": {
+    "a": 52,
+    "b": 52
+  },
+  "user_settings_unchanged": true,
+  "source_unchanged": true,
+  "avatar_source_sha256": "356c8fc3a9a426da284d7e7670f504c3a7c22078a264488287229b451b945732",
+  "avatar_matches_original_git_head": false,
+  "actual_exit_codes": [
+    0,
+    0
+  ],
+  "errors": [
+    0,
+    0
+  ],
+  "cleanup_errors": [],
+  "credential_pattern_matches": {
+    "room_invite_code": 0,
+    "development_cookie": 0,
+    "bearer_header": 0,
+    "standalone_room_bearer": 0,
+    "standalone_invite_secret": 0
+  },
+  "captures": [
+    {
+      "stage": "joined",
+      "path": "/Users/jmjeon/Desktop/jobseeker/\uc6d0\uc11c_\uc81c\ucd9c/02_\ud575\uc2ec\ud504\ub85c\uc81d\ud2b8_\ub9c8\uc2a4\ud130\ud480/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt04_native/a_report_joined.png",
+      "bytes": 862004,
+      "sha256": "2d76983fd383ad1a4d453b350e05ccc03175ae2e2d662e328c200cd89baa269b",
+      "matches_report_sha256": true,
+      "native_viewport_pixels": [
+        1152,
+        720
+      ],
+      "fixture_camera_and_markers": true,
+      "product_camera_transform_written": false,
+      "invite_ui_visible": false,
+      "visual_inspection": "Opened original PNG: both complete production humanoid meshes, labelled LOCAL/REMOTE (test), city surroundings and two-participant badge visible. Invite panel and code absent. Joined image is side-by-side; moved image records changed relative positions. Test labels/camera are fixture-only."
+    },
+    {
+      "stage": "moved",
+      "path": "/Users/jmjeon/Desktop/jobseeker/\uc6d0\uc11c_\uc81c\ucd9c/02_\ud575\uc2ec\ud504\ub85c\uc81d\ud2b8_\ub9c8\uc2a4\ud130\ud480/sim2seoul/data/reports/shared_city/20261026/world_pair_attempt04_native/a_report_moved.png",
+      "bytes": 863558,
+      "sha256": "f4ba30edac282f9c4f6f9ac79d672b6dd9ed10bbeff8008a4d8fa60f46c46bc2",
+      "matches_report_sha256": true,
+      "native_viewport_pixels": [
+        1152,
+        720
+      ],
+      "fixture_camera_and_markers": true,
+      "product_camera_transform_written": false,
+      "invite_ui_visible": false,
+      "visual_inspection": "Opened original PNG: both complete production humanoid meshes, labelled LOCAL/REMOTE (test), city surroundings and two-participant badge visible. Invite panel and code absent. Joined image is side-by-side; moved image records changed relative positions. Test labels/camera are fixture-only."
+    }
+  ],
+  "bound_report_sha256": {
+    "summary.json": "8444f1a8c47ebeadbf98b9739a86faffcb8b6a63c1b832c6c74899b50a127731",
+    "a_report.json": "fdcac76f067775640151bd77bfbc380a97d19183e10575573dc7bd9474462bdb",
+    "b_report.json": "2130304ef488abe743dea612733f52d284033aff412411f4f28abeba1a3ee69c"
+  },
+  "scope": "Native Metal GPU owner plus separate full headless guest. Two actual world/AI/physics processes, real remote skins and accepted state. Original PNGs use temporary fixture camera/test labels, then product camera restored. No production peer-label claim, shared NPC/vehicle/combat simulation, public hosted identity or performance acceptance.",
+  "avatar_git_head_comparison_scope": "Reference comparison only: the feature has pre-existing avatar integration edits. This is not a before/after mutation assertion and is not used as a pass condition."
+}
