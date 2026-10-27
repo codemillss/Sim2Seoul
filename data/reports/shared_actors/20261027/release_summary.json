@@ -1,0 +1,84 @@
+{
+  "result": "IMPLEMENTED_PUBLISHED_VERIFIED_WITH_LIMITS",
+  "date": "2026-10-27",
+  "branch": "codex/shared-city-vehicles-npcs-20261027",
+  "base_main": "328ef22491a0551c9d79e87b4ca95b48de371ce3",
+  "site_version": 7,
+  "release": "exp41_shared_actors03_delivery01",
+  "site_source_commit": "c753b4f76541b9ed2f0a4c87b435b0d6e649e418",
+  "url": "https://sim2seoul-play-20261025-e7d4.rocky-lily-7307.chatgpt.site/play",
+  "scope": {
+    "shared_cars": 14,
+    "shared_adults": 28,
+    "shared_dogs": 2,
+    "actions": [
+      "exclusive car enter/drive/safe exit",
+      "NPC greeting",
+      "dog petting"
+    ],
+    "fixed_host_lost": "room ends",
+    "shared_AI_route_end": "stop without portal recycling",
+    "nonshared": [
+      "combat/police/custody",
+      "other transports/facilities/economy"
+    ]
+  },
+  "selected_independent_checks": {
+    "backend": {
+      "passed": 57,
+      "path": "../shared_city/20261027/stale_owner_world_cleanup01/summary.json"
+    },
+    "vehicles": {
+      "passed": 86,
+      "path": "../shared_city/20261027/vehicles/lease_boundary01_run.json"
+    },
+    "npcs": {
+      "passed": 41,
+      "path": "../shared_city/20261027/npcs_component04/run.json"
+    },
+    "client": {
+      "passed": 39,
+      "path": "client_regression03_retry/summary.json"
+    },
+    "live_NPCs": {
+      "passed": 15,
+      "duration_s": 120,
+      "path": "../shared_city/20261027/live_npcs_attempt01/summary.json"
+    },
+    "two_full_games": {
+      "passed": 89,
+      "duration_s": 83.46,
+      "native_owner_GPU": true,
+      "guest_headless": true,
+      "exit_codes": [
+        0,
+        0
+      ],
+      "engine_errors": 0,
+      "source_binding_count": 19,
+      "path": "../shared_city/20261027/shared_actors_attempt11_native/summary.json"
+    },
+    "actual_local_Worker": {
+      "passed": 20,
+      "path": "site_worker_world05_cleanup.json"
+    },
+    "public_browser": {
+      "game_state": "ready",
+      "chunks_verified": 212,
+      "engine_errors": 0,
+      "path": "production_browser_v7.json"
+    }
+  },
+  "source_binding": "final_source_binding03b.json",
+  "publication": "site_publication03b.json",
+  "cleanup": "root_server_cleanup.json",
+  "limitations": [
+    "No real two distinct authenticated production accounts accepted during this run.",
+    "Admission8 is policy only; no8-player/FPS capacity acceptance.",
+    "HTTP2Hz and interpolation600ms remain prototype limits.",
+    "Native captures use a temporary fixture camera/test labels; restored afterwards.",
+    "Earlier isolated422 and native10 route stop causes remain unidentified; all original failures retained.",
+    "Production raw238-file probe incomplete due HTML platform insertion/403/307. Actual public browser independently verified212 chunks/whole hashes before runtime ready.",
+    "PCK exported from dirty feature tree; manifest buildCommit points to base328ef22.124 final GD hashes match current source."
+  ]
+}

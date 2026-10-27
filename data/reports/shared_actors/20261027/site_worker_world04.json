@@ -1,0 +1,25 @@
+{
+  "task": "EXP41_LOCAL_WORKER_D1_WORLD",
+  "origin": "http://127.0.0.1:8774",
+  "scope": "Actual local Vinext Worker and D1, one official starter mock identity. Synthetic bounded three-entity catalog. No injected identity headers or production requests; not two-account gameplay or capacity acceptance.",
+  "result": "FAIL",
+  "failed_case": "create_world_on_actual_D1",
+  "checks": [
+    {
+      "name": "anonymous_status_requires_sign_in",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "official_local_mock_sign_in",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "create_world_on_actual_D1",
+      "passed": false,
+      "status": 429
+    }
+  ],
+  "passed": 2
+}

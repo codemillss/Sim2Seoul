@@ -1,5 +1,5 @@
--- Local prototype schema. Not a deployed or applied Sites migration.
--- A hosted integration must generate and commit a normal Sites/Drizzle migration.
+-- Local SQLite fixture schema mirrored by generated Sites/Drizzle migrations.
+-- Hosted databases use normal migration history; this is not runtime schema DDL.
 CREATE TABLE multiplayer_rooms (
   id TEXT PRIMARY KEY NOT NULL,
   owner_key TEXT NOT NULL,
@@ -36,4 +36,21 @@ CREATE INDEX multiplayer_players_room_presence ON multiplayer_players(room_id, l
 CREATE TABLE multiplayer_rate_limits (
   key TEXT PRIMARY KEY NOT NULL,
   last_ms INTEGER NOT NULL
+);
+
+CREATE TABLE multiplayer_worlds (
+  room_id TEXT PRIMARY KEY NOT NULL REFERENCES multiplayer_rooms(id) ON DELETE CASCADE,
+  host_id TEXT NOT NULL,
+  revision INTEGER NOT NULL DEFAULT 0,
+  state_json TEXT NOT NULL,
+  updated_ms INTEGER NOT NULL
+);
+CREATE TABLE multiplayer_world_actions (
+  room_id TEXT NOT NULL REFERENCES multiplayer_worlds(room_id) ON DELETE CASCADE,
+  player_id TEXT NOT NULL,
+  request_id TEXT NOT NULL,
+  request_hash TEXT NOT NULL,
+  result_json TEXT NOT NULL,
+  created_ms INTEGER NOT NULL,
+  PRIMARY KEY (room_id, player_id, request_id)
 );

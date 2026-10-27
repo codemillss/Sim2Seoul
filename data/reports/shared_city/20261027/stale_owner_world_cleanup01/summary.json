@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "passed": 57,
+  "failed": 0,
+  "new_cases": 12,
+  "checked_at_utc": "2026-10-27T07:35:22.622713+00:00",
+  "before_fix": {
+    "passed": 2,
+    "failed": 10,
+    "api_sha256": "3b78d002df6460f61aa544eec05d674a580305d330f500cc87a373298e594df7"
+  },
+  "source_sha256_after": {
+    "tools/web/multiplayer/room-api.mjs": "51b717171685531de30502e9c0c105b91dbc7194dc8da5e08fbe68355e0170b2",
+    "tools/web/multiplayer/schema.sql": "9d1fc86cf8fc48bbd005a7b9a2b774b44f07a1ac35f269412514f80cd9126178",
+    "tools/web/multiplayer/world-create-cleanup.test.mjs": "e02db935c4068faca7227e1b1257fdc55e4b947f4581f33f1f86709c7aa12742"
+  },
+  "change": "One bounded DELETE within the create D1 transaction, before room admission. Targets only authenticated owner shared worlds whose host member is absent or last_seen_ms<=now-presenceTtlMs. LIMIT32. Room insert result index updated. Existing create cooldown and global expiration cleanup retained. Scope comments clarified without deployment claims.",
+  "new_cases_scope": [
+    "no reader and expired host allows replacement",
+    "missing host cascades players/world/receipts",
+    "live guest does not preserve dead host world",
+    "cutoff equality expires; cutoff+1 host preserved",
+    "live capacity/cooldown before cleanup",
+    "other-owner stale world preserved",
+    "legacy rooms preserved and still capped",
+    "mixed legacy and stale own world",
+    "concurrent same-owner create admission",
+    "committed heartbeat before create batch survives",
+    "later SQL failure rolls cleanup back",
+    "bounded32 deletion for over-cap fixture state"
+  ],
+  "scope": "Production API exercised with synthetic authenticated-dispatch Requests and actual SQLite D1 adapter, plus existing real loopback HTTP suites. No native game, browser, hosted authentication or production deployment acceptance. Tests use fixed fixture identities; credentials and invite values are not printed. PCK/game sources unchanged by this change.",
+  "worker_failures_preserved": [
+    "data/reports/shared_actors/20261027/site_worker_world03.json",
+    "data/reports/shared_actors/20261027/site_worker_world04.json"
+  ],
+  "worker_failure_scope": "Original local built-Worker create429 active_room_limit failures remain unchanged. Their post-fix rerun and publication belong to root.",
+  "runtime_modification_authorization": "Root explicit GO received before production edit; native10 not started and awaiting this frozen API."
+}

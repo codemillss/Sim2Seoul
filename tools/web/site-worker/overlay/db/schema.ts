@@ -1,4 +1,4 @@
-import { index, integer, real, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
+import { index, integer, primaryKey, real, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
 
 export const multiplayerRooms = sqliteTable("multiplayer_rooms", {
   id: text("id").primaryKey().notNull(),
@@ -28,3 +28,20 @@ export const multiplayerPlayers = sqliteTable("multiplayer_players", {
 export const multiplayerRateLimits = sqliteTable("multiplayer_rate_limits", {
   key: text("key").primaryKey().notNull(), lastMs: integer("last_ms").notNull(),
 });
+
+export const multiplayerWorlds = sqliteTable("multiplayer_worlds", {
+  roomId: text("room_id").primaryKey().notNull().references(() => multiplayerRooms.id, { onDelete: "cascade" }),
+  hostId: text("host_id").notNull(),
+  revision: integer("revision").notNull().default(0),
+  stateJson: text("state_json").notNull(),
+  updatedMs: integer("updated_ms").notNull(),
+});
+
+export const multiplayerWorldActions = sqliteTable("multiplayer_world_actions", {
+  roomId: text("room_id").notNull().references(() => multiplayerWorlds.roomId, { onDelete: "cascade" }),
+  playerId: text("player_id").notNull(),
+  requestId: text("request_id").notNull(),
+  requestHash: text("request_hash").notNull(),
+  resultJson: text("result_json").notNull(),
+  createdMs: integer("created_ms").notNull(),
+}, table => [primaryKey({ columns: [table.roomId, table.playerId, table.requestId] })]);

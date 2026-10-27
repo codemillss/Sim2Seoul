@@ -3,6 +3,7 @@ extends Node3D
 ## It takes over only their physics callbacks after exploration has initialized.
 var loaded := false
 var running := true
+var shared_city_replica := false
 var groups: Array[Dictionary]=[]
 var street: Node3D
 var _original: Array[CharacterBody3D]=[]
@@ -48,11 +49,13 @@ func setup(_city: Node3D,_player: CharacterBody3D,original_people: Array[Charact
 	return true
 
 func _finish_human_poses() -> void:
+	if shared_city_replica:return
 	for row: Dictionary in human_visuals:
 		row.previous=row.current;row.current=row.avatar.global_transform
 		if row.previous.origin.distance_to(row.current.origin)>2.:row.previous=row.current
 
 func _process(_delta: float) -> void:
+	if shared_city_replica:return
 	var fraction:=clampf(Engine.get_physics_interpolation_fraction(),0.,1.)
 	for row: Dictionary in human_visuals:row.proxy.global_transform=row.previous.interpolate_with(row.current,fraction)
 
@@ -84,7 +87,7 @@ func _record_station(group: Dictionary) -> void:
 	actor._station_m=station;actor._segment=actor._segment_at(station,group.direction)
 
 func _physics_process(delta: float) -> void:
-	if not loaded or delta<=0.:return
+	if shared_city_replica or not loaded or delta<=0.:return
 	for group: Dictionary in groups:
 		var actor: CharacterBody3D=group.members[0].body
 		if preload("res://scripts/actor_hit_reaction.gd").owns(actor):continue

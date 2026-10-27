@@ -1,0 +1,79 @@
+{
+  "task": "EXP41_BOUNDED_NATIVE_FIXTURE_ROUTE_DIAGNOSIS",
+  "product_source_changed": false,
+  "attempt10": {
+    "result": "FAIL",
+    "a_checks": 33,
+    "a_failed": 1,
+    "b_checks": 23,
+    "b_failed": 1,
+    "engine_errors_a": 0,
+    "engine_errors_b": 0,
+    "failure": "Owner direct car-door walk stalled; guest reached car then failed peer rendezvous after owner failed.",
+    "reports_preserved": "shared_actors_attempt10_native/",
+    "stalled_xz": [
+      120.163299560547,
+      -107.709693908691
+    ],
+    "desired_car_door_xz": [
+      91.9013137817383,
+      -93.5418395996094
+    ]
+  },
+  "prospective_standalone_query": {
+    "report": "shared_actors_walk_blocker_query02.json",
+    "engine_log": "shared_actors_walk_blocker_query02.log",
+    "script": "shared_actors_walk_blocker_query02.gd",
+    "script_sha256": "9830f1ba801ebe7f7a56161f32a6a13d0d4310764167f43c4cf17462bdcdbf7f",
+    "result": "Fresh full production city reports no collider on 0.5/2/10/32m forward sweeps at 0/.08/.2m elevation, mask45 and enabled capsule. Nearby private edges empty and all sampled _inside checks true.",
+    "limit": "This is not the identical attempt10 authoritative dynamic NPC state. It does not establish what blocked attempt10."
+  },
+  "test_only_changes": [
+    "Capture native pause menu state, resume through production toggle when reopened during Input walking.",
+    "Actor approach requires actual nearest target within existing2.5m E range and actual Input movement; uses collider-aware prospective candidates.",
+    "After850ms without .25m progress, collect actual slide contacts/capsule query/NPC proximity and choose at most4 short detours that satisfy production _inside and prospective capsule checks.",
+    "Continue actual unchanged Input walking with all collisions and no postcreate transform writes.",
+    "Accumulate final settling movement in actual travel metric."
+  ],
+  "final_attempt": "shared_actors_attempt11_native/",
+  "scope": "Fixture navigation and evidence only. Product source, controls, boundaries and physics remain frozen. No claim that earlier transient engine errors or422 source is explained.",
+  "final_attempt_result": {
+    "result": "PASS",
+    "elapsed_ms": 83460,
+    "a_checks": 54,
+    "b_checks": 35,
+    "total_checks": 89,
+    "failed": 0,
+    "both_exit_codes": 0,
+    "both_engine_error_counts": 0,
+    "bound_sources": 19,
+    "source_unchanged": true,
+    "user_settings_unchanged": true,
+    "original_actor_and_camera_states_restored": true,
+    "cleanup_errors": [],
+    "guest_W_press_ms": 1400,
+    "guest_actual_driven_metres": 20.972354888916,
+    "api_rejections": [
+      {
+        "status": 404,
+        "operation": "sync",
+        "error": "room_unavailable"
+      },
+      {
+        "status": 404,
+        "operation": "leave",
+        "error": "room_unavailable"
+      }
+    ],
+    "api422_count": 0,
+    "detour_count": 0,
+    "native_images_visually_inspected": [
+      "shared_actors_attempt11_native/a_report_joined.png",
+      "shared_actors_attempt11_native/a_report_greeting.png",
+      "shared_actors_attempt11_native/a_report_after_drive.png"
+    ],
+    "image_observation": "Original GPU viewport shows shared-city two-person badge, both authored avatars, shared NPC/dog greeting scene and same road car after physical driving/exiting. Explicit fixture labels/camera remain visible. Joined avatars initially overlap at shared spawn. No invite/credential UI or engine error overlay. This is not visual-art-quality acceptance or production identity."
+  },
+  "final_attempt_limit": "Attempt10 stall did not recur in11; bounded detour code was not exercised. No blocker identity or causal explanation is established for10. Standalone query uses a fresh dynamic world. Earlier failed attempts and engine errors remain preserved, with no blanket suppression or retroactive acceptance. Final89 uses final client/adapter/API hashes; no FPS, Internet identity or capacity claim.",
+  "fixture_preflight": "First relative --script path was wrong and produced file-not-found errors in shared_actors_detour_script_preflight.log. Retried exact absolute path in preflight02: normal CLI validation quit2 with no script parse/engine ERROR. This preflight is separate from actual89/89 exit0 native11."
+}

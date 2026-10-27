@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "passed": 45,
+  "failed": 0,
+  "checked_at_utc": "2026-10-27T07:15:01.032301+00:00",
+  "command": [
+    "node",
+    "--test",
+    "tools/web/multiplayer/room-api.test.mjs",
+    "tools/web/multiplayer/dev-server.test.mjs",
+    "tools/web/multiplayer/world-api.test.mjs",
+    "tools/web/multiplayer/world-migration.test.mjs"
+  ],
+  "source_sha256": {
+    "tools/web/multiplayer/room-api.mjs": "3b78d002df6460f61aa544eec05d674a580305d330f500cc87a373298e594df7",
+    "tools/web/multiplayer/world-api.test.mjs": "c3c9d763c3a48b390dd436a091a86a154a8e260a8e893314c0f9b27d93f91602"
+  },
+  "new_cases": [
+    "owner drives with44 live authority entities,43km/h for1600ms,world+drive in same sync,finaldrive+exit,then bounded on-foot sync",
+    "invalid live NPC pose rejects packet atomically without committing vehicle movement,release,receipt orworld sequence;corrected retry succeeds"
+  ],
+  "production_api_changed": false,
+  "scope": "Two real loopback HTTP cookie clients and actual SQLite-backed production API. NPC and vehicle input positions are controlled protocol fixtures, not native game physics or browser acceptance. Existing native07 pauses AI before guest driving, so owner driving with actual live game AI remains a separate GUI/full-game test. No bounds relaxed and no root preview, user identity or production endpoint touched.",
+  "facts": [
+    "Host authority world is validated before drive and actions. Leased/released car world proposals are ignored; their drive remains separately validated.",
+    "Per-entity _poseAtMs determines world movement allowance; global world.updatedAtMs does not reduce other entities movement credit.",
+    "Captured exact error and entity are required to distinguish player movement, NPC movement, other AI-car movement, speed envelope, and drive movement rejection."
+  ],
+  "hypotheses": [
+    "A live NPC movement outlier could reject the entire mixed owner sync, but no source-proven NPC jump or captured entity currently confirms that cause."
+  ],
+  "raw_log_sha256": "fbb88f43f508240350d03affbf2fda9bcffe4909245b4f6efd06b3fcc270bc04"
+}

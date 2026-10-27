@@ -157,6 +157,17 @@ func _negative_fixtures() -> void:
 		var delay: int=fixture._next_sync_ms-before
 		retry_safe=retry_safe and delay>=550 and delay<=60_010 and fixture.connected
 	_check("malformed_429_retry_values_never_cast_unsafely",retry_safe)
+	fixture._failures=0
+	var before_reject:=Time.get_ticks_msec()
+	fixture._request_failure("sync",422,{"error":"world_movement_out_of_range"})
+	_check("rejected_world_proposal_keeps_connection_for_bounded_fresh_sample",fixture.connected and fixture._failures==1 and fixture._next_sync_ms-before_reject>=1000 and fixture._next_sync_ms-before_reject<=1010 and fixture.received_snapshots==0 and fixture.last_failure_code=="world_movement_out_of_range")
+	fixture._pending="sync";fixture._sent_ms=Time.get_ticks_msec()
+	fixture._completed(HTTPRequest.RESULT_SUCCESS,200,PackedStringArray(["Content-Type: application/json"]),JSON.stringify(valid).to_utf8_buffer())
+	_check("accepted_fresh_sample_resets_rejection_budget",fixture.connected and fixture._failures==0 and fixture.received_snapshots==1)
+	# Prevent the injected fixture from sending leave with another client's IDs.
+	fixture.room_id="";fixture.self_id=""
+	for _attempt in range(3):fixture._request_failure("sync",422,{"error":"world_movement_out_of_range"})
+	_check("three_consecutive_rejected_samples_end_connection_safely",not fixture.connected and fixture._failures==3)
 	fixture.connected=false;fixture._pending="status";fixture._cookie="fixture-cookie"
 	fixture._completed(HTTPRequest.RESULT_SUCCESS,200,PackedStringArray(["Content-Type: application/json"]),JSON.stringify({"available":false}).to_utf8_buffer())
 	_check("unsupported_status_keeps_solo_available_with_no_session_memory",fixture.state=="unavailable" and not fixture.available and fixture._cookie.is_empty() and not fixture.connected)

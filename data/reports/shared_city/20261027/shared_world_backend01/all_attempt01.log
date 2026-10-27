@@ -1,0 +1,48 @@
+✔ two real HTTP cookie clients create, join, sync, observe and leave one SQLite room (29.542708ms)
+✔ public local status, idempotent bootstrap and valid-cookie identity binding (8.994708ms)
+✔ unissued cookies, untrusted identity headers and bootstrap account fields cannot authenticate (3.433166ms)
+✔ exact Origin, Host, request target and cookie ambiguity gates are enforced without CORS (5.112417ms)
+✔ session expiry and bounded bootstrap capacity retain server-issued session semantics (37.170834ms)
+✔ bootstrap and room body limits apply to declared and chunked HTTP bodies (5.1495ms)
+✔ static whitelist serves exact gzip bytes and HEAD while rejecting traversal, sources and symlink escapes (7.682167ms)
+✔ API-only host exposes no static files and startup rejects an invalid export or port (1.186375ms)
+✔ two signed-in players join the same actual SQL room and observe accepted movement (7.679125ms)
+✔ authentication, room invite, account binding and exact origin all gate access (2.028792ms)
+✔ build mismatches and unrecognized avatar/state fields cannot enter the room (1.885125ms)
+✔ snapshot and movement share the two-Hz mutation limit; stale/reordered sequences are rejected (1.29475ms)
+✔ accepted yaw endpoints and adjacent headings survive create/snapshot/sync round trips (4.042916ms)
+✔ atomic admission remains within policy cap when nine guests join concurrently (3.465792ms)
+✔ TTL removes silent players and expired room cannot be revived (3.277875ms)
+✔ rejoin rotates session, prevents duplicate accounts, and observes join cooldown (3.11375ms)
+✔ movement speed, finite coordinates and coarse bounds reject invalid state without advancing sequence (1.932583ms)
+✔ optimistic SQL update allows only one concurrent state writer per player (1.557792ms)
+✔ room owner can close, members can leave, and creation has cooldown and an active-room cap (4.136375ms)
+✔ snapshots contain only pseudonymous public state; credentials are hashed in storage (1.392417ms)
+✔ oversized/malformed bodies, unknown routes and unavailable database fail without leaking internals (0.692833ms)
+✔ loopback HTTP smoke: two separate clients create, join, move and see the same room (16.615333ms)
+✔ legacy presence rooms omit world and retain ordinary owner-leave behavior (24.647292ms)
+✔ world snapshots bind host, catalog, public activity and exclude internal receipts (9.378125ms)
+✔ two real HTTP clients race one car: exactly one claim, denial is a normal snapshot (6.0345ms)
+✔ exclusive per-person lease, drive authority, stale epoch/sequence and parked release (9.210583ms)
+✔ host cannot overwrite leased vehicle; catalog and movement envelopes remain fixed (8.460583ms)
+✔ NPC/dog approvals enforce distance/kind, replay exactly once and retain receipt conflicts (6.111875ms)
+✔ enter proximity and off-foot NPC restrictions produce action denials (3.613958ms)
+✔ guest leave, TTL and token-rotating rejoin release old leases (8.44375ms)
+✔ silent guest lease expires while a live host keeps room; host loss closes world coherently (5.592833ms)
+✔ explicit host leave and owner rejoin close world rooms and revoke every actor (8.41375ms)
+✔ world bounds, 96 entities, four actions, private data and identity binding are enforced (6.695583ms)
+✔ interaction lag allowance uses only a recent server-approved previous pose (11.437834ms)
+✔ additive migration preserves the deployed 0000 bytes and journal chain (1.288667ms)
+✔ upgrade of an occupied old database preserves every room, player and rate-limit value (1.332584ms)
+✔ receipt identity is scoped to room and player and survives player departure (0.867333ms)
+✔ room deletion cascades through the world to receipts without deleting another room (0.386625ms)
+✔ new rows reject absent parents, missing required data and duplicate world ownership (0.591667ms)
+✔ overlay manifest hashes include the generated migration and both snapshot generations (0.406416ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 163.655875

@@ -619,6 +619,7 @@ func _roof_destination_clear(destination: Dictionary) -> bool:
 func _commit_exploration_teleport(point: Vector3,roof_destination: Dictionary={}) -> bool:
 	if _sandbox_detained() and not _sandbox_custody_transfer:return false
 	if not point.is_finite():return false
+	if is_instance_valid(shared_city_walk) and not shared_city_walk.before_teleport():return false
 	if not roof_destination.is_empty() and (point.distance_to(roof_destination.get("pool_entry",Vector3.INF))>.001 or not _roof_destination_clear(roof_destination)):return false
 	var old_mode: bool=player.free_roam_enabled
 	var old_mask: int=player.collision_mask
@@ -668,7 +669,7 @@ func _sandbox_detained() -> bool:
 	return is_instance_valid(city_public_safety) and city_public_safety.get("detained")==true
 
 func _sandbox_controls_ready() -> bool:
-	return runtime_ok and not get_tree().paused and is_instance_valid(player) and not menu.visible and input_router.gameplay_enabled and not player.facility_control and not player.interior_active and not _street_transport_riding() and not _shop_active() and not _subway_active() and not _police_facility_active() and not _sandbox_detained()
+	return runtime_ok and not get_tree().paused and is_instance_valid(player) and not menu.visible and input_router.gameplay_enabled and not player.facility_control and not player.interior_active and not _street_transport_riding() and not _shop_active() and not _subway_active() and not _police_facility_active() and not _sandbox_detained() and (not is_instance_valid(shared_city_walk) or not shared_city_walk.world_active)
 
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey:return
@@ -690,6 +691,12 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.echo or _sandbox_held.get(action,false):return
 	_sandbox_held[action]=true
+	if is_instance_valid(shared_city_walk) and shared_city_walk.world_active and action in ["punch","shove","guard"]:
+		exploration_notice.text="공동 도시에서는 E로 주민에게 인사하고 반려견과 교감할 수 있습니다. 전투·경찰 추격은 혼자 탐험에서 이용합니다."
+		get_viewport().set_input_as_handled();return
+	if is_instance_valid(shared_city_walk) and shared_city_walk.world_active and action=="summon":
+		shared_city_walk.client.leave_room("개인 킥보드를 이용하려고 함께 탐험을 마쳤습니다. Q를 다시 누르면 호출할 수 있습니다.")
+		get_viewport().set_input_as_handled();return
 	if not (_sandbox_horn_ready() if action=="horn" else _sandbox_controls_ready()):return
 	_sandbox_requests[action]=true;get_viewport().set_input_as_handled()
 
@@ -756,7 +763,9 @@ func pool_interaction_hint() -> String:
 	return pool_preparation_service.prompt_text() if is_instance_valid(pool_preparation_service) and pool_preparation_service.loaded else ""
 
 func _street_services() -> Array[Node3D]:
-	return [city_bike_service,city_scooter_service,city_bus_service,drivable_car_service,city_helicopter_service,city_subway_service,traffic_car_takeover]
+	var result: Array[Node3D]=[city_bike_service,city_scooter_service,city_bus_service,drivable_car_service,city_helicopter_service,city_subway_service]
+	if not is_instance_valid(shared_city_walk) or not shared_city_walk.world_active:result.append(traffic_car_takeover)
+	return result
 
 func _street_interaction_services() -> Array[Node3D]:
 	var services: Array[Node3D]=_street_services()
@@ -783,6 +792,7 @@ func _cancel_bus_after_teleport() -> void:
 
 func try_street_interact() -> bool:
 	# Existing fresh-E dispatcher remains the sole owner of street interactions.
+	if is_instance_valid(shared_city_walk) and shared_city_walk.try_interact():return true
 	if _sandbox_detained():
 		city_public_safety.handle_interact();return true
 	if _police_facility_active():
@@ -801,6 +811,7 @@ func try_street_interact() -> bool:
 	return false
 
 func street_interaction_hint() -> String:
+	if is_instance_valid(shared_city_walk) and (shared_city_walk.world_active or shared_city_walk.cleanup_pending):return shared_city_walk.prompt_text()
 	if _sandbox_detained():return city_public_safety.prompt_text()
 	if _police_facility_active():return city_public_safety.prompt_text()
 	var underground_hint:=underground_interaction_hint()

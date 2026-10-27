@@ -2,6 +2,8 @@ extends Node
 ## Opt-in outdoor presence. Existing local gameplay remains the movement owner.
 const CLIENT := preload("res://scripts/multiplayer/room_presence_client.gd")
 const REMOTE := preload("res://scripts/multiplayer/remote_resident.gd")
+const VEHICLES := preload("res://scripts/multiplayer/shared_city_vehicles.gd")
+const NPCS := preload("res://scripts/multiplayer/shared_city_npcs.gd")
 var host: Node3D
 var client: Node
 var ui_open := false
@@ -22,6 +24,16 @@ var _check: Button
 var _sign_in: Button
 var _box: PanelContainer
 var _scroll: ScrollContainer
+var vehicles: Node3D
+var npcs: Node3D
+var world_active := false
+var cleanup_pending := false
+var _joining_placement := false
+var _cleanup_retry_ms := 0
+var _last_world_ms := -1
+var _last_world_sequence := -1
+var _catalog_kinds: Dictionary={}
+var _physics_override := false
 
 func setup(scene: Node3D) -> bool:
 	if is_instance_valid(client) or not is_instance_valid(scene):return false
@@ -33,9 +45,14 @@ func setup(scene: Node3D) -> bool:
 		for argument: String in OS.get_cmdline_user_args():
 			if argument.begins_with("--room-server="):endpoint=argument.trim_prefix("--room-server=").trim_suffix("/")
 	if not client.configure(endpoint,_local_sample):return false
+	vehicles=VEHICLES.new();vehicles.name="SharedCityVehicles";add_child(vehicles)
+	npcs=NPCS.new();npcs.name="SharedCityNPCs";add_child(npcs)
+	if not vehicles.setup(host,_request_action) or not npcs.setup(host,_request_action):return false
+	if not client.configure_world(_catalog,_authority_sample,_drive_sample):return false
 	client.changed.connect(_refresh)
 	client.joined.connect(_joined)
 	client.snapshot_received.connect(_snapshot_received)
+	client.action_result.connect(_action_result)
 	_build_ui();_refresh()
 	return true
 
@@ -67,7 +84,7 @@ func _build_ui() -> void:
 	_scroll.add_child(margin)
 	var content:=VBoxContainer.new();content.size_flags_horizontal=Control.SIZE_EXPAND_FILL;content.add_theme_constant_override("separation",12);margin.add_child(content)
 	content.add_child(_text("함께 걷기",28))
-	content.add_child(_text("같은 방에 들어온 친구와 야외에서 만나요.",17))
+	content.add_child(_text("같은 자동차와 거리 주민을 보고 함께 탐험해요.",17))
 	_status=_text("연결을 확인하고 있어요.",17);_status.custom_minimum_size.y=66;content.add_child(_status)
 	_participants=_text("",17);content.add_child(_participants)
 	_sign_in=_button("ChatGPT로 로그인하고 함께 걷기",_open_sign_in);content.add_child(_sign_in)
@@ -83,7 +100,7 @@ func _build_ui() -> void:
 	_copy=_button("초대 코드 복사",_copy_invite);_copy.size_flags_horizontal=Control.SIZE_EXPAND_FILL;row.add_child(_copy)
 	_leave=_button("방 나가기",func():client.leave_room());_leave.size_flags_horizontal=Control.SIZE_EXPAND_FILL;row.add_child(_leave)
 	_check=_button("연결 다시 확인",func():client.check_service());content.add_child(_check)
-	content.add_child(_text("지금은 야외 보행·외형을 공유합니다. 실내나 탈것으로 이동하면 함께 걷기를 마칩니다. NPC·차량·사건은 아직 각 게임에서 따로 움직입니다.",14))
+	content.add_child(_text("공동 도시: 도로 자동차 14대·주민 28명·반려견 2마리. E로 운전하거나 인사해요. 방장이 나가거나 연결이 끊기면 함께 탐험을 마칩니다. 다른 시설·탈것은 혼자 탐험으로 돌아가 이용합니다.",14))
 	content.add_child(_button("게임 메뉴로 돌아가기 · Esc",close_panel))
 	_badge=_text("",18);_badge.name="SharedCityBadge";_badge.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	_badge.add_theme_color_override("font_color",Color(.3,.95,.95));_badge.add_theme_color_override("font_shadow_color",Color.BLACK)
@@ -141,14 +158,122 @@ func _refresh() -> void:
 	_copy.disabled=client.invite_code().is_empty();_leave.disabled=not client.connected
 	_check.disabled=client.connected or client.busy()
 	_invite_output.text=client.invite_code()
-	_badge.text="함께 걷기 · %d명 · Esc에서 방 보기"%client.participant_count if client.connected else ""
-	if not client.connected:_clear_remotes()
+	_badge.text="공동 도시 · %d명 · E 인사 / 자동차 운전"%client.participant_count if client.connected else ""
+	if not client.connected:
+		_clear_remotes()
+		if world_active:cleanup_pending=true
+	_create.disabled=_create.disabled or cleanup_pending
+	_join.disabled=_join.disabled or cleanup_pending
+
+func _catalog() -> Array:
+	var result: Array=[]
+	_catalog_kinds.clear()
+	if not is_instance_valid(vehicles) or not is_instance_valid(npcs):return result
+	for component: Node in [vehicles,npcs]:
+		for row: Dictionary in component.catalog():
+			if _catalog_kinds.has(row.id):return []
+			_catalog_kinds[row.id]=row.kind;result.append(row)
+	return result
+
+func _authority_sample() -> Array:
+	var result: Array=[]
+	if not world_active or cleanup_pending:return result
+	result.append_array(vehicles.sample_authority());result.append_array(npcs.sample_authority())
+	return result
+
+func _drive_sample() -> Dictionary:
+	return vehicles.drive_sample() if world_active and not cleanup_pending else {}
+
+func _request_action(type: String,id: String) -> String:
+	if not world_active or cleanup_pending:return ""
+	var request: String=client.request_action(type,id)
+	if request.is_empty():host.exploration_notice.text="앞선 동작을 확인하고 있어요. 잠시 후 다시 눌러 주세요."
+	else:host.exploration_notice.text="같은 도시에서 동작을 확인하고 있어요."
+	return request
+
+func _action_result(value: Dictionary) -> void:
+	if not is_instance_valid(host):return
+	if bool(value.ok):
+		host.exploration_notice.text="자동차 운전권을 받았습니다." if value.type=="vehicle_enter" else "하차했습니다." if value.type=="vehicle_exit" else "같은 주민에게 인사를 건넸습니다." if value.type=="npc_greet" else "반려견에게 다가가 인사했습니다."
+	else:
+		var reason:=String(value.get("error",""))
+		host.exploration_notice.text="다른 참가자가 운전 중입니다." if reason in ["vehicle_occupied","vehicle_taken","already_occupied"] else "가까이 다가간 뒤 다시 시도해 주세요." if reason in ["too_far","out_of_range","interaction_out_of_range"] else "동작을 적용하지 못했습니다. 잠시 후 다시 시도해 주세요."
+	if vehicles.has_method("action_result"):vehicles.action_result(value)
+	if npcs.has_method("action_result"):npcs.action_result(value)
+
+func _world_matches(value: Dictionary) -> bool:
+	var expected: Array=_catalog()
+	if expected.is_empty() or value.get("entities",[]).size()!=expected.size():return false
+	var seen: Dictionary={}
+	for row: Dictionary in value.entities:
+		if seen.has(row.id) or not _catalog_kinds.has(row.id) or _catalog_kinds[row.id]!=row.kind:return false
+		seen[row.id]=true
+	return true
+
+func shared_riding() -> bool:
+	return world_active and is_instance_valid(vehicles) and vehicles.is_riding()
+
+func _transport_cleanup() -> bool:
+	return world_active and is_instance_valid(vehicles) and vehicles.has_method("cleanup_pending") and vehicles.cleanup_pending()
+
+func try_interact() -> bool:
+	if cleanup_pending:
+		_cleanup_retry_ms=0;host.exploration_notice.text="함께 탐험을 마치고 안전하게 하차하는 중입니다.";return true
+	if not world_active:return false
+	if _transport_cleanup():host.exploration_notice.text="자동차에서 안전하게 내리는 중입니다.";return true
+	if vehicles.is_riding():vehicles.handle_interact();return true
+	var best: Node3D;var distance:=INF
+	for component: Node3D in [vehicles,npcs]:
+		if component.can_interact() and float(component.interaction_distance_m())<distance:
+			best=component;distance=float(component.interaction_distance_m())
+	if is_instance_valid(best):best.handle_interact();return true
+	return false
+
+func prompt_text() -> String:
+	if cleanup_pending:return "안전하게 하차하는 중 · E 다시 확인"
+	if not world_active:return ""
+	if _transport_cleanup():return "자동차에서 안전하게 내리는 중"
+	if vehicles.is_riding():return vehicles.prompt_text()
+	var best: Node3D;var distance:=INF
+	for component: Node3D in [vehicles,npcs]:
+		if component.can_interact() and float(component.interaction_distance_m())<distance:
+			best=component;distance=float(component.interaction_distance_m())
+	return best.prompt_text() if is_instance_valid(best) else "공동 도시 · 주민/반려견 가까이 E · 도로 자동차 가까이 E"
+
+func before_teleport() -> bool:
+	if _joining_placement:return true
+	if shared_riding() or _transport_cleanup() or cleanup_pending:
+		host.exploration_notice.text="자동차에서 안전하게 내린 뒤 장소를 이동해 주세요.";return false
+	if client.connected:
+		client.leave_room("다른 장소로 이동해 함께 탐험을 마쳤습니다.")
+		return not world_active
+	return not cleanup_pending
+
+func _physics_process(_delta: float) -> void:
+	# The room authority keeps street AI alive while its own pause menu is open.
+	# SceneTree pause otherwise disables the physics server even for ALWAYS nodes.
+	if world_active and get_tree().paused:
+		PhysicsServer3D.set_active(true);_physics_override=true
+	elif _physics_override:
+		PhysicsServer3D.set_active(not get_tree().paused);_physics_override=false
+	if not cleanup_pending or Time.get_ticks_msec()<_cleanup_retry_ms:return
+	_cleanup_retry_ms=Time.get_ticks_msec()+250
+	if not vehicles.end():
+		host.exploration_notice.text="안전한 하차 위치를 확인하고 있어요. E로 다시 확인할 수 있습니다.";return
+	if not npcs.end():
+		host.exploration_notice.text="주민과 겹치지 않도록 한 걸음 옆으로 이동해 주세요. 복귀를 다시 확인합니다.";return
+	world_active=false;cleanup_pending=false
+	if _physics_override:
+		PhysicsServer3D.set_active(not get_tree().paused);_physics_override=false
+	_last_world_ms=-1;_last_world_sequence=-1;_refresh()
 
 func _local_sample() -> Dictionary:
 	if not is_instance_valid(host) or not is_instance_valid(host.player):return {}
 	var player: CharacterBody3D=host.player
-	if player.facility_control or player.interior_active:return {}
+	var riding:=shared_riding() or _transport_cleanup()
+	if (player.facility_control and not riding) or player.interior_active:return {}
 	for method: String in ["_street_transport_riding","_shop_active","_subway_active","_police_facility_active","_sandbox_detained"]:
+		if method=="_street_transport_riding" and riding:continue
 		if host.has_method(method) and bool(host.call(method)):return {}
 	var position:=player.global_position
 	if not position.is_finite() or absf(position.x)>1000 or absf(position.z)>1000 or position.y< -100 or position.y>500:return {}
@@ -168,6 +293,12 @@ func _joined(owner: bool,value: Dictionary) -> void:
 	# A delayed join must not take ownership back from a room/vehicle entered
 	# after the request was sent.
 	if _local_sample().is_empty():client.leave_room("활동 상태가 바뀌어 참가를 취소했습니다. 야외에서 다시 참가해 주세요.");return
+	var shared: Dictionary=value.get("world",{})
+	if not _world_matches(shared):client.leave_room("도시의 차량·주민 구성이 다릅니다. 두 게임을 같은 버전으로 열어 주세요.");return
+	if not vehicles.begin(client.self_id,shared.hostId,shared.entities):client.leave_room("자동차 공유를 준비하지 못했습니다.");return
+	world_active=true
+	host._sandbox_requests.clear()
+	if not npcs.begin(client.self_id,shared.hostId,shared.entities):client.leave_room("주민 공유를 준비하지 못했습니다.");return
 	if owner:
 		_invite_input.text=client.invite_code()
 		return
@@ -178,17 +309,27 @@ func _joined(owner: bool,value: Dictionary) -> void:
 	var raw: Array=own.position
 	var desired:=Vector3(float(raw[0]),float(raw[1]),float(raw[2]))
 	var accepted:=false
+	_joining_placement=true
 	for offset: Vector3 in [Vector3(1.4,0,0),Vector3(-1.4,0,0),Vector3(0,0,1.4),Vector3(0,0,-1.4),Vector3.ZERO]:
 		var safe: Dictionary=host._exploration_destination(desired+offset)
 		if safe.is_empty():continue
 		if safe.point.distance_to(desired)>4.:continue
 		accepted=host._commit_exploration_teleport(safe.point)
 		if accepted:break
+	_joining_placement=false
 	if not accepted:client.leave_room("함께 걸을 시작 위치가 막혀 있습니다. 다른 야외 위치에서 방을 만들어 주세요.");return
 	host.player.velocity=Vector3.ZERO;host.player.require_neutral_input();host.player.reset_physics_interpolation()
 	host.rig.snap_to_target_pose()
 
 func _snapshot_received(value: Dictionary) -> void:
+	var shared: Dictionary=value.get("world",{})
+	if not world_active or cleanup_pending:return
+	if not _world_matches(shared):client.leave_room("공동 도시 자료가 달라 함께 탐험을 마쳤습니다.");return
+	var world_ms:=int(value.serverNowMs);var world_sequence:=int(shared.sequence)
+	if world_ms<_last_world_ms or world_sequence<_last_world_sequence:return
+	_last_world_ms=world_ms;_last_world_sequence=world_sequence
+	if not vehicles.apply_snapshot(shared.entities,world_ms) or not npcs.apply_snapshot(shared.entities,world_ms):
+		client.leave_room("공동 도시 상태를 적용하지 못했습니다. 다시 참가해 주세요.");return
 	var seen: Dictionary={}
 	var server_ms:=int(value.serverNowMs);var now_ms:=Time.get_ticks_msec()
 	for row: Dictionary in value.players:
@@ -200,8 +341,14 @@ func _snapshot_received(value: Dictionary) -> void:
 			if not resident.setup(row,server_ms,now_ms):resident.queue_free();continue
 			remotes[id]=resident
 		else:remotes[id].ingest(row,server_ms,now_ms)
+		if remotes.has(id):remotes[id].visible=row.get("activity",{}).get("kind","walk")!="vehicle"
 	for id: String in remotes.keys():
 		if not seen.has(id):remotes[id].queue_free();remotes.erase(id)
+	if npcs.has_method("set_remote_neighbors"):
+		var neighbors: Array[CharacterBody3D]=[]
+		for resident: CharacterBody3D in remotes.values():
+			if resident.visible:neighbors.append(resident)
+		npcs.set_remote_neighbors(neighbors)
 
 func _clear_remotes() -> void:
 	for resident: Node in remotes.values():
@@ -211,6 +358,9 @@ func _clear_remotes() -> void:
 func diagnostic() -> Dictionary:
 	var result: Dictionary=client.diagnostic() if is_instance_valid(client) else {}
 	result["remote_count"]=remotes.size();result["ui_open"]=ui_open
+	result["world_active"]=world_active;result["cleanup_pending"]=cleanup_pending
+	if is_instance_valid(vehicles) and vehicles.has_method("diagnostic"):result["vehicles"]=vehicles.diagnostic()
+	if is_instance_valid(npcs) and npcs.has_method("diagnostic"):result["npcs"]=npcs.diagnostic()
 	return result
 
 func _exit_tree() -> void:

@@ -90,7 +90,16 @@ static func _valid_id(value: Variant) -> bool:
 static func _validated(row: Dictionary, server_now_ms: float) -> Dictionary:
 	if not _integer(server_now_ms, 0.0, MAX_SAFE_INTEGER):return {}
 	for key: Variant in row:
-		if key not in ["id", "sequence", "position", "yaw", "motion", "avatar", "updatedAtMs"]:return {}
+		if key not in ["id", "sequence", "position", "yaw", "motion", "avatar", "updatedAtMs", "activity"]:return {}
+	if row.has("activity"):
+		if not row.activity is Dictionary or row.activity.get("kind") not in ["walk","vehicle"]:return {}
+		for key: Variant in row.activity:
+			if key not in ["kind","entityId"]:return {}
+		if row.activity.kind=="vehicle":
+			var entity_id: Variant=row.activity.get("entityId")
+			if not entity_id is String or entity_id.is_empty() or entity_id.length()>96:return {}
+			var pattern:=RegEx.new();pattern.compile("^[A-Za-z0-9:_-]+$")
+			if pattern.search(entity_id)==null:return {}
 	if not _valid_id(row.get("id")) or not _integer(row.get("sequence"), 0.0, 2147483647.0):return {}
 	if not _integer(row.get("updatedAtMs"), 0.0, server_now_ms):return {}
 	# updatedAtMs tracks the last position mutation, not membership liveness.

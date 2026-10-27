@@ -1,0 +1,20 @@
+✔ expired own world hosts free replacement capacity without a snapshot read (14.377833ms)
+✔ missing own host releases its world and cascades members and receipts (2.030959ms)
+✔ live guest does not retain a world whose host expired (1.897417ms)
+✔ live own host at cutoff plus one millisecond survives; cutoff equality expires (1.404375ms)
+✔ live own worlds remain capped and create cooldown still runs before cleanup (1.605833ms)
+✔ another owner's stale world is preserved by same-owner cleanup (1.843542ms)
+✔ legacy rooms are preserved and still consume owner capacity after host TTL (1.092375ms)
+✔ a stale shared world is removed without deleting the same owner's legacy room (1.158375ms)
+✔ concurrent replacement creates still admit one same-owner request and preserve the cap (1.204667ms)
+✔ a host heartbeat committed immediately before the create batch is respected (1.377917ms)
+✔ failure later in the create transaction rolls cleanup back (1.244458ms)
+✔ cleanup is bounded even for an over-cap fixture database (1.827333ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.112625

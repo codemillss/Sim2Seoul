@@ -1,0 +1,192 @@
+✖ expired own world hosts free replacement capacity without a snapshot read (25.641125ms)
+✖ missing own host releases its world and cascades members and receipts (2.135875ms)
+✖ live guest does not retain a world whose host expired (2.014291ms)
+✖ live own host at cutoff plus one millisecond survives; cutoff equality expires (1.416333ms)
+✖ live own worlds remain capped and create cooldown still runs before cleanup (1.776167ms)
+✖ another owner's stale world is preserved by same-owner cleanup (1.973042ms)
+✔ legacy rooms are preserved and still consume owner capacity after host TTL (1.103666ms)
+✖ a stale shared world is removed without deleting the same owner's legacy room (1.067125ms)
+✖ concurrent replacement creates still admit one same-owner request and preserve the cap (1.2265ms)
+✖ a host heartbeat committed immediately before the create batch is respected (1.440667ms)
+✔ failure later in the create transaction rolls cleanup back (1.216125ms)
+✖ cleanup is bounded even for an over-cap fixture database (1.36275ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 2
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.166833
+
+✖ failing tests:
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:29:1
+✖ expired own world hosts free replacement capacity without a snapshot read (25.641125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:31:48)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:34:1
+✖ missing own host releases its world and cascades members and receipts (2.135875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:38:46)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:41:1
+✖ live guest does not retain a world whose host expired (2.014291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:46:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:48:1
+✖ live own host at cutoff plus one millisecond survives; cutoff equality expires (1.416333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:51:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:54:1
+✖ live own worlds remain capped and create cooldown still runs before cleanup (1.776167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:60:46)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:62:1
+✖ another owner's stale world is preserved by same-owner cleanup (1.973042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:64:43)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:73:1
+✖ a stale shared world is removed without deleting the same owner's legacy room (1.067125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:76:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:79:1
+✖ concurrent replacement creates still admit one same-owner request and preserve the cap (1.2265ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:82:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:85:1
+✖ a host heartbeat committed immediately before the create batch is respected (1.440667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:92:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../../../../../private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:102:1
+✖ cleanup is bounded even for an over-cap fixture database (1.36275ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  40 !== 8
+  
+      at TestContext.<anonymous> (file:///private/tmp/sim2seoul-world-cleanup-red/world-create-cleanup.test.mjs:111:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 40,
+    expected: 8,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

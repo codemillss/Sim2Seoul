@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "checked_at_utc": "2026-10-27T06:06:58.398142+00:00",
+  "command": [
+    "node",
+    "--test",
+    "tools/web/multiplayer/room-api.test.mjs",
+    "tools/web/multiplayer/dev-server.test.mjs",
+    "tools/web/multiplayer/world-api.test.mjs",
+    "tools/web/multiplayer/world-migration.test.mjs"
+  ],
+  "passed": 43,
+  "failed": 0,
+  "source_sha256": {
+    "tools/web/multiplayer/room-api.mjs": "cde6b5fb9662c26b20bddb8767389384459d1c38e934bcc732f87b3e3613500d",
+    "tools/web/multiplayer/schema.sql": "db0b80fc85d24eca437741daf44c994ff38c982c4dcaf1f02afcd49bcdab84d0",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/world-api.test.mjs": "874875d08b5e89e42b91e02165cf03d6aab16a828d9f024297fc08f2d927c180",
+    "tools/web/multiplayer/world-migration.test.mjs": "b70a790bde12ce43de9ce16e1ed9f8ea1f0d3f380bffb6400263e1fdb9412539",
+    "tools/web/site-worker/overlay.json": "f3afe3efc585070c77d13250b15fc17b8213840d1f00c7fd4d4ca869e185e12f",
+    "tools/web/site-worker/overlay/db/schema.ts": "32960a547884dbab5a30989c5a2559bc7ebc9ad52e7eff2b3b3587fb7fce8557",
+    "tools/web/site-worker/overlay/drizzle/0001_shared_world.sql": "c3fca43d980fd7091103c9f90caa0269f6a4cae69496abef18fd857a4a59308b",
+    "tools/web/site-worker/overlay/drizzle/meta/0001_snapshot.json": "b59163be11b6aba1db5059e40e87b8c6f34db9a6c86458236a21b5ac0850dd32",
+    "tools/web/site-worker/overlay/drizzle/meta/_journal.json": "7b12329fb0e6f489723e1c206147e547238c241fc3d0c0a3905059088ad53bcb"
+  },
+  "scope": "Actual loopback HTTP cookie clients and SQLite-backed API, concurrent exclusive claims, host/driver authorization, drive bounds and stale sequences/epochs, replay after 32-result pruning, 1.5s previous-approved-pose proximity, guest leave/rejoin/TTL, host leave/rejoin/TTL room closure, legacy v1 and occupied-old-DB migration. No full game, GUI, hosted identity, server 3D physics or measured concurrency acceptance. No credentials/invite codes in logs.",
+  "contract_notes": [
+    "world pose motion allowlist ai/parked/idle/walk/run",
+    "host owner rejoin closes the existing world room and returns404",
+    "legacy v1 world omitted and ordinary host leave retained",
+    "public actionResults32; durable receipts remain until room cascade",
+    "local-d1 adapter unchanged; shared schema supplies new tables"
+  ],
+  "final_log": "all_final03.log"
+}

@@ -1,5 +1,13 @@
 # 덕수궁·시청 첫 버전 제작 계획
 
+## 2026-10-27 EXP41 — 현재 결과: 같은 차량·주민, version7 게시
+
+원래 도로 자동차14대·성인28명·반려견2마리, 합계44개 entity를 `sim2seoul-shared-world-v2`로 공유한다. E 배타 운전권/주행/하차·parked와 인사/쓰다듬기를 지원한다. host loss는 방 종료이고 공유 AI 차는 endpoint에서 정차한다. F/X 전투·경찰/구금·경제·다른 시설 결과는 solo 범위다.2Hz/600ms와8명 입장 정책은 검증된 수용 인원·성능 보장이 아니다.
+
+최종 native11 두 전체 게임89/89·83.460초·exit0/ERROR0·19-source/settings/exact복원과 backend57·차량86·NPC41·client39·live NPC120초15조건을 확인했다. 실제 로컬 Worker05 20/20, Web03 수동 drive/exit·238자산/212gzip whole와124 GD drift0을 기록한 뒤 같은 Site version7을 succeeded로 게시했다. 운영 schema3→5와 실제 IAB/WASM READY·로그인 필요 안내까지 확인했다. **실제 로그인한 두 운영 계정·지속 성능·4/8명 수용량은 미검증**이다.
+
+별도 raw HTTP 자산 probe는 Cloudflare JSD938B/hash 차이·retry403·기존 서비스 header retry307/NoRedirect로 INCOMPLETE다. 로컬238/238·운영 browser212/212 whole hash/runtime 성공과 분리하며 운영 raw238/238 PASS를 주장하지 않는다. 최초422·native10 정지 원인은 미확정으로 보존한다. PCK03 export는 미커밋 feature source에서 수행했으며 manifest base328ef22를 최종 main provenance로 쓰지 않는다. [현재 상태](WORK_STATUS.md)·[상세 증거/한계](SHARED_CITY_ACTORS.md)를 따른다. 아래 EXP40 version6 이력은 유지한다.
+
 계획 기준일: 2026-10-12 · 첫 버전까지의 제작 기준 · 다음 실행 모델은 사용자가 선택한 Sol
 
 2026-10-27 EXP40 현재 선택: **exp40_shared_city02_delivery01 / version6** 게시·운영 도시/방 로그인 안내→공식 로그인 폼을 확인했다. 계정 정보 미입력으로 실제 로그인/두 계정 플레이는 미검증이다. 운영 gzip 오류를 Web-only로 고쳤고 이전 전체게임03/04는 수정 전 실행이다. 기능 개발 우선순위를 유지한다. [최신 판정](WORK_STATUS.md)을 따른다.

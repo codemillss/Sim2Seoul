@@ -1,0 +1,588 @@
+{
+  "action_results": [
+    {
+      "entityId": "npc:street:plaza_dog:walker",
+      "error": "",
+      "ok": true,
+      "playerId": "a6da1427-2922-4bf8-8d0f-963771164e3f",
+      "requestId": "3ab5196e-ba26-4638-99dc-9a6742f144d3",
+      "type": "npc_greet"
+    },
+    {
+      "entityId": "car:sejong_south_stream_2",
+      "error": "",
+      "ok": true,
+      "playerId": "a6da1427-2922-4bf8-8d0f-963771164e3f",
+      "requestId": "2b61e037-ebb9-49e5-81a9-da163690b25e",
+      "type": "vehicle_enter"
+    },
+    {
+      "entityId": "car:sejong_south_stream_2",
+      "error": "",
+      "ok": true,
+      "playerId": "a6da1427-2922-4bf8-8d0f-963771164e3f",
+      "requestId": "deadb6c7-7849-4bf7-a43c-50325a99204f",
+      "type": "vehicle_exit"
+    }
+  ],
+  "captures": [],
+  "cases": [
+    {
+      "name": "production_manager_initialized",
+      "passed": true
+    },
+    {
+      "name": "full_actual_city_and_capsule_ready",
+      "passed": true
+    },
+    {
+      "name": "full_existing_14cars_28humans_2dogs_catalog",
+      "passed": true
+    },
+    {
+      "name": "actual_service_bootstrap",
+      "passed": true
+    },
+    {
+      "name": "actual_existing_actor_fixture_context_found",
+      "passed": true
+    },
+    {
+      "name": "single_safe_precreate_capsule_placement",
+      "passed": true
+    },
+    {
+      "name": "both_full_games_ready",
+      "passed": true
+    },
+    {
+      "name": "host_create_started",
+      "passed": true
+    },
+    {
+      "name": "host_world_created",
+      "passed": true
+    },
+    {
+      "name": "two_full_worlds_real_remote_and_shared_catalog",
+      "passed": true
+    },
+    {
+      "name": "world_authority_matches_role",
+      "passed": true
+    },
+    {
+      "name": "both_worlds_joined",
+      "passed": true
+    },
+    {
+      "name": "host_pause_menu_keeps_shared_AI_physics_and_HTTP_running",
+      "passed": true
+    },
+    {
+      "name": "host_menu_close_restores_unpaused_world",
+      "passed": true
+    },
+    {
+      "name": "both_ready_for_actual_interactions",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_actual_npc",
+      "passed": true
+    },
+    {
+      "name": "fresh_E_greet_approved",
+      "passed": true
+    },
+    {
+      "name": "guest_observed_same_greeting",
+      "passed": true
+    },
+    {
+      "name": "guest_petted_dog",
+      "passed": true
+    },
+    {
+      "name": "host_observes_shared_pet_reaction",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_existing_car_door",
+      "passed": true
+    },
+    {
+      "name": "both_near_same_existing_car",
+      "passed": true
+    },
+    {
+      "name": "guest_claim_visible_to_host",
+      "passed": true
+    },
+    {
+      "name": "actual_host_E_busy_does_not_steal_driver",
+      "passed": true
+    },
+    {
+      "name": "guest_physical_drive_completed",
+      "passed": true
+    },
+    {
+      "name": "host_observes_server_accepted_car_displacement",
+      "passed": true
+    },
+    {
+      "name": "seated_remote_guest_is_hidden",
+      "passed": true
+    },
+    {
+      "name": "guest_announced_parked",
+      "passed": true
+    },
+    {
+      "name": "host_walks_to_parked_same_car",
+      "passed": true
+    },
+    {
+      "name": "host_can_claim_same_released_car",
+      "passed": true
+    },
+    {
+      "name": "host_safe_E_exit_releases_car",
+      "passed": true
+    },
+    {
+      "name": "guest_left_after_cleanup",
+      "passed": true
+    },
+    {
+      "name": "host_removes_guest_actor",
+      "passed": true
+    },
+    {
+      "name": "guest_second_join_announced",
+      "passed": true
+    },
+    {
+      "name": "host_actual_leave_completed",
+      "passed": true
+    },
+    {
+      "name": "guest_observed_closed_room",
+      "passed": true
+    },
+    {
+      "name": "shutdown_waits_actual_http_leave",
+      "passed": true
+    },
+    {
+      "name": "actual_physics_advanced",
+      "passed": true
+    },
+    {
+      "name": "actual_user_settings_unchanged",
+      "passed": true
+    },
+    {
+      "name": "scoped_settings_remain_unwritten",
+      "passed": true
+    }
+  ],
+  "catalog_sha256": "20a66aa072ceb2b2f4b9c462bd26da018d816d40c901a4cc695cd4b3161e4a42",
+  "checks": 40,
+  "diagnostic": {
+    "available": true,
+    "cleanup_pending": false,
+    "connected": false,
+    "last_failure_code": "",
+    "last_http_code": 200,
+    "last_http_result": 0,
+    "last_request_error": 0,
+    "last_response_bytes": 27,
+    "npcs": {
+      "active": false,
+      "actors": 30,
+      "authority": false,
+      "buffered_snapshots": 0,
+      "interpolation_ms": 600,
+      "shared_actions": [
+        "npc_greet",
+        "npc_pet"
+      ],
+      "shared_police": false
+    },
+    "participants": 0,
+    "received_snapshots": 96,
+    "remote_count": 0,
+    "round_trip_ms": 248,
+    "sequence": 95,
+    "sign_in_required": false,
+    "state": "ready",
+    "transport": "http-presence",
+    "ui_open": false,
+    "vehicles": {
+      "active": false,
+      "cars": 14,
+      "cleanup_pending": false,
+      "driver_entity": "",
+      "error": "",
+      "host_ai": false,
+      "lease_epoch": -1,
+      "pending_action": false,
+      "riding": false,
+      "scope": "Fourteen retained traffic bodies; host AI and approved local driver; presentation replication, not authoritative shared physics"
+    },
+    "world_active": false
+  },
+  "elapsed_ms": 85519,
+  "engine": "4.7.2-stable (official)",
+  "failed": 0,
+  "fixture_capsule_writes_after_create": 0,
+  "fresh_E_presses": 4,
+  "movement": {
+    "accepted_car_after": [
+      75.0690002441406,
+      -1.10800004005432,
+      -50.2490005493164
+    ],
+    "accepted_car_before": [
+      75.7379989624023,
+      -1.33500003814697,
+      -72.7529983520508
+    ]
+  },
+  "precreate_capsule_writes": 1,
+  "public_context": {
+    "carId": "car:sejong_south_stream_2",
+    "dogId": "npc:street:plaza_dog:dog",
+    "npcId": "npc:street:plaza_dog:walker",
+    "spawn": [
+      132.394515991211,
+      -0.34971871972084,
+      -110.951385498047
+    ]
+  },
+  "restore_after": {},
+  "restore_before": {
+    "camera": 78148273794,
+    "cars": {
+      "car:coverage_drive_0_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_0_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ]
+    },
+    "npcs": {
+      "npc:coverage:coverage_walk_00_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_00_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:n02:palace_court": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:n02:plaza_front": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:street:museum_slope:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_east:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ]
+    },
+    "player_layer": 2,
+    "player_mask": 45
+  },
+  "result": "PASS",
+  "role": "a",
+  "scope": "Two independent full production city processes. Existing 14 cars,28 humans,2 dogs. One safe host capsule placement before create; subsequent travel and E/W interactions use actual Input. Production menu setters stop AI during interaction stages. Headless physics/replication acceptance, not pixels, server-owned 3D physics, production authentication or measured capacity. Invite/cookie/bearer stay in memory.",
+  "task": "EXP41_FULL_SHARED_ACTORS",
+  "used_production_stationary_setters": true,
+  "user_settings_after": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "user_settings_before": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "walking_Input_steps": 354,
+  "world_counts": {
+    "cars": 14,
+    "catalog": 44,
+    "collision_objects": 2091,
+    "npc_and_dogs": 30,
+    "source_meshes": 1233
+  }
+}

@@ -1,0 +1,23 @@
+import argparse,concurrent.futures,gzip,hashlib,importlib.util,json,pathlib,time,urllib.request
+p=argparse.ArgumentParser();p.add_argument('--repo',type=pathlib.Path,required=True);p.add_argument('--dist',type=pathlib.Path,required=True);p.add_argument('--origin',required=True);p.add_argument('--report',type=pathlib.Path,required=True);a=p.parse_args()
+assert not a.report.exists()
+started=time.monotonic();spec=importlib.util.spec_from_file_location('prepare',a.repo/'tools/prepare_shared_city_site.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);assets=m.validate_game(a.dist)
+def read(name):
+ req=urllib.request.Request(a.origin.rstrip('/')+'/'+name,headers={'Accept-Encoding':'identity','User-Agent':'Sim2Seoul bounded release check/1.0'})
+ with urllib.request.urlopen(req,timeout=35) as r:
+  raw=r.read();assert r.status==200
+  assert len(raw)==assets[name]['bytes'] and hashlib.sha256(raw).hexdigest()==assets[name]['sha256'],name
+  if name.endswith('.gz'):assert r.headers.get('Content-Encoding') is None,'raw gzip chunk must remain encoded bytes'
+  return name,raw
+with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:received=dict(pool.map(read,assets))
+manifest=json.loads(received['game/manifest.json']);whole={}
+for kind,row in manifest['files'].items():
+ h=hashlib.sha256();n=0
+ for c in row['chunks']:
+  b=gzip.decompress(received[c['path']]);assert len(b)==c['bytes'] and hashlib.sha256(b).hexdigest()==c['sha256'];h.update(b);n+=len(b)
+ assert n==row['bytes'] and h.hexdigest()==row['sha256']
+ whole[kind]={'bytes':n,'sha256':h.hexdigest(),'pass':True}
+with urllib.request.urlopen(a.origin.rstrip('/')+'/api/multiplayer/status',timeout=15) as r:status=json.loads(r.read())
+assert status.get('available') is True and status.get('signInRequired') is True
+result={'result':'PASS','origin':a.origin,'release':manifest['webRelease'],'assets_checked':len(received),'raw_gzip_chunks':sum(len(x['chunks']) for x in manifest['files'].values()),'whole_files':whole,'anonymous_status':status,'elapsed_s':round(time.monotonic()-started,3),'assets':[{'path':k,'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest(),'status':200} for k,v in received.items()]}
+a.report.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k not in ['assets','whole_files']}))

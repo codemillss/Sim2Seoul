@@ -1,5 +1,29 @@
 # 같은 도시에서 함께 걷기: 방 API와 게임 연결
 
+## EXP41 현재 결과 — version7 게시·native11 (2026-10-27)
+
+원래 도로 자동차14대·성인28명·반려견2마리(44개 entity)를 `sim2seoul-shared-world-v2`에서 공유한다. E 배타 운전권/주행/하차·parked와 인사/쓰다듬기, host AI·guest 승인 pose600ms 표시를 연결했다. host loss는 방 종료, 공유 AI 차는 endpoint 정차다. 서버3D 물리/공유 충돌·F/X 전투/경찰·구금·경제·기타 시설 결과는 solo 범위이며8명은 입장 정책이다.
+
+최종 [native11](../../../data/reports/shared_city/20261027/shared_actors_attempt11_native/summary.json)은89/89(A54/B35)·83.460초·각 actual exit0/ERROR0·19-source/settings 불변·원래 actor/AI/충돌/카메라 exact복원·cleanup오류0이다. 원본 GPU PNG3장은 임시 fixture camera/test label로 촬영했다. [backend cleanup57](../../../data/reports/shared_city/20261027/stale_owner_world_cleanup01/summary.json)(migration7 포함), [차량86](../../../data/reports/shared_city/20261027/vehicles/lease_boundary01_run.json)·[NPC41](../../../data/reports/shared_city/20261027/npcs_component04/run.json)·[client39](../../../data/reports/shared_actors/20261027/client_regression03_retry/summary.json)·[실제 live NPC120초15조건](../../../data/reports/shared_city/20261027/live_npcs_attempt01/summary.json)을 별도 범위로 유지한다.
+
+[최종 같은 Site version7](../../../data/reports/shared_actors/20261027/site_publication03b.json)은 `succeeded`/public 유지다. Site commit `c753b4f76541b9ed2f0a4c87b435b0d6e649e418`, 릴리스 `exp41_shared_actors03_delivery01`, API `51b71717…`다. 정상0001 migration 뒤 production schema3→5만 확인했고 운영 행·사용자·세션은 읽지 않았다. [124 GD source drift0/API 결합](../../../data/reports/shared_actors/20261027/final_source_binding03b.json)을 확인했다. PCK03은 dirty feature tree에서 export해 manifest buildCommit은 base328ef22이며 최종 main에서 빌드했다고 표현하지 않는다.
+
+Worker03/04는 닫힌 브라우저 hostTTL15초 뒤에도 own-world2개가30분 room 한도에 남아 create429로 실패했다. 같은 create transaction에서 authenticated owner의 shared world 중 host missing/expired만 LIMIT32 정리하고 result index를 조정했다. live host·legacy·다른 owner·한도/cooldown을 유지하며 heartbeat/rollback/동시 create를 검사했다. 새12조건 before2PASS/10FAIL→after12PASS·전체57/57, [동일 로컬 Worker05 20/20](../../../data/reports/shared_actors/20261027/site_worker_world05_cleanup.json)으로 재검사한 API03b를 게시했고 PCK03은 유지했다.
+
+[Web03 수동](../../../data/reports/shared_actors/20261027/web_gui_attempt03_summary.json)은 실제 E승차/W1600ms/정차·하차/공유 badge 유지/DOM오류0, [로컬03 자산](../../../data/reports/shared_actors/20261027/site_built_assets_check03.json)은238/238·212gzip/whole PASS다. [실제 운영 IAB/WASM](../../../data/reports/shared_actors/20261027/production_browser_v7.json)에서64.202초 READY·212/212/cache68/network144·53,484,236B·DOM engine오류0·ChatGPT 로그인 안내를 확인했다. **실제 로그인한 한 계정의 방 CRUD·서로 다른 두 운영 계정은 미검증**이다.
+
+별도 운영 raw HTTP probe는 Cloudflare JSD938B 삽입으로 strict play.html hash 차이, 알려진 script만 제거한 retry403(정확 자산 미확보), 기존 서비스 header retry307/NoRedirect로 **INCOMPLETE**다. 새로운 identity/token·cross-origin credential 전송은 없었고 추가 probe를 하지 않는다. 로컬238/238·실제 운영 browser212/212 whole/runtime 성공을 운영 raw238/238 성공으로 바꾸지 않는다.
+
+첫 Web422·native05의 일회422 원인은 미확정이며 후속3회 성공과 client1초 fresh-sample2회 재시도/세 번째 종료는 최초 원인 해결 증거가 아니다.80/24m/s 서버 경계를 유지한다. native07–10 실패/이전 성공은 보존하고11을 선택했다.10 접근 정지는 blocker 미확정이며11은 detour 분기0회라 우회 구현의 인과를 단정하지 않는다. [상세 계약·실패 진단](../../../docs/SHARED_CITY_ACTORS.md)을 따른다.
+
+```sh
+node --test tools/web/multiplayer/room-api.test.mjs tools/web/multiplayer/dev-server.test.mjs tools/web/multiplayer/world-api.test.mjs tools/web/multiplayer/world-migration.test.mjs
+# 다음 회귀에는 선택된11 증거를 덮어쓰지 않고 새 폴더를 사용한다.
+node tools/web/multiplayer/check-shared-actors.mjs --report-dir data/reports/shared_city/20261027/shared_actors_new_regression --owner-graphics
+```
+
+실행기는200초 watchdog·자체 API/coordinator port0·메모리 전용 invite·64 stage ring·4096B 공개 context allowlist·actual exit/ERROR·source/settings·finally cleanup을 결합한다. 기존8766 서버를 건드리지 않는다. 아래 EXP40 version6 게시/검증 이력은 보존한다.
+
 갱신일: 2026-10-27 · EXP40 · **version6 게시·운영 도시/방 로그인 안내/공식 로그인 폼 확인 · 인증 두 계정 수용 대기**
 
 현재 우선순위는 사용자 지시 **최적화보다 기능 개발**에 따른 함께 걷기다. 실제 탐험 게임의 Esc → **함께 걷기 · 친구 초대**에서 방 생성·참가·퇴장과 상대 표시를 연결했다. 야외 보행만 공유하며 NPC·차량·전투는 각 게임의 독립 상태다. [사용법·실제 게임 검증·한계](../../../docs/SHARED_CITY_WALK.md)를 따른다.

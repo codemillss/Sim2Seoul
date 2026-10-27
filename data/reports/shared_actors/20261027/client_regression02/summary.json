@@ -1,0 +1,119 @@
+{
+  "task": "EXP40_CLIENT_GZIP_TRANSPORT",
+  "result": "PASS",
+  "started_at_utc": "2026-10-27T06:17:43.526Z",
+  "timeout_ms": 45000,
+  "timed_out": false,
+  "failure": null,
+  "cleanup_errors": [],
+  "source_sha256_before": {
+    "game/scripts/multiplayer/room_presence_client.gd": "22aab01d22188d5003e093505822961dc8e7cfc3be69eb537021f4210eed498c",
+    "tests/game/check_room_presence_client.gd": "e4f9a8832131c3a4fcb2b2512d7a0ab4deac559e9145d624e8db9592b558b816",
+    "tools/web/multiplayer/check-client-gzip.mjs": "371b970735db895f2bc7531ab2db524f785817b861383ab90b1de68f5a403aa4",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "cde6b5fb9662c26b20bddb8767389384459d1c38e934bcc732f87b3e3613500d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "db0b80fc85d24eca437741daf44c994ff38c982c4dcaf1f02afcd49bcdab84d0"
+  },
+  "source_sha256_after": {
+    "game/scripts/multiplayer/room_presence_client.gd": "22aab01d22188d5003e093505822961dc8e7cfc3be69eb537021f4210eed498c",
+    "tests/game/check_room_presence_client.gd": "e4f9a8832131c3a4fcb2b2512d7a0ab4deac559e9145d624e8db9592b558b816",
+    "tools/web/multiplayer/check-client-gzip.mjs": "371b970735db895f2bc7531ab2db524f785817b861383ab90b1de68f5a403aa4",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "cde6b5fb9662c26b20bddb8767389384459d1c38e934bcc732f87b3e3613500d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "db0b80fc85d24eca437741daf44c994ff38c982c4dcaf1f02afcd49bcdab84d0"
+  },
+  "scope": "One bounded headless production HTTPRequest fixture with independent in-memory loopback API and four sequential encoding responses. Native gzip/deflate plus already-decoded-body/header browser mimics. No actual browser, city scene, hosted identity, Site request or production compression acceptance. Root8766 is untouched.",
+  "api_origin": "http://127.0.0.1:63056",
+  "gzip_origin": "http://127.0.0.1:63057",
+  "gzip_fixture": {
+    "request_count": 4,
+    "rejected_requests": 0,
+    "cases": [
+      {
+        "name": "native_actual_gzip",
+        "content_encoding": "gzip",
+        "response_bytes": 83,
+        "request_count": 1
+      },
+      {
+        "name": "native_actual_deflate",
+        "content_encoding": "deflate",
+        "response_bytes": 71,
+        "request_count": 1
+      },
+      {
+        "name": "browser_decoded_gzip_header",
+        "content_encoding": "gzip",
+        "response_bytes": 70,
+        "request_count": 1
+      },
+      {
+        "name": "browser_decoded_deflate_header",
+        "content_encoding": "deflate",
+        "response_bytes": 70,
+        "request_count": 1
+      }
+    ],
+    "credentials_recorded": false,
+    "complete": true
+  },
+  "source_unchanged": true,
+  "engine": {
+    "pid": 25188,
+    "command": [
+      "/Applications/Godot.app/Contents/MacOS/Godot",
+      "--headless",
+      "--path",
+      "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game",
+      "--log-file",
+      "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_engine.log",
+      "--script",
+      "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_room_presence_client.gd",
+      "--",
+      "--base=http://127.0.0.1:63056",
+      "--gzip-base=http://127.0.0.1:63057",
+      "--report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_report.json"
+    ],
+    "exited": true,
+    "exit_code": 0,
+    "signal": null,
+    "spawn_error": null
+  },
+  "artifacts": {
+    "report": {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_report.json",
+      "bytes": 9367,
+      "sha256": "98ee79e409dad28567cfc47e0899bb732b1ba20ff46f1597fa61eadb72a22208"
+    },
+    "engine": {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_engine.log",
+      "bytes": 147,
+      "sha256": "c08cf04178d35694af5a95510db385ac885f149649542f464ced2b3575738ce8"
+    },
+    "stdout": {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_stdout.log",
+      "bytes": 147,
+      "sha256": "c08cf04178d35694af5a95510db385ac885f149649542f464ced2b3575738ce8"
+    },
+    "stderr": {
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_actors/20261027/client_regression02/client_stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "error_counts": {
+    "engine": 0,
+    "stdout": 0,
+    "stderr": 0
+  },
+  "raw_logs_secret_free": true,
+  "fixture_result": "PASS",
+  "fixture_checks": {
+    "passed": 36,
+    "total": 36,
+    "failed": 0
+  },
+  "elapsed_ms": 9863
+}

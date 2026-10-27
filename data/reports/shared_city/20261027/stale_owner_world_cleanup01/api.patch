@@ -1,0 +1,35 @@
+--- /tmp/sim2seoul-world-cleanup-red/room-api.mjs	2026-10-27 16:32:44
++++ tools/web/multiplayer/room-api.mjs	2026-10-27 16:33:51
+@@ -1,6 +1,8 @@
+ /**
+- * Bounded Sites/D1 HTTP presence prototype. Not connected to the deployed game.
++ * Bounded Sites/D1 HTTP presence and shared-world protocol.
+  * Call createRoomApi()(request, env) behind Sites authenticated dispatch only.
++ * Development hosts derive identity from validated local sessions and strip
++ * untrusted identity headers; clients cannot supply production identities.
+  * It returns null outside /api/multiplayer/ so a host can serve its other routes.
+  */
+ export const POLICY = Object.freeze({
+@@ -395,6 +397,13 @@
+       // Bounded opportunistic garbage collection; no request-time schema DDL.
+       this.stmt("DELETE FROM multiplayer_rooms WHERE id IN (SELECT id FROM multiplayer_rooms WHERE expires_ms <= ? LIMIT 32)", nowMs),
+       this.stmt("DELETE FROM multiplayer_rate_limits WHERE key IN (SELECT key FROM multiplayer_rate_limits WHERE last_ms < ? LIMIT 32)", nowMs - POLICY.roomLifetimeMs),
++      // A closed tab has no reader to notice host TTL. Reclaim only this
++      // owner's abandoned shared worlds in the same transaction as admission.
++      this.stmt(`DELETE FROM multiplayer_rooms WHERE owner_key = ? AND id IN (
++        SELECT r.id FROM multiplayer_rooms r JOIN multiplayer_worlds w ON w.room_id = r.id
++        WHERE r.owner_key = ? AND NOT EXISTS (
++          SELECT 1 FROM multiplayer_players p WHERE p.room_id = r.id AND p.id = w.host_id AND p.last_seen_ms > ?
++        ) ORDER BY r.created_ms, r.id LIMIT 32)`, ownerKey, ownerKey, nowMs - POLICY.presenceTtlMs),
+       this.stmt(`INSERT INTO multiplayer_rooms
+         (id, owner_key, invite_hash, build_id, spawn_x, spawn_y, spawn_z, created_ms, expires_ms)
+         SELECT ?, ?, ?, ?, ?, ?, ?, ?, ? WHERE
+@@ -409,7 +418,7 @@
+     ];
+     if (data.world !== undefined) statements.push(this.stmt(`INSERT INTO multiplayer_worlds (room_id, host_id, revision, state_json, updated_ms) SELECT ?, ?, 0, ?, ? WHERE EXISTS (SELECT 1 FROM multiplayer_rooms WHERE id = ?)`, id, playerId, JSON.stringify(initialWorld(data.world, playerId, nowMs)), nowMs, id));
+     const result = await this.db.batch(statements);
+-    if (result[2].meta.changes !== 1) throw new HttpError(429, "active_room_limit");
++    if (result[3].meta.changes !== 1) throw new HttpError(429, "active_room_limit");
+     return { ...(await this.snapshot(room, nowMs)), selfId: playerId, sessionToken, invite };
+   }
+   async join(userId, room, data, nowMs) {

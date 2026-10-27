@@ -206,6 +206,9 @@ func recycle_guard(body: CharacterBody3D) -> Dictionary:
 	return guard
 
 func after_camera_step(_delta: float) -> void:
+	# Camera signals still arrive when replica bodies have physics disabled.
+	if bool(get_meta("shared_city_vehicle_replica", false)):
+		return
 	# Human observation continues while both vehicle movement switches are off.
 	_refresh()
 	for v in vehicles:

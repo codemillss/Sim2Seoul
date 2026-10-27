@@ -1,0 +1,18 @@
+{
+  "classification": "fixture_secret_scanner_false_positive",
+  "fields": [
+    "a_report.json.scope",
+    "b_report.json.scope"
+  ],
+  "literal_match": "bearer stay",
+  "actual_credential_disclosure": false,
+  "functional_cases": {
+    "a_passed": 40,
+    "b_passed": 35,
+    "failed": 0
+  },
+  "b_exit_code": 0,
+  "a_termination": "Wrapper SIGTERM after role_b_failed; normal exit not verified.",
+  "runtime_source_unchanged": true,
+  "fix": "Change explanatory test scope sentence to Credentials remain in memory. Secret scanner policy unchanged. Original summary/logs/reports remain unchanged."
+}

@@ -1,0 +1,217 @@
+{
+  "task": "EXP41_SHARED_ACTORS",
+  "started_at_utc": "2026-10-27T06:23:51.299Z",
+  "result": "FAIL",
+  "timeout_ms": 200000,
+  "timed_out": false,
+  "failure": "role_a_failed",
+  "source_sha256_before": {
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_shared_city_actors.gd": "7a15b8cbcf11cb00f1e3df58db598a5710a0aa87f38a7f35e9cbd17fd8734671",
+    "game/scripts/explore_walk.gd": "8f9d60070ebd8459c7bae2abbc5fe2e2da8cfcd942120c2916c7b39eac45e64f",
+    "game/scripts/multiplayer/room_presence_client.gd": "22aab01d22188d5003e093505822961dc8e7cfc3be69eb537021f4210eed498c",
+    "game/scripts/multiplayer/shared_city_walk.gd": "b545487fed092c010b003542e8924c256c2fdaa81dde593f0129790fbbf88c06",
+    "game/scripts/multiplayer/remote_resident.gd": "bbbd57b1625de2a44d19a1c7b45875e9c40e7e7d34b3a9986625eae255076fbd",
+    "game/scripts/multiplayer/shared_city_vehicles.gd": "1083ad721ff1902d0b8078ee9b2b5c4740897f6a8bc76d1531ee05b96c91b6e3",
+    "game/scripts/multiplayer/shared_city_npcs.gd": "d67e8c29304223971334c2edef3ee608d6cfd05a8b175156720e5c94db054720",
+    "game/scripts/traffic/vehicle.gd": "b95b1c61a786caf7e2bf63059cdca1f527caaaec9acca0b0f03cd09e7102a3e2",
+    "game/scripts/traffic/traffic_manager.gd": "7d2a344c41a3e25e968810639ec833f137eb1f135b32d6292345a87dd5ae69ba",
+    "game/scripts/street_pedestrians.gd": "834a62a883c1add1de197e463dc6ad798fe94b3c7382d93c0ef116bd446874c9",
+    "game/scripts/exploration_pedestrian_avoidance.gd": "fd7c57d2d1a435bd6db52afa53d3fe40e798c971d314376b5c0643f7e6d3529d",
+    "game/scripts/neighborhood_population.gd": "f627c04ae8a8ef38de5d7f63377acbfd3e481450bd261ead308dc17ee284fd0f",
+    "game/scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "tools/web/multiplayer/check-shared-actors.mjs": "cc3e313d6760dc14b41324ea7be4bc3c87c248f469def90a0dc185a360b65490",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "cde6b5fb9662c26b20bddb8767389384459d1c38e934bcc732f87b3e3613500d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "db0b80fc85d24eca437741daf44c994ff38c982c4dcaf1f02afcd49bcdab84d0"
+  },
+  "source_sha256_after": {
+    "game/project.godot": "1e478660af7a3245c7b83317255a2828700891ee8e88f1573d80f7ea9bf7f5ec",
+    "tests/game/check_shared_city_actors.gd": "7a15b8cbcf11cb00f1e3df58db598a5710a0aa87f38a7f35e9cbd17fd8734671",
+    "game/scripts/explore_walk.gd": "8f9d60070ebd8459c7bae2abbc5fe2e2da8cfcd942120c2916c7b39eac45e64f",
+    "game/scripts/multiplayer/room_presence_client.gd": "22aab01d22188d5003e093505822961dc8e7cfc3be69eb537021f4210eed498c",
+    "game/scripts/multiplayer/shared_city_walk.gd": "b545487fed092c010b003542e8924c256c2fdaa81dde593f0129790fbbf88c06",
+    "game/scripts/multiplayer/remote_resident.gd": "bbbd57b1625de2a44d19a1c7b45875e9c40e7e7d34b3a9986625eae255076fbd",
+    "game/scripts/multiplayer/shared_city_vehicles.gd": "1083ad721ff1902d0b8078ee9b2b5c4740897f6a8bc76d1531ee05b96c91b6e3",
+    "game/scripts/multiplayer/shared_city_npcs.gd": "d67e8c29304223971334c2edef3ee608d6cfd05a8b175156720e5c94db054720",
+    "game/scripts/traffic/vehicle.gd": "b95b1c61a786caf7e2bf63059cdca1f527caaaec9acca0b0f03cd09e7102a3e2",
+    "game/scripts/traffic/traffic_manager.gd": "7d2a344c41a3e25e968810639ec833f137eb1f135b32d6292345a87dd5ae69ba",
+    "game/scripts/street_pedestrians.gd": "834a62a883c1add1de197e463dc6ad798fe94b3c7382d93c0ef116bd446874c9",
+    "game/scripts/exploration_pedestrian_avoidance.gd": "fd7c57d2d1a435bd6db52afa53d3fe40e798c971d314376b5c0643f7e6d3529d",
+    "game/scripts/neighborhood_population.gd": "f627c04ae8a8ef38de5d7f63377acbfd3e481450bd261ead308dc17ee284fd0f",
+    "game/scripts/drivable_car_service.gd": "6cc80bc108426f77f121de3e4d749a9e359949a4f7fa8bb52dbf7ddc0b946156",
+    "tools/web/multiplayer/check-shared-actors.mjs": "cc3e313d6760dc14b41324ea7be4bc3c87c248f469def90a0dc185a360b65490",
+    "tools/web/multiplayer/dev-server.mjs": "1ad5d26dc6bb2c11e5ecefbe83bbadc4f579acbba2a0f96a332b038fdf3a91fb",
+    "tools/web/multiplayer/room-api.mjs": "cde6b5fb9662c26b20bddb8767389384459d1c38e934bcc732f87b3e3613500d",
+    "tools/web/multiplayer/local-d1.mjs": "4bc682b93e969a0f09badb2a12906a893305c4d90e8b4a88708303dc5ce3223d",
+    "tools/web/multiplayer/schema.sql": "db0b80fc85d24eca437741daf44c994ff38c982c4dcaf1f02afcd49bcdab84d0"
+  },
+  "render_modes": {
+    "a": "headless",
+    "b": "headless"
+  },
+  "scope": "Two independent production explore_walk games exercising 14 shared road cars and 28 adult NPCs + 2 dogs with an independent fake-development loopback API/coordinator. Host AI, approved poses and exclusive vehicle claims; no server physics, production identity, Site/publication, or performance acceptance. Owner graphics is optional and any captures must be labelled fixture views. Root-owned server8766 is untouched.",
+  "api_origin": "http://127.0.0.1:63736",
+  "coordinator_origin": "http://127.0.0.1:63737",
+  "cleanup_errors": [],
+  "coordination": {
+    "invite_published": true,
+    "fixture_context": {
+      "carId": "car:sejong_north_stream_1",
+      "npcId": "npc:street:plaza_dog:walker",
+      "dogId": "npc:street:plaza_dog:dog",
+      "spawn": [
+        132.564849853516,
+        -0.348762422800064,
+        -110.910484313965
+      ]
+    },
+    "a": {
+      "stage": "failed",
+      "stages": [
+        "ready",
+        "joined",
+        "stationary",
+        "stationary_ready",
+        "greeted",
+        "pet_seen",
+        "at_car",
+        "busy_seen",
+        "drive_seen",
+        "host_released",
+        "absence_seen",
+        "failed"
+      ]
+    },
+    "b": {
+      "stage": "host_closed_seen",
+      "stages": [
+        "ready",
+        "joined",
+        "stationary_ready",
+        "greeting_seen",
+        "petted",
+        "at_car",
+        "driver",
+        "driven",
+        "parked",
+        "left",
+        "rejoined",
+        "host_closed_seen"
+      ]
+    }
+  },
+  "source_unchanged": true,
+  "games": [
+    {
+      "role": "a",
+      "pid": 28966,
+      "command": [
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game",
+        "--log-file",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_engine.log",
+        "--script",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_shared_city_actors.gd",
+        "--",
+        "--room-server=http://127.0.0.1:63736",
+        "--test-role=a",
+        "--test-coord=http://127.0.0.1:63737",
+        "--test-report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_report.json"
+      ],
+      "exit_code": 1,
+      "signal": null,
+      "spawn_error": null,
+      "error_count": 0,
+      "engine_error_count": 0,
+      "report_result": "FAIL",
+      "raw_artifacts_secret_free": true,
+      "settings_unchanged": true,
+      "fixture_checks": {
+        "total": 41,
+        "failed": 1
+      },
+      "passed": false,
+      "files": {
+        "stdout": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_stdout.log",
+          "bytes": 7700,
+          "sha256": "cac238e18c00515733238550d9db0e9227a531cc35b584100a227b6bda62ec54"
+        },
+        "stderr": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_stderr.log",
+          "bytes": 824,
+          "sha256": "c892190c9651a9e034a7adc22418249ef080a2c288ca0e04b15a52725e732f32"
+        },
+        "engine": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_engine.log",
+          "bytes": 8512,
+          "sha256": "615ecd55685e7055b3811d537fa6ace95ee2b0260e6f9911857f739f62232170"
+        },
+        "report": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/a_report.json",
+          "bytes": 16856,
+          "sha256": "c0a5694215ea14a36b304680e7a266420ca7b4bf4180767b8adf49bef02b6e65"
+        }
+      }
+    },
+    {
+      "role": "b",
+      "pid": 28967,
+      "command": [
+        "/Applications/Godot.app/Contents/MacOS/Godot",
+        "--headless",
+        "--path",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/game",
+        "--log-file",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_engine.log",
+        "--script",
+        "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/tests/game/check_shared_city_actors.gd",
+        "--",
+        "--room-server=http://127.0.0.1:63736",
+        "--test-role=b",
+        "--test-coord=http://127.0.0.1:63737",
+        "--test-report=/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_report.json"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "error_count": 0,
+      "engine_error_count": 0,
+      "report_result": "PASS",
+      "raw_artifacts_secret_free": true,
+      "settings_unchanged": true,
+      "fixture_checks": {
+        "total": 35,
+        "failed": 0
+      },
+      "passed": true,
+      "files": {
+        "stdout": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_stdout.log",
+          "bytes": 7700,
+          "sha256": "546c459368ced95776853d56a7fb3636dd3054c9f477aa46341f241dccaa5d33"
+        },
+        "stderr": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "engine": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_engine.log",
+          "bytes": 7700,
+          "sha256": "546c459368ced95776853d56a7fb3636dd3054c9f477aa46341f241dccaa5d33"
+        },
+        "report": {
+          "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt03/b_report.json",
+          "bytes": 16215,
+          "sha256": "fa37098bc4b42831c868d4c007fd8b5df5bed9633af813307460fadc72867b80"
+        }
+      }
+    }
+  ],
+  "elapsed_ms": 77304
+}

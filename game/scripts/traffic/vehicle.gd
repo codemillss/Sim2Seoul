@@ -285,6 +285,10 @@ func set_running(enabled: bool) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Shared-room replicas and leased cars are moved by their adapter/controller.
+	# Keep this guard even if an existing menu toggles physics/running again.
+	if bool(get_meta("shared_city_vehicle_replica", false)) or bool(get_meta("shared_city_vehicle_controlled", false)):
+		return
 	_physics_steps += 1
 	if not _running:
 		_pause_ticks += 1
@@ -769,6 +773,12 @@ func is_at_end() -> bool:
 
 
 func can_recycle() -> bool:
+	# A shared snapshot cannot represent a one-way stream's discontinuous
+	# endpoint-to-start relocation. Hold at the endpoint for every observer.
+	if bool(get_meta("shared_city_no_recycle", false)):
+		return false
+	if bool(get_meta("shared_city_vehicle_replica", false)) or bool(get_meta("shared_city_vehicle_controlled", false)):
+		return false
 	return _configured and _running and _state == "endpoint_wait" and _at_endpoint() and _speed_mps <= SPEED_EPS_MPS and is_on_floor() and absf(velocity.y) <= SPEED_EPS_MPS
 
 

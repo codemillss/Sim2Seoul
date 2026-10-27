@@ -1,0 +1,88 @@
+{
+  "result": "PASS",
+  "checks_passed": 89,
+  "elapsed_ms": 84554,
+  "render_modes": {
+    "a": "native_graphical",
+    "b": "headless"
+  },
+  "both_actual_exit_zero": true,
+  "all_engine_errors_zero": true,
+  "source_unchanged": true,
+  "catalog_identical": true,
+  "world_counts": {
+    "cars": 14,
+    "catalog": 44,
+    "collision_objects": 2091,
+    "npc_and_dogs": 30,
+    "source_meshes": 1233
+  },
+  "local_drive_metres": 20.9416084289551,
+  "peer_accepted_displacement_metres": 12.375638795945022,
+  "both_local_states_restored": true,
+  "both_user_settings_unchanged": true,
+  "normal_fixture_menu_resumes": 0,
+  "all_raw_artifacts_secret_free": true,
+  "expected_room_close_http_errors": [
+    {
+      "status": 404,
+      "operation": "sync",
+      "error": "room_unavailable"
+    },
+    {
+      "status": 404,
+      "operation": "leave",
+      "error": "room_unavailable"
+    }
+  ],
+  "summary_sha256": "3a55803c91d117fa2b0042f7cbc1a82ea236a598f0cb0b7338f135e50bab2506",
+  "reports": {
+    "a": {
+      "checks": 54,
+      "failed": 0,
+      "sha256": "b37842a2ac3ce6c01f734b698e4d6daffc68eb83eb7503735e1a8704c1b39da0"
+    },
+    "b": {
+      "checks": 35,
+      "failed": 0,
+      "sha256": "7274003cab946f05b06dc8cf9b11e83da50d3b25b8e787143f43454c902fb129"
+    }
+  },
+  "captures": [
+    {
+      "stage": "joined",
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt07_native/a_report_joined.png",
+      "sha256": "0fcd85d4dd9946249de7067ac41c0ad2077d6266999b11efbe9ffdb08c775f46",
+      "width": 1152,
+      "height": 720,
+      "invite_ui_visible": false,
+      "product_camera_transform_written": false
+    },
+    {
+      "stage": "greeting",
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt07_native/a_report_greeting.png",
+      "sha256": "4501bf1a7c1ccadba5fadf4f5dd7f57e337b02ee7a937f3208d2144ca0db5428",
+      "width": 1152,
+      "height": 720,
+      "invite_ui_visible": false,
+      "product_camera_transform_written": false
+    },
+    {
+      "stage": "after_drive",
+      "path": "/Users/jmjeon/Desktop/jobseeker/원서_제출/02_핵심프로젝트_마스터풀/sim2seoul/data/reports/shared_city/20261027/shared_actors_attempt07_native/a_report_after_drive.png",
+      "sha256": "7852bcf619f4dbcef77884bce3a9171720e7284095876f629629968d3e6a6798",
+      "width": 1152,
+      "height": 720,
+      "invite_ui_visible": false,
+      "product_camera_transform_written": false
+    }
+  ],
+  "manual_original_pixel_review": {
+    "joined_initial_actor_overlap": true,
+    "joined_note": "Initial accepted spawn is still identical for both actors, so LOCAL/REMOTE overlap in this first frame. Do not use it as the sole two-visible-avatar proof.",
+    "greeting": "Two participant actors, retained human NPC and dog, and shared Korean greeting label visible.",
+    "after_drive": "Both participant actors and the retained shared traffic car are clearly visible.",
+    "all_three": "Original native viewport PNGs inspected. No room invite UI/code is visible. A temporary fixture camera and explicit test markers were used; product camera restored."
+  },
+  "scope": "Native GPU owner plus independent headless guest, full city and actual controller. One safe fixture capsule placement before create; no direct fixture player writes after create. Approved local driving/host AI pose replication and server arbitration; no authoritative server 3D collision physics, production identity, all-city performance or measured capacity claim."
+}

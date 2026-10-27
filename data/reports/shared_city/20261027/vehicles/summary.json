@@ -1,0 +1,85 @@
+{
+  "selected": "lease_boundary01",
+  "checks": 86,
+  "engine_exit": 0,
+  "engine_errors": 0,
+  "source_unchanged_during_selected_run": true,
+  "report": "lease_boundary01.json",
+  "run": "lease_boundary01_run.json",
+  "log": "lease_boundary01.log",
+  "scope": "Actual native engine and inherited car physics on an isolated flat fixture with injected terrain/source-clearance and avatar stubs. Fourteen original fixture body/visual identities. No full city, real skin/GUI, network lease race, backend/production authentication or performance acceptance.",
+  "integration_contract": {
+    "setup": "setup(host, request_action)",
+    "begin": "begin(localSelfId, hostId, entities) -> bool",
+    "snapshot": "apply_snapshot(entities, serverNowMs) -> bool; stale clock/epoch ignored true, malformed false",
+    "authority": "host full14 vehicle rows; guest []",
+    "drive": "only current approved local driver; separate entityId/leaseEpoch/sequence",
+    "end": "false while blocked or delayed native collision pair cleanup; caller must retry and keep node alive",
+    "solo_takeover": "begin rejects already seized original traffic cars; preserves existing state",
+    "unshared_buses": "three moving bodies/controller hidden/suspended with reversible state; bus stops remain",
+    "pause": "adapter ALWAYS for cleanup, local driving gated by paused/menu; global physics activation remains manager-owned"
+  },
+  "failures_preserved": [
+    {
+      "attempt": "initial load",
+      "description": "Non-optional second setup argument failed Godot override signature validation; changed to optional Callable. Initial tool load returned exit0 despite engine parse error; not accepted."
+    },
+    {
+      "attempt": "attempt01",
+      "description": "First fixture wrapper timed out after60s and did not save captured child output. Repeated attempt02 preserves the underlying fixture failures. No success claim."
+    },
+    {
+      "attempt": "attempt02",
+      "description": "Failed conservative end point search and fixture missing interior.active caused repeated engine errors;25s wrapper killed process. Full raw log and run JSON retained."
+    },
+    {
+      "attempt": "attempt03",
+      "description": "43 behavioral checks passed but fixture jump action was absent; engine errors correctly rejected this run."
+    },
+    {
+      "attempt": "attempt04",
+      "description": "43/43 exit0/ERROR0; superseded by expanded66-check fixture."
+    }
+  ],
+  "previous_selected": {
+    "selected": "final01",
+    "checks": 66,
+    "run": "final01_run.json"
+  },
+  "integration_review_fixes": [
+    "Only a successful queued UUID marks a vehicle_exit sent; rejected enqueue can retry the same lease epoch, both driving and late-claim rejection.",
+    "Host AI bodies explicitly use ALWAYS during the shared session; end restores each saved original process mode."
+  ],
+  "integration_review_regression": "72/72 actual engine exit0/ERROR0, all6 bound source files unchanged during selected run. Paused callback fixture checks processing; global PhysicsServer policy and full city acceptance remain root-owned.",
+  "previous_selected_runs": [
+    {
+      "selected": "integration_fix01",
+      "checks": 72,
+      "run": "integration_fix01_run.json"
+    },
+    {
+      "selected": "recycle_guard01",
+      "checks": 79,
+      "run": "recycle_guard01_run.json"
+    }
+  ],
+  "preventive_recycle_consistency": {
+    "metadata": "shared_city_no_recycle",
+    "session": "Set true for all14 retained traffic cars; restore both original value and absence during end.",
+    "real_guard_regression": "Actual production vehicle.tscn/script with original box and native ground contact at a labelled20m flat-fixture endpoint: solo eligible; shared guard refuses actual try_recycle transform/cycle; removing guard restores original solo eligibility and endpoint-to-start behavior. Separate adapter checks all14 metadata and false/true/absent restoration.",
+    "shared_scope": "One-way stream cars stop at the existing endpoint and remain visible/claimable/driveable. Continuous closed-loop shared routes are not implemented.",
+    "incident_boundary": "Preventive protocol consistency fix. Native05 offending entity was not captured; native06 did not reproduce422 and recorded cycle0. Not proof of native05 root cause.",
+    "server_bounds": "Unchanged. No teleport flag or widened speed/movement allowance.",
+    "checks": 79,
+    "engine_exit": 0,
+    "engine_errors": 0
+  },
+  "lease_boundary_correctness": {
+    "change": "A leaseEpoch, driverId or mode transition discards previous authority interpolation samples. The newly approved replica pose is published immediately unless an occupied local car must first finish its existing safe exit.",
+    "regression": "Same-lease interpolation still reaches midpoint; driven->parked new lease immediately fixes body at approved parked pose; an old600ms sample and later process/physics frames do not move it back. Actual native intersect_shape finds the original car only at the new collision location, not the former delayed pose. End restores the original visual/AI state.",
+    "incident_boundary": "Independent source-proven correctness fix; does not establish the cause or resolution of the initial Web GUI HTTP422. Subsequent Web repeats without422 are separate observations.",
+    "checks": 86,
+    "engine_exit": 0,
+    "engine_errors": 0
+  }
+}

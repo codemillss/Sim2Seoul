@@ -1,5 +1,21 @@
 # Sol 실행 작업 계획
 
+## EXP41 — 같은 방 차량·주민 상호작용 (2026-10-27)
+
+- [x] 안정 ID/build v2로 원래 자동차14대·성인28명·반려견2마리(44개)를 연결한다.
+- [x] host AI·게스트600ms 승인 표시·E 배타 claim/주행/하차·인사/쓰다듬기와 host loss 종료를 연결한다. AI 차는 endpoint 정차다.
+- [x] backend57(안에 migration7 포함)·차량86·NPC41·client39와 실제 live NPC120초15조건을 통과한다.
+- [x] 같은 owner의 hostTTL 만료 world만 create transaction에서 LIMIT32 정리한다. 새12조건 before2PASS/10FAIL→after12PASS, live host/legacy/다른 소유자/한도/cooldown 보존을 검사한다.
+- [x] 실제 로컬 Worker05의20조건으로 기존03/04 create429를 재검사한다.
+- [x] 최종 native11 두 전체 게임89/89·83.460초·각 exit0/ERROR0·19-source/settings·actor/AI/충돌/카메라 exact복원·GPU PNG3장을 확인한다. 임시 fixture camera/test label을 명시한다.
+- [x] Web03 actual E승차/W1600ms/정차·하차·연결 badge/DOM오류0과238자산/212gzip whole PASS를 확인한다.
+- [x] Web03 입력124개 GD drift0/API03b 결합과 기존 Site version7 succeeded·public 유지·정상 schema3→5를 확인한다. 운영 행은 읽지 않는다.
+- [x] 운영 public IAB/WASM READY·212/212/cache68/network53,484,236B·DOM engine오류0·로그인 필요 안내를 확인한다.
+- [x] [운영 raw HTTP probe INCOMPLETE](../data/reports/shared_actors/20261027/production_browser_v7.json)를 기록한다. Cloudflare JSD938B/hash 차이·정확 자산 미확보403·NoRedirect307을 보존하며 운영 raw238/238 성공을 주장하지 않는다.
+- [ ] 실제 로그인한 한 계정 방 CRUD·서로 다른 두 운영 계정 플레이와 장시간 단절/재접속·4/8명·성능/조작감을 수용한다.
+
+F/X 전투·경찰/구금·경제·기타 시설은 solo다. 최초 Web422와 native10 정지 원인은 미확정이며11 detour 분기0회를 해결 증거로 쓰지 않는다. [정확한 증거·이전 실패](SHARED_CITY_ACTORS.md)를 보존한다.
+
 ## EXP40 후속 — 운영 gzip 수정과 version6 (2026-10-27)
 
 - [x] version5 실제 운영 압축 API의 `StreamPeerGZIP` 실패를 보존하고 Fetch/Godot 중복 해제 원인을 확인한다.

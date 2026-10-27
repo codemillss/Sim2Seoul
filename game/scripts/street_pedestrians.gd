@@ -25,6 +25,8 @@ var groups: Array[Dictionary] = []
 var skipped: Array[Dictionary] = []
 var elapsed := 0.0
 var running := true
+var shared_city_replica := false
+var shared_city_neighbors: Array[CharacterBody3D] = []
 var _design: Dictionary = {}
 var _traffic: Node
 var _traffic_routes: Array = []
@@ -207,6 +209,8 @@ func _allowed(point: Vector3,radius: float) -> bool:
 
 func _neighbors(group: Dictionary) -> Array:
 	var result: Array=[player];result.append_array(_old_people)
+	for peer: CharacterBody3D in shared_city_neighbors:
+		if is_instance_valid(peer):result.append(peer)
 	for row: Dictionary in actors:
 		if row.group!=group.id:result.append(row.body)
 	return result
@@ -392,7 +396,7 @@ func set_running(enabled: bool) -> void:
 	for row: Dictionary in actors:row.body.velocity=Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
-	if not loaded or delta<=0.:return
+	if shared_city_replica or not loaded or delta<=0.:return
 	if not running:
 		# Keep physical support current while the movement checkbox is off.
 		for row: Dictionary in actors:_step_member(row,row.body.global_position,0.,delta,-row.visual.global_basis.z)
@@ -454,7 +458,7 @@ func _physics_process(delta: float) -> void:
 		_maximum_local_density=maxi(_maximum_local_density,local_density+1)
 
 func _finish_poses(_delta: float) -> void:
-	if not loaded:return
+	if shared_city_replica or not loaded:return
 	for group: Dictionary in groups:
 		if not group.record.dog:continue
 		var human: Dictionary=group.members[0];var dog: Dictionary=group.members[1]
@@ -495,7 +499,7 @@ func _update_leashes(render: bool) -> void:
 		if length>.001:leash.global_transform=Transform3D(Basis(Quaternion(Vector3.UP,difference.normalized())).scaled(Vector3(1,length,1)),(start+end)*.5)
 
 func _process(_delta: float) -> void:
-	if not loaded:return
+	if shared_city_replica or not loaded:return
 	var fraction:=clampf(Engine.get_physics_interpolation_fraction(),0.,1.)
 	for row: Dictionary in actors:row.proxy.global_transform=row.previous_pose.interpolate_with(row.current_pose,fraction)
 	_update_leashes(true)

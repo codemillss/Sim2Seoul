@@ -1,0 +1,1636 @@
+{
+  "action_results": [
+    {
+      "entityId": "npc:street:plaza_dog:dog",
+      "error": "",
+      "ok": true,
+      "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+      "requestId": "816ba0b1-c266-4175-87ee-25d538666070",
+      "type": "npc_pet"
+    },
+    {
+      "entityId": "car:sejong_north_stream_1",
+      "error": "",
+      "ok": true,
+      "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+      "requestId": "d572c370-787d-4748-9dfa-d0957b1ac044",
+      "type": "vehicle_enter"
+    },
+    {
+      "entityId": "car:sejong_north_stream_1",
+      "error": "",
+      "ok": true,
+      "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+      "requestId": "07395867-d9d4-419c-8d82-da4b660ba917",
+      "type": "vehicle_exit"
+    }
+  ],
+  "captures": [],
+  "cases": [
+    {
+      "name": "production_manager_initialized",
+      "passed": true
+    },
+    {
+      "name": "full_actual_city_and_capsule_ready",
+      "passed": true
+    },
+    {
+      "name": "full_existing_14cars_28humans_2dogs_catalog",
+      "passed": true
+    },
+    {
+      "name": "actual_service_bootstrap",
+      "passed": true
+    },
+    {
+      "name": "memory_only_invite_and_public_context_received",
+      "passed": true
+    },
+    {
+      "name": "guest_join_started",
+      "passed": true
+    },
+    {
+      "name": "two_full_worlds_real_remote_and_shared_catalog",
+      "passed": true
+    },
+    {
+      "name": "world_authority_matches_role",
+      "passed": true
+    },
+    {
+      "name": "both_worlds_joined",
+      "passed": true
+    },
+    {
+      "name": "host_approved_stationary_phase",
+      "passed": true
+    },
+    {
+      "name": "guest_replicas_converge_to_approved_host_poses",
+      "passed": true
+    },
+    {
+      "name": "both_ready_for_actual_interactions",
+      "passed": true
+    },
+    {
+      "name": "host_greeted_npc",
+      "passed": true
+    },
+    {
+      "name": "guest_observes_same_greeting_reaction",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_actual_dog",
+      "passed": true
+    },
+    {
+      "name": "fresh_E_pet_approved",
+      "passed": true
+    },
+    {
+      "name": "host_observed_same_pet",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_existing_car_door",
+      "passed": true
+    },
+    {
+      "name": "both_near_same_existing_car",
+      "passed": true
+    },
+    {
+      "name": "guest_E_gets_approved_driver_and_actual_mount",
+      "passed": true
+    },
+    {
+      "name": "host_busy_E_rejected",
+      "passed": true
+    },
+    {
+      "name": "actual_W_drives_retained_physical_car",
+      "passed": true
+    },
+    {
+      "name": "host_observed_driven_car_and_hidden_remote",
+      "passed": true
+    },
+    {
+      "name": "guest_fresh_E_safe_exit_and_server_parked",
+      "passed": true
+    },
+    {
+      "name": "host_claimed_and_released_same_car",
+      "passed": true
+    },
+    {
+      "name": "guest_leave_restores_AI_collision_camera_capsule",
+      "passed": true
+    },
+    {
+      "name": "guest_local_state_equals_prejoin_baseline",
+      "passed": true
+    },
+    {
+      "name": "host_acknowledged_absence",
+      "passed": true
+    },
+    {
+      "name": "guest_rejoin_for_host_loss_case",
+      "passed": true
+    },
+    {
+      "name": "guest_second_world_joined",
+      "passed": true
+    },
+    {
+      "name": "host_leave_closes_room_and_cleans_guest_world",
+      "passed": true
+    },
+    {
+      "name": "shutdown_waits_actual_http_leave",
+      "passed": true
+    },
+    {
+      "name": "actual_physics_advanced",
+      "passed": true
+    },
+    {
+      "name": "actual_user_settings_unchanged",
+      "passed": true
+    },
+    {
+      "name": "scoped_settings_remain_unwritten",
+      "passed": true
+    }
+  ],
+  "catalog_sha256": "20a66aa072ceb2b2f4b9c462bd26da018d816d40c901a4cc695cd4b3161e4a42",
+  "checks": 35,
+  "diagnostic": {
+    "available": true,
+    "cleanup_pending": false,
+    "connected": false,
+    "last_failure_code": "room_unavailable",
+    "last_http_code": 404,
+    "last_http_result": 0,
+    "last_request_error": 0,
+    "last_response_bytes": 28,
+    "npcs": {
+      "active": false,
+      "actors": 30,
+      "authority": false,
+      "buffered_snapshots": 0,
+      "interpolation_ms": 600,
+      "shared_actions": [
+        "npc_greet",
+        "npc_pet"
+      ],
+      "shared_police": false
+    },
+    "participants": 0,
+    "received_snapshots": 80,
+    "remote_count": 0,
+    "round_trip_ms": 161,
+    "sequence": 2,
+    "sign_in_required": false,
+    "state": "ready",
+    "transport": "http-presence",
+    "ui_open": false,
+    "vehicles": {
+      "active": false,
+      "cars": 14,
+      "cleanup_pending": false,
+      "driver_entity": "",
+      "error": "",
+      "host_ai": false,
+      "lease_epoch": -1,
+      "pending_action": false,
+      "riding": false,
+      "scope": "Fourteen retained traffic bodies; host AI and approved local driver; presentation replication, not authoritative shared physics"
+    },
+    "world_active": false
+  },
+  "elapsed_ms": 82641,
+  "engine": "4.7.2-stable (official)",
+  "failed": 0,
+  "fixture_capsule_writes_after_create": 0,
+  "fixture_normal_menu_resumes": 0,
+  "fresh_E_presses": 3,
+  "input_traces": [
+    {
+      "car_distance": -1.0,
+      "client_state": {
+        "available": true,
+        "connected": false,
+        "last_failure_code": "room_unavailable",
+        "last_http_code": 404,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 28,
+        "participants": 0,
+        "received_snapshots": 80,
+        "round_trip_ms": 161,
+        "sequence": 2,
+        "sign_in_required": false,
+        "state": "ready",
+        "transport": "http-presence"
+      },
+      "e_requires_release": false,
+      "elapsed_ms": 82640,
+      "gameplay": true,
+      "interact_held": false,
+      "menu": false,
+      "npc_distance": -1.0,
+      "npc_nearest_id": "",
+      "npc_nearest_kind": "",
+      "observed_actions": [
+        {
+          "entityId": "npc:street:plaza_dog:dog",
+          "error": "",
+          "ok": true,
+          "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+          "requestId": "816ba0b1-c266-4175-87ee-25d538666070",
+          "type": "npc_pet"
+        },
+        {
+          "entityId": "car:sejong_north_stream_1",
+          "error": "",
+          "ok": true,
+          "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+          "requestId": "d572c370-787d-4748-9dfa-d0957b1ac044",
+          "type": "vehicle_enter"
+        },
+        {
+          "entityId": "car:sejong_north_stream_1",
+          "error": "",
+          "ok": true,
+          "playerId": "ca031b70-7c54-43d6-9d5f-d4437c487324",
+          "requestId": "07395867-d9d4-419c-8d82-da4b660ba917",
+          "type": "vehicle_exit"
+        }
+      ],
+      "on_floor": true,
+      "paused": false,
+      "player": [
+        134.100997924805,
+        -0.40640252828598,
+        -110.877998352051
+      ],
+      "queued_actions": 0,
+      "stage": "before_finish",
+      "window_focus": true
+    }
+  ],
+  "movement": {
+    "W_press_ms": 1400,
+    "drive_end": [
+      90.6059265136719,
+      -0.779361307621002,
+      -114.337142944336
+    ],
+    "drive_start": [
+      90.0979995727539,
+      -0.727999985218048,
+      -93.3710021972656
+    ],
+    "metres": 20.972354888916
+  },
+  "pause_menu_baseline": {},
+  "physical_walk_observations": [
+    {
+      "actual_input_steps": 4,
+      "actual_travelled_xz_m": 0.676757946610451,
+      "detours": [],
+      "elapsed_ms": 1028,
+      "end": [
+        133.536407470703,
+        -0.424701184034348,
+        -110.613639831543
+      ],
+      "label": "npc:street:plaza_dog:dog",
+      "last_goal": [
+        133.213729858398,
+        -0.359484761953354,
+        -110.394676208496
+      ],
+      "menu": false,
+      "minimum_travel_m": 0.2,
+      "nearest_distance_m": 1.5116753578186,
+      "nearest_id": "npc:street:plaza_dog:dog",
+      "net_xz_m": 0.623416244983673,
+      "obstruction_traces": [],
+      "path": [
+        {
+          "at_ms": 193,
+          "goal": [
+            133.640106201172,
+            -0.342584937810898,
+            -110.655815124512
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            134.100997924805,
+            -0.40640252828598,
+            -110.877998352051
+          ]
+        },
+        {
+          "at_ms": 727,
+          "goal": [
+            133.213729858398,
+            -0.359484761953354,
+            -110.394676208496
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            133.690399169922,
+            -0.416569620370865,
+            -110.756965637207
+          ]
+        }
+      ],
+      "paused": false,
+      "result": "PASS",
+      "start": [
+        134.100997924805,
+        -0.40640252828598,
+        -110.877998352051
+      ],
+      "window_focus": true
+    },
+    {
+      "actual_input_steps": 149,
+      "actual_travelled_xz_m": 44.4845510497689,
+      "detours": [],
+      "elapsed_ms": 20425,
+      "end": [
+        92.3218154907227,
+        -0.856609761714935,
+        -93.8762588500977
+      ],
+      "label": "point",
+      "last_goal": [
+        91.9056930541992,
+        -0.774564743041992,
+        -93.7087707519531
+      ],
+      "menu": false,
+      "minimum_travel_m": 0.0,
+      "nearest_distance_m": -1.0,
+      "nearest_id": "",
+      "net_xz_m": 44.4835090637207,
+      "obstruction_traces": [],
+      "path": [
+        {
+          "at_ms": 194,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            133.536407470703,
+            -0.424701184034348,
+            -110.613639831543
+          ]
+        },
+        {
+          "at_ms": 728,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            132.75862121582,
+            -0.449568897485733,
+            -110.284820556641
+          ]
+        },
+        {
+          "at_ms": 1260,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            131.652099609375,
+            -0.482758224010468,
+            -109.835845947266
+          ]
+        },
+        {
+          "at_ms": 1794,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            130.54541015625,
+            -0.512994766235352,
+            -109.386871337891
+          ]
+        },
+        {
+          "at_ms": 2328,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            129.438842773438,
+            -0.547423362731934,
+            -108.937896728516
+          ]
+        },
+        {
+          "at_ms": 2861,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            128.332397460938,
+            -0.586292326450348,
+            -108.488922119141
+          ]
+        },
+        {
+          "at_ms": 3394,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            127.225952148438,
+            -0.626236021518707,
+            -108.039947509766
+          ]
+        },
+        {
+          "at_ms": 3927,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            126.119506835938,
+            -0.666179716587067,
+            -107.590972900391
+          ]
+        },
+        {
+          "at_ms": 4461,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            125.013061523438,
+            -0.706123411655426,
+            -107.141998291016
+          ]
+        },
+        {
+          "at_ms": 4994,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            123.907043457031,
+            -0.757778227329254,
+            -106.693229675293
+          ]
+        },
+        {
+          "at_ms": 5526,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            122.801086425781,
+            -0.809570372104645,
+            -106.244499206543
+          ]
+        },
+        {
+          "at_ms": 6061,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            121.695129394531,
+            -0.861358523368835,
+            -105.795768737793
+          ]
+        },
+        {
+          "at_ms": 6594,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            120.589172363281,
+            -0.913150668144226,
+            -105.347038269043
+          ]
+        },
+        {
+          "at_ms": 7127,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            119.483222961426,
+            -0.965388715267181,
+            -104.898315429688
+          ]
+        },
+        {
+          "at_ms": 7661,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            118.377021789551,
+            -1.01153194904327,
+            -104.449462890625
+          ]
+        },
+        {
+          "at_ms": 8193,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            117.270820617676,
+            -1.05767452716827,
+            -104.000610351562
+          ]
+        },
+        {
+          "at_ms": 8727,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            116.164619445801,
+            -1.10381710529327,
+            -103.5517578125
+          ]
+        },
+        {
+          "at_ms": 9260,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            115.058418273926,
+            -1.14995968341827,
+            -103.102905273438
+          ]
+        },
+        {
+          "at_ms": 9794,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            113.951873779297,
+            -1.18668472766876,
+            -102.653945922852
+          ]
+        },
+        {
+          "at_ms": 10328,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            112.845306396484,
+            -1.22277176380157,
+            -102.204971313477
+          ]
+        },
+        {
+          "at_ms": 10860,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            111.738700866699,
+            -1.25886905193329,
+            -101.755996704102
+          ]
+        },
+        {
+          "at_ms": 11394,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            110.632255554199,
+            -1.295205950737,
+            -101.307022094727
+          ]
+        },
+        {
+          "at_ms": 11927,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            109.525527954102,
+            -1.3199155330658,
+            -100.857963562012
+          ]
+        },
+        {
+          "at_ms": 12460,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            108.418395996094,
+            -1.3294689655304,
+            -100.408782958984
+          ]
+        },
+        {
+          "at_ms": 12994,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            107.31127166748,
+            -1.33900690078735,
+            -99.9596328735352
+          ]
+        },
+        {
+          "at_ms": 13527,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            106.204124450684,
+            -1.3475387096405,
+            -99.5104598999023
+          ]
+        },
+        {
+          "at_ms": 14072,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            105.097122192383,
+            -1.35758006572723,
+            -99.0612182617188
+          ]
+        },
+        {
+          "at_ms": 14604,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            103.990608215332,
+            -1.33438229560852,
+            -98.6119537353516
+          ]
+        },
+        {
+          "at_ms": 15138,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            102.88410949707,
+            -1.30919802188873,
+            -98.1627044677734
+          ]
+        },
+        {
+          "at_ms": 15706,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            101.708419799805,
+            -1.28158974647522,
+            -97.6854476928711
+          ]
+        },
+        {
+          "at_ms": 16257,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            100.53271484375,
+            -1.25398313999176,
+            -97.2081909179688
+          ]
+        },
+        {
+          "at_ms": 16792,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            99.4265975952148,
+            -1.21400761604309,
+            -96.7591323852539
+          ]
+        },
+        {
+          "at_ms": 17326,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            98.3208999633789,
+            -1.16155743598938,
+            -96.3101959228516
+          ]
+        },
+        {
+          "at_ms": 17856,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            97.215202331543,
+            -1.10921263694763,
+            -95.8613052368164
+          ]
+        },
+        {
+          "at_ms": 18392,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            96.1095123291016,
+            -1.05675387382507,
+            -95.4124908447266
+          ]
+        },
+        {
+          "at_ms": 18923,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            95.0036849975586,
+            -1.004518866539,
+            -94.9638061523438
+          ]
+        },
+        {
+          "at_ms": 19458,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            93.8983840942383,
+            -0.943279922008514,
+            -94.5151824951172
+          ]
+        },
+        {
+          "at_ms": 19992,
+          "goal": [
+            91.9056930541992,
+            -0.774564743041992,
+            -93.7087707519531
+          ],
+          "menu": false,
+          "paused": false,
+          "player": [
+            92.792854309082,
+            -0.882003784179688,
+            -94.0671157836914
+          ]
+        }
+      ],
+      "paused": false,
+      "result": "PASS",
+      "start": [
+        133.536407470703,
+        -0.424701184034348,
+        -110.613639831543
+      ],
+      "window_focus": true
+    }
+  ],
+  "precreate_capsule_writes": 0,
+  "public_context": {
+    "carId": "car:sejong_north_stream_1",
+    "dogId": "npc:street:plaza_dog:dog",
+    "npcId": "npc:street:plaza_dog:walker",
+    "spawn": [
+      132.701126098633,
+      -0.347996383905411,
+      -110.877784729004
+    ]
+  },
+  "render_mode": "headless",
+  "restore_after": {
+    "camera": 78148273794,
+    "cars": {
+      "car:coverage_drive_0_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_0_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ]
+    },
+    "npcs": {
+      "npc:coverage:coverage_walk_00_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_00_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:n02:palace_court": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:n02:plaza_front": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:street:museum_slope:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_east:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ]
+    },
+    "player_layer": 2,
+    "player_mask": 45
+  },
+  "restore_before": {
+    "camera": 78148273794,
+    "cars": {
+      "car:coverage_drive_0_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_0_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ]
+    },
+    "npcs": {
+      "npc:coverage:coverage_walk_00_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_00_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:n02:palace_court": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:n02:plaza_front": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:street:museum_slope:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_east:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ]
+    },
+    "player_layer": 2,
+    "player_mask": 45
+  },
+  "result": "PASS",
+  "role": "b",
+  "scope": "Two independent full production city processes. Existing 14 cars,28 humans,2 dogs. One safe host capsule placement before create; subsequent travel and E/W interactions use actual Input. Production menu setters stop AI during interaction stages. Physical controller and approved replication acceptance. Native captures, when enabled, use an explicitly labelled temporary fixture camera. No server-owned 3D physics, production authentication or measured capacity. Credentials remain in memory.",
+  "simulation": {
+    "car:coverage_drive_0_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_0_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_1_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_1_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_2_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_2_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_3_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_3_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north_stream_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north_stream_2": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south_stream_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south_stream_2": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    }
+  },
+  "task": "EXP41_FULL_SHARED_ACTORS",
+  "used_production_stationary_setters": false,
+  "user_settings_after": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "user_settings_before": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "walking_Input_steps": 153,
+  "world_counts": {
+    "cars": 14,
+    "catalog": 44,
+    "collision_objects": 2091,
+    "npc_and_dogs": 30,
+    "source_meshes": 1233
+  }
+}

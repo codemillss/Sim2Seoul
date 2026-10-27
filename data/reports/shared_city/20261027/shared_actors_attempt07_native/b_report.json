@@ -1,0 +1,967 @@
+{
+  "action_results": [
+    {
+      "entityId": "npc:street:plaza_dog:dog",
+      "error": "",
+      "ok": true,
+      "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+      "requestId": "d9cdb81c-3b59-442c-8499-16e79e0e95bc",
+      "type": "npc_pet"
+    },
+    {
+      "entityId": "car:sejong_north_stream_1",
+      "error": "",
+      "ok": true,
+      "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+      "requestId": "4cd83cb2-60d4-465a-9770-8327983e5900",
+      "type": "vehicle_enter"
+    },
+    {
+      "entityId": "car:sejong_north_stream_1",
+      "error": "",
+      "ok": true,
+      "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+      "requestId": "70d758b8-bd91-41be-b197-c05f0aecfebe",
+      "type": "vehicle_exit"
+    }
+  ],
+  "captures": [],
+  "cases": [
+    {
+      "name": "production_manager_initialized",
+      "passed": true
+    },
+    {
+      "name": "full_actual_city_and_capsule_ready",
+      "passed": true
+    },
+    {
+      "name": "full_existing_14cars_28humans_2dogs_catalog",
+      "passed": true
+    },
+    {
+      "name": "actual_service_bootstrap",
+      "passed": true
+    },
+    {
+      "name": "memory_only_invite_and_public_context_received",
+      "passed": true
+    },
+    {
+      "name": "guest_join_started",
+      "passed": true
+    },
+    {
+      "name": "two_full_worlds_real_remote_and_shared_catalog",
+      "passed": true
+    },
+    {
+      "name": "world_authority_matches_role",
+      "passed": true
+    },
+    {
+      "name": "both_worlds_joined",
+      "passed": true
+    },
+    {
+      "name": "host_approved_stationary_phase",
+      "passed": true
+    },
+    {
+      "name": "guest_replicas_converge_to_approved_host_poses",
+      "passed": true
+    },
+    {
+      "name": "both_ready_for_actual_interactions",
+      "passed": true
+    },
+    {
+      "name": "host_greeted_npc",
+      "passed": true
+    },
+    {
+      "name": "guest_observes_same_greeting_reaction",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_actual_dog",
+      "passed": true
+    },
+    {
+      "name": "fresh_E_pet_approved",
+      "passed": true
+    },
+    {
+      "name": "host_observed_same_pet",
+      "passed": true
+    },
+    {
+      "name": "physical_input_walk_to_existing_car_door",
+      "passed": true
+    },
+    {
+      "name": "both_near_same_existing_car",
+      "passed": true
+    },
+    {
+      "name": "guest_E_gets_approved_driver_and_actual_mount",
+      "passed": true
+    },
+    {
+      "name": "host_busy_E_rejected",
+      "passed": true
+    },
+    {
+      "name": "actual_W_drives_retained_physical_car",
+      "passed": true
+    },
+    {
+      "name": "host_observed_driven_car_and_hidden_remote",
+      "passed": true
+    },
+    {
+      "name": "guest_fresh_E_safe_exit_and_server_parked",
+      "passed": true
+    },
+    {
+      "name": "host_claimed_and_released_same_car",
+      "passed": true
+    },
+    {
+      "name": "guest_leave_restores_AI_collision_camera_capsule",
+      "passed": true
+    },
+    {
+      "name": "guest_local_state_equals_prejoin_baseline",
+      "passed": true
+    },
+    {
+      "name": "host_acknowledged_absence",
+      "passed": true
+    },
+    {
+      "name": "guest_rejoin_for_host_loss_case",
+      "passed": true
+    },
+    {
+      "name": "guest_second_world_joined",
+      "passed": true
+    },
+    {
+      "name": "host_leave_closes_room_and_cleans_guest_world",
+      "passed": true
+    },
+    {
+      "name": "shutdown_waits_actual_http_leave",
+      "passed": true
+    },
+    {
+      "name": "actual_physics_advanced",
+      "passed": true
+    },
+    {
+      "name": "actual_user_settings_unchanged",
+      "passed": true
+    },
+    {
+      "name": "scoped_settings_remain_unwritten",
+      "passed": true
+    }
+  ],
+  "catalog_sha256": "20a66aa072ceb2b2f4b9c462bd26da018d816d40c901a4cc695cd4b3161e4a42",
+  "checks": 35,
+  "diagnostic": {
+    "available": true,
+    "cleanup_pending": false,
+    "connected": false,
+    "last_failure_code": "room_unavailable",
+    "last_http_code": 404,
+    "last_http_result": 0,
+    "last_request_error": 0,
+    "last_response_bytes": 28,
+    "npcs": {
+      "active": false,
+      "actors": 30,
+      "authority": false,
+      "buffered_snapshots": 0,
+      "interpolation_ms": 600,
+      "shared_actions": [
+        "npc_greet",
+        "npc_pet"
+      ],
+      "shared_police": false
+    },
+    "participants": 0,
+    "received_snapshots": 80,
+    "remote_count": 0,
+    "round_trip_ms": 160,
+    "sequence": 1,
+    "sign_in_required": false,
+    "state": "ready",
+    "transport": "http-presence",
+    "ui_open": false,
+    "vehicles": {
+      "active": false,
+      "cars": 14,
+      "cleanup_pending": false,
+      "driver_entity": "",
+      "error": "",
+      "host_ai": false,
+      "lease_epoch": -1,
+      "pending_action": false,
+      "riding": false,
+      "scope": "Fourteen retained traffic bodies; host AI and approved local driver; presentation replication, not authoritative shared physics"
+    },
+    "world_active": false
+  },
+  "elapsed_ms": 83485,
+  "engine": "4.7.2-stable (official)",
+  "failed": 0,
+  "fixture_capsule_writes_after_create": 0,
+  "fixture_normal_menu_resumes": 0,
+  "fresh_E_presses": 3,
+  "input_traces": [
+    {
+      "car_distance": -1.0,
+      "client_state": {
+        "available": true,
+        "connected": false,
+        "last_failure_code": "room_unavailable",
+        "last_http_code": 404,
+        "last_http_result": 0,
+        "last_request_error": 0,
+        "last_response_bytes": 28,
+        "participants": 0,
+        "received_snapshots": 80,
+        "round_trip_ms": 160,
+        "sequence": 1,
+        "sign_in_required": false,
+        "state": "ready",
+        "transport": "http-presence"
+      },
+      "e_requires_release": false,
+      "elapsed_ms": 83483,
+      "gameplay": true,
+      "interact_held": false,
+      "menu": false,
+      "npc_distance": -1.0,
+      "npc_nearest_id": "",
+      "npc_nearest_kind": "",
+      "observed_actions": [
+        {
+          "entityId": "npc:street:plaza_dog:dog",
+          "error": "",
+          "ok": true,
+          "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+          "requestId": "d9cdb81c-3b59-442c-8499-16e79e0e95bc",
+          "type": "npc_pet"
+        },
+        {
+          "entityId": "car:sejong_north_stream_1",
+          "error": "",
+          "ok": true,
+          "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+          "requestId": "4cd83cb2-60d4-465a-9770-8327983e5900",
+          "type": "vehicle_enter"
+        },
+        {
+          "entityId": "car:sejong_north_stream_1",
+          "error": "",
+          "ok": true,
+          "playerId": "deea376e-e1aa-4a7f-b39c-b58cca521f6c",
+          "requestId": "70d758b8-bd91-41be-b197-c05f0aecfebe",
+          "type": "vehicle_exit"
+        }
+      ],
+      "on_floor": true,
+      "paused": false,
+      "player": [
+        134.27099609375,
+        -0.404674172401428,
+        -110.83699798584
+      ],
+      "queued_actions": 0,
+      "stage": "before_finish",
+      "window_focus": true
+    }
+  ],
+  "movement": {
+    "W_press_ms": 1400,
+    "drive_end": [
+      90.6479873657227,
+      -0.798349380493164,
+      -116.309326171875
+    ],
+    "drive_start": [
+      90.1439971923828,
+      -0.703000009059906,
+      -95.3740005493164
+    ],
+    "metres": 20.9416084289551
+  },
+  "precreate_capsule_writes": 0,
+  "public_context": {
+    "carId": "car:sejong_north_stream_1",
+    "dogId": "npc:street:plaza_dog:dog",
+    "npcId": "npc:street:plaza_dog:walker",
+    "spawn": [
+      132.871124267578,
+      -0.347041636705399,
+      -110.836975097656
+    ]
+  },
+  "render_mode": "headless",
+  "restore_after": {
+    "camera": 78148273794,
+    "cars": {
+      "car:coverage_drive_0_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_0_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ]
+    },
+    "npcs": {
+      "npc:coverage:coverage_walk_00_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_00_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:n02:palace_court": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:n02:plaza_front": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:street:museum_slope:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_east:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ]
+    },
+    "player_layer": 2,
+    "player_mask": 45
+  },
+  "restore_before": {
+    "camera": 78148273794,
+    "cars": {
+      "car:coverage_drive_0_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_0_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_1_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_2_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_0": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:coverage_drive_3_car_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_north_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_1": [
+        8,
+        31,
+        true,
+        1
+      ],
+      "car:sejong_south_stream_2": [
+        8,
+        31,
+        true,
+        1
+      ]
+    },
+    "npcs": {
+      "npc:coverage:coverage_walk_00_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_00_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_01_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_02_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_03_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_04_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_05_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_06_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_07_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_08_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_0": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:coverage:coverage_walk_09_1": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:n02:palace_court": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:n02:plaza_front": [
+        4,
+        47,
+        false,
+        1
+      ],
+      "npc:street:museum_slope:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:plaza_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:dog": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_dog:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_east:walker": [
+        4,
+        47,
+        true,
+        1
+      ],
+      "npc:street:stonewall_west:walker": [
+        4,
+        47,
+        true,
+        1
+      ]
+    },
+    "player_layer": 2,
+    "player_mask": 45
+  },
+  "result": "PASS",
+  "role": "b",
+  "scope": "Two independent full production city processes. Existing 14 cars,28 humans,2 dogs. One safe host capsule placement before create; subsequent travel and E/W interactions use actual Input. Production menu setters stop AI during interaction stages. Physical controller and approved replication acceptance. Native captures, when enabled, use an explicitly labelled temporary fixture camera. No server-owned 3D physics, production authentication or measured capacity. Credentials remain in memory.",
+  "simulation": {
+    "car:coverage_drive_0_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_0_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_1_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_1_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_2_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_2_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_3_car_0": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:coverage_drive_3_car_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north_stream_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_north_stream_2": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south_stream_1": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    },
+    "car:sejong_south_stream_2": {
+      "cycle_count": 0,
+      "last_recycle": {}
+    }
+  },
+  "task": "EXP41_FULL_SHARED_ACTORS",
+  "used_production_stationary_setters": false,
+  "user_settings_after": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "user_settings_before": {
+    "user://sim2seoul_character.json": {
+      "exists": false,
+      "sha256": ""
+    },
+    "user://sim2seoul_exploration.json": {
+      "exists": true,
+      "sha256": "464d873716d4316837357e9944088a9cd7a4eac1f7005b3243524a2dd8e7f8f5"
+    },
+    "user://sim2seoul_exploration.json.time.json": {
+      "exists": true,
+      "sha256": "f488d257f5fdd723f8f3410c2db1ae716edcbc54bfc8b6dbfcc0d7f5c1378878"
+    },
+    "user://sim2seoul_quality.json": {
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "walking_Input_steps": 156,
+  "world_counts": {
+    "cars": 14,
+    "catalog": 44,
+    "collision_objects": 2091,
+    "npc_and_dogs": 30,
+    "source_meshes": 1233
+  }
+}

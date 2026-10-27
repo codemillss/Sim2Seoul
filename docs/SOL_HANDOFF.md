@@ -1,5 +1,19 @@
 # Sol 작업 인수 안내
 
+## 2026-10-27 EXP41 — 현재 인수: 게시 version7·최종 native11
+
+[WORK_STATUS](WORK_STATUS.md) → [공유 차량/NPC 계약](SHARED_CITY_ACTORS.md) → [publication03b](../data/reports/shared_actors/20261027/site_publication03b.json) → [native11](../data/reports/shared_city/20261027/shared_actors_attempt11_native/summary.json)를 읽는다. 브랜치 `codex/shared-city-vehicles-npcs-20261027`·base `328ef22491a0551c9d79e87b4ca95b48de371ce3`다. 원래 도로 자동차14대·성인28명·반려견2마리, 합계44개 entity를 `sim2seoul-shared-world-v2`로 공유한다. E 배타 운전권/주행/하차·parked와 인사/쓰다듬기를 지원한다. host loss는 방 종료이고 공유 AI 차는 endpoint에서 정차한다. F/X 전투·경찰/구금·경제·다른 시설 결과는 solo 범위다.2Hz/600ms와8명 입장 정책은 검증된 수용 인원·성능 보장이 아니다.
+
+최종 [native11 두 전체 게임](../data/reports/shared_city/20261027/shared_actors_attempt11_native/summary.json)은 **89/89(A54/B35),83.460초,각 actual exit0/ERROR0**·19-source/settings 불변·기존 actor/충돌/AI/카메라 exact복원·cleanup오류0이다. 원본 M5/Metal4/Forward+ PNG3장은 임시 fixture camera/test label을 사용했다. [backend cleanup57/57](../data/reports/shared_city/20261027/stale_owner_world_cleanup01/summary.json)(새12 수정 전2PASS/10FAIL→후12PASS), [차량86](../data/reports/shared_city/20261027/vehicles/lease_boundary01_run.json)·[NPC41](../data/reports/shared_city/20261027/npcs_component04/run.json)·[client39](../data/reports/shared_actors/20261027/client_regression03_retry/summary.json)·[실제 live NPC120초15조건](../data/reports/shared_city/20261027/live_npcs_attempt01/summary.json)을 각각 구분한다. migration7은 backend57에 이미 포함된다.
+
+[같은 Site version7 게시](../data/reports/shared_actors/20261027/site_publication03b.json)는 `succeeded`이며 public 범위를 유지했다. 릴리스는 `exp41_shared_actors03_delivery01`, Site commit은 `c753b4f76541b9ed2f0a4c87b435b0d6e649e418`, 최종 API는 `51b71717…`이다. 정상0001 적용 뒤 운영 schema는3→5 tables이며 행/사용자/세션을 읽지 않았다. [실제 로컬 Worker05 20/20](../data/reports/shared_actors/20261027/site_worker_world05_cleanup.json)으로03/04의 create429를 재검사했다. [Web03 수동 drive/exit](../data/reports/shared_actors/20261027/web_gui_attempt03_summary.json)·[자산238/212gzip whole](../data/reports/shared_actors/20261027/site_built_assets_check03.json)을 통과했다.
+
+[03b 결합 검사](../data/reports/shared_actors/20261027/final_source_binding03b.json)는 PCK03 입력124개 GD/current 소스 drift0과 Site API 일치를 확인했다. export는 미커밋 feature tree에서 수행해 manifest `buildCommit=328ef22`는 base다. 최종 main commit으로 PCK를 만들었다고 주장하거나 순환되는 commit 해시를 미리 쓰지 않는다.
+
+[실제 운영 public IAB/Web/WASM](../data/reports/shared_actors/20261027/production_browser_v7.json)은64.202초 READY·212/212/cache68/network144·53,484,236B·DOM engine오류0과 방의 ChatGPT 로그인 안내를 확인했다. 실제 로그인한 한 계정의 방 CRUD·서로 다른 두 운영 계정은 미검증이다. 별도 raw HTTP probe는 **INCOMPLETE**다. 확인된 Cloudflare JSD938B 삽입으로 strict hash 차이, 해당 script만 제거한 retry403(정확 자산 미확보), 기존 서비스 header retry307/NoRedirect 차단을 보존한다. 새로운 identity/token이나 cross-origin credential 전송은 없었으며 추가 probe를 하지 않는다. 로컬238/238와 운영 브라우저212/212 whole hash/runtime 성공을 운영 raw238/238 성공으로 확대하지 않는다.
+
+native07/08/09/10·최초 Web422·Worker03/04 실패 원문은 유지한다.10의 owner 직선 접근 정지는 원인 미확정이며11에서는45.074/44.485m 접근이 통과했지만 detour 분기0회라 우회 수정의 인과를 단정하지 않는다. 최초422는 exact error가 없어 원인 미확정이다. client1초 fresh sample 재시도2회/세 번째 종료는 복구력 개선이며80/24m/s 서버 경계는 유지했다. [상세 계약·증거·실패/한계](SHARED_CITY_ACTORS.md)를 따른다. 같은 미완료 검증을 새 기기에서 중복하지 않고 최종 probe/실제 계정 수용부터 이어간다.
+
 ## 2026-10-27 EXP40 — 현재 인수: version6·운영 로그인 폼 진입까지
 
 현재 선택은 **exp40_shared_city02_delivery01 / version6**다. [게시](../data/reports/shared_city/20261027/site_publication.json) `succeeded`/Site 소스 `005a64485430aa82ed60b10192864a2c5c78d016`·[운영212개/전체 SHA](../data/reports/shared_city/20261027/deployed_asset_check.json) PASS/17.795초·[익명 API200/401](../data/reports/shared_city/20261027/deployed_api_check.json)을 먼저 읽는다. PCK180,883,704B·전송94,792,406B/212조각이며 같은 URL/public 범위를 유지했다.

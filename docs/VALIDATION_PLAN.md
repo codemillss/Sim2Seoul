@@ -1,5 +1,22 @@
 # 검증 계획과 완료 판정
 
+## EXP41 최종 판정 — version7·native11 (2026-10-27)
+
+| 경계 | 실제 결과 | 미수용 범위 |
+|---|---|---|
+| backend/API | [cleanup57/57](../data/reports/shared_city/20261027/stale_owner_world_cleanup01/summary.json), 새12 before2PASS/10FAIL→after12PASS. migration7 포함 | 프로토콜 fixture·실제 HTTP/SQLite, 서버3D 물리 아님 |
+| native 구성 요소 | [차량86](../data/reports/shared_city/20261027/vehicles/lease_boundary01_run.json)·[NPC41](../data/reports/shared_city/20261027/npcs_component04/run.json)·[client39](../data/reports/shared_actors/20261027/client_regression03_retry/summary.json), actual exit0/ERROR0 | 일반 조작감/미술/운영 계정 아님 |
+| actual live NPC | [15/15·120초](../data/reports/shared_city/20261027/live_npcs_attempt01/summary.json),30명 이동·176 snapshot·4220 | 운전/차량 접촉0. 충돌-push 원인 배제 불가 |
+| 최종 두 전체 게임 | [native11 89/89](../data/reports/shared_city/20261027/shared_actors_attempt11_native/summary.json),83.460초·각 exit0/ERROR0·19-source/settings·exact복원 | 실제 GPU PNG3은 임시 fixture camera/label. 초기 AI 증명 뒤 AI정지/guest운전, server physics/성능 아님 |
+| 실제 로컬 Worker/D1 | [05 20/20](../data/reports/shared_actors/20261027/site_worker_world05_cleanup.json),03/04 create429 재검사 | 공식 mock identity로 운영 로그인 아님 |
+| Web03 로컬 | [수동 drive/exit PASS](../data/reports/shared_actors/20261027/web_gui_attempt03_summary.json)·[238자산/212gzip whole PASS](../data/reports/shared_actors/20261027/site_built_assets_check03.json) | NPC on/초기 차량AI switch off, 실제 운영 두 계정 아님 |
+| export/source | [124 GD drift0/API 결합](../data/reports/shared_actors/20261027/final_source_binding03b.json), PCK03 유지 | dirty feature tree export의 manifest base328ef22를 최종 main commit으로 해석하지 않음 |
+| 게시/DB | [version7 succeeded·schema3→5](../data/reports/shared_actors/20261027/site_publication03b.json), public 유지 | 운영 행 미조회, 로그인된 방 CRUD/두 계정 미검증 |
+| 운영 브라우저 | [실제 READY64.202초·212/212/cache68/network144·53,484,236B·DOM오류0·로그인 안내](../data/reports/shared_actors/20261027/production_browser_v7.json) | 단일 혼합 cache/network 관찰, FPS/운영 계정/용량 아님 |
+| 별도 raw HTTP | [INCOMPLETE](../data/reports/shared_actors/20261027/production_browser_v7.json): Cloudflare JSD938B/hash 차이·normalized retry403·기존 서비스 header retry307/NoRedirect | 운영 raw238/238 PASS 아님. 로컬238/238·운영 browser212 whole hash/runtime과 분리 |
+
+native07–10/최초 Web422/Worker03–04 실패 원문을 보존한다.10 정지 원인은 미확정이고11 detour0회라 경로 수정 원인으로 단정하지 않는다. host loss 종료·AI endpoint 정차·solo 시설/F/X/경찰 경계와2Hz/600ms/8정책의 한계는 [상세 계약](SHARED_CITY_ACTORS.md)을 따른다.
+
 ## EXP40 최종 현재 판정 — version6 (2026-10-27)
 
 | 경계 | 실제 결과 | 미수용 범위 |
